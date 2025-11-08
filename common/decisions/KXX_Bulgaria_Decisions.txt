@@ -251,3 +251,154 @@ BUL_IMRO_decision = {
 		
 	}
 }
+
+BUL_agarian_reform_decision = {
+	BUL_wheat_export = {
+		cost = 30
+		visible = {
+			has_completed_focus = BUL_agarianism_protects
+			NOT = {
+				has_country_flag = BUL_agarian_reform_finish1
+				has_country_flag = BUL_has_subsides
+			}
+		}
+		available = { 
+			has_war = no	
+		}
+		icon = GFX_decision_generic_cement_mixer
+		days_remove = 30
+		days_re_enable = 30
+		complete_effect = {
+			set_country_flag = BUL_has_wheat_export
+			if = {
+				limit = {
+					has_idea = BUL_retain_agrarianism_idea
+				}
+				swap_ideas = {
+					remove_idea = BUL_retain_agrarianism_idea
+					add_idea = BUL_increased_wheat_exports_idea
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BUL_increased_wheat_exports_idea
+				}
+				swap_ideas = {
+					remove_idea = BUL_increased_wheat_exports_idea
+					add_idea = BUL_increased_wheat_exports_idea2
+				}
+				set_country_flag = BUL_agarian_reform_finish1
+			}
+		}
+	}
+	BUL_subside_farms = {
+		cost = 30
+		visible = {
+			has_completed_focus = BUL_agarianism_protects
+			NOT = {
+				has_country_flag = BUL_agarian_reform_finish1
+				has_country_flag = BUL_has_wheat_export
+			}
+		}
+		available = { 
+			has_war = no	
+		}
+		icon = GFX_decision_generic_cement_mixer
+		days_remove = 30
+		days_re_enable = 30
+		complete_effect = {
+			set_country_flag = BUL_has_subsides
+			if = {
+				limit = {
+					has_idea = BUL_retain_agrarianism_idea
+				}
+				swap_ideas = {
+					remove_idea = BUL_retain_agrarianism_idea
+					add_idea = BUL_agricultural_subsidisation_idea
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BUL_agricultural_subsidisation_idea
+				}
+				swap_ideas = {
+					remove_idea = BUL_agricultural_subsidisation_idea
+					add_idea = BUL_agricultural_subsidisation_idea2
+				}
+				set_country_flag = BUL_agarian_reform_finish1
+			}
+		}
+	}
+	BUL_land_reform = {
+		cost = 30
+		visible = {
+			has_completed_focus = BUL_agarianism_protects
+			NOT = {
+				has_country_flag = BUL_agarian_reform_finish2
+			}
+		}
+		available = { 
+			has_war = no	
+		}
+		icon = GFX_decision_generic_cement_mixer
+		days_remove = 30
+		fire_only_once = yes
+		complete_effect = {
+			
+				
+			add_ideas = BUL_lowering_tax_burden_on_peasants_idea
+			set_country_flag = BUL_land_reform1
+			
+			
+		}
+	}
+	BUL_land_reform2 = {
+		cost = 30
+		name = BUL_land_reform
+		visible = {
+			has_completed_focus = BUL_agarianism_protects
+			has_country_flag = BUL_land_reform1
+			NOT = {
+				has_country_flag = BUL_agarian_reform_finish2
+			}
+		}
+		available = { 
+			has_war = no	
+		}
+		icon = GFX_decision_generic_cement_mixer
+		days_remove = 30
+		fire_only_once = yes
+		complete_effect = {
+			
+			
+				
+				swap_ideas = {
+					remove_idea = BUL_redistributing_land_to_peasants_idea
+					add_idea = BUL_lowering_tax_burden_on_peasants_idea
+				}
+				set_country_flag = BUL_agarian_reform_finish2
+			
+			
+		}
+	}
+	BUL_finish_reform = {
+		cost = 30
+		visible = {
+			hidden_trigger = {
+				has_country_flag = BUL_agarian_reform_finish1
+				has_country_flag = BUL_agarian_reform_finish2
+			}
+			custom_trigger_tooltip = BUL_all_agarian_decision_complete
+			
+		}
+		available = { 
+			has_war = no	
+		}
+		icon = GFX_decision_generic_cement_mixer
+		days_remove = 30
+		fire_only_once = yes
+		complete_effect = {
+			add_ideas = BUL_agricultural_boom_idea
+		}
+	}
+}

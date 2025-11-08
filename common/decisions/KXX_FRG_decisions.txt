@@ -1080,6 +1080,42 @@ FRG_intervene_in_the_CIV = { #渗透西非海岸
 			}
         }
     }
+FRG_intervene_in_the_SEN = { #重返达喀尔
+		icon = decision_cat_generic_purge
+		visible = { 
+            has_completed_focus = FRG_africa
+		}
+		available = {
+			has_completed_focus = FRG_africa
+            NOT = {
+				country_exists = NFA
+			}
+			country_exists = SEN
+			SEN = {
+				is_puppet_of = FRG
+			}
+		}
+		fire_only_once = yes
+		cost = 0
+		days_remove = 1
+
+		ai_will_do = {
+			factor = 6
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRG_italian_imperialate_decision"
+			set_country_flag = FRG_imperialate
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
+			clr_country_flag = FRG_imperialate
+            FRG = {
+				country_event = frg.110
+			}
+        }
+    }
 FRG_deal_with_the_CIV = { #处置西非海岸
 		cost = 25
 		icon = GFX_decision_generic_nationalism
@@ -1126,6 +1162,367 @@ FRG_deal_with_the_CIV = { #处置西非海岸
 			factor = 5
 		}
 	}
+
+FRG_intervene_in_the_RUS = { #入侵俄罗斯
+		icon = decision_cat_generic_purge
+		visible = { 
+            has_completed_focus = FRG_rus
+		}
+		available = {
+			has_completed_focus = FRG_rus
+            NOT = {
+				country_exists = GER
+			}
+			OR = {
+				country_exists = RUS
+				AND = {
+					country_exists = WSU
+					NOT = {
+						country_exists = RUS
+					}
+					219 = { is_owned_and_controlled_by = WSU }
+				}
+				AND = {
+					country_exists = WHR
+					NOT = {
+						country_exists = RUS
+					}
+					219 = { is_owned_and_controlled_by = WHR }
+				}
+				AND = {
+					country_exists = KUB
+					NOT = {
+						country_exists = RUS
+					}
+					219 = { is_owned_and_controlled_by = KUB }
+				}
+				AND = {
+					country_exists = TRM
+					NOT = {
+						country_exists = RUS
+					}
+					219 = { is_owned_and_controlled_by = TRM }
+				}
+			}
+		}
+		fire_only_once = yes
+		cost = 50
+		days_remove = 15
+
+		ai_will_do = {
+			factor = 6
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRG_italian_imperialate_decision"
+			set_country_flag = FRG_imperialate
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
+			clr_country_flag = FRG_imperialate
+            FRG = {
+				country_event = frg.118
+			}
+        }
+    }
+
+FRG_deal_with_the_RUS = { #迫使俄罗斯投降
+		icon = decision_cat_generic_purge
+		visible = { 
+            has_completed_focus = FRG_rus
+		}
+		available = {
+			has_completed_focus = FRG_rus
+            RUS = {
+				exists = yes
+				surrender_progress > 0.85
+				}
+			}
+		fire_only_once = yes
+		cost = 10
+		days_remove = 25
+
+		ai_will_do = {
+			factor = 6
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRG_italian_imperialate_decision"
+			set_country_flag = FRG_imperialate
+			FRG = {
+				country_event = frg.115
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
+			clr_country_flag = FRG_imperialate
+            
+        }
+    }
+
+FRG_Lebanon_imperialate_decision = { #雪松行动
+		icon = decision_cat_generic_purge
+		visible = { 
+            has_completed_focus = FRG_ottoman	
+		}
+		available = {
+			OR = {
+				country_exists = SYR
+				country_exists = OTT
+			}
+		}
+		fire_only_once = yes
+		cost = 20
+		days_remove = 6
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRG_italian_imperialate_decision"
+			set_country_flag = FRG_imperialate
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
+			clr_country_flag = FRG_imperialate
+			if = {
+				limit = {
+					NOT = {
+						FRG = {
+							OR = {
+								has_government = syndicalist
+								has_government = radical_socialist
+								has_government = social_democrat
+								has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+							}
+						}
+					}
+				}
+				FRG = {
+					country_event = frg.119
+				} 
+			}
+        	else_if = {
+				limit = {
+					FRG = {
+						OR = {
+							has_government = syndicalist
+							has_government = radical_socialist
+							has_government = social_democrat
+							has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+						}
+					}
+				}
+				FRG = {
+					country_event = frg.120
+				} 
+			}                    
+        }
+    }
+
+FRG_IRQ_imperialate_decision = { #美索不达利亚行动
+		icon = decision_cat_generic_purge
+		visible = { 
+            has_completed_focus = FRG_ottoman	
+		}
+		available = {
+			OR = {
+				country_exists = IRQ
+				country_exists = OTT
+			}
+		}
+		fire_only_once = yes
+		cost = 20
+		days_remove = 7
+
+		ai_will_do = {
+			factor = 50
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRG_italian_imperialate_decision"
+			set_country_flag = FRG_imperialate
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
+			clr_country_flag = FRG_imperialate
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							FRG = {
+								OR = {
+									has_government = syndicalist
+									has_government = radical_socialist
+									has_government = social_democrat
+									has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+								}
+							}
+							IRQ = {
+								has_socialist_government = no
+							}
+						}
+						AND = {
+							NOT = {
+								FRG = {
+									OR = {
+										has_government = syndicalist
+										has_government = radical_socialist
+										has_government = social_democrat
+										has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+									}
+								}
+							}
+							IRQ = {
+								has_socialist_government = no	
+							}
+						}
+						AND = {
+							NOT = {
+								FRG = {
+									OR = {
+										has_government = syndicalist
+										has_government = radical_socialist
+										has_government = social_democrat
+										has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+									}
+								}
+							}
+							IRQ = {
+								has_socialist_government = yes	
+							}
+						}
+					}
+				}
+				FRG = {
+					create_wargoal = {
+						type = annex_everything
+						target = IRQ
+					} 
+				}
+			}
+        	else_if = {
+				limit = {
+					FRG = {
+						OR = {
+							has_government = syndicalist
+							has_government = radical_socialist
+							has_government = social_democrat
+							has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+						}
+					}
+					IRQ = {
+						has_socialist_government = yes
+					}
+				}
+				FRG = {
+					add_to_faction = IRQ
+				} 
+			}                    
+        }
+    }
+
+FRG_Djibouti_imperialate_decision = { #红沙行动
+		icon = decision_cat_generic_purge
+		visible = { 
+            has_completed_focus = FRG_africa	
+		}
+		available = {
+			country_exists = DJI
+			NOT = {
+				country_exists = NFA
+			}
+		}
+		fire_only_once = yes
+		cost = 20
+		days_remove = 10
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRG_italian_imperialate_decision"
+			set_country_flag = FRG_imperialate
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
+			clr_country_flag = FRG_imperialate
+			FRG = {
+				country_event = frg.121
+			}                   
+        }
+    }
+
+FRG_MSF_imperialate_decision = { #刚果的秘密交易
+		icon = decision_cat_generic_purge
+		visible = { 
+            has_completed_focus = FRG_ottoman	
+		}
+		available = {
+			NOT = {
+				country_exists = NFA
+			}
+		}
+		fire_only_once = yes
+		cost = 10
+		days_remove = 6
+		ai_will_do = {
+			factor = 10
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRG_italian_imperialate_decision"
+			set_country_flag = FRG_imperialate
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
+			clr_country_flag = FRG_imperialate
+			if = {
+				limit = {
+					country_exists = MSF
+					MSF = {
+						OR = {
+							has_war_with = COG
+							has_war_with = KIV
+							AND = {
+								has_global_flag = CONGO_SHITSHOW_OVER
+								NOT = {
+									has_completed_focus = MSF_entente_cuck
+								}
+							}
+						}
+					}
+				}
+				MSF = {
+					country_event = { id = frg.123 days = 3 }
+				} 
+			}
+			else_if = {
+				limit = {
+					country_exists = KIV
+					KIV = {
+						OR = {
+							has_war_with = COG
+							has_war_with = MSF
+							has_global_flag = CONGO_SHITSHOW_OVER
+							}
+						}
+					}
+				MSF = {
+					country_event = { id = frg.130 days = 3 }
+				} 
+			}                   
+        }
+	}
+    
 
 
 

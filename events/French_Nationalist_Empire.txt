@@ -4071,6 +4071,9 @@ country_event = { #重组法属西非
     fire_only_once = yes
     option = { #重新殖民西非
         name = frg.110.a
+		ai_chance = {
+			factor = 100
+		}
 		trigger = {
 			NOT = {
 				country_exists = NFA
@@ -4086,6 +4089,12 @@ country_event = { #重组法属西非
 					has_government = social_democrat
 					has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
 				}
+			}
+		}
+		FRG = {
+			set_autonomy = {
+				target = SEN
+				autonomy_state = kr_colonial_government
 			}
 		}
 		SEN = {
@@ -4234,11 +4243,11 @@ country_event = { #重组法属赤道非洲
 		trigger = {
 			NOT = {
 				country_exists = NFA
-				}
+			}
 		    GAB = {
 				exists = yes 
 				is_puppet_of = FRG
-			    }
+			}
 			NOT = {
 				FRG = {
 					has_government = syndicalist
@@ -4267,7 +4276,7 @@ country_event = { #重组法属赤道非洲
 				desc = "POLITICS_GAB_COLONIAL_DESC"
             	picture = "gfx/leaders/FRG/Portrait_FRG_Imperial_Regency.png"
             	expire = "1965.1.1"
-            	ideology = colonial_govt_subtype
+            	ideology = autocratic_colonial_govt_subtype
         	}
 			set_party_name = {
             	ideology = paternal_autocrat
@@ -4281,20 +4290,61 @@ country_event = { #重组法属赤道非洲
         	}
 			set_party_name = {
             	ideology = authoritarian_democrat
-            	long_name = "法兰西西非殖民军"
-            	name = "法兰西西非殖民军"
+            	long_name = "法兰西赤道非洲殖民军"
+            	name = "法兰西赤道非洲殖民军"
         	}
 			set_autonomy = {
-					target = GAB
-					autonomy_state = kmt_puppet
-					end_wars = no
-				}
+				target = GAB
+				autonomy_state = kr_colonial_government
+				end_wars = no
+			}
 			complete_national_focus = GAB_the_ecuator_united
 			hidden_effect = {
 				GAB = {
 					country_event = {
 						id = frg.113
 						days = 7
+					}
+				}
+				GAB = {
+					annex_country = { target = WAD transfer_troops = yes }
+				}
+				GAB = {
+					every_state = {
+						limit = { is_core_of = WAD }
+						add_core_of = GAB
+					} 
+					every_state = {
+						limit = { is_core_of = CEA }
+						add_core_of = GAB
+					} 
+					every_state = {
+						limit = { is_core_of = CMR }
+						add_core_of = GAB
+					}
+					every_state = {
+						limit = { is_core_of = KOG }
+						add_core_of = GAB
+					}
+					every_state = {
+						limit = { is_core_of = TKE }
+						add_core_of = GAB
+					}
+					create_wargoal = {
+						type = annex_everything
+						target = CEN
+					}
+					create_wargoal = {
+						type = annex_everything
+						target = CMR
+					}
+					create_wargoal = {
+						type = annex_everything
+						target = KOG
+					}
+					create_wargoal = {
+						type = annex_everything
+						target = TKE
 					}
 				}
 			}
@@ -4594,6 +4644,8 @@ country_event = { #煽动德属西非脱钩
 				}
 				MAF = {
 					end_puppet = CIV
+				}
+				GER = {
 					remove_from_faction = CIV
 				}
 				FRG = {
@@ -4797,6 +4849,7 @@ country_event = { #煽动德属西非脱钩
 			transfer_state = 807
 			transfer_state = 963
 			transfer_state = 876
+
 			add_state_core = 876
 			add_state_core = 807
 			add_state_core = 963
@@ -4981,6 +5034,1608 @@ country_event = { #煽动德属西非脱钩
 	}
 }
 
+#俄国投降
+country_event = {  #给斯拉夫民族一个选择生路的机会
+	id = frg.115
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.115 "}
+	title = frg.115.t
+	desc = frg.115.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { #去，向他们送达这个好消息
+		name = frg.115.a
+		ai_chance = {
+			factor = 50
+		}   
+        add_stability = 0.01  
+		RUS = {
+			country_event = { id = frg.116 days = 5 }
+		}
+	}
+
+	option = { #国之将死，其言也轻
+		name = frg.115.b
+		ai_chance = {
+			factor = 0
+		}   
+        add_stability = 0.01  
+	}
+}
+
+country_event = {  #斯拉夫民族耻辱的一天
+	id = frg.116
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.116 "}
+	title = frg.116.t
+	desc = frg.116.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { #我们只能趁现在保存自己
+		name = frg.116.a
+		ai_chance = {
+			factor = 50
+		}   
+        RUS = {
+			country_event = { id = frg.117 days = 20 }
+		}  
+	}
+
+	option = { #国可亡，不可辱
+		name = frg.116.b
+		ai_chance = {
+			factor = 0
+		}   
+        add_war_support = 0.4
+	}
+}
+
+country_event = {  #败者的回复
+	id = frg.117
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.117 "}
+	title = frg.117.t
+	desc = frg.117.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { #他们还算识趣
+		name = frg.117.a
+		ai_chance = {
+			factor = 50
+		}
+		RUS = {
+			country_event = { id = frg.124 days = 30 }
+		}
+		hidden_effect = {
+		RUS = {
+			add_ideas = RUS_Tver_treaty
+		}
+		RRF = { set_global_flag = FRG_Tver_accords_active }
+		RRF = { transfer_state = 1207
+                transfer_state = 401
+				transfer_state = 239
+                transfer_state = 255
+				transfer_state = 257
+                transfer_state = 1204
+				transfer_state = 1205
+                transfer_state = 252
+				transfer_state = 253
+                transfer_state = 254
+				transfer_state = 258
+                transfer_state = 223
+				transfer_state = 219
+                transfer_state = 247
+				transfer_state = 248
+                transfer_state = 246
+				transfer_state = 205
+                transfer_state = 242
+				transfer_state = 263
+                transfer_state = 210
+				transfer_state = 1289
+                
+				add_state_core = 1207
+                add_state_core = 401
+				add_state_core = 239
+                add_state_core = 255
+				add_state_core = 257
+                add_state_core = 1204
+				add_state_core = 1205
+                add_state_core = 252
+				add_state_core = 253
+                add_state_core = 254
+				add_state_core = 258
+                add_state_core = 223
+				add_state_core = 219
+                add_state_core = 247
+				add_state_core = 248
+                add_state_core = 246
+				add_state_core = 205
+                add_state_core = 242
+				add_state_core = 263
+                add_state_core = 210
+				add_state_core = 1289
+            	}
+		KAR = { transfer_state = 213
+                transfer_state = 215
+				transfer_state = 1274
+                transfer_state = 214
+				transfer_state = 216
+                transfer_state = 1327
+				transfer_state = 351
+                transfer_state = 264
+				transfer_state = 244
+                transfer_state = 1328
+				transfer_state = 195
+                transfer_state = 208
+
+				add_state_core = 213
+                add_state_core = 215
+				add_state_core = 1274
+                add_state_core = 214
+				add_state_core = 216
+                add_state_core = 1327
+				add_state_core = 351
+                add_state_core = 264
+				add_state_core = 244
+                add_state_core = 1328
+				add_state_core = 195
+                add_state_core = 208
+		}
+		BAT = { transfer_state = 1291
+
+				add_state_core = 1291
+
+		}
+		ISH = { transfer_state = 722
+
+				add_state_core = 722
+		}
+		UKR = { transfer_state = 222
+                transfer_state = 224
+				transfer_state = 220
+                transfer_state = 821
+				transfer_state = 1229
+                transfer_state = 240
+				transfer_state = 260
+		}
+		DKB = { transfer_state = 265
+                transfer_state = 236
+				transfer_state = 217
+                transfer_state = 1224
+		}
+		FRG = {
+			puppet = RRF
+			puppet = KAR
+		}
+		RRF = { set_cosmetic_tag = FRG_RRF }   
+        RRF = {
+			kill_country_leader = yes
+			set_politics = {
+            	ruling_party = authoritarian_democrat 
+				elections_allowed = no
+        	} 
+			create_country_leader = {
+	            name = "埃德加·普瓦"
+	            desc = ""
+	            picture = "gfx/leaders/FRG/Edgar_Puaud.png"
+	            expire = "1965.1.1"
+	            ideology = colonial_govt_subtype
+            }
+			set_party_name = {
+            	ideology = authoritarian_democrat
+            	long_name = "莫斯科行省政府"
+            	name = "莫斯科行省政府"
+        	}
+			set_party_name = {
+            	ideology = market_liberal
+            	long_name = "祇属于香奈儿的商业帝国分部"
+            	name = "祇属于香奈儿的商业帝国分部"
+        	}
+			set_party_name = {
+            	ideology = paternal_autocrat
+            	long_name = "进驻俄罗斯的法兰西军队"
+            	name = "驻俄法军"
+        	}
+			set_party_name = {
+            	ideology = totalist
+            	long_name = "反法游击队"
+            	name = "反法游击队"
+        	}
+			set_party_name = {
+            	ideology = syndicalist
+            	long_name = "反法游击队"
+            	name = "反法游击队"
+        	}
+			set_party_name = {
+            	ideology = national_populist
+            	long_name = "巴甫诺维奇大公忠诚派"
+            	name = "巴甫诺维奇大公忠诚派"
+        	} 
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.32
+			}
+            add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.32
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.25
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.2
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.07
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.1
+			}
+		}
+		RRF = { load_focus_tree = { id = generic_focus } }
+		KAR = { set_cosmetic_tag = FRG_KAR } 
+		KAR = {
+			set_politics = {
+            	ruling_party = authoritarian_democrat 
+				elections_allowed = no
+        	} 
+			create_country_leader = {
+            	name = "诺夫哥罗德行省政府机构"
+				desc = ""
+            	picture = "gfx/leaders/FRG/Portrait_FRG_Imperial_Regency.png"
+            	expire = "1965.1.1"
+            	ideology = autocratic_colonial_govt_subtype
+            }
+			set_party_name = {
+            	ideology = authoritarian_democrat
+            	long_name = "诺夫哥罗德行省政府"
+            	name = "诺夫哥罗德行省政府"
+        	}
+			set_party_name = {
+            	ideology = market_liberal
+            	long_name = "祇属于香奈儿的商业帝国分部"
+            	name = "祇属于香奈儿的商业帝国分部"
+        	}
+			set_party_name = {
+            	ideology = paternal_autocrat
+            	long_name = "进驻诺夫哥罗德的法兰西军队"
+            	name = "法兰西驻军"
+        	}
+			set_party_name = {
+            	ideology = totalist
+            	long_name = "反法游击队"
+            	name = "反法游击队"
+        	}
+			set_party_name = {
+            	ideology = syndicalist
+            	long_name = "反法游击队"
+            	name = "反法游击队"
+        	}
+			set_party_name = {
+            	ideology = national_populist
+            	long_name = "从芬兰流亡至此的反法游击队"
+            	name = "芬兰流亡游击队"
+        	} 
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.32
+			}
+            add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.32
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.32
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.1
+			}
+		}
+        KAR = { load_focus_tree = { id = generic_focus } }
+		}
+	}
+}
+
+#入侵俄国
+country_event = {  #评估俄国局势
+	id = frg.118
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.118 "}
+	title = frg.118.t
+	desc = frg.118.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { #斯拉夫人侵略的野心不会收敛的，不是它死就是我亡
+		name = frg.118.a
+		ai_chance = {
+			factor = 50
+		}   
+        trigger = {
+			NOT = {
+				RUS = {
+					is_in_faction_with = FRG
+				}
+			}
+			RUS = {
+				has_socialist_government = no	
+			}
+		}
+		if = {
+			limit = {
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+				RUS = {
+				 	has_socialist_government = no
+				}
+			}
+			create_wargoal = {
+				target = RUS
+				type = annex_everything
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					FRG = {
+						OR = {
+							has_government = syndicalist
+							has_government = radical_socialist
+							has_government = social_democrat
+							has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+						}
+					}
+				}
+				RUS = {
+				 	has_socialist_government = no
+				}
+				NOT = {
+					RUS = {
+						is_in_faction_with = FRG
+					}
+				}
+			}
+			create_wargoal = {
+				target = RUS
+				type = annex_everything
+			}
+		}
+	}
+
+	option = { #法俄友谊天长地久
+		name = frg.118.b
+		ai_chance = {
+			factor = 50
+		}   
+		trigger = {
+			OR = {
+				AND = {
+					NOT = {
+						FRG = {
+							OR = {
+								has_government = syndicalist
+								has_government = radical_socialist
+								has_government = social_democrat
+								has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+							}
+						}
+					}
+					FRG = { has_completed_focus = FRG_ally_russia }
+					RUS = {
+						is_in_faction_with = FRG
+					}
+				}
+				AND = {
+					FRG = {
+						OR = {
+							has_government = syndicalist
+							has_government = radical_socialist
+							has_government = social_democrat
+							has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+						}
+					}
+					RUS = {
+						has_socialist_government = yes
+
+					}
+				}
+			}
+		}
+        if = {
+			limit = {
+				NOT = {
+					FRG = {
+						OR = {
+							has_government = syndicalist
+							has_government = radical_socialist
+							has_government = social_democrat
+							has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+						}
+					}
+				}
+				RUS = {
+					is_in_faction_with = FRG
+				}
+			}
+			add_political_power = 100
+		}
+		else_if = {
+			limit = {
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+				RUS = {
+					has_socialist_government = yes
+				}
+			}
+			RUS = { dismantle_faction = yes }
+			FRG = {
+				add_to_faction = RUS
+			}
+		}
+	}
+
+	option = { #斯拉夫赤匪对我们是一个巨大的威胁，我们必须要先手出击
+		name = frg.118.c
+		ai_chance = {
+			factor = 50
+		}   
+        trigger = {
+			NOT = {
+				RUS = {
+					is_in_faction_with = FRG
+				}
+			}
+			RUS = {
+				has_socialist_government = yes	
+			}
+			NOT = {
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+			}
+		}
+		create_wargoal = {
+			target = RUS
+			type = annex_everything
+		}
+	}
+
+	option = { #斯拉夫人虽为同志，但他们的民族性大于国际情，与我们有根本上的理念差别
+		name = frg.118.e
+		ai_chance = {
+			factor = 50
+		}   
+        trigger = {
+			NOT = {
+				OR = {
+					AND = {
+						FRG = {
+							has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+						} 
+						RUS = has_government = totalist
+					}
+					AND = {
+						FRG = has_government = syndicalist
+						RUS = has_government = syndicalist
+					}
+					AND = {
+						FRG = has_government = radical_socialist
+						RUS = has_government = radical_socialist
+					}
+					AND = {
+						FRG = {
+							has_country_leader = { ruling_only = yes name = "费利克斯·古安" }
+						}
+						RUS = has_government = social_democrat
+					}
+				}
+			}
+			RUS = {
+				has_socialist_government = yes	
+			}
+			FRG = {
+				OR = {
+					has_government = syndicalist
+					has_government = radical_socialist
+					has_government = social_democrat
+					has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+				}
+			}
+		}
+		create_wargoal = {
+			target = RUS
+			type = annex_everything
+		}
+	}
+
+	option = { #斯拉夫人太过强大，我们不能贸然进攻
+		name = frg.118.f
+		ai_chance = {
+			factor = 50
+		}   
+        trigger = {
+			NOT = {
+				RUS = {
+					is_in_faction_with = FRG
+				}
+			}
+			NOT = {
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+			}
+		}
+		add_ideas = RUS_cold_war
+		RUS = {
+			add_ideas = RUS_cold_war
+		}
+	}
+
+	option = { #再不扼杀这场来自西乌克兰、已经席卷东欧的革命，他们的星星之火迟早会燃烧到巴黎
+		name = frg.118.g
+		ai_chance = {
+			factor = 50
+		}   
+        trigger = {
+			country_exists = WSU
+			219 = { is_owned_and_controlled_by = WSU }
+			NOT = {
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+			}
+		}
+		create_wargoal = {
+			target = WSU
+			type = annex_everything
+		}
+	}
+
+	option = { #天哪，这群白罗斯人倒反天罡占领莫斯科之后居然生造出如此诡异的思想，如果我们不率先出手，他们就迟早会吞噬我们
+		name = frg.118.h
+		ai_chance = {
+			factor = 50
+		}   
+        trigger = {
+			NOT = { country_exists = RUS }
+			country_exists = WHR
+			219 = { is_owned_and_controlled_by = WHR }
+			WHR = {
+				has_completed_focus = WHR_schzios
+			}
+			NOT = {
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+			}
+		}
+		create_wargoal = {
+			target = WHR
+			type = annex_everything
+		}
+	}
+}
+
+#黎凡特
+country_event = {  #叙利亚的一小步
+	id = frg.119
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.119 "}
+	title = frg.119.t
+	desc = frg.119.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = {  #煽动黎巴嫩人回归法国
+		name = frg.119.a
+		ai_chance = {
+			factor = 50
+		}
+		custom_effect_tooltip = FRG_middle_east_tooltip_1   
+        add_political_power = -40 
+		add_war_support = -0.1
+		hidden_effect = {
+			LEB = { transfer_state = 553
+					transfer_state = 680
+
+                    add_state_core = 553
+					add_state_core = 680
+                }
+            FRG = {
+				set_autonomy = {
+					target = LEB
+					autonomy_state = kr_colonial_government
+				}
+			} 
+            LEB = { set_cosmetic_tag = FRG_LEB_1 }
+			FRG = { set_country_flag = FRG_LEB_victory }
+			LEB = {
+				set_politics = {
+            		ruling_party = paternal_autocrat
+					elections_allowed = no
+        		} 
+				create_country_leader = {
+            	    name = "让·基亚普"
+				    desc = "POLITICS_IAR_COLONIAL_DESC_10"
+            	    picture = "gfx/leaders/FRG/Portrait_FRG_Jean_Chiappe.png"
+            	    expire = "1965.1.1"
+            	    ideology = autocratic_colonial_govt_subtype
+                }
+                add_popularity = {
+				    ideology = paternal_autocrat
+				    popularity = 0.3
+			    }
+				add_popularity = {
+				    ideology = national_populist
+				    popularity = 0.25
+			    }
+				add_popularity = {
+				    ideology = authoritarian_democrat
+				    popularity = 0.25
+			    }
+				add_popularity = {
+				    ideology = market_liberal
+				    popularity = 0.20
+			    }
+				set_party_name = {
+            		ideology = authoritarian_democrat
+            		long_name = "法属黎巴嫩殖民机构"
+            		name = "法属黎巴嫩殖民机构"
+        		}
+				set_party_name = {
+            		ideology = market_liberal
+            		long_name = "法属黎巴嫩殖民机构（韦特海默家族）"
+            		name = "法属黎巴嫩殖民机构（韦特海默家族）"
+        		}
+				set_party_name = {
+            		ideology = paternal_autocrat
+            		long_name = "法属黎巴嫩殖民军"
+            		name = "法属黎巴嫩殖民军"
+        		}
+				set_party_name = {
+            		ideology = national_populist
+            		long_name = "地方合作者"
+            		name = "地方合作者"
+        		}
+				add_marlib_to_coalition = yes
+				add_authdem_to_coalition = yes
+				add_natpop_to_coalition = yes
+			}
+            LEB = { load_focus_tree = { id = generic_focus } }
+		}
+	}
+
+	option = {  #殖民时代已经过去，我们需要采用新的扩张方针
+		name = frg.119.b
+		ai_chance = {
+			factor = 50
+		}
+		custom_effect_tooltip = FRG_middle_east_tooltip_2   
+        add_political_power = -100 
+		add_war_support = -0.066
+		hidden_effect = {
+			LEB = { transfer_state = 553
+
+                    add_state_core = 553
+                }
+			OTT = {
+				end_puppet = LEB
+				remove_from_faction = LEB
+			}
+            LEB = { set_country_flag = LEB_war_with_Ottman_Win}
+			LEB = {
+				set_politics = {
+            		ruling_party = national_populist
+					elections_allowed = no
+        		}
+				add_popularity = {
+				    ideology = national_populist
+				    popularity = 0.3
+			    } 
+			}
+			LEB = { set_cosmetic_tag = FRG_LEB_2  }
+			LEB = {
+				complete_national_focus = KATP_For_the_Lebanese_nation
+			}
+			FRG = {
+				add_to_faction = LEB
+			}
+		}
+	}
+
+	option = {  #劳民伤财，兴师动众，实乃不明智的想法
+		name = frg.119.b
+		ai_chance = {
+			factor = 0
+		}
+		custom_effect_tooltip = FRG_middle_east_tooltip_3   
+        add_stability = 0.08 
+		add_war_support = 0.15
+	}
+}
+
+country_event = {  #向黎凡特地区传播革命
+	id = frg.120
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.120 "}
+	title = frg.120.t
+	desc = frg.120.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = {  #这里的革命还得需要我们来指导
+		name = frg.120.a
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			OR = {
+				AND = {
+					country_exists = SYR
+					SYR = {
+						has_socialist_government = no
+					}
+				}
+				AND = {
+					country_exists = OTT
+					OTT = {
+						has_socialist_government = no
+					}
+				}
+			}
+		}
+		custom_effect_tooltip = FRG_middle_east_tooltip_4
+        add_political_power = 40 
+		add_war_support = 0.1
+		hidden_effect = {
+			if = {
+				limit = {
+					country_exists = SYR
+					SYR = {
+						has_socialist_government = no
+					}
+				}
+				FRG = {
+					create_wargoal = {
+						type = annex_everything
+						target = SYR
+					} 
+				}
+			}
+			else_if = {
+				limit = {
+					country_exists = OTT
+					OTT = {
+						has_socialist_government = no
+					}
+				}
+				FRG = {
+					create_wargoal = {
+						type = annex_everything
+						target = OTT
+					} 
+				}
+			}
+		}
+	}
+
+	option = {  #访问那里已经取得革命胜利的同志
+		name = frg.120.b
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			OR = {
+				AND = {
+					country_exists = SYR
+					SYR = {
+						has_socialist_government = yes
+					}
+				}
+				AND = {
+					country_exists = OTT
+					OTT = {
+						has_government = totalist
+					}
+				}
+			}
+		}
+		custom_effect_tooltip = FRG_middle_east_tooltip_5
+		add_war_support = 0.2
+		hidden_effect = {
+			if = {
+				limit = {
+					country_exists = SYR
+					SYR = {
+						has_socialist_government = yes
+					}
+				}
+				FRG = {
+					add_to_faction = SYR
+				}
+			} 
+			else_if = {
+				limit = {
+					country_exists = OTT
+					OTT = {
+						has_government = totalist
+					}
+				}
+				FRG = {
+					add_to_faction = OTT
+				}
+			} 
+		}
+	}
+}
+
+#吉布提
+country_event = {  #准备夺取曼德海峡控制权
+	id = frg.121
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.121 "}
+	title = frg.121.t
+	desc = frg.121.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+	option = { #开始行动
+		name = frg.121.a
+		ai_chance = {
+			factor = 50
+		}   
+        DJI = {
+			country_event = { id = frg.122 days = 3 }
+		}   
+	}
+
+	option = { #行动还没开始，新独立的吉布提土著政府便主动派人找上门来，表示只要我们愿意接纳，他们也可以讲革命，也可以讲左派叙事
+		name = frg.121.b
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			FRG = {
+				OR = {
+					has_government = syndicalist
+					has_government = radical_socialist
+					has_government = social_democrat
+					has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+				}
+			}
+			DJI = {
+				OR = {
+					has_government = social_conservative
+					has_government = national_populist
+				}
+			}
+		}   
+        DJI = {
+			set_party_name = {
+            	ideology = radical_socialist
+            	long_name = "第三国际驻吉布提顾问团"
+            	name = "第三国际驻吉布提顾问团"
+        	}
+			set_politics = {
+				ruling_party = social_democrat
+				elections_allowed = yes
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.15
+			}
+			add_radsoc_to_coalition = yes
+			add_soclib_to_coalition = yes
+			add_marlib_to_coalition = yes
+			add_soccon_to_coalition = yes
+			add_natpop_to_coalition = yes
+		}
+		FRG = {
+			add_to_faction = DJI
+		}   
+	}
+}
+
+country_event = {  #诡异的暴动
+	id = frg.122
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.122 "}
+	title = frg.122.t
+	desc = frg.122.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { 
+		name = frg.122.a
+		ai_chance = {
+			factor = 50
+		}   
+        DJI = { get_current_government_type = yes }
+		FRG = {
+			set_autonomy = {
+				target = DJI
+				autonomy_state = kr_colonial_government
+			}
+		}
+		DJI = { restore_previous_government_type = yes }
+		DJI = {
+			swap_ideas = {
+				remove_idea = DJI_chaos_n_shit
+				add_idea = DJI_restored_french_rule
+			}
+			set_cosmetic_tag = DJI_NFA
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				elections_allowed = yes
+			}
+			AFR_open_political_tree = yes
+			AFR_open_economy_tree = yes
+		}
+		every_state = {
+			limit = { is_core_of = SOM }
+			add_core_of = DJI
+		} 
+		every_state = {
+			limit = { is_core_of = ETH }
+			add_core_of = DJI
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = SOM
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = ETH
+		}  
+	}
+
+	option = {
+		name = frg.122.b
+		ai_chance = {
+			factor = 0
+		}   
+        add_stability = 0.01  
+	}
+}
+
+#刚果
+country_event = {  #意料之内的新金主
+	id = frg.123
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.123 "}
+	title = frg.123.t
+	desc = frg.123.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+	option = { #什么，女王打钱了？吾飘零半生，未逢明主，今愿弃阿尔及尔之暗，从巴黎之明...
+		name = frg.123.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			NOT = {
+				FRG = {
+					has_government = syndicalist
+					has_government = radical_socialist
+					has_government = social_democrat
+					has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+				}
+			}
+			FRG = {
+                has_completed_focus = FRG_Chanel_win
+            }
+			NOT = {
+                FRG = {
+                    has_completed_focus = FRG_Appearing_from_the_shadow
+                }
+            }
+		} 
+		FRG = {
+			add_political_power = -66
+		}   
+        FRG = {
+			add_to_faction = MSF
+		} 
+		if = {
+			limit = {
+				MSF = {
+					NOT = {
+						has_completed_focus = MSF_entente_cuck
+					}
+				}
+			}
+			MSF = {
+				complete_national_focus = MSF_mercanary_junta
+			} 
+		}
+	}
+	option = { #巴黎这群人嘛...出价还行，姑且就先投靠吧
+		name = frg.123.b
+		ai_chance = {
+			factor = 50
+		}   
+		FRG = {
+			add_political_power = -44
+		}   
+        FRG = {
+			add_to_faction = MSF
+		} 
+		if = {
+			limit = {
+				MSF = {
+					has_country_leader = { ruling_only = yes name = "Jacques Massu" }
+					NOT = {
+						has_completed_focus = MSF_entente_cuck
+					}
+				}
+			}
+			MSF = {
+				complete_national_focus = MSF_mercanary_junta
+			} 
+		} 
+	}
+	option = { #什么，给这么少就想打发我...啊不是，作为最优秀的战士，我坚决为忠诚于贝当元帅，绝不为巴黎伪政府所动
+		name = frg.123.c
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			NOT = {
+				FRG = {
+					has_government = syndicalist
+					has_government = radical_socialist
+					has_government = social_democrat
+					has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+				}
+			}
+		}    
+        FRG = {
+			country_event = { id = frg.128 days = 4 }
+		} 
+	}
+	option = { #妈的，有诈
+		name = frg.123.e
+		ai_chance = {
+			factor = 50
+		}   
+        FRG = {
+			create_wargoal = {
+				target = KIV
+				type = annex_everything
+			}  
+			create_wargoal = {
+				target = COG
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = MSF
+				type = annex_everything
+			}  
+			create_wargoal = {
+				target = UMN
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = LPD
+				type = annex_everything
+			} 
+		} 
+	}
+}
+
+#被frg强制和平，俄国内战
+country_event = {  #鞑坦人和突厥人率先制造分裂
+	id = frg.124
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event frg.124 "
+		hidden_effect = {
+			249 = { add_core_of = TTR }
+			1199 = { add_core_of = TTR }
+			1197 = { add_claim_by = TTR }
+			1198 = { add_core_of = TTR }
+
+			1197 = { add_core_of = BKN }
+			1195 = { add_core_of = BKN }
+			651 = { add_core_of = BKN }
+			1194 = { add_core_of = BKN }
+			573 = { add_claim_by = BKN }
+		}
+	}
+	title = frg.124.t
+	desc = frg.124.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+	option = { #果然异族不可信任！
+		name = frg.124.a
+		ai_chance = {
+			factor = 50
+		}   
+        hidden_effect = {
+			country_event = {
+				id = frg.125
+				days = 30
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					state = 573
+					state = 651
+					state = 1195
+					state = 1194
+					state = 1197
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { country_exists = RUS }
+					remove_core_of = RUS
+				}
+				if = {
+					limit = { country_exists = RVA }
+					remove_core_of = RVA
+				}
+				if = {
+					limit = { country_exists = WRA }
+					remove_core_of = WRA
+				}
+				if = {
+					limit = { country_exists = RRF }
+					remove_core_of = RRF
+				}
+			}
+			transfer_state_to = BKN
+		}
+		BKN = {
+			transfer_technology_without_doctrines = yes
+			hidden_effect = { load_oob = "BKN" }
+			country_event = {
+				id = bkn.1
+				days = 1
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					state = 249
+					state = 1198
+					state = 1199
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { country_exists = RUS }
+					remove_core_of = RUS
+				}
+			}
+			transfer_state_to = TTR
+		}
+		TTR = { transfer_technology_without_doctrines = yes }
+		hidden_effect = {
+			TTR = { 
+				country_event = {
+					id = ttr_idu.1 
+					days = 5
+				}
+			}
+		}	 
+	}
+	option = {
+		name = frg.124.b
+		trigger = { is_ai = no }
+		every_state = {
+			limit = {
+				OR = {
+					state = 249
+					state = 1198
+					state = 1199
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { country_exists = RUS }
+					remove_core_of = RUS
+				}
+			}
+			transfer_state_to = TTR
+		}
+		TTR = { 
+			transfer_technology_without_doctrines = yes
+			hidden_effect = {
+				TTR = { 
+					country_event = {
+						id = ttr_idu.1 
+						days = 5
+					}
+				}
+			}
+			change_tag_from = ROOT 
+		}
+	}
+	option = {
+		name = frg.124.c
+		trigger = { is_ai = no }
+		every_state = {
+			limit = {
+				OR = {
+					state = 573
+					state = 651
+					state = 1195
+					state = 1194
+					state = 1197
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { country_exists = RUS }
+					remove_core_of = RUS
+				}
+			}
+			transfer_state_to = BKN
+		}
+		BKN = {
+			transfer_technology_without_doctrines = yes
+			hidden_effect = { load_oob = "BKN" }
+			country_event = {
+				id = bkn.1
+				days = 1
+			}
+			change_tag_from = ROOT
+		}
+	}
+}
+
+country_event = {  #军方夺取大片土地
+	id = frg.125
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.125 "}
+	title = frg.125.t
+	desc = frg.125.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { #国家有难，这群家伙居然敢公然分裂国家
+		name = frg.125.a
+		ai_chance = {
+			factor = 50
+		}   
+        every_state = {
+			limit = {
+				OR = {
+					state = 262
+					state = 397
+					state = 581
+					state = 398
+					state = 399
+					state = 400
+					state = 1193
+					state = 256
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { country_exists = RUS }
+					remove_core_of = RUS
+				}
+			}
+			transfer_state_to = RVA
+		} 
+		RVA = {
+			transfer_technology_without_doctrines = yes
+			add_political_power = 100
+			every_owned_state = {
+				limit = { is_demilitarized_zone = yes }
+				set_demilitarized_zone = no
+			}
+			hidden_effect = {
+				set_country_flag = unlock_military
+				load_oob = "RUS_RVA_civil_war"
+			}
+		}
+		RVA = {
+			kill_ideology_leader = paternal_autocrat
+			create_country_leader = {
+				name = "Anton Denikin"
+				desc = "POLITICS_ANTON_DENIKIN_DESC"
+				picture = "gfx/leaders/RUS/Portrait_RUS_Anton_Denikin.png"
+				expire = "1.1.1"
+				ideology = junta_subtype
+			}
+		}
+		RVA = {
+			set_cosmetic_tag = FRG_RVA
+		} 
+	}
+
+	option = {
+		name = frg.125.b
+		trigger = { is_ai = no }  
+        add_stability = 0.01  
+	}
+}
+
+#伊拉克
+country_event = {  #漫步美索不达利亚
+	id = frg.126
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.126 "}
+	title = frg.126.t
+	desc = frg.126.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { #这里的石油...不错
+		name = frg.126.a
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			NOT = {
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+			}
+		}     
+        create_wargoal = {
+			target = IRQ
+			type = annex_everything
+		}  
+		create_wargoal = {
+			target = ASY
+			type = annex_everything
+		}
+	}
+
+	option = { #联络革命同志
+		name = frg.126.b
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			FRG = {
+				OR = {
+					has_government = syndicalist
+					has_government = radical_socialist
+					has_government = social_democrat
+					has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+				}
+			}
+			IRQ = {
+				has_socialist_government = yes
+			}
+		}     
+        FRG = {
+			add_to_faction = IRQ
+		}
+		create_wargoal = {
+			target = ASY
+			type = annex_everything
+		}  
+	}
+
+	option = { #毁减革命公敌
+		name = frg.126.b
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			FRG = {
+				OR = {
+					has_government = syndicalist
+					has_government = radical_socialist
+					has_government = social_democrat
+					has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+				}
+			}
+			IRQ = {
+				has_socialist_government = no
+			}
+		}    
+        create_wargoal = {
+			target = IRQ
+			type = annex_everything
+		}  
+		create_wargoal = {
+			target = ASY
+			type = annex_everything
+		}  
+	}
+}
+
+country_event = {  #新月沃土尽在手中
+	id = frg.127
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.127 "}
+	title = frg.127.t
+	desc = frg.127.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { #新时代十字军东征在法兰西领导下所向披靡
+		name = frg.127.a
+		ai_chance = {
+			factor = 50
+		}
+		IRQ = { set_cosmetic_tag = FRG_IRQ_2 }
+		IRQ = {
+			annex_country = {
+				target = LEB
+				transfer_troops = yes
+			} 
+		}  
+        every_state = {
+			limit = { is_owned_and_controlled_by = LEB }
+			add_core_of = IRQ
+		} 
+	}
+}
+
+#刚果后续
+country_event = {  #雇佣兵不为所动
+	id = frg.128
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.128 "}
+	title = frg.128.t
+	desc = frg.128.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { #主义讲的不错，可惜实质全是生意。反正刚果离开了你们也不是不能运作
+		name = frg.128.a
+		ai_chance = {
+			factor = 50
+		}   
+        FRG = {
+			country_event = { id = frg.129 days = 7 }
+		}   
+	}
+}
+
+country_event = {  #伊丽莎白维尔之旅
+	id = frg.129
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.129 "}
+	title = frg.129.t
+	desc = frg.129.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { #都是为钱而行，矿业资本家就是比傻不拉几大头兵好说话
+		name = frg.129.a
+		ai_chance = {
+			factor = 50
+		}   
+        FRG = {
+			add_to_faction = UMN
+		}  
+	}
+
+	option = { #都低估我们了啊...那法国人践踏刚果的时候就由不得你们臭非洲白人求饶了
+		name = frg.129.a
+		ai_chance = {
+			factor = 50
+		}   
+        create_wargoal = {
+			target = KIV
+			type = annex_everything
+		}  
+		create_wargoal = {
+			target = COG
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = MSF
+			type = annex_everything
+		}  
+		create_wargoal = {
+			target = UMN
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = LPD
+			type = annex_everything
+		}     
+	}
+}
+
+country_event = {  #观察刚果的革命事业
+	id = frg.130
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.130 "}
+	title = frg.130.t
+	desc = frg.130.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+         
+
+	option = { #
+		name = frg.130.a
+		ai_chance = {
+			factor = 50
+		}   
+        KIV = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2000
+				producer = FRG
+			}
+			add_ideas = internationale_support
+		}  
+	}
+}
 
 
 

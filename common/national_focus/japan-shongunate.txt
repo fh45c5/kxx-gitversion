@@ -1,0 +1,1344 @@
+focus_tree = {
+	id = japan-shongunate
+	continuous_focus_position = { x = -40 y = 1050 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPSHO
+		}
+	}
+	shared_focus = JAPFOR_japansplaceintheworld
+	shared_focus = JAPFOR_tokyo_conference
+	shared_focus = JAP_To_Sunder_the_Sunset
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday
+	######### Pre Iesato Death #########
+focus = { 
+	id = JAP_alliance_triumphant
+	icon = GFX_goal_JAP_victory_of_alliance
+	x = 13
+	y = 0
+	cost = 2
+	
+	available = { 
+		custom_trigger_tooltip = {
+			tooltip = "The Northern Alliance has consolidated the ruling authority over the island"
+			OR = {
+				has_country_flag = JAP_counter_coup_win
+				has_country_flag = JAP_alliance_win_over_civilwar
+			}
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_alliance_triumphant"
+		add_political_power = 100
+		remove_ideas = {
+			JAP_militarism_strengthened
+			jap_union_suppressed
+			jap_iraa 
+		}
+	}
+}
+focus = {
+	id = JAP_great_council_of_state
+	icon = GFX_goal_JAP_combined_government
+	relative_position_id = JAP_alliance_triumphant
+	x = 0
+	y = 1
+	prerequisite = {
+		focus = JAP_alliance_triumphant
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_great_council_of_state"
+		custom_effect_tooltip = "The Cabinet will be replaced by Great Council of State"
+		hidden_effect = {
+			add_ideas = JAP_great_council_of_state_idea
+		}
+	}
+}
+focus = {
+	id = JAP_restore_ritsuryo
+	icon = GFX_goal_JAP_ritsuryo_code
+	relative_position_id = JAP_great_council_of_state
+	x = -3
+	y = 1
+	prerequisite = {
+		focus = JAP_great_council_of_state
+	}
+	cost = 6
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_restore_ritsuryo"
+		add_stability = 0.05
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+	}
+}
+focus = {
+	id = JAP_empower_shogunal_authority
+	icon = GFX_goal_JAP_the_two_tokugawas
+	relative_position_id = JAP_great_council_of_state
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = JAP_great_council_of_state
+	}
+	cost = 6
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_empower_shogunal_authority"
+		add_ideas = JAP_first_amongs_equal
+		add_war_support = 0.05
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+	}
+}
+focus = {
+	id = JAP_kyujidai_doctrine
+	icon = GFX_goal_JAP_kyujidai
+	relative_position_id = JAP_great_council_of_state
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = JAP_great_council_of_state
+	}
+	available = {
+		NOT = {
+			has_completed_focus = JAP_shinjidai_doctrine
+		}
+	}
+	cost = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_kyujidai_doctrine"
+		add_ideas = JAP_kyujidai_idea_0
+	}
+}
+focus = {
+	id = JAP_shinjidai_doctrine
+	icon = GFX_goal_JAP_shinjidai
+	relative_position_id = JAP_great_council_of_state
+	x = 3
+	y = 1
+	prerequisite = {
+		focus = JAP_great_council_of_state
+	}
+	available = {
+		NOT = {
+			has_completed_focus = JAP_kyujidai_doctrine
+		}
+	}
+	cost = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_shinjidai_doctrine"
+		add_ideas = JAP_shinjidai_idea_0
+	}
+}
+focus = {
+	id = JAP_supreme_tribunal_of_nagasaki
+	icon = GFX_goal_JAP_special_tribunal_nagasaki
+	relative_position_id = JAP_great_council_of_state
+	x = -2
+	y = 2
+	prerequisite = {
+		focus = JAP_empower_shogunal_authority
+	}
+	prerequisite = {
+		focus = JAP_restore_ritsuryo
+	}
+	cost = 11
+	select_effect = {
+		country_event = {
+			id = jap_shogundom.1
+			days = 2
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_supreme_tribunal_of_nagasaki"
+		custom_effect_tooltip = "Shogun has opened the provisional Supreme Court of Nagasaki to decide the fate of nation"
+	}
+}
+focus = {
+	id = JAP_the_ultranationalists
+	icon = GFX_goal_JAP_ultranat_question
+	relative_position_id = JAP_supreme_tribunal_of_nagasaki
+	x = -1 
+	y = 1
+	prerequisite = {
+		focus = JAP_supreme_tribunal_of_nagasaki
+	}
+	cost = 2.9
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_supreme_tribunal_of_nagasaki"
+		custom_effect_tooltip = jap_nagasaki_court_tt 
+		if = {
+			limit = {
+				has_country_flag = JAP_ultranat_1
+			}
+			custom_effect_tooltip = jap_ultranat_effect_1_tt
+		}
+		if = {
+			limit = {
+				has_country_flag = JAP_ultranat_2
+			}
+			custom_effect_tooltip = jap_ultranat_effect_2_tt
+		}
+	}
+}
+focus = {
+	id = JAP_admiralty_question
+	icon = GFX_goal_JAP_admiralty_question
+	relative_position_id = JAP_supreme_tribunal_of_nagasaki
+	x = 0
+	y = 2
+	prerequisite = {
+		focus = JAP_supreme_tribunal_of_nagasaki
+	}
+	cost = 2.9
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_admiralty_question"
+		custom_effect_tooltip = jap_nagasaki_court_tt
+		if = {
+			limit = {
+				has_country_flag = JAP_admiralty_1
+			}
+			custom_effect_tooltip = jap_admiralty_effect_1_tt
+		}
+		if = {
+			limit = {
+				has_country_flag = JAP_admiralty_2
+			}
+			custom_effect_tooltip = jap_admiralty_effect_2_tt
+		}
+	}
+}
+focus = {
+	id = JAP_the_ultraroyalists
+	icon = GFX_goal_JAP_ultraroyal_question
+	relative_position_id = JAP_supreme_tribunal_of_nagasaki
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = JAP_supreme_tribunal_of_nagasaki
+	}
+	cost = 2.9
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_the_ultraroyalists"
+		custom_effect_tooltip = jap_nagasaki_court_tt 
+		if = {
+			limit = {
+				has_country_flag = JAP_ultraroy_1
+			}
+			custom_effect_tooltip = jap_ultraroy_effect_1_tt
+		}
+		if = {
+			limit = {
+				has_country_flag = JAP_ultraroy_2
+			}
+			custom_effect_tooltip = jap_ultraroy_effect_2_tt
+		}
+	}
+}
+focus = {
+	id = JAP_tribunal_final_phase
+	icon = GFX_goal_JAP_last_answer
+	relative_position_id = JAP_supreme_tribunal_of_nagasaki
+	x = 2
+	y = 3
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = "The questions in court have been answered"
+			has_completed_focus = JAP_admiralty_question
+			has_completed_focus = JAP_the_ultranationalists
+			has_completed_focus = JAP_the_ultraroyalists
+		}
+	}
+	prerequisite = {
+		focus = JAP_guilty_of_former_shogun
+		focus = JAP_new_legacy_of_iesato
+	}
+	prerequisite = { focus = JAP_admiralty_question }
+	cost = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_tribunal_final_phase"
+		country_event = jap_shogundom.5
+	}
+}
+focus = {
+	id = JAP_restore_han_system
+	icon = GFX_goal_JAP_feudal_domain_return
+	relative_position_id = JAP_kyujidai_doctrine
+	x = 0
+	y = 1
+	prerequisite = { focus = JAP_kyujidai_doctrine }
+	cost = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_restore_han_system"
+		JAP_kyujidai_shinjidai_swap = yes 
+	}
+}
+focus = {
+	id = JAP_restore_military_authority
+	icon = GFX_goal_JAP_feudalism_returns
+	relative_position_id = JAP_kyujidai_doctrine
+	x = 0
+	y = 2
+	prerequisite = { focus = JAP_restore_han_system }
+	cost = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_restore_military_authority"
+		JAP_kyujidai_shinjidai_swap = yes
+	}
+}
+focus = {
+	id = JAP_guilty_of_former_shogun
+	icon = GFX_goal_JAP_sin_of_lastshogun
+	relative_position_id = JAP_kyujidai_doctrine
+	x = 0
+	y = 3
+	prerequisite = { focus = JAP_restore_military_authority }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_guilty_of_former_shogun"
+		JAP_kyujidai_shinjidai_swap = yes
+	}
+}
+focus = {
+	id = JAP_reform_kazoku_law
+	icon = GFX_goal_JAP_kazoku_election
+	relative_position_id = JAP_shinjidai_doctrine
+	x = 0
+	y = 1
+	prerequisite = { focus = JAP_shinjidai_doctrine }
+	cost = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_reform_kazoku_law"
+		JAP_kyujidai_shinjidai_swap = yes
+	}
+}
+focus = {
+	id = JAP_next_bastion_of_democracy
+	icon = GFX_goal_JAP_shogunal_democracy
+	relative_position_id = JAP_shinjidai_doctrine
+	x = 0
+	y = 2
+	prerequisite = { focus = JAP_reform_kazoku_law }
+	cost = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_next_bastion_of_democracy"
+		JAP_kyujidai_shinjidai_swap = yes
+	}
+}
+focus = {
+	id = JAP_new_legacy_of_iesato
+	icon = GFX_goal_JAP_new_legacy_of_tokugawa
+	relative_position_id = JAP_shinjidai_doctrine
+	x = 0
+	y = 3
+	prerequisite = { focus = JAP_next_bastion_of_democracy }
+	cost = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_new_legacy_of_iesato"
+		JAP_kyujidai_shinjidai_swap = yes
+	}
+}
+focus = {
+	id = JAP_report_to_the_emperor
+	icon = GFX_goal_JAP_report_to_emperor
+	relative_position_id = JAP_tribunal_final_phase
+	x = 0
+	y = 1
+	prerequisite = { focus = JAP_tribunal_final_phase }
+	cost = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_report_to_the_emperor"
+		country_event = jap_shogundom.6
+	}
+}
+focus = {
+	id = JAP_long_live_the_shogunate
+	icon = GFX_goal_JAP_long_live_shogun
+	relative_position_id = JAP_tribunal_final_phase
+	x = 0
+	y = 2
+	prerequisite = { focus = JAP_report_to_the_emperor }
+	cost = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_report_to_the_emperor"
+		country_event = {
+			id = jap_shogundom.7
+			days = 1
+		}
+		country_event = {
+			id = jap_shogundom.8
+			days = 3
+		}
+		remove_ideas = JAP_LSMC_complete
+		add_timed_idea = {
+			idea = JAP_Tokyo_Market_slowly_restore
+			days = 365
+		}
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+#######Pre Iesato Death Tree
+focus = {
+	id = JAP_iesato_government
+	icon = GFX_goal_JAP_iesato_government 
+	relative_position_id = JAP_long_live_the_shogunate
+	x = 0
+	y = 2
+	allow_branch = {
+		
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = "The Shogunate has decided the fate of nation"
+			has_completed_focus = JAP_long_live_the_shogunate
+		}
+	}
+	bypass = {
+		custom_trigger_tooltip = {
+			tooltip = "The Shogunate has decided the fate of nation"
+			has_completed_focus = JAP_long_live_the_shogunate
+		}
+	}
+	cost = 0
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_iesato_government"
+	}
+}
+focus = {
+	id = JAP_mikawahan_faction
+	icon = GFX_goal_JAP_mikawahan 
+	relative_position_id = JAP_iesato_government
+	x = 4
+	y = 1
+	available = {
+		has_idea = JAP_shinjidai_idea_3 
+	}
+	prerequisite = {
+		focus = JAP_iesato_government
+	}
+	cost = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_mikawahan_faction"
+		set_politics = {
+			ruling_party = authoritarian_democrat
+   			elections_allowed = no
+		}
+		remove_every_hog_trait = yes  
+		activate_advisor = JAP_Tokugawa_Iemasa_hog_ade
+	}
+}
+focus = {
+	id = JAP_left_learning_doctrine
+	icon = GFX_goal_JAP_left_learning_doctrine 
+	relative_position_id = JAP_mikawahan_faction
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = JAP_mikawahan_faction
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_left_learning_doctrine"
+		set_temp_variable = { coalition_partner_var = token:social_democrat }
+		add_to_coalition = yes 
+		add_stability = 0.05
+		add_political_power = 75 
+	}
+}
+focus = {
+	id = JAP_rural_urbanization
+	icon = GFX_goal_JAP_rural_urbanization 
+	relative_position_id = JAP_left_learning_doctrine
+	x = 1
+	y = 1 
+	prerequisite = {
+		focus = JAP_left_learning_doctrine
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_rural_urbanization"
+		unlock_decision_category_tooltip = JAP_urbanization_program
+		unlock_decision_tooltip = JAP_Tokai_Hokkaido_road_1
+		unlock_decision_tooltip = JAP_Tokai_Hokkaido_road_2
+		unlock_decision_tooltip = JAP_Tokai_Hokkaido_road_3 
+		unlock_decision_tooltip = JAP_Hokuriku_road
+		unlock_decision_tooltip = JAP_okinawa_infrastructure
+		unlock_decision_tooltip = JAP_iwo_jima_infrastructure
+	}
+}
+focus = {
+	id = JAP_municipality_promotion_act
+	icon = GFX_goal_JAP_municipality_promote_act 
+	relative_position_id = JAP_left_learning_doctrine 
+	x = 1
+	y = 2
+	prerequisite = {
+		focus = JAP_rural_urbanization
+	}
+	cost = 6
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_municipality_promotion_act"
+		add_stability = 0.1
+	}
+}
+focus = {
+	id = JAP_local_election_act
+	icon = GFX_goal_JAP_local_election 
+	relative_position_id = JAP_left_learning_doctrine
+	x = 1
+	y = 3 
+	prerequisite = {
+		focus = JAP_municipality_promotion_act
+	}
+	prerequisite = {
+		focus = JAP_universal_suffrage_act
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_local_election_act"
+		add_stability = 0.1
+		add_political_power = 100
+		add_popularity = {
+			ideology = var:current_party_ideology_group
+			popularity = 0.05
+		}
+	}
+}
+focus = {
+	id = JAP_prusso_americanism_abolishment
+	icon = GFX_goal_JAP_prusso_american_abolish 
+	relative_position_id = JAP_mikawahan_faction
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = JAP_mikawahan_faction
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_prusso_americanism_abolishment"
+		add_popularity = {
+			ideology = var:current_party_ideology_group
+			popularity = 0.05
+		}
+		add_stability = 0.05
+		add_ideas = JAP_strong_asian_democracy
+	}
+}
+focus = {
+	id = JAP_peoples_power_strengthen
+	icon = GFX_goal_JAP_peoples_power 
+	relative_position_id = JAP_prusso_americanism_abolishment
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = JAP_prusso_americanism_abolishment
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_peoples_power_strengthen"
+		add_stability = 0.1
+		add_political_power = 150
+		add_popularity = {
+			ideology = var:current_party_ideology_group
+			popularity = 0.05
+		}
+	}
+}
+focus = {
+	id = JAP_deconfuciusization
+	icon = GFX_goal_JAP_deconfuciusization 
+	relative_position_id = JAP_prusso_americanism_abolishment
+	x = -1
+	y = 2
+	prerequisite = {
+		focus = JAP_peoples_power_strengthen
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_deconfuciusization"
+		add_political_power = -100
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.1
+		}
+		add_timed_idea = {
+			idea = JAP_deconfuciused_education_reform_idea
+			days = 730
+		}
+		add_research_slot = 1
+	}
+}
+focus = {
+	id = JAP_seigaku_education_reform
+	icon = GFX_goal_JAP_seigaku 
+	relative_position_id = JAP_prusso_americanism_abolishment
+	x = -1
+	y = 3
+	prerequisite = {
+		focus = JAP_deconfuciusization
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_seigaku_education_reform"
+		add_ideas = JAP_seigaku_reform_idea 
+		add_research_slot = 1
+	}
+}
+focus = {
+	id = JAP_electoral_reform
+	icon = GFX_goal_JAP_electoral_reform 
+	relative_position_id = JAP_mikawahan_faction
+	x = 0
+	y = 2
+	prerequisite = {
+		focus = JAP_left_learning_doctrine
+	}
+	prerequisite = {
+		focus = JAP_prusso_americanism_abolishment
+	}
+	prerequisite = {
+		focus = JAP_mikawahan_faction
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_electoral_reform"
+		add_stability = 0.05 
+	}
+}
+focus = {
+	id = JAP_universal_suffrage_act 
+	icon = GFX_goal_JAP_universal_suffrage 
+	relative_position_id = JAP_electoral_reform 
+	x = 0
+	y = 1
+	prerequisite = {
+		focus = JAP_electoral_reform
+	}
+	prerequisite = {
+		focus = JAP_peoples_power_strengthen
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_universal_suffrage_act"
+		add_timed_idea = {
+			idea = JAP_universal_right_idea
+			days = 720
+		} 
+	}
+}
+focus = {
+	id = JAP_to_the_new_golden_age
+	icon = GFX_goal_JAP_to_golden_age 
+	relative_position_id = JAP_electoral_reform 
+	x = 0
+	y = 3
+	prerequisite = {
+		focus = JAP_universal_suffrage_act
+	}
+	prerequisite = {
+		focus = JAP_seigaku_education_reform
+	}
+	prerequisite = {
+		focus = JAP_local_election_act
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_to_the_new_golden_age"
+		add_timed_idea = {
+			idea = JAP_to_the_new_golden_age_idea
+			days = 720
+		}
+	}
+}
+focus = {
+	id = JAP_oniwahan_faction 
+	icon = GFX_goal_JAP_oniwahan 
+	relative_position_id = JAP_iesato_government
+	x = -4
+	y = 1
+	available = {
+		has_idea = JAP_kyujidai_idea_3 
+	}
+	prerequisite = {
+		focus = JAP_iesato_government
+	}
+	cost = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_oniwahan_faction"
+		set_politics = {
+			ruling_party = paternal_autocrat
+   			elections_allowed = no
+		}
+		set_temp_variable = { coalition_partner_var = token:paternal_autocrat }
+		remove_from_coalition = yes 
+		remove_every_for_trait = yes  
+		activate_advisor = JAP_Matsudaira_Tsuneo_for_ade
+		hidden_effect = {
+			add_country_leader_role = {
+				character = JAP_Hirohito 
+				promote_leader = yes
+				country_leader = {
+				  ideology = pat_duumvirism_subtype
+				  expire = "1965.1.1.1"
+				}
+			}
+		}
+	}
+}
+focus = {
+	id = JAP_believe_the_kingsmaker
+	icon = GFX_goal_JAP_the_kingmaker
+	relative_position_id = JAP_oniwahan_faction
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = JAP_oniwahan_faction
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_believe_the_kingsmaker"
+		add_political_power = 150
+	}
+}
+focus = {
+	id = JAP_reinstall_dismissals
+	icon = GFX_goal_JAP_reinstall_daimyo 
+	relative_position_id = JAP_believe_the_kingsmaker
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = JAP_believe_the_kingsmaker
+	}
+	cost = 4
+	select_effect = {
+		every_unit_leader = {
+			limit = {
+				OR = {
+					is_character = JAP_Shimazu_Tadashige
+					is_character = JAP_Toshinari_Maeda
+					is_character = JAP_Kacho_Hironobu
+				}
+			}
+			set_character_flag = JAP_leader
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_reinstall_dismissals"
+		add_corps_commander_role = {
+			Character = JAP_Shimazu_Tadashige
+			skill = 2
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+		}
+		add_corps_commander_role = {
+			Character = JAP_Toshinari_Maeda
+			skill = 3
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 3
+		}
+		add_corps_commander_role = {
+			Character = JAP_Kacho_Hironobu
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+		}
+	}
+}
+focus = {
+	id = JAP_military_disintegration
+	icon = GFX_goal_JAP_military_disintegrate 
+	relative_position_id = JAP_believe_the_kingsmaker
+	x = -1
+	y = 2
+	prerequisite = {
+		focus = JAP_reinstall_dismissals
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_military_disintegration"
+		add_stability = -0.03
+		add_ideas = JAP_separation_command_1
+		every_unit_leader = {
+			limit = {
+				has_character_flag = JAP_leader
+			}
+			add_skill_level = 1
+		}
+	}
+}
+focus = {
+	id = JAP_uphold_prefecturare_imperium
+	icon = GFX_goal_JAP_regional_imperium 
+	relative_position_id = JAP_believe_the_kingsmaker 
+	x = -1
+	y = 3
+	prerequisite = {
+		focus = JAP_military_disintegration
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_uphold_prefecturare_imperium"
+		add_stability = -0.05
+		swap_ideas = {
+			remove_idea = JAP_separation_command_1
+			add_idea = JAP_separation_command_2
+		}
+		add_field_marshal_role = {
+			character = JAP_Tokugawa_Kuniyuki
+			skill = 2
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+		}
+	}
+}
+focus = {
+	id = JAP_and_constitution
+	icon = GFX_goal_JAP_constitution
+	relative_position_id = JAP_oniwahan_faction
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = JAP_oniwahan_faction
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_and_constitution"
+		add_popularity = {
+			ideology = var:current_party_ideology_group 
+			popularity = 0.05
+		}
+	}
+}
+focus = {
+	id = JAP_kuniyuki_blueprint
+	icon = GFX_goal_JAP_kuniyuki_blueprint
+	relative_position_id = JAP_and_constitution
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = JAP_and_constitution
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_kuniyuki_blueprint"
+		add_ideas = JAP_intelligence_service_shogun
+		add_ideas = JAP_plant_the_shogunate_loyalty
+		add_research_slot = 1
+	}
+}
+focus = {
+	id = JAP_bureaucrat_reform
+	icon = GFX_goal_JAP_bureaucrat_reform 
+	relative_position_id = JAP_and_constitution
+	x = 1
+	y = 2
+	prerequisite = {
+		focus = JAP_kuniyuki_blueprint
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_bureaucrat_reform"
+		add_stability = 0.05
+	}
+}
+focus = {
+	id = JAP_fudai_toza_restoration
+	icon = GFX_goal_JAP_toza_fudai 
+	relative_position_id = JAP_and_constitution
+	x = 1
+	y = 3
+	prerequisite = {
+		focus = JAP_bureaucrat_reform
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_fudai_toza_restoration"
+		add_war_support = 0.15
+	}
+}
+focus = {
+	id = JAP_progressive_advancement_backsliding
+	icon = GFX_goal_JAP_progressive_backsliding 
+	relative_position_id = JAP_oniwahan_faction
+	x = 0
+	y = 2
+	prerequisite = {
+		focus = JAP_oniwahan_faction
+	}
+	prerequisite = {
+		focus = JAP_believe_the_kingsmaker
+	}
+	prerequisite = {
+		focus = JAP_and_constitution
+	}
+	cost = 4 
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_progressive_advancement_backsliding"
+		add_stability = -0.2
+		add_political_power = -100
+	}
+}
+focus = {
+	id = JAP_suffrage_of_chosen_one
+	icon = GFX_goal_JAP_suffrage_chosen_one 
+	relative_position_id = JAP_progressive_advancement_backsliding
+	x = 0
+	y = 1
+	prerequisite = {
+		focus = JAP_progressive_advancement_backsliding
+	}
+	cost = 4 
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_suffrage_of_chosen_one"
+		add_stability = 0.05
+		add_popularity = {
+			ideology = var:current_party_ideology_group
+			popularity = 0.07
+		}
+	}
+}
+focus = {
+	id = JAP_to_our_nostalgic_period
+	icon = GFX_goal_JAP_rising_of_sun 
+	relative_position_id = JAP_suffrage_of_chosen_one
+	x = 0
+	y = 2
+	prerequisite = {
+		focus = JAP_suffrage_of_chosen_one
+	}
+	prerequisite = {
+		focus = JAP_fudai_toza_restoration
+	}
+	prerequisite = {
+		focus = JAP_uphold_prefecturare_imperium
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_to_our_nostalgic_period"
+		add_timed_idea = {
+			idea = JAP_to_our_nostalgic_period_idea
+			days = 720
+		}
+	}
+}
+focus = {
+	id = JAP_imperial_power_question
+	icon = GFX_goal_JAP_imperial_power_question 
+	relative_position_id = JAP_iesato_government 
+	x = 0
+	y = 3
+	prerequisite = {
+		focus = JAP_prusso_americanism_abolishment
+		focus = JAP_and_constitution
+	}
+	prerequisite = {
+		focus = JAP_iesato_government
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_imperial_power_question"
+		country_event = {
+			id = jap_shogundom.9
+			days = 1
+		}
+	}
+}
+focus = {
+	id = JAP_learning_from_taisho_era
+	icon = GFX_goal_JAP_taisho_lesson 
+	relative_position_id = JAP_imperial_power_question
+	x = 0
+	y = 1
+	prerequisite = {
+		focus = JAP_imperial_power_question
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_learning_from_taisho_era"
+		country_event = {
+			id = jap_shogundom.10
+			days = 1
+		}
+	}
+}
+focus = {
+	id = JAP_kokutai_minshu_unity
+	icon = GFX_goal_JAP_kokutai_minshu 
+	relative_position_id = JAP_imperial_power_question
+	x = 0
+	y = 3
+	prerequisite = {
+		focus = JAP_learning_from_taisho_era
+	}
+	cost = 4
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: JAP_kokutai_minshu_unity"
+		country_event = {
+			id = jap_shogundom.11
+			days = 1
+		}
+	}
+}
+
+focus = {
+	id = JAP_the_kingmaker_assumed_shogunate
+	icon = GFX_goal_JAP_the_kingmaker 
+	x = 13
+	y = 18
+	
+	cost = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_the_kingmaker_assumed_shogunate"
+		add_country_leader_trait = chancellor_of_state
+		add_country_leader_trait = the_just_shogun
+		add_popularity = {
+			ideology = var:current_party_ideology_group
+			popularity = 0.2
+		}
+		add_ideas = JAP_tokugawa_authority_0
+	}
+}
+focus = {
+	id = JAP_integrate_ancient_laws
+	icon = GFX_goal_JAP_bugyo_guide 
+	relative_position_id = JAP_the_kingmaker_assumed_shogunate
+	x = -2
+	y = 1
+	prerequisite = { focus = JAP_the_kingmaker_assumed_shogunate }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_integrate_ancient_laws"
+		modify_tokugawa_authority = yes 
+	}
+}
+focus = {
+	id = JAP_extend_navy_budget
+	icon = GFX_goal_JAP_increase_navy_budget 
+	relative_position_id = JAP_the_kingmaker_assumed_shogunate
+	x = 0
+	y = 1
+	prerequisite = { focus = JAP_the_kingmaker_assumed_shogunate }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_extend_navy_budget"
+		add_political_power = -50
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.2
+			uses = 1
+			category = naval_doctrine
+		} 
+	}
+}
+focus = {
+	id = JAP_rebuild_the_commissions
+	icon = GFX_goal_JAP_public_address 
+	relative_position_id = JAP_the_kingmaker_assumed_shogunate
+	x = 2
+	y = 1
+	prerequisite = { focus = JAP_the_kingmaker_assumed_shogunate }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_rebuild_the_commissions"
+		modify_tokugawa_authority = yes 
+		 
+		activate_advisor = JAP_Mushanokoji_Kintomo_for_pau
+		activate_advisor = JAP_Yoshikawa_Takeo_sec_pau
+		activate_advisor = JAP_Nagayuki_Asano_eco_pau
+	}
+}
+focus = {
+	id = JAP_embrace_neo_confucianism
+	icon = GFX_goal_confucius 
+	relative_position_id = JAP_extend_navy_budget
+	x = -1 
+	y = 1
+	prerequisite = { focus = JAP_integrate_ancient_laws }
+	prerequisite = { focus = JAP_extend_navy_budget }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_embrace_neo_confucianism"
+		add_stability = 0.02
+	}
+}
+focus = {
+	id = JAP_shin_fukoku_kyohei
+	icon = GFX_goal_JAP_fukoku_kyohei 
+	relative_position_id = JAP_extend_navy_budget
+	x = 1
+	y = 1
+	prerequisite = { focus = JAP_rebuild_the_commissions }
+	prerequisite = { focus = JAP_extend_navy_budget }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_shin_fukoku_kyohei"
+		add_political_power = 100
+		add_timed_idea = {
+			idea = JAP_quickening_military_production
+			days = 720
+		}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.7
+			uses = 3
+			category = land_doctrine
+		}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.7
+			uses = 3
+			category = naval_doctrine
+		}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.7
+			uses = 3
+			category = air_doctrine
+		}
+		army_experience = 50
+		navy_experience = 50
+		air_experience = 50
+	}
+}
+focus = {
+	id = JAP_subordinate_democracy
+	icon = GFX_goal_subordinate_parliament 
+	relative_position_id = JAP_integrate_ancient_laws
+	x = 0
+	y = 2
+	prerequisite = { focus = JAP_embrace_neo_confucianism }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_subordinate_democracy"
+		add_stability = -0.1
+		modify_tokugawa_authority = yes 
+	}
+}
+focus = {
+	id = JAP_make_parliament_our_rubberstamp
+	icon = GFX_goal_JAP_rubberstamp_parliament 
+	relative_position_id = JAP_subordinate_democracy
+	x = -2
+	y = 1
+	prerequisite = { focus = JAP_subordinate_democracy }
+	mutually_exclusive = {
+		focus = JAP_send_parliament_to_hell
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_make_parliament_our_rubberstamp"
+		add_political_power = 25
+		add_popularity = {
+			ideology = authoritarian_democrat 
+			popularity = -0.05
+		} 
+	}
+}
+focus = {
+	id = JAP_samurai_code_of_law
+	icon = GFX_goal_JAP_samurai_law 
+	relative_position_id = JAP_make_parliament_our_rubberstamp
+	x = -1
+	y = 1
+	prerequisite = { focus = JAP_make_parliament_our_rubberstamp }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_samurai_code_of_law"
+		add_political_power = 50
+	}
+}
+focus = {
+	id = JAP_send_parliament_to_hell
+	icon = GFX_goal_absolute_destroy_parliament 
+	relative_position_id = JAP_subordinate_democracy
+	x = 0
+	y = 1
+	prerequisite = { focus = JAP_subordinate_democracy }
+	mutually_exclusive = {
+		focus = JAP_make_parliament_our_rubberstamp
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_send_parliament_to_hell"
+		add_popularity = {
+			ideology = paternal_autocrat 
+			popularity = 0.1
+		} 
+	}
+}
+focus = {
+	id = JAP_purge_the_old_politicians
+	icon = GFX_goal_purge_of_death_angel 
+	relative_position_id = JAP_send_parliament_to_hell
+	x = -1
+	y = 1
+	prerequisite = { focus = JAP_send_parliament_to_hell }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_purge_the_old_politicians"
+		add_manpower = -1100
+	}
+}
+focus = {
+	id = JAP_taiheiyo_circuit_development
+	icon = GFX_goal_JAP_tokaido_dev 
+	relative_position_id = JAP_rebuild_the_commissions
+	x = 0
+	y = 2
+	prerequisite = { focus = JAP_shin_fukoku_kyohei }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_taiheiyo_circuit_development"
+		custom_effect_tooltip = "Unlock the Taiheiyo Development Project"
+	}
+}
+focus = {
+	id = JAP_under_supervision_of_government
+	icon = GFX_goal_JAP_government_supervised_complex 
+	relative_position_id = JAP_taiheiyo_circuit_development
+	x = 0
+	y = 1
+	prerequisite = { focus = JAP_taiheiyo_circuit_development }
+	mutually_exclusive = {
+		focus = JAP_nationalize_the_public_company
+	}
+	cost = 2.5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_under_supervision_of_government"
+		custom_effect_tooltip = "The development right will be single-handed controlled by government"
+	}
+}
+focus = {
+	id = JAP_shogunate_industry
+	icon = GFX_goal_JAP_shogunate_industry 
+	relative_position_id = JAP_under_supervision_of_government
+	x = 1
+	y = 1
+	prerequisite = { focus = JAP_under_supervision_of_government }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_shogunate_industry"
+		add_ideas = JAP_tanegashima_league
+	}
+}
+focus = {
+	id = JAP_nationalize_the_public_company
+	icon = GFX_goal_privatization 
+	relative_position_id = JAP_taiheiyo_circuit_development
+	x = 2
+	y = 1
+	prerequisite = { focus = JAP_taiheiyo_circuit_development }
+	mutually_exclusive = {
+		focus = JAP_under_supervision_of_government
+	}
+	cost = 2.5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_nationalize_the_public_company"
+		custom_effect_tooltip = "The development right will be cooperated by Zaibatsu and Government-seized Companies"
+	}
+}
+focus = {
+	id = JAP_samurai_zaibatsu_megacollab
+	icon = GFX_goal_JAP_megacollab 
+	relative_position_id = JAP_nationalize_the_public_company
+	x = 1
+	y = 1
+	prerequisite = { focus = JAP_nationalize_the_public_company }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_samurai_zaibatsu_megacollab"
+		add_ideas = JAP_izumo_industrial_league
+	}
+}
+focus = {
+	id = JAP_increase_navy_size
+	icon = GFX_goal_JAP_increase_navy_size 
+	relative_position_id = JAP_extend_navy_budget
+	x = 0
+	y = 2
+	prerequisite = { focus = JAP_extend_navy_budget }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_increase_navy_size"
+		add_ideas = JAP_naval_force_expand
+	}
+}
+focus = {
+	id = JAP_absolute_naval_power_state
+	icon = GFX_goal_JAP_maritime_superpower 
+	relative_position_id = JAP_extend_navy_budget
+	x = 0
+	y = 4
+	prerequisite = { focus = JAP_increase_navy_size }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_absolute_naval_power_state"
+		add_ideas = JAP_thalassocratic_shogunate
+	}
+}
+focus = {
+	id = JAP_extend_military_technology_budget
+	icon = GFX_goal_military_tech_research 
+	relative_position_id = JAP_absolute_naval_power_state
+	x = -2
+	y = 1
+	prerequisite = { 
+		focus = JAP_samurai_code_of_law
+		focus = JAP_purge_the_old_politicians
+	}
+	prerequisite = {
+		focus = JAP_absolute_naval_power_state
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_extend_military_technology_budget"
+		add_ideas = JAP_mil_tech_boost
+	}
+}
+focus = {
+	id = JAP_even_military_can_run_business
+	icon = GFX_goal_military_mobillisation 
+	relative_position_id = JAP_absolute_naval_power_state
+	x = 2
+	y = 1
+	prerequisite = { 
+		focus = JAP_shogunate_industry
+		focus = JAP_samurai_zaibatsu_megacollab
+	}
+	prerequisite = {
+		focus = JAP_absolute_naval_power_state
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_even_military_can_run_business"
+		add_political_power = 100
+	}
+}
+focus = {
+	id = JAP_long_live_true_justice
+	icon = GFX_goal_JAP_tokugawa_eternal_reign 
+	relative_position_id = JAP_absolute_naval_power_state
+	x = 0
+	y = 2
+	prerequisite = { focus = JAP_even_military_can_run_business }
+	prerequisite = { focus = JAP_extend_military_technology_budget }
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus JAP_long_live_true_justice"
+		add_stability = 0.1
+		add_political_power = 50
+		modify_tokugawa_authority = yes
+	}
+}
+}

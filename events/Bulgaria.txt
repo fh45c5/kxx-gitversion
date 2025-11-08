@@ -2228,7 +2228,6 @@ country_event = { #Government destabilisation
 	is_triggered_only = yes
 	
 	trigger = {
-		has_government = social_conservative
 		has_idea = BUL_Aleksandar_Stamboliyski_hog_sco
 	}
 
@@ -2300,6 +2299,7 @@ country_event = { #Government destabilisation
 		remove_ideas = BUL_asserting_the_tsars_power_idea
 
 		hidden_effect = {
+			country_event = { id = bulgaria.125 days = 30  }
 			random_other_country = {
 				limit = { is_ai = yes }
 				news_event = worldnews.140
@@ -2371,6 +2371,7 @@ country_event = { #Government destabilisation
 		remove_ideas = BUL_asserting_the_tsars_power_idea
 
 		hidden_effect = {
+			country_event = { id = bulgaria.125 days = 30  }
 			random_other_country = {
 				limit = { is_ai = yes }
 				news_event = worldnews.140
@@ -2493,7 +2494,7 @@ country_event = { #Government destabilisation
 		}
 
 		add_popularity = {
-			ideology = syndicalist
+			ideology = radical_socialist
 			popularity = 0.4
 		}
 
@@ -2506,7 +2507,7 @@ country_event = { #Government destabilisation
 		}
 
 		set_politics = {
-			ruling_party = syndicalist
+			ruling_party = radical_socialist
 			elections_allowed = no
 		}
 
@@ -2522,6 +2523,82 @@ country_event = { #Government destabilisation
 				news_event = worldnews.140
 			}
 		}
+	}
+	option = { #
+		name = bulgaria.57.f
+		trigger = {
+			has_cosmetic_tag = BUL_republic
+		}
+		clr_country_flag = BUL_liberal_government
+
+
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = { rule = BUL_politics option = BUL_POLITIC_SOCDEM }
+					has_game_rule = { rule = BUL_politics option = BUL_POLITIC_MARLIB }
+					has_game_rule = { rule = BUL_politics option = BUL_POLITIC_PATAUT }
+				}
+			}
+		}
+
+		if = {
+			limit = { is_subject = yes }
+			overlord = {
+				country_event = { id = bulgaria.118 days = 1 }
+				set_autonomy = {
+					target = BUL
+					autonomy_state = autonomy_free
+				}
+			}
+		}
+		if = {
+			limit = { is_in_faction = yes }
+			leave_faction = yes
+		}
+		
+		separate_peace_all_wars = yes
+
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.15
+		}
+
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.4
+		}
+
+		remove_all_ministers = yes
+		add_ideas = {
+			BUL_Rafael_Kamhi_hog_rso
+			BUL_Dimo_Kazasov_for_sde
+			BUL_Ivan_Stefanov_eco_syn
+			BUL_Pencho_Zlatev_sec_pau
+		}
+
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = no
+		}
+			create_country_leader = {
+				name = "鲍里斯三世"
+				desc = "POLITICS_BORIS_III_DESC"
+				picture = "gfx/leaders/BUL/Portrait_BUL_Boris_III.png"
+				expire = "1.1.1"
+				ideology = monsoc_subtype
+			}
+		set_party_name = {
+			ideology = radical_socialist
+			name = "沙皇勤王党"
+			long_name = "沙皇勤王党"
+		}
+		set_country_flag = BUL_hidden_path_unlock
+		set_country_flag = KXX_LEADER_GUI_VISIBLE
+		set_country_flag = BUL_Lyubomir_Hristov_Lulchev_VISIBLE
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -4001,108 +4078,7 @@ country_event = { #Death of Ferdinand I, ascension of Boris III
 			popularity = 0.05
 		}
 	}
-	option = { #The Agrarians take power!
-		name = bulgaria.89.g
-		ai_chance = {
-			factor = 50
-			modifier = {
-				factor = 0
-				OR = {
-					has_game_rule = { rule = BUL_politics option = BUL_POLITIC_SOCDEM }
-					has_game_rule = { rule = BUL_politics option = BUL_POLITIC_MARLIB }
-				}
-			}
-			modifier = {
-				factor = 0.5
-				NOT = { is_subject_of = SER }
-			}
-		}
-
-		clr_country_flag = BUL_liberal_government
-
-		create_country_leader = {
-			name = "鲍里斯三世"
-			desc = "POLITICS_BORIS_III_DESC"
-			picture = "gfx/leaders/BUL/Portrait_BUL_Boris_III.png"
-			expire = "1.1.1"
-			ideology = soccon_agrarianism_subtype
-		}
-
-		hidden_effect = {
-			create_country_leader = {
-				name = "鲍里斯三世"
-				desc = "POLITICS_BORIS_III_DESC"
-				picture = "gfx/leaders/BUL/Portrait_BUL_Boris_III.png"
-				expire = "1.1.1"
-				ideology = revisionist_marxism_subtype
-			}
-
-			create_country_leader = {
-				name = "鲍里斯三世"
-				desc = "POLITICS_BORIS_III_DESC"
-				picture = "gfx/leaders/BUL/Portrait_BUL_Boris_III.png"
-				expire = "1.1.1"
-				ideology = centrist_subtype
-			}
-
-			create_country_leader = {
-				name = "鲍里斯三世"
-				desc = "POLITICS_BORIS_III_DESC"
-				picture = "gfx/leaders/BUL/Portrait_BUL_Boris_III.png"
-				expire = "1.1.1"
-				ideology = liberal_conservative_subtype
-			}
-
-			create_country_leader = {
-				name = "鲍里斯三世"
-				desc = "POLITICS_BORIS_III_DESC"
-				picture = "gfx/leaders/BUL/Portrait_BUL_Boris_III.png"
-				expire = "1.1.1"
-				ideology = soccon_agrarianism_subtype
-			}
-
-			create_country_leader = {
-				name = "鲍里斯三世"
-				desc = "POLITICS_BORIS_III_DESC"
-				picture = "gfx/leaders/BUL/Portrait_BUL_Boris_III.png"
-				expire = "1.1.1"
-				ideology = absolute_monarchy_subtype
-			}
-
-			create_country_leader = {
-				name = "鲍里斯三世"
-				desc = "POLITICS_BORIS_III_DESC"
-				picture = "gfx/leaders/BUL/Portrait_BUL_Boris_III.png"
-				expire = "1.1.1"
-				ideology = authoritarian_liberalism_subtype
-			}
-		}
-
-		add_popularity = {
-			ideology = social_conservative
-			popularity = 0.20
-		}
-
-		remove_all_ministers = yes
-		add_ideas = {
-			BUL_Aleksandar_Stamboliyski_hog_sco
-			BUL_Konstantin_Mouraviev_for_sco
-			BUL_Aleksandar_Obbov_eco_sco
-			BUL_Dimitar_Gichev_sec_sco
-		}
-
-		set_politics = {
-			ruling_party = social_conservative
-			elections_allowed = no
-		}
-
-		hidden_effect = {
-			news_event = {
-				id = worldnews.138
-				days = 2
-			}
-		}
-	}
+	
 }
 
 country_event = { #PatAut Coup
@@ -5767,6 +5743,7 @@ country_event = { #Anger against Agrarians
 	option = {
 		name = bulgaria.126.f #chaos - esoterics
 		#insert event later
+		complete_national_focus = BUL_small_cloud_and_big_rain
 	}
 }
 country_event = { #rome shit
@@ -6713,6 +6690,8 @@ country_event = { # puppet monarchy?
 		add_stability = 0.05
 		
 		set_country_flag = zveno_monarchy
+		set_country_flag = KXX_LEADER_GUI_VISIBLE
+		set_country_flag = BUL_Hristo_Lukov_VISIBLE
 	}
 }
 
@@ -6753,8 +6732,8 @@ country_event = { # retire Lukov?
 		}
 		
 		add_political_power = 150
-		
-		set_country_flag = zveno_legionnary
+		complete_national_focus = BUL_young_officers
+		set_country_flag = BUL_legion_victory
 	}
 }
 country_event = {
@@ -7535,6 +7514,8 @@ country_event = { #
 				array = RUS.RUS_starting_states_array
 				add_core_of = ROOT
 			}
+			RUS_enable_integration = yes
+			ROOT = { save_global_event_target_as = russia }
 			every_state = {
 				limit = {
 					is_core_of = DKB
@@ -7575,6 +7556,8 @@ country_event = { #
 				array = RUS.RUS_starting_states_array
 				add_core_of = ROOT
 			}
+			RUS_enable_integration = yes
+			ROOT = { save_global_event_target_as = russia }
 			every_state = {
 				limit = {
 					is_core_of = DKB
@@ -7631,5 +7614,119 @@ country_event = { #
 					add_state_core = PREV 
 				}
 			}
+	}
+}
+country_event = { # 
+	id = bulgaria_foreign_events.17
+	title = bulgaria_foreign_events.17.t
+	desc = bulgaria_foreign_events.17.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		set_country_flag = BUL_imro_off
+	}
+	option = { # yes
+		name = bulgaria_foreign_events.17.a
+		create_country_leader = {
+			name = "弗拉德·帕绍夫"
+			picture = "gfx/leaders/BUL/Portrait_BUL_Vlad_Pashov.png"
+			expire = "1.1.1"
+			ideology = syn_esoteric_anarchism_subtype
+		}
+		create_country_leader = {
+			name = "彼得·杜诺夫"
+			picture = "gfx/leaders/BUL/Portrait_BUL_Peter_Deunov.png"
+			expire = "1.1.1"
+			ideology = radsoc_left_occultism_subtype
+		}
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = BUL_reactionism_party_long
+			name = BUL_reactionism_party
+		}
+		set_party_name = {
+			ideology = syndicalist
+			long_name = BUL_reactionism_party_long
+			name = BUL_reactionism_party
+		}
+		add_synd_to_coalition = yes
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.2
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.2
+		}
+		set_cosmetic_tag = BUL_yugo_free_reactionism
+		set_country_flag = BUL_spawn_of_satan
+	}
+	option = { # yes
+		name = bulgaria_foreign_events.17.b
+		create_country_leader = {
+			name = "尼古拉·雷诺夫"
+			picture = "gfx/leaders/BUL/Portrait_BUL_Nikolay_Rainov.png"
+			expire = "1.1.1"
+			ideology = tot_theosophy_subtype
+		}
+		create_country_leader = {
+			name = "奈登·赫里斯托夫·谢塔诺夫"
+			picture = "gfx/leaders/BUL/Portrait_BUL_Nayden_Shaytanov.png"
+			expire = "1.1.1"
+			ideology = orphism_subtype
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = BUL_accelerationism_party_long
+			name = BUL_accelerationism_party
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = BUL_accelerationism_party_long
+			name = BUL_accelerationism_party
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.2
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.2
+		}
+		set_cosmetic_tag = BUL_accelerationism
+		set_country_flag = BUL_golden_horn
+	}
+	option = { # yes
+		name = bulgaria_foreign_events.17.c
+		create_country_leader = {
+			name = "鲍里斯·格奥尔基耶夫"
+			picture = "gfx/leaders/BUL/Portrait_BUL_Boris_Georgiev.png"
+			expire = "1.1.1"
+			ideology = socdem_esoteric_leninism_subtype
+		}
+		set_country_flag = soc_dems_are_socialists
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = BUL_roerich_party_long
+			name = BUL_roerich_party
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.2
+		}
+		set_cosmetic_tag = BUL_roerich
+		set_country_flag = BUL_roerichists
 	}
 }

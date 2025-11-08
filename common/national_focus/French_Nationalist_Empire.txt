@@ -9306,7 +9306,7 @@ focus_tree = {
 		available = {
 			has_country_leader = {
 				ruling_only = yes
-				name = "菲利克斯·古安"
+				name = "费利克斯·古安"
 			}
 		}
 		prerequisite = {
@@ -14747,14 +14747,16 @@ focus_tree = {
 			focus = FRG_french_might
 		}
 		completion_reward = {
+			FRG = {
+				add_ideas = FRA_EUROPE
+			}
 			every_country = {
 				limit = {
 					is_subject_of = FRG
-					capital_scope = { is_on_continent = europe }
+					OR = {
+						capital_scope = { is_on_continent = europe }				
+					}
 				}
-				add_ideas = FRA_EUROPE
-			}
-			FRG = {
 				add_ideas = FRA_EUROPE
 			}
 		}
@@ -14870,8 +14872,10 @@ focus_tree = {
 		}
 		completion_reward = {
 			custom_effect_tooltip = FRG_europe_tooltip_20
+			unlock_decision_tooltip = FRG_intervene_in_the_SEN
 			unlock_decision_tooltip = FRG_intervene_in_the_CIV
-			country_event = frg.110
+			unlock_decision_tooltip = FRG_Djibouti_imperialate_decision
+			unlock_decision_tooltip = FRG_MSF_imperialate_decision
 		}
 	}
 
@@ -14906,7 +14910,16 @@ focus_tree = {
 			focus = FRG_colony
 		}
 		completion_reward = {
-			
+			custom_effect_tooltip = FRG_europe_tooltip_23
+			unlock_decision_tooltip = FRG_intervene_in_the_RUS
+			hidden_effect = {
+				unlock_decision_tooltip = FRG_deal_with_the_RUS
+				unlock_decision_tooltip = FRG_russia_imperialate_decision
+				unlock_decision_tooltip = FRG_SIB_imperialate_decision
+				unlock_decision_tooltip = FRG_attack_LIT_decision
+				unlock_decision_tooltip = FRG_attack_LAT_decision
+				unlock_decision_tooltip = FRG_attack_EST_decision
+			}
 		}
 	}
 
@@ -14940,7 +14953,11 @@ focus_tree = {
 			focus = FRG_colony
 		}
 		completion_reward = {
-			
+			custom_effect_tooltip = FRG_europe_tooltip_21
+			unlock_decision_tooltip = FRG_Lebanon_imperialate_decision
+			unlock_decision_tooltip = FRG_Levant_imperialate_decision
+			unlock_decision_tooltip = FRG_IRQ_imperialate_decision
+			unlock_decision_tooltip = FRG_moon_imperialate_decision
 		}
 	}
 
@@ -14974,7 +14991,7 @@ focus_tree = {
 			focus = FRG_colony
 		}
 		completion_reward = {
-			
+			custom_effect_tooltip = FRG_europe_tooltip_22
 		}
 	}
 
@@ -15008,7 +15025,7 @@ focus_tree = {
 			focus = FRG_colony
 		}
 		completion_reward = {
-			
+			custom_effect_tooltip = FRG_europe_tooltip_24
 		}
 	}
 
@@ -15177,7 +15194,31 @@ focus_tree = {
 			focus = FRG_china
 		}
 		completion_reward = {
-			
+			if = {
+				limit = {
+					FRG = {
+						is_in_faction_with = CAN
+					}
+				}
+				FRG = {
+					add_political_power = 100
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						FRG = {
+							is_in_faction_with = CAN
+						}
+					}
+				}
+				FRG = {
+					create_wargoal = {
+						type = annex_everything
+						target = CAN
+					} 
+				}
+			}
 		}
 	}
 
