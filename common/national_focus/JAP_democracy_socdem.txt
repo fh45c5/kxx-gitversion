@@ -1,0 +1,1350 @@
+focus_tree = {
+	id = socdem-japan
+	continuous_focus_position = { x = -40 y = 4440 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPSOCDEM
+		}
+	}
+	
+	shared_focus = JAPFOR_japansplaceintheworld
+	shared_focus = JAPFOR_tokyo_conference
+	shared_focus = JAP_To_Sunder_the_Sunset
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday
+	
+	#National Equality
+	focus = {
+		id = JAPSOCDEM_national_equality
+		icon = GFX_JAPSOCDEM_national_equality-248360
+		x = 6
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSOCDEM_revolutionary_nationalism  }
+		completion_reward = {
+		add_stability = 0.15
+		}
+	}
+
+	#A Split in the Shakai Taishuto
+	focus = {
+		id = JAPSOCDEM_a_split_in_the_shakai_taishuto
+		icon = GFX_JAPSOCDEM_a_split_in_the_shakai_taishuto-248360
+		x = 7
+		y = 0
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+	}
+
+	#Totalitarian Shift
+	focus = {
+		id = JAPSOCDEM_totalitarian_shift
+		icon = GFX_JAPSOCDEM_totalitarian_shift-248360
+		x = 4
+		y = 1
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPSOCDEM_a_split_in_the_shakai_taishuto  }
+		mutually_exclusive = { focus = JAPSOCDEM_the_democracy_path  }
+		available = {
+		always = no
+		}
+	}
+
+	#Absorb the Tokohai
+	focus = {
+		id = JAPSOCDEM_absorb_the_tokohai
+		icon = GFX_JAPSOCDEM_absorb_the_tokohai-248360
+		x = 4
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPSOCDEM_totalitarian_shift  }
+		completion_reward = {
+		add_popularity = {
+		ideology = national_populist
+		popularity = 0.1
+		}
+		set_temp_variable = { coalition_partner_var = token:national_populist }
+		add_to_coalition = yes
+		}
+	}
+
+	#Maximist Approach
+	focus = {
+		id = JAPSOCDEM_maximist_approach
+		icon = GFX_JAPSOCDEM_maximist_approach-248360
+		x = 3
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPSOCDEM_absorb_the_tokohai  }
+		completion_reward = {
+		add_ideas = {
+		JAP_maximist_japan
+		}
+		}
+	}
+
+	#Nationalize the Zaibatsu
+	focus = {
+		id = JAPSOCDEM_nationalize_the_zaibatsu
+		icon = GFX_JAPSOCDEM_nationalize_the_zaibatsu-248360
+		x = 5
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPSOCDEM_absorb_the_tokohai  }
+		completion_reward = {
+		set_country_flag = JAP_smash_zaibatsu
+		hidden_effect = {
+			country_event = {
+			id = japan_new_event.142
+			days = 100
+			}
+		}
+		set_variable = {
+				var = zaibatsu_nationalization
+				value = 0
+				tooltip = zaibatsu_nationalization_tt
+			}
+		set_variable = {
+				var = sumitomo_nationalization
+				value = 0
+			}
+		set_variable = {
+				var = mitsui_nationalization
+				value = 0
+			}
+		set_variable = {
+				var = mitsubishi_nationalization
+				value = 0
+			}
+		set_variable = {
+				var = yasuda_nationalization
+				value = 0
+			}
+		}
+	}
+
+	#Supporting the Holy War Against Europe!
+	focus = {
+		id = JAPSOCDEM_supportingtheholywaragainsteurope
+		icon = GFX_JAPSOCDEM_supportingtheholywaragainsteurope-248360
+		x = 4
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPSOCDEM_maximist_approach  } prerequisite = { focus = JAPSOCDEM_nationalize_the_zaibatsu  }
+		completion_reward = {
+		add_war_support = 0.10
+		add_opinion_modifier = {
+			target = GER
+			modifier = KR_factional_rivalry
+		}
+		add_opinion_modifier = {
+			target = RUS
+			modifier = KR_factional_rivalry
+		}
+		add_opinion_modifier = {
+			target = USA
+			modifier = KR_factional_rivalry
+		}
+		add_opinion_modifier = {
+			target = NFA
+			modifier = KR_factional_rivalry
+		}
+		add_opinion_modifier = {
+			target = CAN
+			modifier = KR_factional_rivalry
+		}
+		}
+	}
+
+	#Kempeitai Reforms
+	focus = {
+		id = JAPSOCDEM_kempeitai_reforms
+		icon = GFX_JAPSOCDEM_kempeitai_reforms-248360
+		x = 2
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPSOCDEM_supportingtheholywaragainsteurope  }
+		completion_reward = {
+		add_ideas = {
+		JAP_kempeitai_reforms
+		}
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#Arrest the Syndicalists
+	focus = {
+		id = JAPSOCDEM_arrest_the_syndicalists
+		icon = GFX_JAPSOCDEM_arrest_the_syndicalists-248360
+		x = 4
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSOCDEM_supportingtheholywaragainsteurope  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		add_opinion_modifier = {
+			target = ENG
+			modifier = KR_factional_rivalry
+		}
+		add_opinion_modifier = {
+			target = FRA
+			modifier = KR_factional_rivalry
+		}
+		}
+	}
+
+	#Revolutionary Nationalism
+	focus = {
+		id = JAPSOCDEM_revolutionary_nationalism
+		icon = GFX_JAPSOCDEM_revolutionary_nationalism-248360
+		x = 6
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPSOCDEM_supportingtheholywaragainsteurope  }
+		completion_reward = {
+		increase_conscription = yes
+		}
+	}
+
+	#Under the Chrysanthamen
+	focus = {
+		id = JAPSOCDEM_under_the_chrysanthamen
+		icon = GFX_JAPSOCDEM_under_the_chrysanthamen-248360
+		x = 4
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPSOCDEM_arrest_the_syndicalists  }
+		completion_reward = {
+		add_ideas = {
+		JAP_under_red_sun
+		}
+		}
+	}
+
+	#Revoking Liberal Democracy
+	focus = {
+		id = JAPSOCDEM_revoking_liberal_democracy
+		icon = GFX_JAPSOCDEM_revoking_liberal_democracy-248360
+		x = 2
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSOCDEM_kempeitai_reforms  } prerequisite = { focus = JAPSOCDEM_arrest_the_syndicalists  }
+		completion_reward = {
+		add_stability = -0.20
+		add_research_slot = 1
+		}
+	}
+
+	
+
+	#Promoting the National Socialist Image
+	focus = {
+		id = JAPSOCDEM_promoting_the_national_socialist_image
+		icon = GFX_JAPSOCDEM_promoting_the_national_socialist_image-248360
+		x = 4
+		y = 7
+		cost = 2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPSOCDEM_national_equality  } prerequisite = { focus = JAPSOCDEM_under_the_chrysanthamen  } prerequisite = { focus = JAPSOCDEM_revoking_liberal_democracy  }
+		
+	}
+
+	#Re-Thinking Japanese Socialism
+	focus = {
+		id = JAPSOCDEM_rethinking_japanese_socialism
+		icon = GFX_JAPSOCDEM_rethinking_japanese_socialism-248360
+		x = 4
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPSOCDEM_promoting_the_national_socialist_image  } prerequisite = { focus = JAPSOCDEM_under_the_chrysanthamen  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_age_japanese_socialism
+		}
+		}
+	}
+	
+	#for akastuma and asanuma's iraa path
+	focus = {
+		id = JAPSOCDEM_national_socialist_continuance
+		icon = GFX_RDSOCJAP_national_socialist_continuance-248360
+		x = 3
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { has_cosmetic_tag = JAP_AKAMATSU }
+		prerequisite = { focus = JAPSOCDEM_rethinking_japanese_socialism  } 
+		completion_reward = {
+		add_stability = 0.15
+		if = {
+		limit = { has_idea = JAP_Inejiro_Asanuma_hog_rso }
+		remove_all_ministers = yes
+		add_ideas = {
+			JAP_Katsumaro_Akamatsu_hog_tot
+			JAP_Asanuma_Inejiro_for_tot 
+			JAP_Atsutaro_Suyama_eco_tot
+			JAP_Miwa_Juso_sec_tot
+		}
+		}
+		}
+	}
+
+	#For asanama alone
+	focus = {
+		id = JAPSOCDEM_Asanuma_total_victory
+		icon = GFX_RDSOCJAP_asanuma_complete_victory-248360
+		x = 1
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { has_cosmetic_tag = JAP_ASANUMA }
+		prerequisite = { focus = JAPSOCDEM_rethinking_japanese_socialism  } 
+		completion_reward = {
+		add_ideas = {
+		JAP_Vanguard_proles
+		}
+		}
+	}
+
+	#Peasant soy
+	focus = {
+		id = JAPSOCDEM_agrarian_victory
+		icon = GFX_RDSOCJAP_the_peasants_advocate-248360
+		x = 5
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { has_cosmetic_tag = JAP_HIRANO }
+		prerequisite = { focus = JAPSOCDEM_rethinking_japanese_socialism  } 
+		completion_reward = {
+		add_ideas = {
+		JAP_peasant_corruption 
+		}
+		}
+	}
+
+	#Sorelian man
+	focus = {
+		id = JAPSOCDEM_sorelian_victory
+		icon = GFX_RDSOCJAP_the_rightists_triumph-248360
+		x = 7
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { has_cosmetic_tag = JAP_YAMANA }
+		prerequisite = { focus = JAPSOCDEM_rethinking_japanese_socialism  } 
+		completion_reward = {
+		add_ideas = {
+		JAP_love_owners
+		}
+		}
+	}
+
+	#The Democracy Path
+	focus = {
+		id = JAPSOCDEM_the_democracy_path
+		icon = GFX_JAPSOCDEM_the_democracy_path-248360
+		x = 10
+		y = 1
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPSOCDEM_a_split_in_the_shakai_taishuto  }
+		mutually_exclusive = { focus = JAPSOCDEM_totalitarian_shift  }
+	}
+
+	#Rightist Faction Victory
+	focus = {
+		id = JAPSOCDEM_rightist_faction_victory
+		icon = GFX_JAPSOCDEM_rightist_faction_victory-248360
+		x = 8
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPSOCDEM_the_democracy_path  }
+		mutually_exclusive = { focus = JAPSOCDEM_leftwing_victory  }
+	}
+
+	#Left-wing Victory
+	focus = {
+		id = JAPSOCDEM_leftwing_victory
+		icon = GFX_JAPSOCDEM_leftwing_victory-248360
+		x = 12
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPSOCDEM_the_democracy_path  }
+		mutually_exclusive = { focus = JAPSOCDEM_rightist_faction_victory  }
+	}
+
+	#Promote Universal Sufferage
+	focus = {
+		id = JAPSOCDEM_promote_universal_sufferage
+		icon = GFX_JAPSOCDEM_promote_universal_sufferage-248360
+		x = 12
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSOCDEM_rightist_faction_victory  focus = JAPSOCDEM_leftwing_victory  }
+		completion_reward = {
+		add_ideas = {
+		JAP_universal_sufferage
+		}
+		}
+	}
+
+	#Deal With the Zaibatsu
+	focus = {
+		id = JAPSOCDEM_deal_with_the_zaibatsu
+		icon = GFX_JAPSOCDEM_deal_with_the_zaibatsu-248360
+		x = 10
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPSOCDEM_rightist_faction_victory  focus = JAPSOCDEM_leftwing_victory  }
+		completion_reward = {
+		add_ideas = {
+		JAP_zaibatsu_nationalization_1
+		}
+		}
+	}
+
+	#The Child Welfare Act
+	focus = {
+		id = JAPSOCDEM_the_child_welfare_act
+		icon = GFX_JAPSOCDEM_the_child_welfare_act-248360
+		x = 8
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPSOCDEM_rightist_faction_victory  focus = JAPSOCDEM_leftwing_victory  }
+		completion_reward = {
+		add_popularity = {
+		ideology = social_democrat
+		popularity = 0.1
+		}
+		add_political_power = -10
+		add_stability = 0.1
+		add_manpower = -1000
+		}
+	}
+
+	#The Path of Peace
+	focus = {
+		id = JAPSOCDEM_the_path_of_peace
+		icon = GFX_JAPSOCDEM_the_path_of_peace-248360
+		x = 10
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPSOCDEM_promote_universal_sufferage  } prerequisite = { focus = JAPSOCDEM_deal_with_the_zaibatsu  } prerequisite = { focus = JAPSOCDEM_the_child_welfare_act  }
+		completion_reward = {
+		add_ideas = {
+		JAP_path_of_peace
+		}
+		}
+	}
+
+	#Crush Military Radicalism
+	focus = {
+		id = JAPSOCDEM_crush_military_radicalism
+		icon = GFX_JAPSOCDEM_crush_military_radicalism-248360
+		x = 9
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "浅沼稻次郎"
+			}
+		}
+		prerequisite = { focus = JAPSOCDEM_the_path_of_peace  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#Denounce the Syndicalist Folly
+	focus = {
+		id = JAPSOCDEM_denounce_the_syndicalist_folly
+		icon = GFX_JAPSOCDEM_denounce_the_syndicalist_folly-248360
+		x = 11
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "片山哲"
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPSOCDEM_the_path_of_peace  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		}
+	}
+
+	#Promotion of New Agrarian Reforms
+	focus = {
+		id = JAPSOCDEM_promotion_of_new_agrarian_reforms
+		icon = GFX_JAPSOCDEM_promotion_of_new_agrarian_reforms-248360
+		x = 11
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPSOCDEM_denounce_the_syndicalist_folly focus = JAPSOCDEM_crush_military_radicalism }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_agrarian_reforms
+		}
+		}
+	}
+
+	#Retain The Parliamentary System
+	focus = {
+		id = JAPSOCDEM_retain_the_parliamentary_system
+		icon = GFX_JAPSOCDEM_retain_the_parliamentary_system-248360
+		x = 9
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSOCDEM_crush_military_radicalism focus = JAPSOCDEM_denounce_the_syndicalist_folly }
+		completion_reward = {
+		add_political_power = 20
+		}
+	}
+
+	#Continue Democratization
+	focus = {
+		id = JAPSOCDEM_continue_democratization
+		icon = GFX_JAPSOCDEM_continue_democratization-248360
+		x = 7
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPSOCDEM_retain_the_parliamentary_system  }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+
+	#Revoke the National Security Act
+	focus = {
+		id = JAPSOCDEM_revoke_the_national_security_act
+		icon = GFX_JAPSOCDEM_revoke_the_national_security_act-248360
+		x = 9
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPSOCDEM_retain_the_parliamentary_system  }
+		completion_reward = {
+		add_stability = 0.15
+		add_political_power = -20
+		}
+	}
+
+	#Push For Greater National Autonomy
+	focus = {
+		id = JAPSOCDEM_push_for_greater_national_autonomy
+		icon = GFX_JAPSOCDEM_push_for_greater_national_autonomy-248360
+		x = 11
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_OCCUPATION_COST
+		}
+		prerequisite = { focus = JAPSOCDEM_promotion_of_new_agrarian_reforms  } prerequisite = { focus = JAPSOCDEM_retain_the_parliamentary_system  }
+		completion_reward = {
+		release = KOR
+		JAP = {
+			puppet = {
+				target = KOR
+				end_wars = yes
+			}
+		}
+		}
+	}
+
+	#An Empire of the Liberation
+	focus = {
+		id = JAPSOCDEM_an_empire_of_the_liberation
+		icon = GFX_JAPSOCDEM_an_empire_of_the_liberation-248360
+		x = 13
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPSOCDEM_promotion_of_new_agrarian_reforms  } prerequisite = { focus = JAPSOCDEM_retain_the_parliamentary_system  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_path_of_peace
+		add_idea = JAP_path_of_peace_2
+		}
+		}
+	}
+
+	#Japan's New Era
+	focus = {
+		id = JAPSOCDEM_japansnewera
+		icon = GFX_JAPSOCDEM_japansnewera-248360
+		x = 10
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPSOCDEM_continue_democratization  } prerequisite = { focus = JAPSOCDEM_revoke_the_national_security_act  } prerequisite = { focus = JAPSOCDEM_push_for_greater_national_autonomy  } prerequisite = { focus = JAPSOCDEM_an_empire_of_the_liberation  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_age_japanese_socialism_1
+		}
+		}
+		}
+
+#Denounce the Marxist Faction
+	focus = {
+		id = JAPTAISHUTOTWO_denounce_the_marxist_faction
+		icon = GFX_JAPTAISHUTOTWO_denounce_the_marxist_faction-248360
+		x = 8
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_resolving_the_party_split  }
+		mutually_exclusive = { focus = JAPTAISHUTOTWO_remove_the_national_socialists  }
+		completion_reward = {
+		add_power_balance_value = {
+				id = JAP_Shakai_Taishuto_balance
+				value = 0.2
+				tooltip_side = side_with_jsp_rightists_side
+			}
+		add_popularity = {
+		ideology = radical_socialist
+		popularity = -0.1
+		}
+		}
+	}
+
+	#Accept Universal Suffrage
+	focus = {
+		id = JAPTAISHUTOTWO_accept_universal_suffrage
+		icon = GFX_JAPTAISHUTOTWO_accept_universal_suffrage-248360
+		x = 8
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_denounce_the_marxist_faction  focus = JAPTAISHUTOTWO_remove_the_national_socialists  }
+		mutually_exclusive = {focus = JAPTAISHUTOTWO_promotewomensrights }
+		completion_reward = {
+		add_power_balance_value = {
+				id = JAP_Shakai_Taishuto_balance
+				value = 0.2
+				tooltip_side = side_with_jsp_rightists_side
+			}
+		add_popularity = {
+		ideology = radical_socialist
+		popularity = -0.1
+		}
+		}
+	}
+
+	#Promote Women's Rights
+	focus = {
+		id = JAPTAISHUTOTWO_promotewomensrights
+		icon = GFX_JAPTAISHUTOTWO_promotewomensrights-248360
+		x = 10
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_denounce_the_marxist_faction  focus = JAPTAISHUTOTWO_remove_the_national_socialists  }
+		mutually_exclusive = { focus = JAPTAISHUTOTWO_accept_universal_suffrage  }
+		completion_reward = {
+		add_power_balance_value = {
+				id = JAP_Shakai_Taishuto_balance
+				value = -0.2
+				tooltip_side = side_with_jsp_leftists_side
+			}
+		add_popularity = {
+		ideology = social_democrat
+		popularity = -0.1
+		}
+		}
+	}
+
+	#Victory of Parliamentary Socialism
+	focus = {
+		id = JAPTAISHUTOTWO_victory_of_parliamentary_socialism
+		icon = GFX_JAPTAISHUTOTWO_victory_of_parliamentary_socialism-248360
+		x = 7
+		y = 11
+		cost = 0
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		has_country_flag = JAP_shakai_taishuto_won_in_1940_elections
+		NOT = { has_completed_focus = JAPSOCDEM_totalitarian_shift }
+		}
+	}
+
+	#Resolving the Party Split
+	focus = {
+		id = JAPTAISHUTOTWO_resolving_the_party_split
+		icon = GFX_JAPTAISHUTOTWO_resolving_the_party_split-248360
+		x = 7
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_victory_of_parliamentary_socialism  }
+		completion_reward = {
+		add_political_power = -100
+		add_ideas = {
+		JAP_party_split_jsp
+		}
+		}
+	}
+
+	#Remove the National Socialists
+	focus = {
+		id = JAPTAISHUTOTWO_remove_the_national_socialists
+		icon = GFX_JAPTAISHUTOTWO_remove_the_national_socialists-248360
+		x = 6
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_resolving_the_party_split  }
+		mutually_exclusive = { focus = JAPTAISHUTOTWO_denounce_the_marxist_faction  }
+		completion_reward = {
+		add_power_balance_value = {
+				id = JAP_Shakai_Taishuto_balance
+				value = -0.2
+				tooltip_side = side_with_jsp_leftists_side
+			}
+		add_popularity = {
+		ideology = totalist
+		popularity = -0.1
+		}
+		add_popularity = {
+		ideology = social_democrat
+		popularity = -0.1
+		}
+		}
+	}
+
+	#Up Hold a Strong Military Presence
+	focus = {
+		id = JAPTAISHUTOTWO_up_hold_a_strong_military_presence
+		icon = GFX_JAPTAISHUTOTWO_up_hold_a_strong_military_presence-248360
+		x = 8
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_accept_universal_suffrage  focus = JAPTAISHUTOTWO_promotewomensrights  focus = JAPTAISHUTOTWO_promises_of_peace  focus = JAPTAISHUTOTWO_promote_the_holy_war  }
+		mutually_exclusive = { focus = JAPTAISHUTOTWO_shrivel_up_the_military_industrial_complex  }
+		completion_reward = {
+		add_power_balance_value = {
+				id = JAP_Shakai_Taishuto_balance
+				value = 0.2
+				tooltip_side = side_with_jsp_rightists_side
+			}
+		add_ideas = {
+		JAP_new_army_jsp
+		}
+		}
+	}
+
+	#Crumbling of the Party
+	focus = {
+		id = JAPTAISHUTOTWO_crumbling_of_the_party
+		icon = GFX_JAPTAISHUTOTWO_crumbling_of_the_party-248360
+		x = 7
+		y = 16
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		available = {
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_shrivel_up_the_military_industrial_complex  focus = JAPTAISHUTOTWO_up_hold_a_strong_military_presence  }
+		completion_reward = {
+			if = {
+				limit = {
+					power_balance_value = {
+						id = JAP_Shakai_Taishuto_balance
+						value < -0.1
+					}
+				}
+				custom_effect_tooltip = Inejiro_Asanuma_tooltip
+				hidden_effect = {
+					create_country_leader = {
+						name = "浅沼稻次郎"
+						picture = "gfx/leaders/JAP/Portrait_JAP_Inejiro_Asanuma.png"
+						expire = "1965.1.1"
+						ideology = massimalismo_subtype
+					}
+					set_politics = {
+						ruling_party = totalist
+					}
+					add_ideas = {
+						JAP_Vanguard_proles
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					power_balance_value = {
+						id = JAP_Shakai_Taishuto_balance
+						value < 0.1
+					}
+				}
+				hidden_effect = {
+					create_country_leader = {
+						name = "片山哲"
+						picture = "gfx/leaders/JAP/Portrait_JAP_Katayama_Tetsu.png"
+						expire = "1965.1.1"
+						ideology = socdem_paternal_socialism_subtype
+					}
+				}
+			}
+		}
+	}
+
+	#Promises of Peace
+	focus = {
+		id = JAPTAISHUTOTWO_promises_of_peace
+		icon = GFX_JAPTAISHUTOTWO_promises_of_peace-248360
+		x = 6
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_denounce_the_marxist_faction  focus = JAPTAISHUTOTWO_remove_the_national_socialists  }
+		mutually_exclusive = { focus = JAPTAISHUTOTWO_promote_the_holy_war  }
+		completion_reward = {
+		add_power_balance_value = {
+				id = JAP_Shakai_Taishuto_balance
+				value = -0.2
+				tooltip_side = side_with_jsp_leftists_side
+			}
+		swap_ideas = {
+		remove_idea = JAP_path_of_peace_2
+		add_idea = JAP_path_of_peace
+		}
+		}
+	}
+
+	#Promote the Holy War
+	focus = {
+		id = JAPTAISHUTOTWO_promote_the_holy_war
+		icon = GFX_JAPTAISHUTOTWO_promote_the_holy_war-248360
+		x = 4
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_denounce_the_marxist_faction  focus = JAPTAISHUTOTWO_remove_the_national_socialists  }
+		mutually_exclusive = { focus = JAPTAISHUTOTWO_promises_of_peace  }
+		completion_reward = {
+		add_power_balance_value = {
+				id = JAP_Shakai_Taishuto_balance
+				value = 0.2
+				tooltip_side = side_with_jsp_rightists_side
+			}
+		swap_ideas = {
+		remove_idea = JAP_path_of_peace_2
+		add_idea = JAP_path_of_peace_3
+		}
+		}
+	}
+
+	#Support the Diet
+	focus = {
+		id = JAPTAISHUTOTWO_support_the_diet
+		icon = GFX_JAPTAISHUTOTWO_support_the_diet-248360
+		x = 6
+		y = 17
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "片山哲"
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_crumbling_of_the_party  }
+		mutually_exclusive = { focus = JAPTAISHUTOTWO_proclaim_a_socialist_revolution  }
+	}
+
+	#Proclaim a Socialist Revolution
+	focus = {
+		id = JAPTAISHUTOTWO_proclaim_a_socialist_revolution
+		icon = GFX_JAPTAISHUTOTWO_proclaim_a_socialist_revolution-248360
+		x = 8
+		y = 17
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "浅沼稻次郎"
+			}
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_crumbling_of_the_party  }
+		mutually_exclusive = { focus = JAPTAISHUTOTWO_support_the_diet  }
+		completion_reward = {
+			custom_effect_tooltip = Inejiro_Asanuma_1_tooltip
+			hidden_effect = {
+				JSR = {
+					add_state_core = 537
+					add_state_core = 555
+					add_state_core = 536
+					add_state_core = 533
+					add_state_core = 282
+					add_state_core = 532
+					add_state_core = 534
+					add_state_core = 535
+					add_state_core = 531
+					add_state_core = 530
+					add_state_core = 529
+					add_state_core = 528
+					annex_country = {
+						target = JAP
+						transfer_troops = yes
+					}
+						
+				}
+				JSR = {
+					set_global_flag = JAP_civil_war_over
+					inherit_technology = GER		
+					add_equipment_to_stockpile = {
+					type = infantry_equipment_2
+					amount = 40000
+					}
+					add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 1000
+					}
+					add_ideas = {
+					JAP_Yamamoto_Kenzo_hog_syn
+					JAP_Oyama_Ikuo_for_syn
+					JAP_Yamada_Moritaro_eco_syn
+					JAP_Aso_Hisashi_sec_syn
+					JAP_no_navy
+					JAP_workers_of_the_world_unite
+					JAP_no_emperor
+					JAP_i_am_black_smith
+					JAP_reactionary_army_resistance_1
+					}
+					load_oob = "Japan_revolution"
+					load_focus_tree = japan-revolution
+					create_country_leader = {
+						name = "野坂参三"
+						desc = "-"
+						picture = "gfx/leaders/JAP/Portrait_JAP_Nosaka_Sanzo_LKMT.png"
+						expire = "1965.1.1"
+						ideology = syn_red_junta_subtype
+					}
+					create_country_leader = {
+						name = "麻生久"
+						desc = "-"
+						picture = "gfx/leaders/JAP/Portrait_JAP_Aso_Hisashi.png"
+						expire = "1965.1.1"
+						ideology = totalist_subtype
+					}
+					create_country_leader = {
+						name = "荒畑寒村"
+						desc = "-"
+						picture = "gfx/leaders/JAP/Portrait_JAP_Kenzo_Yamamoto.png"
+						expire = "1965.1.1"
+						ideology = radical_socialist_subtype
+					}
+					create_field_marshal = {
+						name = "野坂参三"
+						portrait_path = "gfx/leaders/JAP/Portrait_JAP_Nosaka_Sanzo_LKMT.png"
+						traits = {
+						
+						}
+						skill = 2
+						attack_skill = 2
+						defense_skill = 1
+						planning_skill = 2
+						logistics_skill = 2
+					}
+					create_field_marshal = {
+						name = "德田球一"
+						portrait_path = "gfx/leaders/JAP/Portrait_JAP_Kyuchi_Tokuda_RD_Ver.png"
+						traits = {
+						
+						}
+						skill = 2
+						attack_skill = 2
+						defense_skill = 1
+						planning_skill = 2
+						logistics_skill = 2
+					}
+					create_field_marshal = {
+						name = "西光万吉"
+						portrait_path = "gfx/leaders/JAP/Portrait_JAP_Saiko_Mankichi.png"
+						traits = {
+						
+						}
+						skill = 2
+						attack_skill = 2
+						defense_skill = 1
+						planning_skill = 2
+						logistics_skill = 2
+					}
+					
+					set_politics = {
+						ruling_party = syndicalist
+						last_election = "1936.11.16"
+						elections_allowed = no
+					}
+					
+					set_popularities = {
+							totalist = 20
+							syndicalist = 50
+							radical_socialist = 20
+							social_democrat = 10
+							social_liberal = 3
+							authoritarian_democrat = 3
+							market_liberal = 20
+							social_conservative = 40
+							paternal_autocrat = 10
+							national_populist = 4
+						}
+					set_party_name = {
+							ideology = totalist
+							long_name = JSR_REBELLION_TOTALIST_PARTY_long
+							name = JSR_REBELLION_TOTALIST_PARTY
+					}
+					set_party_name = {
+							ideology = syndicalist
+							long_name = JSR_REBELLION_SYNDIE_PARTY_long
+							name = JSR_REBELLION_SYNDIE_PARTY
+					}
+					set_party_name = {
+							ideology = radical_socialist
+							long_name = JSR_REBELLION_RADSOC_PARTY_long
+							name = JSR_REBELLION_RADSOC_PARTY
+					}
+					
+					set_party_name = {
+							ideology = social_democrat
+							long_name = JSR_REBELLION_SOCDEM_PARTY_long
+							name = JSR_REBELLION_SOCDEM_PARTY
+					}
+					
+					
+					set_party_name = {
+							ideology = social_liberal
+							long_name = JSR_SOCLIB_PARTY
+							name = JSR_SOCLIB_PARTY
+					}
+					set_party_name = {
+							ideology = market_liberal
+							long_name = JSR_MARLIB_PARTY
+							name = JSR_MARLIB_PARTY
+					}
+					set_party_name = {
+							ideology = social_conservative
+							long_name = JSR_CONS_PARTY
+							name = JSR_CONS_PARTY
+					}
+					
+					set_party_name = {
+							ideology = authoritarian_democrat
+							long_name = JSR_AUTH_PARTY
+							name = JSR_AUTH_PARTY
+					}
+					set_party_name = {
+							ideology = paternal_autocrat
+							long_name = JSR_PATE_PARTY
+							name = JSR_PATE_PARTY
+					}
+					set_party_name = {
+							ideology = national_populist
+							long_name = JSR_NAPO_PARTY
+							name = JSR_NAPO_PARTY
+					}
+				}
+				JSR = { change_tag_from = JAP }
+				JAP = {
+					dismantle_faction = yes
+					release = KOR
+					end_puppet = TAI
+					end_puppet = JST
+				}
+			}
+		}
+	}
+
+	#Shrivel Up the Military Industrial Complex
+	focus = {
+		id = JAPTAISHUTOTWO_shrivel_up_the_military_industrial_complex
+		icon = GFX_JAPTAISHUTOTWO_shrivel_up_the_military_industrial_complex-248360
+		x = 6
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPTAISHUTOTWO_promote_the_holy_war  focus = JAPTAISHUTOTWO_promises_of_peace  focus = JAPTAISHUTOTWO_accept_universal_suffrage  focus = JAPTAISHUTOTWO_promotewomensrights  }
+		mutually_exclusive = { focus = JAPTAISHUTOTWO_up_hold_a_strong_military_presence  }
+		completion_reward = {
+		add_power_balance_value = {
+				id = JAP_Shakai_Taishuto_balance
+				value = -0.2
+				tooltip_side = side_with_jsp_leftists_side
+			}
+		add_ideas = {
+		JAP_no_new_army_jsp
+		}
+		}
+	}
+
+}

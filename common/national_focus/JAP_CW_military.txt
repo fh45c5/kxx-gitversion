@@ -1,0 +1,242 @@
+focus_tree = {
+	id = japan-military-civilwar
+	continuous_focus_position = { x = -40 y = 1050 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPMILICIVIL
+		}
+	}
+	#We Shall March On for the Emperor
+	focus = {
+		id = JAPMILICIVIL_we_shall_march_on_for_the_emperor
+		icon = GFX_JAPMILICIVIL_we_shall_march_on_for_the_emperor-248360
+		x = 5
+		y = 0
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		completion_reward = {
+		add_war_support = 0.15
+		}
+	}
+
+	#Loyalty to the Kokutai
+	focus = {
+		id = JAPMILICIVIL_loyalty_to_the_kokutai
+		icon = GFX_JAPMILICIVIL_loyalty_to_the_kokutai-248360
+		x = 5
+		y = 1
+		cost = 2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPMILICIVIL_we_shall_march_on_for_the_emperor  }
+		completion_reward = {
+		add_political_power = 150
+		}
+	}
+
+	#Uniting Against the Syndicalist Beast
+	focus = {
+		id = JAPMILICIVIL_uniting_against_the_syndicalist_beast
+		icon = GFX_JAPMILICIVIL_uniting_against_the_syndicalist_beast-248360
+		x = 3
+		y = 2
+		cost = 2
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPMILICIVIL_loyalty_to_the_kokutai  }
+		completion_reward = {
+		add_ideas = {
+		JAP_united_against_syndies
+		}
+		remove_ideas = {
+		JAP_no_army_focus
+		FNG_mantetsu_profits
+		}
+		}
+	}
+
+	#Secure International Funding
+	focus = {
+		id = JAPMILICIVIL_secure_international_funding
+		icon = GFX_JAPMILICIVIL_secure_international_funding-248360
+		x = 5
+		y = 2
+		cost = 2
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPMILICIVIL_loyalty_to_the_kokutai  }
+		completion_reward = {
+		if = {
+			limit = {
+					GER = {
+					has_socialist_government = no
+					}
+			}
+			GER = {
+				country_event = japan_new_event.72
+				}
+		}
+		
+		if = {
+			limit = {
+					USA = {
+					has_socialist_government = no
+					}
+			}
+			USA = {
+				country_event = japan_new_event.72
+				}
+		}
+		
+		if = {
+			limit = {
+					RUS = {
+					has_socialist_government = no
+					}
+			}
+			RUS = {
+				country_event = japan_new_event.72
+				}
+		}
+		
+		if = {
+			limit = {
+					CAN = {
+					has_socialist_government = no
+					}
+			}
+			CAN = {
+				country_event = japan_new_event.72
+				}
+		}
+		
+		if = {
+			limit = {
+					AUS = {
+					has_socialist_government = no
+					}
+			}
+			AUS = {
+				country_event = japan_new_event.72
+				}
+		}
+		
+		}
+	}
+
+	#Welcome Back the Former Colonial Officers
+	focus = {
+		id = JAPMILICIVIL_welcome_back_the_former_colonial_officers
+		icon = GFX_JAPMILICIVIL_welcome_back_the_former_colonial_officers-248360
+		x = 7
+		y = 2
+		cost = 2
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPMILICIVIL_loyalty_to_the_kokutai  }
+		completion_reward = {
+		unlock_decision_tooltip = JAP_welcome_colonial_exiles
+		add_ideas = {
+		JAP_colonial_units
+		}
+		}
+	}
+
+	#Favour the Industrialists
+	focus = {
+		id = JAPMILICIVIL_favour_the_industrialists
+		icon = GFX_JAPMILICIVIL_favour_the_industrialists-248360
+		x = 6
+		y = 3
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPMILICIVIL_uniting_against_the_syndicalist_beast  } prerequisite = { focus = JAPMILICIVIL_secure_international_funding  } prerequisite = { focus = JAPMILICIVIL_welcome_back_the_former_colonial_officers  }
+		mutually_exclusive = { focus = JAPMILICIVIL_favour_the_peasant_soldiers  }
+		completion_reward = {
+		add_ideas = {
+		JAP_industrialists_favoured
+		}
+		}
+	}
+
+	#Favour the Peasant Soldiers
+	focus = {
+		id = JAPMILICIVIL_favour_the_peasant_soldiers
+		icon = GFX_JAPMILICIVIL_favour_the_peasant_soldiers-248360
+		x = 4
+		y = 3
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPMILICIVIL_uniting_against_the_syndicalist_beast  } prerequisite = { focus = JAPMILICIVIL_secure_international_funding  } prerequisite = { focus = JAPMILICIVIL_welcome_back_the_former_colonial_officers  }
+		mutually_exclusive = { focus = JAPMILICIVIL_favour_the_industrialists  }
+		completion_reward = {
+		add_ideas = {
+		JAP_peasants_favoured
+		}
+		}
+	}
+
+	#An Army Beloved By the People
+	focus = {
+		id = JAPMILICIVIL_an_army_beloved_by_the_people
+		icon = GFX_JAPMILICIVIL_an_army_beloved_by_the_people-248360
+		x = 4
+		y = 4
+		cost = 4
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPMILICIVIL_favour_the_peasant_soldiers focus = JAPMILICIVIL_favour_the_industrialists  }
+		completion_reward = {
+		add_stability = 0.1
+		add_war_support = 0.15
+		}
+	}
+
+	#Industrial War Machine
+	focus = {
+		id = JAPMILICIVIL_industrial_war_machine
+		icon = GFX_JAPMILICIVIL_industrial_war_machine-248360
+		x = 6
+		y = 4
+		cost = 4
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPMILICIVIL_favour_the_industrialists focus = JAPMILICIVIL_favour_the_peasant_soldiers }
+		completion_reward = {
+		unlock_decision_tooltip = JAP_mobile_work_shops
+		}
+	}
+
+	#Yamato Gokoro!
+	focus = {
+		id = JAPMILICIVIL_yamatogokoro
+		icon = GFX_JAPMILICIVIL_yamatogokoro-248360
+		x = 5
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPMILICIVIL_an_army_beloved_by_the_people  focus = JAPMILICIVIL_industrial_war_machine  }
+		completion_reward = {
+		add_ideas = {
+		JAP_a_last_stand
+		}
+		}
+	}
+
+}

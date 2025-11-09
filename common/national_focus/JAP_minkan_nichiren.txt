@@ -1,0 +1,800 @@
+focus_tree = {
+	id = nichiren-japan
+	continuous_focus_position = { x = -40 y = 1050 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPNICH
+		}
+	}
+	
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday
+	
+	#The League of Blood Incident
+	focus = {
+		id = JAPNICH_the_league_of_blood_incident
+		icon = GFX_JAPNICH_the_league_of_blood_incident-248360
+		x = 15
+		y = 0
+		cost = 0
+		available = {
+		always = no
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+	}
+
+	#Ishiwara's Reign
+	focus = {
+		id = JAPNICH_ishiwarasreign
+		icon = GFX_JAPNICH_ishiwarasreign-248360
+		x = 9
+		y = 1
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPNICH_the_league_of_blood_incident  }
+	}
+
+	#Blood Shall Reign For the Buddha
+	focus = {
+		id = JAPNICH_blood_shall_reign_for_the_buddha
+		icon = GFX_JAPNICH_blood_shall_reign_for_the_buddha-248360
+		relative_position_id = JAPNICH_the_league_of_blood_incident
+		x = -8
+		y = 1
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPNICH_the_league_of_blood_incident  }
+	}
+
+	#Relaying the Gohonzon
+	focus = {
+		id = JAPNICH_relaying_the_gohonzon
+		icon = GFX_JAPNICH_relaying_the_gohonzon-248360
+		x = 5
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNICH_blood_shall_reign_for_the_buddha  }
+		completion_reward = {
+			add_war_support = 0.1
+			add_stability = 0.1
+		}
+	}
+
+	#Encourage Nichiren Shoshu
+	focus = {
+		id = JAPNICH_encourage_nichiren_shoshu
+		icon = GFX_JAPNICH_encourage_nichiren_shoshu-248360
+		x = 8
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPNICH_ishiwarasreign  focus = JAPNICH_blood_shall_reign_for_the_buddha  }
+		completion_reward = {
+		add_war_support = 0.1
+		add_stability = 0.1
+		}
+	}
+
+	#Tōarenmei Undō
+	focus = {
+		id = JAPNICH_toarenmeiundo
+		icon = GFX_JAPNICH_toarenmeiundo-248360
+		x = 10
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNICH_ishiwarasreign  }
+		completion_reward = {
+			add_ideas = {
+			JAP_toarenmeiundo
+			}
+		}
+	}
+
+	#Promoting a Pan-Buddhist Federation
+	focus = {
+		id = JAPNICH_promoting_a_panbuddhist_federation
+		icon = GFX_JAPNICH_promoting_a_panbuddhist_federation-248360
+		x = 11
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = JAPNICH_toarenmeiundo focus = JAPNICH_relaying_the_gohonzon } prerequisite = { focus = JAPNICH_encourage_nichiren_shoshu  }
+		completion_reward = {
+		country_event = japan_new_event.91
+		}
+	}
+
+	#The Hand of the Nation Guides Us Forwards
+	focus = {
+		id = JAPNICH_the_hand_of_the_nation_guides_us_forwards
+		icon = GFX_JAPNICH_the_hand_of_the_nation_guides_us_forwards-248360
+		x = 9
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPNICH_encourage_nichiren_shoshu  } prerequisite = { focus = JAPNICH_toarenmeiundo  }
+		completion_reward = {
+		add_popularity = {
+		ideology = national_populist
+		popularity = 0.1
+		}
+		add_ideas = {
+		JAP_hand_guiding_us_forwards
+		}
+		}
+	}
+
+	#Reach Out To the Buddhist World
+	focus = {
+		id = JAPNICH_reach_out_to_the_buddhist_world
+		icon = GFX_JAPNICH_reach_out_to_the_buddhist_world-248360
+		x = 7
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		
+		has_country_flag = JAP_liberate_nichiren_asia
+		}
+		bypass = {
+			has_country_flag = JAP_uniting_world
+		}
+		prerequisite = { focus = JAPNICH_toarenmeiundo focus = JAPNICH_relaying_the_gohonzon  } prerequisite = { focus = JAPNICH_encourage_nichiren_shoshu  }
+		completion_reward = {
+		unlock_decision_tooltip = JAP_uniting_the_pan_buddhist_realm
+		add_idea = JAP_save_world_buddha
+		}
+	}
+
+	#We Are Called By the Sun
+	focus = {
+		id = JAPNICH_we_are_called_by_the_sun
+		icon = GFX_JAPNICH_we_are_called_by_the_sun-248360
+		x = 5
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNICH_relaying_the_gohonzon  }
+		completion_reward = {
+		add_ideas = {
+		JAP_sun_calling
+		}
+		}
+	}
+
+	#Zen Imperialism
+	focus = {
+		id = JAPNICH_zen_imperialism
+		icon = GFX_JAPNICH_zen_imperialism-248360
+		x = 5
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPNICH_we_are_called_by_the_sun  }
+		completion_reward = {
+		add_ideas = {
+		JAP_zen_imperalism
+		}
+		}
+	}
+
+	#Establish Righteous Temples
+	focus = {
+		id = JAPNICH_establish_righteous_temples
+		icon = GFX_JAPNICH_establish_righteous_temples-248360
+		x = 7
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNICH_reach_out_to_the_buddhist_world  }
+		completion_reward = {
+			remove_ideas = {
+			JAP_no_army_focus
+			}
+			every_state = {
+				limit = {
+				is_owned_by = JAP
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				
+			}
+		}
+	}
+
+	#The Eternal Shogun
+	focus = {
+		id = JAPNICH_the_eternal_shogun
+		icon = GFX_JAPNICH_the_eternal_shogun-248360
+		x = 9
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNICH_the_hand_of_the_nation_guides_us_forwards  }
+		completion_reward = {
+		add_political_power = 100
+		add_stability = 0.1
+		}
+	}
+
+	#Ethnic Harmony
+	focus = {
+		id = JAPNICH_ethnic_harmony
+		icon = GFX_JAPNICH_ethnic_harmony-248360
+		x = 11
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNICH_promoting_a_panbuddhist_federation  }
+		completion_reward = {
+			add_ideas = {
+				JAP_ethnic_unity
+			}
+		}
+	}
+
+	#Sekai Sai Shu Senron
+	focus = {
+		id = JAPNICH_sekai_sai_shu_senron
+		icon = GFX_JAPNICH_sekai_sai_shu_senron-248360
+		x = 10
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPNICH_the_eternal_shogun focus = JAPNICH_ethnic_harmony focus = JAPNICH_zen_imperialism focus = JAPNICH_establish_righteous_temples } 
+		completion_reward = {
+		add_war_support = 0.1
+		country_event = japan_new_event.88
+		}
+	}
+
+	#Stab the Socialist Snakes
+	focus = {
+		id = JAPNICH_stab_the_socialist_snakes
+		icon = GFX_JAPNICH_stab_the_socialist_snakes-248360
+		x = 8
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPNICH_the_eternal_shogun focus = JAPNICH_ethnic_harmony focus = JAPNICH_zen_imperialism focus = JAPNICH_establish_righteous_temples } 
+		completion_reward = {
+		country_event = japan_new_event.85
+		add_manpower = -1000
+		add_popularity = {
+		ideology = totalist
+		popularity = -1
+		}
+		add_popularity = {
+		ideology = syndicalist
+		popularity = -1
+		}
+		add_popularity = {
+		ideology = radical_socialist
+		popularity = -1
+		}
+		}
+	}
+
+	#Pistols to the Degenerates
+	focus = {
+		id = JAPNICH_pistols_to_the_degenerates
+		icon = GFX_JAPNICH_pistols_to_the_degenerates-248360
+		x = 6
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPNICH_the_eternal_shogun focus = JAPNICH_ethnic_harmony focus = JAPNICH_zen_imperialism focus = JAPNICH_establish_righteous_temples }
+		completion_reward = {
+		country_event = japan_new_event.86
+		add_manpower = -10000
+		add_popularity = {
+		ideology = social_democrat
+		popularity = -1
+		}
+		add_popularity = {
+		ideology = social_liberal
+		popularity = -1
+		}
+		add_popularity = {
+		ideology = social_conservative
+		popularity = -1
+		}
+		}
+	}
+
+	#The Emperor All Mighty
+	focus = {
+		id = JAPNICH_the_emperor_all_mighty
+		icon = GFX_JAPNICH_the_emperor_all_mighty-248360
+		x = 6
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNICH_stab_the_socialist_snakes focus = JAPNICH_pistols_to_the_degenerates } prerequisite = { focus = JAPNICH_economic_agrarianism  }
+		completion_reward = {
+		country_event = japan_new_event.87
+		add_stability = 0.5
+		}
+	}
+
+	#The New Shogun
+	focus = {
+		id = JAPNICH_the_new_shogun
+		icon = GFX_JAPNICH_the_new_shogun-248360
+		x = 10
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNICH_stab_the_socialist_snakes  focus = JAPNICH_sekai_sai_shu_senron  } prerequisite = { focus = JAPNICH_economic_agrarianism  }
+		completion_reward = {
+		country_event = japan_new_event.87
+		add_war_support = 0.5
+		}
+	}
+
+	#Remove the Zaibatsu Monsters!
+	focus = {
+		id = JAPNICH_removethezaibatsumonsters
+		icon = GFX_JAPNICH_removethezaibatsumonsters-248360
+		x = 15
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNICH_the_league_of_blood_incident  }
+		completion_reward = {
+		add_ideas = {
+		JAP_zaibatsu_nationalization_1
+		}
+		}
+	}
+
+	#Syncretic Economics
+	focus = {
+		id = JAPNICH_syncretic_economics
+		icon = GFX_JAPNICH_syncretic_economics-248360
+		x = 14
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNICH_removethezaibatsumonsters  }
+		completion_reward = {
+		add_ideas = {
+		JAP_syncretic_economy
+		}
+		}
+	}
+
+	#Rebuild the Fuji School
+	focus = {
+		id = JAPNICH_rebuild_the_fuji_school
+		icon = GFX_JAPNICH_rebuild_the_fuji_school-248360
+		x = 16
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPNICH_removethezaibatsumonsters  }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+
+	#Save the Peasants
+	focus = {
+		id = JAPNICH_save_the_peasants
+		icon = GFX_JAPNICH_save_the_peasants-248360
+		x = 17
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNICH_rebuild_the_fuji_school  }
+		completion_reward = {
+		add_ideas = {
+		JAP_save_peasants
+		}
+		}
+	}
+
+	#Expand Military Industry
+	focus = {
+		id = JAPNICH_expand_military_industry
+		icon = GFX_JAPNICH_expand_military_industry-248360
+		x = 15
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNICH_syncretic_economics  } prerequisite = { focus = JAPNICH_rebuild_the_fuji_school  }
+		completion_reward = {
+			every_state = {
+				limit = {
+				is_owned_by = JAP
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				
+			}
+		}
+	}
+
+	#Redistribute the Zaibatsu's Corps
+	focus = {
+		id = JAPNICH_redistributethezaibatsuscorps
+		icon = GFX_JAPNICH_redistributethezaibatsuscorps-248360
+		x = 13
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNICH_syncretic_economics  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_zaibatsu_nationalization_1
+		add_idea = JAP_zaibatsu_nationalization_2
+		}
+		}
+	}
+
+	#Economic Agrarianism
+	focus = {
+		id = JAPNICH_economic_agrarianism
+		icon = GFX_JAPNICH_economic_agrarianism-248360
+		x = 15
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNICH_save_the_peasants  } prerequisite = { focus = JAPNICH_expand_military_industry  } prerequisite = { focus = JAPNICH_redistributethezaibatsuscorps  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_save_peasants
+		add_idea = JAP_save_peasants_1
+		}
+		}
+	}
+
+	#Birth of Red Nichirenism
+	focus = {
+		id = JAPNICH_birth_of_red_nichirenism
+		icon = GFX_JAPNICH_birth_of_red_nichirenism-248360
+		x = 19
+		y = 1
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPNICH_the_league_of_blood_incident  }
+	}
+
+	#Translate Marx For the Masses
+	focus = {
+		id = JAPNICH_translate_marx_for_the_masses
+		icon = GFX_JAPNICH_translate_marx_for_the_masses-248360
+		x = 18
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPNICH_birth_of_red_nichirenism  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		}
+	}
+
+	#Mount Fuji Rumbles
+	focus = {
+		id = JAPNICH_mount_fuji_rumbles
+		icon = GFX_JAPNICH_mount_fuji_rumbles-248360
+		x = 20
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPNICH_birth_of_red_nichirenism  }
+		completion_reward = {
+		add_war_support = 0.1
+		country_event = japan_new_event.89
+		}
+	}
+
+	#Jōbukkokudo
+	focus = {
+		id = JAPNICH_jobukkokudo
+		icon = GFX_JAPNICH_jobukkokudo-248360
+		x = 20
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = JAPNICH_mount_fuji_rumbles  }
+		completion_reward = {
+		every_country = {
+		JAP = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = PREV
+			}
+		}	
+		
+		}
+		every_state = {
+		add_core_of = JAP
+		}
+		country_event = japan_new_event.88
+		}
+	}
+
+	#Re-Envision The Heian Period
+	focus = {
+		id = JAPNICH_reenvision_the_heian_period
+		icon = GFX_JAPNICH_reenvision_the_heian_period-248360
+		x = 18
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNICH_translate_marx_for_the_masses  }
+		completion_reward = {
+		add_ideas = {
+		JAP_heinan_revised
+		}
+		}
+	}
+
+	#Shinkō Bukkyō
+	focus = {
+		id = JAPNICH_shinkobukkyo
+		icon = GFX_JAPNICH_shinkobukkyo-248360
+		x = 19
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNICH_jobukkokudo  } prerequisite = { focus = JAPNICH_reenvision_the_heian_period  }
+		completion_reward = {
+		add_political_power = 100
+		add_war_support = 0.1
+		}
+	}
+
+	#The Lotus Sutra Shall Blum
+	focus = {
+		id = JAPNICH_the_lotus_sutra_shall_blum
+		icon = GFX_JAPNICH_the_lotus_sutra_shall_blum-248360
+		x = 21
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNICH_jobukkokudo  } prerequisite = { focus = JAPNICH_reenvision_the_heian_period  }
+		completion_reward = {
+		add_ideas = {
+		JAP_lotus_sutra
+		}
+		}
+	}
+
+	#Slaughter the Devils of Greed
+	focus = {
+		id = JAPNICH_slaughter_the_devils_of_greed
+		icon = GFX_JAPNICH_slaughter_the_devils_of_greed-248360
+		x = 19
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPNICH_shinkobukkyo  } prerequisite = { focus = JAPNICH_the_lotus_sutra_shall_blum  }
+		completion_reward = {
+		add_manpower = -10000
+		add_popularity = {
+		ideology = authoritarian_democrat
+		popularity = -0.1
+		}
+		add_popularity = {
+		ideology = paternal_autocrat
+		popularity = -0.1
+		}
+		add_popularity = {
+		ideology = national_populist
+		popularity = -0.1
+		}
+		add_popularity = {
+		ideology = market_liberal
+		popularity = -0.1
+		}
+		add_popularity = {
+		ideology = social_conservative
+		popularity = -0.1
+		}
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#The Crimson Kingdom
+	focus = {
+		id = JAPNICH_the_crimson_kingdom
+		icon = GFX_JAPNICH_the_crimson_kingdom-248360
+		x = 19
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNICH_economic_agrarianism  } prerequisite = { focus = JAPNICH_slaughter_the_devils_of_greed  }
+		completion_reward = {
+		country_event = japan_new_event.90
+		}
+	}
+
+}

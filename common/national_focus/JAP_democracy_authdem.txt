@@ -1,0 +1,877 @@
+focus_tree = {
+	id = kokumin-domei
+	continuous_focus_position = { x = -40 y = 1050 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPKOKUMIN
+		}
+	}
+	shared_focus = JAPFOR_japansplaceintheworld
+	shared_focus = JAPFOR_tokyo_conference
+	shared_focus = JAP_To_Sunder_the_Sunset
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday
+	#Reaction Against The Germanic Centric Peace
+	focus = {
+		id = JAPKOKUMIN_reaction_against_the_germanic_centric_peace
+		icon = GFX_JAPKOKUMIN_reaction_against_the_germanic_centric_peace-248360
+		x = 7
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPKOKUMIN_controlling_the_diet  }
+		completion_reward = {
+		add_war_support = 0.05
+		add_political_power = 50
+		
+		}
+	}
+
+	#Kokumin Domei At the Helm
+	focus = {
+		id = JAPKOKUMIN_kokumin_domei_at_the_helm
+		icon = GFX_JAPKOKUMIN_kokumin_domei_at_the_helm-248360
+		x = 6
+		y = 0
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+	}
+
+	#Controlling the Diet
+	focus = {
+		id = JAPKOKUMIN_controlling_the_diet
+		icon = GFX_JAPKOKUMIN_controlling_the_diet-248360
+		x = 6
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPKOKUMIN_kokumin_domei_at_the_helm  }
+		completion_reward = {
+		add_stability = -0.1
+		add_political_power = 25
+		
+		}
+	}
+
+	#The Cooperative Cabinet Movement
+	focus = {
+		id = JAPKOKUMIN_the_cooperative_cabinet_movement
+		icon = GFX_JAPKOKUMIN_the_cooperative_cabinet_movement-248360
+		x = 3
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPKOKUMIN_controlling_the_diet  }
+		completion_reward = {
+		set_temp_variable = { coalition_partner_var = token:social_liberal }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:market_liberal }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:social_conservative }
+		add_to_coalition = yes
+		add_popularity = {
+		ideology = social_liberal
+		popularity = 0.05
+		}
+		add_popularity = {
+		ideology = market_liberal
+		popularity = 0.05
+		}
+		add_popularity = {
+		ideology = social_conservative
+		popularity = 0.05
+		}
+		add_political_power = -100
+		add_power_balance_value = {
+				id = JAP_National_Alliance_balance
+				value = 0.1
+			}
+		}
+	}
+
+	#Continue Dirigisme Outlook
+	focus = {
+		id = JAPKOKUMIN_continue_dirigisme_outlook
+		icon = GFX_JAPKOKUMIN_continue_dirigisme_outlook-248360
+		x = 9
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPKOKUMIN_controlling_the_diet  }
+		completion_reward = {
+			if = {
+				limit = {
+					OR = {
+						has_idea = JAP_black_monday_statist_0
+						has_idea = JAP_black_monday_statist_1
+					}
+				}
+				add_idea = JAP_black_monday_statist_2
+			}
+			
+			else_if = {
+				limit = {
+					has_idea = JAP_black_monday_statist_2
+				}
+				add_idea = JAP_black_monday_statist_3
+			}
+			
+			else_if = {
+				limit = {
+					has_idea = JAP_black_monday_statist_3
+				}
+				add_idea = JAP_black_monday_statist_4
+			}
+		}
+	}
+
+	#Dealing With the Tokohai Split
+	focus = {
+		id = JAPKOKUMIN_dealing_with_the_tokohai_split
+		icon = GFX_JAPKOKUMIN_dealing_with_the_tokohai_split-248360
+		x = 3
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPKOKUMIN_the_cooperative_cabinet_movement  }
+		completion_reward = {
+		country_event = japan_new_event.105
+		}
+	}
+
+	#Denounce European Imperialism
+	focus = {
+		id = JAPKOKUMIN_denounce_european_imperialism
+		icon = GFX_JAPKOKUMIN_denounce_european_imperialism-248360
+		x = 5
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPKOKUMIN_reaction_against_the_germanic_centric_peace  }
+		completion_reward = {
+		add_opinion_modifier = {
+				target = GER
+				modifier = faction_traitor
+			}
+		add_opinion_modifier = {
+				target = CAN
+				modifier = faction_traitor
+			}
+		add_opinion_modifier = {
+				target = AUS
+				modifier = faction_traitor
+			}
+			add_opinion_modifier = {
+				target = POR
+				modifier = faction_traitor
+			}
+			add_opinion_modifier = {
+				target = AST
+				modifier = faction_traitor
+			}
+			add_opinion_modifier = {
+				target = GEA
+				modifier = faction_traitor
+			}
+			add_opinion_modifier = {
+				target = DEI
+				modifier = faction_traitor
+			}
+			add_opinion_modifier = {
+				target = DEH
+				modifier = faction_traitor
+			}
+			increase_conscription = yes
+		}
+	}
+
+	#The East Asia Monroe Doctrine
+	focus = {
+		id = JAPKOKUMIN_the_east_asia_monroe_doctrine
+		icon = GFX_JAPKOKUMIN_the_east_asia_monroe_doctrine-248360
+		x = 7
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = JAPKOKUMIN_reaction_against_the_germanic_centric_peace  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#Manage the Foreign Exchange
+	focus = {
+		id = JAPKOKUMIN_manage_the_foreign_exchange
+		icon = GFX_JAPKOKUMIN_manage_the_foreign_exchange-248360
+		x = 9
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPKOKUMIN_continue_dirigisme_outlook  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_foreign_exchange
+		}
+		}
+	}
+
+	#Distance Ourselves From Nakano
+	focus = {
+		id = JAPKOKUMIN_distance_ourselves_from_nakano
+		icon = GFX_JAPKOKUMIN_distance_ourselves_from_nakano-248360
+		x = 1
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPKOKUMIN_dealing_with_the_tokohai_split  }
+		completion_reward = {
+		add_stability = 0.05
+		add_power_balance_value = {
+				id = JAP_National_Alliance_balance
+				value = 0.1
+			}
+		}
+	}
+
+	#Control the Unions
+	focus = {
+		id = JAPKOKUMIN_control_the_unions
+		icon = GFX_JAPKOKUMIN_control_the_unions-248360
+		x = 3
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPKOKUMIN_dealing_with_the_tokohai_split  }
+		completion_reward = {
+		add_power_balance_value = {
+				id = JAP_National_Alliance_balance
+				value = -0.3
+			}
+		add_ideas = {
+		JAP_control_the_unions
+		}
+		}
+	}
+
+	#Promote Pan-Asian Unity
+	focus = {
+		id = JAPKOKUMIN_promote_panasian_unity
+		icon = GFX_JAPKOKUMIN_promote_panasian_unity-248360
+		x = 6
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPKOKUMIN_the_east_asia_monroe_doctrine  } prerequisite = { focus = JAPKOKUMIN_denounce_european_imperialism  }
+		completion_reward = {
+		add_power_balance_value = {
+				id = JAP_National_Alliance_balance
+				value = -0.1
+			}
+		add_ideas = {
+		JAP_pan_asian_guidelines_1
+		}
+		}
+	}
+
+	#Retain Low Interest Rates
+	focus = {
+		id = JAPKOKUMIN_retain_low_interest_rates
+		icon = GFX_JAPKOKUMIN_retain_low_interest_rates-248360
+		x = 8
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPKOKUMIN_manage_the_foreign_exchange  }
+		completion_reward = {
+		add_ideas = {
+		JAP_controling_interest_rates
+		}
+		}
+	}
+
+	#Protection Against Major Monopolies
+	focus = {
+		id = JAPKOKUMIN_protection_against_major_monopolies
+		icon = GFX_JAPKOKUMIN_protection_against_major_monopolies-248360
+		x = 10
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPKOKUMIN_manage_the_foreign_exchange  }
+		completion_reward = {
+		add_ideas = {
+		JAP_economic_protectionism
+		}
+		}
+	}
+
+	#Maintaining the Controlled Economy
+	focus = {
+		id = JAPKOKUMIN_maintaining_the_controlled_economy
+		icon = GFX_JAPKOKUMIN_maintaining_the_controlled_economy-248360
+		x = 9
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPKOKUMIN_retain_low_interest_rates  } prerequisite = { focus = JAPKOKUMIN_protection_against_major_monopolies  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_control_the_unions
+		add_idea =JAP_control_the_unions_1
+		}
+		}
+	}
+
+	#Japanese-Manchurian Union
+	focus = {
+		id = JAPKOKUMIN_japanesemanchurian_union
+		icon = GFX_JAPKOKUMIN_japanesemanchurian_union-248360
+		x = 6
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = JAPKOKUMIN_promote_panasian_unity  }
+		completion_reward = {
+		unlock_decision_category_tooltip = JAP_uniting_with_manchuria_decision_category
+		}
+	}
+
+	#Crush the Socialist Terrorists
+	focus = {
+		id = JAPKOKUMIN_crush_the_socialist_terrorists
+		icon = GFX_JAPKOKUMIN_crush_the_socialist_terrorists-248360
+		x = 3
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPKOKUMIN_distance_ourselves_from_nakano  } prerequisite = { focus = JAPKOKUMIN_control_the_unions  }
+		completion_reward = {
+			remove_ideas = {
+				JAP_red_army_resistance_1
+			}
+		}
+	}
+
+	#Total Kokumin Domei Supremacy
+	focus = {
+		id = JAPKOKUMIN_total_kokumin_domei_supremacy
+		icon = GFX_JAPKOKUMIN_total_kokumin_domei_supremacy-248360
+		x = 6
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			OR = {
+				has_country_flag = JAP_domei_tohokai_over
+				has_country_flag = JAP_kokumin_domei_won_in_1940_election
+			}
+		}
+		prerequisite = { focus = JAPKOKUMIN_maintaining_the_controlled_economy  } prerequisite = { focus = JAPKOKUMIN_japanesemanchurian_union  } prerequisite = { focus = JAPKOKUMIN_crush_the_socialist_terrorists  }
+		completion_reward = {
+		add_ideas = {
+		JAP_strengthen_government
+		}
+		hidden_effect = {
+		country_event = {
+		id = japan_new_event.107
+		days = 10
+		}
+		}
+		}
+	}
+
+#Advocate For Mild Authoritarianism
+	focus = {
+		id = JAPDOMEITWO_advocate_for_mild_authoritarianism
+		icon = GFX_JAPDOMEITWO_advocate_for_mild_authoritarianism-248360
+		x = 6
+		y = 16
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPDOMEITWO_strengthen_the_peace_preservation_laws  }
+		completion_reward = {
+		add_stability = 0.15
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.65
+		}
+		add_political_power = -100
+		}
+	}
+
+	#A New Round For the Kokumin Domei
+	focus = {
+		id = JAPDOMEITWO_a_new_round_for_the_kokumin_domei
+		icon = GFX_JAPDOMEITWO_a_new_round_for_the_kokumin_domei-248360
+		x = 7
+		y = 11
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		has_country_flag = JAP_kokumin_domei_won_in_1940_election
+		}
+	}
+
+	#Embracing The Party's Leftwing
+	focus = {
+		id = JAPDOMEITWO_embracingthepartysleftwing
+		icon = GFX_JAPDOMEITWO_embracingthepartysleftwing-248360
+		x = 9
+		y = 12
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPDOMEITWO_a_new_round_for_the_kokumin_domei  }
+		mutually_exclusive = { focus = JAPDOMEITWO_kenzo_holding_the_party_helm  }
+	}
+
+	#Kenzo Holding the Party Helm
+	focus = {
+		id = JAPDOMEITWO_kenzo_holding_the_party_helm
+		icon = GFX_JAPDOMEITWO_kenzo_holding_the_party_helm-248360
+		x = 5
+		y = 12
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPDOMEITWO_a_new_round_for_the_kokumin_domei  }
+		mutually_exclusive = { focus = JAPDOMEITWO_embracingthepartysleftwing  }
+	}
+
+	#Support the Trade Unions
+	focus = {
+		id = JAPDOMEITWO_support_the_trade_unions
+		icon = GFX_JAPDOMEITWO_support_the_trade_unions-248360
+		x = 9
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPDOMEITWO_embracingthepartysleftwing  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_control_the_unions_1
+		add_idea = JAP_control_the_unions_2
+		}
+		}
+	}
+
+	#A Call For A National Unity Government
+	focus = {
+		id = JAPDOMEITWO_a_call_for_a_national_unity_government
+		icon = GFX_JAPDOMEITWO_a_call_for_a_national_unity_government-248360
+		x = 7
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPDOMEITWO_kenzo_holding_the_party_helm  focus = JAPDOMEITWO_embracingthepartysleftwing  }
+		completion_reward = {
+		add_ideas = {
+		JAP_national_unity_government
+		}
+		}
+	}
+
+	#Further Promote Dirigisme Ideas
+	focus = {
+		id = JAPDOMEITWO_further_promote_dirigisme_ideas
+		icon = GFX_JAPDOMEITWO_further_promote_dirigisme_ideas-248360
+		x = 5
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPDOMEITWO_kenzo_holding_the_party_helm  }
+		completion_reward = {
+		add_ideas = {
+		JAP_black_monday_dirigisme_1
+		}
+		}
+	}
+
+	#Coalition with the Seiyukai
+	focus = {
+		id = JAPDOMEITWO_coalition_with_the_seiyukai
+		icon = GFX_JAPDOMEITWO_coalition_with_the_seiyukai-248360
+		x = 6
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		has_government = paternal_autocrat
+		}
+		prerequisite = { focus = JAPDOMEITWO_a_call_for_a_national_unity_government  }
+		mutually_exclusive = { focus = JAPDOMEITWO_socialist_friends  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_national_unity_government
+		add_idea = JAP_national_unity_government_kenzo
+		}
+		set_temp_variable = { coalition_partner_var = token:authoritarian_democrat }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:paternal_autocrat }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:social_conservative }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:national_populist }
+		add_to_coalition = yes
+		}
+	}
+
+	#Socialist Friends
+	focus = {
+		id = JAPDOMEITWO_socialist_friends
+		icon = GFX_JAPDOMEITWO_socialist_friends-248360
+		x = 8
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPDOMEITWO_a_call_for_a_national_unity_government  }
+		mutually_exclusive = { focus = JAPDOMEITWO_coalition_with_the_seiyukai  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_national_unity_government
+		add_idea = JAP_national_unity_government_kazami
+		}
+		set_temp_variable = { coalition_partner_var = token:social_liberal }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:social_democrat }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:radical_socialist }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:totalist }
+		add_to_coalition = yes
+		}
+	}
+
+	#Promote National Socialist Theory
+	focus = {
+		id = JAPDOMEITWO_promote_national_socialist_theory
+		icon = GFX_JAPDOMEITWO_promote_national_socialist_theory-248360
+		x = 8
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPDOMEITWO_socialist_friends  }
+		completion_reward = {
+		add_research_slot = 1
+		add_popularity = {
+					ideology = totalist
+					popularity = 0.2
+				}
+		}
+	}
+
+	#Strengthen the Peace Preservation Laws
+	focus = {
+		id = JAPDOMEITWO_strengthen_the_peace_preservation_laws
+		icon = GFX_JAPDOMEITWO_strengthen_the_peace_preservation_laws-248360
+		x = 6
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPDOMEITWO_coalition_with_the_seiyukai  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_peace_laws
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = -1
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = -1
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -1
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -1
+		}
+		}
+	}
+
+	#Village Relief Petition Movement
+	focus = {
+		id = JAPDOMEITWO_village_relief_petition_movement
+		icon = GFX_JAPDOMEITWO_village_relief_petition_movement-248360
+		x = 8
+		y = 16
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPDOMEITWO_promote_national_socialist_theory  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_controling_interest_rates
+		add_idea = JAP_controling_interest_rates_1
+		}
+		}
+	}
+
+	#Dissolve the Diet
+	focus = {
+		id = JAPDOMEITWO_dissolve_the_diet
+		icon = GFX_JAPDOMEITWO_dissolve_the_diet-248360
+		x = 7
+		y = 17
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPDOMEITWO_advocate_for_mild_authoritarianism  focus = JAPDOMEITWO_village_relief_petition_movement  }
+		completion_reward = {
+		add_stability = -0.2
+		if = {
+			limit = {
+				has_government = authoritarian_democrat
+			}
+			add_popularity = {
+					ideology = authoritarian_democrat
+					popularity = 1
+				}
+		}
+		
+		if = {
+			limit = {
+				has_government = paternal_autocrat
+			}
+			add_popularity = {
+					ideology = paternal_autocrat
+					popularity = 1
+				}
+		}
+		}
+	}
+
+	#Formation of a New Government
+	focus = {
+		id = JAPDOMEITWO_formation_of_a_new_government
+		icon = GFX_JAPDOMEITWO_formation_of_a_new_government-248360
+		x = 7
+		y = 18
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPDOMEITWO_dissolve_the_diet  }
+		completion_reward = {
+		add_political_power = 100
+		set_party_name = {
+			ideology = totalist
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}
+		set_party_name = {
+			ideology = social_liberal
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}
+		set_party_name = {
+			ideology = social_conservative
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}
+		
+		if = {
+			limit = {
+				has_idea = JAP_national_unity_government_kazami
+			}
+			swap_ideas = {
+				remove_idea = JAP_national_unity_government_kazami
+				add_idea = JAP_national_unity_government_kazami_1
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = JAP_national_unity_government_kenzo
+			}
+			swap_ideas = {
+				remove_idea = JAP_national_unity_government_kenzo
+				add_idea = JAP_national_unity_government_kenzo_1
+			}
+		}
+		}
+	}
+
+}
