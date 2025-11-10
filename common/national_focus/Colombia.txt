@@ -892,10 +892,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_exposing_the_Lopez_corruption"
-			add_timed_idea = {
-				idea = COL_stopping_the_corruption
-				days = 45
-			}
+			add_ideas = COL_stopping_the_corruption
 		}
 		
 	}
@@ -2954,7 +2951,7 @@ focus_tree = {
 				name = COL_from_raw_extraction_to_final_product
 				bonus = 0.5
 				uses = 2
-				category = efficiency_tech
+				category = excavation_tech
 			}
 		}
 		
@@ -4465,8 +4462,13 @@ focus_tree = {
 		id = COL_building_grants
 		icon = GFX_BBR_building
 		prerequisite = { focus = COL_the_long_leanage }
-		prerequisite = { focus = COL_more_secure_industries focus = COL_a_fairer_justice_system }
-		prerequisite = { focus = COL_guarantee_state_invervention focus = COL_end_liberal_hegemony }
+		prerequisite = { 
+			focus = COL_more_secure_industries 
+			focus = COL_a_fairer_justice_system 
+			focus = COL_guarantee_state_invervention 
+			focus = COL_end_liberal_hegemony
+		}
+		
 		relative_position_id = COL_the_long_leanage
 		x = 0
 		y = 1
@@ -5899,6 +5901,7 @@ focus_tree = {
 				name = "Dissidents"
 			}
 			custom_effect_tooltip = COL_frente_nacional_tt
+			add_ideas = COL_frente_nacional_idea
 		}
 		
 	}
@@ -5926,6 +5929,10 @@ focus_tree = {
 			add_popularity = {
 				ideology = national_populist
 				popularity = -0.15
+			}
+			swap_ideas = {
+				remove_idea = COL_frente_nacional_idea
+				add_idea = COL_frente_nacional_idea2
 			}
 		}
 		
@@ -6561,24 +6568,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_efficent_rule"
-			add_political_power = 25
-			add_command_power = 15
-			add_popularity = {
-				ideology = social_liberal
-				popularity = -0.07
-			}
-			add_popularity = {
-				ideology = social_conservative
-				popularity = -0.07
-			}
-			add_popularity = {
-				ideology = social_democrat
-				popularity = -0.02
-			}
-			add_popularity = {
-				ideology = market_liberal
-				popularity = -0.02
-			}
+			add_ideas = COL_president_for_life
 		}
 		
 	}
@@ -6599,6 +6589,24 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_efficent_rule"
+			add_political_power = 25
+			add_command_power = 15
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.07
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = -0.07
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.02
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = -0.02
+			}
 			add_popularity = {
 				ideology = authoritarian_democrat
 				popularity = 0.07
@@ -8478,10 +8486,7 @@ focus_tree = {
 		}
 		available = {
 			is_subject = no
-			OR = {
-				has_country_flag = COL_VEN_rejected_friendship
-				has_country_flag = COL_VEN_hostile
-			}
+			
 			can_declare_war_on = VEN
 		}
 		will_lead_to_war_with = VEN
@@ -8584,23 +8589,9 @@ focus_tree = {
 		available = {
 			is_subject = no
 			is_faction_leader = yes
-			OR = {
-				has_country_flag = COL_PRU_hostile
-				has_country_flag = COL_PRU_rejected_friendship
-			}
-			ECU = {
-				is_subject_of = 1214.owner
-				has_war = no
-			}
+			
 		}
-		bypass = {
-			ECU = {
-				NOT = { 
-					owns_state = 1214
-					is_puppet_of = 1214.owner 
-				}
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_ecuador_is_rightfully_colombian"
 			add_war_support = 0.1
@@ -8646,8 +8637,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_ecuador_is_rightfully_colombian"
 			create_wargoal = {
-				type = take_core_state
-				target = var:1214.owner
+				type = annex_country
+				target = ECU
 			}
 			custom_effect_tooltip = COL_remove_state_dynamic_modifiers_tt
 		}
@@ -9728,17 +9719,35 @@ focus_tree = {
 			factor = 3
 		}
 		available = {
-			OR = {
-				has_government = paternal_autocrat
-				has_government = national_populist
-				has_government = authoritarian_democrat
-			}
+			#OR = {
+			#	has_government = paternal_autocrat
+			#	has_government = national_populist
+			#	has_government = authoritarian_democrat
+			#}
 			is_subject = no
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
 			set_faction_name = iberoamerican_consanguinity_bund_faction
 			unlock_decision_category_tooltip = COL_latino_unity_decisions
+			#temp
+			every_state = {
+				limit = {
+					is_on_continent = south_america
+				}
+				COL = {
+					add_state_core = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_on_continent = central_america
+				}
+				COL = {
+					add_state_core = PREV
+				}
+			}
+			
 		}
 		
 	}
