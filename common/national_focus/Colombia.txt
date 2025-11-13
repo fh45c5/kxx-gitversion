@@ -1700,6 +1700,8 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_build_weapons_factories_1"
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
 			random_owned_state = {
 				limit = {
 					free_building_slots = {
@@ -1755,7 +1757,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_synth_resources"
 			add_tech_bonus = {
-				name = COL_synth_resources
 				bonus = 0.5
 				uses = 1
 				category = synth_resources
@@ -1784,6 +1785,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_build_weapons_factories_2"
+			add_one_random_military_factory = yes
 			random_owned_state = {
 				limit = {
 					free_building_slots = {
@@ -2379,59 +2381,16 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_infrastructure"
-			random_owned_state = {
+			every_owned_state = {
 				limit = {
-					free_building_slots = {
-						building = infrastructure
-						size > 0
-					}
-					OR = {
-						is_in_home_area = yes
-						NOT = {
-							owner = {
-								any_owned_state = {
-									free_building_slots = {
-										building = infrastructure
-										size > 0
-									}
-									is_in_home_area = yes
-								}
-							}
-						}
-					}
-				}
+					is_core_of = COL
+				}				
 				add_building_construction = {
 					type = infrastructure
 					level = 1
 					instant_build = yes
 				}
-			}
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = infrastructure
-						size > 0
-					}
-					OR = {
-						is_in_home_area = yes
-						NOT = {
-							owner = {
-								any_owned_state = {
-									free_building_slots = {
-										building = infrastructure
-										size > 0
-									}
-									is_in_home_area = yes
-								}
-							}
-						}
-					}
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
+				
 			}
 		}
 		
@@ -2504,8 +2463,8 @@ focus_tree = {
 			add_tech_bonus = {
 				name = COL_the_new_economy
 				bonus = 0.5
-				uses = 1
-				category = concentrated_industry_category
+				uses = 2
+				category = industry
 			}
 		}
 		
@@ -2606,36 +2565,9 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_import_industrialization_program"
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-					OR = {
-						is_in_home_area = yes
-						NOT = {
-							owner = {
-								any_owned_state = {
-									free_building_slots = {
-										building = industrial_complex
-										size > 0
-										include_locked = yes
-									}
-									is_in_home_area = yes
-								}
-							}
-						}
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
+			add_one_random_civilian_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_civilian_factory = yes
 		}
 		
 	}
@@ -2659,7 +2591,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_mining"
 			add_resource = {
 				type = steel
-				amount = 10
+				amount = 20
 				state = 852
 			}
 		}
@@ -2974,6 +2906,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_import_industrialization_program_phase_final"
+			add_one_random_military_factory = yes
 			random_owned_state = {
 				limit = {
 					free_building_slots = {
@@ -7828,7 +7761,7 @@ focus_tree = {
 	#MAKE OUR OWN FACTION TREE
 	focus = {
 		id = COL_looking_outward
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_generic_world_diplomacy
 		x = 36
 		y = 12
 		allow_branch = {
@@ -7894,7 +7827,7 @@ focus_tree = {
 		prerequisite = { focus = COL_looking_outward }
 		mutually_exclusive = { focus = COL_entering_an_existing_alliance }
 		mutually_exclusive = { focus = COL_by_ourselves }
-		x = -11
+		x = -4
 		y = 1
 		relative_position_id = COL_looking_outward
 		cost = 5
@@ -7949,8 +7882,8 @@ focus_tree = {
 		icon = GFX_goal_COL_Hermanos_Todavia
 		prerequisite = { focus = COL_mend_our_friendship }
 		mutually_exclusive = { focus = COL_revenge_against_venezuela }
-		mutually_exclusive = { focus = COL_defend_against_venezuela }
-		x = -9
+		
+		x = 2
 		y = 1
 		relative_position_id = COL_mend_our_friendship
 		cost = 5
@@ -7972,7 +7905,10 @@ focus_tree = {
 		}
 		available = {
 			is_subject = no
-			has_country_flag = COL_VEN_accepted_friendship
+			NOT =   {
+				has_country_flag = COL_VEN_rejected_friendship
+			}
+			
 			VEN = {
 				exists = yes
 				is_subject = no
@@ -7980,61 +7916,38 @@ focus_tree = {
 				has_socialist_government = no
 				NOT = { 
 					has_war_with = COL 
+					
 				}
 			}
 		}
-		bypass = {
-			VEN = {
-				exists = yes
-				is_subject = no
-				OR = { 
-					is_puppet_of = COL
-					AND = {
-						is_in_faction_with = COL
-						COL = {
-							is_faction_leader = yes
-						}
-					}
-				}
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
 			add_stability = 0.1
+			create_faction = "安第斯条约"
 			VEN = {
 				remove_opinion_modifier = {
 					target = COL
 					modifier = KR_outraged
 				}
 			}
-			country_event = colfocus.5
-			hidden_effect = {
-				if = {
-					limit = {
-						any_other_country = {
-							owns_state = 1214
-							is_subject = no
-							NOT = { 
-								is_in_faction_with = COL 
-							}
-						}
-					}
-					var:1214.owner = {
-						country_event = {
-							id = colfocus.33
-							days = 11
-						}
-					}
-				}
+			VEN = {
+				country_event = colfocus.5
 			}
+			ECU = {
+				country_event = colfocus.33
+			}
+			
 		}
 	}
 
+	
+
 	focus = {
-		id = COL_stronger_togheter
-		icon = GFX_goal_COL_We_are_Stronger_together
+		id = COL_cucuta_congress
+		icon = GFX_goal_COL_The_Second_Cucuta_Congress
 		prerequisite = { focus = COL_friendship_with_VEN }
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = COL_friendship_with_VEN
 		cost = 5
@@ -8043,206 +7956,50 @@ focus_tree = {
 		}
 		available = {
 			is_subject = no
-			has_country_flag = COL_VEN_accepted_friendship
-			VEN = {
-				exists = yes
-				is_subject = no
-				is_in_faction = no
-				has_socialist_government = no
-				NOT = { 
-					has_war_with = COL 
-				}
-			}
-		}
-		bypass = {
-			VEN = {
-				exists = yes
-				is_subject = no
-				OR = { 
-					is_puppet_of = COL
-					AND = {
-						is_in_faction_with = COL
-						COL = {
-							is_faction_leader = yes
-						}
-					}
-				}
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
-			diplomatic_relation = {
-				country = VEN
-				relation = non_aggression_pact
-				active = yes
-			}
-			add_tech_bonus = {
-				name = COL_stronger_togheter
-				bonus = 1
-				uses = 1
-				category = infantry_weapons
-				category = artillery
-			}	
+			
 		}
 		
-	}
-
-	focus = {
-		id = COL_cucuta_congress
-		icon = GFX_goal_COL_The_Second_Cucuta_Congress
-		prerequisite = { focus = COL_stronger_togheter }
-		x = -1
-		y = 1
-		relative_position_id = COL_stronger_togheter
-		cost = 5
-		ai_will_do = {
-			factor = 3
-		}
-		available = {
-			is_subject = no
-			has_country_flag = COL_VEN_accepted_friendship
-			VEN = {
-				exists = yes
-				is_subject = no
-				is_in_faction = no
-				has_socialist_government = no
-				NOT = { 
-					has_war_with = COL 
-				}
-			}
-		}
-		bypass = {
-			VEN = {
-				exists = yes
-				is_subject = no
-				OR = { 
-					is_puppet_of = COL
-					AND = {
-						is_in_faction_with = COL
-						COL = {
-							is_faction_leader = yes
-						}
-					}
-				}
-			}
-		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
 			add_political_power = 50
 			country_event = colfocus.7
-			if = {
-				limit = {
-					NOT = { has_country_flag = COL_who_takes_what_participant }
-				}
-				set_country_flag = COL_who_takes_what_participant
-		
-				unlock_decision_category_tooltip = COL_who_takes_what_decisions
-				
-				# Defining the Costs #
-				set_variable = { COL.who_takes_what_cost_pp = 100 }
-				set_variable = { COL.who_takes_what_cost_pp_ai = 99.99 }
-				set_variable = { COL.who_takes_what_cost_cp = 25 }
-				set_variable = { COL.who_takes_what_cost_cp_ai = 24.99 }
-
-				# Dynamic modifier #
-				hidden_effect = { 
-					set_variable = { COL.COL_who_takes_what_production_speed_buildings_factor = 0 }
-					set_variable = { COL.COL_who_takes_what_surrender_limit = 0 }
-					set_variable = { COL.COL_who_takes_what_local_resources = 0 }
-					add_dynamic_modifier = { modifier = COL_who_takes_what_dynamic_modifier }
-				}
-			}			
-			VEN = { 
-				set_country_flag = COL_who_takes_what_participant
-		
-				unlock_decision_category_tooltip = COL_who_takes_what_decisions
-				
-				# Defining the Costs #
-				set_variable = { VEN.who_takes_what_cost_pp = 100 }
-				set_variable = { VEN.who_takes_what_cost_pp_ai = 99.99 }
-				set_variable = { VEN.who_takes_what_cost_cp = 25 }
-				set_variable = { VEN.who_takes_what_cost_cp_ai = 24.99 }
-				
-				# Dynamic modifier #
-				hidden_effect = { 
-					set_variable = { COL.COL_who_takes_what_production_speed_buildings_factor = 0 }
-					set_variable = { COL.COL_who_takes_what_surrender_limit = 0 }
-					set_variable = { COL.COL_who_takes_what_local_resources = 0 }
-					add_dynamic_modifier = { modifier = COL_who_takes_what_dynamic_modifier }
-				}
-			}
-			if = {
-				limit = {
-					has_country_flag = COL_VEN_accepted_friendship
-					has_country_flag = COL_PRU_accepted_friendship
-				}
-				var:1214.owner = { 
-					set_country_flag = COL_who_takes_what_participant
 			
-					unlock_decision_category_tooltip = COL_who_takes_what_decisions
-					
-					# Defining the Costs #
-					set_variable = { THIS.who_takes_what_cost_pp = 100 }
-					set_variable = { THIS.who_takes_what_cost_pp_ai = 99.99 }
-					set_variable = { THIS.who_takes_what_cost_cp = 25 }
-					set_variable = { THIS.who_takes_what_cost_cp_ai = 24.99 }
-					
-					# Dynamic modifier #
-					hidden_effect = { 
-						set_variable = { COL.COL_who_takes_what_production_speed_buildings_factor = 0 }
-						set_variable = { COL.COL_who_takes_what_surrender_limit = 0 }
-						set_variable = { COL.COL_who_takes_what_local_resources = 0 }
-						add_dynamic_modifier = { modifier = COL_who_takes_what_dynamic_modifier }
-					}
-				}
-			}
 		}
 	}
 
 	focus = {
 		id = COL_tech_sharing_with_VEN
 		icon = GFX_goal_COL_Share_Industrial_Know_How
-		prerequisite = { focus = COL_stronger_togheter }
+		prerequisite = { focus = COL_friendship_with_VEN }
 		x = 1
 		y = 1
-		relative_position_id = COL_stronger_togheter
+		relative_position_id = COL_friendship_with_VEN
 		cost = 5
 		ai_will_do = {
 			factor = 3
 		}
 		available = {
 			is_subject = no
-			has_country_flag = COL_VEN_accepted_friendship
-			VEN = {
-				exists = yes
-				is_subject = no
-				is_in_faction = no
-				has_socialist_government = no
-				NOT = { 
-					has_war_with = COL 
-				}
-			}
+			
 		}
-		bypass = {
-			VEN = {
-				exists = yes
-				OR = {
-					is_puppet_of = COL
-					AND = {
-						is_in_faction_with = COL
-						COL = {
-							is_faction_leader = yes
-						}
-					}
-				}
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
 			add_to_tech_sharing_group = colombia_research
 			VEN = {
 				add_to_tech_sharing_group = colombia_research
 			}
+		if = {
+			limit = {
+				ECU = {
+					is_in_faction_with = COL
+				}
+				
+			}
+			ECU = {
+				add_to_tech_sharing_group = colombia_research
+			}
+		}
 		}
 		
 	}
@@ -8252,7 +8009,7 @@ focus_tree = {
 		prerequisite = { focus = COL_cucuta_congress }
 		prerequisite = { focus = COL_tech_sharing_with_VEN }
 		x = 1
-		y = 2
+		y = 1
 		relative_position_id = COL_cucuta_congress
 		cost = 5
 		ai_will_do = {
@@ -8260,103 +8017,68 @@ focus_tree = {
 		}
 		available = {
 			is_subject = no
-			is_faction_leader = yes
-			has_war = no
-			has_country_flag = COL_VEN_accepted_friendship
-			VEN = {
-				exists = yes
-				is_subject = no
-				is_in_faction = no
-				has_socialist_government = no
-				NOT = { 
-					has_war_with = COL 
-				}
-			}
+			
 		}
-		bypass = {
-			OR = {
-				COL = {
-					OR = {
-						is_in_faction_with = ECU
-						is_puppet_of = ECU
-					}
-				}
-				VEN = {
-					OR = {
-						is_in_faction_with = COL
-						is_puppet_of = COL
-					}
-				}
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
-			COL = {
-				add_to_faction = VEN
+			annex_country = {
+				target = VEN
+				transfer_troops = yes
+			}
+		if = {
+			limit = {
+				ECU = {
+					is_in_faction_with = COL
+				}
+				
+			}
+			annex_country = {
+				target = ECU
+				transfer_troops = yes
+			}
+		}
+			
+			every_state = {
+				limit = {
+					is_core_of = ECU
+				}
+				COL = {
+					add_state_core = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = VEN
+				}
+				COL = {
+					add_state_core = PREV
+				}
 			}
 		}
 		
 	}
 
-	focus = {
-		id = COL_defend_against_venezuela
-		icon = GFX_goal_COL_Prepare_for_the_worst
-		prerequisite = { focus = COL_mend_our_friendship }
-		mutually_exclusive = { focus = COL_revenge_against_venezuela }
-		mutually_exclusive = { focus = COL_friendship_with_VEN }
-		x = -5
-		y = 1
-		relative_position_id = COL_mend_our_friendship
-		cost = 5
-		ai_will_do = {
-			factor = 3
-			modifier = {
-				factor = 0
-				NOT = {
-					has_game_rule = {
-						rule = COL_FOREIGN_POLICY
-						option = DEFAULT
-					}
-				}
-			}
-		}
-		available = {
-			is_subject = no
-			has_country_flag = COL_VEN_rejected_friendship
-			VEN = {
-				exists = yes
-				can_declare_war_on = COL
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
-			add_ideas = COL_prepare_against_VEN
-		}
-	}
-
+	
 	focus = {
 		id = COL_deterrence_against_VEN
 		icon = GFX_goal_COL_Make_the_Enemy_fear_attacking_us
-		prerequisite = { focus = COL_defend_against_venezuela }
+		prerequisite = { focus = COL_war_with_VEN }
+		prerequisite = { focus = COL_ecuador_is_rightfully_colombian }
 		x = 0
-		y = 1
-		relative_position_id = COL_defend_against_venezuela
+		y = 2
+		relative_position_id = COL_revenge_against_venezuela
 		cost = 5
 		ai_will_do = {
 			factor = 2
 		}
 		available = {
 			is_subject = no
-			has_country_flag = COL_rejected_friendship
-			VEN = {
-				exists = yes
-				can_declare_war_on = COL
-			}
+			
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
-			add_ideas = COL_encryption
-			unlock_decision_category_tooltip = COL_deterrence_against_VEN_decisions
+			add_ideas = COL_columbia_uniwar
 		}
 		
 	}
@@ -8380,83 +8102,15 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_encryption_VEN"
 			add_political_power = 25
 			add_stability = 0.02
-			add_timed_idea = {
-				idea = COL_reassure_the_public_idea
-				days = 100
-			}
+			add_ideas = COL_reassure_the_public_idea
+				
+				
+			
 		}
 		
 	}
 
-	focus = {
-		id = COL_deescalating_the_crisis
-		icon = GFX_goal_COL_DeEscalating_the_Crisis
-		prerequisite = { focus = COL_deterrence_against_VEN }
-		x = 1
-		y = 1
-		relative_position_id = COL_deterrence_against_VEN
-		cost = 5
-		ai_will_do = {
-			factor = 2
-		}
-		available = {
-			is_subject = no
-			has_country_flag = COL_crisis_avoided_flag
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
-			remove_opinion_modifier = {
-				target = VEN
-				modifier = KR_outraged
-			}
-			VEN = {
-				remove_opinion_modifier = {
-					target = COL
-					modifier = KR_outraged
-				}
-				add_opinion_modifier = {
-					target = COL
-					modifier = small_decrease
-				}
-			}
-			set_truce = {
-				target = VEN
-				days = 180
-			}
-			#diplomatic_relation = {
-				#country = VEN
-				#relation = non_aggression_pact
-				#active = yes
-			#}
-		}
-		
-	}
-
-	focus = {
-		id = COL_learn_from_this_avoided_crisis
-		icon = GFX_goal_COL_Learn_from_this_Avoided_Crisis
-		prerequisite = { focus = COL_reassure_the_public }
-		prerequisite = { focus = COL_deescalating_the_crisis }
-		x = 0
-		y = 2
-		relative_position_id = COL_deterrence_against_VEN
-		cost = 5
-		ai_will_do = {
-			factor = 2
-		}
-		available = {
-			is_subject = no
-			has_country_flag = COL_crisis_avoided_flag
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_encryption_VEN"
-			swap_ideas = {
-				remove_idea = COL_encryption
-				add_idea = COL_encryption_2
-			}
-		}
-		
-	}
+	
 
 	focus = {
 		id = COL_revenge_against_venezuela
@@ -8493,13 +8147,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
 			add_war_support = 0.1
-			add_state_claim = 489
-			add_state_claim = 307
-			add_state_claim = 849
-			add_state_claim = 850
-			add_state_claim = 488
-			add_state_claim = 912
-			add_state_claim = 1036
+			
 		}
 		
 	}
@@ -8508,8 +8156,8 @@ focus_tree = {
 		id = COL_war_with_VEN
 		icon = GFX_goal_COL_Attack_Venezuela
 		prerequisite = { focus = COL_revenge_against_venezuela }
-		x = 0
-		y = 2
+		x = -1
+		y = 1
 		relative_position_id = COL_revenge_against_venezuela
 		cost = 5
 		ai_will_do = {
@@ -8526,6 +8174,14 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
 			custom_effect_tooltip = COL_gain_wargoals_ven_tt
+			every_state = {
+				limit = {
+					is_core_of = VEN
+				}
+				COL = {
+					add_state_core = PREV
+				}
+			}
 			hidden_effect = {
 				every_other_country = {
 					limit = {
@@ -8563,12 +8219,10 @@ focus_tree = {
 	focus = {
 		id = COL_ecuador_is_rightfully_colombian
 		icon = GFX_goal_COL_Ecuador_should_be_ours
-		prerequisite = { focus = COL_mend_our_friendship }
-		mutually_exclusive = { focus = COL_assuring_independance }
-		mutually_exclusive = { focus = COL_diplomatic_effort }
-		x = 2
+		prerequisite = { focus = COL_revenge_against_venezuela }
+		x = 1
 		y = 1
-		relative_position_id = COL_mend_our_friendship
+		relative_position_id = COL_revenge_against_venezuela
 		cost = 5
 		ai_will_do = {
 			factor = 4
@@ -8594,442 +8248,64 @@ focus_tree = {
 		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_ecuador_is_rightfully_colombian"
-			add_war_support = 0.1
-			add_state_claim = 305
-			add_state_claim = 490
-			add_state_claim = 649
-		}
-		
-	}
-
-	focus = {
-		id = COL_war_with_lower_caqueta_owner
-		icon = GFX_goal_COL_War_Lower_Caqueta
-		prerequisite = { focus = COL_ecuador_is_rightfully_colombian focus = COL_ecuadorean_refugees focus = COL_foment_bolivian_separatism }
-		x = 0
-		y = 2
-		relative_position_id = COL_ecuador_is_rightfully_colombian
-		cost = 5
-		ai_will_do = {
-			factor = 3
-		}
-		available = {
-			is_subject = no
-			OR = {
-				has_country_flag = COL_PRU_hostile
-				has_country_flag = COL_PRU_rejected_friendship
-			}
-			NOT = { owns_state = 1214 }
-			can_declare_war_on = 1214.owner
-		}
-		bypass = {
-			OR = {
-				owns_state = 1214
-				any_other_country = {
-					owns_state = 1214
-					OR = {
-						is_puppet_of = COL
-						is_in_faction_with = COL
-					}
-				}
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_ecuador_is_rightfully_colombian"
-			create_wargoal = {
-				type = annex_country
-				target = ECU
-			}
-			custom_effect_tooltip = COL_remove_state_dynamic_modifiers_tt
-		}
-		
-	}
-
-	focus = {
-		id = COL_assuring_independance
-		icon = GFX_goal_COL_assuring_independance
-		prerequisite = { focus = COL_mend_our_friendship }
-		mutually_exclusive = { focus = COL_ecuador_is_rightfully_colombian }
-		mutually_exclusive = { focus = COL_diplomatic_effort }
-		x = 5
-		y = 1
-		relative_position_id = COL_mend_our_friendship
-		cost = 5
-		ai_will_do = {
-			factor = 4
-			modifier = {
-				factor = 0
-				NOT = {
-					has_game_rule = {
-						rule = COL_FOREIGN_POLICY
-						option = DEFAULT
-					}
-					has_game_rule = {
-						rule = COL_FOREIGN_POLICY
-						option = COL_FOREIGN_POLICY_GRAN_COLOMBIA
-					}
-				}
-			}
-		}
-		available = {
-			is_subject = no
-			is_faction_leader = yes
-			OR = {
-				has_country_flag = COL_PRU_hostile
-				has_country_flag = COL_PRU_rejected_friendship
-			}
-			OR = {
-				ECU = {
-					is_subject_of = 1214.owner
-					has_war = no
-					NOT = { owns_state = 1214 }
-				}
-				custom_trigger_tooltip = {
-					tooltip = PRU_PBC_formed
-					PRU = { has_cosmetic_tag = PBC }
-				}
-			}
-		}
-		bypass = {
-			ECU = {
-				NOT = { 
-					owns_state = 1214
-					is_puppet_of = 1214.owner 
-				}
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_ecuador_is_rightfully_colombian"
-			add_political_power = 100
-			add_stability = 0.05
-		}
-		
-	}
-
-	focus = {
-		id = COL_ecuadorean_refugees
-		icon = GFX_goal_COL_Welcome_Ecuadorean_refugees
-		prerequisite = { focus = COL_assuring_independance }
-		x = -1
-		y = 1
-		relative_position_id = COL_assuring_independance
-		cost = 5
-		ai_will_do = {
-			factor = 3
-		}
-		available = {
-			OR = {
-				has_country_flag = COL_PRU_hostile
-				has_country_flag = COL_PRU_rejected_friendship
-			}
-			ECU = {
-				is_subject_of = 1214.owner
-				has_war = no
-				NOT = { owns_state = 1214 }
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_ecuadorean_refugees"
-			add_war_support = 0.02
-			add_manpower = 13500
-		}
-		
-	}
-
-	focus = {
-		id = COL_foment_bolivian_separatism
-		icon = GFX_goal_COL_Forment_Bolivian_Separatism
-		prerequisite = { focus = COL_assuring_independance }
-		x = 1
-		y = 1
-		relative_position_id = COL_assuring_independance
-		cost = 5
-		ai_will_do = {
-			factor = 3
-		}
-		available = {
-			OR = {
-				has_country_flag = COL_PRU_hostile
-				has_country_flag = COL_PRU_rejected_friendship
-			}
-			custom_trigger_tooltip = {
-				tooltip = PRU_PBC_formed
-				PRU = { has_cosmetic_tag = PBC }
-			}
-			any_other_country = { 
-				NOT = { tag = BOL }
-				controls_state = 1214
-				controls_state = 848
-				controls_state = 1073
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_foment_bolivian_separatism"
-			custom_effect_tooltip = COL_foment_BOL_separatism_tt
-			#BOL = { transfer_state = 848 }
-			#BOL = { transfer_state = 1073 }
-		}
-		
-	}
-
-	focus = {
-		id = COL_ecuadoreans_placate_resistance
-		icon = GFX_goal_COL_On_the_Verge_of_Conflict
-		prerequisite = { focus = COL_ecuadorean_refugees }
-		prerequisite = { focus = COL_war_with_lower_caqueta_owner }
-		x = -2
-		y = 2
-		relative_position_id = COL_foment_bolivian_separatism
-		cost = 5
-		ai_will_do = {
-			factor = 3
-		}
-		available = {
-			OR = {
-				has_country_flag = COL_PRU_hostile
-				has_country_flag = COL_PRU_rejected_friendship
-			}
-			is_subject = no
-			has_war_with = 1214.owner
-			has_war_with = ECU
-			PRU = { exists = yes }
-		}
-		bypass = {
-			ECU = {
-				NOT = { is_puppet_of = PRU }
-				is_puppet_of = COL
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_foment_bolivian_separatism"	
 			every_state = {
 				limit = {
 					is_core_of = ECU
 				}
-				add_resistance = -10
-				add_ideas = COL_lessen_ecuadoreans_resistance
+				COL = {
+					add_state_core = PREV
+				}
+			}
+			COL = { 
+				create_wargoal = {
+					type = take_claimed_state
+					target = ECU
+				} 
 			}
 		}
 		
 	}
 
-	focus = {
-		id = COL_improve_communications
-		icon = GFX_goal_COL_Recalling_our_Ambassador
-		prerequisite = { focus = COL_foment_bolivian_separatism }
-		prerequisite = { focus = COL_war_with_lower_caqueta_owner }
-		x = 0
-		y = 2
-		relative_position_id = COL_foment_bolivian_separatism
-		cost = 5
-		ai_will_do = {
-			factor = 3
-		}
-		available = {
-			OR = {
-				has_country_flag = COL_PRU_hostile
-				has_country_flag = COL_PRU_rejected_friendship
-			}
-			is_subject = no
-			has_war_with = PRU
-			PRU = { exists = yes }
-			OR = {
-				has_tech = radio 
-				has_done_agency_upgrade = upgrade_form_department 
-			}
-			BOL = {
-				exists = yes
-				is_in_faction_with = COL
-				OR = {
-					has_tech = radio 
-					has_done_agency_upgrade = upgrade_form_department 
-				}
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_improve_communication_with_the_bolivians"
-			add_war_support = 0.05
-			if = {
-				limit = { NOT = { has_tech = radio } }
-				set_technology = { radio = 1 }
-			}
-			add_timed_idea = {
-				idea = COL_bolivian_communication
-				days = 90
-			}
-			BOL = {
-				add_timed_idea = {
-					idea = COL_bolivian_communication
-					days = 90
-				}
-			}
-		}
-		
-	}
+	
 
-	focus = {
-		id = COL_diplomatic_effort
-		icon = GFX_goal_COL_Diplomatic_Offense
-		prerequisite = { focus = COL_mend_our_friendship }
-		mutually_exclusive = { focus = COL_ecuador_is_rightfully_colombian }
-		mutually_exclusive = { focus = COL_assuring_independance }
-		x = 9
-		y = 1
-		relative_position_id = COL_mend_our_friendship
-		cost = 5
-		ai_will_do = {
-			factor = 4
-			modifier = {
-				factor = 0
-				NOT = {
-					has_game_rule = {
-						rule = COL_FOREIGN_POLICY
-						option = DEFAULT
-					}
-					has_game_rule = {
-						rule = COL_FOREIGN_POLICY
-						option = COL_FOREIGN_POLICY_NEIGHBOUR_ALLIANCES
-					}
-				}
-			}
-		}
-		available = {
-			is_subject = no
-			NOT = { owns_state = 1214 }
-			has_country_flag = COL_PRU_accepted_friendship
-		}
-		bypass = {
-			var:1214.owner = {
-				OR = {
-					is_in_faction_with = COL
-					is_puppet_of = COL
-				}
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_diplomatic_effort"
-			COL = {
-				remove_state_claim = 1214
-				remove_state_core = 1214		
-			}
-			851 = {
-				set_demilitarized_zone = yes
-			}
-			1214 = {
-				set_demilitarized_zone = yes
-			}
-			var:1214.owner = {
-				diplomatic_relation = { 
-					country = COL
-					relation = non_aggression_pact 
-					active = yes
-				}
-				remove_opinion_modifier = {
-					target = COL
-					modifier = KR_outraged
-				}
-			}
-			hidden_effect = {
-				if = {
-					limit = {
-						VEN = {
-							is_subject = no
-							NOT = { 
-								is_in_faction_with = COL 
-							}
-						}
-					}
-					VEN = {
-						country_event = {
-							id = colfocus.33
-							days = 11
-						}
-					}
-				}
-			}
-		}
-		
-	}
+	
+	
 
+	
 	focus = {
-		id = COL_open_the_borders
-		icon = GFX_goal_COL_Open_the_Borders
-		prerequisite = { focus = COL_diplomatic_effort }
-		x = 0
-		y = 1
-		relative_position_id = COL_diplomatic_effort
+		id = COL_ecuadoreans_placate_resistance
+		icon = GFX_goal_COL_On_the_Verge_of_Conflict
+		prerequisite = { focus = COL_deterrence_against_VEN }
+		
+		x = 1
+		y = 3
+		relative_position_id = COL_revenge_against_venezuela
 		cost = 5
 		ai_will_do = {
 			factor = 3
 		}
 		available = {
 			is_subject = no
-			has_country_flag = COL_PRU_accepted_friendship
 		}
+		
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_ecuador_is_rightfully_colombian"
-			851 = { 
-				remove_dynamic_modifier = { modifier = COL_border_states_dynamic_mod } 
-			}
-			1215 = { 
-				remove_dynamic_modifier = { modifier = COL_border_states_dynamic_mod } 
-			}
-			random_owned_state = {
-				prioritize = { 1215 }
-				limit = {
-					OR = {
-						any_neighbor_state = { is_owned_and_controlled_by = ECU }
-						AND = {
-							any_neighbor_state = { is_owned_and_controlled_by = PRU }
-							ECU = {
-								NOT = { is_puppet_of = PRU }
-							}
-						}
-					}
-					free_building_slots = {
-						building = infrastructure
-						size > 1
-					}
-					OR = {
-						OR = {
-							any_neighbor_state = { is_owned_and_controlled_by = ECU }
-							AND = {
-								any_neighbor_state = { is_owned_and_controlled_by = PRU }
-								ECU = {
-									NOT = { is_puppet_of = PRU }
-								}
-							}
-						}
-						is_in_home_area = yes
-						NOT = {
-							owner = {
-								any_owned_state = {
-									free_building_slots = {
-										building = infrastructure
-										size > 1
-									}
-									is_in_home_area = yes
-								}
-							}
-						}
-					}
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
-				}
-			}
+			log = "[GetDateText]: [Root.GetName]: Focus COL_foment_bolivian_separatism"	
+			add_manpower = 10000
+			add_command_power = 50
 		}
+		
 	}
+
+	
+
 
 	focus = {
 		id = COL_minerary_cooperation
 		icon = GFX_goal_COL_Minerary_Market_Cooperation
-		prerequisite = { focus = COL_open_the_borders }
+		prerequisite = { focus = COL_santander_dream }
 		x = -1
-		y = 1
-		relative_position_id = COL_open_the_borders
+		y = 3
+		relative_position_id = COL_friendship_with_VEN
 		cost = 5
 		ai_will_do = {
 			factor = 3
@@ -9044,7 +8320,6 @@ focus_tree = {
 				name = COL_minerary_cooperation
 				bonus = 1
 				uses = 2
-				category = efficiency_tech
 				category = excavation_tech
 			}
 		}
@@ -9053,140 +8328,51 @@ focus_tree = {
 	focus = {
 		id = COL_dividing_the_SA_cake
 		icon = GFX_goal_COL_Defining_Our_Sphere_of_Influence
-		prerequisite = { focus = COL_open_the_borders }
+		prerequisite = { focus = COL_santander_dream }
 		x = 1
-		y = 1
-		relative_position_id = COL_open_the_borders
+		y = 3
+		relative_position_id = COL_friendship_with_VEN
 		cost = 5
 		ai_will_do = {
 			factor = 3
 		}
 		available = {
 			is_subject = no
-			has_country_flag = COL_PRU_accepted_friendship
 		}
-		bypass = {
-			is_puppet_of = PRU
-			is_in_faction_with = PRU
-			PRU = {
-				is_subject = yes
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_ecuador_is_rightfully_colombian"
 			add_political_power = 50
 			country_event = colfocus.12
-			if = {
-				limit = {
-					NOT = { has_country_flag = COL_who_takes_what_participant }
-				}
-				set_country_flag = COL_who_takes_what_participant
-		
-				unlock_decision_category_tooltip = COL_who_takes_what_decisions
-				
-				# Defining the Costs #
-				set_variable = { COL.who_takes_what_cost_pp = 100 }
-				set_variable = { COL.who_takes_what_cost_pp_ai = 99.99 }
-				set_variable = { COL.who_takes_what_cost_cp = 25 }
-				set_variable = { COL.who_takes_what_cost_cp_ai = 24.99 }
-				
-				# Dynamic modifier #
-				hidden_effect = { 
-					set_variable = { COL.COL_who_takes_what_production_speed_buildings_factor = 0 }
-					set_variable = { COL.COL_who_takes_what_surrender_limit = 0 }
-					set_variable = { COL.COL_who_takes_what_local_resources = 0 }
-					add_dynamic_modifier = { modifier = COL_who_takes_what_dynamic_modifier }
-				}
-			}
-			var:1214.owner = { 
-				set_country_flag = COL_who_takes_what_participant
-	
-				unlock_decision_category_tooltip = COL_who_takes_what_decisions
-				
-				# Defining the Costs #
-				set_variable = { THIS.who_takes_what_cost_pp = 100 }
-				set_variable = { THIS.who_takes_what_cost_pp_ai = 99.99 }
-				set_variable = { THIS.who_takes_what_cost_cp = 25 }
-				set_variable = { THIS.who_takes_what_cost_cp_ai = 24.99 }
-				
-				# Dynamic modifier #
-				hidden_effect = { 
-					set_variable = { COL.COL_who_takes_what_production_speed_buildings_factor = 0 }
-					set_variable = { COL.COL_who_takes_what_surrender_limit = 0 }
-					set_variable = { COL.COL_who_takes_what_local_resources = 0 }
-					add_dynamic_modifier = { modifier = COL_who_takes_what_dynamic_modifier }
-				}
-			}
-			if = {
-				limit = {
-					has_country_flag = COL_VEN_accepted_friendship
-					has_country_flag = COL_PRU_accepted_friendship
-				}
-				VEN = { 
-					set_country_flag = COL_who_takes_what_participant
 			
-					unlock_decision_category_tooltip = COL_who_takes_what_decisions
-					
-					# Defining the Costs #
-					set_variable = { VEN.who_takes_what_cost_pp = 100 }
-					set_variable = { VEN.who_takes_what_cost_pp_ai = 99.99 }
-					set_variable = { VEN.who_takes_what_cost_cp = 25 }
-					set_variable = { VEN.who_takes_what_cost_cp_ai = 24.99 }
-					
-					# Dynamic modifier #
-					hidden_effect = { 
-						set_variable = { COL.COL_who_takes_what_production_speed_buildings_factor = 0 }
-						set_variable = { COL.COL_who_takes_what_surrender_limit = 0 }
-						set_variable = { COL.COL_who_takes_what_local_resources = 0 }
-						add_dynamic_modifier = { modifier = COL_who_takes_what_dynamic_modifier }
-					}
-				}
-			}
 		}
 		
 	}
 
-	focus = {
-		id = COL_there_will_be_peace_in_the_andes
-		icon = GFX_goal_COL_There_will_be_Peace_in_the_Andes
-		prerequisite = { focus = COL_dividing_the_SA_cake }
-		prerequisite = { focus = COL_minerary_cooperation }
-		x = -1
-		y = 2
-		relative_position_id = COL_dividing_the_SA_cake
-		cost = 5
-		ai_will_do = {
-			factor = 3
-		}
-		available = {
-			owns_state = 1214
-			has_country_flag = COL_PRU_accepted_friendship
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_ecuador_is_rightfully_colombian"
-			COL = {
-				add_to_faction = PRU
-			}
-		}
-		
-	}
+
 
 	focus = {
 		id = COL_pay_historians_for_legitimization
 		icon = GFX_goal_COL_Pay_Historians_for_Legitimization
-		prerequisite = { focus = COL_war_with_VEN }
-		prerequisite = { focus = COL_war_with_lower_caqueta_owner }
+		prerequisite = { 
+			focus = COL_reassure_the_public
+			focus = COL_minerary_cooperation
+		}
+		prerequisite = { 
+			focus = COL_ecuadoreans_placate_resistance
+			focus = COL_dividing_the_SA_cake
+		}
 		mutually_exclusive = { focus = COL_find_the_new_bolivar }
-		x = 1
-		y = 1
-		relative_position_id = COL_war_with_VEN
+		x = -1
+		y = 5
+		relative_position_id = COL_mend_our_friendship
 		cost = 5
 		ai_will_do = {
 			factor = 3
 		}
 		available = {
 			is_subject = no
-			OR = {
+			NOT = {
 				has_government = paternal_autocrat
 				has_government = national_populist
 				has_government = authoritarian_democrat
@@ -9205,19 +8391,25 @@ focus_tree = {
 	focus = {
 		id = COL_find_the_new_bolivar
 		icon = GFX_goal_COL_Find_the_new_Bolivar
-		prerequisite = { focus = COL_war_with_VEN }
-		prerequisite = { focus = COL_war_with_lower_caqueta_owner }
+		prerequisite = { 
+			focus = COL_reassure_the_public
+			focus = COL_minerary_cooperation
+		}
+		prerequisite = { 
+			focus = COL_ecuadoreans_placate_resistance
+			focus = COL_dividing_the_SA_cake
+		}
 		mutually_exclusive = { focus = COL_pay_historians_for_legitimization }
-		x = -1
-		y = 1
-		relative_position_id = COL_war_with_lower_caqueta_owner
+		x = 1
+		y = 5
+		relative_position_id = COL_mend_our_friendship
 		cost = 5
 		ai_will_do = {
 			factor = 3
 		}
 		available = {
 			is_subject = no
-			NOT = {
+			OR = {
 				has_government = paternal_autocrat
 				has_government = national_populist
 				has_government = authoritarian_democrat
@@ -9244,18 +8436,8 @@ focus_tree = {
 			factor = 3
 		}
 		available = {
-			OR = {
-				has_government = paternal_autocrat
-				has_government = national_populist
-				has_government = authoritarian_democrat
-			}
 			is_subject = no
-			NOT = {
-				has_cosmetic_tag = GCL
-			}
-			all_core_state = {
-				is_owned_and_controlled_by = COL
-			}
+			
 			custom_trigger_tooltip = {	
 				tooltip = COL_own_venezuelan_states_GCL_tt
 				489 = {
@@ -9294,107 +8476,16 @@ focus_tree = {
 				exists = no
 			}
 		}
-		bypass = {
-			OR = {
-				has_government = paternal_autocrat
-				has_government = national_populist
-				has_government = authoritarian_democrat
-			}
-			NOT = {
-				has_country_flag = COL_accepted_friendship
-			}
-			has_cosmetic_tag = GCL
-			custom_trigger_tooltip = {	
-				tooltip = COL_own_venezuelan_states_GCL_tt
-				489 = {
-					is_owned_and_controlled_by = COL
-					is_core_of = COL
-				}	
-				307 = {
-					is_owned_and_controlled_by = COL
-					is_core_of = COL
-				}	
-				849 = {
-					is_owned_and_controlled_by = COL
-					is_core_of = COL
-				}	
-				850 = {
-					is_owned_and_controlled_by = COL
-					is_core_of = COL
-				}	
-				488 = {
-					is_owned_and_controlled_by = COL
-					is_core_of = COL
-				}	
-				912 = {
-					is_owned_and_controlled_by = COL
-					is_core_of = COL
-				}
-				1036 = {
-					is_owned_and_controlled_by = COL
-					is_core_of = COL
-				}
-			}
-			VEN = {
-				exists = no
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_declare_gran_colombia"
-			every_state = {
-				limit = {
-					OR = {
-						is_core_of = VEN
-					}
-				}
-				add_core_of = COL
-			}
+			
 			set_cosmetic_tag = GCL
 			add_country_leader_trait = bolivarlarp
-			if = {    
-				limit = { has_country_leader = { name = "Laureano Gomez Castro" ruling_only = yes } }
-				set_country_leader_portrait = {
-					portrait = "gfx/leaders/COL/Portrait_Colombia_Laureano_Gomez_Castro_bolivar.png"
-				}
-				set_party_name = {
-					ideology = authdem_bolivarianism
-					long_name = "Junta de Gobierno"
-					name = "JdG"
-				}
-			}
-			else_if = {    
-				limit = { has_country_leader = { name = "Gustavo Rojas Pinilla" ruling_only = yes } }
-				set_country_leader_portrait = {
-					portrait = "gfx/leaders/COL/Portrait_Colombia_Gustavo_Rojas_Pinilla_bolivar.png"
-				}
-				set_party_name = {
-					ideology = bolivarianism
-					long_name = "Junta de Gobierno"
-					name = "JdG"
-				}
-			}
-			else_if = {	
-				limit = { has_country_leader = { name = "Gilberto Alzate Avendano" ruling_only = yes } }
-				set_country_leader_portrait = {
-					portrait = "gfx/leaders/COL/Portrait_Colombia_Gilberto_Alzate_Avendano_bolivar.png"
-				}
-				set_party_name = {
-					ideology = natpop_bolivarianism
-					long_name = "Junta de Gobierno"
-					name = "JdG"
-				}
-			}
-			else_if = {	
-				limit = { has_country_leader = { name = "Carlos Cortés Vargas" ruling_only = yes } }
-				set_country_leader_portrait = {
-					portrait = "gfx/leaders/COL/Portrait_Colombia_Carlos_Cortes_Vargas_bolivar.png"
-				}
-				set_party_name = {
-					ideology = natpop_bolivarianism
-					long_name = "Junta de Gobierno"
-					name = "JdG"
-				}
-			}
+			
+			
+			
+			
 		}
 		
 	}
@@ -9402,7 +8493,7 @@ focus_tree = {
 	focus = {
 		id = COL_invite_guayana_in_GCL
 		icon = GFX_goal_HOL_guyana_for_alliance
-		prerequisite = { focus = COL_declare_gran_colombia focus = COL_santander_dream }
+		prerequisite = { focus = COL_declare_gran_colombia  }
 		x = -6
 		y = 1
 		relative_position_id = COL_declare_gran_colombia
@@ -9495,7 +8586,7 @@ focus_tree = {
 	focus = {
 		id = COL_war_with_guayana_in_GCL
 		icon = GFX_goal_CAN_west_indies
-		prerequisite = { focus = COL_declare_gran_colombia focus = COL_santander_dream }
+		prerequisite = { focus = COL_declare_gran_colombia  }
 		x = -4
 		y = 1
 		relative_position_id = COL_declare_gran_colombia
@@ -9635,14 +8726,7 @@ focus_tree = {
 		ai_will_do = {
 			factor = 3
 		}
-		available = {
-			OR = {
-				has_government = paternal_autocrat
-				has_government = national_populist
-				has_government = authoritarian_democrat
-			}
-			is_subject = no
-		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
 			add_political_power = 30
@@ -9663,14 +8747,7 @@ focus_tree = {
 		ai_will_do = {
 			factor = 3
 		}
-		available = {
-			OR = {
-				has_government = paternal_autocrat
-				has_government = national_populist
-				has_government = authoritarian_democrat
-			}
-			is_subject = no
-		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
 			country_event = colfocus.88
@@ -9689,14 +8766,7 @@ focus_tree = {
 		ai_will_do = {
 			factor = 3
 		}
-		available = {
-			OR = {
-				has_government = paternal_autocrat
-				has_government = national_populist
-				has_government = authoritarian_democrat
-			}
-			is_subject = no
-		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
 			add_stability = 0.1
@@ -9719,17 +8789,189 @@ focus_tree = {
 			factor = 3
 		}
 		available = {
-			#OR = {
-			#	has_government = paternal_autocrat
-			#	has_government = national_populist
-			#	has_government = authoritarian_democrat
-			#}
+			
 			is_subject = no
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
-			set_faction_name = iberoamerican_consanguinity_bund_faction
-			unlock_decision_category_tooltip = COL_latino_unity_decisions
+			if = {
+				limit = {
+					is_faction_leader = yes
+					OR = {
+						has_country_leader = { name = "Carlos Cortés Vargas" ruling_only = yes }
+						has_country_leader = { name = "Gilberto Alzate Avendano" ruling_only = yes }
+					}
+				}
+				set_faction_name = "新旧世界雅利安民族生存空间"
+			}
+			else_if = {
+				limit = {
+					is_faction_leader = yes
+				}
+				set_faction_name = iberoamerican_consanguinity_bund_faction
+			}
+			
+			add_war_support = 0.1
+		}
+		
+	}
+	focus = {
+		id = COL_declare_latin_union
+		icon = GFX_goal_SPR_Protect_Latin_America
+		prerequisite = { focus = COL_expand_our_faction }
+		x = 0
+		y = 1
+		relative_position_id = COL_expand_our_faction
+		cost = 5
+		ai_will_do = {
+			factor = 3
+		}
+		available = {
+			NOT = {
+			has_country_leader = { 
+				name = "Fernando Gonzalez Ochoa"
+				ruling_only = yes
+			}
+			has_country_leader = { name = "Carlos Cortés Vargas" ruling_only = yes }
+			has_country_leader = { name = "Gilberto Alzate Avendano" ruling_only = yes }
+		
+			}
+			is_subject = no
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
+			set_cosmetic_tag = COL_latin
+			#temp
+			every_state = {
+				limit = {
+					is_on_continent = south_america
+				}
+				COL = {
+					add_state_core = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_on_continent = central_america
+				}
+				COL = {
+					add_state_core = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = SPR
+						is_core_of = CNT
+						is_core_of = CAR
+						is_core_of = POR
+						is_core_of = FRA
+						is_core_of = SRI
+						is_core_of = ITA
+						is_core_of = VNC
+						is_core_of = LOM
+						is_core_of = SIC
+						is_core_of = PAP
+						is_core_of = SRD
+						is_core_of = ROM
+						is_core_of = TRS
+						is_core_of = BEL
+						is_core_of = WLL
+					}
+				}
+				COL = {
+					add_state_core = PREV
+				}
+			}
+		}
+		
+	}
+	focus = {
+		id = COL_save_aryan_brothers
+		icon = GFX_goal_NOR_unite_the_nordic_people
+		prerequisite = { focus = COL_expand_our_faction }
+		x = -2
+		y = 1
+		relative_position_id = COL_expand_our_faction
+		cost = 5
+		ai_will_do = {
+			factor = 3
+		}
+		available = {
+			OR = {
+				has_country_leader = { name = "Gilberto Alzate Avendano" ruling_only = yes }
+				has_country_leader = { name = "Carlos Cortés Vargas" ruling_only = yes }
+			}
+			
+		
+			is_subject = no
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
+			set_cosmetic_tag = COL_nordic
+			every_state = {
+				limit = {
+					is_core_of = SWE
+				}
+				add_core_of = ROOT
+				}
+				every_state = {
+				limit = {
+					is_core_of = DEN
+				}
+				add_core_of = ROOT
+				}
+				every_state = {
+				limit = {
+					is_core_of = NOR
+				}
+				add_core_of = ROOT
+				}
+				every_state = {
+				limit = {
+					is_core_of = ICE
+				}
+				add_core_of = ROOT
+				}
+				every_state = {
+				limit = {
+					is_core_of = FIN
+				}
+				add_core_of = ROOT
+				}
+				every_state = {
+				limit = {
+					is_core_of = HOL
+				}
+				add_core_of = FROM
+				}
+				every_state = {
+				limit = {
+					is_core_of = GER
+				}
+				add_core_of = FROM
+				}
+				every_state = {
+				limit = {
+					is_core_of = AUS
+				}
+				add_core_of = FROM
+				}
+				6 = {
+				add_core_of = FROM
+				}
+				29 = {
+				add_core_of = FROM
+				}
+				62 = {
+				add_core_of = FROM
+				}
+				151 = {
+				add_core_of = FROM
+				}
+				3 = {
+				add_core_of = FROM
+				}
 			#temp
 			every_state = {
 				limit = {
@@ -9751,11 +8993,43 @@ focus_tree = {
 		}
 		
 	}
+	focus = {
+		id = COL_ochoa_larps
+		icon = GFX_goal_TEX_Gun_Win_World
+		prerequisite = { focus = COL_expand_our_faction }
+		x = 2
+		y = 1
+		relative_position_id = COL_expand_our_faction
+		cost = 5
+		ai_will_do = {
+			factor = 3
+		}
+		available = {
+			has_country_leader = { 
+				name = "Fernando Gonzalez Ochoa"
+				ruling_only = yes
+			}
+			is_subject = no
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
+			
+			every_state = {
+				
+				COL = {
+					add_state_core = PREV
+				}
+			}
+			
+			
+		}
+		
+	}
 
 	focus = {
 		id = COL_war_with_panama_GCL
 		icon = GFX_goal_PAN_gapthing
-		prerequisite = { focus = COL_declare_gran_colombia focus = COL_there_will_be_peace_in_the_andes }
+		prerequisite = { focus = COL_declare_gran_colombia  }
 		x = 4
 		y = 1
 		relative_position_id = COL_declare_gran_colombia
@@ -9908,7 +9182,7 @@ focus_tree = {
 	focus = {
 		id = COL_invite_panama_in_GCL
 		icon = GFX_goal_panama
-		prerequisite = { focus = COL_declare_gran_colombia focus = COL_there_will_be_peace_in_the_andes }
+		prerequisite = { focus = COL_declare_gran_colombia  }
 		x = 6
 		y = 1
 		relative_position_id = COL_declare_gran_colombia
@@ -9989,7 +9263,7 @@ focus_tree = {
 						}
 					}
 				}
-				country_event = colfocus.8
+				country_event = colfocus.10
 			}
 			every_other_country = {
 				limit = {
@@ -10084,7 +9358,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_ally_reich
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_BAT_germanisation
 		prerequisite = { focus = COL_entering_an_existing_alliance }
 		mutually_exclusive = { focus = COL_ally_entente }
 		mutually_exclusive = { focus = COL_ally_other_factions }
@@ -10122,7 +9396,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_ally_entente
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_GBR_lead_entente
 		prerequisite = { focus = COL_entering_an_existing_alliance }
 		mutually_exclusive = { focus = COL_ally_reich }
 		mutually_exclusive = { focus = COL_ally_other_factions }
@@ -10168,7 +9442,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_ally_other_factions
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_CZE_faction_generic
 		prerequisite = { focus = COL_entering_an_existing_alliance }
 		mutually_exclusive = { focus = COL_ally_entente }
 		mutually_exclusive = { focus = COL_ally_reich }
@@ -10214,7 +9488,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_far_reaching
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_NYC_new_york_volunteers
 		prerequisite = { focus = COL_ally_reich }
 		x = -1
 		y = 1
@@ -10259,7 +9533,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_aiding_in_the_european_theater
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_UMN_european_artillery
 		prerequisite = { focus = COL_far_reaching focus = COL_helping_CAF focus = COL_ally_volunteers }
 		x = -1
 		y = 1
@@ -10310,7 +9584,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_aiding_against_SA_syndicalism
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_USA_stop_southern_syndicalism
 		prerequisite = { focus = COL_far_reaching focus = COL_helping_CAF focus = COL_ally_volunteers }
 		x = 1
 		y = 1
@@ -10355,7 +9629,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_helping_CAF
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_CAF_army
 		prerequisite = { focus = COL_ally_entente }
 		x = 1
 		y = 1
@@ -10396,7 +9670,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_ally_volunteers
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_AUS_Germanic_Individualism
 		prerequisite = { focus = COL_ally_other_factions }
 		x = 1
 		y = 1
@@ -10455,7 +9729,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_renounce_panama_claims
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_USA_panama_control
 		prerequisite = { focus = COL_far_reaching focus = COL_helping_CAF focus = COL_ally_volunteers focus = COL_defensive_planning }
 		mutually_exclusive = { focus = COL_more_reparations_for_panama }
 		x = 1
@@ -10609,7 +9883,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_peace_industry
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_TRM_Siberian_Industry
 		prerequisite = { focus = COL_by_ourselves }
 		x = -2
 		y = 1
@@ -10666,7 +9940,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_defensive_planning
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_EGY_Palestine_Defence
 		prerequisite = { focus = COL_defensive_navy }
 		prerequisite = { focus = COL_peace_industry }
 		x = -1
@@ -10688,7 +9962,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_state_visit_to_the_superpowers
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_AUS_cantonal_eurotopia
 		prerequisite = { focus = COL_defensive_navy }
 		x = 1
 		y = 1
@@ -10713,7 +9987,7 @@ focus_tree = {
 
 	focus = {
 		id = COL_the_latin_american_mediator
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_GUA_Pacifism_World_Stage
 		prerequisite = { focus = COL_defensive_planning }
 		prerequisite = { focus = COL_state_visit_to_the_superpowers }
 		x = 1

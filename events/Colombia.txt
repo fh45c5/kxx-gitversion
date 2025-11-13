@@ -5998,7 +5998,73 @@ country_event = { #URBAN PLANNING - ECONOMIC TREE
 		}
 	}
 }
+country_event = { #
+	id = colfocus.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.777" }
+	title = colfocus.5.t
+	desc = colfocus.5.d
+	picture = GFX_report_event_COL_viaje_a_pie
 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.5.a
+		COL = {
+			country_event = {
+				id = colfocus.5555
+				days = 5
+			}
+		}
+	}
+	option = {
+		name = colfocus.5.b
+		COL = {
+			country_event = {
+				id = colfocus.5556
+				days = 5
+			}
+		}
+	}
+}
+country_event = { #
+	id = colfocus.5555
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.777" }
+	title = colfocus.5555.t
+	desc = colfocus.5555.d
+	picture = GFX_report_event_COL_viaje_a_pie
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.5555.a
+		COL = {
+			add_to_faction = VEN
+		}
+	}
+	
+}
+country_event = { #
+	id = colfocus.5556
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.777" }
+	title = colfocus.5556.t
+	desc = colfocus.5556.d
+	picture = GFX_report_event_COL_viaje_a_pie
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.5556.a
+		set_country_flag = COL_VEN_rejected_friendship
+		uncomplete_national_focus = {
+			focus = COL_friendship_with_VEN
+			uncomplete_children = yes
+		}
+	}
+	
+}
 country_event = { #OTRAPARTE - Viajes a Pié
 	id = colfocus.777
 	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.777" }
@@ -6536,22 +6602,7 @@ country_event = { #DOVES VS EAGLES - VEN or PRU gets asked if they also want to 
 			factor = 30
 		}
 		add_war_support = 0.1
-		if = {
-			limit = {
-				COL = {
-					has_country_flag = COL_VEN_accepted_friendship
-				}
-			}
-			set_country_flag = COL_PRU_hostile
-		}
-		if = {
-			limit = {
-				COL = {
-					has_country_flag = COL_PRU_accepted_friendship
-				}
-			}
-			set_country_flag = COL_VEN_hostile
-		}
+		
 		create_wargoal = {
 			type = annex_everything
 			target = COL
@@ -6579,66 +6630,12 @@ country_event = { #DOVES VS EAGLES - COL gets asked back
 		ai_chance = {
 			factor = 80
 		}
-		if = {
-			limit = {
-				COL = {
-					has_country_flag = COL_VEN_accepted_friendship
-				}
-			}
-			set_country_flag = COL_PRU_accepted_friendship
-		}
-		if = {
-			limit = {
-				COL = {
-					has_country_flag = COL_PRU_accepted_friendship
-				}
-			}
-			set_country_flag = COL_VEN_accepted_friendship 
+		COL = {
+			add_to_faction = ECU
 		}
 	}
 
-	option = {
-		name = colfocus.34.b
-		ai_chance = {
-			factor = 20
-		}
-		if = {
-			limit = {
-				COL = {
-					has_country_flag = COL_VEN_accepted_friendship
-				}
-			}
-			set_country_flag = COL_PRU_hostile
-			create_wargoal = {
-				type = annex_everything
-				target = var:1214.owner
-			} 
-			var:1214.owner = { 
-				create_wargoal = {
-					type = annex_everything
-					target = ROOT
-				} 
-			}
-		}
-		if = {
-			limit = {
-				COL = {
-					has_country_flag = COL_PRU_accepted_friendship
-				}
-			}
-			set_country_flag = COL_VEN_hostile
-			create_wargoal = {
-				type = annex_everything
-				target = VEN
-			} 
-			VEN = { 
-				create_wargoal = {
-					type = annex_everything
-					target = ROOT
-				} 
-			}
-		}
-	}
+	
 }
 
 country_event = { #INVITE OTHERS TO GRAN COLOMBIAN FACTION
@@ -6734,6 +6731,17 @@ country_event = { #FOREIGN POLICIES - CUCUTA CONGRESS
 		add_ideas = COL_cucuta_congress_buff
 		VEN = { 
 			add_ideas = COL_cucuta_congress_buff
+		}
+		if = {
+			limit = {
+				ECU = {
+					is_in_faction_with = COL
+				}
+				
+			}
+			ECU = { 
+				add_ideas = COL_cucuta_congress_buff
+			}
 		}
 	}
 }
@@ -7498,9 +7506,7 @@ country_event = { #FOREIGN POLICIES - ZONES OF INFLUENCES WITH PRU
 	option = {
 		name = colfocus.12.a
 		add_ideas = COL_dividing_the_SA_cake_buff
-		PRU = { 
-			add_ideas = COL_dividing_the_SA_cake_buff
-		}
+		
 	}
 }
 
@@ -7518,120 +7524,71 @@ country_event = { #FOREIGN POLICIES - FIND THE NEW BOLIVAR
 		ai_chance = {
 			factor = 25
 		}
-		hidden_effect = {
-			remove_all_ministers = yes
+		trigger = {
+			 has_country_leader = { name = "Gustavo Rojas Pinilla" ruling_only = yes }
+		
 		}
-		set_politics = {
-			ruling_party = paternal_autocrat
-			elections_allowed = no
+		set_country_leader_portrait = {
+			portrait = "gfx/leaders/COL/Portrait_Colombia_Gustavo_Rojas_Pinilla_bolivar.png"
 		}
-		create_country_leader = {
-			name = "Gustavo Rojas Pinilla"
-			desc = "POLITICS_COL_PINILLA_DESC"
-			picture = "gfx/leaders/COL/Portrait_Colombia_Gustavo_Rojas_Pinilla.png"
-			expire = "1965.1.1"
-			ideology = paternal_autocrat_subtype
-		}
-		if = {
-			limit = {
-				has_country_flag = COL_totpurges
-			}
-			add_ideas = COL_Gustavo_Rojas_Pinilla_hog_pau
-			else = {
-				add_ideas = COL_Gabriel_Paris_Gordillo_hog_pau
-			}
-		}
-		add_ideas = COL_Luis_Ernesto_Ordonez_Castillo_for_pau
-		add_ideas = COL_Deogracias_Fonseca_Espinosa_hog_pau
-		add_ideas = COL_Rafael_Navas_Pardo_sec_pau
+		set_country_leader_ideology = bolivarianism
+				
+				
+			
 	}
 	option = {
 		name = colfocus.13.b 
 		ai_chance = {
 			factor = 25
 		}
-		hidden_effect = {
-			remove_all_ministers = yes
+		trigger = {
+			has_country_leader = { name = "Laureano Gomez Castro" ruling_only = yes }
 		}
-		set_politics = {
-			ruling_party = authoritarian_democrat
-			elections_allowed = no
-		}
-		create_country_leader = {
-			name = "Laureano Gómez Castro"
-			desc = "POLITICS_COL_GOMEZ_CASTRO_DESC"
-			picture = "gfx/leaders/COL/Portrait_Colombia_Laureano_Gomez_Castro.png"
-			expire = "1965.1.1"
-			ideology = authoritarian_democrat_subtype
-		}
-		add_ideas = COL_Laureano_Eleuterio_Gomez_Castro_hog_ade
-		add_ideas = COL_Ismael_Perdomo_Borrero_for_ade
-		add_ideas = COL_Esteban_Jaramillo_eco_ade
-		add_ideas = COL_Pedro_Jose_Berrio_Diaz_sec_ade
+		set_country_leader_portrait = {
+			portrait = "gfx/leaders/COL/Portrait_Colombia_Laureano_Gomez_Castro_bolivar.png"
+		}	
+		set_country_leader_ideology = authdem_bolivarianism
+				
+			
 	}
 	option = {
 		name = colfocus.13.c
 		ai_chance = {
 			factor = 15
 		}
-		hidden_effect = {
-			remove_all_ministers = yes
+		trigger = {
+			has_country_leader = { name = "Carlos Cortés Vargas" ruling_only = yes }
 		}
-		set_politics = {
-			ruling_party = national_populist
-			elections_allowed = no
+		set_country_leader_portrait = {
+			portrait = "gfx/leaders/COL/Portrait_Colombia_Carlos_Cortes_Vargas_bolivar.png"
 		}
-		create_country_leader = {
-			name = "Carlos Cortés Vargas"
-			desc = "POLITICS_COL_CORTES_VARGAS_DESC"
-			picture = "gfx/leaders/COL/Portrait_Colombia_Carlos_Cortes_Vargas.png"
-			expire = "1965.1.1"
-			ideology = national_populist_subtype
-		}
-		add_ideas = COL_Leopardos_Council_hog_npo
-		add_ideas = COL_Luis_Lopez_de_Mesa_Gomez_for_npo
-		add_ideas = COL_Julian_Bucheli_Ayerbe_eco_npo
-		add_ideas = COL_Carlos_Cortes_Vargas_sec_npo
+		set_country_leader_ideology = natpop_bolivarianism	
+			
 	}
 	option = {
 		name = colfocus.13.e
 		ai_chance = {
 			factor = 25
 		}
-		hidden_effect = {
-			remove_all_ministers = yes
+		trigger = {
+			has_country_leader = { name = "Gilberto Alzate Avendano" ruling_only = yes }
 		}
-		set_politics = {
-			ruling_party = national_populist
-			elections_allowed = no
+		set_country_leader_portrait = {
+			portrait = "gfx/leaders/COL/Portrait_Colombia_Gilberto_Alzate_Avendano_bolivar.png"
 		}
-		create_country_leader = {
-			name = "Gilberto Alzate Avendaño"
-			desc = "POLITICS_COL_AVEDANO_DESC"
-			picture = "gfx/leaders/COL/Portrait_Colombia_Gilberto_Alzate_Avendano.png"
-			expire = "1965.1.1"
-			ideology = leopardism_subtype
-		}
-		add_ideas = COL_Leopardos_Council_hog_npo
-		add_ideas = COL_Luis_Lopez_de_Mesa_Gomez_for_npo
-		add_ideas = COL_Julian_Bucheli_Ayerbe_eco_npo
-		add_ideas = COL_Carlos_Cortes_Vargas_sec_npo
+		set_country_leader_ideology = natpop_bolivarianism	
 	}
 	option = {
 		name = colfocus.13.f
 		ai_chance = {
 			factor = 20
-			modifier = {
-				add = 30
-				has_country_leader = { 
-					name = "Francisco Anastasio Pérez"
-					ruling_only = yes
-				}
-			}
+			
 		}
-		add_timed_idea = {
-			idea = COL_a_fragile_democracy
-			days = 130
+		trigger = {
+			has_country_leader = { 
+				name = "Fernando Gonzalez Ochoa"
+				ruling_only = yes
+			}
 		}
 	}
 }
@@ -7679,7 +7636,9 @@ country_event = { #GCL tree - international alignment
 		ai_chance = {
 			factor = 30
 		}
-		set_country_flag = GCL_allies_entente_flag
+		CAN = {
+			country_event = coldecision.6
+		}
 	}
 
 	option = { #reichpakt
@@ -7694,41 +7653,9 @@ country_event = { #GCL tree - international alignment
 		ai_chance = {
 			factor = 20
 		}
-		set_country_flag = GCL_allies_reich_flag
-	}
-
-	option = { #internationale
-		name = colfocus.88.c
-		trigger = {
-			INT = {
-				exists = yes
-				NOT = { is_in_faction_with = ROOT }
-				is_faction_leader = yes
-			}
+		GER = {
+			country_event = coldecision.3
 		}
-		ai_chance = {
-			factor = 5
-		}
-		set_country_flag = GCL_allies_internationale_flag
-	}
-
-	option = { #other factions
-		name = colfocus.88.e
-		trigger = {
-			any_other_country = {
-				NOT = { 
-					is_in_faction_with = ROOT 
-					is_in_faction_with = ENT
-					is_in_faction_with = GER
-					is_in_faction_with = INT
-				}
-				is_faction_leader = yes
-			}
-		}
-		ai_chance = {
-			factor = 10
-		}
-		set_country_flag = GCL_allies_others_flag
 	}
 
 	option = { #alone
@@ -7737,7 +7664,7 @@ country_event = { #GCL tree - international alignment
 			factor = 30
 		}
 		add_war_support = 0.1
-		set_country_flag = GCL_no_allies_flag
+		
 	}
 }
 
