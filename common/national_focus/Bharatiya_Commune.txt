@@ -10,13 +10,13 @@ focus_tree = {
 default = no
 	continuous_focus_position = {
 		x = 100
-		y = 2500
+		y = 1100
 	}
 #工业
 focus = {
     id = BHC_Make_up_for_barren_industries
     icon = GFX_RUS_Money_For_Industrialization
-    x = 5
+    x = 6
     y = 1
     cost = 2
     ai_will_do = {
@@ -735,7 +735,7 @@ focus = {
 focus = {
     id = BHC_Begin_military_mobilization
     icon = GFX_goal_CSA_union_army
-    x = 19
+    x = 47
     y = 1
     cost = 2
     ai_will_do = {
@@ -807,8 +807,8 @@ focus = {
     icon = GFX_goal_CRO_naval_academy
     relative_position_id = BHC_Rebuild_the_Republican_Navy
     prerequisite = { focus = BHC_Allocate_naval_research_funds }
-    x = -2
-    y = 3
+    x = -3
+    y = 2
     cost = 2
     ai_will_do = {
         factor = 10
@@ -1086,7 +1086,7 @@ focus = {
     relative_position_id = BHC_Rebuild_the_Republican_Navy
     prerequisite = { focus = BHC_Introduce_foreign_designs }
     x = -2
-    y = 5
+    y = 3
     cost = 2
     ai_will_do = {
         factor = 10
@@ -1503,8 +1503,8 @@ focus = {
     relative_position_id = BHC_Rebuild_the_Republican_Air_Force
     prerequisite = { focus = BHC_Invest_in_air_force_RD }
     prerequisite = { focus = BHC_United_Civil_Aviation_Company }
-    x = 2
-    y = 3
+    x = 3
+    y = 2
     cost = 2
     ai_will_do = {
         factor = 10
@@ -1745,7 +1745,7 @@ focus = {
     relative_position_id = BHC_Rebuild_the_Republican_Air_Force
     prerequisite = { focus = BHC_Purchase_foreign_fighter_jets }
     x = 2
-    y = 5
+    y = 3
     cost = 2
     ai_will_do = {
         factor = 10
@@ -1771,7 +1771,7 @@ focus = {
     focus = {
     id = BHC_Revolutionary_stronghold_in_the_East
     icon = GFX_goal_SKM_Bhartiya
-    x = 30
+    x = 19
     y = 1
     cost = 2
     ai_will_do = {
@@ -8960,14 +8960,15 @@ focus = {
         }
     }
 ##尼赫鲁掌权##
+
 #尼赫鲁重开选举#
 focus = {
     id = BHC_The_torch_never_extinguishes
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_The_fall_of_a_star }
+    prerequisite = { focus = BHC_The_next_step }
 	relative_position_id = BHC_Revolutionary_stronghold_in_the_East
     x = 0
-    y = 6
+    y = 11
     cost = 2
     ai_will_do = {
         factor = 10
@@ -11340,7 +11341,7 @@ focus = {
     }
     allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
     allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_Declaring_dictatorship }
+    #allow_branch = { has_country_flag = BHC_Declaring_dictatorship }
     completion_reward = {
         add_stability = 0.2
         add_political_power = -150
@@ -11522,8 +11523,6 @@ focus = {
         hidden_effect = {
             
         }
-        add_stability = 0.05
-        add_war_support = 0.05
         }
     }
 #一命呜呼
@@ -14058,4 +14057,811 @@ focus = {
             }
         }
     }
+    #外交
+    ### UNITING INDIA
+
+	focus = {
+		id = BHC_unite_india
+		icon = GFX_goal_india_united
+		available = {
+			PRF = { exists = no }
+			DEH = { exists = no }
+			441 = { is_owned_and_controlled_by = BHC } #Calcutta
+			439 = { is_owned_and_controlled_by = BHC } #Delhi
+			427 = { is_owned_and_controlled_by = BHC } #Hyderabad
+		}
+		x = 30
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_unite_india"
+			if = {
+				limit = {
+					has_idea = IND_divided_india
+				}
+				remove_ideas = IND_divided_india
+			}
+			add_ideas = BHC_unitedindia
+			set_global_flag = india_war_over
+			hidden_effect = {
+				news_event = { id = worldnews.75 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+	}
+
+	focus = {
+		id = BHC_special_INC_meeting
+		icon = GFX_HND_INC
+		cost = 6
+		prerequisite = { focus = BHC_unite_india }
+		available = {
+			441 = { is_owned_and_controlled_by = BHC } #Calcutta
+			439 = { is_owned_and_controlled_by = BHC } #Delhi
+			427 = { is_owned_and_controlled_by = BHC } #Hyderabad
+		}
+		relative_position_id = BHC_unite_india
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				var:324.owner = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_special_INC_meeting"
+			add_political_power = 100
+			country_event = { id = beng.100 days = 1 }
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = BHC_nepal
+		icon = GFX_goal_nepal
+		cost = 6
+		prerequisite = { focus = BHC_special_INC_meeting }
+		will_lead_to_war_with = NEP
+		available = {
+			has_war = no
+			owns_state = 438 #Lucknow
+		}
+		relative_position_id = BHC_unite_india
+		x = -3
+		y = 2
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				var:323.owner = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		bypass = {
+			owns_state = 814 #Uttarakhand
+			owns_state = 887 #Muzaffarpur
+			owns_state = 888 #Sikkim
+			814 = { is_core_of = BHC }
+			887 = { is_core_of = BHC }
+			888 = { is_core_of = BHC }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_nepal"
+			add_state_core = 814
+			add_state_core = 887
+			add_state_core = 888
+			if = {
+				limit = {
+					NEP = {
+						OR = {
+							AND = {
+								owns_state = 814
+								controls_state = 814
+							}
+							AND = {
+								owns_state = 888
+								controls_state = 888
+							}
+							AND = {
+								owns_state = 887
+								controls_state = 887
+							}
+						}
+					}
+				}
+				country_event = prf.187
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = BHC_madras
+		icon = GFX_goal_mysore
+		cost = 6
+		prerequisite = { focus = BHC_special_INC_meeting }
+		will_lead_to_war_with = MAD
+		available = {
+			has_war = no
+			owns_state = 427 #Hyderabad
+			OR = {
+				320 = { NOT = { is_core_of = BHC } }
+				country_exists = MAD
+				country_exists = TRV
+				country_exists = MYS
+			}
+		}
+		relative_position_id = BHC_unite_india
+		x = -1
+		y = 2
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_leader = {
+						ruling_only = yes
+						name = "Mohandas Karamchand Gandhi"
+					}
+					ROOT_is_threatened = yes
+				}
+				OR = {
+					can_declare_war_on = MAD
+					can_declare_war_on = TRV
+					can_declare_war_on = MYS
+				}
+			}
+			modifier = {
+				factor = 0
+				can_declare_war_on = MAD
+				MAD = { default_attack_AI_trigger_FROM = yes }
+			}
+			modifier = {
+				factor = 0
+				can_declare_war_on = TRV
+				TRV = { default_attack_AI_trigger_FROM = yes }
+			}
+			modifier = {
+				factor = 0
+				can_declare_war_on = MYS
+				MYS = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		bypass = {
+			320 = { is_core_of = BHC }
+			NOT = { country_exists = MAD }
+			NOT = { country_exists = TRV }
+			NOT = { country_exists = MYS }
+		}
+
+		will_lead_to_war_with = MAD
+		will_lead_to_war_with = TRV
+		will_lead_to_war_with = MYS
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_madras"
+			add_state_core = 320
+			add_state_core = 1095
+			if = {
+				limit = { country_exists = MAD }
+				MAD = { country_event = { id = prf.191 days = 1 } }
+			}
+			if = {
+				limit = { country_exists = MYS }
+				MYS = { country_event = { id = prf.191 days = 2 } }
+			}
+			if = {
+				limit = { country_exists = TRV }
+				TRV = { country_event = { id = prf.191 days = 3 } }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = BHC_claim_goa
+		icon = GFX_goal_portugal
+		cost = 6
+		prerequisite = { focus = BHC_nepal }
+		prerequisite = { focus = BHC_madras }
+		available = {
+			has_war = no
+			OR = {
+				owns_state = 425 #Mysore
+				owns_state = 868 #Kolhapur
+			}
+		}
+		relative_position_id = BHC_unite_india
+		x = -5
+		y = 3
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+		}
+
+		bypass = {
+			321 = {
+				is_owned_by = BHC
+				is_core_of = BHC
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_claim_goa"
+			add_state_core = 321 #Goa
+			random_country = {
+				limit = {
+					owns_state = 321
+					NOT = { tag = BHC }
+					NOT = { is_in_faction_with = BHC }
+					OR = {
+						is_actual_major = no
+						AND = {
+							has_war = yes
+							any_enemy_country = { is_actual_major = yes }
+						}
+					}
+				}
+				country_event = prf.198
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = BHC_burma
+		icon = GFX_YUN_Goal_Exploit_Burma
+		cost = 6
+		prerequisite = { focus = BHC_nepal }
+		prerequisite = { focus = BHC_madras }
+		will_lead_to_war_with = BRM
+		available = {
+			has_war = no
+			owns_state = 430 #East Bengal
+			BRM = { NOT = { is_subject_of = BHC } }
+		}
+		relative_position_id = BHC_unite_india
+		x = -3
+		y = 3
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				var:288.owner = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		bypass = {
+			OR = {
+				is_ally_with = BRM
+				BRM = { is_subject_of = BHC }
+				288 = {
+					is_owned_by = BHC
+					is_core_of = BHC
+				}
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_burma"
+			every_state = {
+				limit = {
+					is_core_of = BRM
+					NOT = { is_core_of = ROOT }
+				}
+				add_core_of = ROOT
+			}
+			every_state = {
+				limit = {
+					is_claimed_by = BRM
+					is_not_claim_or_core_of_ROOT = yes
+				}
+				add_claim_by = ROOT
+			}
+			if = {
+				limit = {
+					is_faction_leader = yes
+					is_in_faction_with = BRM
+				}
+				remove_from_faction = BRM
+			}
+			if = {
+				limit = { country_exists = BRM }
+				create_wargoal = {
+					type = annex_everything
+					target = BRM
+				}
+			}
+			if = {
+				limit = {
+					NOT = { country_exists = BRM }
+					NOT = { owns_state = 288 }
+				}
+				random_country = {
+					limit = { owns_state = 288 }
+					BHC = {
+						create_wargoal = {
+							type = take_core_state
+							target = PREV
+						}
+					}
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = BHC_siam
+		icon = GFX_YUN_Goal_The_Siamese_Threat
+		cost = 6
+		prerequisite = { focus = BHC_burma }
+		will_lead_to_war_with = SIA
+		available = {
+			has_war = no
+			is_subject = no
+			SIA = {
+				NOT = { is_subject_of = BHC }
+				NOT = { is_in_faction_with = BHC }
+				any_owned_state = { is_core_of = BRM }
+			}
+			OR = {
+				owns_state = 288 #Burma
+				BRM = { is_subject_of = BHC }
+			}
+		}
+		relative_position_id = BHC_unite_india
+		x = -3
+		y = 4
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				SIA = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_siam"
+			add_political_power = 100
+			SIA = { country_event = delhi.106 }
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = BHC_ceylon
+		icon = GFX_goal_ceylon
+		cost = 6
+		prerequisite = { focus = BHC_nepal }
+		prerequisite = { focus = BHC_madras }
+		will_lead_to_war_with = CEY
+		available = {
+			has_war = no
+			owns_state = 423 #Madurai
+		}
+		relative_position_id = BHC_unite_india
+		x = -1
+		y = 3
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				var:422.owner = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		bypass = {
+			422 = {
+				is_owned_by = BHC
+				is_core_of = BHC
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_ceylon"
+			add_state_claim = 422 #Ceylon
+			add_state_claim = 733 #Andaman
+			add_state_claim = 281 #Maldiven
+			if = {
+				limit = {
+					OR = {
+						GER = { owns_state = 422 }
+						GER = { owns_state = 733 }
+						GER = { owns_state = 281 }
+						CEY = { is_subject_of = GER }
+					}
+					GER = {
+						has_war = yes
+						any_enemy_country = { is_major = yes }
+					}
+					NOT = { is_in_faction_with = DEH }
+				}
+				GER = { country_event = prf.194 }
+			}
+			if = {
+				limit = {
+					OR = {
+						GER = { owns_state = 422 }
+						GER = { owns_state = 733 }
+						GER = { owns_state = 281 }
+						CEY = { is_subject_of = GER }
+					}
+					GER = { is_in_faction_with = DEH }
+				}
+				GER = { country_event = prf.195 }
+			}
+			if = {
+				limit = {
+					CEY = {
+						owns_state = 422
+						NOT = { is_subject_of = GER }
+					}
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CEY
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = BHC_red_raj
+		icon = GFX_goal_SKM_Emphasize_Our_Indian_Identity
+		cost = 6
+		prerequisite = { focus = BHC_special_INC_meeting }
+		available = {
+			has_war = no
+			owns_state = 439 #Delhi
+			439 = { is_core_of = BHC }
+			owns_state = 427 #Hyderabad
+			427 = { is_core_of = BHC }
+			owns_state = 443 #Sindh
+			443 = { is_core_of = BHC }
+			is_subject = no
+			has_socialist_government = yes
+			OR = {
+				is_in_faction = no
+				is_faction_leader = yes
+			}
+		}
+		relative_position_id = BHC_unite_india
+		x = 1
+		y = 2
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 2
+				has_government = syndicalist
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_red_raj"
+			country_event = beng.110
+		}
+	}
+
+	focus = {
+		id = BHC_new_india
+		icon = GFX_goal_SKM_Heralds_Indian_Revolution
+		cost = 6
+		prerequisite = { focus = BHC_red_raj }
+		relative_position_id = BHC_unite_india
+		x = 1
+		y = 3
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_new_india"
+			add_stability = 0.10
+			add_political_power = 100
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+	}
+
+	focus = {
+		id = BHC_unite_minds
+		icon = GFX_goal_SKM_Bring_Red_Truth_Masses
+		cost = 6
+		prerequisite = { focus = BHC_new_india }
+		relative_position_id = BHC_unite_india
+		x = 1
+		y = 4
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_unite_minds"
+			add_research_slot = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = BHC_delhi_officers
+		icon = GFX_PRF_integrate_DEH
+		cost = 6
+		prerequisite = { focus = BHC_special_INC_meeting }
+		available = {
+			owns_state = 439 #Delhi
+			NOT = { country_exists = DEH }
+		}
+		relative_position_id = BHC_unite_india
+		x = 3
+		y = 2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_delhi_officers"
+			country_event = beng.113
+		}
+	}
+
+	focus = {
+		id = BHC_integrate_ganges
+		icon = GFX_goal_generic_india_integrate_eastern_provinces
+		cost = 6
+		prerequisite = { focus = BHC_delhi_officers }
+		available = {
+			OR = {
+				owns_state = 1057 #Bagelkhand
+				owns_state = 438 #Lucknow
+				owns_state = 439 #Delhi
+				owns_state = 440 #Punjab
+			}
+		}
+		relative_position_id = BHC_unite_india
+		x = 3
+		y = 3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		available_if_capitulated = yes
+
+		bypass = {
+			1057 = { is_core_of = ROOT }
+			438 = { is_core_of = ROOT }
+			439 = { is_core_of = ROOT }
+			440 = { is_core_of = ROOT }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_integrate_ganges"
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = BHC_integrate_northwest
+		icon = GFX_goal_generic_india_integrate_loyalist_princes
+		cost = 6
+		prerequisite = { focus = BHC_integrate_ganges }
+		available = {
+			OR = {
+				owns_state = 443 #Sindh
+				owns_state = 441 #Kashmir
+				owns_state = 433 #Rajastan
+				owns_state = 428 #Gujarat
+				owns_state = 440 #Punjab
+				owns_state = 444 #Baluchistan
+			}
+		}
+		relative_position_id = BHC_unite_india
+		x = 3
+		y = 4
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		available_if_capitulated = yes
+
+		bypass = {
+			443 = { is_core_of = ROOT }
+			441 = { is_core_of = ROOT }
+			433 = { is_core_of = ROOT }
+			428 = { is_core_of = ROOT }
+			440 = { is_core_of = ROOT }
+			444 = { is_core_of = ROOT }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_integrate_northwest"
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = BHC_princely_officers
+		icon = GFX_DEH_integrate_PRF
+		cost = 6
+		prerequisite = { focus = BHC_special_INC_meeting }
+		available = {
+			owns_state = 427 #Hyderabad
+			NOT = { country_exists = PRF }
+		}
+		relative_position_id = BHC_unite_india
+		x = 5
+		y = 2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_princely_officers"
+			country_event = beng.118
+		}
+	}
+
+	focus = {
+		id = BHC_integrate_bombay
+		icon = GFX_goal_generic_india_integrate_bombay
+		cost = 6
+		prerequisite = { focus = BHC_princely_officers }
+		available = {
+			OR = {
+				owns_state = 429
+				owns_state = 424
+				owns_state = 423
+			}
+		}
+		relative_position_id = BHC_unite_india
+		x = 5
+		y = 3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		bypass = {
+			429 = { is_core_of = BHC } #Bombay
+			424 = { is_core_of = BHC } #Andhra
+			423 = { is_core_of = BHC } #Madurai
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_integrate_bombay"
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = BHC_integrate_deccan
+		icon = GFX_goal_generic_india_integrate_deccan
+		cost = 6
+		prerequisite = { focus = BHC_integrate_bombay }
+		available = {
+			owns_state = 427 #Hyderabad
+			controls_state = 427
+		}
+		relative_position_id = BHC_unite_india
+		x = 5
+		y = 4
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		bypass = {
+			427 = { is_core_of = BHC }
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_integrate_deccan"
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
 }

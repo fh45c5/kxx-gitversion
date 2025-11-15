@@ -753,10 +753,1349 @@ focus_tree = {
 			add_war_support = 0.05
 		}
 	}
-	######################################################################################################################
-	#过渡结束
-	######################################################################################################################
-	####
+######################################################################################################################
+#过渡结束
+######################################################################################################################
+	
+#外交
+
+	focus = {
+		id = PRF_final_struggle
+		icon = GFX_goal_india_princely_federation
+		cost = 7.00
+		x = 20
+		y = 18
+
+		available = {
+			date > 1937.1.1
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_final_struggle"
+			add_war_support = 0.20
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+	}
+
+	focus = {
+		id = PRF_fortify_north_border
+		icon = GFX_goal_generic_india_fortify_against_raj
+		cost = 15.00
+		prerequisite = {
+			focus = PRF_final_struggle
+		}
+		prerequisite = {
+			focus = PRF_army_reform
+		}
+		relative_position_id = PRF_final_struggle
+		x = -7
+		y = 1
+
+		available = {
+			NOT = { has_war_with = DEH }
+			NOT = { has_war_with = BHC }
+			owns_state = 429 #Bombay
+			owns_state = 893 #Nagpur
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		bypass = {
+			OR = {
+				NOT = { owns_state = 429 } #Bombay
+				NOT = { owns_state = 893 } #Nagpur
+				owns_state = 428 #Gujarat
+				owns_state = 437 #Indore
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_fortify_north_border"
+			429 = {
+				add_building_construction = {
+					type = bunker
+					province = 7150
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 11993
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 7205
+					level = 2
+					instant_build = yes
+				}
+			}
+			893 = {
+				add_building_construction = {
+					type = bunker
+					province = 10872
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 4950
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = PRF_fortify_east_border
+		icon = GFX_goal_generic_india_fortify_against_bharat
+		cost = 15.00
+		prerequisite = {
+			focus = PRF_final_struggle
+		}
+		prerequisite = {
+			focus = PRF_army_reform
+		}
+		relative_position_id = PRF_final_struggle
+		x = -5
+		y = 1
+
+		available = {
+			NOT = { has_war_with = DEH }
+			NOT = { has_war_with = BHC }
+			owns_state = 427 #Hyderabad
+			owns_state = 893 #Nagpur
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		bypass = {
+			OR = {
+				NOT = { owns_state = 427 } #Hyderabad
+				NOT = { owns_state = 893 } #Nagpur
+				owns_state = 436 #Jabalpur
+				owns_state = 426 #Orissa
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_fortify_east_border"
+			427 = {
+				add_building_construction = {
+					type = bunker
+					province = 12114
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 4280
+					level = 2
+					instant_build = yes
+				}
+			}
+			893 = {
+				add_building_construction = {
+					type = bunker
+					province = 4883
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 7619
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 10511
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = PRF_against_delhi
+		icon = GFX_goal_india_dominion
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_final_struggle
+		}
+		relative_position_id = PRF_final_struggle
+		x = -2
+		y = 1
+
+		available = {
+			NOT = { has_war_with = DEH }
+			is_subject = no
+			country_exists = DEH
+		}
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 5
+				DEH = { has_war_with = BHC }
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				DEH = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+		bypass = {
+			OR = {
+				has_war_with = DEH
+				NOT = { country_exists = DEH }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_against_delhi"
+			if = {
+				limit = {
+					NOT = { has_idea = PRF_war_fever }
+				}
+				add_timed_idea = { idea = PRF_war_fever days = 365 }
+			}
+			add_opinion_modifier = { target = DEH modifier = PRF_aggressive_stance }
+			reverse_add_opinion_modifier = { target = DEH modifier = PRF_aggressive_stance }
+		}
+	}
+
+	focus = {
+		id = PRF_incite_kashmir
+		icon = GFX_goal_generic_india_kashmir_revolt
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_against_delhi
+		}
+		mutually_exclusive = {
+			focus = PRF_attack_delhi
+		}
+		relative_position_id = PRF_final_struggle
+		x = -4
+		y = 2
+		will_lead_to_war_with = DEH
+		available = {
+			NOT = { has_war_with = DEH }
+			is_subject = no
+			441 = { is_owned_and_controlled_by = DEH } #Kashmir
+			439 = { is_owned_and_controlled_by = DEH } #Delhi
+			has_army_manpower = { size > 299999 }
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				DEH = { default_attack_AI_trigger_FROM = yes }
+			}
+			modifier = {
+				factor = 5
+				DEH = { has_war_with = BHC }
+			}
+		}
+
+		bypass = {
+			owns_state = 439
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_incite_kashmir"
+			country_event = prf.145
+		}
+	}
+
+	focus = {
+		id = PRF_attack_delhi
+		icon = GFX_goal_generic_india_attack_raj
+		cost = 5.00
+		prerequisite = {
+			focus = PRF_against_delhi
+		}
+		mutually_exclusive = {
+			focus = PRF_incite_kashmir
+		}
+		relative_position_id = PRF_final_struggle
+		x = -2
+		y = 2
+		will_lead_to_war_with = DEH
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 299999 }
+			can_declare_war_on = 439.owner #Delhi
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.75
+				441 = { is_owned_and_controlled_by = DEH } #Kashmir
+				439 = { is_owned_and_controlled_by = DEH } #Delhi
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				var:433.owner = { default_attack_AI_trigger_FROM = yes }
+			}
+			modifier = { #don't take this if you can incite a rebellion
+				factor = 0
+				441 = { is_owned_and_controlled_by = RAJ } #Kashmir
+			}
+			modifier = {
+				factor = 5
+				439 = { is_owned_by = DEH }
+				DEH = { has_war_with = BHC }
+			}
+			modifier = {
+				factor = 3
+				439 = { is_owned_by = DEH }
+				NOT = { country_exists = BHC }
+			}
+		}
+
+		bypass = {
+			owns_state = 439
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_attack_delhi"
+			random_country = {
+				limit = { owns_state = 439 }
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+			set_global_flag = india_war_begun
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = PRF_against_bhartiya
+		icon = GFX_goal_india_commune
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_final_struggle
+		}
+		relative_position_id = PRF_final_struggle
+		x = 2
+		y = 1
+
+		available = {
+			NOT = { has_war_with = BHC }
+			is_subject = no
+			country_exists = BHC
+		}
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 0
+				has_war_with = DEH
+			}
+			modifier = {
+				factor = 0
+				has_war = yes
+				surrender_progress > 0.05
+			}
+			modifier = {
+				factor = 0
+				has_war = yes
+				BHC = {
+					NOT = {
+						has_war_with = DEH
+						surrender_progress > 0.35
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				has_army_manpower = { size < 275000 }
+			}
+			modifier = {
+				factor = 2
+				BHC = { is_in_faction = no }
+			}
+		}
+
+		bypass = {
+			OR = {
+				has_war_with = BHC
+				NOT = { country_exists = BHC }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_against_bhartiya"
+			if = {
+				limit = {
+					NOT = { has_idea = PRF_war_fever }
+				}
+				add_timed_idea = { idea = PRF_war_fever days = 365 }
+			}
+			add_opinion_modifier = { target = BHC modifier = PRF_aggressive_stance }
+			reverse_add_opinion_modifier = { target = BHC modifier = PRF_aggressive_stance }
+		}
+	}
+
+	focus = {
+		id = PRF_deal_with_devil
+		icon = GFX_goal_generic_india_raj_princes_attack_bharat
+		cost = 5.00
+		prerequisite = {
+			focus = PRF_against_bhartiya
+		}
+		relative_position_id = PRF_final_struggle
+		x = 0
+		y = 2
+
+		available = {
+			has_war = no
+			is_subject = no
+			country_exists = DEH
+			country_exists = BHC
+			NOT = { has_government = paternal_autocrat }
+			NOT = { any_owned_state = { is_core_of = DEH } }
+			has_army_manpower = { size > 299999 }
+			BHC = { has_socialist_government = yes }
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_deal_with_devil"
+			DEH = { country_event = prf.153 }
+		}
+	}
+
+	focus = {
+		id = PRF_incite_orissa
+		icon = GFX_goal_generic_india_orissa_revolt
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_against_bhartiya
+		}
+		mutually_exclusive = {
+			focus = PRF_attack_bhartiya
+		}
+		relative_position_id = PRF_final_struggle
+		x = 2
+		y = 2
+		will_lead_to_war_with = BHC
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 299999 }
+			can_declare_war_on = BHC
+			426 = { is_owned_and_controlled_by = BHC } #Orissa
+			431 = { is_owned_and_controlled_by = BHC } #Calcutta
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				if = {
+					limit = { 
+						BHC = {
+							has_country_leader = {
+								ruling_only = yes
+								name = "Mohandas Karamchand Gandhi"
+							}
+						}
+					}
+					DEH = {
+						NOT = { has_war_with = BHC }
+						any_home_area_neighbor_country = { has_war_with = PREV }
+					}
+				}
+				else = {
+					BHC = { default_attack_AI_trigger_FROM = yes }
+				}
+			}
+			modifier = { #don't waste time, attack BHC ASAP
+				factor = 0
+				BHC = { has_war = yes }
+			}
+			modifier = {
+				factor = 5
+				DEH = { has_war_with = BHC }
+			}
+			modifier = {
+				factor = 2
+				431 = { is_owned_by = BHC }
+				BHC = { has_war_with = SIA }
+			}
+			modifier = {
+				factor = 5
+				DEH = { has_country_flag = PRF_unholy_deal_yes }
+			}
+			modifier = {
+				factor = 2
+				DEH = { has_country_flag = PRF_unholy_deal_maybe }
+			}
+		}
+
+		bypass = {
+			owns_state = 431
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_incite_orissa"
+			country_event = prf.149
+		}
+	}
+
+	focus = {
+		id = PRF_attack_bhartiya
+		icon = GFX_goal_generic_india_attack_bharat
+		cost = 5.00
+		prerequisite = {
+			focus = PRF_against_bhartiya
+		}
+		mutually_exclusive = {
+			focus = PRF_incite_orissa
+		}
+		relative_position_id = PRF_final_struggle
+		x = 4
+		y = 2
+		will_lead_to_war_with = BHC
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 299999 }
+			can_declare_war_on = 431.owner #Calcutta
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.75
+				426 = { is_owned_and_controlled_by = BHC } #Orissa
+				431 = { is_owned_and_controlled_by = BHC } #Calcutta
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				if = {
+					limit = {
+						BHC = {
+							owns_state = 431 #West Bengal
+							has_country_leader = {
+								ruling_only = yes
+								name = "Mohandas Karamchand Gandhi"
+							}
+						}
+					}
+					DEH = {
+						NOT = { has_war_with = BHC }
+						any_home_area_neighbor_country = { has_war_with = PREV }
+					}
+				}
+				else = {
+					var:431.owner = { default_attack_AI_trigger_FROM = yes }
+				}
+			}
+			modifier = { #don't take this if you can incite a rebellion and BHC isn't busy elsewhere
+				factor = 0
+				426 = { is_owned_and_controlled_by = BHC } #Orissa
+				BHC = { has_war = no }
+			}
+			modifier = {
+				factor = 5
+				431 = { is_owned_by = BHC }
+				DEH = { has_war_with = BHC }
+			}
+			modifier = {
+				factor = 2
+				431 = { is_owned_by = BHC }
+				BHC = { has_war_with = SIA }
+			}
+			modifier = {
+				factor = 3
+				431 = { is_owned_by = BHC }
+				NOT = { country_exists = DEH }
+			}
+			modifier = {
+				factor = 5
+				DEH = { has_country_flag = PRF_unholy_deal_yes }
+			}
+			modifier = {
+				factor = 2
+				DEH = { has_country_flag = PRF_unholy_deal_maybe }
+			}
+		}
+
+		bypass = {
+			owns_state = 431
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_attack_bhartiya"
+			random_country = {
+				limit = { owns_state = 431 }
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+			set_global_flag = india_war_begun
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+
+	### INDIA UNITED
+
+	focus = {
+		id = PRF_india_united
+		icon = GFX_goal_india_united
+		cost = 10.00
+		x = 20
+		y = 21
+
+		available = {
+			NOT = { country_exists = DEH }
+			NOT = { country_exists = BHC }
+			441 = { is_owned_and_controlled_by = PRF } #Calcutta
+			439 = { is_owned_and_controlled_by = PRF } #Delhi
+			427 = { is_owned_and_controlled_by = PRF } #Hyderabad
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_india_united"
+			add_stability = 0.10
+			add_political_power = 100
+			if = {
+				limit = {
+					has_idea = IND_divided_india
+				}
+				remove_ideas = IND_divided_india
+			}
+			add_ideas = PRF_united_india
+			set_global_flag = india_war_over
+			hidden_effect = {
+				news_event = { id = worldnews.73 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+	}
+
+	focus = {
+		id = PRF_nepal_claims
+		icon = GFX_goal_nepal
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_india_united
+		}
+		relative_position_id = PRF_india_united
+		x = -3
+		y = 1
+		will_lead_to_war_with = NEP
+		available = {
+			has_war = no
+			owns_state = 438 #Lucknow
+			438 = { is_core_of = PRF }
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				NEP = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		bypass = {
+			owns_state = 814 #Uttarakhand
+			owns_state = 887 #Muzaffarpur
+			owns_state = 888 #Sikkim
+			814 = { is_core_of = PRF }
+			887 = { is_core_of = PRF }
+			888 = { is_core_of = PRF }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_nepal_claims"
+			add_state_core = 814
+			add_state_core = 887
+			add_state_core = 888
+			if = {
+				limit = {
+					NEP = {
+						OR = {
+							AND = {
+								owns_state = 814
+								controls_state = 814
+							}
+							AND = {
+								owns_state = 888
+								controls_state = 888
+							}
+							AND = {
+								owns_state = 887
+								controls_state = 887
+							}
+						}
+					}
+				}
+				country_event = prf.187
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = PRF_claim_ceylon
+		icon = GFX_goal_ceylon
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_nepal_claims
+		}
+		prerequisite = {
+			focus = PRF_incorporate_madras
+		}
+		relative_position_id = PRF_india_united
+		x = -5
+		y = 2
+		will_lead_to_war_with = CEY
+		available = {
+			has_war = no
+			owns_state = 423 #Madurai
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				var:422.owner = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		bypass = {
+			422 = {
+				is_owned_by = PRF
+				is_core_of = PRF
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_claim_ceylon"
+			add_state_claim = 422 #Ceylon
+			add_state_claim = 733 #Andaman
+			add_state_claim = 281 #Maldiven
+			if = {
+				limit = {
+					OR = {
+						GER = { owns_state = 422 }
+						GER = { owns_state = 733 }
+						GER = { owns_state = 281 }
+						CEY = { is_subject_of = GER }
+					}
+					GER = {
+						has_war = yes
+						any_enemy_country = { is_major = yes }
+					}
+					NOT = { is_in_faction_with = PRF }
+				}
+				GER = { country_event = prf.194 }
+			}
+			if = {
+				limit = {
+					OR = {
+						GER = { owns_state = 422 }
+						GER = { owns_state = 733 }
+						GER = { owns_state = 281 }
+						CEY = { is_subject_of = GER }
+					}
+					GER = { is_in_faction_with = PRF }
+				}
+				GER = { country_event = prf.195 }
+			}
+			if = {
+				limit = {
+					CEY = {
+						owns_state = 422
+						NOT = { is_subject_of = GER }
+					}
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CEY
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = PRF_claim_goa
+		icon = GFX_goal_portugal
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_nepal_claims
+		}
+		relative_position_id = PRF_india_united
+		x = -1
+		y = 2
+
+		available = {
+			has_war = no
+			OR = {
+				owns_state = 425 #Mysore
+				owns_state = 868 #Kolhapur
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 10
+				var:321.owner = { enemies_strength_ratio > 0.5 }
+			}
+		}
+
+		bypass = {
+			321 = { #Goa
+				is_owned_by = PRF
+				is_core_of = PRF
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_claim_goa"
+			add_state_core = 321 #Goa
+			random_country = {
+				limit = {
+					owns_state = 321
+					NOT = { tag = PRF }
+					NOT = { is_in_faction_with = PRF }
+					OR = {
+						is_major = no
+						AND = {
+							has_war = yes
+							any_enemy_country = { is_major = yes }
+						}
+					}
+				}
+				country_event = prf.198
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = PRF_incorporate_burma
+		icon = GFX_YUN_Goal_Exploit_Burma
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_nepal_claims
+		}
+		prerequisite = {
+			focus = PRF_incorporate_madras
+		}
+		relative_position_id = PRF_india_united
+		x = -3
+		y = 2
+		will_lead_to_war_with = BRM
+		available = {
+			has_war = no
+			owns_state = 430 #East Bengal
+			BRM = { NOT = { is_subject_of = PRF } }
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				var:288.owner = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		bypass = {
+			OR = {
+				BRM = { is_subject_of = PRF }
+				288 = {
+					is_owned_by = PRF
+					is_core_of = PRF
+				}
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_incorporate_burma"
+			every_state = {
+				limit = {
+					is_core_of = BRM
+					NOT = { is_core_of = ROOT }
+				}
+				add_core_of = ROOT
+			}
+			every_state = {
+				limit = {
+					is_claimed_by = BRM
+					is_not_claim_or_core_of_ROOT = yes
+				}
+				add_claim_by = ROOT
+			}
+			if = {
+				limit = { country_exists = BRM }
+				create_wargoal = {
+					type = annex_everything
+					target = BRM
+				}
+			}
+			if = {
+				limit = {
+					NOT = { country_exists = BRM }
+					NOT = { owns_state = 288 }
+				}
+				random_country = {
+					limit = { owns_state = 288 }
+					PRF = {
+						create_wargoal = {
+							type = take_core_state
+							target = PREV
+						}
+					}
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = PRF_incorporate_siam
+		icon = GFX_YUN_Goal_The_Siamese_Threat
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_incorporate_burma
+		}
+		relative_position_id = PRF_india_united
+		x = -3
+		y = 3
+		will_lead_to_war_with = SIA
+		available = {
+			has_war = no
+			is_subject = no
+			SIA = {
+				NOT = { is_subject_of = PRF }
+				NOT = { is_in_faction_with = PRF }
+				any_owned_state = { is_core_of = BRM }
+			}
+			OR = {
+				owns_state = 288 #Burma
+				BRM = { is_subject_of = PRF }
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				SIA = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_incorporate_siam"
+			add_political_power = 100
+			SIA = { country_event = delhi.106 }
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = PRF_new_plan
+		icon = GFX_goal_NFA_A_New_Constitution
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_india_united
+		}
+		relative_position_id = PRF_india_united
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_new_plan"
+			add_ideas = PRF_new_plan_idea
+		}
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = PRF_indian_cinema
+		icon = GFX_goal_generic_cinema
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_new_plan
+		}
+		relative_position_id = PRF_india_united
+		x = 1
+		y = 2
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_indian_cinema"
+			add_stability = 0.05
+		}
+		search_filters = { FOCUS_FILTER_STABILITY }
+	}
+
+	focus = {
+		id = PRF_new_research_2
+		icon = GFX_RUS_A_Great_Leap_Forward
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_indian_cinema
+		}
+		relative_position_id = PRF_india_united
+		x = 1
+		y = 3
+
+		available = {
+			NOT = { has_idea = PRF_economic_backwardness }
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_new_research_2"
+			add_research_slot = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = PRF_delhi_officers
+		icon = GFX_PRF_integrate_DEH
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_india_united
+		}
+		relative_position_id = PRF_india_united
+		x = 3
+		y = 1
+
+		available = {
+			owns_state = 439 #Delhi
+			NOT = { country_exists = DEH }
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_delhi_officers"
+			country_event = prf.178
+		}
+	}
+
+	focus = {
+		id = PRF_loyalist_states
+		icon = GFX_goal_generic_india_integrate_loyalist_princes
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_delhi_officers
+		}
+		relative_position_id = PRF_india_united
+		x = 3
+		y = 2
+
+		available = {
+			OR = {
+				owns_state = 443 #Sindh
+				owns_state = 441 #Kashmir
+				owns_state = 433 #Rajastan
+				owns_state = 428 #Gujarat
+				owns_state = 440 #Punjab
+				owns_state = 444 #Baluchistan
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		bypass = {
+			443 = { is_core_of = ROOT }
+			441 = { is_core_of = ROOT }
+			433 = { is_core_of = ROOT }
+			428 = { is_core_of = ROOT }
+			440 = { is_core_of = ROOT }
+			444 = { is_core_of = ROOT }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_loyalist_states"
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = PRF_question_of_rights
+		icon = GFX_goal_generic_india_integrate_eastern_provinces
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_loyalist_states
+		}
+		relative_position_id = PRF_india_united
+		x = 3
+		y = 3
+
+		available = {
+			OR = {
+				owns_state = 1057 #Bagelkhand
+				owns_state = 438 #Lucknow
+				owns_state = 439 #Delhi
+				owns_state = 440 #Indore
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		bypass = {
+			1057 = { is_core_of = ROOT }
+			438 = { is_core_of = ROOT }
+			439 = { is_core_of = ROOT }
+			440 = { is_core_of = ROOT }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_question_of_rights"
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = PRF_bhartiya_officers
+		icon = GFX_PRF_integrate_BHC
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_india_united
+		}
+		relative_position_id = PRF_india_united
+		x = 5
+		y = 1
+
+		available = {
+			owns_state = 431 #West Bengal
+			NOT = { country_exists = BHC }
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_bhartiya_officers"
+			country_event = prf.172
+		}
+	}
+
+	focus = {
+		id = PRF_industry_question
+		icon = GFX_goal_generic_takeover_industries
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_bhartiya_officers
+		}
+		relative_position_id = PRF_india_united
+		x = 5
+		y = 2
+
+		available = {
+			OR = {
+				owns_state = 435 #Bihar
+				owns_state = 431 #West Bengal
+				owns_state = 430 #East Bengal
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		bypass = {
+			435 = { is_core_of = ROOT }
+			431 = { is_core_of = ROOT }
+			430 = { is_core_of = ROOT }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_industry_question"
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = PRF_assam_question
+		icon = GFX_PRF_plantations
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_industry_question
+		}
+		relative_position_id = PRF_india_united
+		x = 5
+		y = 3
+
+		available = {
+			OR = {
+				owns_state = 432 #Assam
+				owns_state = 434 #Nagaland
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		bypass = {
+			432 = { is_core_of = ROOT }
+			434 = { is_core_of = ROOT }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_assam_question"
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = PRF_orissa_question
+		icon = GFX_PRF_zamindar
+		cost = 7.00
+		prerequisite = {
+			focus = PRF_industry_question
+		}
+		relative_position_id = PRF_india_united
+		x = 7
+		y = 3
+
+		available = {
+			OR = {
+				owns_state = 426 #Orissa
+				owns_state = 436 #Jabalpur
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		bypass = {
+			426 = { is_core_of = ROOT }
+			436 = { is_core_of = ROOT }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_orissa_question"
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
+###
 	#industry
 	####
 	focus = {
@@ -2951,7 +4290,7 @@ focus_tree = {
 	#继续掌权
 	######################################################################################################################
 	focus = {
-		id = PRF_Nizam_continues_to_hold_power
+		id = PRF_A_new_day_for_the_Princes_League
 		icon = GFX_ourcurrentproblems
 		x = 32
 		y = 1
@@ -2965,19 +4304,18 @@ focus_tree = {
 			has_country_flag = PRF_Nizam_hold_power
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_A_new_day_for_the_Princes_League"
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			add_stability = 0.01
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy
+		id = PRF_When_the_wall_falls_everyone_pushes
 		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power
+		relative_position_id = PRF_A_new_day_for_the_Princes_League
 		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power
+			focus = PRF_A_new_day_for_the_Princes_League
 		}
 		x = -4
 		y = 1
@@ -2988,19 +4326,18 @@ focus_tree = {
 		available = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_When_the_wall_falls_everyone_pushes"
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			add_ideas = PRF_anti_Nizam
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_2
+		id = PRF_Ease_religious_conflicts
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy
+			focus = PRF_When_the_wall_falls_everyone_pushes
 		}
 		x = 0
 		y = 1
@@ -3015,15 +4352,15 @@ focus_tree = {
 			hidden_effect = {
 			}
 			add_stability = 0.05
-			add_war_support = 0.05
+			remove_ideas = PRF_religious_conflict
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_1
+		id = PRF_Deal_with_the_legacy_of_the_previous_dynastys_regime
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy
+			focus = PRF_When_the_wall_falls_everyone_pushes
 		}
 		x = -2
 		y = 1
@@ -3036,17 +4373,22 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
+				
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			add_stability = -0.30
+			add_war_support = -0.50
+			swap_ideas = {
+				remove_idea = PRF_anti_Nizam
+				add_idea = PRF_anti_Nizam_1
+			}
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_3
+		id = PRF_Establish_a_system_of_electing_kings
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy
+			focus = PRF_When_the_wall_falls_everyone_pushes
 		}
 		x = 2
 		y = 1
@@ -3061,15 +4403,15 @@ focus_tree = {
 			hidden_effect = {
 			}
 			add_stability = 0.05
-			add_war_support = 0.05
+			add_ideas = PRF_The_emperor_takes_turns_ruling
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_4
+		id = PRF_Pardon_colonial_army_personnel
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy_1
+			focus = PRF_Deal_with_the_legacy_of_the_previous_dynastys_regime
 		}
 		x = -3
 		y = 2
@@ -3080,19 +4422,28 @@ focus_tree = {
 		available = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_Pardon_colonial_army_personnel"
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			DEH = {
+            
+				every_unit_leader = {
+                
+					set_nationality = PRF
+            
+				}
+			}
+			
+			add_stability = 0.10
+			add_war_support = 0.15
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_5
+		id = PRF_Show_leniency_to_surrendering_rebels
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy_1
+			focus = PRF_Deal_with_the_legacy_of_the_previous_dynastys_regime
 		}
 		x = -1
 		y = 2
@@ -3103,19 +4454,28 @@ focus_tree = {
 		available = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_Show_leniency_to_surrendering_rebels"
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			BHC = {
+            
+				every_unit_leader = {
+                
+					set_nationality = PRF
+            
+				}
+			}
+			
+			add_stability = 0.10
+			add_war_support = 0.15
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_6
+		id = PRF_Democratic_principles
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy_3
+			focus = PRF_Establish_a_system_of_electing_kings
 		}
 		x = 1
 		y = 2
@@ -3129,16 +4489,18 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			swap_ideas = {
+				remove_idea = PRF_The_emperor_takes_turns_ruling
+				add_idea = PRF_The_emperor_takes_turns_ruling_1
+			}
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_7
+		id = PRF_Money_can_move_gods
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy_3
+			focus = PRF_Establish_a_system_of_electing_kings
 		}
 		x = 3
 		y = 2
@@ -3152,74 +4514,21 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			add_ideas = PRF_Lubricant
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_8
+		id = PRF_Settle_accounts_with_Nizams_autocratic_legacy
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy_4
-		}
-		prerequisite = {
-			focus = The_Princes_Democracy_5
-		}
-		x = -2
-		y = 3
-		cost = 5
-		ai_will_do = {
-			factor = 10
-		}
-		available = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
-			hidden_effect = {
-			}
-			add_stability = 0.05
-			add_war_support = 0.05
-		}
-	}
-	focus = {
-		id = The_Princes_Democracy_9
-		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
-		prerequisite = {
-			focus = The_Princes_Democracy_6
+			focus = PRF_Pardon_colonial_army_personnel
 		}
 		prerequisite = {
-			focus = The_Princes_Democracy_7
-		}
-		x = 2
-		y = 3
-		cost = 5
-		ai_will_do = {
-			factor = 10
-		}
-		available = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
-			hidden_effect = {
-			}
-			add_stability = 0.05
-			add_war_support = 0.05
-		}
-	}
-	focus = {
-		id = The_Princes_Democracy_10
-		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
-		prerequisite = {
-			focus = The_Princes_Democracy_13
-		}
-		prerequisite = {
-			focus = The_Princes_Democracy_8
+			focus = PRF_Show_leniency_to_surrendering_rebels
 		}
 		x = -1
-		y = 4
+		y = 3
 		cost = 5
 		ai_will_do = {
 			factor = 10
@@ -3230,21 +4539,51 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			add_political_power = 100
+			
+			swap_ideas = {
+				remove_idea = PRF_anti_Nizam_1
+				add_idea = PRF_anti_Nizam_2
+			}
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_11
+		id = PRF_Determine_our_own_rules
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy_13
+			focus = PRF_Democratic_principles
 		}
 		prerequisite = {
-			focus = The_Princes_Democracy_9
+			focus = PRF_Money_can_move_gods
 		}
 		x = 1
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus "
+			hidden_effect = {
+			}
+			swap_ideas = {
+				remove_idea = PRF_The_emperor_takes_turns_ruling_1
+				add_idea = PRF_The_emperor_takes_turns_ruling_2
+			}
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = PRF_Strive_for_national_support
+		icon = GFX_ourcurrentproblems
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
+		prerequisite = {
+			focus = PRF_Settle_accounts_with_Nizams_autocratic_legacy
+		}
+		x = -2
 		y = 4
 		cost = 5
 		ai_will_do = {
@@ -3257,18 +4596,53 @@ focus_tree = {
 			hidden_effect = {
 			}
 			add_stability = 0.05
-			add_war_support = 0.05
+			add_ideas = PRF_Expand_national_production
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_12
+		id = PRF_Mobilize_the_forces_of_all_India
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy_10
+			focus = PRF_Determine_our_own_rules
+		}
+		x = 2
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus "
+			hidden_effect = {
+			}
+			add_stability = -0.10
+			add_war_support = -0.10
+			
+			every_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+                
+			}
+		}
+	}
+	focus = {
+		id = PRF_The_path_of_benevolent_rule
+		icon = GFX_ourcurrentproblems
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
+		prerequisite = {
+			focus = PRF_Strive_for_national_support
 		}
 		prerequisite = {
-			focus = The_Princes_Democracy_11
+			focus = PRF_Mobilize_the_forces_of_all_India
+		}
+		prerequisite = {
+			focus = PRF_The_necessary_evil_for_consolidating_rule
 		}
 		x = 0
 		y = 5
@@ -3279,22 +4653,31 @@ focus_tree = {
 		available = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_The_path_of_benevolent_rule"
 			hidden_effect = {
 			}
-			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = PRF_The_emperor_takes_turns_ruling_2
+				add_idea = PRF_The_emperor_takes_turns_ruling_3
+			}
 			add_war_support = 0.05
 		}
 	}
 	focus = {
-		id = The_Princes_Democracy_13
+		id = PRF_The_necessary_evil_for_consolidating_rule
 		icon = GFX_ourcurrentproblems
-		relative_position_id = The_Princes_Democracy
+		relative_position_id = PRF_When_the_wall_falls_everyone_pushes
 		prerequisite = {
-			focus = The_Princes_Democracy_2
+			focus = PRF_Settle_accounts_with_Nizams_autocratic_legacy
+		}
+		prerequisite = {
+			focus = PRF_Determine_our_own_rules
+		}
+		prerequisite = {
+			focus = PRF_Ease_religious_conflicts
 		}
 		x = 0
-		y = 3
+		y = 4
 		cost = 5
 		ai_will_do = {
 			factor = 10
@@ -3302,19 +4685,43 @@ focus_tree = {
 		available = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_The_necessary_evil_for_consolidating_rule"
 			hidden_effect = {
 			}
-			add_stability = 0.05
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.2
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.2
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.2
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -0.2
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.2
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.2
+			}
 			add_war_support = 0.05
+			
 		}
 	}
 	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r
+		id = PRF_Ride_out_of_the_storm
 		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power
+		relative_position_id = PRF_A_new_day_for_the_Princes_League
 		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power
+			focus = PRF_A_new_day_for_the_Princes_League
 		}
 		x = 4
 		y = 1
@@ -3328,65 +4735,18 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			add_political_power = 100
 		}
 	}
 	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_1
+		id = PRF_Purge_the_benevolent_princes
 		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
+		relative_position_id = PRF_Ride_out_of_the_storm
 		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r
-		}
-		x = -1
-		y = 1
-		cost = 5
-		ai_will_do = {
-			factor = 10
-		}
-		available = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
-			hidden_effect = {
-			}
-			add_stability = 0.05
-			add_war_support = 0.05
-		}
-	}
-	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_2
-		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r
-		}
-		x = 1
-		y = 1
-		cost = 5
-		ai_will_do = {
-			factor = 10
-		}
-		available = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
-			hidden_effect = {
-			}
-			add_stability = 0.05
-			add_war_support = 0.05
-		}
-	}
-	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_3
-		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_1
+			focus = PRF_Ride_out_of_the_storm
 		}
 		x = -2
-		y = 2
+		y = 1
 		cost = 5
 		ai_will_do = {
 			factor = 10
@@ -3399,42 +4759,40 @@ focus_tree = {
 			}
 			add_stability = 0.05
 			add_war_support = 0.05
+			add_ideas = PRF_The_Authority_of_the_Nizam
 		}
 	}
 	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_4
+		id = PRF_Establish_a_bodyguard_unit
 		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
+		relative_position_id = PRF_Ride_out_of_the_storm
 		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_1
-		}
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_2
-		}
-		x = 0
-		y = 2
-		cost = 5
-		ai_will_do = {
-			factor = 10
-		}
-		available = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
-			hidden_effect = {
-			}
-			add_stability = 0.05
-			add_war_support = 0.05
-		}
-	}
-	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_5
-		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_2
+			focus = PRF_Ride_out_of_the_storm
 		}
 		x = 2
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus "
+			hidden_effect = {
+			}
+			add_ideas = PRF_Nizam_Youth_League
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = PRF_Hold_the_reins_tight
+		icon = GFX_ourcurrentproblems
+		relative_position_id = PRF_Ride_out_of_the_storm
+		prerequisite = {
+			focus = PRF_Purge_the_benevolent_princes
+		}
+		x = -3
 		y = 2
 		cost = 5
 		ai_will_do = {
@@ -3446,24 +4804,135 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
+			swap_ideas = {
+				remove_idea = PRF_The_Authority_of_the_Nizam
+				add_idea = PRF_The_Authority_of_the_Nizam_1
+			}
+		}
+	}
+	focus = {
+		id = PRF_Eliminate_extremist_religious_elements
+		icon = GFX_ourcurrentproblems
+		relative_position_id = PRF_Ride_out_of_the_storm
+		prerequisite = {
+			focus = PRF_Ride_out_of_the_storm
+		}
+		x = 0
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus "
+			hidden_effect = {
+			}
 			add_stability = 0.05
+			remove_ideas = PRF_religious_conflict
 			add_war_support = 0.05
 		}
 	}
 	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_6
+		id = PRF_Eradicate_the_specter_of_syndicalism
 		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
+		relative_position_id = PRF_Ride_out_of_the_storm
 		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_3
+			focus = PRF_Establish_a_bodyguard_unit
 		}
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_4
+		x = 3
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 10
 		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus "
+			hidden_effect = {
+			}
+			add_stability = -0.05
+			swap_ideas = {
+				remove_idea = PRF_Nizam_Youth_League
+				add_idea = PRF_Nizam_Youth_League_1
+			}
+		}
+	}
+	focus = {
+		id = PRF_The_birth_of_a_nation
+		icon = GFX_ourcurrentproblems
+		relative_position_id = PRF_Ride_out_of_the_storm
 		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_5
+			focus = PRF_Eliminate_extremist_religious_elements
 		}
 		x = 0
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus "
+			hidden_effect = {
+			}
+			add_ideas = PRF_Without_the_Nizam_there_would_be_no_New_India
+		}
+	}
+	focus = {
+		id = PRF_Modernization_strongman
+		icon = GFX_ourcurrentproblems
+		relative_position_id = PRF_Ride_out_of_the_storm
+		prerequisite = {
+			focus = PRF_Hold_the_reins_tight
+		}
+		prerequisite = {
+			focus = PRF_The_birth_of_a_nation
+		}
+		prerequisite = {
+			focus = PRF_Eradicate_the_specter_of_syndicalism
+		}
+		mutually_exclusive = {
+			focus = PRF_The_unyielding_imperial_throne
+		}
+		x = -2
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_Modernization_strongman"
+			hidden_effect = {
+			}
+			swap_ideas = {
+				remove_idea = PRF_Without_the_Nizam_there_would_be_no_New_India
+				add_idea = PRF_Modernized_ideal
+			}
+		}
+	}
+	focus = {
+		id = PRF_The_unyielding_imperial_throne
+		icon = GFX_ourcurrentproblems
+		relative_position_id = PRF_Ride_out_of_the_storm
+		prerequisite = {
+			focus = PRF_Hold_the_reins_tight
+		}
+		prerequisite = {
+			focus = PRF_The_birth_of_a_nation
+		}
+		prerequisite = {
+			focus = PRF_Eradicate_the_specter_of_syndicalism
+		}
+		mutually_exclusive = {
+			focus = PRF_Modernization_strongman
+		}
+		x = 2
 		y = 3
 		cost = 5
 		ai_will_do = {
@@ -3475,71 +4944,21 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
-		}
-	}
-	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_7
-		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_6
-		}
-		mutually_exclusive = {
-			focus = PRF_Nizam_continues_to_hold_power_r_8
-		}
-		x = -2
-		y = 4
-		cost = 5
-		ai_will_do = {
-			factor = 10
-		}
-		available = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
-			hidden_effect = {
+			swap_ideas = {
+				remove_idea = PRF_Without_the_Nizam_there_would_be_no_New_India
+				add_idea = PRF_Without_the_Nizam_there_would_be_no_New_India_1
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
 		}
 	}
 	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_8
+		id = PRF_Benevolent_father
 		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
+		relative_position_id = PRF_Ride_out_of_the_storm
 		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_6
-		}
-		mutually_exclusive = {
-			focus = PRF_Nizam_continues_to_hold_power_r_7
-		}
-		x = 2
-		y = 4
-		cost = 5
-		ai_will_do = {
-			factor = 10
-		}
-		available = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
-			hidden_effect = {
-			}
-			add_stability = 0.05
-			add_war_support = 0.05
-		}
-	}
-	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_9
-		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_7
+			focus = PRF_Modernization_strongman
 		}
 		x = -3
-		y = 5
+		y = 4
 		cost = 5
 		ai_will_do = {
 			factor = 10
@@ -3547,22 +4966,22 @@ focus_tree = {
 		available = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_Benevolent_father"
 			hidden_effect = {
+			add_country_leader_trait = PRF_beloved_father_of_the_Indian_people		
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			custom_effect_tooltip = PRF_beloved_father_of_the_Indian_people_tt
 		}
 	}
 	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_10
+		id = PRF_Noble_sovereign
 		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
+		relative_position_id = PRF_Ride_out_of_the_storm
 		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_7
+			focus = PRF_Modernization_strongman
 		}
 		x = -1
-		y = 5
+		y = 4
 		cost = 5
 		ai_will_do = {
 			factor = 10
@@ -3570,22 +4989,24 @@ focus_tree = {
 		available = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_Noble_sovereign"
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			swap_ideas = {
+				remove_idea = PRF_Modernized_ideal
+				add_idea = PRF_Modernized_ideal_1
+			}
 		}
 	}
 	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_11
+		id = PRF_The_pioneer_of_the_new_empire
 		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
+		relative_position_id = PRF_Ride_out_of_the_storm
 		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_8
+			focus = PRF_The_unyielding_imperial_throne
 		}
 		x = 1
-		y = 5
+		y = 4
 		cost = 5
 		ai_will_do = {
 			factor = 10
@@ -3595,19 +5016,77 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
+				add_country_leader_trait = PRF_The_Eternal_Monarch
 			}
-			add_stability = 0.05
+			custom_effect_tooltip = PRF_The_Eternal_Monarch_tt
+			
 			add_war_support = 0.05
 		}
 	}
 	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_12
+		id = PRF_The_eternal_Nizam
 		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
+		relative_position_id = PRF_Ride_out_of_the_storm
 		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_8
+			focus = PRF_The_unyielding_imperial_throne
 		}
 		x = 3
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus "
+			hidden_effect = {
+			}
+			swap_ideas = {
+				remove_idea = PRF_Without_the_Nizam_there_would_be_no_New_India_1
+				add_idea = PRF_Without_the_Nizam_there_would_be_no_New_India_2
+			}
+		}
+	}
+	focus = {
+		id = PRF_The_Eastern_Washington_or_the_heir_of_1857
+		icon = GFX_ourcurrentproblems
+		relative_position_id = PRF_Ride_out_of_the_storm
+		prerequisite = {
+			focus = PRF_Benevolent_father
+		}
+		prerequisite = {
+			focus = PRF_Noble_sovereign
+		}
+		x = -2
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRF_The_Eastern_Washington_or_the_heir_of_1857"
+			hidden_effect = {
+			}
+			swap_ideas = {
+				remove_idea = PRF_Modernized_ideal_1
+				add_idea = PRF_Modernized_ideal_2
+			}
+		}
+	}
+	focus = {
+		id = PRF_The_Napoleon_of_the_East_or_the_Sword_of_Allah
+		icon = GFX_ourcurrentproblems
+		relative_position_id = PRF_Ride_out_of_the_storm
+		prerequisite = {
+			focus = PRF_The_eternal_Nizam
+		}
+		prerequisite = {
+			focus = PRF_The_pioneer_of_the_new_empire
+		}
+		x = 2
 		y = 5
 		cost = 5
 		ai_will_do = {
@@ -3619,70 +5098,20 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
-		}
-	}
-	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_13
-		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_9
-		}
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_10
-		}
-		x = -2
-		y = 6
-		cost = 5
-		ai_will_do = {
-			factor = 10
-		}
-		available = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
-			hidden_effect = {
+			swap_ideas = {
+				remove_idea = PRF_Without_the_Nizam_there_would_be_no_New_India_2
+				add_idea = PRF_Without_the_Nizam_there_would_be_no_New_India_3
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
 		}
 	}
-	focus = {
-		id = PRF_Nizam_continues_to_hold_power_r_14
-		icon = GFX_ourcurrentproblems
-		relative_position_id = PRF_Nizam_continues_to_hold_power_r
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_12
-		}
-		prerequisite = {
-			focus = PRF_Nizam_continues_to_hold_power_r_11
-		}
-		x = 2
-		y = 6
-		cost = 5
-		ai_will_do = {
-			factor = 10
-		}
-		available = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus "
-			hidden_effect = {
-			}
-			add_stability = 0.05
-			add_war_support = 0.05
-		}
-	}
-	######################################################################################################################
-	#不情愿的民主
-	######################################################################################################################
+######################################################################################################################
+#不情愿的民主
+######################################################################################################################
 	focus = {
 		id = PRF_Democratic_Federation
 		icon = GFX_ourcurrentproblems
-		x = 40
-		y = 1
+		x = 45
+		y = 10
 		cost = 5
 		ai_will_do = {
 			factor = 10
@@ -3690,7 +5119,7 @@ focus_tree = {
 		available = {
 		}
 		allow_branch = {
-			#has_country_flag = PRF_Democracy_Triumphs
+			has_country_flag = PRF_Democracy_Triumphs
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
@@ -4757,8 +6186,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			remove_ideas = PRF_religious_conflict
+			add_political_power = 50
 		}
 	}
 	focus = {
@@ -4782,7 +6211,7 @@ focus_tree = {
 			}
 			swap_ideas = {
 				remove_idea = PRF_National_Agricultural_Reform
-				add_idea = PRF_National_Agricultural_Reform
+				add_idea = PRF_National_Agricultural_Reform_1
 			}
 		}
 	}
@@ -4808,8 +6237,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			add_research_slot = 1
+			add_ideas = PRF_Educational_reform
 		}
 	}
 	focus = {
@@ -4831,8 +6260,9 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			add_stability = -0.05
+			add_war_support = -0.05
+			add_ideas = PRF_labor_camps
 		}
 	}
 	focus = {
@@ -4857,9 +6287,28 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.15
-			#解锁决议重建北方邦，完成决议获得北方邦的经验
-
+			add_stability = 0.01
+			every_state = {
+		limit = {
+			OR = {
+				state = 428
+				state = 433
+				state = 437
+				state = 438
+				state = 439
+				state = 440
+				state = 441
+				state = 443
+				state = 444
+				state = 815
+				state = 890
+				state = 1057
+				state = 1092
+				state = 1094
+			}
+		}
+		add_extra_state_shared_building_slots = 1
+	}
 		}
 	}
 	focus = {
@@ -4886,6 +6335,11 @@ focus_tree = {
 			}
 			add_stability = 0.05
 			add_war_support = 0.05
+			add_pataut_to_coalition = yes
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.3
+			}
 		}
 	}
 	focus = {
@@ -5155,9 +6609,9 @@ focus_tree = {
 			}
 		}
 	}
-	######################################################################################################################
-	#进步王公大获全胜
-	######################################################################################################################
+######################################################################################################################
+#进步王公大获全胜
+######################################################################################################################
 	focus = {
 		id = PRF_The_Prince_achieves_a_complete_victory
 		icon = GFX_ourcurrentproblems
@@ -5254,7 +6708,7 @@ focus_tree = {
 		icon = GFX_ourcurrentproblems
 		relative_position_id = PRF_Bourbonism_revival
 		prerequisite = {
-			focus = PRF_Bourbonism_revival_1
+			focus = PRF_Bourbonism_revival
 		}
 		x = -2
 		y = 2
@@ -5277,10 +6731,7 @@ focus_tree = {
 		icon = GFX_ourcurrentproblems
 		relative_position_id = PRF_Bourbonism_revival
 		prerequisite = {
-			focus = PRF_Bourbonism_revival_1
-		}
-		prerequisite = {
-			focus = PRF_Bourbonism_revival_2
+			focus = PRF_Bourbonism_revival
 		}
 		x = 0
 		y = 2
@@ -5303,7 +6754,7 @@ focus_tree = {
 		icon = GFX_ourcurrentproblems
 		relative_position_id = PRF_Bourbonism_revival
 		prerequisite = {
-			focus = PRF_Bourbonism_revival_2
+			focus = PRF_Bourbonism_revival
 		}
 		x = 2
 		y = 2
@@ -5331,6 +6782,9 @@ focus_tree = {
 		prerequisite = {
 			focus = PRF_Bourbonism_revival_4
 		}
+		prerequisite = {
+			focus = PRF_Bourbonism_revival_1
+		}
 		x = -1
 		y = 3
 		cost = 5
@@ -5356,6 +6810,9 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = PRF_Bourbonism_revival_5
+		}
+		prerequisite = {
+			focus = PRF_Bourbonism_revival_2
 		}
 		x = 1
 		y = 3
@@ -11114,14 +12571,13 @@ focus_tree = {
 		available = {
 		}
 		allow_branch = {
-			has_country_flag = PRF_The_Victory_of_the_Community
+			#has_country_flag = PRF_The_Victory_of_the_Community
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus "
 			hidden_effect = {
 			}
-			add_stability = 0.05
-			add_war_support = 0.05
+			add_political_power = 100
 		}
 	}
 	focus = {
