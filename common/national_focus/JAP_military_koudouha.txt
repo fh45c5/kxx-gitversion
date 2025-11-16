@@ -1,0 +1,1021 @@
+focus_tree = {
+	id = araki-kingoro-tree
+	continuous_focus_position = { x = -40 y = 1440 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPARAKI
+		}
+	}
+	shared_focus = JAPFOR_japansplaceintheworld
+	shared_focus = JAPFOR_tokyo_conference
+	shared_focus = JAP_To_Sunder_the_Sunset
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday
+	#Araki's Success
+	focus = {
+		id = JAPARAKI_arakissuccess
+		icon = GFX_JAPARAKI_arakissuccess-248360
+		x = 13
+		y = 0
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+	}
+
+	#The Cherry Blossoms Bloom
+	focus = {
+		id = JAPARAKI_the_cherry_blossoms_bloom
+		icon = GFX_JAPARAKI_the_cherry_blossoms_bloom-248360
+		x = 4
+		y = 0
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+	}
+
+	#Hashimoto's Declaration
+	focus = {
+		id = JAPARAKI_hashimotosdeclaration
+		icon = GFX_JAPARAKI_hashimotosdeclaration-248360
+		x = 3
+		y = 1
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARAKI_the_cherry_blossoms_bloom  }
+		completion_reward = {
+		country_event = japan_new_event.99
+		}
+	}
+
+	#A Revolutionary Shogunate
+	focus = {
+		id = JAPARAKI_a_revolutionary_shogunate
+		icon = GFX_JAPARAKI_a_revolutionary_shogunate-248360
+		x = 5
+		y = 1
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		has_completed_focus = JAPARAKI_hashimotosdeclaration
+		}
+		prerequisite = { focus = JAPARAKI_the_cherry_blossoms_bloom  }
+		completion_reward = {
+		country_event = japan_new_event.41
+		}
+	}
+
+	#Declaring the 3 Leaps
+	focus = {
+		id = JAPARAKI_declaring_the_3_leaps
+		icon = GFX_JAPARAKI_declaring_the_3_leaps-248360
+		x = 4
+		y = 2
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARAKI_hashimotosdeclaration  } prerequisite = { focus = JAPARAKI_a_revolutionary_shogunate  }
+		completion_reward = {
+		custom_effect_tooltip = japan_three_leaps_tt
+			hidden_effect = {
+				unlock_decision_category_tooltip = JAP_three_leaps_decision_category
+				set_variable = {
+					var = JAP_spiritual_leap
+					value = 0.5
+				}
+				set_variable = {
+					var = JAP_military_leap
+					value = 0.5
+				}
+				set_variable = {
+					var = JAP_economic_leap
+					value = 0.5
+				}
+			}
+		}
+	}
+
+	#The Military Leap
+	focus = {
+		id = JAPARAKI_the_military_leap
+		icon = GFX_JAPARAKI_the_military_leap-248360
+		x = 2
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPARAKI_declaring_the_3_leaps  }
+		completion_reward = {
+		add_war_support = 0.05
+		add_political_power = 10
+		add_ideas = JAP_military_leap
+		add_to_variable = {
+				var = JAP_military_leap
+				value = 10
+			}
+		}
+	}
+
+	#The Spiritual Leap
+	focus = {
+		id = JAPARAKI_the_spiritual_leap
+		icon = GFX_JAPARAKI_the_spiritual_leap-248360
+		x = 4
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPARAKI_declaring_the_3_leaps  }
+		completion_reward = {
+		add_ideas = {
+		JAP_spiritual_leap
+		}
+		add_to_variable = {
+				var = JAP_spiritual_leap
+				value = 10
+			}
+		}
+	}
+
+	#Kemalist Leanings
+	focus = {
+		id = JAPARAKI_kemalist_leanings
+		icon = GFX_JAPARAKI_kemalist_leanings-248360
+		x = 5
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARAKI_the_spiritual_leap  }
+		completion_reward = {
+		add_opinion_modifier = {
+				target = TUR
+				modifier = JAP_kemalist_alliance
+			}
+		}
+	}
+
+	#Extending the Fist of Military Might
+	focus = {
+		id = JAPARAKI_extending_the_fist_of_military_might
+		icon = GFX_JAPARAKI_extending_the_fist_of_military_might-248360
+		x = 3
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPARAKI_the_military_leap  } prerequisite = { focus = JAPARAKI_the_spiritual_leap  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_military_leap
+				value = 10
+			}
+			add_ideas = {
+				JAP_fist_military
+			}	
+		}
+	}
+
+	#Nationalist Propagation
+	focus = {
+		id = JAPARAKI_nationalist_propagation
+		icon = GFX_JAPARAKI_nationalist_propagation-248360
+		x = 1
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPARAKI_the_military_leap  }
+		completion_reward = {
+		unlock_decision_tooltip = JAP_nationalist_propaganda
+		add_to_variable = {
+				var = JAP_spiritual_leap
+				value = 10
+			}
+		}
+	}
+
+	#Reinforce Security of the State
+	focus = {
+		id = JAPARAKI_reinforce_security_of_the_
+		icon = GFX_JAPARAKI_reinforce_security_of_the_state-248360
+		x = 0
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPARAKI_extending_the_fist_of_military_might  } prerequisite = { focus = JAPARAKI_nationalist_propagation  }
+		completion_reward = {
+		add_political_power = 50
+		add_ideas = {
+			JAP_are_ya_ready_war
+		}	
+		add_to_variable = {
+				var = JAP_military_leap
+				value = 10
+			}
+		}
+	}
+
+	#Arrest the Syndicalist Traitors
+	focus = {
+		id = JAPARAKI_arrest_the_syndicalist_traitors
+		icon = GFX_JAPARAKI_arrest_the_syndicalist_traitors-248360
+		x = 2
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARAKI_kemalist_leanings  } prerequisite = { focus = JAPARAKI_extending_the_fist_of_military_might  } prerequisite = { focus = JAPARAKI_nationalist_propagation  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		}
+	}
+
+	#Crush Aristocratic Corruption
+	focus = {
+		id = JAPARAKI_crush_aristocratic_corruption
+		icon = GFX_JAPARAKI_crush_aristocratic_corruption-248360
+		x = 4
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPARAKI_kemalist_leanings  } prerequisite = { focus = JAPARAKI_extending_the_fist_of_military_might  }
+		completion_reward = {
+		add_ideas = {
+		JAP_crush_aristocracy
+		}
+		}
+	}
+
+	#On The Hill of Hashimoto Thought
+	focus = {
+		id = JAPARAKI_on_the_hill_of_hashimoto_thought
+		icon = GFX_JAPARAKI_on_the_hill_of_hashimoto_thought-248360
+		x = 5
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARAKI_reinforce_security_of_the_state  } prerequisite = { focus = JAPARAKI_arrest_the_syndicalist_traitors  } prerequisite = { focus = JAPARAKI_crush_aristocratic_corruption  }
+		completion_reward = {
+			remove_ideas = JAP_military_leap
+			remove_ideas = JAP_spiritual_leap
+			remove_ideas = JAP_economy_leaps
+			add_ideas = JAP_three_leap
+		add_popularity = {
+				ideology = ROOT
+				popularity = 0.10
+			}
+		add_to_variable = {
+				var = JAP_military_leap
+				value = 10
+			}
+		}
+	}
+
+	#Militaristic Social Justice
+	focus = {
+		id = JAPARAKI_militaristic_social_justice
+		icon = GFX_JAPARAKI_militaristic_social_justice-248360
+		x = 3
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARAKI_arrest_the_syndicalist_traitors  } prerequisite = { focus = JAPARAKI_crush_aristocratic_corruption  }
+		completion_reward = {
+			add_ideas = {
+				JAP_militaristic_social_justice
+				}
+		add_stability = 0.10
+		add_to_variable = {
+				var = JAP_military_leap
+				value = 10
+			}
+		}
+	}
+
+	#Finish Off the Moderate Factions
+	focus = {
+		id = JAPARAKI_finish_off_the_moderate_factions
+		icon = GFX_JAPARAKI_finish_off_the_moderate_factions-248360
+		x = 1
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARAKI_reinforce_security_of_the_state  } prerequisite = { focus = JAPARAKI_arrest_the_syndicalist_traitors  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#The Cherry Blossoms Bring Joy to the Empire
+	focus = {
+		id = JAPARAKI_the_cherry_blossoms_bring_joy_to_the_empire
+		icon = GFX_JAPARAKI_the_cherry_blossoms_bring_joy_to_the_empire-248360
+		x = 1
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPARAKI_militaristic_social_justice  } prerequisite = { focus = JAPARAKI_finish_off_the_moderate_factions  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_spiritual_leap
+				value = 10
+			}
+		add_ideas = {
+		JAP_cherry_trees
+		}
+		}
+	}
+
+	#Upholding Kita's Pan-Asianism
+	focus = {
+		id = JAPARAKI_upholdingkitaspanasianism
+		icon = GFX_JAPARAKI_upholdingkitaspanasianism-248360
+		x = 3
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARAKI_on_the_hill_of_hashimoto_thought  } prerequisite = { focus = JAPARAKI_militaristic_social_justice  }
+		completion_reward = {
+			add_ideas = {
+				JAP_Pronouncing_the_New_Kokutairon_idea
+			}	
+		add_research_slot = 1
+		}
+	}
+
+
+	#The Nation Awaits the Era of Prosperity
+	focus = {
+		id = JAPARAKI_the_nation_awaits_the_era_of_prosperity
+		icon = GFX_JAPARAKI_the_nation_awaits_the_era_of_prosperity-248360
+		x = 3
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		has_completed_focus = JAPFOR_japansplaceintheworld
+		}
+		prerequisite = { focus = JAPARAKI_the_cherry_blossoms_bring_joy_to_the_empire  } prerequisite = { focus = JAPARAKI_upholdingkitaspanasianism  }
+		completion_reward = {
+		country_event = japan_new_event.100
+		}
+	}
+
+	###Araki Focus Tree###
+
+
+	#Connecting the Emperor, The Land And The People
+	focus = {
+		id = JAPARAKI_connectingtheemperorthelandandthepeople
+		icon = GFX_JAPARAKI_connectingtheemperorthelandandthepeople-248360
+		x = 13
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARAKI_arakissuccess  }
+		completion_reward = {
+		add_ideas = {
+		JAP_peoples_showa_connections
+		}
+		}
+	}
+
+	#Proclaim a New Shogunate
+	focus = {
+		id = JAPARAKI_proclaim_a_new_shogunate
+		icon = GFX_JAPARAKI_proclaim_a_new_shogunate-248360
+		x = 13
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARAKI_connectingtheemperorthelandandthepeople  }
+		completion_reward = {
+		country_event = japan_new_event.42
+		}
+	}
+
+	#Rally the Tonarigumi
+	focus = {
+		id = JAPARAKI_rally_the_tonarigumi
+		icon = GFX_JAPARAKI_rally_the_tonarigumi-248360
+		x = 11
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPARAKI_proclaim_a_new_shogunate  }
+		completion_reward = {
+		add_war_support = 0.15
+		}
+	}
+
+	#Revive the Kokutai
+	focus = {
+		id = JAPARAKI_revive_the_kokutai
+		icon = GFX_JAPARAKI_revive_the_kokutai-248360
+		x = 13
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPARAKI_proclaim_a_new_shogunate  }
+		completion_reward = {
+			add_ideas = JAP_rally_the_tonarigumi
+		add_stability = 0.15
+		add_political_power = 25
+		}
+	}
+
+	#Shinmin no Michi
+	focus = {
+		id = JAPARAKI_shinmin_no_michi
+		icon = GFX_JAPARAKI_shinmin_no_michi-248360
+		x = 15
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARAKI_proclaim_a_new_shogunate  }
+		completion_reward = {
+		country_event = japan_new_event.101
+		swap_ideas = {
+		remove_idea = JAP_peoples_showa_connections
+		add_idea = JAP_peoples_showa_connections_1
+		}
+		}
+	}
+
+	#Kokutai no Hongi
+	focus = {
+		id = JAPARAKI_kokutai_no_hongi
+		icon = GFX_JAPARAKI_kokutai_no_hongi-248360
+		x = 15
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARAKI_rally_the_tonarigumi  } prerequisite = { focus = JAPARAKI_revive_the_kokutai  } prerequisite = { focus = JAPARAKI_shinmin_no_michi  }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = JAP_rally_the_tonarigumi
+				add_idea = JAP_rally_the_tonarigumi_1
+				}
+		add_research_slot = 1
+		}
+	}
+
+	#Attack the Socialist Resistance
+	focus = {
+		id = JAPARAKI_attack_the_socialist_resistance
+		icon = GFX_JAPARAKI_attack_the_socialist_resistance-248360
+		x = 13
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPARAKI_rally_the_tonarigumi  } prerequisite = { focus = JAPARAKI_revive_the_kokutai  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		}
+	}
+
+	#Uphold Pan-Asianism
+	focus = {
+		id = JAPARAKI_uphold_panasianism
+		icon = GFX_JAPARAKI_uphold_panasianism-248360
+		x = 11
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_OCCUPATION_COST
+		}
+		prerequisite = { focus = JAPARAKI_rally_the_tonarigumi  } prerequisite = { focus = JAPARAKI_revive_the_kokutai  }
+		completion_reward = {
+			add_ideas = {
+				JAP_Pronouncing_the_New_Kokutairon_idea
+			}	
+		add_war_support = 0.05
+		add_political_power = -100
+		add_popularity = {
+		ideology =  ROOT
+		popularity = 0.1
+		}
+		}
+	}
+
+	#Preparing for Total War
+	focus = {
+		id = JAPARAKI_preparing_for_total_war
+		icon = GFX_JAPARAKI_preparing_for_total_war-248360
+		x = 11
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPARAKI_uphold_panasianism  }
+		completion_reward = {
+		add_ideas = {
+		JAP_are_ya_ready
+		}
+		}
+	}
+
+	#Crush Ugaki Thought
+	focus = {
+		id = JAPARAKI_crush_ugaki_thought
+		icon = GFX_JAPARAKI_crush_ugaki_thought-248360
+		x = 13
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPARAKI_attack_the_socialist_resistance  } prerequisite = { focus = JAPARAKI_uphold_panasianism  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#National Mobilization
+	focus = {
+		id = JAPARAKI_national_mobilization
+		icon = GFX_JAPARAKI_national_mobilization-248360
+		x = 15
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARAKI_kokutai_no_hongi  }
+		completion_reward = {
+		add_ideas = {
+		JAP_are_ya_ready_war
+		}
+		}
+	}
+
+	#Spiritual Training
+	focus = {
+		id = JAPARAKI_spiritual_training
+		icon = GFX_JAPARAKI_spiritual_training-248360
+		x = 17
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPARAKI_kokutai_no_hongi  }
+		completion_reward = {
+			add_ideas = {
+				JAP_spiritual_army
+				}
+		army_experience = 50
+		navy_experience = 50
+		add_war_support = 0.05
+		}
+	}
+
+	#National Spiritual Mobilisation
+	focus = {
+		id = JAPARAKI_national_spiritual_mobilisation
+		icon = GFX_JAPARAKI_national_spiritual_mobilisation-248360
+		x = 15
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPARAKI_national_mobilization  } prerequisite = { focus = JAPARAKI_spiritual_training  }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = JAP_spiritual_army
+				add_idea = JAP_spiritual_army_1
+				}
+		}
+	}
+
+	#Expand Military Influence
+	focus = {
+		id = JAPARAKI_expand_military_influence
+		icon = GFX_JAPARAKI_expand_military_influence-248360
+		x = 12
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARAKI_preparing_for_total_war  } prerequisite = { focus = JAPARAKI_crush_ugaki_thought  }
+		completion_reward = {
+			add_war_support = 0.15
+		add_popularity = {
+		ideology =  ROOT
+		popularity = 0.1
+		}
+		}
+	}
+
+	#The Bamboo Spear Slay Our Enemies
+	focus = {
+		id = JAPARAKI_the_bamboo_spear_slay_our_enemies
+		icon = GFX_JAPARAKI_the_bamboo_spear_slay_our_enemies-248360
+		x = 12
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARAKI_expand_military_influence  }
+		completion_reward = {
+		add_ideas = {
+		JAP_bamboo_army
+		}
+		}
+	}
+
+	#Serving For the Emperor
+	focus = {
+		id = JAPARAKI_serving_for_the_emperor
+		icon = GFX_JAPARAKI_serving_for_the_emperor-248360
+		x = 15
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARAKI_national_spiritual_mobilisation  }
+		completion_reward = {
+		add_political_power = 100
+			swap_ideas = {
+			remove_idea = JAP_peoples_showa_connections_1
+			add_idea = JAP_peoples_showa_connections_2
+			}
+		}
+	}
+
+	#Araki At the Helm
+	focus = {
+		id = JAPARAKI_araki_at_the_helm
+		icon = GFX_JAPARAKI_araki_at_the_helm-248360
+		x = 13
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARAKI_the_bamboo_spear_slay_our_enemies  } prerequisite = { focus = JAPARAKI_serving_for_the_emperor  }
+		completion_reward  = {
+			add_ideas = JAP_new_shogunate_2
+			country_event = KXXJAP.8
+		}
+	}
+
+	#The Economy Leaps To Greatness
+	focus = {
+		id = JAPARAKI_the_economy_leaps_to_greatness
+		icon = GFX_JAPARAKI_the_economy_leaps_to_greatness-248360
+		x = 7
+		y = 3
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARAKI_declaring_the_3_leaps  }
+		mutually_exclusive = { focus = JAPARAKI_theemperortheeconomy  }
+		completion_reward  = {
+			add_ideas = JAP_economy_leaps
+		}
+	}
+
+	#The Emperor & The Economy
+	focus = {
+		id = JAPARAKI_theemperortheeconomy
+		icon = GFX_JAPARAKI_theemperortheeconomy-248360
+		x = 9
+		y = 3
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARAKI_proclaim_a_new_shogunate  }
+		mutually_exclusive = { focus = JAPARAKI_the_economy_leaps_to_greatness  }
+	}
+
+	#A Promise to the Peasant Soldiers
+	focus = {
+		id = JAPARAKI_a_promise_to_the_peasant_soldiers
+		icon = GFX_JAPARAKI_a_promise_to_the_peasant_soldiers-248360
+		
+		x = 9
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		available = {
+		has_completed_focus = JAPECONTWO_land_reform_focus
+		}
+		prerequisite = { focus = JAPARAKI_seizing_aristocratic_lands  } prerequisite = { focus = JAPARAKI_the_autarky_economic_solution  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_land_reform_variable
+				value = 1
+			}
+			custom_effect_tooltip = JAP_land_reform_progress
+		}
+	}
+
+	#Seizing Aristocratic Lands
+	focus = {
+		id = JAPARAKI_seizing_aristocratic_lands
+		icon = GFX_JAPARAKI_seizing_aristocratic_lands-248360
+		x = 7
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPARAKI_continued_the_zaibatsu_nationalisation  }
+		completion_reward = {
+		add_to_variable = {
+				var = zaibatsu_nationalization
+				value = 3
+				tooltip = JAP_nationalization_increase_tt
+			}
+		add_stability = -0.1
+		add_political_power = 25
+		}
+		
+	}
+
+	#The Autarky Economic Solution
+	focus = {
+		id = JAPARAKI_the_autarky_economic_solution
+		icon = GFX_JAPARAKI_the_autarky_economic_solution-248360
+		x = 9
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARAKI_continued_the_zaibatsu_nationalisation  }
+		completion_reward = {
+		add_ideas = {
+		JAP_black_monday_statist_2
+		}
+		}
+	}
+
+	#Continued the Zaibatsu Nationalisation
+	focus = {
+		id = JAPARAKI_continued_the_zaibatsu_nationalisation
+		icon = GFX_JAPARAKI_continued_the_zaibatsu_nationalisation-248360
+		x = 8
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARAKI_the_economy_leaps_to_greatness  focus = JAPARAKI_theemperortheeconomy  }
+		completion_reward = {
+		set_country_flag = JAP_smash_zaibatsu
+		hidden_effect = {
+			country_event = {
+			id = japan_new_event.142
+			days = 100
+			}
+		}
+		set_variable = {
+				var = zaibatsu_nationalization
+				value = 0
+				tooltip = zaibatsu_nationalization_tt
+			}
+		set_variable = {
+				var = sumitomo_nationalization
+				value = 0
+			}
+		set_variable = {
+				var = mitsui_nationalization
+				value = 0
+			}
+		set_variable = {
+				var = mitsubishi_nationalization
+				value = 0
+			}
+		set_variable = {
+				var = yasuda_nationalization
+				value = 0
+			}
+		}
+	}
+
+	#Organize Rural Cooperatives
+	focus = {
+		id = JAPARAKI_organize_rural_cooperatives
+		icon = GFX_JAPARAKI_organize_rural_cooperatives-248360
+		x = 7
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		has_completed_focus = JAPECONTWO_land_reform_focus
+		}
+		prerequisite = { focus = JAPARAKI_seizing_aristocratic_lands  } prerequisite = { focus = JAPARAKI_the_autarky_economic_solution  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_land_reform_variable
+				value = 2
+			}
+			custom_effect_tooltip = JAP_land_reform_progress
+		}
+	}
+
+	#Economic Moblization
+	focus = {
+		id = JAPARAKI_economic_moblization
+		icon = GFX_JAPARAKI_economic_moblization-248360
+		x = 8
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARAKI_a_promise_to_the_peasant_soldiers  } prerequisite = { focus = JAPARAKI_organize_rural_cooperatives  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_black_monday_statist_2
+		add_idea = JAP_black_monday_statist_3
+		}
+		}
+	}
+
+	
+
+}

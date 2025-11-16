@@ -1,0 +1,1196 @@
+
+	#Recovering From Black Monday
+	shared_focus = {
+		id = JAPECON_recovering_from_black_monday
+		icon = GFX_JAPECON_recovering_from_black_monday-248360
+		x = 37
+		y = 12
+		cost = 0
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		available = {
+		always = no
+		}
+	}
+
+	#Focus on Japan
+	shared_focus = {
+		id = JAPECON_focus_on_japan
+		icon = GFX_JAPECON_focus_on_japan-248360
+		relative_position_id = JAPECON_recovering_from_black_monday
+		x = -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPECON_recovering_from_black_monday  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_black_monday_0
+		add_idea = JAP_black_monday_1
+		}
+		}
+	}
+
+	#Save the Colonies
+	shared_focus = {
+		id = JAPECON_save_the_colonies
+		icon = GFX_JAPECON_save_the_colonies-248360
+		relative_position_id = JAPECON_recovering_from_black_monday
+		x = 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		bypass = {
+		AND = {
+			NOT = {
+				KOR = {
+					is_puppet_of = JAP
+					}
+				TAI = {
+					is_puppet_of = JAP
+					}
+			}
+		}
+		}
+		prerequisite = { focus = JAPECON_recovering_from_black_monday  }
+		completion_reward = {
+		
+			
+		if = {
+				limit = {
+					TAI = {
+						is_puppet_of = JAP
+						}
+				}
+					TAI = {
+						add_to_variable = {
+								var = TAI.JAP_TWI_INT
+								value = 5
+								tooltip = JAP_TWI_INT_increase_tt
+							}
+					}
+		}
+		if = {
+				limit = {
+					KOR = {
+						is_puppet_of = JAP
+						}
+				}
+					KOR = {
+						add_to_variable = {
+							var = KOR.JAP_TWI_INT
+							value = 5
+							tooltip = JAP_KOR_INT_increase_tt
+						}
+					}
+		}
+		}
+		
+		}
+	
+
+	#The 3 Week Holiday For the Bank
+	shared_focus = {
+		id = JAPECON_the_3_week_holiday_for_the_bank
+		icon = GFX_JAPECON_the_3_week_holiday_for_the_bank-248360
+		relative_position_id = JAPECON_reaffirm_a_focus_on_the_zaibatsu
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPECON_reaffirm_a_focus_on_the_zaibatsu  }
+		completion_reward = {
+		add_stability = -0.05
+		add_political_power = 10
+		add_to_variable = {
+			var = zaibatsu_corporations
+			value = 0.05
+			tooltip = add_zaibatsu_corporations_tt
+		}
+		add_to_variable = {
+			var = civilian_government
+			value = -0.05
+			tooltip = remove_civilian_government_tt
+		}
+		}
+	}
+
+	#Further Korean Investments
+	shared_focus = {
+		id = JAPECON_further_korean_investments
+		icon = GFX_JAPECON_further_korean_investments-248360
+		relative_position_id = JAPECON_extend_loans_for_the_bank_of_taiwan
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		bypass = {
+			NOT = {
+				KOR = {
+					is_puppet_of = JAP
+					}
+			}
+		}
+		prerequisite = { focus = JAPECON_extend_loans_for_the_bank_of_taiwan  }
+		completion_reward = {
+		KOR = {
+			add_ideas = {
+			JAP_overlord_investment
+			}
+		}
+		add_to_variable = {
+						var = KOR.JAP_TWI_INT
+						value = 5
+						tooltip = JAP_KOR_INT_increase_tt
+					}
+		}
+	}
+
+	#Extend Loans For the Bank of Taiwan
+	shared_focus = {
+		id = JAPECON_extend_loans_for_the_bank_of_taiwan
+		icon = GFX_JAPECON_extend_loans_for_the_bank_of_taiwan-248360
+		relative_position_id = JAPECON_save_the_colonies
+		x = 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPECON_save_the_colonies  }
+		completion_reward = {
+		add_ideas = {
+		JAP_colonial_loans
+		}
+		TAI = {
+			add_ideas = {
+			JAP_recieving_colonial_loans
+			}
+		}
+		}
+	}
+
+	#Re-Affirm a Focus on the Zaibatsu
+	shared_focus = {
+		id = JAPECON_reaffirm_a_focus_on_the_zaibatsu
+		icon = GFX_JAPECON_reaffirm_a_focus_on_the_zaibatsu-248360
+		relative_position_id = JAPECON_focus_on_japan
+		x = 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		available = {
+		JAP_privatization_trigger = yes
+		}
+		prerequisite = { focus = JAPECON_focus_on_japan  }
+		mutually_exclusive = { focus = JAPECON_statist_recovery  }
+		completion_reward = {
+		add_to_variable = {
+			var = zaibatsu_corporations
+			value = 0.15
+			tooltip = add_zaibatsu_corporations_tt
+		}
+		add_to_variable = {
+			var = civilian_government
+			value = -0.15
+			tooltip = remove_civilian_government_tt
+		}
+		swap_ideas = {
+		remove_idea = JAP_black_monday_1
+		add_idea = JAP_black_monday_zaibatsu
+		}
+		}
+	}
+
+	#Statist Recovery
+	shared_focus = {
+		id = JAPECON_statist_recovery
+		icon = GFX_JAPECON_statist_recovery-248360
+		relative_position_id = JAPECON_focus_on_japan
+		x = -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		available = {
+		JAP_nationalization_trigger = yes
+		}
+		prerequisite = { focus = JAPECON_focus_on_japan  }
+		mutually_exclusive = { focus = JAPECON_reaffirm_a_focus_on_the_zaibatsu  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_black_monday_1
+		add_idea = JAP_black_monday_statist_0
+		}
+		}
+	}
+
+	#Partial Zaibatsu Nationalization
+	shared_focus = {
+		id = JAPECON_partial_zaibatsu_nationalization
+		icon = GFX_JAPECON_partial_zaibatsu_nationalization-248360
+		relative_position_id = JAPECON_statist_recovery
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPECON_statist_recovery  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_black_monday_statist_0
+		add_idea = JAP_black_monday_statist_1
+		}
+		}
+	}
+
+	#Prop-up Further Manchurian Economic Expansion
+	shared_focus = {
+		id = JAPECON_propup_further_manchurian_economic_expansion
+		icon = GFX_JAPECON_propup_further_manchurian_economic_expansion-248360
+		relative_position_id = JAPECON_further_korean_investments
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPECON_further_korean_investments  }
+		completion_reward = {
+		add_dynamic_modifier = { modifier = FNG_mantetsu_profits_modifier }
+		}
+	}
+
+	#Compensate the Landlords
+	shared_focus = {
+		id = JAPECON_compensate_the_landlords
+		icon = GFX_JAPECON_compensate_the_landlords-248360
+		relative_position_id = JAPECON_the_3_week_holiday_for_the_bank
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPECON_the_3_week_holiday_for_the_bank  }
+		completion_reward = {
+		add_stability = 0.1
+		add_to_variable = {
+			var = zaibatsu_corporations
+			value = 0.05
+			tooltip = add_zaibatsu_corporations_tt
+		}
+		add_to_variable = {
+			var = civilian_government
+			value = -0.05
+			tooltip = remove_civilian_government_tt
+		}
+		}
+	}
+
+	#Subsidise the Peasants
+	shared_focus = {
+		id = JAPECON_subsidise_the_peasants
+		icon = GFX_JAPECON_subsidise_the_peasants-248360
+		relative_position_id = JAPECON_partial_zaibatsu_nationalization
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPECON_partial_zaibatsu_nationalization  }
+		completion_reward = {
+		add_stability = 0.1
+		add_ideas = {
+		JAP_peasants_pleased
+		}
+		}
+	}
+
+	#A Start to For Full  Recovery
+	shared_focus = {
+		id = JAPECON_astarttoforfullrecovery
+		icon = GFX_JAPECON_astarttoforfullrecovery-248360
+		relative_position_id = JAPECON_compensate_the_landlords
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		available = {
+		has_country_flag = factionalism_japan_no
+		}
+		prerequisite = { focus = JAPECON_propup_further_manchurian_economic_expansion  } prerequisite = { focus = JAPECON_compensate_the_landlords  focus = JAPECON_subsidise_the_peasants  } 
+		completion_reward = {
+		hidden_effect = {
+		country_event = {
+		id = japan_new_event.73
+		days = 100
+		}
+		}
+			if = {
+				limit = {
+					has_idea = JAP_black_monday_zaibatsu
+				}
+				swap_ideas = {
+				remove_idea = JAP_black_monday_zaibatsu
+				add_idea = JAP_black_monday_zaibatsu_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = JAP_black_monday_statist_1
+				}
+				swap_ideas = {
+				remove_idea = JAP_black_monday_statist_1
+				add_idea = JAP_black_monday_statist_2
+				}
+			}
+		}
+	}
+	
+	
+	
+	shared_focus = {
+		id = JAPECONTWO_land_reform_focus
+		icon = GFX_goal_SKM_Dire_Need_Land_Reforms
+		cost = 5
+
+		relative_position_id = JAPECON_astarttoforfullrecovery
+		x = 0
+		y = 1
+		prerequisite = { focus = JAPECON_astarttoforfullrecovery  }
+		available = {
+			
+		}
+		ai_will_do = { factor = 100 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_land_reform_focus"
+			add_stability = 0.05
+			unlock_decision_category_tooltip = JAP_land_reform
+			hidden_effect = { JAP_open_JAP_land_reform = yes }
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_narrow_gauge_railways
+		icon = GFX_goal_generic_railroad
+		cost = 5
+
+		relative_position_id = JAPECONTWO_land_reform_focus
+		x = 2
+		y = 1
+
+		prerequisite = {
+			focus = JAPECONTWO_land_reform_focus
+		}
+		ai_will_do = { factor = 100 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_narrow_gauge_railways"
+			add_timed_idea = {
+				idea = JAP_change_rail
+				days = 180
+			}
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = after_idea_expires
+			effect_tooltip = { remove_ideas = JAP_narrow_rail }
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_national_rd_institutes
+		icon = GFX_goal_POL_Research_Cities
+		cost = 8
+
+		relative_position_id = JAPECONTWO_land_reform_focus
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = JAPECONTWO_land_reform_focus
+		}
+		ai_will_do = { factor = 100 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_national_rd_institutes"
+			add_research_slot_until_six = yes
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_rapid_industrialisation
+		icon = GFX_goal_CZE_imperial_arms
+		cost = 5
+
+		relative_position_id = JAPECONTWO_land_reform_focus
+		x = -2
+		y = 1
+
+		prerequisite = {
+			focus = JAPECONTWO_land_reform_focus
+		}
+		ai_will_do = { factor = 15 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_rapid_industrialisation"
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	
+	shared_focus = {
+		id = JAPECONTWO_riken_north
+		icon = GFX_goal_generic_atom_uranium
+		cost = 7
+
+		relative_position_id = JAPECONTWO_land_reform_focus
+		x = 3
+		y = 5
+
+		prerequisite = {
+			focus = JAPECONTWO_the_central_railroad_plan
+			focus = JAPECONTWO_the_shinkansen_proposal
+		}
+		available = {
+			has_tech = atomic_research
+			controls_state = 533
+		}
+		ai_will_do = { factor = 10 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_riken_north"
+			533 = { add_extra_state_shared_building_slots = 1 }
+			add_tech_bonus = {
+				name = JAP_riken_north
+				bonus = 0.5
+				uses = 2
+				category = nuclear
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_rocket_science
+		icon = GFX_goal_generic_rocket_weapon
+		cost = 5
+
+		relative_position_id = JAPECONTWO_land_reform_focus
+		x = -3
+		y = 5
+
+		prerequisite = {
+			focus = JAPECONTWO_the_central_railroad_plan
+			focus = JAPECONTWO_the_shinkansen_proposal
+		}
+		ai_will_do = { factor = 10 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_rocket_science"
+			add_tech_bonus = {
+				name = JAP_rocket_science
+				bonus = 0.5
+				uses = 2
+				category = rocketry
+				category = jet_technology
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	
+	
+	shared_focus = {
+		id = JAPECONTWO_support_the_zaibatsu
+		icon = GFX_focus_jap_zaibatsu
+		cost = 7
+
+		relative_position_id = JAPECONTWO_land_reform_focus
+		x = -4
+		y = 2
+
+		mutually_exclusive = {
+			focus = JAPECONTWO_bureaucratic_economy
+		}
+		prerequisite = {
+			focus = JAPECONTWO_land_reform_focus
+		}
+		available = {
+			has_idea = JAP_black_monday_zaibatsu_1
+		}
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 3
+				has_democratic_government = yes
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: shared_focus JAP_support_the_zaibatsu"
+			custom_effect_tooltip = JAP_upgrade_zaibatsu_tt
+			hidden_effect = {
+				if = {
+					limit = { has_idea = Mitsui_Zaibatsu }
+					swap_ideas = {
+						remove_idea = Mitsui_Zaibatsu
+						add_idea = Mitsui_Zaibatsu_based
+					}
+				}
+				if = {
+					limit = { has_idea = sumitomo }
+					swap_ideas = {
+						remove_idea = sumitomo
+						add_idea = sumitomo_based
+					}
+				}
+				if = {
+					limit = { has_idea = mitsubishi }
+					swap_ideas = {
+						remove_idea = mitsubishi
+						add_idea = mitsubishi_based
+					}
+				}
+			}
+		}
+		search_filters = { shared_focus_FILTER_INDUSTRY shared_focus_FILTER_PRODUCTION }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_finance_factory_projects
+		icon = GFX_RUS_Money_For_Industrialization
+		cost = 7
+
+		relative_position_id = JAPECONTWO_support_the_zaibatsu
+		x = -2
+		y = 1
+
+		prerequisite = {
+			focus = JAPECONTWO_support_the_zaibatsu
+		}
+		ai_will_do = { factor = 25 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: shared_focus JAP_finance_factory_projects"
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_tech_bonus = {
+				name = JAP_finance_factory_projects
+				bonus = 1
+				uses = 1
+				category = construction_tech
+			}
+		}
+		search_filters = { shared_focus_FILTER_INDUSTRY }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_foster_technological_innovation
+		icon = GFX_goal_generic_future_technology
+		cost = 7
+
+		relative_position_id = JAPECONTWO_support_the_zaibatsu
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = JAPECONTWO_support_the_zaibatsu
+		}
+		ai_will_do = { factor = 50 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: shared_focus JAP_foster_technological_innovation"
+			activate_targeted_decision = { target = THIS decision = JAP_back_isuzu }
+			activate_targeted_decision = { target = THIS decision = JAP_fund_nec_plant }
+			activate_targeted_decision = { target = THIS decision = JAP_invest_in_mitsui }
+			activate_targeted_decision = { target = THIS decision = JAP_aid_toyo_rayon }
+		}
+		search_filters = { shared_focus_FILTER_INDUSTRY shared_focus_FILTER_RESEARCH }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_raw_materials_excavation_endeavours
+		icon = GFX_goal_UMN_mine_expansion
+		cost = 7
+
+		relative_position_id = JAPECONTWO_support_the_zaibatsu
+		x = 2
+		y = 1
+
+		prerequisite = {
+			focus = JAPECONTWO_support_the_zaibatsu
+		}
+		available = {
+			controls_state = 534
+			controls_state = 528
+			controls_state = 531
+		}
+		ai_will_do = { factor = 50 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: shared_focus JAP_raw_materials_excavation_endeavours"
+			if = {
+				limit = {
+					NOT = { has_tech = synth_oil_experiments }
+				}
+				set_technology = { synth_oil_experiments = 1 }
+			}
+			else = {
+				add_tech_bonus = {
+					name = JAP_raw_materials_excavation_endeavours
+					bonus = 1
+					uses = 1
+					category = synth_resources
+				}
+			}
+			add_one_random_synthetic_refinery = yes
+			add_one_random_synthetic_refinery = yes
+			add_one_random_synthetic_refinery = yes
+			add_one_random_synthetic_refinery = yes
+			custom_effect_tooltip = tooltip_white_line
+			add_resource = {
+				type = steel
+				amount = 8
+				state = 534
+			}
+			add_resource = {
+				type = tungsten
+				amount = 8
+				state = 534
+			}
+			add_resource = {
+				type = chromium
+				amount = 8
+				state = 528
+			}
+			add_resource = {
+				type = aluminium
+				amount = 8
+				state = 531
+			}
+		}
+		search_filters = { shared_focus_FILTER_INDUSTRY shared_focus_FILTER_RESEARCH }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_the_central_railroad_plan
+		icon = GFX_BAY_RAILWAYS
+		cost = 7
+
+		relative_position_id = JAPECONTWO_foster_technological_innovation
+		x = 0
+		y = 1
+
+		available = {
+			controls_state = 282
+			controls_state = 528
+			controls_state = 529
+			controls_state = 530
+			controls_state = 531
+			controls_state = 532
+			controls_state = 534
+			controls_state = 535
+		}
+		prerequisite = {
+			focus = JAPECONTWO_raw_materials_excavation_endeavours
+		}
+		prerequisite = {
+			focus = JAPECONTWO_finance_factory_projects
+		}
+		ai_will_do = { factor = 50 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: shared_focus JAP_the_central_railroad_plan"
+			build_railway = {
+				level = 2
+				start_province = 1182
+				target_province = 9950
+			}
+			every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					OR = {
+						state = 282
+						state = 528
+						state = 529
+						state = 530
+						state = 531
+						state = 532
+						state = 534
+						state = 535
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { shared_focus_FILTER_INDUSTRY }
+	}
+	
+	shared_focus = {
+		id = JAPECONTWO_bureaucratic_economy
+		icon = GFX_goal_CSA_technocratic_subjugation
+		cost = 7
+
+		relative_position_id = JAPECONTWO_land_reform_focus
+		x = 4
+		y = 2
+
+		mutually_exclusive = {
+			focus = JAPECONTWO_support_the_zaibatsu
+		}
+		prerequisite = {
+			focus = JAPECONTWO_land_reform_focus
+		}
+		available = {
+		OR = {
+		has_idea = JAP_black_monday_statist_3
+		has_idea = JAP_black_monday_statist_2
+		}
+		}
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 3
+				has_dictatorship_government = yes
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_bureaucratic_economy"
+			add_ideas = JAP_bureaucratic_economy_idea
+		}
+		search_filters = { FOCUS_FILTER_PRODUCTION }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_prioritise_military_oil
+		icon = GFX_focus_generic_stockpile_fuel
+		cost = 7
+
+		relative_position_id = JAPECONTWO_bureaucratic_economy
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = JAPECONTWO_bureaucratic_economy
+		}
+		available = {
+			controls_state = 537
+		}
+		ai_will_do = { factor = 25 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_prioritise_military_oil"
+			custom_effect_tooltip = JAP_unlock_nippon_oil
+			537 = {
+				add_resource = {
+					type = oil
+					amount = 12
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			activate_targeted_decision = { target = 532 decision = JAP_support_nippon_soda }
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_regulating_the_automotive_industry
+		icon = GFX_goal_generic_automobile
+		cost = 7
+
+		relative_position_id = JAPECONTWO_bureaucratic_economy
+		x = -2
+		y = 1
+
+		prerequisite = {
+			focus = JAPECONTWO_bureaucratic_economy
+		}
+		ai_will_do = { factor = 25 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_regulating_the_automotive_industry"
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			if = {
+				limit = { var:797.owner = { has_socialist_government = no } }
+				var:797.owner = { country_event = japfor.227 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_reorganise_resource_extraction
+		icon = GFX_all_resource
+		cost = 7
+
+		relative_position_id = JAPECONTWO_bureaucratic_economy
+		x = 2
+		y = 1
+
+		prerequisite = {
+			focus = JAPECONTWO_bureaucratic_economy
+		}
+		ai_will_do = { factor = 25 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_reorganise_resource_extraction"
+			if = {
+				limit = { has_idea = JAP_bureaucratic_economy_idea }
+				swap_ideas = {
+					remove_idea = JAP_bureaucratic_economy_idea
+					add_idea = JAP_bureaucratic_economy_idea_2
+				}
+			}
+			else_if = {
+				limit = { has_idea = JAP_bureaucratic_economy_idea_3 }
+				swap_ideas = {
+					remove_idea = JAP_bureaucratic_economy_idea_3
+					add_idea = JAP_bureaucratic_economy_idea_4
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = JAP_bureaucratic_economy_idea_5
+					add_idea = JAP_bureaucratic_economy_idea_6
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_the_shinkansen_proposal
+		icon = GFX_goal_FRA_Revolutionary_Railways
+		cost = 7
+
+		relative_position_id = JAPECONTWO_bureaucratic_economy
+		x = 0
+		y = 2
+
+		prerequisite = {
+			focus = JAPECONTWO_regulating_the_automotive_industry
+		}
+		prerequisite = {
+			focus = JAPECONTWO_reorganise_resource_extraction
+		}
+		available = {
+			controls_state = 282
+			controls_state = 529
+			controls_state = 531
+			controls_state = 532
+			controls_state = 528
+			controls_state = 531
+			controls_state = 530
+		}
+		bypass = {
+			282 = { infrastructure > 4 }
+			529 = { infrastructure > 4 }
+			531 = { infrastructure > 4 }
+			532 = { infrastructure > 4 }
+			528 = { infrastructure > 4 }
+			531 = { infrastructure > 4 }
+			530 = { infrastructure > 4 }
+		}
+		ai_will_do = { factor = 50 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_the_shinkansen_proposal"
+			build_railway = {
+				level = 5
+				path = { 1182 9998 7157 7087 12097 10125 7187 4172 4142 11960 7072 13865 12031 7212 11946 1092 }
+			}
+			282 = { set_building_level = { type = infrastructure level = 5 } }
+			529 = { set_building_level = { type = infrastructure level = 5 } }
+			531 = { set_building_level = { type = infrastructure level = 5 } }
+			532 = { set_building_level = { type = infrastructure level = 5 } }
+			528 = { set_building_level = { type = infrastructure level = 5 } }
+			531 = { set_building_level = { type = infrastructure level = 5 } }
+			530 = { set_building_level = { type = infrastructure level = 5 } }
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	
+	
+	shared_focus = {
+		id = JAPECONTWO_colonial_incentives
+		icon = GFX_NEE_invest_in_wards
+		cost = 7
+
+		relative_position_id = JAPECONTWO_land_reform_focus
+		x = 0
+		y = 5
+
+		prerequisite = {
+			focus = JAPECONTWO_the_central_railroad_plan
+			focus = JAPECONTWO_the_shinkansen_proposal
+		}
+		available = {
+			OR = {
+				JAP_owns_korea = yes
+				controls_state = 524
+				controls_state = 629
+			}
+		}
+		ai_will_do = { factor = 100 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_colonial_incentives"
+			if = {
+				limit = { JAP_owns_korea = yes }
+				525 = { #Gyeonggi
+					increase_state_category_by_one_level = yes
+				}
+				527 = { #Yangseo
+					increase_state_category_by_one_level = yes
+					add_building_construction = {
+						type = naval_base
+						province = 4052
+						level = 2
+						instant_build = yes
+					}
+				}
+				1099 = { #Samnam
+					increase_state_category_by_one_level = yes
+					add_building_construction = {
+						type = naval_base
+						province = 4056
+						level = 2
+						instant_build = yes
+					}
+				}
+				1100 = { #Gwanbuk
+					increase_state_category_by_one_level = yes
+				}
+			}
+			if = {
+				limit = { 524 = { is_owned_and_controlled_by = ROOT } }
+				524 = { #Taiwan
+					increase_state_category_by_one_level = yes
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = { 745 = { is_owned_and_controlled_by = ROOT } }
+				745 = { #Kwantung
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = air_base
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = { 629 = { is_owned_and_controlled_by = ROOT } }
+				629 = { #Hawaii
+					increase_state_category_by_one_level = yes
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+					add_compliance = 20
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	
+	shared_focus = {
+		id = JAPECONTWO_INT_KOREA
+		icon = GFX_goal_KIV_modern
+		prerequisite = {
+			focus = JAPECONTWO_colonial_incentives
+		}
+		mutually_exclusive = {
+			focus = JAPECONTWO_COL_KOREA
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+			KOR = {
+				is_subject_of = JAP
+				owns_state = 525
+				owns_state = 527
+			}
+		}
+		x = -4
+		y = 1
+		relative_position_id = JAPECONTWO_colonial_incentives
+		cost = 5
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_INT_KOREA"
+			custom_effect_tooltip = integrate_korea
+			hidden_effect = {
+				country_event = {
+					id = japdom.40
+					days = 100
+					random_days = 100
+				}
+			}
+		}
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_COL_KOREA
+		icon = GFX_goal_Korea_Colony
+		prerequisite = {
+			focus = JAPECONTWO_colonial_incentives
+		}
+		mutually_exclusive = {
+			focus = JAPECONTWO_INT_KOREA
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			NOT = {
+				has_idea = JAP_COL_PREP
+			}
+			owns_state = 525
+			owns_state = 527
+		}
+		x = -2
+		y = 1
+		relative_position_id = JAPECONTWO_colonial_incentives
+		cost = 5
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_COL_KOREA"
+			custom_effect_tooltip = colonise_korea
+			hidden_effect = {
+				country_event = {
+					id = japdom.39
+					days = 200
+					random_days = 100
+				}
+			}
+		}
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_COL_TAIWAN
+		icon = GFX_goal_Taiwan_Colony
+		prerequisite = {
+			focus = JAPECONTWO_colonial_incentives
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			NOT = {
+				has_idea = JAP_COL_PREP
+			}
+			owns_state = 524
+		}
+		x = 0
+		y = 1
+		relative_position_id = JAPECONTWO_colonial_incentives
+		cost = 5
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_COL_TAIWAN"
+			custom_effect_tooltip = colonise_taiwan
+			hidden_effect = {
+				country_event = {
+					id = japdom.42
+					days = 100
+					random_days = 100
+				}
+			}
+		}
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_COL_PORT
+		icon = GFX_goal_Port_Arthur_Colony
+		prerequisite = {
+			focus = JAPECONTWO_colonial_incentives
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			NOT = {
+				has_idea = JAP_COL_PREP
+			}
+			owns_state = 745
+		}
+		x = 2
+		y = 1
+		relative_position_id = JAPECONTWO_colonial_incentives
+		cost = 5
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_COL_PORT"
+			custom_effect_tooltip = colonise_port
+			hidden_effect = {
+				country_event = {
+					id = japdom.73
+					days = 50
+					random_days = 100
+				}
+			}
+		}
+	}
+
+	shared_focus = {
+		id = JAPECONTWO_colonise_hawaii
+		icon = GFX_JAP_Hawaii_Colony
+		prerequisite = {
+			focus = JAPECONTWO_colonial_incentives
+		}
+		available = {
+			NOT = { has_idea = JAP_COL_PREP }
+			owns_state = 629
+		}
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 3
+				OR = {
+					has_completed_focus = JAPECONTWO_COL_PORT
+					has_completed_focus = JAPECONTWO_COL_TAIWAN
+				}
+			}
+		}
+		x = 4
+		y = 1
+		relative_position_id = JAPECONTWO_colonial_incentives
+		cost = 5
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_colonise_hawaii"
+			custom_effect_tooltip = colonise_hawaii_tt
+			hidden_effect = {
+				country_event = {
+					id = japdom.760
+					days = 200
+					random_days = 100
+				}
+			}
+		}
+	}
+
+

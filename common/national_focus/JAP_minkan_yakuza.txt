@@ -1,0 +1,377 @@
+focus_tree = {
+	id = yakuza-japan
+	continuous_focus_position = { x = -40 y = 1310 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAP_YAKUZA
+		}
+	}
+	
+	shared_focus = JAPFOR_japansplaceintheworld
+	shared_focus = JAPFOR_tokyo_conference
+	shared_focus = JAP_To_Sunder_the_Sunset
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday
+	
+	#Strengthen the Drug Trade
+	focus = {
+		id = JAP_YAKUZA_strengthen_the_drug_trade
+		icon = GFX_JAP_YAKUZA_strengthen_the_drug_trade-248360
+		x = 2
+		y = 2
+		cost = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAP_YAKUZA_monopolize_on_crime  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus LEC_qing_2"
+			add_ideas = LEC_Opium_Idea
+			add_political_power = 50
+			set_country_flag = LEC_Opium_Flag
+			set_variable = {
+				var = JAP_Opium_Profit
+				value = 0
+			}
+			set_variable = {
+				var = JAP_Opium_Stock
+				value = 0
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+					}
+					state_population > 250000
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#The Yakuza In Power
+	focus = {
+		id = JAP_YAKUZA_the_yakuza_in_power
+		icon = GFX_JAP_YAKUZA_the_yakuza_in_power-248360
+		x = 5
+		y = 0
+		cost = 0
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+	}
+
+	#Dominate the Other Factions
+	focus = {
+		id = JAP_YAKUZA_dominate_the_other_factions
+		icon = GFX_JAP_YAKUZA_dominate_the_other_factions-248360
+		x = -2
+		y = 1
+		cost = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAP_YAKUZA_the_yakuza_in_power  }
+		completion_reward = {
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.4
+			}
+			remove_ideas = {
+				JAP_no_army_focus
+			}
+		}
+	}
+
+	#Monopolize On Crime
+	focus = {
+		id = JAP_YAKUZA_monopolize_on_crime
+		icon = GFX_JAP_YAKUZA_monopolize_on_crime-248360
+		x = 2
+		y = 1
+		cost = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAP_YAKUZA_the_yakuza_in_power  }
+		completion_reward = {
+			add_ideas = {
+				JAP_power_secured_yakuza
+			}
+		}
+	}
+
+	#Set New Inhiations
+	focus = {
+		id = JAP_YAKUZA_set_new_inhiations
+		icon = GFX_JAP_YAKUZA_set_new_inhiations-248360
+		x = 0
+		y = 2
+		cost = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAP_YAKUZA_dominate_the_other_factions  } prerequisite = { focus = JAP_YAKUZA_monopolize_on_crime  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_members
+		}
+		}
+	}
+
+	#Ultra-Nationalist Alliances
+	focus = {
+		id = JAP_YAKUZA_ultranationalist_alliances
+		icon = GFX_JAP_YAKUZA_ultranationalist_alliances-248360
+		x = -2
+		y = 2
+		cost = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAP_YAKUZA_dominate_the_other_factions  }
+		completion_reward = {
+		add_popularity = {
+		ideology = national_populist
+		popularity = 0.25
+		}
+		set_temp_variable = { coalition_partner_var = token:national_populist }
+		add_to_coalition = yes
+		}
+	}
+
+	#International Smuggling Networks
+	focus = {
+		id = JAP_YAKUZA_international_smuggling_networks
+		icon = GFX_JAP_YAKUZA_international_smuggling_networks-248360
+		x = -1
+		y = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAP_YAKUZA_set_new_inhiations  } prerequisite = { focus = JAP_YAKUZA_ultranationalist_alliances  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus LEC_tu2"
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = arms_factory
+					level = 4
+					instant_build = yes
+				}
+			}
+			set_country_flag = LEC_Arms_flag_2
+			set_variable = {
+				var = LEC_Guns
+				value = 0
+			}
+			set_variable = {
+				var = LEC_Guns_Profits
+				value = 0
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 5500
+				producer = JAP
+			}
+		}
+	}
+
+	#Yoshio's Presence
+	focus = {
+		id = JAP_YAKUZA_yoshiospresence
+		icon = GFX_JAP_YAKUZA_yoshiospresence-248360
+		x = 1
+		y = 5
+		cost = 0
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAP_YAKUZA_thejackalstwoheads  }
+		mutually_exclusive = { focus = JAP_YAKUZA_maintaining_tradition  }
+		available = {
+		always = no
+		}
+	}
+
+	#Maintaining Tradition
+	focus = {
+		id = JAP_YAKUZA_maintaining_tradition
+		icon = GFX_JAP_YAKUZA_maintaining_tradition-248360
+		x = -1
+		y = 5
+		cost = 0
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAP_YAKUZA_thejackalstwoheads  }
+		mutually_exclusive = { focus = JAP_YAKUZA_yoshiospresence  }
+		available = {
+		always = no
+		}
+	}
+
+	#The Jackal's Two Heads
+	focus = {
+		id = JAP_YAKUZA_thejackalstwoheads
+		icon = GFX_JAP_YAKUZA_thejackalstwoheads-248360
+		x = 0
+		y = 4
+		cost = 2
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAP_YAKUZA_international_smuggling_networks  } prerequisite = { focus = JAP_YAKUZA_crush_the_syndicalist_snakes  }
+		completion_reward = {
+		country_event = japan_new_event.13
+		}
+	}
+
+	#Work With the Black Dragon
+	focus = {
+		id = JAP_YAKUZA_work_with_the_black_dragon
+		icon = GFX_JAP_YAKUZA_work_with_the_black_dragon-248360
+		x = 0
+		y = 6
+		cost = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAP_YAKUZA_maintaining_tradition  focus = JAP_YAKUZA_yoshiospresence  }
+		completion_reward = {
+		add_popularity = {
+		ideology = national_populist 
+		popularity = 0.15
+		}
+		}
+	}
+
+	#Crush the Syndicalist Snakes
+	focus = {
+		id = JAP_YAKUZA_crush_the_syndicalist_snakes
+		icon = GFX_JAP_YAKUZA_crush_the_syndicalist_snakes-248360
+		x = 1
+		y = 3
+		cost = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAP_YAKUZA_strengthen_the_drug_trade  } prerequisite = { focus = JAP_YAKUZA_set_new_inhiations  }
+		completion_reward = {
+			remove_ideas = {
+				JAP_red_army_resistance_1
+			}
+		}
+	}
+
+	#Japan's Fixer
+	focus = {
+		id = JAP_YAKUZA_japansfixer
+		icon = GFX_JAP_YAKUZA_japansfixer-248360
+		x = 2
+		y = 6
+		cost = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAP_YAKUZA_yoshiospresence  }
+		completion_reward = {
+			add_war_support = 0.1
+			add_political_power = 100
+			add_ideas = {
+				JAP_fixers
+			}
+			create_intelligence_agency = {
+				name = "儿玉机关"
+			}
+		}
+	}
+
+	#Memories From the Rice Riots
+	focus = {
+		id = JAP_YAKUZA_memories_from_the_rice_riots
+		icon = GFX_JAP_YAKUZA_memories_from_the_rice_riots-248360
+		x = -2
+		y = 6
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAP_YAKUZA_maintaining_tradition  }
+		completion_reward = {
+			add_stability = 0.1
+			add_ideas = {
+				JAP_memories_from_the_rice_riots
+			}
+		}
+	}
+
+	#No Law For Our Order
+	focus = {
+		id = JAP_YAKUZA_no_law_for_our_order
+		icon = GFX_JAP_YAKUZA_no_law_for_our_order-248360
+		x = -1
+		y = 7
+		cost = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAP_YAKUZA_work_with_the_black_dragon  } prerequisite = { focus = JAP_YAKUZA_memories_from_the_rice_riots  }
+		completion_reward = {
+			add_ideas = {
+				JAP_new_era_yak
+			}
+		}
+	}
+
+	#Embrace Japanese Dominance
+	focus = {
+		id = JAP_YAKUZA_embrace_japanese_dominance
+		icon = GFX_JAP_YAKUZA_embrace_japanese_dominance-248360
+		x = 1
+		y = 7
+		cost = 3
+		relative_position_id = JAP_YAKUZA_the_yakuza_in_power
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAP_YAKUZA_japansfixer  } prerequisite = { focus = JAP_YAKUZA_work_with_the_black_dragon  }
+		completion_reward = {
+		country_event = japan_new_event.14
+		add_ideas = {
+		JAP_new_dom_yak
+		}
+		}
+	}
+
+}
