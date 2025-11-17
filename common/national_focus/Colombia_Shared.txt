@@ -67,6 +67,7 @@ shared_focus = {
 			ideology = totalist
 			popularity = 0.05
 		}
+		add_ideas = COL_totalist_pol
 	}
 	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
 }
@@ -94,6 +95,7 @@ shared_focus = {
 			remove_idea = COL_factionalized_army
 			add_idea = COL_Totalist_Army1
 		}
+		add_ideas = COL_Secret_Police
 	}
 	search_filters = { FOCUS_FILTER_ARMY_BONUS }
 }
@@ -121,6 +123,7 @@ shared_focus = {
 			ideology = radical_socialist
 			popularity = 0.05
 		}
+		add_ideas = COL_UNIR_pol
 	}
 	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
 }
@@ -148,6 +151,7 @@ shared_focus = {
 			ideology = syndicalist
 			popularity = 0.05
 		}
+		add_ideas = COL_synd_pol
 	}
 	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
 }
@@ -167,6 +171,10 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Seize_The_Means"
 		add_political_power = -75
 		add_ideas = COL_Seize_The_Means_idea1
+		swap_ideas = {
+			remove_idea = COL_totalist_pol
+			add_idea = COL_totalist_pol2
+		}
 	}
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 }
@@ -184,6 +192,10 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_A_Socialist_Bureaucracy"
 		add_ideas = COL_socialist_bureaucracy
+		swap_ideas = {
+			remove_idea = COL_totalist_pol2
+			add_idea = COL_totalist_pol3
+		}
 	}
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 }
@@ -204,6 +216,10 @@ shared_focus = {
 		swap_ideas = {
 			remove_idea = COL_Seize_The_Means_idea1
 			add_idea = COL_Seize_The_Means_idea2
+		}
+		swap_ideas = {
+			remove_idea = COL_totalist_pol3
+			add_idea = COL_totalist_pol4
 		}
 	}
 	search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -228,6 +244,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Leader_Knows_Best"
 		add_stability = 0.05
+		add_ideas = COL_Leader_Knows_Best
 	}
 }
 shared_focus = {
@@ -248,6 +265,11 @@ shared_focus = {
 			id = col.901
 			days = 1
 		}
+		swap_ideas = {
+			remove_idea = COL_Secret_Police
+			add_idea = COL_Peoples_Commissars
+		}
+
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -264,6 +286,7 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Anticapitalist_Action"
+		add_ideas = COL_Anticapitalist_Action
 		custom_effect_tooltip = COL_Anticapitalist_Action_tt 
 		hidden_effect = {
 			add_popularity = {
@@ -299,8 +322,8 @@ shared_focus = {
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
 shared_focus = {
-	id = COL_uuuuuuuu
-	icon = GFX_goal_generic_propaganda
+	id = COL_uuuuuuuu #break the chains
+	icon = GFX_goal_BAN_free_unions
 	prerequisite = { 
 		focus = COL_Peoples_Commissars
 		focus = COL_Reshape_The_Army 
@@ -311,17 +334,21 @@ shared_focus = {
 	y = 1
 	relative_position_id = COL_Peoples_Commissars
 	available = {
-		has_government = totalist
+		OR = {
+			has_government = totalist
+			has_government = radical_socialist
+		}
 	}
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Anticapitalist_Action"
+		add_ideas = COL_break_the_chain
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
 shared_focus = {
-	id = COL_kkkkkkk
-	icon = GFX_goal_generic_propaganda
+	id = COL_kkkkkkk #andes syndicalism
+	icon = GFX_goal_syndicalist_industry
 	prerequisite = { 
 		focus = COL_Peoples_Commissars
 		focus = COL_Reshape_The_Army 
@@ -332,11 +359,15 @@ shared_focus = {
 	y = 1
 	relative_position_id = COL_Peoples_Commissars
 	available = {
-		has_government = totalist
+		OR = {
+			has_government = totalist
+			has_government = radical_socialist
+		}
 	}
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Anticapitalist_Action"
+		add_ideas = COL_andes_syndicalism
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -359,6 +390,10 @@ shared_focus = {
 		swap_ideas = {
 			remove_idea = COL_Totalist_Army1
 			add_idea = COL_Totalist_Army2
+		}
+		swap_ideas = {
+			remove_idea = COL_totalist_pol4
+			add_idea = COL_totalist_pol5
 		}
 	}
 	search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_MANPOWER }
@@ -414,6 +449,7 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_A_One_Party_State"
+
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
 }
@@ -431,6 +467,10 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Heavily_Regulated_Enterp"
 		add_ideas = COL_regulate_the_means
+		swap_ideas = {
+			remove_idea = COL_UNIR_pol
+			add_idea = COL_UNIR_pol2
+		}
 	}
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 }
@@ -452,6 +492,10 @@ shared_focus = {
 			remove_idea = COL_factionalized_army
 			add_idea = COL_radsoc_army
 		}
+		swap_ideas = {
+			remove_idea = COL_UNIR_pol2
+			add_idea = COL_UNIR_pol3
+		}
 	}
 	search_filters = { FOCUS_FILTER_ARMY_BONUS }
 }
@@ -471,6 +515,7 @@ shared_focus = {
 		country_event = {
 			id = col.902
 		}
+		add_ideas = COL_Public_Housing
 	}
 	search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_POLITICAL }
 }
@@ -493,6 +538,10 @@ shared_focus = {
 		swap_ideas = {
 			remove_idea = COL_regulate_the_means_2
 			add_idea = COL_regulate_the_means_4
+		}
+		swap_ideas = {
+			remove_idea = COL_UNIR_pol3
+			add_idea = COL_UNIR_pol4
 		}
 		every_state = {
 			limit = {
@@ -535,8 +584,8 @@ shared_focus = {
 			}
 			add_state_modifier = {
 				modifier = {
-					local_manpower = -0.2
-					local_non_core_manpower = -0.2
+					local_manpower = 0.2
+					local_non_core_manpower = 0.2
 				}
 			}
 		}
@@ -563,6 +612,60 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Estatuto_Del_Trabajo"
 		add_political_power = 75
+		add_ideas = COL_Estatuto_Del_Trabajo
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_compromise_with_union
+	icon = GFX_goal_CSA_american_guildism
+	prerequisite = {
+		focus = COL_Offering_Welfare_And_Hospitals
+		focus = COL_Reshape_The_Army 
+		focus = COL_Public_Housing
+		focus = COL_Minority_Quotas
+	}
+	x = 3
+	y = 3
+	relative_position_id = COL_UNIR_revolution
+	available = {
+		OR = {
+			has_government = radical_socialist
+			has_government = syndicalist
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Estatuto_Del_Trabajo"
+		add_one_random_civilian_factory = yes
+		add_one_random_civilian_factory = yes
+		add_ideas = COL_compromise_with_union
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_edu_program
+	icon = GFX_NEE_education_spending
+	prerequisite = {
+		focus = COL_Offering_Welfare_And_Hospitals
+		focus = COL_Reshape_The_Army 
+		focus = COL_Public_Housing
+		focus = COL_Minority_Quotas
+	}
+	x = 5
+	y = 3
+	relative_position_id = COL_UNIR_revolution
+	available = {
+		OR = {
+			has_government = radical_socialist
+			has_government = syndicalist
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Estatuto_Del_Trabajo"
+		add_stability = 0.1
+		add_ideas = COL_edu_program
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -584,6 +687,7 @@ shared_focus = {
 			remove_idea = COL_regulate_the_means
 			add_idea = COL_regulate_the_means_2
 		}
+		add_ideas = COL_Minority_Quotas
 	}
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 }
@@ -603,14 +707,15 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Minority_Quotas"
+		
 		swap_ideas = {
-			remove_idea = COL_radsoc_army
-			add_idea = COL_radsoc_army_2
+			remove_idea = COL_regulate_the_means_2
+			add_idea = COL_regulate_the_means_3
 		}
-		#swap_ideas = {
-			#remove_idea = COL_regulate_the_means_2
-			#add_idea = COL_regulate_the_means_3
-		#}
+		swap_ideas = {
+			remove_idea = COL_UNIR_pol3
+			add_idea = COL_UNIR_pol4
+		}
 		every_state = {
 			limit = {
 				is_owned_and_controlled_by = ROOT
@@ -652,8 +757,8 @@ shared_focus = {
 			}
 			add_state_modifier = {
 				modifier = {
-					local_manpower = 0.1
-					local_non_core_manpower = 0.1
+					local_manpower = 0.2
+					local_non_core_manpower = 0.2
 				}
 			}
 		}
@@ -669,6 +774,8 @@ shared_focus = {
 	}
 	prerequisite = { focus = COL_uuuuuuuu }
 	prerequisite = { focus = COL_kkkkkkk }
+	prerequisite = { focus = COL_compromise_with_union }
+	prerequisite = { focus = COL_edu_program }
 	x = 1
 	y = 1
 	relative_position_id = COL_Rural_Development_Focus
@@ -681,6 +788,10 @@ shared_focus = {
 		swap_ideas = {
 			remove_idea = COL_radsoc_army
 			add_idea = COL_radsoc_army_2
+		}
+		swap_ideas = {
+			remove_idea = COL_UNIR_pol4
+			add_idea = COL_UNIR_pol5
 		}
 	}
 	search_filters = { FOCUS_FILTER_ARMY_BONUS }
@@ -702,6 +813,7 @@ shared_focus = {
 			id = col.903
 			days = 1
 		}
+		add_ideas = COL_Federalization
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -715,11 +827,16 @@ shared_focus = {
 	relative_position_id = COL_Federalization
 	available = {
 		has_government = syndicalist
+		has_completed_focus = COL_Agressive_Industrialization
 	}
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Offering_Welfare_And_Hospitals"
 		add_ideas = COL_welfare_and_hospitals
+		swap_ideas = {
+			remove_idea = COL_synd_pol2
+			add_idea = COL_synd_pol3
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -744,6 +861,14 @@ shared_focus = {
 				instant_build = yes
 			}
 		}
+		swap_ideas = {
+			remove_idea = COL_factionalized_army
+			add_idea = COL_synd_army
+		}
+		swap_ideas = {
+			remove_idea = COL_synd_pol3
+			add_idea = COL_synd_pol4
+		}
 	}
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 }
@@ -761,6 +886,10 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Agressive_Industrialization"
 		add_stability = -0.05
+		swap_ideas = {
+			remove_idea = COL_synd_pol
+			add_idea = COL_synd_pol2
+		}
 		random_owned_state = {
 			limit = {
 				free_building_slots = {
@@ -818,6 +947,7 @@ shared_focus = {
 			amount = 5
 			state = 493
 		}
+		add_ideas = COL_syndie_resources
 	}
 	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
 }
@@ -839,6 +969,7 @@ shared_focus = {
 			remove_idea = COL_syndie_industrialization
 			add_idea = COL_syndie_industrialization_2
 		}
+		add_ideas = COL_Encourage_Women_In_Factories
 	}
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 }
@@ -856,6 +987,14 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Defensive_Measures"
+		swap_ideas = {
+			remove_idea = COL_synd_army
+			add_idea = COL_synd_army2
+		}
+		swap_ideas = {
+			remove_idea = COL_synd_pol4
+			add_idea = COL_synd_pol5
+		}
 	}
 	search_filters = { FOCUS_FILTER_ARMY_BONUS }
 }
@@ -896,19 +1035,9 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Ready_For_The_Future"
-		custom_effect_tooltip = COL_Reactionary_Resistance_tt
-		hidden_effect = {
-			if = {
-				limit = {
-					has_idea = COL_Reactionary_Resistance_1
-				}
-				remove_ideas = COL_Reactionary_Resistance_1
-			}
-			else = {
-				remove_ideas = COL_Reactionary_Resistance_2
-			}
-		}
-		add_ideas = COL_Bogotazo_Over
+		add_ideas = COL_pan_africa
+		set_cosmetic_tag = COL_afriamer
+		country_event = colsoc.15
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
 }
@@ -954,7 +1083,142 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_State_Visit_To_UK"
-		country_event = col.907
+		custom_effect_tooltip = COL_black_leaders_join
+		add_manpower = 10000
+		hidden_effect = {
+			create_corps_commander = {
+				name = "Rene-Paul Sousatte"
+				portrait_path = "gfx/leaders/GAB/Portrait_GAB_Rene_Paul_Sousatte.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Kwame Nkrumah"
+				portrait_path = "gfx/leaders/GHA/Portrait_GHA_Kwame_Nkrumah.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Alphonse Massamba-Débat"
+				portrait_path = "gfx/leaders/TKE/Portrait_TKE_Alphonse_Massamba_Debat.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Simon-Pierre Kikhounga-Ngot"
+				portrait_path = "gfx/leaders/TKE/Portrait_TKE_Alphonse_Massamba_Debat.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "André Matsoua"
+				portrait_path = "gfx/leaders/TKE/Portrait_TKE_Andre_Grenard_Matswa_Civilian.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Joseph Kasongo"
+				portrait_path = "gfx/leaders/KIV/Portrait_KIV_Joseph_Kasongo.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Cyrille Adoula"
+				portrait_path = "gfx/leaders/KIV/Portrait_KIV_Cyrille_Adoula.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Joseph Iléo"
+				portrait_path = "gfx/leaders/KIV/Portrait_KIV_Joseph_Ileo.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "George Padmore"
+				portrait_path = "gfx/leaders/LIB/Portrait_LIB_George_Padmore.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Dedan Kimathi"
+				portrait_path = "gfx/leaders/KIK/KIK_Dedan_Kimathi.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Fred Kubai"
+				portrait_path = "gfx/leaders/KIK/KIK_Fred_Kubai.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
 }
@@ -975,6 +1239,25 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_safe_harbor_for_ex_slaves"
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = south_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				is_on_continent = south_america
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
 }
@@ -995,6 +1278,10 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Syndie_Air_Buff"
+		swap_ideas = {
+			remove_idea = COL_pan_africa
+			add_idea = COL_pan_africa2
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
 }
@@ -1015,6 +1302,74 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_liberate_the_american_afros"
+		custom_effect_tooltip = COL_black_belt
+		every_country = {
+			limit = {
+				is_american_tag = yes
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = CSA
+					is_core_of = COR
+					is_core_of = USA
+					is_core_of = WCC
+					is_core_of = NEE
+					is_core_of = CAL
+					is_core_of = TEX
+					is_core_of = BBR
+					is_core_of = NYC
+					is_core_of = ARZ
+					is_core_of = TXS
+					is_core_of = ALA
+				}
+			}
+			COL = {
+				add_state_core = PREV
+			}	
+		}
+		if = {
+			limit = {
+				country_exists = BBR
+				BBR = {
+					is_ai = yes
+				}
+			}	
+			annex_country = {
+				target = BBR
+				transfer_troops = yes
+			}
+			BBR = {
+				every_unit_leader = {	
+					set_nationality = COL
+				}	
+			}
+			declare_war_on = { target = COR type = annex_everything } 
+		}
+		every_state = {
+			limit = {
+				is_core_of = HAI
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
+		every_state = {
+			limit = {
+				is_core_of = CAF
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
+
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
 }
@@ -1036,6 +1391,25 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Syndie_Air_Buff"
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = africa }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				is_on_continent = africa
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
 }
@@ -1747,8 +2121,8 @@ shared_focus = {
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
 shared_focus = {
-	id = COL_fafafafalafel
-	icon = GFX_goal_generic_propaganda
+	id = COL_fafafafalafel #amercian support
+	icon = GFX_goal_CSA_centralist_reorganization
 	prerequisite = { focus = COL_mutual_help_with_the_gringos }
 	x = 1
 	y = 1
@@ -1879,8 +2253,8 @@ shared_focus = {
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
 shared_focus = {
-	id = COL_bababa
-	icon = GFX_goal_generic_propaganda
+	id = COL_bababa #divide sa
+	icon = GFX_goal_CSA_socialist_liberation
 	prerequisite = { focus = COL_the_panama_question }
 	prerequisite = { focus = COL_fafafafalafel }
 	x = 1
