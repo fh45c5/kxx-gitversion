@@ -90,3 +90,35 @@ country_event = { #Soc Dem take power to propose peace
 		}
 	}
 }
+country_event = { #civil war over,change to col
+	id = coc.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event coc.1" }
+	title = coc.3.t
+	desc = coc.3.d
+	trigger = {
+		tag = COC
+		NOT = {
+			country_exists = COL
+		}
+		owns_state = 306
+	}
+	fire_only_once = yes
+	
+	option = {
+		name = coc.3.a
+		COL = {
+			annex_country = {
+				target = COC
+				transfer_troops = yes
+			}
+
+		}
+		COC = {
+			every_unit_leader = {	
+				set_nationality = COL
+			}	
+		}
+		COL = { change_tag_from = COC }
+		
+	}
+}

@@ -1964,7 +1964,7 @@ country_event = { #UTC Duran expelled, Viera White new head of the party
 			desc = "POLITICS_COL_VIERA_WHITE_DESC"
 			picture = "Portrait_Colombia_Gilberto_Vieira.png"
 			expire = "1965.1.1"
-			ideology = tot_left_nationalism_subtype
+			ideology = tot_left_nationalism_subtype #wtf?
 		}
 	}
 }
@@ -2128,12 +2128,13 @@ country_event = { #Pinilla's successful coup
 			desc = "POLITICS_COL_PINILLA_DESC"
 			picture = "Portrait_Colombia_Rojas_Pinilla.png"
 			expire = "1965.1.1"
-			ideology = paternal_autocrat_subtype
+			ideology = junta_subtype
 		}
 		set_politics = {
 			ruling_party = paternal_autocrat
 			elections_allowed = no
 		}
+		drop_cosmetic_tag = yes
 		if = {
 			limit = {
 				has_country_flag = COL_totpurges
@@ -4694,7 +4695,7 @@ country_event = { #Left leadership
 				desc = "POLITICS_COL_GAITAN_DESC"
 				picture = "Portrait_Colombia_Jorge_Gaitan.png"
 				expire = "1965.1.1"
-				ideology = radical_socialist_subtype
+				ideology = agrarian_socialism_subtype
 			}
 			if = {
 				limit = {
@@ -4881,6 +4882,15 @@ country_event = { #CIVIL WAR AVOIDED
 		custom_effect_tooltip = COL_avoided_civil_war_tt
 		hidden_effect = {
 			set_country_flag = COL_avoided_civil_war
+		if = {
+			limit = {
+				has_country_flag = COL_promised_free_elections
+			}
+			country_event = {
+				id = colsoc.17
+				days = 1460
+			}
+		}
 		}
 	}
 }
@@ -4985,6 +4995,90 @@ country_event = { #corba ideo picker
 		name = colsoc.15.f
 		set_country_leader_ideology = syn_negritude_subtype
 	}
+}
+country_event = { #join browderist faction
+	id = colsoc.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colsoc.16.t
+	desc = colsoc.16.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = colsoc.16.a #no change
+		
+	}
+	option = {
+		name = colsoc.16.b
+		ai_chance = {
+			factor = 100
+		}
+		COL = {
+			add_to_faction = ROOT
+		}
+		add_war_support = 0.03
+		add_ideas = COL_browderist_allience_other_idea
+			
+		
+	}
+	
+}
+country_event = { #socialist election if civil war avoided
+	id = colsoc.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colsoc.17.t
+	desc = colsoc.17.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = colsoc.17.a #radsoc
+		COL_elected_radsoc = yes
+	}
+	option = {
+		name = colsoc.17.b #synd
+		COL_elected_syndie = yes
+	}
+	option = {
+		name = colsoc.17.c #tot
+		COL_elected_tot = yes
+		#insert leader change events later
+	}
+}
+country_event = { #browder dead
+	id = colfocus.222
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colfocus.222.t
+	desc = colfocus.222.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = colfocus.222.a 
+		add_country_leader_trait = COL_browderist_orphan
+	}
+	
+}
+country_event = { #browder arrived
+	id = colfocus.223
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colfocus.223.t
+	desc = colfocus.223.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = colfocus.222.a 
+			create_country_leader = {
+				name = "Earl Browder"
+				desc = "POLITICS_EARL_BROWDER_DESC"
+				picture = "gfx/leaders/CSA/Portrait_CSA_Earl_Browder_Hat.png"
+				expire = "1.1.1"
+				ideology = popcom_subtype
+				traits = { CSA_new_founding_father }
+			}
+	}
+	
 }
 country_event = { #People's Commissars
 	id = col.901
