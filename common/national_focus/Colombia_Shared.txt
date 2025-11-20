@@ -69,6 +69,7 @@ shared_focus = {
 			popularity = 0.05
 		}
 		add_ideas = COL_totalist_pol
+		country_event = colsoc.19
 	}
 	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
 }
@@ -153,6 +154,7 @@ shared_focus = {
 			popularity = 0.05
 		}
 		add_ideas = COL_synd_pol
+		country_event = colsoc.18
 	}
 	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
 }
@@ -450,7 +452,7 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_A_One_Party_State"
-
+		add_war_support = 0.1
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
 }
@@ -1016,6 +1018,7 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Ready_For_The_Future"
+		add_stability = 0.1
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
 }
@@ -1058,6 +1061,10 @@ shared_focus = {
 		FRA = {
 			has_socialist_government = yes
 			has_capitulated = no
+		}
+		has_country_leader = {
+			name = "Pedro Gomez Agudelo"
+			ruling_only = yes
 		}
 	}
 	cost = 5
@@ -1482,6 +1489,9 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Join_The_Internationale"
 		custom_effect_tooltip = COL_Join_The_Internationale_tt
+		INT = {
+			country_event = coldecision.9
+		}
 	}
 	search_filters = { FOCUS_FILTER_RESEARCH }
 }
@@ -1515,18 +1525,7 @@ shared_focus = {
 			}
 		}
 	}
-	bypass = {
-		has_government = syndicalist
-		is_subject = no
-		all_other_country = {
-			tooltip = COL_is_in_south_america_all_tt
-			is_in_south_america = yes
-			OR = {
-				has_dictatorship_government = yes
-				is_in_faction = yes
-			}
-		}
-	}
+	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Cano_Doctrine"
 		every_other_country = {
@@ -1602,39 +1601,9 @@ shared_focus = {
 		NOT = {
 			is_subject = yes
 		}
-		is_in_faction_with = INT
-		FOP = {
-			has_socialist_government = yes
-			has_war_with = ARG
-			has_capitulated = no
-		}
-		ARG = {
-			has_socialist_government = no
-			has_war_with = FOP
-			has_capitulated = no
-		}
+		
 	}
-	bypass = {
-		has_government = syndicalist
-		NOT = {
-			is_subject = yes
-		}
-		is_in_faction_with = INT
-		OR = {
-			FOP = {
-				OR = {
-					has_socialist_government = no
-					has_capitulated = yes
-				}
-			}
-			ARG = {
-				OR = {
-					has_socialist_government = yes
-					has_capitulated = yes
-				}
-			}
-		}
-	}
+	
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_SA_Front"
@@ -1648,8 +1617,6 @@ shared_focus = {
 	icon = GFX_goal_NFA_liberation
 	prerequisite = { focus = COL_European_Front }
 	prerequisite = { focus = COL_SA_Front }
-	mutually_exclusive = { focus = COL_A_War_To_End_Wars }
-	mutually_exclusive = { focus = COL_revenge_time }
 	x = -1
 	y = 1
 	relative_position_id = COL_European_Front
@@ -1665,11 +1632,7 @@ shared_focus = {
 		SRI = {
 			has_capitulated = yes
 		}
-		any_other_country = {
-			tooltip = COL_is_in_south_america_tt
-			is_in_south_america = yes
-			has_socialist_government = no
-		}
+		
 	}
 	cost = 5
 	completion_reward = {
@@ -1684,8 +1647,6 @@ shared_focus = {
 	icon = GFX_BBR_International_Peace_movement
 	prerequisite = { focus = COL_European_Front }
 	prerequisite = { focus = COL_SA_Front }
-	mutually_exclusive = { focus = COL_Syndie_Aggro }
-	mutually_exclusive = { focus = COL_revenge_time }
 	x = 1
 	y = 1
 	relative_position_id = COL_European_Front
@@ -1697,12 +1658,7 @@ shared_focus = {
 		INT = {
 			has_war = no
 		}
-		GER = {
-			OR = {
-				has_capitulated = yes
-				has_socialist_government = yes
-			}
-		}
+		
 	}
 	cost = 5
 	completion_reward = {
@@ -1716,50 +1672,55 @@ shared_focus = {
 	icon = GFX_goal_CSA_truly_red_peru
 	prerequisite = { focus = COL_European_Front }
 	prerequisite = { focus = COL_SA_Front }
-	mutually_exclusive = { focus = COL_A_War_To_End_Wars }
-	mutually_exclusive = { focus = COL_Syndie_Aggro }
 	x = 1
 	y = 1
 	relative_position_id = COL_SA_Front
 	available = {
 		has_government = syndicalist
-		can_declare_war_on = PRU
 		is_in_faction_with = INT
 		is_subject = no
-		has_war = no
-		INT = {
-			has_war = no
-		}
-		GER = {
-			OR = {
-				has_capitulated = yes
-				has_socialist_government = yes
-			}
-		}
+		
+		
 	}
-	bypass = {
-		has_government = syndicalist
-		NOT = {
-			can_declare_war_on = PRU
-		}
-		is_in_faction_with = INT
-		has_war = no
-		INT = {
-			has_war = no
-		}
-		GER = {
-			OR = {
-				has_capitulated = yes
-				has_socialist_government = yes
-			}
-		}
-	}
+	
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_the_socialist_vigilante"
-		declare_war_on = {
-			target = PRU
-			type = annex_everything
+		#flags?
+		set_cosmetic_tag = FORM_LTM
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = south_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = central_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_on_continent = south_america
+					is_on_continent = central_america
+				}
+				
+			}
+			COL = {
+				add_state_core = PREV
+			}
 		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
@@ -2247,10 +2208,17 @@ shared_focus = {
 	y = 1
 	relative_position_id = COL_the_colombian_gringos
 	available = {
-		has_country_leader = {
-			name = "Augusto Durán Ospino"
-			ruling_only = yes
+		OR = {
+			has_country_leader = {
+				name = "Augusto Durán Ospino"
+				ruling_only = yes
+			}
+			has_country_leader = {
+				name = "Earl Browder"
+				ruling_only = yes
+			}
 		}
+		
 		
 	}
 	cost = 5
@@ -2313,6 +2281,7 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		add_ideas = COL_tot_isolation
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2334,6 +2303,10 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		swap_ideas = {
+			remove_idea = COL_tot_isolation
+			add_idea = COL_tot_isolation2
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2356,6 +2329,7 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		add_ideas = COL_buffer_zone
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2378,6 +2352,54 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		#flags?
+		set_cosmetic_tag = FORM_AME
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = south_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = central_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = north_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_on_continent = south_america
+					is_on_continent = north_america
+					is_on_continent = central_america
+				}
+				
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2399,6 +2421,12 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		add_ideas = command_economy
+		swap_ideas = {
+			remove_idea = COL_buffer_zone
+			add_idea = COL_buffer_zone2
+		}
+
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2420,6 +2448,7 @@ shared_focus = {
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		add_ideas = COL_declare_absolute_neutrality
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2442,6 +2471,8 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
 		create_faction = colombia_nonaligned_faction
+		add_stability = 0.25
+		add_war_support = -0.25
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2454,20 +2485,13 @@ shared_focus = {
 	relative_position_id = COL_the_SA_playground
 	available = {
 		OR = {
-			has_government = totalist
+			#has_government = totalist
 			has_government = radical_socialist
 		}
 		is_subject = no
 		is_in_faction = no
 	}
-	bypass = {
-		OR = {
-			has_government = totalist
-			has_government = radical_socialist
-		}
-		is_subject = no
-		is_faction_leader = yes
-	}
+	
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
@@ -2486,31 +2510,27 @@ shared_focus = {
 	available = {
 		is_faction_leader = yes
 		OR = {
-			has_government = totalist
+			#has_government = totalist
 			has_government = radical_socialist
 		}
 		is_subject = no
 	}
-	bypass = {
-		is_faction_leader = yes
-		OR = {
-			has_government = totalist
-			has_government = radical_socialist
-		}
-		is_subject = no
-		all_other_country = {
-			tooltip = COL_is_in_south_america_tt
-			is_in_south_america = yes
-			has_socialist_government = yes
-			NOT = { has_war_with = COL }
-			is_in_faction_with = COL
-		}
-	}
+	
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Found_The_Panamerican_Forum"
 		custom_effect_tooltip = COL_Found_The_Panamerican_Forum_tt
-		set_country_flag = COL_Panamericanismo_flag
+		every_other_country = {
+			limit = {
+				OR = {
+					is_in_south_america = yes
+					is_in_central_america = yes
+				}
+				
+				has_socialist_government = yes
+			}
+			country_event = colsoc.13
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2523,10 +2543,7 @@ shared_focus = {
 	relative_position_id = COL_Found_The_Panamerican_Forum
 	available = {
 		is_faction_leader = yes
-		OR = {
-			has_government = totalist
-			has_government = radical_socialist
-		}
+		
 	}
 	cost = 5
 	completion_reward = {
@@ -2545,10 +2562,7 @@ shared_focus = {
 	relative_position_id = COL_the_fuel_of_latin_revolutions
 	available = {
 		is_faction_leader = yes
-		OR = {
-			has_government = totalist
-			has_government = radical_socialist
-		}
+		
 		is_subject = no
 	}
 	cost = 5
@@ -2593,10 +2607,7 @@ shared_focus = {
 	relative_position_id = COL_the_fuel_of_latin_revolutions
 	available = {
 		is_faction_leader = yes
-		OR = {
-			has_government = totalist
-			has_government = radical_socialist
-		}
+		
 		is_subject = no
 	}
 	cost = 5
@@ -2615,10 +2626,7 @@ shared_focus = {
 	relative_position_id = COL_the_fuel_of_latin_revolutions
 	available = {
 		is_faction_leader = yes
-		OR = {
-			has_government = totalist
-			has_government = radical_socialist
-		}
+		
 		is_subject = no
 	}
 	cost = 5
@@ -2637,17 +2645,41 @@ shared_focus = {
 	relative_position_id = COL_Volunteer_Forces_Training
 	available = {
 		is_faction_leader = yes
-		OR = {
-			has_government = totalist
-			has_government = radical_socialist
-		}
+		
 		is_subject = no
 	}
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Strike_Coastal_South_America"
 		custom_effect_tooltip = COL_Strike_Coastal_South_America_tt
-		set_country_flag = COL_Strike_Coastal_South_America_flag
+		create_wargoal = {
+			target = VEN
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = ECU
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = PRU
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = CHL
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = ARG
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = URG
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = FOP
+			type = annex_everything
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2660,17 +2692,17 @@ shared_focus = {
 	relative_position_id = COL_Refitting_Our_Navy
 	available = {
 		is_faction_leader = yes
-		OR = {
-			has_government = totalist
-			has_government = radical_socialist
-		}
+		
 		is_subject = no
 	}
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Strike_Brazil"
 		custom_effect_tooltip = COL_Strike_Brazil_tt
-		set_country_flag = COL_Strike_Brazil_flag
+		create_wargoal = {
+			target = BRA
+			type = annex_everything
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2686,17 +2718,21 @@ shared_focus = {
 	relative_position_id = COL_terror_from_the_sky
 	available = {
 		is_faction_leader = yes
-		OR = {
-			has_government = totalist
-			has_government = radical_socialist
-		}
+		
 		is_subject = no
 	}
 	cost = 5
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_Strike_Landlocked_South_America"
 		custom_effect_tooltip = COL_Strike_Landlocked_South_America_tt
-		set_country_flag = COL_Strike_Landlocked_South_America_flag
+		create_wargoal = {
+			target = BOL
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = PAR
+			type = annex_everything
+		}
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -2706,8 +2742,6 @@ shared_focus = {
 	icon = GFX_goal_CSA_revolutionary_army
 	prerequisite = { 
 		focus = COL_Strike_Landlocked_South_America
-		focus = COL_Syndie_Aggro
-		focus = COL_A_War_To_End_Wars
 	}
 	x = -3
 	y = 1
@@ -2717,29 +2751,57 @@ shared_focus = {
 		has_socialist_government = yes
 		is_subject = no
 		is_faction_leader = yes
-		has_war = no
-		any_other_country = {
-			tooltip = COL_is_in_south_america_tt
-			is_in_south_america = yes
-			has_socialist_government = no
-			ROOT = { can_declare_war_on = PREV }
-		}
+		
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_No_More_Borders"
+		#flags?
+		set_cosmetic_tag = FORM_LTM
 		add_war_support = 0.15
-		every_other_country = {
+		every_state = {
 			limit = {
-				is_in_south_america = yes
-				has_socialist_government = no
-				NOT = { has_war_with = COL }
-				ROOT = { can_declare_war_on = PREV }
+				OR = {
+					is_on_continent = south_america
+					is_on_continent = central_america
+				}
+				
 			}
-			ROOT = { 
+			COL = {
+				add_state_core = PREV
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = south_america }
+			}
+			COL = {
 				create_wargoal = {
 					type = annex_everything
 					target = PREV
-				} 
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = central_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_other_country = {
+			limit = {
+				is_in_south_america = yes
+				is_subject_of = COL
+			}
+			COL = { 
+				annex_country = {
+					target = PREV
+					transfer_troops = yes
+				}
 			}
 		}
 	}
@@ -2753,6 +2815,7 @@ shared_focus = {
 		focus = COL_Strike_Landlocked_South_America
 		focus = COL_Syndie_Aggro
 		focus = COL_A_War_To_End_Wars
+		focus = COL_revenge_time
 	}
 	x = 3
 	y = 1
@@ -2765,29 +2828,7 @@ shared_focus = {
 			is_in_faction = yes
 			is_faction_leader = yes
 		}
-		has_war = no
-		any_other_country = {
-			tooltip = COL_is_in_south_america_tt
-			is_in_south_america = yes
-			has_socialist_government = yes
-			NOT = { has_war_with = COL }
-			OR = {
-				is_in_faction_with = COL
-				is_puppet_of = COL
-				AND = {
-					is_guaranteed_by = INT
-					NOT = { has_war_with = INT }
-				}						
-				AND = {
-					is_in_faction_with = INT
-					NOT = { has_war_with = INT }
-				}
-			}
-			OR = {
-				any_state = { is_coastal = yes }
-				is_neighbor_of = COL
-			}
-		}
+		
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_No_More_Borders"
@@ -3357,10 +3398,16 @@ shared_focus = {
 				country_exists = BBR
 				country_exists = COR
 				country_exists = WCC
-				owns_state = 386
+				
 			}
+			owns_state = 361
 		}
-
+	allow_branch = {
+		OR = {
+			has_socialist_government = yes
+			tag = COC
+		}
+	}
 		x = 27
 		y = 10
 		ai_will_do = {
@@ -3498,13 +3545,7 @@ shared_focus = {
 		id = COL_subdue_bourgeousie
 		icon = GFX_goal_CSA_subdue_bourgeoisie
 		cost = 5
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = CSA_browder_is_leader
-				has_country_leader_ideology = popcom_subtype
-			}
-			has_government = totalist
-		}
+		
 		prerequisite = {
 			focus = COL_communist_party
 		}
@@ -4732,7 +4773,7 @@ shared_focus = {
 		}
 	}
 	shared_focus = {# Military Research
-		id = COL_military_research
+		id = COL_military_research1
 		icon = GFX_HUN_new_warfighting_technology
 		cost = 5
 		prerequisite = {
@@ -5624,6 +5665,17 @@ shared_focus = {
 			log = "[GetDateText]: [Root.GetName]: Focus CSA_socialism_in_one_nation"
 			add_popularity = { ideology = totalist popularity = 0.03 }
 			add_political_power = 200
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = CAN
+						is_core_of = NFL
+					}
+				}
+				COL = {
+					add_state_core = PREV
+				}	
+			}
 		}
 	}
 	

@@ -7899,7 +7899,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_revenge_against_venezuela"
 			add_stability = 0.1
-			create_faction = "安第斯条约"
+			
 			VEN = {
 				remove_opinion_modifier = {
 					target = COL
@@ -7909,9 +7909,7 @@ focus_tree = {
 			VEN = {
 				country_event = colfocus.5
 			}
-			ECU = {
-				country_event = colfocus.33
-			}
+			
 			
 		}
 	}
@@ -9326,7 +9324,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_entering_an_existing_alliance"
 			add_war_support = 0.05
 			add_ideas = COL_entering_alliance_idea
-			unlock_decision_category_tooltip = COL_join_alliances_decisions
 		}
 		
 	}
@@ -9340,12 +9337,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = COL_entering_an_existing_alliance
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = unlock_focuses
-				always = no
-			}
-		}
+		
 		cost = 5
 		ai_will_do = {
 			factor = 3
@@ -9365,7 +9357,9 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_ally_reich"
-			custom_effect_tooltip = unlock_focuses
+			GER = {
+			country_event = coldecision.3
+		}
 		}
 	}
 
@@ -9378,19 +9372,7 @@ focus_tree = {
 		x = 2
 		y = 1
 		relative_position_id = COL_entering_an_existing_alliance
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = unlock_focuses
-				always = no
-			}
-			is_subject = no
-			is_in_faction = no
-			ENT = {
-				is_faction_leader = yes
-				NOT = { has_war_with = ROOT }
-			}
-			at_peace_or_same_enemies_as_ENT = yes
-		}
+		
 		cost = 5
 		ai_will_do = {
 			factor = 3
@@ -9410,57 +9392,14 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_new_taxes"
-			custom_effect_tooltip = unlock_focuses
+			CAN = {
+			country_event = coldecision.6
+		}
 		}
 		
 	}
 
-	focus = {
-		id = COL_ally_other_factions
-		icon = GFX_goal_CZE_faction_generic
-		prerequisite = { focus = COL_entering_an_existing_alliance }
-		mutually_exclusive = { focus = COL_ally_entente }
-		mutually_exclusive = { focus = COL_ally_reich }
-		x = 4
-		y = 1
-		relative_position_id = COL_entering_an_existing_alliance
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = unlock_focuses
-				always = no
-			}
-			is_subject = no
-			is_in_faction = no
-			any_country = {
-				is_faction_leader = yes
-				has_socialist_government = no
-				NOT = {
-					tag = GER
-					tag = ENT
-					has_war_with = PREV
-				}
-				at_peace_or_same_enemies_as_ROOT = yes
-			}
-		}
-		cost = 5
-		ai_will_do = {
-			factor = 3
-			modifier = {
-				factor = 0
-				NOT = {
-					has_game_rule = {
-						rule = COL_FOREIGN_POLICY
-						option = DEFAULT
-					}
-				}
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus COL_ally_other_factions"
-			custom_effect_tooltip = unlock_focuses
-		}
-	}
-
+	
 	focus = {
 		id = COL_far_reaching
 		icon = GFX_goal_NYC_new_york_volunteers
@@ -9501,7 +9440,8 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COL_new_taxes"
-			custom_effect_tooltip = COL_ally_further_company_investments_tt
+			add_offsite_building = { type = arms_factory level = 2 }
+
 		}
 		
 	}
@@ -9646,10 +9586,13 @@ focus_tree = {
 	focus = {
 		id = COL_ally_volunteers
 		icon = GFX_goal_AUS_Germanic_Individualism
-		prerequisite = { focus = COL_ally_other_factions }
-		x = 1
-		y = 1
-		relative_position_id = COL_ally_other_factions
+		prerequisite = { 
+			focus = COL_ally_reich
+			focus = COL_ally_entente
+		}
+		x = 5
+		y = 2
+		relative_position_id = COL_entering_an_existing_alliance
 		available = {
 			any_other_country = {
 				is_faction_leader = yes
