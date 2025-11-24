@@ -1,1 +1,64 @@
-scripted_gui = {	per_satrapy_scripted_gui = {		context_type = player_context		window_name = "satrapy_window"				dynamic_lists = {			per_satrapies_entry_list = {				array = per.satrapy_array				entry_container = per_entry_container				change_scope = yes			}		}				visible = { original_tag = PER has_country_flag = per_open_satrapy_window }				effects = {			close_window_button_click = {				clr_country_flag = per_open_satrapy_window			}			satrapy_placate_btn_click = {				satrapy_placate_effect = yes 				set_country_flag = { flag = this_scope_satrapy_placate days = 50 value = 1 }			}			satrapy_provide_equipment_btn_click = { 				satrapy_provide_equipment_effect = yes			}		}								triggers = {			satrapy_placate_btn_click_enabled = {				NOT = { THIS = { has_country_flag = this_scope_satrapy_placate } }			}					}		properties = {			satrapy_loyalty_icon = {				image = "[get_satrapy_loyalty_icon]"			}		}	}	per_satrapy_button_gui = {		context_type = player_context		window_name = "open_satrapy_window"		parent_window_token = politics_tab						visible = { original_tag = PER is_debug = yes }		triggers = {		}		effects = {			open_satrapy_window_button_click = { 				if = { limit = { NOT = { has_country_flag = per_open_satrapy_window } }					set_country_flag = per_open_satrapy_window					else = { clr_country_flag = per_open_satrapy_window }				}			}						}}
+scripted_gui = {
+	per_satrapy_scripted_gui = {
+		context_type = player_context
+		window_name = "satrapy_window"
+
+		
+		dynamic_lists = {
+			per_satrapies_entry_list = {
+				array = per.satrapy_array
+				entry_container = per_entry_container
+				change_scope = yes
+			}
+		}
+		
+		visible = { original_tag = PER has_country_flag = per_open_satrapy_window }
+		
+		effects = {
+			close_window_button_click = {
+				clr_country_flag = per_open_satrapy_window
+			}
+			satrapy_placate_btn_click = {
+				satrapy_placate_effect = yes 
+				set_country_flag = { flag = this_scope_satrapy_placate days = 50 value = 1 }
+			}
+			satrapy_provide_equipment_btn_click = { 
+				satrapy_provide_equipment_effect = yes
+			}
+		}
+				
+		
+		triggers = {
+			satrapy_placate_btn_click_enabled = {
+				NOT = { THIS = { has_country_flag = this_scope_satrapy_placate } }
+			}
+			
+		}
+		properties = {
+			satrapy_loyalty_icon = {
+				image = "[get_satrapy_loyalty_icon]"
+			}
+		}
+	}
+	per_satrapy_button_gui = {
+		context_type = player_context
+		window_name = "open_satrapy_window"
+		parent_window_token = politics_tab
+		
+		
+		visible = { original_tag = PER is_debug = yes }
+		triggers = {
+		}
+		effects = {
+			open_satrapy_window_button_click = { 
+				if = { limit = { NOT = { has_country_flag = per_open_satrapy_window } }
+					set_country_flag = per_open_satrapy_window
+					else = { clr_country_flag = per_open_satrapy_window }
+				}
+			}
+
+					
+	}
+}
+
+}
