@@ -1,0 +1,895 @@
+focus_tree = {
+	id = japan-iraa-rightist
+	continuous_focus_position = { x = -40 y = 1960 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPIRAARIGHTIST
+		}
+	}
+	shared_focus = JAPIRAA_formation_of_the_imperial_rule_assistance_association
+	shared_focus = JAPFOR_japansplaceintheworld
+	shared_focus = JAPFOR_tokyo_conference
+	shared_focus = JAP_To_Sunder_the_Sunset
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday
+	#Rightists Dominate the Conference
+	focus = {
+		id = JAPIRAARIGHTIST_rightists_dominate_the_conference
+		icon = GFX_JAPIRAARIGHTIST_rightists_dominate_the_conference-248360
+		x = 7
+		y = 4
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		
+	}
+
+	#Militarist Victory
+	focus = {
+		id = JAPIRAARIGHTIST_militarist_victory
+		icon = GFX_JAPIRAARIGHTIST_militarist_victory-248360
+		x = 3
+		y = 5
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_rightists_dominate_the_conference  }
+		
+	}
+
+	#Corporatist Economic Hold
+	focus = {
+		id = JAPIRAARIGHTIST_corporatist_economic_hold
+		icon = GFX_JAPIRAARIGHTIST_corporatist_economic_hold-248360
+		x = 7
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_rightists_dominate_the_conference  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_corporatism
+		}
+		}
+	}
+
+	#Kuhara's National Dominance
+	focus = {
+		id = JAPIRAARIGHTIST_kuharasnationaldominance
+		icon = GFX_JAPIRAARIGHTIST_kuharasnationaldominance-248360
+		x = 10
+		y = 5
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_rightists_dominate_the_conference  }
+	}
+
+	#The Market Faction Takes Control
+	focus = {
+		id = JAPIRAARIGHTIST_the_market_faction_takes_control
+		icon = GFX_JAPIRAARIGHTIST_the_market_faction_takes_control-248360
+		x = 12
+		y = 6
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_kuharasnationaldominance  }
+		completion_reward = {
+		add_popularity = {
+		ideology = ROOT
+		popularity = 0.1
+		}
+		add_political_power = 25
+		}
+	}
+
+	#Economic Freedom
+	focus = {
+		id = JAPIRAARIGHTIST_economic_freedom
+		icon = GFX_JAPIRAARIGHTIST_economic_freedom-248360
+		x = 9
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_corporatist_economic_hold  } prerequisite = { focus = JAPIRAARIGHTIST_kuharasnationaldominance  }
+		mutually_exclusive = { focus = JAPIRAARIGHTIST_partial_zaibatsu_nationalization  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_economic_freedom
+		}
+		}
+	}
+
+	#Partial Zaibatsu Nationalization
+	focus = {
+		id = JAPIRAARIGHTIST_partial_zaibatsu_nationalization
+		icon = GFX_JAPIRAARIGHTIST_partial_zaibatsu_nationalization-248360
+		x = 7
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_corporatist_economic_hold  }
+		available = {
+		not = {
+		has_completed_focus = JAPIRAARIGHTIST_kuharasnationaldominance
+		}
+		}
+		mutually_exclusive = { focus = JAPIRAARIGHTIST_economic_freedom  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_economic_nationalization
+		}
+		}
+	}
+
+	#Kiichiro's Victory
+	focus = {
+		id = JAPIRAARIGHTIST_kiichirosvictory
+		icon = GFX_JAPIRAARIGHTIST_kiichirosvictory-248360
+		x = 5
+		y = 6
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_militarist_victory  }
+		mutually_exclusive = { focus = JAPIRAARIGHTIST_hayashisvictory  }
+	}
+
+	#Hayashi's Victory
+	focus = {
+		id = JAPIRAARIGHTIST_hayashisvictory
+		icon = GFX_JAPIRAARIGHTIST_hayashisvictory-248360
+		x = 1
+		y = 6
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_militarist_victory  }
+		mutually_exclusive = { focus = JAPIRAARIGHTIST_kiichirosvictory  }
+	}
+
+	#Purge the IRAA Leftists
+	focus = {
+		id = JAPIRAARIGHTIST_purge_the_iraa_leftists
+		icon = GFX_JAPIRAARIGHTIST_purge_the_iraa_leftists-248360
+		x = 1
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_hayashisvictory  }
+		completion_reward = {
+		country_event = japan_new_event.133
+		}
+	}
+
+	#Create the Tokko
+	focus = {
+		id = JAPIRAARIGHTIST_create_the_tokko
+		icon = GFX_JAPIRAARIGHTIST_create_the_tokko-248360
+		x = 3
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_kiichirosvictory  focus = JAPIRAARIGHTIST_hayashisvictory  }
+		completion_reward = {
+		add_ideas = {
+		JAP_the_tokko
+		}
+		}
+	}
+
+	#Work Against Hashimoto
+	focus = {
+		id = JAPIRAARIGHTIST_work_against_hashimoto
+		icon = GFX_JAPIRAARIGHTIST_work_against_hashimoto-248360
+		x = 5
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_kiichirosvictory  }
+		completion_reward = {
+		country_event = japan_new_event.134
+		}
+	}
+
+	
+
+	#The Invisible Hand of the Free Market
+	focus = {
+		id = JAPIRAARIGHTIST_the_invisible_hand_of_the_free_market
+		icon = GFX_JAPIRAARIGHTIST_the_invisible_hand_of_the_free_market-248360
+		x = 9
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_the_market_faction_takes_control  } prerequisite = { focus = JAPIRAARIGHTIST_economic_freedom  }
+		completion_reward = {
+		add_ideas = {
+		JAP_the_invisible_market
+		}
+		}
+	}
+
+	#Incentivise New Business
+	focus = {
+		id = JAPIRAARIGHTIST_incentivise_new_business
+		icon = GFX_JAPIRAARIGHTIST_incentivise_new_business-248360
+		x = 12
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_the_market_faction_takes_control  }
+		completion_reward = {
+		add_ideas = {
+		JAP_the_new_market
+		}
+		}
+	}
+
+	#A More Hands Off Approach
+	focus = {
+		id = JAPIRAARIGHTIST_a_more_hands_off_approach
+		icon = GFX_JAPIRAARIGHTIST_a_more_hands_off_approach-248360
+		x = 12
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_the_invisible_hand_of_the_free_market  } prerequisite = { focus = JAPIRAARIGHTIST_incentivise_new_business  }
+		completion_reward = {
+		add_ideas = {
+		JAP_the_hands_off
+		}
+		}
+	}
+
+	#Fighting Against Foreign Ideals
+	focus = {
+		id = JAPIRAARIGHTIST_fighting_against_foreign_ideals
+		icon = GFX_JAPIRAARIGHTIST_fighting_against_foreign_ideals-248360
+		x = 5
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_create_the_tokko  } prerequisite = { focus = JAPIRAARIGHTIST_work_against_hashimoto  }
+		completion_reward = {
+		add_opinion_modifier = {
+			target = GER
+			modifier = faction_traitor
+		}
+		add_opinion_modifier = {
+			target = AUS
+			modifier = faction_traitor
+		}
+		add_opinion_modifier = {
+			target = RUS
+			modifier = faction_traitor
+		}
+		add_war_support = 0.075
+		}
+	}
+
+	#Purging the Syndicalists
+	focus = {
+		id = JAPIRAARIGHTIST_purging_the_syndicalists
+		icon = GFX_JAPIRAARIGHTIST_purging_the_syndicalists-248360
+		x = 3
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_create_the_tokko  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		}
+	}
+
+	#Sneak In Toseiha Influence
+	focus = {
+		id = JAPIRAARIGHTIST_sneak_in_toseiha_influence
+		icon = GFX_JAPIRAARIGHTIST_sneak_in_toseiha_influence-248360
+		x = 1
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_purge_the_iraa_leftists  } prerequisite = { focus = JAPIRAARIGHTIST_create_the_tokko  }
+		completion_reward = {
+		add_popularity = {
+		ideology = national_populist
+		popularity = 0.1
+		}
+		add_political_power = 20
+		}
+	}
+
+	#Expand Military Privileges
+	focus = {
+		id = JAPIRAARIGHTIST_expand_military_privileges
+		icon = GFX_JAPIRAARIGHTIST_expand_military_privileges-248360
+		x = -1
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_sneak_in_toseiha_influence  }
+		completion_reward = {
+		add_ideas = {
+			JAP_spiritual_army_1
+		}
+		}
+	}
+
+	#Form the National Muslim Association
+	focus = {
+		id = JAPIRAARIGHTIST_form_the_national_muslim_association
+		icon = GFX_JAPIRAARIGHTIST_form_the_national_muslim_association-248360
+		x = 1
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_sneak_in_toseiha_influence  }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+
+	#Crush Liberal Remnants
+	focus = {
+		id = JAPIRAARIGHTIST_crush_liberal_remnants
+		icon = GFX_JAPIRAARIGHTIST_crush_liberal_remnants-248360
+		x = 3
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_purging_the_syndicalists  }
+		completion_reward = {
+		add_stability = -0.15
+		add_political_power = 75
+		add_popularity = {
+		ideology = ROOT
+		popularity = 0.5
+		}
+		}
+	}
+
+	#The National Conscription Order
+	focus = {
+		id = JAPIRAARIGHTIST_the_national_conscription_order
+		icon = GFX_JAPIRAARIGHTIST_the_national_conscription_order-248360
+		x = 5
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_fighting_against_foreign_ideals  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_army_jsp
+		}
+		}
+	}
+
+	#Realpolitik
+	focus = {
+		id = JAPIRAARIGHTIST_realpolitik
+		icon = GFX_JAPIRAARIGHTIST_realpolitik-248360
+		x = 7
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_fighting_against_foreign_ideals  }
+		completion_reward = {
+		add_ideas = {
+		JAP_realpolitik
+		}
+		}
+	}
+
+	#Subsidies for Small Business
+	focus = {
+		id = JAPIRAARIGHTIST_subsidies_for_small_business
+		icon = GFX_JAPIRAARIGHTIST_subsidies_for_small_business-248360
+		x = 9
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_a_more_hands_off_approach  }
+		completion_reward = {
+		add_ideas = {
+		JAP_small_companies
+		}
+		}
+	}
+
+	#Preferential Treatment for Big Businesses
+	focus = {
+		id = JAPIRAARIGHTIST_preferential_treatment_for_big_businesses
+		icon = GFX_JAPIRAARIGHTIST_preferential_treatment_for_big_businesses-248360
+		x = 11
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_a_more_hands_off_approach  }
+		completion_reward = {
+		add_ideas = {
+		JAP_zaibatsu_backing_minseito
+		}
+		}
+	}
+
+	#New Ventures
+	focus = {
+		id = JAPIRAARIGHTIST_new_ventures
+		icon = GFX_JAPIRAARIGHTIST_new_ventures-248360
+		x = 13
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_a_more_hands_off_approach  }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+
+	#Dealing with the Red Menace
+	focus = {
+		id = JAPIRAARIGHTIST_dealing_with_the_red_menace
+		icon = GFX_JAPIRAARIGHTIST_dealing_with_the_red_menace-248360
+		x = 15
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_a_more_hands_off_approach  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		}
+	}
+
+	#Side Line The Agitators
+	focus = {
+		id = JAPIRAARIGHTIST_side_line_the_agitators
+		icon = GFX_JAPIRAARIGHTIST_side_line_the_agitators-248360
+		x = 16
+		y = 10
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_new_ventures  } prerequisite = { focus = JAPIRAARIGHTIST_dealing_with_the_red_menace  }
+		completion_reward = {
+		add_ideas = {
+		JAP_banning_unions
+		}
+		}
+	}
+
+	#Quietly Roll Back Labour Regulations
+	focus = {
+		id = JAPIRAARIGHTIST_quietly_roll_back_labour_regulations
+		icon = GFX_JAPIRAARIGHTIST_quietly_roll_back_labour_regulations-248360
+		x = 14
+		y = 10
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_new_ventures  } prerequisite = { focus = JAPIRAARIGHTIST_dealing_with_the_red_menace  }
+		completion_reward = {
+		add_ideas = {
+		JAP_roll_back_labour_regulations
+		}
+		}
+	}
+
+	#Privatisation of the Public Sector
+	focus = {
+		id = JAPIRAARIGHTIST_privatisation_of_the_public_sector
+		icon = GFX_JAPIRAARIGHTIST_privatisation_of_the_public_sector-248360
+		x = 11
+		y = 10
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_subsidies_for_small_business  } prerequisite = { focus = JAPIRAARIGHTIST_preferential_treatment_for_big_businesses  }
+		completion_reward = {
+		add_ideas = {
+		JAP_privatisation
+		}
+		}
+	}
+
+	#Hand Out Construction Contracts
+	focus = {
+		id = JAPIRAARIGHTIST_hand_out_construction_contracts
+		icon = GFX_JAPIRAARIGHTIST_hand_out_construction_contracts-248360
+		x = 9
+		y = 10
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_subsidies_for_small_business  } prerequisite = { focus = JAPIRAARIGHTIST_preferential_treatment_for_big_businesses  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_construction_contracts
+		}
+		}
+	}
+
+	#Manoeuvre Against Hayashi
+	focus = {
+		id = JAPIRAARIGHTIST_manoeuvre_against_hayashi
+		icon = GFX_JAPIRAARIGHTIST_manoeuvre_against_hayashi-248360
+		x = 5
+		y = 10
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_crush_liberal_remnants  } prerequisite = { focus = JAPIRAARIGHTIST_the_national_conscription_order  } prerequisite = { focus = JAPIRAARIGHTIST_realpolitik  }
+		completion_reward = {
+		add_manpower = -1
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#Stick With the Status Quo
+	focus = {
+		id = JAPIRAARIGHTIST_stick_with_the_status_quo
+		icon = GFX_JAPIRAARIGHTIST_stick_with_the_status_quo-248360
+		x = 2
+		y = 10
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_expand_military_privileges  } prerequisite = { focus = JAPIRAARIGHTIST_form_the_national_muslim_association  } prerequisite = { focus = JAPIRAARIGHTIST_crush_liberal_remnants  }
+		mutually_exclusive = { focus = JAPIRAARIGHTIST_proclaim_toseiha_dominance  }
+		completion_reward = {
+		add_manpower = -1
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#Proclaim Toseiha Dominance
+	focus = {
+		id = JAPIRAARIGHTIST_proclaim_toseiha_dominance
+		icon = GFX_JAPIRAARIGHTIST_proclaim_toseiha_dominance-248360
+		x = 0
+		y = 10
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_expand_military_privileges  } prerequisite = { focus = JAPIRAARIGHTIST_form_the_national_muslim_association  } prerequisite = { focus = JAPIRAARIGHTIST_crush_liberal_remnants  }
+		mutually_exclusive = { focus = JAPIRAARIGHTIST_stick_with_the_status_quo  }
+		completion_reward = {
+		custom_effect_tooltip = switch_toseiha_tree_tt
+		country_event = japan_new_event.54
+		}
+	}
+
+	#Investigate Konoe
+	focus = {
+		id = JAPIRAARIGHTIST_investigate_konoe
+		icon = GFX_JAPIRAARIGHTIST_investigate_konoe-248360
+		x = 2
+		y = 11
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_stick_with_the_status_quo  }
+		completion_reward = {
+		country_event = japan_new_event.135
+		}
+	}
+
+	#Cultivate Military Support
+	focus = {
+		id = JAPIRAARIGHTIST_cultivate_military_support
+		icon = GFX_JAPIRAARIGHTIST_cultivate_military_support-248360
+		x = 5
+		y = 11
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_manoeuvre_against_hayashi  }
+		completion_reward = {
+		add_war_support = 0.1
+		}
+	}
+
+	#Finish off Toseiha Elements
+	focus = {
+		id = JAPIRAARIGHTIST_finish_off_toseiha_elements
+		icon = GFX_JAPIRAARIGHTIST_finish_off_toseiha_elements-248360
+		x = 7
+		y = 11
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_manoeuvre_against_hayashi  }
+		completion_reward = {
+		add_manpower = -100
+		add_stability = -0.05
+		add_political_power = 50
+		}
+	}
+
+	#Going Once, Going Twice
+	focus = {
+		id = JAPIRAARIGHTIST_goingoncegoingtwice
+		icon = GFX_JAPIRAARIGHTIST_goingoncegoingtwice-248360
+		x = 10
+		y = 11
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_privatisation_of_the_public_sector  } prerequisite = { focus = JAPIRAARIGHTIST_hand_out_construction_contracts  }
+		completion_reward = {
+		add_war_support = 0.1
+		add_stability = 0.05
+		add_political_power = 50
+		swap_ideas = {
+			remove_idea = JAP_the_invisible_market
+			add_idea = JAP_the_invisible_market_1
+			}
+		}
+	}
+
+	#Crackdowns on the Army
+	focus = {
+		id = JAPIRAARIGHTIST_crackdowns_on_the_army
+		icon = GFX_JAPIRAARIGHTIST_crackdowns_on_the_army-248360
+		x = 16
+		y = 11
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_side_line_the_agitators  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#Hiranuma's Shogunate
+	focus = {
+		id = JAPIRAARIGHTIST_hiranumasshogunate
+		icon = GFX_JAPIRAARIGHTIST_hiranumasshogunate-248360
+		x = 5
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_cultivate_military_support  } prerequisite = { focus = JAPIRAARIGHTIST_finish_off_toseiha_elements  }
+		completion_reward = {
+		add_ideas = {
+		JAP_hiranumasshogunate
+		}
+		}
+	}
+
+	#TORA TORA TORA
+	focus = {
+		id = JAPIRAARIGHTIST_tora_tora_tora
+		icon = GFX_JAPIRAARIGHTIST_tora_tora_tora-248360
+		x = 2
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_investigate_konoe  }
+		completion_reward = {
+		add_ideas = {
+		JAP_national_defense_state
+		}
+		}
+	}
+
+	#The Japanese Economic Miracle
+	focus = {
+		id = JAPIRAARIGHTIST_the_japanese_economic_miracle
+		icon = GFX_JAPIRAARIGHTIST_the_japanese_economic_miracle-248360
+		x = 12
+		y = 11
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPIRAARIGHTIST_side_line_the_agitators  } prerequisite = { focus = JAPIRAARIGHTIST_quietly_roll_back_labour_regulations  } prerequisite = { focus = JAPIRAARIGHTIST_privatisation_of_the_public_sector  } prerequisite = { focus = JAPIRAARIGHTIST_hand_out_construction_contracts  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_economic_miracle
+		}
+		}
+	}
+
+}

@@ -1,0 +1,974 @@
+focus_tree = {
+	id = japan-seiyukai
+	continuous_focus_position = { x = -40 y = 4440 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPSEI
+		}
+	}
+	shared_focus = JAPFOR_japansplaceintheworld
+	shared_focus = JAPFOR_tokyo_conference
+	shared_focus = JAP_To_Sunder_the_Sunset
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday
+	#Victory of the Seiyukai
+	focus = {
+		id = JAPSEI_victory_of_the_seiyukai
+		icon = GFX_JAPSEI_victory_of_the_seiyukai-248360
+		x = 6
+		y = 0
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+	}
+
+	#Orthodox Victory
+	focus = {
+		id = JAPSEI_orthodox_victory
+		icon = GFX_JAPSEI_orthodox_victory-248360
+		x = 3
+		y = 1
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPSEI_victory_of_the_seiyukai  }
+		mutually_exclusive = { focus = JAPSEI_the_reform_faction_hold  }
+	}
+
+	#Kuhara's Cabinet
+	focus = {
+		id = JAPSEI_kuharascabinet
+		icon = GFX_JAPSEI_kuharascabinet-248360
+		x = 2
+		y = 2
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPSEI_orthodox_victory  }
+		mutually_exclusive = { focus = JAPSEI_rentaro_cabinet  }
+	}
+
+	#Rentaro Cabinet
+	focus = {
+		id = JAPSEI_rentaro_cabinet
+		icon = GFX_JAPSEI_rentaro_cabinet-248360
+		x = 4
+		y = 2
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPSEI_orthodox_victory  }
+		mutually_exclusive = { focus = JAPSEI_kuharascabinet  }
+	}
+
+	#Honour the Inukai Legacy
+	focus = {
+		id = JAPSEI_honour_the_inukai_legacy
+		icon = GFX_JAPSEI_honour_the_inukai_legacy-248360
+		x = 5
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPSEI_rentaro_cabinet  }
+		completion_reward = {
+		add_ideas = {
+		JAP_inukai_legacy
+		}
+		}
+	}
+
+	#The 2nd National Security Debate
+	focus = {
+		id = JAPSEI_the_2nd_national_security_debate
+		icon = GFX_JAPSEI_the_2nd_national_security_debate-248360
+		x = 3
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSEI_kuharascabinet  focus = JAPSEI_rentaro_cabinet  }
+		completion_reward = {
+		country_event = japan_new_event.110
+		}
+	}
+
+	#Promote Zaibatsu Interests
+	focus = {
+		id = JAPSEI_promote_zaibatsu_interests
+		icon = GFX_JAPSEI_promote_zaibatsu_interests-248360
+		x = 1
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPSEI_kuharascabinet  }
+		completion_reward = {
+		add_ideas = {
+		JAP_industrialists_favoured
+		}
+		}
+	}
+
+	#Solve the Railway Issue
+	focus = {
+		id = JAPSEI_solve_the_railway_issue
+		icon = GFX_JAPSEI_solve_the_railway_issue-248360
+		x = 1
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPSEI_the_2nd_national_security_debate  } prerequisite = { focus = JAPSEI_promote_zaibatsu_interests  }
+		completion_reward = {
+		add_ideas = {
+		JAP_railway_success
+		}
+		}
+	}
+
+	#Crush the Unions
+	focus = {
+		id = JAPSEI_crush_the_unions
+		icon = GFX_JAPSEI_crush_the_unions-248360
+		x = 3
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPSEI_the_2nd_national_security_debate  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		}
+	}
+
+	#Appease the Land Owners
+	focus = {
+		id = JAPSEI_appease_the_land_owners
+		icon = GFX_JAPSEI_appease_the_land_owners-248360
+		x = 5
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSEI_honour_the_inukai_legacy  } prerequisite = { focus = JAPSEI_the_2nd_national_security_debate  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_land_reform_variable
+				value = -2
+			}
+			add_stability = -0.1
+			add_political_power = 50
+			add_popularity = {
+			ideology = ROOT
+			popularity = 0.1
+			}
+		}
+	}
+
+	#Encourage Japanese Integration to Taiwan and Chosen
+	focus = {
+		id = JAPSEI_encourage_japanese_integration_to_taiwan_and_chosen
+		icon = GFX_JAPSEI_encourage_japanese_integration_to_taiwan_and_chosen-248360
+		x = 4
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPSEI_crush_the_unions  } prerequisite = { focus = JAPSEI_appease_the_land_owners  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_KOR_INT
+				value = 2.5
+				tooltip = JAP_KOR_INT_increase_tt
+			}
+		add_to_variable = {
+				var = TAI.JAP_TWI_INT
+				value = 2.5
+				tooltip = JAP_TWI_INT_increase_tt
+			}
+		add_ideas = {
+		JAP_colonial_assumilation
+		}
+		}
+	}
+
+	#Integration Through Assimilation
+	focus = {
+		id = JAPSEI_integration_through_assimilation
+		icon = GFX_JAPSEI_integration_through_assimilation-248360
+		x = 1
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPSEI_solve_the_railway_issue  } prerequisite = { focus = JAPSEI_crush_the_unions  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_KOR_INT
+				value = 1
+				tooltip = JAP_KOR_INT_increase_tt
+			}
+		add_to_variable = {
+				var = TAI.JAP_TWI_INT
+				value = 1
+				tooltip = JAP_TWI_INT_increase_tt
+			}
+		add_ideas = {
+		JAP_colonial_assumilation
+		}
+		add_stability = 0.1
+		}
+	}
+
+	#Form the Dai-Nippon Koa-Domei
+	focus = {
+		id = JAPSEI_form_the_dainippon_koadomei
+		icon = GFX_JAPSEI_form_the_dainippon_koadomei-248360
+		x = 0
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPSEI_integration_through_assimilation  }
+		completion_reward = {
+		add_ideas = {
+		JAP_koa_domei
+		}
+		}
+	}
+
+	#Gain Privy Council Support
+	focus = {
+		id = JAPSEI_gain_privy_council_support
+		icon = GFX_JAPSEI_gain_privy_council_support-248360
+		x = 3
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSEI_encourage_japanese_integration_to_taiwan_and_chosen  focus = JAPSEI_integration_through_assimilation  }
+		completion_reward = {
+		add_war_support = 0.1
+		add_political_power = 20
+		}
+	}
+
+	#Further Influence Manchuria
+	focus = {
+		id = JAPSEI_further_influence_manchuria
+		icon = GFX_JAPSEI_further_influence_manchuria-248360
+		x = 5
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPSEI_encourage_japanese_integration_to_taiwan_and_chosen  }
+		completion_reward = {
+		FNG = {
+		add_popularity = {
+		ideology = market_liberal
+		popularity = 0.1
+		}
+		add_ideas = {
+		JAP_manchurian_exploiation
+		}
+		}
+		}
+	}
+
+	#End Party Factionalism
+	focus = {
+		id = JAPSEI_end_party_factionalism
+		icon = GFX_JAPSEI_end_party_factionalism-248360
+		x = 4
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSEI_form_the_dainippon_koadomei  focus = JAPSEI_gain_privy_council_support  focus = JAPSEI_further_influence_manchuria  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_party_factionalism_seiyukai
+		}
+		}
+	}
+
+	#A Union of the East
+	focus = {
+		id = JAPSEI_a_union_of_the_east
+		icon = GFX_JAPSEI_a_union_of_the_east-248360
+		x = 2
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPSEI_form_the_dainippon_koadomei  focus = JAPSEI_gain_privy_council_support  focus = JAPSEI_further_influence_manchuria  }
+		completion_reward = {
+		unlock_decision_category_tooltip = JAP_uniting_with_manchuria_decision_category
+		}
+	}
+
+	#A National Powerhouse
+	focus = {
+		id = JAPSEI_a_national_powerhouse
+		icon = GFX_JAPSEI_a_national_powerhouse-248360
+		x = 3
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPSEI_end_party_factionalism  } prerequisite = { focus = JAPSEI_a_union_of_the_east  }
+		completion_reward = {
+		add_ideas = {
+		JAP_party_seiyukai
+		}
+		}
+	}
+
+	#The Reform Faction Hold
+	focus = {
+		id = JAPSEI_the_reform_faction_hold
+		icon = GFX_JAPSEI_the_reform_faction_hold-248360
+		x = 9
+		y = 1
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPSEI_victory_of_the_seiyukai  }
+		mutually_exclusive = { focus = JAPSEI_orthodox_victory  }
+	}
+
+	#Support Military Expansion
+	focus = {
+		id = JAPSEI_support_military_expansion
+		icon = GFX_JAPSEI_support_military_expansion-248360
+		x = 8
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPSEI_the_reform_faction_hold  }
+		completion_reward = {
+		add_ideas = {
+		JAP_military_expansionism
+		}
+		}
+	}
+
+	#Uphold Anti-Minseitoism
+	focus = {
+		id = JAPSEI_uphold_antiminseitoism
+		icon = GFX_JAPSEI_uphold_antiminseitoism-248360
+		x = 10
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPSEI_the_reform_faction_hold  }
+		completion_reward = {
+		add_popularity = {
+		ideology = social_liberal
+		popularity = -0.5
+		}
+		add_popularity = {
+		ideology = market_liberal
+		popularity = -0.5
+		}
+		add_manpower = -100
+		add_stability = -0.05
+		add_political_power = 100
+		}
+	}
+
+	#Form the Innovation Alliance
+	focus = {
+		id = JAPSEI_form_the_innovation_alliance
+		icon = GFX_JAPSEI_form_the_innovation_alliance-248360
+		x = 10
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPSEI_support_military_expansion  } prerequisite = { focus = JAPSEI_uphold_antiminseitoism  }
+		completion_reward = {
+		add_ideas = {
+		JAP_innovation_alliance
+		}
+		}
+	}
+
+	#National Policy Research Institute
+	focus = {
+		id = JAPSEI_national_policy_research_institute
+		icon = GFX_JAPSEI_national_policy_research_institute-248360
+		x = 8
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPSEI_support_military_expansion  } prerequisite = { focus = JAPSEI_uphold_antiminseitoism  }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+
+	#Zaibatsu Cooperation
+	focus = {
+		id = JAPSEI_zaibatsu_cooperation
+		icon = GFX_JAPSEI_zaibatsu_cooperation-248360
+		x = 7
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPSEI_form_the_innovation_alliance  } prerequisite = { focus = JAPSEI_national_policy_research_institute  }
+		completion_reward = {
+		add_ideas = {
+		JAP_seiyukai_zaibatsu
+		}
+		}
+	}
+
+	#Crack Down on Socialists
+	focus = {
+		id = JAPSEI_crack_down_on_socialists
+		icon = GFX_JAPSEI_crack_down_on_socialists-248360
+		x = 9
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPSEI_form_the_innovation_alliance  } prerequisite = { focus = JAPSEI_national_policy_research_institute  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		}
+	}
+
+	#Maintain the Democratic Status Quo
+	focus = {
+		id = JAPSEI_maintain_the_democratic_status_quo
+		icon = GFX_JAPSEI_maintain_the_democratic_status_quo-248360
+		x = 11
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSEI_form_the_innovation_alliance  } prerequisite = { focus = JAPSEI_national_policy_research_institute  }
+		completion_reward = {
+		add_stability = 0.1
+		}
+		}
+
+	
+
+	#Moderate Land Reforms
+	focus = {
+		id = JAPSEI_moderate_land_reforms
+		icon = GFX_JAPSEI_moderate_land_reforms-248360
+		x = 7
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSEI_zaibatsu_cooperation  } prerequisite = { focus = JAPSEI_crack_down_on_socialists  } prerequisite = { focus = JAPSEI_maintain_the_democratic_status_quo  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_land_reform_variable
+				value = 1
+			}
+			add_stability = -0.075
+			add_political_power = 25
+			add_popularity = {
+			ideology = ROOT
+			popularity = 0.05
+			}
+		}
+	}
+
+	#Support Small Businesses
+	focus = {
+		id = JAPSEI_support_small_businesses
+		icon = GFX_JAPSEI_support_small_businesses-248360
+		x = 7
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPSEI_moderate_land_reforms  }
+		completion_reward = {
+		add_ideas = {
+		JAP_small_companies
+		}
+		}
+	}
+
+	
+
+	#Retain the Leash
+	focus = {
+		id = JAPSEI_retain_the_leash
+		icon = GFX_JAPSEI_retain_the_leash-248360
+		x = 10
+		y = 6
+		cost = 2
+		search_filters = {
+			FOCUS_FILTER_FRA_OCCUPATION_COST
+		}
+		prerequisite = { focus = JAPSEI_zaibatsu_cooperation  } prerequisite = { focus = JAPSEI_crack_down_on_socialists  } prerequisite = { focus = JAPSEI_maintain_the_democratic_status_quo  }
+			completion_reward = {
+			add_to_variable = {
+					var = JAP_KOR_INT
+					value = 1
+					tooltip = JAP_KOR_INT_increase_tt
+				}
+			add_to_variable = {
+					var = TAI.JAP_TWI_INT
+					value = 1
+					tooltip = JAP_TWI_INT_increase_tt
+				}
+			
+			add_stability = -0.1
+			}
+		}
+
+	#Democratic Imperialism
+	focus = {
+		id = JAPSEI_democratic_imperialism
+		icon = GFX_JAPSEI_democratic_imperialism-248360
+		x = 10
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPSEI_formal_annexation  focus = JAPSEI_retain_the_leash  }
+		completion_reward = {
+		add_stability = 0.05
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#Purge the Orthodox Faction
+	focus = {
+		id = JAPSEI_purge_the_orthodox_faction
+		icon = GFX_JAPSEI_purge_the_orthodox_faction-248360
+		x = 7
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = JAPSEI_support_small_businesses  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_party_factionalism_seiyukai
+		}
+		}
+	}
+
+	#Seiyukai Forever!
+	focus = {
+		id = JAPSEI_seiyukaiforever
+		icon = GFX_JAPSEI_seiyukaiforever-248360
+		x = 9
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPSEI_democratic_imperialism  } prerequisite = { focus = JAPSEI_purge_the_orthodox_faction  }
+		completion_reward = {
+		add_ideas = {
+		JAP_party_seiyukai
+		}
+		}
+	}
+
+#Crushing National Radicalism
+	focus = {
+		id = AJPSEIYUKAITWO_crushing_national_radicalism
+		icon = GFX_AJPSEIYUKAITWO_crushing_national_radicalism-248360
+		x = 7
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = AJPSEIYUKAITWO_upholding_party_orthodoxy  focus = AJPSEIYUKAITWO_becoming_a_grassroots_party  }
+		completion_reward = {
+		add_stability = 0.1
+		add_popularity = {
+			ideology = national_populist
+			popularity = -1
+			}
+			add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -1
+			}
+		}
+	}
+
+	#Reach Out to the Japanese Middle Class
+	focus = {
+		id = AJPSEIYUKAITWO_reach_out_to_the_japanese_middle_class
+		icon = GFX_AJPSEIYUKAITWO_reach_out_to_the_japanese_middle_class-248360
+		x = 9
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = AJPSEIYUKAITWO_becoming_a_grassroots_party  }
+		completion_reward = {
+		add_ideas = {
+		JAP_small_companies_1
+		}
+		}
+	}
+
+	#Zaibatsu Alignments
+	focus = {
+		id = AJPSEIYUKAITWO_zaibatsu_alignments
+		icon = GFX_AJPSEIYUKAITWO_zaibatsu_alignments-248360
+		x = 5
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = AJPSEIYUKAITWO_upholding_party_orthodoxy  }
+		completion_reward = {
+		add_ideas = {
+		JAP_seiyukai_zaibatsu
+		}
+		}
+	}
+
+	#Increase Colonial Investments
+	focus = {
+		id = AJPSEIYUKAITWO_increase_colonial_investments
+		icon = GFX_AJPSEIYUKAITWO_increase_colonial_investments-248360
+		x = 8
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = AJPSEIYUKAITWO_crushing_national_radicalism  } prerequisite = { focus = AJPSEIYUKAITWO_reach_out_to_the_japanese_middle_class  focus = AJPSEIYUKAITWO_zaibatsu_alignments  } 
+		completion_reward = {
+			add_to_variable = {
+					var = JAP_KOR_INT
+					value = 1
+					tooltip = JAP_KOR_INT_increase_tt
+				}
+			add_to_variable = {
+					var = TAI.JAP_TWI_INT
+					value = 1
+					tooltip = JAP_TWI_INT_increase_tt
+				}
+			
+			add_ideas = {
+			JAP_colonial_assumilation
+			}
+			}
+	}
+
+	#Trade Union Removal
+	focus = {
+		id = AJPSEIYUKAITWO_trade_union_removal
+		icon = GFX_AJPSEIYUKAITWO_trade_union_removal-248360
+		x = 6
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = AJPSEIYUKAITWO_crushing_national_radicalism  } prerequisite = { focus = AJPSEIYUKAITWO_reach_out_to_the_japanese_middle_class  focus = AJPSEIYUKAITWO_zaibatsu_alignments  } 
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = -1
+			}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = -1
+			}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -1
+			}
+		}
+	}
+
+	#Stand By Traditional Party Alignments
+	focus = {
+		id = AJPSEIYUKAITWO_stand_by_traditional_party_alignments
+		icon = GFX_AJPSEIYUKAITWO_stand_by_traditional_party_alignments-248360
+		x = 6
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = AJPSEIYUKAITWO_increase_colonial_investments  } prerequisite = { focus = AJPSEIYUKAITWO_trade_union_removal  }
+		mutually_exclusive = { focus = AJPSEIYUKAITWO_formation_of_local_clubs  }
+		completion_reward = {
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+			}
+			add_popularity = {
+			ideology = market_liberal
+			popularity = 0.05
+			}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.1
+			}
+		}
+	}
+
+	#Formation of Local Clubs
+	focus = {
+		id = AJPSEIYUKAITWO_formation_of_local_clubs
+		icon = GFX_AJPSEIYUKAITWO_formation_of_local_clubs-248360
+		x = 8
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = AJPSEIYUKAITWO_increase_colonial_investments  } prerequisite = { focus = AJPSEIYUKAITWO_trade_union_removal  }
+		mutually_exclusive = { focus = AJPSEIYUKAITWO_stand_by_traditional_party_alignments  }
+		completion_reward = {
+		add_ideas = {
+		JAP_local_clubs
+		}
+		}
+	}
+
+	#A New Era For Japanese Social Conservatism
+	focus = {
+		id = AJPSEIYUKAITWO_a_new_era_for_japanese_social_conservatism
+		icon = GFX_AJPSEIYUKAITWO_a_new_era_for_japanese_social_conservatism-248360
+		x = 7
+		y = 16
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = AJPSEIYUKAITWO_stand_by_traditional_party_alignments  focus = AJPSEIYUKAITWO_formation_of_local_clubs  }
+		completion_reward = {
+		add_ideas = {
+		JAP_party_seiyukai_1
+		}
+		}
+	}
+
+	#The Seiyukai Secure a New Term
+	focus = {
+		id = AJPSEIYUKAITWO_the_seiyukai_secure_a_new_term
+		icon = GFX_AJPSEIYUKAITWO_the_seiyukai_secure_a_new_term-248360
+		x = 7
+		y = 11
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+	}
+
+	#Upholding Party Orthodoxy
+	focus = {
+		id = AJPSEIYUKAITWO_upholding_party_orthodoxy
+		icon = GFX_AJPSEIYUKAITWO_upholding_party_orthodoxy-248360
+		x = 6
+		y = 12
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = AJPSEIYUKAITWO_the_seiyukai_secure_a_new_term  }
+		mutually_exclusive = { focus = AJPSEIYUKAITWO_becoming_a_grassroots_party  }
+	}
+
+	#Becoming a Grassroots Party
+	focus = {
+		id = AJPSEIYUKAITWO_becoming_a_grassroots_party
+		icon = GFX_AJPSEIYUKAITWO_becoming_a_grassroots_party-248360
+		x = 8
+		y = 12
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = AJPSEIYUKAITWO_the_seiyukai_secure_a_new_term  }
+		mutually_exclusive = { focus = AJPSEIYUKAITWO_upholding_party_orthodoxy  }
+	}
+
+}

@@ -1,0 +1,1863 @@
+
+	
+	#Army-Navy Harmony
+	shared_focus = {
+		id = JAPARMY_armynavy_harmony
+		icon = GFX_JAPARMY_armynavy_harmony-248360
+		x = 37
+		y = 4
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		has_country_flag = factionalism_japan_no
+		}
+		prerequisite = { focus = JAPARMY_expand_the_kure_naval_arsenal  focus = JAPARMY_teishin_shudan  }
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = JAP_naval_army_comp_army_way
+				}
+			swap_ideas = {
+			remove_idea = JAP_naval_army_comp_army_way
+			add_idea = JAP_naval_army_comp_army_way_1
+			}
+			}
+			
+			else_if = {
+				limit = {
+					has_idea = JAP_naval_army_comp_navy_way
+				}
+				swap_ideas = {
+					remove_idea = JAP_naval_army_comp_navy_way
+					add_idea = JAP_naval_army_comp_navy_way_1
+				}
+			}
+		}
+	}
+
+	#Continue Strengthening Military Industry
+	shared_focus = {
+		id = JAPARMY_continue_strengthening_military_industry
+		icon = GFX_JAPARMY_continue_strengthening_military_industry-248360
+		x = 43
+		y = 8
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_increase_the_armynavy_budgets  } prerequisite = { focus = JAPARMY_increasing_naval_landing_forces  } prerequisite = { focus = JAPARMY_mobilize_the_reserves  }
+		completion_reward = {
+		unlock_mio_policy_tooltip = JAP_koishikawa_arsenal_organisation
+		}
+	}
+
+	#Learning From the Weltkrieg
+	shared_focus = {
+		id = JAPARMY_learning_from_the_weltkrieg
+		icon = GFX_JAPARMY_learning_from_the_weltkrieg-248360
+		x = 29
+		y = 6
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_reform_the_disarmament_policy  }
+		completion_reward = {
+			army_experience = 50
+			add_doctrine_cost_reduction = {
+				name = JAP_weltkreig_lessons
+				cost_reduction = 0.5
+				uses = 3
+				category = land_doctrine
+			}
+		}
+	}
+
+	#Reform the Disarmament Policy
+	shared_focus = {
+		id = JAPARMY_reform_the_disarmament_policy
+		icon = GFX_JAPARMY_reform_the_disarmament_policy-248360
+		x = 31
+		y = 5
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_armynavy_harmony  }
+		mutually_exclusive = { focus = JAPARMY_abandoning_dissarmament  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_long_war_doctrine"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			add_doctrine_cost_reduction = {
+				name = JAP_long_war_doctrine
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			custom_effect_tooltip = JAP_unlock_development_plans
+
+			set_variable = { JAP_long_war_plan_year = 1 }
+
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = available_chief_of_staff
+			show_ideas_tooltip = JAP_Nagata_Tetsuzan_cos_pau
+			clr_country_flag = Nagata_Tetsuzan_dead
+		}
+	}
+
+	#Lessons From the Ministry of Munitions
+	shared_focus = {
+		id = JAPARMY_lessons_from_the_ministry_of_munitions
+		icon = GFX_JAPARMY_lessons_from_the_ministry_of_munitions-248360
+		x = 41
+		y = 6
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_abandoning_dissarmament  }
+		completion_reward = {
+		add_ideas = {
+			JAP_lessons_from_the_ministry_of_munitions
+		}
+		}
+	}
+
+	#Increase the Army-Navy Budgets
+	shared_focus = {
+		id = JAPARMY_increase_the_armynavy_budgets
+		icon = GFX_JAPARMY_increase_the_armynavy_budgets-248360
+		x = 43
+		y = 7
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_abandoning_dissarmament  }
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = JAP_naval_army_comp_navy_way_1
+				}
+				swap_ideas = {
+					remove_idea = JAP_naval_army_comp_navy_way_1
+					add_idea = JAP_new_budgets
+					}
+			}
+			if = {
+				limit = {
+					has_idea = JAP_naval_army_comp_army_way_1
+				}
+				swap_ideas = {
+					remove_idea = JAP_naval_army_comp_army_way_1
+					add_idea = JAP_new_budgets
+					}
+			}
+		}
+	}
+
+	#Increased Warship Administration Costs
+	shared_focus = {
+		id = JAPARMY_increased_warship_administration_costs
+		icon = GFX_JAPARMY_increased_warship_administration_costs-248360
+		x = 45
+		y = 6
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_abandoning_dissarmament  }
+		completion_reward = {
+			add_ideas = {
+			JAP_increased_warship_cost
+			}
+			add_doctrine_cost_reduction = {
+				name = JAP_battle_ship
+				cost_reduction = 0.5
+				uses = 1
+				category = bb_tech
+			}
+		}
+	}
+
+	#Increasing Naval Landing Forces
+	shared_focus = {
+		id = JAPARMY_increasing_naval_landing_forces
+		icon = GFX_JAPARMY_increasing_naval_landing_forces-248360
+		x = 45
+		y = 7
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_increased_warship_administration_costs  }
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = JAP_marines
+				cost_reduction = 1
+				uses = 2
+				category = marine_tech
+			}
+		}
+	}
+
+	#Mobilize the Reserves
+	shared_focus = {
+		id = JAPARMY_mobilize_the_reserves
+		icon = GFX_JAPARMY_mobilize_the_reserves-248360
+		x = 41
+		y = 7
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARMY_lessons_from_the_ministry_of_munitions  }
+		completion_reward = {
+		add_ideas = {
+			JAP_reserve_mobilizers
+		}
+		}
+	}
+
+	#Psychological Warfare
+	shared_focus = {
+		id = JAPARMY_psychological_warfare
+		icon = GFX_JAPARMY_psychological_warfare-248360
+		x = 38
+		y = 9
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_supremacy_of_will  } prerequisite = { focus = JAPARMY_increasing_weapons_production  }
+		completion_reward = {
+		add_ideas = {
+		JAP_psychological_warfare
+		}
+		}
+	}
+
+	#Military Unity
+	shared_focus = {
+		id = JAPARMY_military_unity
+		icon = GFX_JAPARMY_military_unity-248360
+		x = 37
+		y = 10
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPARMY_hell_from_above  focus = JAPARMY_psychological_warfare  }
+		completion_reward = {
+		add_stability = 0.15
+		add_ideas = {
+		JAP_new_budgets_1
+		}
+		}
+	}
+
+	#Supremacy of Will
+	shared_focus = {
+		id = JAPARMY_supremacy_of_will
+		icon = GFX_JAPARMY_supremacy_of_will-248360
+		x = 38
+		y = 7
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_defence_of_the_home_islands  }
+		mutually_exclusive = { focus = JAPARMY_air_land_supremacy  }
+		completion_reward = {
+		add_ideas = {
+		JAP_supremacy_of_will
+		}
+		}
+	}
+
+	#Increasing Weapons Production
+	shared_focus = {
+		id = JAPARMY_increasing_weapons_production
+		icon = GFX_JAPARMY_increasing_weapons_production-248360
+		x = 37
+		y = 8
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_air_land_supremacy  focus = JAPARMY_supremacy_of_will  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_logistics_corps"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			custom_effect_tooltip = tech_improved_logistics_effect
+			hidden_effect = {
+				set_technology = { tech_improved_logistics = 1 popup = no }
+			}
+		}
+	}
+
+	#Hell From Above
+	shared_focus = {
+		id = JAPARMY_hell_from_above
+		icon = GFX_JAPARMY_hell_from_above-248360
+		x = 36
+		y = 9
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_air_land_supremacy  } prerequisite = { focus = JAPARMY_increasing_weapons_production  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_intensive_pilot_training"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			air_experience = 35
+			add_doctrine_cost_reduction = {
+				name = JAP_intensive_pilot_training
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+			if = {
+				limit = { has_completed_focus = JAP_long_war_doctrine }
+				swap_ideas = {
+					remove_idea = JAP_reformist_air_force_lw
+					add_idea = JAP_reformist_air_force_lw_2
+				}
+			}
+			else_if = {
+				limit = { has_completed_focus = JAP_short_war_doctrine }
+				swap_ideas = {
+					remove_idea = JAP_traditionalist_air_force_sw
+					add_idea = JAP_sw_air_2
+				}
+			}
+			else = {
+				custom_effect_tooltip = JAP_line
+				custom_effect_tooltip = JAP_if_long_war
+				swap_ideas = {
+					remove_idea = JAP_reformist_air_force_lw
+					add_idea = JAP_reformist_air_force_lw_2
+				}
+				custom_effect_tooltip = JAP_if_short_war
+				swap_ideas = {
+					remove_idea = JAP_traditionalist_air_force_sw
+					add_idea = JAP_sw_air_2
+				}
+			}
+		}
+	}
+
+	#Air Land Supremacy
+	shared_focus = {
+		id = JAPARMY_air_land_supremacy
+		icon = GFX_JAPARMY_air_land_supremacy-248360
+		x = 36
+		y = 7
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_defence_of_the_home_islands  }
+		mutually_exclusive = { focus = JAPARMY_supremacy_of_will  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_strengthen_the_ijaas"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			if = {
+				limit = { has_completed_focus = JAP_long_war_doctrine }
+				add_ideas = JAP_reformist_air_force_lw
+			}
+			else_if = {
+				limit = { has_completed_focus = JAP_short_war_doctrine }
+				add_ideas = JAP_traditionalist_air_force_sw
+			}
+			else = {
+				custom_effect_tooltip = JAP_if_long_war
+				add_ideas = JAP_reformist_air_force_lw
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = JAP_if_short_war
+				add_ideas = JAP_traditionalist_air_force_sw
+			}
+		}
+	}
+
+	#Defence of the Home Islands
+	shared_focus = {
+		id = JAPARMY_defence_of_the_home_islands
+		icon = GFX_JAPARMY_defence_of_the_home_islands-248360
+		x = 37
+		y = 6
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_armynavy_harmony  } prerequisite = { focus = JAPARMY_reform_the_disarmament_policy focus = JAPARMY_abandoning_dissarmament	}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_plan_edit_1"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			if = {
+				limit = { has_completed_focus = JAP_long_war_doctrine }
+				army_experience = 100
+				custom_effect_tooltip = JAP_unlock_new_triangular
+				division_template = {
+					name = "Santanisei Shidan"
+					division_names_group = JAP_INF_01
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+						infantry = { x = 2 y = 0 }
+						infantry = { x = 2 y = 1 }
+						infantry = { x = 2 y = 2 }
+						artillery_brigade = { x = 0 y = 3 }
+						artillery_brigade = { x = 1 y = 3 }
+						artillery_brigade = { x = 2 y = 3 }
+					}
+					support = {
+						engineer = { x = 0 y = 0 }
+						artillery = { x = 0 y = 1 }
+						recon = { x = 0 y = 2 }
+					}
+				}
+			}
+			else_if = {
+				limit = { has_completed_focus = JAP_short_war_doctrine }
+				army_experience = 100
+				subtract_from_variable = {
+					tooltip = JAP_free_war_plans
+					JAP_CP_cost = 30
+				}
+			}
+			else = {
+				custom_effect_tooltip = JAP_if_long_war
+				effect_tooltip = {
+					army_experience = 100
+					custom_effect_tooltip = JAP_unlock_new_triangular
+					division_template = {
+						name = "Santanisei Shidan"
+						division_names_group = JAP_INF_01
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 0 y = 4 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							artillery_brigade = { x = 2 y = 0 }
+							artillery_brigade = { x = 2 y = 1 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							artillery = { x = 0 y = 1 }
+							recon = { x = 0 y = 2 }
+						}
+					}
+				}
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = JAP_if_short_war
+				effect_tooltip = {
+					army_experience = 100
+					subtract_from_variable = {
+						tooltip = JAP_free_war_plans
+						JAP_CP_cost = 30
+					}
+				}
+			}
+		}
+	}
+
+	#Modernisation of the Shipyards
+	shared_focus = {
+		id = JAPARMY_modernisation_of_the_shipyards
+		icon = GFX_JAPARMY_modernisation_of_the_shipyards-248360
+		x = 32
+		y = 8
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_efficient_munitions_manufacturing  } prerequisite = { focus = JAPARMY_new_military_industry  }
+		completion_reward = {
+			add_ideas = {
+				JAP_dockyard_improvement
+			}
+		}
+	}
+
+	#Abandoning Dissarmament
+	shared_focus = {
+		id = JAPARMY_abandoning_dissarmament
+		icon = GFX_JAPARMY_abandoning_dissarmament-248360
+		x = 43
+		y = 5
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_armynavy_harmony  }
+		mutually_exclusive = { focus = JAPARMY_reform_the_disarmament_policy  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_short_war_doctrine"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			add_doctrine_cost_reduction = {
+				name = JAP_short_war_doctrine
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			set_variable = { JAP_sw_length_var = 180 }
+			set_variable = { JAP_sw_warplan_research_time = 365 }
+			set_variable = { JAP_CP_cost = 3
+		ai_will_do = {
+			factor = 50
+		}	0 }
+			custom_effect_tooltip = JAP_unlock_war_plans
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = available_chief_of_staff
+			show_ideas_tooltip = JAP_Obata_Toshiro_cos_pau
+			clr_country_flag = JAP_Obata_Toshiro_dead
+		}
+		
+	}
+
+	#Defenders of the Sky
+	shared_focus = {
+		id = JAPARMY_defenders_of_the_sky
+		icon = GFX_JAPARMY_defenders_of_the_sky-248360
+		x = 32
+		y = 13
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_military_education_improvements  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_the_zero"
+			add_to_variable = { JAP_compled_nav_focuses = 1 }
+			if = {
+				limit = { has_dlc_bba = yes }
+				if = {
+					limit = { has_tech = improved_small_airframe }
+					add_tech_bonus = {
+						name = JAP_the_zero
+						bonus = 1
+						uses = 1
+						category = cat_air_engine
+					}
+					custom_effect_tooltip = tooltip_white_line
+					create_equipment_variant = {
+						name = "Mitsubishi A6M Rei-sen Model 11"
+						type = cv_small_plane_airframe_2
+						modules = {
+							fixed_main_weapon_slot = aircraft_cannon_1_2x
+							fixed_auxiliary_weapon_slot_1 = heavy_mg_2x
+							fixed_auxiliary_weapon_slot_2 = bomb_locks
+							engine_type_slot = engine_3_1x
+							special_type_slot_1 = self_sealing_fuel_tanks_small
+							special_type_slot_2 = fuel_tanks_small
+						}
+					}
+				}
+				else = {
+					add_tech_bonus = {
+						name = JAP_the_zero
+						ahead_reduction = 1
+						uses = 1
+						technology = improved_small_airframe
+					}
+					custom_effect_tooltip = tooltip_white_line
+					custom_effect_tooltip = JAP_the_zero_bba_tt
+				}
+			}
+			else_if = {
+				limit = { has_tech = cv_fighter2 }
+				create_equipment_variant = {
+					name = "Mitsubishi A6M Rei-sen Model 11"
+					type = cv_fighter_equipment_2
+					parent_version = 0
+					upgrades = {
+						plane_reliability_upgrade = 2
+						plane_engine_upgrade = 3
+						plane_range_upgrade = 3
+					}
+				}
+			}
+			else = {
+				add_tech_bonus = {
+					name = JAP_the_zero
+					ahead_reduction = 1
+					uses = 1
+					technology = fighter2
+					technology = cv_fighter2
+				}
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = JAP_the_zero_not_bba_tt
+			}
+		}
+	}
+
+	#Stronger and More Advanced
+	shared_focus = {
+		id = JAPARMY_stronger_and_more_advanced
+		icon = GFX_JAPARMY_stronger_and_more_advanced-248360
+		x = 31
+		y = 14
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARMY_defenders_of_the_sky  } prerequisite = { focus = JAPARMY_crystallization_of_japanese_technology  }
+		completion_reward = {
+		add_ideas = {
+		JAP_stronger_and_more_advanced
+		}
+		}
+	}
+
+	#Army Elitism
+	shared_focus = {
+		id = JAPARMY_army_elitism
+		icon = GFX_JAPARMY_army_elitism-248360
+		x = 31
+		y = 11
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPARMY_formal_end_to_disarmament  }
+		completion_reward = {
+		add_war_support = 0.1
+		add_stability = 0.1
+		army_experience = 25
+		}
+	}
+
+	#High Performance Firearms
+	shared_focus = {
+		id = JAPARMY_high_performance_firearms
+		icon = GFX_JAPARMY_high_performance_firearms-248360
+		x = 30
+		y = 12
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_army_elitism  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_phase_out_arisakas"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			if = {
+				limit = { has_completed_focus = JAP_long_war_doctrine }
+				add_tech_bonus = {
+					name = JAP_phase_out_arisakas
+					ahead_reduction = 1
+					uses = 1
+					category = infantry_weapons
+				}
+				add_ideas = JAP_quality_equipment_lw
+			}
+			
+			else = {
+				custom_effect_tooltip = JAP_if_long_war
+				add_tech_bonus = {
+					name = JAP_phase_out_arisakas
+					ahead_reduction = 1
+					uses = 1
+					category = infantry_weapons
+				}
+				add_ideas = JAP_quality_equipment_lw
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = JAP_if_short_war
+				add_tech_bonus = {
+					name = JAP_phase_out_arisakas
+					bonus = 1
+					uses = 1
+					category = infantry_weapons
+				}
+				effect_tooltip = { add_ideas = JAP_equipment_sw_0 }
+			}
+		}
+	}
+
+	#Military Education Improvements
+	shared_focus = {
+		id = JAPARMY_military_education_improvements
+		icon = GFX_JAPARMY_military_education_improvements-248360
+		x = 32
+		y = 12
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_army_elitism  }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+
+	#Improving Naval Performance
+	shared_focus = {
+		id = JAPARMY_improving_naval_performance
+		icon = GFX_JAPARMY_improving_naval_performance-248360
+		x = 34
+		y = 8
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_efficient_munitions_manufacturing  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_start_the_third_circle_plan"
+			add_to_variable = { JAP_compled_nav_focuses = 1 }
+			set_country_flag = { flag = JAP_third_maru_keikaku_ongoing days = 1068 }
+			set_technology = {
+				interwar_antiair = 1
+				basic_fire_control_system = 1
+			}
+			hidden_effect = {
+				create_equipment_variant = {
+					name = "Shokaku Class"
+					type = ship_hull_carrier_1
+					name_group = JAP_CV_HISTORICAL
+					parent_version = 0
+					modules = {
+						fixed_ship_deck_slot_1 = ship_deck_space
+						fixed_ship_deck_slot_2 = ship_deck_space
+						fixed_ship_anti_air_slot = ship_anti_air_2
+						fixed_ship_radar_slot = empty
+						fixed_ship_engine_slot = carrier_ship_engine_2
+						fixed_ship_secondaries_slot = ship_secondaries_1
+						front_1_custom_slot = ship_deck_space
+					}
+				}
+				add_equipment_production = {
+					equipment = {
+						type = ship_hull_carrier_1
+						creator = "JAP"
+						version_name = "Shokaku Class"
+					}
+					requested_factories = 3
+					progress = 0.4
+					amount = 1
+				}
+				add_equipment_production = {
+					equipment = {
+						type = ship_hull_carrier_1
+						creator = "JAP"
+						version_name = "Shokaku Class"
+					}
+					requested_factories = 3
+					progress = 0.4
+					amount = 1
+				}
+				create_equipment_variant = {
+					name = "Kawachi Class"
+					type = ship_hull_heavy_2
+					name_group = JAP_PREFECTURES
+					parent_version = 0
+					modules = {
+						fixed_ship_battery_slot = ship_heavy_battery_2
+						fixed_ship_anti_air_slot = ship_anti_air_2
+						fixed_ship_fire_control_system_slot = ship_fire_control_system_1
+						fixed_ship_radar_slot = empty
+						fixed_ship_engine_slot = heavy_ship_engine_2
+						fixed_ship_secondaries_slot = ship_secondaries_2
+						fixed_ship_armor_slot = ship_armor_bb_2
+						front_1_custom_slot = empty
+						mid_1_custom_slot = ship_anti_air_2
+						mid_2_custom_slot = ship_airplane_launcher_1
+						rear_1_custom_slot = ship_heavy_battery_2
+					}
+				}
+				add_equipment_production = {
+					equipment = {
+						type = ship_hull_heavy_2
+						creator = "JAP"
+						version_name = "Kawachi Class"
+					}
+					requested_factories = 3
+					progress = 0.4
+					amount = 1
+				}
+
+				add_equipment_production = {
+					equipment = {
+						type = ship_hull_heavy_2
+						creator = "JAP"
+						version_name = "Kawachi Class"
+					}
+					requested_factories = 3
+					progress = 0.4
+					amount = 1
+				}
+			}
+			custom_effect_tooltip = JAP_third_circle_tt
+		}
+	}
+
+	#Elaboration on the Army
+	shared_focus = {
+		id = JAPARMY_elaboration_on_the_army
+		icon = GFX_JAPARMY_elaboration_on_the_army-248360
+		x = 32
+		y = 9
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARMY_modernisation_of_the_shipyards  } prerequisite = { focus = JAPARMY_improving_naval_performance  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_new_field_manuals"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			swap_ideas = {
+				remove_idea = JAP_shared_modernisation_1
+				add_idea = JAP_army_modernization_2
+			}
+		}
+	}
+
+	#Conscription Reforms
+	shared_focus = {
+		id = JAPARMY_conscription_reforms
+		icon = GFX_JAPARMY_conscription_reforms-248360
+		x = 30
+		y = 9
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARMY_new_organization_targets  } prerequisite = { focus = JAPARMY_hismajestyspower  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_plan_edit_3"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			if = {
+				limit = { has_completed_focus = JAP_long_war_doctrine }
+				add_timed_idea = {
+					idea = JAP_total_war_preparation
+					days = 250
+				}
+			}
+			else_if = {
+				limit = {
+					has_dlc_lar = yes
+					has_completed_focus = JAP_short_war_doctrine
+				}
+				set_variable = { JAP_dummy_var = 20 }
+				custom_effect_tooltip = JAP_change_war_prep
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = JAP_change_strike_against
+				custom_effect_tooltip = JAP_attack_bonus_against_tt
+				custom_effect_tooltip = JAP_breakthrough_bonus_against_tt
+			}
+			else_if = {
+				limit = { has_completed_focus = JAP_short_war_doctrine }
+				set_variable = { JAP_dummy_var = 20 }
+				custom_effect_tooltip = JAP_change_war_prep_not_lar
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = JAP_change_strike_against
+				custom_effect_tooltip = JAP_attack_bonus_against_tt
+				custom_effect_tooltip = JAP_breakthrough_bonus_against_tt
+			}
+			else_if = {
+				limit = { has_dlc_lar = yes }
+				custom_effect_tooltip = JAP_if_long_war
+				effect_tooltip = {
+					add_timed_idea = {
+						idea = JAP_total_war_preparation
+						days = 250
+					}
+				}
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = JAP_if_short_war
+				effect_tooltip = {
+					set_variable = { JAP_dummy_var = 20 }
+					custom_effect_tooltip = JAP_change_war_prep
+					custom_effect_tooltip = tooltip_white_line
+					custom_effect_tooltip = JAP_change_strike_against
+					custom_effect_tooltip = JAP_attack_bonus_against_tt
+					custom_effect_tooltip = JAP_breakthrough_bonus_against_tt
+				}
+			}
+			else = {
+				custom_effect_tooltip = JAP_if_long_war
+				effect_tooltip = {
+					add_timed_idea = {
+						idea = JAP_total_war_preparation
+						days = 250
+					}
+				}
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = JAP_if_short_war
+				effect_tooltip = {
+					set_variable = { JAP_dummy_var = 20 }
+					custom_effect_tooltip = JAP_change_war_prep_not_lar
+					custom_effect_tooltip = tooltip_white_line
+					custom_effect_tooltip = JAP_change_strike_against
+					custom_effect_tooltip = JAP_attack_bonus_against_tt
+					custom_effect_tooltip = JAP_breakthrough_bonus_against_tt
+				}
+			}
+		}
+	}
+
+	#New Military Industry
+	shared_focus = {
+		id = JAPARMY_new_military_industry
+		icon = GFX_JAPARMY_new_military_industry-248360
+		x = 31
+		y = 7
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_learning_from_the_weltkrieg  } prerequisite = { focus = JAPARMY_from_old_to_new  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_supremacy_of_logistics"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			if = {
+				limit = { has_completed_focus = JAP_long_war_doctrine }
+				add_tech_bonus = {
+					name = JAP_supremacy_of_logistics
+					ahead_reduction = 1
+					uses = 2
+					category = support_tech
+				}
+				custom_effect_tooltip = improved_recon_units_tech_effect
+				hidden_effect = {
+					set_technology = { improved_recon_units_tech = 1 popup = no }
+				}
+			}
+			else_if = {
+				limit = { has_completed_focus = JAP_short_war_doctrine }
+				add_tech_bonus = {
+					name = JAP_supremacy_of_logistics
+					bonus = 1
+					uses = 2
+					category = support_tech
+				}
+				custom_effect_tooltip = JAP_modify_supp
+				hidden_effect = {
+					if = {
+						limit = { has_idea = JAP_equipment_sw_0 }
+						swap_ideas = {
+							remove_idea = JAP_equipment_sw_0
+							add_idea = JAP_equipment_sw_2
+						}
+					}
+					else = {
+						swap_ideas = {
+							remove_idea = JAP_equipment_sw_1
+							add_idea = JAP_equipment_sw_3
+						}
+					}
+				}
+			}
+			else = {
+				custom_effect_tooltip = JAP_if_long_war
+				add_tech_bonus = {
+					name = JAP_supremacy_of_logistics
+					ahead_reduction = 1
+					uses = 2
+					category = support_tech
+				}
+				custom_effect_tooltip = improved_recon_units_tech_effect
+				hidden_effect = {
+					set_technology = { improved_recon_units_tech = 1 popup = no }
+				}
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = JAP_if_short_war
+				add_tech_bonus = {
+					name = JAP_supremacy_of_logistics
+					bonus = 1
+					uses = 2
+					category = support_tech
+				}
+				custom_effect_tooltip = JAP_modify_supp
+			}
+		}
+	}
+
+	#Kempeitai Training
+	shared_focus = {
+		id = JAPARMY_kempeitai_training
+		icon = GFX_JAPARMY_kempeitai_training-248360
+		x = 29
+		y = 7
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_learning_from_the_weltkrieg  } prerequisite = { focus = JAPARMY_from_old_to_new  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_coordinate_intelligence_services"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			if = {
+				limit = { has_dlc_lar = no }
+				add_political_power = 50
+				add_ideas = JAP_coordinated_intelligence_no_lar
+			}
+			else_if = {
+				limit = { has_intelligence_agency = no }
+				create_intelligence_agency = yes
+			}
+			else_if = {
+				limit = { NOT = { has_done_agency_upgrade = upgrade_form_department } }
+				upgrade_intelligence_agency = upgrade_form_department
+			}
+			else_if = {
+				limit = { NOT = { has_done_agency_upgrade = upgrade_psycho_warfare } }
+				upgrade_intelligence_agency = upgrade_psycho_warfare
+			}
+			else = { add_political_power = 50 }
+			if = {
+				limit = { has_dlc_lar = yes }
+				add_ideas = JAP_coordinated_intelligence
+			}
+		}
+	}
+
+	#His Majesty's Power
+	shared_focus = {
+		id = JAPARMY_hismajestyspower
+		icon = GFX_JAPARMY_hismajestyspower-248360
+		x = 28
+		y = 8
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARMY_kempeitai_training  }
+		completion_reward = {
+		add_war_support = 0.2
+		}
+	}
+
+	#New Organization Targets
+	shared_focus = {
+		id = JAPARMY_new_organization_targets
+		icon = GFX_JAPARMY_new_organization_targets-248360
+		x = 30
+		y = 8
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARMY_new_military_industry  } prerequisite = { focus = JAPARMY_kempeitai_training  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_update_the_imperial_war_college"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			add_ideas = JAP_shared_modernisation_1
+		}
+	}
+
+	#From Old To New
+	shared_focus = {
+		id = JAPARMY_from_old_to_new
+		icon = GFX_JAPARMY_from_old_to_new-248360
+		x = 33
+		y = 6
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARMY_reform_the_disarmament_policy  }
+		completion_reward = {
+		add_ideas = {
+		JAP_old_to_new
+		}
+		}
+	}
+
+	#Efficient Munitions Manufacturing
+	shared_focus = {
+		id = JAPARMY_efficient_munitions_manufacturing
+		icon = GFX_JAPARMY_efficient_munitions_manufacturing-248360
+		x = 33
+		y = 7
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_from_old_to_new  }
+		completion_reward = {
+		add_ideas = {
+		JAP_efficient_munitions_manufacturing
+		}
+		}
+	}
+
+	#Formal End to Disarmament
+	shared_focus = {
+		id = JAPARMY_formal_end_to_disarmament
+		icon = GFX_JAPARMY_formal_end_to_disarmament-248360
+		x = 31
+		y = 10
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARMY_elaboration_on_the_army  } prerequisite = { focus = JAPARMY_conscription_reforms  }
+		completion_reward = {
+		add_political_power = 200
+		add_stability = 0.1
+		}
+	}
+
+	#Crystallization of Japanese Technology
+	shared_focus = {
+		id = JAPARMY_crystallization_of_japanese_technology
+		icon = GFX_JAPARMY_crystallization_of_japanese_technology-248360
+		x = 30
+		y = 13
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_high_performance_firearms  }
+		completion_reward = {
+		add_tech_bonus = {
+			name = RUS_Equipment_Modernisation 
+			bonus = 1
+			uses = 2
+			category = infantry_weapons
+			category = artillery
+		}
+		}
+	}
+
+	#Mass Assault Tanks
+	shared_focus = {
+		id = JAPARMY_mass_assault_tanks
+		icon = GFX_JAPARMY_mass_assault_tanks-248360
+		x = 40
+		y = 8
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_increase_the_armynavy_budgets  } prerequisite = { focus = JAPARMY_mobilize_the_reserves  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_armoured_experiments"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			add_tech_bonus = {
+				name = JAP_armoured_experiments
+				bonus = 1
+				ahead_reduction = 1
+				uses = 1
+				category = armor
+			}
+			swap_ideas = {
+				remove_idea = JAP_quality_equipment_lw_2
+				add_idea = JAP_quality_equipment_lw_3
+			}
+			division_template = {
+				name = "Dokuritsu Konsei Ryodan II"
+				division_names_group = JAP_IMB_01
+				regiments = {
+					light_armor = { x = 0 y = 0 }
+					light_armor = { x = 0 y = 1 }
+					light_armor = { x = 0 y = 2 }
+					light_armor = { x = 0 y = 3 }
+					light_armor = { x = 0 y = 4 }
+					motorized = { x = 1 y = 0 }
+					motorized = { x = 1 y = 1 }
+					motorized = { x = 1 y = 2 }
+					motorized = { x = 1 y = 3 }
+					motorized = { x = 1 y = 4 }
+				}
+				support = {
+					mot_recon = { x = 0 y = 0 }
+					artillery = { x = 0 y = 1 }
+				}
+			}
+			custom_effect_tooltip = JAP_deploy_tanks
+			hidden_effect = {
+				random_owned_controlled_state = {
+					prioritize = { 745 }
+					create_unit = {
+						division = "division_template = \"Dokuritsu Konsei Ryodan II\" start_experience_factor = 0.3"
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	#Sailing Across the Pacific
+	shared_focus = {
+		id = JAPARMY_sailing_across_the_pacific
+		icon = GFX_JAPARMY_sailing_across_the_pacific-248360
+		x = 46
+		y = 8
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_increase_the_armynavy_budgets  } prerequisite = { focus = JAPARMY_increasing_naval_landing_forces  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_pacific_defence_zone"
+			add_to_variable = { JAP_compled_nav_focuses = 1 }
+			every_controlled_state = {
+				limit = { is_pacific_islands = yes }
+				add_building_construction = {
+					type = coastal_bunker
+					level = 4
+					province = {
+						all_provinces = yes
+						limit_to_naval_base = yes
+					}
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					province = {
+						all_provinces = yes
+						limit_to_naval_base = yes
+					}
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				name = JAP_expand_the_snlf
+				uses = 1
+				ahead_reduction = 2
+				category = marine_tech
+				category = tp_tech
+			}
+		}
+	}
+
+	#A Great Naval Power
+	shared_focus = {
+		id = JAPARMY_a_great_naval_power
+		icon = GFX_JAPARMY_a_great_naval_power-248360
+		x = 45
+		y = 9
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_continue_strengthening_military_industry  } prerequisite = { focus = JAPARMY_sailing_across_the_pacific  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_leviathans_of_the_pacific"
+			add_to_variable = { JAP_compled_nav_focuses = 1 }
+			add_tech_bonus = {
+				name = JAP_leviathans_of_the_pacific
+				bonus = 1
+				uses = 2
+				category = bb_tech
+			}
+		}
+	}
+
+	#Production Re-Scaling
+	shared_focus = {
+		id = JAPARMY_production_rescaling
+		icon = GFX_JAPARMY_production_rescaling-248360
+		x = 43
+		y = 10
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_continue_strengthening_military_industry  } prerequisite = { focus = JAPARMY_military_school_expansions  } prerequisite = { focus = JAPARMY_a_great_naval_power  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_lessons_from_the_ministry_of_munitions
+		add_idea = JAP_lessons_from_the_ministry_of_munitions_1
+		}
+		}
+	}
+
+	#Military School Expansions
+	shared_focus = {
+		id = JAPARMY_military_school_expansions
+		icon = GFX_JAPARMY_military_school_expansions-248360
+		x = 41
+		y = 9
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_mass_assault_tanks  } prerequisite = { focus = JAPARMY_continue_strengthening_military_industry  }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+
+	#State the Mechanization Programme
+	shared_focus = {
+		id = JAPARMY_state_the_mechanization_programme
+		icon = GFX_JAPARMY_state_the_mechanization_programme-248360
+		x = 43
+		y = 11
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_production_rescaling  }
+		completion_reward = {
+		add_ideas = {
+		tank_academy
+		FRA_tank_assembly_line_idea
+		}
+		
+		}
+	}
+
+	#Conscript the Non-Citizens
+	shared_focus = {
+		id = JAPARMY_conscript_the_noncitizens
+		icon = GFX_JAPARMY_conscript_the_noncitizens-248360
+		x = 41
+		y = 12
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARMY_state_the_mechanization_programme  }
+	}
+
+	#Strengthen the Army-Air Corps
+	shared_focus = {
+		id = JAPARMY_strengthen_the_armyair_corps
+		icon = GFX_JAPARMY_strengthen_the_armyair_corps-248360
+		x = 43
+		y = 12
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_state_the_mechanization_programme  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_open_new_flight_schools"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			air_experience = 65
+			if = {
+				limit = { has_completed_focus = JAP_long_war_doctrine }
+				swap_ideas = {
+					remove_idea = JAP_reformist_air_force_lw_2
+					add_idea = JAP_reformist_air_force_lw_3
+				}
+			}
+			else_if = {
+				limit = { has_completed_focus = JAP_short_war_doctrine }
+				swap_ideas = {
+					remove_idea = JAP_sw_air_2
+					add_idea = JAP_sw_air_3
+				}
+			}
+			else = {
+				custom_effect_tooltip = JAP_line
+				custom_effect_tooltip = JAP_if_long_war
+				swap_ideas = {
+					remove_idea = JAP_reformist_air_force_lw_2
+					add_idea = JAP_reformist_air_force_lw_3
+				}
+				custom_effect_tooltip = JAP_if_short_war
+				swap_ideas = {
+					remove_idea = JAP_sw_air_2
+					add_idea = JAP_sw_air_3
+				}
+			}
+		}
+	}
+
+	#Increasing the Worker Numbers
+	shared_focus = {
+		id = JAPARMY_increasing_the_worker_numbers
+		icon = GFX_JAPARMY_increasing_the_worker_numbers-248360
+		x = 45
+		y = 12
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARMY_state_the_mechanization_programme  }
+		completion_reward = {
+		add_ideas = {
+		JAP_reserve_mobilizers
+		}
+		}
+	}
+
+	#The Army and The People
+	shared_focus = {
+		id = JAPARMY_the_army_and_the_people
+		icon = GFX_JAPARMY_the_army_and_the_people-248360
+		x = 43
+		y = 13
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPARMY_conscript_the_noncitizens  } prerequisite = { focus = JAPARMY_strengthen_the_armyair_corps  } prerequisite = { focus = JAPARMY_increasing_the_worker_numbers  }
+		completion_reward = {
+			add_war_support = 0.15
+		}
+	}
+
+	#A Magnificent Army
+	shared_focus = {
+		id = JAPARMY_a_magnificent_army
+		icon = GFX_JAPARMY_a_magnificent_army-248360
+		x = 43
+		y = 14
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPARMY_the_army_and_the_people  }
+		completion_reward = {
+			add_ideas = {
+			JAP_the_army_and_the_people
+			}
+		}
+	}
+
+	#Jakuniku Kyoshoku
+	shared_focus = {
+		id = JAPARMY_jakuniku_kyoshoku
+		icon = GFX_JAPARMY_jakuniku_kyoshoku-248360
+		x = 37
+		y = 0
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		army_experience = 50
+		navy_experience = 50
+		air_experience = 50
+		}
+	}
+
+	#The Army Direction
+	shared_focus = {
+		id = JAPARMY_the_army_direction
+		icon = GFX_JAPARMY_the_army_direction-248360
+		x = 34
+		y = 1
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPARMY_jakuniku_kyoshoku  }
+		mutually_exclusive = { focus = JAPARMY_the_naval_approach  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_naval_army_comp
+		add_idea = JAP_naval_army_comp_army_way
+		}
+		}
+	}
+
+	#The Naval Approach
+	shared_focus = {
+		id = JAPARMY_the_naval_approach
+		icon = GFX_JAPARMY_the_naval_approach-248360
+		x = 40
+		y = 1
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_jakuniku_kyoshoku  }
+		mutually_exclusive = { focus = JAPARMY_the_army_direction  }
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = JAP_naval_army_comp
+			add_idea = JAP_naval_army_comp_navy_way
+			}
+		}
+	}
+
+	#Victory Through Combined Arms!
+	shared_focus = {
+		id = JAPARMY_victorythroughcombinedarms
+		icon = GFX_JAPARMY_victorythroughcombinedarms-248360
+		x = 32
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_the_army_direction  }
+		mutually_exclusive = { focus = JAPARMY_the_human_wave  } mutually_exclusive = { focus = JAPARMY_supremacy_of_the_mind  }
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+					name = JAP_Extensive_Planning
+					cost_reduction = 0.5
+					uses = 2
+					category = cat_grand_battle_plan
+				}
+		}
+	}
+
+	#The Human Wave
+	shared_focus = {
+		id = JAPARMY_the_human_wave
+		icon = GFX_JAPARMY_the_human_wave-248360
+		x = 34
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_the_army_direction  }
+		mutually_exclusive = { focus = JAPARMY_victorythroughcombinedarms  } mutually_exclusive = { focus = JAPARMY_supremacy_of_the_mind  }
+		completion_reward = {
+				add_doctrine_cost_reduction = {
+				name = JAP_War_Of_Numbers
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_mass_assault
+			}
+		}
+	}
+
+	#Supremacy of the Mind
+	shared_focus = {
+		id = JAPARMY_supremacy_of_the_mind
+		icon = GFX_JAPARMY_supremacy_of_the_mind-248360
+		x = 36
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_the_army_direction  }
+		mutually_exclusive = { focus = JAPARMY_victorythroughcombinedarms  } mutually_exclusive = { focus = JAPARMY_the_human_wave  }
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = JAP_Overwhelming_Firepower
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_superior_firepower
+			}
+		}
+	}
+
+	#Teishin Shudan
+	shared_focus = {
+		id = JAPARMY_teishin_shudan
+		icon = GFX_JAPARMY_teishin_shudan-248360
+		x = 34
+		y = 3
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_victorythroughcombinedarms  focus = JAPARMY_the_human_wave  focus = JAPARMY_supremacy_of_the_mind  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_found_teishindan"
+			add_to_variable = { JAP_compled_mil_focuses = 1 }
+			add_equipment_to_stockpile = {
+				type = transport_plane_equipment
+				amount = 24
+			}
+			if = {
+				limit = { has_tech = paratroopers }
+				add_tech_bonus = {
+					name = JAP_found_teishindan
+					bonus = 1
+					uses = 1
+					category = para_tech
+				}
+			}
+			else = {
+				set_technology = { paratroopers = 1 }
+			}
+			division_template = {
+				name = "Teishindan"
+				division_names_group = JAP_PAR_01
+				regiments = {
+					paratrooper = { x = 0 y = 0 }
+					paratrooper = { x = 0 y = 1 }
+					paratrooper = { x = 0 y = 2 }
+					paratrooper = { x = 0 y = 3 }
+					paratrooper = { x = 0 y = 4 }
+				}
+				support = {
+					artillery = { x = 0 y = 0 }
+				}
+			}
+			custom_effect_tooltip = JAP_deploy_teishindan
+			hidden_effect = {
+				random_owned_controlled_state = {
+					prioritize = { 282 }
+					create_unit = {
+						division = "division_template = \"Teishindan\" start_experience_factor = 0.3"
+						owner = ROOT
+						count = 2
+					}
+				}
+			}
+		}
+	}
+
+	#Carrier Investment
+	shared_focus = {
+		id = JAPARMY_carrier_investment
+		icon = GFX_JAPARMY_carrier_investment-248360
+		x = 38
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_the_naval_approach  }
+		mutually_exclusive = { focus = JAPARMY_battleship_mega_projects  } mutually_exclusive = { focus = JAPARMY_snakes_under_the_waves  }
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+			name = JAP_Death_From_Above
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_base_strike
+			}
+		}
+	}
+
+	#Battleship Mega Projects
+	shared_focus = {
+		id = JAPARMY_battleship_mega_projects
+		icon = GFX_JAPARMY_battleship_mega_projects-248360
+		x = 40
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_the_naval_approach  }
+		mutually_exclusive = { focus = JAPARMY_carrier_investment  } mutually_exclusive = { focus = JAPARMY_snakes_under_the_waves  }
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+			name = JAP_Floating_Fortresses
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_fleet_in_being
+			}
+		}
+	}
+
+	#Snakes Under the Waves
+	shared_focus = {
+		id = JAPARMY_snakes_under_the_waves
+		icon = GFX_JAPARMY_snakes_under_the_waves-248360
+		x = 42
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPARMY_the_naval_approach  }
+		mutually_exclusive = { focus = JAPARMY_carrier_investment  } mutually_exclusive = { focus = JAPARMY_battleship_mega_projects  }
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+			name = JAP_War_Under_The_Sea
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_trade_interdiction
+			}
+		}
+	}
+
+	#Expand the Kure Naval Arsenal
+	shared_focus = {
+		id = JAPARMY_expand_the_kure_naval_arsenal
+		icon = GFX_JAPARMY_expand_the_kure_naval_arsenal-248360
+		x = 40
+		y = 3
+		cost = 3
+		ai_will_do = {
+			factor = 50
+		}	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPARMY_snakes_under_the_waves  focus = JAPARMY_battleship_mega_projects  focus = JAPARMY_carrier_investment  }
+		completion_reward = {
+			529 = {
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+			
+			unlock_mio_policy_tooltip = JAP_kure_naval_arsenal_organisation
+		}
+	}
+
+
