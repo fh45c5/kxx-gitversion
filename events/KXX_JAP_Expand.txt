@@ -18,7 +18,7 @@ country_event = { #崛起之龙还是旭日骨寒
 	option = { #崛起之龙
 		name = KXXJAP.1.a
 		ai_chance = {
-			base = 50
+			base = 0
 		}
 		set_country_flag = RD_SCB_path_decided
 		country_event = {
@@ -34,7 +34,7 @@ country_event = { #崛起之龙还是旭日骨寒
 	option = { #旭日骨寒
 		name = KXXJAP.1.b
 		ai_chance = {
-			base = 50
+			base = 100
 		}
 		set_country_flag = RD_SCB_path_decided
 		country_event = { 
@@ -2413,7 +2413,6 @@ country_event = { #大命降下
 		ai_chance = { 
 			base = 20
 		}	
-		custom_effect_tooltip = tooltip_unlock_KXXJAP			
 		set_politics = {
 			ruling_party = authoritarian_democrat
 			elections_allowed = no
@@ -2479,8 +2478,7 @@ country_event = { #大命降下
 		name = KXXJAP.135.b
 		ai_chance = { 
 			base = 20
-		}		
-		custom_effect_tooltip = tooltip_unlock_KXXJAP		
+		}			
 		set_politics = {
 			ruling_party = paternal_autocrat
 			elections_allowed = no
@@ -2539,8 +2537,7 @@ country_event = { #大命降下
 		name = KXXJAP.135.c
 		ai_chance = { 
 			base = 20
-		}
-		custom_effect_tooltip = tooltip_unlock_KXXJAP				
+		}			
 		set_politics = {
 			ruling_party = authoritarian_democrat
 			elections_allowed = no
@@ -2612,6 +2609,7 @@ country_event = { #大命降下
 			ideology = junta_subtype
 		}
 		hidden_effect = {
+			set_country_flag = KXXJAP_HAYASHI
 			load_focus_tree = japan-iraa-rightist
 			mark_focus_tree_layout_dirty = yes			
 			add_authdem_to_coalition = yes
@@ -3706,14 +3704,21 @@ country_event = { #40年及之后的民主选举
 	is_triggered_only = yes
 
 	immediate = {
-		remove_all_ministers = yes
+		hidden_effect = {
+			remove_all_ministers = yes
+			country_event = {
+				id = KXXJAP.157
+				days = 1460
+			}
+		}
 	}
 
 	option = { #政友会
 		name = KXXJAP.157.a
 		ai_chance = { 
 			base = 20
-		}		
+		}
+		country_event =	KXXJAP.158
 		set_politics = {
 			ruling_party = social_conservative
 			elections_allowed = yes
@@ -3723,6 +3728,24 @@ country_event = { #40年及之后的民主选举
 			ideology = social_conservative
 			popularity = 0.3
 		}
+		hidden_effect = {
+			load_focus_tree = japan-seiyukai
+			mark_focus_tree_layout_dirty = yes	
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_victory_of_the_seiyukai
+					}
+				}
+				complete_national_focus = JAPSEI_victory_of_the_seiyukai
+				limit = { 
+					NOT = { 
+						has_completed_focus = AJPSEIYUKAITWO_the_seiyukai_secure_a_new_term
+					}
+				}
+				complete_national_focus = AJPSEIYUKAITWO_the_seiyukai_secure_a_new_term
+			}		
+		}	
 	}
 
 	option = { #民政党 
@@ -3730,6 +3753,7 @@ country_event = { #40年及之后的民主选举
 		ai_chance = { 
 			base = 20
 		}		
+		country_event =	KXXJAP.159
 		set_politics = {
 			ruling_party = market_liberal
 			elections_allowed = yes
@@ -3739,6 +3763,24 @@ country_event = { #40年及之后的民主选举
 			ideology = market_liberal
 			popularity = 0.3
 		}
+		hidden_effect = { 
+			load_focus_tree = minseito-japan
+			mark_focus_tree_layout_dirty = yes			
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPLIB_victory_of_the_minseito
+					}
+				}
+				complete_national_focus = JAPLIB_victory_of_the_minseito
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPMINSEITOTWO_the_minseito_victory
+					}
+				}
+				complete_national_focus = JAPMINSEITOTWO_the_minseito_victory
+			}
+		}		
 	}
 
 	option = { #国民同志会
@@ -3746,6 +3788,7 @@ country_event = { #40年及之后的民主选举
 		ai_chance = { 
 			base = 20
 		}		
+		country_event =	KXXJAP.160
 		set_politics = {
 			ruling_party = social_liberal
 			elections_allowed = yes
@@ -3762,6 +3805,7 @@ country_event = { #40年及之后的民主选举
 		ai_chance = { 
 			base = 20
 		}		
+		country_event =	KXXJAP.161
 		set_politics = {
 			ruling_party = social_democrat
 			elections_allowed = yes
@@ -3771,6 +3815,24 @@ country_event = { #40年及之后的民主选举
 			ideology = social_democrat
 			popularity = 0.3
 		}
+		hidden_effect = { 
+			load_focus_tree = socdem-japan
+			mark_focus_tree_layout_dirty = yes			
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSOCDEM_a_split_in_the_shakai_taishuto
+					}
+				}
+				complete_national_focus = JAPSOCDEM_a_split_in_the_shakai_taishuto
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPTAISHUTOTWO_victory_of_parliamentary_socialism
+					}
+				}
+				complete_national_focus = JAPTAISHUTOTWO_victory_of_parliamentary_socialism
+			}
+		}		
 	}
 
 	option = { #国民同盟
@@ -3778,6 +3840,7 @@ country_event = { #40年及之后的民主选举
 		ai_chance = { 
 			base = 20
 		}		
+		country_event =	KXXJAP.162
 		set_politics = {
 			ruling_party = authoritarian_democrat
 			elections_allowed = yes
@@ -3787,6 +3850,24 @@ country_event = { #40年及之后的民主选举
 			ideology = authoritarian_democrat
 			popularity = 0.3
 		}
+		hidden_effect = { 
+			load_focus_tree = kokumin-domei
+			mark_focus_tree_layout_dirty = yes		
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPKOKUMIN_kokumin_domei_at_the_helm
+					}
+				}
+				complete_national_focus = JAPKOKUMIN_kokumin_domei_at_the_helm
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPDOMEITWO_a_new_round_for_the_kokumin_domei
+					}
+				}
+				complete_national_focus = JAPDOMEITWO_a_new_round_for_the_kokumin_domei
+			}
+		}		
 	}	
 
 }
@@ -3817,6 +3898,26 @@ country_event = { #政友会二次选举
 				JAP_Mitsuchi_Chuzo_eco_sco
 				JAP_Matsuno_Tsuruhei_sec_sco
 			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_orthodox_victory
+					}
+				}
+				complete_national_focus = JAPSEI_orthodox_victory
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_rentaro_cabinet
+					}
+				}
+				complete_national_focus = JAPSEI_rentaro_cabinet
+				limit = { 
+					NOT = { 
+						has_completed_focus = AJPSEIYUKAITWO_upholding_party_orthodoxy
+					}
+				}
+				complete_national_focus = AJPSEIYUKAITWO_upholding_party_orthodoxy
+			}			
 		}
 	}
 
@@ -3860,6 +3961,26 @@ country_event = { #政友会二次选举
 				JAP_Nakajima_Chikuhei_eco_ade
 				JAP_Mochizuki_Keisuke_sec_ade
 			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_the_reform_faction_hold
+					}
+				}
+				complete_national_focus = JAPSEI_the_reform_faction_hold
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_kuharascabinet
+					}
+				}
+				complete_national_focus = JAPSEI_kuharascabinet			
+				limit = { 
+					NOT = { 
+						has_completed_focus = AJPSEIYUKAITWO_becoming_a_grassroots_party
+					}
+				}
+				complete_national_focus = AJPSEIYUKAITWO_becoming_a_grassroots_party
+			}			
 		}
 	}
 
@@ -3882,6 +4003,26 @@ country_event = { #政友会二次选举
 				JAP_Mitsuchi_Chuzo_eco_sco
 				JAP_Matsuno_Tsuruhei_sec_sco
 			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_orthodox_victory
+					}
+				}
+				complete_national_focus = JAPSEI_orthodox_victory
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_rentaro_cabinet
+					}
+				}
+				complete_national_focus = JAPSEI_rentaro_cabinet
+				limit = { 
+					NOT = { 
+						has_completed_focus = AJPSEIYUKAITWO_upholding_party_orthodoxy
+					}
+				}
+				complete_national_focus = AJPSEIYUKAITWO_upholding_party_orthodoxy
+			}			
 		}
 	}	
 	
@@ -3906,11 +4047,27 @@ country_event = { #民政党
 			expire = "1965.1.1"
 			ideology = liberal_conservative_subtype
 		}
-		add_ideas = {
-			JAP_Hamaguchi_Osachi_hog_mli
-			JAP_Shidehara_Kijuro_for_mli
-			JAP_Matsumura_Kenzo_eco_mli
-			JAP_Kimura_Kozaemon_sec_mli
+		hidden_effect = {
+			add_ideas = {
+				JAP_Machida_Chuji_hog_mli
+				JAP_Shidehara_Kijuro_for_mli
+				JAP_Matsumura_Kenzo_eco_mli
+				JAP_Kawasaki_Katsu_sec_mli
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPLIB_bureaucratic_hold
+					}
+				}
+				complete_national_focus = JAPLIB_bureaucratic_hold
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPMINSEITOTWO_keeping_party_tradition
+					}
+				}
+				complete_national_focus = JAPMINSEITOTWO_keeping_party_tradition
+			}
 		}		
 	}
 
@@ -3925,12 +4082,28 @@ country_event = { #民政党
 			expire = "1965.1.1"
 			ideology = pan_asianism_subtype
 		}
-		add_ideas = {
-			JAP_Ryutaro_Nagai_hog_sli
-			JAP_Kiyose_Ichiro_for_sli
-			JAP_Miki_Bukichi_eco_mli
-			JAP_Saito_Takao_sec_mli
-		}		
+		hidden_effect = {		
+			add_ideas = {
+				JAP_Ryutaro_Nagai_hog_sli
+				JAP_Kiyose_Ichiro_for_sli
+				JAP_Miki_Bukichi_eco_mli
+				JAP_Saito_Takao_sec_mli
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPLIB_tojnha_faction_dominance
+					}
+				}
+				complete_national_focus = JAPLIB_tojnha_faction_dominance
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPMINSEITOTWO_keeping_party_tradition
+					}
+				}
+				complete_national_focus = JAPMINSEITOTWO_keeping_party_tradition
+			}			
+		}
 	}
 
 	option = { 
@@ -3944,12 +4117,28 @@ country_event = { #民政党
 			expire = "1965.1.1"
 			ideology = marlib_centrist_subtype
 		}
-		add_ideas = {
-			JAP_Hamaguchi_Osachi_hog_mli
-			JAP_Shidehara_Kijuro_for_mli
-			JAP_Matsumura_Kenzo_eco_mli
-			JAP_Kimura_Kozaemon_sec_mli
-		}		
+		hidden_effect = {
+			add_ideas = {
+				JAP_Machida_Chuji_hog_mli
+				JAP_Shidehara_Kijuro_for_mli
+				JAP_Matsumura_Kenzo_eco_mli
+				JAP_Saito_Takao_sec_mli
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPLIB_bureaucratic_hold
+					}
+				}
+				complete_national_focus = JAPLIB_bureaucratic_hold
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPMINSEITOTWO_a_party_of_the_middle_class
+					}
+				}
+				complete_national_focus = JAPMINSEITOTWO_a_party_of_the_middle_class
+			}
+		}			
 	}	
 
 	option = { 
@@ -3963,11 +4152,27 @@ country_event = { #民政党
 			expire = "1965.1.1"
 			ideology = marlib_authoritarian_liberalism_subtype
 		}
-		add_ideas = {
-			JAP_Hamaguchi_Osachi_hog_mli
-			JAP_Shidehara_Kijuro_for_mli
-			JAP_Matsumura_Kenzo_eco_mli
-			JAP_Kimura_Kozaemon_sec_mli
+		hidden_effect = {		
+			add_ideas = {
+				JAP_Ryutaro_Nagai_hog_sli
+				JAP_Kiyose_Ichiro_for_sli
+				JAP_Miki_Bukichi_eco_mli
+				JAP_Saito_Takao_sec_mli
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPLIB_tojnha_faction_dominance
+					}
+				}
+				complete_national_focus = JAPLIB_tojnha_faction_dominance
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPMINSEITOTWO_keeping_party_tradition
+					}
+				}
+				complete_national_focus = JAPMINSEITOTWO_keeping_party_tradition
+			}			
 		}		
 	}	
 	
