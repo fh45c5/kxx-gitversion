@@ -1,0 +1,6981 @@
+###########################
+# Colombia Focus Tree
+# By 404 Error Not Found
+###########################
+
+##############################################################################################################################
+############ COLOMBIA COMMUNIST TREE ############ COLOMBIA COMMUNIST TREE ############ COLOMBIA COMMUNIST TREE ###############
+##############################################################################################################################
+############ COLOMBIA COMMUNIST TREE ############ COLOMBIA COMMUNIST TREE ############ COLOMBIA COMMUNIST TREE ###############
+##############################################################################################################################
+
+shared_focus = {
+	id = COL_the_coalition_survives
+	icon = GFX_TRK_Revolution
+	x = 0
+	y = 0
+	allow_branch = {
+		OR = {
+			has_socialist_government = yes
+			tag = COC
+		}
+	}
+	cost = 5
+	available = {
+		has_country_flag = COL_left_congress_held
+		OR = {
+			has_country_flag = COL_avoided_civil_war
+			has_country_flag = COL_civil_war_over
+		}
+		has_socialist_government = yes
+	}
+	bypass = {
+		has_country_flag = COL_left_congress_held
+		OR = {
+			has_country_flag = COL_avoided_civil_war
+			has_country_flag = COL_civil_war_over
+		}
+		has_socialist_government = yes
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_the_coalition_survives"
+		custom_effect_tooltip = COL_election_socialist_tt
+		
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_totalist_revolution
+	icon = GFX_goal_ideology_totalist
+	prerequisite = { focus = COL_the_coalition_survives }
+	x = -8
+	y = 1
+	relative_position_id = COL_the_coalition_survives
+	available = {
+		has_country_flag = COL_left_congress_held
+		OR = {
+			has_country_flag = COL_avoided_civil_war
+			has_country_flag = COL_civil_war_over
+		}
+		has_government = totalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_totalist_revolution"
+		add_stability = 0.05
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.05
+		}
+		add_ideas = COL_totalist_pol
+		country_event = colsoc.19
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_Secret_Police
+	icon = GFX_goal_NOR_secret_police
+	prerequisite = { focus = COL_totalist_revolution }
+	x = 1
+	y = 1
+	relative_position_id = COL_totalist_revolution
+	available = {
+		has_government = totalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Secret_Police"
+		add_tech_bonus = {
+			name = COL_Secret_Police
+			bonus = 1
+			uses = 1
+			category = military_police_tech
+		}
+		swap_ideas = {
+			remove_idea = COL_factionalized_army
+			add_idea = COL_Totalist_Army1
+		}
+		add_ideas = COL_Secret_Police
+	}
+	search_filters = { FOCUS_FILTER_ARMY_BONUS }
+}
+
+shared_focus = {
+	id = COL_UNIR_revolution
+	icon = GFX_goal_ideology_radical_socialist
+	prerequisite = { focus = COL_the_coalition_survives }
+	x = 0
+	y = 1
+	relative_position_id = COL_the_coalition_survives
+	available = {
+		has_country_flag = COL_left_congress_held
+		OR = {
+			has_country_flag = COL_avoided_civil_war
+			has_country_flag = COL_civil_war_over
+		}
+		has_government = radical_socialist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+		add_stability = 0.05
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.05
+		}
+		add_ideas = COL_UNIR_pol
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_syndicalist_revolution
+	icon = GFX_goal_ideology_syndicalist
+	prerequisite = { focus = COL_the_coalition_survives }
+	x = 8
+	y = 1
+	relative_position_id = COL_the_coalition_survives
+	available = {
+		has_country_flag = COL_left_congress_held
+		OR = {
+			has_country_flag = COL_avoided_civil_war
+			has_country_flag = COL_civil_war_over
+		}
+		has_government = syndicalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_syndicalist_revolution"
+		add_stability = 0.05
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.05
+		}
+		add_ideas = COL_synd_pol
+		country_event = colsoc.18
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_Seize_The_Means
+	icon = GFX_VK_NATIONALIZE
+	prerequisite = { focus = COL_totalist_revolution }
+	x = -1
+	y = 1
+	relative_position_id = COL_totalist_revolution
+	available = {
+		has_government = totalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Seize_The_Means"
+		add_political_power = -75
+		add_ideas = COL_Seize_The_Means_idea1
+		swap_ideas = {
+			remove_idea = COL_totalist_pol
+			add_idea = COL_totalist_pol2
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+shared_focus = {
+	id = COL_A_Socialist_Bureaucracy
+	icon = GFX_SOV_Every_Bureaucrat
+	prerequisite = { focus = COL_Seize_The_Means }
+	x = 0
+	y = 1
+	relative_position_id = COL_Seize_The_Means
+	available = {
+		has_government = totalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_A_Socialist_Bureaucracy"
+		add_ideas = COL_socialist_bureaucracy
+		swap_ideas = {
+			remove_idea = COL_totalist_pol2
+			add_idea = COL_totalist_pol3
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+shared_focus = {
+	id = COL_Setting_Production_Objectives
+	icon = GFX_SOV_A_Great_Leap_Forward
+	prerequisite = { focus = COL_A_Socialist_Bureaucracy }
+	prerequisite = { focus = COL_Peoples_Commissars }
+	x = 0
+	y = 1
+	relative_position_id = COL_A_Socialist_Bureaucracy
+	available = {
+		has_government = totalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Setting_Production_Objectives"
+		swap_ideas = {
+			remove_idea = COL_Seize_The_Means_idea1
+			add_idea = COL_Seize_The_Means_idea2
+		}
+		swap_ideas = {
+			remove_idea = COL_totalist_pol3
+			add_idea = COL_totalist_pol4
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+shared_focus = {
+	id = COL_Leader_Knows_Best
+	icon = GFX_goal_CSA_lead_the_revolution
+	prerequisite = { 
+		focus = COL_totalist_revolution
+		focus = COL_UNIR_revolution
+	}
+	x = 4
+	y = 1
+	relative_position_id = COL_totalist_revolution
+	available = {
+		OR = {
+			has_government = totalist
+			has_government = radical_socialist
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Leader_Knows_Best"
+		add_stability = 0.05
+		add_ideas = COL_Leader_Knows_Best
+	}
+}
+shared_focus = {
+	id = COL_Peoples_Commissars
+	icon = GFX_SOV_rev_commisars
+	prerequisite = { focus = COL_Secret_Police }
+	prerequisite = { focus = COL_Leader_Knows_Best }
+	x = 0
+	y = 1
+	relative_position_id = COL_Secret_Police
+	available = {
+		has_government = totalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Secret_Police"
+		country_event = {
+			id = col.901
+			days = 1
+		}
+		swap_ideas = {
+			remove_idea = COL_Secret_Police
+			add_idea = COL_Peoples_Commissars
+		}
+
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_Anticapitalist_Action
+	icon = GFX_SOV_No_Capital
+	prerequisite = { focus = COL_Peoples_Commissars }
+	x = 0
+	y = 1
+	relative_position_id = COL_Peoples_Commissars
+	available = {
+		has_government = totalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Anticapitalist_Action"
+		add_ideas = COL_Anticapitalist_Action
+		custom_effect_tooltip = COL_Anticapitalist_Action_tt 
+		hidden_effect = {
+			add_popularity = {
+				ideology = social_conservative
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.05
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_uuuuuuuu #break the chains
+	icon = GFX_goal_BAN_free_unions
+	prerequisite = { 
+		focus = COL_Peoples_Commissars
+		focus = COL_Reshape_The_Army 
+		focus = COL_Public_Housing
+		focus = COL_Minority_Quotas
+	}
+	x = 2
+	y = 1
+	relative_position_id = COL_Peoples_Commissars
+	available = {
+		OR = {
+			has_government = totalist
+			has_government = radical_socialist
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Anticapitalist_Action"
+		add_ideas = COL_break_the_chain
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_kkkkkkk #andes syndicalism
+	icon = GFX_goal_syndicalist_industry
+	prerequisite = { 
+		focus = COL_Peoples_Commissars
+		focus = COL_Reshape_The_Army 
+		focus = COL_Public_Housing
+		focus = COL_Minority_Quotas
+	}
+	x = 4
+	y = 1
+	relative_position_id = COL_Peoples_Commissars
+	available = {
+		OR = {
+			has_government = totalist
+			has_government = radical_socialist
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Anticapitalist_Action"
+		add_ideas = COL_andes_syndicalism
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_Militia_Training_tot
+	icon = GFX_SOV_militia
+	prerequisite = { focus = COL_Setting_Production_Objectives }
+	prerequisite = { focus = COL_Anticapitalist_Action }
+	prerequisite = { focus = COL_uuuuuuuu }
+	prerequisite = { focus = COL_kkkkkkk }
+	x = 1
+	y = 1
+	relative_position_id = COL_Setting_Production_Objectives
+	available = {
+		has_government = totalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Militia_Training_tot"
+		swap_ideas = {
+			remove_idea = COL_Totalist_Army1
+			add_idea = COL_Totalist_Army2
+		}
+		swap_ideas = {
+			remove_idea = COL_totalist_pol4
+			add_idea = COL_totalist_pol5
+		}
+	}
+	search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_no_more_violence
+	icon = GFX_BBR_approach_local_socialists
+	prerequisite = { 
+		focus = COL_Militia_Training_tot 
+		focus = COL_Militia_Training_rad
+		focus = COL_A_Defensive_Army
+	}
+	x = 8
+	y = 1
+	relative_position_id = COL_Militia_Training_tot
+	available = {
+		has_socialist_government = yes
+		has_war = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_no_more_violence"
+		custom_effect_tooltip = COL_Reactionary_Resistance_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					has_idea = COL_Reactionary_Resistance_1
+				}
+				remove_ideas = COL_Reactionary_Resistance_1
+			}
+			else = {
+				remove_ideas = COL_Reactionary_Resistance_2
+			}
+		}
+		add_ideas = COL_Bogotazo_Over
+	}
+	search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_the_SA_playground
+	icon = GFX_goal_CSA_lead_american_revolution
+	x = 22
+	y = 0
+	allow_branch = {
+		OR = {
+			has_socialist_government = yes
+			tag = COC
+		}
+	}
+	available = {
+		has_socialist_government = yes
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_A_One_Party_State"
+		add_war_support = 0.1
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_Heavily_Regulated_Enterp
+	icon = GFX_GRU_PDS_SOCIALIST_MARKET
+	prerequisite = { focus = COL_UNIR_revolution }
+	x = 0
+	y = 1
+	relative_position_id = COL_UNIR_revolution
+	available = {
+		has_government = radical_socialist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Heavily_Regulated_Enterp"
+		add_ideas = COL_regulate_the_means
+		swap_ideas = {
+			remove_idea = COL_UNIR_pol
+			add_idea = COL_UNIR_pol2
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+shared_focus = {
+	id = COL_Reshape_The_Army
+	icon = GFX_goal_CSA_professional_red_army
+	prerequisite = { focus = COL_Heavily_Regulated_Enterp }
+	prerequisite = { focus = COL_Leader_Knows_Best }
+	x = -2
+	y = 1
+	relative_position_id = COL_Heavily_Regulated_Enterp
+	available = {
+		has_government = radical_socialist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Reshape_The_Army"
+		swap_ideas = {
+			remove_idea = COL_factionalized_army
+			add_idea = COL_radsoc_army
+		}
+		swap_ideas = {
+			remove_idea = COL_UNIR_pol2
+			add_idea = COL_UNIR_pol3
+		}
+	}
+	search_filters = { FOCUS_FILTER_ARMY_BONUS }
+}
+shared_focus = {
+	id = COL_Public_Housing
+	icon = GFX_goal_NYC_City_Communes
+	prerequisite = { focus = COL_Heavily_Regulated_Enterp }
+	x = 0
+	y = 1
+	relative_position_id = COL_Heavily_Regulated_Enterp
+	available = {
+		has_government = radical_socialist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Public_Housing"
+		country_event = {
+			id = col.902
+		}
+		add_ideas = COL_Public_Housing
+	}
+	search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_Rural_Development_Focus
+	icon = GFX_goal_HON_Agrarian
+	prerequisite = { focus = COL_Reshape_The_Army }
+	prerequisite = { focus = COL_Public_Housing }
+	prerequisite = { focus = COL_Minority_Quotas }
+	mutually_exclusive = { focus = COL_Urbanization_Effort }
+	x = -1
+	y = 1
+	relative_position_id = COL_Public_Housing
+	available = {
+		has_government = radical_socialist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Rural_Development_Focus"
+		swap_ideas = {
+			remove_idea = COL_regulate_the_means_2
+			add_idea = COL_regulate_the_means_4
+		}
+		swap_ideas = {
+			remove_idea = COL_UNIR_pol3
+			add_idea = COL_UNIR_pol4
+		}
+		every_state = {
+			limit = {
+				is_owned_and_controlled_by = ROOT
+				NOT = {
+					has_resources_amount = {
+						resource = oil
+						amount > 9
+					}
+					has_resources_amount = {
+						resource = aluminium
+						amount > 9
+					}
+					has_resources_amount = {
+						resource = rubber
+						amount > 9
+					}
+					has_resources_amount = {
+						resource = tungsten
+						amount > 9
+					}
+					has_resources_amount = {
+						resource = steel
+						amount > 0
+					}
+					has_resources_amount = {
+						resource = chromium
+						amount > 0
+					}
+				}
+				OR = {
+					has_state_category = zero_island
+					has_state_category = one_island
+					has_state_category = wasteland
+					has_state_category = zero
+					has_state_category = one
+					has_state_category = two
+					has_state_category = three
+				}
+			}
+			add_state_modifier = {
+				modifier = {
+					local_manpower = 0.2
+					local_non_core_manpower = 0.2
+				}
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+shared_focus = {
+	id = COL_Estatuto_Del_Trabajo
+	icon = GFX_RUS_Syndical_Cooperative_Federation
+	prerequisite = {
+			focus = COL_UNIR_revolution
+			focus = COL_syndicalist_revolution
+	}
+	x = 4
+	y = 1
+	relative_position_id = COL_UNIR_revolution
+	available = {
+		OR = {
+			has_government = radical_socialist
+			has_government = syndicalist
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Estatuto_Del_Trabajo"
+		add_political_power = 75
+		add_ideas = COL_Estatuto_Del_Trabajo
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_compromise_with_union
+	icon = GFX_goal_CSA_american_guildism
+	prerequisite = {
+		focus = COL_Offering_Welfare_And_Hospitals
+		focus = COL_Reshape_The_Army 
+		focus = COL_Public_Housing
+		focus = COL_Minority_Quotas
+	}
+	x = 3
+	y = 3
+	relative_position_id = COL_UNIR_revolution
+	available = {
+		OR = {
+			has_government = radical_socialist
+			has_government = syndicalist
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Estatuto_Del_Trabajo"
+		add_one_random_civilian_factory = yes
+		add_one_random_civilian_factory = yes
+		add_ideas = COL_compromise_with_union
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_edu_program
+	icon = GFX_NEE_education_spending
+	prerequisite = {
+		focus = COL_Offering_Welfare_And_Hospitals
+		focus = COL_Reshape_The_Army 
+		focus = COL_Public_Housing
+		focus = COL_Minority_Quotas
+	}
+	x = 5
+	y = 3
+	relative_position_id = COL_UNIR_revolution
+	available = {
+		OR = {
+			has_government = radical_socialist
+			has_government = syndicalist
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Estatuto_Del_Trabajo"
+		add_stability = 0.1
+		add_ideas = COL_edu_program
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_Minority_Quotas
+	icon = GFX_BBR_insurance_societies
+	prerequisite = { focus = COL_Heavily_Regulated_Enterp }
+	prerequisite = { focus = COL_Estatuto_Del_Trabajo }
+	x = 2
+	y = 1
+	relative_position_id = COL_Heavily_Regulated_Enterp
+	available = {
+		has_government = radical_socialist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Minority_Quotas"
+		swap_ideas = {
+			remove_idea = COL_regulate_the_means
+			add_idea = COL_regulate_the_means_2
+		}
+		add_ideas = COL_Minority_Quotas
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+shared_focus = {
+	id = COL_Urbanization_Effort
+	icon = GFX_BBR_urbanization
+	prerequisite = { focus = COL_Reshape_The_Army }
+	prerequisite = { focus = COL_Public_Housing }
+	prerequisite = { focus = COL_Minority_Quotas }
+	mutually_exclusive = { focus = COL_Rural_Development_Focus }
+	x = 1
+	y = 1
+	relative_position_id = COL_Public_Housing
+	available = {
+		has_government = radical_socialist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Minority_Quotas"
+		
+		swap_ideas = {
+			remove_idea = COL_regulate_the_means_2
+			add_idea = COL_regulate_the_means_3
+		}
+		swap_ideas = {
+			remove_idea = COL_UNIR_pol3
+			add_idea = COL_UNIR_pol4
+		}
+		every_state = {
+			limit = {
+				is_owned_and_controlled_by = ROOT
+				NOT = {
+					has_resources_amount = {
+						resource = oil
+						amount > 9
+					}
+					has_resources_amount = {
+						resource = aluminium
+						amount > 9
+					}
+					has_resources_amount = {
+						resource = rubber
+						amount > 9
+					}
+					has_resources_amount = {
+						resource = tungsten
+						amount > 9
+					}
+					has_resources_amount = {
+						resource = steel
+						amount > 0
+					}
+					has_resources_amount = {
+						resource = chromium
+						amount > 0
+					}
+				}
+				OR = {
+					has_state_category = zero_island
+					has_state_category = one_island
+					has_state_category = wasteland
+					has_state_category = zero
+					has_state_category = one
+					has_state_category = two
+					has_state_category = three
+				}
+			}
+			add_state_modifier = {
+				modifier = {
+					local_manpower = 0.2
+					local_non_core_manpower = 0.2
+				}
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+shared_focus = {
+	id = COL_Militia_Training_rad
+	icon = GFX_BBR_jacobin_police
+	prerequisite = { 
+		focus = COL_Rural_Development_Focus
+		focus = COL_Urbanization_Effort
+	}
+	prerequisite = { focus = COL_uuuuuuuu }
+	prerequisite = { focus = COL_kkkkkkk }
+	prerequisite = { focus = COL_compromise_with_union }
+	prerequisite = { focus = COL_edu_program }
+	x = 1
+	y = 1
+	relative_position_id = COL_Rural_Development_Focus
+	available = {
+		has_government = radical_socialist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Militia_Training_rad"
+		swap_ideas = {
+			remove_idea = COL_radsoc_army
+			add_idea = COL_radsoc_army_2
+		}
+		swap_ideas = {
+			remove_idea = COL_UNIR_pol4
+			add_idea = COL_UNIR_pol5
+		}
+	}
+	search_filters = { FOCUS_FILTER_ARMY_BONUS }
+}
+shared_focus = {
+	id = COL_Federalization
+	icon = GFX_SOV_decentralize_syndicates
+	prerequisite = { focus = COL_syndicalist_revolution }
+	x = -1
+	y = 1
+	relative_position_id = COL_syndicalist_revolution
+	available = {
+		has_government = syndicalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Federalization"
+		country_event = {
+			id = col.903
+			days = 1
+		}
+		add_ideas = COL_Federalization
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_Offering_Welfare_And_Hospitals
+	icon = GFX_RUS_Welfare_State
+	prerequisite = { focus = COL_Federalization }
+	prerequisite = { focus = COL_Estatuto_Del_Trabajo }
+	x = 0
+	y = 1
+	relative_position_id = COL_Federalization
+	available = {
+		has_government = syndicalist
+		has_completed_focus = COL_Agressive_Industrialization
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Offering_Welfare_And_Hospitals"
+		add_ideas = COL_welfare_and_hospitals
+		swap_ideas = {
+			remove_idea = COL_synd_pol2
+			add_idea = COL_synd_pol3
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_defensive_countermeasures
+	icon = GFX_goal_generic_fortify_city
+	prerequisite = { focus = COL_Offering_Welfare_And_Hospitals }
+	x = 0
+	y = 1
+	relative_position_id = COL_Offering_Welfare_And_Hospitals
+	available = {
+		has_government = syndicalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_defensive_countermeasures"
+		306 = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = 10747
+				instant_build = yes
+			}
+		}
+		swap_ideas = {
+			remove_idea = COL_factionalized_army
+			add_idea = COL_synd_army
+		}
+		swap_ideas = {
+			remove_idea = COL_synd_pol3
+			add_idea = COL_synd_pol4
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+shared_focus = {
+	id = COL_Agressive_Industrialization
+	icon = GFX_RUS_Cautious_Industrialization
+	prerequisite = { focus = COL_syndicalist_revolution }
+	x = 1
+	y = 1
+	relative_position_id = COL_syndicalist_revolution
+	available = {
+		has_government = syndicalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Agressive_Industrialization"
+		add_stability = -0.05
+		swap_ideas = {
+			remove_idea = COL_synd_pol
+			add_idea = COL_synd_pol2
+		}
+		random_owned_state = {
+			limit = {
+				free_building_slots = {
+					building = industrial_complex
+					size > 1
+					include_locked = yes
+				}
+				OR = {
+					is_in_home_area = yes
+					NOT = {
+						owner = {
+							any_owned_state = {
+								free_building_slots = {
+									building = industrial_complex
+									size > 1
+									include_locked = yes
+								}
+								is_in_home_area = yes
+							}
+						}
+					}
+				}
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		add_ideas = COL_syndie_industrialization
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+shared_focus = {
+	id = COL_syndie_resources
+	icon = GFX_goal_CSA_resource_nationalisation
+	prerequisite = { focus = COL_Agressive_Industrialization }
+	x = 0
+	y = 1
+	relative_position_id = COL_Agressive_Industrialization
+	available = {
+		has_government = syndicalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Workers_Councils"
+		add_resource = {
+			type = tungsten
+			amount = 7
+			state = 486
+		}
+		add_resource = {
+			type = chromium
+			amount = 5
+			state = 493
+		}
+		add_ideas = COL_syndie_resources
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+}
+shared_focus = {
+	id = COL_Encourage_Women_In_Factories
+	icon = GFX_GRU_PIECK_WORKING_WOMAN
+	prerequisite = { focus = COL_syndie_resources }
+	prerequisite = { focus = COL_Offering_Welfare_And_Hospitals }
+	x = 0
+	y = 1
+	relative_position_id = COL_syndie_resources
+	available = {
+		has_government = syndicalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Encourage_Women_In_Factories"
+		swap_ideas = {
+			remove_idea = COL_syndie_industrialization
+			add_idea = COL_syndie_industrialization_2
+		}
+		add_ideas = COL_Encourage_Women_In_Factories
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+shared_focus = {
+	id = COL_A_Defensive_Army
+	icon = GFX_CSA_defensive_outlook
+	prerequisite = { focus = COL_defensive_countermeasures }
+	prerequisite = { focus = COL_Encourage_Women_In_Factories }
+	x = 1
+	y = 1
+	relative_position_id = COL_defensive_countermeasures
+	available = {
+		has_government = syndicalist
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Defensive_Measures"
+		swap_ideas = {
+			remove_idea = COL_synd_army
+			add_idea = COL_synd_army2
+		}
+		swap_ideas = {
+			remove_idea = COL_synd_pol4
+			add_idea = COL_synd_pol5
+		}
+	}
+	search_filters = { FOCUS_FILTER_ARMY_BONUS }
+}
+shared_focus = {
+	id = COL_the_bigger_picture
+	icon = GFX_BBR_internationale_struggle
+	x = 36
+	y = 0
+	allow_branch = {
+		OR = {
+			has_socialist_government = yes
+			tag = COC
+		}
+	}
+	available = {
+		has_socialist_government = yes
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Ready_For_The_Future"
+		add_stability = 0.1
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_afro_syndie
+	icon = GFX_goal_CEA_new_syndicalist_society
+	prerequisite = { focus = COL_the_SA_playground }
+	x = 0
+	y = 1
+	relative_position_id = COL_the_SA_playground
+	available = {
+		has_country_leader = {
+			name = "Diego Luis Córdoba"
+			ruling_only = yes
+		}
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Ready_For_The_Future"
+		add_ideas = COL_pan_africa
+		set_cosmetic_tag = COL_afriamer
+		country_event = colsoc.15
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_State_Visit_To_Europe
+	icon = GFX_BBR_internationale_collaboration
+	prerequisite = { focus = COL_the_bigger_picture }
+	x = -3
+	y = 1
+	relative_position_id = COL_the_bigger_picture
+	available = {
+		has_government = syndicalist
+		NOT = {
+			is_subject = yes
+		}
+		NOT = { has_war_with = FRA }
+		FRA = {
+			has_socialist_government = yes
+			has_capitulated = no
+		}
+		has_country_leader = {
+			name = "Pedro Gomez Agudelo"
+			ruling_only = yes
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_State_Visit_To_France"
+		country_event = col.906
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_invite_black_leaders
+	icon = GFX_BBR_black_national_syndicalism
+	prerequisite = { focus = COL_afro_syndie }
+	x = -1
+	y = 1
+	relative_position_id = COL_afro_syndie
+	available = {
+		has_country_leader = {
+			name = "Diego Luis Córdoba"
+			ruling_only = yes
+		}
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_State_Visit_To_UK"
+		custom_effect_tooltip = COL_black_leaders_join
+		add_manpower = 10000
+		hidden_effect = {
+			create_corps_commander = {
+				name = "Rene-Paul Sousatte"
+				portrait_path = "gfx/leaders/GAB/Portrait_GAB_Rene_Paul_Sousatte.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Kwame Nkrumah"
+				portrait_path = "gfx/leaders/GHA/Portrait_GHA_Kwame_Nkrumah.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Alphonse Massamba-Débat"
+				portrait_path = "gfx/leaders/TKE/Portrait_TKE_Alphonse_Massamba_Debat.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Simon-Pierre Kikhounga-Ngot"
+				portrait_path = "gfx/leaders/TKE/Portrait_TKE_Simon_Pierre_Kikhounga_Ngot.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "André Matsoua"
+				portrait_path = "gfx/leaders/TKE/Portrait_TKE_Andre_Grenard_Matswa_Civilian.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Joseph Kasongo"
+				portrait_path = "gfx/leaders/KIV/Portrait_KIV_Joseph_Kasongo.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Cyrille Adoula"
+				portrait_path = "gfx/leaders/KIV/Portrait_KIV_Cyrille_Adoula.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Joseph Iléo"
+				portrait_path = "gfx/leaders/KIV/Portrait_KIV_Joseph_Ileo.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "George Padmore"
+				portrait_path = "gfx/leaders/LIB/Portrait_LIB_George_Padmore.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Dedan Kimathi"
+				portrait_path = "gfx/leaders/KIK/KIK_Dedan_Kimathi.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "Fred Kubai"
+				portrait_path = "gfx/leaders/KIK/KIK_Fred_Kubai.png"
+				traits = {
+
+				}
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_safe_harbor_for_ex_slaves
+	icon = GFX_goal_NYC_Black_Robin_Hood_Bronx
+	prerequisite = { focus = COL_afro_syndie }
+	x = 1
+	y = 1
+	relative_position_id = COL_afro_syndie
+	available = {
+		has_country_leader = {
+			name = "Diego Luis Córdoba"
+			ruling_only = yes
+		}
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_safe_harbor_for_ex_slaves"
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = south_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				is_on_continent = south_america
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_support_the_black_struggle
+	icon = GFX_goal_CSA_black_autonomy
+	prerequisite = { focus = COL_invite_black_leaders }
+	x = 0
+	y = 1
+	relative_position_id = COL_invite_black_leaders
+	available = {
+		has_country_leader = {
+			name = "Diego Luis Córdoba"
+			ruling_only = yes
+		}
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Syndie_Air_Buff"
+		swap_ideas = {
+			remove_idea = COL_pan_africa
+			add_idea = COL_pan_africa2
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_liberate_the_american_afros
+	icon = GFX_BBR_new_communist_league
+	prerequisite = { focus = COL_safe_harbor_for_ex_slaves }
+	x = 0
+	y = 1
+	relative_position_id = COL_safe_harbor_for_ex_slaves
+	available = {
+		has_country_leader = {
+			name = "Diego Luis Córdoba"
+			ruling_only = yes
+		}
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_liberate_the_american_afros"
+		custom_effect_tooltip = COL_black_belt
+		every_country = {
+			limit = {
+				is_american_tag = yes
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = CSA
+					is_core_of = COR
+					is_core_of = USA
+					is_core_of = WCC
+					is_core_of = NEE
+					is_core_of = CAL
+					is_core_of = TEX
+					is_core_of = BBR
+					is_core_of = NYC
+					is_core_of = ARZ
+					is_core_of = TXS
+					is_core_of = ALA
+				}
+			}
+			COL = {
+				add_state_core = PREV
+			}	
+		}
+		if = {
+			limit = {
+				country_exists = BBR
+				BBR = {
+					is_ai = yes
+				}
+			}	
+			annex_country = {
+				target = BBR
+				transfer_troops = yes
+			}
+			BBR = {
+				every_unit_leader = {	
+					set_nationality = COL
+				}	
+			}
+			declare_war_on = { target = COR type = annex_everything } 
+		}
+		every_state = {
+			limit = {
+				is_core_of = HAI
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
+		every_state = {
+			limit = {
+				is_core_of = CAF
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
+
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_no_masters
+	icon = GFX_goal_NYC_Encourage_Black_Self_Confidence_Pride
+	prerequisite = { focus = COL_support_the_black_struggle }
+	prerequisite = { focus = COL_liberate_the_american_afros }
+	x = 1
+	y = 1
+	relative_position_id = COL_support_the_black_struggle
+	available = {
+		has_country_leader = {
+			name = "Diego Luis Córdoba"
+			ruling_only = yes
+		}
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Syndie_Air_Buff"
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = africa }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				is_on_continent = africa
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_Syndie_Army_Buff
+	icon = GFX_BBR_red_militia_justice
+	prerequisite = { focus = COL_State_Visit_To_Europe }
+	x = -1
+	y = 1
+	relative_position_id = COL_State_Visit_To_Europe
+	available = {
+		has_government = syndicalist
+		NOT = {
+			is_subject = yes
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Syndie_Equipment_Buff"
+		custom_effect_tooltip = COL_Syndie_Army_Buff_tt
+		swap_ideas = {
+			remove_idea = COL_defensive_measures
+			add_idea = COL_defensive_measures_2
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_Syndie_Air_Buff
+	icon = GFX_goal_USA_organic_air_support
+	prerequisite = { focus = COL_State_Visit_To_Europe }
+	x = 1
+	y = 1
+	relative_position_id = COL_State_Visit_To_Europe
+	available = {
+		has_government = syndicalist
+		NOT = {
+			is_subject = yes
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Syndie_Air_Buff"
+		custom_effect_tooltip = COL_Syndie_Air_Buff_tt
+		add_ideas = COL_socialist_air_buff
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_Join_The_Internationale
+	icon = GFX_goal_FRA_international_insurrection
+	prerequisite = { focus = COL_Syndie_Army_Buff }
+	prerequisite = { focus = COL_Syndie_Air_Buff }
+	x = 1
+	y = 1
+	relative_position_id = COL_Syndie_Army_Buff
+	cost = 5
+	available = {
+		has_government = syndicalist
+		is_subject = no
+		is_in_faction = no
+		has_war = no
+		INT = {
+			has_socialist_government = yes
+			is_faction_leader = yes
+			NOT = { has_war_with = ROOT }
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Join_The_Internationale"
+		custom_effect_tooltip = COL_Join_The_Internationale_tt
+		INT = {
+			country_event = coldecision.9
+		}
+	}
+	search_filters = { FOCUS_FILTER_RESEARCH }
+}
+shared_focus = {
+	id = COL_Agudelo_Doctrine
+	icon = GFX_goal_SPR_turn_towards_the_new_world_left
+	prerequisite = { focus = COL_Join_The_Internationale }
+	x = 0
+	y = 1
+	relative_position_id = COL_Join_The_Internationale
+	cost = 5
+	available = {
+		has_government = syndicalist
+		is_subject = no
+		OR = {
+			any_other_country = {
+				tooltip = COL_is_in_south_america_tt
+				is_in_south_america = yes
+				has_socialist_government = yes
+				is_in_faction = no
+				has_war = no
+			}
+			any_other_country = {
+				tooltip = COL_is_in_south_america_tt
+				is_in_south_america = yes
+				has_socialist_government = no
+				has_dictatorship_government = no
+				is_in_faction = no
+				is_subject = no
+				has_war = no
+			}
+		}
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Cano_Doctrine"
+		every_other_country = {
+			limit = {
+				is_in_south_america = yes
+				has_socialist_government = yes
+				is_in_faction = no
+				has_war = no
+			}
+			COL = { 
+				custom_effect_tooltip = COL_syndie_guarantee_tt
+				hidden_effect =  { 
+					diplomatic_relation = { 
+						country = PREV
+						relation = guarantee
+						active = yes
+					}
+				}
+			}
+		}
+		every_other_country = {
+			limit = {
+				is_in_south_america = yes
+				has_socialist_government = no
+				has_dictatorship_government = no
+				is_in_faction = no
+				is_subject = no
+				has_war = no
+			}
+			ROOT = { 
+				country_event = col.36
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_RESEARCH }
+}
+shared_focus = {
+	id = COL_European_Front
+	icon = GFX_goal_FRA_european_peoples_republicanism
+	prerequisite = { focus = COL_Agudelo_Doctrine }
+	x = -1
+	y = 1
+	relative_position_id = COL_Agudelo_Doctrine
+	available = {
+		has_government = syndicalist
+		NOT = {
+			is_subject = yes
+		}
+		is_in_faction_with = INT
+		INT = {
+			has_socialist_government = yes
+			has_war_with = GER
+			has_capitulated = no
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_European_Front"
+		add_ideas = COL_people_navy_2
+		add_war_support = 0.03
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_SA_Front
+	icon = GFX_goal_ARG_FOP_debacle
+	prerequisite = { focus = COL_Agudelo_Doctrine }
+	x = 1
+	y = 1
+	relative_position_id = COL_Agudelo_Doctrine
+	available = {
+		has_government = syndicalist
+		NOT = {
+			is_subject = yes
+		}
+		
+	}
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_SA_Front"
+		add_ideas = COL_people_navy_3
+		add_war_support = 0.03
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_Syndie_Aggro
+	icon = GFX_goal_NFA_liberation
+	prerequisite = { focus = COL_European_Front }
+	prerequisite = { focus = COL_SA_Front }
+	x = -1
+	y = 1
+	relative_position_id = COL_European_Front
+	available = {
+		has_government = syndicalist
+		is_subject = no
+		FRA = {
+			has_capitulated = yes
+		}
+		ENG = {
+			has_capitulated = yes
+		}
+		SRI = {
+			has_capitulated = yes
+		}
+		
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Syndie_Aggro"
+		add_war_support = 0.3
+		add_ideas = COL_suicide_mission
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_A_War_To_End_Wars
+	icon = GFX_BBR_International_Peace_movement
+	prerequisite = { focus = COL_European_Front }
+	prerequisite = { focus = COL_SA_Front }
+	x = 1
+	y = 1
+	relative_position_id = COL_European_Front
+	available = {
+		has_government = syndicalist
+		is_subject = no
+		is_in_faction_with = INT
+		has_war = no
+		INT = {
+			has_war = no
+		}
+		
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_A_War_To_End_Wars"
+		add_ideas = COL_at_peace_once_again
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+shared_focus = {
+	id = COL_revenge_time
+	icon = GFX_goal_CSA_truly_red_peru
+	prerequisite = { focus = COL_European_Front }
+	prerequisite = { focus = COL_SA_Front }
+	x = 1
+	y = 1
+	relative_position_id = COL_SA_Front
+	available = {
+		has_government = syndicalist
+		is_in_faction_with = INT
+		is_subject = no
+		
+		
+	}
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_the_socialist_vigilante"
+		#flags?
+		set_cosmetic_tag = FORM_LTM
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = south_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = central_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_on_continent = south_america
+					is_on_continent = central_america
+				}
+				
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+
+
+####################################################################################################################################
+############ COLOMBIA COMMUNIST AND RADSOC FOREIGN POLICY TREE ############ COLOMBIA COMMUNIST FOREIGN POLICY TREE ############################
+####################################################################################################################################
+############ COLOMBIA COMMUNIST AND RADSOC FOREIGN POLICY TREE ############ COLOMBIA COMMUNIST FOREIGN POLICY TREE ############################
+####################################################################################################################################
+
+shared_focus = {
+	id = COL_bring_browderism_in_colombia
+	icon = GFX_goal_CSA_Browder_Syndicalism
+	prerequisite = { focus = COL_the_bigger_picture }
+	x = 3
+	y = 1
+	relative_position_id = COL_the_bigger_picture
+	available = {
+		has_country_leader = {
+			name = "Augusto Durán Ospino"
+			ruling_only = yes
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_in_the_US_sphere"
+		add_war_support = 0.05
+		set_cosmetic_tag = COL_browderist
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_mutual_help_with_the_gringos
+	icon = GFX_goal_HON_Help_Others
+	prerequisite = { focus = COL_bring_browderism_in_colombia }
+	mutually_exclusive = { focus = COL_look_for_support }
+	x = -2
+	y = 1
+	relative_position_id = COL_bring_browderism_in_colombia
+	available = {
+		has_country_leader = {
+			name = "Augusto Durán Ospino"
+			ruling_only = yes
+		}
+		has_war = no
+		is_subject = no
+		is_in_faction = no
+		any_other_country = {
+			is_subject = no
+			has_country_leader = {
+				name = "Earl Browder"
+				ruling_only = yes
+			}
+			OR = {
+				USA = {
+					has_global_flag = USA_civil_war_avoided_flag
+					has_global_flag = USA_civil_war_over_flag
+				}
+				CSA = {
+					has_global_flag = USA_civil_war_avoided_flag
+					has_global_flag = USA_civil_war_over_flag
+				}
+			}
+		}
+	}
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_in_the_US_sphere"
+		add_ideas = COL_american_help
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_look_for_support
+	icon = GFX_goal_CSA_socialist_friendly_media
+	prerequisite = { focus = COL_bring_browderism_in_colombia }
+	mutually_exclusive = { focus = COL_mutual_help_with_the_gringos }
+	x = 2
+	y = 1
+	relative_position_id = COL_bring_browderism_in_colombia
+	available = {
+		has_country_leader = {
+			name = "Augusto Durán Ospino"
+			ruling_only = yes
+		}
+		is_subject = no
+		is_in_faction = no
+		any_other_country = {
+			OR = {
+				AND = {
+					tag = CSA
+					NOT = {
+						has_country_leader = {
+							name = "Earl Browder"
+							ruling_only = yes
+						}
+					}
+				}
+				AND = {
+					tag = USA
+					NOT = { 
+						has_country_leader = {
+							name = "Earl Browder"
+							ruling_only = yes
+						}
+					}
+				}
+			}
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_look_for_support"
+		add_war_support = 0.05
+		add_ideas = COL_browderist_allience_idea
+			create_faction_from_template = { 
+				template = faction_template_internationale_successor    
+				name = "泛美人民联盟"
+				icon = GFX_faction_logo_generic_17
+			}	
+			every_other_country = {
+				limit = {
+					has_country_leader_ideology = popcom_subtype
+				}
+				country_event = colsoc.16
+				
+			}
+		
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_the_panama_question
+	icon = GFX_goal_USA_panama_control
+	prerequisite = { focus = COL_mutual_help_with_the_gringos }
+	x = -1
+	y = 1
+	relative_position_id = COL_mutual_help_with_the_gringos
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_the_panama_question"
+				create_wargoal = {
+					type = take_claimed_state
+					target = PAN
+				} 
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_fafafafalafel #amercian support
+	icon = GFX_goal_CSA_centralist_reorganization
+	prerequisite = { focus = COL_mutual_help_with_the_gringos }
+	x = 1
+	y = 1
+	relative_position_id = COL_mutual_help_with_the_gringos
+	
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_the_panama_question"
+		swap_ideas = {
+			remove_idea = COL_american_help
+			add_idea = COL_american_help2
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_bababa #divide sa
+	icon = GFX_goal_CSA_socialist_liberation
+	prerequisite = { focus = COL_the_panama_question }
+	prerequisite = { focus = COL_fafafafalafel }
+	x = 1
+	y = 1
+	relative_position_id = COL_the_panama_question
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_in_the_US_sphere"
+			every_state = {
+				limit = {
+					is_on_continent = south_america
+				}
+				COL = {
+					add_state_core = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_on_continent = central_america
+				}
+				CSA = {
+					add_state_core = PREV
+				}
+			}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_prepare_to_land_in_america
+	icon = GFX_goal_CSA_american_exceptionalism
+	prerequisite = { focus = COL_browder_the_martyr focus = COL_invite_earl }
+	x = 1
+	y = 1
+	relative_position_id = COL_browder_the_martyr
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_in_the_US_sphere"
+		add_tech_bonus = {
+			name = COL_prepare_to_land_in_america
+			bonus = 1
+			uses = 1
+			category = marine_tech
+		}
+		add_ideas = COL_marines_tech_idea
+			every_state = {
+				limit = {
+					is_on_continent = south_america
+				}
+				COL = {
+					add_state_core = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_on_continent = central_america
+				}
+				COL = {
+					add_state_core = PREV
+				}
+			}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_the_colombian_gringos
+	icon = GFX_goal_CSA_socialist_defence_doctrine
+	prerequisite = { focus = COL_bababa focus = COL_prepare_to_land_in_america }
+	x = 1
+	y = 2
+	relative_position_id = COL_fafafafalafel
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_in_the_US_sphere"
+		if = {
+			limit = {
+				has_idea = COL_browderist_allience_idea
+			}
+			swap_ideas = {
+				remove_idea = COL_browderist_allience_idea
+				add_idea = COL_browderist_allience_idea_2
+			}
+		}
+		if = {
+			limit = {
+				has_idea = COL_american_help2 
+			}
+			swap_ideas = {
+				remove_idea = COL_american_help2
+				add_idea = COL_american_help3
+			}
+		}	
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_invite_earl
+	icon = GFX_goal_CAN_study_browder_axioms
+	prerequisite = { focus = COL_look_for_support }
+	mutually_exclusive = { focus = COL_browder_the_martyr }
+	x = 5
+	y = 1
+	relative_position_id = COL_mutual_help_with_the_gringos
+	available = {
+		has_country_leader = {
+			name = "Augusto Durán Ospino"
+			ruling_only = yes
+		}
+		has_war = no
+		CSA = {
+			NOT = {
+				has_country_flag = CSA_browder_in_exile
+				has_country_flag = CSA_socialist_union_of_america_flag
+				has_completed_focus = CSA_create_the_cia
+				has_country_flag = CSA_browder_denounces_foster
+			}
+		}
+	}
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_invite_earl"
+		country_event = colfocus.223
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_browder_the_martyr
+	icon = GFX_goal_CSA_the_boss
+	prerequisite = { focus = COL_look_for_support }
+	mutually_exclusive = { focus = COL_invite_earl }
+	x = 3
+	y = 1
+	relative_position_id = COL_mutual_help_with_the_gringos
+	available = {
+		has_country_leader = {
+			name = "Augusto Durán Ospino"
+			ruling_only = yes
+		}
+		CSA = {
+			has_country_flag = CSA_browder_in_exile
+			has_country_flag = CSA_socialist_union_of_america_flag
+			has_completed_focus = CSA_create_the_cia
+			has_country_flag = CSA_browder_denounces_foster
+		}
+		
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_invite_earl"
+		country_event = colfocus.222
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_under_american_juristicition
+	icon = GFX_goal_CSA_master_west
+	prerequisite = { focus = COL_the_colombian_gringos }
+	mutually_exclusive = { focus = COL_friends_but_independents }
+	mutually_exclusive = { focus = COL_reconquering_the_traitors }
+	x = -2
+	y = 1
+	relative_position_id = COL_the_colombian_gringos
+	available = {
+		has_country_leader = {
+			name = "Augusto Durán Ospino"
+			ruling_only = yes
+		}
+		OR = {
+			USA = {
+				exists = yes
+				is_subject = no
+				has_socialist_government = yes
+				has_country_leader = {
+					name = "Earl Browder"
+					ruling_only = yes
+				}
+				OR = {
+					has_global_flag = USA_civil_war_avoided_flag
+					has_global_flag = USA_civil_war_over_flag
+				}
+			}
+			CSA = {
+				exists = yes
+				is_subject = no
+				has_war = no
+				has_socialist_government = yes
+				has_country_leader = {
+					name = "Earl Browder"
+					ruling_only = yes
+				}
+				OR = {
+					has_global_flag = USA_civil_war_avoided_flag
+					has_global_flag = USA_civil_war_over_flag
+				}
+			}
+		}
+		
+	}
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_in_the_US_sphere"
+		
+			swap_ideas = {
+				remove_idea = COL_american_help3
+				add_idea = COL_american_help4
+			}
+		if = {
+			limit = {
+				USA = {
+					exists = yes
+					is_subject = no
+					has_country_leader = {
+						name = "Earl Browder"
+						ruling_only = yes
+					}
+				}
+			}
+			get_current_government_type = yes
+			USA = {
+				puppet = ROOT
+				set_autonomy = {
+					target = ROOT
+					autonomy_state = kr_autonomous_puppet
+				}
+				add_to_faction = ROOT
+			}
+			restore_previous_government_type = yes	
+		}
+		else = {
+			get_current_government_type = yes
+			CSA = {
+				puppet = ROOT
+				set_autonomy = {
+					target = ROOT
+					autonomy_state = kr_autonomous_puppet
+				}
+				add_to_faction = ROOT
+			}	
+			restore_previous_government_type = yes
+		}
+		if = {
+			limit = {
+				ROOT = {
+					is_faction_leader = yes
+				}
+			}
+			leave_faction = yes
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_friends_but_independents
+	icon = GFX_goal_CSA_victory
+	prerequisite = { focus = COL_the_colombian_gringos }
+	mutually_exclusive = { focus = COL_under_american_juristicition }
+	mutually_exclusive = { focus = COL_reconquering_the_traitors }
+	x = 0
+	y = 1
+	relative_position_id = COL_the_colombian_gringos
+	available = {
+		has_country_leader = {
+			name = "Augusto Durán Ospino"
+			ruling_only = yes
+		}
+		CSA = {
+			exists = yes
+			is_subject = no
+			has_socialist_government = yes
+			OR = {
+				has_global_flag = USA_civil_war_avoided_flag
+				has_global_flag = USA_civil_war_over_flag
+			}
+		}
+		OR = {
+			AND = {
+				is_subject = no
+				is_in_faction = no
+			}
+			is_in_faction_with = CSA
+			is_puppet_of = CSA
+		}
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_in_the_US_sphere"
+			swap_ideas = {
+				remove_idea = COL_american_help3
+				add_idea = COL_american_help5
+			}
+		if = {
+			limit = {
+				CSA = {
+					is_faction_leader = yes
+				}
+			}
+			CSA = {
+				add_to_faction = COL
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_reconquering_the_traitors
+	icon = GFX_goal_CSA_ussa
+	prerequisite = { focus = COL_the_colombian_gringos }
+	mutually_exclusive = { focus = COL_friends_but_independents }
+	mutually_exclusive = { focus = COL_under_american_juristicition }
+	x = 2
+	y = 1
+	relative_position_id = COL_the_colombian_gringos
+	available = {
+		OR = {
+			has_country_leader = {
+				name = "Augusto Durán Ospino"
+				ruling_only = yes
+			}
+			has_country_leader = {
+				name = "Earl Browder"
+				ruling_only = yes
+			}
+		}
+		
+		
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_in_the_US_sphere"
+			swap_ideas = {
+				remove_idea = COL_browderist_allience_idea_2
+				add_idea = COL_browderist_allience_idea_3
+			}
+		every_country = {
+			limit = {
+				is_american_tag = yes
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = CSA
+					is_core_of = COR
+					is_core_of = USA
+					is_core_of = WCC
+					is_core_of = NEE
+					is_core_of = CAL
+					is_core_of = TEX
+					is_core_of = BBR
+					is_core_of = NYC
+					is_core_of = ARZ
+					is_core_of = TXS
+					is_core_of = ALA
+				}
+			}
+			COL = {
+				add_state_core = PREV
+			}	
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_all_forms_of_fight
+	icon = GFX_goal_FRA_Defence_Revolution
+	prerequisite = { focus = COL_the_SA_playground }
+	x = -5
+	y = 1
+	relative_position_id = COL_the_SA_playground
+	available = {
+		has_country_leader = {
+			name = "Gilberto Vieira White"
+			ruling_only = yes
+		}
+		is_subject = no
+		is_in_faction = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		add_ideas = COL_tot_isolation
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_stronger_alone
+	icon = GFX_goal_TEX_isolationism
+	prerequisite = { focus = COL_all_forms_of_fight }
+	x = 0
+	y = 1
+	relative_position_id = COL_all_forms_of_fight
+	available = {
+		has_country_leader = {
+			name = "Gilberto Vieira White"
+			ruling_only = yes
+		}
+		is_subject = no
+		is_in_faction = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		swap_ideas = {
+			remove_idea = COL_tot_isolation
+			add_idea = COL_tot_isolation2
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_the_buffer_zone
+	icon = GFX_goal_NEE_armed_free_neutrality
+	prerequisite = { focus = COL_stronger_alone }
+	mutually_exclusive = { focus = COL_self_reliance }
+	x = -1
+	y = 1
+	relative_position_id = COL_stronger_alone
+	available = {
+		has_country_leader = {
+			name = "Gilberto Vieira White"
+			ruling_only = yes
+		}
+		is_subject = no
+		is_in_faction = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		add_ideas = COL_buffer_zone
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_self_reliance
+	icon = GFX_goal_CZE_fortress_autocracy
+	prerequisite = { focus = COL_stronger_alone }
+	mutually_exclusive = { focus = COL_the_buffer_zone }
+	x = 1
+	y = 1
+	relative_position_id = COL_stronger_alone
+	available = {
+		has_country_leader = {
+			name = "Gilberto Vieira White"
+			ruling_only = yes
+		}
+		is_subject = no
+		is_in_faction = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		#flags?
+		set_cosmetic_tag = FORM_AME
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = south_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = central_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = north_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_on_continent = south_america
+					is_on_continent = north_america
+					is_on_continent = central_america
+				}
+				
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_second_objective
+	icon = GFX_goal_TEX_ideoloical_neutrality
+	prerequisite = { focus = COL_the_buffer_zone }
+	x = 0
+	y = 1
+	relative_position_id = COL_the_buffer_zone
+	available = {
+		has_country_leader = {
+			name = "Gilberto Vieira White"
+			ruling_only = yes
+		}
+		is_subject = no
+		is_in_faction = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		add_ideas = command_economy
+		swap_ideas = {
+			remove_idea = COL_buffer_zone
+			add_idea = COL_buffer_zone2
+		}
+
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_declare_absolute_neutrality
+	icon = GFX_goal_HOL_sustain_neutrality
+	prerequisite = { focus = COL_self_reliance }
+	x = 0
+	y = 1
+	relative_position_id = COL_self_reliance
+	available = {
+		has_country_leader = {
+			name = "Gilberto Vieira White"
+			ruling_only = yes
+		}
+		is_subject = no
+		is_in_faction = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		add_ideas = COL_declare_absolute_neutrality
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_third_world_pact
+	icon = GFX_goal_GUA_Peaceful_Revolution
+	prerequisite = { focus = COL_declare_absolute_neutrality }
+	x = 0
+	y = 1
+	relative_position_id = COL_declare_absolute_neutrality
+	available = {
+		has_country_leader = {
+			name = "Gilberto Vieira White"
+			ruling_only = yes
+		}
+		is_subject = no
+		is_in_faction = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+		create_faction_from_template = { 
+				template = faction_template_regional          
+				name = colombia_nonaligned_faction
+				icon = GFX_faction_human_rights_internationale
+			}	
+		add_stability = 0.25
+		add_war_support = -0.25
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_focus_on_south_american_revolutions
+	icon = GFX_goal_USA_stop_southern_syndicalism
+	prerequisite = { focus = COL_the_SA_playground }
+	x = 5
+	y = 1
+	relative_position_id = COL_the_SA_playground
+	available = {
+		OR = {
+			#has_government = totalist
+			has_government = radical_socialist
+		}
+		is_subject = no
+		is_in_faction = no
+	}
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_focus_on_south_american_revolutions"
+
+		create_faction_from_template = { 
+				template = faction_template_generic_dominance              
+				name = south_american_socialists_faction
+				icon = GFX_faction_logo_generic_9
+			}	
+		add_war_support = 0.05
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_Found_The_Panamerican_Forum
+	icon = GFX_goal_NIC_Universal_Commune
+	prerequisite = { focus = COL_focus_on_south_american_revolutions }
+	x = 0
+	y = 1
+	relative_position_id = COL_focus_on_south_american_revolutions
+	available = {
+		is_faction_leader = yes
+		OR = {
+			#has_government = totalist
+			has_government = radical_socialist
+		}
+		is_subject = no
+	}
+	
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Found_The_Panamerican_Forum"
+		custom_effect_tooltip = COL_Found_The_Panamerican_Forum_tt
+		every_other_country = {
+			limit = {
+				OR = {
+					is_in_south_america = yes
+					is_in_central_america = yes
+				}
+				
+				has_socialist_government = yes
+			}
+			country_event = colsoc.13
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_the_fuel_of_latin_revolutions
+	icon = GFX_goal_NIC_Socialist_Revolution
+	prerequisite = { focus = COL_Found_The_Panamerican_Forum }
+	x = 0
+	y = 1
+	relative_position_id = COL_Found_The_Panamerican_Forum
+	available = {
+		is_faction_leader = yes
+		
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Decision COL_the_fuel_of_latin_revolutions"
+		add_manpower = 150
+		add_ideas = COL_radsoc_volunteers
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_Volunteer_Forces_Training
+	icon = GFX_goal_FRA_syndicalistmilitarism
+	prerequisite = { focus = COL_the_fuel_of_latin_revolutions }
+	x = -2
+	y = 1
+	relative_position_id = COL_the_fuel_of_latin_revolutions
+	available = {
+		is_faction_leader = yes
+		
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Decision COL_Refitting_Our_Navy_Pacific"
+		add_war_support = 0.05
+		add_command_power = 25
+		swap_ideas = {
+			remove_idea = COL_radsoc_volunteers
+			add_idea = COL_radsoc_volunteers_2
+		}
+		division_template = {
+			name = "Milicia Operaciones Especiales"
+			division_names_group = COC_MIL_03
+			regiments = {
+				militia = { x = 0 y = 0 }
+				militia = { x = 0 y = 1 }
+				militia = { x = 0 y = 2 }
+				militia = { x = 1 y = 0 }
+				militia = { x = 1 y = 1 }
+				militia = { x = 1 y = 2 }
+				militia = { x = 2 y = 0 }
+				militia = { x = 2 y = 1 }
+				militia = { x = 2 y = 2 }
+			}
+		}
+		306 = {
+			create_unit = {
+				division = "division_template = \"Milicia Operaciones Especiales\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = ROOT
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_terror_from_the_sky
+	icon = GFX_GRU_fighter_focus-4011 
+	prerequisite = { focus = COL_the_fuel_of_latin_revolutions }
+	x = 0
+	y = 1
+	relative_position_id = COL_the_fuel_of_latin_revolutions
+	available = {
+		is_faction_leader = yes
+		
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Decision COL_terror_from_the_sky"
+		add_ideas = COL_forum_air_buff
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_Refitting_Our_Navy
+	icon = GFX_goal_USA_navy_top
+	prerequisite = { focus = COL_the_fuel_of_latin_revolutions }
+	x = 2
+	y = 1
+	relative_position_id = COL_the_fuel_of_latin_revolutions
+	available = {
+		is_faction_leader = yes
+		
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Decision COL_Refitting_Our_Navy_Atlantic"
+		add_ideas = COL_people_navy
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_Strike_Coastal_South_America
+	icon = GFX_goal_generic_coastal_navy2
+	prerequisite = { focus = COL_Volunteer_Forces_Training }
+	x = 1
+	y = 1
+	relative_position_id = COL_Volunteer_Forces_Training
+	available = {
+		is_faction_leader = yes
+		
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Strike_Coastal_South_America"
+		custom_effect_tooltip = COL_Strike_Coastal_South_America_tt
+		create_wargoal = {
+			target = VEN
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = ECU
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = PRU
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = CHL
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = ARG
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = URG
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = FOP
+			type = annex_everything
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+shared_focus = {
+	id = COL_Strike_Brazil
+	icon = GFX_goal_FOP_fonte_brazil
+	prerequisite = { focus = COL_Refitting_Our_Navy }
+	x = -1
+	y = 1
+	relative_position_id = COL_Refitting_Our_Navy
+	available = {
+		is_faction_leader = yes
+		
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Strike_Brazil"
+		custom_effect_tooltip = COL_Strike_Brazil_tt
+		create_wargoal = {
+			target = BRA
+			type = annex_everything
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_Strike_Landlocked_South_America
+	icon = GFX_goal_CSA_chilean_revolution
+	prerequisite = { focus = COL_terror_from_the_sky }
+	prerequisite = { focus = COL_Strike_Coastal_South_America }
+	prerequisite = { focus = COL_Strike_Brazil }
+	x = 0
+	y = 2
+	relative_position_id = COL_terror_from_the_sky
+	available = {
+		is_faction_leader = yes
+		
+		is_subject = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_Strike_Landlocked_South_America"
+		custom_effect_tooltip = COL_Strike_Landlocked_South_America_tt
+		create_wargoal = {
+			target = BOL
+			type = annex_everything
+		}
+		create_wargoal = {
+			target = PAR
+			type = annex_everything
+		}
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_Finish_the_conquest
+	icon = GFX_goal_CSA_revolutionary_army
+	prerequisite = { 
+		focus = COL_Strike_Landlocked_South_America
+	}
+	x = -3
+	y = 1
+	relative_position_id = COL_Strike_Landlocked_South_America
+	cost = 8
+	available = {
+		has_socialist_government = yes
+		is_subject = no
+		is_faction_leader = yes
+		
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_No_More_Borders"
+		#flags?
+		set_cosmetic_tag = FORM_LTM
+		add_war_support = 0.15
+		every_state = {
+			limit = {
+				OR = {
+					is_on_continent = south_america
+					is_on_continent = central_america
+				}
+				
+			}
+			COL = {
+				add_state_core = PREV
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = south_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = central_america }
+			}
+			COL = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_other_country = {
+			limit = {
+				is_in_south_america = yes
+				is_subject_of = COL
+			}
+			COL = { 
+				annex_country = {
+					target = PREV
+					transfer_troops = yes
+				}
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+
+shared_focus = {
+	id = COL_No_More_Borders
+	icon = GFX_goal_CSA_revolutionize_monroeism
+	prerequisite = { 
+		focus = COL_Strike_Landlocked_South_America
+		focus = COL_Syndie_Aggro
+		focus = COL_A_War_To_End_Wars
+		focus = COL_revenge_time
+	}
+	x = 3
+	y = 1
+	relative_position_id = COL_Strike_Landlocked_South_America
+	cost = 8
+	available = {
+		has_socialist_government = yes
+		is_subject = no
+		OR = {
+			is_in_faction = yes
+			is_faction_leader = yes
+		}
+		
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_No_More_Borders"
+			add_political_power = 100
+			add_ideas = COL_socialist_trade
+			custom_effect_tooltip = COL_same_effect_for_other_countries_tt
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						is_in_south_america = yes
+						has_socialist_government = yes
+						NOT = { has_war_with = COL }
+						OR = {
+							is_in_faction_with = COL
+							AND = {
+								is_guaranteed_by = INT
+								NOT = { has_war_with = INT }
+							}						
+							AND = {
+								is_in_faction_with = INT
+								NOT = { has_war_with = INT }
+							}
+						}
+						OR = {
+							any_state = { is_coastal = yes }
+							is_neighbor_of = COL
+							is_puppet_of = COL
+						}
+					}
+					add_political_power = 100
+					add_ideas = COL_socialist_trade
+				}
+			}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+
+shared_focus = {
+	id = COL_the_socialist_vigilante
+	icon = GFX_goal_CSA_social_patriotism
+	prerequisite = { 
+		focus = COL_revenge_time 
+		focus = COL_under_american_juristicition
+		focus = COL_reconquering_the_traitors
+		focus = COL_friends_but_independents
+	}
+	x = 3
+	y = 1
+	relative_position_id = COL_revenge_time
+	available = {
+		has_socialist_government = yes
+		has_war = no
+		
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_the_socialist_vigilante"
+		add_ideas = COL_lessons_from_the_war
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+}
+
+shared_focus = {
+	id = COL_east_colombia_non_socialist_path
+	icon = GFX_goal_generic_propaganda
+	x = 0
+	y = 8
+	allow_branch = {
+		#OR = {
+			has_socialist_government = yes
+			tag = COC
+		#}
+	}
+	cost = 2
+	available = {
+		tag = COC
+		has_socialist_government = no
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_east_colombia_non_socialist_path"
+		COL = { country_event = colfocus.995 }
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_remodel_the_guerrilla
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_east_colombia_non_socialist_path }
+	x = -5
+	y = 1
+	relative_position_id = COL_east_colombia_non_socialist_path
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_east_colombia_factory_conversion
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_east_colombia_non_socialist_path }
+	x = -2
+	y = 1
+	relative_position_id = COL_east_colombia_non_socialist_path
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_international_backing
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_east_colombia_non_socialist_path }
+	x = 2
+	y = 1
+	relative_position_id = COL_east_colombia_non_socialist_path
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_eradicate_the_socialist_threat
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_east_colombia_non_socialist_path }
+	x = 5
+	y = 1
+	relative_position_id = COL_east_colombia_non_socialist_path
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_east_colombian_military_complex
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_east_colombia_factory_conversion }
+	x = 3
+	y = 1
+	relative_position_id = COL_remodel_the_guerrilla
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_officer_schools
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_remodel_the_guerrilla }
+	x = -1
+	y = 1
+	relative_position_id = COL_remodel_the_guerrilla
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_east_colombian_air_and_navy
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_remodel_the_guerrilla }
+	prerequisite = { focus = COL_east_colombia_factory_conversion }
+	x = 1
+	y = 1
+	relative_position_id = COL_remodel_the_guerrilla
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_toward_economic_autarchy
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_international_backing }
+	prerequisite = { focus = COL_eradicate_the_socialist_threat }
+	mutually_exclusive = { focus = COL_joint_venture_with_colombia }
+	x = -1
+	y = 1
+	relative_position_id = COL_international_backing
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_joint_venture_with_colombia
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_international_backing }
+	prerequisite = { focus = COL_eradicate_the_socialist_threat }
+	mutually_exclusive = { focus = COL_toward_economic_autarchy }
+	x = 1
+	y = 1
+	relative_position_id = COL_international_backing
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_agrarian_economic_policies
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_international_backing }
+	prerequisite = { focus = COL_eradicate_the_socialist_threat }
+	x = 1
+	y = 1
+	relative_position_id = COL_eradicate_the_socialist_threat
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_better_inf_and_art
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_officer_schools }
+	prerequisite = { focus = COL_east_colombian_air_and_navy }
+	x = -1
+	y = 1
+	relative_position_id = COL_officer_schools
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_recruitment_program
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_officer_schools }
+	prerequisite = { focus = COL_east_colombian_air_and_navy }
+	x = 1
+	y = 1
+	relative_position_id = COL_officer_schools
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_recruitment_program"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_motorize_east_colombia
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_officer_schools }
+	prerequisite = { focus = COL_east_colombian_air_and_navy }
+	x = 3
+	y = 1
+	relative_position_id = COL_officer_schools
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_motorize_east_colombia"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_buy_planes_and_boats
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_east_colombian_air_and_navy }
+	prerequisite = { focus = COL_international_backing }
+	x = 5
+	y = 1
+	relative_position_id = COL_officer_schools
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_buy_planes_and_boats"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_export_natural_resources
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_agrarian_economic_policies }
+	x = -1
+	y = 1
+	relative_position_id = COL_agrarian_economic_policies
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_export_natural_resources"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_sustainable_industrialization
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_agrarian_economic_policies }
+	x = 1
+	y = 1
+	relative_position_id = COL_agrarian_economic_policies
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_officer_schools_2
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_better_inf_and_art }
+	prerequisite = { focus = COL_recruitment_program }
+	prerequisite = { focus = COL_motorize_east_colombia }
+	prerequisite = { focus = COL_buy_planes_and_boats }
+	x = -1
+	y = 1
+	relative_position_id = COL_motorize_east_colombia
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_closer_to_our_enemys_enemy
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_toward_economic_autarchy }
+	mutually_exclusive = { focus = COL_ask_to_become_protectorate }
+	mutually_exclusive = { focus = COL_indipendence_in_foreign_affairs }
+	x = -1
+	y = 2
+	relative_position_id = COL_toward_economic_autarchy
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_indipendence_in_foreign_affairs
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { 
+		focus = COL_toward_economic_autarchy
+		focus = COL_joint_venture_with_colombia 
+	}
+	mutually_exclusive = { focus = COL_closer_to_our_enemys_enemy }
+	mutually_exclusive = { focus = COL_ask_to_become_protectorate }
+	x = 1
+	y = 2
+	relative_position_id = COL_toward_economic_autarchy
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_ask_to_become_protectorate
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_joint_venture_with_colombia }
+	mutually_exclusive = { focus = COL_closer_to_our_enemys_enemy }
+	mutually_exclusive = { focus = COL_indipendence_in_foreign_affairs }
+	x = 1
+	y = 2
+	relative_position_id = COL_joint_venture_with_colombia
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_ask_to_become_protectorate"
+		if = {
+			limit = {
+				COC = {
+					OR = {
+						is_faction_leader = yes
+						is_in_faction = yes
+					}
+				}
+			}
+			leave_faction = yes
+		}
+		get_current_government_type = yes
+		COL = {
+			puppet = COC
+			set_autonomy = {
+				target = COC
+				autonomy_state = kr_autonomous_puppet
+			}
+			add_to_faction = COC
+		}	
+		restore_previous_government_type = yes	
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_invite_foreign_businessmen
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_export_natural_resources }
+	prerequisite = { focus = COL_sustainable_industrialization }
+	x = 1
+	y = 1
+	relative_position_id = COL_export_natural_resources
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_scientific_reasearch
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { 
+		focus = COL_officer_schools_2 
+		focus = COL_invite_foreign_businessmen 
+	}
+	prerequisite = { 
+		focus = COL_closer_to_our_enemys_enemy 
+		focus = COL_indipendence_in_foreign_affairs
+		focus = COL_ask_to_become_protectorate
+	}
+	x = 0
+	y = 1
+	relative_position_id = COL_officer_schools_2
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = COL_long_lasting_party_legacy
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = COL_invite_foreign_businessmen }
+	prerequisite = { 
+		focus = COL_closer_to_our_enemys_enemy 
+		focus = COL_indipendence_in_foreign_affairs
+		focus = COL_ask_to_become_protectorate
+	}
+	x = 0
+	y = 1
+	relative_position_id = COL_invite_foreign_businessmen
+	available = {
+		has_country_flag = COL_left_congress_held
+		has_socialist_government = no
+	}
+	cost = 5
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus COL_UNIR_revolution"
+	}
+	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+}
+### United Socialist American States	
+	shared_focus = {# United Socialist American States
+		id = COL_usas
+		icon = GFX_goal_CSA_ussa
+		cost = 5
+		available = {
+			NOT = {
+				country_exists = USA
+				country_exists = CSA
+				country_exists = TEX
+				country_exists = CAL
+				country_exists = BBR
+				country_exists = COR
+				country_exists = WCC
+				
+			}
+			owns_state = 361
+		}
+	allow_branch = {
+		OR = {
+			has_socialist_government = yes
+			tag = COC
+		}
+	}
+		x = 27
+		y = 10
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_usas"
+			set_country_flag = CSA_socialist_union_of_america_flag
+			set_cosmetic_tag = COL_USA
+			add_popularity = { ideology = totalist popularity = 0.03 }
+		}
+	}
+	
+	shared_focus = {# Presidential Socialism
+		id = COL_presidential_socialism
+		icon = GFX_goal_red_star_gold_wreath
+		cost = 3
+		available = {
+			
+		}
+		prerequisite = {
+			focus = COL_usas
+		}
+		
+		relative_position_id = COL_usas
+		x = -5
+		y = 1
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_presidential_socialism"
+			add_political_power = 25
+			add_stability = 0.02
+		}
+	}
+
+	shared_focus = {# Union Management
+		id = COL_union_managment
+		icon = GFX_goal_CSA_craft_unions_committee
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_presidential_socialism
+		}
+		relative_position_id = COL_presidential_socialism
+		x = -1
+		y = 1
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_union_managment"
+			add_political_power = 50
+			add_stability = 0.05
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	
+	shared_focus = {# Popular Front
+		id = COL_popular_front
+		icon = GFX_goal_CSA_popular_front
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_union_managment
+		}
+		relative_position_id = COL_presidential_socialism
+		x = -1
+		y = 2
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_popular_front"
+			add_ideas = CSA_popular_front_idea
+			add_political_power = 65
+			add_war_support = 0.05
+			add_stability = 0.08
+			add_popularity = { ideology = totalist popularity = 0.08 }
+			add_popularity = { ideology = syndicalist popularity = 0.01 }
+			add_popularity = { ideology = radical_socialist popularity = 0.01 }
+			add_popularity = { ideology = social_democrat popularity = 0.01 }
+			add_synd_to_coalition = yes
+			add_radsoc_to_coalition = yes
+			add_socdem_to_coalition = yes
+		}
+	}
+	
+	shared_focus = {# Vanguard Party
+		id = COL_communist_party
+		icon = GFX_goal_CSA_empower_chairman
+		cost = 5.00
+		
+		prerequisite = {
+			focus = COL_presidential_socialism
+		}
+		relative_position_id = COL_presidential_socialism
+		x = 1
+		y = 1
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_communist_party"
+			add_ideas = CSA_empowered_executive_idea
+			add_political_power = 75
+			add_manpower = 2200
+		}
+	}
+	
+	shared_focus = {# Subdue Upper Class
+		id = COL_subdue_bourgeousie
+		icon = GFX_goal_CSA_subdue_bourgeoisie
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_communist_party
+		}
+		
+		relative_position_id = COL_presidential_socialism
+		x = 1
+		y = 2
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_subdue_bourgeousie"
+			add_ideas = CSA_red_class_collaboratism_idea
+			
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					dockyard > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	
+	shared_focus = {# Browder's Economic Policy
+		id = COL_browders_economics
+		icon = GFX_goal_CSA_Browder_Syndicalism
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_subdue_bourgeousie
+		}
+		prerequisite = {
+			focus = COL_popular_front
+		}
+		relative_position_id = COL_presidential_socialism
+		x = 0
+		y = 3
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_browders_economics"
+			swap_ideas = {
+				remove_idea = CSA_red_class_collaboratism_idea
+				add_idea = CSA_browderism_syndicalism_idea
+			}
+			
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			
+		}
+	}
+	
+	shared_focus = {# Collective Farming
+		id = COL_collective_farming
+		icon = GFX_goal_CSA_green_fields_program
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_browders_economics
+		}
+		relative_position_id = COL_presidential_socialism
+		x = -1
+		y = 4
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_collective_farming"
+			swap_ideas = {
+			remove_idea = CSA_browderism_syndicalism_idea
+			add_idea = CSA_browderism_syndicalism_agro_idea_2
+			}
+			396 = {	if = {	limit = { is_owned_and_controlled_by = COL } add_extra_state_shared_building_slots = 1 } }
+			375 = {	if = {	limit = { is_owned_and_controlled_by = COL } add_extra_state_shared_building_slots = 1 } }
+			833 = {	if = {	limit = { is_owned_and_controlled_by = COL } add_extra_state_shared_building_slots = 1 } }
+			386 = {	if = {	limit = { is_owned_and_controlled_by = COL } add_extra_state_shared_building_slots = 1 } }
+			362 = {	if = {	limit = { is_owned_and_controlled_by = COL } add_extra_state_shared_building_slots = 1 } }
+			361 = {	if = {	limit = { is_owned_and_controlled_by = COL } add_extra_state_shared_building_slots = 1 } }
+		}
+	}
+	
+	shared_focus = {# Industrial Build up
+		id = COL_industrial_build_up
+		icon = GFX_goal_CSA_strenght_through_industry
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_collective_farming
+		}
+		
+		relative_position_id = COL_presidential_socialism
+		x = -1
+		y = 5
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_industrial_build_up"
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					arms_factory > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					arms_factory > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					arms_factory > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					arms_factory > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					dockyard > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	shared_focus = {# Practical Trade
+		id = COL_practical_trade
+		icon = GFX_goal_CSA_practical_trade
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_industrial_build_up
+		}
+		relative_position_id = COL_presidential_socialism
+		x = -1
+		y = 6
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_practical_trade"
+			add_ideas = CSA_practical_trade_idea
+			
+			add_stability = 0.05
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					is_coastal = yes
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					is_coastal = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					is_coastal = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					is_coastal = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	shared_focus = {# Price Controls
+		id = COL_price_controls
+		icon = GFX_goal_CSA_price_controls
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_practical_trade
+		}
+		
+		relative_position_id = COL_presidential_socialism
+		x = -1
+		y = 7
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_price_controls"
+			swap_ideas = {
+			remove_idea = CSA_practical_trade_idea
+			add_idea = CSA_practical_trade_idea_2
+			}
+			add_political_power = 50
+			add_stability = 0.05
+		}
+	}
+	
+	shared_focus = {# Socialist Self-Management
+		id = COL_decentralized_planning
+		icon = GFX_BBR_collective_management
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_collective_farming
+		}
+		relative_position_id = COL_presidential_socialism
+		x = 1
+		y = 5
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_decentralized_planning"
+			swap_ideas = {
+			remove_idea = CSA_browderism_syndicalism_agro_idea_2
+			add_idea = CSA_browderism_syndicalism_self_management_idea_3
+			}
+			add_stability = 0.05
+			
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					is_coastal = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					is_coastal = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			362 = {	if = {	limit = { is_owned_and_controlled_by = COL } add_extra_state_shared_building_slots = 2 } }
+			361 = {	if = {	limit = { is_owned_and_controlled_by = COL } add_extra_state_shared_building_slots = 2 } }
+		}
+	}
+	shared_focus = {# Reform the IWW
+		id = COL_reform_the_iww
+		icon = GFX_goal_CSA_restructure_iww
+		cost = 5.00
+		
+		prerequisite = {
+			focus = COL_decentralized_planning
+		}
+		relative_position_id = COL_presidential_socialism
+		x = 1
+		y = 6
+		ai_will_do = {
+			factor = 50
+		}
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_reform_the_iww"
+			add_political_power = 65
+			add_stability = 0.05
+			add_popularity = { ideology = totalist popularity = 0.08 }
+			add_popularity = { ideology = syndicalist popularity = -0.05 }
+			
+		}
+	}
+	
+	shared_focus = {# Friendly Media
+		id = COL_friendly_media
+		icon = GFX_goal_CSA_socialist_friendly_media
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_browders_economics
+		}
+		relative_position_id = COL_presidential_socialism
+		x = 2
+		y = 4
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_friendly_media"
+			swap_ideas = {
+			remove_idea = CSA_popular_front_idea
+			add_idea = CSA_popular_front_idea_2
+			}
+			add_popularity = { ideology = totalist popularity = 0.08 }
+			add_political_power = 15
+			add_stability = 0.03
+			
+		}
+	}
+	
+	shared_focus = {# Social Americanism
+		id = COL_american_communism
+		icon = GFX_goal_CSA_apple_pie_communism
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_friendly_media
+		}
+		relative_position_id = COL_presidential_socialism
+		x = 3
+		y = 5
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_american_communism"
+			swap_ideas = {
+			remove_idea = CSA_popular_front_idea_2
+			add_idea = CSA_popular_front_apple_pie_idea_3
+			}
+			add_popularity = { ideology = totalist popularity = 0.05 }
+			add_political_power = 25
+			add_stability = 0.05
+			
+		}
+	}
+	
+	shared_focus = {# Commune Reform
+		id = COL_commune_policy
+		icon = GFX_goal_CSA_deal_with_communes
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_american_communism
+		}
+		relative_position_id = COL_presidential_socialism
+		x = 3
+		y = 6
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_commune_policy"
+			add_popularity = { ideology = totalist popularity = 0.03 }
+			add_stability = 0.05
+			add_political_power = 45
+			
+		}
+	}
+	
+	shared_focus = {# Purge the Stubborn
+		id = COL_purge_the_stubborn
+		icon = GFX_goal_CSA_asserting_the_apparatus
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_commune_policy
+		}
+		prerequisite = {
+			focus = COL_reform_the_iww
+		}
+		
+		relative_position_id = COL_presidential_socialism
+		x = 2
+		y = 7
+		ai_will_do = {
+			factor = 50
+		}
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_purge_the_stubborn"
+			add_political_power = 80
+			add_popularity = { ideology = totalist popularity = 0.1 }
+			
+		}
+	}
+
+	shared_focus = {# Centralized synd
+		id = COL_nat_syndicalist_econ
+		icon = GFX_goal_CSA_centralised_syndicalism
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_price_controls
+		}
+		
+		relative_position_id = COL_presidential_socialism
+		x = -1
+		y = 8
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_nat_syndicalist_econ"
+			swap_ideas = {
+			remove_idea = CSA_practical_trade_idea_2
+			add_idea = CSA_practical_trade_idea_3
+			}
+			add_political_power = 50
+			add_stability = 0.05
+			add_popularity = { ideology = totalist popularity = 0.05 }
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0 
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					arms_factory > 0 
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					infrastructure > 0 
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					infrastructure > 0 
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					infrastructure > 0 
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					infrastructure > 0 
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	shared_focus = {# The Boss
+		id = COL_the_boss
+		icon = GFX_goal_CSA_the_boss
+		cost = 5
+		
+		prerequisite = {
+			focus = COL_purge_the_stubborn
+		}
+		prerequisite = {
+			focus = COL_price_controls
+		}
+		relative_position_id = COL_presidential_socialism
+		x = 1
+		y = 8
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_nat_syndicalist_econ"
+			swap_ideas = {
+				remove_idea = CSA_empowered_executive_idea
+				add_idea = CSA_empowered_executive_idea_2
+			}
+			add_political_power = 150
+			add_stability = 0.12
+			add_popularity = { ideology = totalist popularity = 0.1 }
+			
+		}
+	}
+	
+	shared_focus = {# Create the CIA
+		id = COL_create_the_cia
+		icon = GFX_goal_NOR_secret_police
+		cost = 5
+		available = {
+			has_government = totalist
+		}
+		prerequisite = {
+			focus = COL_browders_economics
+		}
+		relative_position_id = COL_browders_economics
+		x = -3
+		y = 1
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_create_the_cia"
+			add_ideas = CSA_cia_idea
+			if = {
+				limit = { has_dlc = "La Resistance" }
+				if = {
+					limit = { has_intelligence_agency = no }
+					create_intelligence_agency = yes
+				}
+			}
+			
+		}
+	}
+	
+	shared_focus = {# Resources nationalism
+		id = COL_resource_nationalization
+		icon = GFX_goal_CSA_resource_nationalisation
+		cost = 5
+		available = {
+			has_government = totalist
+		}
+		prerequisite = {
+			focus = COL_create_the_cia
+		}
+		relative_position_id = COL_browders_economics
+		x = -3
+		y = 2
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_resource_nationalization"
+			add_political_power = 35
+			random_owned_controlled_state = {
+				limit = { has_resources_amount = { resource = steel amount > 5 } }
+				add_resource = {
+				type = steel
+				amount = 45
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { has_resources_amount = { resource = oil amount > 1 } }
+				add_resource = {
+				type = oil
+				amount = 35
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { has_resources_amount = { resource = oil amount > 1 } }
+				add_resource = {
+				type = oil
+				amount = 25
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { has_resources_amount = { resource = tungsten amount > 1 } }
+				add_resource = {
+				type = tungsten
+				amount = 15
+				}
+			}
+		}
+	}
+	
+	shared_focus = {# People's Commissars
+		id = COL_peoples_commisars
+		icon = GFX_goal_CSA_peoples_commissars
+		cost = 5
+		available = {
+			has_government = totalist
+		}
+		prerequisite = {
+			focus = COL_resource_nationalization
+		}
+		relative_position_id = COL_browders_economics
+		x = -3
+		y = 3
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_peoples_commisars"
+			swap_ideas = {
+				remove_idea = CSA_cia_idea
+				add_idea = CSA_cia2_idea
+			}
+			army_experience = -25
+		}
+	}
+    shared_focus = {#Centralist Military
+		id = COL_centralist_doctrine
+		icon = GFX_goal_CSA_centralist_reorganization
+		cost = 5
+		relative_position_id = COL_usas
+		x = -12
+		y = 1
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		
+		prerequisite = { focus = COL_usas }
+
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CSA_militia_idea
+			add_idea = CSA_militia_idea2
+			}
+			add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 15
+			producer = CSA
+			}
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			add_popularity = { ideology = totalist popularity = 0.05 }
+		}
+	}
+	shared_focus = {#Artillery Contracts
+		id = COL_artillery_production_lines
+		icon = GFX_GRU_overwhelming_firepower-4022
+		cost = 5
+		x = 0
+		y = 1
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		prerequisite = { focus =COL_centralist_doctrine }
+		relative_position_id = COL_centralist_doctrine
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CSA_militia_idea2
+			add_idea = CSA_centralist_doctrine_idea
+			}
+			add_tech_bonus = {
+				name = CSA_artillery
+				bonus = 2
+				uses = 1
+				category = artillery
+			}
+			add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 55
+			producer = CSA
+			}
+		}
+	}
+	shared_focus = {# Arms Quotas
+		id = COL_production_quotas
+		icon = GFX_focus_generic_military_equipment
+		cost = 5
+		x = 2
+		y = 2
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		prerequisite = {
+		focus = COL_artillery_production_lines
+		}
+		relative_position_id = COL_centralist_doctrine
+		completion_reward = {
+			add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 120
+			producer = CSA
+			}
+			add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 40
+			producer = CSA
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					arms_factory > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	shared_focus = {#Military Industrialization
+		id = COL_military_industrialization
+		icon = GFX_goal_generic_soviet_construction
+		cost = 5
+		x = -2
+		y = 2
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		prerequisite = { 
+		focus = COL_artillery_production_lines
+		}
+		relative_position_id = COL_centralist_doctrine
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_mainland_america = yes
+					free_building_slots = { building = arms_factory size > 0 include_locked = yes }
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_mainland_america = yes
+					free_building_slots = { building = arms_factory size > 0 include_locked = yes }
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	shared_focus = {#Officer Artillery Training
+		id = COL_artillery_training
+		icon = GFX_goal_COR_militant_hoosiers
+		cost = 5
+		x = 0
+		y = 1
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		prerequisite = { focus =COL_artillery_production_lines }
+		relative_position_id = COL_artillery_production_lines
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CSA_centralist_doctrine_idea
+			add_idea = CSA_centralist_doctrine_idea_2
+			}
+			army_experience = 15
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+	shared_focus = {#Counter-Reactionary Arnaments
+		id = COL_canons_of_socialism
+		icon = GFX_goal_generic_anti_air_gun
+		cost = 5
+		x = -1
+		y = 2
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		prerequisite = { focus =COL_artillery_training } 
+		prerequisite = { focus =COL_military_industrialization }
+		relative_position_id = COL_artillery_production_lines
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = cat_anti_tank
+			}
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = cat_anti_air
+				}
+			if = {
+				limit = { has_tech = interwar_antitank }
+				add_equipment_to_stockpile = {
+					type = anti_tank_equipment
+					amount = 65
+					producer = CSA
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = anti_air_equipment
+				amount = 30
+				producer = CSA
+			}
+		}
+	}
+	shared_focus = {#Combined Arms 
+		id = COL_revolution_arms
+		icon = GFX_GRU_ground_support_focus-4018
+		cost = 5
+		x = 1
+		y = 2
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		prerequisite = { focus =COL_production_quotas }
+		prerequisite = { focus =COL_artillery_training }
+		relative_position_id = COL_artillery_production_lines
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CSA_centralist_doctrine_idea_2
+			add_idea = CSA_centralist_doctrine_idea_3
+			}
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 20
+				producer = BBR
+			}
+			if = {
+				limit = { has_tech = interwar_antitank }
+				add_equipment_to_stockpile = {
+					type = anti_tank_equipment
+					amount = 15
+					producer = BBR
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = anti_air_equipment
+				amount = 15
+				producer = BBR
+			}
+			add_equipment_to_stockpile = { 
+				type = medium_plane_airframe
+				amount = 30
+				producer = BBR
+			}
+			395 = {
+				if = {
+					limit = { is_owned_and_controlled_by = COL }
+					add_building_construction = {
+						type = air_base
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+	shared_focus = {#Modernized Army
+		id = COL_modernized_army
+		icon = GFX_goal_CSA_professional_red_army
+		cost = 5
+		x = 0
+		y = 3
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		prerequisite = { focus =COL_revolution_arms }
+		prerequisite = { focus =COL_canons_of_socialism }
+		relative_position_id = COL_artillery_production_lines
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CSA_centralist_doctrine_idea_3
+			add_idea = CSA_centralist_doctrine_idea_4
+			}
+			add_stability = 0.05
+			add_political_power = 30
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			add_tech_bonus = {
+				name = CSA_centralist_doctrine_bonus
+				bonus = 1
+				uses = 1
+				category = artillery
+			}
+		}
+	}
+    shared_focus = {# Protecting Columbia
+		id = COL_the_dust_settles
+		icon = GFX_goal_generic_isolation
+		cost = 5
+		prerequisite = {
+			focus = COL_modernized_army
+			
+		}
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 5
+				NOT = { has_global_flag = USA_civil_war_over_flag }
+			}
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = COL_modernized_army
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAL_protecting_Columbia"
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			if = {
+				limit = { has_idea = CSA_state_of_war_idea }
+				remove_ideas = CSA_state_of_war_idea
+			}
+			add_stability = 0.15
+			add_political_power = 100
+			
+		}
+	}
+	shared_focus = {# Military Research
+		id = COL_military_research1
+		icon = GFX_HUN_new_warfighting_technology
+		cost = 5
+		prerequisite = {
+			focus = COL_the_dust_settles
+		}
+		x = -1
+		y = 1
+		relative_position_id = COL_the_dust_settles
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				NOT = { has_global_flag = USA_civil_war_over_flag }
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_military_research"
+			add_research_slot = 1
+		}
+	}
+	
+	
+	shared_focus = { # Bring the 'Complex West
+		id = COL_bring_the_complex_west
+		icon = GFX_CAL_military_lobby
+		cost = 5
+		prerequisite = {
+			focus = COL_the_dust_settles
+		}
+		x = 1
+		y = 1
+		relative_position_id = COL_the_dust_settles
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAL_bring_the_complex_west"
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	shared_focus = { # Columbia Needs You
+		id = COL_Columbia_needs_you
+		icon = GFX_goal_COS_American_Staff
+		cost = 5
+		prerequisite = {
+			focus = COL_bring_the_complex_west
+		}
+		x = 1
+		y = 2
+		relative_position_id = COL_the_dust_settles
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 5
+				NOT = { has_global_flag = USA_civil_war_over_flag }
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAL_Columbia_needs_you"
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+	
+	shared_focus = {# War Bonds
+		id = COL_war_bonds
+		icon = GFX_CAL_bonus_bill
+		cost = 5
+		prerequisite = {
+			focus = COL_bring_the_complex_west
+		}
+		x = 2
+		y = 1
+		relative_position_id = COL_bring_the_complex_west
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 5
+				NOT = { has_global_flag = USA_civil_war_over_flag }
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAL_war_bonds"
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	##Navy###
+	shared_focus = {
+		id = COL_second_continental_navy
+		icon = GFX_goal_CSA_continental_navy
+		available = { any_owned_state = { is_coastal = yes} }
+		x = 5
+		y = 1
+		prerequisite = {
+			focus = COL_usas
+		}
+		relative_position_id = COL_usas
+		cost = 5
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 3
+				enemies_naval_strength_ratio > 0.6
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_second_continental_navy"
+			add_doctrine_cost_reduction = {
+				name = naval_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	shared_focus = {
+		id = COL_revolutionary_naval_industry
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = {
+			focus = COL_second_continental_navy
+		}
+		relative_position_id = COL_second_continental_navy
+		x = 0
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 3
+				enemies_naval_strength_ratio > 0.6
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_revolutionary_naval_industry"
+			navy_experience = 100
+			add_ideas = CSA_revolutionary_naval_industry_4
+			hidden_effect = {
+				add_ideas = CSA_decentralized_command
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	shared_focus = {
+		id = COL_new_american_dockyards
+		icon = GFX_goal_generic_shipyard
+		prerequisite = {
+			focus = COL_revolutionary_naval_industry
+		}
+		relative_position_id = COL_revolutionary_naval_industry
+		x = -2
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 3
+				enemies_naval_strength_ratio > 0.6
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_new_american_dockyards"
+			add_political_power = -100
+			navy_experience = 50
+			if = {
+				limit = { has_idea = CSA_revolutionary_naval_industry_4 }
+				swap_ideas = {
+					remove_idea = CSA_revolutionary_naval_industry_4
+					add_idea = CSA_martime_industry
+				}
+			}	
+			else_if = {
+				limit = { has_idea = CSA_revolutionary_naval_industry_5 }
+				swap_ideas = {
+					remove_idea = CSA_revolutionary_naval_industry_5
+					add_idea = CSA_martime_industry
+				}
+			}
+			else = {
+				custom_effect_tooltip = CSA_new_american_dockyards_tooltip
+				hidden_effect = {
+					swap_ideas = {
+						remove_idea = CSA_revolutionary_naval_industry_6
+						add_idea = CSA_martime_industry
+					}
+				}
+			}
+			if = {
+				limit = { has_completed_shared_focus = CSA_new_naval_plan }
+				add_tech_bonus = {
+					name = CSA_new_american_dockyards
+					uses = 2
+					bonus = 1
+					category = bb_tech
+					category = cl_tech
+				}
+				add_tech_bonus = {
+					name = CSA_new_american_dockyards
+					uses = 3
+					bonus = 0.75
+					category = cat_gunnery
+					category = cat_targeting
+				}
+			}
+			else = {
+				add_tech_bonus = {
+					name = CSA_new_american_dockyards
+					uses = 3
+					bonus = 1
+					category = dd_tech
+					category = cl_tech
+				}
+				add_tech_bonus = {
+					name = CSA_new_american_dockyards
+					uses = 2
+					bonus = 0.75
+					category = asw_tech
+					category = cat_anti_air
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	shared_focus = {
+		id = COL_new_naval_plan
+		icon = GFX_goal_generic_sea_focused_navy2
+		prerequisite = {
+			focus = COL_revolutionary_naval_industry
+		}
+		mutually_exclusive = {
+			focus = COL_american_peoples_navy
+		}
+		relative_position_id = COL_revolutionary_naval_industry
+		x = -1
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 3
+				enemies_naval_strength_ratio > 0.6
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_new_naval_plan"
+			if = {
+				limit = { has_idea = CSA_big_red_fleet }
+				custom_effect_tooltip = CSA_new_naval_plan_tooltip
+				hidden_effect = {
+					swap_ideas = {
+						remove_idea = CSA_big_red_fleet
+						add_idea = CSA_american_peoples_navy_4
+					}
+				}
+			}	
+			else_if = {
+				limit = { has_idea = CSA_sea_hunters }
+				swap_ideas = {
+					remove_idea = CSA_sea_hunters
+					add_idea = CSA_american_peoples_navy_5
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = CSA_decentralized_command
+					add_idea = CSA_american_peoples_navy_6
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	shared_focus = {
+		id = COL_american_peoples_navy
+		icon = GFX_goal_navy_hat_ships
+		prerequisite = {
+			focus = COL_revolutionary_naval_industry
+		}
+		mutually_exclusive = {
+			focus = COL_new_naval_plan
+		}
+		relative_position_id = COL_revolutionary_naval_industry
+		x = 1
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 3
+				enemies_naval_strength_ratio > 0.6
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_american_peoples_navy"
+			if = {
+				limit = { has_idea = CSA_big_red_fleet }
+				custom_effect_tooltip = CSA_american_peoples_navy_tooltip
+				hidden_effect = {
+					swap_ideas = {
+						remove_idea = CSA_big_red_fleet
+						add_idea = CSA_american_peoples_navy_1
+					}
+				}
+			}	
+			else_if = {
+				limit = { has_idea = CSA_sea_hunters }
+				swap_ideas = {
+					remove_idea = CSA_sea_hunters
+					add_idea = CSA_american_peoples_navy_2
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = CSA_decentralized_command
+					add_idea = CSA_american_peoples_navy_3
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	shared_focus = {
+		id = COL_refit_old_ships
+		icon = GFX_goal_AST_upgrade_reserves
+		prerequisite = {
+			focus = COL_new_naval_plan
+			focus = COL_american_peoples_navy
+		}
+		relative_position_id = COL_revolutionary_naval_industry
+		x = 0
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 3
+				enemies_naval_strength_ratio > 0.6
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_refit_old_ships"
+			if = {
+				limit = { has_idea = CSA_american_peoples_navy_1 }
+				custom_effect_tooltip = CSA_refit_old_ships_tooltip_continental_navy
+				hidden_effect = {
+					swap_ideas = {
+						remove_idea = CSA_american_peoples_navy_1
+						add_idea = CSA_american_peoples_navy_7
+					}
+				}
+			}
+			else_if = {
+				limit = { has_idea = CSA_american_peoples_navy_2 }
+				swap_ideas = {
+					remove_idea = CSA_american_peoples_navy_2
+					add_idea = CSA_american_peoples_navy_8
+				}
+			}
+			else_if = {
+				limit = { has_idea = CSA_american_peoples_navy_3 }
+				swap_ideas = {
+					remove_idea = CSA_american_peoples_navy_3
+					add_idea = CSA_american_peoples_navy_9
+				}
+			}
+			else_if = {
+				limit = { has_idea = CSA_american_peoples_navy_4 }
+				custom_effect_tooltip = CSA_refit_old_ships_tooltip_peoples_navy
+				hidden_effect = {
+					swap_ideas = {
+						remove_idea = CSA_american_peoples_navy_4
+						add_idea = CSA_american_peoples_navy_10
+					}
+				}
+			}
+			else_if = {
+				limit = { has_idea = CSA_american_peoples_navy_5 }
+				swap_ideas = {
+					remove_idea = CSA_american_peoples_navy_5
+					add_idea = CSA_american_peoples_navy_11
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = CSA_american_peoples_navy_6
+					add_idea = CSA_american_peoples_navy_12
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	shared_focus = {
+		id = COL_liberty_ships
+		icon = GFX_goal_USA_liberty_ships
+		prerequisite = {
+			focus = COL_new_american_dockyards
+			focus = COL_refit_old_ships
+		}
+		relative_position_id = COL_revolutionary_naval_industry
+		x = -1
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 3
+				enemies_naval_strength_ratio > 0.6
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_liberty_ships"
+			add_ideas = CSA_liberty_ships_ideas
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	shared_focus = {
+		id = COL_revolution_on_high_seas
+		icon = GFX_GRU_carrier_focus-4013
+		prerequisite = {
+			focus = COL_revolutionary_naval_industry
+		}
+		relative_position_id = COL_revolutionary_naval_industry
+		x = 2
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 3
+				enemies_naval_strength_ratio > 0.6
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_revolution_on_high_seas"
+			navy_experience = 30
+			add_tech_bonus = {
+				name = CSA_revolution_on_high_seas
+				uses = 1
+				bonus = 1
+				category = cv_tech
+			}
+			add_tech_bonus = {
+				name = CSA_revolution_on_high_seas
+				uses = 1
+				bonus = 1
+				category = naval_air
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	shared_focus = {
+		id = COL_recreate_continental_marines
+		icon = GFX_goal_generic_amphibious_assault
+		prerequisite = {
+			focus = COL_revolution_on_high_seas
+		}
+		relative_position_id = COL_revolutionary_naval_industry
+		x = 1
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 3
+				enemies_naval_strength_ratio > 0.6
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_recreate_continental_marines"
+			add_ideas = CSA_continental_marines
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	#Navy
+	shared_focus = {
+		id = COL_navy_of_new_age
+		icon = GFX_goal_USA_navy
+		available = {
+			has_navy_size = { size > 299 }
+		}
+		prerequisite = {
+			focus = COL_liberty_ships
+		}
+		prerequisite = {
+			focus = COL_revolution_on_high_seas
+		}
+		relative_position_id = COL_revolutionary_naval_industry
+		x = 0
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 3
+				enemies_naval_strength_ratio > 0.6
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_navy_of_new_age"
+			if = {
+				limit = { has_idea = CSA_american_peoples_navy_7 }
+				custom_effect_tooltip = CSA_navy_of_new_age_tooltip_peoples_navy
+				hidden_effect = {
+					swap_ideas = {
+						remove_idea = CSA_american_peoples_navy_7
+						add_idea = CSA_american_peoples_navy_13
+					}
+				}
+			}
+			else_if = {
+				limit = { has_idea = CSA_american_peoples_navy_8 }
+				swap_ideas = {
+					remove_idea = CSA_american_peoples_navy_8
+					add_idea = CSA_american_peoples_navy_14
+				}
+			}
+			else_if = {
+				limit = { has_idea = CSA_american_peoples_navy_9 }
+				swap_ideas = {
+					remove_idea = CSA_american_peoples_navy_9
+					add_idea = CSA_american_peoples_navy_15
+				}
+			}
+			else_if = {
+				limit = { has_idea = CSA_american_peoples_navy_10 }
+				custom_effect_tooltip = CSA_navy_of_new_age_tooltip_continental_navy
+				hidden_effect = {
+					swap_ideas = {
+						remove_idea = CSA_american_peoples_navy_10
+						add_idea = CSA_american_peoples_navy_16
+					}
+				}
+			}
+			else_if = {
+				limit = { has_idea = CSA_american_peoples_navy_11 }
+				swap_ideas = {
+					remove_idea = CSA_american_peoples_navy_11
+					add_idea = CSA_american_peoples_navy_17
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = CSA_american_peoples_navy_12
+					add_idea = CSA_american_peoples_navy_18
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	####Air Force
+	shared_focus = {#
+		id = COL_red_air_force
+		icon = GFX_goal_CSA_continental_airforce
+		cost = 5
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = COL_usas
+		}
+		relative_position_id = COL_usas
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+	}
+	shared_focus = {#
+		id = COL_bomber_command
+		icon = GFX_GRU_bomber_focus-4012
+		cost = 5
+		x = -2
+		y = 1
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		mutually_exclusive = {
+			focus = COL_fighter_command
+			shared_focus = CSA_flexible_airforce
+		}
+		prerequisite = { focus =COL_red_air_force }
+		relative_position_id = COL_red_air_force
+		completion_reward = {
+			add_tech_bonus = {
+				name = CSA_bomber_bonus
+				bonus = 1.5
+				uses = 2
+				category = cat_strategic_bomber
+			}
+		}
+	}
+	shared_focus = {#
+		id = COL_fighter_command
+		icon = GFX_GRU_fighter_focus-4011
+		cost = 5
+		x = 0
+		y = 1
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		mutually_exclusive = {
+			focus = COL_bomber_command
+			shared_focus = CSA_flexible_airforce
+		}
+		prerequisite = { focus =COL_red_air_force }
+		relative_position_id = COL_red_air_force
+		completion_reward = {
+			add_tech_bonus = {
+				name = CSA_fighter_bonus
+				bonus = 1.5
+				uses = 2
+				category = light_fighter
+			}
+		}
+	}
+	shared_focus = {#
+		id = COL_flexible_airforce
+		icon = GFX_goal_generic_air_doctrine
+		cost = 5
+		x = 2
+		y = 1
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		mutually_exclusive = {
+			focus = COL_bomber_command
+			focus = COL_fighter_command
+		}
+		prerequisite = { focus =COL_red_air_force }
+		relative_position_id = COL_red_air_force
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+	}
+	shared_focus = {#
+		id = COL_the_second_draft
+		icon = GFX_goal_generic_build_airforce
+		cost = 4
+		x = -1
+		y = 2
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		prerequisite = { focus =COL_bomber_command 
+		focus = COL_fighter_command
+		focus = COL_flexible_airforce
+		}
+		mutually_exclusive = {
+		focus = COL_the_traditional_army
+		}
+		relative_position_id = COL_red_air_force
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_the_second_draft"
+			add_stability = -0.05
+			add_manpower = 100000
+			add_ideas = CSA_rebel_girl_idea
+			set_rule = { can_generate_female_aces = yes }
+		}
+		search_filters = { FOCUS_FILTER_MANPOWER }
+	}
+	shared_focus = {#
+		id = COL_the_traditional_army
+		icon = GFX_goal_generic_allies_build_infantry
+		cost = 4
+		x = 1
+		y = 2
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		mutually_exclusive = {
+		focus = COL_the_second_draft
+		}
+		prerequisite = { focus =COL_bomber_command 
+		focus = COL_fighter_command
+		focus = COL_flexible_airforce
+		}
+		relative_position_id = COL_red_air_force
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_the_traditional_army"
+			add_stability = 0.02
+			army_experience = 10
+			air_experience = 30
+			add_political_power = 20
+			add_popularity = { ideology = syndicalist popularity = -0.02 }
+			add_popularity = { ideology = totalist popularity = -0.02 }
+		}
+	}
+	shared_focus = {#
+		id = COL_unleash_the_hellcat
+		icon = GFX_goal_generic_air_fighter2
+		cost = 5
+		x = 0
+		y = 3
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		prerequisite = { 
+		focus = COL_the_second_draft
+		focus = COL_the_traditional_army
+		}
+		relative_position_id = COL_red_air_force
+		completion_reward = {
+			add_tech_bonus = {
+				name = CSA_red_air_force
+				bonus = 1
+				uses = 1
+				category = naval_air
+			}
+			if = {
+				limit = { NOT = { has_tech = cv_fighter1 } }
+				set_technology = { cv_fighter1 = 1 }
+			}
+			if = {
+				limit = { NOT = { has_tech = cv_fighter2 } }
+				set_technology = { cv_fighter2 = 1 }
+			}
+		}
+	}
+	shared_focus = {
+		id = COL_from_the_sky
+		icon = GFX_goal_air_armada
+		cost = 5
+		prerequisite = {
+			focus = COL_unleash_the_hellcat
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_red_air_force
+		x = 0
+		y = 4
+
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_from_the_sky"
+			air_experience = 50
+			add_ideas = CSA_from_the_sky_idea
+		}
+	}
+	### Foreign Policy ###
+
+	shared_focus = {
+		id = COL_back_in_business
+		icon = GFX_goal_CSA
+		cost = 5
+		x = 14
+		y = 1
+		prerequisite = {
+			focus = COL_usas
+		}
+		relative_position_id = COL_usas
+		
+
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				date > 1940.1.1
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_back_in_business"
+			add_political_power = 100
+		}
+	}
+
+	
+	
+	shared_focus = {
+		id = COL_demand_new_england
+		icon = GFX_goal_flag_new_england
+		cost = 5
+		prerequisite = {
+			focus = COL_back_in_business
+		}
+		available = { is_subject = no }
+		
+		relative_position_id = COL_back_in_business
+		x = 0
+		y = 1
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_demand_new_england"
+			CAN = {
+				country_event = {
+				id = csa.2700
+				days = 1
+				}
+			}
+		}
+	}
+
+	shared_focus = {
+		id = COL_socialism_in_one_nation
+		icon = GFX_CSA_Socialist_Empire
+		cost = 4
+		prerequisite = {
+			focus = COL_socialist_liberation
+		}
+		
+		relative_position_id = COL_socialist_liberation
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_socialism_in_one_nation"
+			add_popularity = { ideology = totalist popularity = 0.03 }
+			add_political_power = 200
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = CAN
+						is_core_of = NFL
+					}
+				}
+				COL = {
+					add_state_core = PREV
+				}	
+			}
+		}
+	}
+	
+	
+
+	
+	
+	shared_focus = {# American Empire
+		id = COL_american_empire
+		icon = GFX_BBR_socialist_civi_identity
+		cost = 4
+		
+		prerequisite = { focus = COL_socialist_liberation }
+		
+		relative_position_id = COL_socialism_in_one_nation
+		x = -1
+		y = 1
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			add_ideas = CSA_technocratic_empire_idea
+			
+			
+		}
+	}
+
+	
+	
+	
+	
+	shared_focus = {
+		id = COL_the_revolution_at_home
+		icon = GFX_goal_CSA_revolution_at_homee
+		cost = 5
+		prerequisite = {
+			focus = COL_demand_new_england
+		}
+		mutually_exclusive = {
+			focus = COL_world_revolution
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_demand_new_england
+		x = -3
+		y = 1
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_the_revolution_at_home"
+			add_stability = 0.05
+			add_political_power = 25
+			add_popularity = { ideology = social_democrat popularity = 0.02 }
+		}
+	}
+	
+	shared_focus = {
+		id = COL_defend_the_front
+		icon = GFX_goal_CSA_socialist_defence_doctrine
+		cost = 5
+		prerequisite = {
+			focus = COL_the_revolution_at_home
+		}
+		
+		relative_position_id = COL_the_revolution_at_home
+		x = -2
+		y = 1
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_defend_the_front"
+			add_ideas = CSA_defense_doctrine_idea
+		}
+	}
+	
+	shared_focus = {
+		id = COL_peace_league
+		icon = GFX_goal_CSA_peace_league
+		cost = 5
+		prerequisite = {
+			focus = COL_defend_the_front
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_defend_the_front
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_world_revolution"
+			add_ideas = CSA_peace_league_ideas
+			
+			add_war_support = -0.1
+		}
+	}
+	
+	shared_focus = {
+		id = COL_pacifist_propaganda
+		icon = GFX_goal_CSA_pacifist_education
+		cost = 5
+		prerequisite = {
+			focus = COL_peace_league
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_defend_the_front
+		x = -1
+		y = 2
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_world_revolution"
+			swap_ideas = {
+			remove_idea = CSA_peace_league_ideas
+			add_idea = CSA_peace_league2_ideas
+			}
+			add_stability = 0.10
+			add_political_power = 200
+			add_war_support = -0.05
+		}
+	}
+	
+	shared_focus = {
+		id = COL_invest_in_the_future
+		icon = GFX_BBR_means_of_production
+		cost = 5
+		prerequisite = {
+			focus = COL_peace_league
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_defend_the_front
+		x = 1
+		y = 2
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_world_revolution"
+			add_stability = 0.05
+			increase_ruling_party_popularity_by_5 = yes
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					industrial_complex > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_peace_through_socialism
+		icon = GFX_goal_red_star_dove
+		cost = 5
+		prerequisite = {
+			focus = COL_pacifist_propaganda
+		}
+		prerequisite = {
+			focus = COL_invest_in_the_future
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_defend_the_front
+		x = 0
+		y = 3
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_world_revolution"
+			swap_ideas = {
+			remove_idea = CSA_peace_league2_ideas
+			add_idea = CSA_peace_league3_ideas
+			}
+			add_popularity = { ideology = totalist popularity = 0.1 }
+			add_stability = 0.10
+			add_political_power = 75
+			increase_ruling_party_popularity_by_5 = yes
+			FRA = {
+			add_opinion_modifier = { target = CSA modifier = large_increase }
+			}
+			ENG = {
+			add_opinion_modifier = { target = CSA modifier = large_increase }
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_revolutionary_monroeism
+		icon = GFX_goal_CSA_revolutionize_monroeism
+		cost = 5
+		prerequisite = {
+			focus = COL_the_revolution_at_home
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_the_revolution_at_home
+		x = 2
+		y = 1
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_revolutionary_monroeism"
+			add_ideas = CSA_revolutionary_monroeism_idea
+			add_threat = 3
+			add_war_support = 0.05
+			add_manpower = 4200
+		}
+	}
+	
+	shared_focus = {
+		id = COL_logistics_management
+		icon = GFX_goal_reform_socialist_army
+		cost = 5
+		prerequisite = {
+			focus = COL_revolutionary_monroeism
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_revolutionary_monroeism
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_logistics_management"
+			add_ideas = red_navy_idea
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = 50
+				producer = CSA
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					dockyard > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = COL
+					is_controlled_by = COL
+					dockyard > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_naval_investments
+		icon = GFX_goal_CSA_power_of_red_navy_2
+		cost = 5
+		prerequisite = {
+			focus = COL_logistics_management
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_revolutionary_monroeism
+		x = 1
+		y = 2
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_naval_investments"
+			swap_ideas = {
+				remove_idea = red_navy_idea
+				add_idea = red_navy_idea_2
+			}
+			add_equipment_to_stockpile = {
+				type = battleship_3
+				amount = 2
+				producer = CSA
+			}
+			add_tech_bonus = {
+				name = navy_bonus
+				bonus = 1
+				uses = 1
+				category = ca_tech
+			}
+			add_tech_bonus = {
+				name = navy_bonus
+				bonus = 1
+				uses = 1
+				category = bb_tech
+			}
+			add_manpower = 10000
+		}
+	}
+	
+	
+	
+	
+	
+	shared_focus = {
+		id = COL_world_revolution
+		icon = GFX_goal_CSA_World_Revolution_csa
+		cost = 5
+		prerequisite = {
+			focus = COL_demand_new_england
+		}
+		mutually_exclusive = {
+			focus = COL_the_revolution_at_home
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_demand_new_england
+		x = 3
+		y = 1
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_world_revolution"
+			add_stability = 0.10
+			add_political_power = 200
+		}
+	}
+	
+	shared_focus = {
+		id = COL_address_the_internationale
+		icon = GFX_BBR_internationale_struggle
+		cost = 5
+		prerequisite = {
+			focus = COL_revolutionary_monroeism
+			focus = COL_defend_the_front
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_revolutionary_monroeism
+		x = -2
+		y = 1
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_address_the_internationale"
+			country_event = { id = csa.500 days = 2 }
+		}
+	}
+
+	shared_focus = {
+		id = COL_on_the_beach
+		icon = GFX_BBR_unionize_yesterday
+		cost = 5
+		prerequisite = {
+			focus = COL_world_revolution
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_world_revolution
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_on_the_beach"
+			add_ideas = USA_on_the_beach_idea
+		}
+	}
+	
+	shared_focus = {
+		id = COL_join_the_internationale
+		icon = GFX_BBR_internationale_collaboration
+		cost = 5
+		prerequisite = {
+			focus = COL_on_the_beach
+		}
+		mutually_exclusive = {
+			focus = COL_denounce_the_internationale
+		}
+		available = {
+			is_subject = no
+			is_faction_leader = no
+			INT = { 
+				exists = yes
+				is_faction_leader = yes
+			}
+		}
+		relative_position_id = COL_world_revolution
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_join_the_internationale"
+			INT = {
+				country_event = { id = csa.101 days = 1 }
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_new_lend_lease
+		icon = GFX_goal_syndicalist_industry
+		cost = 5
+		prerequisite = {
+			focus = COL_join_the_internationale
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_world_revolution
+		x = 0
+		y = 3
+
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_new_lend_lease"
+			add_war_support = 0.10
+			every_country = {
+				limit = {
+					is_in_faction_with = COL
+				}
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 2500
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_0
+					amount = 5000
+				}
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_invest_in_the_west
+		icon = GFX_BBR_build_industries
+		cost = 5
+		prerequisite = {
+			focus = COL_new_lend_lease
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_world_revolution
+		x = 0
+		y = 4
+
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_invest_in_the_west"
+			FRA = {
+				add_offsite_building = {
+					type = arms_factory
+					level = 1
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = FRA
+						is_controlled_by = FRA
+						industrial_complex > 0
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = light_tank_equipment_2
+				amount = 40
+				producer = CSA
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_save_the_cnt
+		icon = GFX_goal_CSA_iberian_revolution
+		cost = 5
+		prerequisite = {
+			focus = COL_invest_in_the_west
+			shared_focus = CSA_new_red_faction
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_world_revolution
+		x = 1
+		y = 5
+
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_save_the_cnt"
+			if = {
+				limit = {
+					CNT = {
+						is_in_faction_with = CSA
+					}
+				}
+				CNT = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment_1
+						amount = 500
+						producer = CSA
+					}
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = -500
+					producer = CSA
+				}
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SPR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CAR
+			}
+		}
+	}
+	
+	
+	
+	shared_focus = {
+		id = COL_denounce_the_internationale
+		icon = GFX_goal_CSA_internationale_treachery
+		cost = 2.25
+		prerequisite = {
+			focus = COL_on_the_beach
+		}
+		mutually_exclusive = {
+			focus = COL_join_the_internationale
+		}
+		available = {
+
+			is_subject = no
+			
+		}
+		relative_position_id = COL_world_revolution
+		x = 2
+		y = 2
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_denounce_the_internationale"
+			add_stability = -0.05
+			add_political_power = 50
+			FRA = {
+			add_opinion_modifier = { target = CSA modifier = large_decrease }
+			country_event = {
+			id = csa.502
+			days = 1
+				}
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_all_to_the_revolution
+		icon = GFX_goal_CSA_all_for_revolution
+		cost = 3.25
+		prerequisite = {
+			focus = COL_denounce_the_internationale
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_denounce_the_internationale
+		x = 0
+		y = 1
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_all_to_the_revolution"
+			add_manpower = 7500
+			add_war_support = 0.1
+			random_owned_controlled_state = {
+				limit = {
+					is_mainland_america = yes
+					free_building_slots = { building = arms_factory size > 0 include_locked = yes }
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_mainland_america = yes
+					free_building_slots = { building = arms_factory size > 0 include_locked = yes }
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_new_red_faction
+		icon = GFX_goal_CSA_true_revolutionary_alliance
+		cost = 1.00
+		prerequisite = {
+			focus = COL_all_to_the_revolution
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_denounce_the_internationale
+		x = 0
+		y = 2
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_new_red_faction"
+			add_war_support = 0.03
+			if = {
+				limit = {
+					OR = {
+					is_in_faction = no
+					is_faction_leader = no
+					}
+				}
+				country_event = {
+			    id = csa.501
+			    days = 1
+			    }
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_strike_ireland
+		icon = GFX_goal_CSA_irish_revolution
+		cost = 5
+		prerequisite = {
+			focus = COL_new_red_faction
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_denounce_the_internationale
+		x = 1
+		y = 3
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_strike_ireland"
+			create_wargoal = {
+			type = annex_everything
+			target = IRE
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_strike_faux_socialists
+		icon = GFX_goal_GER_crush_western_syndies
+		cost = 5
+		prerequisite = {
+			focus = COL_strike_ireland
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_denounce_the_internationale
+		x = 1
+		y = 4
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_strike_faux_socialists"
+			add_war_support = 0.05
+			increase_ruling_party_popularity_by_5 = yes
+			add_stability = -0.03
+			create_wargoal = {
+			type = annex_everything
+			target = FRA
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_power_of_the_revolution
+		icon = GFX_goal_CSA_inevitable_world_socialism
+		cost = 5
+		prerequisite = {
+			focus = COL_save_the_cnt
+			focus = COL_strike_faux_socialists
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_denounce_the_internationale
+		x = 0
+		y = 5
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_power_of_the_revolution"
+			add_ideas = CSA_power_of_the_revolution_idea
+		}
+	}
+	
+	shared_focus = {
+		id = COL_break_japan
+		icon = GFX_goal_USA_dismantle_empire
+		cost = 5
+		prerequisite = {
+			focus = COL_power_of_the_revolution
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_power_of_the_revolution
+		x = -1
+		y = 1
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_break_japan"
+			add_war_support = 0.05
+			create_wargoal = {
+			type = annex_everything
+			target = JAP
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_eastern_revolution
+		icon = GFX_goal_USA_vietnam_yesterday
+		cost = 5
+		prerequisite = {
+			focus = COL_break_japan
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_power_of_the_revolution
+		x = -1
+		y = 3
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_eastern_revolution"
+			create_wargoal = {
+			type = annex_everything
+			target = PHI
+			}
+			create_wargoal = {
+			type = annex_everything
+			target = VIN
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_save_bolshevism
+		icon = GFX_goal_support_communism
+		cost = 5
+		prerequisite = {
+			focus = COL_break_japan
+			focus = COL_prussian_socialism
+		}
+		available = {
+
+			is_subject = no
+			RUS = { has_socialist_government = no }
+		}
+		relative_position_id = COL_power_of_the_revolution
+		x = 0
+		y = 2
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_save_bolshevism"
+			create_wargoal = {
+			type = annex_everything
+			target = RUS
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_prussian_socialism
+		icon = GFX_BBR_crush_old_imperialists
+		cost = 5
+		prerequisite = {
+			focus = COL_power_of_the_revolution
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_power_of_the_revolution
+		x = 1
+		y = 1
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_prussian_socialism"
+			add_war_support = 0.05
+			create_wargoal = {
+			type = annex_everything
+			target = GER
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_austria_hungary
+		icon = GFX_goal_CRO_crush_austrian_monopolies
+		cost = 5
+		prerequisite = {
+			focus = COL_prussian_socialism
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_power_of_the_revolution
+		x = 1
+		y = 3
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_on_the_beach"
+			create_wargoal = {
+			type = annex_everything
+			target = AUS
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = COL_world_without_chains
+		icon = GFX_goal_ideology_libsoc
+		cost = 5
+		prerequisite = {
+			focus = COL_austria_hungary
+		}
+		prerequisite = {
+			focus = COL_eastern_revolution
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_power_of_the_revolution
+		x = 0
+		y = 4
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_on_the_beach"
+			add_ideas = CSA_on_the_beach_idea
+		}
+	}
+	
+	#Free the West Path
+	shared_focus = {
+		id = COL_free_the_west
+		icon = GFX_goal_USA_spirit_of_monroe
+		cost = 5
+		prerequisite = {
+			focus = COL_revolutionary_monroeism
+			shared_focus = CSA_on_the_beach
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_back_in_business
+		x = -2
+		y = 5
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 5
+				date > 1940.1.1
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_free_the_west"
+			add_ideas = CSA_free_the_west_idea
+		}
+	}
+	
+	shared_focus = {
+		id = COL_free_canada
+		icon = GFX_goal_canada
+		cost = 5
+		prerequisite = {
+			focus = COL_free_the_west
+		}
+		available = {
+			is_subject = no
+			controls_all_owned_states = yes
+			CAN = {
+				exists = yes
+				has_socialist_government = no
+			}
+		}
+		bypass = {
+			OR = {
+				has_global_flag = CAN_became_socialist
+				has_war_with = CAN
+			}
+		}
+		relative_position_id = COL_free_the_west
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				CAN = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = CAN }
+				CAN = { is_subject_of = ROOT }
+				CAN = { has_socialist_government = yes }
+				has_war_with = CAN
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_free_canada"
+			add_war_support = 0.10
+			create_wargoal = {
+				type = annex_everything
+				target = CAN
+			}
+		}
+	}
+
+	
+	
+	
+
+	shared_focus = {
+		id = COL_master_of_the_west
+		icon = GFX_goal_CSA_master_west
+		cost = 5
+		prerequisite = {
+			focus = COL_free_canada
+		}
+
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_free_the_west
+		x = 2
+		y = 2
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_master_of_the_west"
+			add_stability = 0.10
+			add_political_power = 200
+		}
+	}
+	
+	shared_focus = {
+		id = COL_african_revolution
+		icon = GFX_BBR_radical_anti_imperialism
+		cost = 5
+		prerequisite = {
+			focus = COL_master_of_the_west
+		}
+		available = {
+
+			is_subject = no
+		}
+		relative_position_id = COL_free_the_west
+		x = 3
+		y = 3
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_african_revolution"
+			add_war_support = 0.05
+			create_wargoal = {
+				type = annex_everything
+				target = LIB
+				}
+			create_wargoal = {
+				type = annex_everything
+				target = MAF
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NFA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SAF
+			}
+
+		}
+	}
+	
+	shared_focus = {
+		id = COL_break_arab_monarchism
+		icon = GFX_goal_USA_anti_imperialist_league
+		cost = 5
+		prerequisite = {
+			focus = COL_african_revolution
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_free_the_west
+		x = 3
+		y = 4
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 3
+				has_war = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_break_arab_monarchism"
+			create_wargoal = {
+				type = annex_everything
+				target = EGY
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = TUR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SAU
+			}
+		}
+	}
+	
+	
+	
+	shared_focus = {
+		id = COL_socialist_liberation
+		icon = GFX_goal_CSA_socialist_liberation
+		cost = 5
+		prerequisite = {
+			focus = COL_naval_investments
+		}
+		available = {
+			is_subject = no
+		}
+		relative_position_id = COL_free_the_west
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CSA_socialist_liberation"
+			add_war_support = 0.1
+			add_popularity = { ideology = syndicalist popularity = 0.02 }
+			add_popularity = { ideology = totalist popularity = 0.02 }
+		}
+	}
+	
+	
+

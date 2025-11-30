@@ -1,0 +1,9365 @@
+﻿###########################
+# Colombia Events
+# by 404NameNotFound & others (The LOL, baloon)
+###########################
+#
+# Socialist events: 900-999
+#
+###########################
+
+add_namespace = col
+add_namespace = colcw
+add_namespace = colsoc
+add_namespace = colelection
+add_namespace = colpuppet
+add_namespace = colfocus
+add_namespace = coldecision
+
+#############################################################################################################################################
+############ COLOMBIA PRE-ELECTION EVENTS ############ COLOMBIA PRE-ELECTION EVENTS ############ COLOMBIA PRE-ELECTION EVENTS ###############
+#############################################################################################################################################
+############ COLOMBIA PRE-ELECTION EVENTS ############ COLOMBIA PRE-ELECTION EVENTS ############ COLOMBIA PRE-ELECTION EVENTS ###############
+#############################################################################################################################################
+
+country_event = { #INTRO
+	id = col.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.1" }
+	title = col.1.t
+	desc = col.1.d
+	picture = GFX_report_event_COL_intro
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = col.1.a
+	}
+}
+
+country_event = { #PINILLA RETURNS FROM GERMANY
+	id = col.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.2" }
+	title = col.2.t
+	desc = col.2.d
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = col.2.a
+		add_political_power = 50
+		add_ideas = COL_licenses_from_GER
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		set_country_flag = COL_pinilla_returned
+		unlock_national_focus = COL_the_mission
+	}
+}
+
+country_event = { #Black Monday Hits
+	id = col.3
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event col.3" 
+		hidden_effect = {
+			COL = {
+				country_event = { id = col.4 days = 11 }
+			}
+		}
+	}
+	title = col.3.t
+	desc = col.3.d
+	picture = GFX_report_event_SWE_black_monday
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_socialist_government = no
+	}
+
+	option = {
+		name = col.3.a
+		add_ideas = COL_black
+		set_country_flag = COL_black_monday
+	}
+}
+
+country_event = { #Black Monday Violence
+	id = col.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.4" }
+	title = col.4.t
+	desc = col.4.d
+
+	picture = GFX_report_event_COL_violence
+
+	trigger = {
+		has_government = social_liberal
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #BUILD YOUR OWN PARAMILITARY FORCE
+		name = col.4.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_ALONE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_FN
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_LEOPARDOS
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_OTRAPARTE
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			set_country_flag = COL_paramilitary
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.07
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.03
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		hidden_effect = {
+			country_event = { id = col.5 days = 9 }
+		}
+		custom_effect_tooltip = COL_paramilitary_tt
+	}
+	
+	option = { #ALLY THE ARMY
+		name = col.4.b
+		ai_chance = {
+			base = 35
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_AUTDEM
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_APEN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			set_country_flag = COL_allyarmy
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.07
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.03
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.05
+		}
+		hidden_effect = {
+			country_event = { id = col.5 days = 9 }
+		}
+		custom_effect_tooltip = COL_allyarmy_tt
+	}
+	
+	option = { #KEEP IT MODERATE
+		name = col.4.c
+		ai_chance = {
+			base = 35
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_AUTDEM
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_FN
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_ALONE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_LEOPARDOS
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_OTRAPARTE
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			set_country_flag = COL_moderate
+			country_event = { id = col.5 days = 15 }
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.03
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.02
+		}
+		custom_effect_tooltip = COL_difficult_path_tt
+	}
+}
+
+country_event = { #Bogotazo stage one - Failed assassination of Gaitan
+	id = col.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.5" }
+	title = col.5.t
+	desc = {
+		text = col.5.d_1
+		trigger = {
+			COL = {
+				OR = {
+					has_country_flag = COL_allyarmy
+					has_country_flag = COL_paramilitary
+				}
+			}
+		}
+	}
+	desc = {
+		text = col.5.d_2
+		trigger = {
+			COL = {
+				has_country_flag = COL_moderate
+			}
+		}
+	}
+	picture = GFX_report_event_COL_bogotazo_car
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.5.a
+		add_political_power = -100
+		add_stability = -0.07
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.03
+		}
+		swap_ideas = { 
+			remove_idea = COL_political_turmoil
+			add_idea = COL_bogotazo
+		}
+		unlock_national_focus = COL_bogotazo_happened
+		hidden_effect = {
+			if = {
+				limit = { 
+					has_country_flag = COL_paramilitary
+				}
+				country_event = { id = col.6 days = 10 }
+			}
+			if = {
+				limit = { 
+					has_country_flag = COL_allyarmy
+				}
+				country_event = { id = col.8 days = 10 }
+			}	
+			if = {
+				limit = {
+					has_country_flag = COL_moderate
+				}
+				country_event = { id = col.10 days = 10 }
+			}
+		}	
+	}
+}
+
+country_event = { #Paramilitary's massacre - paramilitary path
+	id = col.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.6" }
+	title = col.6.t
+	desc = col.6.d
+	picture = GFX_report_event_arz_commie_gun
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #send the police/army
+		name = col.6.a
+		ai_chance = { 
+			base = 80 
+		}
+		add_political_power = -200
+		add_command_power = 10
+		hidden_effect = { country_event = { id = col.7 days = 1 } }
+	}
+	
+	option = { #let them get away with it
+		name = col.6.b
+		ai_chance = { 
+			base = 20
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+				}
+			}
+		}
+		add_political_power = 100
+		add_stability = -0.1
+		hidden_effect = { country_event = { id = col.11 days = 1 } }
+	}
+}
+
+country_event = { #Paramilitary's massacre part 2
+	id = col.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.7" }
+	title = col.7.t
+	desc = col.7.d
+	picture = GFX_report_event_arz_commie_gun
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #don't appease
+		name = col.7.a
+		ai_chance = { 
+			base = 60 
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = COL_great_inheritance
+					option = COL_GREAT_INHERITANCE_AUTDEM
+				}
+			}
+		}
+		swap_ideas = { 
+			remove_idea = COL_bogotazo
+			add_idea = COL_worse_bogotazo
+		}
+		add_stability = -0.07
+	}
+	
+	option = { #appease
+		name = col.7.b
+		ai_chance = { 
+			base = 40
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.03
+		}
+		add_stability = -0.05
+		add_political_power = -15
+		custom_effect_tooltip = COL_talkright_tt
+		hidden_effect = { country_event = { id = col.16 days = 11 } }
+	}
+}
+
+country_event = { #Protest querreled - ally the army path
+	id = col.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.8" }
+	title = col.8.t
+	desc = col.8.d
+	picture = GFX_report_event_COL_gathering
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = col.8.a
+		ai_chance = {
+			base = 70
+		}
+		add_political_power = 50
+		add_stability = -0.03	
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		hidden_effect = { country_event = { id = col.9 days = 1 } }
+	}
+
+	option = {
+		name = col.8.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+				}
+			}
+		}
+		add_political_power = 30
+		add_stability = -0.01	
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.01
+		}
+		hidden_effect = { country_event = { id = col.11 days = 1 } }
+	}
+}
+
+country_event = { #Sided with the military - approve the plan
+	id = col.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.9" }
+	title = col.9.t
+	desc = col.9.d
+	picture = GFX_report_event_COL_gathering
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = col.9.a
+		swap_ideas = { 
+			remove_idea = COL_bogotazo
+			add_idea = COL_worse_bogotazo
+		}
+		add_stability = -0.02	
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.07
+		}
+	}
+}
+
+country_event = { #MARCHA DEL SILENCIO - moderate path
+	id = col.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.10" }
+	title = col.10.t
+	desc = col.10.d
+	picture = GFX_report_event_COL_marcha_del_silencio
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #send the army
+		name = col.10.a
+		ai_chance = { 
+			base = 80 
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		swap_ideas = { 
+			remove_idea = COL_bogotazo
+			add_idea = COL_worse_bogotazo
+		}
+		add_stability = -0.07
+	}
+	
+	option = { #appease
+		name = col.10.b
+		ai_chance = { 
+			base = 20 
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.03
+		}
+		add_stability = -0.05
+		add_political_power = -30
+		custom_effect_tooltip = COL_talkleft_tt
+		hidden_effect = { 
+			country_event = { id = col.14 days = 11 } 
+			country_event = { id = col.18 days = 30 }
+		}
+	}
+}
+
+country_event = { #The fake kidnapping plan - paramilitary and allyarmy paths
+	id = col.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.11" }
+	title = col.11.t
+	desc = {
+		text = col.11.d_1
+		trigger = {
+			COL = {
+				has_country_flag = COL_paramilitary
+			}
+		}
+	}
+	desc = {
+		text = col.11.d_2
+		trigger = {
+			COL = {
+				has_country_flag = COL_allyarmy
+			}
+		}
+	}
+	picture = GFX_report_event_COL_failed_coup
+	
+	is_triggered_only = yes
+	
+	
+	option = {
+		name = col.11.a
+		ai_chance = { 
+			factor = 75 
+		}
+		create_country_leader = {
+			name = "Colombian Council"
+			desc = "POLITICS_COL_COUNCIL_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Council.png"
+			expire = "1965.1.1"
+			ideology = centrist_subtype
+			traits = { COL_weak_ass_council }
+		}
+		hidden_effect = { country_event = { id = col.12 days = 7 } }
+	}
+
+	option = {
+		name = col.11.b
+		ai_chance = { 
+			factor = 25
+		}
+		add_political_power = 25
+		add_stability = 0.02
+		hidden_effect = { country_event = { id = col.13 days = 7 } }
+	}
+}
+
+country_event = { #The fake kidnapping succeds
+	id = col.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.12" }
+	title = col.12.t
+	desc = col.12.d
+	picture = GFX_report_event_COL_failed_coup
+	
+	is_triggered_only = yes
+	
+	
+	option = {
+		name = col.12.a
+		add_political_power = 70
+		add_stability = 0.2
+		add_command_power = 25
+		random_unit_leader = { 
+			limit = { has_id = 87563 }
+			promote_leader = yes
+		}
+		random_unit_leader = {
+            limit = { has_id = 87561 }
+            retire = yes
+        }
+		create_country_leader = {
+			name = "Juan Lozano y Lozano"
+			desc = "POLITICS_COL_LOZANO_Y_LOZANO_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Lozano_y_Lozano.png"
+			expire = "1965.1.1"
+			ideology = centrist_subtype
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -1
+		}
+		create_country_leader = {
+			name = ""
+			expire = "1965.1.1"
+			ideology = junta_subtype
+		}
+	}
+}
+
+country_event = { #APEN told the truth, president resigns
+	id = col.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.13" }
+	title = col.13.t
+	desc = {
+		text = col.13.d_1
+		trigger = {
+			COL = {
+				has_country_flag = COL_paramilitary
+			}
+		}
+	}
+	desc = {
+		text = col.13.d_2
+		trigger = {
+			COL = {
+				has_country_flag = COL_allyarmy
+			}
+		}
+	}
+	picture = GFX_report_event_COL_army_golpe
+	
+	is_triggered_only = yes
+	
+	
+	option = {
+		name = col.13.a
+		add_political_power = 30
+		add_stability = 0.05
+		hidden_effect = {
+			create_country_leader = {
+				name = "Eduardo Santos Montejo"
+				desc = "POLITICS_COL_MONTEJO_DESC"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Eduardo_Santos.png"
+				expire = "1965.1.1"
+				ideology = soclib_humanistic_capitalism_subtype  
+			}
+			remove_all_ministers = yes
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Laureano Gómez Castro"
+			desc = "POLITICS_COL_GOMEZ_CASTRO_DESC"
+			picture = "Portrait_Colombia_Lauro_Gomez_Castro.png"
+			expire = "1965.1.1"
+			ideology = autdem_christian_democracy_subtype
+		}
+		add_ideas = COL_Laureano_Eleuterio_Gomez_Castro_hog_ade
+		add_ideas = COL_Ismael_Perdomo_Borrero_for_ade
+		add_ideas = COL_Esteban_Jaramillo_eco_ade
+		add_ideas = COL_Pedro_Jose_Berrio_Diaz_sec_ade
+		hidden_effect = {
+			set_country_flag = COL_authoritarian
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.07
+		}
+	}
+
+	option = {
+		name = col.13.b
+		add_political_power = 30
+		add_stability = 0.05
+		hidden_effect = {
+			create_country_leader = {
+				name = "Eduardo Santos Montejo"
+				desc = "POLITICS_COL_MONTEJO_DESC"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Eduardo_Santos.png"
+				expire = "1965.1.1"
+				ideology = soclib_humanistic_capitalism_subtype  
+			}
+			remove_all_ministers = yes
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Carlos Cortes Vargas"
+			picture = "Portrait_Colombia_Carlos_Cortes_Vargas.png"
+			expire = "1965.1.1"
+			ideology = leopardism_subtype
+		}
+		add_ideas = COL_Leopardos_Council_hog_npo
+		add_ideas = COL_Luis_Lopez_de_Mesa_Gomez_for_npo
+		add_ideas = COL_Julian_Bucheli_Ayerbe_eco_npo
+		add_ideas = COL_Carlos_Cortes_Vargas_sec_npo
+		hidden_effect = {
+			set_country_flag = COL_leopardos
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.07
+		}
+	}
+
+	option = {
+		name = col.13.c
+		add_stability = 0.07
+		hidden_effect = {
+			create_country_leader = {
+				name = "Eduardo Santos Montejo"
+				desc = "POLITICS_COL_MONTEJO_DESC"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Eduardo_Santos.png"
+				expire = "1965.1.1"
+				ideology = soclib_humanistic_capitalism_subtype  
+			}
+			remove_all_ministers = yes
+		}
+		create_country_leader = {
+			name = "Gustavo Rojas Pinilla"
+			desc = "POLITICS_COL_PINILLA_DESC"
+			picture = "Portrait_Colombia_Rojas_Pinilla.png"
+			expire = "1965.1.1"
+			ideology = junta_subtype
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		if = {
+			limit = {
+				has_country_flag = COL_totpurges
+			}
+			add_ideas = COL_Gustavo_Rojas_Pinilla_hog_pau
+			else = {
+				add_ideas = COL_Gabriel_Paris_Gordillo_hog_pau
+			}
+		}
+		add_ideas = COL_Luis_Ernesto_Ordonez_Castillo_for_pau
+		add_ideas = COL_Deogracias_Fonseca_Espinosa_hog_pau
+		add_ideas = COL_Rafael_Navas_Pardo_sec_pau
+		add_political_power = 70
+		add_stability = 0.20
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.03
+		}
+		hidden_effect = {
+			clear_variable = COL_army_coup_risk
+			set_country_flag = COL_pinilla_coup
+			mark_focus_tree_layout_dirty = yes
+			if = {
+				limit = {
+					has_elected_government = no
+				}
+				country_event = {
+					id = colcw.2
+					days = 7
+				}
+			}
+		}
+	}
+}
+
+country_event = { #UNIR PROPOSITION -appease path
+	id = col.14
+	title = col.14.t
+	desc = col.14.d
+	picture = GFX_report_event_COL_gaitan
+
+	is_triggered_only = yes
+
+	immediate = { 
+	log = "[GetDateText]: [Root.GetName]: event col.14"
+	}
+
+	option = { #accept
+		name = col.14.a
+		ai_chance = { 
+			base = 80
+		}
+		hidden_effect = {
+			set_country_flag = COL_Syndie_Accepted
+			country_event = { id = col.15 days = 9 }
+		}
+		add_political_power = -120
+		add_stability = -0.02
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.02
+		}
+	}
+	
+	option = { #refuse
+		name = col.14.b
+		ai_chance = { 
+			base = 20 
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_political_power = -30
+		add_stability = -0.05
+		swap_ideas = { 
+			remove_idea = COL_bogotazo
+			add_idea = COL_worse_bogotazo
+		}
+	}
+}
+
+country_event = { #TOT AND SYND STORM NEWSPAPER
+	id = col.15
+	title = col.15.t
+	desc = col.15.d
+	picture = GFX_report_event_generic_workers
+
+	is_triggered_only = yes
+
+	immediate = { 
+	log = "[GetDateText]: [Root.GetName]: event col.15"
+	}
+
+	option = { #accept
+		name = col.15.a
+		add_stability = -0.02
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.01
+		}
+	}
+}	
+
+country_event = { #AUTDEM PROPOSITION
+	id = col.16
+	title = col.16.t
+	desc = col.16.d
+
+	is_triggered_only = yes
+
+	immediate = { 
+	log = "[GetDateText]: [Root.GetName]: event col.34"
+	}
+
+	option = { #accept
+		name = col.16.a
+		ai_chance = {
+			factor = 80
+		}
+		add_political_power = -120
+		add_stability = -0.02
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		hidden_effect = { 
+			set_country_flag = COL_Autdem_Accepted
+			country_event = { id = col.17 days = 9 }
+		}
+	}
+	
+	option = { #refuse
+		name = col.16.b
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = COL_great_inheritance
+					option = COL_GREAT_INHERITANCE_AUTDEM
+				}
+			}
+		}
+		add_political_power = -30
+		add_stability = -0.05
+		swap_ideas = { 
+			remove_idea = COL_bogotazo
+			add_idea = COL_worse_bogotazo
+		}
+	}
+}	
+
+country_event = { #PATAUT AND NATPOP DEMONSTRATION
+	id = col.17
+	title = col.17.t
+	desc = col.17.d
+	picture = GFX_report_event_COL_cemetery
+
+	is_triggered_only = yes
+
+	immediate = { 
+	log = "[GetDateText]: [Root.GetName]: event col.17"
+	}
+
+	option = { #accept
+		name = col.17.a
+		add_stability = -0.02
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.01
+		}
+	}
+}
+
+country_event = { #NEUTRALITY PATH - MINISTER LEAVE
+	id = col.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.18" }
+	title = col.18.t
+	desc = col.18.d
+	picture = GFX_report_event_generic_scandal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = col.18.a
+		ai_chance = {
+			factor = 75
+		}
+		remove_ideas = COL_Felix_Restrepo_Mejia_S_J_for_sli
+		add_ideas = COL_Carlos_Lozano_y_Lozano_for_sli
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.03
+		}
+		add_stability = -0.02
+	}
+	
+	option = {
+		name = col.18.b
+		ai_chance = {
+			factor = 25
+		}
+		add_political_power = -50
+	}
+}
+
+country_event = { #EARLY ELECTION - SET THE DATE VERY IMPORTANT OF FUTURE ELECTIONS!
+	id = col.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.19" }
+	title = col.19.t
+	desc = col.19.d
+
+	trigger = {
+		has_democratic_government = yes
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #early election
+		name = col.19.a
+		ai_chance = {
+			factor = 85
+		}
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_liberal
+					last_election = "1934.2.10"
+					election_frequency = 24
+					elections_allowed = yes
+				}
+			}
+		}
+		hidden_effect = {
+			set_country_flag = COL_early_election
+			#set_politics = { #setting up early election in the GUI
+				#ruling_party = social_liberal
+				#last_election = "1934.2.10"
+				#election_frequency = 31
+				#elections_allowed = yes
+			#}
+			country_event = { id = colelection.1 days = 120 }
+			country_event = { id = col.20 days = 17 }
+		}
+		custom_effect_tooltip = COL_early_election_tt
+	}
+	
+	option = { #normal election
+		name = col.19.b
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = colelection.1 days = 730 }
+			country_event = { id = col.20 days = 57 }
+		}
+	}
+}
+
+country_event = { #GAITAN SPEAK IN DEFENSE OF BLACK PEOPLE RIGHTS
+	id = col.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.20" }
+	title = col.20.t
+	desc = col.20.d
+
+	is_triggered_only = yes
+	
+	option = {
+		name = col.20.a
+		add_political_power = -20
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.03
+		}
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_afros_anger
+				value = 1
+			}
+			if = {
+				limit = { 
+					NOT = { has_completed_focus = COL_ban_electoral_coalitions } 
+				}
+				country_event = { id = col.21 days = 15 }
+			}
+			if = {
+				limit = {
+					has_completed_focus = COL_ban_electoral_coalitions
+				}
+				country_event = { id = col.22 days 15 }
+			}
+			country_event = { id = col.23 days = 30 }
+			country_event = { id = col.24 days = 45 }
+		}
+		custom_effect_tooltip = COL_afrosangry_tt
+	}
+}
+
+country_event = { #AVOID CHULAVITAS AND LEOPARDOS MAKING A ELECTORAL BLOC
+	id = col.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.21" }
+	title = col.21.t
+	desc = col.21.d
+
+	is_triggered_only = yes
+	
+	option = {
+		name = col.21.a
+		ai_chance = {
+			base = 90
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = COL_great_inheritance
+					option = COL_GREAT_INHERITANCE_AUTDEM
+				}
+			}
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.08
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.06
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.02
+		}
+		set_country_flag = COL_gomez_if_fucked
+	}
+
+	option = {
+		name = col.21.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_AUTDEM
+					}
+				}
+			}
+		}
+		country_event = { id = col.22 days = 5 }
+	}
+}
+
+country_event = { #NATIONALIST BLOC
+	id = col.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.22" }
+	title = col.22.t
+	desc = col.22.d
+	picture = GFX_report_event_COL_coalition_gomez
+	
+	trigger = {
+		has_democratic_goverment = yes
+
+	}
+	is_triggered_only = yes
+	
+	option = {
+		name = col.22.a
+		add_political_power = -15
+		add_stability = -0.01
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.03
+		}
+		set_contry_flag = COL_elections_lists_flag
+		custom_effect_tooltip = COL_elections_lists_tt
+	}
+}
+
+country_event = { #APEN NEW CANDIDATE
+	id = col.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.23" }
+	title = col.23.t
+	desc = col.23.d
+
+	is_triggered_only = yes
+	
+	option = {
+		name = col.23.a
+		ai_chance = {
+			factor = 40
+		}
+		COL_election_clr_flags = yes
+		add_stability = 0.02
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.01
+		}
+		set_country_flag = COL_gabrielechevarria_is_soclib_candidate_flag
+		custom_effect_tooltip = COL_gabrielechevarria_is_soclib_candidate_tt
+	}
+
+	option = {
+		name = col.23.b
+		ai_chance = {
+			factor = 40
+		}
+		COL_election_clr_flags = yes
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.05
+		}
+		set_country_flag = COL_mamatoco_is_soclib_candidate_flag
+		custom_effect_tooltip = COL_mamatoco_is_soclib_candidate_tt
+	}
+
+	option = {
+		name = col.23.c
+		ai_chance = {
+			factor = 20
+		}
+		COL_election_clr_flags = yes
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		set_country_flag = COL_eduardosantos_is_soclib_candidate_flag
+		custom_effect_tooltip = COL_eduardosantos_is_soclib_candidate_tt
+	}
+}
+
+country_event = { #GOMEZ CASTRO CAMPAIGN SPEECH
+	id = col.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.24" }
+	title = col.24.t
+	desc = {
+		text = col.24.d_1
+		trigger = {
+			COL = {
+				has_country_flag = COL_gomez_if_fucked
+			}
+		}
+	}
+	desc = {
+		text = col.24.d_2
+		trigger = {
+			COL = {
+				NOT = { has_country_flag = COL_gomez_if_fucked }
+			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.24.a
+		trigger = {
+			COL = {
+				has_country_flag = COL_gomez_if_fucked
+			}
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.05
+		}
+		add_political_power = -20
+		add_stability = -0.02
+		hidden_effect = {
+			country_event = { id = col.25 days = 7 }
+		}
+	}
+
+	option = {
+		name = col.24.b
+		trigger = {
+			COL = {
+				NOT = { has_country_flag = COL_gomez_if_fucked }
+			}
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+		add_political_power = -20
+		hidden_effect = {
+			country_event = { id = col.25 days = 7 }
+		}
+	}
+}
+
+country_event = { #FLAVOR - BIOFILO PANCLASTA THE ANARCHIST HOBO GUY DENOUNCES THE GOVERNAMENT, ALSO NOBODY CARES
+	id = col.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.25" }
+	title = col.25.t
+	desc = col.25.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.25.a
+		hidden_effect = {
+			country_event = { id = col.26 days = 15 }
+		}
+	}
+}
+
+country_event = { #INDIGENOUS MANIFESTO
+	id = col.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.26" }
+	title = col.26.t
+	desc = col.26.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.26.a
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_indigenous_anger
+				value = 1
+			}
+			country_event = { id = col.27 days = 13 }
+		}
+		custom_effect_tooltip = COL_nativesangry_tt
+	}
+}
+
+country_event = { #Instituto Caro y Cuervo - FLAVOUR
+	id = col.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.27" }
+	title = col.27.t
+	desc = col.27.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.27.a
+		hidden_effect = { country_event = { id = col.28 days = 13 } }
+	}
+}
+
+country_event = { #BLACK SOCIALIST COMMUNE
+	id = col.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.28" }
+	title = col.28.t
+	desc = col.28.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.28.a
+		ai_chance = {
+			base = 45
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_CW
+					}
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_NATIVES_ANGRY_CW
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_afros_anger
+				value = 1
+			}
+		}
+		custom_effect_tooltip = COL_afrosangry_tt
+		hidden_effect = { country_event = { id = col.29 days = 10 } }
+	}
+	
+	option = {
+		name = col.28.b
+		ai_chance = {
+			base = 55
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option =  COL_ROJAS_PINILLA_COUP_BLACKS_ANGRY_CW
+					}
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_ALL_ANGRY_CW
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_stability = -0.05
+		add_political_power = -50
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.02
+		}
+		hidden_effect = { country_event = { id = col.29 days = 9 } }
+	}
+}
+
+country_event = { #CHULAVITAS MARTYRS
+	id = col.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.29" }
+	title = col.29.t
+	desc = col.29.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.29.a
+		ai_chance = {
+			base = 80
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_ALONE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_FN
+					}
+				}
+			}
+		}
+		add_political_power = 25
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.03
+		}
+	}
+	
+	option = {
+		name = col.29.b
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = COL_great_inheritance
+					option = COL_GREAT_INHERITANCE_AUTDEM
+				}
+			}
+		}
+		add_stability = 0.02
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.03
+		}
+	}
+}
+
+################################################################################################################################################
+############ COLOMBIA POST-ELECTION EVENTS ############ COLOMBIA POST-ELECTION EVENTS ############ COLOMBIA POST-ELECTION EVENTS ###############
+################################################################################################################################################
+############ COLOMBIA POST-ELECTION EVENTS ############ COLOMBIA POST-ELECTION EVENTS ############ COLOMBIA POST-ELECTION EVENTS ###############
+################################################################################################################################################
+
+country_event = { #FLAVOR - POST-ELECTION - CHULAVITAS INTERMUNICIPAL BUSES
+	id = col.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.30" }
+	title = col.30.t
+	desc = col.30.d
+
+	trigger = {
+		has_country_leader = { name = "Laureano Gomez Castro" ruling_only = yes }
+		NOT = { country_exists = COC }
+		OR = {
+			has_completed_focus = COL_leading_the_people_toward_God
+			has_completed_focus = COL_traditional_roles
+		}
+		OR = {
+			has_country_flag = COL_bogotazo_over
+			has_stability > 0.5
+			has_political_power > 120
+		}
+	}
+	fire_only_once = yes
+
+	option = {
+		name = col.30.a
+		add_political_power = 10
+		add_stability = 0.0001
+	}
+}
+
+country_event = { #AIR DISASTER NUMBER 1 - FLAVOUR
+	id = col.31
+	title = col.31.t
+	desc = col.31.d
+	picture = GFX_report_event_COL_airdisaster
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.31" }
+
+	trigger = {
+		OR = {
+			AND = {
+				country_exists = COL
+				tag = COL
+			}
+			AND = {
+				NOT = { country_exists = COL }
+				tag = COC
+			}
+		}
+		has_democratic_goverment = yes
+		NOT = {
+			has_country_leader = { 
+				name = "Colombian Council"
+				ruling_only = yes
+			} 
+		}
+		date > 1937.12.15
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		name = col.31.a
+		hidden_effect = { country_event = { id = col.32 days = 207 } }
+	}
+}
+
+country_event = { #AIR DISASTER NUMBER 2 - FLAVOUR
+	id = col.32
+	title = col.32.t
+	desc = col.32.d
+	immediate = { 
+	log = "[GetDateText]: [Root.GetName]: event col.32"
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = col.32.a
+		hidden_effect = { country_event = { id = col.33 days = 30 } }
+	}
+}
+
+country_event = { #AIR DISASTER FINAL - FLAVOUR
+	id = col.33
+	title = col.33.t
+	desc = col.33.d
+	picture = GFX_report_event_COL_toy_plane
+	immediate = { 
+	log = "[GetDateText]: [Root.GetName]: event col.33"
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = col.33.a
+	}
+}
+
+country_event = { #INDEPENDENCE DAY CELEBRATIONS
+	id = col.34
+	title = col.34.t
+	desc = col.34.d
+	picture = GFX_report_event_COL_indipendence_day
+
+	is_triggered_only = yes
+
+	#trigger = {
+		#has_country_flag = COL_avoided_civil_war
+		#AND = {
+			#has_country_flag = COL_civil_war_over
+			#NOT = {
+				#OR = {
+					#has_idea = COL_socialist_resistance_3
+					#has_idea = COL_socialist_resistance_4
+				#}
+			#}
+		#}
+	#}
+
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event col.34"
+	}
+
+	option = {
+		name = col.34.a
+		add_stability = 0.03
+		add_political_power = 30
+	}
+}
+
+country_event = { #APEN DISSOLUTION
+	id = col.35
+	title = col.35.t
+	desc = col.35.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.35" }
+	
+	trigger = {
+		NOT = {
+			OR = {
+				has_country_flag = COL_APEN_won_1
+				has_country_flag = COL_APEN_won_2
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = col.35.a
+		add_political_power = 25
+		increase_ruling_party_popularity_by_2 = yes
+		hidden_effect = {
+			set_temp_variable = { apennomore_var = party_popularity@social_liberal }
+			divide_temp_variable = { apennomore_var = 3 }
+			set_country_flag = COL_APEN_no_more
+			set_political_party = { 
+				ideology = social_liberal
+				popularity = 0
+			}
+			add_popularity = {
+				ideology = autoritharian_democrat
+				popularity = 0.015
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.015
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = apennomore_var
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = apennomore_var
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = apennomore_var
+			}
+		}
+		custom_effect_tooltip = COL_apennomore_tt
+	}
+}
+
+country_event = { #Preparing for Third election: Gaitan new candidate for SocDem
+	id = col.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.36" }
+	title = col.36.t
+	desc = {
+		text = col.36.d_1
+		trigger = {
+			has_government = social_democrat
+		}
+	}
+	desc = {
+		text = col.36.d_2
+		trigger = {
+			NOT = {
+				has_government = social_democrat
+			}
+		}
+	}
+	picture = GFX_report_event_generic_diplomacy3
+	
+	trigger = {
+		country_exists = COL
+		tag = COL
+		date > 1945.8.1
+		date < 1945.10.5
+		has_democratic_government = yes
+		NOT = {
+			COL = {
+				has_country_flag = COL_unir
+				has_country_flag = COL_authoritarian
+			}
+		}
+		#is_subject = no
+	}
+
+	fire_only_once = yes
+
+	option = {
+		trigger = {
+			has_government = social_democrat
+		}
+		name = col.36.a
+		hidden_effect = {
+			set_temp_variable = { unirsd_var = party_popularity@social_democrat }
+			add_to_temp_variable = { unirsd_var = party_popularity@radical_socialist }
+			multiply_temp_variable = { unirsd_var = 100 }
+			set_country_flag = COL_gaitan_is_new_candidate
+			set_political_party = { 
+				ideology = radical_socialist
+				popularity = 0
+			}
+			set_political_party = {
+				ideology = social_democrat
+				popularity = unirsd_var
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.03
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.02
+			}
+		}
+		set_country_flag = COL_gaitan_is_liberal_candidate_flag
+		custom_effect_tooltip = COL_gaitan_is_liberal_candidate_tt
+		custom_effect_tooltip = COL_unirnomore_tt
+	}
+	
+	option = {
+		trigger = {
+			NOT = { has_government = social_democrat }
+		}
+		name = col.36.c
+		hidden_effect = {
+			set_temp_variable = { unirsd_var = party_popularity@social_democrat }
+			add_to_temp_variable = { unirsd_var = party_popularity@radical_socialist }
+			multiply_temp_variable = { unirsd_var = 100 }
+			set_country_flag = COL_gaitan_is_new_candidate
+			set_political_party = { 
+				ideology = radical_socialist
+				popularity = 0
+			}
+			set_political_party = {
+				ideology = social_democrat
+				popularity = unirsd_var
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.03
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.02
+			}
+			create_country_leader = {
+				name = "Jorge Eliécer Gaitán"
+				desc = "POLITICS_COL_GAITAN_DESC"
+				picture = "Portrait_Colombia_Jorge_Gaitan.png"
+				expire = "1965.1.1"
+				ideology = social_democrat_subtype
+			}
+		}
+		set_country_flag = COL_gaitan_is_liberal_candidate_flag
+		custom_effect_tooltip = COL_gaitan_is_liberal_candidate_tt
+		custom_effect_tooltip = COL_unirnomore_tt
+	}
+}
+
+country_event = { #Preparing for Third election: new candidate for SocCons 
+	id = col.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.37" }
+	title = col.37.t
+	desc = {
+		text = col.37.d_1
+		trigger = {
+			has_government = social_conservative
+		}
+	}
+	desc = {
+		text = col.37.d_2
+		trigger = {
+			NOT = {
+				has_government = social_conservative
+			}
+		}
+	}
+	picture = GFX_report_event_generic_diplomacy2
+	
+	trigger = {
+		country_exists = COL
+		tag = COL
+		date > 1945.10.5
+		date < 1945.12.28
+		has_democratic_government = yes
+		NOT = { 
+			has_country_flag = COL_carlosarangovelez_is_soclib_candidate_flag
+			has_country_leader = { name = "Carlos Arango Velez" ruling_only = yes }
+		}
+	}
+
+	fire_only_once = yes
+
+	option = {
+		trigger = {
+			has_government = social_conservative
+		}
+		name = col.37.a
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
+		custom_effect_tooltip = COL_carlosarangovelez_is_soccon_candidate_tt
+	}
+	
+	option = {
+		trigger = {
+			NOT = { has_government = social_conservative }
+		}
+		name = col.37.a
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
+		custom_effect_tooltip = COL_carlosarangovelez_is_soccon_candidate_tt
+	}
+}
+
+country_event = { #Preparing for Third election: Soccons won't run
+	id = col.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.38" }
+	title = col.38.t
+	desc = col.38.d
+	picture = GFX_report_event_generic_diplomacy2
+	
+	trigger = {
+		country_exists = COL
+		tag = COL
+		date > 1945.10.5
+		date < 1945.12.28
+		has_democratic_government = yes
+		OR = { 
+			has_country_flag = COL_carlosarangovelez_is_soclib_candidate_flag
+			has_country_leader = { name = "Carlos Arango Velez" ruling_only = yes }
+		}
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = col.38.a
+		add_political_power = 10
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.05
+		}
+		set_country_flag = COL_soccons_will_not_run
+	}
+}
+
+country_event = { #UTC Duran expelled, Viera White new head of the party
+	id = col.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.39" }
+	title = col.39.t
+	desc = col.39.d
+	picture = GFX_report_event_generic_diplomacy2
+	
+	trigger = {
+		country_exists = COL
+		tag = COL
+		date > 1939.10.5
+		NOT = {
+			has_government = totalist
+		}
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = col.39.a
+		add_political_power = 10
+		add_popularity = {
+			ideology = totalist
+			popularity = -0.02
+		}
+		create_country_leader = {
+			name = "Gilberto Viera White"
+			desc = "POLITICS_COL_VIERA_WHITE_DESC"
+			picture = "Portrait_Colombia_Gilberto_Vieira.png"
+			expire = "1965.1.1"
+			ideology = tot_left_nationalism_subtype #wtf?
+		}
+	}
+}
+
+country_event = { #UTC Duran expelled, Viera White new head of the party
+	id = col.40
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.40" }
+	title = col.40.t
+	desc = col.40.d
+	picture = GFX_report_event_generic_diplomacy2
+	
+	trigger = {
+		country_exists = COL
+		tag = COL
+		NOT = {
+			has_idea = COL_black_lesser_3
+		}
+		date > 1938.4.20
+		has_socialist_government = no
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = col.40.a
+		add_political_power = -70
+		add_war_support = -0.05
+		add_stability = -0.05
+		add_command_power = -50
+		decrease_ruling_party_popularity_by_10 = yes
+		if = {
+			limit = { has_idea = COL_black }
+			remove_ideas = COL_black
+			add_ideas = COL_black_3
+		}
+		if = {
+			limit = { has_idea = COL_black_2 }
+			remove_ideas = COL_black_2
+			add_ideas = COL_black_3
+		}
+		else_if = {
+			limit = { has_idea = COL_black_lesser_1 }
+			remove_ideas = COL_black_lesser_1
+			add_ideas = COL_black_3
+		}
+		else_if = {
+			limit = { has_idea = COL_black_lesser_2 }
+			remove_ideas = COL_black_lesser_2
+			add_ideas = COL_black_3
+		}
+		set_country_flag = COL_black_monday_non_intervention
+	}
+}
+
+####################################################################################################################################
+############ COLOMBIA CIVIL WAR EVENTS ############ COLOMBIA CIVIL WAR EVENTS ############ COLOMBIA CIVIL WAR EVENTS ###############
+####################################################################################################################################
+############ COLOMBIA CIVIL WAR EVENTS ############ COLOMBIA CIVIL WAR EVENTS ############ COLOMBIA CIVIL WAR EVENTS ###############
+####################################################################################################################################
+
+country_event = { #Pinilla's successful coup
+	id = colcw.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colcw.1" }
+	title = colcw.1.t
+	desc = {
+		text = colcw.1.d_1
+		trigger = {
+			COL = {
+				has_country_flag = COL_congress_tot
+			}
+		}
+	}
+	desc = {
+		text = colcw.1.d_2
+		trigger = {
+			COL = {
+				has_country_flag = COL_congress_rad
+			}
+		}
+	}
+	desc = {
+		text = colcw.1.d_3
+		trigger = {
+			COL = {
+				has_country_flag = COL_congress_syn
+			}
+		}
+	}
+	desc = {
+		text = colcw.1.d_4
+		trigger = {
+			COL = {
+				has_country_flag = COL_third_election
+			}
+		}
+	}
+	picture = GFX_report_event_COL_army_golpe
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = colcw.1.a
+		hidden_effect = {
+			
+			if = {
+				limit = {
+					OR = {
+						NOT = {
+							check_variable = {
+								var = COL_indigenous_anger
+								value = 2
+								compare = lesser_than
+							}
+							has_game_rule = {
+								rule = COL_ROJAS_PINILLA_COUP
+								option = DEFAULT
+							}
+						}
+						has_game_rule = {
+							rule = COL_ROJAS_PINILLA_COUP
+							option = COL_ROJAS_PINILLA_COUP_NATIVES_ANGRY_CW
+						}
+						has_game_rule = {
+							rule = COL_ROJAS_PINILLA_COUP
+							option = COL_ROJAS_PINILLA_COUP_ALL_ANGRY_CW
+						}
+					}
+				}
+				set_country_flag = COL_natives_rebel
+			}
+			if = {
+				limit = {
+					OR = {
+						NOT = {
+							check_variable = {
+								var = COL_afros_anger
+								value = 2
+								compare = lesser_than
+							}
+							has_game_rule = {
+								rule = COL_ROJAS_PINILLA_COUP
+								option = DEFAULT
+							}
+						}
+						has_game_rule = {
+							rule = COL_ROJAS_PINILLA_COUP
+							option = COL_ROJAS_PINILLA_COUP_BLACKS_ANGRY_CW
+						}
+						has_game_rule = {
+							rule = COL_ROJAS_PINILLA_COUP
+							option = COL_ROJAS_PINILLA_COUP_ALL_ANGRY_CW
+						}
+					}
+				}
+				set_country_flag = COL_afros_rebel
+			}
+			remove_all_ministers = yes
+		}
+		create_country_leader = {
+			name = "Gustavo Rojas Pinilla"
+			desc = "POLITICS_COL_PINILLA_DESC"
+			picture = "Portrait_Colombia_Rojas_Pinilla.png"
+			expire = "1965.1.1"
+			ideology = junta_subtype
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		drop_cosmetic_tag = yes
+		if = {
+			limit = {
+				has_country_flag = COL_totpurges
+			}
+			add_ideas = COL_Gustavo_Rojas_Pinilla_hog_pau
+			else = {
+				add_ideas = COL_Gabriel_Paris_Gordillo_hog_pau
+			}
+		}
+		add_ideas = COL_Luis_Ernesto_Ordonez_Castillo_for_pau
+		add_ideas = COL_Deogracias_Fonseca_Espinosa_hog_pau
+		add_ideas = COL_Rafael_Navas_Pardo_sec_pau
+		add_political_power = 70
+		add_stability = 0.20
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.03
+		}
+		hidden_effect = {
+			clear_variable = COL_army_coup_risk
+			set_country_flag = COL_pinilla_coup
+			clr_country_flag = COL_CONGRESS
+			mark_focus_tree_layout_dirty = yes
+			if = {
+				limit = {
+					has_elected_government = no
+				}
+				country_event = {
+					id = colcw.2
+					days = 5
+				}
+			}
+			set_country_flag = COL_bogotazo_over
+		}
+		COL_rightwing_idea_removal = yes
+	}
+}
+
+country_event = { #Civil War setup - CHANGE TAG
+	id = colcw.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colcw.2" }
+	title = colcw.2.t
+	desc = {
+		text = colcw.2.d_1
+		trigger = {
+			has_country_flag = COL_left_congress_held
+		}
+	}
+	desc = {
+		text = colcw.2.d_2
+		NOT = {
+			trigger = {
+				has_country_flag = COL_left_congress_held
+			}
+		}
+	}
+
+	trigger = {
+		country_exists = COL
+		tag = COL
+		is_subject = no
+	}
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			set_country_flag = COL_CW
+		}
+	}
+	
+	option = {
+		name = colcw.2.a #stay COL
+		ai_chance = {
+			factor = 100
+		}
+		COL_setup_for_COLCW = yes
+		if = {
+			limit = { has_country_flag = COL_natives_rebel }
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = COL_left_congress_held
+						}
+					}
+					create_country_leader = {
+						name = "(Vacant Leadership)"
+						picture = "Portrait_Colombia_Council.png"
+						expire = "1965.1.1"
+						ideology = social_liberal_subtype
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = colcw.2.b #change to COC
+		ai_chance = {
+			factor = 0
+		}
+		COL_setup_for_COLCW = yes
+		COC = { change_tag_from = COL }
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = COL_left_congress_held
+					}
+				}
+				create_country_leader = {
+					name = "(Vacant Leadership)"
+					picture = "Portrait_Colombia_Council.png"
+					expire = "1965.1.1"
+					ideology = social_liberal_subtype
+				}
+			}
+		}
+	}
+	
+	#option = { #future update don't erase
+		#name = colcw.2.c #change to CAU (indigenous/native rebellion)
+		#ai_chance = {
+			#factor = 0
+		#}
+		#trigger = { 
+			#has_country_flag = COL_natives_rebel
+		#}
+		#COL_setup_for_COLCW = yes
+		#CAU = { change_tag_from = COL }
+		#hidden_effect = {
+			#if = {
+				#limit = {
+					#NOT = {
+						#has_country_flag = COL_left_congress_held
+					#}
+				#}
+				#create_country_leader = {
+					#name = "(Vacant Leadership)"
+					#picture = "Portrait_Colombia_Council.png"
+					#expire = "1965.1.1"
+					#ideology = social_liberal_subtype
+				#}
+			#}
+		#}
+	#}
+} 
+
+country_event = { #Start of COLCW (Hidden)
+	id = colcw.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colcw.3" }
+	hidden = yes
+
+	is_triggered_only = yes
+
+	option = {
+		COC = {
+			declare_war_on = {
+				target = COL
+				type = annex_everything
+			}
+		}
+		#if = {
+			#limit = {
+				#has_country_flag = COL_cw_natives
+			#}
+			#CAU = {
+				#declare_war_on = {
+					#target = COL
+					#type = annex_everything
+				#}
+			#}
+		#}
+	}
+}
+
+
+country_event = { #declaring on CAU or waiting a while
+	id = colcw.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colcw.4" }
+	title = colcw.4.t
+	desc = colcw.4.d
+
+	trigger = {
+		country_exists = COL
+		country_exists = CAU
+		country_exists = COC
+		tag = COL
+		is_subject = no
+		COL = {
+			has_war_with = COC
+			NOT = {
+				has_war_with = CAU
+				has_non_aggression_pact_with = CAU
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = colcw.4.a #declare war
+		ai_chance = {
+			base = 40
+		}
+		declare_war_on = {
+			target = CAU
+			type = annex_everything
+		}
+		CAU = {
+			country_event = {
+				id = cau.4
+			}
+		}
+	}
+	
+	option = {
+		name = colcw.4.b #don't take any action
+		ai_chance = {
+			base = 60
+		}
+		add_stability = 0.03
+		hidden_effect = {
+			CAU = {
+				country_event = {
+					id = cau.3
+					days = 7
+				}
+			}
+			country_event = {
+				id = colcw.6
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { #CAU send non agreesion pact proposal
+	id = colcw.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colcw.5" }
+	title = colcw.5.t
+	desc = colcw.5.d
+
+	trigger = {
+		country_exists = COL
+		country_exists = CAU
+		country_exists = COC
+		tag = COL
+		is_subject = no
+		COL = {
+			has_war_with = COC
+			NOT = {
+				has_war_with = CAU
+				has_non_aggression_pact_with = CAU
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = colcw.5.a #declare war
+		ai_chance = {
+			base = 10
+		}
+		declare_war_on = {
+			target = CAU
+			type = annex_everything
+		}
+		CAU = {
+			country_event = {
+				id = cau.4
+			}
+		}
+	}
+	
+	option = {
+		name = colcw.5.b #accept non aggression proposal
+		ai_chance = {
+			base = 80
+		}
+		diplomatic_relation = {
+			country = CAU
+			relation = non_aggression_pact
+			active = yes
+		}
+		CAU = {
+			country_event = {
+				id = cau.5
+			}
+		}
+	}
+	
+	option = {
+		name = colcw.5.c #don't take any action
+		ai_chance = {
+			base = 10
+		}
+		add_stability = 0.03
+		hidden_effect = {
+			CAU = {
+				country_event = {
+					id = cau.2
+					days = 7
+				}
+			}
+			country_event = {
+				id = colcw.6
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { #CAU declared war because COL didn't take action
+	id = colcw.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colcw.6" }
+	title = colcw.6.t
+	desc = colcw.6.d
+
+	trigger = {
+		country_exists = COL
+		country_exists = CAU
+		country_exists = COC
+		tag = COL
+		is_subject = no
+		COL = {
+			has_war_with = COC
+			NOT = {
+				has_war_with = CAU
+				has_non_aggression_pact_with = CAU
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = colcw.6.a
+		add_war_support = 0.03
+		add_command_power = 10
+	}
+}
+
+country_event = { #COL proposes ceasefire because they're losing
+	id = colcw.7
+	title = colcw.7.t
+	desc = colcw.7.d
+
+	trigger = {
+		is_subject = no
+		has_capitulated = no
+		OR = {
+			has_war_with = COC
+			has_war_with = CAU
+		}
+		NOT = { 
+			COL = {
+				has_country_flag = COL_cw_ceasefire_flag
+			}
+			COC = {
+				has_country_flag = COC_cw_ceasefire_flag
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event colcw.7"
+	}
+
+	option = {
+		name = colcw.7.a
+		ai_will_do = {
+			base = 40
+		}
+		add_political_power = -50
+		add_stability = -0.02
+		add_war_support = -0.1
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.05
+		}
+		set_temp_variable = { coccontrolled = 0 }
+		add_to_temp_variable = { coccontrolled = COC.num_of_controlled_states }
+		subtract_from_temp_variable = { coccontrolled = COC.num_owned_controlled_states }
+		set_temp_variable = { caucontrolled = 0 }
+		add_to_temp_variable = { caucontrolled = CAU.num_of_controlled_states }
+		subtract_from_temp_variable = { caucontrolled = CAU.num_owned_controlled_states }
+		if = {
+			limit = {
+				COC = { has_war_with = COL }
+				NOT = {
+					CAU = {
+						has_war_with = COL
+					}
+				}
+			}
+			COC = {
+				country_event = {
+					id = colcw.8
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				CAU = { has_war_with = COL }
+				NOT = {
+					COC = {
+						has_war_with = COL
+					}
+				}
+			}
+			CAU = {
+				country_event = {
+					id = colcw.8
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				COC = { has_war_with = COL }
+				CAU = { has_war_with = COL }
+				check_variable = { coccontrolled > caucontrolled }
+				#COC.num_of_controlled_states > CAU.num_of_controlled_states
+			}
+			COC = {
+				country_event = {
+					id = colcw.8
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				COC = { has_war_with = COL }
+				CAU = { has_war_with = COL }
+				check_variable = { caucontrolled > coccontrolled }
+				#CAU.num_of_controlled_states > COC.num_of_controlled_states
+			}
+			CAU = {
+				country_event = {
+					id = colcw.8
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				COC = { has_war_with = COL }
+				CAU = { has_war_with = COL }
+				check_variable = { coccontrolled = caucontrolled }
+				#COC.num_of_controlled_states = CAU.num_of_controlled_states
+			}
+			COC = {
+				country_event = {
+					id = colcw.8
+					days = 5
+				}
+			}
+		}
+		set_country_flag = COL_cw_ceasefire_flag
+	}
+
+	option = {
+		name = colcw.7.b
+		ai_will_do = {
+			base = 60
+		}
+		add_political_power = 10
+		add_war_support = 0.1
+		every_enemy_country = {
+			limit = {
+				OR = {
+					tag = COC
+					tag = CAU
+				}
+			}
+			add_war_support = 0.1
+			add_stability = 0.1
+		}
+	}
+}
+
+country_event = { #ceasefire proposal comes
+	id = colcw.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colcw.8" }
+	title = colcw.8.t
+	desc = colcw.8.d
+
+	trigger = {
+		OR = {
+			tag = COC
+			tag = CAU
+		}
+		country_exists = COL
+		COL = { has_war_with = ROOT }
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = colcw.8.a
+		ai_chance = {
+			base = 75
+		}
+		add_political_power = -50
+		add_stability = 0.1
+		add_war_support = -0.1
+		COL = {
+			country_event = {
+				id = colcw.9
+				days = 5
+			}
+		}
+		set_country_flag = COL_ceasefire_receiver
+	}
+
+	option = {
+		name = colcw.8.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0
+				COL = {
+					is_ai = no
+				}
+			}
+		}
+		add_political_power = 75
+		add_war_support = 0.15
+		decrease_ruling_party_popularity_by_3 = yes
+		every_army_leader = {
+			limit = {
+				is_border_war = no
+			}
+			boost_planning = 0.1
+		}
+		every_army_leader = {
+			limit = {
+				is_leading_army_group = no
+				is_leading_army = yes
+				is_border_war = no
+			}
+			add_temporary_buff_to_units = {
+				combat_offense = 0.2
+				combat_breakthrough = 0.25
+				org_damage_multiplier = -1.0
+				str_damage_multiplier = 0.6
+				war_support_reduction_on_damage = 0.2
+				cannot_retreat_while_attacking = 1.0
+				days = 17
+				tooltip = ABILITY_FORCE_ATTACK_TOOLTIP
+			}
+		}
+		COL = {
+			country_event = {
+				id = colcw.10
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #Ceasefire accepted
+	id = colcw.9
+	title = colcw.9.t
+	desc = colcw.9.d
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event colcw.9"
+	}
+
+	option = {
+		name = colcw.9.a
+		add_political_power = -75
+		add_stability = 0.1
+		add_war_support = -0.25
+		if = {
+			limit = { 
+				COC = { has_country_flag = COL_ceasefire_receiver }
+				CAU = { NOT = { has_country_flag = COL_ceasefire_receiver } } 
+			}
+			white_peace = COC
+			set_truce = {
+				target = COC
+				days = 400
+			}
+			remove_wargoal = {
+				type = all
+				target = COC
+			}
+		}
+		else_if = {
+			limit = { 
+				CAU = { has_country_flag = COL_ceasefire_receiver }
+				COC = { NOT = { has_country_flag = COL_ceasefire_receiver } } 
+			}
+			white_peace = CAU
+			set_truce = {
+				target = CAU
+				days = 400
+			}
+			remove_wargoal = {
+				type = all
+				target = CAU
+			}
+		}
+		else = {
+			white_peace = COC
+			set_truce = {
+				target = COC
+				days = 400
+			}
+			remove_wargoal = {
+				type = all
+				target = COC
+			}
+			white_peace = CAU
+			set_truce = {
+				target = CAU
+				days = 400
+			}
+			remove_wargoal = {
+				type = all
+				target = CAU
+			}
+		}
+		remove_ideas = COL_civilwar_pataut_1
+		every_other_country = {
+			limit = { has_country_flag = COL_ceasefire_receiver }
+			add_political_power = -75
+			add_stability = 0.1
+			add_war_support = -0.25
+			white_peace = COL
+			set_truce = {
+				target = COL
+				days = 400
+			}
+			remove_wargoal = {
+				type = all
+				target = COL
+			}
+		}
+		COL = {
+			hidden_effect = {
+				country_event = {
+					id = colcw.11
+					days = 5
+				}
+			}
+		}
+	}
+}
+
+
+country_event = { #Ceasefire rejected
+	id = colcw.10
+	title = colcw.10.t
+	desc = colcw.10.d
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event colcw.10"
+	}
+
+	option = {
+		name = colcw.10.a
+		add_political_power = -50
+		add_war_support = 0.3
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.07
+		}
+	}
+}
+
+country_event = { #COL after ceasefire - Army coup Pinilla restores democracy
+	id = colcw.11
+	title = colcw.11.t
+	desc = colcw.11.d
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event colcw.11"
+	}
+
+	option = {
+		name = colcw.11.a
+		add_political_power = 30
+		add_stability = -0.05
+		add_command_power = 15
+		create_country_leader = {
+			name = "Colombian Council"
+			desc = "POLITICS_COL_COUNCIL_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Council.png"
+			expire = "1965.1.1"
+			ideology = junta_subtype
+			traits = { COL_weak_ass_council }
+		}
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = paternal_autocrat
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 1
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+		}
+	}
+
+	option = {
+		name = colcw.11.b
+		add_political_power = -70
+		add_stability = -0.2
+		add_war_support = -0.15
+	}
+}
+
+
+country_event = { #COL proposes ceasefire because they're losing
+	id = colcw.12
+	title = colcw.12.t
+	desc = colcw.12.d
+
+	trigger = {
+		surrender_progress > 0.55
+		is_subject = no
+		has_capitulated = no
+		OR = {
+			has_war_with = COC
+			has_war_with = CAU
+		}
+	}
+	#is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event colcw.12"
+	}
+
+	option = {
+		name = colcw.12.a
+		add_political_power = -50
+		add_stability = -0.02
+		add_war_support = -0.1
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.05
+		}
+		set_temp_variable = { coccontrolled = 0 }
+		add_to_temp_variable = { coccontrolled = COC.num_of_controlled_states }
+		subtract_from_temp_variable = { coccontrolled = COC.num_owned_controlled_states }
+		set_temp_variable = { caucontrolled = 0 }
+		add_to_temp_variable = { caucontrolled = CAU.num_of_controlled_states }
+		subtract_from_temp_variable = { caucontrolled = CAU.num_owned_controlled_states }
+		if = {
+			limit = {
+				COC = { has_war_with = COL }
+				NOT = {
+					CAU = {
+						has_war_with = COL
+					}
+				}
+			}
+			COC = {
+				country_event = {
+					id = colcw.8
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				CAU = { has_war_with = COL }
+				NOT = {
+					COC = {
+						has_war_with = COL
+					}
+				}
+			}
+			CAU = {
+				country_event = {
+					id = colcw.8
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				COC = { has_war_with = COL }
+				CAU = { has_war_with = COL }
+				check_variable = { coccontrolled > caucontrolled }
+				#COC.num_of_controlled_states > CAU.num_of_controlled_states
+			}
+			COC = {
+				country_event = {
+					id = colcw.8
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				COC = { has_war_with = COL }
+				CAU = { has_war_with = COL }
+				check_variable = { caucontrolled > coccontrolled }
+				#CAU.num_of_controlled_states > COC.num_of_controlled_states
+			}
+			CAU = {
+				country_event = {
+					id = colcw.8
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				COC = { has_war_with = COL }
+				CAU = { has_war_with = COL }
+				check_variable = { coccontrolled = caucontrolled }
+				#COC.num_of_controlled_states = CAU.num_of_controlled_states
+			}
+			COC = {
+				country_event = {
+					id = colcw.8
+					days = 5
+				}
+			}
+		}
+	}
+
+	option = {
+		name = colcw.12.b
+		add_political_power = 10
+		add_war_support = 0.1
+		every_enemy_country = {
+			limit = {
+				OR = {
+					tag = COC
+					tag = CAU
+				}
+			}
+			add_war_support = 0.1
+			add_stability = 0.1
+		}
+	}
+}
+
+
+#################################################################################################################################
+############ COLOMBIA ELECTION EVENTS ############ COLOMBIA ELECTION EVENTS ############ COLOMBIA ELECTION EVENTS ###############
+#################################################################################################################################
+############ COLOMBIA ELECTION EVENTS ############ COLOMBIA ELECTION EVENTS ############ COLOMBIA ELECTION EVENTS ###############
+#################################################################################################################################
+
+country_event = { #first elections
+	id = colelection.1
+	title = colelection.1.t
+	desc = colelection.1.d
+	picture = GFX_report_event_election_vote
+
+	trigger = {
+		country_exists = COL
+		tag = COL
+		has_democratic_government = yes
+		NOT = {
+			has_country_flag = COL_frente_nacional_established
+		}
+		#is_subject = no
+	}
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event colelection.1"
+		hidden_effect = {
+			remove_all_ministers = yes
+			set_country_flag = COL_had_election
+			set_country_flag = COL_first_election
+		}
+	}
+
+	option = {  #APEN
+		name = colelection.1.a
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_APEN
+					}
+				}
+			}
+		}
+		trigger = {
+			NOT = {
+				has_country_flag = COL_mariogalan_is_liberal_candidate_flag
+				has_country_flag = COL_eduardosantos_is_liberal_candidate_flag
+				has_country_flag = COL_alfonsolopez_is_liberal_candidate_flag
+			}
+		}
+		add_political_power = -25
+		add_stability = -0.05
+		COL_update_candidates = yes
+		COL_elected_soclib = yes
+		set_country_flag = COL_apen_won_1
+	}
+
+	option = {  #socdem
+		name = colelection.1.s
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_LIBERAL
+					}
+				}
+			}
+		}
+		add_political_power = -25
+		COL_update_candidates = yes
+		COL_elected_socdem = yes
+		set_country_flag = COL_liberal_won_1
+	}
+
+	option = { #soccon
+		name = colelection.1.b
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_CONSERVATIVE
+					}
+				}
+			}
+		}
+		COL_update_candidates = yes
+		COL_elected_soccon = yes
+		set_country_flag = COL_conservative_won_1
+	}
+
+	option = {  #radsoc
+		name = colelection.1.c
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_ALONE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_FN
+					}
+				}
+			}
+		}
+		add_political_power = 50
+		add_stability = -0.03
+		COL_update_candidates = yes
+		COL_elected_radsoc = yes
+		COL_leftwing_idea_removal = yes
+	}
+
+	option = { #autdem
+		name = colelection.1.e
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_AUTDEM
+					}
+				}
+			}
+		}
+		trigger = {
+			NOT = { has_country_flag = COL_elections_lists_flag }
+		}
+		add_political_power = 50
+		add_stability = -0.03
+		COL_update_candidates = yes
+		COL_elected_autdem = yes
+		COL_rightwing_idea_removal = yes
+	}
+
+	option = { #leopardos
+		name = colelection.1.f
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_LEOPARDOS
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_OTRAPARTE
+					}
+				}
+			}
+		}
+		trigger = {
+			NOT = { has_country_flag = COL_elections_lists_flag }
+		}
+		add_political_power = 50
+		add_stability = -0.03
+		COL_update_candidates = yes
+		COL_elected_natpop = yes
+		COL_rightwing_idea_removal = yes
+	}
+
+	option = { #nationalist bloc
+		name = colelection.1.g
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_AUTDEM
+					}
+				}
+			}
+		}
+		trigger = {
+			has_country_flag = COL_elections_lists_flag
+		}
+		add_political_power = 50
+		add_stability = -0.03
+		COL_update_candidates = yes
+		COL_elected_autdem = yes
+		COL_rightwing_idea_removal = yes
+	}
+}
+
+country_event = { #second elections
+	id = colelection.2
+	title = colelection.2.t
+	desc = colelection.2.d
+	picture = GFX_report_event_election_vote
+
+	trigger = {
+		country_exists = COL
+		tag = COL
+		has_democratic_government = yes
+		NOT = {
+			has_country_flag = COL_frente_nacional_established
+		}
+		date > 1940.1.1
+		#is_subject = no
+	}
+
+
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event colelection.2"
+		hidden_effect = {
+			remove_all_ministers = yes
+			set_country_flag = COL_second_election
+		}
+	}
+
+	option = { #soclib
+		name = colelection.2.a
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_APEN
+					}
+				}
+			}
+		}
+		COL_elected_soclib = yes
+		set_country_flag = COL_apen_won_2
+	}
+
+	option = { #socdem
+		name = colelection.2.s
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_LIBERAL
+					}
+				}
+			}
+		}
+		COL_elected_socdem = yes
+		set_country_flag = COL_liberal_won_2
+	}
+
+	option = { #mamatoco
+		name = colelection.2.b
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_APEN
+					}
+				}
+			}
+		}
+		COL_elected_marlib = yes
+		set_country_flag = COL_mamatoco_won_2
+	}
+
+	option = { #soccons
+		name = colelection.2.c
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_CONSERVATIVE
+					}
+				}
+			}
+		}
+		COL_elected_soccon = yes
+		set_country_flag = COL_conservative_won_2
+	}
+
+	option = { #radsoc
+		name = colelection.2.e
+		trigger = {
+			NOT = {
+				has_country_flag = COL_socialism_outlawed
+			}
+		}
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_ALONE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_FN
+					}
+				}
+			}
+		}
+		COL_elected_radsoc = yes
+		COL_leftwing_idea_removal = yes
+	}
+	
+	option = { #autdem
+		name = colelection.2.f
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_AUTDEM
+					}
+				}
+			}
+		}
+		COL_elected_autdem = yes
+		COL_rightwing_idea_removal = yes
+	}
+
+	option = { #leopardos
+		name = colelection.2.g
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_LEOPARDOS
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_OTRAPARTE
+					}
+				}
+			}
+		}
+		COL_elected_natpop = yes
+		COL_rightwing_idea_removal = yes
+	}
+}
+
+country_event = { #third elections
+	id = colelection.3
+	title = colelection.3.t
+	desc = {
+		text = colelection.3.d_1
+		trigger = {
+			NOT = {
+				has_country_flag = COL_socialism_outlawed
+			}
+		}
+	}
+	desc = {
+		text = colelection.3.d_2
+		trigger = {
+			has_country_flag = COL_socialism_outlawed
+		}
+	}
+	picture = GFX_report_event_election_vote
+
+	trigger = {
+		country_exists = COL
+		tag = COL
+		date > 1944.1.1
+		has_democratic_government = yes
+		NOT = {
+			has_country_flag = COL_frente_nacional_established
+		}
+		#is_subject = no
+	}
+
+
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event colelection.3"
+		hidden_effect = {
+			remove_all_ministers = yes
+			set_country_flag = COL_third_election
+		}
+	}
+
+	option = { #socdem
+		name = colelection.3.a
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_LIBERAL
+					}
+				}
+			}
+		}
+		COL_elected_socdem = yes
+		set_country_flag = COL_liberal_won_3
+	}
+	
+	option = { #Mamatoco
+		name = colelection.3.b
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_APEN
+					}
+				}
+			}
+		}
+		COL_elected_marlib = yes
+		set_country_flag = COL_mamatoco_won_3
+	}
+
+	option = { #soccon
+		name = colelection.3.c
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_CONSERVATIVE
+					}
+				}
+			}
+		}
+		trigger = {
+			NOT = {
+				has_country_flag = COL_soccons_will_not_run
+			}
+		}
+		COL_elected_soccon = yes
+		set_country_flag = COL_conservative_won_3
+	}
+
+	option = { #syn
+		name = colelection.3.e
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_ALONE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_PATAUT_FN
+					}
+				}
+			}
+		}
+		trigger = {
+			NOT = {
+				has_country_flag = COL_socialism_outlawed
+			}
+		}
+		COL_elected_syndie = yes
+		COL_leftwing_idea_removal = yes
+	}
+	
+	option = { #autdem
+		name = colelection.3.f
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_AUTDEM
+					}
+				}
+			}
+		}
+		COL_elected_autdem = yes
+		COL_rightwing_idea_removal = yes
+	}
+
+	option = { #NATPOP
+		name = colelection.3.e
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_LEOPARDOS
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_OTRAPARTE
+					}
+				}
+			}
+		}
+		COL_elected_natpop = yes
+		COL_rightwing_idea_removal = yes
+	}
+}
+
+country_event = { #FN first election
+	id = colelection.4
+	title = colelection.4.t
+	desc = colelection.4.d
+	picture = GFX_report_event_election_vote
+
+	trigger = {
+		country_exists = COL
+		tag = COL
+		has_democratic_government = yes
+		has_country_flag = COL_frente_nacional_established
+		is_subject = no
+	}
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event colelection.4"
+	}
+
+	option = { #FN
+		name = colelection.4.a
+		ai_chance = {
+			factor = 60
+		}
+		COL_elected_FN_soclib = yes
+	}
+
+	option = { #ANAPO
+		name = colelection.4.b
+		ai_chance = {
+			factor = 40
+		}
+		COL_elected_ANAPO_autdem = yes
+	}
+}
+
+####################################################################################################################################
+############ COLOMBIA SOCIALIST EVENTS ############ COLOMBIA SOCIALIST EVENTS ############ COLOMBIA SOCIALIST EVENTS ###############
+####################################################################################################################################
+############ COLOMBIA SOCIALIST EVENTS ############ COLOMBIA SOCIALIST EVENTS ############ COLOMBIA SOCIALIST EVENTS ###############
+####################################################################################################################################
+
+#country_event = { # Reactionary_Resistance
+	#id = colsoc.0
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.0" }
+	#title = colsoc.0.t
+	#desc = colsoc.0.d
+
+	#is_triggered_only = yes
+
+	#option = {
+		#name = colsoc.0.a
+		#add_ideas = COL_Reactionary_Resistance
+		#country_event = {
+			#id = colsoc.1
+			#days = 11
+		#}
+	#}
+#}
+
+country_event = { #Revolutionary congress start
+	id = colsoc.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.1" }
+	title = colsoc.1.t
+	desc = colsoc.1.d
+	picture = GFX_report_event_COL_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #flavor
+		name = colsoc.1.a
+		set_variable = {
+			var = COL_army_coup_risk
+			value = 10
+		}
+		COL_coup_risk_increase = yes
+		hidden_effect = {
+			set_country_flag = {
+				flag = COL_congress_rad
+				value = 0
+			}
+			set_country_flag = {
+				flag = COL_congress_syn
+				value = 0
+			}
+			set_country_flag = {
+				flag = COL_congress_tot
+				value = 0
+			}
+			set_country_flag = COL_congress_started
+			country_event = {
+				id = colsoc.14
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #Left Congress Begins - Colombia's New Name
+	id = colsoc.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.14" }
+	title = colsoc.14.t
+	desc = colsoc.14.d
+	picture = GFX_report_event_generic_economic_policy
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #COMMUNE
+		name = colsoc.14.a
+		ai_chance = {
+			factor = 60
+		}
+		set_cosmetic_tag = COL_soc3
+		add_political_power = 15
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.01
+		}
+		hidden_effect = {
+			country_event = {
+				id = colsoc.2
+				days = 3
+			}
+		}
+	}
+	option = { #POPULAR REPUBLIC
+		name = colsoc.14.b
+		ai_chance = {
+			factor = 7
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+				}
+			}
+		}
+		set_cosmetic_tag = COL_soc4
+		add_political_power = 25
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.03
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.03
+		}
+		hidden_effect = {
+			country_event = {
+				id = colsoc.2
+				days = 3
+			}
+		}
+	}
+	option = { #AGUSTINA Y BERBEO
+		name = colsoc.14.c
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		set_cosmetic_tag = COL_soc1
+		add_political_power = 15
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.01
+		}
+		hidden_effect = {
+			country_event = {
+				id = colsoc.2
+				days = 3
+			}
+		}
+	}
+	option = { #DOSMARES
+		name = colsoc.14.e
+		ai_chance = {
+			factor = 3
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+				}
+			}
+		}
+		set_cosmetic_tag = COL_soc2
+		add_political_power = 10
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = -0.01
+		}
+		hidden_effect = {
+			country_event = {
+				id = colsoc.2
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Left Congress 1 - Economy
+	id = colsoc.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.2" }
+	title = colsoc.2.t
+	desc = colsoc.2.d
+	picture = GFX_report_event_generic_economic_policy
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #RadSocs
+		name = colsoc.2.a
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = excavation_tech
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.02
+		}
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_congress_rad
+				value = 1
+			}
+			country_event = {
+				id = colsoc.3
+				days = 3
+			}
+		}
+	}
+	option = { #Syndicalists
+		name = colsoc.2.b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = synth_resources
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.02
+		}
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_congress_syn
+				value = 1
+			}
+			country_event = {
+				id = colsoc.3
+				days = 3
+			}
+		}
+	}
+	option = { #Totalists
+		name = colsoc.2.c
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+				}
+			}
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			technology = improved_equipment_conversion
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.02
+		}
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_congress_tot
+				value = 1
+			}
+			country_event = {
+				id = colsoc.3
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { # Industrialists protest
+	id = colsoc.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.3" }
+	title = colsoc.3.t
+	desc = {
+		text = colsoc.3.d_1
+		trigger = {
+			has_idea = COL_andi
+		}
+	}
+	desc = {
+		text = colsoc.3.d_2
+		trigger = {
+			NOT = {
+				has_idea = COL_andi
+			}
+		}
+	}
+	picture = GFX_report_event_AST_protest1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # hardline
+		name = colsoc.3.a
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}	
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_idea = COL_andi
+			}
+			remove_ideas = COL_andi
+			add_political_power = -10
+			hidden_effect = {
+				set_country_flag = COL_andioutlawed
+			}
+		}
+		else = {
+			add_political_power = -70
+			add_manpower = -250
+		}
+		add_timed_idea = {
+			idea = COL_industrialist_protest_crushed
+			days = 53
+		}
+		COL_coup_risk_increase = yes
+		hidden_effect = {
+			country_event = {
+				id = colsoc.4
+				days = 3
+			}
+			set_country_flag = COL_hardline_protest_commune
+		}
+	}
+	
+	option = { # softline
+		name = colsoc.3.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_timed_idea = {
+			idea = COL_industrialist_protest
+			days = 53
+		}
+		COL_coup_risk_decrease = yes
+		hidden_effect = {
+			country_event = {
+				id = colsoc.4
+				days = 3
+			}
+			set_country_flag = COL_softline_protest_commune
+		}
+	}
+}
+
+country_event = { #Left Congress 2 - Foreign affairs
+	id = colsoc.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.4" }
+	title = colsoc.4.t
+	desc = colsoc.4.d
+	picture = GFX_report_event_SWI_diplomacy2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #RadSocs - Panamericanismo
+		name = colsoc.4.a
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.02
+		}
+		every_other_country = {
+			limit = {
+				AND = {
+					OR = {
+						capital_scope = { is_on_continent = south_america }
+						capital_scope = { is_on_continent = central_america }
+						capital_scope = { is_on_continent = south_atlantic }
+					}
+					has_socialist_government = yes
+					NOT = {
+						is_in_faction_with = FRA
+					}
+					
+				}
+			}
+			add_opinion_modifier = { 
+				target = COL modifier = small_increase
+			}
+		}
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_congress_rad
+				value = 1
+			}
+			COL_choose_industrialist_hardline = yes
+		}
+		COL_coup_risk_decrease = yes
+	}
+	option = { #Syndicalists - Internationale
+		name = colsoc.4.b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.02
+		}
+		every_country = {
+			limit = {
+				is_in_faction_with = FRA
+			}
+			add_opinion_modifier = { 
+				target = COL modifier = small_increase
+			}
+		}	
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_congress_syn
+				value = 1
+			}
+			COL_choose_industrialist_hardline = yes
+		}
+		COL_coup_risk_increase = yes
+	}
+	option = { #Totalists - Focus on ourselves
+		name = colsoc.4.c
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+				}
+			}
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.02
+		}
+		every_neighbor_country = {
+			limit = {
+				NOT = {
+					OR = {
+						has_socialist_government = yes
+						is_in_faction_with = ROOT
+					}
+				}
+			}
+			add_opinion_modifier = { 
+				target = COL modifier = small_decrease
+			}
+		}
+		add_political_power = 30
+		add_command_power = 30
+		add_war_support = 0.1
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_congress_tot
+				value = 1
+			}
+			COL_choose_industrialist_hardline = yes
+		}
+	}
+}
+
+country_event = { #Protest turns violent
+	id = colsoc.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.5" }
+	title = colsoc.5.t
+	desc = colsoc.5.d
+	picture = GFX_report_event_GRE_riot
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # flavor
+		name = colsoc.5.a
+		add_manpower = -1300
+		add_political_power = -30
+		add_stability = -0.05
+		hidden_effect = {
+			country_event = {
+				id = colsoc.6
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Left Congress 3 - Internal affairs
+	id = colsoc.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.6" }
+	title = colsoc.6.t
+	desc = {
+		text = colsoc.6.d_1
+		trigger = { #tots divided
+			has_country_flag = {
+				flag = COL_congress_tot
+				value < 1
+			}
+		}
+	}
+	desc = {
+		text = colsoc.6.d_2
+		trigger = { #radsocs divided
+			has_country_flag = {
+				flag = COL_congress_rad
+				value < 1
+			}
+		}
+	}
+	desc = {
+		text = colsoc.6.d_3
+		trigger = { #syndies divided
+			has_country_flag = {
+				flag = COL_congress_syn
+				value < 1
+			}
+		}
+	}
+	picture = GFX_report_event_COL_map
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #RadSocs - Adds minorities to militias - tot quit
+		name = colsoc.6.a
+		trigger = {
+			OR = {
+				has_country_flag = {
+					flag = COL_congress_syn
+					value = 2
+				}
+				has_country_flag = {
+					flag = COL_congress_rad
+					value > 0
+				}
+			}
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.02
+		}
+		add_political_power = 50
+		add_stability = 0.01
+		add_ideas = COL_armedminorities
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_congress_rad
+				value = 1
+			}
+			country_event = {
+				id = colsoc.8
+				days = 5
+			}
+		}
+	}
+	option = { #Syndicalists - Trade unions rads quit
+		name = colsoc.6.b
+		trigger = {
+			OR = {
+				has_country_flag = {
+					flag = COL_congress_tot
+					value = 2
+				}
+				has_country_flag = {
+					flag = COL_congress_syn
+					value > 0
+				}
+			}
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.02
+		}
+		add_political_power = 50
+		add_stability = 0.01
+		add_ideas = COL_tradecongress 
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_congress_syn
+				value = 1
+			}
+			country_event = {
+				id = colsoc.8
+				days = 5
+			}
+		}
+	}
+	option = { #Totalists - Purge syndies quit
+		name = colsoc.6.c
+		trigger = {
+			OR = {
+				has_country_flag = {
+					flag = COL_congress_rad
+					value = 2
+				}
+				has_country_flag = {
+					flag = COL_congress_tot
+					value > 0
+				}
+			}
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+				}
+			}
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.02
+		}
+		add_political_power = 70
+		add_stability = 0.07
+		custom_effect_tooltip = NIC_unforseen_consequences
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_congress_tot
+				value = 1
+			}
+			country_event = {
+				id = colsoc.7
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { #Pinilla in exile, Gordillo killed
+	id = colsoc.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.7" }
+	title = colsoc.7.t
+	desc = colsoc.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colsoc.7.a
+		random_unit_leader = {
+            limit = { has_id = 87561 }
+            retire = yes
+        }
+		random_unit_leader = {
+            limit = { has_id = 87562 }
+            retire = yes
+        }
+		COL_coup_risk_decrease = yes
+		hidden_effect = {
+			set_country_flag = COL_totpurges
+			country_event = {
+				id = colsoc.8
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Left leadership
+	id = colsoc.8
+	title = colsoc.8.t
+	desc = {
+		text = colsoc.8.d_1
+		trigger = {
+			COL = {
+				has_country_flag = {
+					flag = COL_congress_rad
+					value > 1
+				}
+			}
+		}
+	}
+	desc = {
+		text = colsoc.8.d_2
+		trigger = {
+			COL = {
+				has_country_flag = {
+					flag = COL_congress_syn
+					value > 1
+				}
+			}
+		}
+	}
+	desc = {
+		text = colsoc.8.d_3
+		trigger = {
+			COL = {
+				has_country_flag = {
+					flag = COL_congress_tot
+					value > 1
+				}
+			}
+		}
+	}
+	picture = GFX_report_event_COL_gathering
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event colsoc.8"
+		hidden_effect = {
+			set_country_flag = COL_left_congress_held
+		}
+	}
+	
+	option = {
+		name = colsoc.8.a
+		trigger = {
+			has_country_flag = {
+				flag = COL_congress_rad
+				value > 1
+			}
+		}
+		add_stability = 0.02
+		add_political_power = 25
+		hidden_effect = {
+			set_global_flag = COL_communeUNIR
+			clr_country_flag = COL_congress_rad
+			clr_country_flag = COL_congress_syn
+			clr_country_flag = COL_congress_tot
+		}
+	}
+
+	option = {
+		name = colsoc.8.b
+		trigger = {
+			has_country_flag = {
+				flag = COL_congress_syn
+				value > 1
+			}
+		}
+		add_stability = 0.02
+		add_political_power = 25
+		hidden_effect = {
+			set_global_flag = COL_communesyndicalist
+			clr_country_flag = COL_congress_rad
+			clr_country_flag = COL_congress_syn
+			clr_country_flag = COL_congress_tot
+		}
+		COL_update_candidates = yes
+		COL_elected_syndie = yes
+	}
+
+	option = {
+		name = colsoc.8.c
+		trigger = {
+			has_country_flag = {
+				flag = COL_congress_tot
+				value > 1
+			}
+		}
+		add_stability = 0.02
+		add_political_power = 25
+		hidden_effect = {
+			set_global_flag = COL_communetotalist
+			clr_country_flag = COL_congress_rad
+			clr_country_flag = COL_congress_syn
+			clr_country_flag = COL_congress_tot
+		}	
+		COL_update_candidates = yes
+		COL_elected_tot = yes		
+	}
+	
+	immediate = {
+		hidden_effect = { 
+			create_country_leader = {
+				name = "Jorge Eliécer Gaitán"
+				desc = "POLITICS_COL_GAITAN_DESC"
+				picture = "Portrait_Colombia_Jorge_Gaitan.png"
+				expire = "1965.1.1"
+				ideology = agrarian_socialism_subtype
+			}
+			if = {
+				limit = {
+					any_other_country = {
+						OR = {
+							capital_scope = { is_on_continent = south_america }
+							capital_scope = { is_on_continent = central_america }
+							capital_scope = { is_on_continent = south_atlantic }
+						}
+						has_civil_war = no
+						has_war = no
+						is_subject = no
+						strength_ratio = {
+							tag = COL
+							ratio > 1
+						}
+						NOT = {
+							tag = COL
+						}
+						has_equipment = { infantry_equipment_0 > 700 }
+						has_manpower > 250
+						has_authoritarian_government = yes
+						has_opinion = {
+							target = COL
+							value < 30
+						}
+					}
+				}
+				country_event = {
+					id = colsoc.9
+					days = 3
+				}
+			}
+			else = {
+				country_event = {
+					id = colsoc.11
+					days = 10
+				}
+			}
+		}
+	}
+}
+
+country_event = { #REACTIONARY FOREIGN BACKING
+	id = colsoc.9
+	title = colsoc.9.t
+	desc = colsoc.9.d
+	picture = GFX_report_event_generic_diplomacy3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event colsoc.9"
+	}
+
+	option = { #accept
+		name = colsoc.9.a
+		ai_chance = {
+			factor = 30
+		}
+		hidden_effect = { 
+			set_country_flag = COL_backing_accepted
+		}
+		every_country = {
+			limit = { 
+				original_tag = COL
+				NOT = {
+					has_country_flag = COL_coup_rumor
+				}
+			}
+			set_country_flag = COL_coup_rumor
+			country_event = {
+				id = colsoc.10
+				days = 2
+			}
+		}
+		add_political_power = 70
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_0
+			amount = -600
+		}
+		add_manpower = -200
+	}
+	
+	option = { #refuse
+		name = colsoc.9.b
+		ai_chance = {
+			factor = 70
+		}
+		hidden_effect = { 
+			set_country_flag = COL_backing_refused
+			country_event = {
+				id = colsoc.11
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { #Notifies the foreign backing
+	id = colsoc.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.10" }
+	title = colsoc.10.t
+	desc = colsoc.10.d
+	picture = GFX_report_event_SIA_Police_1936
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # shitabouttohappen
+		name = colsoc.10.a
+		COL_coup_risk_increase = yes
+		custom_effect_tooltip = COL_army_coup_risk_rise_tt
+		hidden_effect = {
+			country_event = {
+				id = colsoc.11
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #CHECK FOR COUP TRIGGER - SCRIPTED/HIDDEN EFFECT
+	id = colsoc.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.11" }
+	
+	hidden = yes
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #check
+		if = {
+			limit = {
+			
+				check_variable = {
+					var = COL_army_coup_risk
+					value = 9
+					compare = greater_than_or_equals
+				}
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+			country_event = {
+				id = colcw.1
+				days = 2
+			}
+		}
+		else = {
+			country_event = {
+				id = colsoc.12
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { #CIVIL WAR AVOIDED
+	id = colsoc.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colsoc.12.t
+	desc = colsoc.12.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colsoc.12.a
+		add_political_power = 100
+		add_stability = 0.1
+		custom_effect_tooltip = COL_avoided_civil_war_tt
+		hidden_effect = {
+			COC = {
+				every_unit_leader = {
+					set_nationality = COL
+				}
+			}
+			
+			set_country_flag = COL_avoided_civil_war
+		if = {
+			limit = {
+				has_country_flag = COL_promised_free_elections
+			}
+			country_event = {
+				id = colsoc.17
+				days = 1460
+			}
+		}
+		}
+	}
+}
+
+country_event = { #SOUTH AMERICAN FORUM (RADSOC AND TOT FOREIGN POLICY) - INVITE TO FACTION EVENT
+	id = colsoc.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.13" }
+	title = colsoc.13.t
+	desc = colsoc.13.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = colsoc.13.a
+		ai_chance = {
+			factor = 100
+		}
+		add_stability = 0.03
+		add_war_support = 0.05
+		if = {
+			limit = {
+				COL = {
+					has_socialist_government = yes
+				}
+				COC = { exists = no }
+			}
+			COL = {
+				add_to_faction = ROOT
+			}
+		}
+		else_if = {
+			limit = {
+				COC = {
+					has_socialist_government = yes
+				}
+			}
+			COC = {
+				add_to_faction = ROOT
+			}
+		}
+	}
+
+	option = {
+		name = colsoc.13.b
+		ai_chance = {
+			factor = 0
+		}
+		add_political_power = 30
+		if = {
+			limit = {
+				COL = {
+					has_socialist_government = yes
+				}
+				COC = { exists = no }
+			}
+			COL = {
+				add_opinion_modifier = { 
+					target = ROOT modifier = small_decrease
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				COC = {
+					has_socialist_government = yes
+				}
+			}
+			COC = {
+				add_opinion_modifier = { 
+					target = ROOT modifier = small_decrease
+				}
+			}
+		}
+	}
+}
+country_event = { #corba ideo picker
+	id = colsoc.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colsoc.15.t
+	desc = colsoc.15.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colsoc.15.a #no change
+		
+	}
+	option = {
+		name = colsoc.15.b
+		set_country_leader_ideology = african_syndicalism_subtype
+	}
+	option = {
+		name = colsoc.15.c
+		set_country_leader_ideology = syn_left_panafricanism_subtype
+	}
+	option = {
+		name = colsoc.15.e
+		set_country_leader_ideology = syn_noirism_subtype
+	}
+	option = {
+		name = colsoc.15.f
+		set_country_leader_ideology = syn_negritude_subtype
+	}
+}
+country_event = { #join browderist faction
+	id = colsoc.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colsoc.16.t
+	desc = colsoc.16.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = colsoc.16.a #no change
+		
+	}
+	option = {
+		name = colsoc.16.b
+		ai_chance = {
+			factor = 100
+		}
+		COL = {
+			add_to_faction = ROOT
+		}
+		add_war_support = 0.03
+		add_ideas = COL_browderist_allience_other_idea
+			
+		
+	}
+	
+}
+country_event = { #socialist election if civil war avoided
+	id = colsoc.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colsoc.17.t
+	desc = colsoc.17.d
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = colsoc.17
+				days = 1460
+			}
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = colsoc.17.a #radsoc
+		COL_elected_radsoc = yes
+	}
+	option = {
+		name = colsoc.17.b #synd
+		COL_elected_syndie = yes
+	}
+	option = {
+		name = colsoc.17.c #tot
+		COL_elected_tot = yes
+		#insert leader change events later
+	}
+}
+country_event = { #synd change leader
+	id = colsoc.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colsoc.18.t
+	desc = colsoc.18.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = colsoc.18.a #
+
+	}
+	option = {
+		name = colsoc.18.b #
+			create_country_leader = {
+				name = "Pedro Gomez Agudelo"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Pedro_Nel_Gomez.png"
+				expire = "1.1.1"
+				ideology = democratic_syndicalism_subtype
+			}
+	}
+	
+}
+country_event = { #tot change leader
+	id = colsoc.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colsoc.19.t
+	desc = colsoc.19.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = colsoc.19.a #
+
+	}
+	option = {
+		name = colsoc.19.b #
+		create_country_leader = {
+			name = "Gilberto Viera White"
+			desc = "POLITICS_COL_VIERA_WHITE_DESC"
+			picture = "Portrait_Colombia_Gilberto_Vieira.png"
+			expire = "1965.1.1"
+			ideology = national_communism_subtype
+		}
+	}
+	
+}
+country_event = { #browder dead
+	id = colfocus.222
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colfocus.222.t
+	desc = colfocus.222.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = colfocus.222.a 
+		add_country_leader_trait = COL_browderist_orphan
+	}
+	
+}
+country_event = { #browder arrived
+	id = colfocus.223
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colsoc.12" }
+	title = colfocus.223.t
+	desc = colfocus.223.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = colfocus.222.a 
+			create_country_leader = {
+				name = "Earl Browder"
+				desc = "POLITICS_EARL_BROWDER_DESC"
+				picture = "gfx/leaders/CSA/Portrait_CSA_Earl_Browder_Hat.png"
+				expire = "1.1.1"
+				ideology = popcom_subtype
+				traits = { CSA_new_founding_father }
+			}
+	}
+	
+}
+country_event = { #People's Commissars
+	id = col.901
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.901" }
+	title = col.901.t
+	desc = col.901.d
+
+	is_triggered_only = yes
+
+	option = { #everywhere
+		name = col.901.a
+		army_experience = 25
+		navy_experience = 15
+		air_experience = 15
+		swap_ideas = { 
+			remove_idea = COL_Reactionary_Resistance
+			add_idea = COL_Reactionary_Resistance_1
+		}
+	}
+	
+	option = { #in key areas
+		name = col.901.b
+		add_political_power = 50
+		swap_ideas = { 
+			remove_idea = COL_Reactionary_Resistance
+			add_idea = COL_Reactionary_Resistance_2
+		}
+	}
+}
+country_event = { #Public Housing
+	id = col.902
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.902" }
+	title = col.902.t
+	desc = col.902.d
+
+	is_triggered_only = yes
+
+	option = { #new constructions
+		name = col.902.a
+		306 = {
+			add_manpower = 11000
+		}
+		493 = {
+			add_manpower = 5700
+		}
+		852 = {
+			add_manpower = 4210
+		}
+		swap_ideas = { 
+			remove_idea = COL_Reactionary_Resistance
+			add_idea = COL_Reactionary_Resistance_1
+		}
+	}
+	
+	option = { #reporpuse
+		name = col.902.b
+		add_political_power = 50
+		swap_ideas = { 
+			remove_idea = COL_Reactionary_Resistance
+			add_idea = COL_Reactionary_Resistance_2
+		}
+	}
+}
+country_event = { #Federalization
+	id = col.903
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.903" }
+	title = col.903.t
+	desc = col.903.d
+
+	is_triggered_only = yes
+
+	option = { #total federalization
+		name = col.903.a
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.02
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = -0.02
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.07
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.07
+		}
+		swap_ideas = { 
+			remove_idea = COL_Reactionary_Resistance
+			add_idea = COL_Reactionary_Resistance_1
+		}
+	}
+	
+	option = { #partial federalization
+		name = col.903.b
+		add_political_power = 50
+		swap_ideas = { 
+			remove_idea = COL_Reactionary_Resistance
+			add_idea = COL_Reactionary_Resistance_2
+		}
+	}
+}
+country_event = { # State visit to France
+	id = col.906
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.906" }
+	title = col.906.t
+	desc = col.906.d
+
+	is_triggered_only = yes
+
+	option = { #
+		name = col.906.a
+		add_political_power = 35
+		swap_ideas = { 
+			remove_idea = COL_syndie_industrialization_2
+			add_idea = COL_help_from_FRA
+		}
+	}
+}
+country_event = { # State visit to UK
+	id = col.907
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.907" }
+	title = col.907.t
+	desc = col.907.d
+
+	is_triggered_only = yes
+
+	option = { #
+		name = col.907.a
+		add_political_power = 35
+		random_owned_state = {
+			limit = {
+				free_building_slots = {
+					building = anti_air_building
+					size > 0
+				}
+				OR = {
+					is_in_home_area = yes
+					NOT = {
+						owner = {
+							any_owned_state = {
+								free_building_slots = {
+									building = anti_air_building
+									size > 0
+								}
+								is_in_home_area = yes
+							}
+						}
+					}
+				}
+			}
+			add_building_construction = {
+				type = anti_air_building
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+country_event = { #PatAut Minor Concessions
+	id = col.908
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.908" }
+	title = col.908.t
+	desc = col.908.d
+
+	is_triggered_only = yes
+
+	option = { #real concessions
+		name = col.908.a
+		add_political_power = 50
+	}
+	
+	option = { #fake reports
+		name = col.908.b
+		add_stability = 0.07
+		add_political_power = -20
+	}
+}
+
+country_event = { #PatAut Navy or Air Boost
+	id = col.909
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.909" }
+	title = col.909.t
+	desc = col.909.d
+
+	is_triggered_only = yes
+
+	option = { #focus on navy
+		name = col.909.a
+		add_political_power = 15
+		add_ideas = COL_pataut_navy
+	}
+	
+	option = { #focus on airforce
+		name = col.909.b
+		add_political_power = 15
+		add_ideas = COL_pataut_air
+	}
+	
+	option = { #focus on both
+		name = col.909.c
+		add_ideas = COL_pataut_navy_and_air
+	}
+}
+
+country_event = { #Pinilla steps down - Frente Nacional
+	id = col.910
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.910" }
+	title = col.910.t
+	desc = col.910.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.910.a
+		hidden_effect = {
+			remove_all_ministers = yes
+		}
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_conservative
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 96
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+		}
+		create_country_leader = {
+			name = "Francisco de Paula Peréz Tamayo"
+			desc = "POLITICS_COL_TAMAYO_DESC"
+			picture = "Portrait_Colombia_Francisco_de_Paula_Perez_Tamayo.png"
+			expire = "1965.1.1"
+			ideology = social_conservative_subtype
+		}
+		#add_ideas = COL_Mariano_Ospina_Perez_hog_sco
+		#add_ideas = COL_Alfredo_Vazquez_Carrizosa_for_sco
+		#add_ideas = COL_Fernando_Gomez_Martinez_eco_sco
+		#add_ideas = COL_Francisco_Jose_Urrutia_Olano_sec_sco
+		add_ideas = COL_Francisco_de_Paula_Perez_Tamayo_hog_sco
+		add_ideas = COL_Alejandro_Galvis_Galvis_for_sde
+		add_ideas = COL_Nemesio_Camacho_Macias_eco_mli
+		add_ideas = COL_Dario_Echandia_Olaya_sec_sli
+		add_political_power = 100
+		add_stability = 0.2
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = COL_FN_authoritarian_democrat_party_long
+			name = COL_FN_authoritarian_democrat_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = COL_FN_paternal_autocrat_party_long
+			name = COL_FN_paternal_autocrat_party
+		}
+		set_party_name = {
+			ideology = market_liberal
+			long_name = COL_FN_market_liberal_party_long
+			name = COL_FN_authoritarian_democrat_party
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = COL_FN_national_populist_party_long
+			name = COL_FN_national_populist_party
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = COL_FN_social_democrat_party_long
+			name = COL_FN_social_democrat_party
+		}
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = COL_FN_radical_socialist_party_long
+			name = COL_FN_radical_socialist_party
+		}
+		set_party_name = {
+			ideology = syndicalist
+			long_name = COL_FN_syndicalist_party_long
+			name = COL_FN_syndicalist_party
+		}
+		hidden_effect = {
+			set_country_flag = COL_frente_nacional_established
+		}
+	}
+}
+
+country_event = { #Fernando Gonzales first presented to player
+	id = col.776
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.776" }
+	title = col.776.t
+	desc = col.776.d
+
+	trigger = {
+		has_completed_focus = COL_the_new_race
+		has_completed_focus = COL_purge_reds
+		has_completed_focus = COL_militarist_programmes
+	}
+	fire_only_once = yes
+
+	option = {
+		name = col.776.a
+		add_political_power = 30
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.025
+		}
+	}
+}
+
+country_event = { #troubles at the leopardo meeting
+	id = col.777
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.777" }
+	title = col.777.t
+	desc = col.777.d
+	picture = GFX_report_event_generic_conference2
+
+	trigger = {
+		has_completed_focus = COL_church_and_state_separation
+		has_completed_focus = COL_christian_corporations
+	}
+	fire_only_once = yes
+
+	option = { #do nothing
+		name = col.777.a
+		ai_chance = {
+			factor = 20
+		}
+		add_political_power = 50
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.05
+		}
+		hidden_effect = {
+			country_event = {
+				id = col.778
+				days = 5
+			}
+		}
+	}
+
+	option = { #scorn them
+		name = col.777.b
+		ai_chance = {
+			factor = 25
+		}
+		add_political_power = -15
+		hidden_effect = {
+			country_event = {
+				id = col.779
+				days = 5
+			}
+		}
+	}
+
+	option = { #expell them
+		name = col.777.c
+		ai_chance = {
+			factor = 55
+		}
+		add_stability = 0.02
+		add_political_power = -70
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.02
+		}
+		add_manpower = -2
+		hidden_effect = {
+			country_event = {
+				id = col.780
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #leopardos quitly leave
+	id = col.778
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.778" }
+	title = col.778.t
+	desc = col.778.d
+	picture = GFX_report_event_generic_conference2
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.778.a
+		add_political_power = -50
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.03
+		}
+		add_manpower = -2
+		hidden_effect = {
+			country_event = {
+				id = col.781
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #leopardos remain
+	id = col.779
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.779" }
+	title = col.779.t
+	desc = col.779.d
+	picture = GFX_report_event_generic_conference2
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.779.a
+		add_political_power = 20
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.03
+		}
+		hidden_effect = {
+			country_event = {
+				id = col.783
+				days = 5
+			}
+		}
+		set_country_flag = COL_leopardos_remain_flag
+	}
+}
+
+country_event = { #leopardos angry for expulsion
+	id = col.780
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.780" }
+	title = col.780.t
+	desc = col.780.d
+	picture = GFX_report_event_generic_conference2
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.780.a
+		add_political_power = -30
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.02
+		}
+		add_manpower = -1
+		hidden_effect = {
+			country_event = {
+				id = col.781
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #new leopardos leadership
+	id = col.781
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.781" }
+	title = col.781.t
+	desc = col.781.d
+	picture = GFX_report_event_generic_strike
+
+	is_triggered_only = yes
+
+	option = { #Alzate Avedano new leader
+		name = col.781.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_LEOPARDOS
+					}
+				}
+			}
+		}
+		create_country_leader = {
+			name = "Gilberto Alzate Avendano"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Gilberto_Alzate_Avendano.png"
+			expire = "1.1.1"
+			ideology = leopardism_subtype
+		}
+		hidden_effect = {
+			remove_all_ministers = yes
+		}
+		add_ideas = COL_Eliseo_Arango_Ramos_hog_npo
+		add_ideas = COL_Guillermo_Hernandez_de_Alba_for_npo
+		if = {
+			limit = {
+				has_country_flag = COL_Villegas_left_the_leopardos
+			}
+			add_ideas = COL_Julian_Bucheli_Ayerbe_eco_npo
+		}
+		else = {
+			add_ideas = COL_Silvio_Villegas_eco_npo
+		}
+		add_ideas = COL_Jose_Camacho_Carreno_sec_npo
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_political_power = -25
+		add_stability = 0.03
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.03
+		}
+	}
+
+	option = { #Keep the current one
+		name = col.781.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_OTRAPARTE
+					}
+				}
+			}
+		}
+		add_political_power = 25
+		add_stability = -0.03
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.03
+		}
+		hidden_effect = {
+			country_event = {
+				id = col.782
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #no split - Carlos Cortes Vargas still renounce (not sad)
+	id = col.783
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.783" }
+	title = col.783.t
+	desc = col.783.d
+	picture = GFX_report_event_generic_reporters
+
+	is_triggered_only = yes
+
+	option = { #Alzate Avedano new leader
+		name = col.783.a
+		create_country_leader = {
+			name = "Gilberto Alzate Avendano"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Gilberto_Alzate_Avendano.png"
+			expire = "1965.1.1"
+			ideology = leopardism_subtype
+		}
+		hidden_effect = {
+			remove_all_ministers = yes
+		}
+		add_ideas = COL_Eliseo_Arango_Ramos_hog_npo
+		add_ideas = COL_Guillermo_Hernandez_de_Alba_for_npo
+		if = {
+			limit = {
+				has_country_flag = COL_Villegas_left_the_leopardos
+			}
+			add_ideas = COL_Julian_Bucheli_Ayerbe_eco_npo
+		}
+		else = {
+			add_ideas = COL_Silvio_Villegas_eco_npo
+		}
+		add_ideas = COL_Jose_Camacho_Carreno_sec_npo
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_political_power = -25
+		add_stability = 0.03
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.03
+		}
+	}
+}
+
+country_event = { #Oacha coup
+	id = col.782
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.782" }
+	title = col.782.t
+	desc = col.782.d
+	picture = GFX_report_event_generic_reporters
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.782.a
+		create_country_leader = {
+			name = "Fernando Gonzalez Ochoa"
+			desc = "POLITICS_COL_GONZALEZ_OCHOA_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Fernando_Gonzalez_Ochoa.png"
+			expire = "1.1.1"
+			ideology = occultism_subtype
+			traits = { COL_outsider_philosopher }
+		}
+		hidden_effect = {
+			remove_all_ministers = yes
+		}
+		add_ideas = COL_Augusto_Ramirez_Moreno_hog_npo
+		add_ideas = COL_Joaquin_Fidalgo_Hermida_for_npo
+		if = {
+			limit = {
+				has_country_flag = COL_Villegas_left_the_leopardos
+			}
+			add_ideas = COL_Silvio_Villegas_eco_npo
+		}
+		else = {
+			add_ideas = COL_Julian_Bucheli_Ayerbe_eco_npo
+		}
+		add_ideas = COL_Santander_Araujo_sec_npo
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_political_power = 50
+		add_stability = 0.02
+	}
+}
+
+country_event = { #SOCLIB STARTING EVENT
+	id = colfocus.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.1" }
+	title = colfocus.1.t
+	desc = colfocus.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.1.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 1000
+				OR = {
+					has_game_rule = {
+						rule = COL_GREAT_INHERITANCE
+						option = COL_GREAT_INHERITANCE_AUTDEM
+					}
+					has_game_rule = {
+						rule = COL_GREAT_INHERITANCE
+						option = COL_GREAT_INHERITANCE_CONSERVATIVE
+					}
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_NATIVES_ANGRY_CW
+					}
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_ALL_ANGRY_CW
+					}
+				}
+			}
+		}
+		add_stability = 0.01
+		486 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		custom_effect_tooltip = COL_nativesangry_tt
+		hidden_effect = {
+			set_country_flag = {
+				flag = COL_indigenous_anger
+				value = 1
+			}
+			set_country_flag = COL_invite_foreign_industries_flag
+		}
+		unlock_national_focus = COL_invite_foreign_industries
+	}
+	
+	option = {
+		name = colfocus.1.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 1000
+				OR = {
+					has_game_rule = {
+						rule = COL_GREAT_INHERITANCE
+						option = COL_GREAT_INHERITANCE_PATAUT_FN
+					}
+					has_game_rule = {
+						rule = COL_GREAT_INHERITANCE
+						option = COL_GREAT_INHERITANCE_PATAUT_ALONE
+					}
+				}
+				NOT = {
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_NATIVES_ANGRY_CW
+					}
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_ALL_ANGRY_CW
+					}
+				}
+			}
+		}
+		add_command_power = 10
+		add_war_support = 0.02
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.03
+		}
+		hidden_effect = {
+			set_country_flag = COL_no_more_blaiming_the_army_flag
+		}
+		unlock_national_focus = COL_no_more_blaiming_the_army
+	}
+
+	option = {
+		name = colfocus.1.c
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 1000
+				OR = {
+					has_game_rule = {
+						rule = COL_GREAT_INHERITANCE
+						option = COL_GREAT_INHERITANCE_LIBERAL
+					}
+				}
+				NOT = {
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_NATIVES_ANGRY_CW
+					}
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_ALL_ANGRY_CW
+					}
+				}
+			}
+		}
+		add_political_power = 25
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.03
+		}
+		hidden_effect = {
+			set_country_flag = COL_electoral_reform_flag
+		}
+		unlock_national_focus = COL_electoral_reform
+	}
+}
+
+country_event = { #SELECTING HARBOR
+	id = colfocus.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.2" }
+	title = colfocus.2.t
+	desc = colfocus.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.2.a
+		ai_chance = {
+			factor = 60
+		}
+		493 = {
+			add_state_modifier = {
+				modifier = {
+					compliance_gain = 0.1
+					state_production_speed_industrial_complex_factor = 0.1
+					local_supplies_for_controller = 0.1
+					amphibious_invasion_defence = 0.05
+				}
+			}
+		}
+	}
+
+	option = {
+		name = colfocus.2.b
+		ai_chance = {
+			factor = 40
+		}
+		852 = {
+			add_state_modifier = {
+				modifier = {
+					compliance_gain = 0.1
+					state_production_speed_industrial_complex_factor = 0.1
+					local_supplies_for_controller = 0.1
+					amphibious_invasion_defence = 0.05
+				}
+			}
+		}
+	}
+}
+
+country_event = { #REJOINING THE LIBERALS PATH SOCLIB
+	id = colfocus.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.3" }
+	title = colfocus.3.t
+	desc = colfocus.3.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.3.a
+		ai_chance = {
+			factor = 55
+		}
+		COL_election_clr_flags = yes
+		set_country_flag = COL_mariogalan_is_liberal_candidate_flag
+		custom_effect_tooltip = COL_mariogalan_is_liberal_candidate_tt
+		set_party_name = {
+			ideology = social_liberal
+			long_name = "Partido Liberal(Centrista)"
+			name = "PL(Centrista)"
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = "Partido Liberal(Socialdemocratico)"
+			name = "PL(Socialdemocratico)"
+		}
+		custom_effect_tooltip = remove_all_coalitions_tt
+		custom_effect_tooltip = socdem_will_join_coalition_tt
+		hidden_effect = {
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_democrat }
+			add_to_coalition = yes
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.03
+		}
+	}
+
+	option = {
+		name = colfocus.3.b
+		ai_chance = {
+			factor = 10
+		}
+		COL_election_clr_flags = yes
+		custom_effect_tooltip = COL_alfonsolopez_is_liberal_candidate_tt
+		set_country_flag = COL_alfonsolopez_is_liberal_candidate_flag
+		set_party_name = {
+			ideology = social_liberal
+			long_name = "Partido Liberal(Centrista)"
+			name = "PL(Centrista)"
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = "Partido Liberal(Socialdemocratico)"
+			name = "PL(Socialdemocratico)"
+		}
+		custom_effect_tooltip = remove_all_coalitions_tt
+		custom_effect_tooltip = socdem_will_join_coalition_tt
+		hidden_effect = {
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_democrat }
+			add_to_coalition = yes
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.03
+		}
+	}
+
+	option = {
+		name = colfocus.3.c
+		ai_chance = {
+			factor = 35
+		}
+		COL_election_clr_flags = yes
+		custom_effect_tooltip = COL_eduardosantos_is_liberal_candidate_tt
+		set_country_flag = COL_eduardosantos_is_liberal_candidate_flag
+		set_party_name = {
+			ideology = social_liberal
+			long_name = "Partido Liberal(Centrista)"
+			name = "PL(Centrista)"
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = "Partido Liberal(Socialdemocratico)"
+			name = "PL(Socialdemocratico)"
+		}
+		custom_effect_tooltip = remove_all_coalitions_tt
+		custom_effect_tooltip = socdem_will_join_coalition_tt
+		hidden_effect = {
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_democrat }
+			add_to_coalition = yes
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.03
+		}
+	}
+}
+
+country_event = { #ARMY BENEFITS - SOCDEM/SOCCONS
+	id = colfocus.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.43" }
+	title = colfocus.43.t
+	desc = colfocus.43.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.43.a
+		add_stability = 0.03
+		add_command_power = 20
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.05
+		}
+	}
+}
+
+country_event = { #URBAN PLANNING - ECONOMIC TREE
+	id = colfocus.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.4" }
+	title = colfocus.4.t
+	desc = colfocus.4.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.4.a
+		ai_chance = {
+			factor = 75
+		}
+		add_stability = 0.1
+		every_owned_state = {
+			limit = {
+				has_state_category = five
+			}
+			increase_state_category_by_one_level = yes
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = six
+			}
+			increase_state_category_by_one_level = yes
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = seven
+			}
+			increase_state_category_by_one_level = yes
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = eight
+			}
+			increase_state_category_by_one_level = yes
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = nine
+			}
+			increase_state_category_by_one_level = yes
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = ten
+			}
+			increase_state_category_by_one_level = yes
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = eleven
+			}
+			increase_state_category_by_one_level = yes
+		}
+	}
+
+	option = {
+		name = colfocus.4.b
+		ai_chance = {
+			factor = 25
+		}
+		add_political_power = 55
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.02
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = zero
+			}
+			increase_state_category_by_one_level = yes
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = one
+			}
+			increase_state_category_by_one_level = yes
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = two
+			}
+			increase_state_category_by_one_level = yes
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = three
+			}
+			increase_state_category_by_one_level = yes
+		}
+		every_owned_state = {
+			limit = {
+				has_state_category = four
+			}
+			increase_state_category_by_one_level = yes
+		}
+	}
+}
+country_event = { #
+	id = colfocus.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.777" }
+	title = colfocus.5.t
+	desc = colfocus.5.d
+	picture = GFX_report_event_COL_viaje_a_pie
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.5.a
+		COL = {
+			country_event = {
+				id = colfocus.5555
+				days = 5
+			}
+		}
+		if = {
+			limit = {
+				ECU = {
+					is_subject = no
+				}
+			}
+			ECU = {
+				country_event = colfocus.33
+			}
+		}
+			
+	}
+	option = {
+		name = colfocus.5.b
+		COL = {
+			country_event = {
+				id = colfocus.5556
+				days = 5
+			}
+		}
+	}
+}
+country_event = { #
+	id = colfocus.5555
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.777" }
+	title = colfocus.5555.t
+	desc = colfocus.5555.d
+	picture = GFX_report_event_COL_viaje_a_pie
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.5555.a
+		COL = {
+			add_to_faction = VEN
+		}
+	}
+	
+}
+country_event = { #
+	id = colfocus.5556
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.777" }
+	title = colfocus.5556.t
+	desc = colfocus.5556.d
+	picture = GFX_report_event_COL_viaje_a_pie
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.5556.a
+		set_country_flag = COL_VEN_rejected_friendship
+		uncomplete_national_focus = {
+			focus = COL_friendship_with_VEN
+			uncomplete_children = yes
+		}
+	}
+	
+}
+country_event = { #OTRAPARTE - Viajes a Pié
+	id = colfocus.777
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.777" }
+	title = colfocus.777.t
+	desc = colfocus.777.d
+	picture = GFX_report_event_COL_viaje_a_pie
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.777.a
+		add_political_power = 25
+		add_stability = 0.02
+		add_war_support = 0.02
+	}
+}
+
+country_event = { #DOVES VS EAGLES - Choose target
+	id = colfocus.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.23" }
+	title = colfocus.23.t
+	desc = colfocus.23.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Target Venezuela
+		name = colfocus.23.a
+		ai_chance = {
+			factor = 30
+		}
+		add_political_power = 10
+		VEN = {
+			add_opinion_modifier = {
+				target = COL
+				modifier = KR_outraged
+			}
+		}
+		country_event = {
+			id = colfocus.24
+			days = 7
+		}
+	}
+
+	option = { #Target Peru
+		name = colfocus.23.b
+		ai_chance = {
+			factor = 70
+		}
+		add_political_power = 10
+		var:1214.owner = {
+			add_opinion_modifier = {
+				target = COL
+				modifier = KR_outraged
+			}
+		}
+		country_event = {
+			id = colfocus.28
+			days = 7
+		}
+	}
+}
+
+country_event = { #DOVES VS EAGLES - Choosing what to do with Venezuela
+	id = colfocus.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.24" }
+	title = colfocus.24.t
+	desc = colfocus.24.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Eagles
+		name = colfocus.24.a
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = VEN
+						ratio > 1.5
+					}
+				}
+			}
+		}
+		add_war_support = 0.02
+		set_country_flag = COL_VEN_hostile
+	}
+
+	option = { #Doves
+		name = colfocus.24.b
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = VEN
+						ratio < 0.8
+					}
+				}
+			}
+		}
+		add_political_power = 30
+		add_stability = 0.01
+		VEN = {
+			country_event = {
+				id = colfocus.25
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #DOVES VS EAGLES - Venezuela response
+	id = colfocus.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.25" }
+	title = colfocus.25.t
+	desc = colfocus.25.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = colfocus.25.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = COL
+						ratio < 0.8
+					}
+					naval_strength_ratio = {
+						tag = COL
+						ratio < 0.5
+					}
+				}
+			}
+		}
+		add_political_power = 30
+		add_stability = 0.02
+		COL = {
+			country_event = {
+				id = colfocus.26
+				days = 2
+			}
+		}
+	}
+
+	option = { #No
+		name = colfocus.25.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = COL
+						ratio > 1.5
+					}
+					naval_strength_ratio = {
+						tag = COL
+						ratio > 2
+					}
+				}
+			}
+		}
+		add_war_support = 0.05
+		COL = {
+			country_event = {
+				id = colfocus.27
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { #DOVES VS EAGLES - Venezuela accepted
+	id = colfocus.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.26" }
+	title = colfocus.26.t
+	desc = colfocus.26.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.26.a
+		add_political_power = 15
+		add_command_power = 15
+		set_country_flag = COL_VEN_accepted_friendship
+	}
+}
+
+country_event = { #DOVES VS EAGLES - Venezuela refused
+	id = colfocus.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.27" }
+	title = colfocus.27.t
+	desc = colfocus.27.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.27.a
+		add_political_power = -15
+		add_stability = -0.02
+		add_war_support = 0.02
+		set_country_flag = COL_VEN_rejected_friendship
+	}
+}
+
+country_event = { #DOVES VS EAGLES - Choosing what to do with Peru
+	id = colfocus.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.28" }
+	title = colfocus.28.t
+	desc = colfocus.28.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Eagles
+		name = colfocus.28.a
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = var:1214.owner
+						ratio > 1.5
+					}
+				}
+			}
+		}
+		add_war_support = 0.02
+		set_country_flag = COL_PRU_hostile
+	}
+
+	option = { #Doves
+		name = colfocus.28.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = var:1214.owner
+						ratio < 0.8
+					}
+				}
+			}
+		}
+		add_political_power = 30
+		add_stability = 0.01
+		var:1214.owner = {
+			country_event = {
+				id = colfocus.29
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #DOVES VS EAGLES - Peru response
+	id = colfocus.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.29" }
+	title = colfocus.29.t
+	desc = colfocus.29.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = colfocus.29.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = COL
+						ratio < 0.8
+					}
+					naval_strength_ratio = {
+						tag = COL
+						ratio < 0.5
+					}
+				}
+			}
+		}
+		add_political_power = 30
+		add_stability = 0.02
+		COL = {
+			country_event = {
+				id = colfocus.30
+				days = 2
+			}
+		}
+	}
+
+	option = { #No
+		name = colfocus.29.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = COL
+						ratio > 1.5
+					}
+					naval_strength_ratio = {
+						tag = COL
+						ratio > 2
+					}
+				}
+			}
+		}
+		add_war_support = 0.05
+		COL = {
+			country_event = {
+				id = colfocus.31
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { #DOVES VS EAGLES - Venezuela accepted
+	id = colfocus.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.30" }
+	title = colfocus.30.t
+	desc = colfocus.30.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.30.a
+		add_political_power = 15
+		add_command_power = 15
+		set_country_flag = COL_PRU_accepted_friendship
+	}
+}
+
+country_event = { #DOVES VS EAGLES - Venezuela refused
+	id = colfocus.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.31" }
+	title = colfocus.31.t
+	desc = colfocus.31.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.31.a
+		add_political_power = -15
+		add_stability = -0.02
+		add_war_support = 0.02
+		set_country_flag = COL_PRU_rejected_friendship
+	}
+}
+
+country_event = { #DOVES VS EAGLES - Choosing what to do with the other enemy/ally
+	id = colfocus.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.32" }
+	title = colfocus.32.t
+	desc = colfocus.32.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.32.a
+		trigger = {
+			OR = {
+				has_country_flag = COL_PRU_hostile
+				has_country_flag = COL_PRU_rejected_friendship
+			}
+		}
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = VEN
+						ratio > 1.5
+					}
+				}
+			}
+		}
+		add_political_power = 10
+		add_war_support = 0.02
+		set_country_flag = COL_VEN_hostile
+		VEN = {
+			add_opinion_modifier = {
+				target = COL
+				modifier = KR_outraged
+			}
+		}
+	}
+
+	option = {
+		name = colfocus.32.b
+		trigger = {
+			OR = {
+				has_country_flag = COL_PRU_hostile
+				has_country_flag = COL_PRU_rejected_friendship
+			}
+		}
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = VEN
+						ratio < 0.8
+					}
+				}
+			}
+		}
+		add_political_power = 30
+		add_stability = 0.01
+		VEN = {
+			add_opinion_modifier = {
+				target = COL
+				modifier = KR_outraged
+			}
+			country_event = {
+				id = colfocus.25
+				days = 3
+			}
+		}
+	}
+
+	option = {
+		name = colfocus.32.c
+		trigger = {
+			OR = {
+				has_country_flag = COL_VEN_hostile
+				has_country_flag = COL_VEN_rejected_friendship
+			}
+		}
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = var:1214.owner
+						ratio > 1.5
+					}
+				}
+			}
+		}
+		add_political_power = 10
+		add_war_support = 0.02
+		set_country_flag = COL_PRU_hostile
+		var:1214.owner = {
+			add_opinion_modifier = {
+				target = COL
+				modifier = KR_outraged
+			}
+		}
+	}
+
+	option = {
+		name = colfocus.32.d
+		trigger = {
+			OR = {
+				has_country_flag = COL_VEN_hostile
+				has_country_flag = COL_VEN_rejected_friendship
+			}
+		}
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 2
+				OR = {
+					strength_ratio = {
+						tag = var:1214.owner
+						ratio < 0.8
+					}
+				}
+			}
+		}
+		add_political_power = 30
+		add_stability = 0.01
+		var:1214.owner = {
+			add_opinion_modifier = {
+				target = COL
+				modifier = KR_outraged
+			}
+			country_event = {
+				id = colfocus.29
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #DOVES VS EAGLES - VEN or PRU gets asked if they also want to join the friendship
+	id = colfocus.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.33" }
+	title = colfocus.33.t
+	desc = colfocus.33.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.33.a
+		ai_chance = {
+			factor = 70
+		}
+		add_political_power = 35
+		COL = {
+			country_event = {
+				id = colfocus.34
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = colfocus.33.b
+		ai_chance = {
+			factor = 30
+		}
+		add_war_support = 0.1
+		
+		create_wargoal = {
+			type = annex_everything
+			target = COL
+		} 
+		COL = { 
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+			} 
+		}
+	}
+}
+
+country_event = { #DOVES VS EAGLES - COL gets asked back
+	id = colfocus.34
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.34" }
+	title = colfocus.34.t
+	desc = colfocus.34.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.34.a
+		ai_chance = {
+			factor = 80
+		}
+		COL = {
+			add_to_faction = ECU
+		}
+	}
+
+	
+}
+
+country_event = { #INVITE OTHERS TO GRAN COLOMBIAN FACTION
+	id = colfocus.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.20" }
+	title = colfocus.20.t
+	desc = colfocus.20.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = colfocus.20.a
+		ai_chance = {
+			factor = 60
+		}
+		add_stability = 0.03
+		add_war_support = 0.05
+		COL = {
+			add_to_faction = ROOT
+		}
+	}
+
+	option = {
+		name = colfocus.20.b
+		ai_chance = {
+			factor = 40
+		}
+		add_political_power = 30
+		COL = {
+			add_opinion_modifier = { 
+				target = ROOT modifier = small_decrease
+			}
+		}
+	}
+}
+
+country_event = { #DEMOCRATIC PATH - talk with PRU
+	id = colfocus.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.6" }
+	title = colfocus.6.t
+	desc = colfocus.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.6.a
+		ai_chance = {
+			factor = 90
+		}
+		COL = {
+			remove_state_claim = 1214
+			remove_state_core = 1214
+			851 = {
+				set_demilitarized_zone = yes
+			}	
+		}
+		1214 = {
+			set_demilitarized_zone = yes
+		}
+		diplomatic_relation = { 
+			country = COL
+			relation = non_aggression_pact 
+		}
+	}
+
+	option = {
+		name = colfocus.6.b
+		ai_chance = {
+			factor = 10
+		}
+		COL = {
+			add_war_support = 0.1
+		}
+		add_named_threat = {
+			threat = 3
+			name = PRU_refused_COL_diplomacy
+		}
+	}
+}
+
+country_event = { #FOREIGN POLICIES - CUCUTA CONGRESS
+	id = colfocus.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.6" }
+	title = colfocus.7.t
+	desc = colfocus.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.7.a
+		add_ideas = COL_cucuta_congress_buff
+		VEN = { 
+			add_ideas = COL_cucuta_congress_buff
+		}
+		if = {
+			limit = {
+				ECU = {
+					is_in_faction_with = COL
+				}
+				
+			}
+			ECU = { 
+				add_ideas = COL_cucuta_congress_buff
+			}
+		}
+	}
+}
+
+country_event = { #FOREIGN POLICIES - INVITING guyana
+	id = colfocus.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.8" }
+	title = colfocus.8.t
+	desc = colfocus.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #accept
+		name = colfocus.8.a
+		ai_chance = {
+			factor = 75
+		}
+		COL = {
+			add_to_faction = ROOT
+		}
+	}
+
+	option = { #decline
+		name = colfocus.8.b
+		ai_chance = {
+			factor = 25
+		}
+		COL = { 
+			country_event = {
+				id = colfocus.17
+				days = 2
+			}
+			add_war_support = 0.05 
+		}
+		hidden_effect = { set_country_flag = COL_rejected_giving_territories }
+	}
+}
+
+country_event = { #FOREIGN POLICIES - REQUESTING GUYANA TERRITORIES
+	id = colfocus.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.8" }
+	title = colfocus.9.t
+	desc = colfocus.9.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #accept
+		name = colfocus.9.a
+		ai_chance = {
+			factor = 75
+			modifier = {
+				factor = 100
+				has_country_flag = COL_giving_away_san_andres
+			}
+		}
+		add_ideas = COL_compensations_for_giving_land
+		add_offsite_building = { 
+			type = industrial_complex 
+			level = 3
+		}
+		if = {
+			limit = {
+				has_full_control_of_state = 1078
+			}
+			COL = { transfer_state = 1078 }
+		}
+		if = {
+			limit = {
+				has_full_control_of_state = 1079
+			}
+			COL = { transfer_state = 1079 }
+		}
+		if = { 
+			limit = { has_country_flag = COL_giving_away_san_andres } 
+			add_state_core = 1296
+			transfer_state = 1296
+			COL = { remove_state_claim = 1296 }
+			COL = { remove_state_core = 1296 }
+		}
+		COL = { 
+			country_event = {
+				id = colfocus.16
+				days = 2
+			}
+		}
+	}
+
+	option = { #decline
+		name = colfocus.9.b
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				has_country_flag = COL_giving_away_san_andres
+			}
+		}
+		COL = { 
+			country_event = {
+				id = colfocus.17
+				days = 2
+			}
+			add_war_support = 0.05 
+		}
+		hidden_effect = { set_country_flag = COL_rejected_giving_territories }
+	}
+}
+
+country_event = { #FOREIGN POLICIES - INVITING PANAMA
+	id = colfocus.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.9" }
+	title = colfocus.10.t
+	desc = colfocus.10.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #accept
+		name = colfocus.10.a
+		ai_chance = {
+			factor = 75
+		}
+		COL = {
+			add_to_faction = ROOT
+		}
+	}
+
+	option = { #decline
+		name = colfocus.10.b
+		ai_chance = {
+			factor = 25
+		}
+		COL = { 
+			country_event = {
+				id = colfocus.17
+				days = 2
+			}
+			add_war_support = 0.05 
+		}
+		hidden_effect = { set_country_flag = COL_rejected_giving_territories }
+	}
+}
+
+country_event = { #FOREIGN POLICIES - REQUESTING PANAMA TERRITORIES
+	id = colfocus.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.8" }
+	title = colfocus.11.t
+	desc = colfocus.11.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #accept
+		name = colfocus.11.a
+		ai_chance = {
+			factor = 75
+			modifier = {
+				factor = 100
+				has_country_flag = COL_giving_away_san_andres
+			}
+		}
+		add_ideas = COL_compensations_for_giving_land
+		add_offsite_building = { 
+			type = industrial_complex 
+			level = 3
+		}
+		if = {
+			limit = {
+				has_full_control_of_state = 304
+			}
+			COL = { transfer_state = 304 }
+		}
+		if = {
+			limit = {
+				has_full_control_of_state = 685
+			}
+			COL = { transfer_state = 685 }
+		}
+		if = {
+			limit = {
+				has_full_control_of_state = 854
+			}
+			COL = { transfer_state = 854 }
+		}
+		if = {
+			limit = {
+				has_full_control_of_state = 1248
+			}
+			COL = { transfer_state = 1248 }
+		}
+		if = {
+			limit = {
+				has_full_control_of_state = 1257
+			}
+			COL = { transfer_state = 1257 }
+		}
+		if = { 
+			limit = { has_country_flag = COL_giving_away_san_andres } 
+			add_state_core = 1296
+			transfer_state = 1296
+			COL = { remove_state_claim = 1296 }
+			COL = { remove_state_core = 1296 }
+		}
+		COL = { 
+			country_event = {
+				id = colfocus.16
+				days = 2
+			}
+		}
+	}
+
+	option = { #decline
+		name = colfocus.11.b
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				has_country_flag = COL_giving_away_san_andres
+			}
+		}
+		COL = { 
+			country_event = {
+				id = colfocus.17
+				days = 2
+			}
+			add_war_support = 0.05 
+		}
+		hidden_effect = { set_country_flag = COL_rejected_giving_territories }
+	}
+}
+
+country_event = { #GIVING AWAY SAN ANDRES AND PROVIDENCIA
+	id = colfocus.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.15" }
+	title = colfocus.15.t
+	desc = colfocus.15.d
+
+	fire_only_once = yes
+
+	trigger = {
+		COL = {
+			owns_state = 1296
+		}
+		any_other_country = {
+			1296 = {
+				OR = {
+					is_claimed_by = PREV
+					is_core_of = PREV
+				}
+			}
+		}
+		OR = {
+			focus_progress = {
+				focus = COL_invite_guayana_in_GCL
+				progress > 0.7
+			}
+			focus_progress = {
+				focus = COL_invite_panama_in_GCL
+				progress > 0.7
+			}
+		}
+	}
+
+	option = { #accept
+		name = colfocus.15.a
+		ai_chance = {
+			factor = 65
+		}
+		random_other_country = {
+			limit = {
+				COL = {
+					owns_state = 1296
+				}
+				1296 = {
+					OR = {
+						is_claimed_by = PREV
+						is_core_of = PREV
+					}
+				}
+			}
+			reverse_add_opinion_modifier = { 
+				target = COL modifier = small_increase
+			}
+			set_country_flag = COL_giving_away_san_andres
+		}
+	}
+
+	option = { #decline
+		name = colfocus.15.b
+		ai_chance = {
+			factor = 35
+		}
+		add_stability = 0.01
+	}
+}
+
+country_event = { #informed of acceptance from PAN/GYA or the countries holding their territories
+	id = colfocus.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.16" }
+	title = colfocus.16.t
+	desc = colfocus.16.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #accept
+		name = colfocus.16.a
+		add_political_power = 100
+		increase_ruling_party_popularity_by_10 = yes
+	}
+}
+
+country_event = { #informed of rejection from PAN/GYA or the countries holding their territories
+	id = colfocus.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.17" }
+	title = colfocus.17.t
+	desc = colfocus.17.d
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = { #war with pan
+		name = colfocus.17.a
+		ai_chance = {
+			factor = 2
+		}
+		trigger = {
+			any_other_country = {
+				has_country_flag = COL_rejected_giving_territories
+				OR = {
+					tag = PAN
+					any_owned_state = {
+						OR = {
+							AND = {
+								state = 304
+								is_capital = yes
+							}
+							AND = {
+								state = 685
+								is_capital = yes
+							}
+							AND = {
+								state = 854
+								is_capital = yes
+							}
+							AND = {
+								state = 1248
+								is_capital = yes
+							}
+							AND = {
+								state = 1257
+								is_capital = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				AND = {
+					is_core_of = PAN
+					NOT = { state = 1070 }
+				}
+			}
+			add_claim_by = COL
+		}
+		custom_effect_tooltip = COL_gain_wargoals_only_pan_tt
+		hidden_effect = {
+			every_other_country = {
+				limit = {
+					has_country_flag = COL_rejected_giving_territories
+					OR = {
+						tag = PAN
+						any_owned_state = {
+							OR = {
+								AND = {
+									state = 304
+									is_capital = yes
+								}
+								AND = {
+									state = 685
+									is_capital = yes
+								}
+								AND = {
+									state = 854
+									is_capital = yes
+								}
+								AND = {
+									state = 1248
+									is_capital = yes
+								}
+								AND = {
+									state = 1257
+									is_capital = yes
+								}
+							}
+						}
+					}
+				}
+				COL = { 
+					create_wargoal = {
+						type = take_claimed_state
+						target = PREV
+						generator = { 
+							304
+							685
+							854
+							1248
+							1257
+						}
+					} 
+				}
+				clr_country_flag = COL_rejected_giving_territories
+			}
+		}
+	}
+
+	option = { #war with no pan holding pan territories
+		name = colfocus.17.b
+		ai_chance = {
+			factor = 2
+		}
+		trigger = {
+			any_other_country = {
+				has_country_flag = COL_rejected_giving_territories
+				AND = {
+					NOT = { tag = PAN }
+					any_owned_state = {
+						OR = {
+							AND = {
+								state = 304
+								is_capital = no
+							}
+							AND = {
+								state = 685
+								is_capital = no
+							}
+							AND = {
+								state = 854
+								is_capital = no
+							}
+							AND = {
+								state = 1248
+								is_capital = no
+							}
+							AND = {
+								state = 1257
+								is_capital = no
+							}
+						}
+					}
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				AND = {
+					is_core_of = PAN
+					NOT = { state = 1070 }
+				}
+			}
+			add_claim_by = COL
+		}
+		custom_effect_tooltip = COL_gain_wargoals_no_pan_tt
+		hidden_effect = {
+			every_other_country = {
+				limit = {
+					has_country_flag = COL_rejected_giving_territories
+					AND = {
+						NOT = { tag = PAN }
+						any_owned_state = {
+							OR = {
+								AND = {
+									state = 304
+									is_capital = no
+								}
+								AND = {
+									state = 685
+									is_capital = no
+								}
+								AND = {
+									state = 854
+									is_capital = no
+								}
+								AND = {
+									state = 1248
+									is_capital = no
+								}
+								AND = {
+									state = 1257
+									is_capital = no
+								}
+							}
+						}
+					}
+				}
+				COL = { 
+					create_wargoal = {
+						type = take_claimed_state
+						target = PREV
+						generator = { 
+							304
+							685
+							854
+							1248
+							1257
+						}
+					} 
+				}
+				clr_country_flag = COL_rejected_giving_territories
+			}
+		}
+	}
+
+	option = { #war with gya
+		name = colfocus.17.c
+		trigger = {
+			any_other_country = {
+				has_country_flag = COL_rejected_giving_territories
+				OR = {
+					tag = GYA
+					any_owned_state = {
+						OR = {
+							AND = {
+								state = 1078
+								is_capital = yes
+							}
+							AND = {
+								state = 1079
+								is_capital = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		ai_chance = {
+			factor = 2
+		}
+		every_state = {
+			limit = {
+				OR = {
+					state = 1078
+					state = 1079
+				}
+			}
+			add_claim_by = COL
+		}
+		custom_effect_tooltip = COL_gain_wargoals_only_gya_tt
+		hidden_effect = {
+			every_other_country = {
+				limit = {
+					has_country_flag = COL_rejected_giving_territories
+					OR = {
+						tag = GYA
+						any_owned_state = {
+							OR = {
+								AND = {
+									state = 1078
+									is_capital = yes
+								}
+								AND = {
+									state = 1079
+									is_capital = yes
+								}
+							}
+						}
+					}
+				}
+				COL = { 
+					create_wargoal = {
+						type = take_claimed_state
+						target = PREV
+						generator = { 
+							1078
+							1079
+						}
+					} 
+				}
+				clr_country_flag = COL_rejected_giving_territories
+			}
+		}
+	}
+
+	option = { #war with no gya holding gya territories
+		name = colfocus.17.e
+		trigger = {
+			any_other_country = {
+				has_country_flag = COL_rejected_giving_territories
+				NOT = { tag = GYA }
+				any_owned_state = {
+					OR = {
+						AND = {
+							state = 1078
+							is_capital = no
+						}
+						AND = {
+							state = 1079
+							is_capital = no
+						}
+					}
+				}
+			}
+		}
+		ai_chance = {
+			factor = 2
+		}
+		every_state = {
+			limit = {
+				OR = {
+					state = 1078
+					state = 1079
+				}
+			}
+			add_claim_by = COL
+		}
+		custom_effect_tooltip = COL_gain_wargoals_no_gya_tt
+		hidden_effect = {
+			every_other_country = {
+				limit = {
+					has_country_flag = COL_rejected_giving_territories
+					NOT = { tag = GYA }
+					any_owned_state = {
+						OR = {
+							AND = {
+								state = 1078
+								is_capital = no
+							}
+							AND = {
+								state = 1079
+								is_capital = no
+							}
+						}
+					}
+				}
+				COL = { 
+					create_wargoal = {
+						type = take_claimed_state
+						target = PREV
+						generator = { 
+							1078
+							1079
+						}
+					} 
+				}
+				clr_country_flag = COL_rejected_giving_territories
+			}
+		}
+	}
+
+	option = { #war with everyone
+		name = colfocus.17.f
+		trigger = {
+			any_other_country = {
+				has_country_flag = COL_rejected_giving_territories
+				any_other_country = {
+					has_country_flag = COL_rejected_giving_territories
+				}
+			}
+		}
+		ai_chance = {
+			factor = 2
+		}
+		every_state = {
+			limit = {
+				AND = {
+					is_core_of = PAN
+					NOT = { state = 1070 }
+				}
+			}
+			add_claim_by = COL
+		}
+		custom_effect_tooltip = COL_gain_wargoals_pan_tt
+		hidden_effect = {
+			every_other_country = {
+				limit = {
+					has_country_flag = COL_rejected_giving_territories
+					any_owned_state = {
+						AND = {
+							is_core_of = PAN
+							NOT = { state = 1070 }
+						}
+					}
+				}
+				COL = { 
+					create_wargoal = {
+						type = take_claimed_state
+						target = PREV
+						generator = { 
+							304
+							685
+							854
+							1248
+							1257
+						}
+					} 
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					state = 1078
+					state = 1079
+				}
+			}
+			add_claim_by = COL
+		}
+		custom_effect_tooltip = COL_gain_wargoals_gya_tt
+		hidden_effect = {
+			every_other_country = {
+				limit = {
+					has_country_flag = COL_rejected_giving_territories
+					any_owned_state = {
+						OR = {
+							state = 1078
+							state = 1079
+						}
+					}
+				}
+				COL = { 
+					create_wargoal = {
+						type = take_claimed_state
+						target = PREV
+						generator = { 
+							1078
+							1079
+						}
+					} 
+				}
+				clr_country_flag = COL_rejected_giving_territories
+			}
+		}
+	}
+
+	option = { #renounce
+		name = colfocus.17.g
+		ai_chance = {
+			factor = 90
+		}
+		add_political_power = -50
+		add_war_support = -0.1
+		hidden_effect = {
+			every_other_country = {
+				clr_country_flag = COL_rejected_giving_territories
+			}
+		}
+	}
+}
+
+country_event = { #FOREIGN POLICIES - ZONES OF INFLUENCES WITH PRU
+	id = colfocus.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.6" }
+	title = colfocus.12.t
+	desc = colfocus.12.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.12.a
+		add_ideas = COL_dividing_the_SA_cake_buff
+		
+	}
+}
+
+country_event = { #FOREIGN POLICIES - FIND THE NEW BOLIVAR
+	id = colfocus.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.13" }
+	title = colfocus.13.t
+	desc = colfocus.13.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.13.a
+		ai_chance = {
+			factor = 25
+		}
+		trigger = {
+			 has_country_leader = { name = "Gustavo Rojas Pinilla" ruling_only = yes }
+		
+		}
+		set_country_leader_portrait = {
+			portrait = "gfx/leaders/COL/Portrait_Colombia_Gustavo_Rojas_Pinilla_bolivar.png"
+		}
+		set_country_leader_ideology = bolivarianism
+				
+				
+			
+	}
+	option = {
+		name = colfocus.13.b 
+		ai_chance = {
+			factor = 25
+		}
+		trigger = {
+			has_country_leader = { name = "Laureano Gomez Castro" ruling_only = yes }
+		}
+		set_country_leader_portrait = {
+			portrait = "gfx/leaders/COL/Portrait_Colombia_Laureano_Gomez_Castro_bolivar.png"
+		}	
+		set_country_leader_ideology = authdem_bolivarianism
+				
+			
+	}
+	option = {
+		name = colfocus.13.c
+		ai_chance = {
+			factor = 15
+		}
+		trigger = {
+			has_country_leader = { name = "Carlos Cortés Vargas" ruling_only = yes }
+		}
+		set_country_leader_portrait = {
+			portrait = "gfx/leaders/COL/Portrait_Colombia_Carlos_Cortes_Vargas_bolivar.png"
+		}
+		set_country_leader_ideology = natpop_bolivarianism	
+			
+	}
+	option = {
+		name = colfocus.13.e
+		ai_chance = {
+			factor = 25
+		}
+		trigger = {
+			has_country_leader = { name = "Gilberto Alzate Avendano" ruling_only = yes }
+		}
+		set_country_leader_portrait = {
+			portrait = "gfx/leaders/COL/Portrait_Colombia_Gilberto_Alzate_Avendano_bolivar.png"
+		}
+		set_country_leader_ideology = natpop_bolivarianism	
+	}
+	option = {
+		name = colfocus.13.f
+		ai_chance = {
+			factor = 20
+			
+		}
+		trigger = {
+			has_country_leader = { 
+				name = "Fernando Gonzalez Ochoa"
+				ruling_only = yes
+			}
+		}
+	}
+}
+
+country_event = { #soccons tree - Antitrust Measures
+	id = colfocus.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.44" }
+	title = colfocus.44.t
+	desc = colfocus.44.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.44.a
+		add_political_power = 25
+		add_ideas = COL_antitrust_measures_idea_1
+	}
+
+	option = {
+		name = colfocus.44.b
+		add_stability = 0.01
+		add_ideas = COL_antitrust_measures_idea_2
+	}
+}
+
+country_event = { #GCL tree - international alignment
+	id = colfocus.88
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.88" }
+	title = colfocus.88.t
+	desc = colfocus.88.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #entente
+		name = colfocus.88.a
+		trigger = {
+			ENT = {
+				exists = yes
+				NOT = { is_in_faction_with = ROOT }
+				is_faction_leader = yes
+			}
+		}
+		ai_chance = {
+			factor = 30
+		}
+		CAN = {
+			country_event = coldecision.6
+		}
+	}
+
+	option = { #reichpakt
+		name = colfocus.88.b
+		trigger = {
+			GER = {
+				exists = yes
+				NOT = { is_in_faction_with = ROOT }
+				is_faction_leader = yes
+			}
+		}
+		ai_chance = {
+			factor = 20
+		}
+		GER = {
+			country_event = coldecision.3
+		}
+	}
+
+	option = { #alone
+		name = colfocus.88.f
+		ai_chance = {
+			factor = 30
+		}
+		add_war_support = 0.1
+		
+	}
+}
+
+
+country_event = { #BAN MOONSHINE
+	id = colfocus.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.47" }
+	title = colfocus.47.t
+	desc = colfocus.47.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.47.a
+		add_political_power = 20
+		add_stability = 0.01
+		add_ideas = COL_ban_moonshining_idea
+	}
+}
+
+country_event = { #ECHEVARRIA CASTLE
+	id = colfocus.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.48" }
+	title = colfocus.48.t
+	desc = colfocus.48.d
+	picture = GFX_report_event_COL_castle
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.48.a
+		add_political_power = 20
+		add_war_support = 0.01
+	}
+}
+
+country_event = { #THE NATIVES SITUATION
+	id = colfocus.70
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.6" }
+	title = colfocus.70.t
+	desc = colfocus.70.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			OR = {
+				CAU = { exists = yes }
+				has_country_flag = COL_avoided_civil_war
+				AND = {
+					has_country_flag = COL_civil_war_over
+					OR = {
+						has_idea = COL_socialist_resistance_3
+						has_idea = COL_socialist_resistance_4
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = colfocus.70.a
+		ai_chance = {
+			factor = 50
+		}
+		add_stability = 0.01
+	}
+
+	option = {
+		name = colfocus.70.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_NATIVES_ANGRY_CW
+					}
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_ALL_ANGRY_CW
+					}
+				}
+			}
+		}
+		add_stability = -0.03
+		add_ideas = COL_the_natives_situation_idea
+		852 = {
+			state_resources_factor = -0.12
+			mobilization_speed = -0.15
+			required_garrison_factor = -0.5
+		}
+		custom_effect_tooltip = COL_cancel_idea_in_the_future_tt
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_indigenous_anger
+				value = -1
+			}
+		}
+		custom_effect_tooltip = COL_nativeslessangry_tt
+	}
+}
+
+country_event = { #THE AFROS SITUATION
+	id = colfocus.71
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.6" }
+	title = colfocus.71.t
+	desc = colfocus.71.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.71.a
+		ai_chance = {
+			factor = 50
+		}
+		add_stability = 0.01
+	}
+
+	option = {
+		name = colfocus.71.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_BLACKS_ANGRY_CW
+					}
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = COL_ROJAS_PINILLA_COUP_ALL_ANGRY_CW
+					}
+				}
+			}
+		}
+		add_stability = -0.03
+		add_ideas = COL_the_afros_situation_idea
+		493 = {
+			recruitable_population_factor = -0.12
+			mobilization_speed = -0.1
+		}
+		custom_effect_tooltip = COL_cancel_idea_in_the_future_tt
+		add_manpower = -5000
+		hidden_effect = {
+			modify_country_flag = {
+				flag = COL_afros_anger
+				value = -1
+			}
+		}
+		custom_effect_tooltip = COL_afroslessangry_tt
+	}
+}
+
+country_event = { #Deal with the army
+	id = colfocus.56
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.56" }
+	title = colfocus.56.t
+	desc = colfocus.56.d
+	picture = GFX_report_event_COL_army1
+	
+	is_triggered_only = yes
+
+	option = { #wrong pick
+		name = colfocus.56.a
+		ai_chance = {
+			factor = 35
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			set_country_flag = COL_army_spy_first_pick
+		}
+		custom_effect_tooltip = COL_army_spy_tt
+		hidden_effect = {
+			country_event = {
+				id = colfocus.57
+				days = 13
+			}
+		}
+	}
+	
+	option = { #wrong pick
+		name = colfocus.56.b
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			set_country_flag = COL_army_spy_second_pick
+		}
+		custom_effect_tooltip = COL_army_spy_tt
+		hidden_effect = {
+			country_event = {
+				id = colfocus.57
+				days = 13
+			}
+		}
+	}
+	
+	option = { #right pick
+		name = colfocus.56.c
+		ai_chance = {
+			factor = 45
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			set_country_flag = COL_army_spy_third_pick
+		}
+		custom_effect_tooltip = COL_army_spy_tt
+		hidden_effect = {
+			country_event = {
+				id = colfocus.58
+				days = 13
+			}
+		}
+	}
+}
+
+country_event = { #Negative Outcome of Deal with the army
+	id = colfocus.57
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.57" }
+	title = colfocus.57.t
+	desc = {
+		text = colfocus.57.d_1
+		trigger = {
+			has_country_flag = COL_army_spy_first_pick
+		}
+	}
+	desc = {
+		text = colfocus.57.d_2
+		trigger = {
+			has_country_flag = COL_army_spy_second_pick
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #wrong guy effect
+		name = colfocus.57.a
+		add_stability = -0.05
+		COL_coup_risk_increase = yes
+	}
+}
+
+country_event = { #Positive Outcome of Deal with the army
+	id = colfocus.58
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.58" }
+	title = colfocus.58.t
+	desc = colfocus.58.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #correct guy effect
+		name = colfocus.58.b
+		add_stability = 0.05
+		COL_coup_risk_decrease = yes
+	}
+}
+
+country_event = { #Deal with MPU aliged staff
+	id = colfocus.59
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.59" }
+	title = colfocus.59.t
+	desc = colfocus.59.d
+	picture = GFX_report_event_COL_army1
+	
+	is_triggered_only = yes
+
+	option = { #retire only real mpu aligned staff (only if spy succeded before)
+		name = colfocus.59.a
+		trigger = {
+			has_country_flag = COL_army_spy_third_pick
+		}
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_manpower = -770
+		add_timed_idea = {
+			idea = COL_soc_MPU_selected_purges_idea
+			days = 150
+		}
+		COL_retire_selected_generals_socialist_purge = yes
+		COL_coup_risk_decrease = yes
+	}
+	
+	option = { #retire all suspected generals (if spy failed)
+		name = colfocus.59.b
+		trigger = {
+			NOT = { has_country_flag = COL_army_spy_third_pick }
+		}
+		ai_chance = {
+			factor = 75
+			modifier = {
+				factor = 0
+				NOT = {
+					has_game_rule = {
+						rule = COL_ROJAS_PINILLA_COUP
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_manpower = -4200
+		add_timed_idea = {
+			idea = COL_soc_MPU_extensive_purges_idea
+			days = 220
+		}
+		COL_retire_all_generals_socialist_purge = yes
+		COL_coup_risk_decrease_double = yes
+	}
+
+	option = { #retire all suspected generals (if spy succeded but we want just in case)
+		name = colfocus.59.c
+		trigger = {
+			has_country_flag = COL_army_spy_third_pick
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_manpower = -4200
+		add_timed_idea = {
+			idea = COL_soc_MPU_extensive_purges_idea
+			days = 220
+		}
+		COL_retire_all_generals_socialist_purge = yes
+		COL_coup_risk_decrease_double = yes
+	}
+
+	option = { #don't do it
+		name = colfocus.59.e
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_RADSOC
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_SYNDIE
+					}
+					has_game_rule = {
+						rule = COL_great_inheritance
+						option = COL_GREAT_INHERITANCE_TOT
+					}
+				}
+			}
+		}
+		add_stability = 0.02
+		add_army_experience = 3
+		add_command_power = 15
+		increase_ruling_party_popularity_by_5 = yes
+		add_timed_idea = {
+			idea = COL_soc_MPU_no_purges_idea
+			days = 55
+		}
+		COL_coup_risk_increase = yes
+	}
+}
+
+country_event = { #FOREIGN POLICIES - NEUTRALITY: GRAND TOUR COMMENCES
+	id = colfocus.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.19" }
+	title = colfocus.19.t
+	desc = colfocus.19.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.19.a
+		add_tech_bonus = {
+			name = COL_state_visit_to_the_superpowers
+			bonus = 0.5
+			uses = 1
+			category = efficiency_tech
+			category = excavation_tech
+		}
+		add_resource = {
+			type = aluminium
+			amount = 2
+			state = 493
+		}
+		hidden_effect = {
+			country_event = {
+				id = colfocus.21
+				days = 77
+			}
+		}
+	}
+}
+
+country_event = { #FOREIGN POLICIES - NEUTRALITY: GRAND TOUR ENDS
+	id = colfocus.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.21" }
+	title = colfocus.21.t
+	desc = colfocus.21.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colfocus.21.a
+		add_resource = {
+			type = aluminium
+			amount = 6
+			state = 1216
+		}
+	}
+}
+
+country_event = { #FOREIGN POLICIES - REPARATION FOR PANAMA
+	id = colfocus.444
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.444" }
+	title = colfocus.444.t
+	desc = {
+		text = colfocus.444.d_1
+		trigger = {
+			any_other_country = {
+				owns_state = 685
+				controls_state = 685
+				OR = {
+					is_acw_tag = yes
+					tag = USA
+				}
+				NOT = {
+					tag = PAN
+				}
+			}
+		}
+	}
+	desc = {
+		text = colfocus.444.d_2
+		trigger = {
+			any_other_country = {
+				owns_state = 685
+				controls_state = 685
+				NOT = {
+					is_acw_tag = yes
+					tag = USA
+					tag = PAN
+				}
+			}
+		}
+	}
+	desc = {
+		text = colfocus.444.d_3
+		trigger = {
+			any_other_country = {
+				owns_state = 685
+				controls_state = 685
+				tag = PAN
+				NOT = {
+					is_acw_tag = yes
+					tag = USA
+				}
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #accept repatations
+		name = colfocus.444.a
+		ai_chance = {
+			factor = 90
+		}
+		add_political_power = -30
+		add_opinion_modifier = { 
+			target = COL modifier = small_decrease
+		}
+		COL = { 
+			add_ideas = COL_gringo_reparations_for_panama
+			country_event = {
+				id = colfocus.445
+				days = 3
+			}
+		}
+	}
+
+	option = { #decline reparations
+		name = colfocus.444.b
+		ai_chance = {
+			factor = 10
+		}
+		add_opinion_modifier = { 
+			target = COL modifier = medium_decrease
+		}
+		COL = { 
+			country_event = {
+				id = colfocus.446
+				days = 3
+			}
+			add_war_support = 0.05
+			add_opinion_modifier = { 
+				target = ROOT modifier = KR_outraged
+			}
+		}
+	}
+}
+
+country_event = { #FOREIGN POLICIES - ACCEPTED REPARATION
+	id = colfocus.445
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.445" }
+	title = colfocus.445.t
+	desc = colfocus.445.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = colfocus.445.a
+		add_political_power = 50
+		add_ideas = COL_gringo_reparations_for_panama
+	}
+}
+
+country_event = { #FOREIGN POLICIES - REFUSED REPARATION
+	id = colfocus.446
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.446" }
+	title = colfocus.446.t
+	desc = colfocus.446.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = colfocus.446.a
+		add_state_core = 304
+		add_state_core = 685
+		add_state_core = 854
+		add_state_core = 1248
+		add_state_core = 1257
+		add_opinion_modifier = { 
+			target = PAN modifier = KR_outraged
+		}
+	}
+}
+
+country_event = { #flavour event for socialists - BOYACENCE INDUSTRY
+	id = colfocus.323
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colfocus.323" }
+	title = colfocus.323.t
+	desc = colfocus.323.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = colfocus.323.a
+		custom_effect_tooltip = COL_arepas_tt
+	}
+}
+
+country_event = { #SETTING UP AVIANCA
+	id = colfocus.55
+	title = colfocus.55.t
+	desc = colfocus.55.d
+	picture = GFX_report_event_CUB_airforce
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event col.55"
+	}
+
+	option = {
+		name = colfocus.55.a
+		add_political_power = 30
+		set_contry_flag = COL_has_enough_air_bases
+	}
+}
+
+country_event = { #OTRAPARTE - show trial 1 setup
+	id = colfocus.666
+	title = colfocus.666.t
+	desc = colfocus.666.d
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event col.666"
+		hidden_effect = {
+			clr_country_flag = COL_trial_chose_murderer
+			clr_country_flag = COL_trial_chose_druggie
+			clr_country_flag = COL_trial_chose_bank_robber
+			clr_country_flag = COL_trial_chose_traitor
+		}
+	}
+
+	option = {
+		name = colfocus.666.a
+		add_political_power = 35
+		set_country_flag = COL_trial_chose_murderer
+		custom_effect_tooltip = COL_trial_chose_murderer_tt
+		hidden_effect = {
+			country_event = {
+				id = colfocus.667 
+				days = 12
+			}
+		}
+	}
+	option = {
+		name = colfocus.666.b
+		add_political_power = 35
+		set_country_flag = COL_trial_chose_druggie
+		custom_effect_tooltip = COL_trial_chose_druggie_tt
+		hidden_effect = {
+			country_event = {
+				id = colfocus.667 
+				days = 12
+			}
+		}
+	}
+	option = {
+		name = colfocus.666.c
+		add_political_power = 35
+		set_country_flag = COL_trial_chose_bank_robber
+		custom_effect_tooltip = COL_trial_chose_bank_robber_tt
+		hidden_effect = {
+			country_event = {
+				id = colfocus.667 
+				days = 12
+			}
+		}
+	}
+	option = {
+		name = colfocus.666.e
+		add_political_power = 35
+		set_country_flag = COL_trial_chose_traitor
+		custom_effect_tooltip = COL_trial_chose_traitor_tt
+		hidden_effect = {
+			country_event = {
+				id = colfocus.667 
+				days = 12
+			}
+		}
+	}
+}
+
+country_event = { #OTRAPARTE - show trial 1
+	id = colfocus.667
+	title = colfocus.667.t
+	desc = {
+		text = colfocus.667.d_1
+		trigger = {
+			ROOT = {
+				has_country_flag = COL_trial_chose_murderer
+			}
+		}
+	}
+	desc = {
+		text = colfocus.667.d_2
+		trigger = {
+			ROOT = {
+				has_country_flag = COL_trial_chose_druggie
+			}
+		}
+	}
+	desc = {
+		text = colfocus.667.d_3
+		trigger = {
+			ROOT = {
+				has_country_flag = COL_trial_chose_bank_robber
+			}
+		}
+	}
+	desc = {
+		text = colfocus.667.d_4
+		trigger = {
+			ROOT = {
+				has_country_flag = COL_trial_chose_traitor
+			}
+		}
+	}
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event col.667"
+	}
+
+	option = {
+		name = colfocus.667.a
+		ai_chance = {
+			factor = 80
+		}
+		add_stability = 0.015
+		add_manpower = -1
+		hidden_effect = {
+			country_event = {
+				id = colfocus.668 
+				days = 55
+			}
+		}
+	}
+
+	option = {
+		name = colfocus.667.b
+		ai_chance = {
+			factor = 20
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.025
+		}
+		add_political_power = -10
+		hidden_effect = {
+			country_event = {
+				id = colfocus.668
+				days = 55
+			}
+		}
+	}
+}
+
+country_event = { #OTRAPARTE - show trial 2
+	id = colfocus.668
+	title = colfocus.668.t
+	desc = colfocus.668.d
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event col.668"
+	}
+
+	option = {
+		name = colfocus.668.a
+		ai_chance = {
+			factor = 30
+		}
+		add_stability = 0.015
+		add_manpower = -1
+	}
+
+	option = {
+		name = colfocus.668.b
+		ai_chance = {
+			factor = 70
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.025
+		}
+		add_political_power = -10
+	}
+
+	option = {
+		name = colfocus.668.c
+		ai_chance = {
+			factor = 0
+		}
+		random_list = {
+			50 = {
+				custom_effect_tooltip = COL_trial_executed_tt
+				add_stability = 0.015
+				add_manpower = -1
+			}
+			50 = {
+				custom_effect_tooltip = COL_trial_spared_tt
+				add_popularity = {
+					ideology = national_populist
+					popularity = 0.025
+				}
+				add_political_power = -10
+			}
+		}
+	}
+}
+
+country_event = { #FN - Coalition succedes
+	id = colfocus.99
+	title = colfocus.99.t
+	desc = colfocus.99.d
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event colfocus.99"
+	}
+
+	option = {
+		name = colfocus.99.a
+		add_stability = 0.05
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.075
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.075
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.03
+		}
+	}
+}
+
+country_event = { #Civil War White Peace Proposal
+	id = colfocus.995
+	title = colfocus.995.t
+	desc = colfocus.995.d
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event colfocus.995"
+	}
+
+	option = {
+		name = colfocus.995.a
+		ai_chance = {
+			base = 75
+		}
+		add_political_power = -50
+		add_stability = 0.1
+		add_war_support = -0.1
+		COC = {
+			country_event = {
+				id = colfocus.996
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = colfocus.995.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0
+				COC = {
+					is_ai = no
+				}
+			}
+		}
+		add_political_power = 75
+		add_war_support = 0.15
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.025
+		}
+		every_army_leader = {
+			limit = {
+				is_border_war = no
+			}
+			boost_planning = 0.1
+		}
+		every_army_leader = {
+			limit = {
+				is_leading_army_group = no
+				is_leading_army = yes
+				is_border_war = no
+			}
+			add_temporary_buff_to_units = {
+				combat_offense = 0.2
+				combat_breakthrough = 0.25
+				org_damage_multiplier = -1.0
+				str_damage_multiplier = 0.6
+				war_support_reduction_on_damage = 0.2
+				cannot_retreat_while_attacking = 1.0
+				days = 17
+				tooltip = ABILITY_FORCE_ATTACK_TOOLTIP
+			}
+		}
+		COC = {
+			country_event = {
+				id = colfocus.997
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #Ceasefire accepted
+	id = colfocus.996
+	title = colfocus.996.t
+	desc = colfocus.996.d
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event colfocus.996"
+	}
+
+	option = {
+		name = colfocus.996.a
+		add_political_power = -75
+		add_stability = 0.1
+		add_war_support = -0.25
+		white_peace = COL
+		set_truce = {
+			target = COL
+			days = 400
+		}
+		remove_wargoal = {
+			type = all
+			target = COL
+		}
+		COL = { 
+			white_peace = COC
+			set_truce = {
+				target = COC
+				days = 400
+			}
+			remove_wargoal = {
+				type = all
+				target = COC
+			}
+			remove_ideas = COL_civilwar_pataut_1
+		}
+	}
+}
+
+
+country_event = { #Ceasefire rejected
+	id = colfocus.997
+	title = colfocus.997.t
+	desc = colfocus.997.d
+
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event colfocus.997"
+	}
+
+	option = {
+		name = colfocus.997.a
+		add_political_power = -50
+		add_war_support = 0.3
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.03
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.05
+		}
+	}
+}
+
+
+
+
+
+
+###################
+country_event = { #Memey puppet rename to Columbia
+	id = colpuppet.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colpuppet.1" }
+	title = colpuppet.1.t
+	desc = colpuppet.1.d
+	picture = GFX_report_event_generic_reporters
+
+	trigger = {
+		OR = {
+			tag = USA
+			tag = CSA
+			tag = COR
+			tag = CAL
+			tag = TEX
+			tag = WCC
+			
+		}
+		COL = {
+			OR = {
+				is_subject_of = USA
+				is_subject_of = CSA
+				is_subject_of = COR
+				is_subject_of = CAL
+				is_subject_of = TEX
+				is_subject_of = WCC
+			}
+		}
+	}
+	fire_only_once = yes
+
+	option = {
+		name = colpuppet.1.a
+		ai_chance = {
+			factor = 1
+		}
+		COL = {
+			set_cosmetic_tag = COL_COLUMBIA
+		}
+	}
+
+	option = {
+		name = colpuppet.1.b
+		ai_chance = {
+			factor = 99
+		}
+		add_political_power = 25
+		add_stability = 0.01
+	}
+}
+
+country_event = { #Colombia becomes part of USA/CSA because Browder in in charge and Duran Ospina also
+	id = colpuppet.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event colpuppet.2" }
+	title = colpuppet.2.t
+	desc = colpuppet.2.d
+	picture = GFX_report_event_generic_reporters
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = colpuppet.2.a
+		ai_chance = {
+			factor = 100
+		}
+		every_other_country = {
+			limit = {
+				has_country_leader = {
+					name = "Augusto Durán Ospino"
+					ruling_only = yes
+				}
+			}
+			hidden_effect = {
+				every_unit_leader = {
+					set_nationality = CSA
+				}
+				every_state = {
+					limit = {
+						has_variable = ambition_area_@ROOT
+						NOT = { has_variable = ambition_area_@CSA }
+					}
+					set_variable = { ambition_area_@CSA = 1 }
+				}
+			}
+			CSA = {
+				annex_country = {
+					target = PREV
+					transfer_troops = yes
+				}
+			}
+		}
+		set_cosmetic_tag = COL_USA
+	}
+
+	option = {
+		name = colpuppet.2.b
+		ai_chance = {
+			factor = 0
+		}
+		add_political_power = 10
+		add_stability = 0.01
+	}
+}
+
+
+
+
+
+
+country_event = { #OTRAPARTE - NAP timer succes
+	id = coldecision.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event coldecision.1" }
+	title = coldecision.1.t
+	desc = coldecision.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = coldecision.1.a
+		add_stability = 0.05
+		add_ideas = COL_NAP_success_idea
+	}
+}
+
+country_event = { #OTRAPARTE - NAP timer fail
+	id = coldecision.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event coldecision.2" }
+	title = coldecision.2.t
+	desc = coldecision.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = coldecision.2.a
+		add_timed_idea = {
+			idea = COL_NAP_failure_idea
+			days = 30
+		}
+	}
+}
+
+country_event = { #Join Reich
+	id = coldecision.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event coldecision.3" }
+	title = coldecision.3.t
+	desc = coldecision.3.d
+	picture = GFX_report_event_generic_diplomacy1
+
+	is_triggered_only = yes
+
+	option = { # Of course they may join!
+		name = coldecision.3.a
+		ai_chance = {
+			factor = 95
+		}
+		add_political_power = 15
+		COL = {
+			country_event = {
+				id = coldecision.4
+				days = 1
+			}
+		}
+	}
+	option = { # We have no need of them
+		name = coldecision.3.b
+		ai_chance = {
+			factor = 5
+		}
+		COL = {
+			country_event = {
+				id = coldecision.5
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Reich accepts
+	id = coldecision.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event coldecision.4"}
+	title = coldecision.4.t
+	desc = coldecision.4.d
+	picture = GFX_report_event_generic_diplomacy2
+
+	is_triggered_only = yes
+
+	option = {
+		name = coldecision.4.a
+		GER = {
+			add_to_faction = ROOT
+		}
+	}
+}
+
+country_event = { #Reich refuses
+	id = coldecision.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event coldecision.5"}
+	title = coldecision.5.t
+	desc = coldecision.5.d
+	picture = GFX_report_event_generic_diplomacy2
+
+	is_triggered_only = yes
+
+	option = {
+		name = coldecision.5.a
+		add_political_power = -25
+		add_opinion_modifier = {
+			target = GER
+			modifier = ITA_dislikes_govt
+		}
+	}
+}
+
+country_event = { #Join Entente
+	id = coldecision.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event coldecision.6" }
+	title = coldecision.6.t
+	desc = coldecision.6.d
+	picture = GFX_report_event_generic_diplomacy1
+
+	is_triggered_only = yes
+
+	option = { # Of course they may join!
+		name = coldecision.6.a
+		ai_chance = {
+			factor = 95
+		}
+		add_political_power = 15
+		COL = {
+			country_event = {
+				id = coldecision.7
+				days = 1
+			}
+		}
+	}
+	option = { # We have no need of them
+		name = coldecision.6.b
+		ai_chance = {
+			factor = 5
+		}
+		COL = {
+			country_event = {
+				id = coldecision.8
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #ENT accepts
+	id = coldecision.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event coldecision.7"}
+	title = coldecision.7.t
+	desc = coldecision.7.d
+	picture = GFX_report_event_generic_diplomacy2
+
+	is_triggered_only = yes
+
+	option = {
+		name = coldecision.7.a
+		ENT = {
+			add_to_faction = ROOT
+		}
+	}
+}
+
+country_event = { #ENT refuses
+	id = coldecision.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event coldecision.8"}
+	title = coldecision.8.t
+	desc = coldecision.8.d
+	picture = GFX_report_event_generic_diplomacy2
+
+	is_triggered_only = yes
+
+	option = {
+		name = coldecision.8.a
+		add_political_power = -25
+		add_opinion_modifier = {
+			target = ENT
+			modifier = ITA_dislikes_govt
+		}
+	}
+}
+
+country_event = { #Join others
+	id = coldecision.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event coldecision.9" }
+	title = coldecision.9.t
+	desc = coldecision.9.d
+	picture = GFX_report_event_generic_diplomacy1
+
+	is_triggered_only = yes
+
+	option = { # Of course they may join!
+		name = coldecision.9.a
+		ai_chance = {
+			factor = 95
+		}
+		add_political_power = 15
+		set_country_flag = COL_this_faction_leader_accepts_us
+		COL = {
+			country_event = {
+				id = coldecision.10
+				days = 1
+			}
+		}
+	}
+	option = { # We have no need of them
+		name = coldecision.9.b
+		ai_chance = {
+			factor = 5
+		}
+		COL = {
+			country_event = {
+				id = coldecision.11
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #others factions accepts
+	id = coldecision.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event coldecision.10"}
+	title = coldecision.10.t
+	desc = coldecision.10.d
+	picture = GFX_report_event_generic_diplomacy2
+
+	is_triggered_only = yes
+
+	option = {
+		name = coldecision.10.a
+		random_other_country = {
+			limit = {
+				has_country_flag = COL_this_faction_leader_accepts_us
+			}
+			clr_country_flag = COL_this_faction_leader_accepts_us
+			add_to_faction = ROOT
+		}
+	}
+}
+
+country_event = { #others factions refuses
+	id = coldecision.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event coldecision.11"}
+	title = coldecision.11.t
+	desc = coldecision.11.d
+	picture = GFX_report_event_generic_diplomacy2
+
+	is_triggered_only = yes
+
+	option = {
+		name = coldecision.11.a
+		add_political_power = -25
+		random_other_country = {
+			limit = {
+				has_country_flag = COL_this_faction_leader_accepts_us
+			}
+			clr_country_flag = COL_this_faction_leader_accepts_us
+			reverse_add_opinion_modifier = {
+				target = COL
+				modifier = ITA_dislikes_govt
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+####################
+### DEBUG EVENTS ###
+####################
+
+country_event = { #MAKE NATIVES ANGERY
+	id = col.987
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.987" }
+	title = col.987.t
+	desc = col.987.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = col.987.a
+		set_country_flag = COL_natives_rebel
+	}
+
+	option = {
+		name = col.987.b
+		set_country_flag = COL_afros_rebel
+	}
+
+	option = {
+		name = col.987.c
+		set_country_flag = COL_natives_rebel
+		set_country_flag = COL_afros_rebel
+	}
+
+	option = {
+		name = col.987.e
+	}
+}
+
+country_event = { #EARLIEST ELECTION FEBRUARY
+	id = col.989
+	immediate = { log = "[GetDateText]: [Root.GetName]: event col.989" }
+	title = col.989.t
+	desc = col.989.d
+
+	is_triggered_only = yes
+
+	option = { #early election
+		name = col.989.a
+		hidden_effect = {
+			set_country_flag = COL_early_election
+			set_politics = { #setting up early election in the GUI
+				ruling_party = social_liberal
+				last_election = "1934.4.12"
+				election_frequency = 29
+				elections_allowed = yes
+			}
+		}
+		custom_effect_tooltip = COL_early_election_tt
+	}
+}

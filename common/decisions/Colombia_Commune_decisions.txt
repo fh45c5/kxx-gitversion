@@ -1,0 +1,81 @@
+###Colombian Commne / East Colombia Decisions
+
+COC_civil_war_decisions = {
+	COC_spawn_cavalry_and_motorized = {
+		icon = ger_military_buildup
+		allowed = { tag = COC }
+		available = {
+			capital_scope = { 
+				is_owned_and_controlled_by = COC 
+				#has_full_control_of_state = THIS
+			}
+		}
+		visible = {
+			capital_scope = { 
+				is_owned_and_controlled_by = COC 
+				#has_full_control_of_state = THIS
+			}
+			COL = { has_country_flag = COL_CW }
+			COC = { has_war_with = COL }
+			NOT = { has_country_flag = COC_spawn_cav_and_mot_flag }
+		}
+
+		fire_only_once = yes
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CSA_emergency_reserve"
+			custom_effect_tooltip = COC_spawn_cav_and_mot_tt
+			hidden_effect = {
+				division_template = {
+					name = "División Caballera Revolucionaria"
+					division_names_group = SPAN_CAV_01
+					regiments = {
+						cavalry = { x = 0 y = 0 }
+						cavalry = { x = 0 y = 1 }
+						cavalry = { x = 0 y = 2 }
+						cavalry = { x = 1 y = 0 }
+						cavalry = { x = 1 y = 1 }
+						cavalry = { x = 1 y = 2 }
+					}
+					priority = 0
+				}
+				division_template = {
+					name = "División Motorizada Revolucionaria"
+					division_names_group = SPA_ARM_01
+					regiments = {
+						motorized = { x = 0 y = 0 }
+						motorized = { x = 0 y = 1 }
+						motorized = { x = 0 y = 2 }
+						motorized = { x = 1 y = 0 }
+						motorized = { x = 1 y = 1 }
+						motorized = { x = 1 y = 2 }
+					}
+					priority = 1
+				}
+				capital_scope = {
+					create_unit = {
+						division = "division_template = \"División Motorizada Revolucionaria\"  start_experience_factor = 0.0"
+						allow_spawning_on_enemy_provs = yes
+						owner = ROOT
+					}
+					create_unit = {
+						division = "division_template = \"División Caballera Revolucionaria\"  start_experience_factor = 0.0"
+						allow_spawning_on_enemy_provs = yes
+						owner = ROOT
+					}
+					create_unit = {
+						division = "division_template = \"División Caballera Revolucionaria\"  start_experience_factor = 0.0"
+						allow_spawning_on_enemy_provs = yes
+						owner = ROOT
+					}
+				}
+				set_country_flag = COC_spawn_cav_and_mot_flag
+			}
+		}
+	}
+}
