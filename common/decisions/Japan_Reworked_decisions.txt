@@ -436,39 +436,44 @@ JAP_declare_civil_war_win_military = {
 			
 		}
 		remove_effect = {
-		set_country_flag = KXX_LEADER_GUI_VISIBLE
-		remove_all_ministers = yes
-		clr_country_flag = japan_civil_war
-		country_event = japan_new_event.19
-		country_event = japan_new_event.30
-		set_politics = {
-			ruling_party = paternal_autocrat
-			election_frequency = 48
-			elections_allowed = yes
-		}
-		add_popularity = {
-			ideology = paternal_autocrat
-			popularity = 0.4
-		}
-		remove_all_ministers = yes
-		add_ideas = {
-			JAP_Araki_Sadao_hog_npo
-			JAP_Okawa_Shumei_for_npo
-			JAP_Shiina_Etsusaburo_eco_npo
-			JAP_Imasu_Cho_sec_npo
-		}
-		set_country_flag = factionalism_japan_no
-		set_temp_variable = { coalition_partner_var = token:authoritarian_democrat }
-		add_to_coalition = yes
-		set_temp_variable = { coalition_partner_var = token:paternal_autocrat }
-		add_to_coalition = yes
-		set_temp_variable = { coalition_partner_var = token:national_populist }
-		add_to_coalition = yes
-		set_temp_variable = { coalition_partner_var = token:totalist }
-		add_to_coalition = yes
-		set_country_flag = JAP_kodoha_coup
-		load_focus_tree = araki-kingoro-tree
-		mark_focus_tree_layout_dirty = yes		
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			remove_all_ministers = yes
+			clr_country_flag = japan_civil_war
+			set_country_flag = factionalism_japan_no
+			if = {
+				limit = { has_country_flag = SCB_path_decided }
+				country_event = KXXJAP.174
+			}
+			else = {
+				country_event = japan_new_event.19
+				country_event = japan_new_event.30
+				set_politics = {
+					ruling_party = paternal_autocrat
+					election_frequency = 48
+					elections_allowed = yes
+				}
+				add_popularity = {
+					ideology = paternal_autocrat
+					popularity = 0.4
+				}
+				add_ideas = {
+					JAP_Araki_Sadao_hog_npo
+					JAP_Okawa_Shumei_for_npo
+					JAP_Shiina_Etsusaburo_eco_npo
+					JAP_Imasu_Cho_sec_npo
+				}
+				set_temp_variable = { coalition_partner_var = token:authoritarian_democrat }
+				add_to_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:paternal_autocrat }
+				add_to_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:national_populist }
+				add_to_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:totalist }
+				add_to_coalition = yes
+				set_country_flag = JAP_kodoha_coup
+				load_focus_tree = araki-kingoro-tree
+				mark_focus_tree_layout_dirty = yes			
+			}		
 		}
 	}
 	
