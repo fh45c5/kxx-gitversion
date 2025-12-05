@@ -6208,6 +6208,83 @@ country_event = { #泛回教
 
 }	
 
+country_event = { #朝鲜起义优化
+	id = KXXJAP.181
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.181" }
+	title = KXXJAP.181.t
+	desc = KXXJAP.1181.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #总督府扩大自治
+		name = KXXJAP.181.a
+		ai_chance = {
+			base = 90
+		}
+		add_political_power = -100
+		KOR = {
+			transfer_state = 525
+			transfer_state = 527
+			transfer_state = 1345
+			transfer_state = 1346
+			transfer_state = 1347
+			set_cosmetic_tag = KOR_JAP
+		}
+		set_autonomy = { target = KOR autonomy_state = autonomous_territory }		
+		KOR = {
+            set_popularities = {
+                totalist = 0
+                radical_socialist = 0 
+                syndicalist = 0
+                social_democrat = 0
+                social_liberal = 0
+                market_liberal = 0
+                social_conservative = 0
+                authoritarian_democrat = 25
+                paternal_autocrat = 50
+                national_populist = 25
+            }			
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = "朝鲜总督府"
+				name = "朝鲜总督府"
+			}			
+			set_politics = {
+				ruling_party = paternal_autocrat
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "阿部信行"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Nobuyuki_Abe.png"
+				expire = "1965.1.1"
+				ideology = autocratic_colonial_govt_subtype
+			}			
+			hidden_effect = {
+				remove_ideas_with_trait = head_of_government
+				remove_ideas_with_trait = foreign_minister
+				remove_ideas_with_trait = economy_minister
+				remove_ideas_with_trait = security_minister
+			}			
+		}
+	}
+
+	option = { #起义
+		name = KXXJAP.181.b
+		ai_chance = {
+			base = 10
+		}
+		country_event = {
+			id = rework_japan.300
+			days = 1
+		}
+		set_country_flag = JAP_korea_revolt_now
+	}
+
+	
+
+}
+
   country_event = { #测试事件
 	id = KXXJAP.114514
 	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.1" }
