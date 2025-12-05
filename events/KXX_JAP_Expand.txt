@@ -591,7 +591,7 @@ country_event = { #国本社换人
 		add_popularity = { ideology = national_populist popularity = 0.2 }
 		create_country_leader = {
 			name = "真崎甚三郎"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Jinzaburo_Masaki.png"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Jinzaburo_Masaki_KX.png"
 			expire = "1965.1.1"
 			ideology = pataut_showa_statism_subtype
 		}
@@ -790,7 +790,7 @@ country_event = { #1936年总选举
 	option = { 
 		name = KXXJAP.10.e
 		ai_chance = { 
-			base = 15
+			base = 10
 		}		
 		set_politics = {
 			ruling_party = social_democrat
@@ -804,7 +804,7 @@ country_event = { #1936年总选举
 	option = { 
 		name = KXXJAP.10.f
 		ai_chance = { 
-			base = 5
+			base = 10
 		}		
 		set_politics = {
 			ruling_party = radical_socialist
@@ -1343,7 +1343,12 @@ country_event = { #昭和维新春之空
 		name = KXXJAP.120.b
 		ai_chance = { 
 			base = 40
-		}		
+		}	
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			clr_country_flag = JAP_Hirohito_VISIBLE
+			remove_ideas = JAP_emperor_hirohito
+		}
 		set_country_flag = factionalism_japan_no
 		set_politics = { ruling_party = paternal_autocrat }
 		set_cosmetic_tag = JAP_kodoha
@@ -3526,7 +3531,11 @@ country_event = { #西田或北
 			JAP_Nishida_Mitsugi_eco_npo
 			JAP_Kingoro_Hashimoto_sec_tot
 		}
-		mark_focus_tree_layout_dirty = yes		
+		mark_focus_tree_layout_dirty = yes	
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}
 	}
 
 	option = { #北一辉	
@@ -3546,6 +3555,10 @@ country_event = { #西田或北
 			JAP_Kingoro_Hashimoto_sec_tot
 		}
 		mark_focus_tree_layout_dirty = yes
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}		
 	}	
 
 }
@@ -3612,7 +3625,11 @@ country_event = { #皇道派选人
 			picture = "gfx/leaders/JAP/Portrait_JAP_Shiro_Nonaka_KX.png"
 			expire = "1965.1.1"
 			ideology = natpop_showa_statism_subtype
-		}		
+		}
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}				
 	}
 
 	option = { #三上卓
@@ -3628,7 +3645,11 @@ country_event = { #皇道派选人
 			picture = "gfx/leaders/JAP/Portrait_JAP_Mikami_Taku.png"
 			expire = "1965.1.1"
 			ideology = natpop_showa_statism_subtype
-		}				
+		}	
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}					
 	}	
 
 	option = { #桥本欣五郎
@@ -3676,7 +3697,11 @@ country_event = { #皇道派选人
 			JAP_Kuniaki_Koiso_for_pau
 			JAP_Atsutaro_Suyama_eco_tot
 			JAP_Imasu_Cho_sec_npo
-		}		
+		}
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}				
 	}
 }
 
@@ -3749,6 +3774,10 @@ country_event = { #皇道派选人
 			expire = "1965.1.1"
 			ideology = pataut_showa_statism_subtype
 		}	
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}		
 	}
 
 	option = { #真崎甚三郎
@@ -3762,10 +3791,14 @@ country_event = { #皇道派选人
 		}		
 		create_country_leader = {
 			name = "真崎甚三郎"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Jinzaburo_Masaki.png"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Jinzaburo_Masaki_KX.png"
 			expire = "1965.1.1"
 			ideology = pataut_showa_statism_subtype
-		}			
+		}	
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}				
 	}	
 
 }
@@ -4128,6 +4161,136 @@ country_event = {
 		}		
 	}	
 
+}
+
+country_event = { #雍仁登基
+	id = KXXJAP.153
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.153" }
+	title = KXXJAP.153.t
+	desc = KXXJAP.153.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.153.a
+		clr_country_flag = JAP_Hirohito_VISIBLE	
+		clr_country_flag = KXX_LEADER_GUI_VISIBLE	
+		country_event = KXXJAP.154
+	}
+
+}
+
+country_event = { #雍仁登基
+	id = KXXJAP.154
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.154" }
+	title = KXXJAP.154.t
+	desc = KXXJAP.154.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.154.a
+		country_event = KXXJAP.155
+	}
+	
+}
+
+country_event = { #雍仁登基
+	id = KXXJAP.155
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.155" }
+	title = KXXJAP.155.t
+	desc = KXXJAP.155.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.155.a
+		country_event = KXXJAP.156
+		add_ideas = JAP_emperor_yasuhito
+	}
+	
+}
+
+country_event = { #雍仁登基
+	id = KXXJAP.156
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.156" }
+	title = KXXJAP.156.t
+	desc = KXXJAP.156.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.156.a
+		create_country_leader = {
+			name = "Yasuhito"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = natpop_absolute_monarchy_subtype
+		}
+		create_country_leader = {
+			name = "Yasuhito"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = authdem_showa_statism_subtype
+		}		
+		create_country_leader = {
+			name = "Yasuhito"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = pataut_showa_statism_subtype
+		}		
+		create_country_leader = {
+			name = "Yasuhito"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = ikki_kita_thought_subtype
+		}
+		set_country_flag = KXX_Yasuhito_Restoration
+	}
+
+	option = { 
+		name = KXXJAP.156.b
+		create_country_leader = {
+			name = "雍仁"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = natpop_absolute_monarchy_subtype
+		}	
+		create_country_leader = {
+			name = "雍仁"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = authdem_showa_statism_subtype
+		}		
+		create_country_leader = {
+			name = "雍仁"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = pataut_showa_statism_subtype
+		}		
+		create_country_leader = {
+			name = "雍仁"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = ikki_kita_thought_subtype
+		}		
+		set_country_flag = KXX_Yasuhito_Restoration	
+	}
+
+	option = { 
+		name = KXXJAP.156.c
+		set_country_flag = KXX_LEADER_GUI_VISIBLE
+		set_country_flag = JAP_Yasuhito_VISIBLE		
+	}		
+	
 }
 
 country_event = { #40年及之后的民主选举
