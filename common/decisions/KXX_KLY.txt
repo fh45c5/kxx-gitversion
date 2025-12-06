@@ -1,0 +1,44 @@
+political_actions = {
+	KLY_Form_USSR = {
+		icon = GFX_decision_category_SOV_civil_puppet_interaction
+		priority = 100000
+		allowed = { 
+          
+            original_tag = KLY
+            
+        } 
+		visible = {
+			owns_state = 219
+			NOT = {
+				has_country_flag = KLY_ussr
+			}
+		}
+		
+		available = {
+			is_subject = no
+			408 = { is_controlled_by_ROOT_or_subject = yes }
+			202 = { is_controlled_by_ROOT_or_subject = yes }
+			206 = { is_controlled_by_ROOT_or_subject = yes }
+			OR = {
+				231 = { is_controlled_by_ROOT_or_subject = yes }
+				990 = { is_controlled_by_ROOT_or_subject = yes }
+				230 = { is_controlled_by_ROOT_or_subject = yes }
+			}
+			OR = {
+				96 = { is_controlled_by_ROOT_or_subject = yes }
+				1091 = { is_controlled_by_ROOT_or_subject = yes }				
+			}
+		}
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOV_Form_USSR target: [From.GetName]"
+			country_event = russoc.536
+				set_cosmetic_tag = SOV_union_alternative
+			set_country_flag = KLY_ussr
+		}
+	}
+}
