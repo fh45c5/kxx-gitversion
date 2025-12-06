@@ -916,13 +916,28 @@ country_event = { #Japanese Civil War
 	hidden_effect = {
 	news_event = rd_japan_worldnews.2
 	JAP = {
-		add_timed_idea = {
-			idea = JAP_civilwar_lose
-			days = 150
+		if = {
+			limit = { is_ai = yes}
+			random_list = {
+				50 = {	
+					add_timed_idea = {
+						idea = JAP_civilwar_lose
+						days = 150
+					}
+					delete_unit = {
+						state = 282
+					}
+				}
+				50 = {	
+					JSR = {
+						add_timed_idea = {
+							idea = JAP_civilwar_lose
+							days = 150
+						}
+					}
+				}
+			}	
 		}
-		delete_unit = {
-			state = 282
-		}		
 		diplomatic_relation = {
 			country = FNG
 			relation = guarantee
@@ -1044,18 +1059,7 @@ country_event = { #Japanese Civil War
 						planning_skill = 2
 						logistics_skill = 2
 					}
-					create_field_marshal = {
-						name = "西光万吉"
-						portrait_path = "gfx/leaders/JAP/Portrait_JAP_Saiko_Mankichi.png"
-						traits = {
-						
-						}
-						skill = 2
-						attack_skill = 2
-						defense_skill = 1
-						planning_skill = 2
-						logistics_skill = 2
-					}
+
 					
 					set_politics = {
 						ruling_party = syndicalist
@@ -2628,7 +2632,7 @@ country_event = { #Struggle of the Left and Right
 				id = JAP_IRAA_balance
 				left_side = JAP_IRAA_left_side
 				right_side = JAP_IRAA_right_side
-				set_value = 0.05
+				set_value = 0
 			}
 		country_event = {
 		id = japan_new_event.34
@@ -2670,7 +2674,7 @@ country_event = { #Question of the Syndicalists
 		
 		add_power_balance_value = {
 				id = JAP_IRAA_balance
-				value = 0.2
+				value = 0.15
 				tooltip_side = JAP_IRAA_right_side
 			}
 	}
@@ -2697,7 +2701,7 @@ country_event = { #Question of the Syndicalists
 		
 		add_power_balance_value = {
 				id = JAP_IRAA_balance
-				value = -0.2
+				value = -0.15
 				tooltip_side = JAP_IRAA_left_side
 			}
 	}
@@ -2728,7 +2732,7 @@ country_event = { #Question of Politics
 		}
 		add_power_balance_value = {
 				id = JAP_IRAA_balance
-				value = 0.2
+				value = 0.1
 				tooltip_side = JAP_IRAA_right_side
 			}
 	}
@@ -2750,7 +2754,7 @@ country_event = { #Question of Politics
 		}
 		add_power_balance_value = {
 				id = JAP_IRAA_balance
-				value = -0.2
+				value = -0.1
 				tooltip_side = JAP_IRAA_left_side
 			}
 	}
@@ -2889,19 +2893,6 @@ country_event = { #Closing of the First Yokusan Elections
 			}
 		}
 		
-		trigger = {
-		and = {
-		power_balance_value = {
-			id = JAP_IRAA_balance
-			value < 0.01
-			}
-		power_balance_value = {
-			id = JAP_IRAA_balance
-			value > -0.38
-			}
-		}
-		}
-		
 		create_country_leader = {
 			name = "近卫文麿"
 			picture = "gfx/leaders/JAP/Portrait_JAP_Konoe_Fumimaro.png"
@@ -2953,7 +2944,7 @@ country_event = { #Closing of the First Yokusan Elections
 	option = { #Far Left Victory
 		name = japan_new_event.38.c
 		ai_chance = { 
-		factor = 50
+		factor = 10
 		modifier = {
 				factor = 100
 				OR = {
@@ -2976,7 +2967,7 @@ country_event = { #Closing of the First Yokusan Elections
 	option = { #Far Right Victory
 		name = japan_new_event.38.d
 		ai_chance = { 
-		factor = 50
+		factor = 10
 		modifier = {
 				factor = 100
 				OR = {
@@ -3114,6 +3105,11 @@ country_event = { #leftist Election
 	picture = "GFX_iraa_3"
 	immediate = {
 	hidden_effect = {
+	set_party_name = {
+		ideology = totalist
+		long_name = "国家社会主义诸党"
+		name = "国家社会主义诸党"
+	}				
 	load_focus_tree = japan-left-iraa
 	complete_national_focus = JAPLEFTIRAA_leftists_dominate
 	}
@@ -3233,22 +3229,30 @@ country_event = { #Hashimoto Ideology Picker
 	}
 	option = { #Totalist HST
 		name = japan_new_event.41.a
-		ai_chance = { base = 100 }
+		ai_chance = { base = 20 }
 		trigger = {
 		NOT = {
 		has_government = totalist
 		}
 		}
-		create_country_leader = {
-			name = "桥本欣五郎"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Kingoro_Hashimoto_KX.png"
-			expire = "1965.1.1"
-			ideology = tot_nihon_socialism_subtype
-		}
 		set_politics = {
 			ruling_party = totalist
 			elections_allowed = no
 		}
+		if = {
+			limit = { 
+				has_country_flag = KXX_Yasuhito_Restoration	 
+			}
+			set_country_leader_ideology = tot_nihon_socialism_subtype 
+		}	
+		else = {
+			create_country_leader = {
+				name = "桥本欣五郎"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Kingoro_Hashimoto_KX.png"
+				expire = "1965.1.1"
+				ideology = tot_nihon_socialism_subtype
+			}
+		}		
 		add_ideas = JAP_The_Blossoms_Bloom_idea
 		remove_all_ministers = yes
 		add_ideas = {
@@ -3261,22 +3265,30 @@ country_event = { #Hashimoto Ideology Picker
 	
 	option = { #Natpop HST
 		name = japan_new_event.41.b
-		ai_chance = { base = 100 }
+		ai_chance = { base = 20 }
 		trigger = {
 		NOT = {
 		has_government = national_populist
 		}
 		}
-		create_country_leader = {
-			name = "桥本欣五郎"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Kingoro_Hashimoto_KX.png"
-			expire = "1965.1.1"
-			ideology = natpop_nihon_socialism_subtype
-		}
 		set_politics = {
 			ruling_party = national_populist
 			elections_allowed = no
 		}
+		if = {
+			limit = { 
+				has_country_flag = KXX_Yasuhito_Restoration	 
+			}
+			set_country_leader_ideology = natpop_nihon_socialism_subtype
+		}	
+		else = {
+			create_country_leader = {
+				name = "桥本欣五郎"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Kingoro_Hashimoto_KX.png"
+				expire = "1965.1.1"
+				ideology = natpop_nihon_socialism_subtype
+			}
+		}		
 		add_ideas = JAP_The_Blossoms_Bloom_idea
 		remove_all_ministers = yes
 		add_ideas = {
@@ -3288,13 +3300,24 @@ country_event = { #Hashimoto Ideology Picker
 	}
 	option = { #Kemalism!?
 		name = japan_new_event.41.c
-		ai_chance = { base = 100 }
-		
-		create_country_leader = {
-			name = "桥本欣五郎"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Kingoro_Hashimoto_KX.png"
-			expire = "1965.1.1"
-			ideology = natpop_kemalism_subtype
+		ai_chance = { base = 20 }
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}		
+		if = {
+			limit = { 
+				has_country_flag = KXX_Yasuhito_Restoration	 
+			}
+			set_country_leader_ideology = natpop_kemalism_subtype
+		}	
+		else = {
+			create_country_leader = {
+				name = "桥本欣五郎"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Kingoro_Hashimoto_KX.png"
+				expire = "1965.1.1"
+				ideology = natpop_kemalism_subtype
+			}
 		}
 		add_ideas = JAP_The_Blossoms_Bloom_idea_2
 		set_party_name = {
@@ -3313,18 +3336,25 @@ country_event = { #Hashimoto Ideology Picker
 	
 	option = { #Showa Statism
 		name = japan_new_event.41.d
-		ai_chance = { base = 100 }
-		
-		create_country_leader = {
-			name = "桥本欣五郎"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Kingoro_Hashimoto_KX.png"
-			expire = "1965.1.1"
-			ideology = natpop_showa_statism_subtype
-		}
+		ai_chance = { base = 20 }
 		set_politics = {
 			ruling_party = national_populist
 			elections_allowed = no
 		}
+		if = {
+			limit = { 
+				has_country_flag = KXX_Yasuhito_Restoration	 
+			}
+			set_country_leader_ideology = natpop_showa_statism_subtype
+		}	
+		else = {
+			create_country_leader = {
+				name = "桥本欣五郎"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Kingoro_Hashimoto_KX.png"
+				expire = "1965.1.1"
+				ideology = natpop_showa_statism_subtype
+			}
+		}		
 		add_ideas = JAP_The_Blossoms_Bloom_idea_1
 		remove_all_ministers = yes
 		add_ideas = {
@@ -3352,17 +3382,43 @@ country_event = { #Araki Ideology Picker
 	option = { #Pan-Asianism
 		name = japan_new_event.42.a
 		ai_chance = { base = 45 }
-		set_politics = {
-			ruling_party = paternal_autocrat
-			election_frequency = 48
-			elections_allowed = yes
+		if = {
+			limit = { 
+				has_country_flag = KXX_Yasuhito_Restoration	 
+				has_government = paternal_autocrat
+			}
+			set_country_leader_ideology = pataut_pan_asianism_subtype
+		}	
+		else_if = {
+			limit = { 
+				has_country_flag = KXX_Yasuhito_Restoration	 
+				has_government = national_populist
+			}
+			set_country_leader_ideology = natpop_pan_asianism_subtype
 		}
-		create_country_leader = {
-			name = "荒木贞夫"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Sadao_Araki.png"
-			expire = "1965.1.1"
-			ideology = pataut_pan_asianism_subtype
-		}
+		else_if = {
+			limit = { 
+				has_country_flag = KXX_Yasuhito_Restoration	 
+				has_government = authoritarian_democrat
+			}
+			set_country_leader_ideology = authdem_pan_asianism_subtype
+		}		
+		else = {
+			set_politics = {
+				ruling_party = paternal_autocrat
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.5
+			}			
+			create_country_leader = {
+				name = "荒木贞夫"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Sadao_Araki.png"
+				expire = "1965.1.1"
+				ideology = pataut_pan_asianism_subtype
+			}
+		}		
 		add_ideas = JAP_are_ya_ready_war_3
 		remove_all_ministers = yes
 		add_ideas = {
@@ -5625,9 +5681,9 @@ country_event = { #A United Front Victory
 		create_country_leader = {
 						name = "山川均"
 						desc = "-"
-						picture = "gfx/leaders/JAP/Portrait_JAP_Hitoshi_Yamakawa.png"
+						picture = "gfx/leaders/JAP/Portrait_JAP_Hitoshi_Yamakawa_KX.png"
 						expire = "1965.1.1"
-						ideology = radsoc_rounoucom_subtype
+						ideology = rounoucom_subtype
 					}
 		
 	}
@@ -5794,7 +5850,7 @@ country_event = { #Legacy of Yamakawaism
 		create_country_leader = {
 						name = "山川均"
 						desc = "-"
-						picture = "gfx/leaders/JAP/Portrait_JAP_Hitoshi_Yamakawa.png"
+						picture = "gfx/leaders/JAP/Portrait_JAP_Hitoshi_Yamakawa_KX.png"
 						expire = "1965.1.1"
 						ideology = anarcho_syndicalist_subtype
 					}
@@ -5920,6 +5976,7 @@ country_event = { #Leading the True Revolutionary Vanguard
 			JAP_Masayoshi_Fukuda_sec_tot
 		}
 		set_cosmetic_tag = JAP_TOKUDA
+		set_country_flag = KXX_fuckyou_tenno
 		create_country_leader = {
 						name = "德田球一"
 						desc = "-"
@@ -6255,7 +6312,7 @@ country_event = { #Japan Demands Our Submission
 	is_triggered_only = yes
 	option = { #
 		name = japan_new_event.77.a
-		ai_chance = { base = 50 }
+		ai_chance = { base = 60 }
 		trigger = {
 			TRM = {
 				NOT = {
@@ -6273,14 +6330,12 @@ country_event = { #Japan Demands Our Submission
 	
 	option = { #
 		name = japan_new_event.77.b
-		ai_chance = { base = 50 }
+		ai_chance = { base = 40 }
 		JAP = {
 		puppet = TRM
 		set_state_owner = 408
 		set_state_owner = 1246
 		set_state_owner = 409
-		set_state_owner = 560
-		set_state_owner = 562
 		set_state_owner = 637
 		set_country_flag = JAP_OWN_FAR_EAST
 		}
@@ -7215,7 +7270,7 @@ country_event = { #Question of Our Future
 	option = { #
 		name = japan_new_event.92.b
 		ai_chance = { 
-			base = 10
+			base = 5
 		}
 		set_cosmetic_tag = JAP_Tachi_Asia
 		every_state = {
@@ -7242,7 +7297,7 @@ country_event = { #Question of Our Future
 	option = { #
 		name = japan_new_event.92.c
 		ai_chance = { 
-			base = 90
+			base = 95
 		}
 		
 	}
@@ -8323,8 +8378,26 @@ country_event = { #The Manifesto of Pure Anarchism
 	
 	is_triggered_only = yes
 	option = { #
-		set_country_flag = KXX_LEADER_GUI_VISIBLE
-		set_country_flag = JAP_Hirohito_VISIBLE
+		if = {
+			limit = { 
+				JAP = { 
+					has_country_flag = KXX_hirohito_missing 
+				}				
+			}
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = JAP_Akihito_VISIBLE
+			swap_ideas = {
+				remove_idea = JAP_no_emperor
+			}					
+		}	
+		else = {
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = JAP_Hirohito_VISIBLE
+			swap_ideas = {
+				remove_idea = JAP_no_emperor
+				add_idea = JAP_emperor_hirohito
+			}					
+		}	
 		name = japan_new_event.117.a
 		ai_chance = { base = 100 }
 		add_ideas = {
@@ -8533,14 +8606,37 @@ country_event = { #Question of the Emperor?
 	picture = "GFX_hirotio_uniform"
 	
 	is_triggered_only = yes
-	option = { #
+	option = { 
+		trigger = { 
+			NOT = { has_country_flag = KXX_fuckyou_tenno }
+		}
 		name = japan_new_event.125.a
-		ai_chance = { base = 10 }
-		set_country_flag = KXX_LEADER_GUI_VISIBLE
-		set_country_flag = JAP_Hirohito_VISIBLE
-		swap_ideas = {
-		remove_idea = JAP_no_emperor
-		add_idea = JAP_emperor_hirohito
+		ai_chance = { 
+			base = 10 
+			modifier = {
+				factor = 100
+				has_country_flag = KXX_keep_tenno
+			}
+		}
+		if = {
+			limit = { 
+				JAP = { 
+					has_country_flag = KXX_hirohito_missing 
+				}				
+			}
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = JAP_Akihito_VISIBLE
+			swap_ideas = {
+				remove_idea = JAP_no_emperor
+			}					
+		}	
+		else = {
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = JAP_Hirohito_VISIBLE
+			swap_ideas = {
+				remove_idea = JAP_no_emperor
+				add_idea = JAP_emperor_hirohito
+			}					
 		}
 	}
 	
@@ -8821,6 +8917,13 @@ country_event = { #
 		complete_national_focus = JAPNAK_the_issue_of_party_factionalism
 		
 	}
+
+	option = { #
+		name = japan_new_event.132.e
+		ai_chance = { base = 0 }
+		JAP = { set_cosmetic_tag = JAP_YAMANA }
+	}
+
 }
 
 country_event = { #The Ozaki Incident

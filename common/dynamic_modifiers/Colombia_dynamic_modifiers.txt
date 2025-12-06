@@ -1,0 +1,66 @@
+COL_border_states_dynamic_mod = {
+	icon = "GFX_population_icon"
+	enable = { always = yes }
+	remove_trigger = { 
+		OR = {
+				NOT = { is_owned_by = COL }
+				any_neighbor_state = {
+						owner = { 
+							OR = { 
+								NOT = { can_declare_war_on = COL }
+								AND = {
+									has_socialist_government = yes
+									COL = { has_socialist_government = yes }
+								}
+							}
+						}
+				}
+				any_neighbor_state = {
+						owner = { 
+							OR = { 
+								NOT = { can_declare_war_on = COL }
+								AND = {
+									has_socialist_government = yes
+									COL = { has_socialist_government = yes }
+								}
+							}
+						}
+				}
+		}
+	}	
+	state_production_speed_industrial_complex_factor = -0.1
+	state_production_speed_arms_factory_factor = -0.1
+	state_production_speed_infrastructure_factor = -0.1
+	local_factories = -0.15
+	local_resources_factor = -0.25
+	local_manpower = -0.25
+	mobilization_speed = -0.25
+}
+
+COL_cities_closed_dynamic = { 
+	icon = "GFX_idea_guns_shield"
+	enable = { always = yes }
+	remove_trigger = { 
+		NOT = { 
+			OR = {
+				owner = COL 
+				owner = COC
+			}
+		}
+	}
+	local_supplies_for_controller = -0.35
+	local_factories = -0.15
+	resistance_decay = 0.05
+	army_speed_factor_for_controller = 0.35
+}
+
+COL_who_takes_what_dynamic_modifier = { 
+	icon = "GFX_idea_guns_shield"
+	enable = { always = yes }
+	remove_trigger = { 
+		NOT = { has_country_flag = COL_who_takes_what_participant }
+	}
+	consumer_goods_factor = COL_who_takes_what_production_speed_buildings_factor
+	surrender_limit = COL_who_takes_what_surrender_limit
+	local_resources = COL_who_takes_what_local_resources
+}

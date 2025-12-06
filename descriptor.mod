@@ -4,6 +4,7 @@ tags={
 }
 name="kx部分国家微调（新）"
 dependencies={
+	"Kaiserredux"
 	"KaiserreduX"
 	"Kaiserredux: A Kaiserreich Expansion"
 	"Kaiserredux汉化"

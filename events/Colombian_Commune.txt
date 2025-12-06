@@ -1,0 +1,152 @@
+﻿###########################
+# Colombia Events
+# by 404NameNotFound
+###########################
+
+add_namespace = coc
+
+country_event = { #weapons arrive
+	id = coc.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event coc.1" }
+	title = coc.1.t
+	desc = coc.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = coc.1.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_0
+			amount = 1100
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 100
+		}
+	}
+}
+
+country_event = { #Soc Dem take power to propose peace
+	id = coc.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event coc.2" }
+	title = coc.2.t
+	desc = coc.2.d
+	
+	trigger = {
+		OR = {
+			AND = {
+				is_subject = no
+				has_capitulated = no
+				has_war_with = COL
+			}
+		}
+		NOT = { 
+			COL = {
+				has_country_flag = COL_cw_ceasefire_flag
+			}
+			COC = {
+				has_country_flag = COC_cw_ceasefire_flag
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = coc.2.a
+		ai_will_do = {
+			base = 80
+		}
+		hidden_effect = {
+			remove_all_ministers = yes
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+		}
+		add_political_power = 50
+		add_stability = -0.05
+		decrease_ruling_party_popularity_by_5 = yes
+		set_country_flag = COC_cw_ceasefire_flag
+	}
+
+	option = {
+		name = coc.2.b
+		ai_will_do = {
+			base = 20
+		}
+		add_political_power = 10
+		add_war_support = 0.1
+		every_enemy_country = {
+			limit = {
+				OR = {
+					tag = COL
+					tag = CAU
+				}
+			}
+			add_war_support = 0.1
+			add_stability = 0.1
+		}
+	}
+}
+country_event = { #civil war over,change to col
+	id = coc.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event coc.1" }
+	title = coc.3.t
+	desc = coc.3.d
+	trigger = {
+		tag = COC
+		NOT = {
+			country_exists = COL
+		}
+		owns_state = 306
+	}
+	fire_only_once = yes
+	
+	option = {
+		name = coc.3.a
+		if = {
+			limit = {
+				has_government = radical_socialist
+			}
+			COL = {
+				COL_elected_radsoc = yes
+			}
+		}
+		if = {
+			limit = {
+				has_government = syndicalist
+			}
+			COL = {
+				COL_elected_syndie = yes
+			}
+		}
+		if = {
+			limit = {
+				has_government = totalist
+			}
+			COL = {
+				COL_elected_tot = yes
+			}
+		}
+		create_wargoal = { #temp
+			target = CAU
+			type = annex_everything
+		}
+		COL = {
+			annex_country = {
+				target = COC
+				transfer_troops = yes
+			}
+
+		}
+		COC = {
+			every_unit_leader = {	
+				set_nationality = COL
+			}	
+		}
+		COL = { change_tag_from = COC }
+		
+	}
+}

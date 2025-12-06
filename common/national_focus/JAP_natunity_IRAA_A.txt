@@ -1,0 +1,1058 @@
+focus_tree = {
+	id = JAP_Kuromajo_IRAA
+	continuous_focus_position = { x = -40 y = 3050 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPNAK
+		}
+	}
+	shared_focus = JAPFOR_japansplaceintheworld
+	shared_focus = JAPFOR_tokyo_conference
+	shared_focus = JAP_To_Sunder_the_Sunset
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday	
+
+	focus = {
+		id = JAP_showa_restoration
+		icon = GFX_goal_JAP_Taisei_Yokusankai
+		cost = 2
+		x = 12
+		y = 1
+		available = {
+
+		}
+
+		ai_will_do = { factor = 15 }
+
+		select_effect = {
+			log = "[GetDateText]: [Root.GetName]: Select Focus JAP_showa_restoration"
+			country_event = japdom.26
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_showa_restoration"
+			clr_country_flag = JAP_NO_NSA
+			mark_focus_tree_layout_dirty = yes
+			country_event = japdom.27
+			hidden_effect = {
+				country_event = {
+					id = japdom.314
+					days = 700
+					random_days = 30
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	# Kenkyukai Branch
+	
+	focus = {
+		id = JAP_Enlightenment_from_the_Kenkyukai
+		icon = GFX_goal_JAP_Kakushinha
+		cost = 4
+
+		relative_position_id = JAP_showa_restoration
+		x = -5
+		y = 1
+
+		prerequisite = { focus = JAP_showa_restoration }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Enlightenment_from_the_Kenkyukai"
+			custom_effect_tooltip = JAP_man_with_thousand_friends_hog_tt_1
+			hidden_effect = {
+				swap_ideas = {
+					remove_idea = JAP_Konoe_Fumimaro_hog_npo
+					add_idea = JAP_Konoe_Fumimaro2_hog_npo
+				}
+				country_event = {
+					id = japdom.318
+					days = 365
+				}
+			}
+			custom_effect_tooltip = tooltip_white_line
+			set_country_flag = JAP_Fumario_Trait_2
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = electronics
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Cleansing_the_Gardens_of_Sinners
+		icon = GFX_goal_JAP_Cleansing_Gardens_Sinners
+		cost = 5
+
+		relative_position_id = JAP_Enlightenment_from_the_Kenkyukai
+		x = -1
+		y = 1
+
+		prerequisite = { focus = JAP_Enlightenment_from_the_Kenkyukai }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Cleansing_the_Gardens_of_Sinners"
+			add_ideas = JAP_Clean_Gardens_Idea1
+			custom_effect_tooltip = tooltip_white_line
+			1353 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			1355 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			hidden_effect = {
+				country_event = {
+					id = japdom.320
+					days = 200
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Kokutai_no_Hongi
+		icon = GFX_goal_JAP_Kokutai_Hongi
+		cost = 5
+
+		relative_position_id = JAP_Enlightenment_from_the_Kenkyukai
+		x = 1
+		y = 1
+
+		prerequisite = { focus = JAP_Enlightenment_from_the_Kenkyukai }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Kokutai_no_Hongi"
+			add_ideas = JAP_Imperial_Family_Idea1
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_For_Their_Freedom_and_Ours
+		icon = GFX_goal_JAP_For_Their_Freedom_Ours
+		cost = 3
+
+		relative_position_id = JAP_Cleansing_the_Gardens_of_Sinners
+		x = -1
+		y = 1
+
+		prerequisite = { focus = JAP_Cleansing_the_Gardens_of_Sinners }
+		prerequisite = { focus = JAP_Kokutai_no_Hongi }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_For_Their_Freedom_and_Ours"
+			custom_effect_tooltip = JAP_For_Their_Freedom_and_Ours_tt
+			custom_effect_tooltip = tooltip_white_line
+			if = {
+				limit = { POL = { NOT = { has_war_with = JAP } } }
+				add_opinion_modifier = {
+					target = POL
+					modifier = KR_approves_of_govt
+				}
+				reverse_add_opinion_modifier = {
+					target = POL
+					modifier = KR_approves_of_govt
+				}
+			}
+			custom_effect_tooltip = tooltip_white_line
+			if = {
+				limit = { WHR = { NOT = { has_war_with = JAP } } }
+				add_opinion_modifier = {
+					target = WHR
+					modifier = KR_approves_of_govt
+				}
+				reverse_add_opinion_modifier = {
+					target = WHR
+					modifier = KR_approves_of_govt
+				}
+			}
+			custom_effect_tooltip = tooltip_white_line
+			if = {
+				limit = { LIT = { NOT = { has_war_with = JAP } } }
+				add_opinion_modifier = {
+					target = LIT
+					modifier = KR_approves_of_govt
+				}
+				reverse_add_opinion_modifier = {
+					target = LIT
+					modifier = KR_approves_of_govt
+				}
+			}
+			custom_effect_tooltip = tooltip_white_line
+			if = {
+				limit = { UKR = { NOT = { has_war_with = JAP } } }
+				add_opinion_modifier = {
+					target = UKR
+					modifier = KR_approves_of_govt
+				}
+				reverse_add_opinion_modifier = {
+					target = UKR
+					modifier = KR_approves_of_govt
+				}
+			}
+			custom_effect_tooltip = tooltip_white_line
+			add_war_support = 0.05
+			add_political_power = 50
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_In_Corradinis_Proletarian_Vision
+		icon = GFX_goal_JAP_In_Corradinis_Proletarian_Vision
+		cost = 3
+
+		relative_position_id = JAP_Cleansing_the_Gardens_of_Sinners
+		x = 1
+		y = 1
+
+		prerequisite = { focus = JAP_Cleansing_the_Gardens_of_Sinners }
+		prerequisite = { focus = JAP_Kokutai_no_Hongi }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_In_Corradinis_Proletarian_Vision"
+			custom_effect_tooltip = JAP_corradini_will_grant_1
+			custom_effect_tooltip = JAP_corradini_effect_1
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = JAP_corradini_will_grant_2
+			custom_effect_tooltip = JAP_corradini_effect_2
+			hidden_effect = {
+			if = {
+				limit = { 
+					ITA = { 
+						has_government = national_populist 
+						NOT = { has_war_with = JAP }
+					} 
+				}
+				ITA = { add_ideas = JAP_Showa_Support_Idea1 }
+				custom_effect_tooltip = tooltip_white_line
+				add_opinion_modifier = {
+					target = ITA
+					modifier = KR_approves_of_govt
+				}
+				reverse_add_opinion_modifier = {
+					target = ITA
+					modifier = KR_approves_of_govt
+				}
+				custom_effect_tooltip = tooltip_white_line
+				add_popularity = {
+					ideology = national_populist
+					popularity = 0.05
+				}
+			}
+			else = {
+				add_popularity = {
+					ideology = national_populist
+					popularity = 0.03
+				}
+			}
+			}
+			custom_effect_tooltip = tooltip_white_line
+			add_stability = 0.01
+			add_political_power = 50
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_The_White_Fox_in_the_Village
+		icon = GFX_goal_JAP_White_Fox_Village
+		cost = 3
+
+		relative_position_id = JAP_Kokutai_no_Hongi
+		x = 1
+		y = 1
+
+		prerequisite = { focus = JAP_Cleansing_the_Gardens_of_Sinners }
+		prerequisite = { focus = JAP_Kokutai_no_Hongi }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_The_White_Fox_in_the_Village"
+			add_ideas = JAP_White_Fox_Idea1
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Grant_Patronage_to_Asanuma
+		icon = GFX_goal_JAP_Grant_Patronage_Asanuma
+		cost = 5
+
+		relative_position_id = JAP_For_Their_Freedom_and_Ours
+		x = 1
+		y = 1
+
+		prerequisite = { focus = JAP_For_Their_Freedom_and_Ours }
+		prerequisite = { focus = JAP_In_Corradinis_Proletarian_Vision }
+		prerequisite = { focus = JAP_The_White_Fox_in_the_Village }
+		mutually_exclusive = {
+			focus = JAP_Tuning_70_Million_Gears
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Grant_Patronage_to_Asanuma"
+			swap_ideas = {
+				remove_idea = JAP_Clean_Gardens_Idea1
+				add_idea = JAP_Clean_Gardens_Idea2A
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = construction_tech
+			}
+			add_radsoc_to_coalition = yes
+			hidden_effect = {
+				set_party_name = {
+					ideology = radical_socialist
+					name = JAP_national_populist_party_iraa
+					long_name = JAP_national_populist_party_iraa_long
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Tuning_70_Million_Gears
+		icon = GFX_goal_JAP_Tuning_70_Million_Gears
+		cost = 5
+
+		relative_position_id = JAP_In_Corradinis_Proletarian_Vision
+		x = 1
+		y = 1
+
+		prerequisite = { focus = JAP_For_Their_Freedom_and_Ours }
+		prerequisite = { focus = JAP_In_Corradinis_Proletarian_Vision }
+		prerequisite = { focus = JAP_The_White_Fox_in_the_Village }
+		mutually_exclusive = {
+			focus = JAP_Grant_Patronage_to_Asanuma
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Tuning_70_Million_Gears"
+			swap_ideas = {
+				remove_idea = JAP_Clean_Gardens_Idea1
+				add_idea = JAP_Clean_Gardens_Idea2B
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = excavation_tech
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Emperors_Familial_Benevolence
+		icon = GFX_goal_JAP_Emperors_Familial_Benevolence
+		cost = 5
+
+		relative_position_id = JAP_Grant_Patronage_to_Asanuma
+		x = 1
+		y = 1
+
+		prerequisite = {
+			focus = JAP_Grant_Patronage_to_Asanuma
+			focus = JAP_Tuning_70_Million_Gears
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_The_Emperors_Familial_Benevolence"
+			swap_ideas = {
+				remove_idea = JAP_Imperial_Family_Idea1
+				add_idea = JAP_Imperial_Family_Idea2
+			}
+			add_stability = 0.05
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	# Main Branch
+	
+	focus = {
+		id = JAP_Movement_Sweeps_the_Ministries
+		icon = GFX_goal_JAP_Movement_Sweeps_Ministries
+		cost = 5
+
+		relative_position_id = JAP_showa_restoration
+		x = -1
+		y = 1
+
+		prerequisite = { focus = JAP_showa_restoration }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Movement_Sweeps_the_Ministries"
+			add_ideas = JAP_Spiritual_Mobilization_Idea1
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Lineage_of_Amaterasu_Omikami
+		icon = GFX_goal_JAP_Lineage_Amaterasu_Omikami
+		cost = 5
+
+		relative_position_id = JAP_Movement_Sweeps_the_Ministries
+		x = 0
+		y = 1
+
+		prerequisite = { focus = JAP_Movement_Sweeps_the_Ministries }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Lineage_of_Amaterasu_Omikami"
+			country_event = japdom.316
+			custom_effect_tooltip = tooltip_white_line
+			add_ideas = JAP_State_Shinto_Idea1
+			hidden_effect = {
+				country_event = {
+					id = japdom.317
+					days = 75
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Unite_the_Chrysanthemums_Servants
+		icon = GFX_goal_JAP_Unite_Chrysanthemums_Servants
+		cost = 5
+
+		relative_position_id = JAP_showa_restoration
+		x = 1
+		y = 1
+
+		prerequisite = { focus = JAP_showa_restoration }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Unite_the_Chrysanthemums_Servants"
+			add_stability = 0.05
+			add_political_power = 150
+			custom_effect_tooltip = tooltip_white_line
+			add_pataut_to_coalition = yes
+			add_authdem_to_coalition = yes
+			add_soccon_to_coalition = yes
+			add_marlib_to_coalition = yes
+			add_soclib_to_coalition = yes
+			add_socdem_to_coalition = yes
+			hidden_effect = {
+				set_party_name = {
+					ideology = paternal_autocrat
+					name = JAP_national_populist_party_iraa
+					long_name = JAP_national_populist_party_iraa_long
+				}
+				set_party_name = {
+					ideology = authoritarian_democrat
+					name = JAP_national_populist_party_iraa
+					long_name = JAP_national_populist_party_iraa_long
+				}
+				set_party_name = {
+					ideology = social_conservative
+					name = JAP_national_populist_party_iraa
+					long_name = JAP_national_populist_party_iraa_long
+				}
+				set_party_name = {
+					ideology = market_liberal
+					name = JAP_national_populist_party_iraa
+					long_name = JAP_national_populist_party_iraa_long
+				}
+				set_party_name = {
+					ideology = social_liberal
+					name = JAP_national_populist_party_iraa
+					long_name = JAP_national_populist_party_iraa_long
+				}
+				set_party_name = {
+					ideology = social_democrat
+					name = JAP_national_populist_party_iraa
+					long_name = JAP_national_populist_party_iraa_long
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Children_of_the_Sun
+		icon = GFX_goal_JAP_Children_Sun
+		cost = 6
+
+		relative_position_id = JAP_Unite_the_Chrysanthemums_Servants
+		x = 0
+		y = 1
+
+		prerequisite = { focus = JAP_Unite_the_Chrysanthemums_Servants }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Children_of_the_Sun"
+			add_war_support = 0.10
+			524 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			525 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			527 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			1345 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			537 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			hidden_effect = {
+				country_event = {
+					id = japdom.313
+					days = 30
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Capturing_Beauty_and_Harmony
+		icon = GFX_goal_JAP_Capturing_Beauty_Harmony
+		cost = 4
+
+		relative_position_id = JAP_Children_of_the_Sun
+		x = -1
+		y = 1
+
+		prerequisite = { focus = JAP_Lineage_of_Amaterasu_Omikami }
+		prerequisite = { focus = JAP_Children_of_the_Sun }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Capturing_Beauty_and_Harmony"
+			add_stability = 0.05
+			add_political_power = 100
+			activate_decision = war_propaganda
+			FNG = {
+				add_popularity = {
+					ideology = market_liberal
+					popularity = 0.08
+				}
+			}
+			add_tech_bonus = {
+				ahead_reduction = 1
+				uses = 1
+				category = electronics
+			}
+			hidden_effect = {
+				country_event = {
+					id = japdom.312
+					days = 120
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Idolize_the_Yamato_Nadeshiko
+		icon = GFX_goal_JAP_Idolize_Yamato_Nadeshiko
+		cost = 4
+
+		relative_position_id = JAP_Capturing_Beauty_and_Harmony
+		x = -1
+		y = 1
+
+		prerequisite = { focus = JAP_Capturing_Beauty_and_Harmony }
+		mutually_exclusive = {
+			focus = JAP_Forge_the_Gunkoku_Shoujo
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Idolize_the_Yamato_Nadeshiko"
+			add_ideas = JAP_Showa_Women_Idea1A
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Forge_the_Gunkoku_Shoujo
+		icon = GFX_goal_JAP_Forge_Gunkoku_Shoujo
+		cost = 4
+
+		relative_position_id = JAP_Capturing_Beauty_and_Harmony
+		x = 1
+		y = 1
+
+		prerequisite = { focus = JAP_Capturing_Beauty_and_Harmony }
+		mutually_exclusive = {
+			focus = JAP_Idolize_the_Yamato_Nadeshiko
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Forge_the_Gunkoku_Shoujo"
+			add_ideas = JAP_Showa_Women_Idea1B
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Mobilize_for_the_Daitoa_Seisen
+		icon = GFX_goal_JAP_Mobilize_Daitoa_Seisen
+		cost = 4
+
+		relative_position_id = JAP_Idolize_the_Yamato_Nadeshiko
+		x = 1
+		y = 1
+
+		prerequisite = {
+			focus = JAP_Idolize_the_Yamato_Nadeshiko
+			focus = JAP_Forge_the_Gunkoku_Shoujo
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Mobilize_for_the_Daitoa_Seisen"
+			swap_ideas = {
+				remove_idea = JAP_Spiritual_Mobilization_Idea1
+				add_idea = JAP_Spiritual_Mobilization_Idea2
+			}
+			activate_targeted_decision = { target = THIS decision = JAP_divert_workers_towards_production }
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	# Kodoha Branch
+	
+	focus = {
+		id = JAP_Towards_Reverence_and_Retribution
+		icon = GFX_goal_JAP_Kodoha
+		cost = 4
+
+		relative_position_id = JAP_showa_restoration
+		x = 5
+		y = 1
+
+		prerequisite = { focus = JAP_showa_restoration }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Towards_Reverence_and_Retribution"
+			add_ideas = JAP_Kodoha_Idea1
+			custom_effect_tooltip = tooltip_white_line
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_To_Slay_Orochi
+		icon = GFX_goal_JAP_To_Slay_Orochi
+		cost = 7
+
+		relative_position_id = JAP_Towards_Reverence_and_Retribution
+		x = -1
+		y = 1
+
+		prerequisite = { focus = JAP_Towards_Reverence_and_Retribution }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_To_Slay_Orochi"
+			528 = {
+				add_resource = {
+					type = steel
+					amount = 20
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			1356 = {
+				add_resource = {
+					type = steel
+					amount = 12
+				}
+			}
+			532 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			529 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Hashimotos_Sincere_Youth
+		icon = GFX_goal_JAP_Hashimotos_Sincere_Youth
+		cost = 5
+
+		relative_position_id = JAP_Towards_Reverence_and_Retribution
+		x = 1
+		y = 1
+
+		prerequisite = { focus = JAP_Towards_Reverence_and_Retribution }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Hashimotos_Sincere_Youth"
+			add_manpower = 35000
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = tech_assault_battalion_effect
+			hidden_effect = {
+				set_technology = { tech_assault_battalion = 1 popup = no }
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Yamashitas_Honorable_Bushi
+		icon = GFX_goal_JAP_Yamashitas_Honorable_Bushi
+		cost = 4
+
+		relative_position_id = JAP_To_Slay_Orochi
+		x = 0
+		y = 1
+
+		prerequisite = { focus = JAP_To_Slay_Orochi }
+		prerequisite = { focus = JAP_Hashimotos_Sincere_Youth }
+		mutually_exclusive = {
+			focus = JAP_Arakis_Righteous_Samurai
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Yamashitas_Honorable_Bushi"
+			add_ideas = JAP_Yamashita_Idea1
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Arakis_Righteous_Samurai
+		icon = GFX_goal_JAP_Arakis_Righteous_Samurai
+		cost = 4
+
+		relative_position_id = JAP_Hashimotos_Sincere_Youth
+		x = 0
+		y = 1
+
+		prerequisite = { focus = JAP_To_Slay_Orochi }
+		prerequisite = { focus = JAP_Hashimotos_Sincere_Youth }
+		mutually_exclusive = {
+			focus = JAP_Yamashitas_Honorable_Bushi
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Arakis_Righteous_Samurai"
+			add_ideas = JAP_Araki_Idea1
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Exalt_the_Virtuous_Soldier
+		icon = GFX_goal_JAP_Exalt_Virtuous_Soldier
+		cost = 5
+
+		relative_position_id = JAP_Yamashitas_Honorable_Bushi
+		x = -1
+		y = 1
+
+		prerequisite = { focus = JAP_Yamashitas_Honorable_Bushi }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Exalt_the_Virtuous_Soldier"
+			division_template = {
+				name = "Imperial Guards"
+				division_names_group = JAP_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 2 y = 1 }
+					infantry = { x = 2 y = 2 }
+					artillery_brigade = { x = 3 y = 0 }
+					artillery_brigade = { x = 3 y = 1 }
+				}
+				support = {
+					signal_company = { x = 0 y = 0 }
+					field_hospital = { x = 0 y = 1 }
+					logistics_company = { x = 0 y = 2 }
+					engineer = { x = 0 y = 3 }
+					anti_air = { x = 0 y = 4 }
+				}
+			}
+			282 = {
+				create_unit = {
+					division = "name = \"1st Guards Division\" division_template = \"Imperial Guards\" start_experience_factor = 1.0 start_equipment_factor = 1.0"
+					prioritize_location = 1182
+					owner = JAP
+				}
+				create_unit = {
+					division = "name = \"2nd Guards Division\" division_template = \"Imperial Guards\" start_experience_factor = 1.0 start_equipment_factor = 1.0"
+					prioritize_location = 1182
+					owner = JAP
+				}
+				create_unit = {
+					division = "name = \"3rd Guards Division\" division_template = \"Imperial Guards\" start_experience_factor = 1.0 start_equipment_factor = 1.0"
+					prioritize_location = 1182
+					owner = JAP
+				}
+			}
+			add_tech_bonus = {
+				ahead_reduction = 1
+				uses = 1
+				category = light_air
+			}
+			every_unit_leader = {
+				add_defense = 1
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Rising_Tides_and_Blooming_Petals
+		icon = GFX_goal_JAP_Rising_Tides_Blooming_Petals
+		cost = 5
+
+		relative_position_id = JAP_Yamashitas_Honorable_Bushi
+		x = 1
+		y = 1
+
+		prerequisite = {
+			focus = JAP_Yamashitas_Honorable_Bushi
+			focus = JAP_Arakis_Righteous_Samurai
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Exalt_the_Virtuous_Soldier"
+			add_ideas = JAP_Pan_Asianism_Idea1
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Way_of_Death
+		icon = GFX_goal_JAP_Way_Death
+		cost = 5
+
+		relative_position_id = JAP_Arakis_Righteous_Samurai
+		x = 1
+		y = 1
+
+		prerequisite = { focus = JAP_Arakis_Righteous_Samurai }
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Way_of_Death"
+			division_template = {
+				name = "Sadaoshidan"
+				division_names_group = JAP_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 0 y = 4 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+					infantry = { x = 1 y = 4 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 2 y = 1 }
+					infantry = { x = 2 y = 2 }
+					infantry = { x = 2 y = 3 }
+					infantry = { x = 2 y = 4 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+					recon = { x = 0 y = 1 }
+					signal_company = { x = 0 y = 2 }
+				}
+			}
+			282 = {
+				create_unit = {
+					division = "name = \"1st Sadaoshidan\" division_template = \"Sadaoshidan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+					prioritize_location = 1182
+					owner = JAP
+				}
+				create_unit = {
+					division = "name = \"2nd Sadaoshidan\" division_template = \"Sadaoshidan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+					prioritize_location = 1182
+					owner = JAP
+				}
+				create_unit = {
+					division = "name = \"3rd Sadaoshidan\" division_template = \"Sadaoshidan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+					prioritize_location = 1182
+					owner = JAP
+				}
+				create_unit = {
+					division = "name = \"4th Sadaoshidan\" division_template = \"Sadaoshidan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+					prioritize_location = 1182
+					owner = JAP
+				}
+				create_unit = {
+					division = "name = \"5th Sadaoshidan\" division_template = \"Sadaoshidan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+					prioritize_location = 1182
+					owner = JAP
+				}
+				create_unit = {
+					division = "name = \"6th Sadaoshidan\" division_template = \"Sadaoshidan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+					prioritize_location = 1182
+					owner = JAP
+				}
+			}
+			add_tech_bonus = {
+				ahead_reduction = 1
+				uses = 1
+				category = artillery
+			}
+			every_unit_leader = {
+				add_attack = 1
+			}
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Uphold_Masashiges_Loyalty
+		icon = GFX_goal_JAP_Uphold_Masahiges_Loyalty
+		cost = 3
+
+		relative_position_id = JAP_Rising_Tides_and_Blooming_Petals
+		x = -1
+		y = 1
+
+		prerequisite = {
+			focus = JAP_Exalt_the_Virtuous_Soldier
+			focus = JAP_Way_of_Death
+		}
+		prerequisite = { focus = JAP_Rising_Tides_and_Blooming_Petals }
+		mutually_exclusive = {
+			focus = JAP_Venerate_Yoritomos_Resolution
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Uphold_Masashiges_Loyalty"
+			swap_ideas = {
+				remove_idea = JAP_Kodoha_Idea1
+				add_idea = JAP_Kodoha_Idea2A
+			}
+			add_stability = 0.05
+			add_political_power = 75
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = {
+		id = JAP_Venerate_Yoritomos_Resolution
+		icon = GFX_goal_JAP_Venerate_Yoritomos_Resolution
+		cost = 3
+
+		relative_position_id = JAP_Rising_Tides_and_Blooming_Petals
+		x = 1
+		y = 1
+
+		prerequisite = {
+			focus = JAP_Exalt_the_Virtuous_Soldier
+			focus = JAP_Way_of_Death
+		}
+		prerequisite = { focus = JAP_Rising_Tides_and_Blooming_Petals }
+		mutually_exclusive = {
+			focus = JAP_Uphold_Masashiges_Loyalty
+		}
+
+		ai_will_do = { factor = 15 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_Venerate_Yoritomos_Resolution"
+			swap_ideas = {
+				remove_idea = JAP_Kodoha_Idea1
+				add_idea = JAP_Kodoha_Idea2B
+			}
+			army_experience = 35
+			air_experience = 35
+			navy_experience = 35
+		}
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+
+}

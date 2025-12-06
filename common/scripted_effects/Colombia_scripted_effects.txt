@@ -1,0 +1,2435 @@
+COL_setup_border_states = {
+	851 = { 
+		add_dynamic_modifier = { modifier = COL_border_states_dynamic_mod } 
+	}
+	1215 = { 
+		add_dynamic_modifier = { modifier = COL_border_states_dynamic_mod } 
+	}
+}
+
+COL_update_candidates = {
+	hidden_effect = {
+		if = {
+			limit = { #ECHEVARRIA SOCLIB
+				has_country_flag = COL_gabrielechevarria_is_soclib_candidate_flag
+			}
+			create_country_leader = {
+				name = "Gabriel Echavarría Misas"
+				desc = "POLITICS_COL_ECHAVARRIA_MISAS_DESC"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Gabriel_Echavarria_Misas.png"
+				expire = "1965.1.1"
+				ideology = radical_liberalism_subtype 
+			}
+		}
+		else_if = {
+			limit = { #MAMATOCO SOCLIB
+				has_country_flag = COL_mamatoco_is_soclib_candidate_flag
+			}
+			create_country_leader = {
+				name = "Francisco Anastasio Pérez"
+				desc = "POLITICS_COL_FRANCISCO_PEREZ_DESC"
+				picture = "gfx/leaders/Generic/Portrait_Colombia_Francisco_Anastasio_Perez.png"
+				expire = "1965.1.1"
+				ideology = marlib_police_state_subtype
+				traits = {
+					COL_mamatoco
+				}
+			}
+		}
+		else_if = {
+			limit = { #SANTOS MONTEJO SOCLIB
+				OR = {
+					has_country_flag = COL_eduardosantos_is_soclib_candidate_flag
+					has_country_flag = COL_eduardosantos_is_liberal_candidate_flag
+				}
+			}
+			create_country_leader = {
+				name = "Eduardo Santos Montejo"
+				desc = "POLITICS_COL_MONTEJO_DESC"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Eduardo_Santos.png"
+				expire = "1965.1.1"
+				ideology = soclib_humanistic_capitalism_subtype  
+			}
+		}
+		else_if = {
+			limit = { #SocDem Mario Galan
+				has_country_flag = COL_mariogalan_is_liberal_candidate_flag
+			}
+			create_country_leader = {
+				name = "Mario Galan Gomez"
+				desc = "POLITICS_COL_GALAN_DESC"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Mario_Galan_Gomez.png"
+				expire = "1965.1.1"
+				ideology = socdem_radical_progressivism_subtype
+			}
+		}
+		else_if = {
+			limit = { #SocDem Jorge Eliécer Gaitán
+				has_country_flag = COL_gaitan_is_liberal_candidate_flag
+			}
+			create_country_leader = {
+				name = "Jorge Eliécer Gaitán"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Jorge_Gaitan.png"
+				expire = "1965.1.1"
+				ideology = socdem_left_nationalism_subtype 
+			}
+		}
+	}
+}
+
+COL_elected_soclib = {
+	hidden_effect = {
+		remove_all_ministers = yes
+	}
+	if = {
+		limit = { #GABRIEL ECHEVARRIA SOCLIB
+			has_country_flag = COL_gabrielechevarria_is_soclib_candidate_flag
+			NOT = {
+				has_country_leader = { name = "Gabriel Echavarría Misas" ruling_only = yes }
+			}
+		}
+		set_politics = {
+			ruling_party = social_liberal
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Gabriel Echavarría Misas"
+			desc = "POLITICS_COL_ECHAVARRIA_MISAS_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Gabriel_Echavarria_Misas.png"
+			expire = "1965.1.1"
+			ideology = radical_liberalism_subtype 
+		}
+		add_ideas = COL_Eduardo_Santos_Montejo_hog_sli
+		add_ideas = COL_Carlos_Lozano_y_Lozano_for_sli
+		add_ideas = COL_Jorge_Soto_Del_Corral_eco_sli
+		add_ideas = COL_Tulio_Enrique_Tascon_Quintero_sec_sli
+		custom_effect_tooltip = marlib_will_join_coalition_tt
+		hidden_effect = {
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+		}
+	}
+	else_if = {
+		limit = { #MAMATOCO SOCLIB
+			has_country_flag = COL_mamatoco_is_soclib_candidate_flag
+			NOT = {
+				has_country_leader = { name = "Francisco Anastasio Pérez" ruling_only = yes }
+			}
+		}
+		set_politics = {
+			ruling_party = market_liberal
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Francisco Anastasio Pérez"
+			desc = "POLITICS_COL_FRANCISCO_PEREZ_DESC"
+			picture = "gfx/leaders/Generic/Portrait_Colombia_Francisco_Anastasio_Perez.png"
+			expire = "1965.1.1"
+			ideology = marlib_police_state_subtype
+			traits = {
+				COL_mamatoco
+			}
+		}
+		add_ideas = COL_Guillermo_Valencia_Castillo_hog_mli
+		add_ideas = COL_Benito_Hernandez_Bustos_for_mli
+		add_ideas = COL_Nemesio_Camacho_Macias_eco_mli
+		add_ideas = COL_Aquilino_Villegas_Hoyos_sec_mli
+		custom_effect_tooltip = soclib_will_join_coalition_tt
+		hidden_effect = {
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+		}
+	}
+	else_if = {
+		limit = { #SANTOS MONTEJO SOCLIB
+			has_country_flag = COL_eduardosantos_is_soclib_candidate_flag
+			NOT = {
+				has_country_leader = { name = "Eduardo Santos Montejo" ruling_only = yes }
+			}
+		}
+		set_politics = {
+			ruling_party = social_liberal
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Eduardo Santos Montejo"
+			desc = "POLITICS_COL_MONTEJO_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Eduardo_Santos.png"
+			expire = "1965.1.1"
+			ideology = soclib_humanistic_capitalism_subtype  
+		}
+		add_ideas = COL_Eduardo_Santos_Montejo_hog_sli
+		add_ideas = COL_Carlos_Lozano_y_Lozano_for_sli
+		add_ideas = COL_Jorge_Soto_Del_Corral_eco_sli
+		add_ideas = COL_Tulio_Enrique_Tascon_Quintero_sec_sli
+		custom_effect_tooltip = marlib_will_join_coalition_tt
+		hidden_effect = {
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+		}
+	}
+	else_if = { #SECOND ELECTION - CARLOS ARANGO VELEZ
+		limit = {
+			has_country_flag = COL_second_election
+			NOT = { has_country_flag = COL_third_election }
+		}
+		if = {
+			limit = {
+				OR = {
+					has_country_flag = COL_eduardosantos_is_soclib_candidate_flag
+					has_country_flag = COL_gabrielechevarria_is_soclib_candidate_flag
+				}
+			}
+			set_politics = {
+				ruling_party = social_liberal
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			create_country_leader = {
+				name = "Carlos Arango Velez"
+				desc = "POLITICS_COL_ARANGO_VELEZ_LIB_DESC"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Carlos_Arango_Velez.png"
+				expire = "1965.1.1"
+				ideology = centrist_subtype
+			}
+			add_ideas = COL_Eduardo_Santos_Montejo_hog_sli
+			add_ideas = COL_Carlos_Lozano_y_Lozano_for_sli
+			add_ideas = COL_Jorge_Soto_Del_Corral_eco_sli
+			add_ideas = COL_Tulio_Enrique_Tascon_Quintero_sec_sli
+			custom_effect_tooltip = marlib_will_join_coalition_tt
+			hidden_effect = {
+				end_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:market_liberal }
+				add_to_coalition = yes
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.07
+			}
+		}
+		else = {
+			set_politics = {
+				ruling_party = market_liberal
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			create_country_leader = {
+				name = "Carlos Arango Velez"
+				desc = "POLITICS_COL_ARANGO_VELEZ_LIB_DESC"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Carlos_Arango_Velez.png"
+				expire = "1965.1.1"
+				ideology = marlib_police_state_subtype
+			}
+			add_ideas = COL_Guillermo_Valencia_Castillo_hog_mli
+			add_ideas = COL_Benito_Hernandez_Bustos_for_mli
+			add_ideas = COL_Nemesio_Camacho_Macias_eco_mli
+			add_ideas = COL_Aquilino_Villegas_Hoyos_sec_mli
+			custom_effect_tooltip = soclib_will_join_coalition_tt
+			hidden_effect = {
+				end_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:social_liberal }
+				add_to_coalition = yes
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.07
+			}
+		}
+	}
+	else_if = { #THIRD ELECTION - JORGE SOTO DEL CORRAL
+		limit = {
+			has_country_flag = COL_third_election
+		}
+		if = {
+			limit = {
+				OR = {
+					has_country_flag = COL_eduardosantos_is_soclib_candidate_flag
+					has_country_flag = COL_gabrielechevarria_is_soclib_candidate_flag
+				}
+			}
+			set_politics = {
+				ruling_party = social_liberal
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			create_country_leader = {
+				name = "Jorge Soto Del Corral"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Jorge_Soto_Del_Corral.png"
+				expire = "1965.1.1"
+				ideology = radical_liberalism_subtype
+			}
+			add_ideas = COL_Eduardo_Santos_Montejo_hog_sli
+			add_ideas = COL_Carlos_Lozano_y_Lozano_for_sli
+			add_ideas = COL_Jorge_Soto_Del_Corral_eco_sli
+			add_ideas = COL_Tulio_Enrique_Tascon_Quintero_sec_sli
+			custom_effect_tooltip = marlib_will_join_coalition_tt
+			hidden_effect = {
+				end_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:market_liberal }
+				add_to_coalition = yes
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.07
+			}
+		}
+		else = {
+			set_politics = {
+				ruling_party = market_liberal
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			create_country_leader = {
+				name = "Jorge Soto Del Corral"
+				picture = "gfx/leaders/COL/Portrait_Colombia_Jorge_Soto_Del_Corral.png"
+				expire = "1965.1.1"
+				ideology = marlib_police_state_subtype
+			}
+			add_ideas = COL_Guillermo_Valencia_Castillo_hog_mli
+			add_ideas = COL_Benito_Hernandez_Bustos_for_mli
+			add_ideas = COL_Nemesio_Camacho_Macias_eco_mli
+			add_ideas = COL_Aquilino_Villegas_Hoyos_sec_mli
+			custom_effect_tooltip = soclib_will_join_coalition_tt
+			hidden_effect = {
+				end_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:social_liberal }
+				add_to_coalition = yes
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.07
+			}
+		}
+	}
+}
+
+COL_elected_socdem = {
+	hidden_effect = {
+		remove_all_ministers = yes
+	}
+	if = {
+		limit = { #Alfonso Lopez Pumarejo without the coalition
+			has_country_flag = COL_first_election
+			NOT = {
+				has_country_flag = COL_mariogalan_is_liberal_candidate_flag
+				has_country_flag = COL_alfonsolopez_is_liberal_candidate_flag
+				has_country_flag = COL_eduardosantos_is_liberal_candidate_flag
+				has_country_flag = COL_gaitan_is_liberal_candidate_flag
+				has_country_leader = { name = "Alfonso López Pumarejo" ruling_only = yes }
+			}
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Alfonso López Pumarejo"
+			desc = "POLITICS_COL_PUMAREJO_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Alfonso_Lopez_Pumarejo.png"
+			expire = "1965.1.1"
+			ideology = socdem_radical_progressivism_subtype
+		}
+		add_ideas = COL_Carlos_Sanz_de_Santamaria_hog_sde
+		add_ideas = COL_Alejandro_Galvis_Galvis_for_sde
+		add_ideas = COL_Jorge_Soto_Del_Corral_eco_sli
+		add_ideas = COL_Dario_Echandia_Olaya_sec_sde
+	}
+	else_if = {
+		limit = { #first election after reapproaching the liberals - Mario Galan president
+			has_country_flag = COL_mariogalan_is_liberal_candidate_flag
+			NOT = { 
+				has_country_flag = COL_gaitan_is_liberal_candidate_flag 
+				has_country_leader = { name = "Mario Galan Gomez" ruling_only = yes }
+			}
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Mario Galan Gomez"
+			desc = "POLITICS_COL_GALAN_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Mario_Galan_Gomez.png"
+			expire = "1965.1.1"
+			ideology = socdem_radical_progressivism_subtype
+		}
+		add_ideas = COL_Eduardo_Santos_Montejo_hog_sli
+		add_ideas = COL_Alejandro_Galvis_Galvis_for_sde
+		add_ideas = COL_Jorge_Soto_Del_Corral_eco_sli
+		add_ideas = COL_Dario_Echandia_Olaya_sec_sde
+		custom_effect_tooltip = soclib_will_join_coalition_tt
+		hidden_effect = {
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+		}
+	}
+	else_if = {
+		limit = { #first election after reapproaching the liberals - Alfonso Lopez Pumarejo president
+			has_country_flag = COL_alfonsolopez_is_liberal_candidate_flag
+			has_country_flag = COL_first_election
+			NOT = { 
+				has_country_leader = { name = "Alfonso López Pumarejo" ruling_only = yes }
+				has_country_flag = COL_gaitan_is_liberal_candidate_flag 
+			}
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Alfonso López Pumarejo"
+			desc = "POLITICS_COL_PUMAREJO_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Alfonso_Lopez_Pumarejo.png"
+			expire = "1965.1.1"
+			ideology = socdem_radical_progressivism_subtype
+		}
+		add_ideas = COL_Eduardo_Santos_Montejo_hog_sli
+		add_ideas = COL_Alejandro_Galvis_Galvis_for_sde
+		add_ideas = COL_Jorge_Soto_Del_Corral_eco_sli
+		add_ideas = COL_Dario_Echandia_Olaya_sec_sde
+		custom_effect_tooltip = soclib_will_join_coalition_tt
+		hidden_effect = {
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+		}
+	}
+	else_if = {
+		limit = { #first election after reapproaching the liberals - Montejo president
+			has_country_flag = COL_eduardosantos_is_liberal_candidate_flag
+			NOT = { 
+				has_country_leader = { name = "Eduardo Santos Montejo" ruling_only = yes }
+				has_country_flag = COL_gaitan_is_liberal_candidate_flag
+			}
+		}
+		set_politics = {
+			ruling_party = social_liberal
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Eduardo Santos Montejo"
+			desc = "POLITICS_COL_MONTEJO_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Eduardo_Santos.png"
+			expire = "1965.1.1"
+			ideology = soclib_humanistic_capitalism_subtype  
+		}
+		add_ideas = COL_Carlos_Sanz_de_Santamaria_hog_sde
+		add_ideas = COL_Alejandro_Galvis_Galvis_for_sde
+		add_ideas = COL_Jorge_Soto_Del_Corral_eco_sli
+		add_ideas = COL_Tulio_Enrique_Tascon_Quintero_sec_sli
+		custom_effect_tooltip = socdem_will_join_coalition_tt
+		hidden_effect = {
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_democrat }
+			add_to_coalition = yes
+		}
+	}
+	else_if = {
+		limit = { #second election
+			has_country_flag = COL_second_election
+			NOT = { 
+				has_country_leader = { name = "Mario Galan Gomez" ruling_only = yes }
+				has_country_flag = COL_gaitan_is_liberal_candidate_flag 
+			}
+		}
+		create_country_leader = {
+			name = "Mario Galan Gomez"
+			desc = "POLITICS_COL_GALAN_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Mario_Galan_Gomez.png"
+			expire = "1965.1.1"
+			ideology = socdem_radical_progressivism_subtype
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = COL_mariogalan_is_liberal_candidate_flag
+					has_country_flag = COL_alfonsolopez_is_liberal_candidate_flag
+					has_country_flag = COL_eduardosantos_is_liberal_candidate_flag
+				}
+			}
+			add_ideas = COL_Carlos_Sanz_de_Santamaria_hog_sde
+			add_ideas = COL_Alejandro_Galvis_Galvis_for_sde
+			add_ideas = COL_Francisco_Cardona_Santa_eco_sde
+			add_ideas = COL_Dario_Echandia_Olaya_sec_sde
+		}
+		else = {
+			add_ideas = COL_Eduardo_Santos_Montejo_hog_sli
+			add_ideas = COL_Alejandro_Galvis_Galvis_for_sde
+			add_ideas = COL_Jorge_Soto_Del_Corral_eco_sli
+			add_ideas = COL_Dario_Echandia_Olaya_sec_sde
+		}
+	}
+	else_if = {
+		limit = { #third election if Gaitan is the new candidate
+			#date < 1947.1.1
+			has_country_flag = COL_third_election
+			has_country_flag = COL_gaitan_is_liberal_candidate_flag
+		}
+		create_country_leader = {
+			name = "Jorge Eliécer Gaitán"
+			desc = "POLITICS_COL_GAITAN_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Jorge_Gaitan.png"
+			expire = "1965.1.1"
+			ideology = socdem_left_nationalism_subtype 
+		}
+		add_ideas = COL_Carlos_Sanz_de_Santamaria_hog_sde
+		add_ideas = COL_Alejandro_Galvis_Galvis_for_sde
+		add_ideas = COL_Francisco_Cardona_Santa_eco_sde
+		add_ideas = COL_Dario_Echandia_Olaya_sec_sde
+		add_stability = -0.1
+		custom_effect_tooltip = soclib_will_join_coalition_tt
+		hidden_effect = {
+			clr_country_flag = COL_liberal
+			clr_country_flag = COL_liberal_2
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+		}
+	}
+}
+
+COL_elected_soccon = {
+	hidden_effect = {
+		remove_all_ministers = yes
+	}
+	set_politics = {
+		ruling_party = social_conservative
+		election_frequency = 48
+		elections_allowed = yes
+	}
+	if = {
+		limit = { #first election
+			has_country_flag = COL_first_election
+			NOT = {
+				has_country_flag = COL_second_election
+				has_country_flag = COL_third_election
+			}
+		}
+		create_country_leader = {
+			name = "Mariano Ospina Pérez"
+			desc = "POLITICS_COL_PEREZ_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Mariano_Ospina.png"
+			expire = "1965.1.1"
+			ideology = christian_democracy_subtype
+		}
+		add_ideas = COL_Manuel_Mosquera_Garces_hog_sco
+		add_ideas = COL_Roberto_Urdaneta_Arbelaez_for_sco
+		add_ideas = COL_Antonio_Jose_Uribe_Gaviria_eco_sco
+		add_ideas = COL_Francisco_Jose_Urrutia_Olano_sec_sco
+	}
+	if = {
+		limit = { #second election
+			has_country_flag = COL_second_election
+			NOT = {
+				has_country_flag = COL_third_election
+			}
+		}
+
+		create_country_leader = {
+			name = "Manuel Mosquera Garcés"
+			desc = "POLITICS_COL_MOSQUERA_GARCES_DESC"
+			picture = "gfx/leaders/COL/Portrait_Columbia_Manuel_Mosquera_Garces.png"
+			expire = "1965.1.1"
+			ideology = christian_democracy_subtype
+		}
+		add_ideas = COL_Manuel_Mosquera_Garces_hog_sco
+		add_ideas = COL_Alfredo_Vazquez_Carrizosa_for_sco
+		add_ideas = COL_Fernando_Gomez_Martinez_eco_sco
+		add_ideas = COL_Francisco_Jose_Urrutia_Olano_sec_sco
+	}
+	else_if = {
+		limit = { #third election
+			has_country_flag = COL_third_election
+		}
+		create_country_leader = {
+			name = "Carlos Arango Velez"
+			desc = "POLITICS_COL_ARANGO_VELEZ_CONS_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Carlos_Arango_Velez.png"
+			expire = "1965.1.1"
+			ideology = christian_democracy_subtype
+		}
+		add_ideas = COL_Manuel_Mosquera_Garces_hog_sco
+		add_ideas = COL_Miguel_Jimenez_Lopez_for_mli
+		add_ideas = COL_Fernando_Gomez_Martinez_eco_sco
+		add_ideas = COL_Francisco_Jose_Urrutia_Olano_sec_sco
+	}
+}
+
+COL_elected_radsoc = {
+	hidden_effect = {
+		remove_all_ministers = yes
+	}
+	set_politics = {
+		ruling_party = radical_socialist
+		elections_allowed = no
+	}
+	create_country_leader = {
+		name = "Jorge Eliécer Gaitán"
+		desc = "POLITICS_COL_GAITAN_DESC"
+		picture = "gfx/leaders/COL/Portrait_Colombia_Jorge_Gaitan.png"
+		expire = "1965.1.1"
+		ideology = agrarian_socialism_subtype
+	}
+	add_ideas = COL_Jose_Antonio_Osorio_Lizarazo_hog_rso
+	add_ideas = COL_Leon_de_Greiff_for_rso
+	add_ideas = COL_Antonio_Garcia_Nossa_eco_rso
+	add_ideas = COL_Juan_de_la_Cruz_Varela_sec_rso
+	custom_effect_tooltip = syn_will_join_coalition_tt
+	custom_effect_tooltip = tot_will_join_coalition_tt
+	hidden_effect = {
+		country_event = { id = colsoc.1 days = 15 }
+		end_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:syndicalist }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:totalist }
+		add_to_coalition = yes
+		mark_focus_tree_layout_dirty = yes
+		set_country_flag = COL_CONGRESS
+	}
+	add_popularity = {
+		ideology = radical_socialist
+		popularity = 0.07
+	}
+}
+
+COL_elected_syndie = {
+	hidden_effect = {
+		remove_all_ministers = yes
+	}
+	set_politics = {
+		ruling_party = syndicalist
+		elections_allowed = no
+	}
+	create_country_leader = {
+		name = "Diego Luis Córdoba"
+		desc = "POLITICS_COL_LUIS_CORDOBA_DESC"
+		expire = "1965.1.1"
+		picture = "gfx/leaders/COL/Portrait_Colombia_Diego_Luis_Cordoba.png"
+		ideology = anarcho_syndicalist_subtype
+	}
+	add_ideas = COL_Plinio_Mendoza_Neira_hog_syn
+	add_ideas = COL_Pedro_Nel_Gomez_Agudelo_for_syn
+	add_ideas = COL_Raul_Eduardo_Mahecha_eco_syn
+	add_ideas = COL_Eduardo_Zalamea_Borda_sec_syn
+	add_stability = -0.05
+	add_political_power = 70
+	hidden_effect = {
+		country_event = { id = colsoc.1 days = 15 }
+		mark_focus_tree_layout_dirty = yes
+		set_country_flag = COL_CONGRESS
+	}
+	add_popularity = {
+		ideology = radical_socialist
+		popularity = 0.07
+	}
+}
+
+COL_elected_tot = {
+	hidden_effect = {
+		remove_all_ministers = yes
+	}
+	set_politics = {
+		ruling_party = totalist
+		elections_allowed = no
+	}
+	if = {
+		limit = {
+			has_country_flag = COL_totalist_Vieira_leadership
+		}
+		create_country_leader = {
+			name = "Gilberto Vieira"
+			desc = "POLITICS_COL_VIEIRA_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Gilberto_Vieira.png"
+			expire = "1965.1.1"
+			ideology = national_communism_subtype 
+		}
+		add_ideas = COL_Felipe_Lleras_Camargo_hog_tot
+		add_ideas = COL_Luis_Vidales_for_tot
+		add_ideas = COL_Guillermo_Hernandez_Rodriguez_eco_tot
+		add_ideas = COL_Floro_Piedrahita_sec_tot
+		add_stability = -0.1
+		hidden_effect = {
+			country_event = { id = colsoc.1 days = 15 }
+			mark_focus_tree_layout_dirty = yes
+			set_country_flag = COL_CONGRESS
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.07
+		}
+	}
+	else = {
+		create_country_leader = {
+			name = "Augusto Durán Ospino"
+			desc = "POLITICS_COL_DURAN_OSPINO_DESC"
+			picture = "gfx/leaders/COL/Portrait_Colombia_Augusto_Duran_Ospino.png"
+			expire = "1965.1.1"
+			ideology = popcom_subtype
+		}
+		add_ideas = COL_Gilberto_Vieira_hog_tot
+		add_ideas = COL_Pedro_Maria_Carreno_for_tot
+		add_ideas = COL_Jose_Eustasio_Rivera_eco_tot
+		add_ideas = COL_Ignacio_Torres_Giraldo_sec_tot
+		add_stability = -0.1
+		hidden_effect = {
+			country_event = { id = colsoc.1 days = 15 }
+			mark_focus_tree_layout_dirty = yes
+			set_country_flag = COL_CONGRESS
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.07
+		}
+	}	
+}
+
+COL_elected_autdem = {
+	hidden_effect = {
+		remove_all_ministers = yes
+	}
+	set_politics = {
+		ruling_party = authoritarian_democrat
+		elections_allowed = no
+	}
+	create_country_leader = {
+		name = "Laureano Gómez Castro"
+		desc = "POLITICS_COL_GOMEZ_CASTRO_DESC"
+		picture = "gfx/leaders/COL/Portrait_Colombia_Lauro_Gomez_Castro.png"
+		expire = "1965.1.1"
+		ideology = autdem_christian_democracy_subtype
+	}
+	add_ideas = COL_Ismael_Perdomo_Borrero_hog_ade
+	add_ideas = COL_Antonio_Gomez_Restrepo_for_ade
+	add_ideas = COL_Esteban_Jaramillo_eco_ade
+	add_ideas = COL_Pedro_Jose_Berrio_Diaz_sec_ade
+	if = {
+		limit = {
+			has_country_flag = COL_elections_lists_flag
+		}
+		custom_effect_tooltip = natpop_will_join_coalition_tt
+	}
+	hidden_effect = {
+		country_event = { id = col.130 days = 4 }
+		if = {
+			limit = {
+				has_country_flag = COL_elections_lists_flag
+			}
+			end_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:national_populist }
+			add_to_coalition = yes
+		}
+	}
+	add_popularity = {
+		ideology = authoritarian_democrat
+		popularity = 0.07
+	}
+}
+
+COL_elected_natpop = {
+	hidden_effect = {
+		remove_all_ministers = yes
+	}
+	set_politics = {
+		ruling_party = national_populist
+		elections_allowed = no
+	}
+	create_country_leader = {
+		name = "Carlos Cortés Vargas"
+		desc = "POLITICS_COL_CORTES_VARGAS_DESC"
+		picture = "gfx/leaders/COL/Portrait_Colombia_Carlos_Cortes_Vargas.png"
+		expire = "1965.1.1"
+		ideology = leopardism_subtype
+	}
+	add_ideas = COL_Leopardos_Council_hog_npo
+	add_ideas = COL_Luis_Lopez_de_Mesa_Gomez_for_npo
+	add_ideas = COL_Julian_Bucheli_Ayerbe_eco_npo
+	add_ideas = COL_Santander_Araujo_sec_npo
+	add_popularity = {
+		ideology = national_populist
+		popularity = 0.07
+	}
+}
+
+COL_elected_FN_soclib = {
+	hidden_effect = {
+		remove_all_ministers = yes
+	}
+	create_country_leader = {
+		name = "Ricardo Uribe Escobar"
+		desc = "POLITICS_COL_URIBE_ESCOBAR_DESC"
+		picture = "gfx/leaders/COL/Portrait_Colombia_Ricardo_Uribe_Escobar.png"
+		expire = "1965.1.1"
+		ideology = socdem_progressive_conservatism_subtype
+	}
+	set_politics = {
+		ruling_party = social_democrat
+		election_frequency = 96
+		elections_allowed = yes
+	}
+	add_ideas = COL_Manuel_Mosquera_Graces_hog_sde
+	add_ideas = COL_Alfredo_Vazquez_Carrizosa_for_sli
+	add_ideas = COL_Fernando_Gomez_Martinez_eco_sco
+	add_ideas = COL_Tulio_Enrique_Tascon_Quintero_sec_sli
+	add_political_power = 100
+	custom_effect_tooltip = keep_current_coalition_tt
+	hidden_effect = {
+		set_country_flag = COL_frente_nacional_soclib
+		end_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:social_liberal }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:social_conservative }
+		add_to_coalition = yes
+	}
+}
+
+COL_elected_ANAPO_autdem = {
+	hidden_effect = {
+		remove_all_ministers = yes
+	}
+	create_country_leader = {
+		name = "Gustavo Rojas Pinilla"
+		picture = "gfx/leaders/COL/Portrait_Colombia_Gustavo_Rojas_Pinilla.png"
+		desc = "POLITICS_COL_PINILLA_ANAPO_DESC"
+		expire = "1965.1.1"
+		ideology = authdem_caudillo_populism_subtype
+	}
+	custom_effect_tooltip = COL_pinilla_switch_to_ANAPO_tt
+	hidden_effect = {
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			election_frequency = 96
+			elections_allowed = yes
+		}
+	}
+	add_ideas = COL_Ruben_Piedrahita_Arango_hog_pau
+	add_ideas = COL_Laureano_Garcia_Ortiz_for_ade
+	add_ideas = COL_Gregorio_Obregon_eco_ade
+	add_ideas = COL_Evaristo_Sourdis_Juliao_sec_ade
+	add_stability = 0.12
+	custom_effect_tooltip = pataut_will_join_coalition_tt
+	hidden_effect = {
+		set_country_flag = COL_anapo_elected
+		end_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:paternal_autocrat }
+		add_to_coalition = yes
+	}
+}
+
+COL_election_clr_flags = {
+	clr_country_flag = COL_mariogalan_is_liberal_candidate_flag
+	clr_country_flag = COL_eduardosantos_is_liberal_candidate_flag
+	clr_country_flag = COL_alfonsolopez_is_liberal_candidate_flag
+	clr_country_flag = COL_gabrielechevarria_is_soclib_candidate_flag
+	clr_country_flag = COL_mamatoco_is_soclib_candidate_flag
+	clr_country_flag = COL_eduardosantos_is_soclib_candidate_flag
+}
+
+COL_set_up_frente_nacional = {
+	set_temp_variable = { FNnatpopswap_var = party_popularity@national_populist }
+	add_to_temp_variable = { FNnatpopswap_var = party_popularity@authoritarian_democrat }
+	multiply_temp_variable = { FNnatpopswap_var = 100 }
+	set_political_party = { 
+		ideology = authoritarian_democrat
+		popularity = 0
+	}
+	set_political_party = {
+		ideology = national_populist
+		popularity = FNnatpopswap_var
+	}
+	set_temp_variable = { FNautdemswap_var = party_popularity@paternal_autocrat }
+	multiply_temp_variable = { FNautdemswap_var = 100 }
+	set_political_party = { 
+		ideology = paternal_autocrat
+		popularity = 0
+	}
+	set_political_party = {
+		ideology = authoritarian_democrat
+		popularity = FNautdemswap_var
+	}
+	hidden_effect = {
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.04
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.02
+		}
+	}
+	set_party_name = {
+		ideology = authoritarian_democrat
+		long_name = "Junta de Unidad Nacional(Loyalists)\n§LNacional Unity Junta(Loyalists)§!"
+		name = "JUN(Loyalists)"
+	}
+	set_party_name = {
+		ideology = paternal_autocrat
+		long_name = "Junta de Unidad Nacional(Opposition)\n§LNacional Unity Junta(Opposition)§!"
+		name = "JUN(Opposition)"
+	}
+	if = {
+		limit = {
+			has_completed_focus = COL_president_for_life
+		}
+		set_party_name = {
+			ideology = social_conservative
+			long_name = COL_FN_social_conservative_party_long
+			name = COL_FN_social_conservative_party
+		}
+		set_party_name = {
+			ideology = social_liberal
+			long_name = COL_FN_social_liberal_party_long
+			name = COL_FN_social_liberal_party
+		}
+		set_party_name = {
+			ideology = market_liberal
+			long_name = "Frente Nacional's Dissidents"
+			name = "Dissidents"
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = "Frente Nacional's Dissidents"
+			name = "Dissidents"
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = COL_FN_national_populist_party_long
+			name = COL_FN_national_populist_party
+		}
+	}
+	else = {
+		set_party_name = {
+			ideology = national_populist
+			long_name = COL_FN_national_populist_party_long
+			name = COL_FN_national_populist_party
+		}
+	}
+	create_country_leader = {
+		name = "Gustavo Rojas Pinilla"
+		picture = "gfx/leaders/COL/Portrait_Colombia_Gustavo_Rojas_Pinilla.png"
+		expire = "1965.1.1"
+		ideology = authdem_caudillo_populism_subtype
+	}
+	custom_effect_tooltip = COL_pinilla_switch_to_autdem_tt
+	hidden_effect = {
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		if = {
+			limit = {
+				has_country_flag = COL_totpurges
+			}
+			add_ideas = COL_Ruben_Piedrahita_Arango_hog_pau
+			else = {
+				add_ideas = COL_Gabriel_Paris_Gordillo_hog_pau
+			}
+		}
+		add_ideas = COL_Alfredo_Vazquez_Carrizosa_for_sli
+		add_ideas = COL_Fernando_Gomez_Martinez_eco_sco
+		add_ideas = COL_Guillermo_Padilla_Manrique_sec_pau
+	}
+	custom_effect_tooltip = soclib_will_join_coalition_tt
+	custom_effect_tooltip = soccon_will_join_coalition_tt
+	hidden_effect = {
+		end_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:social_liberal }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:social_conservative }
+		add_to_coalition = yes
+	}
+}
+
+COL_coup_risk_increase = {
+	custom_effect_tooltip = COL_army_coup_risk_rise_tt
+	hidden_effect = {
+		add_to_variable = {
+			var = COL_army_coup_risk
+			value = 1
+		}
+	}
+}
+
+COL_coup_risk_decrease = {
+	#if = {
+		#limit = {
+			#check_variable = {
+				#var = COL_army_coup_risk
+				#value = 1
+				#compare = greater_than_or_equals
+			#}
+		#}
+		custom_effect_tooltip = COL_army_coup_risk_lower_tt
+		hidden_effect = {
+			subtract_from_variable = {
+				var = COL_army_coup_risk
+				value = 1
+			}
+		}
+	#}
+}
+
+COL_coup_risk_decrease_double = {
+	#if = {
+		#limit = {
+			#check_variable = {
+				#var = COL_army_coup_risk
+				#value = 1
+				#compare = greater_than_or_equals
+			#}
+		#}
+		custom_effect_tooltip = COL_army_coup_risk_lower_double_tt
+		hidden_effect = {
+			subtract_from_variable = {
+				var = COL_army_coup_risk
+				value = 2
+			}
+		}
+	#}
+}
+
+COL_choose_industrialist_hardline = {
+	if = {
+		limit = {
+			has_country_flag = COL_hardline_protest_commune
+		}
+		country_event = {
+			id = colsoc.6
+			days = 5
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_country_flag = COL_hardline_protest_commune
+			}
+		}
+		country_event = {
+			id = colsoc.5
+			days = 5
+		}
+	}
+}
+
+######SETUP CIVIL WAR - very important##########
+COL_setup_for_COLCW = {
+	COC = { #BASIC STUFF, CLAIM AND TRANSFERS
+		add_state_core = 486 #meta
+		add_state_core = 851 #upper caqueta
+		transfer_state = 486 #meta
+		transfer_state = 851 #upper caqueta
+		if = {  #check for lower caqueta ownership (default to Peru)
+			limit = {
+				COL = {
+					owns_state = 1214
+					controls_state = 1214
+				}
+			}
+			add_state_core = 1214 #lower caqueta
+			transfer_state = 1214 #lower caqueta
+		}
+		else_if = {
+			limit = {
+				COL = {
+					owns_state = 1214
+					NOT = { controls_state = 1214 }
+				}
+			}
+			add_state_core = 1214 #lower caqueta
+		}
+		custom_effect_tooltip = COL_CW_rebel_unit_tt
+		every_state = { #add cores and claims
+			limit = {
+				is_core_of = COL
+				NOT = { is_core_of = COC }
+				NOT = { is_claimed_by = COC }
+			}
+			add_claim_by = COC
+			if = {
+				limit = {
+					is_demilitarized_zone = yes
+				}
+				set_demilitarized_zone = no
+			}
+		}
+	}
+	if = { #EFFECTS FIRED ONLY IF AFRO REBELLION IS SPAWNED
+		limit = {
+			COL = {
+				has_country_flag = COL_afros_rebel
+			}
+		}
+		hidden_effect = {
+			COC = {
+				set_province_controller = 12872 #Choco 1 - Quibdo
+				set_province_controller = 10494 #Choco 2
+				set_province_controller = 13421 #Choco 3
+				set_province_controller = 13422	#Choco 4
+				set_province_controller = 12790 #Baranquilla/Cartagena
+				division_template = {
+					name = "Milicia Afrocolombiana" #SETUP MILITIA AFROCOLOMBIANA DIVISION
+					division_names_group = COC_MIL_03
+					regiments = {
+						militia = { x = 0 y = 0 }
+						militia = { x = 0 y = 1 }
+						militia = { x = 0 y = 2 }
+						militia = { x = 1 y = 0 }
+						militia = { x = 1 y = 1 }
+						militia = { x = 1 y = 2 }
+						militia = { x = 2 y = 0 }
+					}
+				}
+			}
+			853 = { #spawn afrocolombian militias
+				create_unit = {
+					division = "division_template = \"Milicia Afrocolombiana\" start_experience_factor = 0.2 start_equipment_factor = 1"
+					owner = COC
+					prioritize_location = 12872 #Quibdo
+				}
+			}
+			493 = {
+				create_unit = {
+					division = "division_template = \"Milicia Afrocolombiana\" start_experience_factor = 0.2 start_equipment_factor = 1"
+					owner = COC
+					prioritize_location = 12790 #Baranquilla/Cartagena
+				}
+			}
+			if = {
+				limit = {
+					COL = {
+						NOT = {
+							has_country_flag = COL_natives_rebel
+						}
+					}
+				}
+				COC = {
+					set_province_controller = 7936 #Buenaventura
+				}
+				852 = {
+					create_unit = {
+						division = "division_template = \"Milicia Afrocolombiana\" start_experience_factor = 0.2 start_equipment_factor = 1"
+						owner = COC
+						prioritize_location = 7936 #Buenaventura
+					}
+				}
+			}
+		}
+	}
+	if = { #EFFECT FIRED ONLY IF CAU IS SPAWNED
+		limit = {
+			has_country_flag = COL_natives_rebel
+		}
+		CAU = {
+			#transfer states
+			add_state_core = 852 #cauca
+			add_state_core = 1215 #narino
+			transfer_state = 852 #cauca
+			transfer_state = 1215 #narino
+			custom_effect_tooltip = COL_CW_native_unit_tt
+			every_state = { #add CAU cores
+				limit = {
+					is_core_of = COL
+					NOT = { is_core_of = CAU }
+					NOT = { is_claimed_by = CAU }
+				}
+				add_claim_by = CAU
+				if = {
+					limit = {
+						is_demilitarized_zone = yes
+					}
+					set_demilitarized_zone = no
+				}
+			}
+			country_event = { id = cau.1 days = 12 } #CAU inital event
+			hidden_effect = {
+				every_owned_state = { #teleport COL armies
+					teleport_armies = {
+						limit = { 
+							tag = COL 
+						}
+						to_state_array = owned_controlled_states
+					}
+				}
+				add_ideas = {
+					partial_economic_mobilisation
+					extensive_conscription
+					CAU_resistance
+					CAU_Nasa_Neutral
+					CAU_Wayuu_Neutral
+					CAU_Senu_Neutral
+					CAU_Muisca_Neutral
+				}
+				set_popularities = { #copy COL popularities
+					totalist = var:COL.party_popularity_100@totalist
+					syndicalist = var:COL.party_popularity_100@syndicalist
+					radical_socialist = var:COL.party_popularity_100@radical_socialist
+					social_democrat = var:COL.party_popularity_100@social_democrat
+					social_liberal = var:COL.party_popularity_100@social_liberal
+					market_liberal = var:COL.party_popularity_100@market_liberal
+					social_conservative = var:COL.party_popularity_100@social_conservative
+					authoritarian_democrat = var:COL.party_popularity_100@authoritarian_democrat
+					paternal_autocrat = var:COL.party_popularity_100@paternal_autocrat
+					national_populist = var:COL.party_popularity_100@national_populist
+				}
+				add_popularity = { #make autdem stronger
+					ideology = authoritarian_democrat
+					popularity = 0.12
+				}
+				add_popularity = { #make pataut disappear
+					ideology = paternal_autocrat
+					popularity = -1
+				}
+				set_politics = {
+					ruling_party = authoritarian_democrat
+					elections_allowed = no
+				}
+				add_manpower = 12000 #add manpower
+				division_template = { #SETUP CAU DIVISION
+					name = "Opquabachua"
+					division_names_group = SPAN_MIL_01
+					regiments = {
+						militia = { x = 0 y = 0 }
+						militia = { x = 0 y = 1 }
+						militia = { x = 0 y = 2 }
+						militia = { x = 1 y = 0 }
+						militia = { x = 1 y = 1 }
+						militia = { x = 1 y = 2 }
+						militia = { x = 2 y = 0 }
+					}
+				}
+				set_temp_variable = { COL_strengthnat = COL.num_divisions } #calculate number of CAU divisions and spawn
+				multiply_temp_variable = { var = COL_strengthnat value = 0.55 }
+				round_temp_variable = COL_strengthnat
+				clamp_temp_variable = { var = COL_strengthnat max = 12 min = 3 }
+				852 = { #cauca
+					create_unit = {
+						division = "division_template = \"Opquabachua\" start_experience_factor = 0.8 start_equipment_factor = 1"
+						owner = CAU
+						count = var:COL_strengthnat
+					}
+				}
+				#subtract_from_variable = { var = strengthnat value = 1 }
+				#COL_add_natives_units = yes
+				if = { #delete templates
+					limit = { has_template = "División de Infanteria" }
+					delete_unit_template_and_units = { division_template = "División de Infanteria" }
+				}
+				if = {
+					limit = { has_template = "División de Caballeria" }
+					delete_unit_template_and_units = { division_template = "División de Caballeria" }
+				}
+				if = {
+					limit = { has_template = "Guardia" }
+					delete_unit_template_and_units = { division_template = "Guardia" }
+				}
+				if = {
+					limit = {
+						NOT = { has_global_flag = KR_no_unit_limits }
+					}
+					calculate_maximum_divisions = yes
+				}
+				if = {
+					limit = { is_ai = no }
+					add_stability = 0.1 #Player's Buff
+				}
+				COL = {
+					CAU = { transfer_technology = yes }
+				}
+			}
+		}
+	}
+	hidden_effect = {
+		COC = { #COC SETUP 
+			country_event = { id = coc.2 days = 170 random_days = 30 } #Event for Ceasefire/White Peace proposal
+			#set_capital = 486
+			every_owned_state = {
+				teleport_armies = { #teleport COL armies
+					limit = { 
+						tag = COL 
+					}
+					to_state_array = owned_controlled_states
+				}
+			}
+			set_popularities = { #set politics
+				totalist = 29
+				syndicalist = 28
+				radical_socialist = 32
+				social_democrat = 11
+				social_liberal = 0
+				market_liberal = 0
+				social_conservative = 0
+				authoritarian_democrat = 0
+				paternal_autocrat = 0
+				national_populist = 0
+			}
+			if = { #COC is RADSOC
+				limit = { has_global_flag = COL_communeUNIR }
+				add_popularity = {
+					ideology = radical_socialist
+					popularity = 0.05
+				}
+				set_politics = {
+					ruling_party = radical_socialist
+					elections_allowed = no
+				}
+				add_ideas = COL_Jose_Antonio_Osorio_Lizarazo_hog_rso
+				add_ideas = COL_Leon_de_Greiff_for_rso
+				add_ideas = COL_Antonio_Garcia_Nossa_eco_rso
+				add_ideas = COL_Juan_de_la_Cruz_Varela_sec_rso
+				COL = {
+					add_popularity = {
+						ideology = paternal_autocrat
+						popularity = 0.12
+					}
+					add_popularity = {
+						ideology = authoritarian_democrat
+						popularity = 0.025
+					}
+					add_popularity = {
+						ideology = national_populist
+						popularity = 0.025
+					}
+					add_popularity = {
+						ideology = social_conservative
+						popularity = 0.02
+					}
+					add_popularity = {
+						ideology = market_liberal
+						popularity = 0.02
+					}
+					add_popularity = {
+						ideology = social_democrat
+						popularity = 0.015
+					}
+					add_popularity = {
+						ideology = social_liberal
+						popularity = 0.01
+					}
+					add_popularity = {
+						ideology = radical_socialist
+						popularity = -1
+					}
+					add_popularity = {
+						ideology = syndicalist
+						popularity = -1
+					}
+					add_popularity = {
+						ideology = totalist
+						popularity = -1
+					}
+					add_popularity = {
+						ideology = radical_socialist
+						popularity = 0.055
+					}
+					add_popularity = {
+						ideology = syndicalist
+						popularity = 0.025
+					}
+					add_popularity = {
+						ideology = totalist
+						popularity = 0.025
+					}
+				}	
+				end_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:totalist }
+				add_to_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:syndicalist }
+				add_to_coalition = yes
+				set_country_flag = COL_playcommuneunir
+			}
+			if = { #COC is SYND
+				limit = { has_global_flag = COL_communesyndicalist }
+				add_popularity = {
+					ideology = syndicalist
+					popularity = 0.07
+				}
+				set_politics = {
+					ruling_party = syndicalist
+					elections_allowed = no
+				}
+				add_ideas = COL_Plinio_Mendoza_Neira_hog_syn
+				add_ideas = COL_Pedro_Nel_Gomez_Agudelo_for_syn
+				add_ideas = COL_Jose_Eustasio_Rivera_eco_syn
+				add_ideas = COL_Eduardo_Zalamea_Borda_sec_syn
+				COL = {
+					add_popularity = {
+						ideology = paternal_autocrat
+						popularity = 0.12
+					}
+					add_popularity = {
+						ideology = authoritarian_democrat
+						popularity = 0.025
+					}
+					add_popularity = {
+						ideology = national_populist
+						popularity = 0.025
+					}
+					add_popularity = {
+						ideology = social_conservative
+						popularity = 0.02
+					}
+					add_popularity = {
+						ideology = market_liberal
+						popularity = 0.02
+					}
+					add_popularity = {
+						ideology = social_democrat
+						popularity = 0.015
+					}
+					add_popularity = {
+						ideology = social_liberal
+						popularity = 0.01
+					}
+					add_popularity = {
+						ideology = radical_socialist
+						popularity = -1
+					}
+					add_popularity = {
+						ideology = syndicalist
+						popularity = -1
+					}
+					add_popularity = {
+						ideology = totalist
+						popularity = -1
+					}
+					add_popularity = {
+						ideology = radical_socialist
+						popularity = 0.035
+					}
+					add_popularity = {
+						ideology = syndicalist
+						popularity = 0.045
+					}
+					add_popularity = {
+						ideology = totalist
+						popularity = 0.025
+					}
+				}
+				end_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:totalist }
+				add_to_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:radical_socialist }
+				add_to_coalition = yes
+				set_country_flag = COL_playcommunesyndie
+			}
+			if = { #COC is TOT
+				limit = { has_global_flag = COL_communetotalist }
+				add_popularity = {
+					ideology = totalist
+					popularity = 0.07
+				}
+				set_politics = {
+					ruling_party = totalist
+					elections_allowed = no
+				}
+				if = {
+					limit = {
+						COL = {
+							has_country_flag = COL_totalist_Vieira_leadership
+						}
+					}
+					add_ideas = COL_Felipe_Lleras_Camargo_hog_tot
+					add_ideas = COL_Luis_Vidales_for_tot
+					add_ideas = COL_Guillermo_Hernandez_Rodriguez_eco_tot
+					add_ideas = COL_Ignacio_Torres_Giraldo_sec_tot
+				}
+				else = {
+					add_ideas = COL_Gilberto_Vieira_hog_tot
+					add_ideas = COL_Pedro_Maria_Carreno_for_tot
+					add_ideas = COL_Raul_Eduardo_Mahecha_eco_tot
+					add_ideas = COL_Ignacio_Torres_Giraldo_sec_tot
+				}
+				COL = {
+					add_popularity = {
+						ideology = paternal_autocrat
+						popularity = 0.12
+					}
+					add_popularity = {
+						ideology = authoritarian_democrat
+						popularity = 0.025
+					}
+					add_popularity = {
+						ideology = national_populist
+						popularity = 0.025
+					}
+					add_popularity = {
+						ideology = social_conservative
+						popularity = 0.02
+					}
+					add_popularity = {
+						ideology = market_liberal
+						popularity = 0.02
+					}
+					add_popularity = {
+						ideology = social_democrat
+						popularity = 0.015
+					}
+					add_popularity = {
+						ideology = social_liberal
+						popularity = 0.01
+					}
+					add_popularity = {
+						ideology = radical_socialist
+						popularity = -1
+					}
+					add_popularity = {
+						ideology = syndicalist
+						popularity = -1
+					}
+					add_popularity = {
+						ideology = totalist
+						popularity = -1
+					}
+					add_popularity = {
+						ideology = radical_socialist
+						popularity = 0.035
+					}
+					add_popularity = {
+						ideology = syndicalist
+						popularity = 0.025
+					}
+					add_popularity = {
+						ideology = totalist
+						popularity = 0.045
+					}
+				}
+				end_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:radical_socialist }
+				add_to_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:syndicalist }
+				add_to_coalition = yes
+				set_country_flag = COL_playcommunetot
+			}
+			add_ideas = COC_guerrilla #ADD GUERRILLA IDEA
+			division_template = { #SETUP ARMY DIVISION COC
+				name = "División Gaitanista Colombiana" #INF
+				division_names_group = COC_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+				}
+			}
+			division_template = { #SETUP MILITIA DIVISION COC
+				name = "Milicia Socialista Revolucionaria" #MILITIA
+				division_names_group = COC_MIL_01
+				regiments = {
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+					militia = { x = 0 y = 2 }
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+				}
+			}
+			if = { #SETUP EXTRA DIVISIONS UNLOCKED BY PREVIOUS FOCUS
+				limit = {
+					COL = {
+						has_completed_focus = COL_train_foreign_militias
+					}
+				}
+				division_template = {
+					name = "Milicia Extranjera" #MILITIA
+					division_names_group = COC_MIL_02
+					regiments = {
+						militia = { x = 0 y = 0 }
+						militia = { x = 0 y = 1 }
+						militia = { x = 0 y = 2 }
+						militia = { x = 1 y = 0 }
+						militia = { x = 1 y = 1 }
+						militia = { x = 1 y = 2 }
+						militia = { x = 2 y = 0 }
+					}
+				}
+				851 = { #caqueta
+					create_unit = {
+						division = "division_template = \"Milicia Extranjera\" start_experience_factor = 1 start_equipment_factor = 1"
+						owner = COC
+						prioritize_location = 13391 #florencia
+					}
+				}
+			}
+			set_temp_variable = { COL_rebelunits = COL.num_divisions } #CALCULATE AND SPAWN UNITS
+			multiply_temp_variable = { var = COL_rebelunits value = 0.8 }
+			round_temp_variable = COL_rebelunits
+			clamp_temp_variable = { var = COL_rebelunits max = 20 min = 4 }
+			486 = { #meta
+				create_unit = {
+					division = "division_template = \"Milicia Socialista Revolucionaria\" start_experience_factor = 0.3 start_equipment_factor = 1"
+					owner = COC
+					prioritize_location = 1887 #villavicencio
+				}
+				create_unit = {
+					division = "division_template = \"División Gaitanista Colombiana\" start_experience_factor = 0.3 start_equipment_factor = 1"
+					owner = COC
+					prioritize_location = 1887 #villavicencio
+				}
+			}
+			851 = { #caqueta			
+				create_unit = {
+					division = "division_template = \"Milicia Socialista Revolucionaria\" start_experience_factor = 0.3 start_equipment_factor = 1"
+					owner = COC
+					prioritize_location = 13391 #florencia
+				}
+			}
+			subtract_from_temp_variable = { var = COL_rebelunits value = 3 }
+			random_owned_controlled_state = {	
+				limit = {
+					is_coastal = no
+				}	
+				create_unit = {
+					division = "division_template = \"División Gaitanista Colombiana\" start_experience_factor = 0.3 start_equipment_factor = 1"
+					owner = COC
+					count = var:COL_rebelunits
+				}
+			}
+			if = { #delete templates
+				limit = { has_template = "División de Infanteria" }
+				delete_unit_template_and_units = { division_template = "División de Infanteria" }
+			}
+			if = {
+				limit = { has_template = "División de Caballeria" }
+				delete_unit_template_and_units = { division_template = "División de Caballeria" }
+			}
+			if = {
+				limit = { has_template = "Guardia" }
+				delete_unit_template_and_units = { division_template = "Guardia" }
+			}
+			if = { #recalculate divisions
+				limit = {
+					NOT = { has_global_flag = KR_no_unit_limits }
+				}
+				calculate_maximum_divisions = yes
+			}
+			country_event = { id = colcw.3 days = 2 random_days = 3 } #COC DECLARES WAR ON COL EVENT - Starts COLCW
+			if = {
+				limit = { is_ai = no }
+				add_stability = 0.10 #Player's Buff
+			}
+		}
+		COL = { #COL SETUP
+			country_event = { id = colcw.7 days = 300 random_days = 65 } #event for COL proposed ceasefire
+			COC = { transfer_technology = yes }
+			transfer_ship = { prefer_name = "ARC Gloria" type = light_cruiser target = COC }
+			transfer_ship = { prefer_name = "ARC Antioquia" type = destroyer target = COC }
+			if = {
+				limit = {
+					has_country_flag = COL_guerrilla_gets_more_weapons
+					has_country_flag = COL_natives_rebel
+				}
+				send_equipment_fraction = { target = COC value = 0.55 }
+				send_equipment_fraction = { target = CAU value = 0.1 }
+				COL = { 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 75
+					}
+				}
+				COC = { 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 75
+					}
+				}
+				CAU = { 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 25
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = COL_guerrilla_gets_more_weapons
+					NOT = { has_country_flag = COL_natives_rebel }
+				}
+				send_equipment_fraction = { target = COC value = 0.65 }
+				COL = { 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 75
+					}
+				}
+				COC = { 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 100
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = COL_guerrilla_gets_more_weapons }
+					has_country_flag = COL_natives_rebel
+				}
+				send_equipment_fraction = { target = COC value = 0.35 }
+				send_equipment_fraction = { target = CAU value = 0.35 }
+				COL = { 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 25
+					}
+				}
+				COC = { 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 25
+					}
+				}
+				CAU = { 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 25
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = COL_guerrilla_gets_more_weapons }
+					NOT = { has_country_flag = COL_natives_rebel }
+				}
+				send_equipment_fraction = { target = COC value = 0.35 }
+				COL = { 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 25
+					}
+				}
+				COC = { 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 25
+					}
+				}
+			}
+			if = {
+				limit = {
+					COL = { has_completed_focus = COL_plan_fuego_amigo }
+				}
+				COL = {
+					random_owned_controlled_state = {
+						limit = {
+							arms_factory > 0
+						}
+						damage_building = {
+							type = arms_factory
+							damage = 1.0
+						}
+					}
+					random_owned_controlled_state = {
+						limit = {
+							arms_factory > 0
+						}
+						damage_building = {
+							type = arms_factory
+							damage = 1.0
+						}
+					}
+					random_owned_controlled_state = {
+						limit = {
+							industrial_complex > 0
+						}
+						damage_building = {
+							type = industrial_complex
+							damage = 1.0
+						}
+					}
+					random_owned_controlled_state = {
+						limit = {
+							industrial_complex > 0
+						}
+						damage_building = {
+							type = industrial_complex
+							damage = 1.0
+						}
+					}
+					random_owned_controlled_state = {
+						limit = {
+							infrastructure > 0
+						}
+						damage_building = {
+							type = infrastructure
+							damage = 1
+						}
+					}
+				}
+			}
+			add_war_support = 0.15
+			COL_CW_ideas_removal = yes
+			COC = { COC_CW_idea_add = yes }
+			if = {
+				limit = { is_ai = no }
+				add_stability = 0.05 #Player's Buff
+			}
+		}
+	}
+}
+
+COL_leftwing_idea_removal = { #idea removal leftwing governament for COL
+	hidden_effect = {
+		COL = {
+			if = {
+				limit = { has_idea = COL_religious_schools }
+				remove_ideas = COL_religious_schools
+				set_country_flag = COL_had_religious_schools
+			}
+			if = {
+				limit = { has_idea = COL_reform_mil_academies }
+				remove_ideas = COL_reform_mil_academies
+				set_country_flag = COL_had_reform_mil_academies
+			}
+			if = {
+				limit = { has_idea = COL_helping_the_darien }
+				remove_ideas = COL_helping_the_darien
+				set_country_flag = COL_had_helping_the_darien
+			}
+			if = {
+				limit = { has_idea = COL_exiling_enemies }
+				remove_ideas = COL_exiling_enemies
+				set_country_flag = COL_had_exiling_enemies
+			}
+			if = {
+				limit = { has_idea = COL_exiling_enemies_heavy }
+				remove_ideas = COL_exiling_enemies_heavy
+				set_country_flag = COL_had_exiling_enemies_heavy
+			}
+			if = {
+				limit = { has_idea = COL_airdisaster }
+				remove_ideas = COL_airdisaster
+				set_country_flag = COL_had_airdisaster
+			}
+		}
+	}
+}
+
+COL_rightwing_idea_removal = { #idea removal rightwing governament for COL
+	hidden_effect = {
+		COL = {
+			if = {
+				limit = { has_idea = COL_industrialist_protest }
+				remove_ideas = COL_industrialist_protest
+				set_country_flag = COL_had_industrialist_protest
+			}
+			if = {
+				limit = { has_idea = COL_industrialist_protest_crushed }
+				remove_ideas = COL_industrialist_protest_crushed
+				set_country_flag = COL_had_industrialist_protest_crushed
+			}
+			if = {
+				limit = { has_idea = COL_armedminorities }
+				remove_ideas = COL_armedminorities
+				set_country_flag = COL_had_armedminorities
+			}
+			if = {
+				limit = { has_idea = COL_tradecongress }
+				remove_ideas = COL_tradecongress
+				set_country_flag = COL_had_tradecongress
+			}
+			if = {
+				limit = { has_idea = COL_airdisaster }
+				remove_ideas = COL_airdisaster
+				set_country_flag = COL_had_airdisaster
+			}
+		}
+	}
+}
+
+COL_CW_ideas_removal = { #ideas removal rightwing COL CW
+	hidden_effect = {
+		COL = {
+			if = {
+				limit = { has_idea = COL_political_turmoil }
+				swap_ideas = { 
+					remove_idea = COL_political_turmoil
+					add_idea = COL_civilwar_pataut_1
+				}
+				set_country_flag = COL_had_level_1_bogotazo
+			}
+			else_if = {
+				limit = { has_idea = COL_bogotazo_4 }
+				swap_ideas = { 
+					remove_idea = COL_bogotazo_4
+					add_idea = COL_civilwar_pataut_1
+				}
+				set_country_flag = COL_had_level_1_bogotazo
+			}
+			else_if = {
+				limit = { has_idea = COL_bogotazo_5 }
+				swap_ideas = { 
+					remove_idea = COL_bogotazo_5
+					add_idea = COL_civilwar_pataut_1
+				}
+				set_country_flag = COL_had_level_1_bogotazo
+			}
+			else_if = {
+				limit = { has_idea = COL_bogotazo }
+				swap_ideas = { 
+					remove_idea = COL_bogotazo
+					add_idea = COL_civilwar_pataut_2
+				}
+				set_country_flag = COL_had_level_2_bogotazo
+			}
+			else_if = {
+				limit = { has_idea = COL_bogotazo_2 }
+				swap_ideas = { 
+					remove_idea = COL_bogotazo_2
+					add_idea = COL_civilwar_pataut_2
+				}
+				set_country_flag = COL_had_level_2_bogotazo
+			}
+			else_if = {
+				limit = { has_idea = COL_bogotazo_3 }
+				swap_ideas = { 
+					remove_idea = COL_bogotazo_3
+					add_idea = COL_civilwar_pataut_2
+				}
+				set_country_flag = COL_had_level_2_bogotazo
+			}
+			else_if = {
+				limit = { has_idea = COL_worse_bogotazo_4 }
+				swap_ideas = { 
+					remove_idea = COL_bogotazo_4
+					add_idea = COL_civilwar_pataut_2
+				}
+				set_country_flag = COL_had_level_2_bogotazo
+			}
+			else_if = {
+				limit = { has_idea = COL_worse_bogotazo_5 }
+				swap_ideas = { 
+					remove_idea = COL_bogotazo_5
+					add_idea = COL_civilwar_pataut_2
+				}
+				set_country_flag = COL_had_level_2_bogotazo
+			}
+			else_if = {
+				limit = { has_idea = COL_worse_bogotazo }
+				swap_ideas = { 
+					remove_idea = COL_worse_bogotazo
+					add_idea = COL_civilwar_pataut_3
+				}
+				set_country_flag = COL_had_level_3_bogotazo
+			}
+			else_if = {
+				limit = { has_idea = COL_worse_bogotazo_2 }
+				swap_ideas = { 
+					remove_idea = COL_worse_bogotazo_2
+					add_idea = COL_civilwar_pataut_3
+				}
+				set_country_flag = COL_had_level_3_bogotazo
+			}
+			else_if = {
+				limit = { has_idea = COL_worse_bogotazo_3 }
+				swap_ideas = { 
+					remove_idea = COL_worse_bogotazo_3
+					add_idea = COL_civilwar_pataut_3
+				}
+				set_country_flag = COL_had_level_3_bogotazo
+			}
+			else = {
+				add_ideas = COL_civilwar_pataut_1
+			}
+		}
+	}
+}
+	
+COC_CW_idea_add = { #idea add for COC CW
+	hidden_effect = {
+		if = {
+			limit = { has_country_flag = COL_had_political_turmoil }
+			COC = {
+				add_manpower = 1200
+			}
+		}
+		if = {
+			limit = { has_country_flag = COL_had_bogotazo }
+			COC = {
+				add_manpower = 1700
+			}
+		}
+		if = {
+			limit = { has_country_flag = COL_had_bogotazo_2 }
+			COC = {
+				add_manpower = 2200
+			}
+		}
+		if = {
+			limit = { has_country_flag = COL_had_industrialist_protest }
+			COC = {
+				add_ideas = COL_industrialist_protest
+			}
+		}
+		if = {
+			limit = { has_country_flag = COL_had_industrialist_protest_crushed }
+			COC = {
+				add_ideas = COL_industrialist_protest_crushed
+			}
+		}
+		if = {
+			limit = { has_country_flag = COL_had_armedminorities }
+			COC = {
+				add_ideas = COL_armedminorities
+			}
+		}
+		if = {
+			limit = { has_country_flag = COL_had_tradecongress }
+			COC = {
+				add_ideas = COL_tradecongress
+			}
+		}
+	}
+}
+
+COL_spread_ideology_effect_1 = {
+	if = {
+		limit = {
+			FROM = {
+				tag = PRU
+			}
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.015
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.015
+		}
+	}
+	else_if = {
+		limit = {
+			FROM = {
+				tag = BOL
+			}
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.015
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.015
+		}
+	}
+	else_if = {
+		limit = {
+			FROM = {
+				OR = {
+					tag = PAR
+					tag = ECU
+				}
+			}
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.015
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.015
+		}
+	}
+	else_if = {
+		limit = {
+			COL = {
+				has_government = totalist
+			}
+			FROM = {
+				NOT = {
+					tag = ECU
+					tag = PRU
+					tag = BOL
+					tag = PAR
+				}
+			}
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.015
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.015
+		}
+	}
+	else_if = {
+		limit = {
+			COL = {
+				has_government = radical_socialist
+			}
+			FROM = {
+				NOT = {
+					tag = ECU
+					tag = PRU
+					tag = BOL
+					tag = PAR
+				}
+			}
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.015
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.015
+		}
+	}
+	set_country_flag = COL_had_boost_1
+}
+
+COL_spread_ideology_effect_2 = {
+	if = {
+		limit = {
+			FROM = {
+				tag = PRU
+			}
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.03
+		}
+	}
+	else_if = {
+		limit = {
+			FROM = {
+				tag = BOL
+			}
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.03
+		}
+	}
+	else_if = {
+		limit = {
+			FROM = {
+				OR = {
+					tag = PAR
+					tag = ECU
+				}
+			}
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.03
+		}
+	}
+	else_if = {
+		limit = {
+			COL = {
+				has_government = totalist
+			}
+			FROM = {
+				NOT = {
+					tag = ECU
+					tag = PRU
+					tag = BOL
+					tag = PAR
+				}
+			}
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.03
+		}
+	}
+	else_if = {
+		limit = {
+			COL = {
+				has_government = radical_socialist
+			}
+			FROM = {
+				NOT = {
+					tag = ECU
+					tag = PRU
+					tag = BOL
+					tag = PAR
+				}
+			}
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.03
+		}
+	}
+	set_country_flag = COL_had_boost_2
+}
+
+COL_foreign_civil_war_setup = {
+	FROM = {
+		if = {
+			limit = {
+				FROM = {
+					tag = BRA
+				}
+			}
+			civil_war_set_flag_to_restore_elections = yes
+			start_civil_war = {
+				ideology = ROOT
+				size = 0.45
+				capital = 499
+				air_ratio = 0.55
+				keep_unit_leaders_trigger = {
+					always = yes
+				}
+				add_ideas = COL_foreign_cw_participant_idea
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 150
+				}
+				PREV = {
+					add_ideas = COL_foreign_cw_participant_idea
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					tag = PRU
+				}
+			}
+			civil_war_set_flag_to_restore_elections = yes
+			start_civil_war = {
+				ideology = syndicalist
+				size = 0.4
+				capital = 490
+				air_ratio = 0.5
+				keep_unit_leaders_trigger = {
+					always = yes
+				}
+				add_ideas = COL_foreign_cw_participant_idea
+				PREV = {
+					add_ideas = COL_foreign_cw_participant_idea
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					tag = BOL
+				}
+			}
+			civil_war_set_flag_to_restore_elections = yes
+			start_civil_war = {
+				ideology = syndicalist
+				size = 0.35
+				air_ratio = 0.5
+				capital = 848
+				keep_unit_leaders_trigger = {
+					always = yes
+				}
+				add_ideas = COL_foreign_cw_participant_idea
+				PREV = {
+					add_ideas = COL_foreign_cw_participant_idea
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					tag = PAR
+				}
+			}
+			civil_war_set_flag_to_restore_elections = yes
+			start_civil_war = {
+				ideology = totalist
+				size = 0.35
+				air_ratio = 0.5
+				keep_unit_leaders_trigger = {
+					always = yes
+				}
+				add_ideas = COL_foreign_cw_participant_idea
+				PREV = {
+					add_ideas = COL_foreign_cw_participant_idea
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					tag = ECU
+				}
+			}
+			civil_war_set_flag_to_restore_elections = yes
+			start_civil_war = {
+				ideology = totalist
+				size = 0.2
+				air_ratio = 0.5
+				keep_unit_leaders_trigger = {
+					always = yes
+				}
+				add_ideas = COL_foreign_cw_participant_idea
+				PREV = {
+					add_ideas = COL_foreign_cw_participant_idea
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					NOT = {
+						tag = BRA
+						tag = PRU
+						tag = BOL
+						tag = PAR
+						tag = ECU
+					}
+				}
+			}
+			civil_war_set_flag_to_restore_elections = yes
+			start_civil_war = {
+				ideology = ROOT
+				size = 0.35
+				air_ratio = 0.5
+				keep_unit_leaders_trigger = {
+					always = yes
+				}
+				add_ideas = COL_foreign_cw_participant_idea
+				PREV = {
+					add_ideas = COL_foreign_cw_participant_idea
+				}
+			}
+		}
+	}
+}
+
+COL_retire_all_generals_socialist_purge = {
+	#officers removal
+	if = {
+		limit = {
+			NOT = { has_country_flag = COL_totpurges }
+		}
+		random_unit_leader = {
+			limit = { has_id = 87562 }
+			retire = yes
+		}
+	}
+	random_unit_leader = {
+		limit = { has_id = 87564 }
+		retire = yes
+	}
+	random_unit_leader = {
+		limit = { has_id = 87568 }
+		retire = yes
+	}
+	#admirals removal
+	random_navy_leader = {
+		limit = { has_id = 87567 }
+		retire = yes
+	}
+	random_navy_leader = {
+		limit = { has_id = 87566 }
+		retire = yes
+	}
+}
+
+COL_retire_selected_generals_socialist_purge = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = COL_totpurges }
+		}
+		random_unit_leader = {
+			limit = { has_id = 87562 }
+			retire = yes
+		}
+	}
+	random_unit_leader = {
+		limit = { has_id = 87564 }
+		retire = yes
+	}
+	random_navy_leader = {
+		limit = { has_id = 87567 }
+		retire = yes
+	}
+}
+
+COL_setup_who_takes_what_decisions = {
+	set_country_flag = COL_who_takes_what_participant
+	
+	unlock_decision_category_tooltip = COL_who_takes_what_decisions
+	
+	# Defining the Costs #
+	set_variable = { ROOT.who_takes_what_cost_pp = 100 }
+	set_variable = { ROOT.who_takes_what_cost_pp_ai = 99.99 }
+	set_variable = { ROOT.who_takes_what_cost_cp = 25 }
+	set_variable = { ROOT.who_takes_what_cost_cp_ai = 24.99 }	
+}
+	
+	
