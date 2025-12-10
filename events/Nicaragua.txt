@@ -3036,7 +3036,7 @@ country_event = { #They coup lol
 
 	option = {
 		name = nic.7703.a
-                set_cosmetic_tag = NIC_MIL
+        set_cosmetic_tag = NIC_MIL
 		create_corps_commander = {
 			name = "Anastasio Somoza García"
 			portrait_path = "gfx/leaders/NIC/Portrait_NIC_Anastasio_Somoza_Garcia_general.png"
@@ -3065,7 +3065,16 @@ country_event = { #They coup lol
 }
 country_event = { #Diaz or Somoza
 	id = nic.7704
-	immediate = {log = "[GetDateText]: [Root.GetName]: event nic.77"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event nic.77"
+		hidden_effect = {
+			country_event = {
+				id = nic.2000
+				days = 20
+			}
+		}
+		
+	}
 	title = nic.7704.t
 	desc = nic.7704.d
 	is_triggered_only = yes
@@ -3201,7 +3210,7 @@ country_event = { #Universal Commune
 
 	option = { #Hell yeah
 		name = nic.82.a
-                custom_effect_tooltip = NIC_universal_commune_warning
+
                 hidden_effect = {
                 set_cosmetic_tag = NIC_INDO
                 create_wargoal = {
@@ -6021,7 +6030,11 @@ country_event = { #rip Nicaragua, if Honduras is Soc Con or further right
 		add_war_support = -0.2
 		hidden_effect = {
 			country_event = nic.107
-                        country_event = nic.2004
+            country_event = nic.2004
+			country_event = {
+				id = nic.2000
+				days = 20
+			}
 		}
 		create_corps_commander = {
 			name = "Demas T. Craw"
@@ -7131,4 +7144,57 @@ country_event = { #Nicaraguan Canal
 		add_political_power = 100
 		
 	}
+}
+country_event = { #synd
+	id = nic.2000
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event nic.77"
+	}
+	title = nic.2000.t
+	desc = nic.2000.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nic.2000.a
+       
+	}
+	option = {
+		name = nic.2000.b
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.1
+		}
+        hidden_effect = {
+			country_event = {
+				id = nic.2001
+				days = 20
+			}
+		}
+	}
+}
+country_event = { #synd
+	id = nic.2001
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event nic.77"
+	}
+	title = nic.2001.t
+	desc = nic.2001.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nic.2001.a
+		drop_cosmetic_tag = yes
+		set_politics = {
+			ruling_party = syndicalist
+			elections_allowed = no
+		}
+		set_country_flag = NIC_anarchists_in_power
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.15
+		}
+	}
+	
 }
