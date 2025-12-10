@@ -3041,6 +3041,7 @@ country_event = { #They coup lol
 			name = "Anastasio Somoza García"
 			portrait_path = "gfx/leaders/NIC/Portrait_NIC_Anastasio_Somoza_Garcia_general.png"
 			traits = { trickster brilliant_strategist }
+			id = 4898
 			skill = 2
 			attack_skill = 3
 			defense_skill = 2
@@ -3050,6 +3051,7 @@ country_event = { #They coup lol
 		create_corps_commander = {
 			name = "Adolfo Díaz"
 			portrait_path = "gfx/leaders/NIC/Portrait_NIC_Adolfo_Diaz.png"
+			id = 4899
 			traits = { trickster }
 			skill = 2
 			attack_skill = 1
@@ -3402,11 +3404,12 @@ country_event = { #Nawww bruh fr bruh?
 
 	option = { #yes
 		name = nic.8020.a
-                set_cosmetic_tag = NIC_monarchy
+        set_cosmetic_tag = NIC_monarchy
+		set_country_flag = NIC_somaza_monarchy
 		set_party_name = {
 			ideology = paternal_autocrat
-			long_name = "House of Somoza"
-			name = "Somoza Dynasty"
+			long_name = "索摩查王朝"
+			name = "索摩查王朝"
 		}
 		set_politics = {
 			ruling_party = paternal_autocrat
@@ -3417,13 +3420,13 @@ country_event = { #Nawww bruh fr bruh?
 			popularity = 1.0
 		}
 		create_country_leader = {
-			     name = "Somoza I"
+				 name = "Somoza I"
 			     desc = ""
-			     picture = "gfx/leaders/NIC/Portrait_NIC_Somoza_King.png"
+			     picture = "gfx/leaders/NIC/Portrait_NIC_Anastasio_Somoza_Garcia_King.png"
 			     expire = "1965.1.1"
 			     ideology = absolute_monarchy_subtype
 			     traits = {}
-                }
+        }
         }
 }
 ### MILITARY EVENTS ###
@@ -7195,6 +7198,219 @@ country_event = { #synd
 			ideology = syndicalist
 			popularity = 0.15
 		}
+	}
+	
+}
+country_event = { #somaza fucking dead
+	id = nic.2002
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event nic.77"
+		if = { #
+			limit = {
+				has_unit_leader = 4898
+			}
+			random_unit_leader = {
+				limit = { has_id = 4898 }			
+				remove_unit_leader = yes
+			}
+		}
+	}
+	title = nic.2002.t
+	desc = nic.2002.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nic.2002.a
+		set_country_flag = NIC_somoza_fucken_died
+	}
+	option = {
+		name = nic.2002.b
+		set_country_flag = NIC_somoza_fucken_died
+		set_country_flag = NIC_poet_escaped
+	}
+}
+country_event = { #successors?
+	id = nic.2004
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event nic.77"
+	}
+	title = nic.2004.t
+	desc = nic.2004.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nic.2004.a #soclib
+		create_country_leader = {
+			name = "Leonardo Arguello Barreto"
+			desc = ""
+			picture = "gfx/leaders/NIC/Portrait_NIC_Leonardo_Arguello_Barreto.png"
+			expire = "1965.1.1"
+			ideology = radical_liberalism_subtype
+			traits = {}
+        }
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.15
+		}
+	}
+	option = {
+		name = nic.2004.b
+		create_country_leader = {
+			name = "Abelardo Cuadra"
+			desc = ""
+			picture = "gfx/leaders/NIC/Portrait_NIC_Abelardo_Cuadra.png"
+			expire = "1965.1.1"
+			ideology = soccon_controlled_democracy_subtype
+			traits = {}
+        }
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.15
+		}
+	}
+	option = {
+		name = nic.2004.c
+		create_country_leader = {
+			name = "Luis Somoza Debayle"
+			desc = ""
+			picture = "gfx/leaders/NIC/Portrait_NIC_Luis_Somoza_Debayle.png"
+			expire = "1965.1.1"
+			ideology = transitional_government_subtype
+			traits = {}
+        }
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.15
+		}
+	}
+	option = {
+		name = nic.2004.e
+		trigger = {
+			has_country_flag = NIC_somaza_monarchy
+		}
+		create_country_leader = {
+			name = "Lillian I"
+			desc = ""
+			picture = "gfx/leaders/NIC/Portrait_NIC_Lillian_Somoza.png"
+			expire = "1965.1.1"
+			ideology = absolute_monarchy_subtype
+			traits = {}
+        }
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.15
+		}
+	}
+	option = {
+		name = nic.2004.f
+		trigger = {
+			has_country_flag = NIC_poet_escaped
+		}
+		set_country_flag = NIC_hidden_path_unlock
+		mark_focus_tree_layout_dirty = yes
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.15
+		}
+		drop_cosmetic_tag = yes
+		if = { #
+			limit = {
+				has_unit_leader = 4899
+			}
+			random_unit_leader = {
+				limit = { has_id = 4899 }			
+				remove_unit_leader = yes
+			}
+		}
+	}
+}
+country_event = { #somaza ideo picker
+	id = nic.2005
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event nic.77"
+	}
+	title = nic.2005.t
+	desc = nic.2005.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nic.2005.a
+		set_country_leader_ideology = oligarchy_subtype
+	}
+	option = {
+		name = nic.2005.b
+		set_country_leader_ideology = authdem_kleptocracy_subtype
+	}
+	option = {
+		name = nic.2005.c
+		set_country_leader_ideology = police_state_subtype
+	}
+
+}
+country_event = { #somaza ideo picker but son
+	id = nic.2006
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event nic.77"
+	}
+	title = nic.2005.t
+	desc = nic.2005.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nic.2005.a
+		set_country_leader_ideology = authdem_agrarianism_subtype
+	}
+	option = {
+		name = nic.2005.b
+		set_country_leader_ideology = authoritarian_liberalism_subtype
+	}
+	option = {
+		name = nic.2005.c
+		set_country_leader_ideology = controlled_democracy_subtype
+	}
+
+}
+country_event = { #lopez picker 
+	id = nic.2007
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event nic.77"
+	}
+	title = nic.2007.t
+	desc = nic.2007.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nic.2007.a
+		
+	}
+	option = {
+		name = nic.2007.b
+		set_country_leader_ideology = tot_italian_left_futurism_subtype
+	}
+	option = {
+		name = nic.2007.c
+		set_country_leader_ideology = tot_mayakovskyism_subtype
 	}
 	
 }
