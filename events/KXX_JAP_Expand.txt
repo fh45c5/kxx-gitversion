@@ -6326,31 +6326,91 @@ country_event = { #朝鲜起义优化
 
 }
 
-  country_event = { #测试事件
-	id = KXXJAP.114514
-	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.1" }
-	title = KXXJAP.114514.t
-	desc = KXXJAP.1114514.d
+country_event = { #北一辉和莫斯利
+	id = KXXJAP.182
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.182" }
+	title = KXXJAP.182.t
+	desc = KXXJAP.182.d
+
+	trigger = {
+		tag = JAP
+		has_government = totalist
+		has_cosmetic_tag = BRG_ANGLO_JAPAN_JAP
+		NOT = {
+			has_country_flag = KXX_ANGLO_JAP_KITA
+		}
+	}
 
 	fire_only_once = yes
-	is_triggered_only = yes
 
-	option = { #幕府
-		name = KXXJAP.114514.a
+	option = { 
+		name = KXXJAP.182.a
 		ai_chance = {
-			base = 40
+			base = 100
 		}
-        load_focus_tree = japan-shongunate
+		set_country_flag = KXX_ANGLO_JAP_KITA
+		create_country_leader = {
+			name = "联合内阁"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kita_Mosley.png"
+			expire = "1965.1.1"
+			ideology = red_samurai_dictatorship_subtype
+		}
+		set_country_flag = KXX_LEADER_GUI_VISIBLE
+		set_country_flag = JAP_Yasuhito_VISIBLE			
 	}
 
-	option = { #南朝
-		name = KXXJAP.114514.b
+	option = { 
+		name = KXXJAP.182.b
+		ai_chance = {
+			base = 0
+		}
+		set_country_flag = KXX_ANGLO_JAP_KITA
+	}
+}
+
+country_event = { #德川幕府会和清政府结盟
+	id = KXXJAP.183
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.183" }
+	title = KXXJAP.183.t
+	desc = KXXJAP.183.d
+
+	trigger = {
+		tag = JAP
+		is_faction_leader = yes
+		has_completed_focus = JAP_alliance_triumphant
+		QIE = {
+			has_country_leader = {
+				name = "溥仪"
+				ruling_only = yes
+			}
+		}
+		NOT = {
+			QIE = {
+				is_in_faction_with = JAP
+			}
+		}
+	}
+
+	fire_only_once = yes
+
+	option = { 
+		name = KXXJAP.183.a
+		ai_chance = {
+			base = 80
+		}	
+		JAP = { add_to_faction = QIE }
+		QIE = { 
+			declare_war_on = {
+				target = FNG
+				type = annex_everything
+			}
+		}	
+	}
+
+	option = { 
+		name = KXXJAP.183.b
 		ai_chance = {
 			base = 20
-		}		
-        load_focus_tree = japan-southcourt
+		}
 	}
-
-	
-
 }
