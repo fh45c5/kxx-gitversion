@@ -10,6 +10,7 @@ dependencies={
 	"Kaiserredux汉化"
 	"Kaiserredux汉化（已适配简中）"
 	"KX汉化补充"
+	"test2"
 }
 picture="thumbnail.png"
 supported_version="1.16.9"
