@@ -7,7 +7,7 @@
 add_namespace = nic #100 and beyond for peace deals and the military path/Diaz path
 add_namespace = nicind
 add_namespace = nicdec
-
+add_namespace = sandinista_diplomacy
 country_event = { #Intro event
 	id = nic.1
 	immediate = {log = "[GetDateText]: [Root.GetName]: event nic.1"}
@@ -3063,6 +3063,11 @@ country_event = { #They coup lol
 			ruling_party = paternal_autocrat
 			elections_allowed = yes
 		}	
+		country_event = {
+			id = nic.7704
+			days = 1
+		}
+		complete_national_focus = NIC_second_occupation
 	}
 }
 country_event = { #Diaz or Somoza
@@ -6030,7 +6035,7 @@ country_event = { #rip Nicaragua, if Honduras is Soc Con or further right
 		add_war_support = -0.2
 		hidden_effect = {
 			country_event = nic.107
-            country_event = nic.2004
+            country_event = nic.2000
 			country_event = {
 				id = nic.2000
 				days = 20
@@ -7195,6 +7200,8 @@ country_event = { #synd
 			ideology = syndicalist
 			popularity = 0.15
 		}
+		remove_ideas = NIC_undying_resistance
+		remove_ideas = NIC_no_Support
 	}
 	
 }
@@ -7236,6 +7243,7 @@ country_event = { #successors?
 	desc = nic.2004.d
 	is_triggered_only = yes
 	fire_only_once = yes
+
 
 	option = {
 		name = nic.2004.a #soclib
@@ -7410,4 +7418,107 @@ country_event = { #lopez picker
 		set_country_leader_ideology = tot_mayakovskyism_subtype
 	}
 	
+}
+country_event = { #csa exile
+	id = nic.2008
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event nic.77"
+	}
+	title = nic.2008.t
+	desc = nic.2008.d
+	trigger = {
+		tag = NIC
+		has_global_flag = USA_civil_war_begun_flag
+		NOT = {
+			country_exists = CSA
+		}
+		has_socialist_government = yes
+	}
+	fire_only_once = yes
+
+	option = {
+		name = nic.2008.a
+		
+	}
+	option = {
+		name = nic.2008.b
+		CSA = {
+			every_unit_leader = {	
+				set_nationality = NIC
+			}	
+		}
+	}
+	option = {
+		name = nic.2008.c
+		trigger = {
+			has_government = syndicalist
+		}
+		CSA = {
+			every_unit_leader = {	
+				set_nationality = NIC
+			}	
+		}
+		every_country = {
+			limit = {
+				is_american_tag = yes
+			}
+			NIC = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = CSA
+					is_core_of = COR
+					is_core_of = USA
+					is_core_of = WCC
+					is_core_of = NEE
+					is_core_of = CAL
+					is_core_of = TEX
+					is_core_of = BBR
+					is_core_of = NYC
+					is_core_of = ARZ
+					is_core_of = TXS
+					is_core_of = ALA
+				}
+			}
+			NIC = {
+				add_state_core = PREV
+			}	
+		}
+	}
+	
+}
+country_event = { #
+	id = sandinista_diplomacy.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event nic.1"}
+	title = sandinista_diplomacy.1.t
+	desc = sandinista_diplomacy.1.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = sandinista_diplomacy.1.a
+		NIC = {
+			set_autonomy = {
+				target = ROOT
+				autonomy_state = kr_autonomous_puppet
+			}
+		}
+			
+	}
+	option = {
+		name = sandinista_diplomacy.1.b
+		NIC = {
+			create_wargoal = {
+				target = ROOT
+				type = annex_everything
+			}
+		}
+	}
 }
