@@ -195,7 +195,17 @@ focus_tree = {
 		}
 		prerequisite = { focus = JAPSOCIALISM_striking_for_more_than_a_day  } prerequisite = { focus = JAPSOCIALISM_organize_peasant_uprisings  }
 		completion_reward = {
-		country_event = japan_new_event.64
+			if = {
+				limit = {
+					JAP = {
+					has_country_flag = SCB_path_decided
+					}
+				}
+				country_event = KXXJSR.1
+			}
+			else = {
+				country_event = japan_new_event.64
+			}
 		}
 	}
 	
@@ -491,11 +501,26 @@ focus_tree = {
 		prerequisite = { focus = JAPANA_the_fight_against_discrimination  }
 		mutually_exclusive = { focus = JAPANA_burnthecrown  }
 		completion_reward = {
+		if = {
+			limit = { 
+				JAP = { 
+					has_country_flag = KXX_hirohito_missing 
+				}
+			}
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = JAP_Yasuhito_VISIBLE	
+			swap_ideas = {
+				remove_idea = JAP_no_emperor
+				add_idea = JAP_emperor_yasuhito
+			}					
+		}	
+		else = {
 			set_country_flag = KXX_LEADER_GUI_VISIBLE
 			set_country_flag = JAP_Hirohito_VISIBLE
-		swap_ideas = {
-		remove_idea = JAP_no_emperor
-		add_idea = JAP_emperor_hirohito
+			swap_ideas = {
+				remove_idea = JAP_no_emperor
+				add_idea = JAP_emperor_hirohito
+			}					
 		}
 		}
 	}
@@ -1820,7 +1845,23 @@ focus_tree = {
 		}
 		prerequisite = { focus = JAPCOMMUNIST_unification_of_the_trade_unions  } prerequisite = { focus = JAPCOMMUNIST_invigorate_the_three_stage_program  }
 		completion_reward = {
-		country_event = japan_new_event.68
+			if = {
+				limit = {
+					JAP = {
+					has_country_flag = SCB_path_decided
+					}
+				}
+				add_ideas = JSR_Kenji_Miyamoto_idea_1
+				add_ideas = JSR_Nosaka_Sanzo_idea_1
+				add_ideas = JSR_Kenji_Miyamoto_idea
+				limit = {
+					has_country_flag = JAP_Hirohito_VISIBLE
+				}
+				add_ideas = JSR_Nosaka_Sanzo_idea
+			}
+			else = {
+				country_event = japan_new_event.68
+			}
 		}
 	}
 
@@ -2358,7 +2399,19 @@ focus_tree = {
 		}
 		prerequisite = { focus = JAPCOMMUNIST_akahata_no_uta  } prerequisite = { focus = JAPCOMMUNIST_purge_the_antiproletarian_factions  }
 		completion_reward = {
-		country_event = japan_new_event.127
+			if = {
+				limit = {
+					JAP = {
+					has_country_flag = SCB_path_decided
+					}
+				}
+				add_ideas = JSR_Hitoshi_Yamakawa_idea
+				add_ideas = JSR_Kenzo_Yamamoto_idea
+				add_ideas = JSR_Kenzo_Yamamoto_idea_1
+			}
+			else = {
+				country_event = japan_new_event.127
+			}
 		}
 	}
 
@@ -2377,7 +2430,19 @@ focus_tree = {
 		}
 		prerequisite = { focus = JAPCOMMUNIST_birth_of_the_proletarian_youth_league  } prerequisite = { focus = JAPCOMMUNIST_akahata_no_uta  }
 		completion_reward = {
-		country_event = japan_new_event.69
+			if = {
+				limit = {
+					JAP = {
+					has_country_flag = SCB_path_decided
+					}
+				}
+				add_ideas = JSR_Hitoshi_Yamakawa_idea_1
+				add_ideas = JSR_Hitoshi_Yamakawa_idea
+				add_ideas = JSR_Hitoshi_Yamakawa_idea_1
+			}
+			else = {
+				country_event = japan_new_event.69
+			}			
 		}
 	}
 
@@ -2716,63 +2781,22 @@ focus_tree = {
 		completion_reward = {
 		if = {
 			limit = {
-				JST = {
-					AND = {
-						OR = {
-							has_governent = totalist
-							has_governent = syndicalist
-							has_governent = radical_socialist
-						}
-						OR = {
-							is_in_faction_with = JSR
-							is_subject_of = JSR
-						}
-					}
-				}
-			}
-			add_opinion_modifier = {
-				target = JSR
-				modifier = JAP_japanese_comradery
-			}
-			
-		}
-		
-		else_if = {
-			limit = {
 				JSR = {
 					owns_state = 526
 				}
 			}
-			JSR = {
-				release_puppet = JST
+			LCU = { 
+				transfer_state = 526 
+				add_state_core = 526
+			}	
+			JSR	= {	
+				puppet = LCU
 			}
 		}
-		
 		else = {
-			limit = {
-				JST = {
-					NOT = {
-						AND = {
-							OR = {
-								has_governent = totalist
-								has_governent = syndicalist
-								has_governent = radical_socialist
-							}
-							OR = {
-								is_in_faction_with = JSR
-								is_subject_of = JSR
-							}
-						}
-					}
-				}
-			}
-			JSR = {
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = JST
-				}
-			}
-			
+			LCU = { 
+				add_state_core = 526
+			}			
 		}
 		}
 	}
@@ -3055,21 +3079,30 @@ focus_tree = {
 		}
 		prerequisite = { focus = JAPCOMMUNIST_longing_for_armed_struggle  focus = JAPCOMMUNIST_form_the_investigation_committee  }
 		completion_reward = {
-		if = {
-			limit = {
-				has_completed_focus = JAPCOMMUNIST_embracing_smiling_communism
+			if = {
+				limit = {
+					has_country_leader = {
+						name = "宫本显治"
+						ruling_only = yes
+					}
+				}
+				country_event = japan_new_event.71	
 			}
-			country_event = japan_new_event.71
-			
-		}
 		
-		if = {
-			limit = {
-				has_completed_focus = JAPCOMMUNIST_formation_of_a_grass_roots_faction
+			if = {
+				limit = {
+					has_country_leader = {
+						name = "德田球一"
+						ruling_only = yes
+					}
+				}
+				country_event = japan_new_event.129	
 			}
-			country_event = japan_new_event.129
-			
-		}
+			else = {
+				add_ideas = JSR_Kyuchi_Tokuda_idea_2
+				add_ideas = JSR_Kyuchi_Tokuda_idea
+				add_ideas = JSR_Kyuchi_Tokuda_idea_1
+			}
 		}
 	}
 
@@ -4551,10 +4584,8 @@ focus_tree = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
 		available = {
-		has_army_manpower = {
-				size > 750000
-			}
 			has_global_flag = JAP_civil_war_over
+			is_subject = no
 		}
 		completion_reward = {
 			add_war_support = 0.1

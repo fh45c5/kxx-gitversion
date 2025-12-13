@@ -1,5 +1,52 @@
 add_namespace = KXXJAP
 
+country_event = { #崛起之龙还是旭日骨寒
+	id = KXXJAP.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.1" }
+	title = KXXJAP.1.t
+	desc = KXXJAP.1.d
+
+	trigger = { 
+		tag = JAP 
+		NOT = { 
+			OR = { 
+				has_country_flag = RD_SCB_path_decided
+				has_country_flag = SCB_path_decided
+			}
+		}
+	}
+		
+	fire_only_once = yes
+
+	option = { #崛起之龙
+		name = KXXJAP.1.a
+		ai_chance = {
+			base = 0
+		}
+		set_country_flag = RD_SCB_path_decided
+		country_event = {
+			id = japan_new_event.7
+			days = 45
+		}		
+		country_event = { 
+			id = japan_new_event.15 
+			days = 135 
+		}
+	}	
+
+	option = { #旭日骨寒
+		name = KXXJAP.1.b
+		ai_chance = {
+			base = 100
+		}
+		set_country_flag = SCB_path_decided
+		country_event = { 
+			id = KXXJAP.10
+			days = 60
+		}
+	}	
+
+}
 
 country_event = { #财阀集团选出代表人物
 	id = KXXJAP.2
@@ -151,7 +198,7 @@ country_event = { #日共占领东京
 	option = { #这可不妙……
 		name = KXXJAP.3.a
 		ai_chance = {
-			base = 80
+			base = 50
 		}		
 		set_country_flag = JSR_controlled_tokyo
 		add_timed_idea = {
@@ -163,7 +210,7 @@ country_event = { #日共占领东京
 	option = { #必能再有转机！
 		name = KXXJAP.3.b
 		ai_chance = {
-			base = 20
+			base = 50
 		}		
 		add_timed_idea = {
 			idea = yun_skullarmy
@@ -544,7 +591,7 @@ country_event = { #国本社换人
 		add_popularity = { ideology = national_populist popularity = 0.2 }
 		create_country_leader = {
 			name = "真崎甚三郎"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Jinzaburo_Masaki.png"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Jinzaburo_Masaki_KX.png"
 			expire = "1965.1.1"
 			ideology = pataut_showa_statism_subtype
 		}
@@ -693,6 +740,7 @@ country_event = { #1936年总选举
 	is_triggered_only = yes
 	immediate = {
 		hidden_effect = {
+			remove_all_ministers = yes
 			country_event = {
 				id = KXXJAP.100
 				days = 75
@@ -742,7 +790,7 @@ country_event = { #1936年总选举
 	option = { 
 		name = KXXJAP.10.e
 		ai_chance = { 
-			base = 15
+			base = 10
 		}		
 		set_politics = {
 			ruling_party = social_democrat
@@ -756,7 +804,7 @@ country_event = { #1936年总选举
 	option = { 
 		name = KXXJAP.10.f
 		ai_chance = { 
-			base = 5
+			base = 10
 		}		
 		set_politics = {
 			ruling_party = radical_socialist
@@ -1185,7 +1233,7 @@ country_event = { #五一五事变-西园寺遇袭事件
 	option = { #西园寺将倾向于举国一致内阁
 		name = KXXJAP.116.a
 		ai_chance = { 
-			base = 45
+			base = 30
 		}		
 		country_event = KXXJAP.117
 	}	
@@ -1193,7 +1241,7 @@ country_event = { #五一五事变-西园寺遇袭事件
 	option = { #西园寺将倾向于政党内阁/近卫公爵
 		name = KXXJAP.116.b
 		ai_chance = { 
-			base = 55
+			base = 70
 		}		
 		set_country_flag = KXX_seikai_no_japan
 		country_event = KXXJAP.117
@@ -1212,7 +1260,7 @@ country_event = { #五一五事变-永田町核心突击
 	option = { #镇压成功
 		name = KXXJAP.117.a
 		ai_chance = { 
-			base = 60
+			base = 50
 		}		
 		country_event = KXXJAP.118
 	}	
@@ -1220,7 +1268,7 @@ country_event = { #五一五事变-永田町核心突击
 	option = { #镇压失败
 		name = KXXJAP.117.b
 		ai_chance = { 
-			base = 40
+			base = 50
 		}
 		set_country_flag = KXX_may_fifteenth_coup			
 		country_event = KXXJAP.118	
@@ -1295,7 +1343,12 @@ country_event = { #昭和维新春之空
 		name = KXXJAP.120.b
 		ai_chance = { 
 			base = 40
-		}		
+		}	
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			clr_country_flag = JAP_Hirohito_VISIBLE
+			remove_ideas = JAP_emperor_hirohito
+		}
 		set_country_flag = factionalism_japan_no
 		set_politics = { ruling_party = paternal_autocrat }
 		set_cosmetic_tag = JAP_kodoha
@@ -1443,7 +1496,7 @@ country_event = { #民主线/翼赞会选择
 	option = { #近卫
 		name = KXXJAP.137.a
 		ai_chance = { 
-			base = 30
+			base = 20
 		}		
 		set_politics = {
 			ruling_party = national_populist
@@ -1454,6 +1507,10 @@ country_event = { #民主线/翼赞会选择
 			long_name = JAP_party_iraa_long
 			name = JAP_party_iraa
 		}	
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}		
 		create_country_leader = {
 			name = "近卫文麿"
 			picture = "gfx/leaders/JAP/Portrait_JAP_Konoe_Fumimaro.png"
@@ -1474,7 +1531,7 @@ country_event = { #民主线/翼赞会选择
 	option = { #民主
 		name = KXXJAP.137.b
 		ai_chance = { 
-			base = 70
+			base = 80
 		}		
 		set_country_flag = factionalism_japan_no
 		set_politics = {
@@ -1566,7 +1623,9 @@ country_event = { #民主线/翼赞会选择
 
 country_event = { #民主选举
 	id = KXXJAP.127
-	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.127" }
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event KXXJAP.127" 
+	}
 	title = KXXJAP.127.t
 	desc = KXXJAP.127.d
 
@@ -1591,6 +1650,12 @@ country_event = { #民主选举
 		mark_focus_tree_layout_dirty = yes
 		complete_national_focus = JAPSEI_victory_of_the_seiyukai
 		add_ideas = { JAP_party_factionalism_seiyukai }	
+		hidden_effect = {
+			country_event = {
+				id = KXXJAP.157
+				days = 1460
+			}
+		}
 	}
 
 	option = { 
@@ -1610,7 +1675,13 @@ country_event = { #民主选举
 		}
 		load_focus_tree = minseito-japan
 		mark_focus_tree_layout_dirty = yes
-		complete_national_focus = JAPLIB_victory_of_the_minseito		
+		complete_national_focus = JAPLIB_victory_of_the_minseito	
+		hidden_effect = {
+			country_event = {
+				id = KXXJAP.157
+				days = 1460
+			}
+		}			
 	}
 	
 	option = { 
@@ -1637,7 +1708,13 @@ country_event = { #民主选举
 			JAP_Arita_Hachiro_for_ade
 			JAP_Horikiri_Zenbee_eco_ade
 			JAP_Akita_Kiyoshi_sec_ade
-		}			
+		}
+		hidden_effect = {
+			country_event = {
+				id = KXXJAP.157
+				days = 1460
+			}
+		}					
 	}
 	
 	option = { 
@@ -1666,7 +1743,13 @@ country_event = { #民主选举
 			JAP_Mizutani_Chozaburo_eco_sde
 			JAP_Matsuoka_Komakichi_sec_sde
 		}
-		remove_ideas = { JAP_no_army_focus }			
+		remove_ideas = { JAP_no_army_focus }	
+		hidden_effect = {
+			country_event = {
+				id = KXXJAP.157
+				days = 1460
+			}
+		}				
 	}	
 
 	option = { 
@@ -1759,7 +1842,9 @@ country_event = { #民主选举
 		custom_effect_tooltip = tooltip_unlock_KXXJAP
 		ai_chance = { 
 			base = 10
-		}			
+		}
+		load_focus_tree = japan_focus
+		mark_focus_tree_layout_dirty = yes			
 		country_event = KXXJAP.134
 		set_politics = {
 			ruling_party = social_liberal
@@ -1771,6 +1856,12 @@ country_event = { #民主选举
 			popularity = 0.3
 		}
 		remove_all_ministers = yes
+		hidden_effect = {
+			country_event = {
+				id = KXXJAP.157
+				days = 1460
+			}
+		}		
 	}	
 
 }
@@ -1780,6 +1871,7 @@ country_event = { #政友会
 	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.128" }
 	title = KXXJAP.128.t
 	desc = KXXJAP.128.d
+	picture = GFX_event_JAP_seiyukai_all_leader
 
 	is_triggered_only = yes
 
@@ -1790,8 +1882,8 @@ country_event = { #政友会
 		}			
 		custom_effect_tooltip = tooltip_Suzuki_Kisaburo	
 		hidden_effect = {	
-			complete_national_focus = JAPSEI_orthodoxy_of_seiyukai
-			complete_national_focus = JAPSEI_kuhara_faction_rises
+			complete_national_focus = JAPSEI_orthodox_victory
+			complete_national_focus = JAPSEI_kuharascabinet
 			create_country_leader = {
 				name = "铃木喜三郎"
 				picture = "gfx/leaders/JAP/Portrait_JAP_Suzuki_Kisaburo.png"
@@ -1815,8 +1907,8 @@ country_event = { #政友会
 		}		
 		custom_effect_tooltip = tooltip_Mori_Tsutomu
 		hidden_effect = {
-			complete_national_focus = JAPSEI_orthodoxy_of_seiyukai
-			complete_national_focus = JAPSEI_kuhara_faction_rises			
+			complete_national_focus = JAPSEI_orthodox_victory
+			complete_national_focus = JAPSEI_kuharascabinet			
 			create_country_leader = {
 				name = "森恪"
 				picture = "gfx/leaders/JAP/Portrait_JAP_Mori_Tsutomu.png"
@@ -1840,7 +1932,7 @@ country_event = { #政友会
 		}		
 		custom_effect_tooltip = tooltip_Hatoyama_Ichiro
 		hidden_effect = {
-			complete_national_focus = JAPSEI_orthodoxy_of_seiyukai
+			complete_national_focus = JAPSEI_orthodox_victory
 			complete_national_focus = JAPSEI_rentaro_cabinet
 			create_country_leader = {
 				name = "鸠山一郎"
@@ -1921,9 +2013,9 @@ country_event = { #民政党
 		ai_chance = { 
 			base = 35
 		}		
-		custom_effect_tooltip = tooltip_Machida_Chuji		
+		custom_effect_tooltip = tooltip_Machida_Chuji	
+		complete_national_focus = JAPLIB_bureaucratic_hold			
 		create_country_leader = {
-			complete_national_focus = JAPLIB_bureaucratic_hold
 			name = "町田忠治"
 			picture = "gfx/leaders/JAP/Portrait_JAP_Machida_Chuji.png"
 			expire = "1965.1.1"
@@ -1943,9 +2035,9 @@ country_event = { #民政党
 		ai_chance = { 
 			base = 30
 		}		
-		custom_effect_tooltip = tooltip_Ryutaro_Nagai		
+		custom_effect_tooltip = tooltip_Ryutaro_Nagai
+		complete_national_focus = JAPLIB_tojnha_faction_dominance				
 		create_country_leader = {
-			complete_national_focus = JAPLIB_tojnha_faction_dominance
 			name = "永井柳太郎"
 			picture = "gfx/leaders/JAP/Portrait_JAP_Ryutaro_Nagai.png"
 			expire = "1965.1.1"
@@ -1966,8 +2058,8 @@ country_event = { #民政党
 			base = 35
 		}		
 		custom_effect_tooltip = tooltip_Saito_Takao
+		complete_national_focus = JAPLIB_bureaucratic_hold		
 		create_country_leader = {
-			complete_national_focus = JAPLIB_bureaucratic_hold
 			name = "斋藤隆夫"
 			picture = "gfx/leaders/JAP/Portrait_JAP_Saito_Takao.png"
 			expire = "1965.1.1"
@@ -1993,7 +2085,7 @@ country_event = { #国民同盟
 	is_triggered_only = yes
 
 	option = { 
-		name = KXXJAP.129.a
+		name = KXXJAP.130.a
 		ai_chance = { 
 			base = 50
 		}		
@@ -2006,7 +2098,7 @@ country_event = { #国民同盟
 	}
 
 	option = { 
-		name = KXXJAP.129.b
+		name = KXXJAP.130.b
 		ai_chance = { 
 			base = 50
 		}		
@@ -2303,18 +2395,6 @@ country_event = { #国民同志会
 		}
 	}	
 
-	option = { 
-		name = KXXJAP.134.c
-		ai_chance = { 
-			base = 30
-		}		
-		create_country_leader = {
-			name = "鹿岛守之助"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Morinosuke_Kajima.png"
-			expire = "1965.1.1"
-			ideology = kajima_panasiaism_subtype
-		}
-	}
 }
 
 country_event = { #大命降下
@@ -2327,6 +2407,7 @@ country_event = { #大命降下
 	immediate = {
 		hidden_effect = {
 			set_country_flag = NO_RD_IRAA
+			remove_all_ministers = yes
 			set_party_name = {
 				ideology = market_liberal
 				long_name = JAP_nat_unity_party_long
@@ -2370,9 +2451,8 @@ country_event = { #大命降下
 	option = { 
 		name = KXXJAP.135.a
 		ai_chance = { 
-			base = 20
+			base = 40
 		}	
-		custom_effect_tooltip = tooltip_unlock_KXXJAP			
 		set_politics = {
 			ruling_party = authoritarian_democrat
 			elections_allowed = no
@@ -2396,6 +2476,17 @@ country_event = { #大命降下
 			ideology = prussian_constitutionalism_subtype
 		}
 		hidden_effect = {
+			add_ideas = JAP_new_shogunate_1
+			country_event = {
+				id = KXXJAP.163
+				days = 1460
+			}
+			add_ideas = {
+				JAP_Ugaki_Kazushige_hog_mli
+				JAP_Inoue_Junnosuke_eco_mli
+				JAP_Miki_Bukichi_eco_mli
+				JAP_Kawasaki_Katsu_sec_mli
+			}			
 			add_pataut_to_coalition = yes
 			add_soccon_to_coalition = yes
 			add_marlib_to_coalition = yes
@@ -2426,9 +2517,8 @@ country_event = { #大命降下
 	option = { 
 		name = KXXJAP.135.b
 		ai_chance = { 
-			base = 20
-		}		
-		custom_effect_tooltip = tooltip_unlock_KXXJAP		
+			base = 40
+		}			
 		set_politics = {
 			ruling_party = paternal_autocrat
 			elections_allowed = no
@@ -2448,6 +2538,10 @@ country_event = { #大命降下
 			ideology = pataut_nihonism_subtype
 		}
 		hidden_effect = {
+			country_event = {
+				id = KXXJAP.168
+				days = 1460
+			}
 			load_focus_tree = japan-iraa-rightist
 			mark_focus_tree_layout_dirty = yes
 			complete_national_focus = JAPIRAARIGHTIST_rightists_dominate_the_conference
@@ -2482,9 +2576,8 @@ country_event = { #大命降下
 	option = { 
 		name = KXXJAP.135.c
 		ai_chance = { 
-			base = 20
-		}
-		custom_effect_tooltip = tooltip_unlock_KXXJAP				
+			base = 5
+		}			
 		set_politics = {
 			ruling_party = authoritarian_democrat
 			elections_allowed = no
@@ -2535,7 +2628,7 @@ country_event = { #大命降下
 	option = { 
 		name = KXXJAP.135.e
 		ai_chance = { 
-			base = 20
+			base = 10
 		}		
 		set_politics = {
 			ruling_party = paternal_autocrat
@@ -2556,6 +2649,7 @@ country_event = { #大命降下
 			ideology = junta_subtype
 		}
 		hidden_effect = {
+			set_country_flag = KXXJAP_HAYASHI
 			load_focus_tree = japan-iraa-rightist
 			mark_focus_tree_layout_dirty = yes			
 			add_authdem_to_coalition = yes
@@ -2590,7 +2684,7 @@ country_event = { #大命降下
 	option = { 
 		name = KXXJAP.135.f
 		ai_chance = { 
-			base = 20
+			base = 5
 		}		
 		country_event = KXXJAP.136
 	}		
@@ -2629,6 +2723,8 @@ country_event = { #大命降下
 			expire = "1965.1.1"
 			ideology = pataut_police_state_subtype
 		}
+		load_focus_tree = japan_focus
+		mark_focus_tree_layout_dirty = yes		
 		hidden_effect = {
 			add_authdem_to_coalition = yes
 			add_soccon_to_coalition = yes
@@ -2677,6 +2773,8 @@ country_event = { #大命降下
 			expire = "1965.1.1"
 			ideology = transitional_government_subtype
 		}
+		load_focus_tree = japan_focus
+		mark_focus_tree_layout_dirty = yes		
 		hidden_effect = {
 			add_pataut_to_coalition = yes
 			add_soccon_to_coalition = yes
@@ -2721,6 +2819,8 @@ country_event = { #大命降下
 			expire = "1965.1.1"
 			ideology = absolute_monarchy_subtype
 		}
+		load_focus_tree = japan_focus
+		mark_focus_tree_layout_dirty = yes		
 		hidden_effect = {
 			add_authdem_to_coalition = yes
 			add_soccon_to_coalition = yes
@@ -2765,6 +2865,8 @@ country_event = { #大命降下
 			expire = "1965.1.1"
 			ideology = junta_subtype
 		}
+		load_focus_tree = japan_focus
+		mark_focus_tree_layout_dirty = yes		
 		hidden_effect = {
 			add_authdem_to_coalition = yes
 			add_soccon_to_coalition = yes
@@ -3123,7 +3225,7 @@ country_event = { #民间右翼-日莲主义者
 	}
 
 	option = { #山本玄峰
-		name = KXXJAP.140.a
+		name = KXXJAP.140.b
 		set_politics = {
 			ruling_party = radical_socialist
 			elections_allowed = no
@@ -3144,7 +3246,7 @@ country_event = { #民间右翼-日莲主义者
 
 
 	option = { #妹尾义郎
-		name = KXXJAP.140.a
+		name = KXXJAP.140.c
 		create_country_leader = {
 			name = "妹尾义郎"
 			picture = "gfx/leaders/JAP/Portrait_JAP_Giro_Senoo.png"
@@ -3171,7 +3273,7 @@ country_event = { #民间右翼-日莲主义者
 	}
 
 	option = { #里见岸雄
-		name = KXXJAP.140.a
+		name = KXXJAP.140.e
 		set_politics = {
 			ruling_party = social_democrat
 			elections_allowed = no
@@ -3202,6 +3304,9 @@ country_event = { #民间右翼-农本主义者
 
 	option = { #橘孝三郎
 		name = KXXJAP.141.a
+		ai_chance = { 
+			base = 30
+		}				
 		set_politics = {
 			ruling_party = national_populist
 			elections_allowed = no
@@ -3215,6 +3320,9 @@ country_event = { #民间右翼-农本主义者
 
 	option = { #权藤成卿
 		name = KXXJAP.141.b
+		ai_chance = { 
+			base = 15
+		}		
 		set_politics = {
 			ruling_party = authoritarian_democrat
 			elections_allowed = no
@@ -3227,7 +3335,10 @@ country_event = { #民间右翼-农本主义者
 
 
 	option = { #冈本利吉
-		name = KXXJAP.141.c	
+		name = KXXJAP.141.c
+		ai_chance = { 
+			base = 15
+		}					
 		set_politics = {
 			ruling_party = totalist
 			elections_allowed = no
@@ -3240,6 +3351,9 @@ country_event = { #民间右翼-农本主义者
 
 	option = { #加藤完治
 		name = KXXJAP.141.e
+		ai_chance = { 
+			base = 20
+		}				
 		create_country_leader = {
 			name = "加藤完治"
 			picture = "gfx/leaders/JAP/Portrait_JAP_Katou_Kanji.png"
@@ -3255,6 +3369,28 @@ country_event = { #民间右翼-农本主义者
 			popularity = 0.4
 		}		
 	}	
+
+	option = { #武者小路实笃
+		name = KXXJAP.141.f
+		ai_chance = { 
+			base = 30
+		}				
+		create_country_leader = {
+			name = "武者小路实笃"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Saneatsu_Mushanokoji.png"
+			expire = "1965.1.1"
+			ideology = socdem_east_asian_peasantism_subtype
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.4
+		}		
+	}		
+
 
 }
 
@@ -3399,7 +3535,11 @@ country_event = { #西田或北
 			JAP_Nishida_Mitsugi_eco_npo
 			JAP_Kingoro_Hashimoto_sec_tot
 		}
-		mark_focus_tree_layout_dirty = yes		
+		mark_focus_tree_layout_dirty = yes	
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}
 	}
 
 	option = { #北一辉	
@@ -3419,6 +3559,10 @@ country_event = { #西田或北
 			JAP_Kingoro_Hashimoto_sec_tot
 		}
 		mark_focus_tree_layout_dirty = yes
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}		
 	}	
 
 }
@@ -3475,21 +3619,27 @@ country_event = { #皇道派选人
 	option = { #野中四郎
 		name = KXXJAP.146.a	
 		load_focus_tree = araki-kingoro-tree
+		complete_national_focus = JAPARAKI_arakissuccess
 		set_politics = {
 			ruling_party = national_populist
 			elections_allowed = no
 		}		
 		create_country_leader = {
 			name = "野中四郎"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Shiro_Nonaka.png"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Shiro_Nonaka_KX.png"
 			expire = "1965.1.1"
 			ideology = natpop_showa_statism_subtype
-		}		
+		}
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}				
 	}
 
 	option = { #三上卓
 		name = KXXJAP.146.b	
 		load_focus_tree = araki-kingoro-tree
+		complete_national_focus = JAPARAKI_arakissuccess
 		set_politics = {
 			ruling_party = national_populist
 			elections_allowed = no
@@ -3499,7 +3649,11 @@ country_event = { #皇道派选人
 			picture = "gfx/leaders/JAP/Portrait_JAP_Mikami_Taku.png"
 			expire = "1965.1.1"
 			ideology = natpop_showa_statism_subtype
-		}				
+		}	
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}					
 	}	
 
 	option = { #桥本欣五郎
@@ -3547,7 +3701,11 @@ country_event = { #皇道派选人
 			JAP_Kuniaki_Koiso_for_pau
 			JAP_Atsutaro_Suyama_eco_tot
 			JAP_Imasu_Cho_sec_npo
-		}		
+		}
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}				
 	}
 }
 
@@ -3620,6 +3778,10 @@ country_event = { #皇道派选人
 			expire = "1965.1.1"
 			ideology = pataut_showa_statism_subtype
 		}	
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}		
 	}
 
 	option = { #真崎甚三郎
@@ -3633,39 +3795,2622 @@ country_event = { #皇道派选人
 		}		
 		create_country_leader = {
 			name = "真崎甚三郎"
-			picture = "gfx/leaders/JAP/Portrait_JAP_Jinzaburo_Masaki.png"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Jinzaburo_Masaki_KX.png"
 			expire = "1965.1.1"
 			ideology = pataut_showa_statism_subtype
-		}			
+		}	
+		if = {
+			limit = { has_country_flag = KXX_hirohito_missing }
+			country_event = KXXJAP.153
+		}				
 	}	
 
 }
 
-  country_event = { #测试事件
-	id = KXXJAP.114514
-	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.1" }
-	title = KXXJAP.114514.t
-	desc = KXXJAP.1114514.d
+country_event = { 
+	id = KXXJAP.148
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.148" }
+	title = KXXJAP.148.t
+	desc = KXXJAP.148.d
+
+	is_triggered_only = yes	
+
+	option = { #左翼胜利
+		name = KXXJAP.148.a	
+		ai_chance = { 
+			base = 30
+		}
+		country_event = KXXJAP.149
+	}
+	
+	option = { #右翼胜利
+		name = KXXJAP.148.b
+		ai_chance = { 
+			base = 35
+		}
+		country_event = KXXJAP.150
+	}
+	
+	option = { #近卫连任
+		name = KXXJAP.148.c
+		ai_chance = { 
+			base = 35
+		}
+		trigger = { 
+			has_government = national_populist
+		}
+		load_focus_tree = JAP_Kuromajo_IRAA
+		mark_focus_tree_layout_dirty = yes	
+		hidden_effect = { 	
+			set_party_name = {
+				ideology = totalist
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_temp_variable = { coalition_partner_var = token:totalist }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:syndicalist }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:radical_socialist }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_democrat }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_conservative }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:authoritarian_democrat }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:paternal_autocrat }
+			add_to_coalition = yes
+		}		
+	}	
+
+}
+
+country_event = { 
+	id = KXXJAP.149
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event KXXJAP.149" 
+		hidden_effect = { 
+			create_country_leader = {
+				name = "近卫文麿"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Konoe_Fumimaro.png"
+				expire = "1965.1.1"
+				ideology = tot_shintaisei_subtype
+			}
+			load_focus_tree = japan-left-iraa	
+			complete_national_focus = JAPLEFTIRAA_leftists_dominate
+			complete_national_focus = JAPLEFTIRAA_asanumaspowergrab	
+			complete_national_focus = JAPLEFTIRAA_hashimoto_victory	
+			complete_national_focus = JAPLEFTIRAA_tokohai_succession					
+			set_politics = {
+				ruling_party = totalist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.3
+			}	
+			set_party_name = {
+				ideology = totalist
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_temp_variable = { coalition_partner_var = token:syndicalist }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:radical_socialist }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_democrat }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_conservative }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:authoritarian_democrat }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:paternal_autocrat }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:national_populist }
+			add_to_coalition = yes					
+		}
+	}
+	title = KXXJAP.149.t
+	desc = KXXJAP.149.d
+
+	is_triggered_only = yes	
+
+	option = { 
+		name = KXXJAP.149.a	
+		ai_chance = { 
+			base = 30
+		}
+		create_country_leader = {
+			name = "风间章"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Akira_Kazami_suit.png"
+			expire = "1965.1.1"
+			ideology = tot_shintaisei_subtype
+		}		
+	}
+
+	option = { 
+		name = KXXJAP.149.b
+		ai_chance = { 
+			base = 30
+		}
+		create_country_leader = {
+			name = "尾崎秀实"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hotsumi_Ozaki.png"
+			expire = "1965.1.1"
+			ideology = kokuken_socialism_subtype
+		}		
+	}	
+	
+	option = { 
+		name = KXXJAP.149.c
+		ai_chance = { 
+			base = 30
+		}
+		create_country_leader = {
+			name = "蜡山正道"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Masamichi_Royama.png"
+			expire = "1965.1.1"
+			ideology = tot_kakushin_kanryo_subtype
+		}		
+	}	
+
+}
+
+country_event = { 
+	id = KXXJAP.150
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event KXXJAP.150" 
+		hidden_effect = { 
+			create_country_leader = {
+				name = "近卫文麿"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Konoe_Fumimaro.png"
+				expire = "1965.1.1"
+				ideology = shintaisei_subtype
+			}
+			load_focus_tree = japan-iraa-rightist
+			complete_national_focus = JAPIRAARIGHTIST_rightists_dominate_the_conference
+			complete_national_focus = JAPIRAARIGHTIST_kuharasnationaldominance
+			set_politics = {
+				ruling_party = national_populist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.3
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = JAP_party_iraa_long
+				name = JAP_party_iraa
+			}
+			set_temp_variable = { coalition_partner_var = token:social_democrat }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:social_conservative }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:authoritarian_democrat }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:paternal_autocrat }
+			add_to_coalition = yes					
+		}		
+	}
+	title = KXXJAP.150.t
+	desc = KXXJAP.150.d
+
+	is_triggered_only = yes	
+
+	option = { 
+		name = KXXJAP.150.a
+		ai_chance = { 
+			base = 30
+		}
+		create_country_leader = {
+			name = "岸信介"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Nobusuke_Kishi.png"
+			expire = "1965.1.1"
+			ideology = kakushin_kanryo_subtype
+		}		
+	}
+	
+	option = { 
+		name = KXXJAP.150.b
+		ai_chance = { 
+			base = 30
+		}
+		create_country_leader = {
+			name = "松冈洋右"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yosuke_Matsuoka.png"
+			expire = "1965.1.1"
+			ideology = natpop_pan_asianism_subtype
+		}		
+	}
+	
+	option = { 
+		name = KXXJAP.150.c
+		ai_chance = { 
+			base = 30
+		}
+		create_country_leader = {
+			name = "德富苏峰"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Tokutomi_Soho.png"
+			expire = "1965.1.1"
+			ideology = nihonism_subtype
+		}		
+	}	
+
+}
+
+country_event = { #雍仁登基
+	id = KXXJAP.153
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.153" }
+	title = KXXJAP.153.t
+	desc = KXXJAP.153.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.153.a
+		clr_country_flag = JAP_Hirohito_VISIBLE	
+		clr_country_flag = KXX_LEADER_GUI_VISIBLE	
+		country_event = KXXJAP.154
+	}
+
+}
+
+country_event = { #雍仁登基
+	id = KXXJAP.154
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.154" }
+	title = KXXJAP.154.t
+	desc = KXXJAP.154.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.154.a
+		country_event = KXXJAP.155
+	}
+	
+}
+
+country_event = { #雍仁登基
+	id = KXXJAP.155
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.155" }
+	title = KXXJAP.155.t
+	desc = KXXJAP.155.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.155.a
+		country_event = KXXJAP.156
+		add_ideas = JAP_emperor_yasuhito
+	}
+	
+}
+
+country_event = { #雍仁登基
+	id = KXXJAP.156
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.156" }
+	title = KXXJAP.156.t
+	desc = KXXJAP.156.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.156.a
+		ai_chance = { 
+			base = 10
+		}		
+		create_country_leader = {
+			name = "Yasuhito"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = natpop_absolute_monarchy_subtype
+		}
+		create_country_leader = {
+			name = "Yasuhito"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = authdem_showa_statism_subtype
+		}		
+		create_country_leader = {
+			name = "Yasuhito"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = pataut_showa_statism_subtype
+		}		
+		create_country_leader = {
+			name = "Yasuhito"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = ikki_kita_thought_subtype
+		}
+		set_country_flag = KXX_Yasuhito_Restoration
+	}
+
+	option = { 
+		name = KXXJAP.156.b
+		ai_chance = { 
+			base = 30
+		}
+		create_country_leader = {
+			name = "雍仁"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = natpop_absolute_monarchy_subtype
+		}	
+		create_country_leader = {
+			name = "雍仁"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = authdem_showa_statism_subtype
+		}		
+		create_country_leader = {
+			name = "雍仁"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = pataut_showa_statism_subtype
+		}		
+		create_country_leader = {
+			name = "雍仁"
+			desc = JAP_Yasuhito_DESC
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yasuhito_Military.png"
+			expire = "1965.1.1"
+			ideology = ikki_kita_thought_subtype
+		}		
+		set_country_flag = KXX_Yasuhito_Restoration	
+	}
+
+	option = { 
+		name = KXXJAP.156.c
+		ai_chance = { 
+			base = 60
+		}		
+		set_country_flag = KXX_LEADER_GUI_VISIBLE
+		set_country_flag = JAP_Yasuhito_VISIBLE		
+	}		
+	
+}
+
+country_event = { #40年及之后的民主选举
+	id = KXXJAP.157
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.157" }
+	title = KXXJAP.157.t
+	desc = KXXJAP.157.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			remove_all_ministers = yes
+			country_event = {
+				id = KXXJAP.157
+				days = 1460
+			}
+		}
+	}
+
+	option = { #政友会
+		name = KXXJAP.157.a
+		ai_chance = { 
+			base = 20
+		}
+		country_event =	KXXJAP.158
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.3
+		}
+		hidden_effect = {
+			load_focus_tree = japan-seiyukai
+			mark_focus_tree_layout_dirty = yes	
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_victory_of_the_seiyukai
+					}
+				}
+				complete_national_focus = JAPSEI_victory_of_the_seiyukai
+			}	
+			if = { 	
+				limit = { 
+					NOT = { 
+						has_completed_focus = AJPSEIYUKAITWO_the_seiyukai_secure_a_new_term
+					}
+				}
+				complete_national_focus = AJPSEIYUKAITWO_the_seiyukai_secure_a_new_term			
+			}
+		}	
+	}
+
+	option = { #民政党 
+		name = KXXJAP.157.b
+		ai_chance = { 
+			base = 20
+		}		
+		country_event =	KXXJAP.159
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.3
+		}
+		hidden_effect = { 
+			load_focus_tree = minseito-japan
+			mark_focus_tree_layout_dirty = yes			
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPLIB_victory_of_the_minseito
+					}
+				}
+				complete_national_focus = JAPLIB_victory_of_the_minseito
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPMINSEITOTWO_the_minseito_victory
+					}
+				}
+				complete_national_focus = JAPMINSEITOTWO_the_minseito_victory				
+			}			
+		}		
+	}
+
+	option = { #国民同志会
+		name = KXXJAP.157.c
+		ai_chance = { 
+			base = 20
+		}
+		country_event =	KXXJAP.160
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.3
+		}
+	}	
+
+	option = { #社会大众党
+		name = KXXJAP.157.e
+		ai_chance = { 
+			base = 20
+		}		
+		country_event =	KXXJAP.161
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.3
+		}
+		hidden_effect = { 
+			load_focus_tree = socdem-japan
+			mark_focus_tree_layout_dirty = yes			
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSOCDEM_a_split_in_the_shakai_taishuto
+					}
+				}
+				complete_national_focus = JAPSOCDEM_a_split_in_the_shakai_taishuto
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSOCDEM_the_democracy_path
+					}
+				}
+				complete_national_focus = JAPSOCDEM_the_democracy_path			
+			}	
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSOCDEM_rightist_faction_victory
+					}
+				}
+				complete_national_focus = JAPSOCDEM_rightist_faction_victory		
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPTAISHUTOTWO_victory_of_parliamentary_socialism
+					}
+				}
+				complete_national_focus = JAPTAISHUTOTWO_victory_of_parliamentary_socialism	
+			}			
+		}		
+	}
+
+	option = { #国民同盟
+		name = KXXJAP.157.f
+		ai_chance = { 
+			base = 20
+		}		
+		country_event =	KXXJAP.162
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.3
+		}
+		hidden_effect = { 
+			load_focus_tree = kokumin-domei
+			mark_focus_tree_layout_dirty = yes		
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPKOKUMIN_kokumin_domei_at_the_helm
+					}
+				}
+				complete_national_focus = JAPKOKUMIN_kokumin_domei_at_the_helm
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPDOMEITWO_a_new_round_for_the_kokumin_domei
+					}
+				}
+				complete_national_focus = JAPDOMEITWO_a_new_round_for_the_kokumin_domei				
+			}
+		}		
+	}	
+
+}
+
+country_event = { #政友会二次选举
+	id = KXXJAP.158
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.158" }
+	title = KXXJAP.158.t
+	desc = KXXJAP.158.d
+
+	is_triggered_only = yes
+
+	option = { #鸠山一郎
+		name = KXXJAP.158.a
+		ai_chance = { 
+			base = 25
+		}
+		hidden_effect = {
+			create_country_leader = {
+				name = "鸠山一郎"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Hatoyama_Ichiro.png"
+				expire = "1965.1.1"
+				ideology = progressive_conservatism_subtype
+			}
+			add_ideas = {
+				JAP_Hatoyama_Ichiro_hog_sco
+				JAP_Yoshizawa_Kenkichi_for_sco
+				JAP_Mitsuchi_Chuzo_eco_sco
+				JAP_Matsuno_Tsuruhei_sec_sco
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_orthodox_victory
+					}
+				}
+				complete_national_focus = JAPSEI_orthodox_victory
+			}
+			if = {
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_rentaro_cabinet
+					}
+				}
+				complete_national_focus = JAPSEI_rentaro_cabinet				 	
+			}		
+			if = { 	
+				limit = { 
+					NOT = { 
+						has_completed_focus = AJPSEIYUKAITWO_upholding_party_orthodoxy
+					}
+				}
+				complete_national_focus = AJPSEIYUKAITWO_upholding_party_orthodoxy				
+			}				
+		}
+	}
+
+	option = { #中岛知久平
+		name = KXXJAP.158.b
+		ai_chance = { 
+			base = 25
+		}
+		hidden_effect = {
+			create_country_leader = {
+				name = "中岛知久平"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Chikuhei_Nakajima.png"
+				expire = "1965.1.1"
+				ideology = soccon_popular_patriotism_subtype
+			}
+			add_ideas = {
+				JAP_Chikuhei_Nakajima_hog_sco
+				JAP_Ashida_Hitoshi_for_sco
+				JAP_Minoru_Togo_eco_sco
+				JAP_Tanabe_Shichiroku_sec_sco
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_the_reform_faction_hold
+					}
+				}
+				complete_national_focus = JAPSEI_the_reform_faction_hold
+			}	
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = AJPSEIYUKAITWO_becoming_a_grassroots_party
+					}
+				}
+				complete_national_focus = AJPSEIYUKAITWO_becoming_a_grassroots_party
+			}				
+		}
+	}	
+
+	option = { #前田米藏
+		name = KXXJAP.158.c
+		ai_chance = { 
+			base = 25
+		}
+		hidden_effect = {
+			create_country_leader = {
+				name = "前田米藏"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Maeda_Yonezo.png"
+				expire = "1965.1.1"
+				ideology = clientelism_subtype
+			}
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Maeda_Yonezo_hog_ade
+				JAP_Yoshizawa_Kenkichi_for_sco
+				JAP_Nakajima_Chikuhei_eco_ade
+				JAP_Mochizuki_Keisuke_sec_ade
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_the_reform_faction_hold
+					}
+				}
+				complete_national_focus = JAPSEI_the_reform_faction_hold
+			}	
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_kuharascabinet
+					}
+				}
+				complete_national_focus = JAPSEI_kuharascabinet				
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = AJPSEIYUKAITWO_becoming_a_grassroots_party
+					}
+				}
+				complete_national_focus = AJPSEIYUKAITWO_becoming_a_grassroots_party
+			}						
+		}
+	}
+
+	option = { #金光庸夫
+		name = KXXJAP.158.e
+		ai_chance = { 
+			base = 25
+		}
+		hidden_effect = {
+			create_country_leader = {
+				name = "金光庸夫"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Kanemitsu_Tsuneo.png"
+				expire = "1965.1.1"
+				ideology = national_conservative_subtype
+			}
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Hatoyama_Ichiro_hog_sco
+				JAP_Yoshizawa_Kenkichi_for_sco
+				JAP_Mitsuchi_Chuzo_eco_sco
+				JAP_Matsuno_Tsuruhei_sec_sco
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_orthodox_victory
+					}
+				}
+				complete_national_focus = JAPSEI_orthodox_victory
+			}
+			if = {
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPSEI_rentaro_cabinet
+					}
+				}
+				complete_national_focus = JAPSEI_rentaro_cabinet				 	
+			}		
+			if = { 	
+				limit = { 
+					NOT = { 
+						has_completed_focus = AJPSEIYUKAITWO_upholding_party_orthodoxy
+					}
+				}
+				complete_national_focus = AJPSEIYUKAITWO_upholding_party_orthodoxy
+			}			
+		}
+	}	
+	
+}
+
+country_event = { #民政党
+	id = KXXJAP.159
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.159" }
+	title = KXXJAP.159.t
+	desc = KXXJAP.159.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.159.a
+		ai_chance = { 
+			base = 25
+		}		
+		create_country_leader = {
+			name = "町田忠治"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Machida_Chuji.png"
+			expire = "1965.1.1"
+			ideology = liberal_conservative_subtype
+		}
+		hidden_effect = {
+			add_ideas = {
+				JAP_Machida_Chuji_hog_mli
+				JAP_Shidehara_Kijuro_for_mli
+				JAP_Matsumura_Kenzo_eco_mli
+				JAP_Kawasaki_Katsu_sec_mli
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPLIB_bureaucratic_hold
+					}
+				}
+				complete_national_focus = JAPLIB_bureaucratic_hold
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPMINSEITOTWO_keeping_party_tradition
+					}
+				}
+				complete_national_focus = JAPMINSEITOTWO_keeping_party_tradition
+			}
+			if = {
+			} 
+		}		
+	}
+
+	option = { 
+		name = KXXJAP.159.b
+		ai_chance = { 
+			base = 25
+		}	
+		create_country_leader = {
+			name = "永井柳太郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Ryutaro_Nagai.png"
+			expire = "1965.1.1"
+			ideology = pan_asianism_subtype
+		}
+		hidden_effect = {		
+			add_ideas = {
+				JAP_Ryutaro_Nagai_hog_sli
+				JAP_Kiyose_Ichiro_for_sli
+				JAP_Miki_Bukichi_eco_mli
+				JAP_Saito_Takao_sec_mli
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPLIB_tojnha_faction_dominance
+					}
+				}
+				complete_national_focus = JAPLIB_tojnha_faction_dominance
+			}
+			if = {
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPMINSEITOTWO_keeping_party_tradition
+					}
+				}
+				complete_national_focus = JAPMINSEITOTWO_keeping_party_tradition				
+			} 						
+		}
+	}
+
+	option = { 
+		name = KXXJAP.159.c
+		ai_chance = { 
+			base = 25
+		}		
+		create_country_leader = {
+			name = "斋藤隆夫"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Saito_Takao.png"
+			expire = "1965.1.1"
+			ideology = marlib_centrist_subtype
+		}
+		hidden_effect = {
+			add_ideas = {
+				JAP_Machida_Chuji_hog_mli
+				JAP_Shidehara_Kijuro_for_mli
+				JAP_Matsumura_Kenzo_eco_mli
+				JAP_Saito_Takao_sec_mli
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPLIB_bureaucratic_hold
+					}
+				}
+				complete_national_focus = JAPLIB_bureaucratic_hold
+			}
+			if = {
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPMINSEITOTWO_a_party_of_the_middle_class
+					}
+				}
+				complete_national_focus = JAPMINSEITOTWO_a_party_of_the_middle_class				
+			} 			
+		}			
+	}	
+
+	option = { 
+		name = KXXJAP.159.e
+		ai_chance = { 
+			base = 25
+		}		
+		create_country_leader = {
+			name = "大麻唯男"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Oasa_Tadao.png"
+			expire = "1965.1.1"
+			ideology = marlib_authoritarian_liberalism_subtype
+		}
+		hidden_effect = {		
+			add_ideas = {
+				JAP_Ryutaro_Nagai_hog_sli
+				JAP_Kiyose_Ichiro_for_sli
+				JAP_Miki_Bukichi_eco_mli
+				JAP_Saito_Takao_sec_mli
+			}
+			if = { 
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPLIB_tojnha_faction_dominance
+					}
+				}
+				complete_national_focus = JAPLIB_tojnha_faction_dominance
+			}
+			if = {
+				limit = { 
+					NOT = { 
+						has_completed_focus = JAPMINSEITOTWO_keeping_party_tradition
+					}
+				}
+				complete_national_focus = JAPMINSEITOTWO_keeping_party_tradition				
+			} 						
+		}		
+	}	
+	
+}
+
+country_event = { #国民同志会
+	id = KXXJAP.160
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.160" }
+	title = KXXJAP.160.t
+	desc = KXXJAP.160.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.160.a
+		ai_chance = { 
+			base = 35
+		}		
+		create_country_leader = {
+			name = "千叶三郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Chiba_Saburo.png"
+			expire = "1965.1.1"
+			ideology = soclib_humanistic_capitalism_subtype
+		}		
+	}
+
+	option = { 
+		name = KXXJAP.160.b
+		ai_chance = { 
+			base = 35
+		}		
+		create_country_leader = {
+    		name = "石桥湛山"
+    		picture = "gfx/leaders/JAP/Portrait_JAP_Tanzan_Ishibashi.png"
+    		expire = "1.1.1"
+    		ideology = soclib_progressive_democracy_subtype
+		}
+	}	
+
+	option = { 
+		name = KXXJAP.160.c
+		ai_chance = { 
+			base = 30
+		}		
+		create_country_leader = {
+			name = "鹿岛守之助"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Morinosuke_Kajima.png"
+			expire = "1965.1.1"
+			ideology = kajima_panasiaism_subtype
+		}
+	}
+}
+
+country_event = { #社会大众党
+	id = KXXJAP.161
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.161" }
+	title = KXXJAP.161.t
+	desc = KXXJAP.161.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.161.a
+		ai_chance = { 
+			base = 20
+		}	
+		create_country_leader = {
+			name = "片山哲"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Tetsu_Katayama_KX.png"
+			expire = "1965.1.1"
+			ideology = socdem_paternal_socialism_subtype
+		}
+	}
+
+	option = { 
+		name = KXXJAP.161.b
+		ai_chance = { 
+			base = 20
+		}		
+		create_country_leader = {
+			name = "水谷长三郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Chozaburo_Mizutani.png"
+			expire = "1965.1.1"
+			ideology = socdem_paternal_socialism_subtype
+		}
+	}
+	
+	option = { 
+		name = KXXJAP.161.c
+		ai_chance = { 
+			base = 20
+		}		
+		create_country_leader = {
+			name = "西尾末广"
+			picture = "gfx/leaders/JAP/Portriat_JAP_Suehiro_Nishio.png"
+			expire = "1965.1.1"
+			ideology = authoritarian_social_democracy_subtype
+		}
+	}	
+
+	option = { 
+		name = KXXJAP.161.e
+		ai_chance = { 
+			base = 20
+		}		
+		create_country_leader = {
+			name = "八木秀次"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hidetsugu_Yagi.png"
+			expire = "1965.1.1"
+			ideology = liberal_socialism_subtype
+		}
+	}		
+
+	option = { 
+		name = KXXJAP.161.f
+		ai_chance = { 
+			base = 20
+		}			
+		create_country_leader = {
+			name = "铃木茂三郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Mosaburo_Suzuki.png"
+			expire = "1965.1.1"
+			ideology = syndie_social_democrat_subtype
+		}
+	}	
+
+}
+
+country_event = { #国民同盟
+	id = KXXJAP.162
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.162" }
+	title = KXXJAP.162.t
+	desc = KXXJAP.162.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.162.a
+		ai_chance = { 
+			base = 25
+		}		
+		create_country_leader = {
+			name = "伊豆富人"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Tomito_Izu.png"
+			expire = "1965.1.1"
+			ideology = authdem_showa_statism_subtype
+		}
+	}
+
+	option = { 
+		name = KXXJAP.162.b
+		ai_chance = { 
+			base = 25
+		}		
+		create_country_leader = {
+			name = "山道襄一"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Joichi_Yamaji.png"
+			expire = "1965.1.1"
+			ideology = authoritarian_liberalism_subtype
+		}
+	}
+	
+	option = { 
+		name = KXXJAP.162.c
+		ai_chance = { 
+			base = 25
+		}		
+		create_country_leader = {
+			name = "林路一"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Roichi_Hayashi.png"
+			expire = "1965.1.1"
+			ideology = autdem_state_shintoism_subtype
+		}
+	}
+	
+	option = { 
+		name = KXXJAP.162.e
+		ai_chance = { 
+			base = 25
+		}		
+		create_country_leader = {
+			name = "小川友三"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Tomozo_Ogawa.png"
+			expire = "1965.1.1"
+			ideology = authdem_poujadisme_subtype
+		}
+	}	
+
+}
+
+country_event = { #宇垣一成后续
+	id = KXXJAP.163
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.163" }
+	title = KXXJAP.163.t
+	desc = KXXJAP.163.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.163.a
+		ai_chance = { 
+			base = 30
+		}
+		country_event = KXXJAP.164
+	}
+
+	option = { 
+		name = KXXJAP.163.b
+		ai_chance = { 
+			base = 20
+		}		
+		create_country_leader = {
+			name = "币原喜重郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kijyuro_Shidehara.png"
+			expire = "1965.1.1"
+			ideology = liberal_conservative_subtype
+		}
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.3
+		}	
+		add_authdem_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_pataut_to_coalition = yes			
+	}
+	
+	option = { 
+		name = KXXJAP.163.c
+		ai_chance = { 
+			base = 30
+		}		
+		create_country_leader = {
+			name = "小矶国昭"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kuniaki_Koiso.png"
+			expire = "1965.1.1"
+			ideology = junta_subtype
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.3
+		}
+		add_authdem_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes
+		add_natpop_to_coalition = yes
+		hidden_effect = {
+			country_event = {
+				id = KXXJAP.172
+				days = 360
+			}
+		}	
+	}
+	
+	option = { 
+		name = KXXJAP.163.e
+		ai_chance = { 
+			base = 20
+		}		
+		country_event = KXXJAP.165
+	}	
+
+}
+
+country_event = { #宇垣一成换意识形态
+	id = KXXJAP.164
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.164" }
+	title = KXXJAP.164.t
+	desc = KXXJAP.164.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.164.a
+		ai_chance = { 
+			base = 16
+		}
+		create_country_leader = {
+			name = "宇垣一成"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kazushige_Ugaki_KX.png"
+			expire = "1965.1.1"
+			ideology = prussian_constitutionalism_subtype
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.3
+		}	
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes
+		add_natpop_to_coalition = yes			
+	}
+
+	option = { 
+		name = KXXJAP.164.b
+		ai_chance = { 
+			base = 18
+		}
+		create_country_leader = {
+			name = "宇垣一成"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kazushige_Ugaki_KX.png"
+			expire = "1965.1.1"
+			ideology = marlib_authoritarian_liberalism_subtype
+		}
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.3
+		}
+		add_socdem_to_coalition = yes
+		add_soclib_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_authdem_to_coalition =yes
+		add_pataut_to_coalition = yes
+	}
+	
+	option = { 
+		name = KXXJAP.164.c
+		ai_chance = { 
+			base = 16
+		}
+		create_country_leader = {
+			name = "宇垣一成"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kazushige_Ugaki_KX.png"
+			expire = "1965.1.1"
+			ideology = national_conservative_subtype
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.3
+		}	
+		add_marlib_to_coalition = yes		
+		add_pataut_to_coalition = yes
+		add_authdem_to_coalition = yes
+		add_natpop_to_coalition = yes		
+	}
+	
+	option = { 
+		name = KXXJAP.164.e
+		ai_chance = { 
+			base = 16
+		}
+		create_country_leader = {
+			name = "宇垣一成"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kazushige_Ugaki_KX.png"
+			expire = "1965.1.1"
+			ideology = socdem_agrarianism_subtype
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.3
+		}	
+		set_party_name = {
+			ideology = social_democrat
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}	
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes
+		add_natpop_to_coalition = yes		
+	}
+
+	option = { 
+		name = KXXJAP.164.f
+		ai_chance = { 
+			base = 16
+		}
+		create_country_leader = {
+			name = "宇垣一成"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kazushige_Ugaki_KX.png"
+			expire = "1965.1.1"
+			ideology = natpop_agrarianism_subtype
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}	
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes			
+	}
+
+	option = { 
+		name = KXXJAP.164.g
+		ai_chance = { 
+			base = 18
+		}
+		create_country_leader = {
+			name = "宇垣一成"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kazushige_Ugaki_KX.png"
+			expire = "1965.1.1"
+			ideology = kokubo_kokka_subtype
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.3
+		}
+		add_authdem_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes
+		add_natpop_to_coalition = yes				
+	}			
+
+}
+
+country_event = { #宇垣一成后续-革新军人
+	id = KXXJAP.165
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.165" }
+	title = KXXJAP.165.t
+	desc = KXXJAP.165.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.165.a
+		ai_chance = { 
+			base = 50
+		}		
+		country_event = KXXJAP.167
+		create_country_leader = {
+			name = "大岛浩"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hiroshi_Oshima.png"
+			expire = "1965.1.1"
+			ideology = pataut_volkism_subtype
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.3
+		}		
+	}
+	
+	option = { 
+		name = KXXJAP.165.b
+		ai_chance = { 
+			base = 50
+		}		
+		country_event = KXXJAP.166
+		create_country_leader = {
+			name = "松谷诚"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Matsutani_Makoto.png"
+			expire = "1965.1.1"
+			ideology = socdem_junta_subtype
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.3
+		}		
+	}
+
+}
+
+country_event = { #松谷诚换意识形态
+	id = KXXJAP.166
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.166" }
+	title = KXXJAP.166.t
+	desc = KXXJAP.166.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.166.a
+		ai_chance = { 
+			base = 50
+		}
+		create_country_leader = {
+			name = "松谷诚"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Matsutani_Makoto.png"
+			expire = "1965.1.1"
+			ideology = socdem_junta_subtype
+		}			
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}			
+		add_radsoc_to_coalition = yes
+		add_synd_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_natpop_to_coalition	= yes		
+	}
+	
+	option = { 
+		name = KXXJAP.166.b
+		ai_chance = { 
+			base = 50
+		}
+		create_country_leader = {
+			name = "松谷诚"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Matsutani_Makoto.png"
+			expire = "1965.1.1"
+			ideology = red_junta_subtype
+		}	
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}	
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.3
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}	
+		set_party_name = {
+			ideology = social_democrat
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}				
+		add_radsoc_to_coalition = yes
+		add_synd_to_coalition = yes
+		add_socdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_natpop_to_coalition	= yes								
+	}
+
+}
+
+country_event = { #大岛浩换意识形态
+	id = KXXJAP.167
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.167" }
+	title = KXXJAP.167.t
+	desc = KXXJAP.167.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.167.a
+		ai_chance = { 
+			base = 30
+		}
+		create_country_leader = {
+			name = "大岛浩"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hiroshi_Oshima.png"
+			expire = "1965.1.1"
+			ideology = pataut_volkism_subtype
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_authdem_to_coalition = yes
+		add_natpop_to_coalition = yes
+	}
+	
+	option = { 
+		name = KXXJAP.167.b
+		ai_chance = { 
+			base = 40
+		}
+		create_country_leader = {
+			name = "大岛浩"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hiroshi_Oshima.png"
+			expire = "1965.1.1"
+			ideology = spectral_state_subtype
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}	
+		add_authdem_to_coalition = yes
+		add_natpop_to_coalition = yes			
+	}
+
+	option = { 
+		name = KXXJAP.167.c
+		ai_chance = { 
+			base = 30
+		}
+		create_country_leader = {
+			name = "大岛浩"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hiroshi_Oshima.png"
+			expire = "1965.1.1"
+			ideology = rejuvenated_prussianism_subtype
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.3
+		}	
+		add_pataut_to_coalition = yes
+		add_natpop_to_coalition = yes		
+	}	
+
+}
+
+country_event = { #平沼后续
+	id = KXXJAP.168
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.168" }
+	title = KXXJAP.168.t
+	desc = KXXJAP.168.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.168.a
+		ai_chance = { 
+			base = 18
+		}
+		create_country_leader = {
+			name = "平沼骐一郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hiranuma_Kiichiro.png"
+			expire = "1965.1.1"
+			ideology = pataut_nihonism_subtype
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.3
+		}			
+		add_authdem_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes
+		add_natpop_to_coalition = yes				
+	}
+
+	option = { 
+		name = KXXJAP.168.b
+		ai_chance = { 
+			base = 16
+		}	
+		create_country_leader = {
+			name = "有田八郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hachiro_Arita.png"
+			expire = "1965.1.1"
+			ideology = paternal_socialism_subtype
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.3
+		}	
+		add_socdem_to_coalition = yes
+		add_marlib_to_coalition = yes
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_natpop_to_coalition = yes				
+	}
+	
+	option = { 
+		name = KXXJAP.168.c
+		ai_chance = { 
+			base = 18
+		}
+		create_country_leader = {
+			name = "酒井忠正"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Tadamasa_Sakai.png"
+			expire = "1965.1.1"
+			ideology = nihonism_subtype
+		}	
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes	
+		country_event = KXXJAP.170		
+	}
+
+	option = { 
+		name = KXXJAP.168.e
+		ai_chance = { 
+			base = 16
+		}
+		create_country_leader = {
+			name = "北条隽八"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Shumpachi_Hojo.png"
+			expire = "1965.1.1"
+			ideology = socdem_nichiren_buddhism_subtype
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.3
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = JAP_nat_unity_party_long
+			name = JAP_nat_unity_party
+		}		
+		add_marlib_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_natpop_to_coalition = yes	
+	}
+
+	option = { 
+		name = KXXJAP.168.f
+		ai_chance = { 
+			base = 16
+		}
+		create_country_leader = {
+			name = "赤池浓"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Atsushi_Akaike.png"
+			expire = "1965.1.1"
+			ideology = ultranationalism_proto_subtype
+		}	
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes		
+		hidden_effect = {
+			country_event = {
+				id = KXXJAP.171
+				days = 30
+			}
+		}			
+	}
+
+	option = { 
+		name = KXXJAP.168.g
+		ai_chance = { 
+			base = 16
+		}
+		create_country_leader = {
+			name = "山口锐之助"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Yamaguchi_Einosuke.png"
+			expire = "1965.1.1"
+			ideology = kodo_keizairon_subtype
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes				
+	}			
+	
+}
+
+country_event = { #平沼骐一郎意识形态
+	id = KXXJAP.169
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.169" }
+	title = KXXJAP.169.t
+	desc = KXXJAP.169.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.169.a
+		ai_chance = { 
+			base = 15
+		}
+	}
+
+	option = { 
+		name = KXXJAP.169.b
+		ai_chance = { 
+			base = 15
+		}
+		set_country_leader_ideology = pataut_kritarchy_subtype
+	}
+
+	option = { 
+		name = KXXJAP.169.c
+		ai_chance = { 
+			base = 10
+		}
+		set_country_leader_ideology = pataut_national_conservative_subtype
+	}
+
+	option = { 
+		name = KXXJAP.169.e
+		ai_chance = { 
+			base = 20
+		}
+		create_country_leader = {
+			name = "平沼骐一郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hiranuma_Kiichiro.png"
+			expire = "1965.1.1"
+			ideology = nihonism_subtype
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes			
+	}
+
+	option = { 
+		name = KXXJAP.169.f
+		ai_chance = { 
+			base = 20
+		}
+		create_country_leader = {
+			name = "平沼骐一郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hiranuma_Kiichiro.png"
+			expire = "1965.1.1"
+			ideology = natpop_kritarchy_subtype
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes
+	}
+
+	option = { 
+		name = KXXJAP.169.g
+		ai_chance = { 
+			base = 20
+		}
+		create_country_leader = {
+			name = "平沼骐一郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Hiranuma_Kiichiro.png"
+			expire = "1965.1.1"
+			ideology = natpop_national_conservative_subtype
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes
+	}	
+
+}	
+
+country_event = { #酒井忠正意识形态
+	id = KXXJAP.170
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.170" }
+	title = KXXJAP.170.t
+	desc = KXXJAP.170.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.170.a
+		ai_chance = { 
+			base = 40
+		}
+	}
+
+	option = { 
+		name = KXXJAP.170.b
+		ai_chance = { 
+			base = 30
+		}
+		set_country_leader_ideology = natpop_showa_statism_subtype		
+	}
+
+	option = { 
+		name = KXXJAP.170.c
+		ai_chance = { 
+			base = 30
+		}
+		set_country_leader_ideology = natpop_kokubo_kokka_subtype		
+	}
+
+}	
+
+country_event = { #神政龙神会
+	id = KXXJAP.171
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.171" }
+	title = KXXJAP.171.t
+	desc = KXXJAP.171.d
+	picture = GFX_event_jap_shinseiryujinkai
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.171.a
+		country_event = KXXJAP.172
+	}
+
+}	
+
+country_event = { #神政龙神会
+	id = KXXJAP.172
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.172" }
+	title = KXXJAP.172.t
+	desc = KXXJAP.172.d
+	picture = GFX_event_jap_shinseiryujinkai
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.172.a
+		ai_chance = { 
+			base = 50
+		}
+	}
+
+	option = { 
+		name = KXXJAP.172.b
+		ai_chance = { 
+			base = 50
+		}
+		set_cosmetic_tag = JAP_ryujinkai
+		set_country_leader_ideology = spiritualism_subtype		
+	}
+
+}
+
+country_event = { #神代研究会
+	id = KXXJAP.173
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.173" }
+	title = KXXJAP.173.t
+	desc = KXXJAP.173.d
+	picture = GFX_event_JAP_koiso_kuniaki_event
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.173.a
+		ai_chance = { 
+			base = 50
+		}
+	}
+
+	option = { 
+		name = KXXJAP.173.b
+		ai_chance = { 
+			base = 25
+		}	
+		create_country_leader = {
+			name = "小矶国昭"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kuniaki_Koiso.png"
+			expire = "1965.1.1"
+			ideology = natpop_state_shintoism_subtype
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}
+		add_authdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes	
+	}
+
+	option = { 
+		name = KXXJAP.173.c
+		ai_chance = { 
+			base = 25
+		}	
+		set_country_leader_ideology = pataut_occultism_subtype 	
+	}	
+
+}	
+
+country_event = { #SCB内战结束事件
+	id = KXXJAP.174
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.174" }
+	title = KXXJAP.174.t
+	desc = KXXJAP.174.d
+	picture = GFX_event_jap_daihonei_army
+
+	is_triggered_only = yes
+
+	option = { 
+		name = KXXJAP.174.a
+		create_country_leader = {
+			name = "国会"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Vacant_Office.png"
+			expire = "1965.1.1"
+			ideology = provisional_government_subtype
+		}
+		remove_all_ministers = yes
+		country_event = {
+			id = KXXJAP.175
+			days = 14
+		}
+	}
+
+}	
+
+country_event = { #哪一边？
+	id = KXXJAP.175
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.175" }
+	title = KXXJAP.175.t
+	desc = KXXJAP.175.d
+	picture = GFX_event_jap_kinzokugen_event
+
+	is_triggered_only = yes
+
+	option = { #德川家
+		name = KXXJAP.175.a
+		set_cosmetic_tag = JAP_Shogunate
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = "德川内阁"
+			name = "德川内阁"
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = "德川内阁"
+			name = "德川内阁"
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.3
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.3
+		}
+		country_event = KXXJAP.176 	
+		complete_national_focus = JAP_alliance_triumphant
+		complete_national_focus = JAP_iesato_government	
+		create_faction_from_template = faction_template_co_prosperity_sphere
+	}
+
+	option = { #军部
+		name = KXXJAP.175.b
+		country_event = KXXJAP.177 
+		hidden_effect = {
+			set_country_flag = KXX_JAP_BANTOSEIHAI
+			set_country_flag = NO_RD_IRAA
+			complete_national_focus = JAPECON_recovering_from_black_monday
+			create_faction_from_template = faction_template_co_prosperity_sphere
+		}
+	}
+
+}	
+
+country_event = { #德川家族
+	id = KXXJAP.176
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.176" }
+	title = KXXJAP.176.t
+	desc = KXXJAP.176.d
+	picture = GFX_event_JAP_Tokugawa_Yoshinobu
+
+	is_triggered_only = yes
+
+	option = { #德川家达
+		name = KXXJAP.176.a
+		create_country_leader = {
+			name = "德川家达"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Tokugawa_Iesato_KX.png"
+			expire = "1965.1.1"
+			ideology = transitional_government_subtype
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes
+		load_focus_tree = japan-shongunate
+	}
+
+}	
+
+country_event = { #军部的新意思
+	id = KXXJAP.177
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.177" }
+	title = KXXJAP.177.t
+	desc = KXXJAP.177.d
+	picture = GFX_event_jap_daihonei_army
+	
+
+	is_triggered_only = yes
+
+	option = { #石原莞尔
+		name = KXXJAP.177.a
+		create_country_leader = {
+			name = "石原莞尔"
+			desc = "KANJI_LEADER_DESC"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kanji_Ishiwara.png"
+			expire = "1965.1.1"
+			ideology = natpop_nichiren_buddhism_subtype
+		}	
+		add_ideas = {
+			JAP_Kanji_Ishiwara_hog_npo
+			JAP_Shigeru_Honjō_for_npo
+			JAP_Tanaka_Chigaku_eco_npo
+			JAP_Yasuhide_Kurihara_sec_tot
+		}		
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}		
+		add_pataut_to_coalition = yes
+		hidden_effect = {
+			load_focus_tree = japan-iraa-rightist
+			complete_national_focus = JAPIRAARIGHTIST_rightists_dominate_the_conference
+			complete_national_focus = JAPIRAARIGHTIST_militarist_victory
+			complete_national_focus = JAPIRAARIGHTIST_hayashisvictory
+		}		
+	}
+
+	option = { #松井石根
+		name = KXXJAP.177.b
+		create_country_leader = {
+			name = "松井石根"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Iwane_Matsui.png"
+			expire = "1965.1.1"
+			ideology = natpop_pan_asianism_subtype
+		}
+		add_ideas = {
+			JAP_Iwane_Matsui_hog_npo
+			JAP_Hayashi_Senyuki_for_npo
+			JAP_Suzuki_Teiichi_eco_npo
+			JAP_Miwa_Juso_sec_npo
+		}		
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}		
+		add_pataut_to_coalition = yes
+		hidden_effect = {
+			load_focus_tree = japan-iraa-rightist
+			complete_national_focus = JAPIRAARIGHTIST_rightists_dominate_the_conference
+			complete_national_focus = JAPIRAARIGHTIST_militarist_victory
+			complete_national_focus = JAPIRAARIGHTIST_hayashisvictory
+		}
+	}
+
+	option = { #林铣十郎
+		name = KXXJAP.177.c
+		set_cosmetic_tag = JAP_SHUMEI_MUSLIM
+		create_country_leader = {
+			name = "林铣十郎"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Senjuro_Hayashi_KX.png"
+			expire = "1965.1.1"
+			ideology = pataut_islamism_subtype
+		}		
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.3
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = "帝国陆军-大日本回教会"
+			name = "陆军-回教会"
+		}				
+		add_natpop_to_coalition = yes
+		hidden_effect = {
+			load_focus_tree = japan-iraa-rightist
+			complete_national_focus = JAPIRAARIGHTIST_rightists_dominate_the_conference
+			complete_national_focus = JAPIRAARIGHTIST_militarist_victory
+			complete_national_focus = JAPIRAARIGHTIST_hayashisvictory
+			country_event = {
+				id = KXXJAP.179
+				days = 30
+			}
+		}
+	}	
+
+	option = { #四王天延孝
+		name = KXXJAP.177.e
+		create_country_leader = {
+			name = "四王天延孝"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Nobutaka_Shioden.png"
+			expire = "1965.1.1"
+			ideology = antisemitisme_subtype
+		}	
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}	
+		set_party_name = {
+			ideology = national_populist
+			long_name = "帝国陆军-日本反犹太协会"
+			name = "陆军-反犹协会"
+		}			
+		add_pataut_to_coalition = yes
+		hidden_effect = {
+			load_focus_tree = japan-iraa-rightist
+			complete_national_focus = JAPIRAARIGHTIST_rightists_dominate_the_conference
+			complete_national_focus = JAPIRAARIGHTIST_militarist_victory
+			complete_national_focus = JAPIRAARIGHTIST_hayashisvictory
+		}		
+	}
+	
+	option = { #安江仙弘
+		name = KXXJAP.177.f
+		set_cosmetic_tag = JAP_JUDA
+		create_country_leader = {
+			name = "安江仙弘"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Norihiro_Yasue.png"
+			expire = "1965.1.1"
+			ideology = nihonyudaya_shugi_subtype
+		}		
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}	
+		set_party_name = {
+			ideology = national_populist
+			long_name = "帝国陆军-日犹协会"
+			name = "陆军-日犹协会"
+		}			
+		add_pataut_to_coalition = yes
+		hidden_effect = {
+			load_focus_tree = japan-iraa-rightist
+			complete_national_focus = JAPIRAARIGHTIST_rightists_dominate_the_conference
+			complete_national_focus = JAPIRAARIGHTIST_militarist_victory
+			complete_national_focus = JAPIRAARIGHTIST_hayashisvictory
+		}		
+	}
+	
+	option = { #山下奉文
+		name = KXXJAP.177.g
+		set_cosmetic_tag = FORM_TRN_JPN1
+		create_country_leader = {
+			name = "山下奉文"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Tomoyuki_Yamashita.png"
+			expire = "1965.1.1"
+			ideology = natpop_turanism_subtype
+		}
+		add_ideas = {
+			JAP_Iwane_Matsui_hog_npo
+			JAP_Hayashi_Senyuki_for_npo
+			JAP_Suzuki_Teiichi_eco_npo
+			JAP_Miwa_Juso_sec_npo
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = JAP_party_turan_long
+			name = JAP_party_turan
+		}		
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.3
+		}		
+		add_pataut_to_coalition = yes
+		hidden_effect = {
+			load_focus_tree = jap-toseiha
+			mark_focus_tree_layout_dirty = yes
+			complete_national_focus = JAPTOSEIHA_turanism_strikes_japan
+		}
+	}	
+	
+}
+
+country_event = { #泛回教
+	id = KXXJAP.179
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.179" }
+	title = KXXJAP.179.t
+	desc = KXXJAP.179.d
+
+	is_triggered_only = yes
+
+	option = { #去
+		name = KXXJAP.179.a
+		add_ideas = JAP_are_ya_ready_war_1
+		hidden_effect = { 
+			JAP_shumei_caliphate_cores = yes
+		}		
+	}
+
+	option = { #不去
+		name = KXXJAP.179.b
+	}	
+
+}	
+
+country_event = { #朝鲜起义优化
+	id = KXXJAP.181
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.181" }
+	title = KXXJAP.181.t
+	desc = KXXJAP.1181.d
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
-	option = { #幕府
-		name = KXXJAP.114514.a
+	option = { #总督府扩大自治
+		name = KXXJAP.181.a
 		ai_chance = {
-			base = 40
+			base = 90
 		}
-        load_focus_tree = japan-shongunate
+		trigger = {
+			JAP = {
+				NOT = {
+					owns_state = 1246
+				}
+			}
+		}
+		add_political_power = -100
+		KOR = {
+			transfer_state = 525
+			transfer_state = 527
+			transfer_state = 1345
+			transfer_state = 1346
+			transfer_state = 1347
+			set_cosmetic_tag = KOR_JAP
+		}
+		set_autonomy = { target = KOR autonomy_state = autonomous_territory }		
+		KOR = {
+            set_popularities = {
+                totalist = 0
+                radical_socialist = 0 
+                syndicalist = 0
+                social_democrat = 0
+                social_liberal = 0
+                market_liberal = 0
+                social_conservative = 0
+                authoritarian_democrat = 25
+                paternal_autocrat = 50
+                national_populist = 25
+            }			
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = "朝鲜总督府"
+				name = "朝鲜总督府"
+			}			
+			set_politics = {
+				ruling_party = paternal_autocrat
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "阿部信行"
+				picture = "gfx/leaders/JAP/Portrait_JAP_Nobuyuki_Abe.png"
+				expire = "1965.1.1"
+				ideology = autocratic_colonial_govt_subtype
+			}			
+			hidden_effect = {
+				remove_ideas_with_trait = head_of_government
+				remove_ideas_with_trait = foreign_minister
+				remove_ideas_with_trait = economy_minister
+				remove_ideas_with_trait = security_minister
+			}			
+		}
 	}
 
-	option = { #南朝
-		name = KXXJAP.114514.b
+	option = { #那咋了
+		name = KXXJAP.181.b
 		ai_chance = {
-			base = 20
-		}		
-        load_focus_tree = japan-southcourt
+			base = 90
+		}
+		hidden_effect = {
+			news_event = {
+				id = worldnews.198
+			}
+		}
+		add_stability = -0.15
+		country_event = { id = japfor.86 days = 3 }
+		KOR = {
+			transfer_state = 525
+			transfer_state = 527
+			set_country_flag = { flag = KOR_rebellion days = 5 value = 1 }
+			country_event = { id = japfor.85 days = 1 }
+		}
+		set_country_flag = JAP_korea_revolt_now
+	}	
+
+	option = { #起义
+		name = KXXJAP.181.c
+		ai_chance = {
+			base = 10
+		}
+		country_event = {
+			id = rework_japan.300
+			days = 1
+		}
+		set_country_flag = JAP_korea_revolt_now
 	}
 
 	
 
+}
+
+country_event = { #北一辉和莫斯利
+	id = KXXJAP.182
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.182" }
+	title = KXXJAP.182.t
+	desc = KXXJAP.182.d
+
+	trigger = {
+		tag = JAP
+		has_government = totalist
+		has_cosmetic_tag = BRG_ANGLO_JAPAN_JAP
+		NOT = {
+			has_country_flag = KXX_ANGLO_JAP_KITA
+		}
+	}
+
+	fire_only_once = yes
+
+	option = { 
+		name = KXXJAP.182.a
+		ai_chance = {
+			base = 100
+		}
+		set_country_flag = KXX_ANGLO_JAP_KITA
+		create_country_leader = {
+			name = "联合内阁"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Kita_Mosley.png"
+			expire = "1965.1.1"
+			ideology = red_samurai_dictatorship_subtype
+		}
+		set_country_flag = KXX_LEADER_GUI_VISIBLE
+		set_country_flag = JAP_Yasuhito_VISIBLE			
+	}
+
+	option = { 
+		name = KXXJAP.182.b
+		ai_chance = {
+			base = 0
+		}
+		set_country_flag = KXX_ANGLO_JAP_KITA
+	}
+}
+
+country_event = { #德川幕府会和清政府结盟
+	id = KXXJAP.183
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJAP.183" }
+	title = KXXJAP.183.t
+	desc = KXXJAP.183.d
+
+	trigger = {
+		tag = JAP
+		is_faction_leader = yes
+		has_completed_focus = JAP_alliance_triumphant
+		QIE = {
+			has_country_leader = {
+				name = "溥仪"
+				ruling_only = yes
+			}
+		}
+		NOT = {
+			QIE = {
+				is_in_faction_with = JAP
+			}
+		}
+	}
+
+	fire_only_once = yes
+
+	option = { 
+		name = KXXJAP.183.a
+		ai_chance = {
+			base = 80
+		}	
+		JAP = { add_to_faction = QIE }
+		QIE = { 
+			declare_war_on = {
+				target = FNG
+				type = annex_everything
+			}
+		}	
+	}
+
+	option = { 
+		name = KXXJAP.183.b
+		ai_chance = {
+			base = 20
+		}
+	}
 }
