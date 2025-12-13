@@ -33,11 +33,6 @@ focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus JAP_alliance_triumphant"
 		add_political_power = 100
-		remove_ideas = {
-			JAP_militarism_strengthened
-			jap_union_suppressed
-			jap_iraa 
-		}
 	}
 }
 focus = {
@@ -53,9 +48,17 @@ focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus JAP_great_council_of_state"
 		custom_effect_tooltip = "The Cabinet will be replaced by Great Council of State"
-		hidden_effect = {
-			add_ideas = JAP_great_council_of_state_idea
+		add_ideas = JAP_great_council_of_state_idea
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = "太政官"
+			name = "太政官"
 		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = "太政官"
+			name = "太政官"
+		}		
 	}
 }
 focus = {
@@ -376,11 +379,11 @@ focus = {
 			id = jap_shogundom.8
 			days = 3
 		}
-		remove_ideas = JAP_LSMC_complete
 		add_timed_idea = {
 			idea = JAP_Tokyo_Market_slowly_restore
 			days = 365
 		}
+		complete_national_focus = JAPECON_recovering_from_black_monday
 		mark_focus_tree_layout_dirty = yes
 	}
 }
@@ -430,8 +433,15 @@ focus = {
 			ruling_party = authoritarian_democrat
    			elections_allowed = no
 		}
-		remove_every_hog_trait = yes  
-		activate_advisor = JAP_Tokugawa_Iemasa_hog_ade
+		create_country_leader = {
+			name = "德川家达"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Tokugawa_Iesato_KX.png"
+			expire = "1965.1.1"
+			ideology = controlled_democracy_subtype
+		}
+		add_pataut_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes				
 	}
 }
 focus = {
@@ -676,20 +686,19 @@ focus = {
 			ruling_party = paternal_autocrat
    			elections_allowed = no
 		}
-		set_temp_variable = { coalition_partner_var = token:paternal_autocrat }
-		remove_from_coalition = yes 
-		remove_every_for_trait = yes  
-		activate_advisor = JAP_Matsudaira_Tsuneo_for_ade
-		hidden_effect = {
-			add_country_leader_role = {
-				character = JAP_Hirohito 
-				promote_leader = yes
-				country_leader = {
-				  ideology = pat_duumvirism_subtype
-				  expire = "1965.1.1.1"
-				}
-			}
+		create_country_leader = {
+			name = "德川圀顺"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Tokugawa_Kuniyuki.png"
+			expire = "1965.1.1"
+			ideology = pataut_national_conservative_subtype
 		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_authdem_to_coalition = yes		
+		add_soccon_to_coalition = yes
+		add_marlib_to_coalition = yes
 	}
 }
 focus = {
@@ -930,10 +939,7 @@ focus = {
 	cost = 4
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: JAP_to_our_nostalgic_period"
-		add_timed_idea = {
-			idea = JAP_to_our_nostalgic_period_idea
-			days = 720
-		}
+		add_ideas = JAP_to_our_nostalgic_period_idea
 	}
 }
 focus = {
@@ -1002,6 +1008,9 @@ focus = {
 	y = 18
 	
 	cost = 2
+	available = {
+		has_completed_focus = JAP_to_our_nostalgic_period
+	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus JAP_the_kingmaker_assumed_shogunate"
 		add_country_leader_trait = chancellor_of_state
@@ -1073,6 +1082,7 @@ focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus JAP_embrace_neo_confucianism"
 		add_stability = 0.02
+		set_country_leader_ideology = pataut_social_confucianism_subtype
 	}
 }
 focus = {
