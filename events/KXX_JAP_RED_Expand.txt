@@ -935,3 +935,200 @@ country_event = { #作家搞搞新意思
 	}
 
 }
+
+country_event = { #占领日本
+	id = KXXJSR.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KXXJSR.13" }
+	title = KXXJSR.13.t
+	desc = KXXJSR.13.d
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRA
+		has_subject = JAP
+	}
+
+	option = { #现在这样就可以
+		name = KXXJSR.13.a
+		ai_chance = {
+			base = 0
+		}
+		add_political_power = 60
+		add_stability = 0.01
+		JAP = { add_opinion_modifier = { target = FRA modifier = medium_increase } }
+	}
+	
+	option = { #让贝志高去管理！
+		name = KXXJSR.13.b
+		ai_chance = {
+			base = 35
+		}
+		add_political_power = 95
+		FRA = {
+			set_autonomy = {
+				target = JAP
+				autonomous_state = kx_colored_puppet
+			}
+		}
+		JAP = {
+			set_cosmetic_tag = JAP_INT_puppet
+			set_politics = {
+				ruling_party = radical_socialist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.25
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = "第三国际驻日联合司令部"
+				name = "驻日联合司令部"
+			}
+			create_country_leader = {
+				name = "齐诺维·彼什科夫"
+				picture = "gfx/leaders/FRA/Portrait_FRA_Zinovi_Pechkoff.png"
+				expire = "1.1.1"
+				ideology = radsoc_red_junta_subtype
+			}
+		}
+	}
+	
+	option = { #让科皮坦去管理！
+		name = KXXJSR.13.c
+		ai_chance = {
+			base = 35
+		}
+		trigger = {
+			NOT = {
+				has_country_leader = {
+					ruling_only = yes
+					name = "勒内·科皮坦"
+				}
+			}
+		}
+		add_political_power = 20
+		add_stability = 0.03
+		FRA = {
+			set_autonomy = {
+				target = JAP
+				autonomous_state = kx_colored_puppet
+			}
+		}
+		JAP = {
+			set_cosmetic_tag = JAP_COF_puppet
+			set_politics = {
+				ruling_party = social_democrat
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.25
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = "法国委任统治"
+				name = "法国委任统治"
+			}
+			create_country_leader = {
+				name = "勒内·科皮坦"
+				picture = "gfx/leaders/FRA/Portrait_FRA_Rene_Capitant.png"
+				expire = "1.1.1"
+				ideology = socdem_colonial_govt_subtype
+			}
+		}
+	}
+	
+	option = { #让他们选出自己真正的路
+		name = KXXJSR.13.e
+		ai_chance = {
+			base = 30
+		}
+		add_political_power = -60
+		every_state = {
+			limit = { is_core_of = JAP }
+			add_core_of = JSR
+		}
+		JSR = {		
+			set_country_flag = JSR_INT_puppet_now
+			annex_country = { target = JAP transfer_troops = yes }
+			add_to_faction = FRA
+			set_cosmetic_tag = JAP_red_army			
+			create_country_leader = {
+				name = "JCP中央委员会"
+				picture = "gfx/leaders/JAP/Portrait_JAP_JCP_Central_Committee.png"
+				expire = "1965.1.1"
+				ideology = red_junta_subtype
+			}
+			set_politics = {
+				ruling_party = totalist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.25
+			}			
+			if = {
+				limit = { 
+					FRA = {  
+						has_government = totalist
+					}
+				}
+				country_event = KXXJSR.3
+			}
+			if = {
+				limit = { 
+					FRA = { 
+						OR = { 
+							AND = {
+								has_government = radical_socialist
+								NOT = {
+									OR = {
+										has_country_leader = {
+											ruling_only = yes
+											name = "涅斯托尔·马赫诺"
+										}
+										has_country_leader = {
+											ruling_only = yes
+											name = "马里于斯·雅各布"
+										}
+										has_country_leader = {
+											ruling_only = yes
+											name = "黑卫军"	
+										}										
+									}
+								}
+							}
+							has_government = social_democrat
+							has_government = syndicalist
+						}
+					}
+				}
+				country_event = KXXJSR.4
+			}
+			if = {
+				limit = { 
+					OR = {
+						has_country_leader = {
+							ruling_only = yes
+							name = "涅斯托尔·马赫诺"
+						}
+						has_country_leader = {
+							ruling_only = yes
+							name = "马里于斯·雅各布"
+						}
+						has_country_leader = {
+							ruling_only = yes
+							name = "黑卫军"	
+						}										
+					}
+				}
+				country_event = KXXJSR.8
+			}		
+			else = {
+				country_event = KXXJSR.2
+			}
+		}
+	}
+}
