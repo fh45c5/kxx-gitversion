@@ -737,43 +737,64 @@ focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRA_the_modern_comrade_soldier"
-		army_experience = 50
-		add_command_power = 25
-		custom_effect_tooltip = tooltip_white_line
-		every_army_leader = {
-			display_individual_scopes = yes
-			random_select_amount = 4
-			limit = {
-				is_field_marshal = no
-				NOT = { has_trait = RUS_red_army_trait } #Tukhachevsky
-				NOT = { has_trait = INT_polish_exile_trait } #Rokossowski
-			}
-			add_max_trait = 1
-		}
-		if = {
-			limit = { has_completed_focus = FRA_all_for_the_revolution }
+			army_experience = 50
+			add_command_power = 25
 			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = {
-				localization_key = tooltip_extra_effect_from_focus_completion
-				FOCUS = FRA_all_for_the_revolution
+			every_army_leader = {
+				display_individual_scopes = yes
+				random_select_amount = 4
+				limit = {
+					is_field_marshal = no
+					NOT = { has_trait = RUS_red_army_trait } #Tukhachevsky
+					NOT = { has_trait = INT_polish_exile_trait } #Rokossowski
+				}
+				add_max_trait = 1
 			}
-			set_technology = { forest_warfare = 1 popup = yes }
-			set_technology = { jungle_warfare = 1 popup = yes }
-		}
-		else_if = {
-			limit = {
-				NOT = { has_completed_focus = FRA_the_methodical_war }
-				NOT = { has_completed_focus = FRA_principe_de_concentration }
-				NOT = { has_completed_focus = FRA_supremacy_of_movement }
+				if = {
+					limit = {
+						NOT = { has_template = "Brigade de Chars de Combat" }
+					}
+					division_template = {
+						name = "Brigade de Chars de Combat"
+						division_names_group = FRA_ARM_01
+						regiments = {
+							light_armor = { x = 0 y = 0 }
+							light_armor = { x = 0 y = 1 }
+							light_armor = { x = 0 y = 2 }
+							light_armor = { x = 1 y = 0 }
+							light_armor = { x = 1 y = 1 }
+							light_armor = { x = 1 y = 2 }
+							motorized = { x = 2 y = 0 }
+							motorized = { x = 2 y = 1 }
+							motorized = { x = 2 y = 2 }
+							motorized = { x = 2 y = 3 }
+						}
+						support = {
+							recon = { x = 0 y = 0 }
+							engineer = { x = 0 y = 1 }
+							artillery = { x = 0 y = 2 }
+						}
+					priority = 2
+					}
+				}
+				custom_effect_tooltip = FRA_tank_division_tooltip
+			hidden_effect = {
+				16 = {
+					create_unit = {
+						division = "division_template = \"Brigade de Chars de Combat\" start_experience_factor = 0.3 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "division_template = \"Brigade de Chars de Combat\" start_experience_factor = 0.3 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "division_template = \"Brigade de Chars de Combat\" start_experience_factor = 0.3 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
 			}
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = {
-				localization_key = tooltip_if_focus_completed
-				FOCUS = FRA_all_for_the_revolution
-			}
-			set_technology = { forest_warfare = 1 popup = yes }
-			set_technology = { jungle_warfare = 1 popup = yes }
-		}
+			
 	}
 }
 focus = {
@@ -2260,8 +2281,6 @@ focus = {
 			remove_idea = FRA_standardized_equipment_production
 			add_idea = FRA_military_prod_coops
 		}
-		custom_effect_tooltip = tooltip_white_line
-		custom_effect_tooltip = FRA_upgrade_saint_etienne_tulle
 		hidden_effect = {
 			if = {
 				limit = { has_idea = manufacture_saint_etienne }
@@ -3792,63 +3811,11 @@ focus = {
 			add_one_random_civilian_factory = yes
 			if = {
 				limit = { has_completed_focus = FRA_voluntary_association }
-				custom_effect_tooltip = tooltip_white_line
-				custom_effect_tooltip = {
-					localization_key = tooltip_extra_effect_from_focus_completion
-					FOCUS = FRA_voluntary_association
-				}
-				custom_override_tooltip = {
-					tooltip = {
-						localization_key = tooltip_change_law_to
-						CATEGORY = economy
-						LAW = FRA_autonomous_communes_default
-					}
-					add_ideas = FRA_autonomous_communes_default
-				}
-				add_to_temp_variable = {
-					consumer_goods_expected_value = 0.10
-					tooltip = consumer_goods_expected_value_tooltip
-				}
-				add_to_temp_variable = {
-					production_speed_buildings_factor = 0.15
-					tooltip = construction_speed_tooltip
-				}
-				add_to_temp_variable = {
-					global_building_slots_factor = 0.1
-					tooltip = global_building_slots_factor_tooltip
-				}
-				
+				add_one_random_civilian_factory = yes
+			    add_ideas = FRA_autonomous_communes_default
 			}
 			else_if = {
-				limit = {
-					NOT = { has_completed_focus = FRA_modernisation_and_cartelisation }
-					NOT = { has_completed_focus = FRA_militarisation_of_the_proletariat }
-					NOT = { has_completed_focus = FRA_embrace_planism }
-				}
-				custom_effect_tooltip = tooltip_white_line
-				custom_effect_tooltip = {
-					localization_key = tooltip_if_focus_completed
-					FOCUS = FRA_voluntary_association
-				}
-				effect_tooltip = {
-					custom_override_tooltip = {
-						tooltip = {
-							localization_key = tooltip_change_law_to
-							CATEGORY = economy
-							LAW = FRA_autonomous_communes_default
-						}
-						add_ideas = FRA_autonomous_communes_default
-					}
-					add_to_temp_variable = {
-						consumer_goods_expected_value = 0.15
-						tooltip = consumer_goods_expected_value_tooltip
-					}
-					add_to_temp_variable = {
-						production_speed_buildings_factor = 0.15
-						tooltip = construction_speed_tooltip
-					}
-					
-				}
+			    add_one_random_civilian_factory = yes
 			}
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -3887,23 +3854,13 @@ focus = {
 					add_idea = FRA_autonomous_communes_upgraded
 				}
 			}
-			else_if = {
+			else = {
 				limit = {
 					NOT = { has_completed_focus = FRA_modernisation_and_cartelisation }
 					NOT = { has_completed_focus = FRA_militarisation_of_the_proletariat }
 					NOT = { has_completed_focus = FRA_embrace_planism }
 				}
-				custom_effect_tooltip = tooltip_white_line
-				custom_effect_tooltip = {
-					localization_key = tooltip_if_focus_completed
-					FOCUS = FRA_voluntary_association
-				}
-				effect_tooltip = {
-					swap_ideas = {
-						remove_idea = FRA_autonomous_communes_default
-						add_idea = FRA_autonomous_communes_upgraded
-					}
-				}
+			add_one_random_civilian_factory = yes
 			}
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -26112,7 +26069,7 @@ focus = {
 			hidden_effect = {
 				create_country_leader = {
 					name = "乔治·阿尔贝蒂尼"
-					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.jpg"
+					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
 					expire = "1.1.1"
 					traits = { the_oppotunist }
 					ideology = radsoc_united_front
@@ -26155,7 +26112,7 @@ focus = {
 			hidden_effect = {
 				create_country_leader = {
 					name = "乔治·阿尔贝蒂尼"
-					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.jpg"
+					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
 					expire = "1.1.1"
 					traits = { the_oppotunist }
 					ideology = syn_united_front
@@ -26197,7 +26154,7 @@ focus = {
 			hidden_effect = {
 				create_country_leader = {
 					name = "乔治·阿尔贝蒂尼"
-					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.jpg"
+					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
 					expire = "1.1.1"
 					traits = { the_oppotunist }
 					ideology = socdem_united_front
@@ -26258,7 +26215,7 @@ focus = {
 			hidden_effect = {
 				create_country_leader = {
 					name = "乔治·阿尔贝蒂尼"
-					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.jpg"
+					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
 					expire = "1.1.1"
 					traits = { the_oppotunist }
 					ideology = national_security_state_subtype
@@ -26337,7 +26294,7 @@ focus = {
 			hidden_effect = {
 				create_country_leader = {
 					name = "乔治·阿尔贝蒂尼"
-					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.jpg"
+					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
 					expire = "1.1.1"
 					traits = { the_oppotunist }
 					ideology = right_technocracy_subtype
@@ -26386,14 +26343,14 @@ focus = {
 			hidden_effect = {
 				create_country_leader = {
 					name = "乔治·阿尔贝蒂尼"
-					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.jpg"
+					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
 					expire = "1.1.1"
 					traits = { the_oppotunist }
 					ideology = christian_democracy_subtype
 				}
 				create_country_leader = {
 					name = "乔治·阿尔贝蒂尼"
-					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.jpg"
+					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
 					expire = "1.1.1"
 					traits = { the_oppotunist }
 					ideology = autdem_christian_democracy_subtype
@@ -26441,14 +26398,14 @@ focus = {
 			hidden_effect = {
 				create_country_leader = {
 					name = "乔治·阿尔贝蒂尼"
-					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.jpg"
+					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
 					expire = "1.1.1"
 					traits = { the_oppotunist }
 					ideology = soclib_popular_patriotism_subtype
 				}
 				create_country_leader = {
 					name = "乔治·阿尔贝蒂尼"
-					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.jpg"
+					picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
 					expire = "1.1.1"
 					traits = { the_oppotunist }
 					ideology = marlib_authoritarian_liberalism_subtype
