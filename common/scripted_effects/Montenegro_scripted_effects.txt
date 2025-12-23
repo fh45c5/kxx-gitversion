@@ -1,0 +1,89 @@
+MNT_reduce_bm = {
+	if = {
+		limit = { has_idea = MNT_bm_3 }
+		remove_ideas = MNT_bm_3
+	}
+	else_if = {
+		limit = { has_idea = MNT_bm_2 }
+		swap_ideas = {
+			add_idea = MNT_bm_3
+			remove_idea = MNT_bm_2
+		}
+	}
+	else_if = {
+		limit = { has_idea = MNT_bm_1 }
+		swap_ideas = {
+			add_idea = MNT_bm_2
+			remove_idea = MNT_bm_1
+		}
+	}
+}
+MNT_serb_peace_deal = {
+	if = {
+		limit = {
+			has_country_flag = MNT_secured_deal
+		}
+		transfer_state = 107
+		transfer_state = 108
+		else_if = {
+			limit = {
+				controls_state = 107
+			}
+			transfer_state = 107
+			transfer_state = 108
+		}
+	}
+	else = {
+		if = {
+			limit = {
+				controls_state = 765
+			}
+			transfer_state = 765
+		}
+		if = {
+			limit = {
+				controls_state = 107
+				controls_state = 108
+				controls_state = 765
+				controls_state = 767
+			}
+			transfer_state = 767
+		}
+	}
+	transfer_state = 1269
+}
+MNT_do_commie_raise = {
+	custom_effect_tooltip = MNT_do_commie_raise
+	add_to_variable = { MNT.commie_grievances = 1 }
+	if = {
+		limit = {
+			check_variable = { MNT.commie_grievances > 4 }
+			OR = {
+				has_completed_focus = MNT_a_new_community
+				has_completed_focus = MNT_back_on_track
+				has_completed_focus = MNT_business_of_balkans
+			}
+		}
+		country_event = {
+			id = mnt.32
+			days = 10
+			random = 600
+		}
+	}
+}
+MNT_do_nationalist_raise = {
+	custom_effect_tooltip = MNT_do_nationalist_raise
+	add_to_variable = { MNT.nationalist_grievances = 1 }
+	if = {
+		limit = {
+			check_variable = { MNT.nationalist_grievances > 3 }
+			OR = {
+				has_completed_focus = MNT_a_new_community
+				has_completed_focus = MNT_back_on_track
+				has_completed_focus = MNT_business_of_balkans
+			}
+			has_country_flag = MNT_klubasi
+		}
+		set_country_flag = MNT_christmas_rebellion
+	}
+}
