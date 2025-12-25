@@ -1959,7 +1959,7 @@ focus = {
     y = 4
     cost = 2
     ai_will_do = {
-        factor = 10
+        factor = 400
     }
     available = {
         PRF = {
@@ -1977,11 +1977,314 @@ focus = {
         add_war_support = 0.1
         add_command_power = 50
         increase_ruling_party_popularity_by_5 = yes
-        country_event = {
-            id = BHC.2
+        set_country_flag = BHC_the_congress_plan
+        mark_focus_tree_layout_dirty = yes
+        
         }
     }
+	
+    focus = { #勒克瑙会议
+    	id = BHC_the_congress 
+    	icon = GFX_goal_SKM_Bhartiya
+    	cancelable = no
+    	prerequisite = { focus = BHC_Marching_towards_the_congress }
+		relative_position_id = BHC_Revolutionary_stronghold_in_the_East
+    	x = 0
+    	y = 5
+    	cost = 2
+    	ai_will_do = {
+    	    factor = 400
+    	}
+    	available = {
+    	    has_country_flag = INDAN_already
+        }
+        allow_branch = {
+            has_country_flag = BHC_the_congress_plan
+        }
+    	completion_reward = {
+    	    log = "[GetDateText]: [Root.GetName]: BHC_Marching_towards_the_congress"
+    	    add_stability = 0.05
+    	    add_war_support = 0.1
+    	    add_command_power = 50
+    	    country_event = {
+                id = bhcconf.3
+            }
+    	}
+    }	
+	
+    focus = { #勒克瑙会议-独立 
+    	id = BHC_the_congress_Demand_independence 
+    	icon = GFX_goal_SKM_Bhartiya
+    	cancelable = no
+    	prerequisite = { focus = BHC_the_congress }
+		relative_position_id = BHC_the_congress
+        mutually_exclusive = {
+            focus = BHC_the_congress_Limited_autonomy
+        }
+    	x = -1
+    	y = 1
+    	cost = 2
+    	ai_will_do = {
+    	    factor = 420
+    	}
+    	available = {
+    	    has_country_flag = BHC_stpo
+        }
+    	completion_reward = {
+    	    log = "[GetDateText]: [Root.GetName]: BHC_the_congress_Demand_independence"
+    	    hidden_effect = {
+                country_event = {
+                    id = bhcconf.5
+                    days = 3
+                }
+            }
+    	}
     }
+	
+    focus = { #勒克瑙会议-种姓问题 
+    	id = BHC_the_congress_The_caste_issue 
+    	icon = GFX_goal_SKM_Bhartiya
+    	cancelable = no
+    	prerequisite = { 
+            focus = BHC_the_congress_Demand_independence 
+            focus = BHC_the_congress_Limited_autonomy 
+        }
+		relative_position_id = BHC_the_congress
+    	x = -2
+    	y = 2
+    	cost = 3
+    	ai_will_do = {
+    	    factor = 10
+    	}
+    	available = {
+    	    has_country_flag = BHC_attend_Lucknow_Conference
+            NOT = {
+                has_country_flag = IND_kxx_issue
+            }
+        }
+    	completion_reward = {
+    	    log = "[GetDateText]: [Root.GetName]: BHC_the_congress_The_caste_issue"
+    	    set_country_flag = IND_kxx_issue
+                country_event = {
+                    id = bhcconf.2
+                }
+    	}
+    }
+	
+    focus = { #勒克瑙会议 -自治
+    	id = BHC_the_congress_Limited_autonomy 
+    	icon = GFX_goal_SKM_Bhartiya
+    	cancelable = no
+    	prerequisite = { focus = BHC_the_congress }
+		relative_position_id = BHC_the_congress
+        mutually_exclusive = {
+            focus = BHC_the_congress_Demand_independence
+        }
+    	x = 1
+    	y = 1
+    	cost = 2
+    	ai_will_do = {
+    	    factor = 400
+    	}
+    	available = {
+    	    has_country_flag = BHC_stpo
+    	    has_country_flag = con_side
+        }
+    	completion_reward = {
+    	    log = "[GetDateText]: [Root.GetName]: BHC_the_congress_Limited_autonomy"
+    	    add_stability = 0.05
+    	    add_war_support = 0.1
+    	    add_command_power = 50
+            hidden_effect = {
+                country_event = {
+                    id = bhcconf.4
+                    days = 3
+                }
+            }
+    	    increase_ruling_party_popularity_by_5 = yes
+    	}
+    }
+	
+    focus = { #勒克瑙会议-王公去留
+    	id = BHC_the_congress_The_fate_of_princes_and_Dukes 
+    	icon = GFX_goal_SKM_Bhartiya
+    	cancelable = no
+    	prerequisite = { 
+            focus = BHC_the_congress_Demand_independence 
+            focus = BHC_the_congress_Limited_autonomy 
+        }
+		relative_position_id = BHC_the_congress
+    	x = 2
+    	y = 2
+    	cost = 3
+    	ai_will_do = {
+    	    factor = 400
+    	}
+    	available = {
+    	    has_country_flag = BHC_attend_Lucknow_Conference
+            NOT = {
+                has_country_flag = IND_kxx_issue
+            }
+        }
+    	completion_reward = {
+    	    log = "[GetDateText]: [Root.GetName]: BHC_the_congress_The_fate_of_princes_and_Dukes"
+    	    set_country_flag = IND_kxx_issue
+                country_event = {
+                    id = bhcconf.1
+                }
+    	}
+    }
+	
+    focus = { #勒克瑙会议-结局
+    	id = BHC_the_congress_end 
+    	icon = GFX_goal_SKM_Bhartiya
+    	cancelable = no
+    	prerequisite = { focus = BHC_the_congress }
+    	prerequisite = { focus = BHC_the_congress_The_fate_of_princes_and_Dukes }
+    	prerequisite = { focus = BHC_the_congress_The_caste_issue }
+		relative_position_id = BHC_the_congress
+    	x = 0
+    	y = 3
+    	cost = 2
+    	ai_will_do = {
+    	    factor = 400
+    	}
+    	available = {
+    	    
+        }
+        allow_branch = {
+            has_country_flag = BHC_the_congress_plan
+            has_country_flag = DEH_allow_1
+            has_country_flag = DEH_allow_2
+        }
+    	completion_reward = {
+    	    log = "[GetDateText]: [Root.GetName]: BHC_Marching_towards_the_congress"
+    	    add_stability = 0.05
+    	    add_war_support = 0.1
+    	    add_command_power = 50
+    	    increase_ruling_party_popularity_by_5 = yes
+    	    if = {
+                limit = {
+                    BHC = {
+                        has_country_flag = PRF_allow_1
+                        has_country_flag = PRF_allow_2
+                    }
+                    DEH = {
+                        NOT = {
+                            has_country_flag = Continue_the_assassination
+                        }
+                    }
+                }
+                DEH = {
+                    country_event = {
+                        id = BHC_DEH.4
+                        days = 1
+                    }
+                }
+                BHC = {
+                    has_country_flag = IND_a_good_ending
+                }
+                PRF = {
+                    country_event = {
+                        id = BHC_PRF.4
+                        days = 1
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    BHC = {
+                        has_country_flag = DEH_allow_1
+                        has_country_flag = DEH_allow_2
+                    }
+                    DEH = {
+                        NOT = {
+                            has_country_flag = Continue_the_assassination
+                        }
+                    }
+                }
+                DEH = {
+                    country_event = {
+                        id = BHC_DEH.4
+                        days = 1
+                    }
+                }
+                BHC = {
+                    has_country_flag = IND_a_good_ending
+                }
+            }
+    	    if = {
+                limit = {
+                    BHC = {
+                        has_country_flag = PRF_allow_1
+                        has_country_flag = PRF_allow_2
+                    }
+                    DEH = {
+                        has_country_flag = Continue_the_assassination
+                    }
+                }
+                country_event = {
+                 	id = BHC.9
+                }
+            }
+            if = {
+                limit = {
+                    BHC = {
+                        has_country_flag = DEH_allow_1
+                        has_country_flag = DEH_allow_2
+                    }
+                    DEH = {
+                        has_country_flag = Continue_the_assassination
+                    }
+                }
+                country_event = {
+                 	id = BHC.9
+                }
+            }
+            else = {
+                country_event = {
+                 	id = BHC.9
+                }
+            }
+    	}
+    }	
+	
+    focus = { #勒克瑙会议-结局
+    	id = BHC_the_congress_end_bad
+    	icon = GFX_goal_SKM_Bhartiya
+    	cancelable = no
+    	prerequisite = { focus = BHC_the_congress }
+    	prerequisite = { focus = BHC_the_congress_The_fate_of_princes_and_Dukes }
+    	prerequisite = { focus = BHC_the_congress_The_caste_issue }
+		relative_position_id = BHC_the_congress
+    	x = 0
+    	y = 3
+    	cost = 2
+    	ai_will_do = {
+    	    factor = 400
+    	}
+    	available = {
+    	    
+        }
+        allow_branch = {
+            has_country_flag = BHC_the_congress_plan
+            OR = {
+                NOT = {
+                    has_country_flag = DEH_allow_1
+                }
+                NOT = {
+                    has_country_flag = DEH_allow_2
+                }
+            }
+        }
+    	completion_reward = {
+    	    log = "[GetDateText]: [Root.GetName]: BHC_Marching_towards_the_congress"
+    	    add_stability = 0.05
+            country_event = {
+             	id = BHC.9
+            }
+    	}
+    }	
 ###存活###
 		
 	focus = {
