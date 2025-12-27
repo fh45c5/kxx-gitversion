@@ -8,6 +8,14 @@ add_namespace = BHC
 
 add_namespace = BHC_gadi
 
+add_namespace = BHC_DEH
+
+add_namespace = BHC_PRF
+
+add_namespace = bhcconf
+
+add_namespace = BHC_calcutta
+
 
 ### Intro
 country_event = {
@@ -42,6 +50,132 @@ country_event = {
 
 ### First INC Meeting
 
+# tiaoshi
+country_event = {
+	id = BHC_calcutta.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_calcutta.2" }
+	title = BHC_calcutta.2.t
+	desc = BHC_calcutta.2.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC_calcutta.2.a
+		add_political_power = 50
+		
+                DEH = {
+                    has_country_flag = IND_a_good_ending
+                }
+                BHC = {
+                    has_country_flag = IND_a_good_ending
+                }
+                PRF = {
+                    has_country_flag = IND_a_good_ending
+                }
+	}
+}
+#第一次刺杀
+country_event = {
+	id = BHC_calcutta.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_calcutta.1" }
+	title = BHC_calcutta.1.t
+	desc = BHC_calcutta.1.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC_calcutta.1.a
+		hidden_effect = {
+			DEH = {
+				country_event = {
+					id = BHC_calcutta.4
+					days = 2
+				}
+			}
+		}
+		if = {
+			limit = {
+				BHC = {
+					has_country_flag = rev_side
+				}
+			}
+		    country_event = {
+			    id = BHC_calcutta.3
+			    days = 7
+			}
+		}
+		else = {
+			add_stability = -0.05
+		}
+	}
+}
+#刺杀余波（BHC）
+country_event = {
+	id = BHC_calcutta.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.7" }
+	title = BHC_calcutta.3.t
+	desc = BHC_calcutta.3.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+	
+
+	option = {
+		name = BHC_calcutta.3.a
+		set_contury_flag = BHC_contacted_the_underground_party #选择保护
+	}
+	option = {
+		name = BHC_calcutta.3.b
+		add_political_power = 5
+	}
+}
+#刺杀余波（DEH）
+country_event = {
+	id = BHC_calcutta.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_calcutta.4" }
+	title = BHC_calcutta.4.t
+	desc = BHC_calcutta.4.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC_calcutta.4.a
+		BHC = {
+		    set_contury_flag = Continue_the_assassination #继续刺杀
+		}
+	}
+	option = {
+		name = BHC_calcutta.4.b
+		add_political_power = 5
+	}
+}
+#刺杀余波（DEH）
+country_event = {
+	id = BHC_calcutta.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_calcutta.5" }
+	title = BHC_calcutta.5.t
+	desc = BHC_calcutta.5.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+	trigger = {
+		has_country_flag = Failed_assassination
+	}
+
+	option = {
+		name = BHC_calcutta.5.a
+		BHC = {
+		    set_contury_flag = Continue_the_assassination #继续刺杀
+		}
+	}
+	option = {
+		name = BHC_calcutta.5.b
+		add_political_power = 5
+	}
+}
 # 政府换届，甘地上任
 country_event = {
 	id = BHC_gadi.2
@@ -61,9 +195,7 @@ country_event = {
 			picture = "gfx/leaders/BHC/Portrait_BHC_Mohandas_Karamchand_Gandhi.png"
 			expire = "1.1.1"
 			ideology = gandhism_subtype
-			traits = {
-				mahatma
-			}
+			traits = {mahatma}
 		}
 		remove_all_ministers = yes
 		add_ideas = BHC_Rabindranath_Tagore_hog_rso
@@ -72,8 +204,226 @@ country_event = {
 		add_ideas = BHC_Rajkumari_Amrit_Kaur_sec_rso
 	}
 }
-#和平的呼声（BHC）
-country_event = {
+country_event = { #邀请DEH
+	id = BHC_DEH.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_DEH.1" }
+	title = BHC_DEH.1.t
+	desc = BHC_DEH.1.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC_DEH.1.a
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC_DEH.2
+				days = 2
+			}
+		}
+	}
+}
+country_event = { #DEH同意
+	id = BHC_DEH.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_DEH.2" }
+	title = BHC_DEH.2.t
+	desc = BHC_DEH.2.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC_DEH.2.a
+		add_political_power = 50
+		set_country_flag = DEH_agree
+	}
+}
+country_event = { #DEH-谈判成功
+	id = BHC_DEH.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_DEH.4" }
+	title = BHC_DEH.4.t
+	desc = BHC_DEH.4.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC_DEH.4.a
+		BHC = {
+			annex_country = {
+				target = DEH 
+				transfer_troops = no 
+			}
+		}
+	}
+	option = {
+		name = BHC_DEH.4.b
+		add_political_power = 50
+		BHC = {
+			annex_country = {
+				target = DEH 
+				transfer_troops = no 
+			}
+		}
+		BHC = { change_tag_from = DEH }
+	}
+}
+country_event = { #邀请PRF
+	id = BHC_PRF.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_PRF.1" }
+	title = BHC_PRF.1.t
+	desc = BHC_PRF.1.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC_PRF.1.a
+		trigger = {
+			NOT = {
+				has_country_flag = PRF_Uprising_victory
+			}
+		}
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC_PRF.2
+				days = 2
+			}
+		}
+	}
+	option = {
+		name = BHC_PRF.1.b
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC_PRF.3
+				days = 2
+			}
+		}
+	}
+}
+country_event = { #PRF同意
+	id = BHC_PRF.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_PRF.2" }
+	title = BHC_PRF.2.t
+	desc = BHC_PRF.2.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC_PRF.2.a
+		add_political_power = 50
+		set_country_flag = PRF_agree
+	}
+}
+country_event = { #PRF拒绝
+	id = BHC_PRF.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_PRF.3" }
+	title = BHC_PRF.3.t
+	desc = BHC_PRF.3.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC_PRF.3.a
+		add_political_power = 50
+	}
+}
+country_event = { #PRF-谈判成功
+	id = BHC_PRF.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC_PRF.4" }
+	title = BHC_PRF.4.t
+	desc = BHC_PRF.4.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC_PRF.4.a
+		BHC = {
+			annex_country = {
+				target = PRF 
+				transfer_troops = no 
+			}
+		}
+	}
+	option = {
+		name = BHC_PRF.4.b
+		add_political_power = 50
+		BHC = {
+			annex_country = {
+				target = PRF 
+				transfer_troops = no 
+			}
+		}
+		BHC = { change_tag_from = PRF }
+	}
+}
+country_event = { #邀请DEH对第一个议题一种选择的回应
+	id = BHC.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.1" }
+	title = BHC.1.t
+	desc = BHC.1.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.1.a
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.11
+				days = 2
+			}
+		}
+	}
+	option = { #不同意
+		name = BHC.1.b
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.12
+				days = 2
+			}
+		}
+	}
+}
+country_event = { #邀请DEH对第一个议题一种选择的回应 同意
+	id = BHC.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.11" }
+	title = BHC.11.t
+	desc = BHC.11.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.11.a
+		add_political_power = 50
+		set_country_flag = DEH_allow_1
+	}
+}
+country_event = { #邀请DEH对第一个议题一种选择的回应 不同意
+	id = BHC.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.12" }
+	title = BHC.12.t
+	desc = BHC.12.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #不同意
+		name = BHC.12.a
+		add_political_power = 50
+		set_country_flag = DEH_not_allow_1
+	}
+}
+country_event = { #邀请DEH对第一个议题另一种选择的回应
 	id = BHC.2
 	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.2" }
 	title = BHC.2.t
@@ -82,19 +432,58 @@ country_event = {
 
 	is_triggered_only = yes
 
-	option = {
+	option = { #同意
 		name = BHC.2.a
-		DEH = {
+		add_political_power = 50
+		BHC = {
 			country_event = {
-			id = BHC.3
-			days = 7
-		    }
+				id = BHC.21
+				days = 2
+			}
 		}
-		
+	}
+	option = { #不同意
+		name = BHC.2.b
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.22
+				days = 2
+			}
+		}
 	}
 }
-#回应和平的呼声（DEH）
-country_event = {
+country_event = { #邀请DEH对第一个议题另一种选择的回应 同意
+	id = BHC.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.21" }
+	title = BHC.21.t
+	desc = BHC.21.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.21.a
+		add_political_power = 50
+		set_country_flag = DEH_allow_1
+	}
+}
+country_event = { #邀请DEH对第一个议题另一种选择的回应 不同意
+	id = BHC.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.22" }
+	title = BHC.22.t
+	desc = BHC.22.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #不同意
+		name = BHC.22.a
+		add_political_power = 50
+		set_country_flag = DEH_not_allow_1
+	}
+}
+country_event = { #邀请DEH对第二个议题一种选择的回应
 	id = BHC.3
 	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.3" }
 	title = BHC.3.t
@@ -103,18 +492,58 @@ country_event = {
 
 	is_triggered_only = yes
 
-	option = {
+	option = { #同意
 		name = BHC.3.a
+		add_political_power = 50
 		BHC = {
 			country_event = {
-			id = BHC.4
-			days = 7
-		    }
+				id = BHC.31
+				days = 2
+			}
+		}
+	}
+	option = { #不同意
+		name = BHC.3.b
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.32
+				days = 2
+			}
 		}
 	}
 }
-#德里方面同意（BHC）
-country_event = {
+country_event = { #邀请DEH对第二个议题一种选择的回应 同意
+	id = BHC.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.31" }
+	title = BHC.31.t
+	desc = BHC.31.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.31.a
+		add_political_power = 50
+		set_country_flag = DEH_allow_2
+	}
+}
+country_event = { #邀请DEH对第二个议题一种选择的回应 不同意
+	id = BHC.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.32" }
+	title = BHC.32.t
+	desc = BHC.32.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #不同意
+		name = BHC.32.a
+		add_political_power = 50
+		set_country_flag = DEH_not_allow_2
+	}
+}
+country_event = { #邀请DEH对第二个议题一种选择的回应
 	id = BHC.4
 	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.4" }
 	title = BHC.4.t
@@ -123,15 +552,459 @@ country_event = {
 
 	is_triggered_only = yes
 
-	option = {
+	option = { #同意
 		name = BHC.4.a
-		country_event = {
-			id = BHC.5
-			days = 7
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.41
+				days = 2
+			}
 		}
-		PRF = {
-			set_country_flag = unusual_movement_in_the_north
+	}
+	option = { #不同意
+		name = BHC.4.b
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.42
+				days = 2
+			}
 		}
+	}
+}
+country_event = { #邀请DEH对第二个议题另一种选择的回应 同意
+	id = BHC.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.41" }
+	title = BHC.41.t
+	desc = BHC.41.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.41.a
+		add_political_power = 50
+		set_country_flag = DEH_allow_2
+	}
+}
+country_event = { #邀请DEH对第二个议题另一种选择的回应 不同意
+	id = BHC.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.42" }
+	title = BHC.42.t
+	desc = BHC.42.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #不同意
+		name = BHC.42.a
+		add_political_power = 50
+		set_country_flag = DEH_not_allow_2
+	}
+}
+country_event = { #邀请PRF对第一个议题一种选择的回应
+	id = BHC.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.5" }
+	title = BHC.5.t
+	desc = BHC.5.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.5.a
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.51
+				days = 2
+			}
+		}
+	}
+	option = { #不同意
+		name = BHC.5.b
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.52
+				days = 2
+			}
+		}
+	}
+}
+country_event = { #邀请PRF对第一个议题一种选择的回应 同意
+	id = BHC.51
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.51" }
+	title = BHC.51.t
+	desc = BHC.51.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.51.a
+		add_political_power = 50
+		set_country_flag = PRF_allow_1
+	}
+}
+country_event = { #邀请PRF对第一个议题一种选择的回应 不同意
+	id = BHC.52
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.52" }
+	title = BHC.52.t
+	desc = BHC.52.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #不同意
+		name = BHC.52.a
+		add_political_power = 50
+		set_country_flag = PRF_not_allow_1
+	}
+}
+country_event = { #邀请PRF对第一个议题另一种选择的回应
+	id = BHC.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.6" }
+	title = BHC.6.t
+	desc = BHC.6.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.6.a
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.61
+				days = 2
+			}
+		}
+	}
+	option = { #不同意
+		name = BHC.6.b
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.62
+				days = 2
+			}
+		}
+	}
+}
+country_event = { #邀请PRF对第一个议题另一种选择的回应 同意
+	id = BHC.61
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.61" }
+	title = BHC.61.t
+	desc = BHC.61.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.61.a
+		add_political_power = 50
+		set_country_flag = PRF_allow_1
+	}
+}
+country_event = { #邀请PRF对第一个议题另一种选择的回应 不同意
+	id = BHC.62
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.62" }
+	title = BHC.62.t
+	desc = BHC.62.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #不同意
+		name = BHC.62.a
+		add_political_power = 50
+		set_country_flag = PRF_not_allow_1
+	}
+}
+country_event = { #邀请PRF对第二个议题一种选择的回应
+	id = BHC.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.7" }
+	title = BHC.7.t
+	desc = BHC.7.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.7.a
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.71
+				days = 2
+			}
+		}
+	}
+	option = { #不同意
+		name = BHC.7.b
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.72
+				days = 2
+			}
+		}
+	}
+}
+country_event = { #邀请PRF对第二个议题一种选择的回应 同意
+	id = BHC.71
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.71" }
+	title = BHC.71.t
+	desc = BHC.71.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.71.a
+		add_political_power = 50
+		set_country_flag = PRF_allow_2
+	}
+}
+country_event = { #邀请PRF对第二个议题一种选择的回应 不同意
+	id = BHC.72
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.72" }
+	title = BHC.72.t
+	desc = BHC.72.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #不同意
+		name = BHC.72.a
+		add_political_power = 50
+		set_country_flag = PRF_not_allow_2
+	}
+}
+country_event = { #邀请PRF对第二个议题另一种选择的回应
+	id = BHC.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.8" }
+	title = BHC.8.t
+	desc = BHC.8.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.8.a
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.81
+				days = 2
+			}
+		}
+	}
+	option = { #不同意
+		name = BHC.8.b
+		add_political_power = 50
+		BHC = {
+			country_event = {
+				id = BHC.82
+				days = 2
+			}
+		}
+	}
+}
+country_event = { #邀请PRF对第二个议题另一种选择的回应 同意
+	id = BHC.81
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.81" }
+	title = BHC.81.t
+	desc = BHC.81.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #同意
+		name = BHC.81.a
+		add_political_power = 50
+		set_country_flag = PRF_allow_2
+	}
+}
+country_event = { #邀请PRF对第二个议题另一种选择的回应 不同意
+	id = BHC.82
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.82" }
+	title = BHC.82.t
+	desc = BHC.82.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = { #不同意
+		name = BHC.82.a
+		add_political_power = 50
+		set_country_flag = PRF_not_allow_2
+	}
+}
+country_event = { #badending
+	id = BHC.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.9" }
+	title = BHC.9.t
+	desc = BHC.9.d
+	picture = GFX_report_event_BHC_leaders
+
+	is_triggered_only = yes
+
+	option = {
+		name = BHC.9.a
+		add_political_power = -50
+		clr_country_flag = BHC_the_congress_plan
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+country_event = { #第一个议题
+	id = bhcconf.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event bhcconf.1" }
+	title = bhcconf.1.t
+	desc = bhcconf.1.d
+	picture = GFX_report_event_bhcconf_leaders
+
+	is_triggered_only = yes
+
+	option = { #保留王公
+		name = bhcconf.1.a
+		add_political_power = 50
+		if = {
+			limit = {
+				has_country_flag = PRF_agree
+			}
+			DEH = {
+				country_event = {
+					id = BHC.1
+				}
+			}
+			PRF = {
+				country_event = {
+					id = BHC.5
+				}
+			}
+		}
+		else = {
+			DEH = {
+				country_event = {
+					id = BHC.1
+				}
+			}
+		}
+	}
+	option = { #废除土邦
+		name = bhcconf.1.b
+		add_political_power = 50
+		if = {
+			limit = {
+					has_country_flag = PRF_agree
+			}
+			DEH = {
+				country_event = {
+					id = BHC.2
+				}
+			}
+			PRF = {
+				country_event = {
+					id = BHC.6
+				}
+			}
+		}
+		else = {
+			DEH = {
+				country_event = {
+					id = BHC.2
+				}
+			}
+		}
+	}
+}
+country_event = { #第二个议题
+	id = bhcconf.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event bhcconf.2" }
+	title = bhcconf.2.t
+	desc = bhcconf.2.d
+	picture = GFX_report_event_bhcconf_leaders
+
+	is_triggered_only = yes
+
+	option = { #有限改革
+		name = bhcconf.2.a
+		add_political_power = 50
+    	ai_will_do = {
+    	    factor = 70
+    	}
+		if = {
+			limit = {
+					has_country_flag = PRF_agree
+				
+			}
+			DEH = {
+				country_event = {
+					id = BHC.3
+				}
+			}
+			PRF = {
+				country_event = {
+					id = BHC.7
+				}
+			}
+		}
+		else = {
+			DEH = {
+				country_event = {
+					id = BHC.3
+				}
+			}
+		}
+	}
+	option = { #彻底改革
+		name = bhcconf.2.b
+		add_political_power = 50
+    	ai_will_do = {
+    	    factor = 30
+    	}
+		if = {
+			limit = {
+				has_country_flag = PRF_agree
+				
+			}
+			DEH = {
+				country_event = {
+					id = BHC.4
+				}
+			}
+			PRF = {
+				country_event = {
+					id = BHC.8
+				}
+			}
+		}
+		else = {
+			DEH = {
+				country_event = {
+					id = BHC.4
+				}
+			}
+		}
+	}
+}
+country_event = { #你在哪一边
+	id = bhcconf.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event bhcconf.3" }
+	title = bhcconf.3.t
+	desc = bhcconf.3.d
+	is_triggered_only = yes
+
+	option = { #
+		name = bhcconf.3.a
+		add_political_power = 50
+    	ai_will_do = {
+    	    factor = 70
+    	}
+		set_country_flag = BHC_stpo
 		if = {
 			limit = {
 				power_balance_value = {
@@ -156,886 +1029,43 @@ country_event = {
 		}
 	}
 }
-#甘地来到德里（BHC）
-country_event = {
-	id = BHC.5
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.5" }
-	title = BHC.5.t
-	desc = BHC.5.d
-	picture = GFX_report_event_BHC_leaders
-
+country_event = { #会议的基石
+	id = bhcconf.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event bhcconf.4" }
+	title = bhcconf.4.t
+	desc = bhcconf.4.d
 	is_triggered_only = yes
 
-	option = {
-		name = BHC.5.a
-		country_event = {
-			id = BHC.6
-			days = 7
-		}
-		PRF= {
-			country_event = BHC.10
-		}
-	}
-}
-#第一次刺杀
-country_event = {
-	id = BHC.6
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.6" }
-	title = BHC.6.t
-	desc = BHC.6.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.6.a
-		if = {
-			limit = {
-				BHC = {
-					has_country_flag = rev_side
-				}
-			}
-		    country_event = {
-			    id = BHC.7
-			    days = 7
-			}
-		    country_event = {
-			    id = BHC.11
-			    days = 7
-			}
-		}
-		else = {
-		    country_event = {
-			    id = BHC.11
-			    days = 7
-			}
-		}
-		DEH = { 
-		set_contury_flag = Failed_assassination
-	    }
-	}
-}
-#刺杀余波（BHC）
-country_event = {
-	id = BHC.7
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.7" }
-	title = BHC.7.t
-	desc = BHC.7.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-	
-
-	option = {
-		name = BHC.7.a
-		set_contury_flag = BHC_contacted_the_underground_party #选择保护
-	}
-	option = {
-		name = BHC.7.b
-		add_political_power = 5
-	}
-}
-#刺杀余波（DEH）
-country_event = {
-	id = BHC.8
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.8" }
-	title = BHC.8.t
-	desc = BHC.8.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-	trigger = {
-		has_country_flag = Failed_assassination
-	}
-
-	option = {
-		name = BHC.8.a
-		BHC = {
-		    set_contury_flag = Continue_the_assassination #继续刺杀
-		}
-	}
-	option = {
-		name = BHC.8.b
-		add_political_power = 5
-	}
-}
-#PRF的回应
-country_event = {
-	id = BHC.10
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.10" }
-	title = BHC.10.t
-	desc = BHC.10.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.10.a
-		trigger = {
-			NOT = {
-			    has_country_leader = PRF_Uprising_victory
-			}
-		} 
-		add_stability = 0.02 #参加
-		set_country_flag = PRF_Attend_the_meeting
-	}
-	option = {
-		name = BHC.10.b
-		add_stability = 0.01 #不参加
-	}
-}
-#会议开场第一阶段：独立问题
-country_event = {
-	id = BHC.11
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.11" }
-	title = BHC.11.t
-	desc = BHC.11.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.11.a
-		trigger = {
-			has_country_flag = con_side
-		} 
-		add_stability = -0.02 #让步
-		DEH = {
-			country_event = {
-				id = BHC.12
-				days = 7
-			}
-		}
-		BHC = {
-			country_event = {
-				id = BHC.12
-				days = 7
-			}
-		}
-	}
-	option = {
-		name = BHC.11.b
-		add_stability = 0.02 #独立
-		
-		BHC = {
-			country_event = {
-				id = BHC.13
-				days = 7
-			}
-		}
-		DEH = {
-			country_event = {
-				id = BHC.13
-				days = 7
-			}
-		}
-	}
-}
-#达成一致
-country_event = {
-	id = BHC.12
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.12" }
-	title = BHC.12.t
-	desc = BHC.12.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.12.a
-		trigger = {
-			original_tag = DEH
-		} 
-		add_stability = 0.02 
-	}
-	option = {
-		name = BHC.12.b
-		trigger = {
-			original_tag = BHC
-		} 
-		add_stability = 0.02 
-		country_event = {
-			id = BHC.16
-			days = 3
-		}
-	}
-}
-#破裂
-country_event = {
-	id = BHC.13
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.13" }
-	title = BHC.13.t
-	desc = BHC.13.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.13.a
-		trigger = {
-			original_tag = DEH
-		} 
-		add_stability = -0.02 #DEH
-	}
-	option = {
-		name = BHC.13.b
-		trigger = {
-			original_tag = BHC
-		} 
-		add_stability = -0.02 #BHC
-		if = {
-			limit = {
-				AND = {
-					has_country_flag = Continue_the_assassination
-					has_country_flag = BHC_contacted_the_underground_party
-				}
-			}
-			BHC = {
-				country_event = {
-					id = BHC.14
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				BHC = {
-					has_country_flag = Continue_the_assassination
-					NOT = {
-						has_country_flag = BHC_contacted_the_underground_party
-					}
-				}
-
-			}
-			BHC = {
-				country_event = {
-					id = BHC.15
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				BHC = {
-					has_country_flag = con_side
-					NOT = {
-						has_country_flag = BHC_contacted_the_underground_party
-					}
-				}
-
-			}
-			BHC = {
-				country_event = {
-					id = BHC.15
-				}
-			}
-		}
-		else = {
-			BHC = {
-				country_event = {
-					id = BHC.14
-				}
-			}
-		}
-	}
-}
-#存活
-country_event = {
-	id = BHC.14
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.14" }
-	title = BHC.14.t
-	desc = BHC.14.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.14.a
-		add_stability = 0.02 #参加
-	}
-}
-#死亡
-country_event = {
-	id = BHC.15
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.15" }
-	title = BHC.15.t
-	desc = { # 会议无果
-		text = BHC.15.desc1
-		trigger = {
-			DEH = {
-				NOT = {
-					has_country_flag = DEH_Accept_the_second_round_of_suggestions
-				}
-			}
-		}
-	}
-
-	desc = { # 会议结束但……
-		text = BHC.15.desc2
-		trigger = {
-			DEH = {
-				has_country_flag = DEH_Accept_the_first_round_of_suggestions
-				has_country_flag = DEH_Accept_the_second_round_of_suggestions
-			}
-		}
-	}
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.15.a
-		add_stability = -0.1 #参加
-		set_country_flag = BHC_DEAD
-	}
-}
-#第二阶段第一项议题
-country_event = {
-	id = BHC.16
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.16" }
-	title = BHC.16.t
-	desc = BHC.16.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.16.a
-		if = {
-			limit = {
-				PRF = {
-					has_country_flag = PRF_Attend_the_meeting
-				}
-			}
-		    PRF = {
-				country_event = {
-				id = BHC.17
-				days = 3
-		  		}
-		    }
-			DEH = {
-				country_event = {
-				id = BHC.17
-				days = 3
-			    }
-			}
-		}
-		else = {
-			DEH = {
-				country_event = {
-				id = BHC.17
-				days = 3
-			    }
-			}	
-		}
-	}
-	option = {
-		name = BHC.16.b
-		if = {
-			limit = {
-				PRF = {
-					has_country_flag = PRF_Attend_the_meeting
-				}
-			}
-		    PRF = {
-				country_event = {
-				id = BHC.18
-				days = 3
-		  		}
-		    }
-			DEH = {
-				country_event = {
-				id = BHC.18
-				days = 3
-			    }
-			}
-		}
-		else = {
-			DEH = {
-				country_event = {
-				id = BHC.18
-				days = 3
-			    }
-			}	
-		}
-	}
-}
-#第二阶段第一项议题-王公自治
-country_event = {
-	id = BHC.17
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.17" }
-	title = BHC.17.t
-	desc = BHC.17.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.17.a
-		trigger = {
-			original_tag = DEH
-		}
-		BHC = {
-			country_event = {
-			id = BHC.19 #自治领接受
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.17.a
-		trigger = {
-			original_tag = PRF
-		}
-		BHC = {
-			country_event = {
-			id = BHC.20 #王公联邦接受
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.17.c
-		trigger = {
-			original_tag = DEH
-		}
-		BHC = {
-			country_event = {
-			id = BHC.21 #自治领拒绝
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.17.e
-		trigger = {
-			original_tag = PRF
-		}
-		BHC = {
-			country_event = {
-			id = BHC.22 #王公联邦拒绝
-			days = 3
-		    }
-		}
-	}
-}
-#第二阶段第一项议题-消灭土邦
-country_event = {
-	id = BHC.18
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.18" }
-	title = BHC.18.t
-	desc = BHC.18.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.18.a
-		BHC = {
-			country_event = {
-			id = BHC.19 #接受
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.18.b
-		BHC = {
-			country_event = {
-			id = BHC.20 #拒绝
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.18.c
-		trigger = {
-			original_tag = DEH
-		}
-		BHC = {
-			country_event = {
-			id = BHC.21 #自治领拒绝
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.18.e
-		trigger = {
-			original_tag = PRF
-		}
-		BHC = {
-			country_event = {
-			id = BHC.22 #王公联邦拒绝
-			days = 3
-		    }
-		}
-	}
-}
-#自治领方面接受
-country_event = {
-	id = BHC.19
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.19" }
-	title = BHC.19.t
-	desc = BHC.19.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.19.a
-		if = {
-			limit = {
-				DEH = {
-					has_country_flag = DEH_Accept_the_first_round_of_suggestions
-			    }
-		    }
-			DEH = {
-			    set_country_flag = DEH_Accept_the_second_round_of_suggestions
-		    }
-		}
-		else = {
-			DEH = {
-				set_country_flag = DEH_Accept_the_first_round_of_suggestions
-		    }
-		}
-	}
-}
-#自治领方面拒绝
-country_event = {
-	id = BHC.20
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.20" }
-	title = BHC.20.t
-	desc = BHC.20.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.20.a
-		BHC = {
-			country_event = {
-				id = BHC.13
-				days = 3
-			}
-		}
-	}
-}
-#王公联邦/市民方面接受
-country_event = {
-	id = BHC.21
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.21" }
-	title = BHC.21.t
-	desc = BHC.21.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.21.a
-		if = {
-			limit = {
-				DEH = {
-					has_country_flag = PRF_Accept_the_first_round_of_suggestions
-			    }
-		    }
-			DEH = {
-			    set_country_flag = PRF_Accept_the_second_round_of_suggestions
-		    }
-		}
-		else = {
-			DEH = {
-				set_country_flag = PRF_Accept_the_first_round_of_suggestions
-		    }
-		}
-	}
-}
-#王公联邦/市民方面拒绝
-country_event = {
-	id = BHC.22
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.22" }
-	title = BHC.22.t
-	desc = BHC.22.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.22.a
-		PRF = {
-			country_event = {
-				id = BHC.23
-				days = 3
-			}
-		}
-	}
-}
-#无视王公联邦/市民方面要求
-country_event = {
-	id = BHC.23
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.23" }
-	title = BHC.23.t
-	desc = BHC.23.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.23.a
-		BHC = {
-			country_event = {
-				id = BHC.24
-				days = 1
-			}
-		}
-		DEH = {
-			country_event = {
-				id = BHC.24
-				days = 1
-			}
-		}
-		PRF = {
-			clr_country_flag = PRF_Attend_the_meeting
-		}
-		
-	}
-}
-#王公联邦/市民方面退会
-country_event = {
-	id = BHC.24
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.24" }
-	title = BHC.24.t
-	desc = BHC.24.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.24.a
-		trigger = {
-			original_tag = BHC
-		}
-		add_political_power = -5
-	}
-	option = {
-		name = BHC.24.b
-		trigger = {
-			original_tag = DEH
-		add_political_power = -5
-		}
-	}
-}
-#第二阶段第二项议题
-country_event = {
-	id = BHC.25
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.25" }
-	title = BHC.25.t
-	desc = BHC.25.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.25.a
-		if = {
-			limit = {
-				PRF = {
-					has_country_flag = PRF_Attend_the_meeting
-				}
-			}
-		    PRF = {
-				country_event = {
-				id = BHC.17
-				days = 3
-		  		}
-		    }
-			DEH = {
-				country_event = {
-				id = BHC.17
-				days = 3
-			    }
-			}
-		}
-		else = {
-			DEH = {
-				country_event = {
-				id = BHC.17
-				days = 3
-			    }
-			}	
-		}
-	}
-	option = {
-		name = BHC.25.b
-		if = {
-			limit = {
-				PRF = {
-					has_country_flag = PRF_Attend_the_meeting
-				}
-			}
-		    PRF = {
-				country_event = {
-				id = BHC.18
-				days = 3
-		  		}
-		    }
-			DEH = {
-				country_event = {
-				id = BHC.18
-				days = 3
-			    }
-			}
-		}
-		else = {
-			DEH = {
-				country_event = {
-				id = BHC.18
-				days = 3
-			    }
-			}	
-		}
-	}
-}
-#第二阶段第一项议题-种姓问题有限改革方案
-country_event = {
-	id = BHC.26
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.26" }
-	title = BHC.26.t
-	desc = BHC.26.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.26.a
-		trigger = {
-			original_tag = DEH
-		}
-		BHC = {
-			country_event = {
-			id = BHC.19 #自治领接受
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.26.a
-		trigger = {
-			original_tag = PRF
-		}
-		BHC = {
-			country_event = {
-			id = BHC.20 #王公联邦接受
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.26.c
-		trigger = {
-			original_tag = DEH
-		}
-		BHC = {
-			country_event = {
-			id = BHC.21 #自治领拒绝
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.26.e
-		trigger = {
-			original_tag = PRF
-		}
-		BHC = {
-			country_event = {
-			id = BHC.22 #王公联邦拒绝
-			days = 3
-		    }
-		}
-	}
-}
-#第二阶段第一项议题-彻底的改革
-country_event = {
-	id = BHC.27
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.27" }
-	title = BHC.27.t
-	desc = BHC.27.d
-	picture = GFX_report_event_BHC_leaders
-
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.27.a
-		BHC = {
-			country_event = {
-			id = BHC.19 #接受
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.27.b
-		BHC = {
-			country_event = {
-			id = BHC.20 #拒绝
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.27.c
-		trigger = {
-			original_tag = DEH
-		}
-		BHC = {
-			country_event = {
-			id = BHC.21 #自治领拒绝
-			days = 3
-		    }
-		}
-	}
-	option = {
-		name = BHC.27.e
-		trigger = {
-			original_tag = PRF
-		}
-		BHC = {
-			country_event = {
-			id = BHC.22 #王公联邦拒绝
-			days = 3
-		    }
-		}
-	}
-}
-#会谈成功
-country_event = {
-	id = BHC.28
-	immediate = { log = "[GetDateText]: [Root.GetName]: event BHC.8" }
-	title = BHC.8.t
-	desc = BHC.8.d
-	picture = GFX_report_event_BHC_leaders
-	trigger = {
-		DEH = {
-			has_country_flag = DEH_Accept_the_first_round_of_suggestions
-			has_country_flag = DEH_Accept_the_second_round_of_suggestions
-		}
-	}
-	is_triggered_only = yes
-
-	option = {
-		name = BHC.28.a
-		trigger = {
-			original_tag = BHC
-		}
+	option = { #
+		name = bhcconf.4.a
 		add_political_power = 50
-	}
-	option = {
-		name = BHC.28.b
-		trigger = {
-			original_tag = DEH
-		add_political_power = 50
-		}
+    	ai_will_do = {
+    	    factor = 70
+    	}
+		set_country_flag = BHC_attend_Lucknow_Conference
 	}
 }
+country_event = { #和平幻象
+	id = bhcconf.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event bhcconf.5" }
+	title = bhcconf.5.t
+	desc = bhcconf.5.d
+	is_triggered_only = yes
+
+	option = { #
+		name = bhcconf.5.a
+		add_political_power = 50
+    	ai_will_do = {
+    	    factor = 70
+    	}
+		clr_country_flag = BHC_the_congress_plan
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+############################################
+##### 
+############################################
+
 # Bose denounces landlordism
 country_event = {
 	id = beng.3

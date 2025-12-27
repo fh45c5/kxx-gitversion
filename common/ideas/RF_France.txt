@@ -1171,17 +1171,31 @@ ideas = {
 
 	}
 	industrial_concern = {		
-		merlin_gerin = {
-			picture = generic_electronics_concern_1		
+		merlin_gerin = {	
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea merlin_gerin"}
 			allowed = {
-				original_tag = FRA
+				OR = {
+					original_tag = FRA
+					original_tag = NFA
+				}
 			}
-						
+			available = {
+				if = {
+					limit = { FROM = { original_tag = NFA } }
+					FROM = { has_completed_focus = NFA_review_economy }
+				}
+			}
+			traits = { electronics_manufacturer }
+			modifier = {
+				production_speed_radar_station_factor = 0.15
+				local_resources_factor = 0.1
+				production_speed_buildings_factor = 0.1
+				production_speed_infrastructure_factor = 0.1
+			}
 			research_bonus = {
-				electronics = 0.1
+				electronics = 0.15
 			}
-			
-			traits = { electronics_concern }
+
 		}
 	}
 }	
