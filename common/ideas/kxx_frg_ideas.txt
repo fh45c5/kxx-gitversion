@@ -1874,6 +1874,8 @@ ideas = {
 				war_support_factor = -0.5
 				stability_factor = -0.5
 				conscription_factor = -0.25
+				mic_to_overlord_factor = 0.25
+                cic_to_overlord_factor = 0.25
 				custom_modifier_tooltip = cannot_mobilise_tt
 				hidden_modifier = {
 					disabled_ideas = 1
@@ -1881,14 +1883,133 @@ ideas = {
 			}
 			targeted_modifier = {
 				tag = FRG
-				trade_cost_for_target_factor = -0.5
+				trade_cost_for_target_factor = -0.3
 			}
 			rule = {
 				can_join_factions = no
 				can_only_justify_war_on_threat_country = yes
 				can_not_declare_war = yes
-			}
-			
+			}	
 		}
+		FRG_FRG_RUS_Peace = { #东方无战事
+		    allowed = { always = no }
+			picture = BBR_international_peace_movement
+			modifier = {
+		        add_stability = 0.12
+				add_war_support = -0.2
+		    }
+			targeted_modifier = {
+				tag = FRG
+				army_core_attack_factor = -1.0
+				army_core_defence_factor = 10.0
+			}
+	    }
+		FRG_faction_Finale_Leader = { #泛欧罗巴经济共同体主席国
+            on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRG_faction_Finale" }
+            allowed = { always = no }
+            picture = GER_Light_East
+            modifier = {
+                monthly_population = 0.2
+                research_speed_factor = 0.15
+                global_building_slots_factor = 0.18
+                production_speed_buildings_factor = 0.2
+                consumer_goods_factor = -0.2
+			}
+		}
+		FRG_faction_Finale = { #泛欧罗巴经济共同体成员国
+            on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRG_faction_Finale" }
+            allowed = { always = no }
+            picture = GER_Light_East
+            modifier = {
+                monthly_population = 0.1
+                research_speed_factor = 0.06
+                global_building_slots_factor = 0.08
+                production_speed_buildings_factor = 0.1
+                consumer_goods_factor = -0.1
+			}
+		}
+		IRQ_FRG_Oil_Treaty_1 = { #道达尔石油公司的开采工作
+            available = {
+                country_exists = FRG
+                IRQ = {
+					is_puppet_of = FRG
+                }
+                NOT = { has_war_with = FRG }
+            }
+            picture = Oil_Oligarchy_2
+            allowed = { always = no }
+            modifier = {
+                consumer_goods_factor = -0.2
+                industrial_factory_donations = 5
+            }
+            research_bonus = {
+                excavation_tech = 0.1
+            }
+            targeted_modifier = {
+                tag = FRG
+                cic_to_target_factor = 0.05
+                trade_cost_for_target_factor = -0.10
+                extra_trade_to_target_factor = 0.25
+            }
+        }
+		IRQ_FRG_Oil_Treaty_2 = { #支援巴黎社会主义事业(中东)
+            available = {
+                country_exists = FRG
+                IRQ = {
+					is_ally_with = FRG
+				}
+				IRQ = {
+					has_socialist_government = yes
+				}
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+                NOT = { has_war_with = FRG }
+            }
+            picture = national_oil
+            allowed = { always = no }
+            modifier = {
+                consumer_goods_factor = -0.2
+            }
+            research_bonus = {
+                excavation_tech = 0.15
+            }
+            targeted_modifier = {
+                tag = FRG
+                trade_cost_for_target_factor = -0.10
+				consumer_goods_factor = -0.25
+            }
+        }
+		IRQ_FRG_Oil_Treaty_3 = { #黑帮掌控石油产业(中东)
+            available = {
+                country_exists = FRG
+                IRQ = {
+					is_puppet_of = FRG
+				}
+				FRG = {
+					has_completed_focus = FRG_La_scoumoune
+				}
+            }
+            picture = national_oil
+            allowed = { always = no }
+            modifier = {
+                consumer_goods_factor = -0.1
+				industrial_factory_donations = 8
+            }
+            research_bonus = {
+                excavation_tech = 0.1
+            }
+            targeted_modifier = {
+                tag = FRG
+                cic_to_target_factor = 0.05
+                trade_cost_for_target_factor = -0.15
+                extra_trade_to_target_factor = 0.3
+            }
+        }
 	}
 }
