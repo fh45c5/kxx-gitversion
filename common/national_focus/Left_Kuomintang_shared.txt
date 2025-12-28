@@ -24,7 +24,7 @@ focus_tree = {
 		cost = 4
 
 		ai_will_do = {
-			factor = 0
+			factor = 100
 		}
 		available = {
 			is_subject = no
@@ -51,6 +51,81 @@ focus_tree = {
 			country_event = { id = CHI.earlygame.001 days = 45 }
 			hidden_effect = {
 				country_event = { id = CHI.earlygame.012 days = 30 }
+				if = {
+					limit = { 
+						CHI = { is_ai = yes }
+					}
+					random_list = {
+						40 = { 
+							CHI = { 
+								add_timed_idea = {
+									idea = JAP_civilwar_lose
+									days = 90
+								} 
+								add_timed_idea = {
+									idea = absolutely_negative
+									days = 90
+								}				
+							}							
+							HNN = { 
+								declare_war_on = {
+									type = annex_everything
+									target = CHI
+								}
+							}		
+							GXC = { 
+								declare_war_on = {
+									type = annex_everything
+									target = CHI
+								}								
+							}					
+						}
+						40 = { 
+							CHI = { 
+								add_timed_idea = {
+									idea = JAP_civilwar_lose
+									days = 900
+								} 
+								add_timed_idea = {
+									idea = absolutely_negative
+									days = 900
+								}				
+							}
+							HNN = { 
+								declare_war_on = {
+									type = annex_everything
+									target = CHI
+								}
+							}		
+							GXC = { 
+								declare_war_on = {
+									type = annex_everything
+									target = CHI
+								}
+							}	
+							QIE = { 
+								declare_war_on = {
+									type = annex_everything
+									target = CHI
+								}
+							}
+							CHI = { 
+								declare_war_on = {
+									type = annex_everything
+									target = LEC
+								}
+							}																				
+						}
+						20 = { 
+							CHI = { 
+								add_timed_idea = {
+									idea = JAP_civilwar_lose
+									days = 30
+								} 		
+							}
+						}						
+					}		
+				}					
 			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
@@ -5272,7 +5347,11 @@ focus_tree = {
 		ai_will_do = {
 			base = 100
 		}
-
+		available = {
+			NOT = {
+				has_country_flag = CHI_hidden_path_unlock
+			}
+		}
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -5323,7 +5402,11 @@ focus_tree = {
 		ai_will_do = {
 			base = 100
 		}
-
+		available = {
+			NOT = {
+				has_country_flag = CHI_hidden_path_unlock
+			}
+		}
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -5712,7 +5795,7 @@ focus_tree = {
 		}
 		relative_position_id = CHI_move_to_Nanjing
 		ai_will_do = {
-			factor = 0
+			factor = 100
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_southeast_regional_programme"
@@ -6941,8 +7024,7 @@ focus_tree = {
 		}
 		relative_position_id = CHI_move_to_Nanjing
 		ai_will_do = {
-			factor = 0
-			
+			factor = 100
 		}
 
 		available = {
@@ -8498,7 +8580,12 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_unified_China"
-			create_faction = CHI_LKMT_faction
+
+			create_faction_from_template = { 
+			template = faction_template_internationale_successor
+			name = 	CHI_LKMT_faction
+			icon = GFX_faction_logo_chinese_united_front
+		}
 			every_state = {
 				limit = {
 					has_state_flag = LKMT_china_state
@@ -17016,7 +17103,11 @@ focus_tree = {
 				set_faction_name = CHI_mao_faction
 			}
 			else = {
-				create_faction = CHI_mao_faction
+				create_faction_from_template = { 
+			template = faction_template_internationale_successor
+			name = 	CHI_mao_faction
+			icon = GFX_faction_icon_generic_communist
+		}
 			}
 			news_event = { id = chi_for_ws.1 days = 1 }
 			unlock_decision_category_tooltip = CHI_kuomintang_unite_asia_category
@@ -17322,7 +17413,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_repudiate_the_catastrophe"
-			add_state_claim = 336 #Singapore because of ultra ethnonationalism
+			add_state_core = 336 #Singapore because of ultra ethnonationalism
 			if = {
 				limit = { GER = { is_faction_leader = yes } }
 				create_wargoal = {
@@ -22655,4 +22746,750 @@ focus = {
     FOCUS_FILTER_POLITICAL
   }
 }
+#小蒋测试
+	focus = {
+		id = CHI_Victory_of_the_Left_CC
+		icon = Victory_of_the_Left_CC
+		x = 52
+		y = 0
+		cost = 3
+		allow_branch = {
+			has_country_flag = CHI_hidden_path_unlock
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  custom_effect_tooltip = unlock_focuses
+		  remove_ideas = KR_CHI_Unrest_1
+		}	
+	}
+
+	focus = {
+		id = CHI_Build_Upon_National_Marxism
+		icon = Build_Upon_National_Marxism
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = -1
+		y = 1
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Victory_of_the_Left_CC
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_Build_Upon_National_Marxism
+		}	
+	}
+
+	focus = {
+		id = CHI_Follow_Gobbels_Economic_Ideas
+		icon = Follow_Gobbels_Economic_Ideas
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 1
+		y = 1
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Victory_of_the_Left_CC
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_Follow_Gobbels_Economic_Ideas
+		}	
+	}
+
+	focus = {
+		id = CHI_Found_RTV
+		icon = Found_RTV
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = -2
+		y = 2
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Follow_Gobbels_Economic_Ideas
+		}
+		prerequisite = {
+			focus = CHI_Build_Upon_National_Marxism
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_Found_RTV
+		}	
+	}
+
+	focus = {
+		id = CHI_Chinese_Corporatism
+		icon = Chinese_Corporatism
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Follow_Gobbels_Economic_Ideas
+		}
+		prerequisite = {
+			focus = CHI_Build_Upon_National_Marxism
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_Chinese_Corporatism
+		}	
+	}
+
+	focus = {
+		id = CHI_Mobilise_the_National_Work_Force
+		icon = Mobilise_the_National_Work_Force
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 2
+		y = 2
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Follow_Gobbels_Economic_Ideas
+		}
+		prerequisite = {
+			focus = CHI_Build_Upon_National_Marxism
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_one_random_civilian_factory = yes
+		  add_one_random_military_factory = yes
+		  add_one_random_civilian_factory = yes
+		  add_one_random_military_factory = yes
+		  add_one_random_civilian_factory = yes
+		  add_one_random_military_factory = yes
+		  add_one_random_civilian_factory = yes
+		  add_one_random_military_factory = yes
+		}	
+	}
+
+	focus = {
+		id = CHI_Expand_the_Tridenism_League
+		icon = Expand_the_Tridenism_League
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = -3
+		y = 3
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Found_RTV
+		}
+		prerequisite = {
+			focus = CHI_Chinese_Corporatism
+		}
+		prerequisite = {
+			focus = CHI_Mobilise_the_National_Work_Force
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_natpop_to_coalition = yes
+		  add_political_power = 100
+		  add_stability = 0.1
+		  add_war_support = 0.1
+		  	add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.1
+			}
+		}	
+	}
+
+	focus = {
+		id = CHI_Socialize_NBIS
+		icon = Socialize_NBIS
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = -1
+		y = 3
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Found_RTV
+		}
+		prerequisite = {
+			focus = CHI_Chinese_Corporatism
+		}
+		prerequisite = {
+			focus = CHI_Mobilise_the_National_Work_Force
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		   add_ideas = CHI_Socialize_NBIS
+		}	
+	}
+
+	focus = {
+		id = CHI_Organic_Economic_Growth
+		icon = Organic_Economic_Growth
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 1
+		y = 3
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Found_RTV
+		}
+		prerequisite = {
+			focus = CHI_Chinese_Corporatism
+		}
+		prerequisite = {
+			focus = CHI_Mobilise_the_National_Work_Force
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_Organic_Economic_Growth
+		}	
+	}
+
+	focus = {
+		id = CHI_Execute_the_Landlords
+		icon = Execute_the_Landlords
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 3
+		y = 3
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Found_RTV
+		}
+		prerequisite = {
+			focus = CHI_Chinese_Corporatism
+		}
+		prerequisite = {
+			focus = CHI_Mobilise_the_National_Work_Force
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_command_power = -1515163
+		  every_owned_state = {
+			add_extra_state_shared_building_slots = 2
+        	add_building_construction = {
+         		 type = infrastructure
+         		 level = 2
+         		 instant_build = yes
+        	}
+		  }
+		}	
+	}
+
+	focus = {
+		id = CHI_Utilize_the_Han_Supremacy
+		icon = Utilize_Han_Supremacy
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = -4
+		y = 4
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Expand_the_Tridenism_League
+		}
+		prerequisite = {
+			focus = CHI_Socialize_NBIS
+		}
+		prerequisite = {
+			focus = CHI_Organic_Economic_Growth
+		}
+		prerequisite = {
+			focus = CHI_Execute_the_Landlords
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_Utilize_the_Han_Supremacy
+		}	
+	}
+
+	focus = {
+		id = CHI_Purge_the_KMT
+		icon = Purge_the_KMT
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = -2
+		y = 4
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Expand_the_Tridenism_League
+		}
+		prerequisite = {
+			focus = CHI_Socialize_NBIS
+		}
+		prerequisite = {
+			focus = CHI_Organic_Economic_Growth
+		}
+		prerequisite = {
+			focus = CHI_Execute_the_Landlords
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.1
+			}
+			add_stability = 0.2
+		}	
+	}
+
+	focus = {
+		id = CHI_National_Communes
+		icon = National_Communes
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 0
+		y = 4
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Expand_the_Tridenism_League
+		}
+		prerequisite = {
+			focus = CHI_Socialize_NBIS
+		}
+		prerequisite = {
+			focus = CHI_Organic_Economic_Growth
+		}
+		prerequisite = {
+			focus = CHI_Execute_the_Landlords
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_National_Communes
+		}	
+	}
+
+	focus = {
+		id = CHI_Collectivisation
+		icon = Collectivisation
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 2
+		y = 4
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Expand_the_Tridenism_League
+		}
+		prerequisite = {
+			focus = CHI_Socialize_NBIS
+		}
+		prerequisite = {
+			focus = CHI_Organic_Economic_Growth
+		}
+		prerequisite = {
+			focus = CHI_Execute_the_Landlords
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_Collectivisation
+		}	
+	}
+
+	focus = {
+		id = CHI_The_Chinese_Autobahn
+		icon = The_Chinese_Autobahn
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 4
+		y = 4
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Expand_the_Tridenism_League
+		}
+		prerequisite = {
+			focus = CHI_Socialize_NBIS
+		}
+		prerequisite = {
+			focus = CHI_Organic_Economic_Growth
+		}
+		prerequisite = {
+			focus = CHI_Execute_the_Landlords
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_The_Chinese_Autobahn
+		}	
+	}
+
+	focus = {
+		id = CHI_All_Hail_the_Black_Marshal
+		icon = All_Hail_the_Black_Marshal
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 0
+		y = 5
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Utilize_the_Han_Supremacy
+		}
+		prerequisite = {
+			focus = CHI_Purge_the_KMT
+		}
+		prerequisite = {
+			focus = CHI_National_Communes
+		}
+		prerequisite = {
+			focus = CHI_Collectivisation
+		}
+		prerequisite = {
+			focus = CHI_The_Chinese_Autobahn
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_political_power = 100
+		  add_command_power = 50
+		  army_experience = 50
+		  add_country_leader_trait = CHI_people_generalismo
+		}	
+	}
+
+	focus = {
+		id = CHI_Form_the_ACTU
+		icon = Form_the_ACTU
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = -1
+		y = 6
+		cost = 3
+		prerequisite = {
+		  focus = CHI_All_Hail_the_Black_Marshal
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_Form_the_ACTU
+		}	
+	}
+
+	focus = {
+		id = CHI_Developing_the_Motherland
+		icon = Developing_the_Motherland
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 1
+		y = 6
+		cost = 3
+		prerequisite = {
+		  focus = CHI_All_Hail_the_Black_Marshal
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_Developing_the_Motherland
+		}	
+	}
+
+	focus = {
+		id = CHI_Exterminate_the_Japanese_Devils
+		icon = Exterminate_the_Japanese_Devils
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 0
+		y = 7
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Form_the_ACTU
+		}
+		prerequisite = {
+			focus = CHI_Developing_the_Motherland
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		   create_wargoal = { target = JAP type = annex_everything } 
+		   add_ideas = CHI_Exterminate_the_Japanese_Devils
+		}	
+	}
+
+	focus = {
+		id = CHI_Abolish_Religion
+		icon = Abolish_Religion
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = -2
+		y = 8
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Exterminate_the_Japanese_Devils
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		 unlock_decision_tooltip = CHI_release_jap_puppet
+		}	
+	} 
+
+	focus = {
+		id = CHI_Abolish_the_Minzu_Faction
+		icon = Abolish_the_Minzu_Faction
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 0
+		y = 8
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Exterminate_the_Japanese_Devils
+		}
+		available = {
+			JAP = {
+				is_subject_of = CHI
+			}
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  JAP = {
+			add_ideas = CHI_Abolish_the_Minzu_Faction
+		  }
+		}	
+	}
+
+	focus = {
+		id = CHI_Expand_Chinese_Education
+		icon = Expand_Chinese_Education
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 2
+		y = 8
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Exterminate_the_Japanese_Devils
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			add_ideas = CHI_Expand_Chinese_Education
+		 
+		}	
+	}
+
+	focus = {
+		id = CHI_The_Red_Sun_Over_A_Black_Sky
+		icon = The_Red_Sun_Over_A_Black_Sky
+		relative_position_id = CHI_Victory_of_the_Left_CC
+		x = 0
+		y = 9
+		cost = 3
+		prerequisite = {
+		  focus = CHI_Abolish_Religion
+		}
+		prerequisite = {
+			focus = CHI_Abolish_the_Minzu_Faction
+		}
+		prerequisite = {
+			focus = CHI_Expand_Chinese_Education
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  add_ideas = CHI_The_Red_Sun_Over_A_Black_Sky
+		}	
+	}
+
+	focus = {
+		id = CHI_Expanding_Greater_Zhongguo
+		icon = Expanding_Greater_Zhongguo
+		x = 60
+		y = 0
+		cost = 3
+		allow_branch = {
+			has_country_flag = CHI_hidden_path_unlock
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { 
+			add_ideas = CHI_Expanding_Greater_Zhongguo
+		}
+	}
+
+	focus = {
+		id = CHI_Unite_the_East
+		icon = Unite_the_East
+		relative_position_id = CHI_Expanding_Greater_Zhongguo
+		prerequisite = { focus = CHI_Expanding_Greater_Zhongguo }
+		x = 0
+		y = 1
+		cost = 3
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { 
+			add_war_support = 0.2
+			create_faction_from_template = { 
+				template = faction_template_generic_dominance
+				name = "东亚新秩序"
+				icon = GFX_faction_logo_axis
+			}
+
+		add_state_core = 441
+		add_state_core = 890
+		add_state_core = 814
+		add_state_core = 323
+		add_state_core = 888
+		add_state_core = 324
+		add_state_core = 858
+		add_state_core = 1211
+		add_state_core = 586
+		add_state_core = 589
+		add_state_core = 404
+		add_state_core = 654
+		add_state_core = 1293
+		add_state_core = 811
+		add_state_core = 329
+		add_state_core = 408
+		add_state_core = 1246
+		add_state_core = 409
+		add_state_core = 560
+		add_state_core = 561
+		add_state_core = 657
+		add_state_core = 526
+		add_state_core = 537
+		add_state_core = 563
+		add_state_core = 564
+		}
+	}
+
+	focus = {
+		id = CHI_Central_Asian_Liberation
+		icon = Central_Asian_Liberation
+		relative_position_id = CHI_Expanding_Greater_Zhongguo
+		prerequisite = { focus = CHI_Unite_the_East }
+		x = -2
+		y = 2
+		cost = 3
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { 
+			create_wargoal = { target = UZB type = annex_everything } 
+			create_wargoal = { target = ALO type = annex_everything } 
+			create_wargoal = { target = KYR type = annex_everything } 
+			create_wargoal = { target = TRK type = annex_everything } 
+			create_wargoal = { target = KHI type = annex_everything } 
+			unlock_decision_tooltip = CHI_release_alo_puppet
+		}
+	}
+
+	focus = {
+		id = CHI_The_Tigers_Down_South
+		icon = The_Tigers_Down_South
+		relative_position_id = CHI_Expanding_Greater_Zhongguo
+		prerequisite = { focus = CHI_Unite_the_East }
+		x = 0
+		y = 2
+		cost = 3
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { 
+			create_wargoal = { target = BRM type = annex_everything } 
+			create_wargoal = { target = INC type = annex_everything } 
+			create_wargoal = { target = SIA type = annex_everything } 
+			create_wargoal = { target = GEA type = annex_everything } 
+			unlock_decision_tooltip = CHI_release_inc_puppet
+			
+		}
+	}
+
+	focus = {
+		id = CHI_Isolating_India
+		icon = Isolating_India
+		relative_position_id = CHI_Expanding_Greater_Zhongguo
+		prerequisite = { focus = CHI_Unite_the_East }
+		x = 2
+		y = 2
+		cost = 3
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { 
+			create_wargoal = { target = PRF type = annex_everything } 
+			create_wargoal = { target = DEH type = annex_everything } 
+			create_wargoal = { target = BHC type = annex_everything } 
+			create_wargoal = { target = SKM type = annex_everything } 
+			create_wargoal = { target = NEP type = annex_everything } 
+			create_wargoal = { target = BHU type = annex_everything } 
+			unlock_decision_tooltip = CHI_release_bhc_puppet
+		}
+	}
+
+	focus = {
+		id = CHI_Western_Expansion
+		icon = Western_Expansion
+		relative_position_id = CHI_Expanding_Greater_Zhongguo
+		prerequisite = { focus = CHI_Central_Asian_Liberation }
+		prerequisite = { focus = CHI_Isolating_India }
+		prerequisite = { focus = CHI_The_Tigers_Down_South }
+		x = -1
+		y = 3
+		cost = 3
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { 
+			create_wargoal = { target = RUS type = annex_everything } 
+			create_wargoal = { target = TRM type = annex_everything } 
+			unlock_decision_tooltip = CHI_release_rus_puppet
+		}
+	}
+
+	focus = {
+		id = CHI_Eastern_Imperialism_Under_the_Red_Banner
+		icon = Eastern_Imperialism_Under_the_Red_Banner
+		relative_position_id = CHI_Expanding_Greater_Zhongguo
+		prerequisite = { focus = CHI_Central_Asian_Liberation }
+		prerequisite = { focus = CHI_Isolating_India }
+		prerequisite = { focus = CHI_The_Tigers_Down_South }
+		x = 1
+		y = 3
+		cost = 3
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { 
+			create_wargoal = { target = DEI type = annex_everything } 
+			create_wargoal = { target = PHI type = annex_everything } 
+			create_wargoal = { target = GEA type = annex_everything } 
+			create_wargoal = { target = INS type = annex_everything } 
+			unlock_decision_tooltip = CHI_release_phi_puppet
+		}
+	}
+
+	focus = {
+		id = CHI_Zhongguo_for_Years
+		icon = Zhongguo_for_Years
+		relative_position_id = CHI_Expanding_Greater_Zhongguo
+		prerequisite = { focus = CHI_Western_Expansion }
+		prerequisite = { focus = CHI_Eastern_Imperialism_Under_the_Red_Banner }
+		x = 0
+		y = 4
+		cost = 3
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { 
+			add_ideas = CHI_Zhongguo_for_Years
+		}
+	}
 }

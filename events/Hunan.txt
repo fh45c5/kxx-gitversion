@@ -6,21 +6,24 @@
 
 add_namespace = hnn
 
-country_event = { #Intro
-	id = hnn.1
-	immediate = { log = "[GetDateText]: [Root.GetName]: event hnn.1" }
-	title = hnn.1.t
-	desc = hnn.1.d
-	picture = GFX_report_event_HNN_map
+#country_event = { #Intro
+#	id = hnn.1
+#	immediate = { log = "[GetDateText]: [Root.GetName]: event hnn.1" }
+#	title = hnn.1.t
+#	desc = hnn.1.d
+#	picture = GFX_report_event_HNN_map
 
-	is_triggered_only = yes
+#	is_triggered_only = yes
 
-	fire_only_once = yes
+#	fire_only_once = yes
 
-	option = {
-		name = hnn.1.a
-	}
-}
+#	option = {
+#		name = hnn.1.a
+#		hidden_effect = {
+#			country_event = { id = hnn.2 days = 5 }
+#		}
+#	}
+#}
 
 ### Choosing Path
 
@@ -1802,14 +1805,30 @@ country_event = { #Tang Shengzhi coup, military
 			}
 		}
 		set_country_flag = HNN_tang_victory_flag
-		load_focus_tree = hnn-tang-shengzhi-tree
-		set_country_flag = soc_dems_are_socialists
 		set_country_flag = HNN_Tang_Shengzhi_Elected
 		add_popularity = {
 			ideology = social_democrat
 			popularity = 0.1
 		}
+		set_cosmetic_tag = HNN_KMT_HUNAN
+		set_party_name = {
+			ideology = social_democrat
+			long_name = HNN_gmd
+			name = HNN_gmd
+		}
+
 		hidden_effect = {
+		NSW = {
+		random_unit_leader = {
+			limit = {
+			has_id = 1416
+			}
+			set_nationality = HNN
+			}
+			event_target:CHI_Cheng_Qian = {
+				set_nationality = HNN
+			}
+		}
 		remove_ideas = {
 		HNN_socialist_resistance
 		}
@@ -1829,7 +1848,11 @@ country_event = { #Tang Shengzhi coup, military
 		set_politics = {
 			ruling_party = social_democrat
 		}
-		complete_national_focus = HNNSHENGZHI_the_buddhist_general_arrives_in_changsha
+		set_country_leader_ideology = socdem_tridemism_subtype
+		load_focus_tree = hnn-kuomintang-tree
+		unlock_national_focus = HNNKMT_power_through_revolution
+		complete_national_focus = HNNKMT_the_radicals_ride_in
+		complete_national_focus = HNNKMT_tangbackintokmt
 		add_political_power = -10
 			remove_all_ministers = yes
 			add_ideas = {
@@ -1837,6 +1860,7 @@ country_event = { #Tang Shengzhi coup, military
 				HNN_Guan_Kong_for_sde
 				HNN_Cao_Dianqiu_eco_sde
 				HNN_Cao_Bowen_sec_sde
+				HNN_reluctant_KMT_rightists
 			}
 			QIE = {
 				country_event = {

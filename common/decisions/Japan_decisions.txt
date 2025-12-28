@@ -4,7 +4,7 @@
 # By Zankoas and The Alpha Dog
 ################################
 
-@JAP_fading_sun_timeout = 180
+@JAP_fading_sun_timeout = 100
 
 JAP_fading_sun = {
 	JAP_fading_sun_timer = {
@@ -182,8 +182,14 @@ JAP_fading_sun = {
 
 	JAP_offer_peace_to_china = {
 		icon = peace_dove
-
+		ai_will_do = { factor = 100 }
 		available = {
+			OR = {
+			AND = {
+			JAP = { is_ai = yes}
+			date > 1941.1.1  
+			}
+			AND = {
 			NOT = { KOR = { any_core_state = { controller = { is_ally_with = PREV.PREV } } } }
 			if = {
 				limit = {
@@ -226,6 +232,8 @@ JAP_fading_sun = {
 					}
 				}
 			}
+			}
+			}
 		}
 
 		visible = {
@@ -247,7 +255,7 @@ JAP_fading_sun = {
 		ai_will_do = {
 			factor = 0
 			modifier = {
-				add = 1000
+				add = 100
 				OR = {
 					has_global_flag = JAP_will_surrender
 					surrender_progress > 0.15 #Japan was directly invaded
@@ -335,7 +343,7 @@ JAP_fading_sun = {
 		ai_will_do = {
 			factor = 0
 			modifier = {
-				add = 1000
+				add = 100
 				OR = {
 					has_global_flag = JAP_will_surrender
 					surrender_progress > 0.15 #Japan was directly invaded
@@ -2659,7 +2667,7 @@ JAP_co_prosperity_decisions = {
 		fire_only_once = no
 
 		priority = 5
-		targets = { ANQ AST BRM CAM CEY ETS MAN GXC HAW INC INS KAC KOR LAO LEC MAL MON NZL PHI PNG SAR SHA SHX SIA SQI SZC TIB TRM XSM VIN NEP AFG ALO TRK BUK KHI }
+		targets = { ANQ AST BRM CAM CEY ETS MAN GXC HAW INC INS KAC KOR LAO LEC MLY MON NZL PHI PNG SAR SHA SHX SIA SQI SZC TIB TRM XSM VIN NEP AFG ALO TRK BUK UZB BRA PRU BOL MEX YUC PAN ELS ITA POL WHR LIT UKR GRE TUR CAL PER IRQ SYR PLS ISR ETH SOM CHL ARG IRE SPR }
 		target_array = subjects
 		target_array = faction_members
 		target_array = global.indian_tags_array
@@ -3020,9 +3028,7 @@ JAP_co_prosperity_decisions = {
 		}
 
 		visible = {
-			FROM = {
-				has_socialist_government = no
-			}
+
 		}
 
 		cost = 50
@@ -3081,9 +3087,7 @@ JAP_co_prosperity_decisions = {
 		}
 
 		visible = {
-			FROM = {
-				has_socialist_government = no
-			}
+
 		}
 
 		cost = 20
@@ -3132,9 +3136,7 @@ JAP_co_prosperity_decisions = {
 		}
 
 		visible = {
-			FROM = {
-				has_socialist_government = no
-			}
+
 		}
 
 		cost = 20

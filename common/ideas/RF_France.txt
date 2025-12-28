@@ -1170,64 +1170,32 @@ ideas = {
 		
 
 	}
-	industrial_concern = {
-		metallurgique_de_normandie = {
-			on_add = { log = "[GetDateText]: [Root.GetName]: add idea metallurgique_de_normandie"}
-			allowed = { tag = FRA }
-			traits = { industrial_manufacturer }
-			modifier = {
-				production_speed_arms_factory_factor = 0.15
-				production_speed_industrial_complex_factor = 0.15
+	industrial_concern = {		
+		merlin_gerin = {	
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea merlin_gerin"}
+			allowed = {
+				OR = {
+					original_tag = FRA
+					original_tag = NFA
+				}
 			}
-			research_bonus = {
-				industry = 0.1
+			available = {
+				if = {
+					limit = { FROM = { original_tag = NFA } }
+					FROM = { has_completed_focus = NFA_review_economy }
+				}
 			}
-		}
-		radiola = {
-			on_add = { log = "[GetDateText]: [Root.GetName]: add idea radiola"}
-			allowed = { tag = FRA }
 			traits = { electronics_manufacturer }
 			modifier = {
 				production_speed_radar_station_factor = 0.15
+				local_resources_factor = 0.1
+				production_speed_buildings_factor = 0.1
+				production_speed_infrastructure_factor = 0.1
 			}
 			research_bonus = {
 				electronics = 0.15
 			}
-		}
-		rhone_poulenc = {
-			on_add = { log = "[GetDateText]: [Root.GetName]: add idea rhone_poulenc"}
-			allowed = { tag = FRA }
-			traits = { chemical_producer }
-			modifier = {
-				production_speed_synthetic_refinery_factor = 0.15
-			}
-			research_bonus = {
-				synth_resources = 0.15
-			}
-		}
-		famh = {
-						
-			allowed = {
-				original_tag = FRA
-			}
-						
-			research_bonus = {
-				industry = 0.1
-			}
-			
-			traits = { industrial_concern }
-		}
-		merlin_gerin = {
-			picture = generic_electronics_concern_1		
-			allowed = {
-				original_tag = FRA
-			}
-						
-			research_bonus = {
-				electronics = 0.1
-			}
-			
-			traits = { electronics_concern }
+
 		}
 	}
 }	

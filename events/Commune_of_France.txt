@@ -2080,7 +2080,7 @@ country_event = {
 	option = {
 		name = comfrance.20.a #Manouchian wide coalition
 		ai_chance = {
-			factor = 45
+			base = 10
 		}
 		meta_effect = {
 			text = {
@@ -2163,7 +2163,7 @@ country_event = {
 	option = {
 		name = comfrance.20.b #Cachin-centralist compromise
 		ai_chance = {
-			factor = 45
+			base = 20
 		}
 		meta_effect = {
 			text = {
@@ -2229,7 +2229,7 @@ country_event = {
 	option = {
 		name = comfrance.20.c #left cartel,republican socialist party
 		ai_chance = {
-			factor = 10
+			base = 5
 		}
 		meta_effect = {
 			text = {
@@ -2297,7 +2297,7 @@ country_event = {
 	option = {
 		name = comfrance.20.f #left cartel,sfio
 		ai_chance = {
-			factor = 10
+			base = 5
 		}
 		meta_effect = {
 			text = {
@@ -2383,7 +2383,7 @@ country_event = {
 	option = {
 		name = comfrance.20.e #ribes-towards civil war
 		ai_chance = {
-			factor = 0
+			base = 10
 		}
 		meta_effect = {
 			text = {
@@ -2440,6 +2440,122 @@ country_event = {
 		custom_effect_tooltip = "New Communal Elections will take place every 5 years!"
 		mark_focus_tree_layout_dirty = yes
 	}
+
+	option = {
+		name = comfrance.20.f #索雷尔
+		trigger = {
+			is_ai = yes
+		}
+		ai_chance = {
+			base = 30
+		}
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = FRA_sorelians
+			name = FRA_sorelians
+		}
+		create_country_leader = {
+			name = "乔治·瓦卢瓦"
+			desc = "POLITICS_GEORGES_VALOIS_DESC"
+			picture = "gfx/leaders/FRA/Portrait_France_Georges_Valois.png"
+			expire = "1965.1.1"
+			ideology = sorelianism_subtype
+		}
+		remove_ideas_with_trait = head_of_government
+		add_ideas = FRA_Marcel_Bucard_hog_tot
+		remove_ideas_with_trait = foreign_minister
+		add_ideas = FRA_Jacques_Arthuys_for_tot
+		remove_ideas_with_trait = economy_minister
+		add_ideas = FRA_Jacques_Doriot_eco_tot
+		remove_ideas_with_trait = security_minister
+		add_ideas = FRA_Hubert_Lagardelle_sec_tot
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.20
+		}
+		add_stability = -0.1
+				set_cosmetic_tag = FRA_Valois
+		set_global_flag = sorelian_majority_1936
+
+		hidden_effect = {
+			random_other_country = {
+				news_event = {
+					id = worldnews.34
+					days = 1
+				}
+			}
+		}
+	}
+	option = {
+		name = comfrance.20.g #雅各宾
+		trigger = {
+			is_ai = yes
+		}
+		ai_chance = {
+			base = 20
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = FRA_jacobins
+			name = FRA_jacobins
+		}
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		add_stability = -0.1
+		remove_ideas_with_trait = head_of_government
+		add_ideas = FRA_Marcel_Cachin_hog_tot
+		remove_ideas_with_trait = foreign_minister
+		add_ideas = FRA_Jacques_Duclos_for_tot
+		remove_ideas_with_trait = economy_minister
+		add_ideas = FRA_Jean_Jerome_eco_tot
+		remove_ideas_with_trait = security_minister
+		add_ideas = FRA_Lucien_Midol_sec_tot
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.20
+		}
+		create_country_leader = {
+			name = "莫里斯·多列士"
+			desc = "POLITICS_MAURICE_THOREZ_DESC"
+			picture = "gfx/leaders/FRA/Portrait_France_Maurice_Thorez.png"
+			expire = "1965.1.1"
+			ideology = syndicalist_subtype
+		}
+		create_country_leader = {
+			name = "莫里斯·多列士"
+			desc = "POLITICS_MAURICE_THOREZ_DESC"
+			picture = "gfx/leaders/FRA/Portrait_France_Maurice_Thorez.png"
+			expire = "1965.1.1"
+			ideology = jacobinism_subtype
+		}
+		create_country_leader = {
+			name = "莫里斯·多列士"
+			desc = "POLITICS_MAURICE_THOREZ_DESC"
+			picture = "gfx/leaders/FRA/Portrait_France_Maurice_Thorez.png"
+			expire = "1965.1.1"
+			ideology = radical_socialist_subtype
+		}
+		hidden_effect = {
+			country_event = {
+				id = comfrance.130
+				days = 15
+			}
+			random_other_country = {
+				news_event = {
+					id = worldnews.33
+					days = 1
+					}
+			}
+		}
+		set_global_flag = jacobin_majority_1936
+	}
+
 }
 
 country_event = {
@@ -7322,9 +7438,9 @@ country_event = {
 	option = { 
 		name = comfrance.926.a
 		ai_chance = {
-			factor = 34
+			base = 20
 			modifier = {
-				factor = 10000
+				factor = 100
 				has_game_rule = {
 					rule = FRA_xday_of_imfamy
 					option = FRA_NIZAN_ASSUMES_CONTROL
@@ -7367,9 +7483,9 @@ country_event = {
 	option = { 
 		name = comfrance.926.b
 		ai_chance = {
-			factor = 40
+			base = 5
 			modifier = {
-				factor = 10000
+				factor = 100
 				has_game_rule = {
 					rule = FRA_xday_of_imfamy
 					option = FRA_BUCARD_ASSUMES_CONTROL
@@ -7415,7 +7531,7 @@ country_event = {
 	option = { 
 		name = comfrance.926.c
 		ai_chance = {
-			factor = 34
+			base = 5
 			modifier = {
 				factor = 10000
 				has_game_rule = {
@@ -7435,8 +7551,7 @@ country_event = {
 	option = { 
 		name = comfrance.926.f
 		ai_chance = {
-			factor = 50
-			
+			base = 20
 		}
 		create_country_leader = {
 			name = "勒内·科皮坦"
@@ -7468,9 +7583,9 @@ country_event = {
 	option = { 
 		name = comfrance.926.e
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
-				factor = 10000
+				factor = 100
 				has_game_rule = {
 					rule = FRA_xday_of_imfamy
 					option = FRA_DEAT_ASSUMES_CONTROL
@@ -7509,6 +7624,7 @@ country_event = {
 			complete_national_focus = FRA_Paris_en_ordre
 			remove_ideas = FRA_valois_dead_idea
 			remove_ideas = French_Revanchism_idea
+			remove_ideas = FRA_Sorelian_Division
 			country_event = {
 				id = comfrance.929
 				days = 5
@@ -8173,6 +8289,7 @@ country_event = {
 		}
 		add_stability = 0.02
 		set_country_flag = FRA_red_jac_sup
+		set_cosmetic_tag = FRA_Lenin
 		hidden_effect = {
 			country_event = {
 				id = comfrance.130
@@ -8210,6 +8327,7 @@ country_event = {
 			name = FRA_jacobins
 		}
 		set_country_flag = FRA_nat_jac_sup
+		set_cosmetic_tag = FRA_Jacobin
 	}
 	
 }
@@ -9264,7 +9382,7 @@ country_event = { #militant leader
 			name = "皮埃尔·德里厄·拉罗谢尔"
 			picture = "gfx/leaders/FRA/Portrait_Pierre_Drieu_La_Rochelle.png"
 			expire = "1.1.1"
-			ideology = sorelianism_subtype
+			ideology = sorelian_bolshevism_subtype
 			traits = {}
 		}
 		meta_effect = {

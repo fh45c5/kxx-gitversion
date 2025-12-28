@@ -1,0 +1,746 @@
+focus_tree = {
+	id = japan-nakano
+	continuous_focus_position = { x = -40 y = 3050 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPNAK
+		}
+	}
+	shared_focus = JAPFOR_japansplaceintheworld
+	shared_focus = JAPFOR_tokyo_conference
+	shared_focus = JAP_To_Sunder_the_Sunset
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday
+	
+	#Nakano Secures the Diet
+	focus = {
+		id = JAPNAK_nakano_secures_the_diet
+		icon = GFX_JAPNAK_nakano_secures_the_diet-248360
+		x = 10
+		y = 0
+		cost = 1
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+	}
+
+	#The Issue of Party Factionalism
+	focus = {
+		id = JAPNAK_the_issue_of_party_factionalism
+		icon = GFX_JAPNAK_the_issue_of_party_factionalism-248360
+		x = 10
+		y = 1
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		prerequisite = { focus = JAPNAK_nakano_secures_the_diet  }
+	}
+
+	#Controlling the Zaibatsu
+	focus = {
+		id = JAPNAK_controlling_the_zaibatsu
+		icon = GFX_JAPNAK_controlling_the_zaibatsu-248360
+		x = 12
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNAK_the_issue_of_party_factionalism  }
+		completion_reward = {
+		set_country_flag = JAP_smash_zaibatsu
+		hidden_effect = {
+			country_event = {
+			id = japan_new_event.142
+			days = 100
+			}
+		}
+		set_variable = {
+				var = zaibatsu_nationalization
+				value = 0
+				tooltip = zaibatsu_nationalization_tt
+			}
+		set_variable = {
+				var = sumitomo_nationalization
+				value = 0
+			}
+		set_variable = {
+				var = mitsui_nationalization
+				value = 0
+			}
+		set_variable = {
+				var = mitsubishi_nationalization
+				value = 0
+			}
+		set_variable = {
+				var = yasuda_nationalization
+				value = 0
+			}
+		}
+	}
+
+	#Question of the Labour Unions
+	focus = {
+		id = JAPNAK_question_of_the_labour_unions
+		icon = GFX_JAPNAK_question_of_the_labour_unions-248360
+		x = 10
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNAK_the_issue_of_party_factionalism  }
+		completion_reward = {
+		add_ideas = {
+		JAP_union_support_nakano_1
+		}
+		}
+	}
+
+	#Legacy of Satsuma
+	focus = {
+		id = JAPNAK_legacy_of_satsuma
+		icon = GFX_JAPNAK_legacy_of_satsuma-248360
+		x = 6
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPNAK_the_issue_of_party_factionalism  }
+		completion_reward = {
+		add_ideas = {
+		JAP_satsuma_nakano_1
+		}
+		}
+	}
+
+	#Keeping the Emperor Under a Close Eye
+	focus = {
+		id = JAPNAK_keeping_the_emperor_under_a_close_eye
+		icon = GFX_JAPNAK_keeping_the_emperor_under_a_close_eye-248360
+		x = 5
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNAK_legacy_of_satsuma  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_no_army_focus
+		}
+		}
+	}
+
+	#Build up the Mass Movement
+	focus = {
+		id = JAPNAK_build_up_the_mass_movement
+		icon = GFX_JAPNAK_build_up_the_mass_movement-248360
+		x = 7
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNAK_legacy_of_satsuma  }
+		completion_reward = {
+		add_ideas = {
+		JAP_popular_support
+		}
+		}
+	}
+
+	#Guiding the National Economy
+	focus = {
+		id = JAPNAK_guiding_the_national_economy
+		icon = GFX_JAPNAK_guiding_the_national_economy-248360
+		x = 10
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNAK_question_of_the_labour_unions  } prerequisite = { focus = JAPNAK_controlling_the_zaibatsu  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_black_monday_1
+		add_idea = JAP_black_monday_statist_0
+		}
+		}
+	}
+
+	#The Land Question
+	focus = {
+		id = JAPNAK_the_land_question
+		icon = GFX_JAPNAK_the_land_question-248360
+		x = 13
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNAK_controlling_the_zaibatsu  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_land_reform_focus"
+			add_stability = 0.05
+			unlock_decision_category_tooltip = JAP_land_reform
+			hidden_effect = { JAP_open_JAP_land_reform = yes }
+		}
+	}
+
+	#The National Agriculture Reserve
+	focus = {
+		id = JAPNAK_the_national_agriculture_reserve
+		icon = GFX_JAPNAK_the_national_agriculture_reserve-248360
+		x = 15
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNAK_the_land_question  }
+		completion_reward = {
+		add_ideas = {
+		JAP_nation_agriculture_reserve
+		}
+		}
+	}
+
+	#Formation of Self-Rule Cooperatives
+	focus = {
+		id = JAPNAK_formation_of_selfrule_cooperatives
+		icon = GFX_JAPNAK_formation_of_selfrule_cooperatives-248360
+		x = 13
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNAK_the_land_question  }
+		completion_reward = {
+		unlock_decision_tooltip = JAP_agriculture_reserve
+		}
+	}
+
+	#Fabian Economic Influences
+	focus = {
+		id = JAPNAK_fabian_economic_influences
+		icon = GFX_JAPNAK_fabian_economic_influences-248360
+		x = 10
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNAK_build_up_the_mass_movement  } prerequisite = { focus = JAPNAK_guiding_the_national_economy  } prerequisite = { focus = JAPNAK_the_land_question  }
+		completion_reward = {
+		add_ideas = {
+		JAP_maximist_japan
+		}
+		}
+	}
+
+	#Absorb the Shakai Taishuto
+	focus = {
+		id = JAPNAK_absorb_the_shakai_taishuto
+		icon = GFX_JAPNAK_absorb_the_shakai_taishuto-248360
+		x = 7
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNAK_keeping_the_emperor_under_a_close_eye  } prerequisite = { focus = JAPNAK_build_up_the_mass_movement  }
+		completion_reward = {
+		set_temp_variable = { coalition_partner_var = token:social_democrat }
+		add_to_coalition = yes
+		set_temp_variable = { coalition_partner_var = token:radical_socialist }
+		add_to_coalition = yes
+		add_popularity = {
+		ideology = social_democrat
+		popularity = 0.15
+		}
+		add_popularity = {
+		ideology = radical_socialist
+		popularity = 0.01
+		}
+		}
+	}
+
+	#Support the Pan-Asianists
+	focus = {
+		id = JAPNAK_support_the_panasianists
+		icon = GFX_JAPNAK_support_the_panasianists-248360
+		x = 5
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = JAPNAK_keeping_the_emperor_under_a_close_eye  } prerequisite = { focus = JAPNAK_build_up_the_mass_movement  }
+		completion_reward = {
+		add_war_support = 0.1
+		add_ideas = {
+		JAP_pan_asian_guidelines_2
+		}
+		}
+	}
+
+	#Legacy of the Visit to Europe
+	focus = {
+		id = JAPNAK_legacy_of_the_visit_to_europe
+		icon = GFX_JAPNAK_legacy_of_the_visit_to_europe-248360
+		x = 3
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		available = {
+		has_government = totalist
+		}
+		prerequisite = { focus = JAPNAK_absorb_the_shakai_taishuto  } prerequisite = { focus = JAPNAK_support_the_panasianists  }
+		completion_reward = {
+		add_popularity = {
+		ideology = totalist
+		popularity = 0.05
+		}
+		add_ideas = {
+		JAP_nakano_visit_europe
+		}
+		}
+	}
+
+	#Purge the Liberal Menace
+	focus = {
+		id = JAPNAK_purge_the_liberal_menace
+		icon = GFX_JAPNAK_purge_the_liberal_menace-248360
+		x = 5
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPNAK_absorb_the_shakai_taishuto  } prerequisite = { focus = JAPNAK_support_the_panasianists  }
+		completion_reward = {
+		remove_ideas = {
+		JAP_red_army_resistance_1
+		}
+		add_popularity = {
+		ideology = social_liberal
+		popularity = -1
+		}
+		add_popularity = {
+		ideology = market_liberal
+		popularity = -1
+		}
+		add_popularity = {
+		ideology = social_conservative
+		popularity = -1
+		}
+		}
+	}
+
+	#Realization of a Populist Government
+	focus = {
+		id = JAPNAK_realization_of_a_populist_government
+		icon = GFX_JAPNAK_realization_of_a_populist_government-248360
+		x = 7
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNAK_absorb_the_shakai_taishuto  } prerequisite = { focus = JAPNAK_support_the_panasianists  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_popular_support
+		add_idea = JAP_popular_support_1
+		}
+		}
+	}
+
+	#The New Labour Act
+	focus = {
+		id = JAPNAK_the_new_labour_act
+		icon = GFX_JAPNAK_the_new_labour_act-248360
+		x = 9
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNAK_fabian_economic_influences  }
+		completion_reward = {
+		add_stability = 0.05
+		}
+	}
+
+	#A Plan For National Reconstruction
+	focus = {
+		id = JAPNAK_a_plan_for_national_reconstruction
+		icon = GFX_JAPNAK_a_plan_for_national_reconstruction-248360
+		x = 11
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNAK_fabian_economic_influences  }
+		completion_reward = {
+		add_ideas = {
+		JAP_national_reconstruction_plan
+		}
+		}
+	}
+
+	#Deal With the Land Owners
+	focus = {
+		id = JAPNAK_deal_with_the_land_owners
+		icon = GFX_JAPNAK_deal_with_the_land_owners-248360
+		x = 13
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = JAPNAK_formation_of_selfrule_cooperatives  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_land_reform_variable
+				value = 1
+			}
+			custom_effect_tooltip = JAP_land_reform_progress
+		add_ideas = {
+		JAP_land_lord_purge
+		}	
+		}
+	}
+
+	#Reduce the Tax Burden on Farmers
+	focus = {
+		id = JAPNAK_reduce_the_tax_burden_on_farmers
+		icon = GFX_JAPNAK_reduce_the_tax_burden_on_farmers-248360
+		x = 15
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNAK_the_national_agriculture_reserve  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_land_reform_variable
+				value = 1
+			}
+			custom_effect_tooltip = JAP_land_reform_progress
+		add_stability = 0.1
+		}
+	}
+
+	#Increase Peasant Wages
+	focus = {
+		id = JAPNAK_increase_peasant_wages
+		icon = GFX_JAPNAK_increase_peasant_wages-248360
+		x = 15
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = JAPNAK_deal_with_the_land_owners  } prerequisite = { focus = JAPNAK_reduce_the_tax_burden_on_farmers  }
+		completion_reward = {
+		add_ideas = {
+		JAP_peasant_wage_increase
+		}
+		add_to_variable = {
+				var = JAP_land_reform_variable
+				value = 1
+			}
+		custom_effect_tooltip = JAP_land_reform_progress
+		}
+	}
+
+	#Farming for the Nation
+	focus = {
+		id = JAPNAK_farming_for_the_nation
+		icon = GFX_JAPNAK_farming_for_the_nation-248360
+		x = 13
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = JAPNAK_deal_with_the_land_owners  } prerequisite = { focus = JAPNAK_reduce_the_tax_burden_on_farmers  }
+		completion_reward = {
+		add_to_variable = {
+				var = JAP_land_reform_variable
+				value = 1
+			}
+		custom_effect_tooltip = JAP_land_reform_progress
+		add_ideas = {
+		JAP_farming_for_the_nation
+		}
+		}
+	}
+
+	#New Trade Policies
+	focus = {
+		id = JAPNAK_new_trade_policies
+		icon = GFX_JAPNAK_new_trade_policies-248360
+		x = 11
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNAK_the_new_labour_act  } prerequisite = { focus = JAPNAK_a_plan_for_national_reconstruction  }
+		completion_reward = {
+		add_ideas = {
+		JAP_new_foreign_exchange
+		}
+		}
+	}
+
+	#Proposing a Greater Asian Economic Bloc
+	focus = {
+		id = JAPNAK_proposing_a_greater_asian_economic_bloc
+		icon = GFX_JAPNAK_proposing_a_greater_asian_economic_bloc-248360
+		x = 9
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNAK_the_new_labour_act  } prerequisite = { focus = JAPNAK_a_plan_for_national_reconstruction  }
+		completion_reward = {
+				every_country = {
+					limit = {
+						is_subject_of = JAP
+					}
+						add_ideas = {
+						JAP_economic_yen_block
+						}
+				}
+		}
+	}
+
+	#A Strong Armed Government
+	focus = {
+		id = JAPNAK_a_strong_armed_government
+		icon = GFX_JAPNAK_a_strong_armed_government-248360
+		x = 7
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		available = {
+		has_completed_focus = JAPNAK_abolishing_the_cabinet_system
+		}
+		prerequisite = { focus = JAPNAK_realization_of_a_populist_government  }
+		completion_reward = {
+		add_political_power = 100
+		add_popularity = {
+		ideology = ROOT
+		popularity = 0.3
+		}
+		}
+	}
+
+	#Abolishing the Cabinet System
+	focus = {
+		id = JAPNAK_abolishing_the_cabinet_system
+		icon = GFX_JAPNAK_abolishing_the_cabinet_system-248360
+		x = 5
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		available = {
+			if = {
+				limit = {
+					has_government = totalist
+				}
+				has_completed_focus = JAPNAK_legacy_of_the_visit_to_europe
+			}
+		}
+		prerequisite = { focus = JAPNAK_legacy_of_the_visit_to_europe focus = JAPNAK_purge_the_liberal_menace }
+		completion_reward = {
+		country_event = japan_new_event.108
+		}
+	}
+
+	#Creation of the Board of National Affairs
+	focus = {
+		id = JAPNAK_creation_of_the_board_of_national_affairs
+		icon = GFX_JAPNAK_creation_of_the_board_of_national_affairs-248360
+		x = 6
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNAK_a_strong_armed_government  } prerequisite = { focus = JAPNAK_abolishing_the_cabinet_system  }
+		completion_reward = {
+		add_ideas = {
+		JAP_national_planning_board
+		}
+		}
+	}
+
+	#Under the Nakano Economic Program
+	focus = {
+		id = JAPNAK_under_the_nakano_economic_program
+		icon = GFX_JAPNAK_under_the_nakano_economic_program-248360
+		x = 10
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = JAPNAK_new_trade_policies  } prerequisite = { focus = JAPNAK_proposing_a_greater_asian_economic_bloc  }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = JAP_black_monday_statist_0
+		add_idea = JAP_black_monday_natsynd_1
+		}
+		}
+	}
+
+	#Strengthen the Farmer Unions
+	focus = {
+		id = JAPNAK_strengthen_the_farmer_unions
+		icon = GFX_JAPNAK_strengthen_the_farmer_unions-248360
+		x = 14
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		available = {
+		has_country_flag = JAP_land_reform_finished
+		}
+		prerequisite = { focus = JAPNAK_increase_peasant_wages  } prerequisite = { focus = JAPNAK_farming_for_the_nation  }
+		completion_reward = {
+		add_ideas = {
+		JAP_farmer_liberation
+		}
+		}
+	}
+
+	#Nakano Above All
+	focus = {
+		id = JAPNAK_nakano_above_all
+		icon = GFX_JAPNAK_nakano_above_all-248360
+		x = 10
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = JAPNAK_creation_of_the_board_of_national_affairs  } prerequisite = { focus = JAPNAK_under_the_nakano_economic_program  } prerequisite = { focus = JAPNAK_strengthen_the_farmer_unions  }
+		completion_reward = {
+		country_event = japan_new_event.109
+		}
+	}
+
+}
