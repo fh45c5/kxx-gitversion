@@ -1,0 +1,8270 @@
+###########################
+# Estonian Focus Tree
+# By Fort
+# Revised by Alpinia
+###########################
+
+focus_tree = {
+	id = Estonia_Focus
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = EST
+		}
+	}
+
+	default = no
+	continuous_focus_position = { x = 0 y = 4 }
+
+	focus = {
+		id = EST_national_personal_autonomy
+		icon = GFX_goal_AUS_austromarxist_diet
+		x = -20
+		y = 0
+		cost = 6
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_national_personal_autonomy"
+			add_stability = 0.1
+		}
+	}
+	focus = {
+		id = EST_nationalizing_baltic_german_industry
+		icon = GFX_goal_WHR_Assert_Independence_Germany
+		relative_position_id = EST_national_personal_autonomy
+		x = 2
+		y = 0
+		cost = 6
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_nationalizing_baltic_german_industry"
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+	}
+	focus = {
+		id = EST_estonian_freedom
+		icon = GFX_goal_EST_Estonian_Eagle_Focus
+		relative_position_id = EST_nationalizing_baltic_german_industry
+		x = 2
+		y = 0
+		cost = 6
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_estonian_freedom"
+			add_political_power = 100
+			hidden_effect = {
+				country_event = { id = KREST.5 days = 4 }
+			}
+		}
+	}
+	focus = {
+		id = EST_omakaitse
+		icon = GFX_goal_EST_defence_league
+		cost = 8
+		prerequisite = {
+			focus = EST_national_personal_autonomy
+		}
+		prerequisite = {
+			focus = EST_nationalizing_baltic_german_industry
+		}
+		prerequisite = {
+			focus = EST_estonian_freedom
+		}
+		select_effect = {
+			log = "[GetDateText]: [Root.GetName]: Select Focus EST_omakaitse"
+			if = {
+				limit = { is_subject = no }
+			country_event = KREST.15
+		}
+		}
+		relative_position_id = EST_nationalizing_baltic_german_industry
+		x = 0
+		y = 1
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_omakaitse"
+			add_stability = 0.05
+			add_manpower = 8000
+			hidden_effect = {
+				country_event = { id = KREST.90 days = 20 }
+				if = {
+					limit = { RUS = { has_socialist_government = no } }
+					activate_targeted_decision = { target = RUS decision = EST_join_moscow_accord }
+				}
+			}
+		}
+	}
+
+	### Vapsid Tree ###
+	focus = {
+		id = EST_pursue_autarky
+		icon = GFX_goal_generic_autarky
+		allow_branch = {
+			has_government = paternal_autocrat
+		}
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_omakaitse
+		}
+		x = -4
+		y = 1
+		relative_position_id = EST_omakaitse
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_pursue_autarky"
+			EST_reduce_roads_to_riga = yes
+			activate_targeted_decision = { target = 191 decision = EST_industrial_investments_in_dorpat }
+		}
+	}
+	focus = {
+		id = EST_banking_reform
+		icon = GFX_goal_generic_banking_legislation
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_pursue_autarky
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_pursue_autarky
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_banking_reform"
+			EST_reduce_roads_to_riga = yes
+		}
+	}
+	focus = {
+		id = EST_military_armaments_industry
+		icon = GFX_goal_CZE_imperial_arms
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_banking_reform
+		}
+		x = -1
+		y = 1
+		relative_position_id = EST_banking_reform
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_military_armaments_industry"
+			EST_reduce_roads_to_riga = yes
+			activate_targeted_decision = { target = 13 decision = EST_expand_tallinn_arms_factories }
+		}
+	}
+	focus = {
+		id = EST_oil_exploitation
+		icon = GFX_goal_AUS_galicia_oil
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_military_armaments_industry
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_military_armaments_industry
+		cost = 5
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_oil_exploitation"
+			EST_estonian_oil_decisions_activation = yes
+		}
+	}
+	focus = {
+		id = EST_industrializing_tallinn
+		icon = GFX_goal_CAL_massive_projects
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_banking_reform
+		}
+		x = 1
+		y = 1
+		relative_position_id = EST_banking_reform
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_industrializing_tallinn"
+			EST_reduce_roads_to_riga = yes
+			activate_targeted_decision = { target = 13 decision = EST_industrial_investments_in_tallinn }
+			activate_targeted_decision = { target = 13 decision = EST_industrial_investments_in_narva }
+			activate_targeted_decision = { target = 13 decision = EST_urbanisation_initiative }
+		}
+	}
+	focus = {
+		id = EST_agricultural_credit_programmes
+		icon = GFX_USA_sweep_farm_tariffs
+		allow_branch = {
+			has_government = paternal_autocrat
+		}
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_omakaitse
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_omakaitse
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_agricultural_credit_programmes"
+			EST_reduce_agrarian_issue = yes
+		}
+	}
+	focus = {
+		id = EST_modern_farming_methods
+		icon = GFX_RUS_Agricultural_Committee
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_agricultural_credit_programmes
+		}
+		x = -2
+		y = 1
+		relative_position_id = EST_agricultural_credit_programmes
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_modern_farming_methods"
+			EST_reduce_agrarian_issue = yes
+			activate_targeted_decision = { target = 191 decision = EST_rural_infrastructure }
+		}
+	}
+	focus = {
+		id = EST_encourage_communal_farming
+		icon = GFX_RUS_Prosperity_For_Peasants
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_agricultural_credit_programmes
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_agricultural_credit_programmes
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_encourage_communal_farming"
+			EST_reduce_agrarian_issue = yes
+			activate_targeted_decision = { target = 191 decision = EST_develop_communal_farming_in_livonia }
+		}
+	}
+	focus = {
+		id = EST_rural_electrification
+		icon = GFX_RUS_Rural_Electro
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_agricultural_credit_programmes
+		}
+		x = 2
+		y = 1
+		relative_position_id = EST_agricultural_credit_programmes
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_rural_electrification"
+			EST_reduce_agrarian_issue = yes
+			activate_targeted_decision = { target = 13 decision = EST_rural_infrastructure }
+		}
+	}
+	focus = {
+		id = EST_mechanized_farming
+		icon = GFX_goal_BUL_mechanize_farming
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_modern_farming_methods
+		}
+		prerequisite = {
+			focus = EST_encourage_communal_farming
+		}
+		prerequisite = {
+			focus = EST_rural_electrification
+		}
+		x = 0
+		y = 2
+		relative_position_id = EST_agricultural_credit_programmes
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_mechanized_farming"
+			EST_reduce_agrarian_issue = yes
+			activate_targeted_decision = { target = 13 decision = EST_expand_mechanisation }
+			activate_targeted_decision = { target = 191 decision = EST_expand_mechanisation }
+		}
+	}
+	focus = {
+		id = EST_expanding_university_tartu
+		icon = GFX_goal_HON_Education_Research
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_mechanized_farming
+		}
+		x = -1
+		y = 1
+		relative_position_id = EST_mechanized_farming
+		cost = 8
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_expanding_university_tartu"
+			add_research_slot_until_five = yes
+		}
+	}
+	focus = {
+		id = EST_embrace_etatism
+		icon = GFX_RUS_Governmental_Control
+		available = {
+			has_government = paternal_autocrat
+			has_completed_focus = EST_oil_exploitation
+			has_completed_focus = EST_industrializing_tallinn
+		}
+		prerequisite = {
+			focus = EST_mechanized_farming
+		}
+		x = 1
+		y = 1
+		relative_position_id = EST_mechanized_farming
+		cost = 7
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_embrace_etatism"
+			add_ideas = EST_etatism
+		}
+	}
+	focus = {
+		id = EST_expand_omakaitse
+		icon = GFX_goal_POL_International_Polish_Agents
+		allow_branch = {
+			has_government = paternal_autocrat
+		}
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_omakaitse
+		}
+		x = 4
+		y = 1
+		relative_position_id = EST_omakaitse
+		cost = 7
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_expand_omakaitse"
+			if = {
+				limit = { has_dlc_lar = yes }
+				if = {
+					limit = { has_intelligence_agency = yes }
+					if = {
+						limit = { NOT = { has_done_agency_upgrade = upgrade_commando_training } }
+						upgrade_intelligence_agency = upgrade_commando_training
+					}
+					if = {
+						limit = { NOT = { has_done_agency_upgrade = upgrade_crypto_strength } }
+						upgrade_intelligence_agency = upgrade_crypto_strength
+					}
+					if = {
+						limit = { NOT = { has_done_agency_upgrade = upgrade_decryption_boost } }
+						upgrade_intelligence_agency = upgrade_decryption_boost
+					}
+					if = {
+						limit = {
+							OR = {
+								has_done_agency_upgrade = upgrade_commando_training
+								has_done_agency_upgrade = upgrade_crypto_strength
+								has_done_agency_upgrade = upgrade_decryption_boost
+							}
+							NOT = { has_done_agency_upgrade = upgrade_training_centers }
+						}
+						upgrade_intelligence_agency = upgrade_training_centers
+					}
+				}
+				else = {
+					create_intelligence_agency = yes
+				}
+			}
+			else = {
+				add_ideas = EST_expanded_omakaitse
+			}
+		}
+	}
+	focus = {
+		id = EST_one_people
+		icon = GFX_goal_generic_indoctrinate_minds_manipulate_people
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_expand_omakaitse
+		}
+		x = -1
+		y = 2
+		relative_position_id = EST_expand_omakaitse
+		cost = 6
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_one_people"
+			add_stability = 0.1
+			add_political_power = 100
+		}
+	}
+	focus = {
+		id = EST_welfare_state
+		icon = GFX_goal_CAN_build_canadian_welfare_state
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_expand_omakaitse
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_expand_omakaitse
+		cost = 6
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_welfare_state"
+			add_ideas = EST_social_welfare
+		}
+	}
+	focus = {
+		id = EST_crush_the_opposition
+		icon = GFX_goal_SOM_Hangash_Privileges
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_expand_omakaitse
+		}
+		x = 1
+		y = 2
+		relative_position_id = EST_expand_omakaitse
+		cost = 6
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_crush_the_opposition"
+			swap_ruler_traits = {
+				remove = EST_era_of_silence_1
+				add = EST_era_of_silence_2
+			}
+		}
+	}
+	focus = {
+		id = EST_the_vapsid_state
+		icon = GFX_goal_NFA_Bolster_Nationalism
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_one_people
+		}
+		prerequisite = {
+			focus = EST_welfare_state
+		}
+		prerequisite = {
+			focus = EST_crush_the_opposition
+		}
+		x = 0
+		y = 2
+		relative_position_id = EST_welfare_state
+		cost = 7
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_the_vapsid_state"
+			add_ideas = EST_nationalist_state_1
+		}
+	}
+	focus = {
+		id = EST_fatherland_united
+		icon = GFX_goal_COL_Straighten_New_Race
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_the_vapsid_state
+		}
+		x = -1
+		y = 1
+		relative_position_id = EST_the_vapsid_state
+		cost = 7
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_fatherland_united"
+			if = {
+				limit = { has_idea = EST_nationalist_state_3 }
+				swap_ideas = {
+					remove_idea = EST_nationalist_state_3
+					add_idea = EST_nationalist_state_4
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = EST_nationalist_state_1
+					add_idea = EST_nationalist_state_2
+				}
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.2
+			}
+		}
+	}
+	focus = {
+		id = EST_loyalty_to_the_state
+		icon = GFX_goal_NFA_Endless_Devotion_Patrie_Imperiale
+		available = {
+			has_government = paternal_autocrat
+		}
+		prerequisite = {
+			focus = EST_the_vapsid_state
+		}
+		x = 1
+		y = 1
+		relative_position_id = EST_the_vapsid_state
+		cost = 7
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_loyalty_to_the_state"
+			if = {
+				limit = { has_idea = EST_nationalist_state_2 }
+				swap_ideas = {
+					remove_idea = EST_nationalist_state_2
+					add_idea = EST_nationalist_state_4
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = EST_nationalist_state_1
+					add_idea = EST_nationalist_state_3
+				}
+			}
+		}
+	}
+
+	### Isamaaliit Tree ###
+	focus = {
+		id = EST_control_unions
+		icon = GFX_RUS_Control_Trade_Unions
+		prerequisite = {
+			focus = EST_omakaitse
+		}
+		allow_branch = {
+			has_government = authoritarian_democrat
+		}
+		available = {
+			has_government = authoritarian_democrat
+		}
+		x = -2
+		y = 1
+		relative_position_id = EST_omakaitse
+		cost = 3
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_control_unions"
+			country_event = KREST.42
+		}
+	}
+	focus = {
+		id = EST_control_plutocrats
+		icon = GFX_DKB_Oligarchs
+		prerequisite = {
+			focus = EST_omakaitse
+		}
+		allow_branch = {
+			has_government = authoritarian_democrat
+		}
+		available = {
+			has_government = authoritarian_democrat
+		}
+		x = 2
+		y = 0
+		relative_position_id = EST_control_unions
+		cost = 3
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_control_plutocrats"
+			country_event = KREST.43
+		}
+	}
+	focus = {
+		id = EST_reform_bureaucracy
+		icon = GFX_DKB_Bureaucracy
+		prerequisite = {
+			focus = EST_omakaitse
+		}
+		allow_branch = {
+			has_government = authoritarian_democrat
+		}
+		available = {
+			has_government = authoritarian_democrat
+		}
+		x = 2
+		y = 0
+		relative_position_id = EST_control_plutocrats
+		cost = 3
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_reform_bureaucracy"
+			country_event = KREST.44
+		}
+	}
+	focus = {
+		id = EST_corporatist_democracy
+		icon = GFX_goal_AUS_corporatism_real
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_control_unions
+		}
+		prerequisite = {
+			focus = EST_control_plutocrats
+		}
+		prerequisite = {
+			focus = EST_reform_bureaucracy
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_control_plutocrats
+		cost = 3
+		ai_will_do = {
+			factor = 20
+		}
+		select_effect = {
+			country_event = { id = KREST.45 days = 2 }
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_corporatist_democracy"
+			add_ideas = EST_corporatism_1
+		}
+	}
+	focus = {
+		id = EST_disregard_deficit
+		icon = GFX_USA_balancing_the_budget-62853
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_corporatist_democracy
+		}
+		x = -3
+		y = 1
+		relative_position_id = EST_corporatist_democracy
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_disregard_deficit"
+			if = {
+				limit = { has_idea = EST_corporatism_3 }
+				swap_ideas = {
+					remove_idea = EST_corporatism_3
+					add_idea = EST_corporatism_4
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = EST_corporatism_1
+					add_idea = EST_corporatism_2
+				}
+			}
+		}
+	}
+	focus = {
+		id = EST_estonian_russian_trade
+		icon = GFX_RUS_Capitalism_Will_Prosper_In_Russia
+		available = {
+			has_government = authoritarian_democrat
+			country_exists = RUS
+			NOT = { has_war_with = RUS }
+		}
+		prerequisite = {
+			focus = EST_disregard_deficit
+		}
+		mutually_exclusive = {
+			focus = EST_extensive_tariffs
+		}
+		x = -2
+		y = 1
+		relative_position_id = EST_disregard_deficit
+		cost = 7
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 0
+				RUS = {
+					OR = {
+						has_completed_focus = RUS_Expansionism
+						has_socialist_government = yes
+					}
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_estonian_russian_trade"
+			RUS = { country_event = KREST.39 }
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = if_accepted
+			effect_tooltip = { add_ideas = EST_russian_trade }
+		}
+	}
+	focus = {
+		id = EST_extensive_tariffs
+		icon = GFX_GRU_CONS_TARIFF
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_disregard_deficit
+		}
+		mutually_exclusive = {
+			focus = EST_estonian_russian_trade
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_disregard_deficit
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_extensive_tariffs"
+			add_ideas = EST_state_tariffs
+		}
+	}
+	focus = {
+		id = EST_port_expansions
+		icon = GFX_USA_ports_atlantic
+		available = {
+			has_government = authoritarian_democrat
+			13 = { is_owned_and_controlled_by = ROOT }
+		}
+		prerequisite = {
+			focus = EST_estonian_russian_trade
+			focus = EST_extensive_tariffs
+		}
+		x = -1
+		y = 2
+		relative_position_id = EST_disregard_deficit
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_port_expansions"
+			EST_reduce_roads_to_riga = yes
+			13 = {
+				add_building_construction = {
+					type = naval_base
+					level = 3
+					instant_build = yes
+					province = 3152
+				}
+			}
+		}
+	}
+	focus = {
+		id = EST_control_productive_forces
+		icon = GFX_goal_TEX_Business_Empire_Our_Own
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_corporatist_democracy
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_corporatist_democracy
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_control_productive_forces"
+			EST_reduce_roads_to_riga = yes
+			activate_targeted_decision = { target = 191 decision = EST_industrial_investments_in_dorpat }
+			activate_targeted_decision = { target = 13 decision = EST_expand_tallinn_arms_factories }
+		}
+	}
+	focus = {
+		id = EST_reforming_the_banks
+		icon = GFX_goal_AUS_Kickstart_Broken_Banks
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_control_productive_forces
+		}
+		x = -1
+		y = 1
+		relative_position_id = EST_control_productive_forces
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_reforming_the_banks"
+			EST_reduce_roads_to_riga = yes
+		}
+	}
+	focus = {
+		id = EST_industrial_modernization_programs
+		icon = GFX_goal_ALB_Modernization
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_reforming_the_banks
+		}
+		x = -1
+		y = 1
+		relative_position_id = EST_reforming_the_banks
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_industrial_modernization_programs"
+			EST_reduce_roads_to_riga = yes
+			activate_targeted_decision = { target = 13 decision = EST_urbanisation_initiative }
+			activate_targeted_decision = { target = 13 decision = EST_industrial_investments_in_tallinn }
+			activate_targeted_decision = { target = 13 decision = EST_industrial_investments_in_narva }
+		}
+	}
+	focus = {
+		id = EST_increase_production_quotas
+		icon = GFX_BBR_state_quotas
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_industrial_modernization_programs
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_industrial_modernization_programs
+		cost = 7
+		ai_will_do = {
+			factor = 12
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_increase_production_quotas"
+			if = {
+				limit = { has_idea = EST_corporatism_2 }
+				swap_ideas = {
+					remove_idea = EST_corporatism_2
+					add_idea = EST_corporatism_4
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = EST_corporatism_1
+					add_idea = EST_corporatism_3
+				}
+			}
+
+		}
+	}
+	focus = {
+		id = EST_search_for_oil
+		icon = GFX_goal_GAL_sell_oil
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_reforming_the_banks
+		}
+		x = 1
+		y = 1
+		relative_position_id = EST_reforming_the_banks
+		cost = 5
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_search_for_oil"
+			EST_estonian_oil_decisions_activation = yes
+		}
+	}
+	focus = {
+		id = EST_plough_shares_for_tractors
+		icon = GFX_goal_SKM_Foreign_Financed_Mechanization
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_control_productive_forces
+		}
+		x = 1
+		y = 1
+		relative_position_id = EST_control_productive_forces
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_plough_shares_for_tractors"
+			EST_reduce_agrarian_issue = yes
+		}
+	}
+	focus = {
+		id = EST_grain_for_fatherland
+		icon = GFX_goal_AUS_agrarian_icon
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_plough_shares_for_tractors
+		}
+		x = 0
+		y = 2
+		relative_position_id = EST_plough_shares_for_tractors
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_grain_for_fatherland"
+			EST_reduce_agrarian_issue = yes
+		}
+	}
+	focus = {
+		id = EST_pursuit_of_mechanization
+		icon = GFX_RUS_Agricultural_Mechanization
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_grain_for_fatherland
+		}
+		x = -2
+		y = 1
+		relative_position_id = EST_grain_for_fatherland
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_pursuit_of_mechanization"
+			EST_reduce_agrarian_issue = yes
+			activate_targeted_decision = { target = 13 decision = EST_expand_mechanisation }
+			activate_targeted_decision = { target = 191 decision = EST_expand_mechanisation }
+		}
+	}
+	focus = {
+		id = EST_create_an_estonian_landowning_class
+		icon = GFX_goal_NFA_Middle_Class
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_grain_for_fatherland
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_grain_for_fatherland
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_create_an_estonian_landowning_class"
+			EST_reduce_agrarian_issue = yes
+			activate_targeted_decision = { target = 191 decision = EST_develop_communal_farming_in_livonia }
+		}
+	}
+	focus = {
+		id = EST_expand_railways
+		icon = GFX_goal_NIC_Pacific_Rail_Expansion
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_grain_for_fatherland
+		}
+		x = 2
+		y = 1
+		relative_position_id = EST_grain_for_fatherland
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_expand_railways"
+			EST_reduce_agrarian_issue = yes
+			activate_targeted_decision = { target = 13 decision = EST_rural_infrastructure }
+			activate_targeted_decision = { target = 191 decision = EST_rural_infrastructure }
+		}
+	}
+	focus = {
+		id = EST_mass_censorship_laws
+		icon = GFX_goal_GER_Censor_Press
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_corporatist_democracy
+		}
+		x = 3
+		y = 1
+		relative_position_id = EST_corporatist_democracy
+		cost = 6
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_mass_censorship_laws"
+			if = {
+				limit = { has_dlc_lar = yes }
+				add_ideas = EST_mass_censorship_lar
+			}
+			else = {
+				add_ideas = EST_mass_censorship
+			}
+		}
+	}
+	focus = {
+		id = EST_suppress_dissident_voices
+		icon = GFX_goal_generic_imprison_people
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_mass_censorship_laws
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_mass_censorship_laws
+		cost = 6
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_suppress_dissident_voices"
+			add_stability = 0.05
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.2
+			}
+		}
+	}
+	focus = {
+		id = EST_free_education
+		icon = GFX_goal_POL_Invest_Rural_Education
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_mass_censorship_laws
+		}
+		x = -1
+		y = 2
+		relative_position_id = EST_mass_censorship_laws
+		cost = 8
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_free_education"
+			add_research_slot_until_five = yes
+		}
+	}
+	focus = {
+		id = EST_seize_enemy_assets
+		icon = GFX_VK_NATIONALIZE
+		available = {
+			has_government = authoritarian_democrat
+		}
+		prerequisite = {
+			focus = EST_mass_censorship_laws
+		}
+		x = 1
+		y = 2
+		relative_position_id = EST_mass_censorship_laws
+		cost = 6
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_seize_enemy_assets"
+			add_political_power = 100
+			add_stability = -0.05
+		}
+	}
+
+	### Democratic Tree ###
+	focus = {
+		id = EST_draft_a_new_constitution
+		icon = GFX_goal_MEX_rewrite_constitution
+		prerequisite = {
+			focus = EST_omakaitse
+		}
+		allow_branch = {
+			has_elected_government = yes
+		}
+		available = {
+			has_elected_government = yes
+		}
+		select_effect = {
+			log = "[GetDateText]: [Root.GetName]: Select Focus EST_draft_a_new_constitution"
+			set_variable = { var = EST_liberal_constitution value = 0 }
+			country_event = { id = KREST.46 days = 2 }
+			country_event = { id = KREST.47 days = 9 }
+			country_event = { id = KREST.48 days = 16 }
+			country_event = { id = KREST.49 days = 28 }
+		}
+		x = -3
+		y = 1
+		relative_position_id = EST_omakaitse
+		cost = 6
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_draft_a_new_constitution"
+			add_ideas = EST_constitution
+		}
+	}
+	focus = {
+		id = EST_popular_front
+		icon = GFX_goal_FIU_popular_internationalism
+		available = {
+			has_elected_government = yes
+		}
+		prerequisite = {
+			focus = EST_draft_a_new_constitution
+		}
+		x = -1
+		y = 1
+		relative_position_id = EST_draft_a_new_constitution
+		cost = 6
+		ai_will_do = {
+			factor = 12
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_popular_front"
+			add_political_power = 75
+			set_temp_variable = { ideology_change_var = 10 }
+			change_ruling_party_popularity = yes
+		}
+	}
+	focus = {
+		id = EST_safeguard_democracy
+		icon = GFX_RUS_Lessons_Of_Democracy
+		available = {
+			has_elected_government = yes
+		}
+		prerequisite = {
+			focus = EST_draft_a_new_constitution
+		}
+		x = 1
+		y = 1
+		relative_position_id = EST_draft_a_new_constitution
+		cost = 6
+		ai_will_do = {
+			factor = 12
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_safeguard_democracy"
+			add_stability = 0.1
+		}
+	}
+	focus = {
+		id = EST_state_funded_education
+		icon = GFX_goal_CZE_rural_education
+		available = {
+			has_elected_government = yes
+		}
+		prerequisite = {
+			focus = EST_popular_front
+		}
+		prerequisite = {
+			focus = EST_safeguard_democracy
+		}
+		x = 0
+		y = 2
+		relative_position_id = EST_draft_a_new_constitution
+		cost = 8
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_state_funded_education"
+			add_research_slot_until_five = yes
+		}
+	}
+	focus = {
+		id = EST_khutor_programme
+		icon = GFX_RUS_Land_Quotas_Bill
+		allow_branch = {
+			has_elected_government = yes
+		}
+		available = {
+			has_elected_government = yes
+		}
+		prerequisite = {
+			focus = EST_omakaitse
+		}
+		x = -1
+		y = 1
+		relative_position_id = EST_omakaitse
+		cost = 6
+		ai_will_do = {
+			factor = 6
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_khutor_programme"
+			random_owned_controlled_state = {
+				prioritize = { 13 }
+				limit = {
+					is_core_of = ROOT
+					is_valid_state_for_development = yes
+				}
+				increase_state_category_by_one_level = yes
+			}
+			random_owned_controlled_state = {
+				prioritize = { 191 }
+				limit = {
+					is_core_of = ROOT
+					is_valid_state_for_development = yes
+				}
+				increase_state_category_by_one_level = yes
+			}
+		}
+	}
+	focus = {
+		id = EST_detente_with_germany
+		icon = GFX_ITA_germany
+		allow_branch = {
+			has_elected_government = yes
+		}
+		available = {
+			has_elected_government = yes
+			is_in_faction = no
+			NOT = { has_war_with = GER }
+			GER = { is_faction_leader = yes }
+		}
+		bypass_if_unavailable = yes
+		prerequisite = {
+			focus = EST_omakaitse
+		}
+		x = 0
+		y = 3
+		relative_position_id = EST_omakaitse
+		cost = 6
+		ai_will_do = {
+			factor = 12
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_detente_with_germany"
+			GER = { country_event = KREST.36 }
+		}
+	}
+	focus = {
+		id = EST_help_struggling_farmers
+		icon = GFX_goal_GAL_emergency_peasant
+		available = {
+			has_elected_government = yes
+			OR = {
+				NOT = { has_completed_focus = EST_diversify_our_industrial_base }
+				EST_has_roads_to_riga = no
+			}
+		}
+		prerequisite = {
+			focus = EST_detente_with_germany
+		}
+		x = -1
+		y = 1
+		relative_position_id = EST_detente_with_germany
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_help_struggling_farmers"
+			EST_reduce_agrarian_issue = yes
+		}
+	}
+	focus = {
+		id = EST_comprehensive_land_reform
+		icon = GFX_UKR_Agrarian_Reform
+		available = {
+			has_elected_government = yes
+			OR = {
+				NOT = { has_completed_focus = EST_diversify_our_industrial_base }
+				EST_has_roads_to_riga = no
+			}
+		}
+		prerequisite = {
+			focus = EST_help_struggling_farmers
+		}
+		x = -2
+		y = 1
+		relative_position_id = EST_help_struggling_farmers
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_comprehensive_land_reform"
+			EST_reduce_agrarian_issue = yes
+			add_ideas = EST_land_reform_1
+			custom_effect_tooltip = tooltip_white_line
+			activate_targeted_decision = { target = 13 decision = EST_rural_infrastructure }
+			activate_targeted_decision = { target = 191 decision = EST_rural_infrastructure }
+		}
+	}
+	focus = {
+		id = EST_compromise_with_the_landowners
+		icon = GFX_goal_AUS_Children_of_Land
+		available = {
+			has_elected_government = yes
+			has_completed_focus = EST_draft_a_new_constitution
+			OR = {
+				NOT = { has_completed_focus = EST_diversify_our_industrial_base }
+				EST_has_roads_to_riga = no
+			}
+		}
+		prerequisite = {
+			focus = EST_comprehensive_land_reform
+		}
+		mutually_exclusive = {
+			focus = EST_land_redistribution
+		}
+		x = -1
+		y = 1
+		relative_position_id = EST_comprehensive_land_reform
+		cost = 7
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 0
+				OR = {
+					has_government = social_democrat
+					has_government = social_liberal
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_compromise_with_the_landowners"
+			EST_reduce_agrarian_issue = yes
+			swap_ideas = {
+				remove_idea = EST_land_reform_1
+				add_idea = EST_land_reform_2
+			}
+			if = {
+				limit = {
+					OR = {
+						has_government = social_democrat
+						has_government = social_liberal
+					}
+				}
+				custom_effect_tooltip = EST_against_government_policy
+				add_political_power = -75
+				set_temp_variable = { ideology_change_var = -10 }
+				change_ruling_party_popularity = yes
+			}
+		}
+	}
+	focus = {
+		id = EST_land_redistribution
+		icon = GFX_goal_SKM_Dire_Need_Land_Reforms
+		available = {
+			has_elected_government = yes
+			has_completed_focus = EST_draft_a_new_constitution
+			OR = {
+				NOT = { has_completed_focus = EST_diversify_our_industrial_base }
+				EST_has_roads_to_riga = no
+			}
+		}
+		prerequisite = {
+			focus = EST_comprehensive_land_reform
+		}
+		mutually_exclusive = {
+			focus = EST_compromise_with_the_landowners
+		}
+		x = 1
+		y = 1
+		relative_position_id = EST_comprehensive_land_reform
+		cost = 7
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 0
+				NOT = {
+					has_government = social_democrat
+					has_government = social_liberal
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_land_redistribution"
+			EST_reduce_agrarian_issue = yes
+			swap_ideas = {
+				remove_idea = EST_land_reform_1
+				add_idea = EST_land_reform_3
+			}
+			if = {
+				limit = {
+					OR = {
+						has_government = social_conservative
+						has_government = market_liberal
+					}
+				}
+				custom_effect_tooltip = EST_against_government_policy
+				add_political_power = -75
+				set_temp_variable = { ideology_change_var = -10 }
+				change_ruling_party_popularity = yes
+			}
+		}
+	}
+	focus = {
+		id = EST_mechanised_farming
+		icon = GFX_goal_VIN_agricultural_modernization
+		available = {
+			has_elected_government = yes
+			OR = {
+				NOT = { has_completed_focus = EST_diversify_our_industrial_base }
+				EST_has_roads_to_riga = no
+			}
+		}
+		prerequisite = {
+			focus = EST_help_struggling_farmers
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_help_struggling_farmers
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_mechanised_farming"
+			EST_reduce_agrarian_issue = yes
+			activate_targeted_decision = { target = 13 decision = EST_expand_mechanisation }
+			activate_targeted_decision = { target = 191 decision = EST_expand_mechanisation }
+		}
+	}
+	focus = {
+		id = EST_communal_farms
+		icon = GFX_goal_ALB_Albanian_Farmers
+		available = {
+			has_elected_government = yes
+			OR = {
+				NOT = { has_completed_focus = EST_diversify_our_industrial_base }
+				EST_has_roads_to_riga = no
+			}
+		}
+		prerequisite = {
+			focus = EST_help_struggling_farmers
+		}
+		x = 1
+		y = 2
+		relative_position_id = EST_help_struggling_farmers
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_communal_farms"
+			EST_reduce_agrarian_issue = yes
+			activate_targeted_decision = { target = 191 decision = EST_develop_communal_farming_in_livonia }
+		}
+	}
+	focus = {
+		id = EST_diversify_our_industrial_base
+		icon = GFX_UKR_Decentralized_Planning
+		available = {
+			has_elected_government = yes
+			OR = {
+				NOT = { has_completed_focus = EST_help_struggling_farmers }
+				EST_has_agrarian_issue = no
+			}
+		}
+		prerequisite = {
+			focus = EST_detente_with_germany
+		}
+		x = 2
+		y = 1
+		relative_position_id = EST_detente_with_germany
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_diversify_our_industrial_base"
+			EST_reduce_roads_to_riga = yes
+		}
+	}
+	focus = {
+		id = EST_introduce_the_kroon
+		icon = GFX_goal_HON_Debt_Money_Time
+		available = {
+			has_elected_government = yes
+			OR = {
+				NOT = { has_completed_focus = EST_help_struggling_farmers }
+				EST_has_agrarian_issue = no
+			}
+		}
+		prerequisite = {
+			focus = EST_diversify_our_industrial_base
+		}
+		x = -1
+		y = 1
+		relative_position_id = EST_diversify_our_industrial_base
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_introduce_the_kroon"
+			EST_reduce_roads_to_riga = yes
+		}
+	}
+	focus = {
+		id = EST_seek_foreign_investments
+		icon = GFX_RUS_Foreign_Investments
+		available = {
+			has_elected_government = yes
+			OR = {
+				NOT = { has_completed_focus = EST_help_struggling_farmers }
+				EST_has_agrarian_issue = no
+			}
+		}
+		prerequisite = {
+			focus = EST_diversify_our_industrial_base
+		}
+		x = 1
+		y = 1
+		relative_position_id = EST_diversify_our_industrial_base
+		cost = 7
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_seek_foreign_investments"
+			EST_reduce_roads_to_riga = yes
+		}
+	}
+	focus = {
+		id = EST_the_three_year_plan
+		icon = GFX_goal_NOR_Three_Year_Plan
+		available = {
+			has_elected_government = yes
+			OR = {
+				NOT = { has_completed_focus = EST_help_struggling_farmers }
+				EST_has_agrarian_issue = no
+			}
+		}
+		prerequisite = {
+			focus = EST_introduce_the_kroon
+		}
+		prerequisite = {
+			focus = EST_seek_foreign_investments
+		}
+		x = 0
+		y = 2
+		relative_position_id = EST_diversify_our_industrial_base
+		cost = 7
+		ai_will_do = {
+			factor = 12
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_the_three_year_plan"
+			EST_reduce_roads_to_riga = yes
+			activate_mission = EST_three_year_plan_mission
+			custom_effect_tooltip = tooltip_white_line
+			activate_targeted_decision = { target = 13 decision = EST_industrial_investments_in_tallinn }
+			activate_targeted_decision = { target = 13 decision = EST_industrial_investments_in_narva }
+			activate_targeted_decision = { target = 191 decision = EST_industrial_investments_in_dorpat }
+			activate_targeted_decision = { target = 13 decision = EST_expand_tallinn_arms_factories }
+			activate_targeted_decision = { target = 13 decision = EST_urbanisation_initiative }
+		}
+	}
+	focus = {
+		id = EST_a_baltic_trade_hub
+		icon = GFX_goal_MEX_open_markets_for_entente
+		available = {
+			has_elected_government = yes
+			EST_has_agrarian_issue = no
+			EST_has_roads_to_riga = no
+		}
+		prerequisite = {
+			focus = EST_communal_farms
+			focus = EST_the_three_year_plan
+		}
+		x = 1
+		y = 1
+		relative_position_id = EST_communal_farms
+		cost = 7
+		ai_will_do = {
+			factor = 12
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_a_baltic_trade_hub"
+			add_ideas = EST_baltic_trade_hub
+		}
+	}
+	focus = {
+		id = EST_oil_investments
+		icon = GFX_goal_TEX_Fair_Price_Oil
+		allow_branch = {
+			has_elected_government = yes
+		}
+		available = {
+			has_elected_government = yes
+		}
+		prerequisite = {
+			focus = EST_omakaitse
+		}
+		x = 1
+		y = 1
+		relative_position_id = EST_omakaitse
+		cost = 5
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_oil_investments"
+			EST_estonian_oil_decisions_activation = yes
+		}
+	}
+	focus = {
+		id = EST_new_refineries
+		icon = GFX_GRU_CORPORATE_TAKE_OIL
+		available = {
+			has_tech = fuel_silos
+			has_elected_government = yes
+		}
+		prerequisite = {
+			focus = EST_oil_investments
+		}
+		x = 0
+		y = 1
+		relative_position_id = EST_oil_investments
+		cost = 7
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_build_new_storage"
+			if = {
+				limit = { NOT = { has_tech = synth_oil_experiments } }
+				set_technology = { synth_oil_experiments = 1 }
+			}
+			else = {
+				add_tech_bonus = {
+					name = EST_new_refineries
+					bonus = 1
+					uses = 1
+					category = synth_resources
+				}
+			}
+			13 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	### Military Tree ###
+	focus = {
+		id = EST_planned_defences
+		icon = GFX_goal_generic_army_grand_battleplan
+		mutually_exclusive = {
+			focus = EST_the_forest_brothers_legacy
+		}
+		offset = {
+			x = 3
+			trigger = { has_government = paternal_autocrat }
+		}
+		offset = {
+			x = 1
+			trigger = { has_government = authoritarian_democrat }
+		}
+		x = -11
+		y = 0
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_planned_defences"
+			add_ideas = EST_defensive_planning_1
+		}
+	}
+	focus = {
+		id = EST_a_plan_for_every_scenario
+		icon = GFX_goal_planning_bonus
+		prerequisite = {
+			focus = EST_planned_defences
+		}
+		relative_position_id = EST_planned_defences
+		x = -1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_a_plan_for_every_scenario"
+			swap_ideas = {
+				remove_idea = EST_defensive_planning_1
+				add_idea = EST_defensive_planning_2
+			}
+			add_doctrine_cost_reduction = {
+				name = EST_a_plan_for_every_scenario
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+	focus = {
+		id = EST_army_manuals
+		icon = GFX_focus_chi_army_reform
+		prerequisite = {
+			focus = EST_a_plan_for_every_scenario
+		}
+		relative_position_id = EST_a_plan_for_every_scenario
+		x = -1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_army_manuals"
+			if = {
+				limit = { has_idea = EST_defensive_planning_5 }
+				swap_ideas = {
+					remove_idea = EST_defensive_planning_5
+					add_idea = EST_defensive_planning_6
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = EST_defensive_planning_2
+					add_idea = EST_defensive_planning_3
+				}
+			}
+			army_experience = 25
+		}
+	}
+	focus = {
+		id = EST_improved_communications
+		icon = GFX_focus_generic_radio_equipment
+		prerequisite = {
+			focus = EST_army_manuals
+		}
+		relative_position_id = EST_army_manuals
+		x = 0
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_improved_communications"
+			if = {
+				limit = { has_idea = EST_defensive_planning_6 }
+				swap_ideas = {
+					remove_idea = EST_defensive_planning_6
+					add_idea = EST_defensive_planning_7
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = EST_defensive_planning_3
+					add_idea = EST_defensive_planning_4
+				}
+			}
+			if = {
+				limit = { NOT = { has_tech = radio } }
+				set_technology = { radio = 1 }
+			}
+			else = {
+				add_tech_bonus = {
+					name = EST_industrial_mobilisation
+					bonus = 1
+					uses = 1
+					category = electronics
+				}
+			}
+		}
+	}
+	focus = {
+		id = EST_army_logistics
+		icon = GFX_goal_generic_seize_railway
+		prerequisite = {
+			focus = EST_a_plan_for_every_scenario
+		}
+		relative_position_id = EST_a_plan_for_every_scenario
+		x = 1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_army_logistics"
+			if = {
+				limit = { has_idea = EST_defensive_planning_3 }
+				swap_ideas = {
+					remove_idea = EST_defensive_planning_3
+					add_idea = EST_defensive_planning_6
+				}
+			}
+			else_if = {
+				limit = { has_idea = EST_defensive_planning_4 }
+				swap_ideas = {
+					remove_idea = EST_defensive_planning_4
+					add_idea = EST_defensive_planning_7
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = EST_defensive_planning_2
+					add_idea = EST_defensive_planning_5
+				}
+			}
+		}
+	}
+	focus = {
+		id = EST_expand_the_engineer_corps
+		icon = GFX_goal_generic_construction2
+		prerequisite = {
+			focus = EST_planned_defences
+		}
+		relative_position_id = EST_planned_defences
+		x = 1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_expand_the_engineer_corps"
+			custom_effect_tooltip = expanded_engineer_corps_tech_effect
+			hidden_effect = {
+				set_technology = { expanded_engineer_corps_tech = 1 popup = no }
+			}
+		}
+	}
+	focus = {
+		id = EST_industrial_mobilisation
+		icon = GFX_goal_generic_improve_industry
+		prerequisite = {
+			focus = EST_expand_the_engineer_corps
+			focus = EST_integrate_the_omakaitse
+		}
+		relative_position_id = EST_planned_defences
+		x = 2
+		y = 2
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_industrial_mobilisation"
+			add_ideas = EST_industrial_mobilisation_1
+			add_tech_bonus = {
+				name = EST_industrial_mobilisation
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+		}
+	}
+	focus = {
+		id = EST_new_rifle_designs
+		icon = GFX_goal_military_academy
+		prerequisite = {
+			focus = EST_industrial_mobilisation
+		}
+		relative_position_id = EST_industrial_mobilisation
+		x = -1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_new_rifle_designs"
+			add_tech_bonus = {
+				name = EST_new_rifle_designs
+				bonus = 1
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+	focus = {
+		id = EST_dedicated_support_battalions
+		icon = GFX_goal_generic_support_equipment
+		prerequisite = {
+			focus = EST_new_rifle_designs
+		}
+		relative_position_id = EST_new_rifle_designs
+		x = -1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_dedicated_support_battalions"
+			add_tech_bonus = {
+				name = EST_dedicated_support_battalions
+				bonus = 1
+				uses = 3
+				category = support_tech
+			}
+		}
+	}
+	focus = {
+		id = EST_womens_support_units
+		icon = GFX_focus_generic_female_soldiers
+		prerequisite = {
+			focus = EST_dedicated_support_battalions
+		}
+		relative_position_id = EST_dedicated_support_battalions
+		x = 0
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_womens_support_units"
+			add_ideas = EST_womens_support_units
+		}
+	}
+	focus = {
+		id = EST_standardise_weapon_assembly_lines
+		icon = GFX_goal_POL_Munitions_Districts
+		prerequisite = {
+			focus = EST_industrial_mobilisation
+		}
+		relative_position_id = EST_industrial_mobilisation
+		x = 1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_standardise_weapon_assembly_lines"
+			swap_ideas = {
+				remove_idea = EST_industrial_mobilisation_1
+				add_idea = EST_industrial_mobilisation_2
+			}
+		}
+	}
+	focus = {
+		id = EST_artillery_advancements
+		icon = GFX_goal_GEO_Artillery_Tactics
+		prerequisite = {
+			focus = EST_new_rifle_designs
+			focus = EST_standardise_weapon_assembly_lines
+		}
+		relative_position_id = EST_standardise_weapon_assembly_lines
+		x = -1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_artillery_advancements"
+			add_tech_bonus = {
+				name = EST_artillery_advancements
+				bonus = 1
+				uses = 2
+				category = artillery
+			}
+		}
+	}
+	focus = {
+		id = EST_create_an_estonian_air_force
+		icon = GFX_goal_EST_air_force
+		prerequisite = {
+			focus = EST_standardise_weapon_assembly_lines
+		}
+		relative_position_id = EST_standardise_weapon_assembly_lines
+		x = 0
+		y = 2
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_create_an_estonian_air_force"
+			air_experience = 40
+		}
+	}
+	focus = {
+		id = EST_hire_foreign_instructors
+		icon = GFX_focus_generic_military_academy
+		prerequisite = {
+			focus = EST_create_an_estonian_air_force
+		}
+		relative_position_id = EST_create_an_estonian_air_force
+		x = -1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_hire_foreign_instructors"
+			add_doctrine_cost_reduction = {
+				name = EST_hire_foreign_instructors
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+	}
+	focus = {
+		id = EST_acquire_blueprints
+		icon = GFX_goal_EST_Aviotehas_FF
+		prerequisite = {
+			focus = EST_create_an_estonian_air_force
+		}
+		relative_position_id = EST_create_an_estonian_air_force
+		x = 1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_acquire_blueprints"
+			add_tech_bonus = {
+				name = EST_acquire_blueprints
+				bonus = 1
+				uses = 1
+				category = light_fighter
+			}
+			add_tech_bonus = {
+				name = EST_acquire_blueprints
+				bonus = 1
+				uses = 1
+				category = cas_bomber
+			}
+		}
+	}
+	focus = {
+		id = EST_begin_aircraft_production
+		icon = GFX_goal_EST_Aviotehas_PN3_1
+		prerequisite = {
+			focus = EST_acquire_blueprints
+		}
+		relative_position_id = EST_acquire_blueprints
+		x = 0
+		y = 1
+		cost = 7
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_begin_aircraft_production"
+			random_owned_controlled_state = {
+				prioritize = { 13 }
+				limit = {
+					is_core_of = ROOT
+					is_valid_state_for_development = yes
+					free_building_slots = { building = arms_factory size > 0 include_locked = yes }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = EST_study_tank_designs
+		icon = GFX_goal_generic_heavy_armour_russian
+		prerequisite = {
+			focus = EST_standardise_weapon_assembly_lines
+		}
+		relative_position_id = EST_standardise_weapon_assembly_lines
+		x = 1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_study_tank_designs"
+			add_tech_bonus = {
+				name = EST_acquire_blueprints
+				bonus = 0.75
+				uses = 2
+				category = armor
+			}
+		}
+	}
+	focus = {
+		id = EST_form_the_coast_guard
+		icon = GFX_goal_EST_navy
+		prerequisite = {
+			focus = EST_standardise_weapon_assembly_lines
+		}
+		relative_position_id = EST_standardise_weapon_assembly_lines
+		x = 3
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_form_the_coast_guard"
+			navy_experience = 40
+		}
+	}
+	focus = {
+		id = EST_new_ship_designs
+		icon = GFX_goal_generic_design_equipment_standards
+		prerequisite = {
+			focus = EST_form_the_coast_guard
+		}
+		relative_position_id = EST_form_the_coast_guard
+		x = -1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_new_ship_designs"
+			add_tech_bonus = {
+				name = EST_new_ship_designs
+				bonus = 1
+				uses = 2
+				category = dd_tech
+				category = ss_tech
+			}
+		}
+	}
+	focus = {
+		id = EST_reopen_the_tallinn_shipyards
+		icon = GFX_goal_generic_naval_fleet_in_being
+		prerequisite = {
+			focus = EST_form_the_coast_guard
+		}
+		relative_position_id = EST_form_the_coast_guard
+		x = 1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_reopen_the_tallinn_shipyards"
+			random_owned_controlled_state = {
+				prioritize = { 13 }
+				limit = {
+					is_core_of = ROOT
+					is_valid_state_for_development = yes
+					free_building_slots = { building = dockyard size > 0 include_locked = yes }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = EST_train_our_sailors
+		icon = GFX_goal_navy_hat_ships
+		prerequisite = {
+			focus = EST_new_ship_designs
+		}
+		prerequisite = {
+			focus = EST_reopen_the_tallinn_shipyards
+		}
+		relative_position_id = EST_form_the_coast_guard
+		x = 0
+		y = 2
+		cost = 6
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_train_our_sailors"
+			add_doctrine_cost_reduction = {
+				name = EST_train_our_sailors
+				cost_reduction = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+	}
+	focus = {
+		id = EST_the_forest_brothers_legacy
+		icon = GFX_goal_trees
+		mutually_exclusive = {
+			focus = EST_planned_defences
+		}
+		relative_position_id = EST_planned_defences
+		x = 4
+		y = 0
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_the_forest_brothers_legacy"
+			add_ideas = EST_legacy_of_the_forest_brothers_1
+			army_experience = 25
+		}
+	}
+	focus = {
+		id = EST_integrate_the_omakaitse
+		icon = GFX_goal_EST_defence_league
+		prerequisite = {
+			focus = EST_the_forest_brothers_legacy
+		}
+		relative_position_id = EST_the_forest_brothers_legacy
+		x = 2
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_integrate_the_omakaitse"
+			swap_ideas = {
+				remove_idea = EST_legacy_of_the_forest_brothers_1
+				add_idea = EST_legacy_of_the_forest_brothers_2
+			}
+			custom_effect_tooltip = improved_recon_units_tech_effect
+			hidden_effect = {
+				set_technology = { improved_recon_units_tech = 1 popup = no }
+			}
+		}
+	}
+	focus = {
+		id = EST_citizen_guards
+		icon = GFX_EGY_Palestine_Defence
+		prerequisite = {
+			focus = EST_integrate_the_omakaitse
+		}
+		relative_position_id = EST_integrate_the_omakaitse
+		x = -2
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_citizen_guards"
+			if = { #has tactics
+				limit = { has_idea = EST_legacy_of_the_forest_brothers_4 }
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_4
+					add_idea = EST_legacy_of_the_forest_brothers_6
+				}
+			}
+			else_if = { #has caches
+				limit = { has_idea = EST_legacy_of_the_forest_brothers_5 }
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_5
+					add_idea = EST_legacy_of_the_forest_brothers_7
+				}
+			}
+			else_if = { #has tactics + caches
+				limit = { has_idea = EST_legacy_of_the_forest_brothers_8 }
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_8
+					add_idea = EST_legacy_of_the_forest_brothers_9
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_2
+					add_idea = EST_legacy_of_the_forest_brothers_3
+				}
+			}
+		}
+	}
+	focus = {
+		id = EST_hit_and_run_tactics
+		icon = GFX_focus_prc_infiltration
+		prerequisite = {
+			focus = EST_integrate_the_omakaitse
+		}
+		relative_position_id = EST_integrate_the_omakaitse
+		x = 0
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_hit_and_run_tactics"
+			if = { #has guards
+				limit = { has_idea = EST_legacy_of_the_forest_brothers_3 }
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_3
+					add_idea = EST_legacy_of_the_forest_brothers_6
+				}
+			}
+			else_if = { #has caches
+				limit = { has_idea = EST_legacy_of_the_forest_brothers_5 }
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_5
+					add_idea = EST_legacy_of_the_forest_brothers_8
+				}
+			}
+			else_if = { #has guards + caches
+				limit = { has_idea = EST_legacy_of_the_forest_brothers_7 }
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_7
+					add_idea = EST_legacy_of_the_forest_brothers_9
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_2
+					add_idea = EST_legacy_of_the_forest_brothers_4
+				}
+			}
+			add_doctrine_cost_reduction = {
+				name = EST_a_plan_for_every_scenario
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+	focus = {
+		id = EST_hidden_supply_caches
+		icon = GFX_focus_generic_military_equipment
+		prerequisite = {
+			focus = EST_integrate_the_omakaitse
+		}
+		relative_position_id = EST_integrate_the_omakaitse
+		x = 2
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_hidden_supply_caches"
+			if = { #has guards
+				limit = { has_idea = EST_legacy_of_the_forest_brothers_3 }
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_3
+					add_idea = EST_legacy_of_the_forest_brothers_7
+				}
+			}
+			else_if = { #has tactics
+				limit = { has_idea = EST_legacy_of_the_forest_brothers_4 }
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_4
+					add_idea = EST_legacy_of_the_forest_brothers_8
+				}
+			}
+			else_if = { #has guards + tactics
+				limit = { has_idea = EST_legacy_of_the_forest_brothers_6 }
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_6
+					add_idea = EST_legacy_of_the_forest_brothers_9
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = EST_legacy_of_the_forest_brothers_2
+					add_idea = EST_legacy_of_the_forest_brothers_5
+				}
+			}
+		}
+	}
+	focus = {
+		id = EST_never_surrender
+		icon = GFX_goal_flames_of_rebellion
+		prerequisite = {
+			focus = EST_citizen_guards
+		}
+		prerequisite = {
+			focus = EST_hit_and_run_tactics
+		}
+		prerequisite = {
+			focus = EST_hidden_supply_caches
+		}
+		relative_position_id = EST_hit_and_run_tactics
+		x = 0
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				factor = 4
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				date > 1938.1.1
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus EST_never_surrender"
+			swap_ideas = {
+				remove_idea = EST_legacy_of_the_forest_brothers_9
+				add_idea = EST_legacy_of_the_forest_brothers_10
+			}
+		}
+	}	
+
+	#重置开局国策树
+	focus = {
+		id = EST_Our_Fatherland_Born_Anew
+		icon = GFX_goal_estonia
+		x = 5
+		y = 0
+		cost = 3
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Meie_Maa
+		icon = GFX_goal_EST_Estonian_Eagle_Focus
+		relative_position_id = EST_Our_Fatherland_Born_Anew
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Fatherland_Born_Anew
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Meie_Vabadus
+		icon = GFX_goal_AUS_every_man_freedom
+		relative_position_id = EST_Our_Fatherland_Born_Anew
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Fatherland_Born_Anew
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Meie_Keel
+		icon = GFX_RUS_Orthodox_Legacy
+		relative_position_id = EST_Our_Fatherland_Born_Anew
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Fatherland_Born_Anew
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Form_the_National_Economic_Council
+		icon = GFX_goal_CAL_massive_projects
+		relative_position_id = EST_Our_Fatherland_Born_Anew
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Meie_Maa
+		}
+		prerequisite = {
+			focus = EST_Meie_Vabadus
+		}
+		prerequisite = {
+			focus = EST_Meie_Keel
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Form_the_PolPol
+		icon = GFX_goal_POL_International_Polish_Agents
+		relative_position_id = EST_Our_Fatherland_Born_Anew
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Meie_Maa
+		}
+		prerequisite = {
+			focus = EST_Meie_Vabadus
+		}
+		prerequisite = {
+			focus = EST_Meie_Keel
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Culmination_of_Centuries
+		icon = GFX_goal_AUS_austromarxist_diet
+		relative_position_id = EST_Our_Fatherland_Born_Anew
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Form_the_National_Economic_Council
+		}
+		prerequisite = {
+			focus = EST_Form_the_PolPol
+		}
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	#西尔克
+	focus = {
+		id = EST_Sirk_Gambit #西尔克巩固统治
+		icon = GFX_goal_AUS_Empower_Regional_Worker_Councils
+		x = 5
+		y = 5
+		cost = 3
+		search_filters = {
+		  FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+		  custom_effect_tooltip = unlock_focuses
+		}
+	}
+
+	focus = {
+		id = EST_An_End_To_The_Class_Divide #终结阶级分化
+		icon = GFX_RUS_new_social_class
+		relative_position_id = EST_Sirk_Gambit
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Sirk_Gambit
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Unifying_Language #统一语言
+		icon = GFX_goal_CAN_english_language_act
+		relative_position_id = EST_Sirk_Gambit
+		x = -3
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_An_End_To_The_Class_Divide
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_An_Alliance_With_the_Lutheran_Church #与教会结盟
+		icon = GFX_goal_AUS_Children_Gods
+		relative_position_id = EST_Sirk_Gambit
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_An_End_To_The_Class_Divide
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_An_End_To_Petty_Establishment_Politics #终结虚假的民主
+		icon = GFX_RUS_Principle_Democratic_Centralism
+		relative_position_id = EST_Sirk_Gambit
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Sirk_Gambit
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Instants_of_the_Expropriations #对富人征收重税
+		icon = GFX_goal_BEL_Above_Party_Politics
+		relative_position_id = EST_Sirk_Gambit
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_An_End_To_Petty_Establishment_Politics
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Honour_Our_Veterans #向退伍军人致敬
+		icon = GFX_DKB_Veterans
+		relative_position_id = EST_Sirk_Gambit
+		x = 3
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_An_End_To_Petty_Establishment_Politics
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Organize_Independent_Unions #政府掌控下的工会
+		icon = GFX_RUS_Control_Unions
+		relative_position_id = EST_Sirk_Gambit
+		x = -2
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Unifying_Language
+		}
+		prerequisite = {
+			focus = EST_An_Alliance_With_the_Lutheran_Church
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_End_the_Socialist_Menace #落下铁锤
+		icon = GFX_goal_AUS_herd_menace
+		relative_position_id = EST_Sirk_Gambit
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Instants_of_the_Expropriations
+		}
+		prerequisite = {
+			focus = EST_An_Alliance_With_the_Lutheran_Church
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Just_Wage #完善薪资体系
+		icon = GFX_NEE_raise_minimum_wage
+		relative_position_id = EST_Sirk_Gambit
+		x = 2
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Honour_Our_Veterans
+		}
+		prerequisite = {
+			focus = EST_Instants_of_the_Expropriations
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Forge_A_New_Estonian_Generation #爱沙尼亚新生代
+		icon = GFX_RUS_New_Proletarian_Generation2
+		relative_position_id = EST_Sirk_Gambit
+		x = -1
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Organize_Independent_Unions
+		}
+		prerequisite = {
+			focus = EST_End_the_Socialist_Menace
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_An_Organic_Republic #有机共和国
+		icon = GFX_focus_rus_organic_solidarity
+		relative_position_id = EST_Sirk_Gambit
+		x = 1
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_A_Just_Wage
+		}
+		prerequisite = {
+			focus = EST_End_the_Socialist_Menace
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Estonians_Allied_and_Proud #爱沙尼亚 团结且自豪！
+		icon = GFX_goal_NFL_proud_to_be_an_islander
+		relative_position_id = EST_Sirk_Gambit
+		x = 0
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Forge_A_New_Estonian_Generation
+		}
+		prerequisite = {
+			focus = EST_An_Organic_Republic
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	#军事独裁
+	focus = {
+		id = EST_Laidoners_Coup #莱多内尔政变
+		icon = GFX_goal_SWE_Military_Coup
+		x = 16
+		y = 0
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Purge_the_Omakaitse #清洗家园自卫队
+		icon = GFX_goal_CSA_great_purge
+		relative_position_id = EST_Laidoners_Coup
+		x = -1
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Laidoners_Coup
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Suspend_Political_Organizations #封禁议会
+		icon = GFX_goal_NFA_safe_elections
+		relative_position_id = EST_Laidoners_Coup
+		x = 1
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Laidoners_Coup
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Future_of_the_Junta #军政府的未来
+		icon = GFX_goal_OTT_not_just_junta
+		relative_position_id = EST_Laidoners_Coup
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Purge_the_Omakaitse
+		}
+		prerequisite = {
+			focus = EST_Suspend_Political_Organizations
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Appoint_a_Civilian_Government #任命文官政府
+		icon = GFX_goal_CZE_nationalize_public_institutions
+		relative_position_id = EST_Laidoners_Coup
+		x = 3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Future_of_the_Junta
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Rebirth_the_Land_Reform #重启1919年土地改革
+		icon = GFX_goal_generic_land_reform
+		relative_position_id = EST_Laidoners_Coup
+		x = 1
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Appoint_a_Civilian_Government
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Protectionist_Economy #保护主义经济
+		icon = GFX_goal_NFA_centralised_economy
+		relative_position_id = EST_Laidoners_Coup
+		x = 3
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Appoint_a_Civilian_Government
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Implement_Durkheims_Social_Solidarism #推行社会连带主义
+		icon = GFX_goal_generic_solidarity
+		relative_position_id = EST_Laidoners_Coup
+		x = 5
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Appoint_a_Civilian_Government
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Expand_The_Presidency #扩充总统权力
+		icon = GFX_goal_NIC_Strong_Presidency
+		relative_position_id = EST_Laidoners_Coup
+		x = 2
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Implement_Durkheims_Social_Solidarism
+		}
+		prerequisite = {
+			focus = EST_A_Protectionist_Economy
+		}
+		prerequisite = {
+			focus = EST_Rebirth_the_Land_Reform
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Slight_Liberalization_of_the_Press #有限放宽新闻管制
+		icon = GFX_goal_big_news
+		relative_position_id = EST_Laidoners_Coup
+		x = 4
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Implement_Durkheims_Social_Solidarism
+		}
+		prerequisite = {
+			focus = EST_A_Protectionist_Economy
+		}
+		prerequisite = {
+			focus = EST_Rebirth_the_Land_Reform
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Draft_a_New_Constitution #永久任期
+		icon = GFX_goal_HON_Rewrite_Constitution
+		relative_position_id = EST_Laidoners_Coup
+		x = 3
+		y = 6
+		cost = 3
+		prerequisite = {
+			focus = EST_Slight_Liberalization_of_the_Press
+		}
+		prerequisite = {
+			focus = EST_Expand_The_Presidency
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Secure_Military_Rule #巩固军事统治
+		icon = GFX_goal_NFL_allied_military_asistance
+		relative_position_id = EST_Laidoners_Coup
+		x = -3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Future_of_the_Junta
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Introduce_Conscription #全民征兵制
+		icon = GFX_goal_conscription
+		relative_position_id = EST_Laidoners_Coup
+		x = -5
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Secure_Military_Rule
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}	
+
+	focus = {
+		id = EST_An_Isolationist_Nation #奉行孤立主义
+		icon = GFX_goal_NZL_peacetime_conscription
+		relative_position_id = EST_Laidoners_Coup
+		x = -3
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Secure_Military_Rule
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Military_Training_in_Universities #系统化军事教学
+		icon = GFX_goal_military_research
+		relative_position_id = EST_Laidoners_Coup
+		x = -1
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Secure_Military_Rule
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Orthodox_Corporatist_Model #正统社团主义模式
+		icon = GFX_RUS_Corporatist_Lean
+		relative_position_id = EST_Laidoners_Coup
+		x = -4
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Military_Training_in_Universities
+		}
+		prerequisite = {
+			focus = EST_An_Isolationist_Nation
+		}
+		prerequisite = {
+			focus = EST_Introduce_Conscription
+
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Crack_Down_on_Unions #镇压工会
+		icon = GFX_goal_generic_crush_unions
+		relative_position_id = EST_Laidoners_Coup
+		x = -2
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Military_Training_in_Universities
+		}
+		prerequisite = {
+			focus = EST_An_Isolationist_Nation
+		}
+		prerequisite = {
+			focus = EST_Introduce_Conscription
+
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Put_the_State_Above_Individualism #国家高于个人
+		icon = GFX_goal_AUS_Germanic_Individualism
+		relative_position_id = EST_Laidoners_Coup
+		x = -3
+		y = 6
+		cost = 3
+		prerequisite = {
+			focus = EST_Crack_Down_on_Unions
+		}
+		prerequisite = {
+			focus = EST_The_Orthodox_Corporatist_Model
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Estonia_Safe_Now_and_Forever #爱沙尼亚稳定且安全
+		icon = GFX_goal_NEE_New_England_Sleeps_Safely
+		relative_position_id = EST_Laidoners_Coup
+		x = 0
+		y = 7
+		cost = 3
+		prerequisite = {
+			focus = EST_Put_the_State_Above_Individualism
+			focus = EST_Draft_a_New_Constitution
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	#塔拉教
+	focus = {
+		id = EST_The_Rise_of_the_Hiis_Movement #希斯运动崛起...
+		icon = GFX_GFX_NEE_old_gods
+		x = 26
+		y = 7
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Make_Taarausk_the_National_Religion #塔拉教之复兴
+		icon = GFX_goal_AUS_New_Age_Ariosophic_Artistry
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = -1
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Rise_of_the_Hiis_Movement
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Redefine_the_Concept_of_Independence #重释独立概念
+		icon = GFX_goal_FRA_workingman_associations
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = 1
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Rise_of_the_Hiis_Movement
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Move_Towards_a_Faith_driven_Education #信仰驱动教育
+		icon = GFX_goal_SKM_Wide_Education
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = -2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Redefine_the_Concept_of_Independence
+		}
+		prerequisite = {
+			focus = EST_Make_Taarausk_the_National_Religion
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Protect_not_Exploit_Nature #守护自然而非掠夺
+		icon = GFX_goal_TIB_Spiritual_Healing_Man_Nature
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = -3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Move_Towards_a_Faith_driven_Education
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Incentivize_the_Estonianization_of_Names #鼓励姓名本土化
+		icon = GFX_goal_VIN_national_education_campaign
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Redefine_the_Concept_of_Independence
+		}
+		prerequisite = {
+			focus = EST_Make_Taarausk_the_National_Religion
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Phase_Out_the_Gregorian_Calendar #逐步弃用公历
+		icon = GFX_goal_AUS_Rewrite_Prototype_Constitution
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = -1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Incentivize_the_Estonianization_of_Names
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_End_the_Worries_of_Sin_and_Hell #消解罪与地狱之扰
+		icon = GFX_goal_CRO_hell_on_earth
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = 1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Incentivize_the_Estonianization_of_Names
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Completely_Redistribute_the_Land #强硬土地改革
+		icon = GFX_RUS_Land_Socialization
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = 2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Redefine_the_Concept_of_Independence
+		}
+		prerequisite = {
+			focus = EST_Make_Taarausk_the_National_Religion
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Stop_the_Evils_of_Globalization #遏制全球化之恶
+		icon = GFX_goal_AUS_parolu_esperanton
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = 3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Completely_Redistribute_the_Land
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Plant_the_Oaks_of_Taara #塔林植树运动
+		icon = GFX_NEE_education_administration
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = -2
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Protect_not_Exploit_Nature
+		}
+		prerequisite = {
+			focus = EST_Phase_Out_the_Gregorian_Calendar
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Reverse_the_Northern_Crusades #勿忘北方十字军之辱
+		icon = GFX_goal_AOG_Prepare_Crusade
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = 0
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_End_the_Worries_of_Sin_and_Hell
+		}
+		prerequisite = {
+			focus = EST_Phase_Out_the_Gregorian_Calendar
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Himalayas_of_Europe #欧洲的喜马拉雅
+		icon = GFX_goal_SKM_Pink_Spot_Himalayas
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = 2
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_End_the_Worries_of_Sin_and_Hell
+		}
+		prerequisite = {
+			focus = EST_Stop_the_Evils_of_Globalization
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Religion_in_Tandem_with_Modernity #宗教与现代并行
+		icon = GFX_goal_SKM_Unite_Our_Himalayas
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = -1
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Plant_the_Oaks_of_Taara
+		}
+		prerequisite = {
+			focus = EST_Reverse_the_Northern_Crusades
+		}
+		prerequisite = {
+			focus = EST_The_Himalayas_of_Europe
+		}
+		mutually_exclusive = {
+			focus = EST_Reconcile_Our_Faith_With_the_Ideas_of_Turan
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Reconcile_Our_Faith_With_the_Ideas_of_Turan #图兰理念之调和
+		icon = GFX_TTR_Soviet_Turan
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = 1
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Plant_the_Oaks_of_Taara
+		}
+		prerequisite = {
+			focus = EST_Reverse_the_Northern_Crusades
+		}
+		prerequisite = {
+			focus = EST_The_Himalayas_of_Europe
+		}
+		mutually_exclusive = {
+			focus = EST_A_Religion_in_Tandem_with_Modernity
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_I_Believe_in_Tomorrow #明天会更好
+		icon = GFX_goal_NEE_Spiritual_Awakening
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = 0
+		y = 6
+		cost = 3
+		prerequisite = {
+			focus = EST_A_Religion_in_Tandem_with_Modernity
+			focus = EST_Reconcile_Our_Faith_With_the_Ideas_of_Turan
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Estonia_Sacred_and_Faithful #爱沙尼亚，神圣且虔诚
+		icon = GFX_goal_COL_Every_Life_Sacred
+		relative_position_id = EST_The_Rise_of_the_Hiis_Movement
+		x = 0
+		y = 7
+		cost = 3
+		prerequisite = {
+			focus = EST_I_Believe_in_Tomorrow
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	#选举线
+	focus = {
+		id = EST_Democracy_triumphs #民主得胜
+		icon = GFX_USA_democracy_savior
+		x = -10
+		y = 11
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_KRE_Coalition_Secures_Victory #宗教保守联盟赢得胜利
+		icon = GFX_goal_SRD_enshrine_church_collaboration
+		relative_position_id = EST_Democracy_triumphs
+		x = 9
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Establish_a_Strong_Head_of_State #确立总统权威
+		icon = GFX_goal_NYC_build_internationale_headquarters
+		relative_position_id = EST_The_KRE_Coalition_Secures_Victory
+		x = -1
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_KRE_Coalition_Secures_Victory
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Establish_Charity_Based_Welfare #兴起慈善机构
+		icon = GFX_goal_BAS_Paternal_welfare
+		relative_position_id = EST_The_KRE_Coalition_Secures_Victory
+		x = 1
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_KRE_Coalition_Secures_Victory
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Preserve_the_Flat_Tax #维持单一税制
+		icon = GFX_goal_BBR_welfare_for_all
+		relative_position_id = EST_The_KRE_Coalition_Secures_Victory
+		x = 2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Establish_a_Strong_Head_of_State
+		}
+		prerequisite = {
+			focus = EST_Establish_Charity_Based_Welfare
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Land_Reform_for_All_Groups #土改不分阶级
+		icon = GFX_RUS_Land_Socialization
+		relative_position_id = EST_The_KRE_Coalition_Secures_Victory
+		x = 1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Preserve_the_Flat_Tax
+		}
+		prerequisite = {
+			focus = EST_Spearhead_a_Christian_Public_Schooling_System
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Initiate_Cultural_Councils #设立文化委员会
+		icon = GFX_goal_NZL_modify_council_housing
+		relative_position_id = EST_The_KRE_Coalition_Secures_Victory
+		x = -1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Give_More_Autonomy_to_the_Parishes
+		}
+		prerequisite = {
+			focus = EST_Spearhead_a_Christian_Public_Schooling_System
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Spearhead_a_Christian_Public_Schooling_System #宗教深入教育
+		icon = GFX_goal_TEX_American_Family
+		relative_position_id = EST_The_KRE_Coalition_Secures_Victory
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Establish_a_Strong_Head_of_State
+		}
+		prerequisite = {
+			focus = EST_Establish_Charity_Based_Welfare
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Give_More_Autonomy_to_the_Parishes #赋予教区更多自治权
+		icon = GFX_goal_CZE_autonomy_bills
+		relative_position_id = EST_The_KRE_Coalition_Secures_Victory
+		x = -2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Establish_a_Strong_Head_of_State
+		}
+		prerequisite = {
+			focus = EST_Establish_Charity_Based_Welfare
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Tie_the_Knot_Between_Church_and_State #政教密不可分
+		icon = GFX_goal_KIV_church_support
+		relative_position_id = EST_The_KRE_Coalition_Secures_Victory
+		x = 0
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Initiate_Cultural_Councils
+		}
+		prerequisite = {
+			focus = EST_A_Land_Reform_for_All_Groups
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Estonia_Pious_and_Welcoming #爱沙尼亚，虔诚且包容
+		icon = GFX_goal_POL_Gaude_Mater_Dei_Polonia
+		relative_position_id = EST_The_KRE_Coalition_Secures_Victory
+		x = 0
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Tie_the_Knot_Between_Church_and_State
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism #人民党获胜
+		icon = GFX_goal_HON_Socialist_Reforms
+		relative_position_id = EST_Democracy_triumphs
+		x = 16
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Prosperous_Economy_through_Social_Capitalism #借社会资本主义实现经济繁荣
+		icon = GFX_goal_ALB_Flowers_Socialism
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Enshrine_Cultural_Conservatism_for_the_Masses #确立文化保守主义
+		icon = GFX_goal_CAN_right_welfare_state
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Peoples_Duty_of_Moral_Nationalism #道德民族主义义务
+		icon = GFX_goal_BEL_Humanized_Catholic_Social_Teachings
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Enshrine_Cultural_Conservatism_for_the_Masses
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Revive_the_ENKS #复兴 ENKS
+		icon = GFX_goal_COR_The_Lessons_of_History
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = 1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Peoples_Duty_of_Moral_Nationalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Establish_a_Clear_Separation_between_Church_and_State #明确政教分离
+		icon = GFX_CAL_profits_of_the_church
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = 3
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Enshrine_Cultural_Conservatism_for_the_Masses
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Path_Towards_Full_Emancipation #迈向全面解放之路
+		icon = GFX_goal_MEX_Mexican_Democratic_Socialism
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = 3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Establish_a_Clear_Separation_between_Church_and_State
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Emphasize_a_Strong_and_Democratic_Legislature #司法独立的重要性
+		icon = GFX_goal_PRU_legislative_palace
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = 2
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Path_Towards_Full_Emancipation
+		}
+		prerequisite = {
+			focus = EST_Revive_the_ENKS
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+
+	focus = {
+		id = EST_Dont_Overburden_the_People_With_Taxe #实施减税政策
+		icon = GFX_RUS_Tax_Reform
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = -3
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_A_Prosperous_Economy_through_Social_Capitalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Find_Compromise_with_the_Trade_Unionists #与工会达成妥协
+		icon = GFX_goal_generic_union_agreement
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = -3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Dont_Overburden_the_People_With_Taxe
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Land_Reform_Taken_With_Caution #审慎推进土地改革
+		icon = GFX_RUS_Land_Socialization_Question
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_A_Prosperous_Economy_through_Social_Capitalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Bridge_the_Gap_between_North_and_South_Estonia #弥合爱沙尼亚南北差距
+		icon = GFX_goal_AST_expand_agricultural_subsidies
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = -1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_A_Land_Reform_Taken_With_Caution
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Keep_the_Free_Market_Competitive #维持自由市场竞争力
+		icon = GFX_goal_AST_new_markets
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = -2
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Bridge_the_Gap_between_North_and_South_Estonia
+		}
+		prerequisite = {
+			focus = EST_Find_Compromise_with_the_Trade_Unionists
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Estonia_Free_and_United #爱沙尼亚，自由且统一！
+		icon = GFX_goal_NYC_Syndicalism_Without_Radicalism
+		relative_position_id = EST_The_ERE_Secure_Their_Mandate_of_Proper_Liberalism
+		x = 0
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Emphasize_a_Strong_and_Democratic_Legislature
+		}
+		prerequisite = {
+			focus = EST_Keep_the_Free_Market_Competitive
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_AVR_Marches_on_Towards_the_Agrarian_Paradise #迈向农业天堂
+		icon = GFX_goal_HON_Agrarian
+		relative_position_id = EST_Democracy_triumphs
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Seize_the_Occupiers_Lands_Without_Compensation #没收占领者土地
+		icon = GFX_RUS_National_Agrarian_Fund_kdp
+		relative_position_id = EST_The_AVR_Marches_on_Towards_the_Agrarian_Paradise
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_AVR_Marches_on_Towards_the_Agrarian_Paradise
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Two_Different_Visions_for_Peasants_Diverge #农民的两种愿景
+		icon = GFX_goal_AUS_christ_agrarian
+		relative_position_id = EST_Democracy_triumphs
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Seize_the_Occupiers_Lands_Without_Compensation
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Kosters_Liberals_Stand_For_the_Small_Man #克斯特为小人物发声
+		icon = GFX_goal_NEE_Tame_American_Agrarian_Arcadia
+		relative_position_id = EST_Two_Different_Visions_for_Peasants_Diverge
+		x = -4
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Two_Different_Visions_for_Peasants_Diverge
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Party_of_Balance_and_Compromise #平衡与妥协
+		icon = GFX_HUN_art_of_compromise
+		relative_position_id = EST_Kosters_Liberals_Stand_For_the_Small_Man
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Kosters_Liberals_Stand_For_the_Small_Man
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Open_Up_Estonian_Agriculture_to_the_World #推动农业国际化
+		icon = GFX_goal_generic_agriculture2
+		relative_position_id = EST_Kosters_Liberals_Stand_For_the_Small_Man
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Kosters_Liberals_Stand_For_the_Small_Man
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Implement_Strong_Anti_Monopoly_Legislation #实施严格反垄断
+		icon = GFX_goal_PRU_legislative_palace
+		relative_position_id = EST_Kosters_Liberals_Stand_For_the_Small_Man
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Kosters_Liberals_Stand_For_the_Small_Man
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Initiate_Rapid_Modernization_of_Farming_Equipment #农耕设备现代化
+		icon = GFX_goal_SPR_mass_production_of_farming_equipment
+		relative_position_id = EST_Kosters_Liberals_Stand_For_the_Small_Man
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Implement_Strong_Anti_Monopoly_Legislation
+		}
+		prerequisite = {
+			focus = EST_Open_Up_Estonian_Agriculture_to_the_World
+		}
+		prerequisite = {
+			focus = EST_A_Party_of_Balance_and_Compromise
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Create_Agricultural_Co_Operatives #组建农业合作社
+		icon = GFX_RUS_Rationalize_Laws
+		relative_position_id = EST_Kosters_Liberals_Stand_For_the_Small_Man
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Implement_Strong_Anti_Monopoly_Legislation
+		}
+		prerequisite = {
+			focus = EST_Open_Up_Estonian_Agriculture_to_the_World
+		}
+		prerequisite = {
+			focus = EST_A_Party_of_Balance_and_Compromise
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Finalize_the_Second_Land_Reform #完成土地改革
+		icon = GFX_goal_SPR_agrarian_reform
+		relative_position_id = EST_Kosters_Liberals_Stand_For_the_Small_Man
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Initiate_Rapid_Modernization_of_Farming_Equipment
+		}
+		prerequisite = {
+			focus = EST_Create_Agricultural_Co_Operatives
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia #佩茨迈向农业乌托邦
+		icon = GFX_goal_MEX_Create_National_Agrarian_Union
+		relative_position_id = EST_Two_Different_Visions_for_Peasants_Diverge
+		x = 4
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Two_Different_Visions_for_Peasants_Diverge
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Oppose_Any_Further_Land_Reforms #反对土地改革
+		icon = GFX_RUS_Land_Socialization_Blocked
+		relative_position_id = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Form_a_Pact_with_the_Urban_Elite #与精英结盟
+		icon = GFX_goal_ATH_integrate_old_elite
+		relative_position_id = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Conservative_Social_Vision #保守社会愿景
+		icon = GFX_goal_NZL_conservative_outreach
+		relative_position_id = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Nationalize_the_Road_Systems #公路系统国有化
+		icon = GFX_RUS_Nationalize_Vital_Sectors
+		relative_position_id = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Oppose_Any_Further_Land_Reforms
+		}
+		prerequisite = {
+			focus = EST_Form_a_Pact_with_the_Urban_Elite
+		}
+		prerequisite = {
+			focus = EST_A_Conservative_Social_Vision
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Perpetuate_Civic_Nationalism #推行平衡税收政策
+		icon = GFX_goal_TEX_the_american_progress
+		relative_position_id = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Oppose_Any_Further_Land_Reforms
+		}
+		prerequisite = {
+			focus = EST_Form_a_Pact_with_the_Urban_Elite
+		}
+		prerequisite = {
+			focus = EST_A_Conservative_Social_Vision
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Work_Towards_a_Self_Sufficient_Agrarian_Economy #自给自足的农业经济
+		icon = GFX_goal_AUS_christ_agrarian
+		relative_position_id = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Nationalize_the_Road_Systems
+		}
+		prerequisite = {
+			focus = EST_Perpetuate_Civic_Nationalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Create_Rural_Councils #组建乡村委员会
+		icon = GFX_RUS_National_Agrarian_Fund_kdp
+		relative_position_id = EST_Two_Different_Visions_for_Peasants_Diverge
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Kosters_Liberals_Stand_For_the_Small_Man
+			focus = EST_Pats_Conservatives_Work_towards_an_Agrarian_Utopia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Provide_State_Credit_to_Struggling_Farmers #向困境农民提供国家信贷
+		icon = GFX_goal_CZE_rural_education
+		relative_position_id = EST_Two_Different_Visions_for_Peasants_Diverge
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Create_Rural_Councils
+		}	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Engrave_the_Right_to_Private_Property #确立私有财产权
+		icon = GFX_RUS_Encourage_Private_Property
+		relative_position_id = EST_Two_Different_Visions_for_Peasants_Diverge
+		x = 0
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Provide_State_Credit_to_Struggling_Farmers
+		}	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Estonia_Prosperous_and_Bountiful #爱沙尼亚，繁荣且富饶！
+		icon = GFX_goal_AST_united_white_free_prosperous
+		relative_position_id = EST_Two_Different_Visions_for_Peasants_Diverge
+		x = 0
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Provide_State_Credit_to_Struggling_Farmers
+		}	
+		prerequisite = {
+			focus = EST_Work_Towards_a_Self_Sufficient_Agrarian_Economy
+			focus = EST_Finalize_the_Second_Land_Reform
+		}	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People #社会民主党得胜
+		icon = GFX_goal_MEX_Pink_Roses
+		relative_position_id = EST_Democracy_triumphs
+		x = -19
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Resolve_the_Party_Split_Once_and_For_All #解决党内分裂
+		icon = GFX_goal_MAF_RFG_Divide
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Andresens_Socialists_Work_Towards_Real_Change #安德烈森推动社会变革
+		icon = GFX_goal_CZE_radical_changes
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = -3
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Resolve_the_Party_Split_Once_and_For_All
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_No_More_Estates_No_More_Manors #终结庄园制度
+		icon = GFX_goal_COR_american_estates
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = -3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Andresens_Socialists_Work_Towards_Real_Change
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Give_our_Minorities_Full_Cultural_Autonomy #少数群体文化自治权
+		icon = GFX_goal_AST_federated_union_autonomy
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = -3
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_No_More_Estates_No_More_Manors
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Merge_the_PolPol_with_the_ESTP_Guard #整合卫队
+		icon = GFX_goal_POL_International_Polish_Agents
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = -3
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Give_our_Minorities_Full_Cultural_Autonomy
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Dream_of_a_Planned_Economy #计划经济之梦
+		icon = GFX_RUS_Striking_Industrialization
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = -3
+		y = 6
+		cost = 3
+		prerequisite = {
+			focus = EST_Merge_the_PolPol_with_the_ESTP_Guard
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Reis_Orthodox_Social_Democrats_Keep_the_Ship_Steady #赖伊的正统社会民主维持稳定
+		icon = GFX_goal_SKM_Peaceful_Pink_Transition
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 3
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Resolve_the_Party_Split_Once_and_For_All
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_True_Social_Justice_for_the_Landless #为无地者争取尊严
+		icon = GFX_goal_HON_Social_Security_Institute
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Reis_Orthodox_Social_Democrats_Keep_the_Ship_Steady
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Urban_Revitalization_through_Subsidized_Industrialization #重振城市工业化
+		icon = GFX_RUS_Begin_Industrialization
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 3
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_True_Social_Justice_for_the_Landless
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Find_a_Compromise_between_Civic_and_Ethnic_Nationalism #在公民与族群寻求妥协
+		icon = GFX_HUN_art_of_compromise
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 3
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Urban_Revitalization_through_Subsidized_Industrialization
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Basic_Health_Insurance_Program_for_Everyone #全民医疗保险计划
+		icon = GFX_goal_COS_Expand_Health_Programs
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 3
+		y = 6
+		cost = 3
+		prerequisite = {
+			focus = EST_Find_a_Compromise_between_Civic_and_Ethnic_Nationalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Overhaul_the_Labour_Codes_Entirely #全面修订劳动法
+		icon = GFX_goal_generic_labour_legislation
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = -1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Andresens_Socialists_Work_Towards_Real_Change
+			focus = EST_Reis_Orthodox_Social_Democrats_Keep_the_Ship_Steady
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Promote_and_Protect_Trade_Unions #扶持工会
+		icon = GFX_RUS_Let_The_Trade_Unions_Decide
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = -1
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Overhaul_the_Labour_Codes_Entirely
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Universal_General_Education_for_the_Masses #全民基础教育
+		icon = GFX_ITA_education
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = -1
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Promote_and_Protect_Trade_Unions
+		} 
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Destroy_the_Influence_of_the_Church_in_Politics #摧毁教会影响力
+		icon = GFX_goal_MEX_destroy_catholic
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Andresens_Socialists_Work_Towards_Real_Change
+			focus = EST_Reis_Orthodox_Social_Democrats_Keep_the_Ship_Steady
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Implement_Democracy_from_the_Roof_to_the_Foundation #自顶向下贯彻民主
+		icon = GFX_goal_AST_the_defenders_of_a_new_socialist_democracy
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 1
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Destroy_the_Influence_of_the_Church_in_Politics
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Enshrine_Universal_Empowerment_and_Enfranchisement #确立全民参政权
+		icon = GFX_goal_NFL_the_unbroken_promise_of_democracy
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 1
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Implement_Democracy_from_the_Roof_to_the_Foundation
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Implement_a_Truly_Progressive_Wealth_Tax #推行累进财富税
+		icon = GFX_goal_NZL_war_taxes
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 0
+		y = 6
+		cost = 3
+		prerequisite = {
+			focus = EST_Enshrine_Universal_Empowerment_and_Enfranchisement
+		}
+		prerequisite = {
+			focus = EST_Universal_General_Education_for_the_Masses
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Estonia_Fair_and_Just #爱沙尼亚，公平且正义！
+		icon = GFX_goal_generic_socialist_democracy
+		relative_position_id = EST_The_Social_Democrats_Win_Over_the_Ordinary_People
+		x = 0
+		y = 7
+		cost = 3
+		prerequisite = {
+			focus = EST_Implement_a_Truly_Progressive_Wealth_Tax
+		}
+		prerequisite = {
+			focus = EST_The_Dream_of_a_Planned_Economy
+			focus = EST_A_Basic_Health_Insurance_Program_for_Everyone
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate #劳工党胜利
+		icon = GFX_goal_NYC_Democratic_Socialism
+		relative_position_id = EST_Democracy_triumphs
+		x = -11
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Lay_Out_the_Plan_towards_a_Radical_Estonia #勾勒宏伟蓝图
+		icon = GFX_goal_MEX_sane_plan
+		relative_position_id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Put_an_End_to_the_Centuries_Long_Injustice #终结不平等
+		icon = GFX_goal_FNG_End_Republican_Warlords
+		relative_position_id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		x = -2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Lay_Out_the_Plan_towards_a_Radical_Estonia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Introduce_the_Eight_Hour_Workday #推行八小时工作制
+		icon = GFX_goal_NFA_40_week
+		relative_position_id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		x = -3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Put_an_End_to_the_Centuries_Long_Injustice
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Nationalist_Answer_to_the_Question_of_Minorities #以民族主义回应少数群体问题
+		icon = GFX_TRM_Minorities_Government
+		relative_position_id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		x = -1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Put_an_End_to_the_Centuries_Long_Injustice
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Full_Power_to_the_Peoples_Parliament #人民议会全面掌权
+		icon = GFX_goal_NFA_empower_parliament
+		relative_position_id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		x = -2
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_A_Nationalist_Answer_to_the_Question_of_Minorities
+		}
+		prerequisite = {
+			focus = EST_Introduce_the_Eight_Hour_Workday
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_An_Evolutionary_Approach_to_Socialism #渐进社会主义之路
+		icon = GFX_goal_NEE_Maintain_Eco_Socialism
+		relative_position_id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		x = 2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Lay_Out_the_Plan_towards_a_Radical_Estonia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Create_a_Self_Sufficient_Agrarian_Powerhouse #打造自给自足的农业
+		icon = GFX_goal_MEX_Agrarian_Foundation
+		relative_position_id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		x = 1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_An_Evolutionary_Approach_to_Socialism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Introduce_a_Complete_Monetary_Reform #推行全面货币改革
+		icon = GFX_goal_aog_money
+		relative_position_id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		x = 3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_An_Evolutionary_Approach_to_Socialism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Cherish_a_Free_Secular_and_National_Public_Education #世俗化教育
+		icon = GFX_goal_CRO_education_number_one
+		relative_position_id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		x = 2
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Introduce_a_Complete_Monetary_Reform
+		}
+		prerequisite = {
+			focus = EST_Create_a_Self_Sufficient_Agrarian_Powerhouse
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Estonia_Radical_and_Stable #爱沙尼亚 激进且稳定
+		icon = GFX_goal_MEX_Shining_Stable_Red
+		relative_position_id = EST_The_Labour_Party_Seizes_the_Peoples_Mandate
+		x = 0
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Full_Power_to_the_Peoples_Parliament
+		}
+		prerequisite = {
+			focus = EST_Cherish_a_Free_Secular_and_National_Public_Education
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	#革命
+	focus = {
+		id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality #实现真正社会平等
+		icon = GFX_goal_FRA_Revolutionary_Leadership
+		x = 36
+		y = 8
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Paint_the_PolPol_a_Shade_of_Red #将 PolPol 染成红色
+		icon = GFX_goal_CSA_revolutionary_army
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = -1
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Our_Vision_Alone_and_Unleashed #独树一帜，彻底践行我们的愿景
+		icon = GFX_goal_FRA_empire_of_french_worker
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 1
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_First_Step_Towards_a_Dictatorship_of_the_Proletariat #迈向无产阶级专政的第一步
+		icon = GFX_goal_FRA_classical_heroic_socialism
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Vision_Alone_and_Unleashed
+		}
+		prerequisite = {
+			focus = EST_Paint_the_PolPol_a_Shade_of_Red
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Our_Vision_Alone_and_Untarnished #纯粹无瑕的愿景
+		icon = GFX_goal_FRA_syndicalistmilitarism
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = -3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_The_First_Step_Towards_a_Dictatorship_of_the_Proletariat
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Broad_Socialist_Unity_Through_Gritted_Compromise #借妥协达成广泛社会主义团结
+		icon = GFX_goal_FRA_Coop_Dominance
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_The_First_Step_Towards_a_Dictatorship_of_the_Proletariat
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Obligatory_Qualification_of_State_Enterprises #国有企业强制资质审查
+		icon = GFX_goal_FRA_Syndie_Propaganda_Center
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = -5
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Vision_Alone_and_Untarnished
+			focus = EST_A_Broad_Socialist_Unity_Through_Gritted_Compromise
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Total_Land_Reform_to_End_This_Long_Injustice #彻底土地改革，终结长期不公
+		icon = GFX_goal_OTT_Land_Reform
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = -3
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Vision_Alone_and_Untarnished
+			focus = EST_A_Broad_Socialist_Unity_Through_Gritted_Compromise
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Voice_of_the_Vanguard_Transform_Into_a_Broad_Party #先锋之声：转型为广泛政党
+		icon = GFX_goal_CSA_popular_front
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = -1
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Vision_Alone_and_Untarnished
+			focus = EST_A_Broad_Socialist_Unity_Through_Gritted_Compromise
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_New_Estonian_Intelligentsia_Patriotic_and_Socialistic #崭新的爱沙尼亚知识阶层
+		icon = GFX_RUS_New_Party_Schools
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 1
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Vision_Alone_and_Untarnished
+			focus = EST_A_Broad_Socialist_Unity_Through_Gritted_Compromise
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Estonian_Unity_Through_Left_Nationalism #借左翼民族主义实现爱沙尼亚统一
+		icon = GFX_goal_SRI_Revolutionary_Commissars
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 3
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Vision_Alone_and_Untarnished
+			focus = EST_A_Broad_Socialist_Unity_Through_Gritted_Compromise
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Put_An_End_to_Baltic_Radical_Church_Fanaticism #终结波罗的海激进教会狂热
+		icon = GFX_CAL_profits_of_the_church
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 5
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Vision_Alone_and_Untarnished
+			focus = EST_A_Broad_Socialist_Unity_Through_Gritted_Compromise
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Reform_the_NEC_For_the_Voices_of_the_Proletariat #为无产阶级发声，改革 NEC
+		icon = GFX_goal_CSA_dictatorship_of_proletariat
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = -4
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Obligatory_Qualification_of_State_Enterprises
+		}
+		prerequisite = {
+			focus = EST_A_Total_Land_Reform_to_End_This_Long_Injustice
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Develop_Workers_and_Peasants_Cooperatives #发展工农合作社
+		icon = GFX_RUS_Support_Peasant_Cooperatives
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = -2
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Voice_of_the_Vanguard_Transform_Into_a_Broad_Party
+		}
+		prerequisite = {
+			focus = EST_A_Total_Land_Reform_to_End_This_Long_Injustice
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Make_Overtures_to_Andresen_and_His_Allies #向安德烈森及其盟友示好
+		icon = GFX_goal_FRA_communal_statistical_commission
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 0
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Voice_of_the_Vanguard_Transform_Into_a_Broad_Party
+		}
+		prerequisite = {
+			focus = EST_A_New_Estonian_Intelligentsia_Patriotic_and_Socialistic
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Revive_Gustav_Sules_Non_Exit_Movement #复兴古斯塔夫・苏勒的 "不退出" 运动
+		icon = GFX_RUS_Revive_National_Identity
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 2
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Estonian_Unity_Through_Left_Nationalism
+		}
+		prerequisite = {
+			focus = EST_A_New_Estonian_Intelligentsia_Patriotic_and_Socialistic
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Burn_the_German_Occupation_Era_Puppet_Masters #焚毁德国占领时期的傀儡余孽
+		icon = GFX_goal_WHR_Assert_Independence_Germany
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 4
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_Put_An_End_to_Baltic_Radical_Church_Fanaticism
+		}
+		prerequisite = {
+			focus = EST_Estonian_Unity_Through_Left_Nationalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Socialist_Pearl_of_the_Baltic #波罗的海的社会主义明珠
+		icon = GFX_goal_NYC_Pristine_NYC
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 0
+		y = 6
+		cost = 3
+		prerequisite = {
+			focus = EST_Reform_the_NEC_For_the_Voices_of_the_Proletariat
+		}
+		prerequisite = {
+			focus = EST_Develop_Workers_and_Peasants_Cooperatives
+		}
+		prerequisite = {
+			focus = EST_Make_Overtures_to_Andresen_and_His_Allies
+		}
+		prerequisite = {
+			focus = EST_Revive_Gustav_Sules_Non_Exit_Movement
+		}
+		prerequisite = {
+			focus = EST_Burn_the_German_Occupation_Era_Puppet_Masters
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Crimson_Estonia_Sovereign_and_Free #赤色爱沙尼亚，主权独立且自由！
+		icon = GFX_goal_NYC_Ally_Syndies
+		relative_position_id = EST_The_Revolutionary_Nucleate_Mandate_For_True_Social_Equality
+		x = 0
+		y = 7
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Socialist_Pearl_of_the_Baltic
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	#布尔什维克线路
+	focus = {
+		id = EST_Riismanns_Bolsheviks_Cement_their_Power #里斯曼的布尔什维克巩固权力！
+		icon = GFX_UKR_Soviet_Power
+		x = 36
+		y = 0
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Turn_the_Bourgeois_Mockery_of_Justice_against_their_Creators #以资产阶级的 "正义" 反制其自身
+		icon = GFX_goal_CSA_liquidate_bourgeoisie
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = -3
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Riismanns_Bolsheviks_Cement_their_Power
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Initiate_a_Three_Year_Plan_for_Mass_Scale_Industrialization #启动三年大规模工业化计划
+		icon = GFX_goal_NOR_Three_Year_Plan
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = -4
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Turn_the_Bourgeois_Mockery_of_Justice_against_their_Creators
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Sovnoos_System_for_True_Peasant_Equality #苏维诺奥斯 体系实现真正农民平等
+		icon = GFX_RUS_Involve_Peasants_Into_Socialism
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = -2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Turn_the_Bourgeois_Mockery_of_Justice_against_their_Creators
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Develop_a_Centralized_Approach_to_Governance #构建中央集权治理模式
+		icon = GFX_SOV_cult_of_reason
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = -3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_A_Sovnoos_System_for_True_Peasant_Equality
+		}
+		prerequisite = {
+			focus = EST_Initiate_a_Three_Year_Plan_for_Mass_Scale_Industrialization
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Overhaul_the_Banking_System_Entirely #全面 overhaul 银行体系
+		icon = GFX_goal_FRA_peoples_banking
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = -3
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Develop_a_Centralized_Approach_to_Governance
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Entrine_the_Concept_of_the_Vanguard_Party #确立先锋政党理念
+		icon = GFX_RUS_Vanguard_Countryside
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Riismanns_Bolsheviks_Cement_their_Power
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Replace_the_NEC_with_a_System_of_Workers_Councils #以工人委员会体系取代 NEC
+		icon = GFX_YAK_Councils
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Entrine_the_Concept_of_the_Vanguard_Party
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Bring_the_Keskliit_under_Our_Benevolent_Palm #将 Keskliit 纳入我们的善意掌控
+		icon = GFX_RUS_Empower_Urban_Soviets
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Replace_the_NEC_with_a_System_of_Workers_Councils
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Beacon_of_Soviet_Democracy #苏维埃民主的灯塔
+		icon = GFX_goal_POL_Beacon_Polish_Spirit
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 0
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Bring_the_Keskliit_under_Our_Benevolent_Palm
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Redevelop_and_Redefine_the_National_Awakening #重塑并重新定义民族觉醒
+		icon = GFX_SOV_enthusiasts
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 3
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Riismanns_Bolsheviks_Cement_their_Power
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Publish_the_Rahva_Haael_to_the_Masses #向民众发行《人民之声》
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Redevelop_and_Redefine_the_National_Awakening
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Counter_the_Feudalist_Opium_Known_as_Religion #反击名为宗教的封建鸦片
+		icon = GFX_goal_WHR_Immolate_Monetary_System
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 4
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Redevelop_and_Redefine_the_National_Awakening
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Purge_the_Minds_of_the_New_Socialist_Generation #净化新社会主义世代的思想
+		icon = GFX_goal_SOV_humanity
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Publish_the_Rahva_Haael_to_the_Masses
+		}
+		prerequisite = {
+			focus = EST_Counter_the_Feudalist_Opium_Known_as_Religion
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Soviet_Patriotic_Identity_Embodied #苏维埃爱国身份的具象化
+		icon = GFX_SOV_paradise
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 3
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Purge_the_Minds_of_the_New_Socialist_Generation
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Avenge_Lenins_Dream #践行列宁的理想！
+		icon = GFX_SOV_true_lenin
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = -2
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Beacon_of_Soviet_Democracy
+		}
+		prerequisite = {
+			focus = EST_Overhaul_the_Banking_System_Entirely
+		}
+		prerequisite = {
+			focus = EST_The_Soviet_Patriotic_Identity_Embodied
+		}
+		mutually_exclusive = {
+			focus = EST_March_as_Equal_Partners_with_our_Eastern_Brethren
+		}
+		mutually_exclusive = {
+			focus = EST_Two_Nations_Interlinked_through_One_Destiny
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_March_as_Equal_Partners_with_our_Eastern_Brethren #与东方兄弟并肩同行
+		icon = GFX_SOV_form_politburo
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 0
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Beacon_of_Soviet_Democracy
+		}
+		prerequisite = {
+			focus = EST_Overhaul_the_Banking_System_Entirely
+		}
+		prerequisite = {
+			focus = EST_The_Soviet_Patriotic_Identity_Embodied
+		}
+		mutually_exclusive = {
+			focus = EST_Avenge_Lenins_Dream
+		}
+		mutually_exclusive = {
+			focus = EST_Two_Nations_Interlinked_through_One_Destiny
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Two_Nations_Interlinked_through_One_Destiny #两族命运相连
+		icon = GFX_SOV_cit
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 2
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Beacon_of_Soviet_Democracy
+		}
+		prerequisite = {
+			focus = EST_Overhaul_the_Banking_System_Entirely
+		}
+		prerequisite = {
+			focus = EST_The_Soviet_Patriotic_Identity_Embodied
+		}
+		mutually_exclusive = {
+			focus = EST_Avenge_Lenins_Dream
+		}
+		mutually_exclusive = {
+			focus = EST_March_as_Equal_Partners_with_our_Eastern_Brethren
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Soviet_Estonia_Socialist_and_Equal #苏维埃爱沙尼亚，社会主义且平等！
+		icon = GFX_SOV_break_smychka
+		relative_position_id = EST_Riismanns_Bolsheviks_Cement_their_Power
+		x = 0
+		y = 6
+		cost = 3
+		prerequisite = {
+			focus = EST_Avenge_Lenins_Dream
+			focus = EST_March_as_Equal_Partners_with_our_Eastern_Brethren
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists #汉森的工团主义者智取共产主义者！
+		icon = GFX_goal_SRD_crack_down_neo_syndicalists
+		x = 16
+		y = 9
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Spread_the_Idea_of_Trade_Unionism_to_the_Rest_of_Estonia #向爱沙尼亚全境传播工会主义理念
+		icon = GFX_goal_NYC_Understand_Syndicalism
+		relative_position_id = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Incentivize_the_Collectivization_of_Land_to_Cooperatives #鼓励土地向合作社集体化
+		icon = GFX_goal_AUS_Reform_Imperial_Lander
+		relative_position_id = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Destroy_the_Old_Order_of_Nobles_and_Landlords #摧毁贵族与地主的旧秩序
+		icon = GFX_goal_FRA_red_terror
+		relative_position_id = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Implement_a_Workers_Democracy_at_all_Levels_of_Society #在社会各层面推行工人民主
+		icon = GFX_RUS_Syndical_Cooperative_Federation
+		relative_position_id = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Destroy_the_Old_Order_of_Nobles_and_Landlords
+		}
+		prerequisite = {
+			focus = EST_Incentivize_the_Collectivization_of_Land_to_Cooperatives
+		}
+		prerequisite = {
+			focus = EST_Spread_the_Idea_of_Trade_Unionism_to_the_Rest_of_Estonia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Extend_our_Hand_to_Minority_Groups #向少数群体伸出援手
+		icon = GFX_goal_HON_Help_Others
+		relative_position_id = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Destroy_the_Old_Order_of_Nobles_and_Landlords
+		}
+		prerequisite = {
+			focus = EST_Incentivize_the_Collectivization_of_Land_to_Cooperatives
+		}
+		prerequisite = {
+			focus = EST_Spread_the_Idea_of_Trade_Unionism_to_the_Rest_of_Estonia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Draft_Our_Approach_to_Mend_the_Rural_Urban_Divide #规划方案修复城乡裂痕
+		icon = GFX_goal_AST_break_urban_rural_divide
+		relative_position_id = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Implement_a_Workers_Democracy_at_all_Levels_of_Society
+		}
+		prerequisite = {
+			focus = EST_Extend_our_Hand_to_Minority_Groups
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Poogelmann_Implements_a_Truly_Estonian_Syndicalism #波格尔曼推行爱沙尼亚特色工团主义
+		icon = GFX_goal_FRA_agro_industrial_federation
+		relative_position_id = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		x = -3
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Draft_Our_Approach_to_Mend_the_Rural_Urban_Divide
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Finance_a_New_Estonian_Artistic_Movement #资助新爱沙尼亚艺术运动
+		icon = GFX_goal_art_avantgarde
+		relative_position_id = EST_Poogelmann_Implements_a_Truly_Estonian_Syndicalism
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Poogelmann_Implements_a_Truly_Estonian_Syndicalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Devolve_Economic_Affairs_to_the_Regions #将经济事务下放到地方
+		icon = GFX_goal_CAN_anti_syndicalism_decree
+		relative_position_id = EST_Poogelmann_Implements_a_Truly_Estonian_Syndicalism
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Poogelmann_Implements_a_Truly_Estonian_Syndicalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Baalic_Iron_a_Cornerstone_of_Peasant_Syndicalism #农民工团主义的基石
+		icon = GFX_SOV_farm
+		relative_position_id = EST_Poogelmann_Implements_a_Truly_Estonian_Syndicalism
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Poogelmann_Implements_a_Truly_Estonian_Syndicalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Fight_Against_the_Great_Moral_Evil_of_Alcoholism #打击酗酒这一重大道德恶行
+		icon = GFX_goal_NEE_ban_alcohol
+		relative_position_id = EST_Poogelmann_Implements_a_Truly_Estonian_Syndicalism
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Finance_a_New_Estonian_Artistic_Movement
+		}
+		prerequisite = {
+			focus = EST_Devolve_Economic_Affairs_to_the_Regions
+		}
+		prerequisite = {
+			focus = EST_The_Baalic_Iron_a_Cornerstone_of_Peasant_Syndicalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Embrace_Full_National_Personal_Autonomy #拥抱全面民族个人自治
+		icon = GFX_goal_SRD_deal_autonomy
+		relative_position_id = EST_Poogelmann_Implements_a_Truly_Estonian_Syndicalism
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Finance_a_New_Estonian_Artistic_Movement
+		}
+		prerequisite = {
+			focus = EST_Devolve_Economic_Affairs_to_the_Regions
+		}
+		prerequisite = {
+			focus = EST_The_Baalic_Iron_a_Cornerstone_of_Peasant_Syndicalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Perfect_Partnership_of_State_and_Cooperatives #国家与合作社的理想协同范式
+		icon = GFX_RUS_Perfect_Model
+		relative_position_id = EST_Poogelmann_Implements_a_Truly_Estonian_Syndicalism
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Fight_Against_the_Great_Moral_Evil_of_Alcoholism
+		}
+		prerequisite = {
+			focus = EST_Embrace_Full_National_Personal_Autonomy
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Keskliit_Retains_their_Dominance_over_the_Movement #Keskliit 维持对运动的主导！
+		icon = GFX_goal_CSA_centralised_syndicalism
+		relative_position_id = EST_Hansens_Syndicalists_Outmanoeuvre_the_Communists
+		x = 3
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Draft_Our_Approach_to_Mend_the_Rural_Urban_Divide
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Make_our_Move_towards_Full_Collective_Farming #迈向全面集体化之路
+		icon = GFX_goal_BUL_mechanize_farming
+		relative_position_id = EST_The_Keskliit_Retains_their_Dominance_over_the_Movement
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Keskliit_Retains_their_Dominance_over_the_Movement
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Commence_a_Rapid_Industrialization_of_the_Countryside #启动乡村快速工业化
+		icon = GFX_goal_SZC_improvised_farming_machinery
+		relative_position_id = EST_The_Keskliit_Retains_their_Dominance_over_the_Movement
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Keskliit_Retains_their_Dominance_over_the_Movement
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Embrace_the_Bourgeois_Feminist_Movement #接纳资产阶级女权运动
+		icon = GFX_SOV_soviet_humanism
+		relative_position_id = EST_The_Keskliit_Retains_their_Dominance_over_the_Movement
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Keskliit_Retains_their_Dominance_over_the_Movement
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Set_Some_Planned_Economic_Goals #设定若干计划经济目标
+		icon = GFX_CAL_national_unions
+		relative_position_id = EST_The_Keskliit_Retains_their_Dominance_over_the_Movement
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Make_our_Move_towards_Full_Collective_Farming
+		}
+		prerequisite = {
+			focus = EST_Commence_a_Rapid_Industrialization_of_the_Countryside
+		}
+		prerequisite = {
+			focus = EST_Embrace_the_Bourgeois_Feminist_Movement
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Unions_by_Industry_not_by_Craft #按产业而非工艺组建工会
+		icon = GFX_RUS_Trade_Unions_Discussion
+		relative_position_id = EST_The_Keskliit_Retains_their_Dominance_over_the_Movement
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Make_our_Move_towards_Full_Collective_Farming
+		}
+		prerequisite = {
+			focus = EST_Commence_a_Rapid_Industrialization_of_the_Countryside
+		}
+		prerequisite = {
+			focus = EST_Embrace_the_Bourgeois_Feminist_Movement
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Envision_a_Strong_Council_Democracy #构想强大的议会民主
+		icon = GFX_goal_FIU_syndicalize_unions
+		relative_position_id = EST_The_Keskliit_Retains_their_Dominance_over_the_Movement
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Set_Some_Planned_Economic_Goals
+		}
+		prerequisite = {
+			focus = EST_Unions_by_Industry_not_by_Craft
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Syndicalist_Estonia_Reforged_and_Prosperous #工团主义爱沙尼亚，重塑且繁荣！
+		icon = GFX_goal_ALB_Reinforce_Syndicalist_System
+		relative_position_id = EST_Draft_Our_Approach_to_Mend_the_Rural_Urban_Divide
+		x = 0
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Perfect_Partnership_of_State_and_Cooperatives
+			focus = EST_Envision_a_Strong_Council_Democracy
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Unite_the_Baltics_under_the_Hammer_and_Torch #以 hammer and torch（工团主义符号）统一波罗的海
+		icon = GFX_goal_FIN_Syndicalists
+		relative_position_id = EST_Draft_Our_Approach_to_Mend_the_Rural_Urban_Divide
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Baalic_Iron_a_Cornerstone_of_Peasant_Syndicalism
+			focus = EST_Make_our_Move_towards_Full_Collective_Farming
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free #无政府主义者解放爱沙尼亚
+		icon = GFX_goal_FRA_proudhonian_property
+		x = 26
+		y = 0 
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Libertarian_Soviets_For_the_People #为人民的自由苏维埃
+		icon = GFX_goal_FOP_Agrarian_Anarchism_Federacion_Obrera
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Black_Guards_of_Estonia #爱沙尼亚黑卫队
+		icon = GFX_goal_FRA_Anarchist_Mobilization_Techniques
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = -2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Libertarian_Soviets_For_the_People
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Break_Apart_the_Dictatorship_of_Fake_Proletariat #瓦解伪无产阶级专政
+		icon = GFX_goal_FRA_Combat_Anarchist_Chaos
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = -3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Black_Guards_of_Estonia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Halt_the_Religious_Enslavement_of_Man #叫停宗教对人的奴役
+		icon = GFX_goal_WHR_Dethroning_False_Idols
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = -1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Black_Guards_of_Estonia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_An_Anarchist_Utopia_for_All_Peoples #全民族的无政府主义乌托邦
+		icon = GFX_SOV_anarchists
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = -2
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Halt_the_Religious_Enslavement_of_Man
+		}
+		prerequisite = {
+			focus = EST_Break_Apart_the_Dictatorship_of_Fake_Proletariat
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Putting_Our_Fortress_Builders_to_Work #让堡垒建造者投入工作
+		icon = GFX_goal_NVN_Fortify_Fort_Defiance
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Libertarian_Soviets_For_the_People
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Wage_the_Final_Battle_Against_Capitalist_Slavers #向资本主义奴隶主打响最终战役
+		icon = GFX_goal_NZL_crush_capitalist_reformism
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = 2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Libertarian_Soviets_For_the_People
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Devolution_Guides_Estonia_to_Anarchist_Evolution #权力下放引领爱沙尼亚迈向无政府进化
+		icon = GFX_SOV_anarchist_production
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = 1
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Wage_the_Final_Battle_Against_Capitalist_Slavers
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Split_Up_the_Keskliit_Into_Empowered_Craft_Unions #将 Keskliit 拆分为授权的行业工会
+		icon = GFX_goal_AST_unionists_obey_your_master
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = 3
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Wage_the_Final_Battle_Against_Capitalist_Slavers
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_An_Agrarian_Economy_Driven_by_Kustarnoye #由 "Kustarnoye" 驱动的农业经济
+		icon = GFX_UKR_Agrarian_Economy
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = 2
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Devolution_Guides_Estonia_to_Anarchist_Evolution
+		}
+		prerequisite = {
+			focus = EST_Split_Up_the_Keskliit_Into_Empowered_Craft_Unions
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Estonia_Free_From_Statism_Forevermore #爱沙尼亚永远摆脱国家主义！
+		icon = GFX_goal_WHR_Anarchy_Above_All_Borders
+		relative_position_id = EST_The_Naissaar_Anarchists_Return_to_Set_Eesti_Free
+		x = 0
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_An_Anarchist_Utopia_for_All_Peoples
+		}
+		prerequisite = {
+			focus = EST_An_Agrarian_Economy_Driven_by_Kustarnoye
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	#第二次选举
+	focus = {
+		id = EST_two_Democracy_triumphs #第二次选举
+		icon = GFX_TRM_Democracy_Prevails
+		x = -10
+		y = 21
+		cost = 3
+		allow_branch = {
+			NOT = {
+				tag = EST
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_ESTP_Continue_their_Project_for_True_Equality #ESTP 推进真正平等计划
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_two_Democracy_triumphs
+		x = -18
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_two_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Provide_the_Right_to_Housing_for_the_Masses #为民众提供住房权
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESTP_Continue_their_Project_for_True_Equality
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ESTP_Continue_their_Project_for_True_Equality
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Course_between_Reform_and_Revolution #改革与革命之间的路径
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESTP_Continue_their_Project_for_True_Equality
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ESTP_Continue_their_Project_for_True_Equality
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Introduce_the_Minimum_Wage_to_Estonia #为爱沙尼亚引入最低工资制
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESTP_Continue_their_Project_for_True_Equality
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ESTP_Continue_their_Project_for_True_Equality
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Eliminate_the_Idea_of_Martial_Law #摒弃戒严令理念
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESTP_Continue_their_Project_for_True_Equality
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Provide_the_Right_to_Housing_for_the_Masses
+		}
+		prerequisite = {
+			focus = EST_The_Course_between_Reform_and_Revolution
+		}
+		prerequisite = {
+			focus = EST_Introduce_the_Minimum_Wage_to_Estonia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Labour_Self_Management_in_a_Capitalist_Model #资本主义模式下的劳工自我管理
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESTP_Continue_their_Project_for_True_Equality
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Provide_the_Right_to_Housing_for_the_Masses
+		}
+		prerequisite = {
+			focus = EST_The_Course_between_Reform_and_Revolution
+		}
+		prerequisite = {
+			focus = EST_Introduce_the_Minimum_Wage_to_Estonia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Proclaim_the_Dawn_of_a_Changed_Estonia #宣告变革爱沙尼亚的黎明！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESTP_Continue_their_Project_for_True_Equality
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Eliminate_the_Idea_of_Martial_Law
+		}
+		prerequisite = {
+			focus = EST_Labour_Self_Management_in_a_Capitalist_Model
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_ESDTP_Progress_With_their_Vision_for_the_Masses #ESDTP 推进其大众愿景
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_two_Democracy_triumphs
+		x = -12
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_two_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Basic_Health_Insurance_Program_for_Everyone #全民基础医疗保险计划
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESDTP_Progress_With_their_Vision_for_the_Masses
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ESDTP_Progress_With_their_Vision_for_the_Masses
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Fight_the_Everlasting_War_against_Unemployment #向失业打响持久战
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESDTP_Progress_With_their_Vision_for_the_Masses
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ESDTP_Progress_With_their_Vision_for_the_Masses
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Design_a_Free_Vocational_Education_Program #设计免费职业教育计划
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESDTP_Progress_With_their_Vision_for_the_Masses
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ESDTP_Progress_With_their_Vision_for_the_Masses
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Provide_Insurance_to_Our_Agricultural_Industry #为农业产业提供保险
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESDTP_Progress_With_their_Vision_for_the_Masses
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Basic_Health_Insurance_Program_for_Everyone
+		}
+		prerequisite = {
+			focus = EST_Fight_the_Everlasting_War_against_Unemployment
+		}
+		prerequisite = {
+			focus = EST_Design_a_Free_Vocational_Education_Program
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Reformed_Criminal_Code_for_Judicial_Fairness #改革刑法以实现司法公正
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESDTP_Progress_With_their_Vision_for_the_Masses
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Basic_Health_Insurance_Program_for_Everyone
+		}
+		prerequisite = {
+			focus = EST_Fight_the_Everlasting_War_against_Unemployment
+		}
+		prerequisite = {
+			focus = EST_Design_a_Free_Vocational_Education_Program
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Socialist_Utopia_Designed_Without_Egoism #打造无私的社会主义乌托邦！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ESDTP_Progress_With_their_Vision_for_the_Masses
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Provide_Insurance_to_Our_Agricultural_Industry
+		}
+		prerequisite = {
+			focus = EST_A_Reformed_Criminal_Code_for_Judicial_Fairness
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_ETE_Secure_the_Radical_Democratic_Dream #ETE 实现激进民主愿景！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_two_Democracy_triumphs
+		x = -6
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_two_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Regulate_the_Market_Economy #调控市场经济
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ETE_Secure_the_Radical_Democratic_Dream
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ETE_Secure_the_Radical_Democratic_Dream
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Party_at_the_Crossroads_of_Left_and_Right #左右翼交汇的政党
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ETE_Secure_the_Radical_Democratic_Dream
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ETE_Secure_the_Radical_Democratic_Dream
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_New_Estonia_Based_off_of_the_Danish_Model #效仿丹麦模式的新爱沙尼亚
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ETE_Secure_the_Radical_Democratic_Dream
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ETE_Secure_the_Radical_Democratic_Dream
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Bring_Prosperity_to_a_New_Middle_Class #为新中产阶级带来繁荣
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ETE_Secure_the_Radical_Democratic_Dream
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Regulate_the_Market_Economy
+		}
+		prerequisite = {
+			focus = EST_A_Party_at_the_Crossroads_of_Left_and_Right
+		}
+		prerequisite = {
+			focus = EST_The_New_Estonia_Based_off_of_the_Danish_Model
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Assert_Estonias_Position_on_the_World_Stage #确立爱沙尼亚的世界舞台地位
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ETE_Secure_the_Radical_Democratic_Dream
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Regulate_the_Market_Economy
+		}
+		prerequisite = {
+			focus = EST_A_Party_at_the_Crossroads_of_Left_and_Right
+		}
+		prerequisite = {
+			focus = EST_The_New_Estonia_Based_off_of_the_Danish_Model
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Estonia_Guided_Towards_a_Shining_Democracy #引领爱沙尼亚迈向光辉民主！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ETE_Secure_the_Radical_Democratic_Dream
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Bring_Prosperity_to_a_New_Middle_Class
+		}
+		prerequisite = {
+			focus = EST_Assert_Estonias_Position_on_the_World_Stage
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_ERE_Keep_Up_the_Mandate_of_Popular_Liberalism #ERE 延续民众自由主义使命！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_two_Democracy_triumphs
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_two_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_New_Model_of_Social_Welfare #社会福利新典范
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ERE_Keep_Up_the_Mandate_of_Popular_Liberalism
+		x = -2	
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ERE_Keep_Up_the_Mandate_of_Popular_Liberalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Give_Subsidies_to_Small_Business_Owners #向小企业主提供补贴
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ERE_Keep_Up_the_Mandate_of_Popular_Liberalism
+		x = 0	
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ERE_Keep_Up_the_Mandate_of_Popular_Liberalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_The_Beacon_of_Serious_Democracy #严肃民主的灯塔
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ERE_Keep_Up_the_Mandate_of_Popular_Liberalism
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_ERE_Keep_Up_the_Mandate_of_Popular_Liberalism
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Our_Place_as_the_Party_of_Law_and_Order #我们作为法治政党的定位
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ERE_Keep_Up_the_Mandate_of_Popular_Liberalism
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_A_New_Model_of_Social_Welfare
+		}
+		prerequisite = {
+			focus = EST_Give_Subsidies_to_Small_Business_Owners
+		}
+		prerequisite = {
+			focus = EST_The_Beacon_of_Serious_Democracy
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Perfect_Coexistence_of_Rural_and_Urban_Alike #城乡完美共存
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ERE_Keep_Up_the_Mandate_of_Popular_Liberalism
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_A_New_Model_of_Social_Welfare
+		}
+		prerequisite = {
+			focus = EST_Give_Subsidies_to_Small_Business_Owners
+		}
+		prerequisite = {
+			focus = EST_The_Beacon_of_Serious_Democracy
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Sun_of_Liberalism_Shines_Bright_Upon_Estonia #自由主义之光照耀爱沙尼亚！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_ERE_Keep_Up_the_Mandate_of_Popular_Liberalism
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Our_Place_as_the_Party_of_Law_and_Order
+		}
+		prerequisite = {
+			focus = EST_A_Perfect_Coexistence_of_Rural_and_Urban_Alike
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_AP_Cement_their_Vision_for_the_Small_Man #AP 巩固其为小人物的愿景！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_two_Democracy_triumphs
+		x = 6
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_two_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_A_Party_More_than_Just_Farmers #不只是农民的政党
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_AP_Cement_their_Vision_for_the_Small_Man
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_AP_Cement_their_Vision_for_the_Small_Man
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Put_a_Halt_to_the_Evils_of_Mass_Industrialization #叫停大规模工业化之恶
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_AP_Cement_their_Vision_for_the_Small_Man
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_AP_Cement_their_Vision_for_the_Small_Man
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Commercial_Hub_of_the_Baltics #波罗的海商业枢纽
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_AP_Cement_their_Vision_for_the_Small_Man
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_AP_Cement_their_Vision_for_the_Small_Man
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Economic_Prosperity_through_Laissez_Faire #借自由放任实现经济繁荣
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_AP_Cement_their_Vision_for_the_Small_Man
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_A_Party_More_than_Just_Farmers
+		}
+		prerequisite = {
+			focus = EST_Put_a_Halt_to_the_Evils_of_Mass_Industrialization
+		}
+		prerequisite = {
+			focus = EST_The_Commercial_Hub_of_the_Baltics
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Convert_our_Forests_into_Fields #将森林垦为农田
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_AP_Cement_their_Vision_for_the_Small_Man
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_A_Party_More_than_Just_Farmers
+		}
+		prerequisite = {
+			focus = EST_Put_a_Halt_to_the_Evils_of_Mass_Industrialization
+		}
+		prerequisite = {
+			focus = EST_The_Commercial_Hub_of_the_Baltics
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Agrarian_Capitalist_Dream_Prospers #农业资本主义梦想繁荣！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_AP_Cement_their_Vision_for_the_Small_Man
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Economic_Prosperity_through_Laissez_Faire
+		}
+		prerequisite = {
+			focus = EST_Convert_our_Forests_into_Fields
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_PK_Continue_the_Agrarian_Utopia #PK 延续农业乌托邦！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_two_Democracy_triumphs
+		x = 12
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_two_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+	
+	focus = {
+		id = EST_Proceed_with_an_Inflationist_Economic_Policy #推行通胀主义经济政策
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_PK_Continue_the_Agrarian_Utopia
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_PK_Continue_the_Agrarian_Utopia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Pact_with_the_Urban_Elite #与城市精英结盟
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_PK_Continue_the_Agrarian_Utopia
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_PK_Continue_the_Agrarian_Utopia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Form_the_Coalition_of_National_Interests #组建国家利益联盟
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_PK_Continue_the_Agrarian_Utopia
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_PK_Continue_the_Agrarian_Utopia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Increase_Funding_for_Scientific_Causes #增加科研 funding
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_PK_Continue_the_Agrarian_Utopia
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Proceed_with_an_Inflationist_Economic_Policy
+		}
+		prerequisite = {
+			focus = EST_A_Pact_with_the_Urban_Elite
+		}
+		prerequisite = {
+			focus = EST_Form_the_Coalition_of_National_Interests
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Deal_a_Strong_Blow_to_the_Communist_Traitors #重创共产主义叛徒
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_PK_Continue_the_Agrarian_Utopia
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Proceed_with_an_Inflationist_Economic_Policy
+		}
+		prerequisite = {
+			focus = EST_A_Pact_with_the_Urban_Elite
+		}
+		prerequisite = {
+			focus = EST_Form_the_Coalition_of_National_Interests
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_This_Great_Country_of_Farmers #农民的伟大国度！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_PK_Continue_the_Agrarian_Utopia
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Increase_Funding_for_Scientific_Causes
+		}
+		prerequisite = {
+			focus = EST_Deal_a_Strong_Blow_to_the_Communist_Traitors
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_KRE_Coalition_Pursue_the_Faithful_Dream #KRE 联盟追寻虔诚梦想！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_two_Democracy_triumphs
+		x = 18
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_two_Democracy_triumphs
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Endorse_an_Expanded_Pension_System #扩大养老金体系
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_KRE_Coalition_Pursue_the_Faithful_Dream
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_KRE_Coalition_Pursue_the_Faithful_Dream
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Give_More_Autonomy_to_the_Parishe #赋予教区更多自治权
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_KRE_Coalition_Pursue_the_Faithful_Dream
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_KRE_Coalition_Pursue_the_Faithful_Dream
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Focus_on_our_Industries_at_Sea #聚焦海洋产业
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_KRE_Coalition_Pursue_the_Faithful_Dream
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_KRE_Coalition_Pursue_the_Faithful_Dream
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_New_Artistic_Revolution_by_the_Pen_and_Paper #借纸笔开启新艺术革命
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_KRE_Coalition_Pursue_the_Faithful_Dream
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Endorse_an_Expanded_Pension_System
+		}
+		prerequisite = {
+			focus = EST_Give_More_Autonomy_to_the_Parishe
+		}
+		prerequisite = {
+			focus = EST_A_Focus_on_our_Industries_at_Sea
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Subsidize_and_Open_the_Kristlik_Akadeemia #补贴并开放克里斯蒂克学院
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_KRE_Coalition_Pursue_the_Faithful_Dream
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Endorse_an_Expanded_Pension_System
+		}
+		prerequisite = {
+			focus = EST_Give_More_Autonomy_to_the_Parishe
+		}
+		prerequisite = {
+			focus = EST_A_Focus_on_our_Industries_at_Sea
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Dawn_of_a_Truly_Blessed_Estonia #真正受福爱沙尼亚的黎明！
+		icon = GFX_HUN_counterrevolution
+		relative_position_id = EST_The_KRE_Coalition_Pursue_the_Faithful_Dream
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_A_New_Artistic_Revolution_by_the_Pen_and_Paper
+		}
+		prerequisite = {
+			focus = EST_Subsidize_and_Open_the_Kristlik_Akadeemia
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Rise_of_Pikkas_National_Liberals #皮克的民族自由派崛起！
+		icon = GFX_goal_BBR_national_rebirth
+		x = 14
+		y = 19
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Tear_Down_this_Crooked_System #推翻这一扭曲体系
+		icon = GFX_goal_FRA_democratic_error
+		relative_position_id = EST_The_Rise_of_Pikkas_National_Liberals
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Rise_of_Pikkas_National_Liberals
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Put_a_Cap_on_Land_Ownership #限制土地所有权
+		icon = GFX_BRY_Land_Socialization
+		relative_position_id = EST_The_Rise_of_Pikkas_National_Liberals
+		x = -1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Tear_Down_this_Crooked_System
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Forcefully_Liquidate_Government_Enterprises #强制清算国有企业
+		icon = GFX_goal_NYC_Privatization
+		relative_position_id = EST_The_Rise_of_Pikkas_National_Liberals
+		x = 1
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Tear_Down_this_Crooked_System
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Expose_the_Enemies_Disguised_as_Friends #揭露伪装成朋友的敌人
+		icon = GFX_goal_NYC_Kill_Mob
+		relative_position_id = EST_The_Rise_of_Pikkas_National_Liberals
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Forcefully_Liquidate_Government_Enterprises
+		}
+		prerequisite = {
+			focus = EST_Put_a_Cap_on_Land_Ownership
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Great_Balance_of_Tradition_and_Progress #传统与进步的伟大平衡
+		icon = GFX_goal_NFA_Middle_Class
+		relative_position_id = EST_The_Rise_of_Pikkas_National_Liberals
+		x = 0
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Expose_the_Enemies_Disguised_as_Friends
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Sever_All_Ties_with_the_Religious_Lobbyists #切断与宗教游说集团的所有联系
+		icon = GFX_CAL_profits_of_the_church
+		relative_position_id = EST_The_Rise_of_Pikkas_National_Liberals
+		x = -2
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Expose_the_Enemies_Disguised_as_Friends
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Fulfill_the_Pledges_towards_our_Veterans #兑现对退伍军人的承诺
+		icon = GFX_goal_SRI_Rally_Veterans_ANC
+		relative_position_id = EST_The_Rise_of_Pikkas_National_Liberals
+		x = 2
+		y = 4
+		cost = 3
+		prerequisite = {
+			focus = EST_Expose_the_Enemies_Disguised_as_Friends
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Distribute_the_Valve_Newspaper_to_the_Masses #向民众分发《阀门》报纸
+		icon = GFX_UKR_Borotba_Newspaper
+		relative_position_id = EST_The_Rise_of_Pikkas_National_Liberals
+		x = -1
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Great_Balance_of_Tradition_and_Progress
+		}
+		prerequisite = {
+			focus = EST_Sever_All_Ties_with_the_Religious_Lobbyists
+		}
+		prerequisite = {
+			focus = EST_Fulfill_the_Pledges_towards_our_Veterans
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Stop_the_Exploitation_of_Ethnicity #制止族群剥削
+		icon = GFX_goal_FIU_ethnic_understanding
+		relative_position_id = EST_The_Rise_of_Pikkas_National_Liberals
+		x = 1
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Great_Balance_of_Tradition_and_Progress
+		}
+		prerequisite = {
+			focus = EST_Sever_All_Ties_with_the_Religious_Lobbyists
+		}
+		prerequisite = {
+			focus = EST_Fulfill_the_Pledges_towards_our_Veterans
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Death_Knell_of_the_Establishment #建制派的丧钟
+		icon = GFX_goal_death_tracks
+		relative_position_id = EST_The_Rise_of_Pikkas_National_Liberals
+		x = 0
+		y = 6
+		cost = 3
+		prerequisite = {
+			focus = EST_Distribute_the_Valve_Newspaper_to_the_Masses
+		}
+		prerequisite = {
+			focus = EST_Stop_the_Exploitation_of_Ethnicity
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	#外交
+	focus = {
+		id = EST_Estonias_Place_in_a_Changing_World #爱沙尼亚在世界中的定位
+		icon = GFX_goal_generic_world_diplomacy
+		x = 29
+		y = 16
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_To_Secure_our_Present #巩固当下…
+		icon = GFX_TRM_Secure_Borders
+		relative_position_id = EST_Estonias_Place_in_a_Changing_World
+		x = -5
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Estonias_Place_in_a_Changing_World
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Amongst_our_Socialist_Brethren #融入社会主义兄弟阵营
+		icon = GFX_goal_FRA_phalanstere
+		relative_position_id = EST_To_Secure_our_Present
+		x = -4
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_To_Secure_our_Present
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Estonian_Technological_Revolution #爱沙尼亚技术革命
+		icon = GFX_goal_NOR_universalism
+		relative_position_id = EST_To_Secure_our_Present
+		x = -4
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Amongst_our_Socialist_Brethren
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Look_Towards_the_North #北向展望
+		icon = GFX_goal_NOR_scandinavia
+		relative_position_id = EST_To_Secure_our_Present
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_To_Secure_our_Present
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Spirit_of_the_Pohjan_Pojat #波赫扬之子精神
+		icon = GFX_goal_finnish_spirit
+		relative_position_id = EST_To_Secure_our_Present
+		x = -2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Look_Towards_the_North
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_New_Relationship_with_the_Eastern_Bulwark #构建与东方堡垒的新关系
+		icon = GFX_goal_RUS_flag
+		relative_position_id = EST_To_Secure_our_Present
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_To_Secure_our_Present
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Recognize_our_Cross_Border_Trade #认可跨境贸易
+		icon = GFX_goal_generic_positive_trade_relations_gold
+		relative_position_id = EST_To_Secure_our_Present
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_A_New_Relationship_with_the_Eastern_Bulwark
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Look_Back_to_the_Old_Allies #重拾 1918 年旧盟友
+		icon = GFX_goal_CAN_british_investments
+		relative_position_id = EST_To_Secure_our_Present
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_To_Secure_our_Present
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_New_Breakthroughs_in_Military_Innovation #军事创新新突破
+		icon = GFX_goal_CAN_Expand_Training_Facilities
+		relative_position_id = EST_To_Secure_our_Present
+		x = 2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_Look_Back_to_the_Old_Allies
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Enemy_of_Our_Enemy #敌人的敌人
+		icon = GFX_goal_germany
+		relative_position_id = EST_To_Secure_our_Present
+		x = 4
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_To_Secure_our_Present
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_New_Partnership_With_Our_German_Minority #与德裔少数群体构建新伙伴关系
+		icon = GFX_goal_align_germany
+		relative_position_id = EST_To_Secure_our_Present
+		x = 4
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_The_Enemy_of_Our_Enemy
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_And_to_Seize_the_Future #抢占未来
+		icon = GFX_securethenorthernborder
+		relative_position_id = EST_Estonias_Place_in_a_Changing_World
+		x = 3
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_Estonias_Place_in_a_Changing_World
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Save_our_Brothers_from_the_Jaws_of_Tyranny #拯救兄弟于暴政之口
+		icon = GFX_goal_latvia
+		relative_position_id = EST_And_to_Seize_the_Future
+		x = -2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_And_to_Seize_the_Future
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_In_the_Defense_of_a_Forgotten_Region #捍卫被遗忘的地区
+		icon = GFX_BAT_aut
+		relative_position_id = EST_And_to_Seize_the_Future
+		x = -1
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_And_to_Seize_the_Future
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Koidulas_Dream_Renewed #科伊杜拉的梦想重生！
+		icon = GFX_goal_flag_finland
+		relative_position_id = EST_And_to_Seize_the_Future
+		x = 1
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = EST_And_to_Seize_the_Future
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_A_Spearhead_of_the_Pan_European_Movement #泛欧运动的先锋！
+		icon = GFX_goal_AUS_paneuropa
+		relative_position_id = EST_And_to_Seize_the_Future
+		x = 2
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_And_to_Seize_the_Future
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_Negotiate_for_Jaaniilin #谈判争取贾尼林
+		icon = GFX_goal_russia
+		relative_position_id = EST_And_to_Seize_the_Future
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = EST_And_to_Seize_the_Future
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+
+	focus = {
+		id = EST_The_Vision_of_a_Greater_Estonia #大爱国沙尼亚愿景
+		icon = GFX_goal_estonia
+		relative_position_id = EST_And_to_Seize_the_Future
+		x = 0
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = EST_Negotiate_for_Jaaniilin
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}	
+	}
+}
