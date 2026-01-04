@@ -2206,16 +2206,7 @@ shared_focus = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_to_save_yunnan_from_itself"
 			add_stability = 0.05
-			YUN_LYC_medium_effect = yes
-			if = {
-				limit = { NOT = { has_character = YUN_li_peiyan } }
-				custom_effect_tooltip = tooltip_white_line
-				custom_effect_tooltip = available_political_advisor
-				show_ideas_tooltip = YUN_li_peiyan_advisor
-				hidden_effect = {
-					YUN_li_peiyan = { CHN_recruit_character_effect = yes }
-				}
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2233,22 +2224,10 @@ shared_focus = {
 			log = "[GetLogRoot]: Focus Completed YUN_retreating_into_isolation"
 			YUN_isolation_effect = yes
 			add_command_power = -35
-			custom_effect_tooltip = tooltip_white_line
 			add_stability = 0.03
 			add_war_support = -0.06
-			add_timed_idea = {
-				idea = YUN_increasing_isolationist_politics
-				days = 320
-			}
-			if = {
-				limit = { NOT = { has_character = YUN_zhou_zhongyue } }
-				custom_effect_tooltip = tooltip_white_line
-				custom_effect_tooltip = available_political_advisor
-				show_ideas_tooltip = YUN_zhou_zhongyue_advisor
-				hidden_effect = {
-					YUN_zhou_zhongyue = { CHN_recruit_character_effect = yes }
-				}
-			}
+			add_ideas = YUN_increasing_isolationist_politics
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2265,13 +2244,7 @@ shared_focus = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_reorganising_the_yunnan_army"
 			army_experience = 25
-			YUN_LYC_medium_effect = yes
-			YUN_HRY_medium_effect = yes
-			custom_effect_tooltip = tooltip_white_line
-			add_timed_idea = {
-				idea = YUN_culling_incompetents
-				days = 280
-			}
+			add_ideas = YUN_culling_incompetents
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2290,7 +2263,6 @@ shared_focus = {
 			add_stability = -0.03
 			add_war_support = 0.03
 			army_experience = 20
-			custom_effect_tooltip = tooltip_white_line
 			add_one_random_military_factory = yes
 			add_equipment_to_stockpile = {
 				type = infantry_equipment
@@ -2315,24 +2287,10 @@ shared_focus = {
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_protecting_our_commerce"
-			YUN_HRY_medium_effect = yes
-			YUN_YCC_large_effect = yes
-			custom_effect_tooltip = tooltip_white_line
+			
 			add_one_random_civilian_factory = yes
 			add_one_random_civilian_factory = yes
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = {
-					has_free_political_advisor_slot = yes
-					YUN_miao_yuntai = { is_hired_as_advisor = no }
-				}
-				hidden_effect = {
-					activate_advisor = YUN_miao_yuntai_advisor
-				}
-				custom_effect_tooltip = if_not_yet_hired_will_hire
-				show_ideas_tooltip = YUN_miao_yuntai_advisor
-				custom_effect_tooltip = tooltip_white_line
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2348,23 +2306,11 @@ shared_focus = {
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_salvaging_tangs_reforms"
-			YUN_PGP_large_effect = yes
+			
 			add_stability = 0.03
 			add_political_power = 30
-			custom_effect_tooltip = tooltip_white_line
-			add_timed_idea = {
-				idea = YUN_continuation_of_the_tang_policy
-				days = 250
-			}
-			if = {
-				limit = { NOT = { has_character = YUN_zhang_banghan } }
-				custom_effect_tooltip = tooltip_white_line
-				custom_effect_tooltip = available_political_advisor
-				show_ideas_tooltip = YUN_zhang_banghan_advisor
-				hidden_effect = {
-					YUN_zhang_banghan = { CHN_recruit_character_effect = yes }
-				}
-			}
+			add_ideas = YUN_continuation_of_the_tang_policy
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2394,22 +2340,14 @@ shared_focus = {
 				ideology = radical_socialist
 				popularity = -0.08
 			}
-			custom_effect_tooltip = tooltip_white_line
+			
 			add_tech_bonus = {
 				name = YUN_eliminating_internal_dissidents
 				category = military_police_tech
 				uses = 1
 				bonus = 2
 			}
-			if = {
-				limit = { NOT = { has_character = YUN_xu_zhichen } }
-				custom_effect_tooltip = tooltip_white_line
-				custom_effect_tooltip = available_political_advisor
-				show_ideas_tooltip = YUN_xu_zhichen_advisor
-				hidden_effect = {
-					YUN_xu_zhichen = { CHN_recruit_character_effect = yes }
-				}
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2427,21 +2365,7 @@ shared_focus = {
 			log = "[GetLogRoot]: Focus Completed YUN_handling_external_affairs"
 			add_war_support = 0.05
 			add_one_random_military_factory = yes
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = { is_subject = yes }
-				add_timed_idea = {
-					idea = YUN_tribute_for_autonomy
-					days = 365
-				}
-				unlock_decision_tooltip = CHN_pressure_overlord_to_act_decision
-				hidden_effect = {
-					activate_targeted_decision = { target = var:overlord decision = CHN_pressure_overlord_to_act_decision }
-				}
-			}
-			else = {
-				unlock_decision_tooltip = YUN_acknowledge_zhili_authority_decision
-			}
+			set_potential_national_government = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2459,7 +2383,19 @@ shared_focus = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_claiming_the_southwest"
 			add_war_support = 0.05
-			china_form_SCPC_effect = yes
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = GXC
+						is_core_of = PRC
+						is_core_of = SZC
+						is_core_of = HNN
+					}
+				}
+				YUN = {
+					add_state_core = PREV
+				}
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2478,11 +2414,9 @@ shared_focus = {
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_expanding_our_universities"
-			YUN_YCD_large_effect = yes
-			YUN_CMS_large_effect = yes
-			custom_effect_tooltip = tooltip_white_line
+
 			add_research_slot_until_five = yes
-			custom_effect_tooltip = tooltip_white_line
+
 			add_tech_bonus = {
 				name = YUN_expanding_our_universities
 				category = cat_production
@@ -2511,15 +2445,7 @@ shared_focus = {
 			add_stability = -0.05
 			add_war_support = 0.05
 			add_political_power = 35
-			custom_effect_tooltip = tooltip_white_line
-			CHN_setup_lategame_debuffs_effect = yes #Satellite will get debuffs at same time as overlord.
-			custom_effect_tooltip = tooltip_white_line
-			activate_targeted_decision = { target = ROOT decision = CHN_evacuate_military_industry }
-			activate_targeted_decision = { target = ROOT decision = CHN_evacuate_civilian_industry }
-			custom_effect_tooltip = focus_tree_will_change_tt
-			set_variable = { CHN_evacuation_cost = 30 }
-			custom_effect_tooltip = tooltip_white_line
-			YUN_transition_economy_effect = yes
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
