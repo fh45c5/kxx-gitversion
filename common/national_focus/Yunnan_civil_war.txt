@@ -1,1223 +1,5 @@
 ###Alternate Tree
-shared_focus = {
-	id = YUN_initial_stabilization
-	icon = GFX_goal_HOL_CNA_restored_stability
-	cost = 7.2
-	x = 23
-	y = 0
-	available = {
-		always = no
-	}
-	bypass = {
-		NOT = {
-			has_country_flag = YUN_let_the_games_begin
-		}
-	}
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_initial_stabilization"
-	}
-}
-shared_focus = {
-	id = YUN_Long
-	icon = GFX_YUN_Goal_LONG_YUN_NOMBA_ONE
-	cost = 7.2
-	available = {
-		has_country_leader = {
-			name = "Long Yun"
-			ruling_only = yes
-		}
-	}
-	prerequisite = {
-		focus = YUN_initial_stabilization
-	}
-	mutually_exclusive = {
-		focus = YUN_NRA_prevailed
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	x = 19
-	y = 1
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Long"
-		add_ideas = YUN_Long_Yun1
-	}
-	search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
 
-}
-shared_focus = {
-	id = YUN_King_of_Yunnan2
-	icon = GFX_YUN_tang_dynasty
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Long
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	x = 19
-	y = 2
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_King_of_Yunnan2"
-		swap_ideas = {
-			remove_idea = YUN_Long_Yun1
-			add_idea = YUN_Long_Yun2
-		}
-	}
-	search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
-
-}
-shared_focus = {
-	id = YUN_cult_of_personality
-	icon = GFX_goal_generic_cult_personality
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_King_of_Yunnan2
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	x = 19
-	y = 3
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_cult_of_personality"
-		swap_ideas = {
-			remove_idea = YUN_Long_Yun2
-			add_idea = YUN_Long_Yun3
-		}
-		hidden_effect = {
-			country_event = { id = yun.320 days = 90 }
-			country_event = { id = yun.323 days = 400 }
-			country_event = { id = yun.325 days = 900 }
-		}
-	}
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
-}
-shared_focus = {
-	id = YUN_continue_isolation
-	icon = GFX_goal_generic_isolation
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_cult_of_personality
-	}
-	mutually_exclusive = {
-		focus = YUN_Expansionism2
-	}
-	ai_will_do = {
-		factor = 25
-	}
-	x = 18
-	y = 4
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_continue_isolation"
-		swap_ideas = {
-			remove_idea = YUN_Long_Yun3
-			add_idea = YUN_Long_Yun4_left
-		}
-	}
-	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH }
-}
-shared_focus = {
-	id = YUN_Expansionism2
-	icon = GFX_Goal_YUN_The_Master_of_the_East_Continent
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_cult_of_personality
-	}
-	mutually_exclusive = {
-		focus = YUN_continue_isolation
-	}
-	ai_will_do = {
-		factor = 26
-	}
-	x = 20
-	y = 4
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Expansionism2"
-		swap_ideas = {
-			remove_idea = YUN_Long_Yun3
-			add_idea = YUN_Long_Yun4
-		}
-	}
-	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL }
-
-}
-shared_focus = {
-	id = YUN_gear_up_for_war
-	icon = GFX_GRU_CORPORATE_MILITARY_INDUSTRIAL_COMPLEX
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Expansionism2
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	x = 20
-	y = 5
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_gear_up_for_war"
-		add_timed_idea = { idea = YUN_Long_Yun_temporal_boost days = 365 }
-	}
-}
-shared_focus = {
-	id = YUN_Strike_At_Liangguang
-	icon = GFX_goal_SZC_recover_the_first_province
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_gear_up_for_war
-	}
-	available = {
-		has_war = no
-		is_subject = no
-		OR = {
-			GXC = {
-				exists = yes
-				NOT = {
-					is_subject_of = YUN
-				}
-			}
-			CHI = {			#Chen Mingshu reforms the L-KMT tag
-				exists = yes
-				owns_state = 594
-			}
-		}
-	}
-	will_lead_to_war_with = GXC
-
-	x = 20
-	y = 6
-	ai_will_do = {
-		factor = 25
-	}
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Strike_At_Liangguang"
-
-		if = {
-			limit = {
-				CHI = {
-					exists = yes
-					owns_state = 594
-				}
-			}
-			declare_war_on = {
-				target = CHI
-				type = annex_everything
-			}
-		}
-		if = {
-			limit = {
-				GXC = {
-					exists = yes
-				}
-			}
-			declare_war_on = {
-				target = GXC
-				type = annex_everything
-			}
-		}
-		hidden_effect = {
-			add_state_claim = 591
-			add_state_claim = 592
-			add_state_claim = 593
-			add_state_claim = 594
-			add_state_claim = 599
-			add_state_claim = 800
-			add_state_claim = 1012
-			add_state_claim = 1054
-			add_state_claim = 1053
-			add_state_claim = 1055
-			add_state_claim = 1056
-		}
-		custom_effect_tooltip = YUN_claims_liangguang
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
-shared_focus = {
-	id = YUN_NRA_prevailed
-	icon = GFX_focus_HKG_Rev_Com_KMT
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_initial_stabilization
-	}
-	mutually_exclusive = {
-		focus = YUN_Long
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	available = {
-		OR = {
-			has_country_leader = {
-				name = "Zhu Peide"
-				ruling_only = yes
-			}
-			has_country_flag = Zhu_De_READY
-		}
-	}
-	x = 27
-	y = 1
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_NRA_prevailed"
-		add_ideas = YUN_Kuomintang1
-		clr_country_flag = Zhu_De_READY
-		increase_ruling_party_popularity_by_10 = yes
-		set_potential_national_government = yes
-		if = {
-			limit = {
-				has_country_flag = NGxC_in_hiding
-			}
-			new_guangxi_clique_leaves_hiding = yes
-			country_event = lngcivilwar.24
-		}
-	}
-	search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_POLITICAL }
-}
-shared_focus = {
-	id = YUN_the_Society_of_Bamboo_King
-	icon = GFX_YUN_Goal_Bamboo_King_Society
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Long
-		focus = YUN_NRA_prevailed
-	}
-	mutually_exclusive = {
-		focus = YUN_Sinitic_Dominance
-	}
-	ai_will_do = {
-		factor = 25
-	}
-	x = 22
-	y = 2
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_the_Society_of_Bamboo_King"
-		country_event = yun.45
-		set_country_flag = YUN_dian_identity
-	}
-}
-shared_focus = {
-	id = YUN_Dian_Identity
-	icon = GFX_YUN_Goal_Dian_Identity
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_the_Society_of_Bamboo_King
-	}
-	ai_will_do = {
-		factor = 25
-	}
-	x = 22
-	y = 3
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Dian_Identity"
-		swap_ideas = {
-			remove_idea = YUN_bamboo_king_society
-			add_idea = YUN_bamboo_king_society2
-		}
-	}
-	search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_STABILITY }
-}
-shared_focus = {
-	id = YUN_Sinitic_Dominance
-	icon = GFX_goal_FNG_China_Reach
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_NRA_prevailed
-		focus = YUN_Long
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	mutually_exclusive = {
-		focus = YUN_the_Society_of_Bamboo_King
-	}
-	x = 24
-	y = 2
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Sinitic_Dominance"
-		country_event = yun.46
-		set_country_flag = YUN_sinicization_for_yall
-	}
-}
-shared_focus = {
-	id = YUN_Restore_political_stability
-	icon = GFX_goal_generic_stable_government
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Sinitic_Dominance
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	x = 24
-	y = 3
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Restore_political_stability"
-		swap_ideas = {
-			remove_idea = YUN_continue_sinicization
-			add_idea = YUN_continue_sinicization2
-		}
-	}
-	search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_STABILITY }
-}
-shared_focus = {
-	id = YUN_Democratic_Fortress2
-	icon = GFX_RUS_Lessons_Of_Democracy
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Dian_Identity
-		focus = YUN_Restore_political_stability
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	x = 23
-	y = 4
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Democratic_Fortress2"
-		add_ideas = YUN_democratic_fortress
-	}
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH }
-
-}
-shared_focus = {
-	id = YUN_Land_Problem
-	icon = GFX_RUS_Land_Quotas_Bill
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Democratic_Fortress2
-	}
-	ai_will_do = {
-		factor = 25
-	}
-	x = 22
-	y = 5
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Land_Problem"
-		country_event = yun.47
-	}
-}
-shared_focus = {
-	id = YUN_emergent_financial_measures
-	icon = GFX_goal_TEX_Business_Empire_Our_Own
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Democratic_Fortress2
-	}
-	x = 24
-	y = 5
-	ai_will_do = {
-		factor = 25
-	}
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_emergent_financial_measures"
-		swap_ideas = {
-			remove_idea = YUN_democratic_fortress
-			add_idea = YUN_democratic_fortress2
-		}
-	}
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
-
-}
-shared_focus = {
-	id = YUN_Revive_republican_ideals
-	icon = GFX_goal_MON_KMT
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_NRA_prevailed
-	}
-	x = 27
-	y = 2
-	ai_will_do = {
-		factor = 50
-	}
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Revive_republican_ideals"
-		swap_ideas = {
-			remove_idea = YUN_Kuomintang1
-			add_idea = YUN_Kuomintang2
-		}
-		add_stability = 0.05
-		add_political_power = -25
-		increase_ruling_party_popularity_by_5 = yes
-	}
-	search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-}
-shared_focus = {
-	id = YUN_Reform_KMT_Organization
-	icon = GFX_goal_CHI_YUN_reconcile
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Revive_republican_ideals
-	}
-	x = 27
-	y = 3
-	ai_will_do = {
-		factor = 50
-	}
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Reform_KMT_Organization"
-		swap_ideas = {
-			remove_idea = YUN_Kuomintang2
-			add_idea = YUN_Kuomintang3
-		}
-		add_stability = 0.05
-		add_political_power = -25
-		increase_ruling_party_popularity_by_5 = yes
-	}
-	search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-}
-shared_focus = {
-	id = YUN_join_the_left_KMT_committee
-	icon = GFX_goal_LKMT_A_New_China
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Reform_KMT_Organization
-	}
-	mutually_exclusive = {
-		focus = YUN_join_the_right_KMT_committee
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	available = {
-		has_government = social_democrat
-		is_subject = no
-		is_in_faction = no
-	}
-	x = 26
-	y = 4
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_join_the_left_KMT_committee"
-		if = {
-			limit = {
-				CHI = { exists = yes }
-			}
-			CHI = { country_event = yun.516 }
-			else = {
-				custom_effect_tooltip = YUN_Left_KMT_dead_end
-				hidden_effect = {
-					country_event = {
-						id = yun.73
-						days = 2
-					}
-				}
-			}
-		}
-	}
-
-}
-shared_focus = {
-	id = YUN_join_the_right_KMT_committee
-	icon = GFX_goal_RKMT_A_New_China
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Reform_KMT_Organization
-	}
-	mutually_exclusive = {
-		focus = YUN_join_the_left_KMT_committee
-	}
-	available = {
-		has_government = social_liberal
-		is_subject = no
-		is_in_faction = no
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	x = 28
-	y = 4
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_join_the_right_KMT_committee"
-		if = {
-			limit = {
-				GXC = {
-					is_faction_leader = yes
-					has_government = authoritarian_democrat
-				}
-			}
-			GXC = { country_event = yun.518 }
-			else = {
-				save_global_event_target_as = yunnan_R_KMT_faction_leader
-
-			create_faction_from_template = { 
-				template = faction_template_generic_dominance              
-				name = yunnan_R_KMT_faction
-				icon = "GFX_faction_guomindang"
-			}				
-				set_potential_national_government = yes
-				if = {
-					limit = {
-						GXC = {
-							exists = yes
-							has_government = authoritarian_democrat
-						}
-					}
-					GXC = { country_event = yun.522 }
-				}
-			}
-		}
-	}
-	search_filters = { FOCUS_FILTER_POLITICAL }
-}
-shared_focus = {
-	id = YUN_Kuomintang_government_Inititative
-	icon = GFX_Goal_Kuomintang_Government_Initiative
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_join_the_right_KMT_committee
-		focus = YUN_join_the_left_KMT_committee
-	}
-	ai_will_do = {
-		factor = 50
-	}
-	available = {
-		has_government = social_liberal
-		is_subject = no
-	}
-	x = 27
-	y = 5
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Kuomintang_government_Inititative"
-		custom_effect_tooltip = YUN_proclaim_the_KMT
-		hidden_effect = {
-			every_country = {
-				limit = {
-					OR = {
-						tag = GXC
-						tag = SZC
-						tag = HNN
-						tag = CHI
-					}
-					is_faction_leader = yes
-					is_in_faction_with = YUN
-				}
-				PREV = { country_event = yun.520 }
-			}
-			country_event = {
-				id = yun.328 days = 30
-			}
-		}
-		set_cosmetic_tag = YUN_NRA
-	}
-}
-shared_focus = {
-	id = YUN_Enter_Yangtze_River2
-	icon = GFX_YUN_goal_attack_hunnan
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Kuomintang_government_Inititative
-		focus = YUN_gear_up_for_war
-	}
-	ai_will_do = {
-		factor = 10
-	}
-	available = {
-		has_war = no
-		is_subject = no
-	}
-	bypass = {
-		HNN = {
-			OR = {
-				exists = no
-				is_subject_of = YUN
-			}
-		}
-	}
-	x = 24
-	y = 6
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Enter_Yangtze_River2"
-		custom_effect_tooltip = YUN_attack_hunnan
-		hidden_effect = {
-			country_event = yun.115
-		}
-	}
-
-}
-shared_focus = {
-	id = YUN_Secure_South_China
-	icon = GFX_YUN_Goal_Secure_Southern_China
-	cost = 3.6
-	prerequisite = {
-		focus = YUN_Kuomintang_government_Inititative
-	}
-	available = {
-		has_war = no
-		is_subject = no
-	}
-	bypass = {
-		NOT = {
-			country_exists = GXC
-			country_exists = HNN
-			country_exists = SZC
-		}
-	}
-	ai_will_do = {
-		factor = 10
-	}
-	x = 28
-	y = 6
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Secure_South_China"
-		custom_effect_tooltip = YUN_Secure_Southern_China
-	}
-}
-
-shared_focus = {
-	id = YUN_Deal_with_the_leftie_KMT
-	icon = GFX_YUN_Goal_Deal_with_the_Left_KMT
-	cost = 3.6
-	prerequisite = {
-		focus = YUN_Kuomintang_government_Inititative
-	}
-	available = {
-		has_war = no
-		is_subject = no
-		NOT = {
-			CHI = {
-				is_in_faction_with = YUN
-			}
-		}
-		##you should border CHI to declare on 'em
-		OR = {
-			has_subject = GXC
-			owns_state = 593 	##yuehai
-			CHI = { owns_state = 593 }
-			owns_state = 602	##xiangjiang
-			CHI = { owns_state = 602 }
-		}
-	}
-	bypass = {
-		CHI = {
-			exists = no
-		}
-	}
-	ai_will_do = {
-		factor = 10
-	}
-	x = 26
-	y = 6
-
-	will_lead_to_war_with = CHI
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Deal_with_the_leftie_KMT"
-		declare_war_on = {
-			target = CHI
-			type = annex_everything
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-
-}
-
-shared_focus = {
-	id = YUN_Secure_Coastal_China
-	icon = GFX_YUN_Goal_Secure_Coastal_China
-	cost = 3.6
-	prerequisite = {
-		focus = YUN_Secure_South_China
-	}
-
-	prerequisite = {
-		focus = YUN_Deal_with_the_leftie_KMT
-	}
-	available = {
-		has_war = no
-		is_subject = no
-	}
-	bypass = {
-		AND = {
-			LEP = {
-				exists = no
-			}
-			ANQ = {
-				exists = no
-			}
-			SQI = {
-				exists = no
-			}
-		}
-	}
-	ai_will_do = {
-		factor = 10
-	}
-	x = 27
-	y = 7
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Secure_Coastal_China"
-		custom_effect_tooltip = YUN_Secure_Coastal_China_TT
-	}
-
-}
-
-shared_focus = {
-	id = YUN_secure_western_china
-	icon = GFX_YUN_Goal_Secure_Western_China
-	cost = 3.6
-	prerequisite = {
-		focus = YUN_Secure_Tibet2
-		focus = YUN_End_the_Monarchy
-	}
-	available = {
-		has_war = no
-		is_subject = no
-	}
-	bypass = {
-		AND = {
-			SHX = {
-				exists = no
-			}
-			XSM = {
-				exists = no
-			}
-			TAN = {
-				exists = no
-			}
-			TAN = {
-				exists = no
-			}
-			SIK = {
-				exists = no
-			}
-		}
-	}
-	ai_will_do = {
-		factor = 10
-	}
-	x = 23
-	y = 8
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_secure_western_china"
-		custom_effect_tooltip = YUN_Secure_western_China_TT
-	}
-
-}
-
-
-shared_focus = {
-	id = YUN_secure_northern_china
-	icon = GFX_YUN_Goal_Secure_Northern_China
-	cost = 3.6
-	prerequisite = {
-		focus = YUN_Secure_Coastal_China
-	}
-	prerequisite = {
-		focus = YUN_End_the_Monarchy
-	}
-	available = {
-		has_war = no
-		is_subject = no
-	}
-	bypass = {
-		FNG = {
-			exists = no
-		}
-	}
-	ai_will_do = {
-		factor = 10
-	}
-	x = 27
-	y = 8
-	will_lead_to_war_with = FNG
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_secure_northern_china"
-		declare_war_on = {
-			target = FNG
-			type = annex_everything
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-
-}
-
-
-shared_focus = {
-	id = YUN_Ultimatium_To_Sichuan2
-	icon = GFX_YUN_goal_attack_Sichuan
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_gear_up_for_war
-		focus = YUN_Kuomintang_government_Inititative
-	}
-	available = {
-		has_war = no
-		is_subject = no
-		NOT = {
-			SZC = {
-				is_in_faction_with = YUN
-			}
-		}
-	}
-	bypass = {
-		SZC = {
-			OR = {
-				has_government = social_liberal
-				exists = no
-				is_subject_of = YUN
-				is_in_faction_with = YUN
-			}
-		}
-	}
-	ai_will_do = {
-		factor = 10
-	}
-	x = 22
-	y = 6
-
-	will_lead_to_war_with = SZC
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Ultimatium_To_Sichuan2"
-		hidden_effect = {
-			country_event = yun.105
-		}
-		custom_effect_tooltip = YUN_going_to_war_with_Sichuan
-	}
-}
-shared_focus = {
-	id = YUN_End_the_Monarchy
-	icon = GFX_goal_AOG_Quell_Nobility
-	cost = 3.6
-	prerequisite = {
-		focus = YUN_Enter_Yangtze_River2
-	}
-	prerequisite = {
-		focus = YUN_Deal_with_the_leftie_KMT
-	}
-	available = {
-		has_war = no
-		is_subject = no
-		OR = {
-			is_neighbor_of = QIE
-			any_allied_country = {
-				is_neighbor_of = QIE
-			}
-		}
-	}
-	bypass = {
-		QIE = {
-			exists = no
-		}
-	}
-	ai_will_do = {
-		factor = 10
-	}
-	x = 25
-	y = 7
-	will_lead_to_war_with = QIE
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_End_the_Monarchy"
-		declare_war_on = {
-			target = QIE
-			type = annex_everything
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
-shared_focus = {
-	id = YUN_A_New_China
-	icon = GFX_focus_HKG_Salvation_China
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_End_the_Monarchy
-	}
-	ai_will_do = {
-		factor = 10
-	}
-	available = {
-		YUN = {
-			AND = {
-				owns_state = 613 #Nanjing
-				owns_state = 608 #Beijing
-			}
-		}
-	}
-	x = 25
-	y = 8
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_A_New_China"
-		set_cosmetic_tag = YUN_CHI_ROC
-		set_country_flag = has_united_china
-		add_political_power = 100
-		add_research_slot = 1
-		#load_focus_tree = { tree = YUN_KMT_United_Tree }
-		set_capital = { state = 608 } #Beijing
-	}
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH }
-}
-shared_focus = {
-	id = YUN_Secure_Tibet2
-	icon = GFX_YUN_Goal_Secure_Tibet
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_Ultimatium_To_Sichuan2
-	}
-	available = {
-		has_war = no
-		is_subject = no
-		TIB = {
-			exists = yes
-			NOT = {
-				is_subject_of = YUN
-			}
-			owns_state = 693
-		}
-	}
-	bypass = {
-		OR = {
-			TIB = {
-				exists = no
-			}
-			YUN = {
-				owns_state = 693
-			}
-		}
-	}
-	ai_will_do = {
-		modifier = {
-			factor = -10
-			has_war = yes
-		}
-	}
-	x = 22
-	y = 7
-
-	will_lead_to_war_with = TIB
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Secure_Tibet2"
-		country_event = yun.133
-	}
-}
-shared_focus = {
-	id = YUN_Exploit_Burma2
-	icon = GFX_YUN_Goal_Exploit_Burma
-	cost = 3.6
-	prerequisite = {
-		focus = YUN_gear_up_for_war
-	}
-	available = {
-		has_war = no
-		is_subject = no
-		BRM = {
-			exists = yes
-			NOT = {
-				is_subject_of = YUN
-			}
-		}
-	}
-	bypass = {
-		BRM = {
-			OR = {
-				is_subject_of = YUN
-				exists = no
-			}
-		}
-	}
-	ai_will_do = {
-		factor = 10
-		modifier = {
-			factor = -10
-			has_war = yes
-		}
-		modifier = {
-			factor = -50
-			BRM = {
-				is_in_faction = yes
-			}
-		}
-		modifier = {
-			factor = -50
-			BRM = {
-				overlord = {
-					strength_ratio = {
-						tag = PREV ratio > 1.0
-					}
-				}
-			}
-		}
-	}
-	x = 18
-	y = 6
-
-	will_lead_to_war_with = BRM
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Exploit_Burma2"
-		add_state_claim = 701
-		add_state_claim = 72
-		declare_war_on = {
-			target = BRM
-			type = annex_everything
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
-shared_focus = {
-	id = YUN_the_Siamese_Threat2
-	icon = GFX_YUN_Goal_The_Siamese_Threat
-	cost = 3.6
-	prerequisite = {
-		focus = YUN_Exploit_Burma2
-	}
-	available = {
-		72 = {
-			is_core_of = YUN
-		}
-		has_war = no
-		is_subject = no
-		SIA = {
-			exists = yes
-			NOT = {
-				is_subject_of = YUN
-			}
-		}
-	}
-	bypass = {
-		SIA = {
-			is_subject_of = YUN
-		}
-		YUN = {
-			owns_state = 756
-		}
-	}
-	ai_will_do = {
-		factor = 10
-		modifier = {
-			factor = -10
-			has_war = yes
-		}
-		modifier = {
-			factor = -50
-			BRM = {
-				overlord = {
-					strength_ratio = {
-						tag = PREV ratio < 3.0
-					}
-				}
-			}
-		}
-	}
-	x = 18
-	y = 7
-
-	will_lead_to_war_with = SIA
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_the_Siamese_Threat2"
-		add_state_claim = 756
-		declare_war_on = {
-			target = SIA
-			type = annex_everything
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-
-}
-shared_focus = {
-	id = YUN_Conquer_Indochina
-	icon = GFX_YUN_Goal_Conquer_IndoChina
-	cost = 3.6
-	prerequisite = {
-		focus = YUN_the_Siamese_Threat2
-	}
-	available = {
-		has_war = no
-		is_subject = no
-		OR = {
-			INC = {
-				exists = yes
-				NOT = {
-					is_subject_of = YUN
-				}
-			}
-			GEA = {
-				exists = yes
-				owns_state = 857
-				owns_state = 671
-			}
-		}
-	}
-	bypass = {
-		OR = {
-			INC = {
-				is_subject_of = YUN
-			}
-			YUN = {
-				owns_state = 857
-				owns_state = 671
-			}
-		}
-	}
-	ai_will_do = {
-		factor = 10
-		modifier = {
-			factor = -10
-			has_war = yes
-		}
-	}
-	will_lead_to_war_with = INC
-
-	x = 18
-	y = 8
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_Conquer_Indochina"
-		add_state_claim = 671
-		add_state_claim = 857
-		if = {
-			limit = {
-				INC = {
-					exists = yes
-					NOT = { has_war_with = GEA }
-					owns_state = 857
-					owns_state = 671
-				}
-			}
-			declare_war_on = {
-				target = INC
-				type = annex_everything
-			}
-		}
-		if = {
-			limit = {
-				GEA = {
-					exists = yes
-					owns_state = 857
-					owns_state = 671
-				}
-			}
-			declare_war_on = {
-				target = GEA
-				type = annex_everything
-			}
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
-
-shared_focus = {
-	id = YUN_the_mountain_fortress
-	icon = GFX_goal_NVN_Fortify_Fort_Defiance
-	cost = 7.2
-	prerequisite = {
-		focus = YUN_continue_isolation
-	}
-	ai_will_do = {
-		factor = 10
-	}
-	x = 18
-	y = 5
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus YUN_the_mountain_fortress"
-		swap_ideas = {
-			remove_idea = YUN_Long_Yun4_left
-			add_idea = YUN_Long_Yun5_left
-		}
-	}
-}	
 ####################
 ####Yunnan Tree#####
 ####By Drozdovite###
@@ -1230,14 +12,22 @@ shared_focus = {
 
 shared_focus = {
 		id = YUN_to_save_yunnan_from_itself
-		icon = GFX_goal_China_NPA
+		icon = GFX_goal_ideology_paternal_autocrat
 		cost = 5
-
-		
-		x = -10
-		y = 0
+	relative_position_id = YUN_initial_stabilization
+		prerequisite = {
+			focus = YUN_initial_stabilization
+		}
+		x = -7
+		y = 10
 		ai_will_do = { base = 100 }
-		
+		available = {
+			OR = {
+				has_country_flag = YUN_regionalists
+				has_country_flag = YUN_YUN_TOOK_OVER
+			}
+			
+		}
 
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_to_save_yunnan_from_itself"
@@ -1250,7 +40,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_retreating_into_isolation
 		icon = GFX_goal_nested_fortifications
-		cost = 6
+		cost = 5
 		x = 0
 		y = 1
 		relative_position_id = YUN_to_save_yunnan_from_itself
@@ -1271,7 +61,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_reorganising_the_yunnan_army
 		icon = GFX_focus_generic_full_social_mobilization
-		cost = 6
+		cost = 5
 		x = -2
 		y = 1
 		relative_position_id = YUN_to_save_yunnan_from_itself
@@ -1288,7 +78,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_dealing_with_the_southern_bandits
 		icon = GFX_focus_ITA_banda_carita
-		cost = 7
+		cost = 5
 		x = -1
 		y = 1
 		relative_position_id = YUN_reorganising_the_yunnan_army
@@ -1315,7 +105,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_protecting_our_commerce
 		icon = GFX_goal_generic_tackle_corruption
-		cost = 7
+		cost = 5
 		x = 0
 		y = 1
 		relative_position_id = YUN_dealing_with_the_southern_bandits
@@ -1334,7 +124,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_salvaging_tangs_reforms
 		icon = GFX_goal_develop_provinces
-		cost = 7
+		cost = 5
 		x = -1
 		y = 1
 		relative_position_id = YUN_retreating_into_isolation
@@ -1353,8 +143,8 @@ shared_focus = {
 
 	shared_focus = {
 		id = YUN_eliminating_internal_dissidents
-		icon = GFX_goal_RUS_oppression
-		cost = 7
+		icon = GFX_goal_NGR_at_dissent
+		cost = 5
 		x = 1
 		y = 1
 		relative_position_id = YUN_retreating_into_isolation
@@ -1391,7 +181,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_handling_external_affairs
 		icon = GFX_focus_chi_one_china_policy
-		cost = 7
+		cost = 5
 		x = 3
 		y = 1
 		relative_position_id = YUN_retreating_into_isolation
@@ -1408,7 +198,7 @@ shared_focus = {
 
 	shared_focus = {
 		id = YUN_claiming_the_southwest
-		icon = YUN_GFX_Goal_Secure_Southern_China
+		icon = GFX_YUN_Goal_Secure_Southern_China
 		cost = 5
 		x = -1
 		y = 1
@@ -1439,7 +229,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_expanding_our_universities
 		icon = GFX_goal_brain
-		cost = 6
+		cost = 5
 		x = -1
 		y = 1
 		relative_position_id = YUN_eliminating_internal_dissidents
@@ -1488,8 +278,8 @@ shared_focus = {
 
 	shared_focus = {
 		id = YUN_internal_affairs_reform_conference
-		icon = GFX_goal_QIE_assembly
-		cost = 7
+		icon = GFX_goal_CAL_council
+		cost = 5
 		x = 0
 		y = 1
 		relative_position_id = YUN_as_the_flowers_bloom
@@ -1501,17 +291,7 @@ shared_focus = {
 			change_ruling_party_popularity = yes
 			add_war_support = 0.05
 			add_stability = 0.05
-			custom_effect_tooltip = tooltip_white_line
-			YUN_improve_dian_qian_divide_effect = yes
-			if = {
-				limit = { NOT = { has_character = YUN_ye_gongchao } }
-				custom_effect_tooltip = tooltip_white_line
-				custom_effect_tooltip = available_political_advisor
-				show_ideas_tooltip = YUN_ye_gongchao_advisor
-				hidden_effect = {
-					YUN_ye_gongchao = { CHN_recruit_character_effect = yes }
-				}
-			}
+			add_ideas = YUN_dian_qian_divide_4_contender
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -1519,7 +299,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_governments_undertaker
 		icon = GFX_focus_generic_secret_service_agency
-		cost = 6
+		cost = 5
 		x = -1
 		y = 1
 		relative_position_id = YUN_internal_affairs_reform_conference
@@ -1560,16 +340,7 @@ shared_focus = {
 			else = {
 				add_political_power = 50
 			}
-			if = {
-				limit = { YUN_xu_zhichen = { is_political_advisor = yes } }
-				custom_effect_tooltip = YUN_xu_zhichen_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				add_one_random_military_factory = yes
-				add_stability = 0.02
-			}
-			else = {
-				custom_effect_tooltip = YUN_xu_zhichen_will_be_helpful_tt
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -1577,7 +348,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_harmony_in_the_land_harmony_at_home
 		icon = GFX_goal_SZC_improvised_farming_machinery
-		cost = 7
+		cost = 5
 		x = 1
 		y = 1
 		relative_position_id = YUN_internal_affairs_reform_conference
@@ -1585,27 +356,14 @@ shared_focus = {
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_harmony_in_the_land_harmony_at_home"
-			YUN_PGP_medium_effect = yes
 			add_one_random_infrastructure = yes
 			add_one_random_infrastructure = yes
 			every_core_state = {
-				limit = {
-					is_china_claim_area = yes
-					is_valid_state_for_development = yes
-				}
 				random_select_amount = 3
 				increase_state_category_by_one_level = yes
 			}
 			custom_effect_tooltip = tooltip_white_line
-			YUN_NPA_improve_popular_support_effect = yes
-			if = {
-				limit = { NOT = { has_character = YUN_wang_weiyu } }
-				custom_effect_tooltip = tooltip_white_line
-				YUN_wang_weiyu = { custom_effect_tooltip = character_becomes_a_general }
-				hidden_effect = {
-					YUN_wang_weiyu = { CHN_recruit_character_effect = yes }
-				}
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -1613,7 +371,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_kunming_as_a_safehaven
 		icon = GFX_focus_generic_university_3
-		cost = 6
+		cost = 5
 		x = 0
 		y = 2
 		relative_position_id = YUN_internal_affairs_reform_conference
@@ -1623,30 +381,13 @@ shared_focus = {
 			log = "[GetLogRoot]: Focus Completed YUN_kunming_as_a_safehaven"
 			add_research_slot_until_five = yes
 			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = { YUN_cun_shusheng = { is_political_advisor = yes } }
-				custom_effect_tooltip = YUN_cun_shusheng_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				add_tech_bonus = {
+			add_tech_bonus = {
 					name = YUN_kunming_as_a_safehaven
 					uses = 2
 					bonus = 0.25
 					category = electronics
 					category = cat_production
 				}
-			}
-			else = {
-				custom_effect_tooltip = YUN_cun_shusheng_will_be_helpful_tt
-			}
-			if = {
-				limit = { NOT = { has_character = YUN_li_wenyi } }
-				custom_effect_tooltip = tooltip_white_line
-				custom_effect_tooltip = available_political_advisor
-				show_ideas_tooltip = YUN_li_wenyi_advisor
-				hidden_effect = {
-					YUN_li_wenyi = { CHN_recruit_character_effect = yes }
-				}
-			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -1659,12 +400,18 @@ shared_focus = {
 		y = 1
 		relative_position_id = YUN_as_the_flowers_bloom
 		prerequisite = { focus = YUN_as_the_flowers_bloom }
-		available = { is_subject = yes }
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_raise_the_banner_of_the_southwest"
-			add_war_support = 0.05
-			CHN_add_to_civil_war_preparation_effect = yes
+			add_war_support = 0.15
+				create_wargoal = {
+					target = PRC
+					type = annex_everything
+				}
+				create_wargoal = {
+					target = GXC
+					type = annex_everything
+				}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -1672,7 +419,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_unexpected_development
 		icon = GFX_goal_beijing_begonia
-		cost = 6
+		cost = 5
 		x = 0
 		y = 1
 		relative_position_id = YUN_raise_the_banner_of_the_southwest
@@ -1680,22 +427,32 @@ shared_focus = {
 		available = {
 			is_subject = no
 			controls_state = 592 #Canton - we do controls not owns state for Beijing so just keeping the same logic. Hopefully the below 2 will prevent any overlap.
-			#GXC = { exists = no }
-			CHN_no_aligned_unifier_exists_trigger = yes
+			GXC = { exists = no }
+			
 		}
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_the_unexpected_development"
-			country_event = YUN.lategame.840 #Yunnan Rises Again
-			custom_effect_tooltip = tooltip_white_line
-			china_enable_all_demand_submission_decisions = yes
+			set_potential_national_government = yes
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = GXC
+						is_core_of = PRC
+					}
+				}
+				YUN = {
+					add_state_core = PREV
+				}
+			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 
 	shared_focus = {
 		id = YUN_the_yunnan_uprising
-		icon = GFX_goal_China_Beiyang_Mass_Assault
+		icon = GFX_goal_chinese_instructors
 		cost = 3
 		x = 7
 		y = 1
@@ -1710,10 +467,7 @@ shared_focus = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_the_yunnan_uprising"
 			add_war_support = 0.1
-			if = {
-				limit = { has_global_flag = allow_sound_events_flag }
-				hidden_effect = { scoped_play_song = qi_zheng_piao_piao }
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
 	}
@@ -1771,8 +525,7 @@ shared_focus = {
 					owner = ROOT
 				}
 			}
-			YUN_civil_war_NPA_effect = yes
-			add_command_power = 100
+			
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -1853,34 +606,16 @@ shared_focus = {
 
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_a_nation_of_valleys_and_caves"
-			every_character = {
-				limit = {
-					is_unit_leader = yes
-					NOT = { has_trait = trickster }
-				}
-				random_select_amount = 2
-				add_trait = {
-					trait = trickster
-				}
-			}
-			every_character = {
-				limit = {
-					is_unit_leader = yes
-				}
-				add_temporary_buff_to_units = {
-					combat_offense = 0.2
-					combat_breakthrough = 0.2
-					cannot_retreat_while_attacking = 1.0
-					days = 42
-				}
-			}
+			add_command_power = 100
+			set_technology = { jungle_warfare = 1 }
+			set_technology = { forest_warfare = 1 }
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
 
 	shared_focus = {
 		id = YUN_revel_in_the_republican_tradition
-		icon = GFX_goal_harness_peoples_will
+		icon = GFX_goal_FNG_unification_conference
 		cost = 5
 		x = 1
 		y = 1
@@ -1893,31 +628,14 @@ shared_focus = {
 
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_revel_in_the_republican_tradition"
-			every_character = {
-				limit = {
-					is_army_leader = yes
-					OR = {
-						has_character_flag = YUN_LYC_character_flag
-						has_character_flag = YUN_HRY_character_flag
-						has_character_flag = YUN_BEI_character_flag
-					}
-				}
-				add_timed_unit_leader_trait = {
-					trait = trait_determined
-					days = 100
-				}
-			}
-			add_timed_idea = {
-				idea = YUN_celebrating_revolutionary_tradition
-				days = 100
-			}
+			add_ideas = YUN_celebrating_revolutionary_tradition
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
 
 	shared_focus = {
 		id = YUN_muster_our_fellow_comrades
-		icon = GFX_goal_RUS_heroism
+		icon = GFX_goal_FNG_Military_Man
 		cost = 3
 		x = -1
 		y = 1
@@ -1934,17 +652,14 @@ shared_focus = {
 				type = arms_factory
 				level = 1
 			}
-			add_timed_idea = {
-				idea = YUN_hinging_everything_on_total_victory
-				days = 100
-			}
+			add_ideas = YUN_hinging_everything_on_total_victory
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
 
 	shared_focus = {
 		id = YUN_the_undefeatable_heroes
-		icon = GFX_Goal_YUN_legacy_of_national_protection_war
+		icon = GFX_Goal_YUN_Sinitic_Dominance
 		cost = 5
 		x = 1
 		y = 1
@@ -1957,14 +672,7 @@ shared_focus = {
 
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_the_undefeatable_heroes"
-			if = {
-				limit = { NOT = { owns_state = 613 } } #Nanjing
-				custom_effect_tooltip = YUN_the_undefeatable_heroes_tt
-				add_timed_idea = {
-					idea = YUN_chinas_praetorians
-					days = 100
-				}
-			}
+			add_ideas = YUN_chinas_praetorians
 			if = {
 				limit = { controls_state = 1051 } #Guiyang
 				1051 = {
@@ -1999,32 +707,29 @@ shared_focus = {
 
 	shared_focus = {
 		id = YUN_the_yunnan_dragon
-		icon = GFX_goal_YUN_long_yun_dragon_of_yunnan
-		cost = 6
+		icon = GFX_YUN_Goal_LONG_YUN_NOMBA_ONE
+		cost = 5
 		x = -3
 		y = 1
-		available = { has_country_leader = { character = YUN_long_yun } }
+		available = { 
+			has_country_leader = {
+				name = "Long Yun"
+				ruling_only = yes
+			}
+			has_country_leader = {
+				name = "龙云"
+				ruling_only = yes
+			}
+		}
 		relative_position_id = YUN_as_the_flowers_bloom
 		prerequisite = { focus = YUN_as_the_flowers_bloom }
 		mutually_exclusive = { focus = YUN_junta_of_many_faces }
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_the_yunnan_dragon"
-			YUN_LYC_large_effect = yes
+			
 			add_stability = 0.05
-			custom_effect_tooltip = tooltip_white_line
-			effect_tooltip = {
-				YUN_long_yun = {
-					add_trait = {
-						trait = YUN_king_of_yunnan
-						ideology = authoritarian_democrat_subtype
-					}
-				}
-			}
-			hidden_effect = {
-				set_temp_variable = { trait_token = token:YUN_king_of_yunnan }
-				YUN_long_yun = { add_trait_to_all_country_leader_roles = yes }
-			}
+			add_country_leader_trait = YUN_king_of_yunnan
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -2032,7 +737,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_roots_of_a_democratic_fortress
 		icon = GFX_focus_generic_bastion_of_democracy
-		cost = 8
+		cost = 5
 		x = 0
 		y = 1
 		ai_will_do = { base = 100 }
@@ -2043,25 +748,12 @@ shared_focus = {
 
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_the_roots_of_a_democratic_fortress"
-			YUN_CMS_large_effect = yes
-			YUN_YCD_large_effect = yes
+			
 			add_political_power = 35
 			custom_effect_tooltip = tooltip_white_line
-			set_temp_variable = { coalition_partner_var = token:social_democrat }
-			add_to_coalition = yes
-			set_temp_variable = { coalition_partner_var = token:social_liberal }
-			add_to_coalition = yes
-			custom_effect_tooltip = tooltip_white_line
-			YUN_NPA_improve_popular_support_effect = yes
-			if = {
-				limit = { NOT = { has_character = YUN_su_honggang } }
-				custom_effect_tooltip = tooltip_white_line
-				custom_effect_tooltip = available_political_advisor
-				show_ideas_tooltip = YUN_su_honggang_advisor
-				hidden_effect = {
-					YUN_su_honggang = { CHN_recruit_character_effect = yes }
-				}
-			}
+			add_socdem_to_coalition = yes
+			add_soclib_to_coalition = yes
+			add_ideas = YUN_NPA_popular_support_4
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2069,7 +761,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_security_as_a_provincial_affair
 		icon = GFX_goal_SHX_united_front
-		cost = 8
+		cost = 5
 		x = -2
 		y = 1
 		ai_will_do = { base = 100 }
@@ -2083,10 +775,7 @@ shared_focus = {
 			add_stability = 0.05
 			add_war_support = 0.05
 			custom_effect_tooltip = tooltip_white_line
-			add_timed_idea = {
-				idea = YUN_maintaining_open_mindedness
-				days = 315
-			}
+			add_ideas = YUN_maintaining_open_mindedness
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2094,27 +783,39 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_junta_of_many_faces
 		icon = GFX_goal_generic_council
-		cost = 6
+		cost = 5
 		x = -8
 		y = 1
-		available = { has_country_leader = { character = YUN_hu_ruoyu } }
+		available = { 
+			OR = {
+				has_country_leader = {
+					name = "Hu Ruoyu"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "胡若愚"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "Lu Han"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "卢汉"
+					ruling_only = yes
+				}
+			}
+		}
 		relative_position_id = YUN_as_the_flowers_bloom
 		prerequisite = { focus = YUN_as_the_flowers_bloom }
 		mutually_exclusive = { focus = YUN_the_yunnan_dragon }
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_junta_of_many_faces"
-			YUN_HRY_large_effect = yes
+			
 			add_war_support = 0.05
-			custom_effect_tooltip = tooltip_white_line
-			YUN_zhang_ruji = { promote_leader = yes }
-			YUN_li_Xuanting = { promote_leader = yes }
-			if = {
-				limit = { check_variable = { CHN_military_disarray_fixes_needed_var > 0 } }
-				subtract_from_variable = { CHN_military_disarray_fixes_needed_var = 1 }
-				custom_effect_tooltip = tooltip_white_line
-				CHN_improve_military_disarray_effect = yes
-			}
+			
+			
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -2122,7 +823,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_guarantee_of_stability
 		icon = GFX_goal_ANQ_nationalist_credibility
-		cost = 6
+		cost = 5
 		x = 1
 		y = 1
 		ai_will_do = { base = 100 }
@@ -2135,12 +836,7 @@ shared_focus = {
 			log = "[GetLogRoot]: Focus Completed YUN_guarantee_of_stability"
 			add_stability = 0.05
 			add_political_power = 35
-			YUN_YCC_medium_effect = yes
-			YUN_HRY_medium_effect = yes
-			YUN_CMS_small_effect = yes
-			YUN_YCD_small_effect = yes
-			custom_effect_tooltip = tooltip_white_line
-			YUN_NPA_improve_popular_support_effect = yes
+			add_ideas = YUN_NPA_popular_support_4
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2148,7 +844,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_to_rebel_against_isolation
 		icon = GFX_goal_ANQ_use_anticoncessionists
-		cost = 8
+		cost = 5
 		x = -1
 		y = 1
 		ai_will_do = { base = 100 }
@@ -2161,13 +857,10 @@ shared_focus = {
 			log = "[GetLogRoot]: Focus Completed YUN_to_rebel_against_isolation"
 			add_stability = -0.03
 			add_war_support = 0.06
-			YUN_lu_han = { gain_xp = 300 }
+			
 			add_one_random_military_factory = yes
-			custom_effect_tooltip = tooltip_white_line
-			add_timed_idea = {
-				idea = YUN_revival_of_export_militarism
-				days = 365
-			}
+			add_ideas = YUN_revival_of_export_militarism
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2185,34 +878,9 @@ shared_focus = {
 			log = "[GetLogRoot]: Focus Completed YUN_establish_the_economic_committee"
 			custom_effect_tooltip = YUN_economic_committee_tt
 			add_ideas = YUN_the_yunnan_provincial_economic_committee
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = { YUN_lu_chongren = { is_political_advisor = yes } }
-				custom_effect_tooltip = YUN_lu_chongren_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				add_one_random_civilian_factory = yes
-				YUN_LYC_small_effect = yes
-			}
-			else = {
-				custom_effect_tooltip = YUN_lu_chongren_will_be_helpful_tt
-			}
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = {
-					YUN_lu_chongren = { is_hired_as_advisor = no }
-					has_free_political_advisor_slot = yes
-				}
-				hidden_effect = {
-					activate_advisor = YUN_lu_chongren_advisor
-				}
-				custom_effect_tooltip = if_not_yet_hired_will_hire
-				show_ideas_tooltip = YUN_lu_chongren_advisor
-			}
-			else = {
-				add_political_power = 35
-			}
-			custom_effect_tooltip = tooltip_white_line
-			CHN_improve_economic_devastation_effect = yes
+			add_one_random_civilian_factory = yes
+			add_political_power = 35
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2220,7 +888,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_a_renewed_land_survey
 		icon = GFX_goal_OTT_Land_Reform
-		cost = 8
+		cost = 5
 		x = -2
 		y = 1
 		relative_position_id = YUN_establish_the_economic_committee
@@ -2230,8 +898,6 @@ shared_focus = {
 			log = "[GetLogRoot]: Focus Completed YUN_a_renewed_land_survey"
 			every_core_state = {
 				limit = {
-					is_china_claim_area = yes
-					is_valid_state_for_development = yes
 					NOT = { infrastructure > 3 }
 				}
 				random_select_amount = 4
@@ -2239,7 +905,6 @@ shared_focus = {
 			}
 			custom_effect_tooltip = tooltip_white_line
 			YUN_provincial_economic_committee_effect = yes
-			CHN_improve_economic_devastation_effect = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2247,7 +912,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_rotunda_of_finance
 		icon = GFX_goal_generic_deals
-		cost = 8
+		cost = 5
 		x = 0
 		y = 1
 		relative_position_id = YUN_establish_the_economic_committee
@@ -2255,32 +920,15 @@ shared_focus = {
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_the_rotunda_of_finance"
-			if = {
-				limit = { YUN_li_peiyan = { is_political_advisor = yes } }
-				custom_effect_tooltip = YUN_li_peiyan_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				add_stability = 0.03
+			add_stability = 0.03
 				add_tech_bonus = {
 					name = YUN_the_rotunda_of_finance
 					uses = 2
 					bonus = 0.2
 					category = cat_production
 				}
-				YUN_LYC_small_effect = yes
-			}
-			else = {
-				custom_effect_tooltip = YUN_li_peiyan_will_be_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				add_tech_bonus = {
-					name = YUN_the_rotunda_of_finance
-					uses = 2
-					bonus = 0.2
-					category = cat_production
-				}
-			}
-			custom_effect_tooltip = tooltip_white_line
+			
 			YUN_provincial_economic_committee_effect = yes
-			CHN_improve_economic_devastation_effect = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2288,7 +936,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_teaching_student_self_reliance
 		icon = GFX_focus_generic_military_academy
-		cost = 7
+		cost = 5
 		x = 1
 		y = 1
 		relative_position_id = YUN_a_renewed_land_survey
@@ -2299,20 +947,7 @@ shared_focus = {
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_teaching_student_self_reliance"
-			if = {
-				limit = { YUN_cun_shusheng = { is_political_advisor = yes } }
-				custom_effect_tooltip = YUN_cun_shusheng_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				add_timed_idea = {
-					idea = YUN_spartan_education
-					days = 180
-				}
-			}
-			else = {
-				custom_effect_tooltip = YUN_cun_shusheng_will_be_helpful_tt
-			}
-			custom_effect_tooltip = tooltip_white_line
-			remove_ideas = CHN_national_illiteracy1_idea
+			add_ideas = YUN_spartan_education
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2320,7 +955,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_southwestern_metropolis
 		icon = GFX_goal_generic_autarky
-		cost = 7
+		cost = 5
 		x = 1
 		y = 1
 		relative_position_id = YUN_the_rotunda_of_finance
@@ -2328,17 +963,7 @@ shared_focus = {
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_the_southwestern_metropolis"
-			if = {
-				limit = { YUN_zhang_banghan = { is_political_advisor = yes } }
-				custom_effect_tooltip = YUN_zhang_banghan_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				325 = { prioritize_state = yes }
-				add_one_random_synthetic_refinery = yes
-			}
-			else = {
-				custom_effect_tooltip = YUN_zhang_banghan_will_be_helpful_tt
-			}
-			custom_effect_tooltip = tooltip_white_line
+			add_one_random_synthetic_refinery = yes
 			add_political_power = 40
 			random_owned_controlled_state = {
 				prioritize = { 325 }
@@ -2365,7 +990,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_establishing_a_provincial_monopoly
 		icon = GFX_focus_generic_central_planning
-		cost = 8
+		cost = 5
 		x = 0
 		y = 2
 		relative_position_id = YUN_a_renewed_land_survey
@@ -2375,12 +1000,7 @@ shared_focus = {
 			log = "[GetLogRoot]: Focus Completed YUN_establishing_a_provincial_monopoly"
 			add_stability = 0.05
 			add_war_support = 0.05
-			custom_effect_tooltip = tooltip_white_line
-			add_timed_idea = {
-				idea = YUN_establishing_a_provincial_monopoly_idea
-				days = 280
-			}
-			custom_effect_tooltip = tooltip_white_line
+			add_ideas = YUN_establishing_a_provincial_monopoly_idea
 			YUN_provincial_economic_committee_effect = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -2388,8 +1008,8 @@ shared_focus = {
 
 	shared_focus = {
 		id = YUN_reorganise_the_fudian_bank
-		icon = YUN_GFX_Goal_FuDian_Bank_Reorganisation
-		cost = 8
+		icon = GFX_YUN_Goal_FuDian_Bank_Reorganization
+		cost = 5
 		x = 0
 		y = 2
 		relative_position_id = YUN_the_rotunda_of_finance
@@ -2397,25 +1017,7 @@ shared_focus = {
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_reorganise_the_fudian_bank"
-			YUN_YCC_large_effect = yes
-			if = {
-				limit = {
-					YUN_miao_yuntai = { is_political_advisor = yes }
-				}
-				custom_effect_tooltip = YUN_miao_yuntai_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				add_timed_idea = {
-					idea = YUN_architect_of_a_new_china
-					days = 400
-				}
-			}
-			else = {
-				custom_effect_tooltip = YUN_miao_yuntai_will_be_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-			}
-			custom_effect_tooltip = GXC_postwar_economic_reconversion_tt
-			custom_effect_tooltip = tooltip_white_line
-			CHN_add_civilian_industry_effect = yes
+			add_ideas = YUN_architect_of_a_new_china
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2423,7 +1025,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_commerces_wartime_contribution
 		icon = GFX_focus_generic_military_industry
-		cost = 8
+		cost = 5
 		x = -1
 		y = 1
 		relative_position_id = YUN_establishing_a_provincial_monopoly
@@ -2437,23 +1039,7 @@ shared_focus = {
 				bonus = 1
 				category = train_tech
 			}
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = { YUN_miao_yuntai = { is_political_advisor = yes } }
-				custom_effect_tooltip = YUN_miao_yuntai_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				add_timed_idea = {
-					idea = YUN_industrialisation_by_the_train_track
-					days = 280
-				}
-			}
-			else = {
-				custom_effect_tooltip = YUN_miao_yuntai_will_be_helpful_tt
-			}
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = GXC_private_property_tt
-			custom_effect_tooltip = tooltip_white_line
-			CHN_add_infra_effect = yes
+			add_ideas = YUN_industrialisation_by_the_train_track
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2470,20 +1056,8 @@ shared_focus = {
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_militarisation_to_save_the_nation"
-			CHN_build_military_industry_effect = yes
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = { YUN_lu_chongren = { is_political_advisor = yes } }
-				custom_effect_tooltip = YUN_lu_chongren_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
 				every_controlled_state = {
-					limit = {
-						china_is_chinese_core_or_claim_trigger = yes
-						OR = {
-							has_state_category = five
-							has_state_category = six
-						}
-					}
+					
 					random_select_amount = 3
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
@@ -2491,10 +1065,6 @@ shared_focus = {
 						level = 1
 					}
 				}
-			}
-			else = {
-				custom_effect_tooltip = YUN_lu_chongren_will_be_helpful_tt
-			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2502,7 +1072,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_maximise_tax_revenues
 		icon = GFX_goal_generic_seize_money
-		cost = 8
+		cost = 5
 		x = 0
 		y = 2
 		relative_position_id = YUN_reorganise_the_fudian_bank
@@ -2510,26 +1080,46 @@ shared_focus = {
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_maximise_tax_revenues"
-			custom_effect_tooltip = GXC_nationalising_vital_resources_tt
-			custom_effect_tooltip = tooltip_white_line
-			CHN_add_resource_effects = yes
+	if = {
+		limit = { 592 = { is_controlled_by_ROOT_or_subject = yes } } #Canton
+		592 = {
+			add_resource = { type = steel amount = 4 }
+		}
+	}
+	if = {
+		limit = { 595 = { is_controlled_by_ROOT_or_subject = yes } } #Nanping
+		595 = {
+			add_resource = { type = tungsten amount = 4 }
+		}
+	}
+	if = {
+		limit = { 613 = { is_controlled_by_ROOT_or_subject = yes } } #Nanjing
+		613 = {
+			add_resource = { type = steel amount = 4 }
+		}
+	}
+	if = {
+		limit = { 608 = { is_controlled_by_ROOT_or_subject = yes } } #Beijing
+		608 = {
+			add_resource = { type = steel amount = 4 }
+		}
+	}
+	if = {
+		limit = { 1048 = { is_controlled_by_ROOT_or_subject = yes } } #Wuhan
+		1048 = {
+			add_resource = { type = steel amount = 4 }
+		}
+	}
 			add_tech_bonus = {
 				name = YUN_maximise_tax_revenues
 				bonus = 0.5
 				uses = 1
 				category = excavation_tech
 			}
-			if = {
-				limit = { YUN_wang_weiyu = { is_political_advisor = yes } }
-				custom_effect_tooltip = YUN_wang_weiyu_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				add_stability = 0.03
-				add_war_support = 0.03
-				add_one_random_infrastructure = yes
-			}
-			else = {
-				custom_effect_tooltip = YUN_wang_weiyu_will_be_helpful_tt
-			}
+			add_stability = 0.03
+			add_war_support = 0.03
+			add_one_random_infrastructure = yes
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2540,11 +1130,14 @@ shared_focus = {
 
 	shared_focus = {
 		id = YUN_cai_es_dream_realised
-		icon = GFX_goal_YUN_cai_e
-		cost = 6
+		icon = GFX_goal_YUN_Cai_E_Art_War
+		cost = 5
 
 		relative_position_id = YUN_kunming_as_a_safehaven
-
+		available = {
+			owns_state = 608
+			has_country_flag = has_united_china 
+		}
 		x = 0
 		y = 2
 		ai_will_do = { base = 100 }
@@ -2555,14 +1148,17 @@ shared_focus = {
 			add_war_support = 0.05
 			add_stability = -0.10
 			army_experience = 10
+			add_ideas = YUN_the_state_within_the_state
+			add_ideas = YUN_devastating_economic_catastrophe
+			add_ideas = YUN_inexperience_and_lack_of_cohesion
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 
 	shared_focus = {
 		id = YUN_obligations_of_the_military
-		icon = GFX_goal_China_Beiyang_soldier
-		cost = 8
+		icon = GFX_TRM_Fengtian_Military
+		cost = 5
 
 		relative_position_id = YUN_cai_es_dream_realised
 
@@ -2596,7 +1192,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_financial_regulation_committee
 		icon = GFX_focus_ITA_devaluate_the_lire
-		cost = 8
+		cost = 5
 
 		relative_position_id = YUN_cai_es_dream_realised
 
@@ -2610,11 +1206,7 @@ shared_focus = {
 
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_the_financial_regulation_committee"
-			YUN_YCC_large_effect = yes
-			set_temp_variable = { coalition_partner_var = token:market_liberal }
-			add_to_coalition = yes
-			set_temp_variable = { coalition_stability_var = 0.75 }
-			set_coalition_stability_market_liberal = yes
+			add_marlib_to_coalition = yes
 			custom_effect_tooltip = tooltip_white_line
 			add_ideas = YUN_economic_regulation_committee
 			custom_effect_tooltip = tooltip_white_line
@@ -2629,7 +1221,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_building_a_shared_nation_state
 		icon = GFX_focus_chi_one_china_policy
-		cost = 8
+		cost = 5
 
 		relative_position_id = YUN_cai_es_dream_realised
 
@@ -2644,10 +1236,7 @@ shared_focus = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_building_a_shared_nation_state"
 			add_stability = 0.03
-			add_timed_idea = {
-				idea = YUN_responsibility_for_the_nation_state
-				days = 280
-			}
+			add_ideas = YUN_responsibility_for_the_nation_state
 			custom_effect_tooltip = tooltip_white_line
 			swap_ideas = {
 				remove_idea = YUN_inexperience_and_lack_of_cohesion
@@ -2660,7 +1249,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_restoring_harmony_to_the_countryside
 		icon = GFX_focus_generic_agriculture
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_the_financial_regulation_committee
 
@@ -2675,15 +1264,15 @@ shared_focus = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_restoring_harmony_to_the_countryside"
 			add_political_power = 100
-			china_generic_land_reform_setup = yes
+			add_one_random_civilian_factory = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 
 	shared_focus = {
 		id = YUN_all_under_the_king
-		icon = GFX_goal_YUN_long_yun_dragon_of_yunnan
-		cost = 6
+		icon = GFX_YUN_Goal_LONG_YUN_NOMBA_ONE
+		cost = 5
 
 		relative_position_id = YUN_restoring_harmony_to_the_countryside
 
@@ -2699,16 +1288,27 @@ shared_focus = {
 			focus = YUN_duel_of_twin_dragons
 		}
 
-		available = {
-			has_country_leader = { character = YUN_long_yun }
+		available = { 
+			has_country_leader = {
+				name = "Long Yun"
+				ruling_only = yes
+			}
+			has_country_leader = {
+				name = "龙云"
+				ruling_only = yes
+			}
 		}
 
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_all_under_the_king"
-			custom_effect_tooltip = {
-				localization_key = CHN_deduct_stab_relative_to_ideology_tt
-				IDEOLOGY = paternal_autocrat_coloured
-			}
+		create_country_leader = {
+			name = "龙云"
+			desc = "POLITICS_YUNNAN_LONG_YUN_DESC"
+			picture = "gfx/leaders/YUN/Portrait_Yunnan_leader_Long_Yun.png"
+			expire = "1.1.1"
+			traits = { YUN_king_of_yunnan }
+			ideology = authdem_junta_subtype
+		}
 			set_temp_variable = { YUN_stability_loss_temp_var = ROOT.party_popularity@paternal_autocrat }
 			multiply_temp_variable = { YUN_stability_loss_temp_var = -1 }
 			multiply_temp_variable = { YUN_stability_loss_temp_var = 0.5 }
@@ -2721,9 +1321,7 @@ shared_focus = {
 			custom_effect_tooltip = tooltip_white_line
 			add_political_power = 50
 			army_experience = 50
-			hidden_effect = {
-				country_event = { id = YUN.endgame.630 days = 3 } #The National Protection Cabinet
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2731,7 +1329,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_restraining_the_revolution
 		icon = GFX_goal_SHX_republican_flags
-		cost = 8
+		cost = 5
 
 		relative_position_id = YUN_all_under_the_king
 
@@ -2757,52 +1355,12 @@ shared_focus = {
 				ideology = authoritarian_democrat
 				popularity = 0.05
 			}
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = { YUN_long_yun = { has_trait = YUN_king_of_yunnan } }
-				effect_tooltip = {
-					swap_ruler_traits = {
-						remove = YUN_king_of_yunnan
-						add = YUN_dian_dragon
-					}
-				}
-				hidden_effect = {
-					YUN_long_yun = {
-						set_temp_variable = { remove_trait_token = token:YUN_king_of_yunnan }
-						set_temp_variable = { add_trait_token = token:YUN_dian_dragon }
-						swap_traits_in_all_country_leader_roles = yes
-					}
-				}
-			}
-			else = {
-				effect_tooltip = {
-					YUN_long_yun = {
-						add_trait = {
-							trait = YUN_dian_dragon
-							ideology = authoritarian_democrat_subtype
-						}
-					}
-				}
-				hidden_effect = {
-					set_temp_variable = { trait_token = token:YUN_dian_dragon }
-					YUN_long_yun = { add_trait_to_all_country_leader_roles = yes }
-				}
+			swap_country_leader_traits = { 
+				remove =  YUN_king_of_yunnan
+				add =  YUN_dian_dragon
 			}
 			custom_effect_tooltip = tooltip_white_line
-			YUN = { set_variable = { generic_raise_stability_decision_cost = 75 } }
-			custom_effect_tooltip = reduce_stability_decision_cost_twenty_five_percent_tt
-			custom_effect_tooltip = tooltip_white_line
-			YUN = {
-				YUN_kong_xiangxi = { CHN_recruit_character_effect = yes }
-				YUN_yang_yongtai = { CHN_recruit_character_effect = yes }
-			}
-			GXC = {
-				GXC_ma_junwu = { CHN_recruit_character_effect = yes }
-			}
-			QIE = {
-				QIE_gu_zhongxiu = { CHN_recruit_character_effect = yes }
-			}
-			custom_effect_tooltip = tooltip_white_line
+			
 			YUN_NPA_improve_popular_support_effect = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -2811,7 +1369,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_adherence_to_the_new_literati
 		icon = GFX_goal_ANQ_convince_intellectuals
-		cost = 8
+		cost = 5
 
 		relative_position_id = YUN_restraining_the_revolution
 
@@ -2839,54 +1397,16 @@ shared_focus = {
 				ideology = social_conservative
 				popularity = 0.03
 			}
-			custom_effect_tooltip = tooltip_white_line
-			QIE = {
-				QIE_hu_shih = { CHN_recruit_character_effect = yes }
-				QIE_shen_junru = { CHN_recruit_character_effect = yes }
-				QIE_wu_xianzi = { CHN_recruit_character_effect = yes }
-			}
-			GXC = {
-				GXC_zhang_junmai = { CHN_recruit_character_effect = yes }
-				GXC_Zhang_dongsun = { CHN_recruit_character_effect = yes }
-			}
-			custom_effect_tooltip = tooltip_white_line
-			set_temp_variable = { coalition_partner_var = token:social_liberal }
-			add_to_coalition = yes
-			custom_effect_tooltip = tooltip_white_line
-			effect_tooltip = {
-				add_advisor_role = {
-					character = YUN_luo_longji
-					advisor = {
-						slot = political_advisor
-						idea_token = YUN_luo_longji_advisor
-						traits = { KR_the_lonesome_warrior_advisor }
-						cost = 150
-					}
-					activate = yes
-				}
-			}
-			hidden_effect = {
-				YUN_luo_longji = { remove_civilian_advisor_roles = yes }
-				add_advisor_role = {
-					character = YUN_luo_longji
-					advisor = {
-						slot = political_advisor
-						idea_token = YUN_luo_longji_advisor
-						traits = { KR_the_lonesome_warrior_advisor }
-						cost = 150
-					}
-					activate = yes
-				}
-				country_event = { id = YUN.endgame.631 days = 21 } #Xiong Qinglai, the Mathematician
-			}
+			add_soclib_to_coalition = yes
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 
 	shared_focus = {
 		id = YUN_chinas_melting_pot
-		icon = YUN_GFX_Goal_Bamboo_King_Society
-		cost = 7
+		icon = GFX_YUN_Goal_Bamboo_King_Society
+		cost = 5
 
 		relative_position_id = YUN_restraining_the_revolution
 
@@ -2903,23 +1423,17 @@ shared_focus = {
 			add_stability = 0.05
 			add_war_support = 0.05
 			custom_effect_tooltip = tooltip_white_line
-			remove_ideas = YUN_inexperience_and_lack_of_cohesion_1
-			custom_effect_tooltip = tooltip_white_line
-			add_timed_idea = {
-				idea = YUN_of_many_cultures_and_many_histories
-				days = 310
-			}
-			custom_effect_tooltip = tooltip_white_line
-			reduce_propaganda_decision_cost_twenty_five_percent = yes
-			custom_effect_tooltip = reduce_propaganda_decision_cost_twenty_five_percent_tt
+			add_ideas = YUN_of_many_cultures_and_many_histories
+			
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 
 	shared_focus = {
 		id = YUN_government_by_efficiency
-		icon = GFX_goal_China_Beiyang_coat_of_arms
-		cost = 6
+		icon = GFX_goal_AST_efficency_over_liberalism
+		cost = 5
 
 		relative_position_id = YUN_chinas_melting_pot
 
@@ -2941,9 +1455,7 @@ shared_focus = {
 				remove_idea = YUN_NPA_popular_support_5
 				add_idea = YUN_NPA_popular_support_the_guided_revolution
 			}
-			hidden_effect = {
-				country_event = { id = YUN.endgame.700 days = 3 } #Dian's National Revolution
-			}
+			set_country_leader_ideology = oligarchy_subtype
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2951,7 +1463,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_steeled_democracy
 		icon = GFX_goal_SHX_united_front
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_chinas_melting_pot
 
@@ -2976,9 +1488,7 @@ shared_focus = {
 				remove_idea = YUN_NPA_popular_support_5
 				add_idea = YUN_NPA_popular_support_the_democratic_fortress
 			}
-			hidden_effect = {
-				country_event = { id = YUN.endgame.701 days = 3 } #A President and His Republic
-			}
+			set_country_leader_ideology = authoritarian_liberalism_subtype
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -2986,7 +1496,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_duel_of_twin_dragons
 		icon = GFX_focus_generic_conspiracy
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_restoring_harmony_to_the_countryside
 
@@ -3002,10 +1512,24 @@ shared_focus = {
 			focus = YUN_all_under_the_king
 		}
 
-		available = {
+		available = { 
 			OR = {
-				has_country_leader = { character = YUN_lu_han }
-				has_country_leader = { character = YUN_hu_ruoyu }
+				has_country_leader = {
+					name = "Hu Ruoyu"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "胡若愚"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "Lu Han"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "卢汉"
+					ruling_only = yes
+				}
 			}
 		}
 
@@ -3029,19 +1553,15 @@ shared_focus = {
 			custom_effect_tooltip = tooltip_white_line
 			add_political_power = 50
 			army_experience = 50
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = YUN_the_roulette_of_backstabbing_and_betrayals_tt
-			add_ideas = YUN_the_roulette_of_backstabbing_and_betrayals
-			hidden_effect = {
-				country_event = { id = YUN.endgame.660 days = 3 } #Lu Han’s Uprising
-			}
+			
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 
 	shared_focus = {
 		id = YUN_from_flexibility_to_dynamicism
-		icon = GFX_goal_china_beiyang_cooporation
+		icon = GFX_goal_ALB_Cooperate_Chiefs_Capital
 		cost = 10
 
 		relative_position_id = YUN_duel_of_twin_dragons
@@ -3097,8 +1617,8 @@ shared_focus = {
 
 	shared_focus = {
 		id = YUN_cultivate_the_national_youth
-		icon = GFX_goal_China_Beiyang_Mass_Assault
-		cost = 8
+		icon = GFX_goal_CZE_youth_service
+		cost = 5
 
 		relative_position_id = YUN_duel_of_twin_dragons
 
@@ -3112,7 +1632,6 @@ shared_focus = {
 
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_cultivate_the_national_youth"
-			remove_ideas = YUN_inexperience_and_lack_of_cohesion_1
 			custom_effect_tooltip = tooltip_white_line
 			add_war_support = 0.08
 			add_popularity = {
@@ -3129,16 +1648,14 @@ shared_focus = {
 			}
 			custom_effect_tooltip = tooltip_white_line
 			add_ideas = YUN_national_youth_league_affairs_bureau
-			hidden_effect = {
-				country_event = { id = YUN.endgame.661 days = 21 } #Yunnanese Cuisine
-			}
+
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 
 	shared_focus = {
 		id = YUN_restoring_auspicious_governance
-		icon = GFX_goal_China_five_colour_beiyang_star_auth
+		icon = GFX_focus_MAN_restore_the_beiyang_army
 		cost = 10
 
 		relative_position_id = YUN_from_flexibility_to_dynamicism
@@ -3153,7 +1670,17 @@ shared_focus = {
 		mutually_exclusive = { focus = YUN_revolutionary_constitutionalism }
 
 		available = {
-			has_country_leader = { character = YUN_hu_ruoyu }
+			OR = {
+				has_country_leader = {
+					name = "Hu Ruoyu"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "胡若愚"
+					ruling_only = yes
+				}
+				
+			}
 		}
 
 		completion_reward = {
@@ -3172,35 +1699,15 @@ shared_focus = {
 			}
 			add_stability = YUN_stability_loss_temp_var
 			custom_effect_tooltip = tooltip_white_line
-			effect_tooltip = {
-				YUN_hu_ruoyu = {
-					add_trait = {
-						trait = YUN_the_great_commandant_trait
-						ideology = paternal_autocrat_subtype
-					}
-				}
-			}
+			add_country_leader_trait = YUN_the_great_commandant_trait
+			
 			custom_effect_tooltip = tooltip_white_line
 			add_stability = 0.08
 			add_popularity = {
 				ideology = social_conservative
 				popularity = 0.05
 			}
-			custom_effect_tooltip = tooltip_white_line
-			QIE = {
-				QIE_wu_jinglian = { CHN_recruit_character_effect = yes }
-				QIE_bian_shoujing = { CHN_recruit_character_effect = yes }
-				QIE_liu_menggeng = { custom_effect_tooltip = character_becomes_a_general }
-				QIE_wang_tan = { custom_effect_tooltip = character_becomes_a_general }
-				hidden_effect = {
-					QIE_liu_menggeng = { CHN_recruit_character_effect = yes }
-					QIE_wang_tan = { CHN_recruit_character_effect = yes }
-				}
-			}
-			hidden_effect = {
-				set_temp_variable = { trait_token = token:YUN_the_great_commandant_trait }
-				YUN_hu_ruoyu = { add_trait_to_all_country_leader_roles = yes }
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -3208,7 +1715,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_great_commandant
 		icon = GFX_focus_generic_full_social_mobilization
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_restoring_auspicious_governance
 
@@ -3231,17 +1738,15 @@ shared_focus = {
 				remove_idea = YUN_NPA_popular_support_5
 				add_idea = YUN_NPA_popular_support_all_under_the_great_commander
 			}
-			hidden_effect = {
-				country_event = { id = YUN.endgame.702 days = 3 } #A New Order...
-			}
+			set_country_leader_ideology = junta_subtype
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 
 	shared_focus = {
 		id = YUN_revolutionary_constitutionalism
-		icon = GFX_goal_GXC_rehabilitating_beiyang
-		cost = 8
+		icon = GFX_focus_CHI_restore_the_old_republic
+		cost = 5
 
 		relative_position_id = YUN_cultivate_the_national_youth
 
@@ -3255,15 +1760,22 @@ shared_focus = {
 		mutually_exclusive = { focus = YUN_restoring_auspicious_governance }
 
 		available = {
-			has_country_leader = { character = YUN_lu_han }
+			OR = {
+				
+				has_country_leader = {
+					name = "Lu Han"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "卢汉"
+					ruling_only = yes
+				}
+			}
 		}
 
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed YUN_revolutionary_constitutionalism"
-			custom_effect_tooltip = {
-				localization_key = CHN_deduct_stab_relative_to_ideology_tt
-				IDEOLOGY = paternal_autocrat_coloured
-			}
+			
 			set_temp_variable = { YUN_stability_loss_temp_var = ROOT.party_popularity@paternal_autocrat }
 			multiply_temp_variable = { YUN_stability_loss_temp_var = -1 }
 			multiply_temp_variable = { YUN_stability_loss_temp_var = 0.75 }
@@ -3274,15 +1786,7 @@ shared_focus = {
 			}
 			add_stability = YUN_stability_loss_temp_var
 			custom_effect_tooltip = tooltip_white_line
-			effect_tooltip = {
-				YUN_lu_han = {
-					add_trait = {
-						trait = YUN_reluctant_revolutionary
-						ideology = paternal_autocrat_subtype
-					}
-				}
-			}
-			custom_effect_tooltip = tooltip_white_line
+			add_country_leader_trait = YUN_reluctant_revolutionary
 			add_stability = 0.08
 			add_war_support = 0.05
 			add_popularity = {
@@ -3293,38 +1797,9 @@ shared_focus = {
 				ideology = social_liberal
 				popularity = 0.10
 			}
-			set_temp_variable = { coalition_partner_var = token:radical_socialist }
-			add_to_coalition = yes
-			set_temp_variable = { coalition_partner_var = token:social_liberal }
-			add_to_coalition = yes
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = YUN_revolutionary_constitutionalism_coalition_tt
-			custom_effect_tooltip = tooltip_white_line
-			effect_tooltip = {
-				add_trait = {
-					character = YUN_zhou_zhongyue
-					slot = second_in_command
-					trait = KR_revolutionary_pedagogue
-				}
-			}
-			hidden_effect = {
-				set_temp_variable = { coalition_stability_var = 0.25 }
-				set_coalition_stability_radical_socialist = yes
-				set_temp_variable = { coalition_stability_var = 0.25 }
-				set_coalition_stability_social_liberal = yes
-				set_temp_variable = { trait_token = token:YUN_reluctant_revolutionary }
-				YUN_lu_han = { add_trait_to_all_country_leader_roles = yes }
-				remove_trait = {
-					character = YUN_zhou_zhongyue
-					slot = second_in_command
-					trait = KR_compassionate_gentleman_sic
-				}
-				add_trait = {
-					character = YUN_zhou_zhongyue
-					slot = second_in_command
-					trait = KR_revolutionary_pedagogue
-				}
-			}
+			add_radsoc_to_coalition = yes
+			add_soclib_to_coalition = yes
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -3332,7 +1807,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_adventurous_turncoat
 		icon = GFX_goal_harness_peoples_will
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_revolutionary_constitutionalism
 
@@ -3355,9 +1830,7 @@ shared_focus = {
 				remove_idea = YUN_NPA_popular_support_5
 				add_idea = YUN_NPA_popular_support_the_new_age_of_export_militarism
 			}
-			hidden_effect = {
-				country_event = { id = YUN.endgame.703 days = 3 } #From Militarist to President
-			}
+			set_country_leader_ideology = pataut_paternal_socialism_subtype
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -3365,7 +1838,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_three_trainings_and_commandments
 		icon = GFX_goal_SHX_Destiny
-		cost = 8
+		cost = 5
 
 		relative_position_id = YUN_restoring_harmony_to_the_countryside
 
@@ -3382,23 +1855,9 @@ shared_focus = {
 			log = "[GetLogRoot]: Focus Completed YUN_three_trainings_and_commandments"
 			add_stability = 0.05
 			add_war_support = 0.05
-			add_timed_idea = {
-				idea = YUN_the_three_trainings_and_three_commandments
-				days = 270
-			}
-			custom_effect_tooltip = tooltip_white_line
-			remove_ideas = YUN_the_state_within_the_state_1
-			custom_effect_tooltip = tooltip_white_line
-			YUN_NPA_improve_popular_support_effect = yes
-			hidden_effect = {
-				if = {
-					limit = { has_country_leader = { character = YUN_long_yun } }
-					country_event = { id = YUN.endgame.632 days = 21 } #The Family Business
-				}
-				else = {
-					country_event = { id = YUN.endgame.662 days = 21 } #The New Prime Minister
-				}
-			}
+			
+			
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -3406,7 +1865,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_exporting_the_dian_economic_model
 		icon = GFX_goal_state_economy
-		cost = 8
+		cost = 5
 
 		relative_position_id = YUN_three_trainings_and_commandments
 
@@ -3424,8 +1883,7 @@ shared_focus = {
 				remove_idea = YUN_economic_regulation_committee
 				add_idea = YUN_economic_regulation_committee_2
 			}
-			remove_ideas = YUN_devastating_economic_catastrophe_1
-			custom_effect_tooltip = tooltip_white_line
+
 			add_one_random_civilian_factory = yes
 			add_one_random_civilian_factory = yes
 		}
@@ -3435,7 +1893,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_protecting_chinas_foundations
 		icon = GFX_goal_generic_rice_field
-		cost = 8
+		cost = 5
 
 		relative_position_id = YUN_exporting_the_dian_economic_model
 
@@ -3458,16 +1916,7 @@ shared_focus = {
 			}
 			every_owned_state = {
 				limit = {
-					is_china_claim_area = yes
-					OR = {
-						has_state_flag = yunnan_province_state
-						has_state_flag = guangxi_province_state
-						has_state_flag = sichuan_province_state
-						has_state_flag = hunan_province_state
-						has_state_flag = henan_province_state
-						has_state_flag = sichuan_province_state
-						has_state_flag = shaanxi_province_state
-					}
+					is_core_of = YUN
 				}
 				add_extra_state_shared_building_slots = 2
 			}
@@ -3478,7 +1927,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_on_the_issue_of_those_of_merit
 		icon = GFX_focus_generic_industrialists
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_three_trainings_and_commandments
 
@@ -3495,22 +1944,7 @@ shared_focus = {
 			add_stability = 0.05
 			add_war_support = 0.05
 			add_research_slot_until_five = yes
-			custom_effect_tooltip = tooltip_white_line
-			QIE = {
-				QIE_wellington_koo = { CHN_recruit_character_effect = yes }
-				QIE_wang_chonghui = { CHN_recruit_character_effect = yes }
-				QIE_yan_huiqing = { CHN_recruit_character_effect = yes }
-			}
-			if = {
-				limit = {
-					NOT = { has_character = GXC_liu_zhenhuan }
-					has_country_leader = { character = YUN_long_yun }
-				}
-				GXC = {
-					GXC_liu_zhenhuan = { custom_effect_tooltip = character_becomes_a_general }
-					hidden_effect = { GXC_liu_zhenhuan = { CHN_recruit_character_effect = yes } }
-				}
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -3536,11 +1970,7 @@ shared_focus = {
 			add_war_support = 0.03
 			custom_effect_tooltip = tooltip_white_line
 			custom_effect_tooltip = YUN_striking_a_mutually_beneficial_deal_tt
-			add_timed_idea = {
-				idea = YUN_striking_a_mutually_beneficial_deal
-				days = 320
-			}
-			custom_effect_tooltip = tooltip_white_line
+			add_ideas = YUN_striking_a_mutually_beneficial_deal
 			YUN_extending_a_hand_to_the_gentry_effect = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -3552,7 +1982,7 @@ shared_focus = {
 		cost = 4
 
 		relative_position_id = YUN_NRA_prevailed
-		x = 5
+		x = 2
 		y = 10
 
 		prerequisite = { focus = YUN_the_king_of_the_southwest }
@@ -4610,7 +3040,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_expand_public_education
 		icon = GFX_goal_ENG_Highland_Research_Towns
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_rebuilding_local_administrations
 		x = -1
@@ -4654,7 +3084,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_new_life_movement
 		icon = GFX_focus_ICE_embrace_the_workers_revolution
-		cost = 7
+		cost = 5
 
 		relative_position_id = YUN_daughters_of_a_new_china
 		x = 0
@@ -4676,7 +3106,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_a_new_social_organism
 		icon = GFX_focus_CHI_baojia_system
-		cost = 7
+		cost = 5
 
 		relative_position_id = YUN_expand_public_education
 		x = 1
@@ -4701,7 +3131,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_inaugurate_the_smaller_yuans
 		icon = GFX_focus_chi_examination_yuan
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_rebuilding_local_administrations
 		x = 1
@@ -4733,7 +3163,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_pursue_international_legitimacy
 		icon = GFX_focus_generic_diplomatic_treaty
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_inaugurate_the_smaller_yuans
 		x = 0
@@ -4791,7 +3221,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_academia_sinica
 		icon = GFX_focus_NORDIC_dem_capstone_research
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_pursue_international_legitimacy
 		x = -2
@@ -4819,7 +3249,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_expand_the_legislative_yuan
 		icon = GFX_focus_chi_legislative_yuan
-		cost = 7
+		cost = 5
 
 		relative_position_id = YUN_pursue_international_legitimacy
 		x = 0
@@ -4844,7 +3274,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_create_the_national_health_administration
 		icon = GFX_focus_generic_field_hostpital
-		cost = 7
+		cost = 5
 
 		relative_position_id = YUN_pursue_international_legitimacy
 		x = 2
@@ -4875,7 +3305,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_cement_the_dangguo_ideal
 		icon = GFX_goal_chi_military_regime
-		cost = 7
+		cost = 5
 
 		relative_position_id = YUN_pursue_international_legitimacy
 		x = 0
@@ -4921,7 +3351,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_national_reconstruction_committee
 		icon = GFX_goal_CHI_revive_china
-		cost = 7
+		cost = 5
 
 		relative_position_id = YUN_white_sun_ascendant
 		x = 2
@@ -4955,7 +3385,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_autarkic_model
 		icon = GFX_focus_hol_abandon_the_gold_standard
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_national_reconstruction_committee
 		x = -1
@@ -4985,7 +3415,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_pursuing_minsheng
 		icon = GFX_goal_healthcare
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_national_reconstruction_committee
 		x = 1
@@ -5050,7 +3480,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_rural_cooperative_movement
 		icon = GFX_focus_ITA_peasants_rise
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_white_sun_ascendant
 		x = 4
@@ -5080,7 +3510,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_modernised_rail_system
 		icon = GFX_focus_generic_railroad
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_rural_cooperative_movement
 		x = 1
@@ -5123,7 +3553,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_uplifting_chinas_downtrodden
 		icon = GFX_goal_OTT_Land_Reform
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_rural_cooperative_movement
 		x = 0
@@ -5197,7 +3627,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_chinese_solutions_for_chinese_problems
 		icon = GFX_focus_chi_one_china_policy
-		cost = 7
+		cost = 5
 
 		relative_position_id = YUN_national_capitalism
 		x = 1
@@ -5269,7 +3699,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_developing_the_financial_sector
 		icon = GFX_goal_capitalist_system
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_white_sun_ascendant
 		x = 6
@@ -5403,7 +3833,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_reconstruction_by_chinese_means
 		icon = GFX_focus_generic_china1
-		cost = 7
+		cost = 5
 
 		relative_position_id = YUN_union_of_class_and_society
 		x = -1
@@ -5440,7 +3870,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_awakening_of_the_new_right
 		icon = GFX_goal_chi_the_party_state
-		cost = 6
+		cost = 5
 
 		x = 2
 		y = 8
@@ -5576,7 +4006,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_scourge_of_marxism
 		icon = GFX_goal_HOL_crackdown_radsoc
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_purify_the_party_organ
 		x = 0
@@ -5598,7 +4028,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_way_for_the_youth
 		icon = GFX_goal_CHI_paramilitary_double
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_dismantle_reactionary_degeneracy
 		x = 2
@@ -5616,7 +4046,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_rehabilitate_the_general_staff
 		icon = GFX_focus_CHI_an_alternative_rooted_in_tradition
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_rein_in_the_generals
 		x = 1
@@ -5635,7 +4065,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_preliminary_plan_for_education
 		icon = GFX_focus_generic_university_1
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_dismantle_reactionary_degeneracy
 		x = 0
@@ -5653,7 +4083,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_restore_social_harmony
 		icon = GFX_focus_HKG_Pragmatism
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_preliminary_plan_for_education
 		x = 3
@@ -5711,7 +4141,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_create_the_chinese_engineering_society
 		icon = GFX_focus_generic_public_works
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_expand_the_central_banking_system
 		x = 0
@@ -5746,7 +4176,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_control_the_means_of_media
 		icon = GFX_goal_generic_propaganda_film
-		cost = 7
+		cost = 5
 
 		relative_position_id = YUN_create_the_chinese_engineering_society
 		x = -1
@@ -5790,7 +4220,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_one_doctrine_one_party
 		icon = GFX_focus_CHI_revise_the_national_curriculum
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_control_the_means_of_media
 		x = 0
@@ -5849,7 +4279,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_organise_the_military_engineering_corps
 		icon = GFX_goal_generic_construct_public_housing
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_create_the_chinese_engineering_society
 		x = 0
@@ -5877,7 +4307,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_tend_to_the_national_beehive
 		icon = GFX_goal_NEE_Lovell_Hive
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_restore_social_harmony
 		x = 0
@@ -5916,7 +4346,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_apostle_of_the_cultural_revolution
 		icon = GFX_goal_burning_globe
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_tend_to_the_national_beehive
 		x = -1
@@ -5935,7 +4365,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_curtail_internal_disunity
 		icon = GFX_focus_LAT_suspend_constitution_of_latvia
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_tend_to_the_national_beehive
 		x = 1
@@ -5970,7 +4400,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_champion_the_national_dharma
 		icon = GFX_goal_XSM_promoting_buddhism
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_tend_to_the_national_beehive
 		x = 0
@@ -5992,7 +4422,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_threading_the_needle
 		icon = GFX_focus_CHI_co_opt_the_koh_hsin_movement
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_restore_social_harmony
 		x = -4
@@ -6042,7 +4472,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_human_engineering
 		icon = GFX_focus_NORDIC_com_selector_material
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_threading_the_needle
 		x = -1
@@ -6067,7 +4497,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_doctrine_of_national_servitude
 		icon = GFX_goal_chi_towards_true_love
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_human_engineering
 		x = 0
@@ -6090,7 +4520,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_revitalise_filal_piety
 		icon = GFX_focus_generic_population_growth
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_threading_the_needle
 		x = 1
@@ -6118,7 +4548,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_cardinal_principles
 		icon = GFX_goal_QIE_confucianism
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_revitalise_filal_piety
 		x = 1
@@ -6144,7 +4574,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_embrace_spiritual_sciences
 		icon = GFX_goal_CHI_peoples_army
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_cardinal_principles
 		x = -1
@@ -6184,7 +4614,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_transfuse_western_sciences
 		icon = GFX_focus_generic_low_cost_housing
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_cardinal_principles
 		x = 1
@@ -6208,7 +4638,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_towards_revolutionary_datong
 		icon = GFX_focus_man_claim_the_mandate_of_heaven
-		cost = 8
+		cost = 5
 
 		relative_position_id = YUN_cardinal_principles
 		x = 0
@@ -6247,7 +4677,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_whampoas_legacy_lives_on
 		icon = GFX_goal_CHI_soul_of_whampoa
-		cost = 6
+		cost = 5
 
 		x = 20
 		y = 8
@@ -6272,7 +4702,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_militarisation_of_education
 		icon = GFX_focus_generic_limited_social_mobilization
-		cost = 6
+		cost = 5
 
 		x = -2
 		y = 1
@@ -6373,7 +4803,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_a_second_reorganisation
 		icon = GFX_Goal_Kuomintang_Government_Initiative
-		cost = 6
+		cost = 5
 
 		x = -8
 		y = 1
@@ -6459,7 +4889,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_refining_the_organic_economy
 		icon = GFX_focus_generic_low_cost_housing
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 1
@@ -6539,7 +4969,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_expand_the_youth_corps
 		icon = GFX_goal_chi_youth_corps
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -6562,7 +4992,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_curtailing_gentry_oppression
 		icon = GFX_goal_generic_tackle_corruption
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 1
@@ -6594,7 +5024,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_reiterating_minsheng
 		icon = GFX_goal_chi_towards_true_love
-		cost = 7
+		cost = 5
 
 		x = -2
 		y = 2
@@ -6638,7 +5068,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_institute_of_revolutionary_practice
 		icon = GFX_goal_chi_republic
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 3
@@ -6694,7 +5124,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_bridging_the_factional_divide
 		icon = GFX_goal_CHI_YUN_reconcile
-		cost = 6
+		cost = 5
 
 		x = -0
 		y = 4
@@ -6740,7 +5170,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_heir_to_the_red_napoleon
 		icon = GFX_focus_CHI_glorify_deng_yanda
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 1
@@ -6822,7 +5252,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_joint_commission_on_rural_reconstruction
 		icon = GFX_focus_chi_cooperation_with_the_nationalists
-		cost = 6
+		cost = 5
 
 		x = 3
 		y = 1
@@ -6846,7 +5276,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_formalise_the_government
 		icon = GFX_focus_generic_court
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 1
@@ -6872,7 +5302,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_broaden_the_social_base
 		icon = GFX_goal_agrarian_socialism
-		cost = 6
+		cost = 5
 
 		x = 1
 		y = 1
@@ -6894,7 +5324,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_a_revolutionary_democratic_party_for_the_future
 		icon = GFX_socialist_constitution
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -6979,7 +5409,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_peoples_generalissimo
 		icon = GFX_goal_generic_solidarity
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -7011,7 +5441,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_spiritual_authoritarianism
 		icon = GFX_goal_SWE_nordic_holy_spirit
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 1
@@ -7145,7 +5575,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_restoring_spiritual_balance
 		icon = GFX_goal_generic_stable_government
-		cost = 6
+		cost = 5
 
 		x = -3
 		y = 3
@@ -7199,7 +5629,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_chinese_bushido
 		icon = GFX_goal_Japanese_Glory
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 1
@@ -7224,7 +5654,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_revolutionary_generalissimo
 		icon = GFX_goal_ANQ_end_century_humiliation
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -7254,7 +5684,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_caring_for_our_veterans
 		icon = GFX_focus_generic_infiltration
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -7283,7 +5713,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_military_centrism
 		icon = GFX_goal_chi_military_regime
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 3
@@ -7354,7 +5784,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_lucky_generalissimo
 		icon = GFX_focus_CHI_generalissimo_for_all_of_china 
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -7384,7 +5814,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_a_mixed_economic_system
 		icon = GFX_focus_generic_energy
-		cost = 6
+		cost = 5
 
 		x = 2
 		y = 2
@@ -7407,7 +5837,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_reshuffle_the_executive_yuan
 		icon = GFX_goal_ANQ_convince_intellectuals
-		cost = 6
+		cost = 5
 
 		x = 3
 		y = 3
@@ -7455,7 +5885,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_political_consultative_conference
 		icon = GFX_goal_generic_parliament
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 1
@@ -7479,7 +5909,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_liberal_generalissimo
 		icon = GFX_goal_ideology_social_liberal
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -7509,7 +5939,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_national_military_education_movement
 		icon = GFX_focus_generic_university_1
-		cost = 6
+		cost = 5
 
 		x = 5
 		y = 1
@@ -7538,7 +5968,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_crackdown_on_warlordism
 		icon = GFX_focus_generic_oppression
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 1
@@ -7562,7 +5992,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_promote_yellow_unionism
 		icon = GFX_goal_generic_union_agreement
-		cost = 6
+		cost = 5
 
 		x = 1
 		y = 1
@@ -7591,7 +6021,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_realisation_of_dictatorship
 		icon = GFX_goal_chi_the_party_state
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -7683,7 +6113,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_blueshirt_generalissimo
 		icon = GFX_goal_CHI_military_affairs_cmsn
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -7714,7 +6144,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_purge_the_old_party
 		icon = GFX_goal_purge_opposition
-		cost = 6
+		cost = 5
 
 		x = 9
 		y = 1
@@ -7817,7 +6247,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_negotiate_with_shanghai_compradors
 		icon = GFX_focus_CHI_Legitimise_du
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 1
@@ -7840,7 +6270,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_reevaluating_underground_ties
 		icon = GFX_LEC_Illegitimate_Economy
-		cost = 6
+		cost = 5
 
 		x = 2
 		y = 1
@@ -7863,7 +6293,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_expand_the_special_task_force
 		icon = GFX_goal_generic_police_state
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 2
@@ -7919,7 +6349,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_national_economic_reconstruction_movement
 		icon = GFX_goal_CHI_revive_china
-		cost = 6
+		cost = 5
 
 		x = 1
 		y = 2
@@ -7946,7 +6376,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_mass_organisation
 		icon = GFX_goal_mass_concentration_of_army
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 3
@@ -7973,7 +6403,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_absolute_obedience_to_the_leader
 		icon = GFX_chiangsnewnra
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 4
@@ -7996,7 +6426,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_reinterpret_the_three_principles
 		icon = GFX_goal_chi_three_principles
-		cost = 6
+		cost = 5
 
 		x = 1
 		y = 4
@@ -8076,7 +6506,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_cleaning_out_the_rot_and_decadence
 		icon = GFX_goal_generic_tackle_corruption
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_kuomintangising_the_southwest
 		x = -3
@@ -8096,7 +6526,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_humbling_the_kingmakers
 		icon = GFX_goal_collaborate_local_elites
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_kuomintangising_the_southwest
 		x = -4
@@ -8119,7 +6549,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_incentivising_the_enlightenment
 		icon = GFX_focus_research2
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_kuomintangising_the_southwest
 		x = -3
@@ -8170,7 +6600,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_two_model_zhus
 		icon = GFX_goal_CHI_YUN_reconcile
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_kuomintangising_the_southwest
 		x = 0
@@ -8271,7 +6701,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_our_part_in_the_national_revolution
 		icon = GFX_goal_LKMT_A_New_China
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_kuomintangising_the_southwest
 		x = 2
@@ -8395,7 +6825,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_a_business_utopia_in_the_southwest
 		icon = GFX_goal_generic_financial_markets
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_a_revolutions_sole_visionary
 		x = -3
@@ -8416,7 +6846,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_a_new_deal_with_political_science
 		icon = GFX_goal_capitalist_system
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_a_revolutions_sole_visionary
 		x = -4
@@ -8442,7 +6872,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_returning_to_the_revolutions_root
 		icon = GFX_goal_ANQ_convince_intellectuals
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_a_revolutions_sole_visionary
 		x = -4
@@ -8468,7 +6898,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_calling_on_shanghai_finance
 		icon = GFX_goal_LEC_shanghai_yuan
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_a_revolutions_sole_visionary
 		x = -2
@@ -8496,7 +6926,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_expanding_kunming_university
 		icon = GFX_focus_generic_university_2
-		cost = 6
+		cost = 5
 
 		relative_position_id = YUN_a_revolutions_sole_visionary
 		x = -1
@@ -9030,7 +7460,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_salvaging_the_nations_livelihood
 		icon = GFX_goal_SZC_improvised_farming_machinery
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -9102,7 +7532,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_under_the_auspices_of_workers_and_peasants
 		icon = GFX_goal_CHI_united_front
-		cost = 6
+		cost = 5
 
 		x = -3
 		y = 1
@@ -9154,7 +7584,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_modernisation_and_militarisation
 		icon = GFX_focus_PRC_hundred_regiments_offensive
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 3
@@ -9196,7 +7626,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_reconstituting_military_order
 		icon = GFX_focus_generic_court
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 1
@@ -9226,7 +7656,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_to_enact_minsheng_geming
 		icon = GFX_goal_Workers_Paradise
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 2
@@ -9267,7 +7697,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_national_rejuvenation_and_national_prosperity
 		icon = GFX_focus_generic_workers_and_farmers_rise
-		cost = 6
+		cost = 5
 
 		x = -2
 		y = 3
@@ -9318,7 +7748,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_chinese_socialism_secured_forevermore
 		icon = GFX_focus_PRC_revolutionary_war_of_the_masses
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 5
@@ -9348,7 +7778,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_partys_most_loyal
 		icon = GFX_goal_CHI_military_affairs_cmsn
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 1
@@ -9400,7 +7830,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_honouring_the_war_dead
 		icon = GFX_goal_CHI_soul_of_whampoa
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 1
@@ -9424,7 +7854,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_the_superior_form_of_federalism
 		icon = GFX_goal_chi_the_party_state
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -9458,7 +7888,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_deals_with_the_compradors
 		icon = GFX_goal_ANQ_convince_intellectuals
-		cost = 6
+		cost = 5
 
 		x = 2
 		y = 1
@@ -9479,7 +7909,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_national_defense_fortification_plan
 		icon = GFX_focus_SWE_hedgehog_defense
-		cost = 6
+		cost = 5
 
 		x = 1
 		y = 3
@@ -9511,7 +7941,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_revolution_safeguarded_by_its_warriors
 		icon = GFX_goal_CHI_paramilitary_double
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 4
@@ -9534,7 +7964,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_brothers_of_principle_sons_of_the_guofu
 		icon = GFX_focus_HKG_Praise_Sun
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 5
@@ -9566,7 +7996,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_legacy_of_gu_pinzhen
 		icon = GFX_YUN_tang_dynasty
-		cost = 6
+		cost = 5
 
 		x = 1
 		y = 5
@@ -9644,7 +8074,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_exporting_the_kunming_model
 		icon = GFX_focus_CHI_prepare_war_zones
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 3
@@ -9668,7 +8098,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_an_antidote_for_economic_woes
 		icon = GFX_goal_CHI_revive_china
-		cost = 6
+		cost = 5
 
 		x = -2
 		y = 4
@@ -9691,7 +8121,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_flourish_of_the_kuomintang_liberals
 		icon = GFX_goal_SHX_republican_flags
-		cost = 6
+		cost = 5
 
 		x = 5
 		y = 1
@@ -9783,7 +8213,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_engaging_with_the_dangwai
 		icon = GFX_goal_CAL_council
-		cost = 6
+		cost = 5
 
 		x = -2
 		y = 2
@@ -9808,7 +8238,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_undoing_the_injustice_of_1924
 		icon = GFX_goal_China_Beiyang_Army
-		cost = 6
+		cost = 5
 
 		x = -2
 		y = 3
@@ -9847,7 +8277,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_draft_a_permanent_constitution
 		icon = GFX_goal_chi_three_principles
-		cost = 6
+		cost = 5
 
 		x = 0
 		y = 2
@@ -9870,7 +8300,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_modernising_the_decrepit_dangguo
 		icon = GFX_goal_generic_banking_legislation
-		cost = 6
+		cost = 5
 
 		x = 1
 		y = 1
@@ -9891,7 +8321,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_a_national_liberal_economy
 		icon = GFX_focus_generic_modernize_industry
-		cost = 7
+		cost = 5
 
 		x = 0
 		y = 3
@@ -9916,7 +8346,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_rule_through_agreement_not_through_the_sword
 		icon = GFX_focus_generic_university_2
-		cost = 6
+		cost = 5
 
 		x = -1
 		y = 4
@@ -9939,7 +8369,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_rule_of_national_experts_and_gentlemen
 		icon = GFX_focus_generic_industrialists
-		cost = 6
+		cost = 5
 
 		x = -3
 		y = 4
@@ -9960,7 +8390,7 @@ shared_focus = {
 	shared_focus = {
 		id = YUN_ushering_a_new_era_under_the_genro
 		icon = GFX_goal_ideology_social_liberal
-		cost = 6
+		cost = 5
 
 		x = -2
 		y = 5
