@@ -2920,10 +2920,7 @@ focus = {
 			add_political_power = 100
 			add_war_support = 0.10
 			zhili_china_enable_alliance_decisions = yes
-			china_enable_non_government_demand_submission_decisions = yes
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = china_can_core_through_compliance
-			custom_effect_tooltip = tooltip_white_line
+			china_enable_all_demand_submission_decisions = yes
 			if = {
 				limit = { has_completed_focus = QIE_jiangbailiplan }
 				effect_tooltip = {
@@ -3302,13 +3299,32 @@ focus = {
 		prerequisite = { focus = QIE_cross_the_dai_river }
 		prerequisite = { focus = QIE_destroy_kuomintang }
 		available = {
-			has_global_flag = china_united
+			325 = { is_owned_by_ROOT_or_subject = yes } #Kunming (YUN)
+			592 = { is_owned_by_ROOT_or_subject = yes } #Guangzhou (GXC)
+			597 = { is_owned_by_ROOT_or_subject = yes } #Jinan (SQI)
+			602 = { is_owned_by_ROOT_or_subject = yes } #Xiangjiang (HNN)
+			606 = { is_owned_by_ROOT_or_subject = yes } #Anqing (ANQ)
+			613 = { is_owned_by_ROOT_or_subject = yes } #Nanjing (LEP)
+			650 = { is_owned_by_ROOT_or_subject = yes } #Chongqing (SZC)
+			1072 = { is_owned_by_ROOT_or_subject = yes } #Taiyuan (SHX)
+			716 = { #Shenyang (FNG)
+				OR = {
+					is_owned_by_ROOT_or_subject = yes #Shenyang (FNG)
+					owner = { is_in_faction_with = QIE }
+				}
+			}
+			NOT = {
+				country_exists = CHI
+				country_exists = FNG
+			}
 		}
+
 
 		ai_will_do = { factor = 50 }
 		completion_reward = {
 			
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_unitedchina"
+			set_country_flag = has_united_china
 			add_stability = 0.20
 			add_research_slot_until_five = yes
 			if = {
@@ -3319,6 +3335,7 @@ focus = {
 				limit = { has_idea = QIE_ilegitimate_republic_idea }
 				remove_ideas = QIE_ilegitimate_republic_idea
 			}
+			set_cosmetic_tag = QIE_unified
 		}
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
@@ -3551,9 +3568,9 @@ focus = {
 
 
 		completion_reward = {
-			add_state_claim = 537
-			add_state_claim = 563
-			add_state_claim = 564
+			add_state_core = 537
+			add_state_core = 563
+			add_state_core = 564
 			add_state_core = 586
 			add_state_core = 589
 			add_state_core = 654
@@ -5806,12 +5823,12 @@ focus = {
 			focus = HNN_expansion_of_yuelu_academy
 		}
 	available = {
-			has_global_flag = china_united
-			has_completed_focus=HNN_victory_of_the_united_front
-		}
+		has_country_flag = has_united_china
+	}
     relative_position_id = HNN_expansion_of_yuelu_academy
 	ai_will_do = { factor = 50 }
 	completion_reward = {
+		
 		if = {
 			limit = {
 				NOT = { country_exists = CHI }
@@ -5823,6 +5840,7 @@ focus = {
 		}
 		}
 		add_political_power = 100
+
 	}
 	search_filters = { FOCUS_FILTER_POLITICAL }
 }
@@ -7999,16 +8017,16 @@ focus = {
 		x = 0
 		y = 8
 	relative_position_id = QIE_Fight_Hetmanist_Bureacracy
-		allow_branch = {
-			
+		available = {
+			has_country_flag = has_united_china
 		}
-		
         prerequisite = {
 			focus = QIE_Avantguarde_Proletariat
 		}
 		ai_will_do = { base = 100 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_new_way_ancient_civ"
+			set_country_flag = has_united_china
 			add_popularity = { ideology = syndicalist popularity = 0.10 }
 			if = {
 			limit = {
