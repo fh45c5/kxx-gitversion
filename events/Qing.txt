@@ -5739,6 +5739,28 @@ country_event = {
       }
     }
   }
+  option = {
+    name = qiecoup.2.f
+   
+    trigger = {
+      SQI = {
+        OR = {
+          has_country_leader = {
+            name = "张宗援"  
+            ruling_only = yes
+          }
+         
+        }
+       
+      }
+    }
+    SQI = {
+      country_event = {
+        id = qiecoup.34
+        days = 1
+      }
+    }
+  }
 }
 country_event = {
   id = qiecoup.3
@@ -5979,6 +6001,12 @@ country_event = {
     text = qiecoup.9.d_ungern
     trigger = {
       has_country_flag = QIE_ungern_says_no
+    }
+  }
+  desc = {
+    text = qiecoup.9.d_date
+    trigger = {
+      has_country_flag = QIE_date_says_no
     }
   }
   fire_only_once = yes
@@ -6319,6 +6347,12 @@ country_event = {
       has_country_flag = QIE_zhang_backs_coup
     }
   }
+   desc = {
+    text = qiecoup.17.d_date
+    trigger = {
+      has_country_flag = QIE_date_backs_coup
+    }
+  }
   fire_only_once = yes
   is_triggered_only = yes
   option = {
@@ -6327,6 +6361,7 @@ country_event = {
       OR = {
         has_country_flag = QIE_zhang_backs_coup
         has_country_flag = QIE_song_backs_coup
+        has_country_flag = QIE_date_backs_coup
       }
     }
     hidden_effect = {
@@ -6960,6 +6995,7 @@ country_event = {
           OR = {
             has_country_flag = QIE_song_backs_coup
             has_country_flag = QIE_zhang_backs_coup
+            has_country_flag = QIE_date_backs_coup
           }
           SQI = {
             exists = yes
@@ -7405,6 +7441,63 @@ country_event = {
   option = {
     name = qiecoup.12.a
     set_country_flag = QIE_ungern_backs_coup
+    hidden_effect = {
+      country_event = {
+        id = qiecoup.16
+        days = 5
+      }
+    }
+  }
+}
+country_event = {
+  id = qiecoup.34
+  immediate = {
+    log = "[GetDateText]: [Root.GetName]: event qiecoup.5"
+  }
+  title = qiecoup.34.t
+  desc = qiecoup.34.d
+  fire_only_once = yes
+  is_triggered_only = yes
+  option = {
+    name = qiecoup.5.a
+    ai_chance = {
+      factor = 99
+     
+    }
+    QIE = {
+      country_event = {
+        id = qiecoup.35
+        days = 2
+      }
+    }
+  }
+  option = {
+    name = qiecoup.5.b
+    ai_chance = {
+      factor = 1
+      
+    }
+    set_country_flag = QIE_date_says_no
+    QIE = {
+      country_event = {
+        id = qiecoup.9
+        days = 2
+      }
+    }
+  }
+}
+country_event = {
+  id = qiecoup.35
+  immediate = {
+    log = "[GetDateText]: [Root.GetName]: event qiecoup.12"
+  }
+  title = qiecoup.35.t
+  desc = qiecoup.35.d
+  fire_only_once = yes
+  is_triggered_only = yes
+  option = {
+    name = qiecoup.12.a
+    set_country_flag = QIE_date_backs_coup
     hidden_effect = {
       country_event = {
         id = qiecoup.16
@@ -8298,6 +8391,21 @@ country_event = {
       }
     }
   }
+   option = {
+    trigger = {
+      QIE = {
+        has_country_flag = QIE_date_backs_coup
+      }
+    }
+    name = qiefocus.24.f
+    set_country_flag = QIE_date_in_government
+    hidden_effect = {
+      add_popularity = {
+        ideology = paternal_autocrat
+        popularity = 0.02
+      }
+    }
+  }
 }
 country_event = {
   id = qiefocus.25
@@ -9162,6 +9270,177 @@ country_event = {
   }
   option = {
     name = qieflavor.200.c
+    add_political_power = 100
+    add_stability = 0.1
+    add_war_support = -0.1
+  }
+}
+country_event = {
+  id = qieflavor.101 #ycp cores 
+  immediate = {
+    log = "[GetDateText]: [Root.GetName]: event qieflavor.100"
+  }
+  title = qieflavor.101.t
+  desc = qieflavor.101.d
+  fire_only_once = yes
+  is_triggered_only = yes
+  option = {
+    name = qieflavor.101.a
+    every_state = {
+      limit = {
+        is_core_of = MLY
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+    every_state = {
+      limit = {
+        is_core_of = SAR
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+     every_state = {
+      limit = {
+        is_core_of = INS
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+    every_state = {
+      limit = {
+        is_core_of = DEI
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+    every_state = {
+      limit = {
+        is_core_of = PHI
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+  }
+   option = {
+    name = qieflavor.101.b
+    add_political_power = 100
+    add_stability = 0.1
+    add_war_support = -0.1
+  }
+}
+country_event = {
+  id = qieflavor.102 #cera core
+  immediate = {
+    log = "[GetDateText]: [Root.GetName]: event qieflavor.100"
+  }
+  title = qieflavor.102.t
+  desc = qieflavor.102.d
+  fire_only_once = yes
+  is_triggered_only = yes
+  option = {
+    name = qieflavor.102.a
+    every_state = {
+      limit = {
+        is_core_of = BRA
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+    every_state = {
+      limit = {
+        is_core_of = MEX
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+   
+  }
+   option = {
+    name = qieflavor.101.b
+    add_political_power = 100
+    add_stability = 0.1
+    add_war_support = -0.1
+  }
+}
+country_event = {
+  id = qieflavor.103 #mp core
+  immediate = {
+    log = "[GetDateText]: [Root.GetName]: event qieflavor.100"
+  }
+  title = qieflavor.103.t
+  desc = qieflavor.103.d
+  fire_only_once = yes
+  is_triggered_only = yes
+  option = {
+    name = qieflavor.103.a
+    every_state = {
+      limit = {
+        is_core_of = ALO
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+    every_state = {
+      limit = {
+        is_core_of = TRK
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+    every_state = {
+      limit = {
+        is_core_of = UZB
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+     every_state = {
+      limit = {
+        is_core_of = KHI
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+     every_state = {
+      limit = {
+        is_core_of = KYR
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+    every_state = {
+      limit = {
+        is_core_of = TRM
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+    every_state = {
+      limit = {
+        is_core_of = RUS
+        is_on_continent = asia
+      }
+      QIE = {
+        add_state_core = PREV
+      }
+    }
+  }
+   option = {
+    name = qieflavor.101.b
     add_political_power = 100
     add_stability = 0.1
     add_war_support = -0.1
