@@ -2706,7 +2706,1340 @@ focus_tree = {
 		}
 		search_filters = { FOCUS_FILTER_RESEARCH }
 	}
+	focus = {
+		id = QIE_man_national_army 
+		icon = GFX_goal_China_Beiyang_Army
+		cost = 4
+
+		
+		x = 33
+		y = 10
+		available = {
+			has_country_flag = has_united_china
+		}
+
+		ai_will_do = { base = 100 }
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_national_army"
+			
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+
+	focus = {
+		id = QIE_man_expand_national_security_apparatus 
+		icon = GFX_goal_generic_espionage
+		cost = 4
+
+		relative_position_id = QIE_man_national_army
+		x = 2
+		y = 1
+		prerequisite = { focus = QIE_man_national_army}
+		available = {
+			if = {
+				limit = { has_dlc_lar = yes }
+				has_intelligence_agency = yes
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_expand_national_security_apparatus"
+			army_experience = 25
+			add_stability = 0.1
+			if = {
+				limit = { has_dlc_lar = no }
+				add_ideas = SHX_spy_agency_2_idea
+				army_experience = 40
+			}
+			else_if = {
+				limit = { NOT = { has_done_agency_upgrade = upgrade_commando_training } }
+				upgrade_intelligence_agency = upgrade_commando_training
+			}
+			else_if = {
+				limit = { NOT = { has_done_agency_upgrade = upgrade_interrogation_techniques } }
+				upgrade_intelligence_agency = upgrade_interrogation_techniques
+			}
+			else_if = {
+				limit = { NOT = { has_done_agency_upgrade = upgrade_passive_defense } }
+				upgrade_intelligence_agency = upgrade_passive_defense
+			}
+		}
+	}
+
+	focus = {
+		id = QIE_man_national_air_force 
+		icon = GFX_goal_QIE_Imperial_Air_Force_1
+		cost = 4
+
+		relative_position_id = QIE_man_national_army
+		x = 4
+		y = 1
+
+		ai_will_do = { base = 75 }
+		prerequisite = { focus = QIE_man_national_army}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_national_air_force"
+			air_experience = 35
+			if = {
+				limit = { has_dlc_bba = yes }
+				add_equipment_to_stockpile = {
+					type = small_plane_airframe_0
+					amount = 50
+					producer = GER
+					variant_name = "Ff 68"
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = fighter_equipment_0
+					amount = 50
+					producer = QIE
+				}
+			}
+			add_tech_bonus = {
+				name = SHX_cas_tech
+				bonus = 1
+				uses = 1
+				category = cas_bomber
+			}
+			add_ideas = QIE_republic_of_china_air_force_idea
+			air_experience = 50
+			
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = QIE_man_invite_foreign_aviation_instructors 
+		icon = GFX_focus_SOV_flying_clubs
+		cost = 4
+		relative_position_id = QIE_man_national_air_force
+		x = -1
+		y = 1
+		ai_will_do = { base = 80 }
+		prerequisite = { focus = QIE_man_national_air_force }
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_invite_foreign_aviation_instructors"
+			add_tech_bonus = {
+				name = QIE_invite_foreign_aviation_instructors
+				bonus = 0.5
+				uses = 1
+				category = light_fighter
+				category = cat_heavy_fighter
+			}
+			add_ideas = QIE_rapid_air_development_german_idea
+		}
+	}
+
+	focus = {
+		id = QIE_man_airborne_special_forces 
+		icon = GFX_focus_generic_paratrooper
+		cost = 4
+
+		relative_position_id = QIE_man_invite_foreign_aviation_instructors
+		x = -1
+		y = 1
+
+		prerequisite = { focus = QIE_man_modern_officer_corps focus = QIE_man_invite_foreign_aviation_instructors }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_airborne_special_forces"
+			if = {
+				limit = {
+					NOT = { has_tech = paratroopers }
+				}
+				set_technology = { paratroopers = 1 }
+			}
+			else = {
+				add_tech_bonus = {
+					name = QIE_airborne_special_forces
+					bonus = 1
+					uses = 1
+					category = para_tech
+				}
+			}
+			division_template = {
+				name = "Kongjiang bing jun" #Paratroopers
+				division_names_group = CHYN_INF_01
+				regiments = {
+					paratrooper = { x = 0 y = 0 }
+					paratrooper = { x = 0 y = 1 }
+					paratrooper = { x = 1 y = 0 }
+					paratrooper = { x = 1 y = 1 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+				}
+			}
+			random_owned_controlled_state = {
+				prioritize = { 613 }
+				limit = {
+					is_in_home_area = yes
+					impassable = no
+				}
+				create_unit = {
+					division = "name = \"Di jiu lan\" division_template = \"Kongjiang bing jun\" start_experience_factor = 1.0"
+					prioritize_location = 1046
+					owner = ROOT
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = QIE_man_expand_airbases 
+		icon = GFX_focus_SOV_women_in_aviation
+		cost = 4
+
+		relative_position_id = QIE_man_national_air_force
+		x = 2
+		y = 1
+
+		prerequisite = { focus = QIE_man_national_air_force }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_expand_airbases"
+			596 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			802 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = { controls_state = 592 }
+				592 = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = { controls_state = 608 }
+				608 = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			add_one_random_military_factory = yes
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = QIE_man_imitiate_foreign_air_designs
+		icon = GFX_goal_generic_design_equipment_standards
+		cost = 4
+
+		relative_position_id = QIE_man_expand_airbases
+		x = 0
+		y = 1
+
+		prerequisite = { focus = QIE_man_expand_airbases }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_imitiate_foreign_air_designs"
+			GER = {
+					if = {
+						limit = { has_tech = jet_fighter1 }
+						create_production_license = {
+							target = SHX
+							cost_factor = 0
+							equipment = { type = jet_fighter_equipment_1 }
+						}
+					}
+					else_if = {
+						limit = { has_tech = fighter3 }
+						create_production_license = {
+							target = SHX
+							cost_factor = 0
+							equipment = { type = fighter_equipment_3 }
+						}
+					}
+					else_if = {
+						limit = { has_tech = fighter2 }
+						create_production_license = {
+							target = SHX
+							cost_factor = 0
+							equipment = { type = fighter_equipment_2 }
+						}
+					}
+					else_if = {
+						limit = { has_tech = fighter1 }
+						create_production_license = {
+							target = SHX
+							cost_factor = 0
+							equipment = { type = fighter_equipment_1 }
+						}
+					}
+					else = {
+						create_production_license = {
+							target = SHX
+							cost_factor = 0
+							equipment = { type = 	fighter_equipment_0 }
+						}
+					}
+				}
+			air_experience = 40
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = QIE_man_enshrine_the_fighter_cult 
+		icon = GFX_goal_generic_air_command
+		cost = 4
+
+		relative_position_id = QIE_man_national_air_force
+		x = 0
+		y = 2
+		prerequisite = { focus = QIE_man_national_air_force }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_enshrine_the_fighter_cult"
+			air_experience = 100
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = QIE_man_encourage_attack_aviation 
+		icon = GFX_goal_generic_air_CAS_new
+		cost = 4
+
+		relative_position_id = QIE_man_enshrine_the_fighter_cult
+		x = 0
+		y = 1
+
+		prerequisite = { focus = QIE_man_enshrine_the_fighter_cult }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_encourage_attack_aviation"
+			add_tech_bonus = {
+				name = QIE_encourage_attack_aviation
+				bonus = 0.5
+				uses = 1
+				category = cat_air_guns
+			}
+			add_tech_bonus = {
+				name = QIE_encourage_attack_aviation
+				bonus = 0.5
+				uses = 1
+				category = cat_air_engine
+			}
+			swap_ideas = {
+				remove_idea = QIE_republic_of_china_air_force_idea
+				add_idea = QIE_republic_of_china_air_force_idea2
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+
+	focus = {
+		id = QIE_man_long_range_supremacy 
+		icon = GFX_goal_generic_air_tactical_bomber_german
+		cost = 4
+
+		relative_position_id = QIE_man_encourage_attack_aviation
+		x = -1
+		y = 1
+		mutually_exclusive = { focus = QIE_man_dive_bombing_focus }
+		prerequisite = { focus = QIE_man_encourage_attack_aviation }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_long_range_supremacy"
+			add_tech_bonus = {
+				name = QIE_long_range_supremacy
+				bonus = 1.0
+				uses = 1
+				category = tactical_bomber
+			}
+			swap_ideas = {
+				remove_idea = QIE_republic_of_china_air_force_idea2
+				add_idea = QIE_republic_of_china_air_force_idea_long_range
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = QIE_man_dive_bombing_focus 
+		icon = GFX_goal_generic_air_CAS_german
+		cost = 4
+
+		relative_position_id = QIE_man_encourage_attack_aviation
+		x = 1
+		y = 1
+		mutually_exclusive = { focus = QIE_man_long_range_supremacy }
+		prerequisite = { focus = QIE_man_encourage_attack_aviation }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_dive_bombing_focus"
+			add_tech_bonus = {
+				name = QIE_dive_bombing_focus
+				bonus = 1.0
+				uses = 1
+				category = cas_bomber
+			}
+			swap_ideas = {
+				remove_idea = QIE_republic_of_china_air_force_idea2
+				add_idea = QIE_republic_of_china_air_force_idea_cas
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = QIE_man_roc_air_force 
+		icon = GFX_goal_China_Beiyang_Air_Force
+		cost = 4
+
+		relative_position_id = QIE_man_dive_bombing_focus
+		x = -1
+		y = 1
+		prerequisite = { focus = QIE_man_long_range_supremacy focus = QIE_dive_bombing_focus }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_roc_air_force"
+			if = {
+				limit = { has_idea = QIE_republic_of_china_air_force_idea_long_range }
+				swap_ideas = {
+					remove_idea = QIE_republic_of_china_air_force_idea_long_range
+					add_idea = QIE_republic_of_china_air_force_idea3_long_range
+				}
+			}
+			else_if = {
+				limit = { has_idea = QIE_republic_of_china_air_force_idea_cas }
+				swap_ideas = {
+					remove_idea = QIE_republic_of_china_air_force_idea_cas
+					add_idea = QIE_republic_of_china_air_force_idea3_cas
+				}
+			}
+			else = {
+				custom_effect_tooltip = SHX_Depends_tooltip
+				custom_effect_tooltip = QIE_roc_air_force_long_range_tt
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = QIE_republic_of_china_air_force_idea_long_range
+						add_idea = QIE_republic_of_china_air_force_idea3_long_range
+					}
+				}
+				custom_effect_tooltip = QIE_roc_air_force_cas_tt
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = QIE_republic_of_china_air_force_idea_cas
+						add_idea = QIE_republic_of_china_air_force_idea3_cas
+					}
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+
+	focus = {
+		id = QIE_man_utilise_arsenals 
+		icon = GFX_focus_DEN_limited_regulations
+		cost = 4
+
+		relative_position_id = QIE_man_national_army
+		x = -2
+		y = 1
+
+		ai_will_do = { base = 80 }
+		prerequisite = { focus = QIE_man_national_army}
+		available = {
+			owns_any_state_of = {
+				592 #Guangzhou
+				613 #Jinling
+				716 #Liaoning
+				1048 #Wuhan
+				1059 #Kaifeng
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_utilise_arsenals"
+			custom_effect_tooltip = SHX_arsenals_tt
+			if = {
+				limit = { owns_state = 1048 } #Wuhan
+				1048 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory #Hanyang Arsenal
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = { owns_state = 1059 } #Kaifeng
+				1059 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory #Gongxian Arsenal
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = { owns_state = 613 } #Nanjing
+				613 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory #Jinling Arsenal
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = { owns_state = 716 } #Shenyang
+				716 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory #Jinling Arsenal
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = { owns_state = 592 } #Guangzhou
+				592 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory #Jinling Arsenal
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = QIE_man_renovate_military_academies 
+		icon = GFX_goal_officers
+		cost = 4
+		relative_position_id = QIE_man_national_army
+		x = 0
+		y = 1
+		prerequisite = { focus = QIE_man_national_army}
+		ai_will_do = { base = 100 }
+
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_renovate_military_academies"
+			army_experience = 25
+			add_doctrine_cost_reduction = {
+				name = QIE_renovate_military_academies
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = QIE_man_the_modern_chinese_soldier 
+		icon = GFX_goal_generic_mechanized_infantry
+		cost = 4
+
+		relative_position_id = QIE_man_renovate_military_academies
+		x = -1
+		y = 1
+
+		prerequisite = { focus = QIE_man_renovate_military_academies }
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_the_modern_chinese_soldier"
+			army_experience = 30
+			add_tech_bonus = {
+				name = QIE_the_modern_chinese_soldier
+				bonus = 1
+				uses = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = QIE_the_modern_chinese_soldier
+				bonus = 1
+				uses = 1
+				category = artillery
+			}
+			add_tech_bonus = {
+				name = QIE_the_modern_chinese_soldier
+				bonus = 1
+				uses = 1
+				category = cat_mechanized_equipment
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = QIE_man_modern_officer_corps 
+		icon = GFX_goal_generic_army_high_command
+		cost = 4
+
+		relative_position_id = QIE_man_renovate_military_academies
+		x = 1
+		y = 1
+
+		prerequisite = { focus = QIE_man_renovate_military_academies }
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_modern_officer_corps"
+			every_unit_leader = {
+				add_planning = 1
+			}
+			every_unit_leader = {
+				add_logistics = 1
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = QIE_man_broadfront_operations_capacity 
+		icon = GFX_focus_ETH_peacekeeping_forces
+		cost = 4
+
+		relative_position_id = QIE_man_renovate_military_academies
+		x = 0
+		y = 2
+
+		prerequisite = { focus = QIE_man_renovate_military_academies }
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_broadfront_operations_capacity"
+			set_technology = { improved_recon_units_tech = 1 popup = yes }
+			custom_effect_tooltip = tooltip_white_line
+			add_tech_bonus = {
+				name = QIE_broadfront_operations_capacity
+				bonus = 1
+				uses = 1
+				category = recon_tech
+			}
+		}
+	}
+	focus = {
+		id = QIE_man_new_methods 
+		icon = GFX_focus_SOV_the_glory_of_the_red_army_alternative
+		cost = 4
+
+		relative_position_id = QIE_man_broadfront_operations_capacity
+		x = 1
+		y = 1
+
+		ai_will_do = { base = 100 }
+		prerequisite = { focus = QIE_man_broadfront_operations_capacity }
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_new_methods"
+			add_tech_bonus = {
+				name = SHX_tanks_tech_boost
+				bonus = 0.5
+				uses = 2
+				category = armor
+			}
+			add_tech_bonus = {
+				name = SHX_tanks_tech_boost
+				bonus = 1
+				uses = 1
+				category = motorized_equipment
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = QIE_man_future_of_war 
+		icon = GFX_goal_generic_army_superior_firepower
+		cost = 4
+
+		relative_position_id = QIE_man_broadfront_operations_capacity
+		x = 0
+		y = 2
+
+		ai_will_do = { base = 100 }
+		prerequisite = { focus = QIE_man_broadfront_operations_capacity }
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_future_of_war"
+			every_unit_leader = {
+				add_attack = 1
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+				name = QIE_future_of_war
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = QIE_man_new_army_new_china 
+		icon = GFX_goal_FNG_fengtian_army
+		cost = 4
+
+		relative_position_id = QIE_man_future_of_war
+		x = 0
+		y = 1
+
+		ai_will_do = { base = 100 }
+		prerequisite = { focus = QIE_man_future_of_war }
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_new_army_new_china"
+			add_ideas = QIE_new_army
+		}
+	}
+	focus = {
+		id = QIE_man_build_a_navy 
+		icon = GFX_goal_QIE_Imperial_Navy_1
+		cost = 4
+
+		relative_position_id = QIE_man_national_army
+		x = -4
+		y = 1
+
+		ai_will_do = { base = 50 }
+		prerequisite = {
+			focus = QIE_man_national_army
+		}
+		available = { any_owned_state = { is_coastal = yes } }
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_build_a_navy"
+			if = { #for non broke players
+				limit = {
+					has_dlc_mtg = yes
+				}
+				if = {
+					limit = { NOT = { has_tech = early_ship_hull_light } }
+					set_technology = { early_ship_hull_light = 1 }
+				}
+				if = {
+					limit = { NOT = { has_tech = early_ship_hull_cruiser } }
+					set_technology = { early_ship_hull_cruiser = 1 }
+				}
+				if = {
+					limit = { NOT = { has_tech = coastal_defense_ships } }
+					set_technology = { coastal_defense_ships = 1 }
+				}
+				if = {
+					limit = { NOT = { has_tech = coastal_defense_ships } }
+					set_technology = { coastal_defense_ships = 1 }
+				}
+				if = {
+					limit = { NOT = { has_tech = basic_naval_mines } }
+					set_technology = { basic_naval_mines = 1 }
+				}
+				if = {
+					limit = { NOT = { has_tech = basic_battery } }
+					set_technology = { basic_battery = 1 }
+				}
+				if = {
+					limit = { NOT = { has_tech = basic_torpedo } }
+					set_technology = { basic_torpedo = 1 }
+				}
+			}
+			else = {
+				if = {
+					limit = { NOT = { has_tech = early_destroyer } }
+					set_technology = { early_destroyer = 1 }
+				}
+				if = {
+					limit = { NOT = { has_tech = early_submarine } }
+					set_technology = { early_submarine = 1 }
+				}
+			}
+
+			add_tech_bonus = {
+				name = SHX_navy_modernisation_tech
+				bonus = 0.5
+				uses = 2
+				category = dd_tech
+			}
+			navy_experience = 50
+			
+			
+			
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = QIE_man_fortify_coastal_bulwark  
+		icon = GFX_goal_nested_fortifications
+		cost = 4
+
+		relative_position_id = QIE_man_build_a_navy
+		x = -1
+		y = 1
+
+		prerequisite = { focus = QIE_man_build_a_navy }
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 0.5
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				has_war = no
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_fortify_coastal_bulwark"
+			enable_tech_expanded_engineer_corps = yes
+			custom_effect_tooltip = tooltip_white_line
+			every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_in_home_area = yes
+					is_coastal = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					province = {
+						all_provinces = yes
+						limit_to_coastal = yes
+					}
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = QIE_man_advanced_coastal_defensive_plans 
+		icon = GFX_goal_generic_radar_instillation
+		cost = 4
+		relative_position_id = QIE_man_fortify_coastal_bulwark
+		x = -1
+		y = 1
+		prerequisite = { focus = QIE_man_fortify_coastal_bulwark }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_advanced_coastal_defensive_plans"
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.25
+			}
+			custom_effect_tooltip = tooltip_white_line
+			add_tech_bonus = {
+				name = QIE_advanced_coastal_defensive_plans
+				bonus = 1
+				uses = 1
+				category = radar_tech
+			}
+			custom_effect_tooltip = CHI_coastal_defense_stratagems_tt
+			every_owned_state = {
+				limit = {
+					OR = {
+						state = 745 #Port Arthur
+						state = 1065 #Jiaodong
+						state = 1075 #Nantong
+						state = 1099 #Samnam
+					}
+					is_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = { is_ally_with = KOR }
+				KOR = {
+					random_owned_controlled_state = {
+						prioritize = { 1099 }
+						limit = {
+							is_core_of = ROOT
+							is_coastal = yes
+						}
+						add_building_construction = {
+							type = radar_station
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = QIE_man_dockyards 
+		icon = GFX_goal_generic_naval_industry
+		cost = 4
+
+		relative_position_id = QIE_man_build_a_navy
+		x = 1
+		y = 1
+
+		ai_will_do = { base = 50 }
+		prerequisite = {
+			focus = QIE_man_build_a_navy
+		}
+		available = {
+			any_owned_state = {
+				is_controlled_by = QIE
+				is_coastal = yes
+				free_building_slots = { building = dockyard size > 1 include_locked = yes }
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_dockyards"
+			add_timed_idea = {
+				idea = SHX_rapid_naval_modernisation_idea
+				days = 365
+			}
+			random_owned_controlled_state = {
+				prioritize = { 743 } #Shanghai
+				limit = {
+					is_coastal = yes
+					free_building_slots = { building = dockyard size > 1 include_locked = yes }
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = dockyard
+					level = 4
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = QIE_man_rapid_militarisation 
+		icon = GFX_goal_Focus_Military_Mobilisation
+		cost = 4
+
+		relative_position_id = QIE_man_the_modern_chinese_soldier
+		x = -1
+		y = 1
+
+		ai_will_do = { base = 50 }
+		prerequisite = {
+			focus = QIE_man_dockyards
+			focus = QIE_man_the_modern_chinese_soldier
+		}
+
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_rapid_militarisation"
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+		}
+	}
+	focus = {
+		id = QIE_man_new_navy_new_traditions 
+		icon = GFX_goal_navy_decision
+		cost = 4
+
+		relative_position_id = QIE_man_build_a_navy
+		x = 0
+		y = 2
+
+		prerequisite = { focus = QIE_man_build_a_navy }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_new_navy_new_traditions"
+			add_ideas = QIE_republic_of_china_navy_idea
+			navy_experience = 50
+			add_doctrine_cost_reduction = {
+				name = QIE_new_navy_new_traditions
+				cost_reduction = 0.50
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = QIE_man_chinese_marines  
+		icon = GFX_goal_generic_marines2
+		cost = 4
+
+		relative_position_id = QIE_man_new_navy_new_traditions
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				has_reached_maximum_divisions = yes
+				factor = 0
+			}
+		}
+		prerequisite = { focus = QIE_man_new_navy_new_traditions }
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_chinese_marines QIE_chinese_marines"
+			enable_tech_marine_bonus = yes
+			custom_effect_tooltip = tooltip_white_line
+			add_tech_bonus = {
+				name = QIE_chinese_marines 
+				bonus = 0.5
+				uses = 1
+				category = marine_tech
+			}
+			add_tech_bonus = {
+				name = SHX_marine_transport_tech
+				bonus = 0.5
+				uses = 1
+				category = tp_tech
+			}
+			division_template = {
+				name = "Haijun lu zhan dui" #Marine Corps
+				division_names_group = CHYN_INF_01
+				regiments = {
+					marine = { x = 0 y = 0 }
+					marine = { x = 0 y = 1 }
+					marine = { x = 1 y = 0 }
+					marine = { x = 1 y = 1 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+				}
+			}
+			random_owned_controlled_state = {
+				prioritize = { 1072 }
+				limit = {
+					is_in_home_area = yes
+					impassable = no
+				}
+				create_unit = {
+					division = "name = \"Di san tuan kuobian.\" division_template = \"Haijun lu zhan dui\" start_experience_factor = 1.0" #The Third Regiment
+					prioritize_location = 1046
+					owner = ROOT
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = QIE_man_undersea_warfare 
+		icon = GFX_goal_generic_naval_submarine2
+		cost = 4
+
+		relative_position_id = QIE_man_new_navy_new_traditions
+		x = -2
+		y = 1
+
+		prerequisite = { focus = QIE_man_new_navy_new_traditions }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_undersea_warfare"
+			add_tech_bonus = {
+				name = QIE_undersea_warfare
+				bonus = 1
+				uses = 1
+				category = ss_tech
+			}
+			if = {
+				limit = { has_dlc_mtg = yes }
+				add_tech_bonus = {
+					name = QIE_undersea_warfare
+					bonus = 1
+					uses = 1
+					category = cat_torpedoes
+				}
+			}
+			else = {
+				navy_experience = 25
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = QIE_man_integrate_naval_air_coordination 
+		icon = GFX_goal_bombs_away
+		cost = 4
+
+		relative_position_id = QIE_man_new_navy_new_traditions
+		x = 2
+		y = 1
+
+		prerequisite = { focus = QIE_man_new_navy_new_traditions }
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_integrate_naval_air_coordination"
+			add_tech_bonus = {
+				name = QIE_integrate_naval_air_coordination
+				bonus = 1
+				uses = 1
+				category = cv_tech
+			}
+			add_tech_bonus = {
+				name = QIE_integrate_naval_air_coordination
+				bonus = 1
+				uses = 1
+				category = naval_air
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
 	
+	focus = {
+		id = QIE_man_fleet_of_the_republic 
+		icon = GFX_goal_generic_sea_focused_navy2
+		cost = 4
+
+		relative_position_id = QIE_man_new_navy_new_traditions
+		x = 0
+		y = 2
+		prerequisite = { focus = QIE_man_undersea_warfare }
+		prerequisite = { focus = QIE_man_chinese_marines }
+		prerequisite = { focus = QIE_man_integrate_naval_air_coordination }
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+			modifier = {
+				factor = 2
+				has_global_flag = china_united
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_fleet_of_the_republic"
+			swap_ideas = {
+				remove_idea = QIE_republic_of_china_navy_idea
+				add_idea = QIE_republic_of_china_navy_idea2
+			}
+			if = {
+				limit = { has_dlc_mtg = yes }
+				add_tech_bonus = {
+					name = CHI_fleet_of_the_republic
+					bonus = 0.5
+					uses = 2
+					category = cat_ship_light_battery
+				}
+			}
+		}
+	}
 	focus = {
 		id = QIE_baron_ungern
 		icon = GFX_goal_MON_baron_of_the_steppes
