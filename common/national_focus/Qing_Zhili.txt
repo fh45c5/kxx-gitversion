@@ -9399,7 +9399,7 @@ focus = {
 		cost = 4
 	
 		x = 55
-		y = 16
+		y = 26
 		allow_branch = {
 			has_country_flag = QIE_hidden_path_unlock
 		}
@@ -11711,18 +11711,14 @@ focus = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 	
-	 ############################
-   ## Shared Endgame Content  #
-   ############################
+	 focus = {
+		id = QIE_ZHL_election
+		icon = GFX_goal_generic_elections
+		cost = 8
 
-	focus = {
-		id = FNG_a_new_beiyang_focus
-		icon = GFX_goal_beijing_begonia
-		cost = 4
-
-		relative_position_id = HNN_restore_civilian_rule
-		x = 3
-		y = 3
+		relative_position_id = QIE_XHHSD
+		x = -8
+		y = 15
 
 		ai_will_do = {
 			base = 75
@@ -11733,23 +11729,31 @@ focus = {
 					has_country_flag = SHX_ai_chooses_KMT_ending_flag
 				}
 			}
+			modifier = {
+				factor = 0
+				#Prevent odd behavior if you got puppeted
+				is_subject = yes
+				has_socialist_government = yes
+			}
+		}
+		available = {
+			has_completed_focus = QIE_towards_the_dream_of_unification
+			if = {
+				limit = { has_country_leader = { character = SHX_feng_yuxiang } }
+				has_completed_focus = QIE_comrades
+			}
+			else_if = {
+				limit = { has_country_leader = { character = SHX_yan_xishan } }
+				has_completed_focus = QIE_national_government
+			}
 		}
 		prerequisite = {
-			focus = QIE_HFDX
-			focus = HNN_restore_civilian_rule
-		}
-		available = {	
-		}
-		allow_branch = {
-			
-			NOT = {
-				has_completed_focus = FNG_a_revolutionary_republic_focus
-			}
+			focus = QIE_zhonghua_revived
 		}
 		
 		
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_a_new_beiyang_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_a_new_beiyang_focus"
 			add_stability = 0.05
 			add_popularity = { ideology = social_democrat popularity = 0.01 }
 			add_popularity = { ideology = social_liberal popularity = 0.03 }
@@ -11760,13 +11764,13 @@ focus = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_INTERNAL_AFFAIRS }
 	}
 
-	focus = {
-		id = FNG_listen_to_independent_voices_focus
-		icon = GFX_goal_QIE_president_hu
-		cost = 4
+	focus = { #socdem
+		id = QIE_progressive_block_reign_victorious
+		icon = GFX_UKR_Social_Democrats
+		cost = 8
 
-		relative_position_id = FNG_a_new_beiyang_focus
-		x = -2
+		relative_position_id = QIE_ZHL_election
+		x = -8
 		y = 1
 
 		ai_will_do = {
@@ -11779,21 +11783,13 @@ focus = {
 				}
 			}
 		}
-		allow_branch = {
-			
-			NOT = {
-				has_completed_focus = FNG_a_revolutionary_republic_focus
-				has_completed_focus = FNG_stewarding_the_national_recovery_focus
-				has_completed_focus = FNG_setting_the_groundwork_for_democracy_focus
-			}
-		}
+		
 		prerequisite = {
-			focus = FNG_a_new_beiyang_focus
+			focus = QIE_ZHL_election
 		}
-		mutually_exclusive = { focus = FNG_stewarding_the_national_recovery_focus }
-		mutually_exclusive = { focus = FNG_setting_the_groundwork_for_democracy_focus }
+		
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_listen_to_independent_voices_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
 			add_popularity = { ideology = social_liberal popularity = 0.10 }
 			set_temp_variable = { coalition_partner_var = token:social_liberal }
 			add_to_coalition = yes
@@ -11801,22 +11797,508 @@ focus = {
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
 	}
+	
+	
+	focus = { 
+		id = QIE_help_worker_peasant
+		icon = GFX_goal_generic_happy_workers
+		cost = 8
 
+		relative_position_id = QIE_progressive_block_reign_victorious
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_progressive_block_reign_victorious
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { 
+		id = QIE_elect_the_talented
+		icon = GFX_goal_ANQ_convince_intellectuals
+		cost = 8
+
+		relative_position_id = QIE_progressive_block_reign_victorious
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_politicalize_trade_union
+		}
+		prerequisite = {
+			focus = QIE_help_worker_peasant
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { 
+		id = QIE_foundations_of_welfare_state
+		icon = GFX_RUS_Welfare_State
+		cost = 8
+
+		relative_position_id = QIE_progressive_block_reign_victorious
+		x = -1
+		y = 3
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_politicalize_trade_union
+		}
+		prerequisite = {
+			focus = QIE_help_worker_peasant
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { 
+		id = QIE_civilian_over_military
+		icon = GFX_RUS_Under_Control
+		cost = 8
+
+		relative_position_id = QIE_progressive_block_reign_victorious
+		x = 1
+		y = 3
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_politicalize_trade_union
+		}
+		prerequisite = {
+			focus = QIE_help_worker_peasant
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { 
+		id = QIE_politicalize_trade_union
+		icon = GFX_RUS_Trade_Unions_Discussion
+		cost = 8
+
+		relative_position_id = QIE_progressive_block_reign_victorious
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_progressive_block_reign_victorious
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { 
+		id = QIE_realize_social_democracy
+		icon = GFX_RUS_Twinkling_Social_Democracy
+		cost = 8
+
+		relative_position_id = QIE_progressive_block_reign_victorious
+		x = 0
+		y = 4
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_elect_the_talented
+		}
+		prerequisite = {
+			focus = QIE_foundations_of_welfare_state
+		}
+		prerequisite = {
+			focus = QIE_civilian_over_military
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { #marlib
+		id = QIE_listen_to_independent_voices_focus
+		icon = GFX_goal_ideology_market_liberal
+		cost = 8
+
+		relative_position_id = QIE_ZHL_election
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_ZHL_election
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { #soccon
+		id = QIE_return_to_rural
+		icon = GFX_goal_BEL_Rural_Ideal
+		cost = 8
+
+		relative_position_id = QIE_ZHL_election
+		x = 4
+		y = 1
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_ZHL_election
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { #
+		id = QIE_industry_serves_agri
+		icon = GFX_focus_ALO_russian_money
+		cost = 8
+
+		relative_position_id = QIE_return_to_rural
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_return_to_rural
+		}
+	
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { #
+		id = QIE_resource_conservation
+		icon = GFX_goal_NEE_Oak_Strong
+		cost = 8
+
+		relative_position_id = QIE_return_to_rural
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_return_to_rural
+		}
+	
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	
+	focus = { #
+		id = QIE_peasant_system_national_treasure
+		icon = GFX_goal_SPR_peasant_coop_focus
+		cost = 8
+
+		relative_position_id = QIE_return_to_rural
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_industry_serves_agri
+		}
+		prerequisite = {
+			focus = QIE_resource_conservation
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { #
+		id = QIE_control_population
+		icon = GFX_GRU_MARLIB_CUT_WELFARE
+		cost = 8
+
+		relative_position_id = QIE_return_to_rural
+		x = -1
+		y = 3
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_industry_serves_agri
+		}
+		prerequisite = {
+			focus = QIE_resource_conservation
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { #
+		id = QIE_militia_demilitrize
+		icon = GFX_RUS_Combat_Army_Mutiny
+		cost = 8
+
+		relative_position_id = QIE_return_to_rural
+		x = 1
+		y = 3
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_industry_serves_agri
+		}
+		prerequisite = {
+			focus = QIE_resource_conservation
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = { #
+		id = QIE_declare_great_agrian_state
+		icon = GFX_RUS_Agricultural_Committee
+		cost = 8
+
+		relative_position_id = QIE_return_to_rural
+		x = 0
+		y = 4
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_control_population
+		}
+		prerequisite = {
+			focus = QIE_peasant_system_national_treasure
+		}
+		prerequisite = {
+			focus = QIE_militia_demilitrize
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_listen_to_independent_voices_focus"
+			add_popularity = { ideology = social_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
 	focus = {
-		id = FNG_herding_the_republicans_focus
+		id = QIE_herding_the_republicans_focus
 		icon = GFX_focus_BRA_rio_protocol
-		cost = 4
+		cost = 8
 
-		relative_position_id = FNG_listen_to_independent_voices_focus
+		relative_position_id = QIE_listen_to_independent_voices_focus
 		x = -1
 		y = 1
 
 		ai_will_do = { base = 75 }
 		prerequisite = {
-			focus = FNG_listen_to_independent_voices_focus
+			focus = QIE_listen_to_independent_voices_focus
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_herding_the_republicans_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_herding_the_republicans_focus"
 			add_war_support = 0.05 #Buff it to 5% + 50pp to compete with loosely with others' econ policies
 			add_political_power = 100
 			add_popularity = { ideology = social_democrat popularity = 0.01 }
@@ -11828,48 +12310,48 @@ focus = {
 	}
 
 	focus = {
-		id = FNG_entreat_the_endeavor_society_focus
+		id = QIE_entreat_the_endeavor_society_focus
 		icon = GFX_goal_AST_freedom_of_the_press
-		cost = 4
+		cost = 8
 
-		relative_position_id = FNG_listen_to_independent_voices_focus
+		relative_position_id = QIE_listen_to_independent_voices_focus
 		x = 1
 		y = 1
 
 		ai_will_do = { base = 75 }
 		prerequisite = {
-			focus = FNG_listen_to_independent_voices_focus
+			focus = QIE_listen_to_independent_voices_focus
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_entreat_the_endeavor_society_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_entreat_the_endeavor_society_focus"
 			add_political_power = 150
 			if = {
 				limit = { has_character = QIE_hu_shih }
 				custom_effect_tooltip = available_political_advisor
-				show_ideas_tooltip = QIE_hu_shih_pol
+				show_ideas_tooltip = QIE_hu_shih_advisor
 			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 
 	focus = {
-		id = FNG_strengthen_the_legislature_focus
+		id = QIE_strengthen_the_legislature_focus
 		icon = GFX_goal_generic_parliament2
-		cost = 4
+		cost = 8
 
-		relative_position_id = FNG_entreat_the_endeavor_society_focus
+		relative_position_id = QIE_entreat_the_endeavor_society_focus
 		x = -1
 		y = 1
 
 		ai_will_do = { base = 75 }
 		prerequisite = {
-			focus = FNG_entreat_the_endeavor_society_focus
+			focus = QIE_entreat_the_endeavor_society_focus
 		}
 		prerequisite = {
-			focus = FNG_herding_the_republicans_focus
+			focus = QIE_herding_the_republicans_focus
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_strengthen_the_legislature_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_strengthen_the_legislature_focus"
 			add_popularity = { ideology = social_democrat popularity = 0.01 }
 			add_popularity = { ideology = social_liberal popularity = 0.07 }
 			add_popularity = { ideology = market_liberal popularity = 0.01 }
@@ -11878,21 +12360,109 @@ focus = {
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
-
-	focus = {
-		id = FNG_stewarding_the_national_recovery_focus
-		icon = GFX_goal_beiyang_star
+focus = {
+		id = QIE_endeavours_human_face
+		icon = GFX_goal_QIE_president_hu
 		cost = 4
 
-		relative_position_id = FNG_a_new_beiyang_focus
-		x = 2
-		y = 1
-		offset = {
-			trigger = { has_completed_focus = FNG_stewarding_the_national_recovery_focus }
-			x = -4
-			y = 0
-		}
+		relative_position_id = QIE_listen_to_independent_voices_focus
+		x = -1
+		y = 3
 
+		prerequisite = {
+			focus = QIE_entreat_the_endeavor_society_focus
+		}
+		prerequisite = {
+			focus = QIE_herding_the_republicans_focus
+		}
+		
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 0.5
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				has_war = no
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = QIE_path option = QIE_PATH_KOO_AUTDEM }
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_endeavours_human_face"
+			add_political_power = 50
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.04
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = QIE_government_of_good_people
+		icon = GFX_goal_beijing_begonia
+		cost = 6
+
+		relative_position_id = QIE_listen_to_independent_voices_focus
+		x = 1
+		y = 3
+
+		prerequisite = {
+			focus = QIE_entreat_the_endeavor_society_focus
+		}
+		prerequisite = {
+			focus = QIE_herding_the_republicans_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_government_of_good_people"
+			swap_ideas = {
+				remove_idea = QIE_legitimacy_of_the_republic_1
+				add_idea = QIE_legitimacy_of_the_republic_hu_shih_1
+			}
+			add_ideas = QIE_burgeoning_pluralism
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = QIE_liberalism_forever
+		icon = GFX_goal_COR_Market_Orientated_Economics
+		cost = 6
+
+		relative_position_id = QIE_listen_to_independent_voices_focus
+		x = 0
+		y = 4
+
+		prerequisite = {
+			focus = QIE_strengthen_the_legislature_focus
+		}
+		prerequisite = {
+			focus = QIE_endeavours_human_face
+		}
+		prerequisite = {
+			focus = QIE_government_of_good_people
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed QIE_government_of_good_people"
+			swap_ideas = {
+				remove_idea = QIE_legitimacy_of_the_republic_1
+				add_idea = QIE_legitimacy_of_the_republic_hu_shih_1
+			}
+			add_ideas = QIE_burgeoning_pluralism
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = QIE_new_china_new_citizen
+		icon = GFX_goal_ideology_authoritarian_democrat
+		cost = 8
+
+		relative_position_id = QIE_ZHL_election
+		x = 34
+		y = 1
+		
 		ai_will_do = {
 			base = 75
 			modifier = {
@@ -11903,21 +12473,255 @@ focus = {
 				}
 			}
 		}
-		allow_branch = {
-			
-			NOT = {
-				has_completed_focus = FNG_a_revolutionary_republic_focus
-				has_completed_focus = FNG_listen_to_independent_voices_focus
-				has_completed_focus = FNG_setting_the_groundwork_for_democracy_focus
+		
+		prerequisite = {
+			focus = QIE_ZHL_election
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_stewarding_the_national_recovery_focus"
+			add_popularity = { ideology = market_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_erdicate_socialism
+		icon = GFX_GRU_BAN_LEFT
+		cost = 8
+
+		relative_position_id = QIE_new_china_new_citizen
+		x = -1
+		y = 1
+		
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+				}
 			}
 		}
+		
 		prerequisite = {
-			focus = FNG_a_new_beiyang_focus
+			focus = QIE_new_china_new_citizen
 		}
-		mutually_exclusive = { focus = FNG_listen_to_independent_voices_focus }
-		mutually_exclusive = { focus = FNG_setting_the_groundwork_for_democracy_focus }
+		
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_stewarding_the_national_recovery_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_stewarding_the_national_recovery_focus"
+			add_popularity = { ideology = market_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_gear_of_regime
+		icon = GFX_focus_HKG_Crooks
+		cost = 8
+
+		relative_position_id = QIE_new_china_new_citizen
+		x = 1
+		y = 1
+		
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_new_china_new_citizen
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_stewarding_the_national_recovery_focus"
+			add_popularity = { ideology = market_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_traditionalist_values
+		icon = GFX_goal_FNG_Defend_Confucius
+		cost = 8
+
+		relative_position_id = QIE_new_china_new_citizen
+		x = 0
+		y = 2
+		
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_erdicate_socialism
+		}
+		prerequisite = {
+			focus = QIE_gear_of_regime
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_stewarding_the_national_recovery_focus"
+			add_popularity = { ideology = market_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_republic_of_elite
+		icon = GFX_NEE_elite_contracts
+		cost = 8
+
+		relative_position_id = QIE_new_china_new_citizen
+		x = -1
+		y = 3
+		
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_erdicate_socialism
+		}
+		prerequisite = {
+			focus = QIE_gear_of_regime
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_stewarding_the_national_recovery_focus"
+			add_popularity = { ideology = market_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_emphaize_military
+		icon = GFX_goal_ideology_paternal_autocrat
+		cost = 8
+
+		relative_position_id = QIE_new_china_new_citizen
+		x = 1
+		y = 3
+		
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_erdicate_socialism
+		}
+		prerequisite = {
+			focus = QIE_gear_of_regime
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_stewarding_the_national_recovery_focus"
+			add_popularity = { ideology = market_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_zhili_rule_prevails
+		icon = GFX_goal_QIE_zhili
+		cost = 8
+
+		relative_position_id = QIE_new_china_new_citizen
+		x = 0
+		y = 4
+		
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_traditionalist_values
+		}
+		prerequisite = {
+			focus = QIE_republic_of_elite
+		}
+		prerequisite = {
+			focus = QIE_emphaize_military
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_stewarding_the_national_recovery_focus"
+			add_popularity = { ideology = market_liberal popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:market_liberal }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_stewarding_the_national_recovery_focus
+		icon = GFX_goal_beiyang_star
+		cost = 8
+
+		relative_position_id = QIE_ZHL_election
+		x = 20
+		y = 1
+		
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_DCP_ending_flag
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_ZHL_election
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_stewarding_the_national_recovery_focus"
 			add_popularity = { ideology = market_liberal popularity = 0.10 }
 			set_temp_variable = { coalition_partner_var = token:market_liberal }
 			add_to_coalition = yes
@@ -11927,20 +12731,20 @@ focus = {
 	}
 
 	focus = {
-		id = FNG_currying_international_exports_focus
+		id = QIE_currying_international_exports_focus
 		icon = GFX_goal_OTT_Restrict_Foreign_Exchange_Regime
-		cost = 4
+		cost = 8
 
-		relative_position_id = FNG_stewarding_the_national_recovery_focus
+		relative_position_id = QIE_stewarding_the_national_recovery_focus
 		x = -1
 		y = 1
 
 		ai_will_do = { base = 75 }
 		prerequisite = {
-			focus = FNG_stewarding_the_national_recovery_focus
+			focus = QIE_stewarding_the_national_recovery_focus
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_currying_international_exports_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_currying_international_exports_focus"
 			if = {
 				limit = {
 					NOT = {
@@ -11964,21 +12768,26 @@ focus = {
 	}
 
 	focus = {
-		id = FNG_domestic_infrastructure_projects_focus
+		id = QIE_domestic_infrastructure_projects_focus
 		icon = GFX_goal_generic_railroad
-		cost = 4
+		cost = 8
 
-		relative_position_id = FNG_stewarding_the_national_recovery_focus
+		relative_position_id = QIE_stewarding_the_national_recovery_focus
 		x = 1
 		y = 1
 
 		ai_will_do = { base = 75 }
 		prerequisite = {
-			focus = FNG_stewarding_the_national_recovery_focus
+			focus = QIE_stewarding_the_national_recovery_focus
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_domestic_infrastructure_projects_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_domestic_infrastructure_projects_focus"
 			add_political_power = 100
+			if = {
+				limit = { has_character = FNG_zhang_zongxiang }
+				custom_effect_tooltip = available_political_advisor
+				show_ideas_tooltip = FNG_zhang_zongxiang_advisor
+			}
 			custom_effect_tooltip = tooltip_white_line
 			add_one_random_infrastructure = yes
 			add_one_random_infrastructure = yes
@@ -11987,20 +12796,23 @@ focus = {
 	}
 
 	focus = {
-		id = FNG_growing_a_chinese_middle_class_focus
+		id = QIE_growing_a_chinese_middle_class_focus
 		icon = GFX_focus_generic_industrialists
-		cost = 4
+		cost = 8
 
-		relative_position_id = FNG_stewarding_the_national_recovery_focus
+		relative_position_id = QIE_stewarding_the_national_recovery_focus
 		x = 0
 		y = 2
 
 		ai_will_do = { base = 75 }
 		prerequisite = {
-			focus = FNG_stewarding_the_national_recovery_focus
+			focus = QIE_currying_international_exports_focus
+		}
+		prerequisite = {
+			focus = QIE_domestic_infrastructure_projects_focus
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_growing_a_chinese_middle_class_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_growing_a_chinese_middle_class_focus"
 			add_political_power = -50 #-75pp penalty for breaking the mold of 1 civ factory + 25pp.
 			add_popularity = { ideology = market_liberal popularity = 0.05 }
 			add_one_random_civilian_factory = yes
@@ -12008,20 +12820,93 @@ focus = {
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 	}
-
 	focus = {
-		id = FNG_setting_the_groundwork_for_democracy_focus
-		icon = GFX_goal_QIE_ncera
-		cost = 4
+		id = QIE_learn_from_west
+		icon = GFX_goal_COL_Authoritarian_Friends_Everywhere_Unite
+		cost = 8
 
-		relative_position_id = FNG_a_new_beiyang_focus
-		x = 6
-		y = 1
-		offset = {
-			trigger = { has_completed_focus = FNG_setting_the_groundwork_for_democracy_focus }
-			x = -8
-			y = 0
+		relative_position_id = QIE_stewarding_the_national_recovery_focus
+		x = -1
+		y = 3
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_currying_international_exports_focus
 		}
+		prerequisite = {
+			focus = QIE_domestic_infrastructure_projects_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_growing_a_chinese_middle_class_focus"
+			add_political_power = -50 #-75pp penalty for breaking the mold of 1 civ factory + 25pp.
+			add_popularity = { ideology = market_liberal popularity = 0.05 }
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_chinese_pragmatism
+		icon = GFX_focus_HKG_Pragmatism
+		cost = 8
+
+		relative_position_id = QIE_stewarding_the_national_recovery_focus
+		x = 1
+		y = 3
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_currying_international_exports_focus
+		}
+		prerequisite = {
+			focus = QIE_domestic_infrastructure_projects_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_growing_a_chinese_middle_class_focus"
+			add_political_power = -50 #-75pp penalty for breaking the mold of 1 civ factory + 25pp.
+			add_popularity = { ideology = market_liberal popularity = 0.05 }
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_republicanism_without_partisan
+		icon = GFX_VNC_model_of_modern_republicanism
+		cost = 8
+
+		relative_position_id = QIE_stewarding_the_national_recovery_focus
+		x = 0
+		y = 4
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_growing_a_chinese_middle_class_focus
+		}
+		prerequisite = {
+			focus = QIE_learn_from_west
+		}
+		prerequisite = {
+			focus = QIE_chinese_pragmatism
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_growing_a_chinese_middle_class_focus"
+			add_political_power = -50 #-75pp penalty for breaking the mold of 1 civ factory + 25pp.
+			add_popularity = { ideology = market_liberal popularity = 0.05 }
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_setting_the_groundwork_for_democracy_focus
+		icon = GFX_goal_NIC_Victory_Social_Democracy
+		cost = 8
+
+		relative_position_id = QIE_ZHL_election
+		x = 12
+		y = 1
+		
 
 		ai_will_do = {
 			base = 75
@@ -12033,20 +12918,13 @@ focus = {
 				}
 			}
 		}
-		allow_branch = {
-			NOT = {
-				has_completed_focus = FNG_a_revolutionary_republic_focus
-				has_completed_focus = FNG_listen_to_independent_voices_focus
-				has_completed_focus = FNG_stewarding_the_national_recovery_focus
-			}
-		}
+		
 		prerequisite = {
-			focus = FNG_a_new_beiyang_focus
+			focus = QIE_ZHL_election
 		}
-		mutually_exclusive = { focus = FNG_listen_to_independent_voices_focus }
-		mutually_exclusive = { focus = FNG_stewarding_the_national_recovery_focus }
+		
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_setting_the_groundwork_for_democracy_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_setting_the_groundwork_for_democracy_focus"
 			add_popularity = { ideology = social_conservative popularity = 0.10 }
 			set_temp_variable = { coalition_partner_var = token:social_conservative }
 			add_to_coalition = yes
@@ -12054,22 +12932,273 @@ focus = {
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
 	}
-
 	focus = {
-		id = FNG_investing_in_education_focus
-		icon = GFX_goal_KTG_Educate_natives
-		cost = 4
+		id = QIE_people_rise_up_save_country
+		icon = GFX_goal_SWE_true_national_revolution_2
+		cost = 8
 
-		relative_position_id = FNG_setting_the_groundwork_for_democracy_focus
+		relative_position_id = QIE_ZHL_election
+		x = 16
+		y = 1
+		
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_ZHL_election
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_setting_the_groundwork_for_democracy_focus"
+			add_popularity = { ideology = social_conservative popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_conservative }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_take_out_foreign_capital
+		icon = GFX_goal_generic_overthrow_capitalists
+		cost = 8
+
+		relative_position_id = QIE_people_rise_up_save_country
+		x = -1
+		y = 1
+		
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_people_rise_up_save_country
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_setting_the_groundwork_for_democracy_focus"
+			add_popularity = { ideology = social_conservative popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_conservative }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_denounce_bad_habits
+		icon = GFX_goal_BAS_No_crown_traditionalism
+		cost = 8
+
+		relative_position_id = QIE_people_rise_up_save_country
+		x = 1
+		y = 1
+		
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_people_rise_up_save_country
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_setting_the_groundwork_for_democracy_focus"
+			add_popularity = { ideology = social_conservative popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_conservative }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_science_worship
+		icon = GFX_goal_VIN_vietnam_academy_science_technology
+		cost = 8
+
+		relative_position_id = QIE_people_rise_up_save_country
 		x = 0
+		y = 2
+		
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_take_out_foreign_capital
+		}
+		prerequisite = {
+			focus = QIE_denounce_bad_habits
+		}
+
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_setting_the_groundwork_for_democracy_focus"
+			add_popularity = { ideology = social_conservative popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_conservative }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_lowing_election_standards
+		icon = GFX_goal_IRE_snap_election
+		cost = 8
+
+		relative_position_id = QIE_people_rise_up_save_country
+		x = -1
+		y = 3
+		
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_take_out_foreign_capital
+		}
+		prerequisite = {
+			focus = QIE_denounce_bad_habits
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_setting_the_groundwork_for_democracy_focus"
+			add_popularity = { ideology = social_conservative popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_conservative }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_minority_rights
+		icon = GFX_goal_COR_Equal_Economic_Political_Legal_Rights
+		cost = 8
+
+		relative_position_id = QIE_people_rise_up_save_country
+		x = 1
+		y = 3
+		
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_take_out_foreign_capital
+		}
+		prerequisite = {
+			focus = QIE_denounce_bad_habits
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_setting_the_groundwork_for_democracy_focus"
+			add_popularity = { ideology = social_conservative popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_conservative }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_begonia_of_many_faces
+		icon = GFX_goal_FNG_China_Reach
+		cost = 8
+
+		relative_position_id = QIE_people_rise_up_save_country
+		x = 0
+		y = 4
+		
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = SHX_ai_chooses_Hu_ending_flag
+					has_country_flag = SHX_ai_chooses_RP_ending_flag
+				}
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_lowing_election_standards
+		}
+		prerequisite = {
+			focus = QIE_science_worship
+		}
+		prerequisite = {
+			focus = QIE_minority_rights
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_setting_the_groundwork_for_democracy_focus"
+			add_popularity = { ideology = social_conservative popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_conservative }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+	focus = {
+		id = QIE_investing_in_education_focus
+		icon = GFX_goal_KTG_Educate_natives
+		cost = 8
+
+		relative_position_id = QIE_setting_the_groundwork_for_democracy_focus
+		x = -1
 		y = 1
 
 		ai_will_do = { base = 75 }
 		prerequisite = {
-			focus = FNG_setting_the_groundwork_for_democracy_focus
+			focus = QIE_setting_the_groundwork_for_democracy_focus
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_investing_in_education_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_investing_in_education_focus"
 			add_tech_bonus = {
 				bonus = 0.5
 				uses = 1
@@ -12082,25 +13211,43 @@ focus = {
 	}
 
 	focus = {
-		id = FNG_the_rural_revival_focus
+		id = QIE_the_rural_revival_focus
 		icon = GFX_goal_SZC_improvised_farming_machinery
-		cost = 4
+		cost = 8
 
-		relative_position_id = FNG_investing_in_education_focus
+		relative_position_id = QIE_setting_the_groundwork_for_democracy_focus
 		x = 1
 		y = 1
 
 		ai_will_do = { base = 75 }
 		prerequisite = {
-			focus = FNG_investing_in_education_focus
+			focus = QIE_setting_the_groundwork_for_democracy_focus
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_the_rural_revival_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_the_rural_revival_focus"
 			add_political_power = 100
 			if = {
 				limit = { has_character = QIE_liang_shuming }
 				custom_effect_tooltip = available_political_advisor
-				show_ideas_tooltip = QIE_liang_shuming_pol
+				show_ideas_tooltip = QIE_liang_shuming_advisor
+			}
+			else = {
+				QIE = {
+					QIE_liang_shuming = {
+						set_nationality = ROOT
+						add_advisor_role = {
+							advisor = {
+								slot = political_advisor
+								idea_token = QIE_liang_shuming_advisor
+								desc = QIE_liang_shuming_sic_desc
+								traits = { QIE_rural_reconstruction_advocate }
+							}
+						}
+						hidden_effect = {
+							remove_second_in_command_role = yes
+						}
+					}
+				}
 			}
 			custom_effect_tooltip = tooltip_white_line
 			construction_add_building_slot_in_best_random_state_effect = yes
@@ -12110,20 +13257,107 @@ focus = {
 	}
 
 	focus = {
-		id = FNG_anti_corruption_efforts_focus
-		icon = GFX_goal_generic_tackle_corruption
-		cost = 4
+		id = QIE_educate_masses
+		icon = GFX_goal_FRA_Levee_Masse
+		cost = 8
 
-		relative_position_id = FNG_investing_in_education_focus
-		x = -1
+		relative_position_id = QIE_investing_in_education_focus
+		x = 0
+		y = 2
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_investing_in_education_focus
+		}
+		prerequisite = {
+			focus = QIE_the_rural_revival_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_anti_corruption_efforts_focus"
+			add_political_power = 25
+			add_popularity = { ideology = social_conservative popularity = 0.05 }
+			add_offsite_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_chinese_west_interaction
+		icon = GFX_focus_HKG_Renegotiate
+		cost = 8
+
+		relative_position_id = QIE_investing_in_education_focus
+		x = 2
+		y = 2
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_investing_in_education_focus
+		}
+		prerequisite = {
+			focus = QIE_the_rural_revival_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_anti_corruption_efforts_focus"
+			add_political_power = 25
+			add_popularity = { ideology = social_conservative popularity = 0.05 }
+			add_offsite_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_democracy_stands_tall
+		icon = GFX_UKR_Torch_Of_Democracy
+		cost = 8
+
+		relative_position_id = QIE_investing_in_education_focus
+		x = 1
+		y = 3
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_anti_corruption_efforts_focus
+		}
+		prerequisite = {
+			focus = QIE_educate_masses
+		}
+		prerequisite = {
+			focus = QIE_chinese_west_interaction
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_anti_corruption_efforts_focus"
+			add_political_power = 25
+			add_popularity = { ideology = social_conservative popularity = 0.05 }
+			add_offsite_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_anti_corruption_efforts_focus
+		icon = GFX_goal_generic_tackle_corruption
+		cost = 8
+
+		relative_position_id = QIE_investing_in_education_focus
+		x = 1
 		y = 1
 
 		ai_will_do = { base = 75 }
 		prerequisite = {
-			focus = FNG_investing_in_education_focus
+			focus = QIE_investing_in_education_focus
+		}
+		prerequisite = {
+			focus = QIE_the_rural_revival_focus
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus SHX_anti_corruption_efforts_focus"
+			log = "[GetLogRoot]: Focus Completed SHX_anti_corruption_efforts_focus"
 			add_political_power = 25
 			add_popularity = { ideology = social_conservative popularity = 0.05 }
 			add_offsite_building = {
@@ -12134,6 +13368,925 @@ focus = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 	}
 
+	focus = { #soclib
+		id = QIE_solicit_southern_compromises_focus
+		icon = GFX_goal_china_negotiations
+		cost = 8
+
+		relative_position_id = QIE_ZHL_election
+		x = -4
+		y = 1
+		
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				has_country_flag = SHX_ai_chooses_northern_ending_flag
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_ZHL_election
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_solicit_southern_compromises_focus"
+			add_popularity = { ideology = social_democrat popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:social_democrat }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = QIE_reconciling_north_south_focus
+		icon = GFX_goal_SHX_united_front
+		cost = 8
+
+		relative_position_id = QIE_solicit_southern_compromises_focus
+		x = -1
+		y = 1
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_solicit_southern_compromises_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_reconciling_north_south_focus"
+			add_timed_idea = { idea = SHX_reconciling_north_south_idea days = 720 }
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = QIE_commit_to_constitutionalism
+		icon = GFX_goal_constitutional_guarantees
+		cost = 8
+
+		relative_position_id = QIE_solicit_southern_compromises_focus
+		x = 0
+		y = 2
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_reconciling_north_south_focus
+		}
+		prerequisite = {
+			focus = QIE_embrace_federalist_principles_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_commit_to_constitutionalism"
+			if = {
+				limit = { has_completed_focus = QIE_listen_to_independent_voices_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.03 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+			}
+			else_if = {
+				limit = { has_completed_focus = QIE_stewarding_the_national_recovery_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.03 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+			}
+			else_if = {
+				limit = { has_completed_focus = QIE_setting_the_groundwork_for_democracy_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.03 }
+			}
+			else = {
+				#Ha imagine not believing in democracy?
+				add_popularity = { ideology = social_democrat popularity = 0.02 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+				set_temp_variable = { ideology_change_var = 0.02 }
+				change_ruling_party_popularity = yes
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	
+	focus = {
+		id = QIE_spirit_of_democracy
+		icon = GFX_goal_ideology_social_liberal
+		cost = 8
+
+		relative_position_id = QIE_solicit_southern_compromises_focus
+		x = -1
+		y = 3
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_reconciling_north_south_focus
+		}
+		prerequisite = {
+			focus = QIE_embrace_federalist_principles_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_commit_to_constitutionalism"
+			if = {
+				limit = { has_completed_focus = QIE_listen_to_independent_voices_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.03 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+			}
+			else_if = {
+				limit = { has_completed_focus = QIE_stewarding_the_national_recovery_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.03 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+			}
+			else_if = {
+				limit = { has_completed_focus = QIE_setting_the_groundwork_for_democracy_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.03 }
+			}
+			else = {
+				#Ha imagine not believing in democracy?
+				add_popularity = { ideology = social_democrat popularity = 0.02 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+				set_temp_variable = { ideology_change_var = 0.02 }
+				change_ruling_party_popularity = yes
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = QIE_appealing_for_republican_coalition
+		icon = GFX_RUS_Secure_Coalition
+		cost = 8
+
+		relative_position_id = QIE_solicit_southern_compromises_focus
+		x = 1
+		y = 3
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_reconciling_north_south_focus
+		}
+		prerequisite = {
+			focus = QIE_embrace_federalist_principles_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_commit_to_constitutionalism"
+			if = {
+				limit = { has_completed_focus = QIE_listen_to_independent_voices_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.03 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+			}
+			else_if = {
+				limit = { has_completed_focus = QIE_stewarding_the_national_recovery_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.03 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+			}
+			else_if = {
+				limit = { has_completed_focus = QIE_setting_the_groundwork_for_democracy_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.03 }
+			}
+			else = {
+				#Ha imagine not believing in democracy?
+				add_popularity = { ideology = social_democrat popularity = 0.02 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+				set_temp_variable = { ideology_change_var = 0.02 }
+				change_ruling_party_popularity = yes
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = QIE_solidify_election_system
+		icon = GFX_goal_NFL_restore_democracy
+		cost = 8
+
+		relative_position_id = QIE_solicit_southern_compromises_focus
+		x = 0
+		y = 4
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_commit_to_constitutionalism
+		}
+		prerequisite = {
+			focus = QIE_appealing_for_republican_coalition
+		}
+		prerequisite = {
+			focus = QIE_spirit_of_democracy
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_commit_to_constitutionalism"
+			if = {
+				limit = { has_completed_focus = QIE_listen_to_independent_voices_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.03 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+			}
+			else_if = {
+				limit = { has_completed_focus = QIE_stewarding_the_national_recovery_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.03 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+			}
+			else_if = {
+				limit = { has_completed_focus = QIE_setting_the_groundwork_for_democracy_focus }
+				add_popularity = { ideology = social_democrat popularity = 0.03 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.03 }
+			}
+			else = {
+				#Ha imagine not believing in democracy?
+				add_popularity = { ideology = social_democrat popularity = 0.02 }
+				add_popularity = { ideology = social_liberal popularity = 0.02 }
+				add_popularity = { ideology = market_liberal popularity = 0.02 }
+				add_popularity = { ideology = social_conservative popularity = 0.02 }
+				set_temp_variable = { ideology_change_var = 0.02 }
+				change_ruling_party_popularity = yes
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = QIE_embrace_federalist_principles_focus
+		icon = GFX_goal_GXC_federalist_republic
+		cost = 8
+
+		relative_position_id = QIE_solicit_southern_compromises_focus
+		x = 1
+		y = 1
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_solicit_southern_compromises_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_embrace_federalist_principles_focus"
+			if = {
+				limit = { has_character = GXC_zhang_junmai }
+				custom_effect_tooltip = available_political_advisor
+				show_ideas_tooltip = GXC_zhang_junmai_advisor
+				custom_effect_tooltip = tooltip_white_line
+			}
+			custom_effect_tooltip = SHX_embrace_federalist_principles_tt
+			if = {
+				limit = { controls_state = 592 } #Guangzhou
+				592 = { add_dynamic_modifier = { modifier = SHX_federal_autonomy_state_modifier } }
+			}
+			if = {
+				limit = { controls_state = 594 } #Nanning
+				594 = { add_dynamic_modifier = { modifier = SHX_federal_autonomy_state_modifier } }
+			}
+			if = {
+				limit = { controls_state = 602 } #Changsha
+				602 = { add_dynamic_modifier = { modifier = SHX_federal_autonomy_state_modifier } }
+			}
+			if = {
+				limit = { controls_state = 325 } #Kunming
+				325 = { add_dynamic_modifier = { modifier = SHX_federal_autonomy_state_modifier } }
+			}
+			if = {
+				limit = { controls_state = 605 } #Chongqing
+				605 = { add_dynamic_modifier = { modifier = SHX_federal_autonomy_state_modifier } }
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = QIE_entrench_northern_primacy_focus
+		icon = GFX_goal_China_Beiyang_Army
+		cost = 8
+
+		relative_position_id = QIE_ZHL_election
+		x = 8
+		y = 1
+		
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				has_country_flag = SHX_ai_chooses_southern_ending_flag
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_ZHL_election
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_entrench_northern_primacy_focus"
+			if = {
+				limit = { has_country_leader = { character = SHX_feng_yuxiang } }
+				add_popularity = { ideology = authoritarian_democrat popularity = 0.05 }
+				add_popularity = { ideology = paternal_autocrat popularity = 0.05 }
+				set_temp_variable = { coalition_partner_var = token:paternal_autocrat }
+				add_to_coalition = yes
+			}
+			else_if = {
+				limit = { has_country_leader = { character = SHX_yan_xishan } }
+				add_popularity = { ideology = paternal_autocrat popularity = 0.05 }
+				add_popularity = { ideology = authoritarian_democrat popularity = 0.05 }
+				set_temp_variable = { coalition_partner_var = token:authoritarian_democrat }
+				add_to_coalition = yes
+			}
+			mark_focus_tree_layout_dirty = yes #needed to trigger focus tree shift
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = QIE_eliminate_regionalism_focus
+		icon = GFX_goal_focus_chain_army
+		cost = 8
+
+		relative_position_id = QIE_entrench_northern_primacy_focus
+		x = -1
+		y = 1
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_entrench_northern_primacy_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_eliminate_regionalism_focus"
+			add_timed_idea = { idea = SHX_eliminate_regionalism_idea days = 720 }
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = QIE_beiyang_patronage_focus
+		icon = GFX_goal_collaborate_local_elites
+		cost = 8
+
+		relative_position_id = QIE_entrench_northern_primacy_focus
+		x = 1
+		y = 1
+
+		ai_will_do = { base = 75 }
+		available = {
+			has_country_flag = CHN_has_chosen_a_capital_flag
+		}
+		prerequisite = {
+			focus = QIE_entrench_northern_primacy_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_beiyang_patronage_focus"
+			set_temp_variable = { ideology_change_var = 0.03 }
+			change_ruling_party_popularity = yes
+			if = {
+				limit = { has_character = QIE_wellington_koo }
+				custom_effect_tooltip = available_political_advisor
+				show_ideas_tooltip = QIE_wellington_koo_advisor
+			}
+			var:SHX.Capital = { add_dynamic_modifier = { modifier = SHX_beiyang_patronage_state_modifier } }
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_pursue_social_harmony
+		icon = GFX_goal_CZE_class_equality
+		cost = 8
+
+		relative_position_id = QIE_entrench_northern_primacy_focus
+		x = 0
+		y = 2
+
+		ai_will_do = { base = 75 }
+		available = {
+			has_country_flag = CHN_has_chosen_a_capital_flag
+		}
+		prerequisite = {
+			focus = QIE_eliminate_regionalism_focus
+		}
+		prerequisite = {
+			focus = QIE_beiyang_patronage_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_beiyang_patronage_focus"
+			set_temp_variable = { ideology_change_var = 0.03 }
+			change_ruling_party_popularity = yes
+			if = {
+				limit = { has_character = QIE_wellington_koo }
+				custom_effect_tooltip = available_political_advisor
+				show_ideas_tooltip = QIE_wellington_koo_advisor
+			}
+			var:SHX.Capital = { add_dynamic_modifier = { modifier = SHX_beiyang_patronage_state_modifier } }
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_power_of_bureaucracy
+		icon = GFX_TRM_Restructure_Bureaucracy
+		cost = 8
+
+		relative_position_id = QIE_entrench_northern_primacy_focus
+		x = -1
+		y = 3
+
+		ai_will_do = { base = 75 }
+		available = {
+			has_country_flag = CHN_has_chosen_a_capital_flag
+		}
+		prerequisite = {
+			focus = QIE_eliminate_regionalism_focus
+		}
+		prerequisite = {
+			focus = QIE_beiyang_patronage_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_beiyang_patronage_focus"
+			set_temp_variable = { ideology_change_var = 0.03 }
+			change_ruling_party_popularity = yes
+			if = {
+				limit = { has_character = QIE_wellington_koo }
+				custom_effect_tooltip = available_political_advisor
+				show_ideas_tooltip = QIE_wellington_koo_advisor
+			}
+			var:SHX.Capital = { add_dynamic_modifier = { modifier = SHX_beiyang_patronage_state_modifier } }
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_authoritian_republic
+		icon = GFX_goal_generic_authoritarian_government
+		cost = 8
+
+		relative_position_id = QIE_entrench_northern_primacy_focus
+		x = 1
+		y = 3
+
+		ai_will_do = { base = 75 }
+		available = {
+			has_country_flag = CHN_has_chosen_a_capital_flag
+		}
+		prerequisite = {
+			focus = QIE_eliminate_regionalism_focus
+		}
+		prerequisite = {
+			focus = QIE_beiyang_patronage_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_beiyang_patronage_focus"
+			set_temp_variable = { ideology_change_var = 0.03 }
+			change_ruling_party_popularity = yes
+			if = {
+				limit = { has_character = QIE_wellington_koo }
+				custom_effect_tooltip = available_political_advisor
+				show_ideas_tooltip = QIE_wellington_koo_advisor
+			}
+			var:SHX.Capital = { add_dynamic_modifier = { modifier = SHX_beiyang_patronage_state_modifier } }
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_china_united_and_indivisible_focus
+		icon = GFX_goal_authoritarian
+		cost = 8
+
+		relative_position_id = QIE_entrench_northern_primacy_focus
+		x = 0
+		y = 4
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_power_of_bureaucracy
+		}
+		prerequisite = {
+			focus = QIE_pursue_social_harmony
+		}
+		prerequisite = {
+			focus = QIE_authoritian_republic
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_china_united_and_indivisible_focus"
+			add_war_support = 0.03
+			if = {
+				limit = { has_country_leader = { character = SHX_feng_yuxiang } }
+				add_popularity = { ideology = authoritarian_democrat popularity = 0.07 }
+				add_popularity = { ideology = paternal_autocrat popularity = 0.03 }
+			}
+			else = {
+				add_popularity = { ideology = authoritarian_democrat popularity = 0.03 }
+				add_popularity = { ideology = paternal_autocrat popularity = 0.07 }
+			}
+
+
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	
+
+	
+	focus = {
+		id = QIE_three_principles_for_one_chinese_nation_focus
+		icon = GFX_goal_chi_three_principles
+		cost = 8
+
+		relative_position_id = QIE_ZHL_election
+		x = 24
+		y = 1
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				has_country_flag = SHX_ai_chooses_YCP_ending_flag
+			}
+		}
+		prerequisite = {
+			focus = QIE_ZHL_election
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_three_principles_for_one_chinese_nation_focus"
+			add_popularity = { ideology = radical_socialist popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:radical_socialist }
+			add_to_coalition = yes
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+
+	focus = {
+		id = QIE_expansive_land_reform_focus
+		icon = GFX_goal_generic_land_reform
+		cost = 8
+
+		relative_position_id = QIE_three_principles_for_one_chinese_nation_focus
+		x = -1
+		y = 1
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_three_principles_for_one_chinese_nation_focus
+		}
+
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_expansive_land_reform_focus"
+			add_popularity = { ideology = radical_socialist popularity = 0.10 }
+			KMT_set_radical_land_reform_effect = yes
+			add_timed_idea = { idea = SHX_expansive_land_reform_idea days = 720 }
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = QIE_national_reconstruction_commission_focus
+		icon = GFX_goal_CHI_revive_china
+		cost = 8
+
+		relative_position_id = QIE_three_principles_for_one_chinese_nation_focus
+		x = 1
+		y = 1
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_three_principles_for_one_chinese_nation_focus
+		}
+
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_national_reconstruction_commission_focus"
+			add_political_power = 50
+			if = {
+				limit = { has_country_leader = { character = SHX_feng_yuxiang } }
+				add_popularity = { ideology = radical_socialist popularity = 0.07 }
+				add_popularity = { ideology = syndicalist popularity = 0.03 }
+				if = {
+					limit = { has_character = QIE_li_dazhao }
+					custom_effect_tooltip = tooltip_white_line
+					custom_effect_tooltip = available_political_advisor
+					show_ideas_tooltip = QIE_li_dazhao_advisor
+				}
+			}
+			else = {
+				add_popularity = { ideology = radical_socialist popularity = 0.07 }
+				add_popularity = { ideology = market_liberal popularity = 0.03 }
+				if = {
+					limit = { has_character = YUN_kong_xiangxi }
+					custom_effect_tooltip = tooltip_white_line
+					custom_effect_tooltip = available_political_advisor
+					show_ideas_tooltip = YUN_kong_xiangxi_advisor
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = QIE_kindle_the_mass_movement_focus
+
+		
+		icon = GFX_goal_CHI_paramilitary_double
+		
+		cost = 8
+
+		relative_position_id = QIE_three_principles_for_one_chinese_nation_focus
+		x = 0
+		y = 2
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_national_reconstruction_commission_focus
+		}
+		prerequisite = {
+			focus = QIE_expansive_land_reform_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_kindle_the_mass_movement_focus"
+			add_popularity = { ideology = radical_socialist popularity = 0.10 }
+			if = {
+				limit = { has_character = CHI_wang_jingwei }
+				custom_effect_tooltip = available_political_advisor
+				show_ideas_tooltip = CHI_wang_jingwei_advisor
+			}
+			if = {
+				limit = { has_country_leader = { character = SHX_feng_yuxiang } }
+				custom_effect_tooltip = tooltip_white_line
+				country_event = { id = shanxi_endgame_events.25 days = 14 } #Lets Feng flip to rad soc
+				unlock_decision_tooltip = china_join_the_internationale_decision
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+
+	focus = {
+		id = QIE_a_new_republic_and_a_young_china_focus
+		icon = GFX_goal_QIE_ycp
+		cost = 8
+
+		relative_position_id = QIE_ZHL_election
+		x = 30
+		y = 1
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 0
+				has_country_flag = SHX_ai_chooses_KMT_ending_flag
+			}
+			modifier = {
+				factor = 0
+				is_subject = yes
+				has_socialist_government = yes #Just in case you got puppeted
+			}
+		}
+		
+		prerequisite = {
+			focus = QIE_ZHL_election
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_a_new_republic_and_a_young_china_focus"
+			add_popularity = { ideology = national_populist popularity = 0.10 }
+			set_temp_variable = { coalition_partner_var = token:national_populist }
+			add_to_coalition = yes
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+
+	focus = {
+		id = QIE_presidential_cult_of_personality_focus
+		icon = GFX_goal_generic_cult_personality
+		cost = 8
+
+		relative_position_id = QIE_a_new_republic_and_a_young_china_focus
+		x = 1
+		y = 1
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_a_new_republic_and_a_young_china_focus
+		}
+
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_presidential_cult_of_personality_focus"
+			add_political_power = 50
+			add_popularity = { ideology = national_populist popularity = 0.07 }
+			set_temp_variable = { ideology_change_var = 0.03 }
+			change_ruling_party_popularity = yes
+			if = {
+				limit = { has_country_leader = { character = SHX_feng_yuxiang } }
+				if = {
+					limit = { has_character = HNN_zhao_yusong }
+					custom_effect_tooltip = tooltip_white_line
+					custom_effect_tooltip = available_political_advisor
+					show_ideas_tooltip = HNN_zhao_yusong_advisor
+				}
+			}
+			else = {
+				if = {
+					limit = { has_character = SHX_chang_yansheng }
+					custom_effect_tooltip = tooltip_white_line
+					custom_effect_tooltip = available_political_advisor
+					show_ideas_tooltip = SHX_chang_yansheng_advisor
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = QIE_a_bureau_of_progress_focus
+		icon = GFX_goal_national_populism
+		cost = 8
+
+		relative_position_id = QIE_a_new_republic_and_a_young_china_focus
+		x = -1
+		y = 1
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_a_new_republic_and_a_young_china_focus
+		}
+
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_a_bureau_of_progress_focus"
+			add_popularity = { ideology = national_populist popularity = 0.10 }
+			add_one_random_military_factory = yes
+			add_timed_idea = { idea = SHX_bureau_of_progress_idea days = 720 }
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = QIE_undertake_mass_militarisation_focus
+		
+		icon = GFX_goal_conscription
+		
+		cost = 8
+
+		relative_position_id = QIE_a_new_republic_and_a_young_china_focus
+		x = 0
+		y = 2
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_a_bureau_of_progress_focus
+		}
+		prerequisite = {
+			focus = QIE_presidential_cult_of_personality_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_undertake_mass_militarisation_focus"
+			add_popularity = { ideology = national_populist popularity = 0.10 }
+			if = {
+				limit = { has_character = QIE_zeng_qi }
+				custom_effect_tooltip = available_political_advisor
+				show_ideas_tooltip = QIE_zeng_qi_advisor
+			}
+			if = {
+				limit = { has_country_leader = { character = SHX_yan_xishan } }
+				custom_effect_tooltip = tooltip_white_line
+				country_event = { id = shanxi_endgame_events.27 days = 14 } #Allows Yan Xishan to flip nat pop if he wants
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+	}
+
+	focus = {
+		id = QIE_centralise_the_national_government_focus
+		icon = GFX_goal_ANQ_centralization
+		cost = 8
+
+		relative_position_id = QIE_a_new_republic_and_a_young_china_focus #Make it relative to this so the shift effect is easier
+		x = -4
+		y = 3
+
+		
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_expansive_land_reform_focus
+			focus = QIE_a_bureau_of_progress_focus
+		}
+		prerequisite = {
+			focus = QIE_national_reconstruction_commission_focus
+			focus = QIE_presidential_cult_of_personality_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_centralise_the_national_government_focus"
+			add_war_support = 0.03
+			add_political_power = -75 #-100 for going one more than "standard" of 25pp and 1 military factory + 3% WS
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = QIE_dawn_of_the_party_state_focus
+		icon = GFX_focus_generic_military_dictatorship
+		cost = 8
+
+		relative_position_id = QIE_centralise_the_national_government_focus
+		x = 1
+		y = 1
+
+		ai_will_do = { base = 75 }
+		prerequisite = {
+			focus = QIE_centralise_the_national_government_focus
+		}
+		prerequisite = {
+			focus = QIE_crash_industrialisation_focus
+		}
+		prerequisite = {
+			focus = QIE_kindle_the_mass_movement_focus
+			focus = QIE_undertake_mass_militarisation_focus
+		}
+		
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_dawn_of_the_party_state_focus"
+			if = {
+				limit = { has_country_leader = { character = SHX_yan_xishan } }
+				if = {
+					limit = { has_completed_focus = QIE_three_principles_for_one_chinese_nation_focus }
+					add_timed_idea = { idea = SHX_dawn_of_the_party_state_yan_kmt_idea days = 720 }
+				}
+				else = {
+					#Yan + YCP is default sort of
+					add_timed_idea = { idea = SHX_dawn_of_the_party_state_yan_ycp_idea days = 720 }
+				}
+			}
+			else_if = {
+				limit = { has_country_leader = { character = SHX_feng_yuxiang } }
+				if = {
+					limit = { has_completed_focus = QIE_a_new_republic_and_a_young_china_focus }
+					add_timed_idea = { idea = SHX_dawn_of_the_party_state_feng_ycp_idea days = 720 }
+				}
+				else = {
+					#Feng + KMT is the default sort of
+					add_timed_idea = { idea = SHX_dawn_of_the_party_state_feng_kmt_idea days = 720 }
+				}
+			}
+
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = QIE_crash_industrialisation_focus
+		icon = GFX_goal_NIC_Military_Industry
+		cost = 8
+
+		relative_position_id = QIE_centralise_the_national_government_focus
+		x = 2
+		y = 0
+
+		ai_will_do = { base = 75 }
+		available = {
+			owns_state = 743 #Shanghai
+		}
+		prerequisite = {
+			focus = QIE_expansive_land_reform_focus
+			focus = QIE_a_bureau_of_progress_focus
+		}
+		prerequisite = {
+			focus = QIE_national_reconstruction_commission_focus
+			focus = QIE_presidential_cult_of_personality_focus
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed SHX_crash_industrialisation_focus"
+			if = {
+				limit = { controls_state = 608 } #Beijing
+				608 = { add_dynamic_modifier = { modifier = SHX_crash_industrialisation_plan_state_modifier } }
+			}
+			if = {
+				limit = { controls_state = 716 } #Shenyang
+				716 = { add_dynamic_modifier = { modifier = SHX_crash_industrialisation_plan_state_modifier } }
+			}
+			if = {
+				limit = { controls_state = 1048 } #Wuhan
+				1048 = { add_dynamic_modifier = { modifier = SHX_crash_industrialisation_plan_state_modifier } }
+			}
+			if = {
+				limit = { controls_state = 592 } #Canton
+				592 = { add_dynamic_modifier = { modifier = SHX_crash_industrialisation_plan_state_modifier } }
+			}
+			if = {
+				limit = { controls_state = 743 } #Shanghai
+				743 = { add_dynamic_modifier = { modifier = SHX_crash_industrialisation_plan_state_modifier } }
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
 	
 	
 
