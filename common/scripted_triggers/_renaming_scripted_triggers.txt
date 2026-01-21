@@ -17,16 +17,12 @@ is_american_tag = {
 			tag = DSR
 			tag = ARZ
 			tag = NVN
-			tag = TXS
 			tag = AFT
 			tag = ATD
 			tag = IKE
 			tag = UOT
 			tag = CGL
-			#tag = BLL
 			tag = FSA
-			tag = TXS
-			#tag = SNA
 			tag = ENC
 			tag = NYC
 		}
@@ -67,6 +63,12 @@ is_arab_tag = {
 			original_tag = SYR
 			original_tag = IRQ
 			original_tag = PAL
+			original_tag = LBA
+			original_tag = TRP
+			original_tag = ALG
+			original_tag = MOR
+			original_tag = TUN
+			original_tag = MRT
 		}
 	}
 }
@@ -132,7 +134,6 @@ is_han_chinese_tag = {
 			original_tag = YUN
 			original_tag = MAN
 			original_tag = PRC
-			is_lec_core_chinese_tag = yes
 		}
 	}
 }
@@ -142,16 +143,6 @@ is_non_han_chinese_tag = {
 		tag = ETS
 		tag = TIB
 		tag = MON
-		tag = TAI
-	}
-}
-
-is_lec_core_chinese_tag = {
-	AND = {
-	original_tag = LEC
-		LEC = {
-			has_country_flag = shanghai_revolution
-		}
 	}
 }
 is_chinese_tag = {
@@ -172,7 +163,6 @@ is_tag_in_china_area = {
 		original_tag = TIB
 		original_tag = ETS
 		original_tag = LEC
-		original_tag = TAI
 	}
 }
 is_dutch_tag = {
@@ -212,6 +202,7 @@ is_CANZACAF_tag = {
 	OR = {
 		tag = CAF
 		tag = CAN
+		tag = NFL
 		tag = NZL
 		tag = AST
 		tag = JAM
@@ -286,6 +277,9 @@ is_french_tag = {
 			tag = FRA
 			tag = NFA
 			tag = FRP
+			tag = FAR
+			tag = OCC
+			tag = NRM
 		}
 	}
 }
@@ -308,7 +302,7 @@ is_french_speaking_tag = {
 	custom_trigger_tooltip = {
 		tooltip = is_french_speaking_tag
 		OR = {
-			is_french_tag = YES
+			is_french_tag = yes
 			is_french_africa_tag = yes
 			tag = QUE
 			tag = WLL
@@ -324,10 +318,13 @@ is_german_tag = {
 			tag = AUS
 			tag = GRU
 			tag = WGR
+			tag = EPR
 			tag = NGF
 			tag = DDR
 			tag = BAY
 			tag = GEX
+			tag = MAF
+			tag = GEA
 			AND = {
 				original_tag = BAT
 				has_socialist_government = no
@@ -340,8 +337,6 @@ is_german_tag = {
 				original_tag = DKB
 				has_country_flag = DKB_germanization
 			}
-			tag = MAF
-			tag = GEA
 		}
 	}
 }
@@ -356,6 +351,7 @@ is_germany_or_splinter_tag = {
 			tag = BAY
 			tag = NGF
 			tag = DDR
+			original_tag = EPR
 		}
 	}
 }
@@ -366,6 +362,7 @@ is_italian_tag = {
 			tag = ITA
 			tag = SRI
 			tag = SIC
+			tag = SCL
 			tag = SRD
 			tag = PAP
 			tag = VNC
@@ -390,7 +387,23 @@ is_soviet_speaking_tag = {
 	has_elected_government = no
 	has_authoritarian_government = no
 }
-
+is_cossack_tag = {
+	OR = {
+		original_tag = DKB
+		original_tag = KUB
+		original_tag = URL
+		original_tag = ORE
+		original_tag = TRB
+		AND = {
+			original_tag = KLY
+			has_cosmetic_tag = KLY_cossack
+		}
+		AND = {
+			original_tag = TRM
+			TRM_semyenov_in_power = yes
+		}
+	}
+}
 is_russian_cw_tag = {
 	OR = {
 		tag = RVA
@@ -409,6 +422,7 @@ is_russian_tag = {
 			tag = RVA
 			tag = WRA
 			tag = RRF
+			tag = RPG
 		}
 	}
 }
@@ -422,24 +436,33 @@ is_russian_speaking_tag = {
 		tag = RVA
 		tag = WRA
 		tag = RRF
+		tag = RPG
 		tag = DKB
-		tag = RVA
-		tag = WRA
-		tag = RRF
+		tag = ORE
+		tag = TRB
+		AND = {
+			tag = URL
+			has_socialist_government = no
+			has_left_democratic_government = no
+		}
 		AND = {
 			tag = KUB
 			NOT = { has_country_flag = KUB_ukrainian_language }
 		}
 		AND = {
-			tag = BRY
-			OR = {
-				has_government = totalist
-				has_government = paternal_autocrat
-			}
-		}
-		AND = {
 			tag = MON
 			MON_sternberg_in_power = yes
+		}
+		AND = {
+			tag = ALO
+			NOT = { has_country_flag = ALO_kazakhization }
+		}
+		AND = {
+			tag = TRK
+			OR = {
+				TRK_monstrov_in_power = yes
+				TRK_tvo_in_power = yes
+			}
 		}
 	}
 }
@@ -454,7 +477,7 @@ is_russian_tag_that_can_integrate = {
 		AND = {
 			tag = MON
 			OR = {
-				has_global_flag = MON_Sternberg_russian_empire
+				has_country_flag = MON_Sternberg_russian_empire
 				owns_state = 219
 			}
 		}
@@ -494,8 +517,8 @@ is_turkic_tag = {
 			is_oghuz_turkic_tag = yes
 			is_kipchak_turkic_tag = yes
 			is_karluk_turkic_tag = yes
-			tag = SIK
 			tag = YAK
+			tag = KHA
 		}
 	}
 }
@@ -512,8 +535,12 @@ is_uzbek_tag = {
 	custom_trigger_tooltip = {
 		tooltip = is_uzbek_tag
 		OR = {
-			tag = KYR
 			tag = TRK
+			tag = UZB
+			AND = {
+				tag = KHI
+				KHI_is_turkmen = no
+			}
 		}
 	}
 }
@@ -523,7 +550,10 @@ is_oghuz_turkic_tag = {
 		OR = {
 			is_turkish_tag = yes
 			tag = AZE
-			tag = UZB
+			AND = {
+				tag = KHI
+				KHI_is_turkmen = yes
+			}
 		}
 	}
 }
@@ -533,16 +563,18 @@ is_kipchak_turkic_tag = {
 		OR = {
 			AND = {
 				tag = ALO
-				NOT = { has_country_flag = ALO_speaks_russian }
+				has_country_flag = ALO_kazakhization
 			}
 			AND = {
 				tag = CRM
 				NOT = { has_government = radical_socialist }
 				NOT = { has_government = paternal_autocrat }
 			}
+			tag = KYR
+			tag = ALT
 			tag = MTR
 			tag = TTR
-			tag = BKN 
+			tag = BKN
 		}
 	}
 }
@@ -575,19 +607,17 @@ is_japanese_tag = {
 			tag = TRM
 			has_country_flag = TRM_uses_japanese
 		}
+		AND = {
+			tag = CAL
+			has_country_flag = JAP_Ministers_Allowed
+		}
 	}
 }
 
 is_mongolian_tag = {
 	OR = {
 		original_tag = MON
-		AND = {
-			tag = BRY
-			NOT = {
-				has_government = totalist
-				has_government = paternal_autocrat
-			}
-		}
+		tag = BRY
 	}
 }
 
@@ -673,10 +703,17 @@ is_indian_tag = {
 		tooltip = is_indian_tag
 		OR = {
 			tag = BRM
-				is_indian_unifier_tag = yes
+			tag = SKM
+			is_indian_unifier_tag = yes
 			tag = MAD
 			tag = TRV
 			tag = MYS
+			tag = INR
+			tag = PGI
+			AND = {
+				tag = AFG
+				owns_state = 440 #East Punjab
+			}
 		}
 	}
 }
@@ -690,7 +727,7 @@ is_yiddish_tag = { #has a large yiddish population
 		tag = LAT
 		tag = BAT
 		tag = WHR
-		tag = UKR
+		original_tag = UKR
 		tag = GAL
 		tag = HUN
 		tag = CZE
@@ -714,22 +751,17 @@ is_islamic_tag = { #Majority muslims
 			tag = TAN
 			tag = SIK
 			tag = ETS
+			tag = UZB
 			tag = TRK
-			tag = KYR
 			is_arab_tag = yes
 			tag = ALB
 			tag = BOS
 			tag = SOM
 			tag = DJI
 			tag = MAL
-			tag = TUN
-			tag = MOR
-			tag = MRT
 			tag = MTR
 			tag = DAG
 			tag = NGR
-			tag = ALG
-			tag = TRP
 			tag = SUD
 			tag = WAD
 			tag = SEN
@@ -751,12 +783,27 @@ is_central_asian_tag = {
 	custom_trigger_tooltip = {
 		tooltip = is_central_asian_tag
 		OR = {
-			tag = ALO
-			tag = KYR
-			tag = UZB
-			tag = TRK
-			tag = TAJ
+			original_tag = ALO
+			original_tag = ORE
+			original_tag = URL
+			tag = SMR
+			is_turkestan_tag = yes
 		}
+	}
+}
+is_kokand_splinter_tag = {
+	OR = {
+		original_tag = TRK
+		original_tag = KYR
+	}
+}
+is_turkestan_tag = {
+	OR = {
+		original_tag = TRK
+		original_tag = KHI
+		original_tag = UZB
+		original_tag = TAJ
+		original_tag = KYR
 	}
 }
 is_leauge_war_tag = {
@@ -807,7 +854,6 @@ is_romanian_tag = {
 		OR = {
 			tag = ROM
 			tag = TRS
-			tag = RRM
 			tag = BAN
 			tag = MOL
 		}
@@ -829,6 +875,7 @@ is_scandinavian_tag = {
 		OR = {
 			tag = DEN
 			tag = SWE
+			tag = SAM
 			tag = NOR
 			tag = ICE
 		}
@@ -887,6 +934,19 @@ is_maori_tag = {
 		OR = {
 			tag = NZL
 			tag= AST
+		}
+	}
+}
+
+is_romance_speaking_tag = {
+	custom_trigger_tooltip = {
+		tooltip = is_romance_speaking_tag
+		OR = {
+			is_spanish_speaking_tag = yes
+			is_french_speaking_tag = yes
+			is_brz_portuguese = yes
+			is_italian_tag = yes
+			is_romanian_tag = yes
 		}
 	}
 }
