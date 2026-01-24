@@ -3568,8 +3568,8 @@ focus_tree = {
 		cost = 4
 
 		
-		x = 0
-		y = 12
+		x = 57
+		y = 1
 		available = {
 			has_country_flag = has_united_china
 		}
@@ -7491,7 +7491,7 @@ focus_tree = {
 	focus = {
 		id = QIE_the_red_sun_over_the_dragon
 		icon = GFX_QIE_the_red_sun_over_the_dragon-90809
-		x = 66
+		x = 68
 		y = 0
 		cost = 5
 		available = {
@@ -7572,6 +7572,7 @@ focus_tree = {
 		completion_reward = {
 		add_war_support = 0.10
 		add_ideas = QIE_mladrossi
+		country_event = red_qing.4
 		}
 	}
 
@@ -7589,12 +7590,55 @@ focus_tree = {
 		prerequisite = { focus = QIE_the_league_of_yellow_dragons  }
 	
 		completion_reward = {
-		add_political_power = -50
+		add_political_power = 50
 		add_popularity = {
-		ideology = syndicalist
-		popularity = 0.07
+			ideology = syndicalist
+			popularity = 0.07
 		}
-		country_event = red_qing.3
+			set_party_name = {
+				ideology = totalist
+				long_name = QIE_red_qing_totalist_party_long
+				name = QIE_red_qing_totalist_party
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = QIE_red_qing_syndicalist_party_long
+				name = QIE_red_qing_syndicalist_party
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = QIE_red_qing_radical_socialist_party_long
+				name = QIE_red_qing_radical_socialist_party
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = QIE_red_qing_social_democrat_party_long
+				name = QIE_red_qing_social_democrat_party
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = QIE_red_qing_social_liberal_party_long
+				name = QIE_red_qing_social_liberal_party
+			}
+			if = {
+				limit = {
+					has_government = radical_socialist
+				}
+				add_tot_to_coalition = yes
+				add_synd_to_coalition = yes
+				add_socdem_to_coalition = yes
+				add_soclib_to_coalition = yes
+			}
+			if = {
+				limit = {
+					has_government = totalist
+				}
+				add_radsoc_to_coalition = yes
+				add_synd_to_coalition = yes
+				add_socdem_to_coalition = yes
+				add_soclib_to_coalition = yes
+			}
+		#country_event = red_qing.3
 		
 		}
 	}
@@ -8073,12 +8117,11 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		completion_reward = {
 		add_political_power = 100
 		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+		country_event = red_qing.18
+		hidden_effect = {
+			country_event = {
+				id = red_qing.19
+				days = 60
 			}
 		}
 		}
@@ -8095,16 +8138,8 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_the_empire_of_the_red_dragon	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_political_power = 100
+			add_ideas = QIE_socialist_party
 		}
 	}
 	focus = {
@@ -8119,16 +8154,7 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_the_empire_of_the_red_dragon	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_synd_datong
 		}
 	}
 	focus = {
@@ -8143,16 +8169,7 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_the_empire_of_the_red_dragon	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_zhang_natsynd
 		}
 	}
 	focus = {
@@ -8167,16 +8184,19 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_zhangguotao_brings_new_revolution	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.1
 			}
-		}
+			add_synd_to_coalition = yes
+			add_political_power = 100
+		add_stability = 0.1
+		add_war_support = 0.1
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+			country_event = red_qing.16 #另立中央
 		}
 	}
 	focus = {
@@ -8191,16 +8211,10 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_zhangguotao_brings_new_revolution	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			swap_ideas = {
+				remove_idea = QIE_zhang_natsynd
+				add_idea = QIE_zhang_natsynd2
 			}
-		}
 		}
 	}
 	focus = {
@@ -8216,16 +8230,22 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_intergrate_syndicalists	} 
 		prerequisite = { focus = QIE_inherit_blueshirts	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			swap_ideas = {
+				remove_idea = QIE_zhang_natsynd2
+				add_idea = QIE_zhang_natsynd3
 			}
-		}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.1
+			}
 		}
 	}
 	focus = {
@@ -8241,16 +8261,7 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_intergrate_syndicalists	} 
 		prerequisite = { focus = QIE_inherit_blueshirts	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_autarky
 		}
 	}
 	focus = {
@@ -8266,16 +8277,10 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_intergrate_syndicalists	} 
 		prerequisite = { focus = QIE_inherit_blueshirts	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
 		}
 	}
 	focus = {
@@ -8292,16 +8297,8 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_national_militarilize	} 
 		prerequisite = { focus = QIE_crush_liberal_left	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_rise_of_national_socialism
+			country_event = red_qing.17 #中国的莫斯利！
 		}
 	}
 	focus = {
@@ -8316,16 +8313,14 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_syndicalism_to_datong	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.1
 			}
-		}
+			
 		}
 	}
 	focus = {
@@ -8340,16 +8335,11 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_syndicalism_to_datong	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			swap_ideas = {
+				remove_idea = QIE_synd_datong
+				add_idea = QIE_synd_datong2
 			}
-		}
+			country_event = red_qing.13 #第一个工团主义政党
 		}
 	}
 	focus = {
@@ -8365,16 +8355,10 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_popular_mandate	} 
 		prerequisite = { focus = QIE_learn_west_syndicalism	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			swap_ideas = {
+				remove_idea = QIE_synd_datong2
+				add_idea = QIE_synd_datong3
 			}
-		}
 		}
 	}
 	focus = {
@@ -8390,16 +8374,10 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_popular_mandate	} 
 		prerequisite = { focus = QIE_learn_west_syndicalism	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_manpower = 100000
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			country_event = red_qing.15 #“高丽共产党”
 		}
 	}
 	focus = {
@@ -8415,16 +8393,7 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_popular_mandate	} 
 		prerequisite = { focus = QIE_learn_west_syndicalism	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_syndical_dirisngisme
 		}
 	}
 	focus = {
@@ -8441,16 +8410,8 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_utilise_radical_students	} 
 		prerequisite = { focus = QIE_syndical_dirisngisme	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_new_china_new_society
+			country_event = red_qing.14 #实现泛亚主义？
 		}
 	}
 	focus = {
@@ -8465,16 +8426,8 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_social_party_continues	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_manpower = 100000
+			add_command_power = 50
 		}
 	}
 	focus = {
@@ -8489,16 +8442,11 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_social_party_continues	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			swap_ideas = {
+				remove_idea = QIE_socialist_party
+				add_idea = QIE_socialist_party2
 			}
-		}
+			country_event = red_qing.10 #国际的孔子与孔子的国际
 		}
 	}
 	focus = {
@@ -8514,16 +8462,8 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_gender_equal	} 
 		prerequisite = { focus = QIE_internationalize_confucianism	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_imperial_anarchy
+			country_event = red_qing.11 #三无主义
 		}
 	}
 	focus = {
@@ -8540,15 +8480,17 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_internationalize_confucianism	} 
 		completion_reward = {
 		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+		add_stability = 0.1
+		add_war_support = 0.1
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
 			}
-		}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.1
+			}
+			country_event = red_qing.12 #新社会主义与新民主主义之问
 		}
 	}
 	focus = {
@@ -8564,16 +8506,10 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_gender_equal	} 
 		prerequisite = { focus = QIE_internationalize_confucianism	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+		swap_ideas = {
+				remove_idea = QIE_socialist_party2
+				add_idea = QIE_socialist_party3
 			}
-		}
 		}
 	}
 	focus = {
@@ -8590,16 +8526,7 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_national_education	} 
 		prerequisite = { focus = QIE_no_religion_state_family	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_socialism_forever
 		}
 	}
 	focus = {
@@ -8614,16 +8541,8 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_the_empire_of_the_red_dragon	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_political_power = 100
+			add_ideas = QIE_labour_party
 		}
 	}
 	focus = {
@@ -8638,16 +8557,10 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_between_labor_capital	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
 		}
 	}
 	focus = {
@@ -8662,16 +8575,17 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_between_labor_capital	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			swap_ideas = {
+				remove_idea = QIE_labour_party
+				add_idea = QIE_labour_party2
 			}
-		}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = QIE_red_qing_social_liberal_party_long
+				name = QIE_red_qing_social_liberal_party
+			}
+			add_soclib_to_coalition = yes
+			add_socdem_to_coalition = yes
 		}
 	}
 	focus = {
@@ -8687,16 +8601,21 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_moderniazion_with_human_face	} 
 		prerequisite = { focus = QIE_tackle_illegal_strikes	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.1
 			}
-		}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.1
+			}
 		}
 	}
 	focus = {
@@ -8712,16 +8631,8 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_moderniazion_with_human_face	} 
 		prerequisite = { focus = QIE_tackle_illegal_strikes	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_christian_socialism
+			country_event = red_qing.8 #天主教与社会主义
 		}
 	}
 	focus = {
@@ -8737,16 +8648,10 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_moderniazion_with_human_face	} 
 		prerequisite = { focus = QIE_tackle_illegal_strikes	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+		swap_ideas = {
+				remove_idea = QIE_labour_party2
+				add_idea = QIE_labour_party3
 			}
-		}
 		}
 	}
 	focus = {
@@ -8763,16 +8668,8 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_worker_rights	} 
 		prerequisite = { focus = QIE_encourage_cooperation	}
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_class_unity
+			country_event = red_qing.9 #战胜阶级斗争
 		}
 	}
 	focus = {
@@ -8787,21 +8684,13 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_the_empire_of_the_red_dragon	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_political_power = 100
+			add_idea = QIE_red_ncera
 		}
 	}
 	focus = {
 		id = QIE_learn_narodism
-		icon = GFX_UKR_Promote_SD_SR
+		icon = GFX_goal_GER_SPD
 		x = -1
 		y = 1
 		relative_position_id = QIE_ncera_rises_again
@@ -8811,21 +8700,13 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_ncera_rises_again	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_spd
+			country_event = red_qing.6 #学习连施派
 		}
 	}
 	focus = {
 		id = QIE_legacy_of_hundred_day_reform
-		icon = GFX_goal_QIE_kang_youwei
+		icon = GFX_goal_SPR_kill_fake_syndies
 		x = 1
 		y = 1
 		relative_position_id = QIE_ncera_rises_again
@@ -8835,21 +8716,20 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		}
 		prerequisite = { focus = QIE_ncera_rises_again	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			swap_ideas = {
+				remove_idea = QIE_red_ncera
+				add_idea = QIE_red_ncera2
 			}
-		}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -0.1
+			}
+			add_soccon_to_coalition = yes
 		}
 	}
 	focus = {
 		id = QIE_enpower_constitution
-		icon = GFX_goal_NFA_A_New_Constitution
+		icon = GFX_GRU_GSVP_Victory
 		x = 0
 		y = 2
 		relative_position_id = QIE_ncera_rises_again
@@ -8860,16 +8740,10 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_learn_narodism	} 
 		prerequisite = { focus = QIE_legacy_of_hundred_day_reform	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_one_random_civilian_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_military_factory = yes
 		}
 	}
 	focus = {
@@ -8885,16 +8759,17 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_learn_narodism	} 
 		prerequisite = { focus = QIE_legacy_of_hundred_day_reform	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.1
 			}
-		}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.1
+			}
 		}
 	}
 	focus = {
@@ -8911,20 +8786,15 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_legacy_of_hundred_day_reform	} 
 		completion_reward = {
 		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
+			swap_ideas = {
+				remove_idea = QIE_red_ncera2
+				add_idea = QIE_red_ncera3
 			}
-		}
 		}
 	}
 	focus = {
 		id = QIE_legacy_of_liangqichao
-		icon = GFX_goal_QIE_hail_to_the_qing
+		icon = GFX_GRU_National_Corporatism
 		x = 0
 		y = 4
 		relative_position_id = QIE_ncera_rises_again
@@ -8936,16 +8806,8 @@ relative_position_id = QIE_the_red_sun_over_the_dragon
 		prerequisite = { focus = QIE_chinese_agrian_socialism	} 
 		prerequisite = { focus = QIE_enpower_constitution	} 
 		completion_reward = {
-		add_political_power = 100
-		add_stability = 0.2
-		drop_cosmetic_tag = yes
-		if = {
-			limit = { has_completed_focus = QIE_attacking_revisionism }
-			set_cosmetic_tag = QIE_RED_REVOLUTION
-			else = {
-			set_cosmetic_tag = QIE_EMPIRE_RED_DRAGONS
-			}
-		}
+			add_ideas = QIE_trimuph_of_national_socialism
+			country_event = red_qing.7 #革命帝国
 		}
 	}
 }
