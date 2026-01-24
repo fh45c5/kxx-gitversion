@@ -1,0 +1,838 @@
+BRI_Small_country_big_trouble = {
+	BRI_political_crisis_countdown = { #政治混乱……
+        icon = GFX_decision_generic_ignite_civil_war
+		priority = 99
+		days_mission_timeout = 60
+		cancel_if_not_visible = yes
+		is_good = no
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = BRI_political_crisis_ongoing
+		}
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		timeout_effect = {
+			custom_effect_tooltip = BRI_political_crisis_countdown_tt
+			if = {
+				limit = { #国民党优势
+					check_variable = { BRI.PNBpower > BRI.FLBpower }
+                    check_variable = { BRI.PNBpower > BRI.BLBApower }
+                    check_variable = { BRI.PNBpower > BRI.ABpower }
+				}
+				BRI = {
+					country_event = BRI_crisis.2
+				}
+			}
+			else_if = {
+				limit = { #自由阵线优势
+					check_variable = { BRI.FLBpower > BRI.PNBpower }
+                    check_variable = { BRI.FLBpower > BRI.BLBApower }
+                    check_variable = { BRI.FLBpower > BRI.ABpower }
+				}
+				BRI = {
+					country_event = BRI_crisis.3
+				}
+			}
+			else_if = {
+				limit = { #企业
+					check_variable = { BRI.BLBApower > BRI.PNBpower }
+                    check_variable = { BRI.BLBApower > BRI.FLBpower }
+                    check_variable = { BRI.BLBApower > BRI.ABpower }
+				}
+				BRI = {
+					country_event = BRI_crisis.4
+				}
+			}
+			else_if = {
+				limit = { #大队
+					check_variable = { BRI.ABpower > BRI.PNBpower }
+                    check_variable = { BRI.ABpower > BRI.FLBpower }
+                    check_variable = { BRI.ABpower > BRI.BLBApower }
+				}
+				BRI = {
+					country_event = BRI_crisis.5
+				}
+			}
+			else_if = {
+				limit = { #平局
+					check_variable = { BRI.ABpower = BRI.PNBpower }
+                    check_variable = { BRI.PNBpower = BRI.FLBpower }
+                    check_variable = { BRI.FLBpower = BRI.BLBApower }
+				}
+				BRI = {
+					country_event = BRI_crisis.7
+				}
+			}
+			else = {
+				BRI = { #僵局
+					country_event = BRI_crisis.6
+				}
+			}
+		}
+	}
+	BRI_PNB_action = { #民族党
+        icon = GFX_decision_generic_civil_support
+		priority = 99
+		days_mission_timeout = 10
+		cancel_if_not_visible = yes
+		is_good = no
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = BRI_Sb_trouble
+		}
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_effect = {
+		}
+		timeout_effect = {
+			random_owned_controlled_state = {
+				random_list = {
+					50 = {
+						BRI_PNB_gain_power_low = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.03
+						}
+					}
+					35 = {
+						BRI_PNB_gain_power_mid = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.06
+						}
+					}
+					15 = {
+						BRI_PNB_gain_power_high = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.1
+						}
+					}
+				}
+			}
+		}
+	}
+	BRI_FLB_action = { #自由阵线
+        icon = GFX_decision_generic_civil_support
+		priority = 100
+		days_mission_timeout = 10
+		cancel_if_not_visible = yes
+		is_good = no
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = BRI_Sb_trouble
+		}
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_effect = {
+		}
+		timeout_effect = {
+			random_owned_controlled_state = {
+				random_list = {
+					50 = {
+						BRI_FLB_gain_power_low = yes
+						add_popularity = {
+							ideology = syndicalist
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_democrat
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_conservative
+							popularity = 0.01
+						}
+					}
+					35 = {
+						BRI_FLB_gain_power_mid = yes
+						add_popularity = {
+							ideology = market_liberal
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_liberal
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = syndicalist
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_democrat
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_conservative
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = authoritarian_democrat
+							popularity = 0.01
+						}
+
+					}
+					15 = {
+						BRI_FLB_gain_power_high = yes
+						add_popularity = {
+							ideology = totalist
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = radical_socialist
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = market_liberal
+							popularity = 0.02
+						}
+						add_popularity = {
+							ideology = social_liberal
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = syndicalist
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_democrat
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_conservative
+							popularity = 0.02
+						}
+						add_popularity = {
+							ideology = authoritarian_democrat
+							popularity = 0.01
+						}
+					}
+				}
+			}
+		}
+	}
+	BRI_BLBA_action = { #Brittany Local Business Association
+        icon = GFX_decision_generic_civil_support
+		priority = 101
+		days_mission_timeout = 10
+		cancel_if_not_visible = yes
+		is_good = no
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = BRI_Sb_trouble
+		}
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_effect = {
+		}
+		timeout_effect = {
+			random_owned_controlled_state = {
+				random_list = {
+					50 = {
+						BRI_BLBA_gain_power_low = yes
+						add_popularity = {
+							ideology = market_liberal
+							popularity = 0.03
+						}
+					}
+					35 = {
+						BRI_BLBA_gain_power_mid = yes
+						add_popularity = {
+							ideology = market_liberal
+							popularity = 0.05
+						}
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.01
+						}
+
+					}
+					15 = {
+						BRI_BLBA_gain_power_high = yes
+						add_popularity = {
+							ideology = market_liberal
+							popularity = 0.07
+						}
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.03
+						}
+					}
+				}
+			}
+		}
+	}
+	BRI_AB_action = { #大队
+		icon = GFX_decision_generic_civil_support
+		priority = 102
+		days_mission_timeout = 10
+		cancel_if_not_visible = yes
+		is_good = no
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = BRI_Sb_trouble
+		}
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_effect = {
+		}
+		timeout_effect = {
+			random_owned_controlled_state = {
+				random_list = {
+					50 = {
+						BRI_AB_gain_power_low = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = national_populist
+							popularity = 0.02
+						}
+					}
+					35 = {
+						BRI_AB_gain_power_mid = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.02
+						}
+						add_popularity = {
+							ideology = national_populist
+							popularity = 0.04
+						}
+
+					}
+					15 = {
+						BRI_AB_gain_power_high = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.04
+						}
+						add_popularity = {
+							ideology = national_populist
+							popularity = 0.06
+						}
+					}
+				}
+			}
+		}
+	}
+	BRI_Freedom_Front_related = { #自由阵线相关决议
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 100
+		priority = 103
+		complete_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = BRI_Freedom_Front_act
+					}
+				}
+				set_country_flag = BRI_Freedom_Front_act
+			}
+			if = {
+				limit = {
+					has_country_flag = BRI_Freedom_Front_act
+				}
+				clr_country_flag = BRI_Freedom_Front_act
+			}
+		}
+	}
+	BRI_Mobilize_the_masses_for_reconstruction = { #动员大众
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_Freedom_Front_act
+		}
+		cost = 100
+		days_re_enable = 10
+		priority = 104
+		complete_effect = {
+			BRI_FLB_gain_power_low = yes
+			BRI_AB_lose_power_low = yes
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.02
+			}
+			add_stability = 0.01
+			add_manpower = 10000
+		}
+	}
+	BRI_Commitment_to_restore_democracy = { #承诺恢复民主
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_Freedom_Front_act
+		}
+		cost = 100
+		days_re_enable = 10
+		priority = 105
+		complete_effect = {
+			BRI_FLB_gain_power_low = yes
+			BRI_PNB_lose_power_low = yes
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.01
+			}
+			add_stability = 0.01
+		}
+	}
+	BRI_Commitment_to_private_property_ownership = { #承诺私有产权
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_Freedom_Front_act
+		}
+		cost = 100
+		days_re_enable = 10
+		priority = 106
+		complete_effect = {
+			BRI_FLB_gain_power_mid = yes
+			BRI_BLBA_lose_power_mid = yes
+			add_stability = 0.01
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	BRI_Relaxation_of_martial_law = {
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_Freedom_Front_act
+		}
+		cost = 100
+		days_re_enable = 10
+		priority = 107
+		complete_effect = {
+			BRI_FLB_gain_power_high = yes
+			add_stability = 0.01
+			add_political_power = 30
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	BRI_PNB_related = { #国民党相关决议
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 100
+		days_re_enable = 0
+		priority = 108
+		complete_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = BRI_PNB_act
+					}
+				}
+				set_country_flag = BRI_PNB_act
+			}
+			if = {
+				limit = {
+					has_country_flag = BRI_PNB_act
+				}
+				clr_country_flag = BRI_PNB_act
+			}
+		}
+	}
+	BRI_Agricultural_subsidies = { #农业补助
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_PNB_act
+		}
+		cost = 100
+		days_re_enable = 10
+		priority = 109
+		complete_effect = {
+			BRI_PNB_gain_power_low = yes
+			BRI_FLB_lose_power_mid = yes
+			add_stability = 0.01
+			add_political_power = 10
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_Emphasis_on_national_identity = { #民族认同强化
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_PNB_act
+		}
+		cost = 100
+		days_re_enable = 10
+		priority = 110
+		complete_effect = {
+			BRI_PNB_gain_power_low = yes
+			BRI_FLB_lose_power_low = yes
+			add_war_support = 0.02
+			add_political_power = 50
+		}
+	}
+	BRI_Nationalization_of_industrial_enterprises = { #工业国有化
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_PNB_act
+		}
+		cost = 100
+		days_re_enable = 10
+		priority = 111
+		complete_effect = {
+			BRI_PNB_gain_power_low = yes
+			BRI_BLBA_lose_power_low = yes
+			add_war_support = -0.02
+			add_one_random_military_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_Tie_up_the_brigades = { #控制大队的影响力
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_PNB_act
+		}
+		cost = 100
+		days_re_enable = 10
+		priority = 112
+		complete_effect = {
+			BRI_PNB_gain_power_low = yes
+			random_list = {
+				30 = {
+					BRI_AB_lose_power_low = yes
+				}
+				40 = {
+					BRI_AB_lose_power_mid = yes
+				}
+				30 = {
+					BRI_AB_lose_power_high = yes
+				}
+			}
+			add_war_support = -0.02
+			add_stability = 0.03
+		}
+	}
+	BRI_BLBA_related = { #企业联盟相关决议
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 100
+		days_re_enable = 0
+		priority = 113
+		complete_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = BRI_BLBA_act
+					}
+				}
+				set_country_flag = BRI_BLBA_act
+			}
+			if = {
+				limit = {
+					has_country_flag = BRI_BLBA_act
+				}
+				clr_country_flag = BRI_BLBA_act
+			}
+		}
+	}
+	BRI_Invest_in_enterprises = { #企业投资
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_BLBA_act
+		}
+		cost = 100
+		days_re_enable = 20
+		priority = 114
+		complete_effect = {
+			BRI_BALA_gain_power_low = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_civilian_factory = yes
+			add_stability = -0.07
+		}
+	}
+	BRI_Invite_business_executives_into_government = { #邀请企业高管进入政府
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_BLBA_act
+		}
+		cost = 100
+		days_re_enable = 20
+		priority = 125
+		complete_effect = {
+			BRI_BALA_gain_power_low = yes
+			BRI_FLB_lose_power_mid = yes
+			BRI_PNB_lose_power_mid = yes
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.1
+			}
+			add_stability = -0.05
+			add_political_power = 50
+		}
+	}
+	BRI_Military_engages_in_business = { #军队参与企业活动
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_BLBA_act
+		}
+		cost = 100
+		days_re_enable = 20
+		priority = 116
+		complete_effect = {
+			BRI_BALA_gain_power_low = yes
+			BRI_AB_lose_power_mid = yes
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+			add_stability = -0.05
+			add_one_random_military_factory = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_Open_up_the_market = { #开放市场
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_BLBA_act
+		}
+		cost = 100
+		days_re_enable = 20
+		priority = 117
+		complete_effect = {
+			BRI_BALA_gain_power_mid = yes
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.06
+			}
+			add_stability = -0.05
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_AB_related = { #大队相关决议
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 100
+		days_re_enable = 0
+		priority = 104
+		complete_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = BRI_AB_act
+					}
+				}
+				set_country_flag = BRI_AB_act
+			}
+			if = {
+				limit = {
+					has_country_flag = BRI_AB_act
+				}
+				clr_country_flag = BRI_AB_act
+			}
+		}
+	}
+	BRI_Expand_the_brigades = { #扩大大队
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_AB_act
+		}
+		cost = 100
+		days_re_enable = 20
+		priority = 118
+		complete_effect = {
+			BRI_AB_gain_power_low = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.05
+			}
+			add_stability = -0.05
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_manpower = 10000
+		}
+	}
+	BRI_Establish_regional_paramilitary_organizations = { #建立区域警察组织
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_AB_act
+		}
+		cost = 100
+		days_re_enable = 20
+		priority = 119
+		complete_effect = {
+			BRI_AB_gain_power_low = yes
+			BRI_PNB_lose_power_mid = yes
+			BRI_FLB_lose_power_mid = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.05
+			}
+			add_stability = -0.05
+			army_experience = 30
+		}
+	}
+	BRI_Place_loyalists_in_the_military = { #安插忠诚分子进入军队
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_AB_act
+		}
+		cost = 100
+		days_re_enable = 20
+		priority = 120
+		complete_effect = {
+			BRI_AB_gain_power_mid = yes
+			BRI_FLB_lose_power_mid = yes
+			BRI_PNB_lose_power_high = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.07
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.03
+			}
+			add_stability = -0.05
+			add_war_support = 0.05
+			add_political_power = 50
+		}
+	}
+	BRI_Pressure_the_PNB = { #压制PNB
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		visible = {
+			has_country_flag = BRI_Sb_trouble 
+			has_country_flag = BRI_AB_act
+		}
+		cost = 100
+		days_re_enable = 20
+		priority = 121
+		complete_effect = {
+			BRI_PNB_lose_power_high = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.03
+			}
+		}
+	}
+}
