@@ -5023,11 +5023,11 @@ focus_tree = {
 		cost = 4.00
 		prerequisite = { 
 			focus = QIE_YGD_infiltrate_military 
-			 
+		}
+		prerequisite = { 
 			focus = QIE_assess_doctrines 
-	}
+		}
 		
-		allow_branch = { tag = QIE }
 		mutually_exclusive = { focus = QIE_uneasy_coalition }
 		x = 7
 		y = 0
@@ -5260,7 +5260,7 @@ focus_tree = {
 		relative_position_id = QIE_YGD_enroll_in_baoding
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_military_controled"
-			remove_ideas = QIE_YGD_sorta_loyal_military
+			
 			swap_ideas = {
 				remove_idea = QIE_YGD_military_zeal_forts
 				add_idea = QIE_YGD_military_zeal_final
@@ -5274,35 +5274,11 @@ focus_tree = {
 		icon = GFX_goal_china_yiguandao
 		cost = 2.00
 		available = {
-			OR = {
-				has_country_flag = QIE_yiguandao_couped
-				AND = {
-					tag = SQI
-					has_country_leader = {
-						name = "Puyi"
-						ruling_only = yes
-					}
-				}
-			}
 			has_government = national_populist
-			NOT = { has_completed_focus = QIE_form_emergency_govt }
 		}
 		
 		bypass = {
-			hidden_trigger = {
-				OR = {
-					has_country_flag = QIE_yiguandao_couped
-					AND = {
-						tag = SQI
-						has_country_leader = {
-							name = "Puyi"
-							ruling_only = yes
-						}
-					}
-				}
-				has_government = national_populist
-				NOT = { has_completed_focus = QIE_form_emergency_govt }
-			}
+			has_government = national_populist
 		}
 		x = 46
 		y = 0
@@ -5368,6 +5344,8 @@ focus_tree = {
 				ideology = national_populist
 				popularity = 0.10
 			}
+			add_command_power = 50
+			add_manpower = 10000
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -5458,6 +5436,7 @@ focus_tree = {
 				}
 			}
 			add_stability = 0.10
+			add_ideas = QIE_YGD_destroy_secularists
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -5532,20 +5511,18 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_pick_YCP"
-			add_political_power = 70
-			hidden_effect = {
-			effect_tooltip = {
-				remove_country_leader_trait = SQI_imprisoned_emperor
-			}
-			}
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
 			hidden_effect = {
 				create_country_leader = {
 					name = "Puyi"
 					desc = "POLITICS_PUYI_RESTORED_YIGUANDAO_DESC"
 					picture = "gfx/leaders/QIE/Portrait_QIE_Puyi_Uniform.png"
 					expire = "1.1.1"
-					ideology = occultism_subtype
+					ideology = consistent_way_subtype 
 				}
+				country_event = qieygd.4
 			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -5590,29 +5567,18 @@ focus_tree = {
 		relative_position_id = QIE_tianran_takes_over
 
 		completion_reward = {
-			if = {
-				limit = {
-					tag = QIE
-				}
-				log = "[GetDateText]: [Root.GetName]: Focus QIE_pick_YCP"
-				set_temp_variable = { temp = party_popularity@social_conservative }
+			add_ideas = QIE_rural_reform_idea
+			add_soccon_to_coalition = yes
 				add_popularity = {
 					ideology = social_conservative
-					popularity = -0.50
+					popularity = 0.10
 				}
-				add_popularity = {
-					ideology = national_populist
-					popularity = temp
-				}
-				add_political_power = 70
-			}
-			else = {
 				add_popularity = {
 					ideology = national_populist
 					popularity = 0.10
 				}
-			}
-			add_ideas = QIE_rural_reform_idea
+			
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -5634,23 +5600,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_pick_YCP"
-			if = {
-				limit = {
-					tag = SQI
-				}
-				set_temp_variable = { temp = party_popularity@authoritarian_democrat }
-				add_popularity = {
-					ideology = authoritarian_democrat
-					popularity = -0.50
-				}
-				add_popularity = {
-					ideology = national_populist
-					popularity = temp
-				}
-			}
-			else = {
-				add_ideas = SQI_Guiyidao_support
-			}
+			add_ideas = SQI_Guiyidao_support
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -5692,7 +5642,7 @@ focus_tree = {
 				}
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
-					type = infrastructure
+					type = industrial_complex
 					level = 2
 					instant_build = yes
 				}
@@ -5919,6 +5869,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_holy_meritocracy"
 			add_research_slot = 1
+			add_ideas = QIE_holy_meritocracy_idea
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6076,10 +6027,9 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_we_win }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
+			has_country_leader = {
+				ruling_only = yes
+				name = "王凤仪"
 			}
 		}
 		x = -8
@@ -6089,17 +6039,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_YGD_wanguodaodehui_idea
+	
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6109,10 +6050,9 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_we_win }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
+			has_country_leader = {
+				ruling_only = yes
+				name = "段正元"
 			}
 		}
 		x = -4
@@ -6122,17 +6062,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_YGD_daodexueshe_idea
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6142,10 +6072,9 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_we_win }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
+			has_country_leader = {
+				ruling_only = yes
+				name = "孙素贞"
 			}
 		}
 		x = 0
@@ -6155,16 +6084,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
+			add_ideas = QIE_YGD_consist_way_continues_idea
 			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -6175,10 +6095,9 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_we_win }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
+			has_country_leader = {
+				ruling_only = yes
+				name = "彭汝尊"
 			}
 		}
 		x = 4
@@ -6188,16 +6107,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
+			add_ideas = QIE_YGD_tongshanshe_idea
 			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -6208,10 +6118,9 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_we_win }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
+			has_country_leader = {
+				ruling_only = yes
+				name = "萧昌明"
 			}
 		}
 		x = 8
@@ -6221,17 +6130,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			add_political_power = 100
+			add_war_support = 0.1
+			add_stability = 0.1
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.10
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6241,11 +6146,7 @@ focus_tree = {
 		cost = 5.00
 		
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			always = no
 		}
 		x = 0
 		y = 7
@@ -6254,17 +6155,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_political_power = 100
+			add_stability = 0.1
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6274,11 +6166,7 @@ focus_tree = {
 		cost = 5.00
 		
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -2
 		y = 1
@@ -6287,17 +6175,17 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.50
 			}
-			set_cosmetic_tag = QIE_unified
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.50
 			}
-			country_event = qieflavor.200
-			
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6307,11 +6195,7 @@ focus_tree = {
 		cost = 5.00
 		
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 1
@@ -6320,17 +6204,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_state_atheism
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6340,11 +6214,7 @@ focus_tree = {
 		cost = 5.00
 		
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 2
 		y = 1
@@ -6353,17 +6223,14 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+				every_owned_state = {
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+				add_ideas = QIE_industrialize_nation
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6373,11 +6240,7 @@ focus_tree = {
 		cost = 5.00
 		
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -1
 		y = 2
@@ -6387,17 +6250,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_research_slot = 1
+			add_ideas = QIE_democracy_science
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6407,11 +6261,7 @@ focus_tree = {
 		cost = 5.00
 		
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 1
 		y = 2
@@ -6421,17 +6271,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_research_slot = 1
+			add_ideas = QIE_research_saves_nation
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6441,11 +6282,7 @@ focus_tree = {
 		cost = 5.00
 		
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 3
@@ -6455,17 +6292,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_china_rises
+			add_synd_to_coalition = yes
+			add_radsoc_to_coalition = yes
+			add_soclib_to_coalition = yes
+			add_marlib_to_coalition = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6475,11 +6306,7 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_tiandejiao }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -1
 		y = 1
@@ -6488,17 +6315,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_YGD_confuious
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6508,11 +6325,7 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_tiandejiao }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 1
 		y = 1
@@ -6521,17 +6334,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
 			
+			add_ideas = QIE_YGD_buddiasism
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6542,11 +6346,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_confuious  }
 		prerequisite = { focus = QIE_YGD_buddiasism }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 2
@@ -6555,16 +6355,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
+			add_ideas = QIE_YGD_taoism
 			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -6576,11 +6367,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_confuious  }
 		prerequisite = { focus = QIE_YGD_buddiasism }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -1
 		y = 3
@@ -6589,17 +6376,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_YGD_christianism
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6610,11 +6387,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_confuious  }
 		prerequisite = { focus = QIE_YGD_buddiasism }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 1
 		y = 3
@@ -6623,17 +6396,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_YGD_islamism
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6645,11 +6408,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_taoism }
 		prerequisite = { focus = QIE_YGD_islamism }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 4
@@ -6658,17 +6417,28 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
+			remove_idea = QIE_YGD_confuious
+			remove_idea = QIE_YGD_buddiasism
+			remove_idea = QIE_YGD_taoism
+			remove_idea = QIE_YGD_christianism
+			remove_idea = QIE_YGD_islamism
+			add_ideas = QIE_YGD_unify_religion
+			set_cosmetic_tag = QIE_tiande_world
+		every_state = {
 			
+			QIE = {
+				add_state_core = PREV
+			}
+		}
+		every_country = {
+			
+			QIE = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6678,11 +6448,7 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_tongshanshe }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -1
 		y = 1
@@ -6691,17 +6457,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_YGD_spirit_soldiers
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6711,11 +6467,7 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_tongshanshe }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 1
 		y = 1
@@ -6724,17 +6476,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_manpower = 100000
+			add_command_power = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6745,11 +6488,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_spirit_soldiers }
 		prerequisite = { focus = QIE_YGD_remanits_of_zhili }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 2
@@ -6758,17 +6497,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			swap_ideas = {
+				remove_idea = QIE_YGD_tongshanshe_idea
+				add_idea = QIE_YGD_tongshanshe_idea2
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6779,11 +6511,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_spirit_soldiers }
 		prerequisite = { focus = QIE_YGD_remanits_of_zhili }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -1
 		y = 3
@@ -6792,17 +6520,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			add_political_power = 100
+			add_war_support = 0.1
+			add_stability = 0.1
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.10
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6813,11 +6537,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_spirit_soldiers }
 		prerequisite = { focus = QIE_YGD_remanits_of_zhili }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			has_completed_focus = QIE_YGD_mile
 		}
 		x = 1
 		y = 3
@@ -6826,17 +6546,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			swap_ideas = {
+				remove_idea = QIE_YGD_tongshanshe_idea2
+				add_idea = QIE_YGD_tongshanshe_idea3
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6848,11 +6561,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_intergrate_other_religion }
 		prerequisite = { focus = QIE_YGD_forbidden_magic }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 4
@@ -6861,17 +6570,47 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
+		add_ideas = QIE_YGD_declare_state_of_living_buddia
+		set_cosmetic_tag = QIE_TAN
+		every_state = {
 			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+				is_on_continent = asia
 			}
-			set_cosmetic_tag = QIE_unified
+			QIE = {
+				add_state_core = PREV
 			}
-			country_event = qieflavor.200
-			
+		}
+		every_state = {
+			limit = {
+				is_on_continent = india
+			}
+			QIE = {
+				add_state_core = PREV
+			}
+		}
+		set_cosmetic_tag = QIE_monbol_asia
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = asia }
+			}
+			QIE = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				capital_scope = { is_on_continent = india }
+			}
+			QIE = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6882,11 +6621,7 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_consist_way_continues }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -1
 		y = 2
@@ -6895,16 +6630,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
 			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -6915,11 +6640,7 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_consist_way_continues }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 1
 		y = 2
@@ -6928,17 +6649,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			swap_ideas = {
+				remove_idea = QIE_YGD_consist_way_continues_idea
+				add_idea = QIE_YGD_consist_way_continues_idea2
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6949,11 +6663,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_welfare_state }
 		prerequisite = { focus = QIE_YGD_soldify_control }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 3
@@ -6962,17 +6672,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			swap_ideas = {
+				remove_idea = QIE_YGD_consist_way_continues_idea2
+				add_idea = QIE_YGD_consist_way_continues_idea3
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -6983,11 +6686,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_welfare_state }
 		prerequisite = { focus = QIE_YGD_soldify_control }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -1
 		y = 4
@@ -6996,16 +6695,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			add_political_power = 100
+			add_war_support = 0.1
+			add_stability = 0.1
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.10
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
 			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -7017,11 +6713,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_welfare_state }
 		prerequisite = { focus = QIE_YGD_soldify_control }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 1
 		y = 4
@@ -7030,17 +6722,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_one_random_civilian_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_military_factory = yes
+		
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7052,11 +6738,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_traditional_order }
 		prerequisite = { focus = QIE_YGD_establishism }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 5
@@ -7065,16 +6747,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
+			add_ideas = QIE_YGD_mother_rule
 			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -7085,11 +6758,7 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_daodexueshe }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -1
 		y = 1
@@ -7098,16 +6767,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			add_political_power = 100
+			add_war_support = -0.1
+			add_stability = 0.2
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.10
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
 			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -7118,11 +6784,7 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_daodexueshe }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 1
 		y = 1
@@ -7131,17 +6793,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			swap_ideas = {
+				remove_idea = QIE_YGD_daodexueshe_idea
+				add_idea = QIE_YGD_daodexueshe_idea2
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7152,11 +6807,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_wrong_of_militarism }
 		prerequisite = { focus = QIE_YGD_rule_as_self }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 2
@@ -7165,17 +6816,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			swap_ideas = {
+				remove_idea = QIE_YGD_daodexueshe_idea2
+				add_idea = QIE_YGD_daodexueshe_idea3
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7186,11 +6830,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_wrong_of_militarism }
 		prerequisite = { focus = QIE_YGD_rule_as_self }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -1
 		y = 3
@@ -7199,17 +6839,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_YGD_peaceful
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7220,11 +6850,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_wrong_of_militarism }
 		prerequisite = { focus = QIE_YGD_rule_as_self }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 1
 		y = 3
@@ -7233,17 +6859,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_one_random_civilian_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_military_factory = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7255,11 +6874,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_rule_of_moral }
 		prerequisite = { focus = QIE_YGD_confuciousism }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 4
@@ -7268,17 +6883,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_YGD_datong
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7288,11 +6893,7 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_wanguodaodehui }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = -1
 		y = 1
@@ -7301,17 +6902,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7321,11 +6915,7 @@ focus_tree = {
 		cost = 5.00
 		prerequisite = { focus = QIE_YGD_wanguodaodehui }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 1
 		y = 1
@@ -7334,17 +6924,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
+			add_ideas = QIE_YGD_mental_curing
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7355,11 +6935,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_new_rural_movement }
 		prerequisite = { focus = QIE_YGD_mental_curing }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 2
@@ -7368,16 +6944,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			swap_ideas = {
+				remove_idea = QIE_YGD_wanguodaodehui_idea
+				add_idea = QIE_YGD_wanguodaodehui_idea2
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
 			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -7389,11 +6959,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_new_rural_movement }
 		prerequisite = { focus = QIE_YGD_mental_curing }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			has_completed_focus = QIE_YGD_good_people
 		}
 		x = -1
 		y = 3
@@ -7402,17 +6968,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
-			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
 			
+			swap_ideas = {
+				remove_idea = QIE_YGD_wanguodaodehui_idea2
+				add_idea = QIE_YGD_wanguodaodehui_idea3
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7423,11 +6983,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_new_rural_movement }
 		prerequisite = { focus = QIE_YGD_mental_curing }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 1
 		y = 3
@@ -7436,16 +6992,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			add_political_power = 100
+			add_war_support = 0.1
+			add_stability = 0.1
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.10
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
 			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -7458,11 +7011,7 @@ focus_tree = {
 		prerequisite = { focus = QIE_YGD_good_people }
 		prerequisite = { focus = QIE_YGD_saint_buddia_holy }
 		available = {
-			FNG = { exists = no }
-			OR = {
-			has_global_flag = JAP_Fading_Sun
-			JAP = { exists = no }
-			}
+			
 		}
 		x = 0
 		y = 4
@@ -7471,17 +7020,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus QIE_YGD_we_win"
-			set_country_flag = has_united_china
-			add_war_support = 0.30
-			add_stability = 0.30
-			if = {
-			limit = {
-			has_country_leader = { name = "Puyi" ruling_only = yes }
+			add_ideas = QIE_YGD_spirit_destiny
+			hidden_effect = {
+				country_event = {
+					id = qieygd.12
+					days = 30
+				}
 			}
-			set_cosmetic_tag = QIE_unified
-			}
-			country_event = qieflavor.200
-			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7753,6 +7298,12 @@ focus_tree = {
 				type = industrial_complex
 				level = 2
 				instant_build = yes
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id  = red_qing.5
+				days = 7
 			}
 		}
 		}

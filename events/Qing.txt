@@ -9467,37 +9467,7 @@ country_event = {
     add_war_support = -0.1
   }
 }
-country_event = {
-  id = qieygd.1
-  title = qieygd.1.t
-  desc = qieygd.1.d
-  picture = GFX_report_event_SQI_yiguandao_military
-  fire_only_once = yes
-  trigger = {
-    tag = QIE
-    has_country_flag = QIE_zhang_in_government
-    national_populist > 0.30
-    NOT = {
-      has_completed_focus = QIE_form_emergency_govt
-    }
-  }
-  mean_time_to_happen = {
-    days = 3
-  }
-  option = {
-    name = qieygd.1.a
-    hidden_effect = {
-      country_event = {
-        id = qieygd.2
-        days = 3
-      }
-    }
-  }
-  option = {
-    name = qieygd.1.b
-    set_global_flag = QIE_yiguandao_no_coup
-  }
-}
+
 country_event = {
   id = qieygd.2
   title = qieygd.2.t
@@ -9610,15 +9580,7 @@ country_event = {
       expire = "1.1.1"
       ideology = consistent_way_subtype 
     }
-    if = {
-      limit = {
-        has_global_flag = KX_POLICEMAN_SWEAR_TO_GOD
-      }
-      set_cosmetic_tag = TIAN_EMPIRE_FUN
-      else = {
-        set_cosmetic_tag = TIAN_EMPIRE
-      }
-    }
+    set_cosmetic_tag = TIAN_EMPIRE
     set_party_name = {
       ideology = national_populist
       long_name = "天朝(Tiāncháo)"  # Tiāncháo
@@ -9800,17 +9762,101 @@ country_event = {
   is_triggered_only = yes
   option = {
     name = qieygd.8.a
+    create_country_leader = {
+      name = "王凤仪"  
+      picture = "gfx/leaders/QIE/Portrait_QIE_Wang_Fengyi.png"
+      expire = "1.1.1"
+      ideology = natpop_datong_shu_subtype
+    }
+    set_cosmetic_tag = QIE_wgddh
   }
   option = {
     name = qieygd.8.b
     create_country_leader = {
+      name = "段正元"  
+      picture = "gfx/leaders/QIE/Portrait_QIE_Duan_Zhengyuan.png"
+      expire = "1.1.1"
+      ideology = natpop_social_confucianism_subtype
+    }
+    set_cosmetic_tag = QIE_ddxs
+  }
+  option = {
+    name = qieygd.8.c
+    create_country_leader = {
       name = "孙素贞"  # Sun Suzhen
       picture = "gfx/leaders/SQI/Portrait_Shandong_Sun_Suzhen.png"
-      desc = "POLITICS_ZHANG_TIANRAN_DESC"
       expire = "1.1.1"
       ideology = consistent_way_subtype 
     }
   }
+  option = {
+    name = qieygd.8.e
+    create_country_leader = {
+      name = "彭汝尊"  
+      picture = "gfx/leaders/QIE/Portrait_QIE_Peng_Ruzun.png"
+      expire = "1.1.1"
+      ideology = occultism_subtype
+    }
+    set_cosmetic_tag = QIE_buddha
+  }
+   option = {
+    name = qieygd.8.f
+    create_country_leader = {
+      name = "萧昌明"  
+      picture = "gfx/leaders/QIE/Portrait_QIE_Xiao_Changming.png"
+      expire = "1.1.1"
+      ideology = natpop_tiande_subtype
+    }
+    set_cosmetic_tag = QIE_tiande
+  }
+}
+country_event = {
+  id = qieygd.12
+  title = qieygd.12.t
+  desc = qieygd.12.d
+  picture = GFX_report_event_SQI_yiguandao_group
+  fire_only_once = yes
+  is_triggered_only = yes
+  option = {
+    name = qieygd.12.a
+   
+  }
+  option = {
+    name = qieygd.12.b
+    hidden_effect = {
+      country_event = {
+        id = qieygd.13
+        days = 20
+      }
+    }
+  }
+}
+country_event = {
+  id = qieygd.13
+  title = qieygd.13.t
+  desc = qieygd.13.d
+  picture = GFX_report_event_SQI_yiguandao_group
+  fire_only_once = yes
+  is_triggered_only = yes
+  option = {
+    name = qieygd.13.a
+     create_country_leader = {
+      name = "江希张"  
+      picture = "gfx/leaders/QIE/Portrait_QIE_Jiang_Xizhang.png"
+      expire = "1.1.1"
+      ideology = socdem_utopian_technocracy_subtype
+    }
+    set_cosmetic_tag = QIE_techno
+  }
+  set_country_flag = soc_dems_are_socialists
+  set_politics = {
+    ruling_party = social_democrat
+  }
+  complete_national_focus = QIE_no_more_fake_gods
+      add_popularity = {
+				ideology = social_democrat
+				popularity = 0.2
+			}
 }
 country_event = {
   id = qieygd.10
@@ -9848,121 +9894,7 @@ country_event = {
     }
   }
 }
-country_event = {
-  id = qiefocus.36
-  immediate = {
-    log = "[GetDateText]: [Root.GetName]: event qiefocus.27"
-  }
-  title = qiefocus.36.t
-  desc = qiefocus.36.d
-  fire_only_once = yes
-  is_triggered_only = yes
-  option = {
-    name = qiefocus.36.a
-    
-  }
-  option = {
-    name = qiefocus.36.b
-    ai_chance = {
-      factor = 85
-    }
-    custom_effect_tooltip = QIE_you_libtard
-    if = {
-      limit = {
-        has_government = social_conservative
-      }
-       create_country_leader = {
-        name = "溥仪"  # Puyi
-        desc = "POLITICS_PUYI_RESTORED_DESC"
-        picture = "gfx/leaders/QIE/Portrait_QIE_Puyi_Uniform.png"
-        expire = "1.1.1"
-        ideology = neo_feudalism_subtype
-      }
-      set_politics = {
-        ruling_party = paternal_autocrat
-         elections_allowed = no
-      }
-      set_party_name = {
-				ideology = paternal_autocrat
-				long_name = QIE_social_conservative_party_long
-				name = QIE_social_conservative_party
-			}
-        add_popularity = {
-						ideology = paternal_autocrat
-						popularity = 0.3
-				}
-        add_popularity = {
-						ideology = social_conservative
-						popularity = -0.3
-				}
-        add_soccon_to_coalition = yes
-       
-    }
-    if = {
-      limit = {
-        has_government = social_democrat
-      }
-       create_country_leader = {
-        name = "溥仪"  # Puyi
-        desc = "POLITICS_PUYI_RESTORED_DESC"
-        picture = "gfx/leaders/QIE/Portrait_QIE_Puyi_Uniform.png"
-        expire = "1.1.1"
-        ideology = soccon_datong_shu_subtype
-      }
-      set_politics = {
-        ruling_party = social_conservative
-        elections_allowed = no
-      }
-      set_party_name = {
-				ideology = social_conservative
-				long_name = QIE_social_democrat_party_long
-				name = QIE_social_democrat_party
-			}
-        add_popularity = {
-						ideology = social_conservative
-						popularity = 0.3
-				}
-        add_popularity = {
-						ideology = social_democrat
-						popularity = -0.3
-				}
-        add_socdem_to_coalition = yes
-    }
-    if = {
-      limit = {
-        has_government = social_liberal
-      }
-       create_country_leader = {
-        name = "溥仪"  # Puyi
-        desc = "POLITICS_PUYI_RESTORED_DESC"
-        picture = "gfx/leaders/QIE/Portrait_QIE_Puyi_Uniform.png"
-        expire = "1.1.1"
-        ideology = authdem_new_legalism_subtype
-      }
-      set_politics = {
-        ruling_party = authoritarian_democrat
-         elections_allowed = no
-      }
-      set_party_name = {
-				ideology = authoritarian_democrat
-				long_name = QIE_social_liberal_party_long
-				name = QIE_social_liberal_party
-			}
-        add_popularity = {
-						ideology = authoritarian_democrat
-						popularity = 0.3
-				}
-        add_popularity = {
-						ideology = social_liberal
-						popularity = -0.3
-				}
-        add_soclib_to_coalition = yes
-        add_pataut_to_coalition = yes
-        add_natpop_to_coalition = yes
-    }
-     
-  }
-}
+
 country_event = {
   id = qiefocus.37
   title = qiefocus.37.t
