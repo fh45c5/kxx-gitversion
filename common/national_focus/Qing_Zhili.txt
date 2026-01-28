@@ -158,7 +158,6 @@ focus_tree = {
 			OR = {
 				has_completed_focus = QIE_capitalize_politics
 				has_completed_focus = QIE_unrest
-				has_completed_focus=HNN_victory_of_the_united_front
 			}
 		}
 
@@ -218,11 +217,7 @@ focus_tree = {
 			}
 			
 				add_political_power = 25
-				add_timed_idea = {
-					idea = HNN_seized_foreign_assets
-					days = 365
-				}
-			
+				add_ideas = HNN_seized_foreign_assets
 				every_country = {
 					limit = {
 						has_guaranteed = LEC
@@ -315,11 +310,8 @@ focus_tree = {
 				
 				add_stability = -0.05
 				
+			add_ideas = HNN_open_for_business
 			
-			add_timed_idea = {
-				idea = HNN_open_for_business
-				days = 280
-			}
 			add_one_random_civilian_factory = yes
 			
 		}
@@ -383,16 +375,8 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HNN_rewards_for_arms_manufacturers"
-		
-				
-				add_timed_idea = {
-					idea = HNN_subsidised_military_industry
-					days = 200
-				}
-				
-			
-			
-			
+			add_ideas = HNN_subsidised_military_industry
+
 			add_one_random_military_factory = yes
 			add_one_random_military_factory = yes
 		}
@@ -492,10 +476,7 @@ focus_tree = {
 				}
 				
 			
-			add_timed_idea = {
-				idea = HNN_union_government_synergy
-				days = 365
-			}
+			add_ideas = HNN_union_government_synergy
 			add_one_random_civilian_factory = yes
 		}
 		search_filters = { FOCUS_FILTER_PRODUCTION FOCUS_FILTER_POLITICAL }
@@ -3335,7 +3316,37 @@ focus = {
 				limit = { has_idea = QIE_ilegitimate_republic_idea }
 				remove_ideas = QIE_ilegitimate_republic_idea
 			}
-			set_cosmetic_tag = QIE_unified
+			if = {
+				limit = {
+					OR = {
+						has_completed_focus = QIE_placateassembly
+						has_completed_focus = QIE_capitalize_politics
+					}
+				}
+				set_cosmetic_tag = QIE_unified
+			}
+			if = {
+				limit = {
+					OR = {
+						has_completed_focus = QIE_XHHSD
+						has_completed_focus = QIE_wu_constitution
+						has_completed_focus = QIE_alliance_of_unbelieviable
+					}
+				}
+				set_cosmetic_tag = QIE_roc_proclaimed
+			}
+			if = {
+				limit = {					
+					has_completed_focus = HNN_victory_of_the_united_front
+				}
+				set_cosmetic_tag = YUN_CHI_ROC
+			}
+			if = {
+				limit = {					
+					has_completed_focus = QIE_Fight_Hetmanist_Bureacracy
+				}
+				set_cosmetic_tag = CHI_syndicalist
+			}
 		}
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
@@ -7382,7 +7393,12 @@ focus = {
         completion_reward = {
 			add_political_power = 100
 			custom_effect_tooltip = tooltip_white_line
-
+			if = {
+				limit = {
+					has_completed_focus = QIE_wmbd
+				}
+				country_event = qieflavor.32
+			}
 
 		}
 		
@@ -7398,11 +7414,11 @@ focus = {
 		available = {
 			
 				
-					has_completed_focus = QIE_wmbd
-					OR = {
-						has_government = market_liberal
-						has_government = social_conservative
-					}
+			has_completed_focus = QIE_wmbd
+			OR = {
+				has_government = market_liberal
+				has_government = social_conservative
+			}
 					
 				
 				
@@ -14717,6 +14733,90 @@ focus = {
 		   	#transfer_state = 996
 		  	#transfer_state = 802
 			#transfer_state = 592
+		}
+	}
+	focus = {
+		id = QIE_power_to_german_councils
+		icon = GFX_BAT_germanisation
+		x = 5
+		y = 6
+   		relative_position_id = QIE_ywxw
+		cost = 4
+        prerequisite = {
+			focus = QIE_LYGW
+		}
+		
+		ai_will_do = {
+			factor = 4
+		}
+
+		available = {
+			NOT = {
+				has_war_with = GER
+			}
+		
+		}
+		allow_branch = {
+			has_country_flag = QIE_GERMANS
+		}
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = QIE_ger_chi_coop3
+				add_idea = QIE_ger_chi_coop4
+			}
+			
+			
+		}
+	}
+	focus = {
+		id = QIE_join_reichspakt
+		icon =  GFX_goal_GER_Pax_Germanica
+		x = 7
+		y = 6
+   		relative_position_id = QIE_ywxw
+		cost = 4
+        prerequisite = {
+			focus = QIE_LYGW
+		}
+		
+		ai_will_do = {
+			factor = 4
+		}
+		allow_branch = {
+			has_country_flag = QIE_GERMANS
+		}
+		available = {
+			NOT = {
+				has_war_with = GER
+				}
+		has_country_flag = has_united_china
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			
+			GER = { add_to_faction = QIE }		
+			transfer_state = 744
+		   	transfer_state = 996
+		  	transfer_state = 802
+			transfer_state = 592
 		}
 	}
 	focus = {
