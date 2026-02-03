@@ -66,6 +66,74 @@ country_event = { #和平归来
 	}
 }
 
+country_event = { #与布列塔尼的合作
+	id = BRI_FRA.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRI_FRA.3" }
+	title =  BRI_FRA.3.t
+	desc =  BRI_FRA.3.d
+
+	is_triggered_only = yes
+
+	option = { #为什么不？
+		name =  BRI_FRA.3.a
+		BRI = {
+			country_event = {
+				id = BRI_FRA.4
+				days = 2
+			}
+		}
+		add_ideas = BRI_OIL_with_nfa_NFA
+	}
+	option = { #为什么？
+		name =  BRI_FRA.3.b
+		ai_will_do = {
+			factor = 0
+		}
+		BRI = {
+			country_event = {
+				id = BRI_FRA.5
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { #同意了
+	id = BRI_FRA.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRI_FRA.4" }
+	title =  BRI_FRA.4.t
+	desc =  BRI_FRA.4.d
+
+	is_triggered_only = yes
+
+	option = { #为什么不？
+		name =  BRI_FRA.4.a
+		BRI = {
+			set_temp_variable = { BRI_profitability = 0.1 }
+			BRI_The_Enterprise_profitability_effect = yes
+		}
+		add_ideas = BRI_OIL_with_nfa
+	}
+}
+
+country_event = { #竟然不许
+	id = BRI_FRA.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRI_FRA.5" }
+	title =  BRI_FRA.5.t
+	desc =  BRI_FRA.5.d
+
+	is_triggered_only = yes
+
+	option = { #搞笑
+		name =  BRI_FRA.5.a
+		BRI = {
+			set_temp_variable = { BRI_profitability = -0.1 }
+			BRI_The_Enterprise_profitability_effect = yes
+		}
+	}
+}
+
+#
 country_event = { #内部问题
 	id = BRI_crisis.1
 	immediate = { log = "[GetDateText]: [Root.GetName]: event BRI_crisis.1" }
@@ -126,6 +194,13 @@ country_event = { #企业联合
 		BRI = {
 			clr_country_flag = BRI_Sb_trouble
 			set_country_flag = BRI_the_rule_of_BLBA
+			add_ideas = BRI_mordrel_folly_and_corruption
+			add_ideas = BRI_perrots_resistance
+			add_ideas = BRI_Workers_strike
+			set_politics = {
+				ruling_party = market_liberal
+				elections_allowed = no
+			}
 		}
 	}
 }
@@ -212,7 +287,7 @@ country_event = { #激化的僵局
 	}
 }
 
-
+#
 country_event = { #我们是谁
 	id = BRI_RNP.2
 	immediate = { log = "[GetDateText]: [Root.GetName]: event BRI_RNP.2" }
@@ -230,7 +305,7 @@ country_event = { #我们是谁
 	}
 }
 
-
+#
 country_event = { #不丰不杀
 	id = BRI_Giant_enterprises.1
 	immediate = { log = "[GetDateText]: [Root.GetName]: event BRI_Giant_enterprises.1" }
@@ -322,8 +397,8 @@ country_event = { #小亏一笔
 	option = {
 		name =  BRI_Giant_enterprises.6.a
 		BRI = {
-			set_temp_variable = { property_change = -5 }
-			BRI_The_millionaire_game_of_large_enterprises = yes		
+				set_temp_variable = { BRI_profitability = 0.05 }
+				BRI_The_Enterprise_profitability_effect = yes
 		}
 	}
 }
@@ -375,5 +450,41 @@ country_event = { #血本无归
 		}
 	}
 }
+####
+country_event = { #破产
+	id = BRI_Giant_enterprises.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRI_Giant_enterprises.10" }
+	title =  BRI_Giant_enterprises.10.t
+	desc =  BRI_Giant_enterprises.10.d
 
+	is_triggered_only = yes
+	trigger = {
+		AND = {
+			tag = BRI
+			check_variable = { BRI.enterprises_property_chance < -10 }
+		}
+	}
+	option = {
+		name =  BRI_Giant_enterprises.10.a
+		BRI = {
+			set_temp_variable = { property_change = -0.01 }
+			BRI_The_millionaire_game_of_large_enterprises = yes		
+		}
+	}
+}
+#
+country_event = { #自由阵线的选举
+	id = BRI_FLB.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRI_FLB.1" }
+	title =  BRI_FLB.1.t
+	desc =  BRI_FLB.1.d
 
+	is_triggered_only = yes
+	option = {
+		name =  BRI_FLB.1.a
+		BRI = {
+			set_temp_variable = { property_change = -0.01 }
+			BRI_The_millionaire_game_of_large_enterprises = yes		
+		}
+	}
+}
