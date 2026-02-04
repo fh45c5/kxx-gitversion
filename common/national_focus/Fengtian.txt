@@ -34,6 +34,7 @@ focus_tree = {
 				}
 				country_event = fngsystem.1000
 			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -931,7 +932,7 @@ focus_tree = {
 			}
 			army_experience = 15
 			country_event = fengtian.75
-			FNG_trigger_tang_yulin_leak_event = yes
+			
 			add_ideas = FNG_shared_army_reform_1
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_POLITICAL FOCUS_FILTER_ARMY_XP }
@@ -1449,15 +1450,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Modernise_The_Cavalry"
-			custom_effect_tooltip = FNG_cavalry_reform_tt
-			if = {
-				limit = { FNG_ma_zhanshan = { is_high_command = yes } }
-				set_temp_variable = { ZCPOP = 1 }
-				add_ideas = FNG_cavalry_reform_1
-			}
-			else = {
-				add_ideas = FNG_cavalry_reforms
-			}
+			add_ideas = FNG_cavalry_reform_1
+			set_temp_variable = { ZCPOP = 1 }
+			FNG_ZCPOP = yes
 		}
 	}
 
@@ -4379,10 +4374,12 @@ focus_tree = {
 		icon = GFX_goal_LEP_kmt_encirclement
 		cost = 4
 		available = { NOT = { has_country_flag = FNG_conference_song_support } }
-		
-		x = 19
+		prerequisite = {
+			focus = FNG_establish_junta
+		}
+		x = 1
 		y = 1
-		relative_position_id = FNG_from_poverty_to_extravagance
+		relative_position_id = FNG_establish_junta
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_anti_leftist_campaign"
@@ -4410,7 +4407,7 @@ focus_tree = {
 		icon = GFX_goal_conspiracy
 		cost = 4
 		prerequisite = { focus = FNG_anti_leftist_campaign }
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = FNG_anti_leftist_campaign
 		ai_will_do = { factor = 80 }
@@ -4424,9 +4421,9 @@ focus_tree = {
 		id = FNG_Protect_Confucian_principles
 		icon = GFX_goal_FNG_Defend_Confucius #GFX_goal_ANQ_nationalist_credibility
 		cost = 4
-		prerequisite = { focus = FNG_Integrate_Zhili_Defectors }
-		mutually_exclusive = { focus = FNG_Bring_in_Yan_Xishan_Thought }
-		x = -2
+		prerequisite = { focus = FNG_Bring_in_Yan_Xishan_Thought }
+
+		x = 1
 		y = 1
 		relative_position_id = FNG_Integrate_Zhili_Defectors
 		ai_will_do = { factor = 80 }
@@ -4441,10 +4438,10 @@ focus_tree = {
 		icon = GFX_goal_FNG_Xishan_Thought
 		cost = 4
 		available = { has_country_flag = FNG_conference_xishan_support }
-		prerequisite = { focus = FNG_Integrate_Zhili_Defectors }
-		mutually_exclusive = { focus = FNG_Protect_Confucian_principles }
-		x = 0
-		y = 1
+		prerequisite = { focus = FNG_anti_leftist_campaign }
+
+		x = 2
+		y = 0
 		relative_position_id = FNG_Integrate_Zhili_Defectors
 		ai_will_do = { factor = 800 }
 		completion_reward = {
@@ -4453,6 +4450,45 @@ focus_tree = {
 			add_war_support = -0.10
 			add_ideas = SHX_yan_xishan_thought_15
 		}
+	}
+	focus = {
+		id = FNG_militarise_the_student_body
+		icon = GFX_goal_generic_paramilitary
+		cost = 4
+
+		relative_position_id = FNG_establish_junta
+		x = 3
+		y = 3
+
+		prerequisite = {
+			focus = FNG_Bring_in_Yan_Xishan_Thought
+		}
+
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed FNG_militarise_the_student_body"
+			remove_ideas = CHN_national_illiteracy1_idea
+			custom_effect_tooltip = tooltip_white_line
+			china_add_research_slots = yes
+			custom_effect_tooltip = tooltip_white_line
+			if = {
+				limit = { FNG_feng_yong = { is_political_advisor = yes } }
+				custom_effect_tooltip = FNG_feng_yong_was_helpful_tt
+				custom_effect_tooltip = tooltip_white_line
+				add_popularity = {
+					ideology = national_populist
+					popularity = 0.08
+				}
+				add_timed_idea = {
+					idea = FNG_preparing_the_students
+					days = 220
+				}
+			}
+			else = {
+				custom_effect_tooltip = FNG_feng_yong_will_be_helpful_tt
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
 	}
 	focus = {
 		id = FNG_Revived_Rural_Reconstruction
@@ -4845,13 +4881,11 @@ focus_tree = {
 		id = FNG_Centralize_Provincial_Revenues
 		icon = GFX_goal_YUN_gib_money_plz
 		cost = 4
-		prerequisite = { focus = FNG_Crush_Flies_and_Capture_Pigs }
-		prerequisite = { focus = FNG_Incorporate_Local_Patronage_Networks }
-		prerequisite = { focus = FNG_Reclaim_the_Railways }
-		
-		x = 0
-		y = 1
-		relative_position_id = FNG_Incorporate_Local_Patronage_Networks
+		prerequisite = { focus = FNG_militarise_the_student_body }
+		prerequisite = { focus = FNG_Protect_Confucian_principles }
+		x = 2
+		y = 4
+		relative_position_id = FNG_establish_junta
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Centralize_Provincial_Revenues"
@@ -4861,13 +4895,101 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
 	}
 	focus = {
+		id = FNG_against_imperialism_of_all_forms
+		icon = GFX_goal_ANQ_end_century_humiliation
+		cost = 4
+
+		relative_position_id = FNG_establish_junta
+		x = 3
+		y = 5
+
+		prerequisite = {
+			focus = FNG_Centralize_Provincial_Revenues
+		}
+
+		ai_will_do = { factor = 100 }
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed FNG_against_imperialism_of_all_forms"
+			set_temp_variable = { RLPOP = 5 }
+			FNG_RLPOP = yes
+			set_temp_variable = { ZCPOP = 5 }
+			FNG_ZCPOP = yes
+			custom_effect_tooltip = tooltip_white_line
+			add_political_power = 25
+			custom_effect_tooltip = {
+				localization_key = tooltip_modify_dynmod
+				DYNMOD = FNG_factionalism_modifier
+			}
+			add_to_variable = {
+				FNG_factionalism_war_support = 0.1
+				tooltip = war_support_factor_tooltip
+			}
+			add_to_variable = {
+				FNG_factionalism_stability = 0.05
+				tooltip = stability_factor_tooltip
+			}
+			add_to_variable = {
+				FNG_factionalism_pp_factor = 0.1
+				tooltip = political_power_factor_tooltip
+			}
+			add_to_variable = {
+				FNG_factionalism_conscription_factor = 0.1
+				tooltip = conscription_factor_tooltip
+			}
+			custom_effect_tooltip = tooltip_white_line
+			JAP = {
+				add_opinion_modifier = {
+					target = FNG
+					modifier = KR_diplomatic_row
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+	}
+	focus = {
+		id = FNG_build_up_new_government
+		icon = GFX_TRM_Minorities_Government
+		cost = 4
+		prerequisite = { 
+			focus = FNG_Reclaim_the_Railways 
+		}
+		prerequisite = { 
+			focus = FNG_Crush_Flies_and_Capture_Pigs
+		}
+		prerequisite = { 
+			focus = FNG_Incorporate_Local_Patronage_Networks
+		}
+		x = -2
+		y = 1
+		relative_position_id = FNG_Reclaim_the_Railways
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FNG_Institute_Labour_Discipline"
+			custom_effect_tooltip = FNG_remove_labour_unrest
+			add_timed_idea = {
+				idea = FNG_Supressed_Labour_Movement
+				days = 300
+			}
+			custom_effect_tooltip = FNG_labour_discipline_tt
+			hidden_effect = {
+				country_event = {
+					id = fengtian.253
+					days = 300
+				}
+			}
+		}
+	}
+	focus = {
 		id = FNG_Institute_Labour_Discipline
 		icon = GFX_HUN_make_work_brueaucracy
 		cost = 4
-		prerequisite = { focus = FNG_Reclaim_the_Railways }
-		x = 0
-		y = 1
-		relative_position_id = FNG_Reclaim_the_Railways
+		prerequisite = { 
+			focus = FNG_One_Army_One_Republic
+		}
+		
+		x = -3
+		y = 5
+		relative_position_id = FNG_establish_junta
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Institute_Labour_Discipline"
@@ -4890,17 +5012,13 @@ focus_tree = {
 		icon = GFX_focus_AST_war_japan
 		cost = 4
 		prerequisite = {
-			focus = FNG_Redefine_Provincial_Obligations
-			focus = FNG_Centralize_Provincial_Revenues
+			focus = FNG_build_up_new_government
 		}
-		mutually_exclusive = {
-			focus = FNG_rebirth_of_the_dragon_throne
-			focus = FNG_panasian_china
-		}
+		
 		
 		x = 0
 		y = 1
-		relative_position_id = FNG_Centralize_Provincial_Revenues
+		relative_position_id = FNG_build_up_new_government
 		ai_will_do = { factor = 80 }
 		available = {
 			FNG_JAP_not_hostile = yes
@@ -5166,82 +5284,7 @@ focus_tree = {
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 	}
-	focus = {
-		id = FNG_Eliminate_Internal_Dissent
-		icon = GFX_goal_skull_treaty2
-		cost = 4
-		available = { FNG_if_zhang_scripted_trigger = yes }
-		
-		prerequisite = { focus = FNG_The_Question_of_the_Presidency }
-		mutually_exclusive = { focus = FNG_Toward_Japan }
-		x = 20
-		y = 1
-		relative_position_id = FNG_The_Question_of_the_Presidency
-		ai_will_do = { factor = 80 }
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus FNG_Eliminate_Internal_Dissent"
-			add_political_power = 150
-			if = {
-				limit = {
-					has_country_flag = Zhang_Zuolin_dead
-					has_country_leader = {
-						name = "张学良"
-						ruling_only = yes
-					}
-				}
-				country_event = { id = fengtian.295 }
-			}
-			set_temp_variable = { ZCPOP = 5 }
-			FNG_ZCPOP = yes
-		}
-		search_filters = { FOCUS_FILTER_POLITICAL }
-	}
-	focus = {
-		id = FNG_Minde_Zhuyi
-		icon = GFX_goal_QIE_confucianism
-		cost = 4
-		prerequisite = { focus = FNG_Eliminate_Internal_Dissent }
-		x = 0
-		y = 1
-		relative_position_id = FNG_Eliminate_Internal_Dissent
-		ai_will_do = { factor = 80 }
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus FNG_Minde_Zhuyi"
-			FNG_increase_legitimacy = yes
-			swap_ideas = {
-				remove_idea = FNG_Principled_Executive
-				add_idea = FNG_Peoples_Morality
-			}
-		}
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
-	}
-	focus = {
-		id = FNG_A_Father_to_the_People
-		icon = GFX_goal_FNG_grand_marshal
-		cost = 4
-		prerequisite = { focus = FNG_Minde_Zhuyi }
-		x = 0
-		y = 1
-		relative_position_id = FNG_Minde_Zhuyi
-		ai_will_do = { factor = 80 }
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus FNG_A_Father_to_the_People"
-			if = {
-				limit = {
-					has_country_flag = FNG_zhuolin_takes_over
-					is_subject = no
-					controls_state = 716
-					NOT = { has_completed_focus = FNG_The_Ultimatum }
-				}
-				country_event = fngnap.1
-			}
-			swap_ideas = {
-				remove_idea = FNG_Peoples_Morality
-				add_idea = FNG_Paternal_Guidance
-			}
-		}
-		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
-	}
+	
 	
 	
     
@@ -5255,11 +5298,11 @@ focus_tree = {
 			has_completed_focus = FNG_The_Ultimatum
 		}
 		
-		#prerequisite = { focus = FNG_The_Ultimatum }
-		x = -8
+		prerequisite = { focus = FNG_zhang_clique_reign_victorious }
+		x = 4
 		y = 1
 		
-		relative_position_id = FNG_The_Ultimatum
+		relative_position_id = FNG_zhang_clique_reign_victorious
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_A_Chinese_Napoleon"
@@ -5485,7 +5528,7 @@ focus_tree = {
 		id = FNG_army_leads_the_empire
 		icon = GFX_goal_FNG_Military_Man
 		cost = 4
-		available = { has_completed_focus = FNG_The_Generals_Know_Best }
+		
 		prerequisite = {
 			focus = FNG_Bonapartist_Constitutionalism
 			focus = FNG_smash_warlord_republicanism
@@ -5758,10 +5801,10 @@ focus_tree = {
 		id = FNG_DHXB #Chinese nationalists wank here
 		icon = GFX_TRK_united_turkestan
 		cost = 4
-		prerequisite = { focus = FNG_zuolin_unites_china }
-		x = -1.5
-		y = 1
-		relative_position_id = FNG_zuolin_unites_china
+
+		x = 6
+		y = 17
+	
 		ai_will_do = { factor = 90 }
 		completion_reward = {
 			add_state_core = 586
@@ -5775,10 +5818,10 @@ focus_tree = {
 		id = FNG_SFYD #Chinese nationalists wank here
 		icon = GFX_goal_china_outer_manchuria
 		cost = 4
-		prerequisite = { focus = FNG_zuolin_unites_china }
-		x = 1.5
-		y = 1
-		relative_position_id = FNG_zuolin_unites_china
+
+		x = 10
+		y = 17
+
 		ai_will_do = { factor = 90 }
 		completion_reward = {
 			add_state_core = 561
@@ -5797,7 +5840,7 @@ focus_tree = {
 		id = FNG_JLZC #Chinese nationalists wank here
 		icon = GFX_goal_FNG_China_Reach
 		cost = 4
-		prerequisite = { focus = FNG_zuolin_unites_china }
+
 		available = {
 			controls_state = 561
 			controls_state = 560
@@ -5810,9 +5853,9 @@ focus_tree = {
 			controls_state = 654
 			controls_state = 404
 		}
-		x = 0
-		y = 2
-		relative_position_id = FNG_zuolin_unites_china
+		x = 8
+		y = 18
+
 		ai_will_do = { factor = 90 }
 		completion_reward = {
 			FNG_increase_legitimacy = yes
@@ -5842,7 +5885,7 @@ focus_tree = {
 		}
 		
 		prerequisite = { focus = FNG_The_Question_of_the_Presidency }
-		mutually_exclusive = { focus = FNG_Eliminate_Internal_Dissent }
+		
 		x = 24
 		y = 10
 		relative_position_id = FNG_The_Question_of_the_Presidency
@@ -5895,7 +5938,7 @@ focus_tree = {
 			}
 		}
 		prerequisite = {
-			focus = FNG_Minde_Zhuyi
+
 			focus = FNG_Chunchi-Xiangyi
 		}
 		x = -2
@@ -5958,10 +6001,6 @@ focus_tree = {
 		icon = GFX_focus_man_claim_the_mandate_of_heaven
 		cost = 4
 		prerequisite = { focus = FNG_Treaty_of_Friendship_and_Cooperation }
-		mutually_exclusive = {
-			focus = FNG_The_Ultimatum
-			focus = FNG_panasian_china
-		}
 		
 		available = { has_global_flag = MON_FNG_new_mandate_enforced }
 		bypass = { hidden_trigger = { has_global_flag = MON_FNG_new_mandate_enforced } }
@@ -7257,10 +7296,6 @@ focus_tree = {
 				ruling_only = yes
 			}
 		}
-		mutually_exclusive = {
-			focus = FNG_The_Ultimatum
-			focus = FNG_rebirth_of_the_dragon_throne
-		}
 		
 		x = -3
 		y = 10
@@ -7433,7 +7468,7 @@ focus_tree = {
 	
 	focus = {
 		id = FNG_dongbeis_final_victory
-		icon = GFX_goal_FNG_unification_by_subjugation
+		icon = GFX_focus_CHI_restore_the_old_republic
 		cost = 4
 
 		relative_position_id = FNG_The_Question_of_the_Presidency
@@ -7637,7 +7672,7 @@ focus_tree = {
 		prerequisite = { focus = FNG_rulership_as_a_family_business }
 		prerequisite = { focus = FNG_denouncing_imperialist_vultures }
 
-		mutually_exclusive = { focus = FNG_the_president_of_providence }
+		
 
 		available = {
 			has_country_leader = { character = FNG_zhang_xueliang }
@@ -7692,6 +7727,101 @@ focus_tree = {
 
 		prerequisite = { focus = FNG_from_poverty_to_extravagance }
 
+		mutually_exclusive = {
+			focus = FNG_clear_cut_political_economics
+		}
+		mutually_exclusive = {
+			focus = FNG_zhang_clique_reign_victorious
+		}
+		ai_will_do = {
+			factor = 80
+			modifier = {
+				factor = 0
+				OR = {
+					#has_game_rule = { rule = FNG_path option = FNG_PATH_RECOVERY_AUTDEM }
+					has_game_rule = { rule = FNG_path option = FNG_PATH_COMMUNICATIONS_AUTDEM }
+					has_game_rule = { rule = FNG_path option = FNG_PATH_TWIN_DRAGONS_AUTDEM }
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed FNG_commencing_true_recovery"
+			army_experience = 25
+			add_political_power = 25
+			add_war_support = 0.05
+			set_temp_variable = { RLPOP = 5 }
+			FNG_RLPOP = yes
+			custom_effect_tooltip = tooltip_white_line
+			effect_tooltip = { activate_advisor = FNG_pan_fu_sic }
+			custom_effect_tooltip = tooltip_white_line
+			add_one_random_civilian_factory = yes
+			add_one_random_military_factory = yes
+			custom_effect_tooltip = tooltip_white_line
+			if = {
+				limit = { SHD = { exists = no } }
+				if = {
+					limit = { NOT = { has_character = SHD_jin_yune } }
+					SHD = {
+						SHD_jin_yune = { custom_effect_tooltip = character_becomes_a_general }
+						hidden_effect = {
+							SHD_jin_yune = { CHN_recruit_character_effect = yes }
+						}
+					}
+				}
+				if = {
+					limit = { NOT = { has_character = SHD_sun_dianying } }
+					SHD = {
+						SHD_sun_dianying = { custom_effect_tooltip = character_becomes_a_general }
+						hidden_effect = {
+							SHD_sun_dianying = { CHN_recruit_character_effect = yes }
+						}
+					}
+				}
+				if = {
+					limit = { NOT = { has_character = SHD_qu_yingguang } }
+					SHD = {
+						SHD_qu_yingguang = { CHN_recruit_character_effect = yes }
+						hidden_effect = {
+							SHD_qu_yingguang = { remove_unit_leader_role = yes }
+						}
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_character = GXC_zhang_junmai
+					}
+					if = {
+						limit = { GXC_zhang_junmai = { is_second_in_command = yes } }
+						UPC = {
+							clr_country_flag = FNG_twin_dragon_subjugation_flag
+							country_event = { id = UPC.twindragonevents.005 days = 3 }
+						}
+						GXC = { GXC_zhang_junmai = { CHN_recruit_character_effect = yes } }
+						activate_advisor = FNG_pan_fu_sic
+					}
+				}
+				else = {
+					activate_advisor = FNG_pan_fu_sic
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = FNG_zhang_clique_reign_victorious
+		icon = GFX_goal_ideology_paternal_autocrat
+		cost = 4
+
+		relative_position_id = FNG_from_poverty_to_extravagance
+		x = 13
+		y = 1
+
+		prerequisite = { focus = FNG_from_poverty_to_extravagance }
+		mutually_exclusive = {
+			focus = FNG_commencing_true_recovery
+		}
 		mutually_exclusive = {
 			focus = FNG_clear_cut_political_economics
 		}
@@ -7772,8 +7902,208 @@ focus_tree = {
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
-
-	
+	focus = {
+		id = FNG_establish_junta
+		icon = GFX_goal_HON_Junta_Skeleton
+		cost = 4
+		available = { FNG_if_zhang_scripted_trigger = yes }
+		
+		prerequisite = { focus = FNG_zhang_clique_reign_victorious }
+		x = -4
+		y = 1
+		relative_position_id = FNG_zhang_clique_reign_victorious
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FNG_Eliminate_Internal_Dissent"
+			add_political_power = 150
+			if = {
+				limit = {
+					has_country_flag = Zhang_Zuolin_dead
+					has_country_leader = {
+						name = "张学良"
+						ruling_only = yes
+					}
+				}
+				country_event = { id = fengtian.295 }
+			}
+			set_temp_variable = { ZCPOP = 5 }
+			FNG_ZCPOP = yes
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = FNG_Eliminate_Internal_Dissent
+		icon = GFX_goal_DSR_Purge
+		cost = 4
+		available = { FNG_if_zhang_scripted_trigger = yes }
+		
+		prerequisite = { focus = FNG_establish_junta }
+		
+		x = -1
+		y = 1
+		relative_position_id = FNG_establish_junta
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FNG_Eliminate_Internal_Dissent"
+			add_political_power = 150
+			if = {
+				limit = {
+					has_country_flag = Zhang_Zuolin_dead
+					has_country_leader = {
+						name = "张学良"
+						ruling_only = yes
+					}
+				}
+				country_event = { id = fengtian.295 }
+			}
+			set_temp_variable = { ZCPOP = 5 }
+			FNG_ZCPOP = yes
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = FNG_Minde_Zhuyi
+		icon = GFX_goal_QIE_confucianism
+		cost = 4
+		prerequisite = { focus = FNG_Eliminate_Internal_Dissent }
+		x = -1
+		y = 1
+		relative_position_id = FNG_Eliminate_Internal_Dissent
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FNG_Minde_Zhuyi"
+			FNG_increase_legitimacy = yes
+			swap_ideas = {
+				remove_idea = FNG_Principled_Executive
+				add_idea = FNG_Peoples_Morality
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = FNG_A_Father_to_the_People
+		icon = GFX_goal_FNG_grand_marshal
+		cost = 4
+		prerequisite = { focus = FNG_the_president_of_providence }
+		prerequisite = { focus = FNG_Protect_Confucian_principles }
+		x = 2
+		y = 2
+		relative_position_id = FNG_Minde_Zhuyi
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FNG_A_Father_to_the_People"
+			if = {
+				limit = {
+					has_country_flag = FNG_zhuolin_takes_over
+					is_subject = no
+					controls_state = 716
+					NOT = { has_completed_focus = FNG_The_Ultimatum }
+				}
+				country_event = fngnap.1
+			}
+			swap_ideas = {
+				remove_idea = FNG_Peoples_Morality
+				add_idea = FNG_Paternal_Guidance
+			}
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+	}
+	focus = {
+		id = FNG_civilian_government_under_supervise
+		icon = GFX_goal_generic_authoritarian_government
+		cost = 4
+		prerequisite = { focus = FNG_A_Father_to_the_People }
+		mutually_exclusive = {
+			focus = FNG_chinese_stratocracy
+		}
+		x = 1
+		y = 3
+		relative_position_id = FNG_Minde_Zhuyi
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FNG_A_Father_to_the_People"
+			if = {
+				limit = {
+					has_country_flag = FNG_zhuolin_takes_over
+					is_subject = no
+					controls_state = 716
+					NOT = { has_completed_focus = FNG_The_Ultimatum }
+				}
+				country_event = fngnap.1
+			}
+			swap_ideas = {
+				remove_idea = FNG_Peoples_Morality
+				add_idea = FNG_Paternal_Guidance
+			}
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+	}
+	focus = {
+		id = FNG_chinese_stratocracy
+		icon = GFX_goal_China_twelve_symbols
+		cost = 4
+		prerequisite = { focus = FNG_A_Father_to_the_People }
+		mutually_exclusive = {
+			focus = FNG_civilian_government_under_supervise
+		}
+		x = 3
+		y = 3
+		relative_position_id = FNG_Minde_Zhuyi
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FNG_A_Father_to_the_People"
+			if = {
+				limit = {
+					has_country_flag = FNG_zhuolin_takes_over
+					is_subject = no
+					controls_state = 716
+					NOT = { has_completed_focus = FNG_The_Ultimatum }
+				}
+				country_event = fngnap.1
+			}
+			swap_ideas = {
+				remove_idea = FNG_Peoples_Morality
+				add_idea = FNG_Paternal_Guidance
+			}
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+	}
+	focus = {
+		id = FNG_a_new_republic
+		icon = GFX_goal_China_five_races_star
+		cost = 4
+		prerequisite = { 
+			focus = FNG_A_Father_to_the_People 
+			focus = FNG_towards_minquan
+			focus = FNG_possibility_of_eternal_peace
+			focus = FNG_government_as_a_machine
+			focus = FNG_state_of_moral
+			focus = FNG_the_first_party_of_the_state
+			focus = FNG_the_state_socialist_regime
+		}
+		
+		x = -6
+		y = 7
+		relative_position_id = FNG_from_poverty_to_extravagance
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FNG_A_Father_to_the_People"
+			if = {
+				limit = {
+					has_country_flag = FNG_zhuolin_takes_over
+					is_subject = no
+					controls_state = 716
+					NOT = { has_completed_focus = FNG_The_Ultimatum }
+				}
+				country_event = fngnap.1
+			}
+			swap_ideas = {
+				remove_idea = FNG_Peoples_Morality
+				add_idea = FNG_Paternal_Guidance
+			}
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+	}
 	focus = {
 		id = FNG_legacy_old_anhui_clique
 		icon = GFX_goal_MON_Anfu_Club
@@ -8383,7 +8713,9 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = FNG_commencing_true_recovery
 		}
-
+		mutually_exclusive = {
+			focus = FNG_zhang_clique_reign_victorious
+		}
 		ai_will_do = {
 			base = 80
 			modifier = {
@@ -9058,18 +9390,18 @@ focus_tree = {
 	
 	focus = {
 		id = FNG_the_president_of_providence
-		icon = GFX_goal_China_Beiyang_soldier_five_colour_flag
+		icon = GFX_goal_China_five_colour_beiyang_star_auth
 		cost = 4
 
-		relative_position_id = FNG_denouncing_imperialist_vultures
-		x = 20
-		y = 1
+		relative_position_id = FNG_establish_junta
+		x = -1
+		y = 3
 
-		prerequisite = { focus = FNG_the_moral_republic }
-		prerequisite = { focus = FNG_rulership_as_a_family_business }
-		prerequisite = { focus = FNG_denouncing_imperialist_vultures }
+		prerequisite = { focus = FNG_Minde_Zhuyi }
+		prerequisite = { focus = FNG_Integrate_Zhili_Defectors }
 
-		mutually_exclusive = { focus = FNG_from_poverty_to_extravagance }
+
+		
 
 		available = {
 			has_country_leader = { character = FNG_yang_yuting }
@@ -9118,17 +9450,103 @@ focus_tree = {
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
+	focus = {
+		id = FNG_The_Generals_Know_Best
+		icon = GFX_focus_generic_military_mission
+		cost = 4
+
+		relative_position_id = FNG_establish_junta
+		x = -3
+		y = 3
+
+		prerequisite = {
+			focus = FNG_Minde_Zhuyi
+		}
+
+		
+
+		available = {
+			OR = {
+				has_country_leader = {
+					character = FNG_zhang_xueliang
+				}
+				has_country_leader = {
+					character = FNG_zhang_zuolin
+				}
+			}
+		}
+
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed FNG_The_Generals_Know_Best"
+			add_ideas = FNG_primacy_of_the_loyalists
+			custom_effect_tooltip = tooltip_white_line
+			set_temp_variable = { ZCPOP = 5 }
+			FNG_ZCPOP = yes
+			every_character = {
+				limit = {
+					is_unit_leader = yes
+					has_trait = CHN_zhang_officer_trait
+				}
+				add_temporary_buff_to_units = {
+					org_damage_multiplier = -0.15
+					combat_defense = 0.10
+					combat_breakthrough = 0.05
+					days = 200
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_ARMY_BONUS }
+	}
+
+	focus = {
+		id = FNG_One_Army_One_Republic
+		icon = GFX_goal_CHN_china_beiyang_militarism
+		cost = 6
+
+		relative_position_id = FNG_establish_junta
+		x = -2
+		y = 4
+
+		prerequisite = {
+			focus = FNG_The_Generals_Know_Best
+		}
+
+		
+		ai_will_do = { factor = 80 }
+		completion_reward = {
+			log = "[GetLogRoot]: Focus Completed FNG_One_Army_One_Republic"
+			army_experience = 15
+			add_timed_idea = {
+				idea = FNG_Command_Reforms
+				days = 250
+			}
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = after_idea_expires
+			effect_tooltip = { add_ideas = FNG_triumph_of_the_model_officers }
+			custom_effect_tooltip = tooltip_white_line
+			FNG_JAP_investment_large = yes
+			every_character = {
+				limit = {
+					is_unit_leader = yes
+					has_trait = CHN_shikan_officer_trait
+				}
+				gain_xp = 200
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
 
 	focus = {
 		id = FNG_the_dragons_gambit
 		icon = GFX_goal_China_five_colour_beiyang_star_auth
 		cost = 4
 
-		relative_position_id = FNG_the_president_of_providence
-		x = 0
-		y = 1
+		relative_position_id = FNG_concord_of_nationalities
+		x = -2
+		y = 0
 
-		prerequisite = { focus = FNG_the_president_of_providence }
+		
 		mutually_exclusive = {
 			focus = FNG_concord_of_nationalities
 		}
@@ -9268,11 +9686,11 @@ focus_tree = {
 		icon = GFX_goal_ANQ_fengtian_loyalty
 		cost = 4
 
-		relative_position_id = FNG_the_president_of_providence
-		x = 2
-		y = 1
+	
+		x = 64
+		y = 9
 
-		prerequisite = { focus = FNG_the_president_of_providence }
+		
 		mutually_exclusive = {
 			focus = FNG_the_dragons_gambit
 		}
@@ -9362,7 +9780,7 @@ focus_tree = {
 		cost = 4
 
 		
-		x = 48
+		x = 66
 		y = 12
 
 		prerequisite = {
