@@ -1,0 +1,67 @@
+DEN_Intervene_in_the_German_Civil_War = {
+	DEN_Reclaim_Schleswig = {
+		icon = hand_grab
+
+		ai_will_do = { factor = 2000 }
+
+		fire_only_once = yes
+		visible = {
+			has_country_flag = DEN_SCH_flag
+		}
+		days_remove = 4
+		available = {
+			tag = DEN
+			GER = {
+				has_war_with = GRU
+			}
+		}
+		remove_effect = {
+			transfer_state = 782
+			transfer_state = 839
+		}
+	}
+
+	DEN_Reclaim_Holstein = {
+		icon = hand_grab
+
+		ai_will_do = { factor = 2000 }
+
+		fire_only_once = yes
+		visible = {
+			has_country_flag = DEN_SCH_flag
+		}
+		days_remove = 7
+		available = {
+			tag = DEN
+			AND = {
+				OR = {
+					DEN = {
+						controls_state = 782
+					}
+					any_other_country = {
+						is_subject_of = DEN
+						controls_state = 782
+					}
+				}
+				OR = {
+					DEN = {
+						controls_state = 839
+					}
+					any_other_country = {
+						is_subject_of = DEN
+						controls_state = 839
+					}
+				}
+			}
+		}
+		remove_effect = {
+			transfer_state = 58
+			hidden_effect = {
+				country_event = {
+					id = SCH.1
+					days = 7
+				}
+			}
+		}
+	}
+}
