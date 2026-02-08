@@ -835,7 +835,7 @@ BRI_Expansion_of_large_enterprises = { #巨企扩张
 		}
 	}	
 }	
-BRI_Giant_enterprises_governing_the_country = {
+BRI_Giant_enterprises_governing_the_country = { #巨企治国
 	BRI_Generate_revenue = { #月度收入
 		icon = GFX_decision_generic_break_treaty
 		days_mission_timeout = 30
@@ -845,7 +845,7 @@ BRI_Giant_enterprises_governing_the_country = {
 			}
 		}
 		activation = {
-			has_country_flag = BRI_large_enterprises_on_the_world
+			has_country_flag = BRI_Giant_enterprises_in_BRI
 		}
 		cancel_trigger = {
 			has_country_flag = BRI_Bankruptcy
@@ -871,14 +871,6 @@ BRI_Giant_enterprises_governing_the_country = {
 			set_temp_variable = { BRI_pp_bouns = 1 }
 			add_to_temp_variable = { BRI_pp_bouns = BRI_pp_profitability }
 			multiply_temp_variable = { BRI_revenue_1 = BRI_pp_bouns }
-			#单位工厂人力
-			set_temp_variable = {
-				BRI_manpower_profitability = manpower_per_military_factory
-			}
-			multiply_temp_variable = { BRI_manpower_profitability = 0.0001 }
-			set_temp_variable = { BRI_manpower_bouns = 1 }
-			add_to_temp_variable = { BRI_manpower_bouns = BRI_pp_profitability }
-			multiply_temp_variable = { BRI_revenue_1 = BRI_manpower_bouns }
 			set_temp_variable = { 
 				property_change = BRI_revenue_1
 			}
@@ -891,7 +883,7 @@ BRI_Giant_enterprises_governing_the_country = {
 	BRI_military_factory_I = { #小规模军事工业扩张
 		icon = factories
 		ai_will_do = {
-			factor = 100
+			factor = 0
 		}
 		custom_cost_trigger = {
 			check_variable = { BRI.enterprises_property_chance > 0.5 }
@@ -919,7 +911,7 @@ BRI_Giant_enterprises_governing_the_country = {
 	BRI_military_factory_II = { #中等规模军事工业扩张
 		icon = factories
 		ai_will_do = {
-			factor = 100
+			factor = 0
 		}
 		custom_cost_trigger = {
 			check_variable = { BRI.enterprises_property_chance > 2 }
@@ -951,7 +943,7 @@ BRI_Giant_enterprises_governing_the_country = {
 	BRI_military_factory_III = { #大规模军事工业扩张
 		icon = factories
 		ai_will_do = {
-			factor = 100
+			factor = 0
 		}
 		custom_cost_trigger = {
 			check_variable = { BRI.enterprises_property_chance > 10 }
@@ -992,7 +984,7 @@ BRI_Giant_enterprises_governing_the_country = {
 	BRI_civilian_factory_I = { #小规模民用工业扩张
 		icon = factories
 		ai_will_do = {
-			factor = 100
+			factor = 0
 		}
 		custom_cost_trigger = {
 			check_variable = { BRI.enterprises_property_chance > 0.5 }
@@ -1020,7 +1012,7 @@ BRI_Giant_enterprises_governing_the_country = {
 	BRI_civilian_factory_II = { #中等规模民用工业扩张
 		icon = factories
 		ai_will_do = {
-			factor = 100
+			factor = 0
 		}
 		custom_cost_trigger = {
 			check_variable = { BRI.enterprises_property_chance > 2 }
@@ -1052,7 +1044,7 @@ BRI_Giant_enterprises_governing_the_country = {
 	BRI_civilian_factory_III = { #大模民用工业扩张
 		icon = factories
 		ai_will_do = {
-			factor = 100
+			factor = 0
 		}
 		custom_cost_trigger = {
 			check_variable = { BRI.enterprises_property_chance > 10 }
@@ -1108,7 +1100,10 @@ BRI_Giant_enterprises_governing_the_country = {
 		custom_cost_text = BRI_upgrade_ARMY_cost
 		fire_only_once = no
 		days_remove = 60
-
+		complete_effect = {
+			set_temp_variable = { property_change = -0.3 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
 		remove_effect = {
 			army_experience = 30
 			if = {
@@ -1185,7 +1180,10 @@ BRI_Giant_enterprises_governing_the_country = {
 		custom_cost_text = BRI_upgrade_ARMY_cost
 		fire_only_once = no
 		days_remove = 60
-
+		complete_effect = {
+			set_temp_variable = { property_change = -0.3 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
 		remove_effect = {
 			army_experience = 30
 			if = {
@@ -1261,7 +1259,10 @@ BRI_Giant_enterprises_governing_the_country = {
 		custom_cost_text = BRI_upgrade_ARMY_cost
 		fire_only_once = no
 		days_remove = 60
-
+		complete_effect = {
+			set_temp_variable = { property_change = -0.3 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
 		remove_effect = {
 			army_experience = 30
 			if = {
@@ -1353,10 +1354,10 @@ BRI_Giant_enterprises_governing_the_country = {
 			army_defence_factor = 0.25
 		}
 		remove_effect = {	
-			add_ideas = BRI_Pasteur_research
+			add_war_support = 0.1
 		}
 	}
-	BRI_edu_preparation = { #科技投入
+	BRI_edu_preparation = { #科研投入
 		icon = factories
 		ai_will_do = {
 			factor = 0
@@ -1365,9 +1366,6 @@ BRI_Giant_enterprises_governing_the_country = {
 			check_variable = { BRI.enterprises_property_chance > 0.5 }
 		}
 		custom_cost_text = BRI_factory_I_cost
-		available = {
-			amount_research_slots < 7
-		}
 		visible = {
 			original_tag = BRI
 		}
@@ -1381,15 +1379,19 @@ BRI_Giant_enterprises_governing_the_country = {
 			research_speed_factor = 0.5
 		}
 		remove_effect = {	
-			add_research_slot = 1
+			if = {
+				limit = {
+					amount_research_slots < 7
+				}
+				add_research_slot = 1
+			}
 		}
 	}
 	#达能
-	
 	BRI_Pasteur_Institute = { #巴斯德研究所
 		icon = factories
 		ai_will_do = {
-			factor = 10
+			factor = 0
 		}
 		custom_cost_trigger = {
 			check_variable = { BRI.enterprises_property_chance > 0.5 }
@@ -1415,9 +1417,9 @@ BRI_Giant_enterprises_governing_the_country = {
 		}
 	}
 	BRI_Workers_Self_Governance_Act = {
-		icon = factories
+		icon = GFX_decision_category_export_revolution
 		ai_will_do = {
-			factor = 10
+			factor = 0
 		}
 		custom_cost_trigger = {
 			check_variable = { BRI.enterprises_property_chance > 1 }
@@ -1436,22 +1438,22 @@ BRI_Giant_enterprises_governing_the_country = {
 			BRI_The_millionaire_game_of_large_enterprises = yes	
 		}
 		modifier = {
-			production_factory_start_efficiency_factor = 0.1
-			line_change_production_efficiency_factor = 0.5
-			production_factory_efficiency_gain_factor = 0.4
-			production_factory_max_efficiency_factor = 0.5
-			industrial_capacity_factory = 0.3
+			production_factory_start_efficiency_factor = 0.2
+			line_change_production_efficiency_factor = 0.2
+			production_factory_efficiency_gain_factor = 0.2
+			production_factory_max_efficiency_factor = 0.2
+			industrial_capacity_factory = 0.2
 		}
 		remove_effect = {	
 			add_ideas = BRI_Workers_Self_Governance
-			set_temp_variable = { BRI_profitability = -0.03 }
+			set_temp_variable = { BRI_profitability = 0.05 }
 			BRI_The_Enterprise_profitability_effect = yes
 		}
 	}
 	BRI_Workers_Self_Governance_Act_2 = {
-		icon = factories
+		icon = GFX_decision_category_export_revolution
 		ai_will_do = {
-			factor = 10
+			factor = 0
 		}
 		custom_cost_trigger = {
 			check_variable = { BRI.enterprises_property_chance > 1 }
@@ -1481,11 +1483,12 @@ BRI_Giant_enterprises_governing_the_country = {
 				remove_idea = BRI_Workers_Self_Governance
 				add_idea = BRI_Workers_Self_Governance_1
 			}
-			set_temp_variable = { BRI_profitability = -0.03 }
+			set_temp_variable = { BRI_profitability = 0.15 }
 			BRI_The_Enterprise_profitability_effect = yes
 		}
 	}
 	BRI_upgrade_danone_company_1 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1531,6 +1534,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_danone_company_2 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1570,6 +1574,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_danone_company_3 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1608,6 +1613,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_danone_company_4 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1646,6 +1652,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_danone_company_5 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1683,8 +1690,130 @@ BRI_Giant_enterprises_governing_the_country = {
 			}
         }
     }
-	#
+	#LVMH
+	BRI_hostile_takeover_danone_company = {
+		icon = GFX_decision_hand_grab
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_force_intergation
+		}
+		fire_only_once = yes
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.5
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.5
+			}
+		}
+		modifier = {
+			social_conservative_drift = -0.1
+			radical_socialist_drift = -0.1
+		}
+		remove_effect = {	
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes		
+		}
+	}
+	BRI_hostile_takeover_Michelin_company = {
+		icon = GFX_decision_hand_grab
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_force_intergation
+		}
+		fire_only_once = yes
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.5
+			}
+		}
+		modifier = {
+			national_populist_drift = -0.1
+		}
+		remove_effect = {	
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes		
+		}
+	}
+	BRI_hostile_takeover_total_company = {
+		icon = GFX_decision_hand_grab
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_force_intergation
+		}
+		fire_only_once = yes
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.5
+			}
+		}
+		modifier = {
+			paternal_autocrat_drift = -0.1
+		}
+		remove_effect = {	
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes		
+		}
+	}
+	BRI_hostile_takeover_lagadelle_company = {
+		icon = GFX_decision_hand_grab
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_force_intergation
+		}
+		fire_only_once = yes
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.5
+			}
+		}
+		modifier = {
+			totalist_drift = -0.1
+		}
+		remove_effect = {	
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes		
+		}
+	}
 	BRI_upgrade_LVMH_company_1 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1730,6 +1859,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_LVMH_company_2 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1769,6 +1899,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_LVMH_company_3 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1807,6 +1938,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_LVMH_company_4 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1845,6 +1977,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_LVMH_company_5 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1882,7 +2015,108 @@ BRI_Giant_enterprises_governing_the_country = {
 			}
         }
     }
+	#米家
+	BRI_battlions_Michelin = { #米卫队
+		icon = GFX_decision_soldierly_discipline
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_battlions
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			stability_factor = -0.05
+			stability_weekly = 	-0.005
+		}
+		remove_effect = {	
+			add_ideas = BRI_battlions_Michelin_org_1
+			set_temp_variable = { BRI_profitability = 0.05 }
+			add_one_random_military_factory = yes
+		}
+	}
+	BRI_battlions_Michelin_expanded = { #扩编米孝子
+		icon = GFX_decision_soldierly_discipline
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_corporate_army
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			stability_factor = -0.05
+			stability_weekly = 	-0.005
+		}
+		remove_effect = {	
+			swap_ideas = {
+				remove_idea = BRI_battlions_Michelin_org_1
+				add_idea = BRI_battlions_Michelin_org_2
+			}
+			set_temp_variable = { BRI_profitability = 0.05 }
+			add_one_random_military_factory = yes
+		}
+	}
+	BRI_technology_school_Michelin = { #米家学校
+		icon = GFX_decision_government_up
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_technology_school
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			stability_factor = -0.05
+			stability_weekly = 	-0.005
+		}
+		remove_effect = {	
+			swap_ideas = {
+				remove_idea = BRI_battlions_Michelin_org_1
+				add_idea = BRI_battlions_Michelin_org_2
+			}
+			set_temp_variable = { BRI_profitability = 0.05 }
+			add_one_random_military_factory = yes
+		}
+	}
 	BRI_upgrade_Michelin_company_1 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1928,6 +2162,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_Michelin_company_2 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -1967,6 +2202,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_Michelin_company_3 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2005,6 +2241,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_Michelin_company_4 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2043,6 +2280,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_Michelin_company_5 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2080,7 +2318,169 @@ BRI_Giant_enterprises_governing_the_country = {
 			}
         }
     }
+	#拉加代尔
+	BRI_lagadelles_ties_with_PCF_1 = { #政党纽带
+		icon = GFX_decision_category_export_revolution
+		days_mission_timeout = 60
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_completed_focus = BRI_puppet_pcf
+		}
+		cancel_trigger = {
+			has_country_flag = BRI_Bankruptcy
+		}
+		cancel_effect = {
+
+		}
+		priority = 985
+		timeout_effect = {
+			#政党支持数目对收益
+			set_temp_variable = { BRI_part_1 = party_popularity_100@totalist }
+			multiply_temp_variable = { BRI_part_1 = 0.01 }
+			set_temp_variable = { 
+				property_change = BRI_part_1
+			}
+			BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				activate_mission = BRI_lagadelles_ties_with_PCF_1
+			}
+		}
+	}
+	BRI_lagadelles_AIR_fighter_equipment = { #战斗机
+		icon = GFX_decision_plane
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_sky_is_ours
+		}
+		fire_only_once = no
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			political_power_cost = 0.3
+		}
+		remove_effect = {	
+			add_tech_bonus = {
+				name = BRI_fighters
+				bonus = 1
+				uses = 2
+				category = light_fighter
+				category = cat_heavy_fighter
+			}
+			add_tech_bonus = {
+				name = BRI_lagadelles_AIR_equipment
+				bonus = 1
+				uses = 1
+				category = air_equipment
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+		}
+	}
+	BRI_lagadelles_AIR_CAS_equipment = {
+		icon = GFX_decision_plane
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_sky_is_ours
+		}
+		fire_only_once = no
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			political_power_cost = 0.3
+		}
+		remove_effect = {	
+			add_tech_bonus = {
+				bonus = 1
+				uses = 2
+				category = cas_bomber
+			}
+			add_tech_bonus = {
+				name = BRI_lagadelles_AIR_equipment
+				bonus = 1
+				uses = 1
+				category = air_equipment
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+		}
+	}
+	BRI_lagadelles_AIR_nav_bomber_equipment = {
+		icon = GFX_decision_plane
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_sky_is_ours
+		}
+		fire_only_once = no
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			political_power_cost = 0.3
+		}
+		remove_effect = {	
+			add_tech_bonus = {
+				name = CAN_naval_bomber_programme
+				bonus = 1
+				uses = 2
+				category = naval_bomber
+			}
+			add_tech_bonus = {
+				name = BRI_lagadelles_AIR_equipment
+				bonus = 1
+				uses = 1
+				category = air_equipment
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+		}
+	}
 	BRI_upgrade_lagadelle_company_1 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2126,6 +2526,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_lagadelle_company_2 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2165,6 +2566,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_lagadelle_company_3 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2203,6 +2605,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_lagadelle_company_4 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2241,6 +2644,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_lagadelle_company_5 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2278,7 +2682,138 @@ BRI_Giant_enterprises_governing_the_country = {
 			}
         }
     }
+	#道达尔
+	BRI_oil_digging_I = { #小规模石油采掘扩张
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_oil_more
+		}
+		fire_only_once = no
+		days_remove = 30
+		days_re_enable = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			add_one_random_military_factory = yes
+			custom_effect_tooltip = BRI_oil_digging_I_tt 
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 2
+				}
+			}
+		}
+	}
+	BRI_oil_digging_II = { #石油采掘
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text =  BRI_Workers_Self_Governance_Act_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_oil_more
+		}
+		fire_only_once = no
+		days_re_enable = 60
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -1 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			custom_effect_tooltip = BRI_oil_digging_II_tt 
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 5
+				}
+			}
+		}
+	}
+	BRI_oil_digging_III = { #大规模石油采掘
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 2 }
+		}
+		custom_cost_text = BRI_factory_II_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_oil_more
+		}
+		fire_only_once = no
+		days_re_enable = 180
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 23
+				}
+			}
+			custom_effect_tooltip = BRI_oil_digging_III_tt 
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_oil_more_money_more = { #黑金即金
+		icon = GFX_decision_generic_break_treaty
+		days_mission_timeout = 30
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_completed_focus = BRI_and_money_more
+		}
+		cancel_trigger = {
+			has_country_flag = BRI_Bankruptcy
+		}
+		cancel_effect = {
+
+		}
+		priority = 98
+		timeout_effect = {
+			#工厂数目对收益
+			set_temp_variable = { BRI_oil_revenue_1 = resource_produced@oil }
+			multiply_temp_variable = { BRI_oil_revenue_1 = 0.001 }
+			set_temp_variable = { 
+				property_change = BRI_oil_revenue_1
+			}
+			BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				activate_mission = BRI_oil_more_money_more
+			}
+		}
+	}
 	BRI_upgrade_total_company_1 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2324,6 +2859,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_total_company_2 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2363,6 +2899,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_total_company_3 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2401,6 +2938,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_total_company_4 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2439,6 +2977,7 @@ BRI_Giant_enterprises_governing_the_country = {
         }
     }
 	BRI_upgrade_total_company_5 = {
+		icon = give_cash
 		ai_will_do = {
 			factor = 10
 		}
@@ -2476,4 +3015,610 @@ BRI_Giant_enterprises_governing_the_country = {
 			}
         }
     }
+}
+BRI_britanny_on_world_stage_cat = {
+	BRI_Infiltrate_France = {#渗透法国
+		icon = GFX_decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_infitrate_frg
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			FRG = {
+				country_event = {
+					id = BRI_FRA.7
+					days = 5
+				}
+			}
+			if = {
+				limit = {
+					country_exists = NFA
+				}
+				NFA = {
+					country_event = {
+						id = BRI_FRA.6
+						days = 5
+					}
+				}
+			}
+		}
+		remove_effect = {
+			activate_mission = BRI_against_fra
+			BRI = {
+				declare_war_on = {
+					target = FRG
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = NFA
+				}
+				BRI = {
+					create_wargoal = {
+						type = annex_everything
+						target = NFA
+					}
+				}
+			}
+		}
+	}
+	BRI_against_fra = { #举起反旗
+		icon = GFX_decision_generic_break_treaty
+		days_mission_timeout = 210
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			OR = {
+				has_war_with = NFA
+				has_war_with = FRG
+			}
+		}
+		cancel_trigger = {
+			has_war = no
+		}
+		cancel_effect = {
+
+		}
+		priority = 985
+		timeout_effect = {
+			add_stability = -0.25
+			add_war_support = -0.25
+		}
+	}
+	BRI_Lock_Occitania_back_in_the_cage = {#对奥克西塔尼亚的最后通牒
+		icon = GFX_decision_OCC
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_reclaim_france
+			country_exists = OCC
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			OCC = {
+				country_event = {
+					id = BRI_FRA.8 #要挟
+					days = 5
+				}
+			}
+		}
+		remove_effect = {
+			activate_mission = BRI_against_fra
+			BRI = {
+				declare_war_on = {
+					target = OCC
+					type = annex_everything
+				}
+			}
+		}
+	}
+	BRI_Lock_Lorraine_back_in_the_cage = {#对洛林的最后通牒
+		icon = GFX_decision_Luolin
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_reclaim_france
+			country_exists = LRE
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			LRE = {
+				country_event = {
+					id = BRI_FRA.9 #要挟
+					days = 5
+				}
+			}
+		}
+		remove_effect = {
+			activate_mission = BRI_against_fra
+			BRI = {
+				declare_war_on = {
+					target = LRE
+					type = annex_everything
+				}
+			}
+		}
+	}
+	BRI_Lock_Normandy_back_in_the_cage = { #诺曼底
+		icon = GFX_decision_NRM
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_reclaim_france	
+			country_exists = NRM
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			NRM = {
+				country_event = {
+					id = BRI_FRA.10 #要挟
+					days = 5
+				}
+			}
+		}
+		remove_effect = {
+			activate_mission = BRI_against_fra
+			BRI = {
+				declare_war_on = {
+					target = NRM
+					type = annex_everything
+				}
+			}
+		}
+	}
+	BRI_Join_Russia = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			country_exists = RUS
+			is_subject = no
+			is_in_faction = no
+			RUS = {
+				is_subject = no
+				exists = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = BRI
+				}					
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_join_faction
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = 0.1
+			add_political_power = 50
+		}
+		remove_effect = {
+			RUS = {
+				country_event = {
+					id = BRI_for.1
+					days = 5
+				}
+			} #加入俄罗斯
+		}
+	}
+	BRI_Join_Germany = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			country_exists = GER
+			has_socialist_government = no
+			is_subject = no
+			is_in_faction = no
+			GER = {
+				is_subject = no
+				exists = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = BRI
+				}					
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_join_faction
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = 0.1
+			add_political_power = 50
+		}
+		remove_effect = {
+			GER = {
+				country_event = {
+					id = BRI_for.2
+					days = 5
+				}
+			} #加入德国
+		}
+	}
+	BRI_Join_the_Entente_Powers = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			country_exists = CAN
+			has_socialist_government = no
+			is_subject = no
+			is_in_faction = no
+			RUS = {
+				is_subject = no
+				exists = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = BRI
+				}					
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_join_faction
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = 0.1
+			add_political_power = 50
+		}
+		remove_effect = {
+			CAN = {
+				country_event = {
+					id = BRI_for.3
+					days = 5
+				}
+			} #加入加拿大
+		}
+	}
+	BRI_Join_the_Third_International = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_socialist_government = yes
+			is_subject = no
+			is_in_faction = no
+			RUS = {
+				is_subject = no
+				exists = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = BRI
+				}					
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_join_faction
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = 0.1
+			add_political_power = 50
+		}
+		remove_effect = {
+			ENG = {
+				country_event = {
+					id = BRI_for.4
+					days = 5
+				}
+			} #加入第三国际
+		}
+	}
+	BRI_Support_Wales = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_war = no
+			NOT = {
+				country_exists = WAL
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_celtic_union
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+			add_political_power = -50
+		}
+		remove_effect = {
+			set_country_flag = BRI_Wales_aid
+			custom_effect_tooltip = BRI_Support_Wales_tooltip
+		}
+	}
+	BRI_Support_Scotland = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_war = no
+			NOT = {
+				country_exists = SCT
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_celtic_union
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+			add_political_power = -50
+		}
+		remove_effect = {
+			set_country_flag = BRI_Scotland_aid
+			custom_effect_tooltip = BRI_Support_Scotland_tooltip
+		}
+	}
+	BRI_Support_Ireland = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_war = no
+		}
+		visible = {
+			has_completed_focus = BRI_friendship_with_ireland
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+			add_political_power = -50
+		}
+		remove_effect = {
+			country_event = {
+				id = BRI_FRA.11
+			}
+			custom_effect_tooltip = BRI_Support_Ireland_tooltip
+		}
+	}
+	BRI_Anglo_Saxons_surrender = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_war = no
+		}
+		visible = {
+			has_completed_focus = BRI_recelticlize
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+			add_political_power = -50
+		}
+		remove_effect = {
+			set_country_flag = BRI_Ireland_aid
+			custom_effect_tooltip = BRI_Anglo_Saxons_surrender_tooltip
+            create_faction_from_template = { 
+				template = faction_template_generic_dominance              
+				name = Alliance_celtique
+				icon = GFX_faction_arizona
+			}
+			if = {
+				limit = {
+					has_country_flag = BRI_Ireland_aid
+				}
+				BRI = { add_to_faction = IRE }
+				IRE = {
+					declare_war_on = { target = ENG type = annex_everything }
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = BRI_Scotland_aid
+				}
+				BRI = { add_to_faction = SCT }
+				SCT = {
+					transfer_state = 120
+					transfer_state = 121
+					transfer_state = 136
+					transfer_state = 133
+					transfer_state = 938 
+					add_state_core = 120
+					add_state_core = 121
+					add_state_core = 136
+					add_state_core = 133
+					add_state_core = 938 
+					division_template = {
+						name = "起义部队"
+						priority = 3
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 0 y = 4 }
+							infantry = { x = 0 y = 5 }
+							infantry = { x = 0 y = 6 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = SCT
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = BRI
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = BRI
+						}
+					}
+					declare_war_on = { target = ENG type = annex_everything }
+				}
+				
+			}
+			if = {
+				limit = {
+					has_country_flag = BRI_Wales_aid
+				}
+				BRI = { add_to_faction = WAL }
+				WAL = {
+					transfer_state = 122 
+					add_state_core = 122 
+					transfer_state = 1225 
+					add_state_core = 1225 
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 10000
+						producer = ENG
+					}
+					division_template = {
+						name = "起义部队"
+						priority = 3
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 0 y = 4 }
+							infantry = { x = 0 y = 5 }
+							infantry = { x = 0 y = 6 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = WAL
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = WAL
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = WAL
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = WAL
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = WAL
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = WAL
+						}
+						create_unit = {
+							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							allow_spawning_on_enemy_provs = yes
+							owner = WAL
+						}
+					}
+					declare_war_on = { target = ENG type = annex_everything }
+				}
+			}
+		}
+	}
 }
