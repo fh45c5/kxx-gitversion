@@ -4,6 +4,138 @@
 
 
 chinese_unification = {
+	china_fading_sun_timer_enemy = {
+		icon = revolt#activated #by japfor.229
+		available = {
+			OR = {
+				AND = {
+					OR = {
+						KOR = {
+							exists = yes
+							is_in_faction_with = JAP
+						}
+						KOR = { exists = no }
+					}
+					KOR = { all_core_state = { owner = { has_full_control_of_state = PREV } } }
+				}
+				AND = {
+					KOR = {
+						exists = yes
+						NOT = {
+							is_in_faction_with = JAP
+						}
+					}
+					JAP = {
+						525 = { is_controlled_by_ROOT_or_ally = yes }
+						527 = { is_controlled_by_ROOT_or_ally = yes }
+						1345 = { is_controlled_by_ROOT_or_ally = yes }
+						1347 = { is_controlled_by_ROOT_or_ally = yes }
+					}
+				}
+				AND = {
+					KOR = {
+						exists = no
+					}
+					JAP = {
+						525 = { is_controlled_by_ROOT_or_ally = yes }
+						527 = { is_controlled_by_ROOT_or_ally = yes }
+						1345 = { is_controlled_by_ROOT_or_ally = yes }
+						1347 = { is_controlled_by_ROOT_or_ally = yes }
+					}
+				}
+			}
+			if = {
+				limit = {
+					country_exists = MAN
+					JAP = { is_ally_with = MAN }
+				}
+				MAN = { has_capitulated = yes }
+			}
+			if = {
+				limit = { is_russian_tag = yes }
+				if = {
+					limit = { has_war_with = FNG }
+					FNG = { has_capitulated = yes }
+				}
+				OR = {
+					NOT = { country_exists = TRM }
+					TRM = { has_capitulated = yes }
+				}
+			}
+			else = {
+				if = {
+					limit = { NOT = { JAP = { has_war_with = FNG } } }
+					OR = {
+						NOT = { country_exists = FNG }
+						FNG = { has_capitulated = yes }
+					}
+				}
+				JAP = {
+					custom_trigger_tooltip = {
+						tooltip = JAP_all_chinese_allies_capitulated
+						NOT = {
+							any_allied_country = {
+								is_tag_in_china_area = yes
+								NOT = {
+									original_tag = TAI
+								}
+								has_capitulated = no
+							}
+						}
+					}
+				}
+				JAP = {
+					custom_trigger_tooltip = {
+						tooltip = JAP_all_owned_chinese_states_occupied
+						NOT = {
+							any_owned_state = {
+								is_china_claim_area = yes
+								NOT = { state = 524 } #Taiwan
+								NOT = { state = 745 } #Kwantung
+								is_controlled_by = ROOT
+							}
+						}
+					}
+				}
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = { has_war_with = JAP }
+				JAP = { has_capitulated = yes }
+				JAP = { is_subject = yes }
+				JAP = { is_in_faction_but_not_leader = yes }
+				JAP = { surrender_progress > 0.15 }
+			}
+		}
+
+		days_remove = 150
+
+		cancel_effect = {
+
+		}
+		complete_effect = {
+		
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout JAP_fading_sun_timer_enemy"
+			#no logging here - this mission is only meant to give a player information
+			effect_tooltip = {
+				if = {
+					limit = { JAP = { is_ai = no } }
+					JAP = {
+						add_stability = -0.1
+						add_war_support = -0.1
+					}
+				}
+				else = {
+					custom_effect_tooltip = JAP_will_surrender_if_forced_out_of_china
+					country_event = japfor.230
+				}
+			}
+		}
+	}
 	assume_chinese_leadership = {
 		icon = generic_speech
 		priority = 4000
