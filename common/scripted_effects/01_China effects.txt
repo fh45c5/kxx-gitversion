@@ -1,37 +1,3 @@
-set_potential_national_government = {
-	if = {
-		limit = { NOT = { has_country_flag = china_is_potential_government } }
-		set_country_flag = china_is_potential_government
-		every_state = {
-			limit = {
-				is_core_china = yes
-				is_claim_or_core_of_PREV = no
-				NOT = {
-					has_variable = ambition_area_@PREV
-					owner = {
-						is_subject_of = PREV.PREV
-						china_is_governorate = yes
-					}
-				}
-			}
-			add_claim_by = PREV
-			add_to_array = { PREV.china_government_ambitions = THIS }
-			set_variable = { ambition_area_@PREV = 1 }
-		}
-		hidden_effect = {
-			every_state = {
-				limit = {
-					is_china_claim_area = yes
-					is_claim_or_core_of_PREV = no
-					NOT = { has_variable = ambition_area_@PREV }
-				}
-				add_to_array = { PREV.china_government_ambitions = THIS }
-				set_variable = { ambition_area_@PREV = 1 }
-			}
-			CHI_warn_of_rkmt_government_effect = yes #If its a RKMT leader, effect will fire an event for CHI
-		}
-	}
-}
 
 clear_potential_national_government = {
 	hidden_effect = {
