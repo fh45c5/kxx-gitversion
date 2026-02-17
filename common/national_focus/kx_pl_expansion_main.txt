@@ -3598,7 +3598,7 @@ focus_tree = {
 			has_country_flag = plx_endecja_rules
 		}	
 		relative_position_id = KX_PL_PNPR_WINS_ELECTIONS
-		x = 17
+		x = 20
 		y = 0
 		cost = 1
 		ai_will_do = {
@@ -5633,7 +5633,7 @@ focus_tree = {
 				remove_idea = KX_PLX_pan_slav_1
 				add_idea = KX_PLX_pan_slav_2b
 			}
-			country_event =	plx.59		
+			#country_event = plx.59		
 		}
 	}	
 	focus = {
@@ -5718,18 +5718,26 @@ focus_tree = {
 	####German Takeover
 	focus = {
 		id = KX_PL_PG_GERMAN_TAKEOVER
-		icon = GFX_goal_POL_german_king
+		icon = GFX_goal_POL_austrian_king
 		available = {
 			has_country_flag = plx_rc_in_power
 		}
-		x = 25
-		y = 20
+		prerequisite = {
+			focus = KX_PL_PG_KING_IN_POWER
+		}
+		mutually_exclusive = {
+			focus = KX_PL_PG_A_MONARCH_TO_CHOOSE
+		
+		}
+		relative_position_id = KX_PL_PG_KING_IN_POWER
+		x = -1
+		y = 1
 		cost = 1
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
-			#add_political_power = 25		
+			add_ideas = POL_lessons_of_the_empire_idea	
 		}
 	}
 	focus = {
@@ -5738,19 +5746,28 @@ focus_tree = {
 		available = {
 			has_country_flag = plx_rc_in_power
 		}
-		prerequisite = {
+		mutually_exclusive = {
 			focus = KX_PL_PG_GERMAN_TAKEOVER
+		
+		}
+		prerequisite = {
+			focus = KX_PL_PG_KING_IN_POWER
 		}
 		relative_position_id = KX_PL_PG_GERMAN_TAKEOVER
-		x = 0
-		y = 1
+		x = 2
+		y = 0
 		cost = 12
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
 			add_political_power = 25	
-
+		create_country_leader = {
+			name = "皇家委员会"
+			picture = "gfx/leaders/POL/Portrait_POL_Rada_Regencyjna.png"
+			expire = "1965.1.1"
+			ideology = elective_monarchy_subtype
+		}
 		}
 	}
 	focus = {
@@ -5759,12 +5776,10 @@ focus_tree = {
 		available = {
 			has_country_flag = plx_rc_in_power
 		}
-		prerequisite = {
-			focus = KX_PL_PG_A_MONARCH_TO_CHOOSE
-		}
-		relative_position_id = KX_PL_PG_A_MONARCH_TO_CHOOSE
-		x = 0
-		y = 1
+		
+		
+		x = 25
+		y = 21
 		cost = 1
 		ai_will_do = {
 			factor = 100
@@ -5780,17 +5795,21 @@ focus_tree = {
 			has_country_flag = plx_rc_in_power
 		}
 		prerequisite = {
-			focus = KX_PL_PG_KING_IN_POWER
+			focus = KX_PL_PG_GERMAN_TAKEOVER
+			focus = KX_PL_PG_A_MONARCH_TO_CHOOSE
+		
 		}		
 		relative_position_id = KX_PL_PG_KING_IN_POWER
 		x = 0
-		y = 1
+		y = 2
 		cost = 2
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
-			country_event = plxv2.043
+			#country_event = plxv2.043
+			country_event = plxv2.083
+			
 		}
 	}
 	focus = {
@@ -5942,26 +5961,30 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_stability = 0.10
+			country_event = plxv2.137
 		}
 	}
 	focus = {
 		id = KX_PL_PG_RELY_ON_ARISTOCRACY
-		icon = GFX_goal_BRG_Aristocratic_Ally
+		icon = GFX_goal_POR_royal_edicts
 		available = {
-			#has_country_flag = plx_rc_in_power
+			has_country_flag = plx_rc_old
 		}
 		prerequisite = {
 			focus = KX_PL_PG_REAFFIRM_ROYAL_COUNCIL
-		}		
+		}	
+		mutually_exclusive = {
+			focus = KX_PL_PG_NEW_MILITARY_SAFEGUARD
+		}
 		relative_position_id = KX_PL_PG_REAFFIRM_ROYAL_COUNCIL
-		x = 0
+		x = -1
 		y = 1
 		cost = 8
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
-			add_ideas = KX_mon_royal_council_1
+			add_political_power = 100
 		}
 	}
 	focus = {
@@ -5981,6 +6004,7 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
+			country_event = plxv2.142
 			if = { 
 				limit = { has_idea = KX_mon_royal_council_2 }
 				swap_ideas = {
@@ -5996,38 +6020,7 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
-		id = KX_PL_PG_EXPAND_LOCAL_GOVERNANCE
-		icon = GFX_goal_COR_american_estates
-		available = {
-			#has_country_flag = plx_rc_in_power
-		}
-		prerequisite = {
-			focus = KX_PL_PG_RELY_ON_ARISTOCRACY
-		}
-		relative_position_id = KX_PL_PG_RELY_ON_ARISTOCRACY
-		x = 1
-		y = 1
-		cost = 7
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			if = { 
-				limit = { has_idea = KX_mon_royal_council_2 }
-				swap_ideas = {
-					remove_idea = KX_mon_royal_council_2
-					add_idea = KX_mon_royal_council_3
-				}
-			}
-			else = {
-				swap_ideas = {
-					remove_idea = KX_mon_royal_council_1
-					add_idea = KX_mon_royal_council_2
-				}
-			}
-		}
-	}
+	
 	focus = {
 		id = KX_PL_PG_APPEAL_TO_INDUSTRIALISTS
 		icon = GFX_goal_AST_drink_with_industrialists
@@ -6035,16 +6028,15 @@ focus_tree = {
 			#has_country_flag = plx_rc_in_power
 		}
 		prerequisite = {
-			focus = KX_PL_PG_EXPAND_LOCAL_GOVERNANCE
-		}
-		prerequisite = {
-			focus = KX_PL_PG_POWER_TO_THE_SENAT
+			focus = KX_PL_PG_UNITY_NOT_IDEOLOGY
+			focus = KX_PL_PG_ARISTOCRATIC_REPUBLIC
 		}
 		mutually_exclusive = {
-			focus = KX_PL_PG_TOWARDS_CORPORATISM
-		}		
-		relative_position_id = KX_PL_PG_POWER_TO_THE_SENAT
-		x = 0
+			focus = KX_PL_PG_IGNORE_THE_NEW_RICH
+			focus = KX_PL_PG_SEEK_LEGITIMACY_IN_PEOPLE
+		}
+		relative_position_id = KX_PL_PG_ARISTOCRATIC_REPUBLIC
+		x = 1
 		y = 1
 		cost = 10
 		ai_will_do = {
@@ -6052,9 +6044,68 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_ideas = KX_mon_royal_capitalism_1
-			country_event = plxv2.085
+			
 		}
 	}
+	focus = {
+		id = KX_PL_PG_IGNORE_THE_NEW_RICH
+		icon = GFX_goal_CRO_seize_riches
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_ARISTOCRATIC_REPUBLIC
+		}
+		mutually_exclusive = {
+			focus = KX_PL_PG_APPEAL_TO_INDUSTRIALISTS
+		}
+		relative_position_id = KX_PL_PG_ARISTOCRATIC_REPUBLIC
+		x = -1
+		y = 1
+		cost = 10
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_mon_aristocracy_econ_1
+			if = {
+				limit = {
+					has_idea = POL_Wladyslaw_Sikorski_hog_pau
+				}
+				set_country_leader_ideology = autdem_christian_democracy_subtype
+			}
+		}
+	}
+	focus = {
+		id = KX_PL_PG_SEEK_LEGITIMACY_IN_PEOPLE
+		icon = GFX_goal_USA_To_You_The_People
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_UNITY_NOT_IDEOLOGY
+		}
+		mutually_exclusive = {
+			focus = KX_PL_PG_APPEAL_TO_INDUSTRIALISTS
+			focus = KX_PL_PG_IGNORE_THE_NEW_RICH
+		}
+		relative_position_id = KX_PL_PG_UNITY_NOT_IDEOLOGY
+		x = 1
+		y = 1
+		cost = 10
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_mon_in_everyones_service_1
+			if = {
+				limit = {
+					has_idea = POL_Aleksy_Cwiakowski_hog_sde
+				}
+				set_country_leader_ideology = authdem_monsoc_subtype
+			}
+		}
+	}	
 	focus = {
 		id = KX_PL_PG_TAX_BREAKS
 		icon = GFX_RUS_Tax_Reform
@@ -6063,28 +6114,17 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = KX_PL_PG_APPEAL_TO_INDUSTRIALISTS
+			focus = KX_PL_PG_IGNORE_THE_NEW_RICH
 		}
 		relative_position_id = KX_PL_PG_APPEAL_TO_INDUSTRIALISTS
-		x = 0
+		x = -1
 		y = 1
 		cost = 10
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
-			if = { 
-				limit = { has_idea = KX_mon_royal_capitalism_2 }
-				swap_ideas = {
-					remove_idea = KX_mon_royal_capitalism_2
-					add_idea = KX_mon_royal_capitalism_3
-				}
-			}
-			else = {
-				swap_ideas = {
-					remove_idea = KX_mon_royal_capitalism_1
-					add_idea = KX_mon_royal_capitalism_2
-				}
-			}
+			add_ideas = PLX_mon_tax_breaks
 		}
 	}
 	focus = {
@@ -6094,44 +6134,12 @@ focus_tree = {
 			#has_country_flag = plx_rc_in_power
 		}
 		prerequisite = {
-			focus = KX_PL_PG_APPEAL_TO_INDUSTRIALISTS
-		}
-		relative_position_id = KX_PL_PG_APPEAL_TO_INDUSTRIALISTS
-		x = -2
-		y = 1
-		cost = 10
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			if = { 
-				limit = { has_idea = KX_mon_royal_capitalism_2 }
-				swap_ideas = {
-					remove_idea = KX_mon_royal_capitalism_2
-					add_idea = KX_mon_royal_capitalism_3
-				}
-			}
-			else = {
-				swap_ideas = {
-					remove_idea = KX_mon_royal_capitalism_1
-					add_idea = KX_mon_royal_capitalism_2
-				}
-			}
-		}
-	}
-	focus = {
-		id = KX_PL_PG_PROTECTIONISM
-		icon = GFX_USA_payment_protection
-		available = {
-			#has_country_flag = plx_rc_in_power
-		}
-		prerequisite = {
-			focus = KX_PL_PG_LOWER_REGULATIONS
-		}
-		prerequisite = {
 			focus = KX_PL_PG_TAX_BREAKS
 		}
-		relative_position_id = KX_PL_PG_LOWER_REGULATIONS
+		prerequisite = {
+			focus = KX_PL_PG_CONTINUE_LAND_CONSOLIDATION
+		}		
+		relative_position_id = KX_PL_PG_TAX_BREAKS
 		x = 1
 		y = 1
 		cost = 10
@@ -6140,11 +6148,11 @@ focus_tree = {
 		}
 		completion_reward = {
 			swap_ideas = {
-				remove_idea = KX_mon_royal_capitalism_3
-				add_idea = KX_mon_royal_capitalism_4
+				remove_idea = KX_mon_royal_capitalism_1
+				add_idea = KX_mon_royal_capitalism_2
 			}
 		}
-	}	
+	}
 	focus = {
 		id = KX_PL_PG_CONTINUE_LAND_CONSOLIDATION
 		icon = GFX_goal_ZIM_land_husbandry_act
@@ -6152,12 +6160,10 @@ focus_tree = {
 			#has_country_flag = plx_rc_in_power
 		}
 		prerequisite = {
-			focus = KX_PL_PG_PROTECTIONISM
+			focus = KX_PL_PG_APPEAL_TO_INDUSTRIALISTS
+			focus = KX_PL_PG_SEEK_LEGITIMACY_IN_PEOPLE
 		}
-		mutually_exclusive = {
-			focus = KX_PL_PG_LIMIT_LAND_SALE
-		}		
-		relative_position_id = KX_PL_PG_PROTECTIONISM
+		relative_position_id = KX_PL_PG_APPEAL_TO_INDUSTRIALISTS
 		x = 1
 		y = 1
 		cost = 10
@@ -6175,12 +6181,9 @@ focus_tree = {
 			#has_country_flag = plx_rc_in_power
 		}
 		prerequisite = {
-			focus = KX_PL_PG_PROTECTIONISM
+			focus = KX_PL_PG_IGNORE_THE_NEW_RICH
 		}
-		mutually_exclusive = {
-			focus = KX_PL_PG_CONTINUE_LAND_CONSOLIDATION
-		}
-		relative_position_id = KX_PL_PG_PROTECTIONISM
+		relative_position_id = KX_PL_PG_IGNORE_THE_NEW_RICH
 		x = -1
 		y = 1
 		cost = 10
@@ -6192,144 +6195,413 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = KX_PL_PG_TOWARDS_CORPORATISM
-		icon = GFX_goal_BRG_Distributist_Economy
+		id = KX_PL_PG_STATE_CONTRACTING
+		icon = GFX_NEE_elite_contracts
 		available = {
-			#has_country_flag = plx_start
-		}	
-		prerequisite = {
-			focus = KX_PL_PG_EXPAND_LOCAL_GOVERNANCE
+			#has_country_flag = plx_rc_in_power
 		}
-		mutually_exclusive = {
-			focus = KX_PL_PG_APPEAL_TO_INDUSTRIALISTS
+		prerequisite = {
+			focus = KX_PL_PG_LIMIT_LAND_SALE
+		}
+		prerequisite = {
+			focus = KX_PL_PG_TAX_BREAKS
 		}		
-		relative_position_id = KX_PL_PG_EXPAND_LOCAL_GOVERNANCE
-		x = 0
+		relative_position_id = KX_PL_PG_LIMIT_LAND_SALE
+		x = 1
 		y = 1
-		cost = 10 #?
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			add_ideas = SOC_POL_PZPR_corporatism_1
-			country_event = plxv2.086
-		}
-	}	
-	focus = {
-		id = KX_PL_PG_CLASS_BLIND_SYNDICATES
-		icon = GFX_RUS_Corporatist_Lean
-		available = {
-			#has_country_flag = plx_start
-		}	
-		prerequisite = {
-			focus = KX_PL_PG_TOWARDS_CORPORATISM
-		}
-		relative_position_id = KX_PL_PG_TOWARDS_CORPORATISM
-		x = 2
-		y = 1
-		cost = 10 #?
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			add_ideas = SOC_POL_PZPR_right_syndicates
-		}
-	}
-	focus = {
-		id = KX_PL_PG_COUNCIL_OF_WORKERS_AND_CAPITALISTS
-		icon = GFX_BBR_collective_management
-		available = {
-			#has_country_flag = plx_start
-		}	
-		prerequisite = {
-			focus = KX_PL_PG_TOWARDS_CORPORATISM
-		}
-		relative_position_id = KX_PL_PG_TOWARDS_CORPORATISM
-		x = 0
-		y = 1
-		cost = 10 #?
+		cost = 10
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
 			swap_ideas = {
-				remove_idea = SOC_POL_PZPR_corporatism_1
-				add_idea = SOC_POL_PZPR_corporatism_2
+				remove_idea = PLX_mon_aristocracy_econ_1
+				add_idea = PLX_mon_aristocracy_econ_2
 			}
-		}
-	}	
-	focus = {
-		id = KX_PL_PG_CLASS_COLABORATIONIST_AGRICULTURE
-		icon = GFX_goal_AUS_corporatocratic_democracy
-		available = {
-			#has_country_flag = plx_start
-		}	
-		prerequisite = {
-			focus = KX_PL_PG_COUNCIL_OF_WORKERS_AND_CAPITALISTS
-		}
-		prerequisite = {
-			focus = KX_PL_PG_CLASS_BLIND_SYNDICATES
-		}
-		relative_position_id = KX_PL_PG_COUNCIL_OF_WORKERS_AND_CAPITALISTS
-		x = 0
-		y = 1
-		cost = 10 #?
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			add_ideas = SOC_POL_colab_agri
 		}
 	}
 	focus = {
-		id = KX_PL_PG_COORDINATE_SMALL_BUSINESS
-		icon = GFX_goal_NFA_People_Corporatism
+		id = KX_PL_PG_PROMOTE_PHILANTROPY
+		icon = GFX_goal_AUS_Jewels_Charity_Orders
 		available = {
-			#has_country_flag = plx_start
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_STATE_CONTRACTING
+			focus = KX_PL_PG_LOWER_REGULATIONS
 		}	
-		prerequisite = {
-			focus = KX_PL_PG_CLASS_BLIND_SYNDICATES
-		}
-		prerequisite = {
-			focus = KX_PL_PG_COUNCIL_OF_WORKERS_AND_CAPITALISTS
-		}
-		relative_position_id = KX_PL_PG_CLASS_BLIND_SYNDICATES
+		relative_position_id = KX_PL_PG_STATE_CONTRACTING
 		x = 0
 		y = 1
-		cost = 10 #?
+		cost = 10
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
-			add_ideas = SOC_POL_PZPR_business_coordination
+			add_ideas = PLX_mon_philantropy
 		}
-	}	
+	}
 	focus = {
-		id = KX_PL_PG_POLISH_SOLIDARISM
-		icon = GFX_focus_rus_organic_solidarity
+		id = KX_PL_PG_RESTORE_TRADE_UNIONS
+		icon = GFX_RUS_Trade_Unions_Impartiality_Act
 		available = {
-			#has_country_flag = plx_start
-		}	
-		prerequisite = {
-			focus = KX_PL_PG_CLASS_COLABORATIONIST_AGRICULTURE
+			#has_country_flag = plx_rc_in_power
 		}
 		prerequisite = {
-			focus = KX_PL_PG_COORDINATE_SMALL_BUSINESS
+			focus = KX_PL_PG_SEEK_LEGITIMACY_IN_PEOPLE
+		}	
+		relative_position_id = KX_PL_PG_SEEK_LEGITIMACY_IN_PEOPLE
+		x = 1
+		y = 1
+		cost = 10
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_mon_trade_unions
+		}
+	}
+	focus = {
+		id = KX_PL_PG_PLATFORM_BETWEEN_CLASSES
+		icon = GFX_goal_NFA_bridge_class_divide
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_RESTORE_TRADE_UNIONS
+		}
+		prerequisite = {
+			focus = KX_PL_PG_CONTINUE_LAND_CONSOLIDATION
 		}		
-		relative_position_id = KX_PL_PG_COORDINATE_SMALL_BUSINESS
+		relative_position_id = KX_PL_PG_RESTORE_TRADE_UNIONS
 		x = -1
 		y = 1
-		cost = 10 #?
+		cost = 10
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
 			swap_ideas = {
-				remove_idea = SOC_POL_PZPR_corporatism_2
-				add_idea = SOC_POL_PZPR_corporatism_3
+				remove_idea = PLX_mon_in_everyones_service_1
+				add_idea = PLX_mon_in_everyones_service_2
+			}
+		}
+	}
+	focus = {
+		id = KX_PL_PG_MODERATE_WELFARE_STATE
+		icon = GFX_goal_NOR_welfare_for_the_nordic_race
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_PLATFORM_BETWEEN_CLASSES
+		}		
+		relative_position_id = KX_PL_PG_PLATFORM_BETWEEN_CLASSES
+		x = 0
+		y = 1
+		cost = 10
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_mon_moderate_welfare
+			hidden_effect = {
+				country_event = {
+					id = plxv2.119 days = 60
+				}	
+				country_event = {
+					id = plxv2.120 days = 40
+				}
+			}			
+		}
+	}
+	focus = {
+		id = KX_PL_PG_PROTECTIONISM
+		icon = GFX_USA_payment_protection
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_LOWER_REGULATIONS
+			focus = KX_PL_PG_STATE_CONTRACTING
+			focus = KX_PL_PG_PLATFORM_BETWEEN_CLASSES
+		}
+		relative_position_id = KX_PL_PG_LOWER_REGULATIONS
+		x = 0
+		y = 1
+		cost = 10
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_mon_protectionism
+		}
+	}	
+	
+	focus = {
+		id = KX_PL_PG_NEW_MILITARY_SAFEGUARD
+		icon = GFX_goal_GAL_military_in_charge
+		available = {
+			has_country_flag = plx_rc_new
+		}
+		prerequisite = {
+			focus = KX_PL_PG_REAFFIRM_ROYAL_COUNCIL
+		}
+		mutually_exclusive = {
+			focus = KX_PL_PG_RELY_ON_ARISTOCRACY
+		}		
+		relative_position_id = KX_PL_PG_REAFFIRM_ROYAL_COUNCIL
+		x = 1
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_stability = 0.10
+		}
+	}	
+	focus = {
+		id = KX_PL_PG_FINDING_COMPROMISE
+		icon = GFX_goal_MEX_find_compromise
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_NEW_MILITARY_SAFEGUARD
+		}		
+		relative_position_id = KX_PL_PG_NEW_MILITARY_SAFEGUARD
+		x = 1
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = KX_mon_military_democracy_1
+					
+		}
+	}
+	focus = {
+		id = KX_PL_PG_REOPEN_PARLIAMENT
+		icon = GFX_RUS_Reinforce_Local_Parliaments
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_FINDING_COMPROMISE
+		}		
+		relative_position_id = KX_PL_PG_FINDING_COMPROMISE
+		x = 1
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			if = { 
+				limit = { has_idea = KX_mon_military_democracy_2 }
+				swap_ideas = {
+					remove_idea = KX_mon_military_democracy_2
+					add_idea = KX_mon_military_democracy_3
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = KX_mon_military_democracy_1
+					add_idea = KX_mon_military_democracy_2
+				}
 			}
 		}
 	}	
+	focus = {
+		id = KX_PL_PG_SEJM_ADVISORY_ROLE
+		icon = GFX_RUS_Lower_Local_Parliaments
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_POWER_TO_THE_SENAT
+		}		
+		relative_position_id = KX_PL_PG_POWER_TO_THE_SENAT
+		x = -1
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			if = { 
+				limit = { has_idea = KX_mon_royal_council_2 }
+				swap_ideas = {
+					remove_idea = KX_mon_royal_council_2
+					add_idea = KX_mon_royal_council_3
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = KX_mon_royal_council_1
+					add_idea = KX_mon_royal_council_2
+				}
+			}
+		}
+	}	
+	focus = {
+		id = KX_PL_PG_LIMIT_ROYAL_PREROGATIVES
+		icon = GFX_goal_SRD_royalist_fervor
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_CONTINUE_EXECUTIVE_ORDERS
+		}
+		prerequisite = {
+			focus = KX_PL_PG_POWER_TO_THE_SENAT
+			focus = KX_PL_PG_FINDING_COMPROMISE
+		}
+		mutually_exclusive = {
+			focus = KX_PL_PG_GOVERNMENT_BY_APPOINTMENT
+		}
+		relative_position_id = KX_PL_PG_CONTINUE_EXECUTIVE_ORDERS
+		x = -1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLX_mon_monarch_role_1
+				add_idea = PLX_mon_monarch_role_2a
+			}
+		}
+	}
+	focus = {
+		id = KX_PL_PG_GOVERNMENT_BY_APPOINTMENT
+		icon = GFX_goal_MEX_Appointed_judges
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_CONTINUE_EXECUTIVE_ORDERS
+		}
+		prerequisite = {
+			focus = KX_PL_PG_POWER_TO_THE_SENAT
+			focus = KX_PL_PG_FINDING_COMPROMISE
+		}
+		mutually_exclusive = {
+			focus = KX_PL_PG_LIMIT_ROYAL_PREROGATIVES
+		}
+		relative_position_id = KX_PL_PG_CONTINUE_EXECUTIVE_ORDERS
+		x = 1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLX_mon_monarch_role_1
+				add_idea = PLX_mon_monarch_role_2b
+			}
+		}
+	}
+	focus = {
+		id = KX_PL_PG_UNITY_NOT_IDEOLOGY
+		icon = GFX_goal_SPR_One_and_multiple
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_GOVERNMENT_BY_APPOINTMENT
+			focus = KX_PL_PG_LIMIT_ROYAL_PREROGATIVES
+		}
+		prerequisite = {
+			focus = KX_PL_PG_REOPEN_PARLIAMENT
+		}
+		relative_position_id = KX_PL_PG_GOVERNMENT_BY_APPOINTMENT
+		x = 0
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			if = { 
+				limit = { has_idea = KX_mon_military_democracy_2 }
+				swap_ideas = {
+					remove_idea = KX_mon_military_democracy_2
+					add_idea = KX_mon_military_democracy_3
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = KX_mon_military_democracy_1
+					add_idea = KX_mon_military_democracy_2
+				}
+			}
+			country_event = {
+				id = plxv2.140
+			}	
+		}
+	}
+	focus = {
+		id = KX_PL_PG_ARISTOCRATIC_REPUBLIC
+		icon = GFX_goal_BRG_Aristocratic_Ally
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_GOVERNMENT_BY_APPOINTMENT
+			focus = KX_PL_PG_LIMIT_ROYAL_PREROGATIVES
+		}
+		prerequisite = {
+			focus = KX_PL_PG_SEJM_ADVISORY_ROLE
+		}
+		relative_position_id = KX_PL_PG_LIMIT_ROYAL_PREROGATIVES
+		x = 0
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			if = { 
+				limit = { has_idea = KX_mon_royal_council_2 }
+				swap_ideas = {
+					remove_idea = KX_mon_royal_council_2
+					add_idea = KX_mon_royal_council_3
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = KX_mon_royal_council_1
+					add_idea = KX_mon_royal_council_2
+				}
+			}
+		}
+	}	
+	focus = {
+		id = KX_PL_PG_CONTINUE_EXECUTIVE_ORDERS
+		icon = GFX_goal_MEX_All_power_to_the_Executive
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_PG_NEW_MILITARY_SAFEGUARD
+			focus = KX_PL_PG_RELY_ON_ARISTOCRACY
+		}		
+		relative_position_id = KX_PL_PG_RELY_ON_ARISTOCRACY
+		x = 1
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_mon_monarch_role_1
+		}
+	}
 	focus = {
 		id = KX_PL_PG_SCIENTIFIC_ECONOMY
 		icon = GFX_goal_FRA_technocratic_ministry
@@ -6499,7 +6771,7 @@ focus_tree = {
 	}	
 	focus = {
 		id = KX_PL_PG_ROYAL_CABINET_continues
-		icon = GFX_goal_HEJ_royal_house_hashemite
+		icon = GFX_goal_SPR_Popular_Nationalism
 		available = {
 			has_country_flag = plx_rc_in_power
 		}
@@ -6511,7 +6783,7 @@ focus_tree = {
 		}	
 		relative_position_id = KX_PL_PG_KING_IN_POWER
 		x = -10
-		y = 3
+		y = 4
 		cost = 2
 		ai_will_do = {
 			factor = 100
@@ -9636,14 +9908,7 @@ focus_tree = {
 	focus = {
     id = POL_soc_victory_of_the_people
     icon = GFX_goal_POL_ZPP
-    allow_branch = {
-      NOT = {
-        has_country_leader = {
-          name = "海克·甘德松斯基"  # Heck Gandersoński
-          ruling_only = yes
-        }
-      }
-    }
+    
 	prerequisite = {
 			focus = KX_PL_KPP_INTERNATIONALISM
 		}	
@@ -14931,14 +15196,7 @@ focus_tree = {
 	focus = {
     id = PLX_POL_Undivine_Comedy
     icon = GFX_goal_POL_Undivine_Comedy
-    allow_branch = {
-      NOT = {
-        has_country_leader = {
-          name = "海克·甘德松斯基"  # Heck Gandersoński
-          ruling_only = yes
-        }
-      }
-    }
+    
     available = {
       has_country_flag = POL_Undivine_Anarchists
     }
@@ -15130,14 +15388,7 @@ focus_tree = {
   focus = {
     id = PLX_POL_Reborn_Through_Faith
     icon = GFX_goal_POL_Reborn_Through_Faith
-    allow_branch = {
-      NOT = {
-        has_country_leader = {
-          name = "海克·甘德松斯基"  # Heck Gandersoński
-          ruling_only = yes
-        }
-      }
-    }
+    
     available = {
       has_country_flag = POL_christian_takeover
     }
@@ -17322,14 +17573,7 @@ focus_tree = {
   focus = {
     id = PLX_POL_the_great_debate
     icon = GFX_goal_POL_Regency_Thing
-    allow_branch = {
-      NOT = {
-        has_country_leader = {
-          name = "海克·甘德松斯基"  # Heck Gandersoński
-          ruling_only = yes
-        }
-      }
-    }
+    
     available = {
       OR = {
         POL_has_regency_council = yes
@@ -17339,7 +17583,7 @@ focus_tree = {
     cancelable = no
     x = 60
     y = 30
-    cost = 30
+    cost = 4
     ai_will_do = {
       factor = 100
     }
@@ -17350,14 +17594,7 @@ focus_tree = {
   focus = {
     id = PLX_POL_False_Piast
     icon = GFX_goal_pol_piast
-    allow_branch = {
-      NOT = {
-        has_country_leader = {
-          name = "海克·甘德松斯基"  # Heck Gandersoński
-          ruling_only = yes
-        }
-      }
-    }
+    
     available = {
       has_country_flag = POL_Pawel_Salwator
     }
@@ -17399,14 +17636,7 @@ focus_tree = {
   focus = {
     id = PLX_POL_polish_king
     icon = GFX_goal_POL_polish_king
-    allow_branch = {
-      NOT = {
-        has_country_leader = {
-          name = "海克·甘德松斯基"  # Heck Gandersoński
-          ruling_only = yes
-        }
-      }
-    }
+    
     available = {
       OR = {
         POL_king_augustyn = yes
@@ -17679,14 +17909,7 @@ focus_tree = {
   focus = {
     id = PLX_POL_mendog_iii
     icon = GFX_goal_POL_lithuanian_king
-    allow_branch = {
-      NOT = {
-        has_country_leader = {
-          name = "海克·甘德松斯基"  # Heck Gandersoński
-          ruling_only = yes
-        }
-      }
-    }
+    
     available = {
       OR = {
         POL_king_mendog = yes
@@ -17836,14 +18059,7 @@ focus_tree = {
   focus = {
     id = PLX_POL_von_hohenzollern
     icon = GFX_goal_POL_saxon_king
-    allow_branch = {
-      NOT = {
-        has_country_leader = {
-          name = "海克·甘德松斯基"  # Heck Gandersoński
-          ruling_only = yes
-        }
-      }
-    }
+    
     available = {
       POL_king_fryderyk = yes
     }
@@ -18005,9 +18221,7 @@ focus_tree = {
 	available = {
 	  has_country_flag = POL_Temporal_Rift
 	}
-	allow_branch = {
-		  has_country_flag = POL_Temporal_Rift
-	  }
+	
 	x = 24
 	y = 46
 	cost = 6
@@ -18257,7 +18471,7 @@ focus_tree = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POL_Concerto_Midnight_Sun" 
-					create_country_leader = {
+			create_country_leader = {
 			   name = "马泰乌什·莫拉维茨基"
 			   picture = "gfx/leaders/POL/Portrait_POL_Mateusz_Morawiecki.png"
 			   expire = "1965.1.1"
@@ -19162,7 +19376,7 @@ focus = {
 		#mutually_exclusive = {
 		#	focus = KX_PL_PNPR_WINS_ELECTIONS
 		#}	
-		x = -8
+		x = -6
 		y = 8
 		cost = 1
 		ai_will_do = {
@@ -19499,20 +19713,8 @@ focus = {
 			factor = 100
 		}
 		completion_reward = {
-			if ={
-				limit = { has_country_leader = { name = "卡罗尔·奥布拉希特二世" ruling_only = yes } }
-				add_ideas = PLX_pps_guided_democracy_1
-			}
-			if ={
-				limit = { has_country_leader = { name = "诺伯特·巴利奇" ruling_only = yes } }
-				add_ideas = PLX_pps_guided_democracy_1
-				hidden_effect = {
-					country_event = {
-						id = plxv2.009
-						days = 7
-					}		
-				}	
-			}
+			add_ideas = PLX_pps_guided_democracy_1
+			
 		}
 	}	
 	focus = {
@@ -19537,10 +19739,10 @@ focus = {
 				add_idea = PLX_pps_guided_democracy_2
 			}
 			hidden_effect = {
-				country_event = {
-					id = plxv2.009
-					days = 7
-				}		
+				#country_event = {
+				#	id = plxv2.009
+				#	days = 7
+				#}		
 			}			
 		}
 	}
@@ -19791,7 +19993,7 @@ focus = {
 		#mutually_exclusive = {
 		#	focus = KX_PL_PNPR_WINS_ELECTIONS
 		#}	
-		x = 1
+		x = 3
 		y = 8
 		cost = 1
 		ai_will_do = {
@@ -19895,7 +20097,7 @@ focus = {
 	}	
 	focus = {
 		id = KX_PLX_PSL_Populist_Rhetoric
-		icon = GFX_RUS_Party_Lands_Peoples_Reform
+		icon = GFX_goal_SWE_land_to_people
 		available = {
 			has_country_flag = plx_psl_rules
 		}
@@ -20336,7 +20538,7 @@ focus = {
 		#mutually_exclusive = {
 		#	focus = KX_PL_PSL_WINS_ELECTIONS
 		#}	
-		x = 11
+		x = 16
 		y = 8
 		cost = 1
 		ai_will_do = {
@@ -20369,6 +20571,360 @@ focus = {
 		}
 		completion_reward = {
 			add_political_power = 50		
+		}
+	}
+	focus = {
+		id = KX_PL_Chadecja_Left
+		icon = GFX_goal_TEX_christian_nat_crusade
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+			has_country_flag = plx_chadecja_left
+		}
+		mutually_exclusive = {
+			focus = KX_PL_Chadecja_Stays_Pure
+		}
+		mutually_exclusive = {
+			focus = KX_PL_Chadecja_Cooperate_with_NatDem
+		}		
+		prerequisite = {
+			focus = KX_PL_PNPR_WINS_ELECTIONS
+		}		
+		relative_position_id = KX_PL_PNPR_WINS_ELECTIONS
+		x = -5
+		y = 1
+		cost = 3
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50		
+		}
+	}	
+	focus = {
+		id = KX_PL_Chadecja_Leftist_Christian_Democracy
+		icon = GFX_goal_FRA_christian_socialism
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Left
+		}
+		relative_position_id = KX_PL_Chadecja_Left
+		x = 0
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_chad_social_christ_dem_1
+		}
+	}
+	focus = {
+		id = KX_PL_Chadecja_Indicative_Planning
+		icon = GFX_goal_COS_Erect_Central_Bank
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Leftist_Christian_Democracy
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Non_Marxist_Unionism
+		}		
+		relative_position_id = KX_PL_Chadecja_Leftist_Christian_Democracy
+		x = -1
+		y = 1
+		cost = 10
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_chad_planning_1
+		}
+	}
+	focus = {
+		id = KX_PL_Chadecja_Broad_Coalition
+		icon = GFX_goal_INS_focus_party_coalition
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Leftist_Christian_Democracy
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Non_Marxist_Unionism
+		}		
+		relative_position_id = KX_PL_Chadecja_Leftist_Christian_Democracy
+		x = -3
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLX_chad_social_christ_dem_1
+				add_idea = PLX_chad_social_christ_dem_2
+			}		
+			country_event = plxv2.109
+		}
+	}
+	focus = {
+		id = KX_PL_Chadecja_Social_Radicalism
+		icon = GFX_BBR_radicalized_unions
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+			has_country_flag = plx_chadecja_ally_pps
+		}
+		mutually_exclusive = {
+			focus = KX_PL_Chadecja_Land_Reform_With_PSL
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Broad_Coalition
+		}
+		relative_position_id = KX_PL_Chadecja_Broad_Coalition
+		x = 2
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLX_chad_social_christ_dem_2
+				add_idea = PLX_chad_social_christ_dem_3
+			}
+			add_ideas = SOC_POL_PPS_socialised_land
+			country_event = plxv2.105
+		}
+	}	
+	focus = {
+		id = KX_PL_Chadecja_Land_Reform_With_PSL
+		icon = GFX_goal_CZE_agrarian_summit
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		mutually_exclusive = {
+			focus = KX_PL_Chadecja_Social_Radicalism
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Broad_Coalition
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Indicative_Planning
+		}
+		relative_position_id = KX_PL_Chadecja_Broad_Coalition
+		x = 0
+		y = 1
+		cost = 7
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			hidden_effect = {
+				set_country_flag = plx_chadecja_ally_psl				
+			}
+			add_ideas = SOC_POL_PSL_agrarianism_1
+			add_soclib_to_coalition = yes
+		}
+	}
+	focus = {
+		id = KX_PL_Chadecja_Attack_the_Elite
+		icon = GFX_goal_AUS_Democracy_With_Order
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		mutually_exclusive = {
+			focus = KX_PL_Chadecja_Promote_Class_Solidarity
+		}		
+		prerequisite = {
+			focus = KX_PL_PNPR_CLASS_COLABORATION
+			focus = KX_PL_PNPR_STABLE_PROGRESS
+			focus = KX_PL_Chadecja_Continue_Nationalisation
+		}
+		
+		relative_position_id = KX_PL_PNPR_CLASS_COLABORATION
+		x = 0
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLX_chad_social_christ_dem_3
+				add_idea = PLX_chad_social_christ_dem_4
+			}		
+			country_event = plxv2.106
+		}
+	}
+	focus = {
+		id = KX_PL_Chadecja_Continue_Nationalisation
+		icon = GFX_goal_CAN_Standardized_Industrial_Codes
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_State_Owned_Utilities
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Social_Radicalism
+			focus = KX_PL_Chadecja_Land_Reform_With_PSL
+		}		
+		relative_position_id = KX_PL_Chadecja_Social_Radicalism
+		x = 3
+		y = 1
+		cost = 10
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLX_chad_planning_1
+				add_idea = PLX_chad_planning_2
+			}		
+		}
+	}		
+	focus = {
+		id = KX_PL_Chadecja_Promote_Class_Solidarity
+		icon = GFX_goal_generic_solidarity
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		mutually_exclusive = {
+			focus = KX_PL_Chadecja_Attack_the_Elite
+		}
+		prerequisite = {
+			focus = KX_PL_PNPR_CLASS_COLABORATION
+			focus = KX_PL_PNPR_STABLE_PROGRESS
+			focus = KX_PL_Chadecja_Continue_Nationalisation
+		}
+		relative_position_id = KX_PL_PNPR_CLASS_COLABORATION
+		x = 2
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_chad_national_solidarity
+		}
+	}
+	focus = {
+		id = KX_PL_Chadecja_Creating_Welfare_State
+		icon = GFX_goal_CAN_build_canadian_welfare_state
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Promote_Class_Solidarity
+			focus = KX_PL_Chadecja_Attack_the_Elite
+		}
+		relative_position_id = KX_PL_Chadecja_Promote_Class_Solidarity
+		x = -2
+		y = 1
+		cost = 9
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_chad_welfare
+			hidden_effect = {
+				country_event = {
+					id = plxv2.119 days = 60
+				}	
+				country_event = {
+					id = plxv2.120 days = 40
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = KX_PL_Chadecja_Economic_Assembly
+		icon = GFX_goal_SRD_restore_parliamentary_supremacy
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		
+		prerequisite = {
+			focus = KX_PL_Chadecja_Continue_Nationalisation
+		}
+		relative_position_id = KX_PL_Chadecja_Continue_Nationalisation
+		x = 0
+		y = 1
+		cost = 7
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLX_chad_social_christ_dem_4
+				add_idea = PLX_chad_social_christ_dem_5
+			}		
+			country_event = plxv2.112
+		}
+	}
+	focus = {
+		id = KX_PL_Chadecja_Protect_Constitution
+		icon = GFX_goal_LUX_Constitutional_Duchy
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Promote_Class_Solidarity
+		}
+		relative_position_id = KX_PL_Chadecja_Promote_Class_Solidarity
+		x = 0
+		y = 1
+		cost = 7
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_chad_constitutionalism
+		}
+	}
+	focus = {
+		id = KX_PL_Chadecja_Taming_National_Democracy
+		icon = GFX_goal_CAN_tame_russian_bear
+		available = {
+			has_country_flag = plx_chadecja_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_State_Shares
+		}
+		prerequisite = {
+			focus = KX_PL_Chadecja_Continue_Land_Consolidtation
+		}
+		relative_position_id = KX_PL_Chadecja_State_Shares
+		x = 1
+		y = 1
+		cost = 6
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_ideas = PLX_chad_tamed_natdem
+			hidden_effect = {
+				country_event = {
+					id = plxv2.123 days = 10
+				}				
+			}
 		}
 	}
 	focus = {
@@ -20420,7 +20976,9 @@ focus = {
 		}
 		prerequisite = {
 			focus = KX_PL_Chadecja_Stays_Pure
+			focus = KX_PL_Chadecja_Left
 		}
+	
 		relative_position_id = KX_PL_Chadecja_Stays_Pure
 		x = -1
 		y = 1
@@ -20734,68 +21292,7 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = KX_PL_PNPR_RELIGIOUS_PLURALISM
-		icon = GFX_goal_GER_Religious_Freedom
-		available = {
-			#has_country_flag = plx_start
-		}
-		prerequisite = {
-			focus = KX_PL_PNPR_STABLE_PROGRESS
-			focus = KX_PL_PNPR_CLASS_COLABORATION
-		}			
-		relative_position_id = KX_PL_PNPR_STABLE_PROGRESS
-		x = -1
-		y = 1
-		cost = 4
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			add_stability = 0.05		
-		}
-	}
-	focus = {
-		id = KX_PL_PNPR_AUTONOMY_FOR_MINORITIES
-		icon = GFX_TRM_Minorities_Government
-		available = {
-			#has_country_flag = plx_start
-		}
-		prerequisite = {
-			focus = KX_PL_PNPR_RELIGIOUS_PLURALISM
-		}			
-		relative_position_id = KX_PL_PNPR_RELIGIOUS_PLURALISM
-		x = -1
-		y = 1
-		cost = 4
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			add_stability = 0.05		
-		}
-	}	
-	focus = {
-		id = KX_PL_PNPR_BUT_POLISH_PRIMACY
-		icon = GFX_goal_POL_Beacon_Polish_Spirit
-		available = {
-			#has_country_flag = plx_start
-		}
-		prerequisite = {
-			focus = KX_PL_PNPR_RELIGIOUS_PLURALISM
-		}			
-		relative_position_id = KX_PL_PNPR_RELIGIOUS_PLURALISM
-		x = 1
-		y = 1
-		cost = 4
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			add_political_power = 50
-		}
-	}
-
+	
 	focus = {
 		id = KX_PL_PNPR_FURTHER_PROGRAM
 		icon = GFX_goal_AUS_Push_Forward_Womens_Movement
@@ -20803,14 +21300,14 @@ focus = {
 			#has_country_flag = plx_start
 		}
 		prerequisite = {
-			focus = KX_PL_PNPR_BUT_POLISH_PRIMACY
+			focus = KX_PL_Chadecja_Creating_Welfare_State
 		}	
 		prerequisite = {
-			focus = KX_PL_PNPR_AUTONOMY_FOR_MINORITIES
+			focus = KX_PL_Chadecja_Protect_Constitution
 		}			
-		relative_position_id = KX_PL_PNPR_BUT_POLISH_PRIMACY
-		x = -1
-		y = 1
+		relative_position_id = KX_PL_PNPR_CLASS_COLABORATION
+		x = 1
+		y = 3
 		cost = 4 #?
 		ai_will_do = {
 			factor = 100
