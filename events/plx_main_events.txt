@@ -6262,7 +6262,7 @@ country_event = {
 			popularity = 0.10
 		}
 		hidden_effect = { 
-			set_country_flag = plx_chadecja_left
+			set_country_flag = plx_chadecja_center
 		}
 		ai_chance = {
 			factor = 1
@@ -6283,6 +6283,22 @@ country_event = {
 			factor = 1
 		}
 	}
+	option = {
+		name = plxv2.007.c
+		
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		hidden_effect = { 
+			set_country_flag = plx_chadecja_left
+			end_coalition = yes
+			add_socdem_to_coalition = yes	
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}	
 }
 
 country_event = {
@@ -6359,6 +6375,7 @@ country_event = {
 	option = {
 		name = plxv2.009.g
 		add_political_power = 30
+
 		create_country_leader = {
 			name = "托马什·阿尔奇谢夫斯基"
 			picture = "gfx/leaders/POL/Portrait_PLX_Tomasz_Arciszewski.png"
@@ -6372,6 +6389,7 @@ country_event = {
 	option = {
 		name = plxv2.009.h
 		add_political_power = 30
+
 		create_country_leader = {
 			name = "卡齐米日·普扎克"
 			picture = "gfx/leaders/POL/Portrait_Kazimierz_Puzak.png"
@@ -8732,6 +8750,176 @@ country_event = {
 		ai_chance = {
 			factor = 1
 		}
+	}
+}
+country_event = {
+	id = plxv2.105 #
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.105" }
+	title = plxv2.105.t
+	desc = plxv2.105.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = {
+		name = plxv2.105.a
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.05
+		}
+		hidden_effect = {
+			set_country_flag = plx_socdem_chadecja
+			set_party_name = {
+				ideology = social_democrat
+				long_name = POL_chnpp_party_long
+				name = "ChNPP"
+			}
+			if = {
+				limit = { 
+					has_country_leader = { name = "Karol II Olbracht" ruling_only = yes }
+				}
+				create_country_leader = {
+					name = "Karol II Olbracht"
+					picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
+					expire = "1.1.1"
+					ideology = socdem_paternal_socialism_subtype
+				}
+			}
+			else = {
+				create_country_leader = {
+					name = "Adam Chądzyński "
+					picture = "gfx/leaders/POL/Portrait_POL_Adam_Chadzynski.png"
+					expire = "1.1.1"
+					ideology = socdem_paternal_socialism_subtype
+				}
+			}
+			set_politics = {
+				ruling_party = social_democrat
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			
+			end_coalition = yes
+			add_radsoc_to_coalition = yes
+			add_soccon_to_coalition = yes			
+		}
+	}
+}
+country_event = {
+	id = plxv2.106 #
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.106" }
+	title = plxv2.106.t
+	desc = plxv2.106.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = {
+		name = plxv2.106.a
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.20
+		}
+		hidden_effect = {
+			clr_country_flag = plx_socdem_chadecja
+			set_country_flag = plx_radsoc_chadecja
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = POL_npp_party_long
+				name = "NPP"
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = POL_pps_soc_party
+				name = "PPS"
+			}
+			if = {
+				limit = { 
+					has_country_leader = { name = "Karol II Olbracht" ruling_only = yes }
+				}
+				create_country_leader = {
+					name = "Karol II Olbracht"
+					picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
+					expire = "1.1.1"
+					ideology = radsoc_paternal_socialism_subtype
+				}
+			}
+			else = {
+				create_country_leader = {
+					name = "Antoni Ciszak "
+					picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
+					expire = "1.1.1"
+					ideology = radsoc_paternal_socialism_subtype
+				}				
+			}
+			if = {
+				limit = { 
+					has_country_leader = { name = "Karol II Olbracht" ruling_only = yes }
+				}
+				create_country_leader = {
+					name = "Karol II Olbracht"
+					picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
+					expire = "1.1.1"
+					ideology = socdem_democratic_socialism_subtype
+				}
+			}
+			else = {
+				create_country_leader = {
+					name = "Tomasz Arciszewski "
+					picture = "gfx/leaders/POL/Portrait_PLX_Tomasz_Arciszewski.png"
+					expire = "1.1.1"
+					ideology = socdem_democratic_socialism_subtype
+				}
+			}
+			set_politics = {
+				ruling_party = radical_socialist
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			
+			end_coalition = yes
+			add_soccon_to_coalition = yes
+			add_socdem_to_coalition = yes	
+
+			country_event = {
+				id = plx.52 days = 10
+			}			
+		}
+	}
+}
+
+country_event = {
+	id = plxv2.109 #
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.109" }
+	title = plxv2.109.t
+	desc = plxv2.109.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = {
+		name = plxv2.109.a
+		add_socdem_to_coalition = yes
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		add_political_power = 50
+		set_country_flag = plx_chadecja_ally_pps
+	}
+	option = {
+		name = plxv2.109.b
+		add_stability = 0.08
 	}
 }
 country_event = {
