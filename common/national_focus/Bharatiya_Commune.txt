@@ -1807,7 +1807,7 @@ focus = {
         add_stability = 0.1
         add_war_support = 0.1
             country_event = {
-                id = BHC_gadi.2
+                id = kxxbeng.2
             }
         }
     }
@@ -1819,7 +1819,7 @@ focus = {
         focus = BHC_The_watchful_guardian_of_the_Mahatma 
     }
 	relative_position_id = BHC_Revolutionary_stronghold_in_the_East
-    x = -2
+    x = -3
     y = 2
     cost = 2
     ai_will_do = {
@@ -1831,6 +1831,10 @@ focus = {
         log = "[GetDateText]: [Root.GetName]: BHC_Conservatives_concerns"
         add_stability = 0.05
         add_war_support = -0.1
+        add_power_balance_value = {
+			id = BHC_The_Congress_Party_constantly_at_odds
+			value = 0.10
+		} 
         add_popularity = { ideology = social_democrat popularity = 0.05 }
         add_popularity = { ideology = social_liberal popularity = 0.05 }
         add_popularity = { ideology = market_liberal popularity = 0.05 }
@@ -1854,7 +1858,12 @@ focus = {
     completion_reward = {
         log = "[GetDateText]: [Root.GetName]: BHC_Carry_forward_the_ideal_of_the_commune"
         add_ideas = BHC_ideal_of_commune
+        add_power_balance_value = {
+			id = BHC_The_Congress_Party_constantly_at_odds
+			value = -0.2
+		}
         }
+        
     }
 	
     focus = {
@@ -1862,7 +1871,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_The_watchful_guardian_of_the_Mahatma }
 	relative_position_id = BHC_Revolutionary_stronghold_in_the_East
-    x = 2
+    x = 3
     y = 2
     cost = 2
     ai_will_do = {
@@ -1874,6 +1883,10 @@ focus = {
         log = "[GetDateText]: [Root.GetName]: BHC_Restless_revolutionaries"
         add_stability = -0.1
         add_war_support = 0.05
+        add_power_balance_value = {
+			id = BHC_The_Congress_Party_constantly_at_odds
+			value = -0.15
+		}
         add_popularity = { ideology = totalist popularity = 0.05 }
         add_popularity = { ideology = syndicalist popularity = 0.05 }
         add_popularity = { ideology = radical_socialist popularity = 0.05 }
@@ -1899,6 +1912,10 @@ focus = {
         log = "[GetDateText]: [Root.GetName]: BHC_Efforts_for_peace"
         add_stability = 0.1
         add_political_power = 150
+        add_power_balance_value = {
+			id = BHC_The_Congress_Party_constantly_at_odds
+			value = 0.10
+		}
         }
     }
 	
@@ -1922,6 +1939,10 @@ focus = {
         add_stability = 0.05
         add_war_support = 0.05
         increase_ruling_party_popularity_by_5 = yes
+        add_power_balance_value = {
+			id = BHC_The_Congress_Party_constantly_at_odds
+			value = -0.10
+		}
         }
     }
 	
@@ -1944,6 +1965,10 @@ focus = {
         log = "[GetDateText]: [Root.GetName]: BHC_Be_good_at_giving_systematic_guidance"
         add_manpower = 50000
         add_war_support = 0.05
+        add_power_balance_value = {
+			id = BHC_The_Congress_Party_constantly_at_odds
+			value = 0.10
+		}
         }
     }
 	
@@ -1979,10 +2004,405 @@ focus = {
         increase_ruling_party_popularity_by_5 = yes
         set_country_flag = BHC_the_congress_plan
         mark_focus_tree_layout_dirty = yes
-        
+        country_event = {
+            id = KXXBHC.1
+        }
         }
     }
-	
+	#统一战争
+    
+	focus = {
+		id = BHC_war_prepare
+		icon = GFX_goal_india_commune
+		cost = 6
+		available = {
+			date > 1937.1.1
+		}
+        allow_branch = {
+            NOT = {
+                has_country_flag = BHC_the_congress_plan
+            }
+        }
+		x = 30
+		y = 1
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_war_prepare"
+			add_war_support = 0.10
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+	}
+
+	focus = {
+		id = BHC_north_border
+		icon = GFX_goal_generic_india_fortify_against_raj
+		cost = 6
+		prerequisite = { focus = BHC_war_prepare }
+		available = {
+			country_exists = DEH
+			NOT = { has_war_with = DEH }
+			NOT = { has_war_with = PRF }
+			owns_state = 436 #Raipur
+			owns_state = 435 #Bihar
+		}
+		relative_position_id = BHC_war_prepare
+		x = -3
+		y = 1
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 0
+				has_army_manpower = { size < 200000 }
+			}
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = DEH }
+				NOT = { owns_state = 436 }
+				NOT = { owns_state = 435 }
+				owns_state = 438 #Lucknow
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_north_border"
+			436 = {
+				add_building_construction = {
+					type = bunker
+					province = 8120
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 10332
+					level = 2
+					instant_build = yes
+				}
+			}
+			435 = {
+				add_building_construction = {
+					type = bunker
+					province = 10471
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 4571
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 4516
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = BHC_attack_delhi
+		icon = GFX_goal_generic_india_attack_raj
+		cost = 5.0
+		prerequisite = { focus = BHC_north_border }
+		mutually_exclusive = { focus = BHC_delhi_rebellion }
+		will_lead_to_war_with = DEH
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 299999 }
+			can_declare_war_on = 439.owner #Delhi
+		}
+		relative_position_id = BHC_war_prepare
+		x = -4
+		y = 2
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				var:433.owner = { default_attack_AI_trigger_FROM = yes }
+			}
+			modifier = { #don't take this if you can incite a rebellion
+				factor = 0
+				890 = { is_owned_and_controlled_by = DEH } #Shimla
+			}
+		}
+
+		bypass = {
+			owns_state = 433 #Rajputana
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_attack_delhi"
+			random_country = {
+				limit = { owns_state = 439 }
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = BHC_delhi_rebellion
+		icon = GFX_goal_generic_india_shimla_revolt
+		cost = 6
+		prerequisite = { focus = BHC_north_border }
+		mutually_exclusive = { focus = BHC_attack_delhi }
+		will_lead_to_war_with = DEH
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 299999 }
+			890 = { is_owned_and_controlled_by = DEH }
+			439 = { is_owned_and_controlled_by = DEH }
+			can_declare_war_on = DEH
+		}
+		relative_position_id = BHC_war_prepare
+		x = -2
+		y = 2
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				DEH = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		bypass = {
+			owns_state = 439
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_delhi_rebellion"
+		}
+	}
+
+	focus = {
+		id = BHC_west_border
+		icon = GFX_goal_generic_india_fortify_against_princes
+		cost = 6
+		prerequisite = { focus = BHC_war_prepare }
+		available = {
+			country_exists = PRF
+			NOT = { has_war_with = DEH }
+			NOT = { has_war_with = PRF }
+			owns_state = 436 #Raipur
+			owns_state = 426 #Orissa
+		}
+		relative_position_id = BHC_war_prepare
+		x = 3
+		y = 1
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 0
+				has_army_manpower = { size < 200000 }
+			}
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+		}
+
+		available_if_capitulated = yes
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = PRF }
+				NOT = { owns_state = 436 }
+				NOT = { owns_state = 426 }
+				owns_state = 427 #Hyderabad
+				owns_state = 893 #Nagpur
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_west_border"
+			436 = {
+				add_building_construction = {
+					type = bunker
+					province = 12854
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 4557
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 10171
+					level = 2
+					instant_build = yes
+				}
+			}
+			426 = {
+				add_building_construction = {
+					type = bunker
+					province = 7465
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 7428
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = BHC_attack_prf
+		icon = GFX_goal_generic_india_attack_princes
+		cost = 5.0
+		prerequisite = { focus = BHC_west_border }
+		mutually_exclusive = { focus = BHC_prf_rebellion }
+		will_lead_to_war_with = PRF
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 299999 }
+			can_declare_war_on = 427.owner #Hyderabad
+		}
+		relative_position_id = BHC_war_prepare
+		x = 2
+		y = 2
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				var:433.owner = { default_attack_AI_trigger_FROM = yes }
+			}
+			modifier = { #don't take this if you can incite a rebellion
+				factor = 0
+				868 = { is_owned_and_controlled_by = PRF } #Kolhapur
+			}
+		}
+
+		bypass = {
+			owns_state = 427 #Hyderabad
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_attack_prf"
+			random_country = {
+				limit = { owns_state = 427 }
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+
+	focus = {
+		id = BHC_prf_rebellion
+		icon = GFX_goal_generic_india_kolhapur_revolt
+		cost = 6
+		prerequisite = { focus = BHC_west_border }
+		mutually_exclusive = { focus = BHC_attack_prf }
+		will_lead_to_war_with = PRF
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 299999 }
+			427 = { is_owned_and_controlled_by = PRF }
+			868 = { is_owned_and_controlled_by = PRF }
+			can_declare_war_on = PRF
+		}
+		relative_position_id = BHC_war_prepare
+		x = 4
+		y = 2
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_leader = {
+					ruling_only = yes
+					name = "Mohandas Karamchand Gandhi"
+				}
+			}
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				PRF = { default_attack_AI_trigger_FROM = yes }
+			}
+		}
+
+		bypass = {
+			owns_state = 427
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus BHC_prf_rebellion"
+		}
+	}
+
     focus = { #勒克瑙会议
     	id = BHC_the_congress 
     	icon = GFX_goal_SKM_Bhartiya
@@ -1996,7 +2416,10 @@ focus = {
     	    factor = 400
     	}
     	available = {
-    	    has_country_flag = INDAN_already
+    	    custom_effect_tooltip = {
+                tooltip = kxxbhc_The_Lucknow_Conference_tt
+                has_country_flag = DEH_agree_to_attend_The_Lucknow_Conference
+            }
         }
         allow_branch = {
             has_country_flag = BHC_the_congress_plan
@@ -2007,281 +2430,7 @@ focus = {
     	    add_war_support = 0.1
     	    add_command_power = 50
     	    country_event = {
-                id = bhcconf.3
-            }
-    	}
-    }	
-	
-    focus = { #勒克瑙会议-独立 
-    	id = BHC_the_congress_Demand_independence 
-    	icon = GFX_goal_SKM_Bhartiya
-    	cancelable = no
-    	prerequisite = { focus = BHC_the_congress }
-		relative_position_id = BHC_the_congress
-        mutually_exclusive = {
-            focus = BHC_the_congress_Limited_autonomy
-        }
-    	x = -1
-    	y = 1
-    	cost = 2
-    	ai_will_do = {
-    	    factor = 420
-    	}
-    	available = {
-    	    has_country_flag = BHC_stpo
-        }
-    	completion_reward = {
-    	    log = "[GetDateText]: [Root.GetName]: BHC_the_congress_Demand_independence"
-    	    hidden_effect = {
-                country_event = {
-                    id = bhcconf.5
-                    days = 3
-                }
-            }
-    	}
-    }
-	
-    focus = { #勒克瑙会议-种姓问题 
-    	id = BHC_the_congress_The_caste_issue 
-    	icon = GFX_goal_SKM_Bhartiya
-    	cancelable = no
-    	prerequisite = { 
-            focus = BHC_the_congress_Demand_independence 
-            focus = BHC_the_congress_Limited_autonomy 
-        }
-		relative_position_id = BHC_the_congress
-    	x = -2
-    	y = 2
-    	cost = 3
-    	ai_will_do = {
-    	    factor = 10
-    	}
-    	available = {
-    	    has_country_flag = BHC_attend_Lucknow_Conference
-            NOT = {
-                has_country_flag = IND_kxx_issue
-            }
-        }
-    	completion_reward = {
-    	    log = "[GetDateText]: [Root.GetName]: BHC_the_congress_The_caste_issue"
-    	    set_country_flag = IND_kxx_issue
-                country_event = {
-                    id = bhcconf.2
-                }
-    	}
-    }
-	
-    focus = { #勒克瑙会议 -自治
-    	id = BHC_the_congress_Limited_autonomy 
-    	icon = GFX_goal_SKM_Bhartiya
-    	cancelable = no
-    	prerequisite = { focus = BHC_the_congress }
-		relative_position_id = BHC_the_congress
-        mutually_exclusive = {
-            focus = BHC_the_congress_Demand_independence
-        }
-    	x = 1
-    	y = 1
-    	cost = 2
-    	ai_will_do = {
-    	    factor = 400
-    	}
-    	available = {
-    	    has_country_flag = BHC_stpo
-    	    has_country_flag = con_side
-        }
-    	completion_reward = {
-    	    log = "[GetDateText]: [Root.GetName]: BHC_the_congress_Limited_autonomy"
-    	    add_stability = 0.05
-    	    add_war_support = 0.1
-    	    add_command_power = 50
-            hidden_effect = {
-                country_event = {
-                    id = bhcconf.4
-                    days = 3
-                }
-            }
-    	    increase_ruling_party_popularity_by_5 = yes
-    	}
-    }
-	
-    focus = { #勒克瑙会议-王公去留
-    	id = BHC_the_congress_The_fate_of_princes_and_Dukes 
-    	icon = GFX_goal_SKM_Bhartiya
-    	cancelable = no
-    	prerequisite = { 
-            focus = BHC_the_congress_Demand_independence 
-            focus = BHC_the_congress_Limited_autonomy 
-        }
-		relative_position_id = BHC_the_congress
-    	x = 2
-    	y = 2
-    	cost = 3
-    	ai_will_do = {
-    	    factor = 400
-    	}
-    	available = {
-    	    has_country_flag = BHC_attend_Lucknow_Conference
-            NOT = {
-                has_country_flag = IND_kxx_issue
-            }
-        }
-    	completion_reward = {
-    	    log = "[GetDateText]: [Root.GetName]: BHC_the_congress_The_fate_of_princes_and_Dukes"
-    	    set_country_flag = IND_kxx_issue
-                country_event = {
-                    id = bhcconf.1
-                }
-    	}
-    }
-	
-    focus = { #勒克瑙会议-结局
-    	id = BHC_the_congress_end 
-    	icon = GFX_goal_SKM_Bhartiya
-    	cancelable = no
-    	prerequisite = { focus = BHC_the_congress }
-    	prerequisite = { focus = BHC_the_congress_The_fate_of_princes_and_Dukes }
-    	prerequisite = { focus = BHC_the_congress_The_caste_issue }
-		relative_position_id = BHC_the_congress
-    	x = 0
-    	y = 3
-    	cost = 2
-    	ai_will_do = {
-    	    factor = 400
-    	}
-    	available = {
-    	    
-        }
-        allow_branch = {
-            has_country_flag = BHC_the_congress_plan
-            has_country_flag = DEH_allow_1
-            has_country_flag = DEH_allow_2
-        }
-    	completion_reward = {
-    	    log = "[GetDateText]: [Root.GetName]: BHC_Marching_towards_the_congress"
-    	    add_stability = 0.05
-    	    add_war_support = 0.1
-    	    add_command_power = 50
-    	    increase_ruling_party_popularity_by_5 = yes
-    	    if = {
-                limit = {
-                    BHC = {
-                        has_country_flag = PRF_allow_1
-                        has_country_flag = PRF_allow_2
-                    }
-                    DEH = {
-                        NOT = {
-                            has_country_flag = Continue_the_assassination
-                        }
-                    }
-                }
-                DEH = {
-                    country_event = {
-                        id = BHC_DEH.4
-                        days = 1
-                    }
-                }
-                BHC = {
-                    has_country_flag = IND_a_good_ending
-                }
-                PRF = {
-                    country_event = {
-                        id = BHC_PRF.4
-                        days = 1
-                    }
-                }
-            }
-            if = {
-                limit = {
-                    BHC = {
-                        has_country_flag = DEH_allow_1
-                        has_country_flag = DEH_allow_2
-                    }
-                    DEH = {
-                        NOT = {
-                            has_country_flag = Continue_the_assassination
-                        }
-                    }
-                }
-                DEH = {
-                    country_event = {
-                        id = BHC_DEH.4
-                        days = 1
-                    }
-                }
-                BHC = {
-                    has_country_flag = IND_a_good_ending
-                }
-            }
-    	    if = {
-                limit = {
-                    BHC = {
-                        has_country_flag = PRF_allow_1
-                        has_country_flag = PRF_allow_2
-                    }
-                    DEH = {
-                        has_country_flag = Continue_the_assassination
-                    }
-                }
-                country_event = {
-                 	id = BHC.9
-                }
-            }
-            if = {
-                limit = {
-                    BHC = {
-                        has_country_flag = DEH_allow_1
-                        has_country_flag = DEH_allow_2
-                    }
-                    DEH = {
-                        has_country_flag = Continue_the_assassination
-                    }
-                }
-                country_event = {
-                 	id = BHC.9
-                }
-            }
-            else = {
-                country_event = {
-                 	id = BHC.9
-                }
-            }
-    	}
-    }	
-	
-    focus = { #勒克瑙会议-结局
-    	id = BHC_the_congress_end_bad
-    	icon = GFX_goal_SKM_Bhartiya
-    	cancelable = no
-    	prerequisite = { focus = BHC_the_congress }
-    	prerequisite = { focus = BHC_the_congress_The_fate_of_princes_and_Dukes }
-    	prerequisite = { focus = BHC_the_congress_The_caste_issue }
-		relative_position_id = BHC_the_congress
-    	x = 0
-    	y = 3
-    	cost = 2
-    	ai_will_do = {
-    	    factor = 400
-    	}
-    	available = {
-    	    
-        }
-        allow_branch = {
-            has_country_flag = BHC_the_congress_plan
-            OR = {
-                NOT = {
-                    has_country_flag = DEH_allow_1
-                }
-                NOT = {
-                    has_country_flag = DEH_allow_2
-                }
-            }
-        }
-    	completion_reward = {
-    	    log = "[GetDateText]: [Root.GetName]: BHC_Marching_towards_the_congress"
-    	    add_stability = 0.05
-            country_event = {
-             	id = BHC.9
+                id = KXXBHC.7
             }
     	}
     }	
@@ -2292,7 +2441,7 @@ focus = {
 		icon = GFX_goal_PB_PRS_The_Ministry_For_Industrial_Development
         relative_position_id = BHC_Marching_towards_the_congress
 		x = 0
-		y = 1
+		y = 27
 		cost = 7
 		ai_will_do = {
 			factor = 200
@@ -2302,9 +2451,9 @@ focus = {
 		available = {
 			
 		}
-        allow_branch = {
+        #allow_branch = {
             has_country_flag = BHC_ALIVE
-        }
+        #}
 		cancel_if_invalid = yes
 		completion_reward = {
 			
@@ -2324,8 +2473,8 @@ focus = {
 			factor = 200
 		}
 		available_if_capitulated = no
-    	allow_branch = { has_country_flag = BHC_ALIVE }
-    	allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
+    	#allow_branch = { has_country_flag = BHC_ALIVE }
+    	#allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
 		available = {
 			
 		}
@@ -2631,9 +2780,6 @@ focus = {
 			focus = BHC_Consolidate_the_spirit_of_parliamentary_democracy
 		}
 		prerequisite = {
-			focus = BHC_Bread_on_the_farmers_table
-		}
-		prerequisite = {
 			focus = BHC_Dacia_of_national_freedom
 		}
 		x = -0
@@ -2676,8 +2822,8 @@ focus = {
 		available = {
 			
 		}
-    	allow_branch = { has_country_flag = BHC_ALIVE }
-    	allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
+    	#allow_branch = { has_country_flag = BHC_ALIVE }
+    	#allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
 		cancel_if_invalid = yes
 		completion_reward = {
 			
@@ -2699,8 +2845,8 @@ focus = {
 		}
 		available_if_capitulated = no
 		
-    	allow_branch = { has_country_flag = BHC_ALIVE }
-    	allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    	#allow_branch = { has_country_flag = BHC_ALIVE }
+    	#allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
 		available = {
 			
 		}
@@ -3256,8 +3402,8 @@ focus = {
 			factor = 200
 		}
 		available_if_capitulated = no
-    	allow_branch = { has_country_flag = BHC_ALIVE }
-    	allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    	#allow_branch = { has_country_flag = BHC_ALIVE }
+    	#allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
 		available = {
 			
 		}
@@ -5492,7 +5638,7 @@ focus = {
 ##内塔吉挽救革命##
 focus = {
     id = BHC_March_forward
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_March_forward
 	relative_position_id = BHC_Revolutionary_stronghold_in_the_East
     x = 0
     y = 6
@@ -5503,9 +5649,9 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    #allow_branch = { has_country_flag = BHC_The_Bose_Coup }
     completion_reward = {
         log = "[GetDateText]: [Root.GetName]: BHC_March_forward"
         add_stability = 0.1
@@ -5516,7 +5662,7 @@ focus = {
 
     focus = {
     id = BHC_In_response_to_Delhis_call
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_In_response_to_Delhis_call
     prerequisite = { focus = BHC_March_forward }
 	relative_position_id = BHC_March_forward
     x = -2
@@ -5538,7 +5684,7 @@ focus = {
 
     focus = {
     id = BHC_raise_the_flag_of_the_nation
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_raise_the_flag_of_the_nation
     prerequisite = { focus = BHC_March_forward }
 	relative_position_id = BHC_March_forward
     x = 0
@@ -5563,7 +5709,7 @@ focus = {
 
     focus = {
     id = BHC_let_it_fly_high_without_falling
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_let_it_fly_high_without_falling
     prerequisite = { focus = BHC_inserted_in_the_great_Red_Fort }
     prerequisite = { focus = BHC_raise_the_flag_of_the_nation }
     prerequisite = { focus = BHC_In_response_to_Delhis_call }
@@ -5590,7 +5736,7 @@ focus = {
 
     focus = {
     id = BHC_inserted_in_the_great_Red_Fort
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_inserted_in_the_great_Red_Fort
     prerequisite = { focus = BHC_March_forward }
 	relative_position_id = BHC_March_forward
     x = 2
@@ -5611,7 +5757,7 @@ focus = {
 
     focus = {
     id = BHC_Awaken_the_Indian_Tiger
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Awaken_the_Indian_Tiger
     prerequisite = { focus = BHC_let_it_fly_high_without_falling }
 	relative_position_id = BHC_March_forward
     x = 0
@@ -5633,7 +5779,7 @@ focus = {
 
     focus = {
     id = BHC_Memory_of_the_Father_of_the_Nation
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Memory_of_the_Father_of_the_Nation
     prerequisite = { focus = BHC_Awaken_the_Indian_Tiger }
 	relative_position_id = BHC_March_forward
     x = -1
@@ -5655,7 +5801,7 @@ focus = {
 
     focus = {
     id = BHC_Reorganize_the_Congress_Party
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Reorganize_the_Congress_Party
     prerequisite = { focus = BHC_Memory_of_the_Father_of_the_Nation }
 	relative_position_id = BHC_March_forward
     x = -2
@@ -5675,10 +5821,10 @@ focus = {
     }
     focus = {
     id = BHC_Fate_of_the_Gandhians
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Fate_of_the_Gandhians
     prerequisite = { focus = BHC_Reorganize_the_Congress_Party }
 	relative_position_id = BHC_March_forward
-    x = -1
+    x = -2
     y = 6
     cost = 5
     ai_will_do = {
@@ -5694,7 +5840,7 @@ focus = {
     }
     focus = {
     id = BHC_Try_War_Criminals
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Try_War_Criminals
     prerequisite = { focus = BHC_Awaken_the_Indian_Tiger }
 	relative_position_id = BHC_March_forward
     x = 1
@@ -5717,7 +5863,7 @@ focus = {
 
     focus = {
     id = BHC_Purge_the_National_Army
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Purge_the_National_Army
     prerequisite = { focus = BHC_Try_War_Criminals }
 	relative_position_id = BHC_March_forward
     x = 2
@@ -5736,10 +5882,10 @@ focus = {
     }
     focus = {
     id = BHC_Position_of_the_Third_International_Delegation
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Position_of_the_Third_International_Delegation
     prerequisite = { focus = BHC_Purge_the_National_Army }
 	relative_position_id = BHC_March_forward
-    x = 1
+    x = 2
     y = 6
     cost = 5
     ai_will_do = {
@@ -5760,7 +5906,7 @@ focus = {
     }
     focus = {
     id = BHC_Root_Out_the_Black_Sheep
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Root_Out_the_Black_Sheep
     prerequisite = { focus = BHC_Awaken_the_Indian_Tiger }
 	relative_position_id = BHC_March_forward
     x = 0
@@ -5782,13 +5928,11 @@ focus = {
 
     focus = {
     id = BHC_Head_towards_Delhi
-    icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_Position_of_the_Third_International_Delegation }    
-    prerequisite = { focus = BHC_Awaken_the_Indian_Tiger }
-    prerequisite = { focus = BHC_Fate_of_the_Gandhians }
+    icon = GFX_goal_BHC_Head_towards_Delhi
+    prerequisite = { focus = BHC_Root_Out_the_Black_Sheep }
 	relative_position_id = BHC_March_forward
     x = 0
-    y = 7
+    y = 6
     cost = 5
     ai_will_do = {
         factor = 10
@@ -5814,9 +5958,8 @@ focus = {
 focus = {
     id = BHC_Inquilab_Zindabad
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_Head_towards_Delhi }
 	relative_position_id = BHC_Head_towards_Delhi
-    x = -8
+    x = -13
     y = 1
     cost = 5
     ai_will_do = {
@@ -5825,10 +5968,10 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
-    allow_branch = { has_country_flag = BHC_The_communism_win }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    #allow_branch = { has_country_flag = BHC_The_Bose_Coup }
+    #allow_branch = { has_country_flag = BHC_The_communism_win }
     completion_reward = {
         add_ideas = BHC_commie_idea
         add_popularity = { ideology = totalist popularity = 0.1 }
@@ -6620,9 +6763,8 @@ focus = {
 focus = {
     id = BHC_Jai_Hind
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_Head_towards_Delhi }
 	relative_position_id = BHC_Head_towards_Delhi
-    x = 8
+    x = 13
     y = 1
     cost = 5
     ai_will_do = {
@@ -6631,10 +6773,10 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
-    allow_branch = { has_country_flag = BHC_The_Totalitarianism_win }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    #allow_branch = { has_country_flag = BHC_The_Bose_Coup }
+    #allow_branch = { has_country_flag = BHC_The_Totalitarianism_win }
     completion_reward = {
         log = "[GetDateText]: [Root.GetName]: BHC_Jai_Hind"
         add_ideas = BHC_totalist_idea
@@ -7453,7 +7595,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_Head_towards_Delhi }
 	relative_position_id = BHC_Head_towards_Delhi
-    x = -8
+    x = -28
     y = 1
     cost = 5
     ai_will_do = {
@@ -7462,10 +7604,10 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
-    allow_branch = { has_country_flag = BHC_The_technocrats_win }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    #allow_branch = { has_country_flag = BHC_The_Bose_Coup }
+    #allow_branch = { has_country_flag = BHC_The_technocrats_win }
     completion_reward = {
         add_ideas = BHC_technocrat_idea
         increase_ruling_party_popularity_by_10 = yes
@@ -8048,7 +8190,6 @@ focus = {
 focus = {
     id = BHC_Subhasji_Subhasji
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_Head_towards_Delhi }
 	relative_position_id = BHC_Head_towards_Delhi
     x = 0
     y = 1
@@ -8059,10 +8200,10 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
-    allow_branch = { has_country_flag = BHC_The_Netaji_win }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    #allow_branch = { has_country_flag = BHC_The_Bose_Coup }
+    #allow_branch = { has_country_flag = BHC_The_Netaji_win }
     completion_reward = {
         log = "[GetDateText]: [Root.GetName]: BHC_Subhasji_Subhasji"
         increase_ruling_party_popularity_by_10
@@ -8716,7 +8857,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_Head_towards_Delhi }
 	relative_position_id = BHC_Head_towards_Delhi
-    x = 8
+    x = 28
     y = 1
     cost = 5
     ai_will_do = {
@@ -8725,10 +8866,12 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
-    allow_branch = { has_country_flag = BHC_The_Roy_win }
+    #allow_branch = { 
+        has_country_flag = BHC_DEAD
+        has_country_flag = BHC_The_Conservatives_victory 
+        has_country_flag = BHC_The_Bose_Coup 
+        has_country_flag = BHC_The_Roy_win 
+    #}
     completion_reward = {
         log = "[GetDateText]: [Root.GetName]: BHC_The_Radicals"
         increase_ruling_party_popularity_by_10 = yes
@@ -8796,7 +8939,7 @@ focus = {
     prerequisite = { focus = BHC_Unite_with_the_Congress_Socialist_Party }
 	relative_position_id = BHC_The_Radicals
     x = 0
-    y = 2
+    y = 3
     cost = 5
     ai_will_do = {
         factor = 10
@@ -8804,11 +8947,11 @@ focus = {
     available = {
         
     }    
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
-    allow_branch = { has_country_flag = BHC_The_Roy_win }
-    allow_branch = { has_country_flag = BHC_ROY_alone}
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    #allow_branch = { has_country_flag = BHC_The_Bose_Coup }
+    #allow_branch = { has_country_flag = BHC_The_Roy_win }
+    #allow_branch = { has_country_flag = BHC_ROY_alone}
     completion_reward = {
         increase_ruling_party_popularity_by_10 = yes
         add_stability = 0.1
@@ -9139,11 +9282,11 @@ focus = {
     available = {
         
     }    
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
-    allow_branch = { has_country_flag = BHC_The_Roy_win }
-    allow_branch = { has_country_flag = BHC_ROYs }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    #allow_branch = { has_country_flag = BHC_The_Bose_Coup }
+    #allow_branch = { has_country_flag = BHC_The_Roy_win }
+    #allow_branch = { has_country_flag = BHC_ROYs }
     completion_reward = {
         log = "[GetDateText]: [Root.GetName]: BHC_India_in_Transition"
         add_political_power = 200
@@ -9524,7 +9667,7 @@ focus = {
     prerequisite = { focus = BHC_Head_towards_Delhi }
 	relative_position_id = BHC_Head_towards_Delhi
     x = 0
-    y = 1
+    y = 9
     cost = 5
     ai_will_do = {
         factor = 10
@@ -9532,10 +9675,10 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
-    allow_branch = { has_country_flag = BHC_The_3i_win }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    #allow_branch = { has_country_flag = BHC_The_Bose_Coup }
+    #allow_branch = { has_country_flag = BHC_The_3i_win }
     completion_reward = {
         remove_ideas = BHC_netaji_idea_2
         add_stability = 0.05
@@ -9616,7 +9759,7 @@ focus = {
     prerequisite = { focus = BHC_Establish_an_Eastern_branch }
 	relative_position_id = BHC_Fifty_Five_Days_in_Delhi
     x = 0
-    y = 2
+    y = 3
     cost = 5
     ai_will_do = {
         factor = 10
@@ -9624,11 +9767,11 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
-    allow_branch = { has_country_flag = BHC_The_3i_win }
-    allow_branch = { has_country_flag = BHC_The_3i_win_spy }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    #allow_branch = { has_country_flag = BHC_The_Bose_Coup }
+    #allow_branch = { has_country_flag = BHC_The_3i_win }
+    #allow_branch = { has_country_flag = BHC_The_3i_win_spy }
     completion_reward = {
         add_ideas = BHC_code_silver
         add_stability = 0.25
@@ -9887,11 +10030,11 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
-    allow_branch = { has_country_flag = BHC_The_Bose_Coup }
-    allow_branch = { has_country_flag = BHC_The_3i_win }
-    allow_branch = { has_country_flag = BHC_The_3i_win_usually }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_Conservatives_victory }
+    #allow_branch = { has_country_flag = BHC_The_Bose_Coup }
+    #allow_branch = { has_country_flag = BHC_The_3i_win }
+    #allow_branch = { has_country_flag = BHC_The_3i_win_usually }
     completion_reward = {
         increase_ruling_party_popularity_by_10 = yes
         add_political_power = 150
@@ -9903,7 +10046,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_A_Day_in_the_Bengal_Lancers }
 	relative_position_id = BHC_Fifty_Five_Days_in_Delhi
-    x = -2
+    x = -5
     y = 3
     cost = 5
     ai_will_do = {
@@ -10059,7 +10202,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_A_Day_in_the_Bengal_Lancers }
 	relative_position_id = BHC_Fifty_Five_Days_in_Delhi
-    x = 2
+    x = 5
     y = 3
     cost = 5
     ai_will_do = {
@@ -10273,10 +10416,9 @@ focus = {
 focus = {
     id = BHC_The_torch_never_extinguishes
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_The_next_step }
-	relative_position_id = BHC_Revolutionary_stronghold_in_the_East
+	relative_position_id = BHC_The_next_step
     x = 0
-    y = 11
+    y = 19
     cost = 5
     ai_will_do = {
         factor = 10
@@ -10284,9 +10426,9 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_Initiating_elections }
+    #allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_Initiating_elections }
     completion_reward = {
         add_ideas = BHC_ideal_of_commune_2
         add_popularity = { ideology = totalist popularity = 0.05 }
@@ -12636,10 +12778,9 @@ focus = {
 focus = {
     id = BHC_Necessary_dictatorship
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_The_fall_of_a_star }
 	relative_position_id = BHC_Revolutionary_stronghold_in_the_East
-    x = 0
-    y = 5
+    x = 60
+    y = 1
     cost = 5
     ai_will_do = {
         factor = 10
@@ -12647,9 +12788,9 @@ focus = {
     available = {
         
     }
-    allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_Declaring_dictatorship }
+    #allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_Declaring_dictatorship }
     completion_reward = {
         add_stability = 0.2
         add_political_power = -150
@@ -12660,10 +12801,11 @@ focus = {
     focus = {
     id = BHC_Strengthening_local_police_forces
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_Necessary_dictatorship }
+    prerequisite = { focus = BHC_Purging_the_opposition }
+    prerequisite = { focus = BHC_Reforming_the_INC }
 	relative_position_id = BHC_Necessary_dictatorship
     x = -2
-    y = 1
+    y = 2
     cost = 5
     ai_will_do = {
         factor = 10
@@ -12683,7 +12825,7 @@ focus = {
     prerequisite = { focus = BHC_Strengthening_local_police_forces }
 	relative_position_id = BHC_Necessary_dictatorship
     x = -1
-    y = 2
+    y = 3
     cost = 5
     ai_will_do = {
         factor = 10
@@ -12705,7 +12847,7 @@ focus = {
     prerequisite = { focus = BHC_Reforming_the_INC }
     prerequisite = { focus = BHC_Purging_the_opposition }
 	relative_position_id = BHC_Necessary_dictatorship
-    x = 1
+    x = 2
     y = 2
     cost = 5
     ai_will_do = {
@@ -12722,35 +12864,12 @@ focus = {
     }
     
     focus = {
-    id = BHC_Reforming_the_Indian_National_Congress
-    icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_Necessary_dictatorship }
-	relative_position_id = BHC_Necessary_dictatorship
-    x = 0
-    y = 1
-    cost = 5
-    ai_will_do = {
-        factor = 10
-    }
-    available = {
-        
-    }
-    completion_reward = {
-        hidden_effect = {
-            
-        }
-        add_stability = 0.05
-        add_war_support = 0.05
-        }
-    }
-    
-    focus = {
     id = BHC_A_duty_to_fulfill
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_Silencing_the_political_arena }
-    prerequisite = { focus = BHC_Strongly_maintaining_stability }
+    prerequisite = { focus = BHC_Purging_the_opposition }
 	relative_position_id = BHC_Necessary_dictatorship
-    x = 0
+    x = 1
     y = 3
     cost = 5
     ai_will_do = {
@@ -12772,7 +12891,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_Necessary_dictatorship }
 	relative_position_id = BHC_Necessary_dictatorship
-    x = 0
+    x = -1
     y = 1
     cost = 5
     ai_will_do = {
@@ -12794,7 +12913,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_Necessary_dictatorship }
 	relative_position_id = BHC_Necessary_dictatorship
-    x = 2
+    x = 1
     y = 1
     cost = 5
     ai_will_do = {
@@ -12817,9 +12936,12 @@ focus = {
     id = BHC_The_next_step
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_A_duty_to_fulfill }
+    prerequisite = { focus = BHC_Strongly_maintaining_stability }
+    prerequisite = { focus = BHC_Purge_the_Traitors }
+    prerequisite = { focus = BHC_Silence_the_Congress_Party }
 	relative_position_id = BHC_Necessary_dictatorship
     x = 0
-    y = 4
+    y = 5
     cost = 5
     ai_will_do = {
         factor = 10
@@ -12834,12 +12956,12 @@ focus = {
         }
     }
     focus = {
-    id = BHC_Silence_the_Congress_Party_desc
+    id = BHC_Silence_the_Congress_Party
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_The_next_step }
-	relative_position_id = BHC_The_next_step
+    prerequisite = { focus = BHC_Secure_the_Loyalty_of_the_Military }
+	relative_position_id = BHC_Necessary_dictatorship
     x = -2
-    y = 1
+    y = 4
     cost = 5
     ai_will_do = {
         factor = 10
@@ -12847,12 +12969,12 @@ focus = {
     available = {
         
     }
-    allow_branch = {
+    #allow_branch = {
         NOT = {
             has_country_flag = BHC_Initiating_elections
         }
         has_country_flag = BHC_Declaring_dictatorship
-    }
+    #}
     completion_reward = {
         hidden_effect = {
             
@@ -12862,10 +12984,10 @@ focus = {
     focus = {
     id = BHC_Secure_the_Loyalty_of_the_Military
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_The_next_step }
-	relative_position_id = BHC_The_next_step
-    x = 0
-    y = 1
+    prerequisite = { focus = BHC_Reforming_the_INC }
+	relative_position_id = BHC_Necessary_dictatorship
+    x = -3
+    y = 3
     cost = 5
     ai_will_do = {
         factor = 10
@@ -12873,12 +12995,12 @@ focus = {
     available = {
         
     }
-    allow_branch = {
+    #allow_branch = {
         NOT = {
             has_country_flag = BHC_Initiating_elections
         }
         has_country_flag = BHC_Declaring_dictatorship
-    }
+    #}
     completion_reward = {
         hidden_effect = {
             
@@ -12888,10 +13010,10 @@ focus = {
     focus = {
     id = BHC_Purge_the_Traitors
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_The_next_step }
-	relative_position_id = BHC_The_next_step
+    prerequisite = { focus = BHC_Permanent_State_of_Emergency }
+	relative_position_id = BHC_Necessary_dictatorship
     x = 2
-    y = 1
+    y = 4
     cost = 5
     ai_will_do = {
         factor = 10
@@ -12899,12 +13021,12 @@ focus = {
     available = {
         
     }
-    allow_branch = {
+    #allow_branch = {
         NOT = {
             has_country_flag = BHC_Initiating_elections
         }
         has_country_flag = BHC_Declaring_dictatorship
-    }
+    #}
     completion_reward = {
         hidden_effect = {
             
@@ -12914,12 +13036,10 @@ focus = {
     focus = {
     id = BHC_Permanent_State_of_Emergency
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_Secure_the_Loyalty_of_the_Military }
-    prerequisite = { focus = BHC_Silence_the_Congress_Party_desc }
-    prerequisite = { focus = BHC_Purge_the_Traitors }
-	relative_position_id = BHC_The_next_step
-    x = 0
-    y = 2
+    prerequisite = { focus = BHC_Purging_the_opposition }
+	relative_position_id = BHC_Necessary_dictatorship
+    x = 3
+    y = 3
     cost = 5
     ai_will_do = {
         factor = 10
@@ -12936,8 +13056,7 @@ focus = {
 #一命呜呼
 focus = {
     id = BHC_The_Darkest_Day
-    icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_The_next_step }
+    icon = GFX_goal_BHC_The_Darkest_Day
 	relative_position_id = BHC_The_next_step
     x = -8
     y = 1
@@ -12949,10 +13068,7 @@ focus = {
         
     }
     
-    allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_DEAD_again }
-    allow_branch = { has_country_flag = BHC_Declaring_dictatorship }
+    #allow_branch = { has_country_flag = BHC_The_revolutionaries_victory has_country_flag = BHC_DEAD has_country_flag = BHC_DEAD_again  has_country_flag = BHC_Declaring_dictatorship }
     completion_reward = {
         log = "[GetDateText]: [Root.GetName]: BHC_The_Darkest_Day"
         remove_ideas = BHC_nehrus_dictatorship_3
@@ -12963,10 +13079,10 @@ focus = {
  #考尔
     focus = {
     id = BHC_The_General_Who_Saved_the_Nation
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_The_General_Who_Saved_the_Nation
     prerequisite = { focus = BHC_The_Darkest_Day }
 	relative_position_id = BHC_The_Darkest_Day
-    x = -4
+    x = 5
     y = 1
     cost = 5
     ai_will_do = {
@@ -12983,7 +13099,7 @@ focus = {
     
     focus = {
     id = BHC_Win_Over_Defectors_from_the_Previous_Regime
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Win_Over_Defectors_from_the_Previous_Regime
     prerequisite = { focus = BHC_The_General_Who_Saved_the_Nation }
 	relative_position_id = BHC_The_General_Who_Saved_the_Nation
     x = -1
@@ -13005,10 +13121,10 @@ focus = {
     
     focus = {
     id = BHC_Militarize_the_Army
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Militarize_the_Army
     prerequisite = { focus = BHC_Win_Over_Defectors_from_the_Previous_Regime }
 	relative_position_id = BHC_The_General_Who_Saved_the_Nation
-    x = -1
+    x = 0
     y = 3
     cost = 5
     ai_will_do = {
@@ -13026,7 +13142,7 @@ focus = {
     
     focus = {
     id = BHC_Buy_Off_Left_Wing_Politicians
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Buy_Off_Left_Wing_Politicians
     prerequisite = { focus = BHC_The_General_Who_Saved_the_Nation }
 	relative_position_id = BHC_The_General_Who_Saved_the_Nation
     x = 1
@@ -13050,11 +13166,11 @@ focus = {
     
     focus = {
     id = BHC_Leverage_Nehrus_Connections
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Leverage_Nehrus_Connections
     prerequisite = { focus = BHC_Buy_Off_Left_Wing_Politicians }
 	relative_position_id = BHC_The_General_Who_Saved_the_Nation
-    x = 1
-    y = 3
+    x = 2
+    y = 2
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13080,7 +13196,7 @@ focus = {
     
     focus = {
     id = BHC_Money_Makes_the_Horse_Go_Fast
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Money_Makes_the_Horse_Go_Fast
     prerequisite = { focus = BHC_Win_Over_Defectors_from_the_Previous_Regime }
 	relative_position_id = BHC_The_General_Who_Saved_the_Nation
     x = -2
@@ -13100,12 +13216,12 @@ focus = {
     
     focus = {
     id = BHC_Strengthen_the_Country_and_the_Army
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Strengthen_the_Country_and_the_Army
     prerequisite = { focus = BHC_Militarize_the_Army }
     prerequisite = { focus = BHC_Money_Makes_the_Horse_Go_Fast }
 	relative_position_id = BHC_The_General_Who_Saved_the_Nation
-    x = -2
-    y = 4
+    x = -1
+    y = 5
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13124,7 +13240,7 @@ focus = {
     
     focus = {
     id = BHC_Fair_Legislation
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Fair_Legislation
     prerequisite = { focus = BHC_The_General_Who_Saved_the_Nation }
 	relative_position_id = BHC_The_General_Who_Saved_the_Nation
     x = 0
@@ -13144,12 +13260,12 @@ focus = {
     
     focus = {
     id = BHC_The_Great_Protector_of_Bharat
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_The_Great_Protector_of_Bharat
     prerequisite = { focus = BHC_Fair_Legislation }
     prerequisite = { focus = BHC_Militarize_the_Army }
     prerequisite = { focus = BHC_Leverage_Nehrus_Connections }
 	relative_position_id = BHC_The_General_Who_Saved_the_Nation
-    x = 0
+    x = 1
     y = 4
     cost = 5
     ai_will_do = {
@@ -13169,7 +13285,7 @@ focus = {
  #尼赫鲁二
     focus = {
     id = BHC_Successor
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Successor
     prerequisite = { focus = BHC_The_Darkest_Day }
 	relative_position_id = BHC_The_Darkest_Day
     x = 0
@@ -13189,11 +13305,11 @@ focus = {
 
     focus = {
     id = BHC_Radical_Nationalization
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Radical_Nationalization
     prerequisite = { focus = BHC_Successor }
 	relative_position_id = BHC_Successor
     x = -1
-    y = 1
+    y = 2
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13299,11 +13415,11 @@ focus = {
 
     focus = {
     id = BHC_Twenty_Five_Point_Plan
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Twenty_Five_Point_Plan
     prerequisite = { focus = BHC_Radical_Nationalization }
 	relative_position_id = BHC_Successor
-    x = -2
-    y = 2
+    x = 1
+    y = 3
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13319,12 +13435,12 @@ focus = {
 
     focus = {
     id = BHC_Gabiri_Hatao
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Gabiri_Hatao
     prerequisite = { focus = BHC_Twenty_Five_Point_Plan }
     prerequisite = { focus = BHC_Discipline_of_the_Graveyard }
 	relative_position_id = BHC_Successor
-    x = -1
-    y = 3
+    x = -2
+    y = 4
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13401,12 +13517,12 @@ focus = {
 
     focus = {
     id = BHC_Desh_Bachao
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Desh_Bachao
     prerequisite = { focus = BHC_Establish_a_Loyal_Bureaucracy }
     prerequisite = { focus = BHC_Discipline_of_the_Graveyard }
 	relative_position_id = BHC_Successor
-    x = 1
-    y = 3
+    x = 2
+    y = 4
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13425,11 +13541,11 @@ focus = {
 
     focus = {
     id = BHC_Discipline_of_the_Graveyard
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Discipline_of_the_Graveyard
     prerequisite = { focus = BHC_Successor }
 	relative_position_id = BHC_Successor
     x = 0
-    y = 2
+    y = 1
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13445,11 +13561,11 @@ focus = {
 
     focus = {
     id = BHC_Rely_on_the_Kashmir_Mafia
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Rely_on_the_Kashmir_Mafia
     prerequisite = { focus = BHC_Successor }
 	relative_position_id = BHC_Successor
     x = 1
-    y = 1
+    y = 2
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13467,11 +13583,11 @@ focus = {
 
     focus = {
     id = BHC_Establish_a_Loyal_Bureaucracy
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Establish_a_Loyal_Bureaucracy
     prerequisite = { focus = BHC_Rely_on_the_Kashmir_Mafia }
 	relative_position_id = BHC_Successor
-    x = 2
-    y = 2
+    x = -1
+    y = 3
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13487,12 +13603,12 @@ focus = {
 
     focus = {
     id = BHC_Descendants_of_Bharat
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Descendants_of_Bharat
     prerequisite = { focus = BHC_Gabiri_Hatao }
     prerequisite = { focus = BHC_Desh_Bachao }
 	relative_position_id = BHC_Successor
     x = 0
-    y = 4
+    y = 5
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13511,10 +13627,10 @@ focus = {
  #搞笑伯纳姆
     focus = {
     id = BHC_Tycoon
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Tycoon
     prerequisite = { focus = BHC_The_Darkest_Day }
 	relative_position_id = BHC_The_Darkest_Day
-    x = 4
+    x = -5
     y = 1
     cost = 5
     ai_will_do = {
@@ -13531,7 +13647,7 @@ focus = {
     
     focus = {
     id = BHC_Cooperation_with_Gandhian_Socialists
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Cooperation_with_Gandhian_Socialists
     prerequisite = { focus = BHC_Tycoon }
 	relative_position_id = BHC_Tycoon
     x = -1
@@ -13558,11 +13674,11 @@ focus = {
     
     focus = {
     id = BHC_Practice_the_Idea_of_Trusteeship
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Practice_the_Idea_of_Trusteeship
     prerequisite = { focus = BHC_Cooperation_with_Gandhian_Socialists }
 	relative_position_id = BHC_Tycoon
-    x = -1
-    y = 3
+    x = -2
+    y = 2
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13578,7 +13694,7 @@ focus = {
     
     focus = {
     id = BHC_Introduce_a_Technocratic_Cabinet
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Introduce_a_Technocratic_Cabinet
     prerequisite = { focus = BHC_Tycoon }
 	relative_position_id = BHC_Tycoon
     x = 1
@@ -13598,10 +13714,10 @@ focus = {
     
     focus = {
     id = BHC_March_Towards_Self_Sufficiency
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_March_Towards_Self_Sufficiency
     prerequisite = { focus = BHC_Introduce_a_Technocratic_Cabinet }
 	relative_position_id = BHC_Tycoon
-    x = 1
+    x = 0
     y = 3
     cost = 5
     ai_will_do = {
@@ -13621,7 +13737,7 @@ focus = {
     
     focus = {
     id = BHC_Reconcile_with_Trade_Unions
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Reconcile_with_Trade_Unions
     prerequisite = { focus = BHC_Introduce_a_Technocratic_Cabinet }
 	relative_position_id = BHC_Tycoon
     x = 2
@@ -13643,12 +13759,12 @@ focus = {
     
     focus = {
     id = BHC_Manage_the_Revolution_Not_Syndicalist_Revolution
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Manage_the_Revolution_Not_Syndicalist_Revolution
     prerequisite = { focus = BHC_March_Towards_Self_Sufficiency }
     prerequisite = { focus = BHC_Reconcile_with_Trade_Unions }
 	relative_position_id = BHC_Tycoon
-    x = 2
-    y = 4
+    x = 1
+    y = 5
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13667,7 +13783,7 @@ focus = {
     
     focus = {
     id = BHC_Abandon_Corrupt_Parliamentarism
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Abandon_Corrupt_Parliamentarism
     prerequisite = { focus = BHC_Tycoon }
 	relative_position_id = BHC_Tycoon
     x = 0
@@ -13693,12 +13809,12 @@ focus = {
     
     focus = {
     id = BHC_Iron_and_Steel_Idyll
-    icon = GFX_goal_SKM_Bhartiya
+    icon = GFX_goal_BHC_Iron_and_Steel_Idyll
     prerequisite = { focus = BHC_Abandon_Corrupt_Parliamentarism }
     prerequisite = { focus = BHC_Practice_the_Idea_of_Trusteeship }
     prerequisite = { focus = BHC_March_Towards_Self_Sufficiency }
 	relative_position_id = BHC_Tycoon
-    x = 0
+    x = -1
     y = 4
     cost = 5
     ai_will_do = {
@@ -13719,7 +13835,6 @@ focus = {
 focus = {
     id = BHC_Back_on_Track
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_The_next_step }
 	relative_position_id = BHC_The_next_step
     x = 8
     y = 1
@@ -13731,10 +13846,10 @@ focus = {
         
     }
     
-    allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_Lift_the_martial_law }
-    allow_branch = { has_country_flag = BHC_Declaring_dictatorship }
+    #allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_Lift_the_martial_law }
+    #allow_branch = { has_country_flag = BHC_Declaring_dictatorship }
     completion_reward = {
         log = "[GetDateText]: [Root.GetName]: BHC_Back_on_Track"
         add_stability = 0.1
@@ -13748,7 +13863,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_Back_on_Track }
 	relative_position_id = BHC_Back_on_Track
-    x = -4
+    x = 5
     y = 1
     cost = 5
     ai_will_do = {
@@ -13791,7 +13906,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_Uniting_Comrades_on_the_Path_to_Sainthood }
 	relative_position_id = BHC_The_Apostle_Comes_from_the_North
-    x = -1
+    x = 0
     y = 3
     cost = 5
     ai_will_do = {
@@ -13832,8 +13947,8 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_The_Soul_of_Art }
 	relative_position_id = BHC_The_Apostle_Comes_from_the_North
-    x = 1
-    y = 3
+    x = 2
+    y = 2
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13877,8 +13992,8 @@ focus = {
     prerequisite = { focus = BHC_Building_the_Divine_Kingdom_Together }
     prerequisite = { focus = BHC_Looking_Back_on_the_Path_Traveled }
 	relative_position_id = BHC_The_Apostle_Comes_from_the_North
-    x = -2
-    y = 4
+    x = -1
+    y = 5
     cost = 5
     ai_will_do = {
         factor = 10
@@ -13940,7 +14055,7 @@ focus = {
     prerequisite = { focus = BHC_Building_the_Divine_Kingdom_Together }
     prerequisite = { focus = BHC_The_Art_of_the_Astrologer }
 	relative_position_id = BHC_The_Apostle_Comes_from_the_North
-    x = 0
+    x = 1
     y = 4
     cost = 5
     ai_will_do = {
@@ -13984,7 +14099,7 @@ focus = {
     prerequisite = { focus = BHC_Spirit_Manifests_from_Internalization }
 	relative_position_id = BHC_Spirit_Manifests_from_Internalization
     x = -1
-    y = 1
+    y = 2
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14005,8 +14120,8 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_Listening_to_the_Voice_of_the_Self }
 	relative_position_id = BHC_Spirit_Manifests_from_Internalization
-    x = -2
-    y = 2
+    x = 1
+    y = 3
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14026,8 +14141,8 @@ focus = {
     prerequisite = { focus = BHC_The_Evolution_of_Matter }
     prerequisite = { focus = BHC_The_Divine_Life }
 	relative_position_id = BHC_Spirit_Manifests_from_Internalization
-    x = -1
-    y = 3
+    x = -2
+    y = 4
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14050,8 +14165,8 @@ focus = {
     prerequisite = { focus = BHC_Human_Potential }
     prerequisite = { focus = BHC_The_Divine_Life }
 	relative_position_id = BHC_Spirit_Manifests_from_Internalization
-    x = 1
-    y = 3
+    x = 2
+    y = 4
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14074,7 +14189,7 @@ focus = {
     prerequisite = { focus = BHC_Spirit_Manifests_from_Internalization }
 	relative_position_id = BHC_Spirit_Manifests_from_Internalization
     x = 0
-    y = 2
+    y = 1
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14097,7 +14212,7 @@ focus = {
     prerequisite = { focus = BHC_Spirit_Manifests_from_Internalization }
 	relative_position_id = BHC_Spirit_Manifests_from_Internalization
     x = 1
-    y = 1
+    y = 2
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14176,8 +14291,8 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_The_Renaissance_of_India }
 	relative_position_id = BHC_Spirit_Manifests_from_Internalization
-    x = 2
-    y = 2
+    x = -1
+    y = 3
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14198,7 +14313,7 @@ focus = {
     prerequisite = { focus = BHC_Forms_of_Brahman }
 	relative_position_id = BHC_Spirit_Manifests_from_Internalization
     x = 0
-    y = 4
+    y = 5
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14220,7 +14335,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_Back_on_Track }
 	relative_position_id = BHC_Back_on_Track
-    x = 4
+    x = -5
     y = 1
     cost = 5
     ai_will_do = {
@@ -14260,8 +14375,8 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_The_Limitations_of_the_Mind }
 	relative_position_id = BHC_Revolution_of_Liberating_the_Soul
-    x = -1
-    y = 3
+    x = -2
+    y = 2
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14305,7 +14420,7 @@ focus = {
     icon = GFX_goal_SKM_Bhartiya
     prerequisite = { focus = BHC_Direct_Justice }
 	relative_position_id = BHC_Revolution_of_Liberating_the_Soul
-    x = 1
+    x = 0
     y = 3
     cost = 5
     ai_will_do = {
@@ -14343,11 +14458,11 @@ focus = {
     focus = {
     id = BHC_Love_of_the_Self
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_Evil_ego }
+    prerequisite = { focus = BHC_The_Evil_Self }
     prerequisite = { focus = BHC_The_Revolution_of_Love }
 	relative_position_id = BHC_Revolution_of_Liberating_the_Soul
-    x = 2
-    y = 4
+    x = 1
+    y = 5
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14394,7 +14509,7 @@ focus = {
     prerequisite = { focus = BHC_Reconciliation_with_the_Theosophical_Society }
     prerequisite = { focus = BHC_The_Evil_Self }
 	relative_position_id = BHC_Revolution_of_Liberating_the_Soul
-    x = 0
+    x = -1
     y = 4
     cost = 5
     ai_will_do = {
@@ -14415,10 +14530,9 @@ focus = {
 focus = {
     id = BHC_The_uprising_triumphs
     icon = GFX_goal_SKM_Bhartiya
-    prerequisite = { focus = BHC_The_next_step }
 	relative_position_id = BHC_The_next_step
     x = 0
-    y = 1
+    y = 9
     cost = 5
     ai_will_do = {
         factor = 10
@@ -14427,10 +14541,10 @@ focus = {
         
     }
     
-    allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
-    allow_branch = { has_country_flag = BHC_DEAD }
-    allow_branch = { has_country_flag = BHC_The_uprising }
-    allow_branch = { has_country_flag = BHC_Declaring_dictatorship }
+    #allow_branch = { has_country_flag = BHC_The_revolutionaries_victory }
+    #allow_branch = { has_country_flag = BHC_DEAD }
+    #allow_branch = { has_country_flag = BHC_The_uprising }
+    #allow_branch = { has_country_flag = BHC_Declaring_dictatorship }
     completion_reward = {
         log = "[GetDateText]: [Root.GetName]: BHC_The_uprising_triumphs"
         add_ideas = BHC_great_uprising
@@ -15498,7 +15612,7 @@ focus = {
 			427 = { is_owned_and_controlled_by = BHC } #Hyderabad
 		}
 		x = 30
-		y = 1
+		y = 2
 		cost = 10
 
 		ai_will_do = {
@@ -15562,7 +15676,6 @@ focus = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BHC_special_INC_meeting"
 			add_political_power = 100
-			country_event = { id = beng.100 days = 1 }
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -16050,7 +16163,6 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BHC_red_raj"
-			country_event = beng.110
 		}
 	}
 
@@ -16120,7 +16232,7 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BHC_delhi_officers"
-			country_event = beng.113
+			
 		}
 	}
 
@@ -16223,7 +16335,6 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BHC_princely_officers"
-			country_event = beng.118
 		}
 	}
 

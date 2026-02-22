@@ -33,6 +33,116 @@ IND_The_Lucknow_Conference = {
 
 		}
 		timeout_effect = {
+			
+			if = {
+				limit = {
+					tag = BHC
+				}
+				set_country_flag = IND_The_Lucknow_issue_1_over
+				clr_country_flag = IND_The_Lucknow_issue_1_begin
+				add_political_power = 100
+			}
+			if = {
+				limit = {
+					tag = DEH
+				}
+				set_country_flag = IND_The_Lucknow_issue_1_over
+				clr_country_flag = IND_The_Lucknow_issue_1_begin
+				add_political_power = 200
+			}
+			if = {
+				limit = {
+					check_variable = { DEH.INDpower > BHC.INDpower }
+					OR = {
+						check_variable = { DEH.BOPpower < 60 }
+						check_variable = { DEH.BOPpower = 60 }
+					}
+				}
+				DEH = {
+					country_event = {
+						id = BHCissue.2 
+					}
+				}
+				custom_effect_tooltip = DEH_advantage_tt
+			}
+			if = {
+				limit = {
+					OR = {
+						check_variable = { DEH.INDpower = BHC.INDpower }
+						check_variable = { DEH.INDpower < BHC.INDpower }
+					}
+					OR = {
+						check_variable = { DEH.BOPpower < 60 }
+						check_variable = { DEH.BOPpower = 60 }
+					}
+				}
+				BHC = {
+					country_event = {
+						id = BHCissue.2 
+					}
+				}
+				custom_effect_tooltip = BHC_advantage_tt
+			}
+			if = {
+				limit = {
+					check_variable = { DEH.BOPpower > 60 }
+				}
+				add_political_power = -50
+				custom_effect_tooltip = the_break_of_Lucknow_tt
+				country_event = { #和平幻象
+					id = KXXBHC.9
+					days = 3
+				}
+				DEH = {
+					remove_ideas = IND_The_Lucknow_Conference_idea
+				}
+				BHC = {
+					remove_ideas = IND_The_Lucknow_Conference_idea
+				}
+				PRF = {
+					remove_ideas = IND_The_Lucknow_Conference_idea
+				}
+				custom_effect_tooltip = IND_negotiation_deadlock_tt
+				DEH = {
+					custom_effect_tooltip = IND_negotiation_deadlock_tt
+				}
+			}
+		}
+	}
+	The_Lucknow_issue_2 = {
+        icon = GFX_decision_generic_civil_support
+		priority = 100
+		days_mission_timeout = 60
+		cancel_if_not_visible = yes
+		is_good = no
+		ai_will_do = {
+			factor = 100
+		}
+		visible = {
+			FROM = {
+				has_idea = IND_The_Lucknow_Conference_idea
+				has_country_flag = IND_The_Lucknow_issue_2_begin
+			}
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = IND_The_Lucknow_issue_2_begin
+		}
+		cancel_trigger = {
+			BHC = {
+				NOT = {
+					has_country_flag = IND_The_Lucknow_issue_2_begin
+				}
+			}
+		}
+		cancel_effect = {
+
+		}
+		timeout_effect = {
 			if = {
 				limit = {
 					tag = BHC
@@ -49,47 +159,57 @@ IND_The_Lucknow_Conference = {
 				clr_country_flag = IND_The_Lucknow_issue_1_begin
 				add_political_power = 1000
 			}
-		}
-	}
-	The_Lucknow_issue_2 = {
-        icon = GFX_decision_generic_civil_support
-		priority = 100
-		days_mission_timeout = 60
-		cancel_if_not_visible = yes
-		is_good = no
-		ai_will_do = {
-			factor = 100
-		}
-		visible = {
-			has_country_flag = IND_The_Lucknow_issue_2_begin
-		}
-		available = {
-			NOT = {
-				has_country_flag = IND_The_Lucknow_issue_2_begin
-			}
-		}
-		activation = {
-			has_country_flag = IND_The_Lucknow_issue_2_begin
-		}
-		cancel_trigger = {
-			BHC = {
-				NOT = {
-					has_country_flag = IND_The_Lucknow_issue_2_over
-				}
-			}
-		}
-		cancel_effect = {
-
-		}
-		timeout_effect = {
 			if = {
 				limit = {
-					check_variable = {
-						BHC.INDpower > DEH.INDpower
+					check_variable = { DEH.INDpower > BHC.INDpower }
+					OR = {
+						check_variable = { DEH.BOPpower < 60 }
+						check_variable = { DEH.BOPpower = 60 }
 					}
-					check_variable = {
-						BHC.BOPpower < 80
+				}
+				DEH = {
+					country_event = {
+						id = BHCissue.6
 					}
+				}
+				custom_effect_tooltip = DEH_advantage_tt
+			}
+			if = {
+				limit = {
+					OR = {
+						check_variable = { DEH.INDpower = BHC.INDpower }
+						check_variable = { DEH.INDpower < BHC.INDpower }
+					}
+					OR = {
+						check_variable = { DEH.BOPpower < 60 }
+						check_variable = { DEH.BOPpower = 60 }
+					}
+				}
+				BHC = {
+					country_event = {
+						id = BHCissue.6
+					}
+				}
+				custom_effect_tooltip = BHC_advantage_tt
+			}
+			if = {
+				limit = {
+					check_variable = { DEH.BOPpower > 60 }
+				}
+				add_political_power = -50
+				custom_effect_tooltip = the_break_of_Lucknow_tt
+				country_event = { #和平幻象
+					id = KXXBHC.9
+					days = 3
+				}
+				DEH = {
+					remove_ideas = IND_The_Lucknow_Conference_idea
+				}
+				BHC = {
+					remove_ideas = IND_The_Lucknow_Conference_idea
+				}
+				PRF = {
+					remove_ideas = IND_The_Lucknow_Conference_idea
 				}
 			}
 		}
@@ -215,11 +335,14 @@ IND_The_Lucknow_Conference = {
 			factor = 100
 		}
 		visible = {
-			has_country_flag = IND_The_Lucknow_issue_2_begin
+			FROM = {
+				has_idea = IND_The_Lucknow_Conference_idea
+				has_country_flag = IND_The_Lucknow_issue_2_begin
+			}
 		}
 		available = {
-			NOT = {
-				has_country_flag = IND_The_Lucknow_issue_2_begin
+			hidden_trigger = {
+				always = no
 			}
 		}
 		activation = {
@@ -228,7 +351,7 @@ IND_The_Lucknow_Conference = {
 		cancel_trigger = {
 			BHC = {
 				NOT = {
-					has_country_flag = IND_The_Lucknow_issue_2_over
+					has_country_flag = IND_The_Lucknow_issue_2_begin
 				}
 			}
 		}
