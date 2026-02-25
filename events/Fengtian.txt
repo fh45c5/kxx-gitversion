@@ -12,7 +12,7 @@ add_namespace = fngdynasty
 add_namespace = fngnap
 add_namespace = fngrebels #unused events
 add_namespace = fngmil
-
+add_namespace = fngreg
 #################################
 ### Fengtian Political Events ###
 #################################
@@ -74,6 +74,12 @@ country_event = { #Protests Continue REPEATING
 			has_country_flag = regionalist_protest_4
 		}
 	}
+	desc = {
+		text = fengtian.3.d5
+		trigger = {
+			has_country_flag = regionalist_protest_5
+		}
+	}
 	picture = GFX_report_event_CHI_protest
 
 	is_triggered_only = yes
@@ -127,9 +133,29 @@ country_event = { #Protests Continue REPEATING
 			if = {
 				limit = {
 					has_country_flag = regionalist_protest_4
+					NOT = {
+						OR = {
+							has_completed_focus = FNG_Justify_Mass_Arrests
+							has_completed_focus = FNG_Silence_Targeted_Subversives
+						}
+					}
 				}
+				
 				clr_country_flag = regionalist_protest_4
-				set_country_flag = regionalist_protest_2
+				set_country_flag = regionalist_protest_5
+			}
+			else = {
+				clr_country_flag = regionalist_protest_4
+				set_country_flag = regionalist_protest_2	
+			}
+			if = {
+				limit = {
+					has_country_flag = regionalist_protest_5
+				}
+				country_event = {
+					id = fngreg.1
+					days = 10
+				}
 			}
 			country_event = { # Repeating
 				id = fengtian.3
@@ -18387,5 +18413,33 @@ country_event = { #Army Selection
 		name = fngmil.33.e
 		trigger = { has_completed_focus = FNG_a_weapon_to_surpass_the_IJA }
 		add_ideas = FNG_army_zeal
+	}
+}
+country_event = { #
+	id = fngreg.1
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event fengtian.1" 
+		hidden_effect = {
+			
+			kill_country_leader = yes
+			set_country_flag = FNG_no_longer_chinese_tag #ban unification decisions
+				JAP = {
+					diplomatic_relation = {
+   						country = FNG
+   						relation = guarantee
+   						active = no
+  					}
+				}
+		}
+	}
+	title = fngreg.1.t
+	desc = fngreg.1.d
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = fngreg.1.a
+		
 	}
 }
