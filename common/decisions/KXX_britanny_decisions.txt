@@ -64,19 +64,11 @@ BRI_factionism = {
 					country_event = BRI_crisis.5
 				}
 			}
-			else_if = {
-				limit = { #平局
-					check_variable = { BRI.ABpower = BRI.PNBpower }
-                    check_variable = { BRI.PNBpower = BRI.FLBpower }
-                    check_variable = { BRI.FLBpower = BRI.BLBApower }
-				}
-				BRI = {
-					country_event = BRI_crisis.7
-				}
-			}
 			else = {
-				BRI = { #僵局
-					country_event = BRI_crisis.6
+				hidden_effect = {
+					BRI = { #僵局
+						country_event = BRI_crisis.7
+					}
 				}
 			}
 		}
@@ -3410,6 +3402,116 @@ BRI_britanny_on_world_stage_cat = {
 				id = BRI_FRA.11
 			}
 			custom_effect_tooltip = BRI_Support_Ireland_tooltip
+		}
+	}
+	BRI_The_October_Revolution = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_country_flag = BRI_the_rule_of_lagadelle_company
+		}
+		visible = {
+			has_completed_focus = BRI_october_revolution
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+			add_political_power = -50
+		}
+		remove_effect = {
+			set_cosmetic_tag = BRI_sov_enterprises
+			set_capital = { id = 129 remember_old_capital = no }
+			set_province_name = { id = 129 name = "列宁格勒" }
+		}
+	}
+	BRI_Anglo_Saxons_intergration = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_completed_focus = BRI_recelticlize
+			126 = {
+				is_controlled_by_ROOT_or_owner = yes
+			}
+		}
+		visible = {
+			NOT = {
+				country_exists = ENG
+			}
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+		}
+		modifier = {
+			political_power_gain = -0.1
+			conversion_cost_civ_to_mil_factor = -0.1
+			conversion_cost_mil_to_civ_factor = -0.1
+			production_factory_start_efficiency_factor = -0.1
+			line_change_production_efficiency_factor = -0.1
+			production_factory_efficiency_gain_factor = -0.1
+			production_factory_max_efficiency_factor = -0.1
+			industrial_capacity_factory = -0.1
+			industrial_capacity_dockyard = -0.1
+		}
+		remove_effect = {
+			set_cosmetic_tag = BRI_celtic_union
+			if = {
+				limit = {
+					has_country_flag = BRI_Scotland_aid
+				}
+				BRI = {
+					add_state_core = 120
+					add_state_core = 121
+					add_state_core = 136
+					add_state_core = 133
+					add_state_core = 938 
+					annex_country = {
+						target = SCT
+						transfer_troops = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = BRI_Wales_aid
+				}
+				BRI = {
+					add_state_core = 122 
+					add_state_core = 1225 
+					annex_country = {
+						target = WAL
+						transfer_troops = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = BRI_Ireland_aid
+				}
+				BRI = {
+					add_state_core = 113 
+					add_state_core = 119 
+					add_state_core = 134
+					add_state_core = 135 
+					annex_country = {
+						target = IRE
+						transfer_troops = yes
+					}
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = ENG
+				}
+				add_core_of = BRI
+			}
+			add_political_power = 100
 		}
 	}
 	BRI_Anglo_Saxons_surrender = {

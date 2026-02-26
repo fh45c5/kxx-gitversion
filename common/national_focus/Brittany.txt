@@ -206,8 +206,10 @@ focus_tree = {
 				}
 			}
 			else = {
-				country_event = {
+				FRA = {
+					country_event = {
 					id = BRI_FRA.1
+					}
 				}
 			}
 		}
@@ -251,7 +253,13 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			OR = {
+					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
+					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
+					has_country_flag = BRI_autonomists
+					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_France_Marcel_Cachin_win
+				}
 		}
 		completion_reward = {
 			add_political_power = 100
@@ -278,7 +286,16 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			NOT = {
+				OR = {
+					has_country_flag = BRI_Giant_enterprises_in_BRI
+					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
+					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
+					has_country_flag = BRI_autonomists
+					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_France_Marcel_Cachin_win
+				}
+			}
 		}
 		completion_reward = {
 			
@@ -417,7 +434,7 @@ focus_tree = {
 			focus = BRI_europe_market
 		}
 		available = {
-			
+			has_country_flag = BRI_the_rule_of_lagadelle_company
 		}
 		completion_reward = {
 			BRI = {
@@ -477,7 +494,7 @@ focus_tree = {
 			focus = BRI_europe_market
 		}
 		available = {
-			
+			has_country_flag = BRI_the_rule_of_danone_company
 		}
 		completion_reward = {
 			BRI = {
@@ -534,7 +551,7 @@ focus_tree = {
 			focus = BRI_europe_market
 		}
 		available = {
-			
+			has_country_flag = BRI_the_rule_of_Michelin_company
 		}
 		completion_reward = {
 			BRI = {
@@ -588,7 +605,7 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_the_rule_of_total_company
 		}
 		completion_reward = {
 			BRI = {
@@ -640,7 +657,7 @@ focus_tree = {
 			focus = BRI_october_revolution
 		}
 		available = {
-			
+			has_country_flag = BRI_the_rule_of_LVMH_company
 		}
 		completion_reward = {
 			BRI = {
@@ -862,6 +879,13 @@ focus_tree = {
 		}
 		completion_reward = {
 			unlock_decision_tooltip = BRI_Anglo_Saxons_surrender
+			add_war_support = 0.15
+			every_state = {
+				limit = {
+					is_core_of = ENG
+				}
+				add_claim_by = BRI
+			}
 		}
 	}
 	focus = {
@@ -885,6 +909,8 @@ focus_tree = {
 		}
 		completion_reward = {
 			unlock_decision_tooltip = BRI_Support_Ireland
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
 		}
 	}
 	focus = {
@@ -911,6 +937,7 @@ focus_tree = {
 				}
 				add_core_of = BRI
 			}
+			set_cosmetic_tag = BRI_celt_ger
 			create_wargoal = {
 				target = GER
 				type = annex_everything
@@ -1002,13 +1029,13 @@ focus_tree = {
 			BRI = {
 				owns_state = 16
 				OR = {
+					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
 					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
 					has_country_flag = BRI_autonomists
-					has_country_flag= BRI_radsoc_soclib
+					has_country_flag = BRI_radsoc_soclib
 					has_country_flag = BRI_France_Marcel_Cachin_win
 				}
 			}
-			
 			custom_trigger_tooltip = {
 				tooltip = BRI_FRA_one_survivor_tooltip
 				NOT = {
@@ -1025,8 +1052,31 @@ focus_tree = {
 			every_state = {
 				limit = {
 					is_core_of = FRA
+					is_claimed_by = FRA
 				}
 				add_core_of = BRI
+			}
+			set_capital = { state = 16 remember_old_capital = no }
+			if = {
+				limit = {
+					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
+				}
+				set_cosmetic_tag = BRI_FRA_kingdom
+			}
+			else_if = {
+				limit = {
+					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
+				}
+				set_cosmetic_tag = BRI_FRA_nazibol
+			}
+			else_if = {
+				limit = {
+					has_country_flag = BRI_France_Marcel_Cachin_win
+				}
+				set_cosmetic_tag = FRA_atheist
+			}
+			else = {
+				set_cosmetic_tag = BRI_FRA
 			}
 		}
 	}
@@ -1308,6 +1358,7 @@ focus_tree = {
 				}
 				add_claim_by = BRI
 			}
+			set_cosmetic_tag = BRI_europe
 		}
 	}
 	focus = {
@@ -1330,7 +1381,14 @@ focus_tree = {
 			has_completed_focus = BRI_onwards
 		}
 		completion_reward = {
-			
+			add_ideas = NFA_nap_liberation_idea
+			every_state = {
+				limit = {
+					is_claimed_by = NFA
+				}
+				add_core_of = BRI
+				add_stability = -0.2
+			}
 		}
 	}
 	focus = {
@@ -1349,7 +1407,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_political_power = 100
+			country_event = {
+				id = brittany.1
+				days = 2
+			}
 		}
 	}
 	focus = {
@@ -4739,7 +4801,7 @@ focus_tree = {
 	focus = {
 		id = BRI_brittanny_construction
 		icon = GFX_goal_FRA_transhumanism
-		x = 32
+		x = 20
 		y = 22
 		cost = 4
 		ai_will_do = {
@@ -4752,7 +4814,7 @@ focus_tree = {
 			has_country_flag = BRI_DATE_DELETE
 		}
 		completion_reward = {
-		
+			
 		}
 	}
 	focus = {
@@ -4823,19 +4885,19 @@ focus_tree = {
 	focus = {
 		id = BRI_strongest_stays
 		icon = GFX_goal_FRA_power_safety_honor
-		x = -1
-		y = 3
+		x = -2
+		y = 2
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_purge_streets
+			focus = BRI_brittanny_construction
 		}
 		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_purge_streets
 		}
 		
 		completion_reward = {
@@ -4845,19 +4907,19 @@ focus_tree = {
 	focus = {
 		id = BRI_cleverist_stays
 		icon = GFX_goal_FRA_machiaville_enlightment
-		x = 1
-		y = 3
+		x = 2
+		y = 2
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_purge_streets
+			focus = BRI_brittanny_construction
 		}
 		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_purge_streets
 		}
 		
 		completion_reward = {
@@ -4868,9 +4930,12 @@ focus_tree = {
 		id = BRI_new_state
 		icon = GFX_goal_FRA_pure_order
 		x = 0
-		y = 4
+		y = 3
 		relative_position_id = BRI_brittanny_construction
 		
+		prerequisite = {
+			focus = BRI_purge_streets
+		}
 		prerequisite = {
 			focus = BRI_strongest_stays
 		}
@@ -4892,19 +4957,19 @@ focus_tree = {
 	focus = {
 		id = BRI_new_man
 		icon = GFX_goal_FRA_rationlize_economy
-		x = -1
-		y = 5
+		x = -3
+		y = 3
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_new_state
+			focus = BRI_brittanny_construction
 		}
 		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_new_state
 		}
 		
 		completion_reward = {
@@ -4914,19 +4979,19 @@ focus_tree = {
 	focus = {
 		id = BRI_new_society
 		icon = GFX_goal_FRA_nation_city_collective
-		x = 1
-		y = 5
+		x = 3
+		y = 3
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_new_state
+			focus = BRI_brittanny_construction
 		}
 		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_new_state
 		}
 		
 		completion_reward = {
@@ -4937,9 +5002,12 @@ focus_tree = {
 		id = BRI_assimilation
 		icon = GFX_goal_FRA_new_human
 		x = 0
-		y = 6
+		y = 4
 		relative_position_id = BRI_brittanny_construction
 		
+		prerequisite = {
+			focus = BRI_new_state
+		}
 		prerequisite = {
 			focus = BRI_new_man
 		}
@@ -4961,12 +5029,12 @@ focus_tree = {
 	focus = {
 		id = BRI_beyond_totalism
 		icon = GFX_goal_FRA_order_strong_ration
-		x = -1
-		y = 7
+		x = -4
+		y = 4
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_assimilation
+			focus = BRI_brittanny_construction
 		}
 		
 		cost = 4
@@ -4974,7 +5042,7 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_assimilation
 		}
 		
 		completion_reward = {
@@ -4984,12 +5052,12 @@ focus_tree = {
 	focus = {
 		id = BRI_beyond_natpop
 		icon = GFX_goal_FRA_erdicate_anti_france
-		x = 1
-		y = 7
+		x = 4
+		y = 4
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_assimilation
+			focus = BRI_brittanny_construction
 		}
 		
 		cost = 4
@@ -4997,7 +5065,7 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_assimilation
 		}
 		
 		completion_reward = {
@@ -5008,7 +5076,7 @@ focus_tree = {
 		id = BRI_new_order
 		icon = GFX_goal_FRA_beyond_extreme
 		x = 0
-		y = 8
+		y = 5
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
@@ -5016,6 +5084,9 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = BRI_beyond_natpop
+		}
+		prerequisite = {
+			focus = BRI_assimilation
 		}
 		cost = 4
 		ai_will_do = {
