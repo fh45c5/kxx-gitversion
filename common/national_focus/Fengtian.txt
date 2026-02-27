@@ -6175,6 +6175,10 @@ focus_tree = {
 				ideology = social_democrat
 				popularity = -0.05
 			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
 			add_stability = 0.1
 		}
 	}
@@ -6191,6 +6195,10 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Integrate_Zhili_Defectors"
 			add_political_power = 75
 			FNG_increase_legitimacy = yes
+			swap_ideas = {
+				remove_idea = FNG_junta_rule
+				add_idea = FNG_junta_rule2
+			}
 		}
 	}
 	focus = {
@@ -6205,8 +6213,8 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Protect_Confucian_principles"
-			add_stability = 0.1
-			FNG_increase_legitimacy = yes
+			
+			add_research_slot = 1
 		}
 	}
 	focus = {
@@ -6243,26 +6251,8 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_militarise_the_student_body"
-			remove_ideas = CHN_national_illiteracy1_idea
-			custom_effect_tooltip = tooltip_white_line
-			china_add_research_slots = yes
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = { FNG_feng_yong = { is_political_advisor = yes } }
-				custom_effect_tooltip = FNG_feng_yong_was_helpful_tt
-				custom_effect_tooltip = tooltip_white_line
-				add_popularity = {
-					ideology = national_populist
-					popularity = 0.08
-				}
-				add_timed_idea = {
-					idea = FNG_preparing_the_students
-					days = 220
-				}
-			}
-			else = {
-				custom_effect_tooltip = FNG_feng_yong_will_be_helpful_tt
-			}
+			add_ideas = FNG_preparing_the_students
+			
 		}
 		search_filters = { FOCUS_FILTER_RESEARCH }
 	}
@@ -6666,7 +6656,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Centralize_Provincial_Revenues"
 			add_ideas = FNG_Centralized_Provincial_Revenues
-			set_country_flag = chen_jiongming_angered
+			
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
 	}
@@ -6686,39 +6676,8 @@ focus_tree = {
 		ai_will_do = { factor = 100 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_against_imperialism_of_all_forms"
-			set_temp_variable = { RLPOP = 5 }
-			FNG_RLPOP = yes
-			set_temp_variable = { ZCPOP = 5 }
-			FNG_ZCPOP = yes
-			custom_effect_tooltip = tooltip_white_line
-			add_political_power = 25
-			custom_effect_tooltip = {
-				localization_key = tooltip_modify_dynmod
-				DYNMOD = FNG_factionalism_modifier
-			}
-			add_to_variable = {
-				FNG_factionalism_war_support = 0.1
-				tooltip = war_support_factor_tooltip
-			}
-			add_to_variable = {
-				FNG_factionalism_stability = 0.05
-				tooltip = stability_factor_tooltip
-			}
-			add_to_variable = {
-				FNG_factionalism_pp_factor = 0.1
-				tooltip = political_power_factor_tooltip
-			}
-			add_to_variable = {
-				FNG_factionalism_conscription_factor = 0.1
-				tooltip = conscription_factor_tooltip
-			}
-			custom_effect_tooltip = tooltip_white_line
-			JAP = {
-				add_opinion_modifier = {
-					target = FNG
-					modifier = KR_diplomatic_row
-				}
-			}
+			add_stability = 0.1
+			FNG_increase_legitimacy = yes
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 	}
@@ -11527,7 +11486,7 @@ focus_tree = {
 		id = FNG_establish_junta
 		icon = GFX_goal_HON_Junta_Skeleton
 		cost = 4
-		available = { FNG_if_zhang_scripted_trigger = yes }
+		
 		mutually_exclusive = {
 			focus = FNG_A_Chinese_Napoleon
 		}
@@ -11538,19 +11497,8 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Eliminate_Internal_Dissent"
-			add_political_power = 150
-			if = {
-				limit = {
-					has_country_flag = Zhang_Zuolin_dead
-					has_country_leader = {
-						name = "张学良"
-						ruling_only = yes
-					}
-				}
-				country_event = { id = fengtian.295 }
-			}
-			set_temp_variable = { ZCPOP = 5 }
-			FNG_ZCPOP = yes
+			add_ideas = FNG_junta_rule
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -11568,19 +11516,9 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Eliminate_Internal_Dissent"
+			add_stability = 0.15
+			country_event = { id = fengtian.295 }
 			add_political_power = 150
-			if = {
-				limit = {
-					has_country_flag = Zhang_Zuolin_dead
-					has_country_leader = {
-						name = "张学良"
-						ruling_only = yes
-					}
-				}
-				country_event = { id = fengtian.295 }
-			}
-			set_temp_variable = { ZCPOP = 5 }
-			FNG_ZCPOP = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -11615,15 +11553,7 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_A_Father_to_the_People"
-			if = {
-				limit = {
-					has_country_flag = FNG_zhuolin_takes_over
-					is_subject = no
-					controls_state = 716
-					NOT = { has_completed_focus = FNG_The_Ultimatum }
-				}
-				country_event = fngnap.1
-			}
+			#country_event = fngnap.1
 			swap_ideas = {
 				remove_idea = FNG_Peoples_Morality
 				add_idea = FNG_Paternal_Guidance
@@ -11645,18 +11575,9 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_A_Father_to_the_People"
-			if = {
-				limit = {
-					has_country_flag = FNG_zhuolin_takes_over
-					is_subject = no
-					controls_state = 716
-					NOT = { has_completed_focus = FNG_The_Ultimatum }
-				}
-				country_event = fngnap.1
-			}
 			swap_ideas = {
-				remove_idea = FNG_Peoples_Morality
-				add_idea = FNG_Paternal_Guidance
+				remove_idea = FNG_junta_rule3
+				add_idea = FNG_junta_rule4
 			}
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
@@ -11675,18 +11596,9 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_A_Father_to_the_People"
-			if = {
-				limit = {
-					has_country_flag = FNG_zhuolin_takes_over
-					is_subject = no
-					controls_state = 716
-					NOT = { has_completed_focus = FNG_The_Ultimatum }
-				}
-				country_event = fngnap.1
-			}
 			swap_ideas = {
-				remove_idea = FNG_Peoples_Morality
-				add_idea = FNG_Paternal_Guidance
+				remove_idea = FNG_junta_rule3
+				add_idea = FNG_junta_rule5
 			}
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
@@ -13032,42 +12944,9 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_president_of_providence"
-			custom_effect_tooltip = FNG_the_president_of_providence_tt
-			set_temp_variable = { FNG_stability_loss_temp_var = ROOT.party_popularity@authoritarian_democrat }
-			multiply_temp_variable = { FNG_stability_loss_temp_var = -0.33 }
-			clamp_temp_variable = {
-				var = FNG_stability_loss_temp_var
-				min = -1
-				max = 0
-			}
-			add_stability = FNG_stability_loss_temp_var
-			custom_effect_tooltip = tooltip_white_line
-			effect_tooltip = {
-				FNG_yang_yuting = {
-					add_trait = {
-						trait = FNG_marshal_of_destiny
-						ideology = paternal_autocrat_subtype
-					}
-				}
-			}
-			hidden_effect = {
-				set_temp_variable = { trait_token = token:FNG_marshal_of_destiny }
-				FNG_yang_yuting = { add_trait_to_all_country_leader_roles = yes }
-			}
-			custom_effect_tooltip = tooltip_white_line
-			china_add_research_slots = yes
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = {
-				localization_key = tooltip_modify_dynmod
-				DYNMOD = FNG_factionalism_modifier
-			}
-			add_to_variable = {
-				FNG_factionalism_consumer_goods = -0.15
-				tooltip = consumer_goods_factor_tooltip
-			}
-			add_to_variable = {
-				FNG_factionalism_stability = 0.05
-				tooltip = stability_factor_tooltip
+			swap_ideas = {
+				remove_idea = FNG_junta_rule2
+				add_idea = FNG_junta_rule3
 			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -13088,35 +12967,14 @@ focus_tree = {
 		
 
 		available = {
-			OR = {
-				has_country_leader = {
-					character = FNG_zhang_xueliang
-				}
-				has_country_leader = {
-					character = FNG_zhang_zuolin
-				}
-			}
+			
 		}
 
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_The_Generals_Know_Best"
 			add_ideas = FNG_primacy_of_the_loyalists
-			custom_effect_tooltip = tooltip_white_line
-			set_temp_variable = { ZCPOP = 5 }
-			FNG_ZCPOP = yes
-			every_character = {
-				limit = {
-					is_unit_leader = yes
-					has_trait = CHN_zhang_officer_trait
-				}
-				add_temporary_buff_to_units = {
-					org_damage_multiplier = -0.15
-					combat_defense = 0.10
-					combat_breakthrough = 0.05
-					days = 200
-				}
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -13139,22 +12997,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_One_Army_One_Republic"
 			army_experience = 15
-			add_timed_idea = {
-				idea = FNG_Command_Reforms
-				days = 250
-			}
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = after_idea_expires
-			effect_tooltip = { add_ideas = FNG_triumph_of_the_model_officers }
-			custom_effect_tooltip = tooltip_white_line
-			FNG_JAP_investment_large = yes
-			every_character = {
-				limit = {
-					is_unit_leader = yes
-					has_trait = CHN_shikan_officer_trait
-				}
-				gain_xp = 200
-			}
+			add_ideas = FNG_triumph_of_the_model_officers
+			
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -19204,10 +19048,7 @@ focus_tree = {
 				popularity = 0.25
 			}
 			
-			swap_ideas = {
-				remove_idea = ISR_minority_revolt_1
-				add_idea = ISR_minority_revolt_5
-			}
+			add_ideas = ISR_minority_revolt_5
 		}
 	}
 	#Focus for A Merge the With the Labour Party
@@ -19502,10 +19343,8 @@ focus_tree = {
 				ideology = authoritarian_democrat
 				popularity = 0.25
 			}
-			swap_ideas = {
-				remove_idea = ISR_minority_revolt_1
-				add_idea = ISR_minority_revolt_3
-			}
+			add_ideas = ISR_minority_revolt_3
+			
 		}
 	}
 	#Focus for Militarized Society
