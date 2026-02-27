@@ -24,6 +24,9 @@ BRI_factionism = {
 		}
 		timeout_effect = {
 			custom_effect_tooltip = BRI_political_crisis_countdown_tt
+			hidden_effect = {
+				remove_ideas = BRI_inner_factionalism
+			}
 			if = {
 				limit = { #国民党优势
 					check_variable = { BRI.PNBpower > BRI.FLBpower }
@@ -669,164 +672,7 @@ BRI_factionism = {
 		}
 	}
 }	
-BRI_Expansion_of_large_enterprises = { #巨企扩张
-    BRI_Major_enterprises_enter_country = { #巨企进驻
-		icon = generic_prepare_civil_war
-		available = {				
-			hidden_trigger = {
-                always = yes
-			}				
-		}
-        visible = {
-			any_other_country = { is_subject_of = ROOT }
-		}
 
-		cost = 10
-		target_root_trigger = {
-		}
-		target_array = subjects
-		
-		highlight_states = {
-			highlight_state_targets = {
-				state = FROM.capital
-			} 
-		}
-
-		target_trigger = {
-			FROM = {
-				is_subject_of = ROOT
-				NOT = {
-					has_idea = BRI_Giant_enterprises_in
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 0
-		}
-
-		complete_effect = {
-			FROM = { 
-                add_ideas = BRI_Giant_enterprises_in
-			}
-		}
-	}	
-    BRI_Major_enterprises_invest_country = { #巨企投资
-		icon = generic_prepare_civil_war
-		available = {				
-			hidden_trigger = {
-                always = yes
-			}				
-		}
-        visible = {
-			any_other_country = { is_subject_of = ROOT }
-		}
-
-		cost = 25
-		days_remove = 30
-		days_re_enable = 10
-		target_root_trigger = {
-		}
-		target_array = subjects
-		
-		highlight_states = {
-			highlight_state_targets = {
-				state = FROM.capital
-			} 
-		}
-
-		target_trigger = {
-			FROM = {
-				is_subject_of = ROOT
-				has_idea = BRI_Giant_enterprises_in
-			}
-		}
-
-		ai_will_do = {
-			factor = 0
-		}
-
-		complete_effect = {
-			set_temp_variable = { property_change = -0.5 }
-			BRI_The_millionaire_game_of_large_enterprises = yes	
-		}
-		remove_effect = {
-			BRI = {
-				random_list = {
-					5 = {
-						country_event = BRI_Giant_enterprises.5
-					}
-					7 = {
-						country_event = BRI_Giant_enterprises.4
-					}
-					13 = {
-						country_event = BRI_Giant_enterprises.3
-					}
-					15 = {
-						country_event = BRI_Giant_enterprises.2
-					}
-					20 = {
-						country_event = BRI_Giant_enterprises.1
-					}
-					15 = {
-						country_event = BRI_Giant_enterprises.6
-					}
-					13 = {
-						country_event = BRI_Giant_enterprises.7
-					}
-					7 = {
-						country_event = BRI_Giant_enterprises.8
-					}
-					5 = {
-						country_event = BRI_Giant_enterprises.9
-					}
-				}
-			}
-		}
-	}	
-	BRI_tribute_factories_off = {
-		icon = generic_prepare_civil_war
-		available = {				
-			hidden_trigger = {
-                always = yes
-			}				
-		}
-        visible = {
-			any_other_country = { is_subject_of = ROOT }
-		}
-
-		cost = 25
-
-		target_root_trigger = {
-		}
-		target_array = subjects
-		
-		highlight_states = {
-			
-			highlight_state_targets = {
-				state = FROM.capital
-			} 
-
-		}
-
-		target_trigger = {
-			FROM = {
-				is_subject_of = ROOT
-				has_idea = BRI_Giant_enterprises_in
-			}
-		}
-
-		ai_will_do = {
-			factor = 0
-		}
-
-		complete_effect = {
-			FROM = { 
-                remove_ideas = BRI_Giant_enterprises_in	
-			}
-		}
-	}	
-}	
 BRI_Giant_enterprises_governing_the_country = { #巨企治国
 	BRI_Generate_revenue = { #月度收入
 		icon = GFX_decision_generic_break_treaty
@@ -3398,8 +3244,10 @@ BRI_britanny_on_world_stage_cat = {
 			add_political_power = -50
 		}
 		remove_effect = {
-			country_event = {
+			IRE = {
+				country_event = {
 				id = BRI_FRA.11
+				}
 			}
 			custom_effect_tooltip = BRI_Support_Ireland_tooltip
 		}
@@ -3719,6 +3567,283 @@ BRI_britanny_on_world_stage_cat = {
 						}
 					}
 					declare_war_on = { target = ENG type = annex_everything }
+				}
+			}
+		}
+	}
+}
+BRI_Corbusier_Savina_balance_category = {
+	BRI_base_Urban_Management = {
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+			power_balance_value = {
+				id = BHC_The_Congress_Party_constantly_at_odds
+				value > -0.9
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_purge_streets
+		}
+		days_remove = 20
+		cost = 50
+		complete_effect = {
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = -0.1
+			}
+		}
+		modifier = {
+			consumer_goods_factor = 0.1
+		}
+		remove_effect = {
+			add_stability = 0.05
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_base_Urban_Renovation = {
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+			power_balance_value = {
+				id = BHC_The_Congress_Party_constantly_at_odds
+				value > -0.9
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_purge_streets
+		}
+		days_remove = 30
+		cost = 50
+		complete_effect = {
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = -0.1
+			}
+		}
+		remove_effect = {
+			add_stability = -0.05
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+		}
+	}
+	BRI_base_new_state_mobilization = {
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+			power_balance_value = {
+				id = BHC_The_Congress_Party_constantly_at_odds
+				value > -0.7
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_new_state
+		}
+		days_remove = 90
+		cost = 50
+		complete_effect = {
+			add_stability = -0.3
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = -0.3
+			}
+		}
+		modifier = {
+			conversion_cost_civ_to_mil_factor = -0.9
+			conversion_cost_mil_to_civ_factor = -0.9
+			production_factory_start_efficiency_factor = 0.25
+			line_change_production_efficiency_factor = 0.25
+			production_factory_efficiency_gain_factor = 0.25
+			production_factory_max_efficiency_factor = 0.25
+			industrial_capacity_factory = 0.35
+		}
+		remove_effect = {
+			add_stability = -0.3
+		}
+	}
+}
+BRI_POPF_puppet_category = {
+	BRI_POPF_puppet_ENG = {
+		icon = generic_ignite_civil_war
+		available = {
+			126 = {
+				is_owned_by = BRI
+			}
+			128 = {
+				is_owned_by = BRI
+			}
+			NOT = {
+				country_exists = GBP
+			}
+		}
+		
+		visible = {
+			tag = BRI
+			has_completed_focus = BRI_new_french_imperialism
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {
+			
+		}
+		remove_effect = {
+			release = GBP
+			puppet = GBP
+			GBP = {
+			set_cosmetic_tag = ENG_BRI
+				set_politics = {
+					ruling_party = totalist
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "托马斯·厄内斯特·赫尔姆"
+					desc = ""
+					picture = "gfx/leaders/ENG/Portrait_ENG_Thomas_Ernest_Hulme.png"
+					expire = "1.1.1"
+					ideology = sorelianism_subtype
+				}
+			}
+		}
+	}
+	BRI_POPF_puppet_SRI = {
+		icon = generic_ignite_civil_war
+		available = {
+			158 = {
+				is_owned_by = BRI
+			}
+			162 = {
+				is_owned_by = BRI
+			}
+			2 = {
+				is_owned_by = BRI
+			}
+			NOT = {
+				country_exists = SRI
+			}
+		}
+		
+		visible = {
+			tag = BRI
+			has_completed_focus = BRI_new_french_imperialism
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {
+			
+		}
+		remove_effect = {
+			release = SRI
+			puppet = SRI
+			SRI = {
+			set_cosmetic_tag = SRI_BRI
+				set_politics = {
+					ruling_party = totalist
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "安格鲁·塔斯卡"
+					desc = ""
+					picture = "gfx/leaders/SRI/Portrait_SRI_Angelo_Tasca.png"
+					expire = "1.1.1"
+					ideology = lovestoneism_subtype
+				}
+			}
+		}
+	}
+	BRI_POPF_puppet_CNT = {
+		icon = generic_ignite_civil_war
+		available = {
+			165 = {
+				is_owned_by = BRI
+			}
+			41 = {
+				is_owned_by = BRI
+			}
+			NOT = {
+				country_exists = CNT
+			}
+		}
+		
+		visible = {
+			tag = BRI
+			has_completed_focus = BRI_new_french_imperialism
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {
+			
+		}
+		remove_effect = {
+			release = CNT
+			puppet = CNT
+			CNT = {
+			set_cosmetic_tag = CNT_BRI
+				set_politics = {
+					ruling_party = totalist
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "马西亚诺·佩德罗·杜鲁蒂"
+					desc = ""
+					picture = "gfx/leaders/CAR/CNT_Marciano_Pedro_Durruti.png"
+					expire = "1.1.1"
+					ideology = national_bolshevik_subtype
+				}
+			}
+		}
+	}
+	BRI_POPF_puppet_GER = {
+		icon = generic_ignite_civil_war
+		available = {
+			64 = {
+				is_owned_by = BRI
+			}
+			54 = {
+				is_owned_by = BRI
+			}
+			NOT = {
+				country_exists = GRU
+			}
+		}
+		
+		visible = {
+			tag = BRI
+			has_completed_focus = BRI_new_french_imperialism
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {
+			
+		}
+		remove_effect = {
+			release = GRU
+			puppet = GRU
+			GRU = {
+			set_cosmetic_tag = GRU_BRI
+				set_politics = {
+					ruling_party = totalist
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "让·皮埃尔·莫雷尔"
+					desc = ""
+					picture = "gfx/leaders/BRI/Portrait_GRU_Jean_Pierre_Mourer.png"
+					expire = "1.1.1"
+					ideology = tot_bukharinist_subtype
 				}
 			}
 		}
