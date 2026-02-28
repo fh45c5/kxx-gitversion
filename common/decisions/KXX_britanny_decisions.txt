@@ -2910,7 +2910,7 @@ BRI_britanny_on_world_stage_cat = {
 	}
 	BRI_against_fra = { #举起反旗
 		icon = GFX_decision_generic_break_treaty
-		days_mission_timeout = 210
+		days_mission_timeout = 60
 		available = {
 			hidden_trigger = {
 				always = no
@@ -2923,15 +2923,32 @@ BRI_britanny_on_world_stage_cat = {
 			}
 		}
 		cancel_trigger = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = NFA
+					has_war_with = FRG
+				}
+			}
 		}
 		cancel_effect = {
-
+			add_stability = -0.2
+			add_war_support = -0.2
+		}
+		modifier = {
+			army_attack_factor = 0.1
+			breakthrough_factor = 0.1
+			army_defence_factor = 0.1
+			production_factory_start_efficiency_factor = 0.05
+			line_change_production_efficiency_factor = 0.05
+			production_factory_efficiency_gain_factor = 0.1
+			production_factory_max_efficiency_factor = 0.1
+			industrial_capacity_factory = 0.05
 		}
 		priority = 985
 		timeout_effect = {
-			add_stability = -0.25
-			add_war_support = -0.25
+			add_stability = -0.02
+			add_war_support = -0.02
+			activate_mission = BRI_against_fra
 		}
 	}
 	BRI_Lock_Occitania_back_in_the_cage = {#对奥克西塔尼亚的最后通牒
@@ -3700,6 +3717,23 @@ BRI_POPF_puppet_category = {
 		remove_effect = {
 			release = GBP
 			puppet = GBP
+			every_owned_state = {
+				limit = { 
+					OR = {
+						is_core_of = ENG
+						is_core_of = SCT
+						is_core_of = WAL
+						is_core_of = GBP
+					}
+					NOT = {
+						is_core_of = FRA
+					}
+				}
+				GBP = {
+					add_core_of = GBP
+					transfer_state = GBP
+				}
+			}
 			GBP = {
 			set_cosmetic_tag = ENG_BRI
 				set_politics = {
@@ -3746,6 +3780,17 @@ BRI_POPF_puppet_category = {
 		remove_effect = {
 			release = SRI
 			puppet = SRI
+			every_owned_state = {
+				limit = {
+					is_not_claim_or_core_of_ROOT = yes
+					is_european_italy = yes
+					NOT = {
+						is_core_of = FRA
+					}
+				}
+				add_core_of = SRI
+				transfer_state_to = SRI
+			}
 			SRI = {
 			set_cosmetic_tag = SRI_BRI
 				set_politics = {
@@ -3789,6 +3834,24 @@ BRI_POPF_puppet_category = {
 		remove_effect = {
 			release = CNT
 			puppet = CNT
+			every_owned_state = {
+				limit = {
+					is_not_claim_or_core_of_ROOT = yes
+					OR = {
+						is_core_of = SPR
+						is_core_of = CAR
+						is_core_of = CNT
+						is_core_of = BAS
+						is_core_of = GLC
+						is_core_of = CAT
+					}
+					NOT = {
+						is_core_of = FRA
+					}
+				}
+				add_core_of = CNT
+				transfer_state_to = CNT
+			}
 			CNT = {
 			set_cosmetic_tag = CNT_BRI
 				set_politics = {
@@ -3832,6 +3895,17 @@ BRI_POPF_puppet_category = {
 		remove_effect = {
 			release = GRU
 			puppet = GRU
+			every_owned_state = {
+				limit = {
+					is_not_claim_or_core_of_ROOT = yes
+					is_core_of = GER
+					NOT = {
+						is_core_of = FRA
+					}
+				}
+				add_core_of = GRU
+				transfer_state_to = GRU
+			}
 			GRU = {
 			set_cosmetic_tag = GRU_BRI
 				set_politics = {
