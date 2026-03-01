@@ -6221,7 +6221,7 @@ focus_tree = {
 		id = FNG_Bring_in_Yan_Xishan_Thought
 		icon = GFX_goal_FNG_Xishan_Thought
 		cost = 4
-		available = { has_country_flag = FNG_conference_xishan_support }
+		
 		prerequisite = { focus = FNG_anti_leftist_campaign }
 
 		x = 2
@@ -6267,7 +6267,7 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Revived_Rural_Reconstruction"
-			custom_effect_tooltip = FNG_rural_reconstruction
+			FNG_increase_legitimacy = yes
 			every_state = {
 				limit = {
 					state = 799
@@ -6303,6 +6303,7 @@ focus_tree = {
 				remove_idea = FNG_Restored_Constitution
 				add_idea = FNG_Negotiated_Provincial_Revenues
 			}
+			FNG_increase_legitimacy = yes
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER FOCUS_FILTER_POLITICAL }
 	}
@@ -12524,48 +12525,20 @@ focus_tree = {
 				name = FNG_national_unity_league
 				long_name = FNG_national_unity_league_tt
 			}
-			set_party_name = {
-				ideology = social_democrat
-				long_name = GXC_UPC_CDL_DSP_party_long_tt
-				name = GXC_UPC_CDL_DSP_party
-			}
+			FNG_increase_legitimacy = yes
 			add_popularity = {
 				ideology = social_democrat
 				popularity = 0.10
 			}
-			FNG_JAP_spend_large = yes
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = { has_idea = FNG_Centralized_Provincial_Revenues }
-				add_stability = -0.05
-				remove_ideas = FNG_Centralized_Provincial_Revenues
-				custom_effect_tooltip = tooltip_white_line
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.10
 			}
-			add_timed_idea = {
-				idea = FNG_Negotiated_Provincial_Revenues
-				days = 400
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.10
 			}
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = { has_event_target = FNG_federalist_leader }
-				event_target:FNG_federalist_leader = { save_event_target_as = target }
-			}
-			else = {
-				GXC = { save_event_target_as = target }
-			}
-			china_integrate_TARGET_effect = yes
-			hidden_effect = {
-				set_party_name = {
-					ideology = authoritarian_democrat
-					name = FNG_national_unity_league
-					long_name = FNG_national_unity_league_long
-				}
-				set_party_name = {
-					ideology = social_democrat
-					long_name = GXC_UPC_CDL_DSP_party_long
-					name = GXC_UPC_CDL_DSP_party
-				}
-			}
+			add_ideas = FNG_in_the_spirit_of_1912
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER FOCUS_FILTER_POLITICAL }
 	}
@@ -12584,34 +12557,15 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reconstruction_through_autonomy"
-			custom_effect_tooltip = FNG_reconstruction_through_autonomy_tt
-			custom_effect_tooltip = tooltip_white_line
-			CHN_add_resource_northerner_effects = yes
+			
+			FNG_increase_legitimacy = yes
 			add_tech_bonus = {
 				name = FNG_reconstruction_through_autonomy
 				bonus = 0.5
 				uses = 1
 				category = excavation_tech
 			}
-			custom_effect_tooltip = tooltip_white_line
-			every_owned_state = {
-				limit = {
-					is_china_claim_area = yes
-					OR = {
-						has_state_flag = guangdong_province_state
-						has_state_flag = guangxi_province_state
-						has_state_flag = yunnan_province_state
-						has_state_flag = hunan_province_state
-						has_state_flag = sichuan_province_state
-						has_state_flag = jiangxi_province_state
-						has_state_flag = fujian_province_state
-						has_state_flag = zhejiang_province_state
-					}
-				}
-				add_dynamic_modifier = {
-					modifier = FNG_enshrined_regionalism
-				}
-			}
+			
 			add_stability = 0.08
 			add_war_support = 0.08
 		}
@@ -15064,6 +15018,10 @@ focus_tree = {
 		x = 0
 		y = 3
 		relative_position_id = FNG_Restore_1923_Constitution
+		available = { 
+			has_country_flag = FNG_conference_song_support 
+			has_country_flag = FNG_conference_federalist_support
+		}
 		prerequisite = {
 			focus = FNG_Redefine_Provincial_Obligations
 		}
@@ -15235,16 +15193,37 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Limited_Womens_Suffrage"
-			add_timed_idea = {
-				idea = FNG_Controversy_Women_Emancipation
-				days = 90
+			FNG_increase_legitimacy = yes
+			add_ideas = FNG_tridem_Fengtian
+			custom_effect_tooltip = FNG_no_more_bickering_an_shiet_lah
+			set_country_flag = FNG_no_more_bickering_an_shiet_lah_flag
+			clr_country_flag = FNG_communications_clique_active
+			clr_country_flag = FNG_recovery_league_active
+			clr_country_flag = FNG_zhang_clique_active
+			create_country_leader = {
+				name = "Zhang Zuolin"
+				desc = "POLITICS_ZHANG_ZUOLIN_DESC"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Zuolin.png"
+				expire = "1.1.1"
+				ideology = soclib_tridemism_subtype
 			}
-			custom_effect_tooltip = FNG_women_suffrage
 			hidden_effect = {
-				country_event = {
-					id = fengtian.251
-					days = 90
+				set_temp_variable = { temp = party_popularity@paternal_autocrat }
+				multiply_temp_variable = { temp = 0.5 }
+				add_popularity = { ideology = paternal_autocrat popularity = -1 }
+				add_popularity = { ideology = social_liberal popularity = ZCPOP }
+				add_popularity = { ideology = paternal_autocrat popularity = ZCPOP }
+				set_temp_variable = { temp = party_popularity@authoritarian_democrat }
+				multiply_temp_variable = { temp = 0.5 }
+				add_popularity = { ideology = authoritarian_democrat popularity = -1 }
+				add_popularity = { ideology = social_liberal popularity = ZCPOP }
+				add_popularity = { ideology = authoritarian_democrat popularity = ZCPOP }
+				set_party_name = {
+					ideology = social_liberal
+					long_name = FNG_fed_coalition_long
+					name = FNG_fed_coalition
 				}
+				set_politics = { ruling_party = social_liberal }
 			}
 		}
 	}
@@ -15302,6 +15281,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Building_the_Road_to_Federalism"
 			FNG_increase_legitimacy = yes
+			add_ideas = FNG_Feddie_Fengtian
 			custom_effect_tooltip = FNG_no_more_bickering_an_shiet_lah
 			set_country_flag = FNG_no_more_bickering_an_shiet_lah_flag
 			clr_country_flag = FNG_communications_clique_active
@@ -15312,7 +15292,7 @@ focus_tree = {
 				desc = "POLITICS_ZHANG_ZUOLIN_DESC"
 				picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Zuolin.png"
 				expire = "1.1.1"
-				ideology = soccon_generic_national_democracy_subtype
+				ideology = soccon_chinese_federalism_subtype
 			}
 			hidden_effect = {
 				set_temp_variable = { temp = party_popularity@paternal_autocrat }
@@ -15350,10 +15330,8 @@ focus_tree = {
 				type = industrial_complex
 				level = 4
 			}
-			swap_ideas = {
-				remove_idea = FNG_Worker_Loyalty
-				add_idea = FNG_Land_to_the_Tiller_idea
-			}
+			add_ideas = FNG_Land_to_the_Tiller_idea
+			
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
 	}
@@ -15484,20 +15462,15 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Twin_Dragons_Taming_the_Water"
-			effect_tooltip = {
-				swap_ideas = {
-					remove_idea = FNG_Feddie_Fengtian4
-					add_idea = FNG_Twin_Dragons_Taming_the_Water_idea_fake
-				}
-			}
-			hidden_effect = {
+			
+			
 				swap_ideas = {
 					remove_idea = FNG_Feddie_Fengtian4
 					add_idea = FNG_Twin_Dragons_Taming_the_Water_idea
 				}
 				remove_ideas = FNG_Land_to_the_Tiller_idea
 				remove_ideas = FNG_patriot_education_idea
-			}
+			
 			add_political_power = 100
 			add_popularity = { ideology = social_conservative popularity = 0.10 }
 		}
@@ -16543,12 +16516,7 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.1
 			army_experience = 50
-			GUK_Bilas = {
-				remove_unit_leader_role = yes
-			}
-			GUK_Kordyuk = {
-				remove_unit_leader_role = yes
-			}
+			
 		}
 	}
 	focus = {
@@ -16722,15 +16690,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_war_support = 0.1
-			GUK_kost_andrushchenko = {
-				remove_unit_leader_role = yes
-			}
-			GUK_volodymyr_sinclair = {
-				remove_unit_leader_role = yes
-			}
-			GUK_rodion_malynovskyi = {
-				remove_unit_leader_role = yes
-			}
+			
 		}
 	}
 	focus = {
@@ -17280,12 +17240,7 @@ focus_tree = {
 			set_politics = {
 				ruling_party = totalist
 			}
-			create_country_leader = {
-				name = "尼古拉·乌斯特里亚洛夫"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Nikolay_Ustryalov.png"
-				expire = "1965.1.1"
-				ideology = national_bolshevik_subtype
-			}
+			
 		}
 	}
 	focus = {
