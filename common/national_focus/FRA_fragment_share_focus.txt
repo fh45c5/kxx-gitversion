@@ -33,8 +33,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_commune_federation_s_embers"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_political_power = 100
 	}
 }
 
@@ -427,7 +426,14 @@ shared_focus = {
 	y = 4
 	cost = 5
 	available = {
-		
+		FROM = {
+			if = {
+				limit = {
+					original_tag = BRI
+				}
+
+			}
+		}
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_socialism_still_exists"
@@ -510,7 +516,12 @@ shared_focus = {
 	y = 4
 	cost = 5
 	available = {
-		
+		FROM = {
+			OR = {
+				has_government = totalist
+				has_government = national_populist
+			}
+		}
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_corporatist_model"
@@ -788,8 +799,9 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Defend_our_independence"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		army_experience = 75
+		add_war_support = 0.09
+		add_political_power = 50
 	}
 }
 
@@ -808,8 +820,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Regularize_the_army"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_fragment_ARMY_1
+			add_idea = FRB_fragment_ARMY_2
+		}
 	}
 }
 
@@ -828,8 +842,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Peoples_army"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_fragment_ARMY_1
+			add_idea = FRB_fragment_ARMY_2
+		}
 	}
 }
 
@@ -848,8 +864,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Army_political_department"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_ideas = FRB_Political_Commissar
 	}
 }
 
@@ -868,8 +883,9 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Mobilize_local_militia"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_stability = 0.05
+		add_political_power = 75
+		add_war_support = 0.05
 	}
 }
 
@@ -889,8 +905,16 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Strengthen_mobilization_mechanisms"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		custom_effect_tooltip = FRB_Strengthen_mobilization_mechanisms_tt
+		if = {
+			limit = {
+				has_completed_focus = FRB_Mobilize_local_militia
+			}
+			add_ideas = FRB_local_militia_1
+		}
+		else = {
+			add_ideas = FRB_local_militia
+		}
 	}
 }
 
@@ -909,8 +933,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Revolutionary_radicalism"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_Political_Commissar
+			add_idea = FRB_Political_Commissar_1
+		}
 	}
 }
 
@@ -932,8 +958,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Reignite_the_torch"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_fragment_ARMY_2
+			add_idea = FRB_fragment_ARMY_3_rev
+		}
 	}
 }
 
@@ -952,8 +980,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Establish_a_revolutionary_forward_command"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_ideas = FRB_revolutionary_forward_command
 	}
 }
 
@@ -973,8 +1000,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Organize_combat_teams"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_fragment_ARMY_1
+			add_idea = FRB_fragment_ARMY_2
+		}
 	}
 }
 
@@ -993,8 +1022,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Inculcate_nationalism"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_ideas = FRB_combat_teams_idea
 	}
 }
 
@@ -1013,8 +1041,8 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Strengthen_combat_training"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		army_experience = 100
+		add_war_support = 0.08
 	}
 }
 
@@ -1034,8 +1062,16 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_An_excellent_army"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		custom_effect_tooltip = FRB_Strengthen_mobilization_mechanisms_tt
+		if = {
+			limit = {
+				has_completed_focus = FRB_Strengthen_combat_training
+			}
+			add_ideas = FRB_excellent_army_1
+		}
+		else = {
+			add_ideas = FRB_excellent_army
+		}
 	}
 }
 
@@ -1054,8 +1090,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_War_frenzy"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_combat_teams_idea
+			add_idea = FRB_combat_teams_idea_1
+		}
 	}
 }
 
@@ -1077,8 +1115,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Shield_of_national_independence"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_fragment_ARMY_2
+			add_idea = FRB_fragment_ARMY_3_nat
+		}
 	}
 }
 
@@ -1097,8 +1137,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Expand_military_production"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_ideas = FRB_Expand_military_production_idea		
 	}
 }
 
@@ -1118,8 +1157,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Empower_commune_veterans"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_ideas = FRB_veterans
 	}
 }
 
@@ -1139,8 +1177,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Reform_the_military_conscription_system"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_ideas = FRB_Relaxed_military_service
 	}
 }
 
@@ -1159,8 +1196,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Establish_a_war_department"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_ideas = FRB_war_department
 	}
 }
 
@@ -1179,8 +1215,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_National_defense_bill"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_war_department
+			add_idea = FRB_war_department_1
+		}
 	}
 }
 
@@ -1199,7 +1237,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Look_up_to_the_sky"
-		custom_effect_tooltip = COL_election_socialist_tt
+		add_ideas = FRB_Look_up_to_the_sky_idea
 		
 	}
 }
@@ -1219,8 +1257,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Aircraft_design"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_ideas = FRB_fragment_AIR_industry
 	}
 }
 
@@ -1285,8 +1322,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_The_eagle_spreads_its_wings"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_Look_up_to_the_sky_idea
+			add_idea = FRB_Look_up_to_the_sky_idea_1
+		}
 	}
 }
 
@@ -1305,8 +1344,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Gaze_out_to_the_ocean"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_ideas = FRB_Gaze_out_to_the_ocean_idea
 	}
 }
 
@@ -1325,8 +1363,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Warship_research_and_development"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_ideas = FRB_fragment_NAVY_industry
 	}
 }
 
@@ -1345,8 +1382,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Naval_war_exercises"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		navy_experience = 200
 	}
 }
 
@@ -1366,7 +1402,8 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Dockyard_construction"
 		custom_effect_tooltip = COL_election_socialist_tt
-		
+		add_two_random_dockyards = yes
+		add_two_random_dockyards = yes
 	}
 }
 
@@ -1391,8 +1428,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_The_eagle_spreads_its_wings"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_Gaze_out_to_the_ocean_idea
+			add_idea = FRB_Gaze_out_to_the_ocean_idea_1
+		}
 	}
 }
 
@@ -1417,7 +1456,9 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRB_Defend_freedom"
-		custom_effect_tooltip = COL_election_socialist_tt
-		
+		swap_ideas = {
+			remove_idea = FRB_fragment_ARMY_2
+			add_idea = FRB_fragment_ARMY_3_lib
+		}
 	}
 }
