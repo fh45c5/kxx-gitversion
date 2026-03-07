@@ -12,7 +12,7 @@ add_namespace = fngdynasty
 add_namespace = fngnap
 add_namespace = fngrebels #unused events
 add_namespace = fngmil
-
+add_namespace = fngreg
 #################################
 ### Fengtian Political Events ###
 #################################
@@ -35,6 +35,7 @@ country_event = { #Rumors incite Regionalist Uproar
 			add_idea = FNG_Regionalist_Resentment
 			remove_idea = FNG_Regionalist_Sentiment
 		}
+		activate_mission = FNG_regionalist_wrath
 		hidden_effect = {
 			country_event = {
 				id = fengtian.3
@@ -74,6 +75,7 @@ country_event = { #Protests Continue REPEATING
 			has_country_flag = regionalist_protest_4
 		}
 	}
+	
 	picture = GFX_report_event_CHI_protest
 
 	is_triggered_only = yes
@@ -124,13 +126,15 @@ country_event = { #Protests Continue REPEATING
 				clr_country_flag = regionalist_protest_3
 				set_country_flag = regionalist_protest_4
 			}
+			
 			if = {
 				limit = {
 					has_country_flag = regionalist_protest_4
 				}
 				clr_country_flag = regionalist_protest_4
-				set_country_flag = regionalist_protest_2
+				set_country_flag = regionalist_protest_2	
 			}
+			
 			country_event = { # Repeating
 				id = fengtian.3
 				days = 20
@@ -18387,5 +18391,237 @@ country_event = { #Army Selection
 		name = fngmil.33.e
 		trigger = { has_completed_focus = FNG_a_weapon_to_surpass_the_IJA }
 		add_ideas = FNG_army_zeal
+	}
+}
+country_event = { #
+	id = fngreg.1
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event fengtian.1" 
+		hidden_effect = {
+			remove_ideas = FNG_Regionalist_Outrage
+			remove_ideas = FNG_Regionalist_Resentment
+			remove_ideas = FNG_Regionalist_Sentiment
+			remove_ideas = {
+				FNG_Unscrupulous_Governance
+				FNG_Investment_Dearth
+				FNG_The_Kwantung_Army
+				FNG_mantetsu_influence_idea
+			}
+			FNG = {
+				every_unit_leader = {	
+					set_nationality = NSW
+				}	
+			}
+			remove_all_ministers = yes
+			clr_country_flag = FNG_concordia_association_active
+			clr_country_flag = FNG_communications_clique_active
+			clr_country_flag = FNG_recovery_league_active
+			clr_country_flag = FNG_zhang_clique_active
+			add_stability = -0.25
+			kill_country_leader = yes
+			set_country_flag = FNG_no_longer_chinese_tag #ban unification decisions
+				JAP = {
+					diplomatic_relation = {
+   						country = FNG
+   						relation = guarantee
+   						active = no
+  					}
+				}
+		}
+	}
+	title = fngreg.1.t
+	desc = fngreg.1.d
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	option = {
+		name = fngreg.1.a #sov
+		set_country_flag = FNG_sov_win
+		create_country_leader = {
+			name = "阿列克谢·波达波夫"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Xie_Wendong.png"
+			expire = "1.1.1"
+			ideology = radsoc_red_junta_subtype
+		}
+			create_country_leader = {
+				name = "尼古拉·乌斯特里亚洛夫"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Nikolay_Ustryalov.png"
+				expire = "1965.1.1"
+				ideology = national_bolshevik_subtype
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.15
+			}
+			set_politics = {
+				ruling_party = radical_socialist
+				elections_allowed = no
+			}
+			hidden_effect = {
+				
+				create_field_marshal = {
+					name = "Vasily Blyukher"
+					portrait_path = "gfx/leaders/TRM/TRM_Vasily_Blyukher.png"
+					id = 505050
+					traits = {
+						offensive_doctrine
+						politically_connected
+						trickster
+					}
+					skill = 3
+					attack_skill = 3
+					defense_skill = 1
+					planning_skill = 2
+					logistics_skill = 1
+				}
+				create_corps_commander = {
+					name = "Genrikh Eikhe"
+					portrait_path = "gfx/leaders/TRM/TRM_Genrikh_Eikhe.png"
+					id = 505049
+					traits = {
+						politically_connected
+						infantry_leader
+						trait_engineer
+					}
+					skill = 2
+					attack_skill = 1
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 1
+				}
+			}
+	}
+	option = {
+		name = fngreg.1.b #rus
+		set_country_flag = FNG_rus_win
+		create_country_leader = {
+			name = "康斯坦丁·罗扎耶夫斯基"
+			picture = "gfx/leaders/ARC/Portrait_Rodz_General.png"
+			expire = "1.1.1"
+			ideology = pataut_legionarism_subtype
+		}
+		create_country_leader = {
+			name = "康斯坦丁·罗扎耶夫斯基"
+			picture = "gfx/leaders/ARC/Portrait_Rodz_General.png"
+			expire = "1.1.1"
+			ideology = legionarism_subtype
+		}
+			set_politics = {
+				ruling_party = national_populist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.15
+			}
+			
+
+				
+	}
+	option = {
+		name = fngreg.1.c #ukr
+		set_country_flag = FNG_ukr_win
+		create_country_leader = {
+			name = "尤里·罗伊"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Yuriy_Roy.png"
+			expire = "1.1.1"
+			ideology = natpop_kleptocracy_subtype
+		}
+		create_country_leader = {
+			name = "伊万·斯维特"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Ivan_Svit.png"
+			expire = "1.1.1"
+			ideology = tot_eternal_revolution
+		}
+			set_politics = {
+				ruling_party = national_populist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.15
+			}
+			
+	}
+	option = {
+		name = fngreg.1.e #bandits
+		set_country_flag = FNG_bandits_win
+			set_politics = {
+				ruling_party = paternal_autocrat
+				elections_allowed = no
+			}
+		create_country_leader = {
+			name = "谢文东"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Xie_Wendong.png"
+			expire = "1.1.1"
+			ideology = crime_syndicate_subtype
+		}
+	}
+	option = {
+		name = fngreg.1.f #kor
+		set_country_flag = FNG_kor_win
+		create_country_leader = {
+			name = "金佐镇"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Kim_Chwa_chin.png"
+			expire = "1.1.1"
+			ideology = syn_anarchism_subtype
+		}
+		
+			set_politics = {
+				ruling_party = syndicalist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.15
+			}
+			hidden_effect = {
+				GUK = {
+					every_character = {
+						limit = { is_unit_leader = yes }
+						set_nationality = FNG
+					}
+				}
+			}	
+	}
+	option = {
+		name = fngreg.1.g #jew
+		set_country_flag = FNG_jew_win
+		create_country_leader = {
+			name = "以利亚胡·兰金"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Yuriy_Roy.png"
+			expire = "1.1.1"
+			ideology = autdem_zionism
+		}
+		create_country_leader = {
+			name = "以色列·爱泼斯坦"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Ivan_Svit.png"
+			expire = "1.1.1"
+			ideology = radsoc_communism_subtype
+		}
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.15
+			}
 	}
 }
