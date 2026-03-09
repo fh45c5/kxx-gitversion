@@ -1,0 +1,976 @@
+################################### LKMT ###################################
+ #五省战争
+ add_namespace = KXX_LKMT_I 
+	#Intro
+	country_event = { 
+		id = KXX_LKMT_I.1
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.1" }
+		title = KXX_LKMT_I.1.t
+		desc = KXX_LKMT_I.1.d
+		is_triggered_only = yes
+
+		option = {
+			name = KXX_LKMT_I.1.a
+			country_event = KXX_LKMT_I.2
+			add_war_support = 0.05
+			add_political_power = 60
+		}
+   	}
+	#国民革命的现状 （主要派系）
+	country_event = {
+		id = KXX_LKMT_I.2
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.2" }
+		title = KXX_LKMT_I.2.t
+		desc = KXX_LKMT_I.2.d
+		is_triggered_only = yes
+
+		option = {
+			name = KXX_LKMT_I.2.a
+			country_event = KXX_LKMT_I.3
+		}
+   	}
+	#国民革命的现状（次要派系）
+	country_event = {
+		id = KXX_LKMT_I.3
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.3" }
+		title = KXX_LKMT_I.3.t
+		desc = KXX_LKMT_I.3.d
+		is_triggered_only = yes
+
+		option = {
+			name = KXX_LKMT_I.3.a
+		}
+   	}
+	#农忙
+	country_event = {
+		id = KXX_LKMT_I.4
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.4" }
+		title = KXX_LKMT_I.4.t
+		desc = KXX_LKMT_I.4.d
+		picture = GFX_report_event_CHI_economic
+
+		is_triggered_only = yes #Triggered by CHI.earlygame.000, should be on June 24th, 1936
+
+		option = { #They'll have to get used to these changes for the greater good.
+			name = KXX_LKMT_I.4.a
+			ai_chance = { base = 50 }
+			add_command_power = 30
+			add_stability = -0.10
+			CHI_add_rad_small_effect = yes
+		}
+
+		option = { #Divert new recruits to get some moral training in the fields.
+			name = KXX_LKMT_I.4.b
+			ai_chance = { base = 50 }
+			add_manpower = -5000
+			add_political_power = 50
+			add_war_support = 0.05
+		}
+   	}
+	# 红色娘子军 ###
+	country_event = {
+		id = KXX_LKMT_I.5
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.5" }
+		title = KXX_LKMT_I.5.t
+		desc = KXX_LKMT_I.5.d
+
+		is_triggered_only = yes 
+
+		option = {
+			name = KXX_LKMT_I.5.a
+			ai_chance = { base = 50 }
+			add_political_power = 30
+			CHI_sub_rad_small_effect = yes
+		}
+
+		option = {
+			name = KXX_LKMT_I.5.b
+			ai_chance = { base = 50 }
+			add_manpower = 5000
+			army_experience = 10
+			CHI_add_rad_small_effect = yes
+		}
+	}
+	# 夏威夷派 
+	country_event = { 
+		id = KXX_LKMT_I.6
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.6" }
+		title = KXX_LKMT_I.6.t
+		desc = KXX_LKMT_I.6.d
+		picture = GFX_report_event_CHI_sun_fo_in_hawaii
+
+		is_triggered_only = yes #Triggered by focus CHI_our_connections_overseas
+
+		option = { #Bah who needs them?
+			name = KXX_LKMT_I.6.a
+			ai_chance = { base = 50 }
+			add_political_power = 25
+		}
+
+		option = { #We'll take what we can get!
+			name = KXX_LKMT_I.7.b
+			ai_chance = { base = 50 }
+			add_political_power = 50
+			CHI_add_rad_small_effect = yes
+			CHI_NRC_small_effect = yes
+		}
+	}
+	# 请求欧洲援助 	
+	country_event = { # get support from europe
+		id = KXX_LKMT_I.7
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.7" }
+		title = KXX_LKMT_I.7.t
+		desc = KXX_LKMT_I.7.d
+		picture = GFX_report_event_IRE_german_volunteers
+		is_triggered_only = yes
+
+		option = { # advisors and guns
+			name = KXX_LKMT_I.7.a
+			ai_chance = { base = 30 }
+			add_political_power = -50
+			CHI = {
+				effect_tooltip = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 500
+						producer = ROOT
+					}
+					add_equipment_to_stockpile = {
+						type = artillery_equipment
+						amount = 50
+						producer = ROOT
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = KR_approves_of_govt
+					}
+				}
+				country_event = { id = KXX_LKMT_I.8 days = 3 } #Event to CHI letting them know advisors and guns are on the way
+			}
+		}
+
+		option = { # Solidarity but not for you
+			name = KXX_LKMT_I.7.b
+			ai_chance = {
+				base = 20
+				modifier = {
+					add = -20
+					OR = {
+						tag = ENG
+						tag = FRA
+					}
+				}
+			}
+			CHI = {
+				effect_tooltip = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = KR_disapproves_of_govt
+					}
+				}
+				country_event = { id = KXX_LKMT_I.9 days = 3 } #Nothing
+			}
+		}
+	}
+	# 拿到欧洲援助 ###	
+	country_event = { # Advisors and Rifles from Europe
+		id = KXX_LKMT_I.8
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.8" }
+		title = KXX_LKMT_I.8.t
+		desc = KXX_LKMT_I.8.d
+		picture = GFX_report_event_CHI_wang_jingwei_field_binoculars
+
+		is_triggered_only = yes
+
+		option = {
+			name = KXX_LKMT_I.8.a
+			CHI_add_CSL_influence_medium = yes
+			army_experience = 20
+			random_list = {
+				25 = {
+					add_offsite_building = {
+						type = arms_factory
+						level = 1
+					}
+				}
+				25 = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 500
+						producer = FROM
+					}
+					add_equipment_to_stockpile = {
+						type = artillery_equipment
+						amount = 50
+						producer = FROM
+					}
+				}
+				50 = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 500
+						producer = FROM
+					}
+				}
+			}
+			add_opinion_modifier = {
+				target = FROM
+				modifier = KR_approves_of_govt
+			}
+		}
+	}
+	# 欧洲没援助 ###
+	country_event = { # nothing from Europe
+		id = KXX_LKMT_I.9
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.9" }
+		title = KXX_LKMT_I.9.t
+		desc = KXX_LKMT_I.9.d
+		picture = GFX_report_event_CHI_wang_jingwei_speech_preparation_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = KXX_LKMT_I.9.a #Tragic, but understandable.
+			ai_chance = { base = 50 }
+			add_opinion_modifier = {
+				target = FROM
+				modifier = KR_disapproves_of_govt
+			}
+		}
+
+		option = {
+			name = KXX_LKMT_I.9.b #We will liberate China on our own!
+			ai_chance = { base = 50 }
+			add_opinion_modifier = {
+				target = FROM
+				modifier = small_decrease
+			}
+			CHI_add_CRA_influence_medium = yes
+		}
+	}
+	# 南京被解放 ###
+	country_event = { #A New Day in Nanjing
+		id = KXX_LKMT_I.10
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.13" }
+		title = KXX_LKMT_I.10.t
+		desc = KXX_LKMT_I.10.d
+		picture = GFX_report_event_CHI_chu_minyi_with_camera
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = { 
+			name = KXX_LKMT_I.10.a #A new republic rises!
+			add_political_power = 15
+			set_capital = {
+				state = 613
+				remember_old_capital = no
+			}
+		}
+	}
+	# 温州事件 ###
+	country_event = {
+		id = KXX_LKMT_I.11 #Incidents in Wenzhou
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.11" }
+		title = KXX_LKMT_I.11.t
+		desc = KXX_LKMT_I.11.d
+		picture = GFX_report_event_CHI_riot
+	
+		fire_only_once = yes
+		is_triggered_only = yes #Fired by on_action
+	
+		option = {
+			name = KXX_LKMT_I.11.a
+			add_political_power = -10
+			803 = {
+				damage_building = {
+					type = infrastructure
+					damage = 0.15
+				}
+			}
+		}
+	}
+	# 南通惨案 ###
+	country_event = {
+		id = KXX_LKMT_I.12 #Tragedy in Nantong
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.12" }
+		title = KXX_LKMT_I.12.t
+		desc = KXX_LKMT_I.12.d
+		picture = GFX_report_event_kmt_newspaper
+	
+		fire_only_once = yes
+		is_triggered_only = yes #Fired by on_action
+	
+		option = {
+			name = KXX_LKMT_I.12.a
+			add_political_power = -10
+			1075 = {
+				damage_building = {
+					type = infrastructure
+					damage = 0.15
+				}
+			}
+		}
+	}
+	# “胡建人”在杭州 ###
+	country_event = {
+		id = KXX_LKMT_I.13 #Fujianers in Hangzhou
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.13" }
+		title = KXX_LKMT_I.13.t
+		desc = KXX_LKMT_I.13.d
+		picture = GFX_report_event_CHI_honghuzi
+	
+		fire_only_once = yes
+		is_triggered_only = yes #Triggered by on_action
+	
+		option = {
+			name = KXX_LKMT_I.13.a
+			add_political_power = -10
+			596 = {
+				damage_building = {
+					type = infrastructure
+					damage = 0.15
+				}
+			}
+			hidden_effect = {
+				country_event = { id = KXX_LKMT_I.14 days = 15 random_days = 10 }
+			}
+		}
+	}
+	# 双枪科恩 ###
+	country_event = {
+		id = KXX_LKMT_I.14
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.14 FROM = [From.GetName]" }
+
+		title = KXX_LKMT_I.14.t
+		desc = KXX_LKMT_I.14.d
+		picture = GFX_report_event_CHI_two_gun_cohen
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = KXX_LKMT_I.14.a
+			add_stability = 0.02
+		}
+	}
+	#  张发奎和薛岳归来  ###
+	country_event = {
+		id = KXX_LKMT_I.15
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.15 FROM = [From.GetName]" }
+
+		title = KXX_LKMT_I.15.t
+		desc = KXX_LKMT_I.15.d
+		picture = GFX_report_event_CHI_xue_zhang
+
+		is_triggered_only = yes
+
+		option = {
+			name = KXX_LKMT_I.15.a
+			add_manpower = 200
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 500
+				producer = BHC
+			}
+			create_corps_commander = {
+				name = "CHI_xue_yue"
+				desc = CHI_xue_yue_desc
+				traits = { brilliant_strategist trait_reckless war_hero CHI_left_kmt_officer }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "CHI_zhang_fakui"
+				desc = CHI_zhang_fakui_desc
+				traits = { harsh_leader infantry_officer war_hero CHI_left_kmt_officer }
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 3
+			}
+			BHC = { country_event = { id = KXX_LKMT_I.16 days = 3 } }
+		}
+	}
+	# 照会印度公社 ###
+	country_event = {
+		id = KXX_LKMT_I.16
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.16 FROM = [From.GetName]" }
+		title = KXX_LKMT_I.16.t
+		desc = KXX_LKMT_I.16.d
+		picture = GFX_report_event_CHI_xue_zhang
+
+		is_triggered_only = yes
+
+		option = {
+			name = KXX_LKMT_I.16.a
+			add_political_power = 5
+			CHI = { save_event_target_as = volunteer_target }
+			send_volunteers_to_TARGET = yes
+		}
+	}
+	# 井冈山援军 ###
+	country_event = {
+		id = KXX_LKMT_I.17
+		title = KXX_LKMT_I.17.t
+		desc = KXX_LKMT_I.17.d
+		picture = GFX_report_event_generic_Youjizhan_2
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.17.1
+			add_political_power = 50
+			add_war_support = 0.1
+			trigger = {
+				always = yes
+			}
+			army_experience = 25
+			add_command_power = 50
+			set_country_flag = CHI_Gannan_army_meeting_completed
+			CHI_add_PMC_influence_medium = yes
+			hidden_effect = {
+				country_event = { id = KXX_LKMT_I.18 days = 1 }
+			}
+		}
+	}
+	# 南昌空虚 ###
+	country_event = {
+		id = KXX_LKMT_I.18
+		picture = GFX_report_event_CHI_Mao_Zhuxi
+		title = KXX_LKMT_I.18.t
+		desc = KXX_LKMT_I.18.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.18.1
+			add_war_support = 0.02
+			create_corps_commander = {
+				name = CHI_Mao_runzhi
+				desc = Mao_runzhi.d
+				traits = { brilliant_strategist organizer trickster adaptable CHI_left_kmt_officer }
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 4
+				logistics_skill = 2
+			}
+			activate_mission = CHI_mission_support_nanchang
+		}
+	}
+	# 南昌起义 ###
+	country_event = {
+		id = KXX_LKMT_I.19
+		picture = GFX_report_event_generic_Nanchang_Qiyi
+		title = KXX_LKMT_I.19.t
+		desc = KXX_LKMT_I.19.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.19.1
+			add_political_power = 150
+			CHI_RCA_medium_effect = yes
+			CHI_add_PMC_influence_large = yes
+			hidden_effect = {  
+				news_event = { id = KXX_LKMT_I.20 days = 1 }
+			}
+		}
+	}
+	#NEWS
+	news_event = { 
+		id = KXX_LKMT_I.20
+		title = KXX_LKMT_I.20.t
+		desc = KXX_LKMT_I.20.d
+		picture = GFX_news_event_capture_hong_kong
+
+		major = yes
+		is_triggered_only = yes
+		fire_for_sender = yes
+
+		trigger = {
+			wants_world_news = yes
+		}
+
+		show_major = {
+			regional_asia_news = yes
+		}
+
+		option = {
+			name = KXX_LKMT_I.20.a
+		}
+	}
+	# 中央委员会归来 ###
+	country_event = {
+		id = KXX_LKMT_I.21
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.21 FROM = [From.GetName]" }
+
+		title = KXX_LKMT_I.21.t
+		desc = {
+			text = KXX_LKMT_I.21.d1
+			trigger = {
+				has_full_control_of_state = 803 # Wenzhou
+			}
+		}
+		desc = {
+			text = KXX_LKMT_I.21.d2
+			trigger = {
+				has_full_control_of_state = 802 # Xiamen
+				NOT = { has_full_control_of_state = 803 } # Wenzhou
+			}
+		}
+		desc = {
+			text = KXX_LKMT_I.21.d3
+			trigger = {
+				NOT = { has_full_control_of_state = 803 } # Wenzhou
+				NOT = { has_full_control_of_state = 802 } # Xiamen
+			}
+		}
+		picture = GFX_report_event_FNG_protest
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = KXX_LKMT_I.21.a
+			custom_effect_tooltip = CHI_krevent1_tt
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 500
+				producer = FRA
+			}
+			swap_ideas = {
+				remove_idea = CHI_Mao_zedong_hog_tot
+				add_idea = CHI_Liao_Zhongkai_hog_rso
+			}
+			CHI_RCA_medium_effect = yes
+			hidden_effect = {
+				random_controlled_state = {
+					prioritize = { 802 803 1046 }
+					create_unit = {
+						owner = ROOT
+						division = "name = \"Committee's Own\" division_template = \"Zhenggui Shih\" start_experience_factor = 0.5 start_equipment_factor = 1.0 force_equipment_variants = { infantry_equipment_1 = { owner = FRA } artillery_equipment_1 = { owner = FRA } }"
+					}
+				}
+				add_country_leader_role = {
+					character = CHI_committee
+					promote_leader = yes
+					country_leader = {
+						ideology = radsoc_tridemism_subtype
+						expire = "1965.1.1.1"
+						desc = CHI_committee_desc
+						traits = {
+							CHI_struggle_of_line
+						}
+					}
+				}
+				clr_country_flag = Li_Shiqun_dead
+				clr_country_flag = Gu_Zhenggang_dead
+				clr_country_flag = Guo_Chuntao_dead
+				clr_country_flag = Zhou_Fokai_dead
+				clr_country_flag = Zeng_Xing_dead
+				clr_country_flag = Chu_Minyi_dead
+				clr_country_flag = Chen_Bijun_dead
+			}
+			custom_effect_tooltip = CHI_get_team_of_consultants_tooltip
+		}
+	}
+	# 农民运动 ###
+	country_event = {
+		id = KXX_LKMT_I.22
+		title = KXX_LKMT_I.22.t
+		desc = KXX_LKMT_I.22.d
+		picture = GFX_report_event_CHI_xiaotuiche
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.22.a
+			CHI_add_rad_large_effect = yes
+			add_manpower = 10000
+			add_resource = {
+				type = steel
+				amount = 26
+				state = 1044
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 200
+				producer = LEP
+			}
+			custom_effect_tooltip = CHI_mobilize_2_units_tt
+			hidden_effect = { 
+				random_owned_controlled_state = {
+					limit = {
+						is_in_home_area = yes
+						impassable = no
+					}
+					create_unit = {
+						division = "division_template = \"Géming Minbing Lü\" start_experience_factor = 0.3"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "division_template = \"Géming Minbing Lü\" start_experience_factor = 0.3"
+						owner = ROOT
+					}
+				}
+			}
+		}
+		option = { 
+			name = KXX_LKMT_I.22.b
+			add_manpower = 5000
+			add_resource = {
+				type = steel
+				amount = 26
+				state = 1044
+			}
+			custom_effect_tooltip = CHI_mobilize_1_units_tt
+			hidden_effect = {
+				random_owned_controlled_state = {
+					limit = {
+						is_in_home_area = yes
+						impassable = no
+					}
+					create_unit = {
+						division = "division_template = \"Géming Minbing Lü\" start_experience_factor = 0.3"
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+	# 土匪问题 ###
+	country_event = {
+		id = KXX_LKMT_I.23
+		title = KXX_LKMT_I.23.t
+		desc = KXX_LKMT_I.23.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.23.a
+			CHI_add_rad_small_effect = yes
+			hidden_effect = { 
+				country_event = { id = KXX_LKMT_I.24 days = 14 }
+				random_owned_controlled_state = {
+					prioritize = { 1046 }
+					limit = {
+						is_in_home_area = yes
+						impassable = no
+					}
+					create_unit = {
+						division = "division_template = \"Géming Minbing Lü\" start_experience_factor = 0.3"
+						prioritize_location = 1046
+						owner = ROOT
+					}
+					create_unit = {
+						division = "division_template = \"Géming Minbing Lü\" start_experience_factor = 0.3"
+						prioritize_location = 1046
+						owner = ROOT
+					}
+				}
+			}
+			custom_effect_tooltip = CHI_mobilize_2_units_tt
+		}
+		option = { 
+			name = KXX_LKMT_I.23.b
+			hidden_effect = { 
+				random_owned_controlled_state = {
+					prioritize = { 1046 }
+					limit = {
+						is_in_home_area = yes
+						impassable = no
+					}
+					create_unit = {
+						division = "division_template = \"Géming Minbing Lü\" start_experience_factor = 0.3"
+						prioritize_location = 1046
+						owner = ROOT
+					}
+				}
+			}
+			custom_effect_tooltip = CHI_mobilize_1_units_tt
+		}
+	}
+	# 士兵劫掠 ###
+	country_event = {
+		id = KXX_LKMT_I.24
+		title = KXX_LKMT_I.24.t
+		desc = KXX_LKMT_I.24.d
+		picture = GFX_report_event_CHI_warlord_cavalry
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.24.a
+			CHI_sub_rad_medium_effect = yes
+			add_timed_idea = { idea = CHI_bandits_pillaged days = 90 }
+			army_experience = 25
+			add_political_power = 50
+			add_manpower = -5000
+		}
+		option = { 
+			name = KXX_LKMT_I.24.b
+			CHI_add_CRA_influence_small = yes
+			CHI_add_rad_medium_effect = yes
+			add_political_power = -25
+			add_stability = -0.05
+		}
+	}
+	# 上海的情况 ###
+	country_event = {
+		id = KXX_LKMT_I.25
+		title = KXX_LKMT_I.25.t
+		desc = KXX_LKMT_I.25.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.25.a
+			CHI_RCA_small_effect = yes
+			CHI_add_CRA_influence_small = yes
+			hidden_effect = {
+				country_event = { id = KXX_LKMT_I.26 days = 3 }
+			}
+		}
+		option = { 
+			name = KXX_LKMT_I.25.b
+			CHI_RCA_medium_effect = yes
+			hidden_effect = {
+				country_event = { id = KXX_LKMT_I.26 days = 3 }
+			}
+		}
+	}
+	# 拿下上海 ###
+	country_event = {
+		id = KXX_LKMT_I.26
+		title = KXX_LKMT_I.26.t
+		desc = KXX_LKMT_I.26.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.26.a
+			add_war_support = 0.05
+			add_political_power = 50
+			transfer_state = 743
+			CHI_RCA_medium_effect = yes
+			hidden_effect = {
+				country_event = { id = KXX_LKMT_I.27 days = 1 }
+			}
+		}
+	}
+	# 洋人的谈判 ###
+	country_event = {
+		id = KXX_LKMT_I.27
+		title = KXX_LKMT_I.27.t
+		desc = KXX_LKMT_I.27.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.27.a
+			add_war_support = 0.05
+			add_timed_idea = {
+				idea = CHI_shanghai_reserve_fund
+				days = 180
+			}
+			LEC = { country_event = { id = KXX_LKMT_I.28 days = 1 } }
+		}
+		option = { 
+			name = KXX_LKMT_I.27.b
+			CHI_add_rad_medium_effect = yes
+			add_political_power = -25
+			LEC = { country_event = { id = KXX_LKMT_I.29 days = 1 } }
+		}
+	}
+	# 谈判破裂 ###
+	country_event = {
+		id = KXX_LKMT_I.28
+		title = KXX_LKMT_I.28.t
+		desc = KXX_LKMT_I.28.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.28.a
+			FROM = { country_event = { id = KXX_LKMT_I.32 days = 1 } }
+		}
+		option = { 
+			name = KXX_LKMT_I.28.b
+			ai_chance = { base = 0 }
+			FROM = { country_event = { id = KXX_LKMT_I.31 days = 1 } }
+		}
+	}
+	# 国民党的威胁 ###
+	country_event = {
+		id = KXX_LKMT_I.29
+		title = KXX_LKMT_I.29.t
+		desc = KXX_LKMT_I.29.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.29.a
+			ai_chance = { base = 0 }
+			FROM = { country_event = { id = KXX_LKMT_I.31 days = 1 } }
+		}
+		option = { 
+			name = KXX_LKMT_I.29.b
+			FROM = { country_event = { id = KXX_LKMT_I.30 days = 1 } }
+		}
+	}
+	# 工部局拒绝 ###
+	country_event = {
+		id = KXX_LKMT_I.30
+		title = KXX_LKMT_I.30.t
+		desc = KXX_LKMT_I.30.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.30.a
+			add_war_support = 0.05
+			CHI_NRC_medium_effect = yes
+			CHI_add_rad_small_effect = yes
+			add_timed_idea = {
+				idea = CHI_shanghai_reserve_fund
+				days = 180
+			}
+			FROM = { country_event = { id = KXX_LKMT_I.28 days = 1 } }
+		}
+	}
+	# 工部局妥协 ###
+	country_event = {
+		id = KXX_LKMT_I.31
+		title = KXX_LKMT_I.31.t
+		desc = KXX_LKMT_I.31.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.31.a
+			add_political_power = 50
+			CHI_RCA_medium_effect = yes
+			CHI_add_CRA_influence_small = yes
+			if = {
+				limit = { LEC = { owns_state = 326 } }
+				transfer_state = 326
+			}
+			if = {
+				limit = { LEC = { owns_state = 609 } }
+				hidden_effect = {
+					JAP = {
+						transfer_state = 609
+						country_event = { id = lectianjap.27 days = 3 }
+					}
+				}
+			}
+			if = {
+				limit = { LEC = { owns_state = 746 } }
+				transfer_state = 746
+			}
+			if = {
+				limit = { LEC = { owns_state = 747 } }
+				transfer_state = 747
+			}
+			if = {
+				limit = { LEC = { owns_state = 801 } }
+				transfer_state = 801
+			}
+			LEC = { transfer_state = 743 }
+		}
+	}
+	# 工部局封锁 ###
+	country_event = {
+		id = KXX_LKMT_I.32
+		title = KXX_LKMT_I.32.t
+		desc = KXX_LKMT_I.32.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = { 
+			name = KXX_LKMT_I.32.a
+			add_war_support = 0.05
+			CHI_add_rad_small_effect = yes
+			add_ideas = CHI_economic_blockade_event
+			hidden_effect = {
+				FROM = { country_event = { id = lec.61 days = 30 } }
+			}
+		}
+	}
+	# 中央委员会迟到 ###
+	country_event = {
+		id = KXX_LKMT_I.33
+		title = KXX_LKMT_I.33.t
+		desc = KXX_LKMT_I.33.d
+		picture = GFX_report_event_CHI_wang_Jingwei_admiral
+		fire_only_once = yes
+		is_triggered_only = yes
+		option = {
+			name = KXX_LKMT_I.33.a
+			CHI_NRC_small_effect = yes
+		}
+	}
+	# 击败安庆和齐燮元 ###
+	country_event = {
+		id = KXX_LKMT_I.34
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_I.34 FROM = [From.GetName]" }
+		title = KXX_LKMT_I.34.t
+		desc = KXX_LKMT_I.34.d
+		picture = GFX_report_event_CHI_successful_northern_expedition_flag
+
+		fire_only_once = yes
+
+		trigger = {
+			tag = CHI
+			LEP = { exists = no }
+			ANQ = { exists = no }
+		}
+		mean_time_to_happen = { days = 2 }
+
+		option = {
+			name = KXX_LKMT_I.34.a
+			add_political_power = 50
+			if = {
+				limit = { has_idea = league_collapse_CHI }
+				remove_ideas = league_collapse_CHI
+			}
+		}
+	}
+ #南京时期
+ add_namespace = KXX_LKMT_II
+	country_event = {
+		id = KXX_LKMT_II.1
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_II.1" }
+		title = KXX_LKMT_II.1.t
+		desc = KXX_LKMT_II.1.d
+		picture = GFX_report_event_CHI_successful_northern_expedition_flag
+		trigger = {
+			tag = CHI
+			is_subject = no
+			owns_state = 613
+			NOT = {
+				country_exists = LEP
+				country_exists = ANQ
+			}
+		}
+		fire_only_once = yes
+		option = {
+			name = KXX_LKMT_II.1.a #We shall recover
+			add_political_power = 25
+			set_country_flag = CHI_phase_two_begins_flag
+			mark_focus_tree_layout_dirty = yes
+			add_state_core = 613
+			custom_effect_tooltip = CHI_focus_tree_will_change_tt
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						has_socialist_government = yes
+						OR = {
+							tag = FRA
+							tag = ENG
+							tag = NOR
+							tag = BHC
+							tag = SRI
+							AND = {
+								is_major = yes
+								is_in_faction_with = FRA
+							}
+						}
+					}
+					country_event = { id = CHI.midgame.002 days = 3 } #Report from the MMIC
+				}
+			}
+		}
+	}
