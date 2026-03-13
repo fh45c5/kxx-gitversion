@@ -1,4 +1,41 @@
 ################################### LKMT ###################################
+ add_namespace = KXX_lkmt_hotfix
+ #text
+ add_namespace = KXX_LKMT_TEXT
+	country_event = { 
+		id = KXX_LKMT_TEXT.1
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_TEXT.1" }
+		title = KXX_LKMT_TEXT.1.t
+		desc = KXX_LKMT_TEXT.1.d
+		is_triggered_only = yes
+
+		option = {
+			name = KXX_LKMT_TEXT.1.a
+			add_dynamic_modifier = {
+				modifier = CHI_dynamic_text
+			}
+			add_to_variable = {
+				var = CHI.CHI_consumer_goods_factor_ides_text
+				value = -0.2
+				tooltip = consumer_goods_factor_tooltip
+			}
+			add_to_variable = {
+				var = CHI.CHI_industrial_capacity_factory_ides_text
+				value = -0.2
+				tooltip = industrial_capacity_factory_tooltip
+			}
+			add_to_variable = {
+				var = CHI.CHI_industrial_capacity_dockyard_ides_text
+				value = -0.2
+				tooltip = industrial_capacity_dockyard_tooltip
+			}
+			hidden_effect = {
+				FROM = {
+					add_ideas = CHI_ideas_text_I
+				}
+			}
+		}
+   	}
  #五省战争
  add_namespace = KXX_LKMT_I 
 	#Intro
@@ -108,7 +145,7 @@
 		}
 
 		option = { #We'll take what we can get!
-			name = KXX_LKMT_I.7.b
+			name = KXX_LKMT_I.6.b
 			ai_chance = { base = 50 }
 			add_political_power = 50
 			CHI_add_rad_small_effect = yes
@@ -374,8 +411,9 @@
 				producer = BHC
 			}
 			create_corps_commander = {
-				name = "CHI_xue_yue"
+				name = "薛岳"
 				desc = CHI_xue_yue_desc
+				Portrait_path = "gfx/leaders/CHI/Portrait_CHI_Xue_Yue_KR.png"
 				traits = { brilliant_strategist trait_reckless war_hero CHI_left_kmt_officer }
 				skill = 2
 				attack_skill = 2
@@ -384,8 +422,9 @@
 				logistics_skill = 1
 			}
 			create_corps_commander = {
-				name = "CHI_zhang_fakui"
+				name = "张发奎"
 				desc = CHI_zhang_fakui_desc
+				Portrait_path = "gfx/leaders/CHI/Portrait_KXX_CHI_Zhang_Fakui.png"
 				traits = { harsh_leader infantry_officer war_hero CHI_left_kmt_officer }
 				skill = 3
 				attack_skill = 3
@@ -449,7 +488,8 @@
 			name = KXX_LKMT_I.18.1
 			add_war_support = 0.02
 			create_corps_commander = {
-				name = CHI_Mao_runzhi
+				name = "毛泽东"
+				Portrait_path = "gfx/leaders/CHI/CHI_mao_Zedong_civilian.png"
 				desc = Mao_runzhi.d
 				traits = { brilliant_strategist organizer trickster adaptable CHI_left_kmt_officer }
 				skill = 3
@@ -916,6 +956,9 @@
 			tag = CHI
 			LEP = { exists = no }
 			ANQ = { exists = no }
+			NOT = {
+				has_country_flag = win_in_china_east
+			}
 		}
 		mean_time_to_happen = { days = 2 }
 
@@ -926,6 +969,53 @@
 				limit = { has_idea = league_collapse_CHI }
 				remove_ideas = league_collapse_CHI
 			}
+			set_country_flag = win_in_china_east
+		}
+	}
+	# 江淮星火 ###
+	country_event = {
+		id = KXX_LKMT_I.35
+		title = KXX_LKMT_I.35.t
+		desc = KXX_LKMT_I.35.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		trigger = {
+			tag = CHI
+			is_subject = no
+			ANQ = { exists = no }
+			NOT = {
+				has_country_flag = KXX_gaoyuhan_back
+			}
+		}
+		option = { 
+			name = KXX_LKMT_I.35.a
+			set_party_name = {
+				ideology = totalist
+				name = CHI_totalist_CSA_ASA_league
+				long_name = CHI_totalist_CSA_ASA_league_long
+			}
+			create_country_leader = {
+				name = "高语罕"
+				picture = "gfx/leaders/CHI/Portrait_CHI_Gao_Yuhan.png"
+				expire = "1965.1.1"
+				ideology = tot_anarcho_communism_subtype
+			}
+			set_country_flag = KXX_gaoyuhan_back
+		}
+		option = { 
+			name = KXX_LKMT_I.35.b
+			set_party_name = {
+				ideology = totalist
+				name = "中工盟-激进社会主义大同盟"
+				long_name = "中工盟-激进社会主义大同盟"
+			}
+			create_country_leader = {
+				name = "高语罕"
+				picture = "gfx/leaders/CHI/Portrait_CHI_Gao_Yuhan.png"
+				expire = "1965.1.1"
+				ideology = tot_anarcho_communism_subtype
+			}
+			set_country_flag = KXX_gaoyuhan_back
 		}
 	}
  #南京时期
@@ -944,12 +1034,15 @@
 				country_exists = LEP
 				country_exists = ANQ
 			}
+			NOT = {
+				has_country_flag = CHI_phase_one_begins_flag
+			}
 		}
 		fire_only_once = yes
 		option = {
 			name = KXX_LKMT_II.1.a #We shall recover
 			add_political_power = 25
-			set_country_flag = CHI_phase_two_begins_flag
+			set_country_flag = CHI_phase_one_begins_flag
 			mark_focus_tree_layout_dirty = yes
 			add_state_core = 613
 			custom_effect_tooltip = CHI_focus_tree_will_change_tt
@@ -972,5 +1065,153 @@
 					country_event = { id = CHI.midgame.002 days = 3 } #Report from the MMIC
 				}
 			}
+		}
+	}
+	#党务事
+	country_event = {
+		id = KXX_LKMT_II.2
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_II.2" }
+		title = KXX_LKMT_II.2.t
+		desc = KXX_LKMT_II.2.d
+		picture = GFX_report_event_CHI_successful_northern_expedition_flag
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = KXX_LKMT_II.2.a 
+			add_dynamic_modifier = {
+				modifier = CHI_Party_affairs_construction_dynamic_idea
+			}
+			add_to_variable = {
+				CHI.CHI_Party_affairs_political_power_gain_var = -0.3
+				tooltip = pp_gain_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_Party_affairs_political_power_factor_var = -0.3
+				tooltip = pp_factor_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_Party_affairs_stability_factor_var = -0.5
+				tooltip = stability_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_Party_affairs_war_support_factor_var = -0.45
+				tooltip = war_support_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_Party_affairs_consumer_goods_factor_var = 0.3
+				tooltip = consumer_goods_factor_tooltip
+			}
+			FROM = {
+				set_temp_variable = { CSP_PARTY_NAME_change = 0.5 }
+				CHI_CSP_PARTY_NAME_var = yes
+				set_temp_variable = { ASA_PARTY_NAME_change = 0.1 }
+				CHI_ASA_PARTY_NAME_var = yes
+				set_temp_variable = { PSA_PARTY_NAME_change = 0.1 }
+				CHI_PSA_PARTY_NAME_var = yes
+				set_temp_variable = { Mansion_Faction_change = 0.4 }
+				CHI_RCA_PARTY_Mansion_Faction_var = yes
+				set_temp_variable = { Constitutional_Faction_change = 0.15 }
+				CHI_RCA_PARTY_Constitutional_Faction_var = yes
+				set_temp_variable = { Radicalism_change = 0.2 }
+				CHI_RCA_PARTY_Radicalism_var = yes
+				set_temp_variable = { PAC_Constitutional_change = 0.55 }
+				CHI_PAC_PARTY_Constitutional_Faction_var = yes
+				set_temp_variable = { deng_Faction_change = 0.25 }
+				CHI_PAC_deng_Faction_var = yes
+			}
+			hidden_effect = {
+				add_ideas = CHI_Party_affairs_construction_idea
+			}
+		}
+	}
+	# 军务 #
+	country_event = {
+		id = KXX_LKMT_II.3
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_II.3" }
+		title = KXX_LKMT_II.3.t
+		desc = KXX_LKMT_II.3.d
+		picture = GFX_report_event_CHI_successful_northern_expedition_flag
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = KXX_LKMT_II.3.a 
+			add_dynamic_modifier = {
+				modifier = CHI_ARMY_affairs_construction_dynamic_idea
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_experience_gain_army_var = 0.05
+				tooltip = army_xp_gain_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_experience_gain_army_factor_var = 0.05
+				tooltip = army_xp_gain_factor_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_political_power_factor_var = -0.01
+				tooltip = conscription_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_conscription_var = -0.15
+				tooltip = conscription_factor_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_army_attack_factor_var = -0.05
+				tooltip = army_attack_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_army_defence_factor_var = -0.05
+				tooltip = army_defence_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_army_speed_factor_var = -0.05
+				tooltip = army_speed_factor_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_max_planning_var = 0.1
+				tooltip = max_planning_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_supply_consumption_factor_var = 0.1
+				tooltip = supply_consumption_factor_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_land_doctrine_cost_factor_var = 0.1
+				tooltip = land_doctrine_cost_factor_tooltip
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_NRA_var = 0.3
+			}
+			add_to_variable = {
+				CHI.CHI_ARMY_affairs_SOC_var = 0.1
+			}
+			hidden_effect = {
+				add_ideas = CHI_ARMY_affairs_construction_idea
+			}
+		}
+	}
+ #入主北平
+ add_namespace = KXX_LKMT_III
+	country_event = {
+		id = KXX_LKMT_III.2
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_III.2" }
+		title = KXX_LKMT_III.2.t
+		desc = KXX_LKMT_III.2.d
+		picture = GFX_report_event_CHI_successful_northern_expedition_flag
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = KXX_LKMT_III.2.a 
+		}
+	}
+	country_event = {
+		id = KXX_LKMT_III.1
+		immediate = { log = "[GetDateText]: [Root.GetName]: event KXX_LKMT_III.1" }
+		title = KXX_LKMT_III.1.t
+		desc = KXX_LKMT_III.1.d
+		picture = GFX_report_event_CHI_successful_northern_expedition_flag
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = KXX_LKMT_III.1.a 
 		}
 	}
