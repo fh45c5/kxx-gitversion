@@ -7418,16 +7418,9 @@ focus_tree = {
 		icon = GFX_focus_jap_spiritual_mobilization
 		cost = 4
 		available = {
-			OR = {
-				has_country_leader = {
-					name = "杨宇霆"
-					ruling_only = yes
-				}
-				has_global_flag = MON_FNG_new_mandate_enforced
-				AND = {
-					is_subject_of = MON
-					MON = { has_global_flag = MON_new_claimed }
-				}
+			has_country_leader = {
+				name = "杨宇霆"
+				ruling_only = yes
 			}
 		}
 		prerequisite = {
@@ -7443,8 +7436,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Toward_Japan"
 			add_ideas = FNG_Japanese_Economic_Union
-			set_temp_variable = { CAPOP = 5 }
-			FNG_CAPOP = yes
+			
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
 	}
@@ -7480,13 +7472,7 @@ focus_tree = {
 			JAP = {	is_faction_leader = yes }
 		}
 		
-		bypass = {
-			has_completed_focus = FNG_Eliminate_Internal_Dissent
-			OR = {
-				is_subject_of = JAP
-				is_in_faction_with = JAP
-			}
-		}
+		
 		prerequisite = { focus = FNG_Toward_Japan }
 		prerequisite = { focus = FNG_new_republic_legitimacy }
 		x = 2
@@ -7496,29 +7482,9 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Treaty_of_Friendship_and_Cooperation"
-			effect_tooltip = {
-				set_temp_variable = { CAPOP = 5 }
-				FNG_CAPOP = yes
-				custom_effect_tooltip = FNG_if_zhang
-				FNG_decrease_legitimacy = yes
-				JAP = { add_to_faction = FNG }
-				custom_effect_tooltip = FNG_if_concordia
-				add_political_power = 150
-				JAP = { add_political_power = 75 }
-			}
-			hidden_effect = {
-				set_temp_variable = { CAPOP = 5 }
-				FNG_CAPOP = yes
-				if = {
-					limit = { NOT = { has_global_flag = FNG_projapan } }
-					FNG_decrease_legitimacy = yes
-					JAP = { add_to_faction = FNG }
-				}
-				else = {
-					add_political_power = 150
-					JAP = { add_political_power = 75 }
-				}
-			}
+			add_political_power = 100
+			add_stability = 0.1
+			FNG_increase_legitimacy = yes
 		}
 	}
 	focus = {
@@ -7530,7 +7496,9 @@ focus_tree = {
 		x = 4
 		y = 0
 		relative_position_id = FNG_Chunchi-Xiangyi
-		
+		available = {
+			has_completed_focus = FNG_Chunchi-Xiangyi
+		}
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_Join_the_Yen_Bloc"
@@ -7552,7 +7520,7 @@ focus_tree = {
 		prerequisite = { focus = FNG_a_reformed_government }
 		
 		available = { has_global_flag = MON_FNG_new_mandate_enforced }
-		bypass = { hidden_trigger = { has_global_flag = MON_FNG_new_mandate_enforced } }
+		
 		x = 34
 		y = 1
 		relative_position_id = FNG_a_reformed_government
@@ -7562,7 +7530,7 @@ focus_tree = {
 		ai_will_do = { factor = 90 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_rebirth_of_the_dragon_throne"
-			custom_effect_tooltip = unlock_focuses
+			add_ideas = FNG_hanjian_gov
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7578,8 +7546,7 @@ focus_tree = {
 		relative_position_id = FNG_rebirth_of_the_dragon_throne
 		ai_will_do = { factor = 90 }
 		completion_reward = {
-			set_temp_variable = { CAPOP = 5 }
-			FNG_CAPOP = yes
+			
 			FNG_dynastic_own_libtards = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -8876,12 +8843,7 @@ focus_tree = {
 		icon = GFX_goal_ANQ_panasian
 		cost = 4
 		
-		available = {
-			has_country_leader = {
-				name = "杨宇霆"
-				ruling_only = yes
-			}
-		}
+		
 		prerequisite = { 
 			focus = FNG_rule_of_the_commercial_cabal
 			focus = FNG_reign_of_the_old_politicians
@@ -9051,8 +9013,7 @@ focus_tree = {
 		ai_will_do = { factor = 90 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_integrate_the_kwantung_army2"
-			set_temp_variable = { CAPOP = 5 }
-			FNG_CAPOP = yes
+			
 			swap_ideas = {
 				remove_idea = FNG_The_Kwantung_Army
 				add_idea = FNG_kwantung_army_integration
@@ -11957,17 +11918,7 @@ focus_tree = {
 		
 		
 
-		available = {
-			OR = {
-				custom_override_tooltip = {
-					tooltip = FNG_JAP_influence_below_50_tooltip
-					FNG_mantetsu_level_very_high = no
-					FNG_mantetsu_level_high = no
-				}
-				has_game_rule = { rule = FNG_path option = FNG_PATH_GAMBIT_PATAUT }
-			}
-		}
-
+		
 		ai_will_do = {
 			factor = 80
 
@@ -11981,28 +11932,8 @@ focus_tree = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_dragons_gambit"
 			add_political_power = 25
 			army_experience = 25
-			add_popularity = {
-				ideology = social_conservative
-				popularity = 0.05
-			}
-			add_popularity = {
-				ideology = national_populist
-				popularity = 0.05
-			}
-			add_popularity = {
-				ideology = paternal_autocrat
-				popularity = 0.05
-			}
-			FNG_JAP_spend_mega = yes
-			custom_effect_tooltip = tooltip_white_line
-			reduce_propaganda_decision_cost_twenty_five_percent = yes
-			custom_effect_tooltip = reduce_propaganda_decision_cost_twenty_five_percent_tt
-			if = {
-				limit = {
-					has_game_rule = { rule = FNG_path option = FNG_PATH_GAMBIT_PATAUT }
-				}
-				custom_effect_tooltip = CHN_game_rule_rigged_warning_tt
-			}
+			FNG_increase_legitimacy = yes
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12021,43 +11952,7 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_redeeming_the_lost_patriots"
-			add_stability = 0.05
-			add_war_support = 0.05
-			custom_effect_tooltip = tooltip_white_line
-			set_temp_variable = { coalition_partner_var = token:national_populist }
-			add_to_coalition = yes
-			set_temp_variable = { coalition_stability_var = 0.75 }
-			set_coalition_stability_national_populist = yes
-			custom_effect_tooltip = tooltip_white_line
-			QIE = {
-				QIE_li_huang = {
-					CHN_recruit_character_effect = yes
-					add_advisor_role = {
-						advisor = {
-							slot = political_advisor
-							idea_token = QIE_li_huang_advisor
-							desc = QIE_li_huang_sic_desc
-							traits = { KR_pragmatic_statesman }
-						}
-					}
-				}
-				QIE_zeng_qi = { CHN_recruit_character_effect = yes }
-				QIE_zhang_yinwu = { CHN_recruit_character_effect = yes }
-			}
-			if = {
-				limit = { SHX = { exists = no } }
-				if = {
-					limit = { NOT = { has_character = SHX_liang_huazhi } }
-					SHX = {
-						SHX_liang_huazhi = { CHN_recruit_character_effect = yes }
-					}
-				}
-			}
-			custom_effect_tooltip = tooltip_white_line
-			add_timed_idea = {
-				idea = FNG_achieving_national_statism
-				days = 320
-			}
+			add_ideas = FNG_achieving_national_statism
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12076,13 +11971,7 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_rising_sun_and_the_waking_tiger"
-			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_stewardship_of_providence
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
+			add_ideas = FNG_true_equality_of_the_five_races
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12169,13 +12058,7 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_chinese_shogunate"
-			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_a_chinese_shogun
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
+			add_ideas = FNG_the_chinese_shogunate
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12233,22 +12116,7 @@ focus_tree = {
 			log = "[GetLogRoot]: Focus Completed FNG_from_the_ashes"
 			add_stability = 0.05
 			add_war_support = 0.05
-			custom_effect_tooltip = {
-				localization_key = tooltip_modify_dynmod
-				DYNMOD = FNG_factionalism_modifier
-			}
-			add_to_variable = {
-				FNG_factionalism_pp_factor = 0.05
-				tooltip = political_power_factor_tooltip
-			}
-			add_to_variable = {
-				FNG_factionalism_stability = 0.10
-				tooltip = stability_factor_tooltip
-			}
-			add_to_variable = {
-				FNG_factionalism_war_support = 0.05
-				tooltip = war_support_factor_tooltip
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12270,11 +12138,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_extinguish_the_partisan_threat"
 			remove_ideas = FNG_an_army_of_traitors
-			custom_effect_tooltip = tooltip_white_line
-			add_timed_idea = {
-				idea = FNG_waging_the_war_of_minds_and_bodies
-				days = 280
-			}
+			add_ideas = FNG_waging_the_war_of_minds_and_bodies
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -12296,47 +12160,17 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_martyrdom_of_an_old_idealist"
 			add_political_power = 25
-			add_popularity = {
-				ideology = social_liberal
-				popularity = 0.05
-			}
+			FNG_increase_legitimacy = yes
 			add_popularity = {
 				ideology = market_liberal
-				popularity = 0.05
+				popularity = 0.15
 			}
-			add_popularity = {
-				ideology = social_democrat
-				popularity = 0.05
-			}
-			add_popularity = {
-				ideology = authoritarian_democrat
-				popularity = 0.05
-			}
+			
 			add_popularity = {
 				ideology = national_populist
-				popularity = 0.05
+				popularity = 0.15
 			}
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = {
-				localization_key = tooltip_modify_dynmod
-				DYNMOD = FNG_factionalism_modifier
-			}
-			add_to_variable = {
-				FNG_factionalism_pp_factor = 0.05
-				tooltip = political_power_factor_tooltip
-			}
-			add_to_variable = {
-				FNG_factionalism_stability = 0.05
-				tooltip = stability_factor_tooltip
-			}
-			add_to_variable = {
-				FNG_factionalism_war_support = 0.05
-				tooltip = war_support_factor_tooltip
-			}
-			add_to_variable = {
-				FNG_factionalism_consumer_goods = -0.10
-				tooltip = consumer_goods_factor_tooltip
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 	}
@@ -12358,14 +12192,14 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_rebuilding_the_shattered_nation"
 			remove_ideas = FNG_hollowed_out_economy
-			custom_effect_tooltip = tooltip_white_line
+			
 			add_one_random_civilian_factory = yes
 			add_one_random_civilian_factory = yes
 			add_one_random_infrastructure = yes
 			add_one_random_infrastructure = yes
-			custom_effect_tooltip = tooltip_white_line
+			
 			add_political_power = 100
-			china_generic_land_reform_setup = yes
+			
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 	}
@@ -12388,7 +12222,7 @@ focus_tree = {
 			log = "[GetLogRoot]: Focus Completed FNG_unification_by_the_subjugated"
 			add_stability = 0.06
 			add_war_support = 0.06
-			custom_effect_tooltip = tooltip_white_line
+			
 			custom_override_tooltip = {
 				tooltip = {
 					localization_key = tooltip_create_division_template
@@ -12449,11 +12283,7 @@ focus_tree = {
 					}
 				}
 			}
-			custom_effect_tooltip = tooltip_white_line
-			add_timed_idea = {
-				idea = FNG_war_of_national_pacification
-				days = 280
-			}
+			add_ideas = FNG_war_of_national_pacification
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
 	}
@@ -12501,29 +12331,11 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_a_reformed_government"
-			country_event = fengtian_endgame_events.006
-			custom_effect_tooltip = tooltip_white_line
+			
 			remove_ideas = FNG_collaboration_the_great_evil
-			custom_effect_tooltip = tooltip_white_line
+			
 			FNG_increase_legitimacy = yes
-			if = {
-				limit = {
-					GXC = { exists = no }
-				}
-				custom_effect_tooltip = tooltip_white_line
-				if = {
-					limit = { NOT = { has_character = GXC_huang_Dawei } }
-					GXC = { GXC_huang_Dawei = { CHN_recruit_character_effect = yes } }
-				}
-				if = {
-					limit = { NOT = { has_character = GXC_chen_lianbo } }
-					GXC = { GXC_chen_lianbo = { CHN_recruit_character_effect = yes } }
-				}
-				if = {
-					limit = { NOT = { has_character = GXC_chen_gongshou } }
-					GXC = { GXC_chen_gongshou = { CHN_recruit_character_effect = yes } }
-				}
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12545,29 +12357,7 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_a_reformed_government"
-			country_event = fengtian_endgame_events.006
-			custom_effect_tooltip = tooltip_white_line
-			remove_ideas = FNG_collaboration_the_great_evil
-			custom_effect_tooltip = tooltip_white_line
-			FNG_increase_legitimacy = yes
-			if = {
-				limit = {
-					GXC = { exists = no }
-				}
-				custom_effect_tooltip = tooltip_white_line
-				if = {
-					limit = { NOT = { has_character = GXC_huang_Dawei } }
-					GXC = { GXC_huang_Dawei = { CHN_recruit_character_effect = yes } }
-				}
-				if = {
-					limit = { NOT = { has_character = GXC_chen_lianbo } }
-					GXC = { GXC_chen_lianbo = { CHN_recruit_character_effect = yes } }
-				}
-				if = {
-					limit = { NOT = { has_character = GXC_chen_gongshou } }
-					GXC = { GXC_chen_gongshou = { CHN_recruit_character_effect = yes } }
-				}
-			}
+			add_ideas = FNG_hanjian_gov
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12586,29 +12376,9 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_a_reformed_government"
-			country_event = fengtian_endgame_events.006
-			custom_effect_tooltip = tooltip_white_line
-			remove_ideas = FNG_collaboration_the_great_evil
-			custom_effect_tooltip = tooltip_white_line
+			add_political_power = 100
 			FNG_increase_legitimacy = yes
-			if = {
-				limit = {
-					GXC = { exists = no }
-				}
-				custom_effect_tooltip = tooltip_white_line
-				if = {
-					limit = { NOT = { has_character = GXC_huang_Dawei } }
-					GXC = { GXC_huang_Dawei = { CHN_recruit_character_effect = yes } }
-				}
-				if = {
-					limit = { NOT = { has_character = GXC_chen_lianbo } }
-					GXC = { GXC_chen_lianbo = { CHN_recruit_character_effect = yes } }
-				}
-				if = {
-					limit = { NOT = { has_character = GXC_chen_gongshou } }
-					GXC = { GXC_chen_gongshou = { CHN_recruit_character_effect = yes } }
-				}
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12632,28 +12402,10 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_tofu_on_puppet_strings"
 			army_experience = 50
-			FNG_JAP_investment_large = yes
-			add_popularity = {
-				ideology = paternal_autocrat
-				popularity = 0.10
-			}
-			custom_effect_tooltip = tooltip_white_line
+			
 			add_ideas = FNG_true_equality_of_the_five_races
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = {
-					FNG_ruan_zhenduo = { is_hired_as_advisor = no }
-					has_free_political_advisor_slot = yes
-				}
-				hidden_effect = {
-					activate_advisor = FNG_ruan_zhenduo_advisor
-				}
-				custom_effect_tooltip = if_not_yet_hired_will_hire
-				show_ideas_tooltip = FNG_ruan_zhenduo_advisor
-			}
-			else = {
-				add_political_power = 70
-			}
+			
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12674,23 +12426,15 @@ focus_tree = {
 			log = "[GetLogRoot]: Focus Completed FNG_tokyos_rubber_stamp"
 			add_stability = 0.06
 			FNG_JAP_investment_large = yes
-			add_one_random_civilian_factory = yes
-			add_one_random_civilian_factory = yes
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_reconstruction_through_autonomy_tt
-			custom_effect_tooltip = tooltip_white_line
-			CHN_add_resource_northerner_effects = yes
+			add_one_random_military_factory = yes
 			add_tech_bonus = {
 				name = FNG_tokyos_rubber_stamp
 				bonus = 0.5
 				uses = 1
 				category = excavation_tech
 			}
-			custom_effect_tooltip = tooltip_white_line
-			swap_ideas = {
-				remove_idea = FNG_true_equality_of_the_five_races
-				add_idea = FNG_true_equality_of_the_five_races_2
-			}
+			
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 	}
@@ -12709,13 +12453,11 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_at_the_whims_of_the_puppeteer"
-			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_the_marionette_regime
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
+			swap_ideas = {
+				remove_idea = FNG_true_equality_of_the_five_races
+				add_idea = FNG_true_equality_of_the_five_races_2
 			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12740,7 +12482,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_country_leader = { character = FNG_zhang_zongxiang }
+			
 		}
 
 		ai_will_do = { factor = 1000 }
@@ -12748,24 +12490,8 @@ focus_tree = {
 			log = "[GetLogRoot]: Focus Completed FNG_rule_of_the_commercial_cabal"
 			add_political_power = 25
 			army_experience = 25
-			set_temp_variable = { CCPOP = 10 }
-			FNG_CCPOP = yes
-			custom_effect_tooltip = tooltip_white_line
-			if = {
-				limit = { GXC = { exists = no } }
-				GXC = { GXC_chen_lianbo = { CHN_recruit_character_effect = yes } }
-			}
-			QIE = {
-				QIE_wang_kemin = { CHN_recruit_character_effect = yes }
-				QIE_upgrade_wang_kemin_advisor_effect = yes
-			}
-			custom_effect_tooltip = tooltip_white_line
 			add_ideas = FNG_financing_reformed_reconstruction
-			custom_effect_tooltip = tooltip_white_line
-			add_timed_idea = {
-				idea = FNG_financing_reformed_reconstruction
-				days = 420
-			}
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 	}
@@ -12784,41 +12510,7 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_looking_toward_the_zaibatsu"
-			add_stability = 0.08
-			set_temp_variable = { CCPOP = 5 }
-			FNG_CCPOP = yes
-			custom_effect_tooltip = tooltip_white_line
-			FNG_alliance_of_state_and_business_effect = yes
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_looking_toward_the_zaibatsu_tt
-			if = {
-				limit = { controls_state = 743 } #Shanghai
-				743 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 613 } #Nanjing
-				613 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 716 } #Shenyang
-				716 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 608 } #Beijing
-				608 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 650 } #Chongqing
-				650 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 596 } #Hangzhou
-				596 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 609 } #Tianjin
-				609 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
+			add_ideas = FNG_looking_toward_the_zaibatsu
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 	}
@@ -12836,41 +12528,9 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_looking_toward_the_zaibatsu"
-			add_stability = 0.08
-			set_temp_variable = { CCPOP = 5 }
-			FNG_CCPOP = yes
-			custom_effect_tooltip = tooltip_white_line
-			FNG_alliance_of_state_and_business_effect = yes
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_looking_toward_the_zaibatsu_tt
-			if = {
-				limit = { controls_state = 743 } #Shanghai
-				743 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 613 } #Nanjing
-				613 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 716 } #Shenyang
-				716 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 608 } #Beijing
-				608 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 650 } #Chongqing
-				650 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 596 } #Hangzhou
-				596 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 609 } #Tianjin
-				609 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
+			
+			add_stability = 0.1
+			FNG_increase_legitimacy = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 	}
@@ -12888,41 +12548,8 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_looking_toward_the_zaibatsu"
-			add_stability = 0.08
-			set_temp_variable = { CCPOP = 5 }
-			FNG_CCPOP = yes
-			custom_effect_tooltip = tooltip_white_line
-			FNG_alliance_of_state_and_business_effect = yes
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_looking_toward_the_zaibatsu_tt
-			if = {
-				limit = { controls_state = 743 } #Shanghai
-				743 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 613 } #Nanjing
-				613 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 716 } #Shenyang
-				716 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 608 } #Beijing
-				608 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 650 } #Chongqing
-				650 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 596 } #Hangzhou
-				596 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 609 } #Tianjin
-				609 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
+			add_ideas = FNG_no_labor_movement
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 	}
@@ -12940,41 +12567,7 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_looking_toward_the_zaibatsu"
-			add_stability = 0.08
-			set_temp_variable = { CCPOP = 5 }
-			FNG_CCPOP = yes
-			custom_effect_tooltip = tooltip_white_line
-			FNG_alliance_of_state_and_business_effect = yes
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_looking_toward_the_zaibatsu_tt
-			if = {
-				limit = { controls_state = 743 } #Shanghai
-				743 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 613 } #Nanjing
-				613 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 716 } #Shenyang
-				716 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 608 } #Beijing
-				608 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 650 } #Chongqing
-				650 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 596 } #Hangzhou
-				596 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 609 } #Tianjin
-				609 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
+			add_ideas = FNG_business_union
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 	}
@@ -12992,41 +12585,7 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_looking_toward_the_zaibatsu"
-			add_stability = 0.08
-			set_temp_variable = { CCPOP = 5 }
-			FNG_CCPOP = yes
-			custom_effect_tooltip = tooltip_white_line
-			FNG_alliance_of_state_and_business_effect = yes
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_looking_toward_the_zaibatsu_tt
-			if = {
-				limit = { controls_state = 743 } #Shanghai
-				743 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 613 } #Nanjing
-				613 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 716 } #Shenyang
-				716 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 608 } #Beijing
-				608 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 650 } #Chongqing
-				650 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 596 } #Hangzhou
-				596 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
-			if = {
-				limit = { controls_state = 609 } #Tianjin
-				609 = { add_dynamic_modifier = { modifier = FNG_constructing_the_chinese_zaibatsu_modifier } }
-			}
+			add_ideas = FNG_chinese_dringsime
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 	}
@@ -13049,13 +12608,9 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_corporate_state"
-			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_governance_of_monopolies
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
+			add_ideas = FNG_the_corporate_state
+			
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13089,37 +12644,8 @@ focus_tree = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
 			add_political_power = 50
 			add_stability = 0.08
-			add_war_support = 0.08
-			set_temp_variable = { RLPOP = 8 }
-			FNG_RLPOP = yes
-			custom_effect_tooltip = tooltip_white_line
-			QIE = { QIE_gao_lingwei = { CHN_recruit_character_effect = yes } }
-			if = {
-				limit = {
-					SHD = { exists = no }
-				}
-				if = {
-					limit = { NOT = { has_character = SHD_qu_yingguang } }
-					SHD = { SHD_qu_yingguang = { CHN_recruit_character_effect = yes } }
-				}
-				if = {
-					limit = { NOT = { has_character = SHD_jin_yune } }
-					SHD = { SHD_jin_yune = { CHN_recruit_character_effect = yes } }
-				}
-				if = {
-					limit = { NOT = { has_character = SHD_sun_dianying } }
-					SHD = { SHD_sun_dianying = { CHN_recruit_character_effect = yes } }
-				}
-			}
-			if = {
-				limit = {
-					ANQ = { exists = no }
-				}
-				if = {
-					limit = { NOT = { has_character = ANQ_chen_lu } }
-					ANQ = { ANQ_chen_lu = { CHN_recruit_character_effect = yes } }
-				}
-			}
+			add_ideas = FNG_reign_of_the_old_politicians
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13152,37 +12678,7 @@ focus_tree = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
 			add_political_power = 50
 			add_stability = 0.08
-			add_war_support = 0.08
-			set_temp_variable = { RLPOP = 8 }
-			FNG_RLPOP = yes
-			custom_effect_tooltip = tooltip_white_line
-			QIE = { QIE_gao_lingwei = { CHN_recruit_character_effect = yes } }
-			if = {
-				limit = {
-					SHD = { exists = no }
-				}
-				if = {
-					limit = { NOT = { has_character = SHD_qu_yingguang } }
-					SHD = { SHD_qu_yingguang = { CHN_recruit_character_effect = yes } }
-				}
-				if = {
-					limit = { NOT = { has_character = SHD_jin_yune } }
-					SHD = { SHD_jin_yune = { CHN_recruit_character_effect = yes } }
-				}
-				if = {
-					limit = { NOT = { has_character = SHD_sun_dianying } }
-					SHD = { SHD_sun_dianying = { CHN_recruit_character_effect = yes } }
-				}
-			}
-			if = {
-				limit = {
-					ANQ = { exists = no }
-				}
-				if = {
-					limit = { NOT = { has_character = ANQ_chen_lu } }
-					ANQ = { ANQ_chen_lu = { CHN_recruit_character_effect = yes } }
-				}
-			}
+			add_ideas = FNG_a_new_national_government
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13213,7 +12709,7 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			add_ideas = FNG_degenated
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13236,7 +12732,10 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			swap_ideas = {
+				remove_idea = FNG_degenated
+				add_idea = FNG_degenated2
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13253,13 +12752,16 @@ focus_tree = {
 		
 
 		available = {
-			 
+			has_completed_focus = FNG_hardship_no_escape
 		}
 
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			swap_ideas = {
+				remove_idea = FNG_degenated4
+				add_idea = FNG_degenated5
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13282,7 +12784,10 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			swap_ideas = {
+				remove_idea = FNG_degenated5
+				add_idea = FNG_degenated6
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13305,7 +12810,10 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			swap_ideas = {
+				remove_idea = FNG_degenated6
+				add_idea = FNG_degenated7
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13328,7 +12836,8 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			FNG_decrease_legitimacy = yes
+			add_political_power = 100
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13351,7 +12860,10 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			swap_ideas = {
+				remove_idea = FNG_degenated2
+				add_idea = FNG_degenated3
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13374,7 +12886,10 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			swap_ideas = {
+				remove_idea = FNG_degenated3
+				add_idea = FNG_degenated4
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13398,7 +12913,10 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			swap_ideas = {
+				remove_idea = FNG_degenated7
+				add_idea = FNG_degenated8
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13421,7 +12939,10 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			swap_ideas = {
+				remove_idea = FNG_a_new_national_government
+				add_idea = FNG_a_new_national_government2
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13444,7 +12965,10 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			swap_ideas = {
+				remove_idea = FNG_a_new_national_government2
+				add_idea = FNG_a_new_national_government3
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13467,7 +12991,34 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_reign_of_the_old_politicians"
-			
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.10
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13489,13 +13040,10 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
-			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_beiyangs_compradors
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			FNG_increase_legitimacy = yes
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13518,13 +13066,10 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
-			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_beiyangs_compradors
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
+		
+			
+			add_ideas = FNG_popular_support_the_marionette_regime
+			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13546,13 +13091,9 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
-			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_beiyangs_compradors
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13574,13 +13115,8 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
+			FNG_increase_legitimacy = yes
 			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_beiyangs_compradors
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13603,12 +13139,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
 			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_beiyangs_compradors
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
+			
+			FNG_increase_legitimacy = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13630,13 +13162,7 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
-			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_beiyangs_compradors
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
+			add_ideas = FNG_war_is_peace
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13659,13 +13185,7 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
-			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_beiyangs_compradors
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
+			add_ideas = FNG_chinese_militarism
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13687,13 +13207,8 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
-			add_political_power = 100
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = FNG_lose_legitimacy_management_tt
-			add_ideas = FNG_popular_support_beiyangs_compradors
-			hidden_effect = {
-				FNG_clear_legitimacy_ideas = yes
-			}
+			add_stability = 0.1
+			FNG_increase_legitimacy = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
