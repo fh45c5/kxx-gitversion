@@ -3252,32 +3252,7 @@ BRI_britanny_on_world_stage_cat = {
 			custom_effect_tooltip = BRI_Support_Scotland_tooltip
 		}
 	}
-	BRI_Support_Ireland = {
-		icon = decision_bakuretsu
-		ai_will_do = {
-			factor = 10
-		}
-		available = {
-			has_war = no
-		}
-		visible = {
-			has_completed_focus = BRI_friendship_with_ireland
-		}
-		fire_only_once = yes
-		days_remove = 30
-		complete_effect = {
-			add_stability = -0.1
-			add_political_power = -50
-		}
-		remove_effect = {
-			IRE = {
-				country_event = {
-				id = BRI_FRA.11
-				}
-			}
-			custom_effect_tooltip = BRI_Support_Ireland_tooltip
-		}
-	}
+	
 	BRI_The_October_Revolution = {
 		icon = decision_bakuretsu
 		ai_will_do = {
@@ -3334,51 +3309,7 @@ BRI_britanny_on_world_stage_cat = {
 			industrial_capacity_dockyard = -0.1
 		}
 		remove_effect = {
-			set_cosmetic_tag = BRI_celtic_union
-			if = {
-				limit = {
-					has_country_flag = BRI_Scotland_aid
-				}
-				BRI = {
-					add_state_core = 120
-					add_state_core = 121
-					add_state_core = 136
-					add_state_core = 133
-					add_state_core = 938 
-					annex_country = {
-						target = SCT
-						transfer_troops = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					has_country_flag = BRI_Wales_aid
-				}
-				BRI = {
-					add_state_core = 122 
-					add_state_core = 1225 
-					annex_country = {
-						target = WAL
-						transfer_troops = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					has_country_flag = BRI_Ireland_aid
-				}
-				BRI = {
-					add_state_core = 113 
-					add_state_core = 119 
-					add_state_core = 134
-					add_state_core = 135 
-					annex_country = {
-						target = IRE
-						transfer_troops = yes
-					}
-				}
-			}
+			
 			every_state = {
 				limit = {
 					is_core_of = ENG
@@ -3388,217 +3319,118 @@ BRI_britanny_on_world_stage_cat = {
 			add_political_power = 100
 		}
 	}
-	BRI_Anglo_Saxons_surrender = {
+	BRI_France_intergration = {
 		icon = decision_bakuretsu
 		ai_will_do = {
 			factor = 10
 		}
 		available = {
-			has_war = no
+			has_completed_focus = BRI_recelticlize
+			16 = {
+				is_controlled_by_ROOT_or_owner = yes
+			}
 		}
 		visible = {
-			has_completed_focus = BRI_recelticlize
+			NOT = {
+				country_exists = FRG
+				country_exists = OCC
+				country_exists = NRM
+				country_exists = LRE
+			}
 		}
 		fire_only_once = yes
 		days_remove = 30
 		complete_effect = {
 			add_stability = -0.1
-			add_political_power = -50
+		}
+		modifier = {
+			political_power_gain = -0.1
+			conversion_cost_civ_to_mil_factor = -0.1
+			conversion_cost_mil_to_civ_factor = -0.1
+			production_factory_start_efficiency_factor = -0.1
+			line_change_production_efficiency_factor = -0.1
+			production_factory_efficiency_gain_factor = -0.1
+			production_factory_max_efficiency_factor = -0.1
+			industrial_capacity_factory = -0.1
+			industrial_capacity_dockyard = -0.1
 		}
 		remove_effect = {
-			set_country_flag = BRI_Ireland_aid
-			custom_effect_tooltip = BRI_Anglo_Saxons_surrender_tooltip
-            create_faction_from_template = { 
-				template = faction_template_generic_dominance              
-				name = Alliance_celtique
-				icon = GFX_faction_arizona
-			}
-			create_wargoal = { 
-				target = ENG 
-				type = annex_everything 
-			}
-			if = {
+			
+			every_state = {
 				limit = {
-					has_country_flag = BRI_Ireland_aid
+					OR = {
+						is_core_of = FRG
+						is_core_of = LRE
+						is_core_of = NRM
+						is_core_of = OCC
+					}
+					
 				}
-				IRE = { add_to_faction = BRI }
-				IRE = {
-					declare_war_on = { target = ENG type = annex_everything }
-				}
+				add_core_of = BRI
 			}
-			if = {
+			add_political_power = 100
+		}
+	}
+	BRI_Iberian_intergration = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_completed_focus = BRI_recelticlize
+			41 = {
+				is_controlled_by_ROOT_or_owner = yes
+			}
+			112 = {
+				is_controlled_by_ROOT_or_owner = yes
+			}
+		}
+		visible = {
+			NOT = {
+				country_exists = SPR
+				country_exists = CNT
+				country_exists = CAR
+				country_exists = POR
+				country_exists = BAS
+				country_exists = CAT
+				country_exists = GLC
+			}
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+		}
+		modifier = {
+			political_power_gain = -0.1
+			conversion_cost_civ_to_mil_factor = -0.1
+			conversion_cost_mil_to_civ_factor = -0.1
+			production_factory_start_efficiency_factor = -0.1
+			line_change_production_efficiency_factor = -0.1
+			production_factory_efficiency_gain_factor = -0.1
+			production_factory_max_efficiency_factor = -0.1
+			industrial_capacity_factory = -0.1
+			industrial_capacity_dockyard = -0.1
+		}
+		remove_effect = {
+			
+			every_state = {
 				limit = {
-					has_country_flag = BRI_Scotland_aid
-				}
-				SCT = { add_to_faction = BRI }
-				SCT = {
-					transfer_state = 120
-					transfer_state = 121
-					transfer_state = 136
-					transfer_state = 133
-					transfer_state = 938 
-					add_state_core = 120
-					add_state_core = 121
-					add_state_core = 136
-					add_state_core = 133
-					add_state_core = 938 
-					division_template = {
-						name = "起义部队"
-						priority = 3
-						regiments = {
-							infantry = { x = 0 y = 0 }
-							infantry = { x = 0 y = 1 }
-							infantry = { x = 0 y = 2 }
-							infantry = { x = 0 y = 3 }
-							infantry = { x = 0 y = 4 }
-							infantry = { x = 0 y = 5 }
-							infantry = { x = 0 y = 6 }
-						}
+					OR = {
+						is_core_of = SPR
+						is_core_of = CNT
+						is_core_of = CAR
+						is_core_of = POR
+						is_core_of = BAS
+						is_core_of = CAT
+						is_core_of = GLC
+						
 					}
-					random_owned_controlled_state = {
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = SCT
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = BRI
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = BRI
-						}
-					}
-					declare_war_on = { target = ENG type = annex_everything }
+					
 				}
-				
+				add_core_of = BRI
 			}
-			if = {
-				limit = {
-					has_country_flag = BRI_Wales_aid
-				}
-				WAL = { add_to_faction = BRI }
-				WAL = {
-					transfer_state = 122 
-					add_state_core = 122 
-					transfer_state = 1225 
-					add_state_core = 1225 
-					add_equipment_to_stockpile = {
-						type = infantry_equipment
-						amount = 10000
-						producer = ENG
-					}
-					division_template = {
-						name = "起义部队"
-						priority = 3
-						regiments = {
-							infantry = { x = 0 y = 0 }
-							infantry = { x = 0 y = 1 }
-							infantry = { x = 0 y = 2 }
-							infantry = { x = 0 y = 3 }
-							infantry = { x = 0 y = 4 }
-							infantry = { x = 0 y = 5 }
-							infantry = { x = 0 y = 6 }
-						}
-					}
-					random_owned_controlled_state = {
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = WAL
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = WAL
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = WAL
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = WAL
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = WAL
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = WAL
-						}
-						create_unit = {
-							division = "name = \"起义部队\" division_template = \"起义部队\" start_experience_factor = 0.5 start_equipment_factor = 1"
-							allow_spawning_on_enemy_provs = yes
-							owner = WAL
-						}
-					}
-					declare_war_on = { target = ENG type = annex_everything }
-				}
-			}
+			add_political_power = 100
 		}
 	}
 }

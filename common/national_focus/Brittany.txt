@@ -312,7 +312,8 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
-			add_ideas = IRE_republic_free_from_chaos
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
 		}
 	}
 	focus = {
@@ -766,8 +767,41 @@ focus_tree = {
 			
 		}
 		completion_reward = {
-			unlock_decision_tooltip = BRI_Support_Scotland
-			unlock_decision_tooltip = BRI_Support_Wales
+			set_cosmetic_tag = BRI_celtic_union
+			if = {
+				limit = {
+					country_exists = SCT
+				}
+				BRI = {
+					every_state = {
+						limit = {
+							is_core_of = SCT
+						}
+						add_core_of = BRI
+					}
+					annex_country = {
+						target = SCT
+						transfer_troops = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					country_exists = WAL
+				}
+				WAL = {
+					every_state = {
+						limit = {
+							is_core_of = WAL
+						}
+						add_core_of = BRI
+					}
+					annex_country = {
+						target = WAL
+						transfer_troops = yes
+					}
+				}
+			}
 		}
 	}
 	focus = {
@@ -927,8 +961,12 @@ focus_tree = {
 			
 		}
 		completion_reward = {
-			unlock_decision_tooltip = BRI_Anglo_Saxons_surrender
+			unlock_decision_tooltip = BRI_Anglo_Saxons_intergration
+			unlock_decision_tooltip = BRI_France_intergration
+			unlock_decision_tooltip = BRI_Iberian_intergration
 			add_war_support = 0.15
+			add_state_core = 779
+			add_state_core = 28
 			every_state = {
 				limit = {
 					OR = {
@@ -972,9 +1010,12 @@ focus_tree = {
 			
 		}
 		completion_reward = {
-			unlock_decision_tooltip = BRI_Support_Ireland
-			add_one_random_civilian_factory = yes
-			add_one_random_civilian_factory = yes
+			IRE = {
+				country_event = {
+				id = BRI_FRA.11
+				}
+			}
+			
 		}
 	}
 	focus = {
@@ -1202,7 +1243,7 @@ focus_tree = {
 				limit = {
 					has_country_flag = BRI_France_Marcel_Cachin_win
 				}
-				set_cosmetic_tag = FRA_atheist
+				set_cosmetic_tag = FRA_Jacobinmod
 			}
 			else = {
 				set_cosmetic_tag = BRI_FRA
