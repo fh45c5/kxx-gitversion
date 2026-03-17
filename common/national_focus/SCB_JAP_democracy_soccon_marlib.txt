@@ -1,0 +1,786 @@
+focus_tree = {
+	id = SCB_JAP_democracy_soccon_marlib
+	continuous_focus_position = { x = -40 y = 4440 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAPSEI
+		}
+	}
+	shared_focus = JAPFOR_japansplaceintheworld
+	shared_focus = JAPFOR_tokyo_conference
+	shared_focus = JAP_To_Sunder_the_Sunset
+	shared_focus = JAPARMY_jakuniku_kyoshoku
+	shared_focus = JAPECON_recovering_from_black_monday
+
+	# ========================== 立宪政友会及主干部分 ==========================
+
+	# 0: 政友会继续执政
+	focus = {
+		id = JAP_seiyukai_governance
+		icon = GFX_goal_JAP_Rikken_Seiyukai
+		cost = 10
+		x = 8
+		y = 1
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	# 1: 延续高桥财政
+	focus = {
+		id = JAP_takahashi_finance_continuation
+		icon = GFX_goal_generic_financial_markets
+		cost = 10
+		prerequisite = { focus = JAP_seiyukai_governance }
+		relative_position_id = JAP_seiyukai_governance
+		x = 0
+		y = 1
+		completion_reward = {
+			# TODO: 添加高桥财政国家精神 (通胀/建设速度)
+			add_offsite_base_factories = 2
+		}
+	}
+
+	# 2: 推动地方振兴
+	focus = {
+		id = JAP_local_revitalization
+		icon = GFX_goal_NFA_Local_Reconstruction_Councils
+		cost = 10
+		prerequisite = { focus = JAP_takahashi_finance_continuation }
+		relative_position_id = JAP_takahashi_finance_continuation
+		x = -1
+		y = 1
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+
+	# 3: 重申产业立国
+	focus = {
+		id = JAP_industrial_foundation
+		icon = GFX_RUS_Industrial_Expansion
+		cost = 10
+		prerequisite = { focus = JAP_takahashi_finance_continuation }
+		relative_position_id = JAP_takahashi_finance_continuation
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.15
+				uses = 1
+				category = industry
+			}
+		}
+	}
+
+	# 4: 兵农两全策略
+	focus = {
+		id = JAP_soldier_farmer_strategy
+		icon = GFX_goal_NEE_farmers_into_soldiers
+		cost = 10
+		prerequisite = { focus = JAP_local_revitalization }
+		relative_position_id = JAP_local_revitalization
+		x = -1
+		y = 1
+		completion_reward = {
+			add_war_support = 0.05
+			# TODO: 添加征兵修正
+		}
+	}
+
+	# 5: 地租移让
+	focus = {
+		id = JAP_land_tax_transfer
+		icon = GFX_goal_ZIM_land_husbandry_act
+		cost = 10
+		prerequisite = { focus = JAP_local_revitalization focus = JAP_industrial_foundation }
+		relative_position_id = JAP_local_revitalization
+		x = 1
+		y = 1
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	# 6: 非常时对策常态化
+	focus = {
+		id = JAP_emergency_measures_normalization
+		icon = GFX_goal_ARZ_Eternal_Emergency
+		cost = 10
+		prerequisite = { focus = JAP_industrial_foundation }
+		relative_position_id = JAP_industrial_foundation
+		x = 1
+		y = 1
+		completion_reward = {
+			# TODO: 添加国家精神
+		}
+	}
+
+	# 7: 国体明征的先锋
+	focus = {
+		id = JAP_kokutai_vanguard
+		icon = GFX_JAPTOSEIHA_the_course_shall_shine_for_asia-248360
+		cost = 10
+		prerequisite = { focus = JAP_emergency_measures_normalization focus = JAP_land_tax_transfer focus = JAP_soldier_farmer_strategy }
+		relative_position_id = JAP_land_tax_transfer
+		x = 0
+		y = 1
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+
+	# 8: “铁腕喜三郎”决不宥和
+	focus = {
+		id = JAP_suzuki_iron_fist_no_appeasement
+		icon = GFX_goal_JAP_suzuki_iron_fist
+		cost = 10
+		prerequisite = { focus = JAP_kokutai_vanguard }
+		relative_position_id = JAP_kokutai_vanguard
+		x = -6
+		y = 1
+		completion_reward = {
+			add_political_power = 150
+			# TODO: 添加强硬派国家精神
+		}
+	}
+
+	# 9: 国本社提携工作
+	focus = {
+		id = JAP_kokuhonsha_cooperation
+		icon = GFX_JAPIRAARIGHTIST_kiichirosvictory-248360
+		cost = 10
+		prerequisite = { focus = JAP_suzuki_iron_fist_no_appeasement }
+		relative_position_id = JAP_suzuki_iron_fist_no_appeasement
+		x = -1
+		y = 1
+		completion_reward = {
+			# TODO: 添加平沼骐一郎相关的加成
+		}
+	}
+
+	# 10: 思想犯罪扩大化
+	focus = {
+		id = JAP_thought_crime_expansion
+		icon = GFX_RUS_Ban_All_Socialist_Parties
+		cost = 10
+		prerequisite = { focus = JAP_kokuhonsha_cooperation }
+		relative_position_id = JAP_kokuhonsha_cooperation
+		x = 0
+		y = 1
+		completion_reward = {
+			add_stability = 0.05
+			# TODO: 每日政治点增益，但增加反抗
+		}
+	}
+
+	# 11: 清洗反总裁派
+	focus = {
+		id = JAP_purge_anti_president
+		icon = GFX_goal_purge_opposition
+		cost = 10
+		prerequisite = { focus = JAP_suzuki_iron_fist_no_appeasement }
+		relative_position_id = JAP_suzuki_iron_fist_no_appeasement
+		x = 1
+		y = 1
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	# 12: 巩固政党-官僚人事
+	focus = {
+		id = JAP_party_bureaucracy_personnel
+		icon = GFX_TRM_Restructure_Bureaucracy
+		cost = 10
+		prerequisite = { focus = JAP_purge_anti_president }
+		relative_position_id = JAP_purge_anti_president
+		x = 0
+		y = 1
+		completion_reward = {
+			# TODO: 减少内阁更换成本
+		}
+	}
+
+	# 13: 稳定压倒一切
+	focus = {
+		id = JAP_stability_above_all
+		icon = GFX_goal_authority
+		cost = 10
+		prerequisite = { focus = JAP_party_bureaucracy_personnel focus = JAP_thought_crime_expansion }
+		relative_position_id = JAP_thought_crime_expansion
+		x = 1
+		y = 1
+		completion_reward = {
+			add_stability = 0.15
+		}
+	}
+
+	# 14: “中国通”森恪独裁之治
+	focus = {
+		id = JAP_mori_kaku_dictatorship
+		icon = GFX_goal_JAP_mori_kaku_dictatorship
+		cost = 10
+		prerequisite = { focus = JAP_kokutai_vanguard }
+		relative_position_id = JAP_kokutai_vanguard
+		x = -2
+		y = 1
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	# 15: 重提田中外交
+	focus = {
+		id = JAP_tanaka_diplomacy
+		icon = GFX_goal_JAP_Sphere_Freed_Discord
+		cost = 10
+		prerequisite = { focus = JAP_suzuki_iron_fist_no_appeasement focus = JAP_mori_kaku_dictatorship }
+		relative_position_id = JAP_mori_kaku_dictatorship
+		x = -1
+		y = 1
+		completion_reward = {
+			# TODO: 添加对华宣战理由或修正
+		}
+	}
+
+	# 16: 垄断对满投资
+	focus = {
+		id = JAP_manchurian_investment
+		icon = GFX_goal_FNG_unification_conference
+		cost = 10
+		prerequisite = { focus = JAP_tanaka_diplomacy }
+		relative_position_id = JAP_tanaka_diplomacy
+		x = 0
+		y = 1
+		completion_reward = {
+			add_extra_state_shared_structures_slots = 1
+		}
+	}
+
+	# 17: 操纵国会话语权
+	focus = {
+		id = JAP_diet_discourse
+		icon = GFX_goal_generic_authoritarian_government
+		cost = 10
+		prerequisite = { focus = JAP_mori_kaku_dictatorship }
+		relative_position_id = JAP_mori_kaku_dictatorship
+		x = 1
+		y = 1
+		completion_reward = {
+			add_political_power = 75
+		}
+	}
+
+	# 18: 以“政”善导“军”
+	focus = {
+		id = JAP_politics_guides_military
+		icon = GFX_JAP_instill_loyalty_to_the_military-2684
+		cost = 10
+		prerequisite = { focus = JAP_diet_discourse }
+		relative_position_id = JAP_diet_discourse
+		x = 0
+		y = 1
+		completion_reward = {
+			# TODO: 降低陆军干政影响
+		}
+	}
+
+	# 19: 终结宪政的幻象
+	focus = {
+		id = JAP_constitutional_illusion_end
+		icon = GFX_RUS_Abolish_Senate
+		cost = 10
+		prerequisite = { focus = JAP_manchurian_investment focus = JAP_politics_guides_military }
+		relative_position_id = JAP_manchurian_investment
+		x = 1
+		y = 1
+		completion_reward = {
+			add_war_support = 0.1
+		}
+	}
+
+	# 20: “关东长老”前田登上台
+	focus = {
+		id = JAP_maeda_yonezo_ascent
+		icon = GFX_goal_JAP_maeda_yonezo_ascent
+		cost = 10
+		prerequisite = { focus = JAP_kokutai_vanguard }
+		relative_position_id = JAP_kokutai_vanguard
+		x = 2
+		y = 1
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	# 21: 中小产业组织化
+	focus = {
+		id = JAP_sme_organization
+		icon = GFX_RUS_The_Industry_Needs_Men
+		cost = 10
+		prerequisite = { focus = JAP_maeda_yonezo_ascent }
+		relative_position_id = JAP_maeda_yonezo_ascent
+		x = -1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.1
+				uses = 1
+				category = industry
+			}
+		}
+	}
+
+	# 22: 国防产业两全策略
+	focus = {
+		id = JAP_defense_industry_strategy
+		icon = GFX_goal_generic_military_equipment
+		cost = 10
+		prerequisite = { focus = JAP_sme_organization }
+		relative_position_id = JAP_sme_organization
+		x = 0
+		y = 1
+		completion_reward = {
+			add_extra_state_shared_structures_slots = 2
+		}
+	}
+
+	# 23: 争夺革新运动主导权
+	focus = {
+		id = JAP_reform_movement_leadership
+		icon = GFX_goal_ARZ_Authoritarian_Liberalism
+		cost = 10
+		prerequisite = { focus = JAP_maeda_yonezo_ascent }
+		relative_position_id = JAP_maeda_yonezo_ascent
+		x = 1
+		y = 1
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	# 24: 讨好乡军团体
+	focus = {
+		id = JAP_rural_military_appeasement
+		icon = GFX_ALO_Rural
+		cost = 10
+		prerequisite = { focus = JAP_reform_movement_leadership }
+		relative_position_id = JAP_reform_movement_leadership
+		x = 0
+		y = 1
+		completion_reward = {
+			add_war_support = 0.05
+		}
+	}
+
+	# 25: 纵断政权的旧梦
+	focus = {
+		id = JAP_vertical_regime_dream
+		icon = GFX_goal_NIC_Authoritarian_Constitution
+		cost = 10
+		prerequisite = { focus = JAP_defense_industry_strategy focus = JAP_rural_military_appeasement }
+		relative_position_id = JAP_defense_industry_strategy
+		x = 1
+		y = 1
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+
+	# 26: “便宜主义者”久原执杖
+	focus = {
+		id = JAP_kuhara_fusanosuke_leadership
+		icon = GFX_goal_JAP_kuhara_fusanosuke_leadership
+		cost = 10
+		prerequisite = { focus = JAP_kokutai_vanguard }
+		relative_position_id = JAP_kokutai_vanguard
+		x = 6
+		y = 1
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	# 27: 国策协商常态化
+	focus = {
+		id = JAP_policy_consultation
+		icon = GFX_goal_CAL_council
+		cost = 10
+		prerequisite = { focus = JAP_maeda_yonezo_ascent focus = JAP_kuhara_fusanosuke_leadership }
+		relative_position_id = JAP_kuhara_fusanosuke_leadership
+		x = -1
+		y = 1
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+
+	# 28: 修正《产业统制法》
+	focus = {
+		id = JAP_industrial_control_law_amendment
+		icon = GFX_goal_CAN_Support_British_Industrialists
+		cost = 10
+		prerequisite = { focus = JAP_policy_consultation }
+		relative_position_id = JAP_policy_consultation
+		x = 0
+		y = 1
+		completion_reward = {
+			# TODO: 建筑速度修正
+		}
+	}
+
+	# 29: 对抗元老政治
+	focus = {
+		id = JAP_against_genro
+		icon = GFX_goal_SWE_against_lies_of_democracy
+		cost = 10
+		prerequisite = { focus = JAP_kuhara_fusanosuke_leadership }
+		relative_position_id = JAP_kuhara_fusanosuke_leadership
+		x = 1
+		y = 1
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	# 30: 统一政治结社
+	focus = {
+		id = JAP_unify_political_associations
+		icon = GFX_goal_COL_Authoritarian_Friends_Everywhere_Unite
+		cost = 10
+		prerequisite = { focus = JAP_against_genro }
+		relative_position_id = JAP_against_genro
+		x = 0
+		y = 1
+		completion_reward = {
+			# TODO: 添加政党支持度加成
+		}
+	}
+
+	# 31: 渐进的保守革命
+	focus = {
+		id = JAP_gradual_conservative_revolution
+		icon = GFX_goal_AUS_conservative_laborer
+		cost = 10
+		prerequisite = { focus = JAP_industrial_control_law_amendment focus = JAP_unify_political_associations }
+		relative_position_id = JAP_industrial_control_law_amendment
+		x = 1
+		y = 1
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.1
+		}
+	}
+
+	# ========================== 立宪民政党分支 ==========================
+
+	# 32: 民政党东山再起
+	focus = {
+		id = JAP_minseito_comeback
+		icon = GFX_goal_JAP_Rikken_Minseito
+		cost = 10
+		x = 21
+		y = 1
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	# 33: 中央权力的代表
+	focus = {
+		id = JAP_central_power_representative
+		icon = GFX_RUS_New_Governmental_Agencies
+		cost = 10
+		prerequisite = { focus = JAP_minseito_comeback }
+		relative_position_id = JAP_minseito_comeback
+		x = 0
+		y = 1
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	# 34: 教育立国政策
+	focus = {
+		id = JAP_education_nation_policy
+		icon = GFX_goal_CZE_rural_education
+		cost = 10
+		prerequisite = { focus = JAP_central_power_representative }
+		relative_position_id = JAP_central_power_representative
+		x = -2
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = electronics_bonus
+				bonus = 0.1
+				uses = 1
+				category = electronics
+			}
+		}
+	}
+
+	# 35: 回归稳健财政
+	focus = {
+		id = JAP_sound_finance_return
+		icon = GFX_goal_COR_Moderate_Economy_Love
+		cost = 10
+		prerequisite = { focus = JAP_central_power_representative }
+		relative_position_id = JAP_central_power_representative
+		x = 0
+		y = 1
+		completion_reward = {
+			# TODO: 减少消费品需求
+		}
+	}
+
+	# 36: 以樱田会发声
+	focus = {
+		id = JAP_sakuradakai_voice
+		icon = GFX_goal_NFA_national_propaganda
+		cost = 10
+		prerequisite = { focus = JAP_central_power_representative }
+		relative_position_id = JAP_central_power_representative
+		x = 2
+		y = 1
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	# 37: “财务通”町田稳定局势
+	focus = {
+		id = JAP_machida_chuji_stability
+		icon = GFX_goal_JAP_machida_chuji_stability
+		cost = 10
+		prerequisite = { focus = JAP_education_nation_policy focus = JAP_sound_finance_return focus = JAP_sakuradakai_voice }
+		relative_position_id = JAP_education_nation_policy
+		x = 1
+		y = 1
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+
+	# 38: “小大隈”永井带来革新
+	focus = {
+		id = JAP_nagai_ryutaro_reform
+		icon = GFX_goal_JAP_nagai_ryutaro_reform
+		cost = 10
+		prerequisite = { focus = JAP_education_nation_policy focus = JAP_sound_finance_return focus = JAP_sakuradakai_voice }
+		relative_position_id = JAP_sakuradakai_voice
+		x = -1
+		y = 1
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	# 39: 后经济危机时代
+	focus = {
+		id = JAP_post_crisis_era
+		icon = GFX_goal_NFA_review_economy
+		cost = 10
+		prerequisite = { focus = JAP_machida_chuji_stability }
+		relative_position_id = JAP_machida_chuji_stability
+		x = -1
+		y = 1
+		completion_reward = {
+			# TODO: 移除负面经济修正
+		}
+	}
+
+	# 40: 滨口内阁的教训
+	focus = {
+		id = JAP_hamaguchi_cabinet_lessons
+		icon = GFX_goal_CAL_japan_gov_restructure
+		cost = 10
+		prerequisite = { focus = JAP_machida_chuji_stability focus = JAP_nagai_ryutaro_reform }
+		relative_position_id = JAP_machida_chuji_stability
+		x = 1
+		y = 1
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+
+	# 41: 聚拢党人派力量
+	focus = {
+		id = JAP_party_faction_unification
+		icon = GFX_goal_NGR_native_rights
+		cost = 10
+		prerequisite = { focus = JAP_nagai_ryutaro_reform }
+		relative_position_id = JAP_nagai_ryutaro_reform
+		x = 1
+		y = 1
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	# 42: 保护城市中产阶级
+	focus = {
+		id = JAP_protect_urban_middle_class
+		icon = GFX_BBR_support_black_middle_class
+		cost = 10
+		prerequisite = { focus = JAP_post_crisis_era }
+		relative_position_id = JAP_post_crisis_era
+		x = -1
+		y = 1
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+
+	# 43: 合理的增税政策
+	focus = {
+		id = JAP_rational_tax_policy
+		icon = GFX_RUS_Progressive_Tax
+		cost = 10
+		prerequisite = { focus = JAP_post_crisis_era }
+		prerequisite = { focus = JAP_hamaguchi_cabinet_lessons }
+		relative_position_id = JAP_post_crisis_era
+		x = 1
+		y = 1
+		completion_reward = {
+			# TODO: 增加每日政治点，减少稳定性
+		}
+	}
+
+	# 44: 偏向乡军团体
+	focus = {
+		id = JAP_favor_rural_military_groups
+		icon = GFX_goal_KIV_develop_rural
+		cost = 10
+		prerequisite = { focus = JAP_hamaguchi_cabinet_lessons }
+		prerequisite = { focus = JAP_party_faction_unification }
+		relative_position_id = JAP_hamaguchi_cabinet_lessons
+		x = 1
+		y = 1
+		completion_reward = {
+			add_war_support = 0.05
+		}
+	}
+
+	# 45: 推动选举肃正
+	focus = {
+		id = JAP_election_purification
+		icon = GFX_goal_NFA_safe_elections
+		cost = 10
+		prerequisite = { focus = JAP_party_faction_unification }
+		relative_position_id = JAP_party_faction_unification
+		x = 1
+		y = 1
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	# 46: 强化官僚掌握力
+	focus = {
+		id = JAP_bureaucratic_control
+		icon = GFX_DKB_Bureaucracy
+		cost = 10
+		prerequisite = { focus = JAP_rational_tax_policy focus = JAP_protect_urban_middle_class }
+		relative_position_id = JAP_rational_tax_policy
+		x = -1
+		y = 1
+		completion_reward = {
+			# TODO: 减少内阁成本
+		}
+	}
+
+	# 47: 坚持协调外交
+	focus = {
+		id = JAP_cooperative_diplomacy
+		icon = GFX_goal_ATH_diplomats
+		cost = 10
+		prerequisite = { focus = JAP_bureaucratic_control }
+		relative_position_id = JAP_bureaucratic_control
+		x = 0
+		y = 1
+		completion_reward = {
+			# TODO: 添加与其他大国的外交加成
+		}
+	}
+
+	# 48: 推动产业合理化
+	focus = {
+		id = JAP_industrial_rationalization
+		icon = GFX_RUS_Industrial_Democracy
+		cost = 10
+		prerequisite = { focus = JAP_rational_tax_policy focus = JAP_favor_rural_military_groups }
+		relative_position_id = JAP_rational_tax_policy
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.15
+				uses = 1
+				category = industry
+			}
+		}
+	}
+
+	# 49: 劳资协调问题
+	focus = {
+		id = JAP_labor_capital_coordination
+		icon = GFX_MAF_labor_charter
+		cost = 10
+		prerequisite = { focus = JAP_industrial_rationalization }
+		relative_position_id = JAP_industrial_rationalization
+		x = 0
+		y = 1
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+
+	# 50: 摆脱独裁者的幻象
+	focus = {
+		id = JAP_escape_dictator_illusion
+		icon = GFX_goal_COS_No_Place_Dictators_Here
+		cost = 10
+		prerequisite = { focus = JAP_election_purification focus = JAP_favor_rural_military_groups }
+		relative_position_id = JAP_party_faction_unification
+		x = 0
+		y = 2
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	# 51: 泛亚主义展望
+	focus = {
+		id = JAP_pan_asian_vision
+		icon = GFX_goal_JAP_greater_asian_sphere
+		cost = 10
+		prerequisite = { focus = JAP_escape_dictator_illusion }
+		relative_position_id = JAP_escape_dictator_illusion
+		x = 0
+		y = 1
+		completion_reward = {
+			# TODO: 对亚洲国家的阵营加入倾向
+		}
+	}
+
+	# 52: 拥护宪政，千代不变
+	focus = {
+		id = JAP_uphold_constitutionalism
+		icon = GFX_goal_LUX_Constitutional_Duchy
+		cost = 10
+		prerequisite = { focus = JAP_cooperative_diplomacy focus = JAP_labor_capital_coordination focus = JAP_pan_asian_vision }
+		relative_position_id = JAP_labor_capital_coordination
+		x = 0
+		y = 1
+		completion_reward = {
+			add_stability = 0.2
+			add_political_power = 200
+		}
+	}
+}
