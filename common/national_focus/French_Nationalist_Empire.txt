@@ -2228,7 +2228,6 @@ focus = {
 			type = artillery_equipment
 			amount = 250
 		}
-		country_event = { id = frg_economy.2 }
 	}
 }
 
@@ -2372,6 +2371,7 @@ focus = {
 				AND = {
 					has_country_leader = { ruling_only = yes name = "科洛内尔·雷米" }
 					has_country_flag = Remy_alive
+					has_country_flag = FRG_refuse_Monei
 				}
 				has_country_leader = { ruling_only = yes name = "保罗·查克" }
 			}
@@ -2877,6 +2877,7 @@ focus = {
 				AND = {
 					has_country_leader = { ruling_only = yes name = "科洛内尔·雷米" }
 					has_country_flag = Remy_alive
+					has_country_flag = FRG_accept_Monei
 				}
 			}
 		}
@@ -3076,8 +3077,21 @@ focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRG_begin_national_planning"
 		custom_effect_tooltip = FRG_Yellow_Socialist_tt
-		add_ideas = FRG_economic_struggle
-
+		country_event = { id = frg_economy.3 }
+		if = {
+			limit = {
+				NOT = {
+					has_completed_focus = FRG_La_scoumoune
+				}
+			}
+			add_ideas = FRG_economic_struggle
+		}
+		else_if = {
+			limit = {
+				has_completed_focus = FRG_La_scoumoune
+			}
+			add_ideas = FRG_economic_struggle_2
+		}
 	}
 }
 
@@ -11866,7 +11880,7 @@ focus = {
 		completion_reward = {
 			army_experience = 25
 		    add_ideas = FRG_new_order
-			France_reunited = yes
+			France_reunited_effect = yes
 		}
 	}
 	focus = {
@@ -13131,7 +13145,7 @@ focus = {
 		x = 7
 		y = 1
 		ai_will_do = {
-			factor = 120
+			factor = 180
 		}
 		prerequisite = {
 			focus = FRG_world
@@ -13145,7 +13159,24 @@ focus = {
 		} 
 		completion_reward = {
 			custom_effect_tooltip = FRG_europe_tooltip_17
-			unlock_decision_tooltip = FRG_tunisia_imperialate_decision
+			unlock_decision_tooltip = FRG_deal_with_the_MOR
+			if = {
+				limit = {
+					country_exists = NFA
+					FRG = {
+						has_war_with = NFA
+					}
+				}
+				unlock_decision_tooltip = FRG_deal_with_nation_france_decision
+			}
+			if = {
+				limit = {
+					NOT = {
+						country_exists = NFA
+					}
+				}
+				unlock_decision_tooltip = FRG_tunisia_imperialate_decision
+			}
 			hidden_effect = {
 				add_state_core = 459
 				add_state_core = 460
