@@ -9,7 +9,7 @@ focus_tree = {
 	}
 	default = no
 	continuous_focus_position = { x = 200 y = 2500 }
-	
+	shared_focus = FRB_Defend_our_independence
 	focus = {
 		id = BRI_ar_chas_donv_yelo_da_ouez
 		icon = GFX_ALA_grey_wolf
@@ -24,7 +24,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_No_longer_a_slave
 		}
 	}
 	focus = {
@@ -45,7 +45,9 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_manpower = 100000
+			add_stability = -0.05
+			add_war_support = 0.15
 		}
 	}
 	focus = {
@@ -66,7 +68,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_No_longer_a_slave
+				add_idea = BRI_No_longer_a_slave_1
+			}
 		}
 	}
 	focus = {
@@ -87,7 +92,8 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_one_random_civilian_factory = yes
+			add_two_random_military_factories = yes
 		}
 	}
 	focus = {
@@ -108,7 +114,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Guerrilla_warfare
 		}
 	}
 	focus = {
@@ -129,7 +135,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_No_longer_a_slave_1
+				add_idea = BRI_No_longer_a_slave_2
+			}
 		}
 	}
 	focus = {
@@ -150,7 +159,17 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 5000
+				producer = FRA
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 3000
+				producer = BRI
+			}
 		}
 	}
 	focus = {
@@ -175,9 +194,1484 @@ focus_tree = {
 		available = {
 			
 		}
-		
 		completion_reward = {
+			if = {
+				limit = {
+					FRA = {
+						exists = no
+					}
+				}
+				country_event = {
+					id = BRI_FRA.2
+				}
+			}
+			else_if =  {
+				limit = {
+					has_war_with = FRG
+				}
+				FRG = {
+					country_event = {
+						id = BRI_FRA.2
+					}
+				}
+			}
+			else = {
+				FRA = {
+					country_event = {
+						id = BRI_FRA.1
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = BRI_britanny_on_world_stage
+		icon = GFX_goal_generic_world_diplomacy
+		x = 3
+		y = 5
 		
+		
+		cost = 4
+		
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			has_completed_focus = BRI_independent_win
+			NOT = {
+				has_idea = BRI_inner_factionalism
+			}
+		}
+		completion_reward = {
+			unlock_decision_category_tooltip = BRI_britanny_on_world_stage_cat
+			remove_ideas = BRI_memories_of_1932
+		}
+	}
+	focus = {
+		id = BRI_our_france_identity
+		icon = GFX_goal_NFA_certain_idea_of_france
+		x = -8
+		y = 1
+		relative_position_id = BRI_britanny_on_world_stage
+		cost = 4
+		prerequisite = {
+			focus = BRI_britanny_on_world_stage
+		}
+		mutually_exclusive = {
+			focus = BRI_our_celtic_ancestors
+		}
+		mutually_exclusive = {
+			focus = BRI_our_corporate_empire
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			OR = {
+					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
+					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
+					has_country_flag = BRI_Britanny_Morvan_Marchal_gain_power
+					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_France_Marcel_Cachin_win
+				}
+		}
+		completion_reward = {
+			add_political_power = 100
+			add_war_support = 0.15
+		}
+	}
+	focus = {
+		id = BRI_our_celtic_ancestors
+		icon = GFX_IRE_gaelic
+		x = 0
+		y = 1
+		relative_position_id = BRI_britanny_on_world_stage
+		cost = 4
+		prerequisite = {
+			focus = BRI_britanny_on_world_stage
+		}
+		mutually_exclusive = {
+			focus = BRI_our_france_identity
+		}
+		mutually_exclusive = {
+			focus = BRI_our_corporate_empire
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = BRI_Giant_enterprises_in_BRI
+					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
+					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
+					has_country_flag = BRI_autonomists
+					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_France_Marcel_Cachin_win
+				}
+			}
+		}
+		completion_reward = {
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	focus = {
+		id = BRI_our_corporate_empire
+		icon = GFX_goal_MEX_corporate_economics
+		x = 6
+		y = 1
+		relative_position_id = BRI_britanny_on_world_stage
+		cost = 4
+		prerequisite = {
+			focus = BRI_britanny_on_world_stage
+		}
+		mutually_exclusive = {
+			focus = BRI_our_celtic_ancestors
+		}
+		mutually_exclusive = {
+			focus = BRI_our_france_identity
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			has_country_flag = BRI_Giant_enterprises_in_BRI
+		}
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+				set_temp_variable = { property_change = 1.5 }
+				BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
+		}
+	}
+	focus = {
+		id = BRI_take_france
+		icon = GFX_goal_NFA_Greater_France
+		x = 0
+		y = 1
+		relative_position_id = BRI_our_corporate_empire
+		cost = 4
+		prerequisite = {
+			focus = BRI_our_corporate_empire
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			hidden_effect = {
+				add_political_power = 28
+			}
+			declare_war_on = {
+				target = FRG
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = OCC
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = LRE
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = NRM
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = FRA
+						is_core_of = OCC
+						is_core_of = FRG
+						is_core_of = LRE
+						is_core_of = NRM
+					}
+
+				}
+				BRI = { 
+					add_state_core = PREV 
+			    }
+			}
+		}
+	}
+	focus = {
+		id = BRI_corporate_alliance
+		icon = GFX_GRU_CORPORATE_ALLIANCE
+		x = -2
+		y = 1
+		relative_position_id = BRI_our_corporate_empire
+		cost = 4
+		prerequisite = {
+			focus = BRI_our_corporate_empire
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+				set_temp_variable = { property_change = 3 }
+				BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
+		}
+	}
+	focus = {
+		id = BRI_october_revolution
+		icon = GFX_SOV_middle_class
+		x = -4
+		y = 2
+		relative_position_id = BRI_our_corporate_empire
+		cost = 4
+		prerequisite = {
+			focus = BRI_take_france
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		
+		mutually_exclusive = {
+			focus = BRI_all_farming_fields
+		}
+		mutually_exclusive = {
+			focus = BRI_control_rubber
+		}
+		mutually_exclusive = {
+			focus = BRI_command_oil
+		}
+		mutually_exclusive = {
+			focus = BRI_europe_market
+		}
+		available = {
+			has_country_flag = BRI_the_rule_of_lagadelle_company
+		}
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -1 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			hidden_effect = {
+				add_political_power = 28
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.2
+			}
+			every_state = {
+				limit = {
+					is_core_of = RUS
+				}
+				add_core_of = BRI
+			}
+			every_state = {
+				limit = {
+					is_core_of = TRM
+				}
+				add_core_of = BRI
+			}
+			RUS_enable_integration = yes
+			set_country_flag = BRI_large_enterprises_on_the_world
+			unlock_decision_tooltip = BRI_The_October_Revolution
+		}
+	}
+	focus = {
+		id = BRI_all_farming_fields
+		icon = GFX_goal_COR_mechanize_our_farms
+		x = -2
+		y = 2
+		relative_position_id = BRI_our_corporate_empire
+		cost = 4
+		prerequisite = {
+			focus = BRI_take_france
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		
+		mutually_exclusive = {
+			focus = BRI_october_revolution
+		}
+		mutually_exclusive = {
+			focus = BRI_control_rubber
+		}
+		mutually_exclusive = {
+			focus = BRI_command_oil
+		}
+		mutually_exclusive = {
+			focus = BRI_europe_market
+		}
+		available = {
+			has_country_flag = BRI_the_rule_of_danone_company
+		}
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -1 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = ARG
+						is_core_of = CHL
+						is_core_of = ENG
+						is_core_of = DEN
+						is_core_of = GER
+						is_core_of = HOL
+						is_core_of = BRA
+						is_core_of = URG
+						is_core_of = BEL
+					}
+				}
+				add_core_of = BRI
+			}
+			hidden_effect = {
+				add_political_power = 28
+			}
+		}
+	}
+	focus = {
+		id = BRI_control_rubber
+		icon = GFX_goal_UMN_rubber_farming
+		x = 0
+		y = 2
+		relative_position_id = BRI_our_corporate_empire
+		cost = 4
+		prerequisite = {
+			focus = BRI_take_france
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		
+		mutually_exclusive = {
+			focus = BRI_all_farming_fields
+		}
+		mutually_exclusive = {
+			focus = BRI_october_revolution
+		}
+		mutually_exclusive = {
+			focus = BRI_command_oil
+		}
+		mutually_exclusive = {
+			focus = BRI_europe_market
+		}
+		available = {
+			has_country_flag = BRI_the_rule_of_Michelin_company
+		}
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -1 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			hidden_effect = {
+				add_political_power = 28
+			}
+			every_state = {
+				limit = {
+					is_core_of = BRM
+					is_core_of = INC
+					is_core_of = LAO
+					is_core_of = VIN
+					is_core_of = SIA
+					is_core_of = MLY
+					is_core_of = SAR
+					is_core_of = CAM
+					is_core_of = VNQ
+					is_core_of = DEI
+					is_core_of = INS
+				}
+				add_core_of = BRI
+			}
+		}
+	}
+	focus = {
+		id = BRI_command_oil
+		icon = GFX_GRU_CORPORATE_TAKE_OIL
+		x = 2
+		y = 2
+		relative_position_id = BRI_our_corporate_empire
+		cost = 4
+		prerequisite = {
+			focus = BRI_take_france
+		}
+		
+		mutually_exclusive = {
+			focus = BRI_all_farming_fields
+		}
+		mutually_exclusive = {
+			focus = BRI_control_rubber
+		}
+		mutually_exclusive = {
+			focus = BRI_october_revolution
+		}
+		mutually_exclusive = {
+			focus = BRI_europe_market
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			has_country_flag = BRI_the_rule_of_total_company
+		}
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -1 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			hidden_effect = {
+				add_political_power = 28
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = USA
+						is_core_of = CSA
+						is_core_of = COR
+						is_core_of = NEE
+						is_core_of = BBR
+						is_core_of = TEX
+						is_core_of = WCC
+						is_core_of = CAL
+						is_core_of = IRQ
+						is_core_of = PER
+						is_core_of = AZE
+					}
+				}
+				add_core_of = BRI
+			}
+		}
+	}
+	focus = {
+		id = BRI_europe_market
+		icon = GFX_goal_NFA_Sweet_France
+		x = 4
+		y = 2
+		relative_position_id = BRI_our_corporate_empire
+		cost = 4
+		prerequisite = {
+			focus = BRI_take_france
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		
+		mutually_exclusive = {
+			focus = BRI_all_farming_fields
+		}
+		mutually_exclusive = {
+			focus = BRI_control_rubber
+		}
+		mutually_exclusive = {
+			focus = BRI_command_oil
+		}
+		mutually_exclusive = {
+			focus = BRI_october_revolution
+		}
+		available = {
+			has_country_flag = BRI_the_rule_of_LVMH_company
+		}
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -1 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			hidden_effect = {
+				add_political_power = 28
+			}
+			every_state = {
+					limit = { 
+						is_on_continent = europe
+					}
+					add_core_of = BRI
+				}
+		}
+	}
+	focus = {
+		id = BRI_towards_great_brittany
+		icon = GFX_goal_FRG_Brittany
+		x = -1
+		y = 1
+		cost = 4
+		relative_position_id = BRI_our_celtic_ancestors
+		prerequisite = {
+			focus = BRI_our_celtic_ancestors
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			15 = {
+				add_core_of = BRI
+			}
+			30 = {
+				add_core_of = BRI
+			}
+			23 = {
+				add_core_of = BRI
+			}
+			create_wargoal = {
+				target = FRG
+				type = take_core_state
+			}
+			create_wargoal = {
+				target = NRM
+				type = take_core_state
+			}
+		}
+	}
+	focus = {
+		id = BRI_celtic_union
+		icon = GFX_focus_WLA_celtic_flags
+		x = 1
+		y = 1
+		cost = 4
+		relative_position_id = BRI_our_celtic_ancestors
+		prerequisite = {
+			focus = BRI_our_celtic_ancestors
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		
+		available = {
+			
+		}
+		completion_reward = {
+			set_cosmetic_tag = BRI_celtic_union
+			if = {
+				limit = {
+					country_exists = SCT
+				}
+				BRI = {
+					every_state = {
+						limit = {
+							is_core_of = SCT
+						}
+						add_core_of = BRI
+					}
+					annex_country = {
+						target = SCT
+						transfer_troops = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					country_exists = WAL
+				}
+				WAL = {
+					every_state = {
+						limit = {
+							is_core_of = WAL
+						}
+						add_core_of = BRI
+					}
+					annex_country = {
+						target = WAL
+						transfer_troops = yes
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = BRI_join_faction
+		icon = GFX_goal_CZE_faction_generic
+		x = -5
+		y = 1
+		cost = 4
+		relative_position_id = BRI_our_celtic_ancestors
+		prerequisite = {
+			focus = BRI_our_france_identity
+			focus = BRI_our_celtic_ancestors
+		}
+		mutually_exclusive = {
+			focus = BRI_own_faction
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_stability = 0.1
+			if = {
+				limit = {
+					country_exists = RUS
+				}
+				unlock_decision_tooltip = BRI_Join_Russia
+			}
+			if = {
+				limit = {
+					country_exists = GER
+				}
+				unlock_decision_tooltip = BRI_Join_Germany
+			}
+			if = {
+				limit = {
+					country_exists = CAN
+				}
+				unlock_decision_tooltip = BRI_Join_the_Entente_Powers
+			}
+			if = {
+				limit = {
+					country_exists = ENG
+					ENG = {
+						OR = {
+							has_government = totalist
+							has_government = radical_socialist
+							has_government = syndicalist
+						} 
+					}
+				}
+				unlock_decision_tooltip = BRI_Join_the_Third_International
+			}
+		}
+	}
+	focus = {
+		id = BRI_own_faction
+		icon = GFX_goal_generic_join_faction
+		x = -3
+		y = 1
+		cost = 4
+		relative_position_id = BRI_our_celtic_ancestors
+		prerequisite = {
+			focus = BRI_our_france_identity
+			focus = BRI_our_celtic_ancestors
+		}
+		mutually_exclusive = {
+			focus = BRI_join_faction
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			create_faction_from_template = { 
+				template = faction_template_generic_dominance
+				name = 	"伊姆萨夫集团"
+				icon = GFX_faction_celtic_internationale
+			}
+			add_political_power = 200
+			add_stability = 0.2
+			add_war_support = 0.15
+		}
+	}
+	focus = {
+		id = BRI_economic_cooperation
+		icon = GFX_NEE_Imperial_Economy
+		x = -4
+		y = 2
+		cost = 4
+		relative_position_id = BRI_our_celtic_ancestors
+		prerequisite = {
+			focus = BRI_own_faction
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_two_random_infrastructures = yes
+		}
+	}
+	focus = {
+		id = BRI_military_cooperation
+		icon = GFX_RUS_Get_Military
+		x = -6
+		y = 2
+		cost = 4
+		relative_position_id = BRI_our_celtic_ancestors
+		prerequisite = {
+			focus = BRI_own_faction
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+		}
+	}
+	focus = {
+		id = BRI_recelticlize
+		icon = GFX_goal_IRE_dissolve_dail
+		x = 0
+		y = 2
+		cost = 4
+		relative_position_id = BRI_our_celtic_ancestors
+		prerequisite = {
+			focus = BRI_celtic_union
+		}
+		prerequisite = {
+			focus = BRI_towards_great_brittany
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			custom_effect_tooltip = BRI_attack_Anglo_Saxons_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = BRI_Wales_aid
+					}
+					BRI = {
+						transfer_state = 122 
+						add_state_core = 1225
+						transfer_state = 1225 
+						add_state_core = 122
+					}
+					division_template = {
+						name = "起义军"
+						priority = 3
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 0 y = 4 }
+							infantry = { x = 0 y = 5 }
+							infantry = { x = 0 y = 6 }
+						}
+					}
+					random_owned_controlled_state = {
+						prioritize = { 122 1225 }
+						limit = {
+							is_in_home_area = yes
+							impassable = no
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = BRI_Scotland_aid
+					}
+					BRI = {
+						transfer_state = 120
+						add_state_core = 120
+					}
+					division_template = {
+						name = "起义军"
+						priority = 3
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 0 y = 4 }
+							infantry = { x = 0 y = 5 }
+							infantry = { x = 0 y = 6 }
+						}
+					}
+					random_owned_controlled_state = {
+						prioritize = { 120 }
+						limit = {
+							is_in_home_area = yes
+							impassable = no
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+					}
+				}
+			}
+			declare_war_on = { 
+				target = 126.owner 
+				type = annex_everything
+			}
+			unlock_decision_tooltip = BRI_Anglo_Saxons_intergration
+			unlock_decision_tooltip = BRI_France_intergration
+			unlock_decision_tooltip = BRI_Iberian_intergration
+			add_war_support = 0.15
+			add_state_core = 779
+			add_state_core = 28
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = ENG
+						is_core_of = FRA
+						is_core_of = NRM
+						is_core_of = OCC
+						is_core_of = LRE
+						is_core_of = CNT
+						is_core_of = CAR
+						is_core_of = SPR
+						is_core_of = BAS
+						is_core_of = CAT
+						is_core_of = GLC
+						is_core_of = POR
+						is_core_of = FRG
+					}
+				}
+				add_claim_by = BRI
+			}
+		}
+	}
+	focus = {
+		id = BRI_friendship_with_ireland
+		icon = GFX_goal_IRE_irish_unity
+		x = -2
+		y = 2
+		cost = 4
+		relative_position_id = BRI_our_celtic_ancestors
+		prerequisite = {
+			focus = BRI_celtic_union
+		}
+		prerequisite = {
+			focus = BRI_towards_great_brittany
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			IRE = {
+				country_event = {
+				id = BRI_FRA.11
+				}
+			}
+			
+		}
+	}
+	focus = {
+		id = BRI_nordics
+		icon = GFX_goal_NOR_free_germanic_peoples
+		x = 0
+		y = 3
+		cost = 4
+		relative_position_id = BRI_our_celtic_ancestors
+		prerequisite = {
+			focus = BRI_recelticlize
+		}
+		available = {
+			has_country_flag = BRI_laine_gain_power
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			every_state = {
+				limit = {
+					is_core_of = GER
+				}
+				add_core_of = BRI
+			}every_state = {
+				limit = {
+					is_core_of = NOR
+				}
+				add_core_of = BRI
+			}
+			every_state = {
+				limit = {
+					is_core_of = SWE
+				}
+				add_core_of = BRI
+			}
+			every_state = {
+				limit = {
+					is_core_of = FIN
+				}
+				add_core_of = BRI
+			}
+			every_state = {
+				limit = {
+					is_core_of = DEN
+				}
+				add_core_of = BRI
+			}
+			every_state = {
+				limit = {
+					is_core_of = AUS
+				}
+				add_core_of = BRI
+			}
+			every_state = {
+				limit = {
+					is_core_of = HOL
+				}
+				add_core_of = BRI
+			}
+			every_state = {
+				limit = {
+					is_core_of = CZE
+				}
+				add_core_of = BRI
+			}
+			set_cosmetic_tag = BRI_celt_ger
+			create_wargoal = {
+				target = GER
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = NOR
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = SWE
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = FIN
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = DEN
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = AUS
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = HOL
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = CZE
+				type = annex_everything
+			}
+		}
+	}
+	focus = {
+		id = BRI_infitrate_frg
+		icon = GFX_goal_NFA_La_France_Enivree
+		x = -1
+		y = 1
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_our_france_identity
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			unlock_decision_tooltip = BRI_Infiltrate_France
+		}
+	}
+	focus = {
+		id = BRI_crush_seperatists
+		icon = GFX_goal_CEA_exploit_france
+		x = 1
+		y = 1
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_our_france_identity
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			every_state = {
+				limit = {
+					is_core_of = FRA
+				}
+				BRI = { 
+					add_state_claim = PREV 
+			    }
+			}
+		}
+	}
+	focus = {
+		id = BRI_reclaim_france
+		icon = GFX_goal_NFA_France_Aux_Francais
+		x = 0
+		y = 2
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_infitrate_frg
+		}
+		prerequisite = {
+			focus = BRI_crush_seperatists
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			custom_effect_tooltip = BRI_reclaim_france_effect_tooltip
+			unlock_decision_tooltip = BRI_Lock_Occitania_back_in_the_cage
+			unlock_decision_tooltip = BRI_Lock_Lorraine_back_in_the_cage
+			unlock_decision_tooltip = BRI_Lock_Normandy_back_in_the_cage
+		}
+	}
+	focus = {
+		id = BRI_return_france_eternal
+		icon = GFX_goal_NFA_Return_France_Eternelle
+		x = 0
+		y = 3
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			BRI = {
+				owns_state = 16
+				OR = {
+					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
+					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
+					has_country_flag = BRI_Britanny_Morvan_Marchal_gain_power
+					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_France_Marcel_Cachin_win
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = BRI_FRA_one_survivor_tooltip
+				NOT = {
+					country_exists = FRG
+					country_exists = FRP
+					country_exists = FRA
+					country_exists = OCC
+					country_exists = NRM
+					country_exists = LRE
+				}
+			}
+		}
+		completion_reward = {
+			KXX_add_big_france_core = yes
+			set_capital = { state = 16 remember_old_capital = no }
+			if = {
+				limit = {
+					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
+				}
+				set_cosmetic_tag = BRI_FRA_kingdom
+			}
+			else_if = {
+				limit = {
+					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
+				}
+				set_cosmetic_tag = BRI_FRA_nazibol
+			}
+			else_if = {
+				limit = {
+					has_country_flag = BRI_France_Marcel_Cachin_win
+				}
+				set_cosmetic_tag = FRA_Jacobinmod
+			}
+			else = {
+				set_cosmetic_tag = BRI_FRA
+			}
+		}
+	}
+	focus = {
+		id = BRI_restore_natural_border
+		icon = GFX_goal_HOL_baerle_talks
+		x = -1
+		y = 5
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_return_france_eternal
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			every_other_country = {
+				limit = { 
+					OR = {
+						is_belgian_tag = yes 
+						original_tag = HOL
+						original_tag = LUX
+						country_exists = yes
+					}
+				}
+				ROOT = { 
+					create_wargoal = { 
+						target = PREV 
+						type = annex_everything
+					} 
+				}
+			}
+		}
+	}
+	focus = {
+		id = BRI_pacify_spain
+		icon = GFX_goal_FRA_liberate_Iberia
+		x = -2
+		y = 4
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_return_france_eternal
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					country_exists = CNT
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CNT
+				}
+			}
+			if = {
+				limit = {
+					country_exists = CAR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CAR
+				}
+			}
+			if = {
+				limit = {
+					country_exists = SPR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = SPR
+				}
+			}
+			if = {
+				limit = {
+					country_exists = BAS
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = BAS
+				}
+			}
+			if = {
+				limit = {
+					country_exists = CAT
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CAT
+				}
+			}
+			if = {
+				limit = {
+					country_exists = GLC
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = GLC
+				}
+			}
+			if = {
+				limit = {
+					country_exists = POR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = POR
+				}
+			}
+		}
+	}
+	focus = {
+		id = BRI_pacify_italy
+		icon = GFX_goal_CZE_attack_italy
+		x = 2
+		y = 4
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_return_france_eternal
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			every_other_country = {
+				limit = { 
+					is_italian_tag = yes 
+				}
+				ROOT = { 
+					create_wargoal = { 
+						target = PREV 
+						type = annex_everything
+					} 
+				}
+			}
+		}
+	}
+	focus = {
+		id = BRI_albion_traitors
+		icon = GFX_goal_ENG_new_britain
+		x = 1
+		y = 5
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_return_france_eternal
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
+				}
+				ENG = {
+					country_event = {
+						id = BRI_for.5
+					}
+				}
+			}
+			else = {
+				create_wargoal = {
+					type = annex_everything
+					target = ENG
+				}
+			}
+		}
+	}
+	focus = {
+		id = BRI_swiss_romandy
+		icon = GFX_goal_AUS_Swiss_Neutrality
+		x = 0
+		y = 4
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_return_france_eternal
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			
+			if = {
+				limit = {
+					country_exists = SWI
+				}
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = SWI
+				}
+			}
+		}
+	}
+	focus = {
+		id = BRI_death_to_germany
+		icon = GFX_goal_WHR_Assert_Independence_Germany
+		x = 0
+		y = 6
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_pacify_italy
+		}
+		prerequisite = {
+			focus = BRI_pacify_spain
+		}
+		prerequisite = {
+			focus = BRI_restore_natural_border
+		}
+		prerequisite = {
+			focus = BRI_albion_traitors
+		}
+		prerequisite = {
+			focus = BRI_swiss_romandy
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = GER
+			}
+		}
+	}
+	focus = {
+		id = BRI_dream_of_new_europe
+		icon = GFX_goal_UMN_european_artillery
+		x = -1
+		y = 7
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_death_to_germany
+		}
+		mutually_exclusive = {
+			focus = BRI_new_french_imperialism
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			NOT = {
+				has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
+			}
+		}
+		completion_reward = {
+			every_state = {
+				limit = {
+					is_on_continent = europe
+				}
+				add_claim_by = BRI
+			}
+			set_cosmetic_tag = BRI_europe
+		}
+	}
+	focus = {
+		id = BRI_new_french_imperialism
+		icon = GFX_goal_FRA_strike_french_reaction
+		x = 1
+		y = 7
+		relative_position_id = BRI_our_france_identity
+		cost = 4
+		prerequisite = {
+			focus = BRI_death_to_germany
+		}
+		mutually_exclusive = {
+			focus = BRI_dream_of_new_europe
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			has_completed_focus = BRI_onwards
+		}
+		completion_reward = {
+			add_ideas = NFA_nap_liberation_idea
+			unlock_decision_category_tooltip = BRI_POPF_puppet_category
+			unlock_decision_tooltip = BRI_POPF_puppet_CNT
+			unlock_decision_tooltip = BRI_POPF_puppet_SRI
+			unlock_decision_tooltip = BRI_POPF_puppet_ENG
+			unlock_decision_tooltip = BRI_POPF_puppet_GER
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = NFA
+						is_claimed_by = NFA
+						is_core_of = ALG	
+						is_core_of = TUN
+						is_core_of = MRT
+						is_core_of = SEN
+						is_core_of = GNA
+						is_core_of = MAL
+						is_core_of = BFA
+						is_core_of = NER
+						is_core_of = WAD
+						is_core_of = INC
+					}
+				}
+				add_core_of = BRI
+				add_stability = -0.2
+			}
 		}
 	}
 	focus = {
@@ -186,17 +1680,21 @@ focus_tree = {
 		x = 20
 		y = 0
 		
-		cost = 1
+		cost = 4
 		
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_the_rule_of_RNB
 		}
 		
 		completion_reward = {
-		
+			add_political_power = 100
+			country_event = {
+				id = brittany.1
+				days = 2
+			}
 		}
 	}
 	focus = {
@@ -205,7 +1703,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_radicalize_national_revolution
 			focus = BRI_rise_of_Ar_Falz	
@@ -221,7 +1719,9 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+		add_stability = 0.05
+		add_war_support = 0.1
+		add_ideas = BRI_Celtic_Nation
 		}
 	}
 	focus = {
@@ -230,7 +1730,7 @@ focus_tree = {
 		x = 0
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_celtic_nation
 		}
@@ -243,7 +1743,8 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Breton_language_teaching
+			add_research_slot = 1
 		}
 	}
 	focus = {
@@ -252,7 +1753,7 @@ focus_tree = {
 		x = 5
 		y = 1
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_PNB_holds
 		}
@@ -260,11 +1761,12 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_Oliver_Modreel_hold_power
 		}
 		
 		completion_reward = {
-		
+			add_stability = 0.07
+			add_war_support = 0.1
 		}
 	}
 	focus = {
@@ -273,7 +1775,7 @@ focus_tree = {
 		x = 7
 		y = 1
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_PNB_holds
 		}
@@ -281,11 +1783,12 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_Francois_Debeauvais_gain_power
 		}
 		
 		completion_reward = {
-		
+			add_political_power = 100
+			add_stability = 0.1
 		}
 	}
 	focus = {
@@ -294,7 +1797,7 @@ focus_tree = {
 		x = 8
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_marruassism_incoming
 		}
@@ -306,7 +1809,8 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Decentralization
+			add_political_power = 30
 		}
 	}
 	focus = {
@@ -315,7 +1819,7 @@ focus_tree = {
 		x = 8
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_regionalism_and_autonomism
 		}
@@ -327,7 +1831,9 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Army_reorganization
+			add_manpower = -10000
+			add_stability = 0.05
 		}
 	}
 	focus = {
@@ -336,7 +1842,7 @@ focus_tree = {
 		x = 10
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_marruassism_incoming
 		}
@@ -348,7 +1854,34 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.25
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.1
+			}
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_political_power = 75
+			add_stability = 0.05
 		}
 	}
 	focus = {
@@ -357,7 +1890,7 @@ focus_tree = {
 		x = 10
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_party_unity
 		}
@@ -369,7 +1902,8 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Eliminate_racial_stains
+			add_manpower = 15000
 		}
 	}
 	focus = {
@@ -378,7 +1912,7 @@ focus_tree = {
 		x = 9
 		y = 4
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_erdicrate_jew
 		}
@@ -399,7 +1933,9 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Organic_state_realised
+			add_stability = 0.05
+			add_war_support = 0.1
 		}
 	}
 	focus = {
@@ -408,7 +1944,7 @@ focus_tree = {
 		x = 0 
 		y = 5
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_popular_state
 			focus = BRI_red_liberty
@@ -424,7 +1960,8 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_The_homeland_of_the_Bretons
+			add_political_power = 150
 		}
 	}
 	focus = {
@@ -433,7 +1970,7 @@ focus_tree = {
 		x = 2
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_mordel_again
 		}
@@ -445,7 +1982,14 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Government_Enterprise_Linkage
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_marlib_to_coalition = yes
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.15
+			}
 		}
 	}
 	focus = {
@@ -454,7 +1998,7 @@ focus_tree = {
 		x = 2
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_friend_of_capital
 		}
@@ -466,7 +2010,17 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_Government_Enterprise_Linkage
+				add_idea = BRI_Government_Enterprise_Linkage_1
+			}
+			add_one_random_civilian_factory = yes
+			add_two_random_civilian_factories = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_military_factory = yes
 		}
 	}
 	focus = {
@@ -475,7 +2029,7 @@ focus_tree = {
 		x = 4
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_mordel_again
 		}
@@ -487,7 +2041,24 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_The_Party_commands_military
+			add_political_power = 30
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.2
+			}
 		}
 	}
 	focus = {
@@ -496,7 +2067,7 @@ focus_tree = {
 		x = 4
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_moderate_legionarism
 		}
@@ -508,7 +2079,21 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Strive_for_the_support_of_the_church
+			add_stability = 0.05
+			add_manpower = 10000
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.03
+			}
 		}
 	}
 	focus = {
@@ -517,7 +2102,7 @@ focus_tree = {
 		x = 6
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_mordel_again
 			focus = BRI_marruassism_incoming
@@ -530,7 +2115,8 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Brittany_model_of_corporatism
+			add_one_random_civilian_factory = yes
 		}
 	}
 	focus = {
@@ -539,7 +2125,7 @@ focus_tree = {
 		x = 6
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_mordel_again
 		}
@@ -551,7 +2137,12 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_Brittany_model_of_corporatism
+				add_idea = BRI_Brittany_model_of_corporatism_1
+			}
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
 		}
 	}
 	focus = {
@@ -560,7 +2151,7 @@ focus_tree = {
 		x = 3
 		y = 4
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_britanny_language
 		}
@@ -581,7 +2172,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_The_Wolf_Spirit_of_Brittany
 		}
 	}
 	focus = {
@@ -590,7 +2181,7 @@ focus_tree = {
 		x = -7
 		y = 1
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_PNB_holds
 		}
@@ -598,11 +2189,11 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_Theophile_Jeusset_gain_power
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Radical_national_revolution
 		}
 	}
 	focus = {
@@ -611,7 +2202,7 @@ focus_tree = {
 		x = -10
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_radicalize_national_revolution
 		}
@@ -623,7 +2214,13 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_The_Party_commands_military
+			army_experience = 50
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.15
+			}
+			add_natpop_to_coalition = yes
 		}
 	}
 	focus = {
@@ -632,7 +2229,7 @@ focus_tree = {
 		x = -10
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_intergrate_perrots
 		}
@@ -644,7 +2241,12 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_war_support = 0.02
+			add_stability = 0.01
+			swap_ideas = {
+				remove_idea = BRI_Radical_national_revolution
+				add_idea = BRI_Radical_national_revolution_1
+			}
 		}
 	}
 	focus = {
@@ -653,7 +2255,7 @@ focus_tree = {
 		x = -8
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_radicalize_national_revolution
 		}
@@ -665,7 +2267,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Unite_workers_and_peasants
 		}
 	}
 	focus = {
@@ -674,7 +2276,7 @@ focus_tree = {
 		x = -8
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_social_national_worker_movement
 		}
@@ -686,7 +2288,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_Unite_workers_and_peasants
+				add_idea = BRI_Unite_workers_and_peasants_1
+			}
 		}
 	}
 	focus = {
@@ -695,7 +2300,7 @@ focus_tree = {
 		x = -9
 		y = 4
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_britanny_peasant_britanny_bread
 		}
@@ -716,7 +2321,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Peoples_Country_also_nations_country
 		}
 	}
 	focus = {
@@ -725,7 +2330,7 @@ focus_tree = {
 		x = -5
 		y = 1
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_PNB_holds
 		}
@@ -733,11 +2338,11 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_Yann_Sohier_gain_power
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Ar_Falz_revolution
 		}
 	}
 	focus = {
@@ -746,7 +2351,7 @@ focus_tree = {
 		x = -6
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_radicalize_national_revolution
 			focus = BRI_rise_of_Ar_Falz
@@ -759,7 +2364,14 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.15
+			}
 		}
 	}
 	focus = {
@@ -768,7 +2380,7 @@ focus_tree = {
 		x = -6
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_socialist_policy
 			
@@ -781,7 +2393,12 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Nationalized_industries
+			add_political_power = 50
+			add_timed_idea = {
+				idea = BRI_Corporate_alliance_divestment
+				days = 90
+			}
 		}
 	}
 	focus = {
@@ -790,7 +2407,7 @@ focus_tree = {
 		x = -4
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_rise_of_Ar_Falz
 			
@@ -803,7 +2420,30 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_tot_to_coalition = yes
+			set_party_name = {
+				ideology = totalist
+				name = BRI_FRA_tot_communist
+				long_name = BRI_FRA_tot_communist_long
+			}
+			set_party_name = {
+				ideology = syndicalist
+				name = BRI_FRA_synd_communist
+				long_name = BRI_FRA_synd_communist_long
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.05
+			}
+			add_ideas = BRI_cachins_guide
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.2
+			}
 		}
 	}
 	focus = {
@@ -812,7 +2452,7 @@ focus_tree = {
 		x = -4
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_cooperate_with_cachin
 			
@@ -825,7 +2465,20 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_political_power = 150
+			add_stability = -0.01
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.3
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.2
+			}
+			swap_ideas = {
+				remove_idea = BRI_cachins_guide
+				add_idea = BRI_cachins_guide_1
+			}
 		}
 	}
 	focus = {
@@ -834,7 +2487,7 @@ focus_tree = {
 		x = -2
 		y = 2
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_rise_of_Ar_Falz
 			
@@ -847,7 +2500,12 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_synd_to_coalition = yes
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.15
+			}
+			add_ideas = BRI_Syndicalism_guides_economy
 		}
 	}
 	focus = {
@@ -856,7 +2514,7 @@ focus_tree = {
 		x = -2
 		y = 3
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_intergrate_syndicalists
 			
@@ -869,7 +2527,15 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.15
+			}
+			swap_ideas = {
+				remove_idea = BRI_Syndicalism_guides_economy
+				add_idea = BRI_Syndicalism_guides_economy_1
+			}
+			add_war_support = 0.06
 		}
 	}
 	focus = {
@@ -878,7 +2544,7 @@ focus_tree = {
 		x = -3
 		y = 4
 		relative_position_id = BRI_PNB_holds
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_farmers_syndicate		
 		}
@@ -899,7 +2565,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_The_Freedom_of_Fire
 		}
 	}
 	focus = {
@@ -908,17 +2574,19 @@ focus_tree = {
 		x = 45
 		y = 0
 		
-		cost = 1
+		cost = 4
 		
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_the_rule_of_AP
 		}
-		
 		completion_reward = {
-		
+			country_event = {
+				id = brittany.2
+			}
+			add_ideas = BRI_rule_of_AP_1
 		}
 	}
 	focus = {
@@ -927,7 +2595,7 @@ focus_tree = {
 		x = -9
 		y = 1
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_millitary_coup
 		}
@@ -935,11 +2603,12 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_laine_gain_power
 		}
 		
 		completion_reward = {
-		
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
 		}
 	}
 	focus = {
@@ -948,7 +2617,7 @@ focus_tree = {
 		x = -10
 		y = 2
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_laine_stays
 		}
@@ -960,7 +2629,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_1
+				add_idea = BRI_rule_of_AP_2
+			}
 		}
 	}
 	focus = {
@@ -969,7 +2641,7 @@ focus_tree = {
 		x = -8
 		y = 2
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_laine_stays
 		}
@@ -981,7 +2653,16 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_one_random_civilian_factory = yes
+			add_stability = 0.1
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
 		}
 	}
 	focus = {
@@ -990,7 +2671,7 @@ focus_tree = {
 		x = -11
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_away_with_french
 		}
@@ -1002,7 +2683,16 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.15
+			
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.15
+			
+			}
 		}
 	}
 	focus = {
@@ -1011,7 +2701,7 @@ focus_tree = {
 		x = -9
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_away_with_french
 		}
@@ -1026,7 +2716,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_esotericism_idea_0
 		}
 	}
 	focus = {
@@ -1035,7 +2725,7 @@ focus_tree = {
 		x = -7
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		
 		prerequisite = {
 			focus = BRI_irish_friends
@@ -1048,7 +2738,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_2
+				add_idea = BRI_rule_of_AP_3
+			}
 		}
 	}
 	focus = {
@@ -1057,7 +2750,7 @@ focus_tree = {
 		x = -10
 		y = 4
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_esotericism
 		}
@@ -1072,7 +2765,15 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
 		}
 	}
 	focus = {
@@ -1081,7 +2782,7 @@ focus_tree = {
 		x = -8
 		y = 4
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_expand_bezrrot
 		}
@@ -1096,7 +2797,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_esotericism_idea_0
+				add_idea = BRI_esotericism_idea_1
+			}
 		}
 	}
 	focus = {
@@ -1105,7 +2809,7 @@ focus_tree = {
 		x = -9
 		y = 5
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_no_capital
 		}
@@ -1120,7 +2824,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_3
+				add_idea = BRI_rule_of_AP_4
+			}
 		}
 	}
 	focus = {
@@ -1129,7 +2836,7 @@ focus_tree = {
 		x = -3
 		y = 1
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_millitary_coup
 		}
@@ -1138,11 +2845,13 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_Jean_Marie_Pero_gain_power
 		}
 		
 		completion_reward = {
-		
+			add_stability = 0.1
+			add_war_support = 0.05
+			add_political_power = 100
 		}
 	}
 	focus = {
@@ -1151,7 +2860,7 @@ focus_tree = {
 		x = -4
 		y = 2
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_power_to_church
 		}
@@ -1164,7 +2873,14 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.15
+			}
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
 		}
 	}
 	focus = {
@@ -1173,7 +2889,7 @@ focus_tree = {
 		x = -2
 		y = 2
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_power_to_church
 		}
@@ -1186,7 +2902,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_culture_revival_idea
 		}
 	}
 	
@@ -1196,7 +2912,7 @@ focus_tree = {
 		x = -5
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_catholic_nation
 		}
@@ -1209,7 +2925,19 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_two_random_civilian_factories = yes
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.15
+			}
 		}
 	}
 	focus = {
@@ -1218,7 +2946,7 @@ focus_tree = {
 		x = -3
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_catholic_nation
 		}
@@ -1233,7 +2961,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_culture_revival_idea
+				add_idea = BRI_culture_revival_idea_2
+			
+			}
 		}
 	}
 	focus = {
@@ -1242,7 +2974,7 @@ focus_tree = {
 		x = -1
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		
 		prerequisite = {
 			focus = BRI_culture_revival
@@ -1255,7 +2987,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_1
+				add_idea = BRI_rule_of_AP_2
+			}
 		}
 	}
 	focus = {
@@ -1264,7 +2999,7 @@ focus_tree = {
 		x = -4
 		y = 4
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_retake_rural
 		}
@@ -1279,7 +3014,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_war_support = 0.1
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_2
+				add_idea = BRI_rule_of_AP_3
+			}
 		}
 	}
 	focus = {
@@ -1288,7 +3027,7 @@ focus_tree = {
 		x = -2
 		y = 4
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_retake_rural
 		}
@@ -1303,7 +3042,20 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.15
+			}
+			add_stability = 0.1
+			add_political_power = 100
 		}
 	}
 	focus = {
@@ -1312,7 +3064,7 @@ focus_tree = {
 		x = -3
 		y = 5
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_Bleun_Brug
 		}
@@ -1327,7 +3079,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_3
+				add_idea = BRI_rule_of_AP_4
+			
+			}
 		}
 	}
 	focus = {
@@ -1336,7 +3092,7 @@ focus_tree = {
 		x = 3
 		y = 1
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_millitary_coup
 		}
@@ -1345,11 +3101,11 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_Raymond_Delaporte_gain_power
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_neo_modrelists
 		}
 	}
 	focus = {
@@ -1358,7 +3114,7 @@ focus_tree = {
 		x = 2
 		y = 2
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_anti_modrelists
 		}
@@ -1371,7 +3127,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_1
+				add_idea = BRI_rule_of_AP_2
+			}
 		}
 	}
 	focus = {
@@ -1380,7 +3139,7 @@ focus_tree = {
 		x = 4
 		y = 2
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_anti_modrelists
 		}
@@ -1393,7 +3152,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_neo_modrelists
+				add_idea = BRI_neo_modrelists_1
+			}
 		}
 	}
 	focus = {
@@ -1402,7 +3164,7 @@ focus_tree = {
 		x = 1
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_reorganize_BNP
 		}
@@ -1415,7 +3177,13 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			army_experience = 75
+			add_war_support = 0.1
+			add_political_power = 50
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.15
+			}
 		}
 	}
 	focus = {
@@ -1424,7 +3192,7 @@ focus_tree = {
 		x = 3
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_reorganize_BNP
 		}
@@ -1439,7 +3207,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_2
+				add_idea = BRI_rule_of_AP_3
+			}
 		}
 	}
 	focus = {
@@ -1448,7 +3219,7 @@ focus_tree = {
 		x = 5
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		
 		prerequisite = {
 			focus = BRI_ultranationalism
@@ -1461,7 +3232,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_neo_modrelists_1
+				add_idea = BRI_neo_modrelists_2
+			}
 		}
 	}
 	focus = {
@@ -1470,7 +3244,7 @@ focus_tree = {
 		x = 2
 		y = 4
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_cooperate_with_church
 		}
@@ -1485,7 +3259,23 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_stability = 0.1
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.15
+			}
 		}
 	}
 	focus = {
@@ -1494,7 +3284,7 @@ focus_tree = {
 		x = 4
 		y = 4
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_cooperate_with_church
 		}
@@ -1509,7 +3299,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_neo_modrelists_2
+				add_idea = BRI_neo_modrelists_3
+			}
 		}
 	}
 	focus = {
@@ -1518,7 +3311,7 @@ focus_tree = {
 		x = 3
 		y = 5
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_erdicrate_opposition
 		}
@@ -1533,7 +3326,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_3
+				add_idea = BRI_rule_of_AP_4
+			}
 		}
 	}
 	focus = {
@@ -1542,7 +3338,7 @@ focus_tree = {
 		x = 9
 		y = 1
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_millitary_coup
 		}
@@ -1551,10 +3347,18 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_Britanny_Morvan_Marchal_gain_power
 		}
 		
 		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.1
+			}
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
 		
 		}
 	}
@@ -1564,7 +3368,7 @@ focus_tree = {
 		x = 8
 		y = 2
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_autonomists
 		}
@@ -1577,7 +3381,30 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.05
+			}
+			add_authdem_to_coalition = yes
+			add_radsoc_to_coalition = yes
+			add_soclib_to_coalition = yes
+			add_soccon_to_coalition = yes
 		}
 	}
 	focus = {
@@ -1586,7 +3413,7 @@ focus_tree = {
 		x = 7
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_ally_BFF
 		}
@@ -1599,7 +3426,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_1
+				add_idea = BRI_rule_of_AP_2
+			}
 		}
 	}
 	focus = {
@@ -1608,7 +3438,7 @@ focus_tree = {
 		x = 10
 		y = 2
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_autonomists
 		}
@@ -1621,7 +3451,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_federalism_idea_0
 		}
 	}
 	focus = {
@@ -1630,7 +3460,7 @@ focus_tree = {
 		x = 9
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_ally_BFF
 		}
@@ -1645,7 +3475,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Sociale_secularisation
 		}
 	}
 	focus = {
@@ -1654,7 +3484,7 @@ focus_tree = {
 		x = 11
 		y = 3
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		
 		prerequisite = {
 			focus = BRI_federalism
@@ -1667,7 +3497,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_federalism_idea_0
+				add_idea = BRI_federalism_idea_1
+			}
 		}
 	}
 	focus = {
@@ -1676,7 +3509,7 @@ focus_tree = {
 		x = 8
 		y = 4
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_national_unity_government
 		}
@@ -1691,7 +3524,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_Sociale_secularisation
+				add_idea = BRI_Sociale_secularisation_1
+			}
 		}
 	}
 	focus = {
@@ -1700,7 +3536,7 @@ focus_tree = {
 		x = 10
 		y = 4
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_international_minority_committee
 		}
@@ -1715,7 +3551,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_2
+				add_idea = BRI_rule_of_AP_3
+			}
 		}
 	}
 	focus = {
@@ -1724,7 +3563,7 @@ focus_tree = {
 		x = 9
 		y = 5
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_social_democratic
 		}
@@ -1739,7 +3578,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_3
+				add_idea = BRI_rule_of_AP_4
+			}
 		}
 	}
 	focus = {
@@ -1748,7 +3590,7 @@ focus_tree = {
 		x = 0
 		y = 6
 		relative_position_id = BRI_millitary_coup
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_embrace_liberty
 			focus = BRI_nation_reborn
@@ -1764,7 +3606,14 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_rule_of_AP_4
+				add_idea = BRI_rule_of_AP_5
+			}
+			add_political_power = 200
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
 		}
 	}
 	focus = {
@@ -1773,17 +3622,17 @@ focus_tree = {
 		x = 20
 		y = 8
 		
-		cost = 1
+		cost = 4
 		
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_the_rule_of_FLB
 		}
 		
 		completion_reward = {
-		
+			country_event = brittany.4
 		}
 	}
 	focus = {
@@ -1792,7 +3641,7 @@ focus_tree = {
 		x = -5
 		y = 1
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_BFF
 		}
@@ -1800,11 +3649,12 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_synd_socdem_win
 		}
 		
 		completion_reward = {
-		
+			country_event = brittany.5
+			add_ideas = BRI_Brittany_agrees
 		}
 	}
 	focus = {
@@ -1813,7 +3663,7 @@ focus_tree = {
 		x = -6
 		y = 2
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_synd_socdem
 		}
@@ -1825,7 +3675,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_IDEAS_syndicalism_revival_0
 		}
 	}
 	focus = {
@@ -1834,7 +3684,7 @@ focus_tree = {
 		x = -4
 		y = 2
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_synd_socdem
 		}
@@ -1846,7 +3696,19 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Breton_nationalism_0
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = -0.15
+			}
 		}
 	}
 	focus = {
@@ -1855,7 +3717,7 @@ focus_tree = {
 		x = -7
 		y = 3
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_syndicalism_revival
 		}
@@ -1867,7 +3729,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_IDEAS_syndicalism_revival_0
+				add_idea = BRI_IDEAS_syndicalism_revival_1
+			}
+			add_one_random_civilian_factory = yes
 		}
 	}
 	focus = {
@@ -1876,7 +3742,7 @@ focus_tree = {
 		x = -5
 		y = 3
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_syndicalism_revival
 		}
@@ -1891,7 +3757,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_Breton_nationalism_0
+				add_idea = BRI_Breton_nationalism_1
+			}
 		}
 	}
 	focus = {
@@ -1900,7 +3769,7 @@ focus_tree = {
 		x = -6
 		y = 4
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_autonomy_commune
 		}
@@ -1915,7 +3784,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_IDEAS_syndicalism_revival_1
+				add_idea = BRI_IDEAS_syndicalism_revival_2
+			}
 		}
 	}
 	focus = {
@@ -1924,7 +3796,7 @@ focus_tree = {
 		x = -4
 		y = 4
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_autonomy_commune
 		}
@@ -1939,7 +3811,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_Breton_nationalism_1
+				add_idea = BRI_Breton_nationalism_2
+			}
 		}
 	}
 	focus = {
@@ -1948,7 +3823,7 @@ focus_tree = {
 		x = -5
 		y = 5
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_red_and_black
 		}
@@ -1966,7 +3841,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_The_Utopia
 		}
 	}
 	focus = {
@@ -1975,7 +3850,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_BFF
 		}
@@ -1984,11 +3859,12 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag =BRI_radsoc_soclib_win
 		}
 		
 		completion_reward = {
-		
+			country_event = brittany.11
+			add_ideas = BRI_The_French_Revolution_again_1
 		}
 	}
 	focus = {
@@ -1997,7 +3873,7 @@ focus_tree = {
 		x = -2
 		y = 2
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_radsoc_soclib
 			focus = BRI_synd_socdem
@@ -2011,7 +3887,16 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_political_power = 100
+			add_stability = 0.05
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.15
+			}
 		}
 	}
 	focus = {
@@ -2020,7 +3905,7 @@ focus_tree = {
 		x = -3
 		y = 3
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_anti_ultranat
 		}
@@ -2033,7 +3918,13 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_military_factories = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
 		}
 	}
 	focus = {
@@ -2042,7 +3933,7 @@ focus_tree = {
 		x = -1
 		y = 3
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_anti_ultranat
 		}
@@ -2055,7 +3946,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_worker_rights_idea
 		}
 	}
 	focus = {
@@ -2064,7 +3955,7 @@ focus_tree = {
 		x = -2
 		y = 4
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_brittany_socialism
 		}
@@ -2079,7 +3970,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_one_random_infrastructure = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
 		}
 	}
 	focus = {
@@ -2088,7 +3982,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_radsoc_soclib
 		}
@@ -2101,7 +3995,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_The_French_Revolution_again_1
+				add_idea = BRI_The_French_Revolution_again_2
+			}
 		}
 	}
 	focus = {
@@ -2110,7 +4007,7 @@ focus_tree = {
 		x = 0
 		y = 4
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_debrittanylize
 		}
@@ -2123,7 +4020,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_The_French_Revolution_again_2
+				add_idea = BRI_The_French_Revolution_again_3
+			}
 		}
 	}
 	focus = {
@@ -2132,7 +4032,7 @@ focus_tree = {
 		x = 0
 		y = 5
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_crush_clericals
 		}
@@ -2150,7 +4050,18 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_The_French_Revolution_again_3
+				add_idea = BRI_The_French_Revolution_again_4
+			}
+			if = {
+				limit = {
+					has_government = social_liberal
+				}
+				country_event = {
+					id = brittany.11
+				}
+			}
 		}
 	}
 	focus = {
@@ -2159,7 +4070,7 @@ focus_tree = {
 		x = 2
 		y = 2
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_radsoc_soclib
 			focus = BRI_authdem_soccon
@@ -2173,7 +4084,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Attracting_the_middle_class
 		}
 	}
 	focus = {
@@ -2182,7 +4093,7 @@ focus_tree = {
 		x = 1
 		y = 3
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_middle_class
 		}
@@ -2195,7 +4106,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_civilian_factory = yes
 		}
 	}
 	
@@ -2205,7 +4120,7 @@ focus_tree = {
 		x = 3
 		y = 3
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_middle_class
 		}
@@ -2218,7 +4133,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_political_power = 100
 		}
 	}
 	focus = {
@@ -2227,7 +4145,7 @@ focus_tree = {
 		x = 2
 		y = 4
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_agrian_reform
 		}
@@ -2242,7 +4160,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_stability = 0.1
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
 		}
 	}
 	focus = {
@@ -2251,7 +4172,7 @@ focus_tree = {
 		x = 5
 		y = 1
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_BFF
 		}
@@ -2260,11 +4181,13 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_authdem_soccon_win
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Brittany_agrees
+			add_political_power = 100
+			country_event = brittany.6
 		}
 	}
 	focus = {
@@ -2273,7 +4196,7 @@ focus_tree = {
 		x = 4
 		y = 2
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_authdem_soccon
 		}
@@ -2286,7 +4209,24 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			custom_effect_tooltip = BRI_social_GOV_tt
+			add_stability = 0.05
+				add_one_random_civilian_factory = yes
+				add_political_power = 100
+				add_war_support = 0.05
+				add_ideas = BRI_social_catholic_idea
+			if = {
+				limit = {
+					has_government = social_conservative
+				}
+				add_popularity = {
+					ideology = social_conservative
+					popularity = 0.1
+				}
+				country_event = {
+					id = brittany.7
+				}
+			}
 		}
 	}
 	focus = {
@@ -2295,7 +4235,7 @@ focus_tree = {
 		x = 6
 		y = 2
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_authdem_soccon
 		}
@@ -2308,7 +4248,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_cultural_confidence
 		}
 	}
 	focus = {
@@ -2317,7 +4257,7 @@ focus_tree = {
 		x = 5
 		y = 3
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_social_catholic
 		}
@@ -2332,7 +4272,21 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_political_power = 100
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -0.1
+			}
+			add_stability = 0.05
+			add_war_support = 0.05
 		}
 	}
 	
@@ -2342,7 +4296,7 @@ focus_tree = {
 		x = 7
 		y = 3
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_social_catholic
 		}
@@ -2357,7 +4311,8 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_political_power = 50
+			add_ideas = BRI_Gorsedd_idea
 		}
 	}
 	focus = {
@@ -2366,7 +4321,7 @@ focus_tree = {
 		x = 6
 		y = 4
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_oppose_socialism
 		}
@@ -2381,7 +4336,9 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_EThe_noble_Celtic_spirit
+			add_stability = 0.05
+			add_war_support = 0.05
 		}
 	}
 	
@@ -2391,7 +4348,7 @@ focus_tree = {
 		x = 4
 		y = 4
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_oppose_socialism
 		}
@@ -2404,7 +4361,9 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_stability = 0.05
+			add_manpower = 100000
+			add_ideas = BRI_aristocracy_republic
 		}
 	}
 	focus = {
@@ -2413,7 +4372,7 @@ focus_tree = {
 		x = 5
 		y = 5
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_aristocracy_rule
 		}
@@ -2431,7 +4390,29 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_political_power = 100
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_two_random_civilian_factories = yes
+			add_two_random_military_factories = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			if = {
+				limit = {
+					has_government = social_conservative
+				}
+				country_event = {
+					id = brittany.7
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = brittany.13
+					days = 30
+				}
+			}
 		}
 	}
 	focus = {
@@ -2440,7 +4421,7 @@ focus_tree = {
 		x = 0
 		y = 6
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_tradition_and_conservative
 			focus = BRI_jacobin_legacy
@@ -2455,7 +4436,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_free_and_strong_idea
 		}
 	}
 	focus = {
@@ -2464,18 +4445,22 @@ focus_tree = {
 		x = -4
 		y = 7
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		
 		
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			add_stability = 0.1
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.1
+			}
 		}
 	}
 	focus = {
@@ -2484,7 +4469,7 @@ focus_tree = {
 		x = -5
 		y = 8
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_communists
 		}
@@ -2493,11 +4478,19 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_revo_alliance_idea_0
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 100
+			add_synd_to_coalition = yes
+			add_radsoc_to_coalition = yes
+			country_event = {
+				id = brittany.10
+			}
 		}
 	}
 	focus = {
@@ -2506,7 +4499,7 @@ focus_tree = {
 		x = -3
 		y = 8
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_communists
 		}
@@ -2515,11 +4508,15 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = BRI_cachins_revo_0
+				add_idea = BRI_cachins_revo_1
+			}
 		}
 	}
 	focus = {
@@ -2528,7 +4525,7 @@ focus_tree = {
 		x = -6
 		y = 9
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_broad_revo_alliance
 		}
@@ -2539,11 +4536,14 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_Alliance_ouvriere_et_paysanne
+			add_two_random_military_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
 		}
 	}
 	focus = {
@@ -2552,7 +4552,7 @@ focus_tree = {
 		x = -4
 		y = 9
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_broad_revo_alliance
 		}
@@ -2563,11 +4563,23 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.3
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.3
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.3
+			}
+			add_political_power = 100
 		}
 	}
 	focus = {
@@ -2576,7 +4588,7 @@ focus_tree = {
 		x = -2
 		y = 9
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_broad_revo_alliance
 		}
@@ -2587,11 +4599,14 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_revo_alliance_idea_0
+				add_idea = BRI_revo_alliance_idea_1
+			}
 		}
 	}
 	focus = {
@@ -2600,7 +4615,7 @@ focus_tree = {
 		x = -6
 		y = 10
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_reorganize_union
 		}
@@ -2614,11 +4629,20 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_Alliance_ouvriere_et_paysanne
+				add_idea = BRI_Alliance_ouvriere_et_paysanne_1
+			}
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
 		}
 	}
 	focus = {
@@ -2627,7 +4651,7 @@ focus_tree = {
 		x = -4
 		y = 10
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_reorganize_union
 		}
@@ -2641,11 +4665,14 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_cachins_revo_1
+				add_idea = BRI_cachins_revo_2
+			}
 		}
 	}
 	focus = {
@@ -2654,7 +4681,7 @@ focus_tree = {
 		x = -2
 		y = 10
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_reorganize_union
 		}
@@ -2668,11 +4695,14 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_revo_alliance_idea_1
+				add_idea = BRI_revo_alliance_idea_2
+			}
 		}
 	}
 	focus = {
@@ -2681,7 +4711,7 @@ focus_tree = {
 		x = -5
 		y = 11
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_agrian_cooperates
 		}
@@ -2695,11 +4725,14 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_revo_alliance_idea_2
+				add_idea = BRI_revo_alliance_idea_3	
+			}
 		}
 	}
 	focus = {
@@ -2708,7 +4741,7 @@ focus_tree = {
 		x = -3
 		y = 11
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_agrian_cooperates
 		}
@@ -2726,7 +4759,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_cachins_revo_2
+				add_idea = BRI_cachins_revo_3
+			}
 		}
 	}
 	focus = {
@@ -2735,7 +4771,7 @@ focus_tree = {
 		x = -4
 		y = 12
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_local_autonomy
 		}
@@ -2746,11 +4782,18 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_win
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_cachins_revo_3
+				add_idea = BRI_cachins_revo_4
+			}
+			swap_ideas = {
+				remove_idea = BRI_revo_alliance_idea_3
+				add_idea = BRI_revo_alliance_idea_4
+			}
 		}
 	}
 	focus = {
@@ -2759,17 +4802,26 @@ focus_tree = {
 		x = 4
 		y = 7
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
 		}
 		
 		completion_reward = {
-		
+			add_stability = -0.05 
+			add_war_support = 0.15
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -1
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
 		}
 	}
 	focus = {
@@ -2778,7 +4830,7 @@ focus_tree = {
 		x = 2
 		y = 8
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_popf
 		}
@@ -2790,7 +4842,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_POPF_nations_0
 		}
 	}
 	focus = {
@@ -2799,7 +4851,7 @@ focus_tree = {
 		x = 1
 		y = 9
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_nazbols
 		}
@@ -2811,7 +4863,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_POPF_nations_0
+				add_idea = BRI_POPF_nations_1
+			}
 		}
 	}
 	focus = {
@@ -2820,7 +4875,7 @@ focus_tree = {
 		x = 2
 		y = 10
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_assimilate_nationalists
 		}
@@ -2832,7 +4887,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_POPF_nations_1
+				add_idea = BRI_POPF_nations_2
+			}
 		}
 	}
 	focus = {
@@ -2841,7 +4899,7 @@ focus_tree = {
 		x = 4
 		y = 8
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_popf
 		}
@@ -2853,7 +4911,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_POPF_economy_0
 		}
 	}
 	focus = {
@@ -2862,7 +4920,7 @@ focus_tree = {
 		x = 4
 		y = 9
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_socialist_economy
 		}
@@ -2874,7 +4932,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_POPF_economy_0
+				add_idea = BRI_POPF_economy_1
+			}
 		}
 	}
 	focus = {
@@ -2883,7 +4944,7 @@ focus_tree = {
 		x = 4
 		y = 10
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_labor_front
 		}
@@ -2895,7 +4956,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_POPF_economy_1
+				add_idea = BRI_POPF_economy_2
+			
+			}
 		}
 	}
 	focus = {
@@ -2904,7 +4969,7 @@ focus_tree = {
 		x = 6
 		y = 8
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_popf
 		}
@@ -2916,7 +4981,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_ideas = BRI_POPF_politics_0
 		}
 	}
 	focus = {
@@ -2925,7 +4990,7 @@ focus_tree = {
 		x = 7
 		y = 9
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_authoritain_socialism
 		}
@@ -2937,7 +5002,10 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_POPF_politics_0
+				add_idea = BRI_POPF_politics_1
+			}
 		}
 	}
 	focus = {
@@ -2946,7 +5014,7 @@ focus_tree = {
 		x = 6
 		y = 10
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_destory_democracy
 		}
@@ -2958,7 +5026,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_POPF_politics_1
+				add_idea = BRI_POPF_politics_2
+			
+			}
 		}
 	}
 	focus = {
@@ -2967,7 +5039,7 @@ focus_tree = {
 		x = 4
 		y = 11
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_only_france
 		}
@@ -2985,7 +5057,14 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_two_random_civilian_factories = yes
+			add_two_random_military_factories = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_ideas = BRI_true_socialism_idea
+			add_political_power = -200
+			add_stability = 0.1
+			add_war_support = 0.1
 		}
 	}
 	focus = {
@@ -2994,7 +5073,7 @@ focus_tree = {
 		x = 4
 		y = 12
 		relative_position_id = BRI_BFF
-		cost = 1
+		cost = 4
 		prerequisite = {
 			focus = BRI_trimph_of_true_socialism
 		}
@@ -3007,24 +5086,31 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_political_power = 200
 		}
 	}
 	focus = {
 		id = BRI_brittanny_construction
 		icon = GFX_goal_FRA_transhumanism
-		x = 32
-		y = 22
-		cost = 1
+		x = 5
+		y = 12
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
 			
 		}
-		
+		allow_branch = {
+			has_country_flag = BRI_DATE_DELETE
+		}
 		completion_reward = {
-		
+			set_power_balance = {
+				id = BRI_Corbusier_Savina_balance
+				left_side = BRI_Corbusier_balance_high_side
+				right_side = BRI_Joseph_Savina_high_side
+				set_value = -1
+			}
 		}
 	}
 	focus = {
@@ -3036,16 +5122,22 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_brittanny_construction
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
 			
 		}
-		
 		completion_reward = {
-		
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.05
+			}
+			add_one_random_infrastructure = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_military_factories = yes
 		}
 	}
 	focus = {
@@ -3057,7 +5149,7 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_brittanny_construction
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
@@ -3066,7 +5158,18 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_manpower = -10000
+			add_political_power = 200
+			add_stability = -0.1
+			add_war_support = -0.1
+			add_popularity = {
+				ideology = totalist
+				popularity = 1
+			}
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.05
+			}
 		}
 	}
 	focus = {
@@ -3081,7 +5184,7 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_destruction_and_rebulid
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
@@ -3090,67 +5193,85 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			unlock_decision_tooltip = BRI_base_Urban_Renovation
+			unlock_decision_tooltip = BRI_base_Urban_Management
+			add_ideas = BRI_BOP_Savian_1
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.05
+			}
 		}
 	}
 	focus = {
 		id = BRI_strongest_stays
 		icon = GFX_goal_FRA_power_safety_honor
-		x = -1
-		y = 3
+		x = -2
+		y = 2
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_purge_streets
+			focus = BRI_brittanny_construction
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_purge_streets
 		}
 		
 		completion_reward = {
-		
+			add_war_support = 0.1
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.1
+			}
+			
 		}
 	}
 	focus = {
 		id = BRI_cleverist_stays
 		icon = GFX_goal_FRA_machiaville_enlightment
-		x = 1
-		y = 3
+		x = 2
+		y = 2
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_purge_streets
+			focus = BRI_brittanny_construction
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_purge_streets
 		}
 		
 		completion_reward = {
-		
+			add_research_slot = 2
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.1
+			}
 		}
 	}
 	focus = {
 		id = BRI_new_state
 		icon = GFX_goal_FRA_pure_order
 		x = 0
-		y = 4
+		y = 3
 		relative_position_id = BRI_brittanny_construction
 		
+		prerequisite = {
+			focus = BRI_purge_streets
+		}
 		prerequisite = {
 			focus = BRI_strongest_stays
 		}
 		prerequisite = {
 			focus = BRI_cleverist_stays
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
@@ -3159,67 +5280,87 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			swap_ideas = {
+				remove_idea = BRI_BOP_Savian_1
+				add_idea = BRI_BOP_Savian_2
+			}
+			unlock_decision_tooltip = BRI_base_new_state_mobilization
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.1
+			}
 		}
 	}
 	focus = {
 		id = BRI_new_man
 		icon = GFX_goal_FRA_rationlize_economy
-		x = -1
-		y = 5
+		x = -3
+		y = 3
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_new_state
+			focus = BRI_brittanny_construction
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_new_state
 		}
 		
 		completion_reward = {
-		
+			add_manpower = 1000000
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.15
+			}
 		}
 	}
 	focus = {
 		id = BRI_new_society
 		icon = GFX_goal_FRA_nation_city_collective
-		x = 1
-		y = 5
+		x = 3
+		y = 3
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_new_state
+			focus = BRI_brittanny_construction
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_new_state
 		}
 		
 		completion_reward = {
-		
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.15
+			}
+			add_stability = 1
+			add_war_support = 1
 		}
 	}
 	focus = {
 		id = BRI_assimilation
 		icon = GFX_goal_FRA_new_human
 		x = 0
-		y = 6
+		y = 4
 		relative_position_id = BRI_brittanny_construction
 		
+		prerequisite = {
+			focus = BRI_new_state
+		}
 		prerequisite = {
 			focus = BRI_new_man
 		}
 		prerequisite = {
 			focus = BRI_new_society
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
@@ -3228,60 +5369,102 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			every_country = {
+				limit = {
+					is_ai = yes
+				}
+				add_ideas = BRI_based_idea
+			}
+			unlock_decision_tooltip = BRI_base_assimilation
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.15
+			}
+			swap_ideas = {
+				remove_idea = BRI_BOP_Savian_2
+				add_idea = BRI_BOP_Savian_3
+			}
 		}
 	}
 	focus = {
 		id = BRI_beyond_totalism
 		icon = GFX_goal_FRA_order_strong_ration
-		x = -1
-		y = 7
+		x = -4
+		y = 4
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_assimilation
+			focus = BRI_brittanny_construction
 		}
 		
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_assimilation
 		}
 		
 		completion_reward = {
-		
+			every_country = {
+				limit = {
+					is_ai = yes
+					has_government = totalist
+				}
+				swap_ideas = {
+					remove_idea = BRI_based_idea
+					add_idea = BRI_based_idea_1
+				}
+			}
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.2
+			}
 		}
 	}
 	focus = {
 		id = BRI_beyond_natpop
 		icon = GFX_goal_FRA_erdicate_anti_france
-		x = 1
-		y = 7
+		x = 4
+		y = 4
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
-			focus = BRI_assimilation
+			focus = BRI_brittanny_construction
 		}
 		
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_completed_focus = BRI_assimilation
 		}
 		
 		completion_reward = {
-		
+			every_country = {
+				limit = {
+					is_ai = yes
+					has_government = national_populist
+				}
+				swap_ideas = {
+					remove_idea = BRI_based_idea
+					add_idea = BRI_based_idea_1
+				}
+			}
+			BRI = {
+				add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.2
+				}
+			}
 		}
 	}
 	focus = {
 		id = BRI_new_order
 		icon = GFX_goal_FRA_beyond_extreme
 		x = 0
-		y = 8
+		y = 5
 		relative_position_id = BRI_brittanny_construction
 		
 		prerequisite = {
@@ -3290,7 +5473,10 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_beyond_natpop
 		}
-		cost = 1
+		prerequisite = {
+			focus = BRI_assimilation
+		}
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
@@ -3299,7 +5485,17 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = 0.2
+			}
+			swap_ideas = {
+				remove_idea = BRI_BOP_Savian_3
+				add_idea = BRI_BOP_Savian_4
+			}
+			every_state = {
+				add_core_of = BRI
+			}
 		}
 	}
 	focus = {
@@ -3307,16 +5503,17 @@ focus_tree = {
 		icon = GFX_goal_SRI_capitalism
 		x = 45
 		y = 8		
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		available = {
-			
+			has_country_flag = BRI_the_rule_of_BLBA
 		}
 		
 		completion_reward = {
-		
+			custom_effect_tooltip = BRI_reslove_mordrel_tt
+			remove_ideas = BRI_mordrel_folly_and_corruption
 		}
 	}
 	focus = {
@@ -3324,7 +5521,7 @@ focus_tree = {
 		icon = GFX_goal_ALB_Remove_Squat
 		x = -2
 		y = 1		
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_mordrel_folly
 		ai_will_do = {
 			factor = 100
@@ -3334,7 +5531,16 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			custom_effect_tooltip = BRI_reslove_perrots_tt
+			hidden_effect = {
+				remove_ideas = BRI_perrots_resistance
+				add_timed_idea = {
+					idea = BRI_perrots_resistance
+					days = 60
+				}
+			}
+			add_war_support = 0.09
+			add_political_power = 50
 		}
 	}
 	focus = {
@@ -3342,7 +5548,7 @@ focus_tree = {
 		icon = GFX_goal_CAN_anti_syndicalism_decree
 		x = 0
 		y = 1		
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_mordrel_folly
 		ai_will_do = {
 			factor = 100
@@ -3352,7 +5558,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			remove_ideas = BRI_Workers_strike
+			add_timed_idea = {
+				idea = BRI_Workers_strike_over
+				days = 60
+			}
 		}
 	}
 	focus = {
@@ -3360,7 +5570,7 @@ focus_tree = {
 		icon = GFX_goal_generic_controlled_board
 		x = 2
 		y = 1		
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_mordrel_folly
 		ai_will_do = {
 			factor = 100
@@ -3370,7 +5580,8 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		
+			custom_effect_tooltip = BRI_unlock_Enterprise_tooltip
+			set_country_flag = BRI_Board_of_Directors_of_the_Enterprise
 		}
 	}
 	focus = {
@@ -3378,7 +5589,7 @@ focus_tree = {
 		icon = GFX_BBR_labor_board
 		x = 0
 		y = 2	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_mordrel_folly
 		ai_will_do = {
 			factor = 100
@@ -3393,7 +5604,9 @@ focus_tree = {
 			focus = BRI_board_and_managers
 		}
 		completion_reward = {
-		
+			country_event = { #巨企
+				id = brittany.3
+			}
 		}
 	}
 	focus = {
@@ -3401,7 +5614,7 @@ focus_tree = {
 		icon = GFX_goal_BRI_lagadelle
 		x = -12
 		y = 3	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_mordrel_folly
 		ai_will_do = {
 			factor = 100
@@ -3409,9 +5622,20 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_committee_meeting
 		}
-		
+		available = {
+			has_country_flag = BRI_the_rule_of_lagadelle_company
+		}
 		completion_reward = {
-		
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+				set_temp_variable = { property_change = 0.5 }
+				BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3419,7 +5643,7 @@ focus_tree = {
 		icon = GFX_goal_BRI_danone
 		x = -6
 		y = 3	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_mordrel_folly
 		ai_will_do = {
 			factor = 100
@@ -3427,9 +5651,20 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_committee_meeting
 		}
-		
+		available = {
+			has_country_flag = BRI_the_rule_of_danone_company
+		}
 		completion_reward = {
-		
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+				set_temp_variable = { property_change = 0.5 }
+				BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3437,7 +5672,7 @@ focus_tree = {
 		icon = GFX_CSA_technocrat_logo
 		x = -1
 		y = 1	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3446,8 +5681,18 @@ focus_tree = {
 			focus = BRI_danone
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.1 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3455,7 +5700,7 @@ focus_tree = {
 		icon = GFX_goal_VIN_vietnam_academy_science_technology
 		x = 1
 		y = 1	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3464,8 +5709,19 @@ focus_tree = {
 			focus = BRI_danone
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			unlock_decision_tooltip = BRI_Pasteur_Institute
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3473,7 +5729,7 @@ focus_tree = {
 		icon = GFX_goal_BRI_burnam
 		x = -1
 		y = 2	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3487,8 +5743,25 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = BRI_remants_of_left_cartel
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_political_power = -100
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+				create_country_leader = {
+					name = "安东尼·吕布"
+					picture = "gfx/leaders/BRI/Portrait_Antoine_Riboud.png"
+					expire = "1965.1.1"
+					ideology = socdem_utopian_technocracy_subtype
+				}
+			}
 		}
 	}
 	focus = {
@@ -3496,7 +5769,7 @@ focus_tree = {
 		icon = GFX_goal_ICE_social_democrats
 		x = 1
 		y = 2	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3510,8 +5783,26 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = BRI_moderate_burnamism
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_political_power = 100
+			add_stability = 0.05
+			set_temp_variable = { BRI_profitability = 0.1 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				create_country_leader = {
+					name = "安东尼·吕布"
+					picture = "gfx/leaders/BRI/Portrait_Antoine_Riboud.png"
+					expire = "1965.1.1"
+					ideology = liberal_socialism_subtype
+				}
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3519,7 +5810,7 @@ focus_tree = {
 		icon = GFX_goal_TEX_loyal_labor
 		x = -2
 		y = 3	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3529,8 +5820,20 @@ focus_tree = {
 			focus = BRI_remants_of_left_cartel
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.07 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_stability = 0.05
+			add_political_power = 50
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3538,7 +5841,7 @@ focus_tree = {
 		icon = GFX_goal_GER_Vision_Saint_Simon
 		x = 0
 		y = 3	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3548,8 +5851,19 @@ focus_tree = {
 			focus = BRI_remants_of_left_cartel
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_stability = 0.05
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3557,7 +5871,7 @@ focus_tree = {
 		icon = GFX_goal_generic_food_processing
 		x = 2
 		y = 3	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3567,8 +5881,19 @@ focus_tree = {
 			focus = BRI_remants_of_left_cartel
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.08 }
+			add_one_random_civilian_factory = yes
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3576,7 +5901,7 @@ focus_tree = {
 		icon = GFX_RUS_Welfare_State
 		x = -1
 		y = 4	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3590,8 +5915,21 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_biscuit_juice_candy
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.02 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_political_power = 25
+			add_stability = 0.05
+			add_one_random_civilian_factory = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3599,7 +5937,7 @@ focus_tree = {
 		icon = GFX_goal_BBR_healthcare
 		x = 1
 		y = 4	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3613,8 +5951,18 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_biscuit_juice_candy
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.03 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3622,7 +5970,7 @@ focus_tree = {
 		icon = GFX_goal_CSA_dictatorship_of_proletariat
 		x = 0
 		y = 5	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3634,8 +5982,17 @@ focus_tree = {
 			focus = BRI_and_health
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			unlock_decision_tooltip = BRI_Workers_Self_Governance_Act
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3643,7 +6000,7 @@ focus_tree = {
 		icon = GFX_goal_NFA_Happy_Workers
 		x = 0
 		y = 6	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_danone
 		ai_will_do = {
 			factor = 100
@@ -3652,8 +6009,17 @@ focus_tree = {
 			focus = BRI_worker_autonomy
 		}
 	
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			unlock_decision_tooltip = BRI_Workers_Self_Governance_Act_2
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3661,7 +6027,7 @@ focus_tree = {
 		icon = GFX_goal_BRI_michellin
 		x = 0
 		y = 3	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_mordrel_folly
 		ai_will_do = {
 			factor = 100
@@ -3669,17 +6035,28 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_committee_meeting
 		}
-		
+		available = {
+			has_country_flag = BRI_the_rule_of_Michelin_company
+		}
 		completion_reward = {
-		
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+				set_temp_variable = { property_change = 0.5 }
+				BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
 		id = BRI_battlions
 		icon = GFX_goal_CAN_national_security_act
-		x = -2
-		y = 1	
-		cost = 1
+		x = -1
+		y = 2	
+		cost = 4
 		relative_position_id = BRI_michelin
 		ai_will_do = {
 			factor = 100
@@ -3688,16 +6065,28 @@ focus_tree = {
 			focus = BRI_michelin
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = -0.02 }
+			add_two_random_military_factories = yes
+			BRI_The_Enterprise_profitability_effect = yes
+			unlock_decision_tooltip = BRI_battlions_Michelin
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
 		id = BRI_corporate_army
 		icon = GFX_NEE_might_makes_right
-		x = -2
-		y = 2	
-		cost = 1
+		x = 2
+		y = 4	
+		cost = 4
 		relative_position_id = BRI_michelin
 		ai_will_do = {
 			factor = 100
@@ -3706,16 +6095,28 @@ focus_tree = {
 			focus = BRI_battlions
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = -0.03 }
+			add_one_random_military_factory = yes
+			BRI_The_Enterprise_profitability_effect = yes
+			unlock_decision_tooltip = BRI_battlions_Michelin_expanded
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
 		id = BRI_never_strike
 		icon = GFX_goal_UK_ban_unions
-		x = -2
-		y = 3
-		cost = 1
+		x = -1
+		y = 5
+		cost = 4
 		relative_position_id = BRI_michelin
 		ai_will_do = {
 			factor = 100
@@ -3724,8 +6125,20 @@ focus_tree = {
 			focus = BRI_corporate_army
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			add_political_power = 100
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_one_random_civilian_factory = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3733,7 +6146,7 @@ focus_tree = {
 		icon = GFX_goal_COR_State_Supreme_Orderer
 		x = 0
 		y = 1
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_michelin
 		ai_will_do = {
 			factor = 100
@@ -3742,16 +6155,26 @@ focus_tree = {
 			focus = BRI_michelin
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
 		id = BRI_crush_socialism
 		icon = GFX_RUS_Ban_All_Socialist_Parties
 		x = 0
-		y = 2
-		cost = 1
+		y = 3
+		cost = 4
 		relative_position_id = BRI_michelin
 		ai_will_do = {
 			factor = 100
@@ -3760,16 +6183,44 @@ focus_tree = {
 			focus = BRI_vive_order
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.1 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_popularity = {
+				ideology = totalist
+				popularity = -1
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -1
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -1
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -1
+			}
+			add_stability = -0.2
+			add_political_power = 50
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
 		id = BRI_parent_of_worker
 		icon = GFX_goal_COR_Perfected_Paternalist_Approach
 		x = 0
-		y = 3
-		cost = 1
+		y = 4
+		cost = 4
 		relative_position_id = BRI_michelin
 		ai_will_do = {
 			factor = 100
@@ -3778,16 +6229,26 @@ focus_tree = {
 			focus = BRI_crush_socialism
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
 		id = BRI_rubber
 		icon = GFX_goal_DEI_focus_moar_rubber
-		x = 2
-		y = 1
-		cost = 1
+		x = 1
+		y = 2
+		cost = 4
 		relative_position_id = BRI_michelin
 		ai_will_do = {
 			factor = 100
@@ -3796,16 +6257,40 @@ focus_tree = {
 			focus = BRI_michelin
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			14 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+			983 = {
+				add_resource = {
+					type = rubber
+					amount = 20
+				}
+			}
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
 		id = BRI_rubber_railway
 		icon = GFX_goal_FRA_Revolutionary_Railways
-		x = 2
-		y = 2
-		cost = 1
+		x = -2
+		y = 4
+		cost = 4
 		relative_position_id = BRI_michelin
 		ai_will_do = {
 			factor = 100
@@ -3814,34 +6299,60 @@ focus_tree = {
 			focus = BRI_rubber
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_manpower = -10000
+			add_political_power = 50
+			set_temp_variable = { BRI_profitability = 0.05 }
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
 		id = BRI_technology_school
 		icon = GFX_goal_FIU_italian_school
-		x = 2
-		y = 3
-		cost = 1
+		x = 1
+		y = 5
+		cost = 4
 		relative_position_id = BRI_michelin
 		ai_will_do = {
 			factor = 100
 		}
 		prerequisite = {
-			focus = BRI_rubber
+			focus = BRI_rubber_railway
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.1 }
+			BRI_The_Enterprise_profitability_effect = yes
+			unlock_decision_tooltip = BRI_technology_school_Michelin
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
 		id = BRI_rubber_empire
 		icon = GFX_goal_UMN_rubber_farming
 		x = 0
-		y = 4
-		cost = 1
+		y = 6
+		cost = 4
 		relative_position_id = BRI_michelin
 		ai_will_do = {
 			factor = 100
@@ -3855,8 +6366,18 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_technology_school
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.1 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3864,7 +6385,7 @@ focus_tree = {
 		icon = GFX_goal_BRI_totalenergy
 		x = 6
 		y = 3	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_mordrel_folly
 		ai_will_do = {
 			factor = 100
@@ -3872,9 +6393,20 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_committee_meeting
 		}
-		
+		available = {
+			has_country_flag = BRI_the_rule_of_total_company
+		}
 		completion_reward = {
-		
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { property_change = 0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3882,7 +6414,7 @@ focus_tree = {
 		icon = GFX_GRU_CORPORATE_TAKE_OIL
 		x = 0
 		y = 1	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_total
 		ai_will_do = {
 			factor = 100
@@ -3891,8 +6423,24 @@ focus_tree = {
 			focus = BRI_total
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			983 = {
+				add_resource = {
+					type = oil
+					amount = 20
+				}
+			}
+			set_temp_variable = { BRI_profitability = 0.03 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3900,7 +6448,7 @@ focus_tree = {
 		icon = GFX_TRM_Scientific_Investment
 		x = -1
 		y = 2	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_total
 		ai_will_do = {
 			factor = 100
@@ -3909,8 +6457,18 @@ focus_tree = {
 			focus = BRI_oil_must_flow
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3918,7 +6476,7 @@ focus_tree = {
 		icon = GFX_goal_natfrance
 		x = 1
 		y = 2	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_total
 		ai_will_do = {
 			factor = 100
@@ -3927,8 +6485,23 @@ focus_tree = {
 			focus = BRI_oil_must_flow
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
+			NFA = {
+				country_event = {
+					id = BRI_FRA.3
+				}
+			}
 		}
 	}
 	focus = {
@@ -3936,7 +6509,7 @@ focus_tree = {
 		icon = GFX_goal_NEE_Industrial_society
 		x = -1
 		y = 3	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_total
 		ai_will_do = {
 			factor = 100
@@ -3947,8 +6520,19 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_trade_with_natfrance
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_one_random_civilian_factory = yes
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3956,7 +6540,7 @@ focus_tree = {
 		icon = GFX_goal_AUS_galicia_oil
 		x = 1
 		y = 3	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_total
 		ai_will_do = {
 			factor = 100
@@ -3967,8 +6551,34 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_trade_with_natfrance
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			14 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+			983 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -3976,7 +6586,7 @@ focus_tree = {
 		icon = GFX_NEE_right_of_contract
 		x = -2
 		y = 4	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_total
 		ai_will_do = {
 			factor = 100
@@ -3987,8 +6597,18 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_synisic_oil
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			hidden_effect = {
+				add_political_power = 28
+			}
+			add_political_power = -50
+			add_stability = -0.15
 		}
 	}
 	focus = {
@@ -3996,7 +6616,7 @@ focus_tree = {
 		icon = GFX_goal_ROM_King_Under_Surveillance
 		x = 0
 		y = 4	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_total
 		ai_will_do = {
 			factor = 100
@@ -4007,8 +6627,18 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_synisic_oil
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.1 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4016,7 +6646,7 @@ focus_tree = {
 		icon = GFX_goal_generic_lightbulb
 		x = 2
 		y = 4	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_total
 		ai_will_do = {
 			factor = 100
@@ -4027,8 +6657,18 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_synisic_oil
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4036,7 +6676,7 @@ focus_tree = {
 		icon = GFX_goal_TEX_Fair_Price_Oil
 		x = 0
 		y = 5	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_total
 		ai_will_do = {
 			factor = 100
@@ -4050,8 +6690,21 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_light_in_our_hands
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.1 }
+			BRI_The_Enterprise_profitability_effect = yes
+			unlock_decision_tooltip = BRI_oil_digging_III
+			unlock_decision_tooltip = BRI_oil_digging_II
+			unlock_decision_tooltip = BRI_oil_digging_I
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4059,7 +6712,7 @@ focus_tree = {
 		icon = GFX_USA_a_pile_of_fucking_cash
 		x = 0
 		y = 6	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_total
 		ai_will_do = {
 			factor = 100
@@ -4068,8 +6721,21 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_light_in_our_hands
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_political_power = 100
+			set_temp_variable = { BRI_profitability = 0.15 }
+			add_one_random_civilian_factory = yes
+			BRI_The_Enterprise_profitability_effect = yes
+			unlock_decision_tooltip = BRI_oil_more_money_more
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4077,7 +6743,7 @@ focus_tree = {
 		icon = GFX_goal_BRI_lvmh
 		x = 12
 		y = 3	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_mordrel_folly
 		ai_will_do = {
 			factor = 100
@@ -4085,9 +6751,20 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_committee_meeting
 		}
-		
+		available = {
+			has_country_flag = BRI_the_rule_of_LVMH_company
+		}
 		completion_reward = {
-		
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { property_change = 0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4095,7 +6772,7 @@ focus_tree = {
 		icon = GFX_goal_GEO_wine
 		x = -2
 		y = 1	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_LVMH
 		ai_will_do = {
 			factor = 100
@@ -4104,8 +6781,20 @@ focus_tree = {
 			focus = BRI_LVMH
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_political_power = 50
+			add_one_random_civilian_factory = yes
+			set_temp_variable = { BRI_profitability = 0.03 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4113,7 +6802,7 @@ focus_tree = {
 		icon = GFX_goal_NYC_Pro_Irish_Politics
 		x = 0
 		y = 1	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_LVMH
 		ai_will_do = {
 			factor = 100
@@ -4122,8 +6811,19 @@ focus_tree = {
 			focus = BRI_LVMH
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			add_one_random_civilian_factory = yes
+			custom_effect_tooltip = BRI_completed_focus_tt
+				set_temp_variable = { BRI_profitability = 0.05 }
+				BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4131,7 +6831,7 @@ focus_tree = {
 		icon = GFX_goal_AFG_Polish_the_Jewel
 		x = 2
 		y = 1	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_LVMH
 		ai_will_do = {
 			factor = 100
@@ -4140,8 +6840,19 @@ focus_tree = {
 			focus = BRI_LVMH
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_one_random_civilian_factory = yes
+			set_temp_variable = { BRI_profitability = 0.02 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4149,7 +6860,7 @@ focus_tree = {
 		icon = GFX_goal_NFA_Republican_National_Corporatism
 		x = 0
 		y = 2	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_LVMH
 		ai_will_do = {
 			factor = 100
@@ -4163,8 +6874,24 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_jewelry
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_stability = -0.1
+			add_war_support = -0.1
+			set_temp_variable = { BRI_profitability = 0.1 }
+			BRI_The_Enterprise_profitability_effect = yes
+			unlock_decision_tooltip = BRI_hostile_takeover_danone_company
+			unlock_decision_tooltip = BRI_hostile_takeover_Michelin_company
+			unlock_decision_tooltip = BRI_hostile_takeover_total_company
+			unlock_decision_tooltip = BRI_hostile_takeover_lagadelle_company
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4172,7 +6899,7 @@ focus_tree = {
 		icon = GFX_VK_NATIONALIZE
 		x = 0
 		y = 3
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_LVMH
 		ai_will_do = {
 			factor = 100
@@ -4181,8 +6908,20 @@ focus_tree = {
 			focus = BRI_force_intergation
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes	
+			}	
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			set_temp_variable = { property_change = 10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4190,7 +6929,7 @@ focus_tree = {
 		icon = GFX_goal_COR_Prioritize_Pay_Go_Economics
 		x = -2
 		y = 4
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_LVMH
 		ai_will_do = {
 			factor = 100
@@ -4199,8 +6938,18 @@ focus_tree = {
 			focus = BRI_intergrate_their_industry
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4208,7 +6957,7 @@ focus_tree = {
 		icon = GFX_goal_AST_arbitrational_courts_protect_union_control
 		x = 0
 		y = 4
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_LVMH
 		ai_will_do = {
 			factor = 100
@@ -4217,8 +6966,18 @@ focus_tree = {
 			focus = BRI_intergrate_their_industry
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4226,7 +6985,7 @@ focus_tree = {
 		icon = GFX_GRU_CONS_TAX_CUT
 		x = 2
 		y = 4
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_LVMH
 		ai_will_do = {
 			factor = 100
@@ -4235,8 +6994,19 @@ focus_tree = {
 			focus = BRI_intergrate_their_industry
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.05 }
+			add_political_power = -50
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4244,7 +7014,7 @@ focus_tree = {
 		icon = GFX_goal_CZE_export_work
 		x = 0
 		y = 5
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_LVMH
 		ai_will_do = {
 			factor = 100
@@ -4258,8 +7028,18 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_no_tax
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.07 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4267,7 +7047,7 @@ focus_tree = {
 		icon = GFX_goal_TEX_Business_With_Bosses
 		x = 0
 		y = 6
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_LVMH
 		ai_will_do = {
 			factor = 100
@@ -4276,8 +7056,18 @@ focus_tree = {
 			focus = BRI_expand_exports
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			set_temp_variable = { BRI_profitability = 0.13 }
+			BRI_The_Enterprise_profitability_effect = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4285,7 +7075,7 @@ focus_tree = {
 		icon = GFX_goal_CSA_new_economic_planning
 		x = 0
 		y = 1	
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_lagadelle
 		ai_will_do = {
 			factor = 100
@@ -4294,8 +7084,20 @@ focus_tree = {
 			focus = BRI_lagadelle
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			BRI = {
+				set_temp_variable = { BRI_profitability = 0.05 }
+				BRI_The_Enterprise_profitability_effect = yes
+			}
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4303,7 +7105,7 @@ focus_tree = {
 		icon = GFX_goal_CSA_american_guildism
 		x = -2
 		y = 2
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_lagadelle
 		ai_will_do = {
 			factor = 100
@@ -4312,8 +7114,21 @@ focus_tree = {
 			focus = BRI_red_millionaire
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			BRI = {
+				set_temp_variable = { BRI_profitability = 0.10 }
+				BRI_The_Enterprise_profitability_effect = yes
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_one_random_civilian_factory = yes
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4321,7 +7136,7 @@ focus_tree = {
 		icon = GFX_goal_CSA_subdue_bourgeoisie
 		x = 0
 		y = 2
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_lagadelle
 		ai_will_do = {
 			factor = 100
@@ -4330,8 +7145,24 @@ focus_tree = {
 			focus = BRI_red_millionaire
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			BRI = {
+				set_temp_variable = { BRI_profitability = 0.10 }
+				BRI_The_Enterprise_profitability_effect = yes
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.15
+			}
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4339,7 +7170,7 @@ focus_tree = {
 		icon = GFX_goal_CSA_communications_infrastructure
 		x = 2
 		y = 2
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_lagadelle
 		ai_will_do = {
 			factor = 100
@@ -4348,8 +7179,20 @@ focus_tree = {
 			focus = BRI_red_millionaire
 		}
 		
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			BRI = {
+				set_temp_variable = { BRI_profitability = 0.02 }
+				BRI_The_Enterprise_profitability_effect = yes
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4357,7 +7200,7 @@ focus_tree = {
 		icon = GFX_goal_CSA_price_controls
 		x = -1
 		y = 3
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_lagadelle
 		ai_will_do = {
 			factor = 100
@@ -4371,8 +7214,21 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_propaganda_system
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			add_one_random_civilian_factory = yes
+			BRI = {
+				set_temp_variable = { BRI_profitability = 0.05 }
+				BRI_The_Enterprise_profitability_effect = yes
+			}
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4380,7 +7236,7 @@ focus_tree = {
 		icon = GFX_GRU_PIECK_propaganda
 		x = 1
 		y = 3
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_lagadelle
 		ai_will_do = {
 			factor = 100
@@ -4394,8 +7250,20 @@ focus_tree = {
 		prerequisite = {
 			focus = BRI_propaganda_system
 		}
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			BRI = {
+				set_temp_variable = { BRI_profitability = 0.05 }
+				BRI_The_Enterprise_profitability_effect = yes
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4403,7 +7271,7 @@ focus_tree = {
 		icon = GFX_goal_Yellow_Union
 		x = -1
 		y = 4
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_lagadelle
 		ai_will_do = {
 			factor = 100
@@ -4415,8 +7283,20 @@ focus_tree = {
 			focus = BRI_communication_control
 		}
 	
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			BRI = {
+				set_temp_variable = { BRI_profitability = 0.10 }
+				BRI_The_Enterprise_profitability_effect = yes
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4424,7 +7304,7 @@ focus_tree = {
 		icon = GFX_goal_KSV_rule_from_the_air
 		x = 1
 		y = 4
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_lagadelle
 		ai_will_do = {
 			factor = 100
@@ -4436,8 +7316,23 @@ focus_tree = {
 			focus = BRI_communication_control
 		}
 	
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			BRI = {
+				set_temp_variable = { BRI_profitability = 0.03 }
+				BRI_The_Enterprise_profitability_effect = yes
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			unlock_decision_tooltip = BRI_lagadelles_AIR_fighter_equipment
+			unlock_decision_tooltip = BRI_lagadelles_AIR_CAS_equipment
+			unlock_decision_tooltip = BRI_lagadelles_AIR_nav_bomber_equipment
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4445,7 +7340,7 @@ focus_tree = {
 		icon = GFX_goal_BRI_puppet_pcf
 		x = 0
 		y = 5
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_lagadelle
 		ai_will_do = {
 			factor = 100
@@ -4457,8 +7352,21 @@ focus_tree = {
 			focus = BRI_sky_is_ours
 		}
 	
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			unlock_decision_tooltip = BRI_lagadelles_ties_with_PCF_1
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+			hidden_effect = {
+				add_political_power = 28
+			}
 		}
 	}
 	focus = {
@@ -4466,7 +7374,7 @@ focus_tree = {
 		icon = GFX_SOV_socialist_market
 		x = 0
 		y = 6
-		cost = 1
+		cost = 4
 		relative_position_id = BRI_lagadelle
 		ai_will_do = {
 			factor = 100
@@ -4476,8 +7384,292 @@ focus_tree = {
 		}
 		
 	
-		completion_reward = {
 		
+		completion_reward = {
+			BRI = {
+				set_temp_variable = { property_change = -0.01 }
+				BRI_The_millionaire_game_of_large_enterprises = yes		
+			}
+			custom_effect_tooltip = BRI_completed_focus_tt
+			BRI = {
+				set_temp_variable = { BRI_profitability = 0.15 }
+				BRI_The_Enterprise_profitability_effect = yes
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.25
+			}
+			hidden_effect = {
+				add_political_power = 28
+			}
+		}
+	}
+	focus = {
+		id = BRI_Revitalizing_the_Economy_of_Brittany
+		icon = GFX_TRM_Subsidise_Industrial_Expansion
+		x = 6
+		y = 22
+		cost = 4
+		
+		
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			add_ideas = BRI_economy_1
+		}
+	}
+	focus = {
+		id = BRI_Exploiting_the_Wealth_of_the_Armorican_Massif
+		icon = GFX_goal_UMN_cobalt_mines
+		x = 0
+		y = 2
+		cost = 4
+		relative_position_id = BRI_Revitalizing_the_Economy_of_Brittany
+		prerequisite = { focus = BRI_Expanding_the_Tourist_Resort_of_Saint_Malo_Saint_Nazaire }
+		prerequisite = { focus = BRI_Investing_in_the_South_Nantes_Frying_Plant }
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			swap_ideas = {
+				remove_idea = BRI_economy_2
+				add_idea = BRI_economy_3
+			}
+		}
+	}
+
+	focus = {
+		id = BRI_Expanding_the_Tourist_Resort_of_Saint_Malo_Saint_Nazaire
+		icon = GFX_goal_generic_tourism
+		x = -1
+		y = 1
+		cost = 4
+		relative_position_id = BRI_Revitalizing_the_Economy_of_Brittany
+		prerequisite = { focus = BRI_Revitalizing_the_Economy_of_Brittany }
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+		}
+		
+		completion_reward = {
+			add_stability = 0.05
+			if = {
+				limit = {
+					has_completed_focus = BRI_Investing_in_the_South_Nantes_Frying_Plant
+				}
+				swap_ideas = {
+					remove_idea = BRI_economy_1
+					add_idea = BRI_economy_2
+				}
+			}
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+		}
+	}
+	
+	focus = {
+		id = BRI_The_Lethal_Weapons_of_Arsetex_Company
+		icon = GFX_goal_CZE_imperial_arms
+		x = -1
+		y = 4
+		cost = 4
+		relative_position_id = BRI_Revitalizing_the_Economy_of_Brittany
+		prerequisite = { focus = BRI_Exploiting_the_Wealth_of_the_Armorican_Massif }
+		prerequisite = { focus = BRI_Developing_the_Primary_Agricultural_Region }
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			if = {
+				limit = {
+					has_completed_focus = BRI_Subsidizing_the_Railway_Department_of_Finistere_Province
+				}
+				swap_ideas = {
+					remove_idea = BRI_economy_3
+					add_idea = BRI_economy_4
+				}
+			}
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+		}
+	}
+	
+	focus = {
+		id = BRI_Funding_Rennes_University
+		icon = GFX_goal_PAN_Create_the_Universidad_de_Panama
+		x = 0
+		y = 3
+		cost = 4
+		relative_position_id = BRI_Revitalizing_the_Economy_of_Brittany
+		prerequisite = { focus = BRI_Exploiting_the_Wealth_of_the_Armorican_Massif }
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			has_completed_focus = BRI_Subsidizing_the_Railway_Department_of_Finistere_Province
+			has_completed_focus = BRI_The_Lethal_Weapons_of_Arsetex_Company
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			add_research_slot = 1
+			swap_ideas = {
+				remove_idea = BRI_economy_4
+				add_idea = BRI_economy_5
+			}
+		}
+	}
+	
+	focus = {
+		id = BRI_Industries_on_Par_with_France
+		icon = GFX_goal_MNT_decade_to_prosperity
+		x = 0
+		y = 5
+		cost = 4
+		relative_position_id = BRI_Revitalizing_the_Economy_of_Brittany
+		prerequisite = { focus = BRI_Funding_Rennes_University }
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			add_two_random_civilian_factories = yes
+			add_two_random_military_factories = yes
+			swap_ideas = {
+				remove_idea = BRI_economy_5
+				add_idea = BRI_economy_6
+			}
+		}
+	}
+	focus = {
+		id = BRI_Subsidizing_the_Railway_Department_of_Finistere_Province
+		icon = GFX_goal_ROM_Railway_Investments
+		x = 1
+		y = 4
+		cost = 4
+		relative_position_id = BRI_Revitalizing_the_Economy_of_Brittany
+		prerequisite = { focus = BRI_Exploiting_the_Wealth_of_the_Armorican_Massif }
+		prerequisite = { focus = BRI_Launching_the_Loire_Valley_Shipyard }
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+		}
+		
+		completion_reward = {
+			add_political_power = 50
+			if = {
+				limit = {
+					has_completed_focus = BRI_The_Lethal_Weapons_of_Arsetex_Company
+				}
+				swap_ideas = {
+					remove_idea = BRI_economy_3
+					add_idea = BRI_economy_4
+				}
+			}
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	
+	
+	focus = {
+		id = BRI_Developing_the_Primary_Agricultural_Region
+		icon = GFX_goal_VIN_agricultural_modernization
+		x = -2
+		y = 2
+		cost = 4
+		relative_position_id = BRI_Revitalizing_the_Economy_of_Brittany
+		prerequisite = { focus = BRI_Revitalizing_the_Economy_of_Brittany }
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			add_one_random_infrastructure = yes
+			add_two_random_civilian_factories = yes
+		}
+	}
+	
+	focus = {
+		id = BRI_Launching_the_Loire_Valley_Shipyard
+		icon = GFX_goal_generic_shipyard
+		x = 2
+		y = 2
+		cost = 4
+		relative_position_id = BRI_Revitalizing_the_Economy_of_Brittany
+		prerequisite = { focus = BRI_Revitalizing_the_Economy_of_Brittany }
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+		}
+		
+		completion_reward = {
+			add_two_random_dockyards = yes
+			add_two_random_dockyards = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	
+	
+	focus = {
+		id = BRI_Investing_in_the_South_Nantes_Frying_Plant
+		icon = GFX_goal_ALA_fishing
+		x = 1
+		y = 1
+		cost = 4
+		relative_position_id = BRI_Revitalizing_the_Economy_of_Brittany
+		prerequisite = { focus = BRI_Revitalizing_the_Economy_of_Brittany }
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+		}
+		
+		completion_reward = {
+			add_political_power = 45
+			add_one_random_civilian_factory = yes
+			add_two_random_civilian_factories = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			if = {
+				limit = {
+					has_completed_focus = BRI_Expanding_the_Tourist_Resort_of_Saint_Malo_Saint_Nazaire
+				}
+				swap_ideas = {
+					remove_idea = BRI_economy_1
+					add_idea = BRI_economy_2
+				}
+			}
 		}
 	}
 }
