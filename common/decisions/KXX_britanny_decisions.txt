@@ -1,75 +1,3789 @@
 BRI_factionism = {
-
- BRI_support_nationalists = {
-		icon = generic_nationalism
-		allowed = { is_ai = no }
-		visible = {
-			tag = BRI			
-		}
-		cost = 0
-		fire_only_once = no
-		days_re_enable = 0
+	BRI_political_crisis_countdown = { #政治混乱……
+        icon = GFX_decision_generic_ignite_civil_war
+		priority = 2000
+		days_mission_timeout = 60
+		cancel_if_not_visible = yes
+		is_good = no
+		fire_only_once = yes
 		ai_will_do = {
-			factor = 0
+			factor = 100
 		}
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision BUL_YUG_Flag_Picker"		
-			
+		available = {
+			hidden_trigger = {
+				always = no
+			}
 		}
-	}	
-	BRI_support_paramilitary = {
-		icon = generic_nationalism
-		allowed = { is_ai = no }
-		visible = {
-			tag = BRI			
+		activation = {
+			has_country_flag = BRI_Sb_trouble
 		}
-		cost = 0
-		fire_only_once = no
-		days_re_enable = 0
-		ai_will_do = {
-			factor = 0
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
 		}
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision BUL_YUG_Flag_Picker"		
-			
+		timeout_effect = {
+			custom_effect_tooltip = BRI_political_crisis_countdown_tt
+			hidden_effect = {
+				remove_ideas = BRI_inner_factionalism
+			}
+			if = {
+				limit = { #国民党优势
+					check_variable = { BRI.PNBpower > BRI.FLBpower }
+                    check_variable = { BRI.PNBpower > BRI.BLBApower }
+                    check_variable = { BRI.PNBpower > BRI.ABpower }
+				}
+				BRI = {
+					country_event = BRI_crisis.2
+				}
+			}
+			else_if = {
+				limit = { #自由阵线优势
+					check_variable = { BRI.FLBpower > BRI.PNBpower }
+                    check_variable = { BRI.FLBpower > BRI.BLBApower }
+                    check_variable = { BRI.FLBpower > BRI.ABpower }
+				}
+				BRI = {
+					country_event = BRI_crisis.3
+				}
+			}
+			else_if = {
+				limit = { #企业
+					check_variable = { BRI.BLBApower > BRI.PNBpower }
+                    check_variable = { BRI.BLBApower > BRI.FLBpower }
+                    check_variable = { BRI.BLBApower > BRI.ABpower }
+				}
+				BRI = {
+					country_event = BRI_crisis.4
+				}
+			}
+			else_if = {
+				limit = { #大队
+					check_variable = { BRI.ABpower > BRI.PNBpower }
+                    check_variable = { BRI.ABpower > BRI.FLBpower }
+                    check_variable = { BRI.ABpower > BRI.BLBApower }
+				}
+				BRI = {
+					country_event = BRI_crisis.5
+				}
+			}
+			else = {
+				hidden_effect = {
+					BRI = { #僵局
+						country_event = BRI_crisis.7
+					}
+				}
+			}
 		}
 	}
-	BRI_support_corporates = {
-		icon = generic_nationalism
-		allowed = { is_ai = no }
-		visible = {
-			tag = BRI			
-		}
-		cost = 0
-		fire_only_once = no
-		days_re_enable = 0
+	BRI_PNB_action = { #民族党
+        icon = GFX_decision_generic_civil_support
+		priority = 989
+		days_mission_timeout = 10
+		cancel_if_not_visible = yes
+		is_good = no
 		ai_will_do = {
-			factor = 0
-		} 
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision BUL_YUG_Flag_Picker"		
-			
+			factor = 100
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = BRI_Sb_trouble
+		}
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_effect = {
+		}
+		timeout_effect = {
+			random_owned_controlled_state = {
+				random_list = {
+					50 = {
+						BRI_PNB_gain_power_low = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.03
+						}
+					}
+					35 = {
+						BRI_PNB_gain_power_mid = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.06
+						}
+					}
+					15 = {
+						BRI_PNB_gain_power_high = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.1
+						}
+					}
+				}
+			}
 		}
 	}
-	BRI_support_soc_and_dem = {
-		icon = generic_nationalism
-		allowed = { is_ai = no }
-		visible = {
-			tag = BRI			
-		}
-		cost = 0
-		fire_only_once = no
-		days_re_enable = 0
+	BRI_FLB_action = { #自由阵线
+        icon = GFX_decision_generic_civil_support
+		priority = 999
+		days_mission_timeout = 10
+		cancel_if_not_visible = yes
+		is_good = no
 		ai_will_do = {
-			factor = 0
+			factor = 100
 		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = BRI_Sb_trouble
+		}
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_effect = {
+		}
+		timeout_effect = {
+			random_owned_controlled_state = {
+				random_list = {
+					50 = {
+						BRI_FLB_gain_power_low = yes
+						add_popularity = {
+							ideology = syndicalist
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_democrat
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_conservative
+							popularity = 0.01
+						}
+					}
+					35 = {
+						BRI_FLB_gain_power_mid = yes
+						add_popularity = {
+							ideology = market_liberal
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_liberal
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = syndicalist
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_democrat
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_conservative
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = authoritarian_democrat
+							popularity = 0.01
+						}
 
+					}
+					15 = {
+						BRI_FLB_gain_power_high = yes
+						add_popularity = {
+							ideology = totalist
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = radical_socialist
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = market_liberal
+							popularity = 0.02
+						}
+						add_popularity = {
+							ideology = social_liberal
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = syndicalist
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_democrat
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = social_conservative
+							popularity = 0.02
+						}
+						add_popularity = {
+							ideology = authoritarian_democrat
+							popularity = 0.01
+						}
+					}
+				}
+			}
+		}
+	}
+	BRI_BLBA_action = { #Brittany Local Business Association
+        icon = GFX_decision_generic_civil_support
+		priority = 979
+		days_mission_timeout = 10
+		cancel_if_not_visible = yes
+		is_good = no
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = BRI_Sb_trouble
+		}
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_effect = {
+		}
+		timeout_effect = {
+			random_owned_controlled_state = {
+				random_list = {
+					50 = {
+						BRI_BLBA_gain_power_low = yes
+						add_popularity = {
+							ideology = market_liberal
+							popularity = 0.03
+						}
+					}
+					35 = {
+						BRI_BLBA_gain_power_mid = yes
+						add_popularity = {
+							ideology = market_liberal
+							popularity = 0.05
+						}
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.01
+						}
+
+					}
+					15 = {
+						BRI_BLBA_gain_power_high = yes
+						add_popularity = {
+							ideology = market_liberal
+							popularity = 0.07
+						}
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.03
+						}
+					}
+				}
+			}
+		}
+	}
+	BRI_AB_action = { #大队
+		icon = GFX_decision_generic_civil_support
+		priority = 969
+		days_mission_timeout = 10
+		cancel_if_not_visible = yes
+		is_good = no
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = BRI_Sb_trouble
+		}
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_effect = {
+		}
+		timeout_effect = {
+			random_owned_controlled_state = {
+				random_list = {
+					50 = {
+						BRI_AB_gain_power_low = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.01
+						}
+						add_popularity = {
+							ideology = national_populist
+							popularity = 0.02
+						}
+					}
+					35 = {
+						BRI_AB_gain_power_mid = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.02
+						}
+						add_popularity = {
+							ideology = national_populist
+							popularity = 0.04
+						}
+
+					}
+					15 = {
+						BRI_AB_gain_power_high = yes
+						add_popularity = {
+							ideology = paternal_autocrat
+							popularity = 0.04
+						}
+						add_popularity = {
+							ideology = national_populist
+							popularity = 0.06
+						}
+					}
+				}
+			}
+		}
+	}
+	BRI_Mobilize_the_masses_for_reconstruction = { #动员大众
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 10
+		priority = 998
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision BUL_YUG_Flag_Picker"		
-			
+			BRI_FLB_gain_power_low = yes
+			BRI_AB_lose_power_low = yes
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.02
+			}
+			add_stability = 0.01
+			add_manpower = 10000
+		}
+	}
+	BRI_Commitment_to_restore_democracy = { #承诺恢复民主
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 10
+		priority = 997
+		complete_effect = {
+			BRI_FLB_gain_power_low = yes
+			BRI_PNB_lose_power_low = yes
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.01
+			}
+			add_stability = 0.01
+		}
+	}
+	BRI_Commitment_to_private_property_ownership = { #承诺私有产权
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 10
+		priority = 996
+		complete_effect = {
+			BRI_FLB_gain_power_mid = yes
+			BRI_BLBA_lose_power_mid = yes
+			add_stability = 0.01
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	BRI_Relaxation_of_martial_law = {
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 10
+		priority = 995
+		complete_effect = {
+			BRI_FLB_gain_power_high = yes
+			add_stability = 0.01
+			add_political_power = 30
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	BRI_Agricultural_subsidies = { #农业补助
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 10
+		priority = 988
+		complete_effect = {
+			BRI_PNB_gain_power_low = yes
+			BRI_FLB_lose_power_mid = yes
+			add_stability = 0.01
+			add_political_power = 10
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_Emphasis_on_national_identity = { #民族认同强化
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 10
+		priority = 987
+		complete_effect = {
+			BRI_PNB_gain_power_low = yes
+			BRI_FLB_lose_power_low = yes
+			add_war_support = 0.02
+			add_political_power = 50
+		}
+	}
+	BRI_Nationalization_of_industrial_enterprises = { #工业国有化
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 10
+		priority = 986
+		complete_effect = {
+			BRI_PNB_gain_power_low = yes
+			BRI_BLBA_lose_power_low = yes
+			add_war_support = -0.02
+			add_one_random_military_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_Tie_up_the_brigades = { #控制大队的影响力
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 10
+		priority = 985
+		complete_effect = {
+			BRI_PNB_gain_power_low = yes
+			random_list = {
+				30 = {
+					BRI_AB_lose_power_low = yes
+				}
+				40 = {
+					BRI_AB_lose_power_mid = yes
+				}
+				30 = {
+					BRI_AB_lose_power_high = yes
+				}
+			}
+			add_war_support = -0.02
+			add_stability = 0.03
+		}
+	}
+	BRI_Invest_in_enterprises = { #企业投资
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 20
+		priority = 978
+		complete_effect = {
+			BRI_BALA_gain_power_low = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_civilian_factory = yes
+			add_stability = -0.07
+		}
+	}
+	BRI_Invite_business_executives_into_government = { #邀请企业高管进入政府
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 20
+		priority = 977
+		complete_effect = {
+			BRI_BALA_gain_power_low = yes
+			BRI_FLB_lose_power_mid = yes
+			BRI_PNB_lose_power_mid = yes
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.1
+			}
+			add_stability = -0.05
+			add_political_power = 50
+		}
+	}
+	BRI_Military_engages_in_business = { #军队参与企业活动
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 20
+		priority = 976
+		complete_effect = {
+			BRI_BALA_gain_power_low = yes
+			BRI_AB_lose_power_mid = yes
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+			add_stability = -0.05
+			add_one_random_military_factory = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_Open_up_the_market = { #开放市场
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 20
+		priority = 975
+		complete_effect = {
+			BRI_BALA_gain_power_mid = yes
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.06
+			}
+			add_stability = -0.05
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_Expand_the_brigades = { #扩大大队
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 20
+		priority = 968
+		complete_effect = {
+			BRI_AB_gain_power_low = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.05
+			}
+			add_stability = -0.05
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_manpower = 10000
+		}
+	}
+	BRI_Establish_regional_paramilitary_organizations = { #建立区域警察组织
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 20
+		priority = 967
+		complete_effect = {
+			BRI_AB_gain_power_low = yes
+			BRI_PNB_lose_power_mid = yes
+			BRI_FLB_lose_power_mid = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.05
+			}
+			add_stability = -0.05
+			army_experience = 30
+		}
+	}
+	BRI_Place_loyalists_in_the_military = { #安插忠诚分子进入军队
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 20
+		priority = 966
+		complete_effect = {
+			BRI_AB_gain_power_mid = yes
+			BRI_FLB_lose_power_mid = yes
+			BRI_PNB_lose_power_high = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.07
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.03
+			}
+			add_stability = -0.05
+			add_war_support = 0.05
+			add_political_power = 50
+		}
+	}
+	BRI_Pressure_the_PNB = { #压制PNB
+		available = {
+			has_country_flag = BRI_Sb_trouble 
+		}
+		cost = 25
+		days_re_enable = 20
+		priority = 965
+		complete_effect = {
+			BRI_PNB_lose_power_high = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.03
+			}
 		}
 	}
 }	
+
+BRI_Giant_enterprises_governing_the_country = { #巨企治国
+	BRI_Generate_revenue = { #月度收入
+		icon = GFX_decision_generic_break_treaty
+		days_mission_timeout = 30
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_country_flag = BRI_Giant_enterprises_in_BRI
+		}
+		cancel_trigger = {
+			has_country_flag = BRI_Bankruptcy
+		}
+		cancel_effect = {
+
+		}
+		priority = 985
+		timeout_effect = {
+			#工厂数目对收益
+			set_temp_variable = { BRI_revenue_1 = num_of_owned_factories }
+			multiply_temp_variable = { BRI_revenue_1 = 0.02 }
+			#巨企盈利能力对收益
+			set_temp_variable = {
+				BRI_Enterprise_profitability = BRI.Enterprise_profitability
+			}
+			multiply_temp_variable = { BRI_revenue_1 = BRI_Enterprise_profitability }
+			#pp对收益
+			set_temp_variable = {
+				BRI_pp_profitability = has_political_power
+			}
+			multiply_temp_variable = { BRI_pp_profitability = 0.0001 }
+			set_temp_variable = { BRI_pp_bouns = 1 }
+			add_to_temp_variable = { BRI_pp_bouns = BRI_pp_profitability }
+			multiply_temp_variable = { BRI_revenue_1 = BRI_pp_bouns }
+			set_temp_variable = { 
+				property_change = BRI_revenue_1
+			}
+			BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				activate_mission = BRI_Generate_revenue
+			}
+		}
+	}
+	BRI_military_factory_I = { #小规模军事工业扩张
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			NOT = {
+				has_country_flag = BRI_Bankruptcy
+			}
+		}
+		fire_only_once = no
+		days_remove = 30
+		days_re_enable = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			add_one_random_military_factory = yes
+		}
+	}
+	BRI_military_factory_II = { #中等规模军事工业扩张
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 2 }
+		}
+		custom_cost_text = BRI_factory_II_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			NOT = {
+				has_country_flag = BRI_Bankruptcy
+			}
+		}
+		fire_only_once = no
+		days_re_enable = 90
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -2 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+		}
+	}
+	BRI_military_factory_III = { #大规模军事工业扩张
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 10 }
+		}
+		custom_cost_text = BRI_factory_III_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			NOT = {
+				has_country_flag = BRI_Bankruptcy
+			}
+		}
+		fire_only_once = no
+		days_re_enable = 180
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_two_random_military_factories = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_civilian_factory_I = { #小规模民用工业扩张
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			NOT = {
+				has_country_flag = BRI_Bankruptcy
+			}
+		}
+		fire_only_once = no
+		days_remove = 30
+		days_re_enable = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			add_one_random_civilian_factory = yes
+		}
+	}
+	BRI_civilian_factory_II = { #中等规模民用工业扩张
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 2 }
+		}
+		custom_cost_text = BRI_factory_II_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			NOT = {
+				has_country_flag = BRI_Bankruptcy
+			}
+		}
+		fire_only_once = no
+		days_remove = 60
+		days_re_enable = 90
+		complete_effect = {
+			set_temp_variable = { property_change = -2 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	BRI_civilian_factory_III = { #大模民用工业扩张
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 10 }
+		}
+		custom_cost_text = BRI_factory_III_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			NOT = {
+				has_country_flag = BRI_Bankruptcy
+			}
+		}
+		fire_only_once = no
+		days_remove = 120
+		days_re_enable = 180
+		complete_effect = {
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_two_random_civilian_factories = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_LAND_style_construction = { #军队建设
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+		original_tag = BRI
+		}
+		visible = {
+			NOT = {
+				has_idea = BRI_ARMY_Giant_enterprises_5
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.3 }
+		}
+		custom_cost_text = BRI_upgrade_ARMY_cost
+		fire_only_once = no
+		days_remove = 60
+		complete_effect = {
+			set_temp_variable = { property_change = -0.3 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			army_experience = 30
+			if = {
+				limit = {
+					NOT = {
+						has_idea = BRI_ARMY_Giant_enterprises_0
+						has_idea = BRI_ARMY_Giant_enterprises_1
+						has_idea = BRI_ARMY_Giant_enterprises_2
+						has_idea = BRI_ARMY_Giant_enterprises_3
+						has_idea = BRI_ARMY_Giant_enterprises_4
+						has_idea = BRI_ARMY_Giant_enterprises_5
+					}
+				}
+				add_ideas = BRI_ARMY_Giant_enterprises_0
+			}
+			if = {
+				limit = {
+					has_idea = BRI_ARMY_Giant_enterprises_0
+				}
+				swap_ideas = {
+					remove_idea = BRI_ARMY_Giant_enterprises_0
+					add_idea = BRI_ARMY_Giant_enterprises_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_ARMY_Giant_enterprises_1
+				}
+				swap_ideas = {
+					remove_idea = BRI_ARMY_Giant_enterprises_1
+					add_idea = BRI_ARMY_Giant_enterprises_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_ARMY_Giant_enterprises_2
+				}
+				swap_ideas = {
+					remove_idea = BRI_ARMY_Giant_enterprises_2
+					add_idea = BRI_ARMY_Giant_enterprises_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_ARMY_Giant_enterprises_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_ARMY_Giant_enterprises_3
+					add_idea = BRI_ARMY_Giant_enterprises_4
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_ARMY_Giant_enterprises_4
+				}
+				swap_ideas = {
+					remove_idea = BRI_ARMY_Giant_enterprises_4
+					add_idea = BRI_ARMY_Giant_enterprises_5
+				}
+			}
+		}
+	
+	}
+	BRI_AIR_style_construction = {
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+		original_tag = BRI
+		}
+		visible = {
+			NOT = {
+				has_idea = BRI_AIR_Giant_enterprises_5
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.3 }
+		}
+		custom_cost_text = BRI_upgrade_ARMY_cost
+		fire_only_once = no
+		days_remove = 60
+		complete_effect = {
+			set_temp_variable = { property_change = -0.3 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			army_experience = 30
+			if = {
+				limit = {
+					NOT = {
+						has_idea = BRI_AIR_Giant_enterprises_0
+						has_idea = BRI_AIR_Giant_enterprises_1
+						has_idea = BRI_AIR_Giant_enterprises_2
+						has_idea = BRI_AIR_Giant_enterprises_3
+						has_idea = BRI_AIR_Giant_enterprises_4
+						has_idea = BRI_AIR_Giant_enterprises_5
+					}
+				}
+				add_ideas = BRI_AIR_Giant_enterprises_0
+			}
+			if = {
+				limit = {
+					has_idea = BRI_AIR_Giant_enterprises_0
+				}
+				swap_ideas = {
+					remove_idea = BRI_AIR_Giant_enterprises_0
+					add_idea = BRI_AIR_Giant_enterprises_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_AIR_Giant_enterprises_1
+				}
+				swap_ideas = {
+					remove_idea = BRI_AIR_Giant_enterprises_1
+					add_idea = BRI_AIR_Giant_enterprises_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_AIR_Giant_enterprises_2
+				}
+				swap_ideas = {
+					remove_idea = BRI_AIR_Giant_enterprises_2
+					add_idea = BRI_AIR_Giant_enterprises_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_AIR_Giant_enterprises_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_AIR_Giant_enterprises_3
+					add_idea = BRI_AIR_Giant_enterprises_4
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_AIR_Giant_enterprises_4
+				}
+				swap_ideas = {
+					remove_idea = BRI_AIR_Giant_enterprises_4
+					add_idea = BRI_AIR_Giant_enterprises_5
+				}
+			}
+		}
+	}
+	BRI_NAVY_style_construction = {
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+		original_tag = BRI
+		}
+		visible = {
+			NOT = {
+				has_idea = BRI_NAVY_Giant_enterprises_5
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.3 }
+		}
+		custom_cost_text = BRI_upgrade_ARMY_cost
+		fire_only_once = no
+		days_remove = 60
+		complete_effect = {
+			set_temp_variable = { property_change = -0.3 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			army_experience = 30
+			if = {
+				limit = {
+					NOT = {
+						has_idea = BRI_NAVY_Giant_enterprises_0
+						has_idea = BRI_NAVY_Giant_enterprises_5
+						has_idea = BRI_NAVY_Giant_enterprises_1
+						has_idea = BRI_NAVY_Giant_enterprises_2
+						has_idea = BRI_NAVY_Giant_enterprises_3
+						has_idea = BRI_NAVY_Giant_enterprises_4
+					}
+				}
+				add_ideas = BRI_NAVY_Giant_enterprises_0
+			}
+			if = {
+				limit = {
+					has_idea = BRI_NAVY_Giant_enterprises_0
+				}
+				swap_ideas = {
+					remove_idea = BRI_NAVY_Giant_enterprises_0
+					add_idea = BRI_NAVY_Giant_enterprises_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_NAVY_Giant_enterprises_1
+				}
+				swap_ideas = {
+					remove_idea = BRI_NAVY_Giant_enterprises_1
+					add_idea = BRI_NAVY_Giant_enterprises_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_NAVY_Giant_enterprises_2
+				}
+				swap_ideas = {
+					remove_idea = BRI_NAVY_Giant_enterprises_2
+					add_idea = BRI_NAVY_Giant_enterprises_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_NAVY_Giant_enterprises_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_NAVY_Giant_enterprises_3
+					add_idea = BRI_NAVY_Giant_enterprises_4
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BRI_NAVY_Giant_enterprises_4
+				}
+				swap_ideas = {
+					remove_idea = BRI_NAVY_Giant_enterprises_4
+					add_idea = BRI_NAVY_Giant_enterprises_5
+				}
+			}
+		}
+	}
+	BRI_war_preparation = { #战争准备
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 5 }
+		}
+		custom_cost_text = BRI_war_preparation_cost
+		available = {
+			has_war = yes
+		}
+		visible = {
+			original_tag = BRI
+		}
+		fire_only_once = no
+		days_remove = 365
+		complete_effect = {
+			set_temp_variable = { property_change = -5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			research_speed_factor = 0.3
+			production_factory_start_efficiency_factor = 0.2
+			line_change_production_efficiency_factor = 0.2
+			production_factory_efficiency_gain_factor = 0.2
+			production_factory_max_efficiency_factor = 0.2
+			industrial_capacity_factory = 0.3
+			consumer_goods_factor = 0.5
+			army_attack_factor = 0.25
+			breakthrough_factor = 0.25
+			army_defence_factor = 0.25
+		}
+		remove_effect = {	
+			add_war_support = 0.1
+		}
+	}
+	BRI_edu_preparation = { #科研投入
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		visible = {
+			original_tag = BRI
+		}
+		fire_only_once = no
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			research_speed_factor = 0.5
+		}
+		remove_effect = {	
+			if = {
+				limit = {
+					amount_research_slots < 7
+				}
+				add_research_slot = 1
+			}
+		}
+	}
+	#达能
+	BRI_Pasteur_Institute = { #巴斯德研究所
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_Pasteur
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			research_speed_factor = 0.5
+		}
+		remove_effect = {	
+			add_ideas = BRI_Pasteur_research
+		}
+	}
+	BRI_Workers_Self_Governance_Act = {
+		icon = GFX_decision_category_export_revolution
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 1 }
+		}
+		custom_cost_text = BRI_Workers_Self_Governance_Act_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_worker_autonomy
+		}
+		fire_only_once = yes
+		days_remove = 90
+		complete_effect = {
+			set_temp_variable = { property_change = -1 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			production_factory_start_efficiency_factor = 0.2
+			line_change_production_efficiency_factor = 0.2
+			production_factory_efficiency_gain_factor = 0.2
+			production_factory_max_efficiency_factor = 0.2
+			industrial_capacity_factory = 0.2
+		}
+		remove_effect = {	
+			add_ideas = BRI_Workers_Self_Governance
+			set_temp_variable = { BRI_profitability = 0.05 }
+			BRI_The_Enterprise_profitability_effect = yes
+		}
+	}
+	BRI_Workers_Self_Governance_Act_2 = {
+		icon = GFX_decision_category_export_revolution
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 1 }
+		}
+		custom_cost_text = BRI_Workers_Self_Governance_Act_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_worker_capitalist_technocrat
+		}
+		fire_only_once = yes
+		days_remove = 180
+		complete_effect = {
+			set_temp_variable = { property_change = -1 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			production_factory_start_efficiency_factor = 0.1
+			line_change_production_efficiency_factor = 0.1
+			production_factory_efficiency_gain_factor = 0.1
+			production_factory_max_efficiency_factor = 0.1
+			industrial_capacity_factory = 0.1
+		}
+		remove_effect = {	
+			swap_ideas = {
+				remove_idea = BRI_Workers_Self_Governance
+				add_idea = BRI_Workers_Self_Governance_1
+			}
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+		}
+	}
+	BRI_upgrade_danone_company_1 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_danone_company
+			NOT = {
+				OR = {
+					has_country_flag = BRI_danone_company_upgrade_1
+					has_country_flag = BRI_danone_company_upgrade_2
+					has_country_flag = BRI_danone_company_upgrade_3
+					has_country_flag = BRI_danone_company_upgrade_4
+					has_country_flag = BRI_danone_company_upgrade_5
+				}
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_danone_company_I_tooltip
+			set_country_flag = BRI_danone_company_upgrade_1
+			hidden_effect = {
+				if = {
+					BRI = {
+						has_idea = BRI_Giant_enterprises_danone_company_0
+					}
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_danone_company_0
+					add_idea = BRI_Giant_enterprises_danone_company_1
+				}
+			}
+        }
+    }
+	BRI_upgrade_danone_company_2 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_danone_company
+			BRI = {
+				has_country_flag = BRI_danone_company_upgrade_1
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_danone_company_I_tooltip
+			set_country_flag = BRI_danone_company_upgrade_2
+			clr_country_flag = BRI_danone_company_upgrade_1
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_danone_company_1
+
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_danone_company_1
+					add_idea = BRI_Giant_enterprises_danone_company_2
+				}
+			}
+        }
+    }
+	BRI_upgrade_danone_company_3 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_danone_company
+			BRI = {
+				has_country_flag = BRI_danone_company_upgrade_2
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_danone_company_I_tooltip
+			set_country_flag = BRI_danone_company_upgrade_3
+			clr_country_flag = BRI_danone_company_upgrade_2
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_danone_company_2
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_danone_company_2
+					add_idea = BRI_Giant_enterprises_danone_company_3
+				}
+			}
+        }
+    }
+	BRI_upgrade_danone_company_4 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_danone_company
+			BRI = {
+				has_country_flag = BRI_danone_company_upgrade_3
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_danone_company_I_tooltip
+			set_country_flag = BRI_danone_company_upgrade_4
+			clr_country_flag = BRI_danone_company_upgrade_3
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_danone_company_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_danone_company_3
+					add_idea = BRI_Giant_enterprises_danone_company_4
+				}
+			}
+        }
+    }
+	BRI_upgrade_danone_company_5 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_danone_company
+			BRI = {
+				has_country_flag = BRI_danone_company_upgrade_4
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_danone_company_I_tooltip
+			set_country_flag = BRI_danone_company_upgrade_4
+			clr_country_flag = BRI_danone_company_upgrade_3
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_danone_company_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_danone_company_3
+					add_idea = BRI_Giant_enterprises_danone_company_4
+				}
+			}
+        }
+    }
+	#LVMH
+	BRI_hostile_takeover_danone_company = {
+		icon = GFX_decision_hand_grab
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_force_intergation
+		}
+		fire_only_once = yes
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.5
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.5
+			}
+		}
+		modifier = {
+			social_conservative_drift = -0.1
+			radical_socialist_drift = -0.1
+		}
+		remove_effect = {	
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes		
+		}
+	}
+	BRI_hostile_takeover_Michelin_company = {
+		icon = GFX_decision_hand_grab
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_force_intergation
+		}
+		fire_only_once = yes
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.5
+			}
+		}
+		modifier = {
+			national_populist_drift = -0.1
+		}
+		remove_effect = {	
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes		
+		}
+	}
+	BRI_hostile_takeover_total_company = {
+		icon = GFX_decision_hand_grab
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_force_intergation
+		}
+		fire_only_once = yes
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.5
+			}
+		}
+		modifier = {
+			paternal_autocrat_drift = -0.1
+		}
+		remove_effect = {	
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes		
+		}
+	}
+	BRI_hostile_takeover_lagadelle_company = {
+		icon = GFX_decision_hand_grab
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_force_intergation
+		}
+		fire_only_once = yes
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { BRI_profitability = 0.15 }
+			BRI_The_Enterprise_profitability_effect = yes
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.5
+			}
+		}
+		modifier = {
+			totalist_drift = -0.1
+		}
+		remove_effect = {	
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes		
+		}
+	}
+	BRI_upgrade_LVMH_company_1 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_LVMH_company
+			NOT = {
+				OR = {
+					has_country_flag = BRI_LVMH_company_upgrade_1
+					has_country_flag = BRI_LVMH_company_upgrade_2
+					has_country_flag = BRI_LVMH_company_upgrade_3
+					has_country_flag = BRI_LVMH_company_upgrade_4
+					has_country_flag = BRI_LVMH_company_upgrade_5
+				}
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_LVMH_company_I_tooltip
+			set_country_flag = BRI_LVMH_company_upgrade_1
+			hidden_effect = {
+				if = {
+					BRI = {
+						has_idea = BRI_Giant_enterprises_LVMH_company_0
+					}
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_LVMH_company_0
+					add_idea = BRI_Giant_enterprises_LVMH_company_1
+				}
+			}
+        }
+    }
+	BRI_upgrade_LVMH_company_2 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_LVMH_company
+			BRI = {
+				has_country_flag = BRI_LVMH_company_upgrade_1
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_LVMH_company_I_tooltip
+			set_country_flag = BRI_LVMH_company_upgrade_2
+			clr_country_flag = BRI_LVMH_company_upgrade_1
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_LVMH_company_1
+
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_LVMH_company_1
+					add_idea = BRI_Giant_enterprises_LVMH_company_2
+				}
+			}
+        }
+    }
+	BRI_upgrade_LVMH_company_3 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_LVMH_company
+			BRI = {
+				has_country_flag = BRI_LVMH_company_upgrade_2
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_LVMH_company_I_tooltip
+			set_country_flag = BRI_LVMH_company_upgrade_3
+			clr_country_flag = BRI_LVMH_company_upgrade_2
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_LVMH_company_2
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_LVMH_company_2
+					add_idea = BRI_Giant_enterprises_LVMH_company_3
+				}
+			}
+        }
+    }
+	BRI_upgrade_LVMH_company_4 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_LVMH_company
+			BRI = {
+				has_country_flag = BRI_LVMH_company_upgrade_3
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_LVMH_company_I_tooltip
+			set_country_flag = BRI_LVMH_company_upgrade_4
+			clr_country_flag = BRI_LVMH_company_upgrade_3
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_LVMH_company_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_LVMH_company_3
+					add_idea = BRI_Giant_enterprises_LVMH_company_4
+				}
+			}
+        }
+    }
+	BRI_upgrade_LVMH_company_5 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_LVMH_company
+			BRI = {
+				has_country_flag = BRI_LVMH_company_upgrade_4
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_LVMH_company_I_tooltip
+			set_country_flag = BRI_LVMH_company_upgrade_4
+			clr_country_flag = BRI_LVMH_company_upgrade_3
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_LVMH_company_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_LVMH_company_3
+					add_idea = BRI_Giant_enterprises_LVMH_company_4
+				}
+			}
+        }
+    }
+	#米家
+	BRI_battlions_Michelin = { #米卫队
+		icon = GFX_decision_soldierly_discipline
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_battlions
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			stability_factor = -0.05
+			stability_weekly = 	-0.005
+		}
+		remove_effect = {	
+			add_ideas = BRI_battlions_Michelin_org_1
+			set_temp_variable = { BRI_profitability = 0.05 }
+			add_one_random_military_factory = yes
+		}
+	}
+	BRI_battlions_Michelin_expanded = { #扩编米孝子
+		icon = GFX_decision_soldierly_discipline
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_corporate_army
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			stability_factor = -0.05
+			stability_weekly = 	-0.005
+		}
+		remove_effect = {	
+			swap_ideas = {
+				remove_idea = BRI_battlions_Michelin_org_1
+				add_idea = BRI_battlions_Michelin_org_2
+			}
+			set_temp_variable = { BRI_profitability = 0.05 }
+			add_one_random_military_factory = yes
+		}
+	}
+	BRI_technology_school_Michelin = { #米家学校
+		icon = GFX_decision_government_up
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_technology_school
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			stability_factor = -0.05
+			stability_weekly = 	-0.005
+		}
+		remove_effect = {	
+			swap_ideas = {
+				remove_idea = BRI_battlions_Michelin_org_1
+				add_idea = BRI_battlions_Michelin_org_2
+			}
+			set_temp_variable = { BRI_profitability = 0.05 }
+			add_one_random_military_factory = yes
+		}
+	}
+	BRI_upgrade_Michelin_company_1 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_Michelin_company
+			NOT = {
+				OR = {
+					has_country_flag = BRI_Michelin_company_upgrade_1
+					has_country_flag = BRI_Michelin_company_upgrade_2
+					has_country_flag = BRI_Michelin_company_upgrade_3
+					has_country_flag = BRI_Michelin_company_upgrade_4
+					has_country_flag = BRI_Michelin_company_upgrade_5
+				}
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_Michelin_company_I_tooltip
+			set_country_flag = BRI_Michelin_company_upgrade_1
+			hidden_effect = {
+				if = {
+					BRI = {
+						has_idea = BRI_Giant_enterprises_Michelin_company_0
+					}
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_Michelin_company_0
+					add_idea = BRI_Giant_enterprises_Michelin_company_1
+				}
+			}
+        }
+    }
+	BRI_upgrade_Michelin_company_2 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_Michelin_company
+			BRI = {
+				has_country_flag = BRI_Michelin_company_upgrade_1
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_Michelin_company_I_tooltip
+			set_country_flag = BRI_Michelin_company_upgrade_2
+			clr_country_flag = BRI_Michelin_company_upgrade_1
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_Michelin_company_1
+
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_Michelin_company_1
+					add_idea = BRI_Giant_enterprises_Michelin_company_2
+				}
+			}
+        }
+    }
+	BRI_upgrade_Michelin_company_3 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_Michelin_company
+			BRI = {
+				has_country_flag = BRI_Michelin_company_upgrade_2
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_Michelin_company_I_tooltip
+			set_country_flag = BRI_Michelin_company_upgrade_3
+			clr_country_flag = BRI_Michelin_company_upgrade_2
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_Michelin_company_2
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_Michelin_company_2
+					add_idea = BRI_Giant_enterprises_Michelin_company_3
+				}
+			}
+        }
+    }
+	BRI_upgrade_Michelin_company_4 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_Michelin_company
+			BRI = {
+				has_country_flag = BRI_Michelin_company_upgrade_3
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_Michelin_company_I_tooltip
+			set_country_flag = BRI_Michelin_company_upgrade_4
+			clr_country_flag = BRI_Michelin_company_upgrade_3
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_Michelin_company_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_Michelin_company_3
+					add_idea = BRI_Giant_enterprises_Michelin_company_4
+				}
+			}
+        }
+    }
+	BRI_upgrade_Michelin_company_5 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_Michelin_company
+			BRI = {
+				has_country_flag = BRI_Michelin_company_upgrade_4
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_Michelin_company_I_tooltip
+			set_country_flag = BRI_Michelin_company_upgrade_4
+			clr_country_flag = BRI_Michelin_company_upgrade_3
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_Michelin_company_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_Michelin_company_3
+					add_idea = BRI_Giant_enterprises_Michelin_company_4
+				}
+			}
+        }
+    }
+	#拉加代尔
+	BRI_lagadelles_ties_with_PCF_1 = { #政党纽带
+		icon = GFX_decision_category_export_revolution
+		days_mission_timeout = 60
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_completed_focus = BRI_puppet_pcf
+		}
+		cancel_trigger = {
+			has_country_flag = BRI_Bankruptcy
+		}
+		cancel_effect = {
+
+		}
+		priority = 985
+		timeout_effect = {
+			#政党支持数目对收益
+			set_temp_variable = { BRI_part_1 = party_popularity_100@totalist }
+			multiply_temp_variable = { BRI_part_1 = 0.01 }
+			set_temp_variable = { 
+				property_change = BRI_part_1
+			}
+			BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				activate_mission = BRI_lagadelles_ties_with_PCF_1
+			}
+		}
+	}
+	BRI_lagadelles_AIR_fighter_equipment = { #战斗机
+		icon = GFX_decision_plane
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_sky_is_ours
+		}
+		fire_only_once = no
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			political_power_cost = 0.3
+		}
+		remove_effect = {	
+			add_tech_bonus = {
+				name = BRI_fighters
+				bonus = 1
+				uses = 2
+				category = light_fighter
+				category = cat_heavy_fighter
+			}
+			add_tech_bonus = {
+				name = BRI_lagadelles_AIR_equipment
+				bonus = 1
+				uses = 1
+				category = air_equipment
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+		}
+	}
+	BRI_lagadelles_AIR_CAS_equipment = {
+		icon = GFX_decision_plane
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_sky_is_ours
+		}
+		fire_only_once = no
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			political_power_cost = 0.3
+		}
+		remove_effect = {	
+			add_tech_bonus = {
+				bonus = 1
+				uses = 2
+				category = cas_bomber
+			}
+			add_tech_bonus = {
+				name = BRI_lagadelles_AIR_equipment
+				bonus = 1
+				uses = 1
+				category = air_equipment
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+		}
+	}
+	BRI_lagadelles_AIR_nav_bomber_equipment = {
+		icon = GFX_decision_plane
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_sky_is_ours
+		}
+		fire_only_once = no
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		modifier = {
+			political_power_cost = 0.3
+		}
+		remove_effect = {	
+			add_tech_bonus = {
+				name = CAN_naval_bomber_programme
+				bonus = 1
+				uses = 2
+				category = naval_bomber
+			}
+			add_tech_bonus = {
+				name = BRI_lagadelles_AIR_equipment
+				bonus = 1
+				uses = 1
+				category = air_equipment
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+		}
+	}
+	BRI_upgrade_lagadelle_company_1 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_lagadelle_company
+			NOT = {
+				OR = {
+					has_country_flag = BRI_lagadelle_company_upgrade_1
+					has_country_flag = BRI_lagadelle_company_upgrade_2
+					has_country_flag = BRI_lagadelle_company_upgrade_3
+					has_country_flag = BRI_lagadelle_company_upgrade_4
+					has_country_flag = BRI_lagadelle_company_upgrade_5
+				}
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_lagadelle_company_I_tooltip
+			set_country_flag = BRI_lagadelle_company_upgrade_1
+			hidden_effect = {
+				if = {
+					BRI = {
+						has_idea = BRI_Giant_enterprises_lagadelle_company_0
+					}
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_lagadelle_company_0
+					add_idea = BRI_Giant_enterprises_lagadelle_company_1
+				}
+			}
+        }
+    }
+	BRI_upgrade_lagadelle_company_2 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_lagadelle_company
+			BRI = {
+				has_country_flag = BRI_lagadelle_company_upgrade_1
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_lagadelle_company_I_tooltip
+			set_country_flag = BRI_lagadelle_company_upgrade_2
+			clr_country_flag = BRI_lagadelle_company_upgrade_1
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_lagadelle_company_1
+
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_lagadelle_company_1
+					add_idea = BRI_Giant_enterprises_lagadelle_company_2
+				}
+			}
+        }
+    }
+	BRI_upgrade_lagadelle_company_3 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_lagadelle_company
+			BRI = {
+				has_country_flag = BRI_lagadelle_company_upgrade_2
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_lagadelle_company_I_tooltip
+			set_country_flag = BRI_lagadelle_company_upgrade_3
+			clr_country_flag = BRI_lagadelle_company_upgrade_2
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_lagadelle_company_2
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_lagadelle_company_2
+					add_idea = BRI_Giant_enterprises_lagadelle_company_3
+				}
+			}
+        }
+    }
+	BRI_upgrade_lagadelle_company_4 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_lagadelle_company
+			BRI = {
+				has_country_flag = BRI_lagadelle_company_upgrade_3
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_lagadelle_company_I_tooltip
+			set_country_flag = BRI_lagadelle_company_upgrade_4
+			clr_country_flag = BRI_lagadelle_company_upgrade_3
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_lagadelle_company_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_lagadelle_company_3
+					add_idea = BRI_Giant_enterprises_lagadelle_company_4
+				}
+			}
+        }
+    }
+	BRI_upgrade_lagadelle_company_5 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_lagadelle_company
+			BRI = {
+				has_country_flag = BRI_lagadelle_company_upgrade_4
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_lagadelle_company_I_tooltip
+			set_country_flag = BRI_lagadelle_company_upgrade_4
+			clr_country_flag = BRI_lagadelle_company_upgrade_3
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_lagadelle_company_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_lagadelle_company_3
+					add_idea = BRI_Giant_enterprises_lagadelle_company_4
+				}
+			}
+        }
+    }
+	#道达尔
+	BRI_oil_digging_I = { #小规模石油采掘扩张
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text = BRI_factory_I_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_oil_more
+		}
+		fire_only_once = no
+		days_remove = 30
+		days_re_enable = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -0.5 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			add_one_random_military_factory = yes
+			custom_effect_tooltip = BRI_oil_digging_I_tt 
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 2
+				}
+			}
+		}
+	}
+	BRI_oil_digging_II = { #石油采掘
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.5 }
+		}
+		custom_cost_text =  BRI_Workers_Self_Governance_Act_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_oil_more
+		}
+		fire_only_once = no
+		days_re_enable = 60
+		days_remove = 30
+		complete_effect = {
+			set_temp_variable = { property_change = -1 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			custom_effect_tooltip = BRI_oil_digging_II_tt 
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 5
+				}
+			}
+		}
+	}
+	BRI_oil_digging_III = { #大规模石油采掘
+		icon = factories
+		ai_will_do = {
+			factor = 0
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 2 }
+		}
+		custom_cost_text = BRI_factory_II_cost
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_oil_more
+		}
+		fire_only_once = no
+		days_re_enable = 180
+		days_remove = 120
+		complete_effect = {
+			set_temp_variable = { property_change = -10 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 23
+				}
+			}
+			custom_effect_tooltip = BRI_oil_digging_III_tt 
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_oil_more_money_more = { #黑金即金
+		icon = GFX_decision_generic_break_treaty
+		days_mission_timeout = 30
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			has_completed_focus = BRI_and_money_more
+		}
+		cancel_trigger = {
+			has_country_flag = BRI_Bankruptcy
+		}
+		cancel_effect = {
+
+		}
+		priority = 98
+		timeout_effect = {
+			#工厂数目对收益
+			set_temp_variable = { BRI_oil_revenue_1 = resource_produced@oil }
+			multiply_temp_variable = { BRI_oil_revenue_1 = 0.001 }
+			set_temp_variable = { 
+				property_change = BRI_oil_revenue_1
+			}
+			BRI_The_millionaire_game_of_large_enterprises = yes
+			hidden_effect = {
+				activate_mission = BRI_oil_more_money_more
+			}
+		}
+	}
+	BRI_upgrade_total_company_1 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_total_company
+			NOT = {
+				OR = {
+					has_country_flag = BRI_total_company_upgrade_1
+					has_country_flag = BRI_total_company_upgrade_2
+					has_country_flag = BRI_total_company_upgrade_3
+					has_country_flag = BRI_total_company_upgrade_4
+					has_country_flag = BRI_total_company_upgrade_5
+				}
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_total_company_I_tooltip
+			set_country_flag = BRI_total_company_upgrade_1
+			hidden_effect = {
+				if = {
+					BRI = {
+						has_idea = BRI_Giant_enterprises_total_company_0
+					}
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_total_company_0
+					add_idea = BRI_Giant_enterprises_total_company_1
+				}
+			}
+        }
+    }
+	BRI_upgrade_total_company_2 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_total_company
+			BRI = {
+				has_country_flag = BRI_total_company_upgrade_1
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_total_company_I_tooltip
+			set_country_flag = BRI_total_company_upgrade_2
+			clr_country_flag = BRI_total_company_upgrade_1
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_total_company_1
+
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_total_company_1
+					add_idea = BRI_Giant_enterprises_total_company_2
+				}
+			}
+        }
+    }
+	BRI_upgrade_total_company_3 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_total_company
+			BRI = {
+				has_country_flag = BRI_total_company_upgrade_2
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_total_company_I_tooltip
+			set_country_flag = BRI_total_company_upgrade_3
+			clr_country_flag = BRI_total_company_upgrade_2
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_total_company_2
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_total_company_2
+					add_idea = BRI_Giant_enterprises_total_company_3
+				}
+			}
+        }
+    }
+	BRI_upgrade_total_company_4 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_total_company
+			BRI = {
+				has_country_flag = BRI_total_company_upgrade_3
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_total_company_I_tooltip
+			set_country_flag = BRI_total_company_upgrade_4
+			clr_country_flag = BRI_total_company_upgrade_3
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_total_company_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_total_company_3
+					add_idea = BRI_Giant_enterprises_total_company_4
+				}
+			}
+        }
+    }
+	BRI_upgrade_total_company_5 = {
+		icon = give_cash
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_country_flag = BRI_the_rule_of_total_company
+			BRI = {
+				has_country_flag = BRI_total_company_upgrade_4
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = { BRI.enterprises_property_chance > 0.2 }
+		}
+		custom_cost_text = BRI_upgrade_company_cost
+        days_remove = 30
+        fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { property_change = -0.20 }
+			BRI_The_millionaire_game_of_large_enterprises = yes	
+		}
+        remove_effect = {
+            custom_effect_tooltip = BRI_upgrade_total_company_I_tooltip
+			set_country_flag = BRI_total_company_upgrade_4
+			clr_country_flag = BRI_total_company_upgrade_3
+			hidden_effect = {
+				if = {
+					has_idea = BRI_Giant_enterprises_total_company_3
+				}
+				swap_ideas = {
+					remove_idea = BRI_Giant_enterprises_total_company_3
+					add_idea = BRI_Giant_enterprises_total_company_4
+				}
+			}
+        }
+    }
+}
+BRI_britanny_on_world_stage_cat = {
+	BRI_Infiltrate_France = {#渗透法国
+		icon = GFX_decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			has_completed_focus = BRI_infitrate_frg
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			FRG = {
+				country_event = {
+					id = BRI_FRA.7
+					days = 5
+				}
+			}
+			if = {
+				limit = {
+					country_exists = NFA
+				}
+				NFA = {
+					country_event = {
+						id = BRI_FRA.6
+						days = 5
+					}
+				}
+			}
+		}
+		remove_effect = {
+			activate_mission = BRI_against_fra
+			BRI = {
+				declare_war_on = {
+					target = FRG
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = NFA
+				}
+				BRI = {
+					create_wargoal = {
+						type = annex_everything
+						target = NFA
+					}
+				}
+			}
+		}
+	}
+	BRI_against_fra = { #举起反旗
+		icon = GFX_decision_generic_break_treaty
+		days_mission_timeout = 30
+		priority = 985
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			OR = {
+				has_war_with = NFA
+				has_war_with = FRG
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_war_with = NFA
+					has_war_with = FRG
+				}
+			}
+		}
+		cancel_effect = {
+			add_stability = -0.05
+			add_war_support = -0.05
+			add_political_power = 150
+		}
+		timeout_effect = {
+			add_stability = 0.01
+			add_war_support = 0.01
+			activate_mission = BRI_against_fra
+		}
+	}
+	BRI_Lock_Occitania_back_in_the_cage = {#对奥克西塔尼亚的最后通牒
+		icon = GFX_decision_OCC
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			OR = {
+				has_completed_focus = BRI_towards_great_brittany
+				has_completed_focus = BRI_reclaim_france
+			}
+			country_exists = OCC
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			OCC = {
+				country_event = {
+					id = BRI_FRA.8 #要挟
+					days = 5
+				}
+			}
+		}
+		remove_effect = {
+			activate_mission = BRI_against_fra
+			BRI = {
+				declare_war_on = {
+					target = OCC
+					type = annex_everything
+				}
+			}
+		}
+	}
+	BRI_Lock_Lorraine_back_in_the_cage = {#对洛林的最后通牒
+		icon = GFX_decision_Luolin
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			OR = {
+				has_completed_focus = BRI_reclaim_france
+				has_completed_focus = BRI_towards_great_brittany
+			}
+			country_exists = LRE
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			LRE = {
+				country_event = {
+					id = BRI_FRA.9 #要挟
+					days = 5
+				}
+			}
+		}
+		remove_effect = {
+			activate_mission = BRI_against_fra
+			BRI = {
+				declare_war_on = {
+					target = LRE
+					type = annex_everything
+				}
+			}
+		}
+	}
+	BRI_Lock_Normandy_back_in_the_cage = { #诺曼底
+		icon = GFX_decision_NRM
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+		}
+		visible = {
+			OR = {
+				has_completed_focus = BRI_towards_great_brittany
+				has_completed_focus = BRI_reclaim_france
+			}	
+			country_exists = NRM
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			NRM = {
+				country_event = {
+					id = BRI_FRA.10 #要挟
+					days = 5
+				}
+			}
+		}
+		remove_effect = {
+			activate_mission = BRI_against_fra
+			BRI = {
+				declare_war_on = {
+					target = NRM
+					type = annex_everything
+				}
+			}
+		}
+	}
+	BRI_Join_Russia = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			country_exists = RUS
+			is_subject = no
+			is_in_faction = no
+			RUS = {
+				is_subject = no
+				exists = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = BRI
+				}					
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_join_faction
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = 0.1
+			add_political_power = 50
+		}
+		remove_effect = {
+			RUS = {
+				country_event = {
+					id = BRI_for.1
+					days = 5
+				}
+			} #加入俄罗斯
+		}
+	}
+	BRI_Join_Germany = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			country_exists = GER
+			has_socialist_government = no
+			is_subject = no
+			is_in_faction = no
+			GER = {
+				is_subject = no
+				exists = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = BRI
+				}					
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_join_faction
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = 0.1
+			add_political_power = 50
+		}
+		remove_effect = {
+			GER = {
+				country_event = {
+					id = BRI_for.2
+					days = 5
+				}
+			} #加入德国
+		}
+	}
+	BRI_Join_the_Entente_Powers = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			country_exists = CAN
+			has_socialist_government = no
+			is_subject = no
+			is_in_faction = no
+			RUS = {
+				is_subject = no
+				exists = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = BRI
+				}					
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_join_faction
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = 0.1
+			add_political_power = 50
+		}
+		remove_effect = {
+			CAN = {
+				country_event = {
+					id = BRI_for.3
+					days = 5
+				}
+			} #加入加拿大
+		}
+	}
+	BRI_Join_the_Third_International = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_socialist_government = yes
+			is_subject = no
+			is_in_faction = no
+			RUS = {
+				is_subject = no
+				exists = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = BRI
+				}					
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_join_faction
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = 0.1
+			add_political_power = 50
+		}
+		remove_effect = {
+			ENG = {
+				country_event = {
+					id = BRI_for.4
+					days = 5
+				}
+			} #加入第三国际
+		}
+	}
+	BRI_Support_Wales = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_war = no
+			NOT = {
+				country_exists = WAL
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_celtic_union
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+			add_political_power = -50
+		}
+		remove_effect = {
+			set_country_flag = BRI_Wales_aid
+			custom_effect_tooltip = BRI_Support_Wales_tooltip
+		}
+	}
+	BRI_Support_Scotland = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_war = no
+			NOT = {
+				country_exists = SCT
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_celtic_union
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+			add_political_power = -50
+		}
+		remove_effect = {
+			set_country_flag = BRI_Scotland_aid
+			custom_effect_tooltip = BRI_Support_Scotland_tooltip
+		}
+	}
+	
+	BRI_The_October_Revolution = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_country_flag = BRI_the_rule_of_lagadelle_company
+		}
+		visible = {
+			has_completed_focus = BRI_october_revolution
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+			add_political_power = -50
+		}
+		remove_effect = {
+			set_cosmetic_tag = BRI_sov_enterprises
+			set_capital = { state = 195 remember_old_capital = yes }
+			set_province_name = { id = 6174 name = "列宁格勒" }
+		}
+	}
+	BRI_Anglo_Saxons_intergration = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_completed_focus = BRI_recelticlize
+			126 = {
+				is_controlled_by_ROOT_or_owner = yes
+			}
+		}
+		visible = {
+			NOT = {
+				country_exists = ENG
+			}
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+		}
+		modifier = {
+			political_power_gain = -0.1
+			conversion_cost_civ_to_mil_factor = -0.1
+			conversion_cost_mil_to_civ_factor = -0.1
+			production_factory_start_efficiency_factor = -0.1
+			line_change_production_efficiency_factor = -0.1
+			production_factory_efficiency_gain_factor = -0.1
+			production_factory_max_efficiency_factor = -0.1
+			industrial_capacity_factory = -0.1
+			industrial_capacity_dockyard = -0.1
+		}
+		remove_effect = {
+			
+			every_state = {
+				limit = {
+					is_core_of = ENG
+				}
+				add_core_of = BRI
+			}
+			add_political_power = 100
+		}
+	}
+	BRI_France_intergration = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_completed_focus = BRI_recelticlize
+			16 = {
+				is_controlled_by_ROOT_or_owner = yes
+			}
+		}
+		visible = {
+			NOT = {
+				country_exists = FRG
+				country_exists = OCC
+				country_exists = NRM
+				country_exists = LRE
+			}
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+		}
+		modifier = {
+			political_power_gain = -0.1
+			conversion_cost_civ_to_mil_factor = -0.1
+			conversion_cost_mil_to_civ_factor = -0.1
+			production_factory_start_efficiency_factor = -0.1
+			line_change_production_efficiency_factor = -0.1
+			production_factory_efficiency_gain_factor = -0.1
+			production_factory_max_efficiency_factor = -0.1
+			industrial_capacity_factory = -0.1
+			industrial_capacity_dockyard = -0.1
+		}
+		remove_effect = {
+			
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = FRG
+						is_core_of = LRE
+						is_core_of = NRM
+						is_core_of = OCC
+					}
+					
+				}
+				add_core_of = BRI
+			}
+			add_political_power = 100
+		}
+	}
+	BRI_Iberian_intergration = {
+		icon = decision_bakuretsu
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			has_completed_focus = BRI_recelticlize
+			41 = {
+				is_controlled_by_ROOT_or_owner = yes
+			}
+			112 = {
+				is_controlled_by_ROOT_or_owner = yes
+			}
+		}
+		visible = {
+			NOT = {
+				country_exists = SPR
+				country_exists = CNT
+				country_exists = CAR
+				country_exists = POR
+				country_exists = BAS
+				country_exists = CAT
+				country_exists = GLC
+			}
+		}
+		fire_only_once = yes
+		days_remove = 30
+		complete_effect = {
+			add_stability = -0.1
+		}
+		modifier = {
+			political_power_gain = -0.1
+			conversion_cost_civ_to_mil_factor = -0.1
+			conversion_cost_mil_to_civ_factor = -0.1
+			production_factory_start_efficiency_factor = -0.1
+			line_change_production_efficiency_factor = -0.1
+			production_factory_efficiency_gain_factor = -0.1
+			production_factory_max_efficiency_factor = -0.1
+			industrial_capacity_factory = -0.1
+			industrial_capacity_dockyard = -0.1
+		}
+		remove_effect = {
+			
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = SPR
+						is_core_of = CNT
+						is_core_of = CAR
+						is_core_of = POR
+						is_core_of = BAS
+						is_core_of = CAT
+						is_core_of = GLC
+						
+					}
+					
+				}
+				add_core_of = BRI
+			}
+			add_political_power = 100
+		}
+	}
+}
+BRI_Corbusier_Savina_balance_category = {
+	BRI_base_Urban_Management = {
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+			power_balance_value = {
+				id = BHC_The_Congress_Party_constantly_at_odds
+				value > -0.9
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_purge_streets
+		}
+		days_remove = 20
+		cost = 50
+		complete_effect = {
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = -0.1
+			}
+		}
+		modifier = {
+			consumer_goods_factor = 0.1
+		}
+		remove_effect = {
+			add_stability = 0.05
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+		}
+	}
+	BRI_base_Urban_Renovation = {
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+			power_balance_value = {
+				id = BHC_The_Congress_Party_constantly_at_odds
+				value > -0.9
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_purge_streets
+		}
+		days_remove = 30
+		cost = 50
+		complete_effect = {
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = -0.1
+			}
+		}
+		remove_effect = {
+			add_stability = -0.05
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+		}
+	}
+	BRI_base_new_state_mobilization = {
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			original_tag = BRI
+			power_balance_value = {
+				id = BHC_The_Congress_Party_constantly_at_odds
+				value > -0.7
+			}
+		}
+		visible = {
+			has_completed_focus = BRI_new_state
+		}
+		days_remove = 90
+		cost = 50
+		complete_effect = {
+			add_stability = -0.3
+			add_power_balance_value = {
+				id = BRI_Corbusier_Savina_balance
+				value = -0.3
+			}
+		}
+		modifier = {
+			conversion_cost_civ_to_mil_factor = -0.9
+			conversion_cost_mil_to_civ_factor = -0.9
+			production_factory_start_efficiency_factor = 0.25
+			line_change_production_efficiency_factor = 0.25
+			production_factory_efficiency_gain_factor = 0.25
+			production_factory_max_efficiency_factor = 0.25
+			industrial_capacity_factory = 0.35
+		}
+		remove_effect = {
+			add_stability = -0.3
+		}
+	}
+}
+BRI_POPF_puppet_category = {
+	BRI_POPF_puppet_ENG = {
+		icon = generic_ignite_civil_war
+		available = {
+			126 = {
+				is_owned_by = BRI
+			}
+			128 = {
+				is_owned_by = BRI
+			}
+			NOT = {
+				country_exists = ENG
+				country_exists = GBR
+			}
+		}
+		
+		visible = {
+			tag = BRI
+			has_completed_focus = BRI_new_french_imperialism
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {
+			
+		}
+		remove_effect = {
+			every_owned_state = {
+				limit = { 
+					OR = {
+						is_core_of = ENG
+						is_core_of = SCT
+						is_core_of = WAL
+					}
+					NOT = {
+						is_core_of = FRA
+					}
+				}
+				transfer_state = GBP
+			}
+			release = GBP
+			puppet = GBP
+			
+			GBP = {
+			set_cosmetic_tag = ENG_BRI
+				set_politics = {
+					ruling_party = totalist
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "托马斯·厄内斯特·赫尔姆"
+					desc = ""
+					picture = "gfx/leaders/ENG/Portrait_ENG_Thomas_Ernest_Hulme.png"
+					expire = "1.1.1"
+					ideology = sorelianism_subtype
+				}
+			}
+		}
+	}
+	BRI_POPF_puppet_SRI = {
+		icon = generic_ignite_civil_war
+		available = {
+			158 = {
+				is_owned_by = BRI
+			}
+			162 = {
+				is_owned_by = BRI
+			}
+			2 = {
+				is_owned_by = BRI
+			}
+			NOT = {
+				country_exists = SRI
+				country_exists = ITA
+				country_exists = PAP
+				country_exists = SIC
+				country_exists = SRD
+				country_exists = LOM
+				country_exists = VNC
+			}
+		}
+		
+		visible = {
+			tag = BRI
+			has_completed_focus = BRI_new_french_imperialism
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {
+			
+		}
+		remove_effect = {
+			every_owned_state = {
+				limit = {
+					is_not_claim_or_core_of_ROOT = yes
+					is_european_italy = yes
+					NOT = {
+						is_core_of = FRA
+					}
+				}
+				add_core_of = SRI
+				transfer_state_to = SRI
+			}
+			release = SRI
+			puppet = SRI
+			
+			SRI = {
+			set_cosmetic_tag = SRI_BRI
+				set_politics = {
+					ruling_party = totalist
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "安格鲁·塔斯卡"
+					desc = ""
+					picture = "gfx/leaders/SRI/Portrait_SRI_Angelo_Tasca.png"
+					expire = "1.1.1"
+					ideology = lovestoneism_subtype
+				}
+			}
+		}
+	}
+	BRI_POPF_puppet_CNT = {
+		icon = generic_ignite_civil_war
+		available = {
+			165 = {
+				is_owned_by = BRI
+			}
+			41 = {
+				is_owned_by = BRI
+			}
+			NOT = {
+				country_exists = CNT
+				country_exists = POR
+			}
+		}
+		
+		visible = {
+			tag = BRI
+			has_completed_focus = BRI_new_french_imperialism
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {
+			
+		}
+		remove_effect = {
+			every_owned_state = {
+				limit = {
+					is_not_claim_or_core_of_ROOT = yes
+					OR = {
+						is_core_of = SPR
+						is_core_of = CAR
+						is_core_of = CNT
+						is_core_of = BAS
+						is_core_of = GLC
+						is_core_of = CAT
+						is_core_of = POR
+					}
+					NOT = {
+						is_core_of = FRA
+					}
+				}
+				add_core_of = CNT
+				transfer_state_to = CNT
+			}
+			release = CNT
+			puppet = CNT
+			
+			CNT = {
+			set_cosmetic_tag = CNT_BRI
+				set_politics = {
+					ruling_party = totalist
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "马西亚诺·佩德罗·杜鲁蒂"
+					desc = ""
+					picture = "gfx/leaders/CAR/CNT_Marciano_Pedro_Durruti.png"
+					expire = "1.1.1"
+					ideology = national_bolshevik_subtype
+				}
+			}
+		}
+	}
+	BRI_POPF_puppet_GER = {
+		icon = generic_ignite_civil_war
+		available = {
+			64 = {
+				is_owned_by = BRI
+			}
+			54 = {
+				is_owned_by = BRI
+			}
+			NOT = {
+				country_exists = GER
+			}
+		}
+		
+		visible = {
+			tag = BRI
+			has_completed_focus = BRI_new_french_imperialism
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {
+			
+		}
+		remove_effect = {
+			every_owned_state = {
+				limit = {
+					is_not_claim_or_core_of_ROOT = yes
+					is_core_of = GER
+					NOT = {
+						is_core_of = FRA
+					}
+				}
+				add_core_of = GRU
+				transfer_state_to = GRU
+			}
+			release = GRU
+			puppet = GRU
+			
+			GRU = {
+			set_cosmetic_tag = GRU_BRI
+				set_politics = {
+					ruling_party = totalist
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "让·皮埃尔·莫雷尔"
+					desc = ""
+					picture = "gfx/leaders/BRI/Portrait_GRU_Jean_Pierre_Mourer.png"
+					expire = "1.1.1"
+					ideology = tot_bukharinist_subtype
+				}
+			}
+		}
+	}
+}
