@@ -633,7 +633,9 @@ CHI_military_expeditions_category = {
 
 		is_good = no
 		days_mission_timeout = 60
-
+		timeout_effect = {
+			activate_mission = CHI_mission_secure_fujian
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CHI_mission_secure_fujian"
 			transfer_state = 595
@@ -648,6 +650,59 @@ CHI_military_expeditions_category = {
 			hidden_effect = {
 				random_owned_controlled_state = {
 					prioritize = { 595 1066 }
+					limit = {
+						is_in_home_area = yes
+						impassable = no
+					}
+					create_unit = {
+						division = "division_template = \"Géming Minbing Lü\" start_experience_factor = 0.3"
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	CHI_mission_secure_anhui = {
+		icon = generic_civil_support
+
+		allowed = { always = no }
+
+		available = {
+			controls_state = 606
+		}
+		cancel_trigger = {
+			owns_state = 606
+		}
+
+		is_good = no
+		days_mission_timeout = 60
+		timeout_effect = {
+			activate_mission = CHI_mission_secure_anhui
+		}
+		cancel_effect = {
+			country_event = {
+				id = KXX_LKMT_I.35
+				hours = 3
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_mission_secure_fujian"
+			transfer_state = 606
+			add_stability = 0.06
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 500
+				producer = LEP
+			}
+			country_event = {
+				id = KXX_LKMT_I.35
+				hours = 3
+			}
+			custom_effect_tooltip = CHI_mobilize_1_units_tt
+			hidden_effect = {
+				random_owned_controlled_state = {
+					prioritize = { 606 }
 					limit = {
 						is_in_home_area = yes
 						impassable = no
@@ -2568,114 +2623,6 @@ CHI_military_expeditions_category = {
 	}
 	
 }
-CHI_balance_of_power_category = {
-	
-	CHI_stack_the_bureaucracy_decision = {
-		available = {
-			
-		}
-		icon = GFX_decision_generic_political_discourse
-		ai_will_do = {
-			base = 0
-		}
-		fire_only_once = no
-		days_re_enable = 180
-		cost = 50
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_stack_the_bureaucracy_decision"
-			CHI_RCA_medium_effect = yes
-		}
-	}
-	CHI_enforce_party_orthodoxy_decision = {
-		available = {
-			
-		}
-		icon = GFX_decision_eng_propaganda_campaigns
-		ai_will_do = { 
-			base = 0 
-		}
-		fire_only_once = no
-		days_re_enable = 180
-		cost = 50
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_enforce_party_orthodoxy_decision"
-			CHI_RCA_medium_effect = yes
-			hidden_effect = {
-				add_war_support = -0.10
-			}
-		}
-	}
-	CHI_shore_up_peasant_communes_decision = {
-		available = {
-			
-		}
-		icon = GFX_decision_POL_looming_peasants_strike
-		ai_will_do = {
-			base = 0
-		}
-		fire_only_once = no
-		days_re_enable = 180
-		cost = 50
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_shore_up_peasant_communes_decision"
-			CHI_NRC_medium_effect = yes
-		}
-	}
-	CHI_undermine_the_chairmans_grip_decision = {
-		available = {
-			
-		}
-		icon = GFX_decision_generic_speech
-		ai_will_do = { base = 0 }
-		fire_only_once = no
-		days_re_enable = 180
-		cost = 75
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_undermine_the_chairmans_grip_decision"
-			CHI_NRC_large_effect = yes
-			hidden_effect = {
-				add_stability = -0.10
-			}
-		}
-	}
-	CHI_intimidate_the_opposition_decision = {
-		available = {
-			
-		}
-		icon = GFX_decision_oppression
-		ai_will_do = { 
-			base = 0 
-		}
-		fire_only_once = no
-		days_re_enable = 180
-		cost = 75
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_intimidate_the_opposition_decision"
-			if = {
-				limit = {
-					is_power_balance_in_range = {
-						id = CHI_power_balance
-						range > CHI_bop_NRC_tilt
-					}
-				}
-				add_war_support = -0.05 #Opposition of RCA's decision
-				CHI_NRC_large_effect = yes
-			}
-			if = {
-				limit = {
-					is_power_balance_in_range = {
-						id = CHI_power_balance
-						range < CHI_bop_RCA_tilt
-					}
-				}
-				add_stability = -0.05 #Opposite of NRC's decision
-				CHI_RCA_large_effect = yes
-			}
-			CHI_add_rad_medium_effect = yes
-		}
-	}
-}
-
 ####  建立海军  ####
 The_CHI_naval_construction = {
 	
