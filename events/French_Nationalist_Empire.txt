@@ -3381,22 +3381,22 @@ country_event = {
 		}
 		set_party_name = {
 			ideology = totalist
-			long_name = "社会主义行动党"
+			long_name = "FRG_SheHuiZhuYiXingDongDang"
 			name = "社会主义行动党"
 		}
 		set_party_name = {
 			ideology = syndicalist
-			long_name = "劳工总联合会"
+			long_name = "FRG_LaoGongZongLianHeHui"
 			name = "劳工总联合会"
 		}
 		set_party_name = {
 			ideology = radical_socialist
-			long_name = "临时政府/联邦无政府主义者联合会"
+			long_name = "FRG_Republican_Socialist_Party"
 			name = "临时政府/联邦无政府主义者联合会"
 		}
 		set_party_name = {
 			ideology = social_democrat
-			long_name = "工人国际法国支部"
+			long_name = "FRG_FrenchSectionoftheInternationalWorkers'Association"
 			name = "工人国际法国支部"
 		}
 		set_cosmetic_tag = FRG_commune
@@ -3415,6 +3415,7 @@ country_event = {
 			days = 2
 		}
 		remove_ideas = FRG_A_chaotic_government
+		set_country_flag = FRG_revolution_victory
 	}
 	
 	
@@ -3444,7 +3445,7 @@ country_event = {
 			ideology = radical_socialist
 			popularity = 0.1
 		}
-		complete_national_focus = FRG_Crossroads_of_DestinyFRG_Reconstruction_of_the_Republic
+		complete_national_focus = FRG_Reconstruction_of_the_Republic
 		country_event = {
 			id = frg.62
 			days = 7
@@ -3495,10 +3496,7 @@ country_event = {
 	}
 	option = {
 		name = frg.62.b
-		set_politics = {
-			ruling_party = radical_socialist
-			elections_allowed = no
-		}
+		
 		set_party_name = {
 			ideology = radical_socialist
 			long_name = "基督教劳联"
@@ -3509,18 +3507,29 @@ country_event = {
 			long_name = "基督教劳联"
 			name = "基督教劳联"
 		}
-		create_country_leader = {
-			name = "加斯东·泰西耶"  # Gaston Tessier
-			picture = "gfx/leaders/FRA/Portrait_FRA_Gaston_Tessier.png"
-			expire = "1.1.1"
-			ideology = christian_socialism_subtype
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
 		}
 		create_country_leader = {
 			name = "加斯东·泰西耶"  # Gaston Tessier
+			desc = FRG_Gaston_Tessier
 			picture = "gfx/leaders/FRA/Portrait_FRA_Gaston_Tessier.png"
 			expire = "1.1.1"
 			ideology = socdem_christian_socialism_subtype
 		}
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "加斯东·泰西耶"  # Gaston Tessier
+			desc = FRG_Gaston_Tessier
+			picture = "gfx/leaders/FRA/Portrait_FRA_Gaston_Tessier.png"
+			expire = "1.1.1"
+			ideology = christian_socialism_subtype
+		}
+		
 		set_cosmetic_tag = FRG_tessier
 	}
 	option = {
@@ -3531,11 +3540,12 @@ country_event = {
 		}
 		set_party_name = {
 			ideology = social_democrat
-			long_name = "共和社会党"
+			long_name = "FRG_Republican_Socialist_Party"
 			name = "共和社会党"
 		}
 		create_country_leader = {	
 			name = "加斯东·维达尔"  # Gaston Vidal
+			deac = FRG_Gaston_Vidal_desc
 			picture = "gfx/leaders/FRA/Portrait_FRA_Gaston_Vidal.png"
 			expire = "1.1.1"
 			ideology = socdem_paternal_socialism_subtype
@@ -3583,6 +3593,7 @@ country_event = {
 		}
 		create_country_leader = {
 			name = "达尼埃尔·介朗"
+			desc = FRG_Daniel_Guerin
 			picture = "gfx/leaders/FRA/Portrait_France_Daniel_Guerin.png"
 			expire = "1.1.1"
 			ideology = anarcho_communism_subtype
@@ -3843,9 +3854,12 @@ country_event = { #日内瓦普通的一天
 				}
 			}
 		FRG = {transfer_state = 943}
-		FRG = { 
-			puppet = SWI
-	 		}
+		FRG = {
+			set_autonomy = {
+				target = SWI
+				autonomy_state = autonomous_territory
+			}
+		}
 		SWI = {
 			set_politics = {
             	ruling_party = totalist
@@ -4281,7 +4295,7 @@ country_event = { #重组法属西非
 		FRG = {
 			set_autonomy = {
 				target = SEN
-				autonomy_state = kr_colonial_government
+				autonomy_state = autonomous_territory
 			}
 		}
 		SEN = {
@@ -4332,7 +4346,7 @@ country_event = { #重组法属西非
         	}
 			set_autonomy = {
 				target = SEN
-				autonomy_state = kx_colonial_government
+				autonomy_state = autonomous_territory
 				end_wars = no
 			}
 			country_event = { id = frg.111 days = 7 }
@@ -4482,7 +4496,7 @@ country_event = { #重组法属赤道非洲
         	}
 			set_autonomy = {
 				target = GAB
-				autonomy_state = kx_colonial_government
+				autonomy_state = autonomous_territory
 				end_wars = no
 			}
 			complete_national_focus = GAB_the_ecuator_united
@@ -5414,11 +5428,11 @@ country_event = {  #败者的回复
 			 FRG = {
 				set_autonomy = {
 					target = RRF
-					autonomous_state = kx_colored_puppet
+					autonomous_state = autonomous_territory
 				}
 				set_autonomy = {
 					target = KAR
-					autonomous_state = kx_colored_puppet
+					autonomous_state = autonomous_territory
 				}
 			}
 			RRF = { set_cosmetic_tag = FRG_RRF }   
@@ -6201,7 +6215,7 @@ country_event = {  #叙利亚的一小步
             FRG = {
 				set_autonomy = {
 					target = LEB
-					autonomy_state = kr_colonial_government
+					autonomy_state = autonomous_territory
 				}
 			} 
             LEB = { set_cosmetic_tag = FRG_LEB_1 }
@@ -6517,7 +6531,7 @@ country_event = {  #诡异的暴动
 		FRG = {
 			set_autonomy = {
 				target = DJI
-				autonomy_state = kr_colonial_government
+				autonomy_state = autonomous_territory
 			}
 		}
 		DJI = { restore_previous_government_type = yes }
@@ -7532,7 +7546,7 @@ country_event = { #马达加斯加
 		FRG = { 
 			set_autonomy = {
 				target = MAG
-				autonomous_state = kx_colored_puppet
+				autonomous_state = autonomous_territory
 			}
 		}
 		MAG = {
@@ -7580,7 +7594,7 @@ country_event = { #“高级”行动 瞄准福克兰群岛
 		FRG = { 
 			set_autonomy = {
 				target = FLS
-				autonomous_state = kx_colored_puppet
+				autonomous_state = autonomous_territory
 			}
 		}
         FLS = { set_cosmetic_tag = FRG_FLS }
