@@ -383,7 +383,7 @@ FRG_factionering = {
 				}
 			}	
 		ai_will_do = {
-			factor = 5
+			factor = 200
 			}
 		}
 	}
@@ -430,7 +430,7 @@ FRG_factionering = {
 			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 200
 		}
 	}
 	FRG_invite_ser = { #邀请塞尔维亚加入阵营
@@ -496,7 +496,7 @@ FRG_factionering = {
 			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 200
 		}
 	}
 	FRG_invite_por = { #邀请葡萄牙加入阵营
@@ -538,7 +538,7 @@ FRG_factionering = {
 			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 200
 		}
 	}
 	FRG_invite_pol = { #邀请波兰加入阵营
@@ -578,7 +578,7 @@ FRG_factionering = {
 			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 500
 		}
 	}
 	FRG_invite_swe = { #邀请瑞典加入阵营
@@ -617,7 +617,7 @@ FRG_factionering = {
 			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 500
 		}
 	}
 	FRG_invite_ita = { #邀请意大利共和国加入阵营
@@ -766,7 +766,7 @@ FRG_factionering = {
 			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 500
 		}
 	}
 	FRG_invite_nor = { #邀请挪威加入阵营
@@ -879,7 +879,7 @@ FRG_factionering = {
 				}
 			}
 		ai_will_do = {
-			factor = 5
+			factor = 200
 			}
 		}
 	}
@@ -951,7 +951,7 @@ FRG_factionering = {
 			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 200
 		}
 	}
 	FRG_invite_sic = { #邀请两西西里加入阵营
@@ -999,7 +999,7 @@ FRG_factionering = {
 			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 500
 		}
 	}
 	FRG_invite_mex = { #重新踏足墨西哥
@@ -1043,7 +1043,7 @@ FRG_factionering = {
 			}
 		}
 		ai_will_do = {
-			factor = 2
+			factor = 200
 		}
 	}
 	FRG_invite_nyc = { #望向大洋彼岸的纽约
@@ -1079,7 +1079,7 @@ FRG_factionering = {
 			}
 		}
 		ai_will_do = {
-			factor = 2
+			factor = 200
 		}
 	}
 FRG_intervene_in_the_CIV = { #渗透西非海岸
@@ -1134,7 +1134,7 @@ FRG_intervene_in_the_SEN = { #重返达喀尔
 		days_remove = 1
 
 		ai_will_do = {
-			factor = 6
+			factor = 200
 		}
 		
 		complete_effect = {
@@ -1225,14 +1225,9 @@ FRG_deal_with_the_MOR = { #威胁摩洛哥当局
 				}
 			}
 			MOR = { set_cosmetic_tag = FRG_MOR }
+			
 			MOR = {
 				set_politics = { 
-					parties = { 	
-						authoritarian_democrat = { popularity = 30 } 
-						paternal_autocrat = { popularity = 26 } 
-						market_liberal = { popularity = 26 } 
-						national_populist = { popularity = 18 } 
-					}
 					ruling_party = paternal_autocrat
 					elections_allowed = no
 				}
@@ -1251,19 +1246,35 @@ FRG_deal_with_the_MOR = { #威胁摩洛哥当局
             		long_name = "法兰西驻摩洛哥海外部队"
             		name = "法兰西驻外部队"
         		}
+				add_popularity = {
+				    ideology = authoritarian_democrat
+				    popularity = 0.26
+			    }
+                add_popularity = {
+				    ideology = paternal_autocrat
+				    popularity = 0.3
+			    }
+				add_popularity = {
+				    ideology = national_populist
+				    popularity = 0.3
+			    }
+				add_popularity = {
+				    ideology = market_liberal
+				    popularity = 0.2
+			    }
 			}
 			MOR = {
-					division_template = {
-						name = "复兴政府驻外部队"
-						division_names_group = BRI_NRARMY_01
-						regiments = {
-							infantry = { x = 0 y = 0 }
-							infantry = { x = 0 y = 1 }
-							infantry = { x = 1 y = 0 }
-							infantry = { x = 1 y = 1 }
-							infantry = { x = 2 y = 0 }
-							infantry = { x = 2 y = 1 }
-						}
+				division_template = {
+					name = "复兴政府驻外部队"
+					division_names_group = BRI_NRARMY_01
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 2 y = 0 }
+						infantry = { x = 2 y = 1 }
+					}
 					support = {
 						artillery = { x = 0 y = 0 }
 					}
@@ -1272,27 +1283,27 @@ FRG_deal_with_the_MOR = { #威胁摩洛哥当局
 					create_unit = {
 						division = "name = \"复兴政府驻外部队\" division_template = \"复兴政府驻外部队\" start_experience_factor = 0.6 start_equipment_factor = 1"
 						allow_spawning_on_enemy_provs = yes
-						owner = TUN
+						owner = MOR
 					}
 					create_unit = {
 						division = "name = \"复兴政府驻外部队\" division_template = \"复兴政府驻外部队\" start_experience_factor = 0.6 start_equipment_factor = 1"
 						allow_spawning_on_enemy_provs = yes
-						owner = TUN
+						owner = MOR
 					}
 					create_unit = {
 						division = "name = \"复兴政府驻外部队\" division_template = \"复兴政府驻外部队\" start_experience_factor = 0.6 start_equipment_factor = 1"
 						allow_spawning_on_enemy_provs = yes
-						owner = TUN
+						owner = MOR
 					}	
 					create_unit = {
 						division = "name = \"复兴政府驻外部队\" division_template = \"复兴政府驻外部队\" start_experience_factor = 0.6 start_equipment_factor = 1"
 						allow_spawning_on_enemy_provs = yes
-						owner = TUN
+						owner = MOR
 					}
 					create_unit = {
 						division = "name = \"复兴政府驻外部队\" division_template = \"复兴政府驻外部队\" start_experience_factor = 0.6 start_equipment_factor = 1"
 						allow_spawning_on_enemy_provs = yes
-						owner = TUN
+						owner = MOR
 					}
 				}
 			
@@ -1326,7 +1337,7 @@ FRG_deal_with_nation_france_decision = {   #引爆阿尔及尔伪政府的后方
 		days_remove = 1
 
 		ai_will_do = {
-			factor = 6
+			factor = 200
 		}
 		
 		complete_effect = {
@@ -1337,9 +1348,6 @@ FRG_deal_with_nation_france_decision = {   #引爆阿尔及尔伪政府的后方
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
 			clr_country_flag = FRG_imperialate
-			NFA = {
-				remove_ideas = FRG_civil_war_idea
-			}
             TUN = { transfer_state = 458
                     transfer_state = 665
 					add_state_core = 448
@@ -1501,6 +1509,12 @@ FRG_deal_with_nation_france_decision = {   #引爆阿尔及尔伪政府的后方
         		}
 			}
 			hidden_effect = {
+				FRG = {
+					remove_ideas = FRG_civil_war_idea
+				}
+				NFA = {
+					remove_ideas = FRG_civil_war_idea
+				}
 				every_state = {
 					limit = {
 						is_owned_by = NFA
@@ -1562,7 +1576,7 @@ FRG_intervene_in_the_RUS = { #入侵俄罗斯
 		days_remove = 15
 
 		ai_will_do = {
-			factor = 6
+			factor = 200
 		}
 		
 		complete_effect = {
@@ -1596,7 +1610,7 @@ FRG_deal_with_the_RUS = { #迫使俄罗斯投降
 		days_remove = 25
 
 		ai_will_do = {
-			factor = 6
+			factor = 200
 		}
 		
 		complete_effect = {
@@ -1630,7 +1644,7 @@ FRG_Lebanon_imperialate_decision = { #雪松行动
 		days_remove = 6
 
 		ai_will_do = {
-			factor = 10
+			factor = 100
 		}
 		
 		complete_effect = {
@@ -1692,7 +1706,7 @@ FRG_IRQ_imperialate_decision = { #美索不达利亚行动
 		days_remove = 7
 
 		ai_will_do = {
-			factor = 50
+			factor = 500
 		}
 		
 		complete_effect = {
@@ -1795,7 +1809,7 @@ FRG_Djibouti_imperialate_decision = { #红沙行动
 		days_remove = 10
 
 		ai_will_do = {
-			factor = 10
+			factor = 100
 		}
 		
 		complete_effect = {
@@ -1826,7 +1840,7 @@ FRG_MSF_imperialate_decision = { #刚果的秘密交易
 		cost = 10
 		days_remove = 6
 		ai_will_do = {
-			factor = 10
+			factor = 100
 		}
 		
 		complete_effect = {
@@ -1892,7 +1906,7 @@ FRG_MSF_imperialate_decision = { #刚果的秘密交易
 		days_remove = 15
 
 		ai_will_do = {
-			factor = 10
+			factor = 100
 		}
 		
 		complete_effect = {
@@ -1924,10 +1938,10 @@ FRG_MSF_imperialate_decision = { #刚果的秘密交易
 		}
 		complete_effect = {
 			add_stability = 0.01
-			add_political_power = 50
+			add_political_power = 200
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 200
 		}
 	}
 }
