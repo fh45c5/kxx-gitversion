@@ -3769,11 +3769,7 @@ country_event = { #反德外交方向
 			}
 		}
 		FRG = {
-			create_faction_from_template = { 
-				template = faction_template_generic_dominance
-				name = 	"第三国际"
-				icon = GFX_faction_third_internationale #
-			}
+			create_faction = "第三国际"
 			complete_national_focus = FRG_internationale
 		}
 		FRG = {
@@ -4323,14 +4319,6 @@ country_event = { #重组法属西非
 		    SEN = {
 				exists = yes 
 				is_puppet_of = FRG
-			    }
-			NOT = {
-				FRG = {
-					has_government = syndicalist
-					has_government = radical_socialist
-					has_government = social_democrat
-					has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
-				}
 			}
 		}
 		FRG = {
@@ -4339,59 +4327,125 @@ country_event = { #重组法属西非
 				autonomy_state = autonomous_territory
 			}
 		}
-		SEN = {
-			set_cosmetic_tag = NFA_MITTEL_01
-			set_politics = {
-            	ruling_party = authoritarian_democrat
-				elections_allowed = no
-        	} 
-			add_popularity = {
-				ideology = authoritarian_democrat
-				popularity = 0.44
+		if = {
+			limit = {
+				NOT = {
+					FRG = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
 			}
-			add_popularity = {
-				ideology = market_liberal
-				popularity = 0.14
+			SEN = {
+				set_cosmetic_tag = NFA_MITTEL_01
+				set_politics = {
+            		ruling_party = authoritarian_democrat
+					elections_allowed = no
+        		} 
+				add_popularity = {
+					ideology = authoritarian_democrat
+					popularity = 0.44
+				}
+				add_popularity = {
+					ideology = market_liberal
+					popularity = 0.14
+				}
+        		create_country_leader = {
+            		name = "乔治·比多"
+					desc = "POLITICS_SEN_COLONIAL_DESC"
+            		picture = "gfx/leaders/FRG/Portrait_FRG_Georges_Bidault.png"
+            		expire = "1965.1.1"
+            		ideology = colonial_govt_subtype
+        		}
+				set_party_name = {
+            		ideology = authoritarian_democrat
+            		long_name = "法兰西西非殖民机构"
+            		name = "法兰西西非殖民机构"
+        		}
+				set_party_name = {
+            		ideology = market_liberal
+            		long_name = "法兰西西非殖民机构"
+            		name = "法兰西西非殖民机构"
+        		}
+				set_party_name = {
+            		ideology = paternal_autocrat
+            		long_name = "法兰西西非殖民军"
+            		name = "法兰西西非殖民军"
+        		}
+				set_party_name = {
+            		ideology = national_populist
+            		long_name = "地方合作者"
+            		name = "地方合作者"
+        		}
+				set_party_name = {
+            		ideology = social_democrat
+            		long_name = "地方合作者"
+            		name = "地方合作者"
+        		}
+    		}
+		}
+		if = {
+			limit = {
+				FRG = {
+					has_government = syndicalist
+					has_government = radical_socialist
+					has_government = social_democrat
+					has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+				}
 			}
-        	create_country_leader = {
-            	name = "乔治·比多"
-				desc = "POLITICS_SEN_COLONIAL_DESC"
-            	picture = "gfx/leaders/FRG/Portrait_FRG_Georges_Bidault.png"
-            	expire = "1965.1.1"
-            	ideology = colonial_govt_subtype
-        	}
-			set_party_name = {
-            	ideology = authoritarian_democrat
-            	long_name = "法兰西西非殖民机构"
-            	name = "法兰西西非殖民机构"
-        	}
-			set_party_name = {
-            	ideology = market_liberal
-            	long_name = "法兰西西非殖民机构"
-            	name = "法兰西西非殖民机构"
-        	}
-			set_party_name = {
-            	ideology = paternal_autocrat
-            	long_name = "法兰西西非殖民军"
-            	name = "法兰西西非殖民军"
-        	}
-			set_party_name = {
-            	ideology = national_populist
-            	long_name = "地方合作者"
-            	name = "地方合作者"
-        	}
-			set_party_name = {
-            	ideology = social_democrat
-            	long_name = "地方合作者"
-            	name = "地方合作者"
-        	}
-			set_autonomy = {
-				target = SEN
-				autonomy_state = autonomous_territory
-				end_wars = no
-			}
-			country_event = { id = frg.111 days = 7 }
-    	}
+			SEN = {
+				set_cosmetic_tag = NFA_MITTEL_02
+				set_politics = {
+            		ruling_party = syndicalist
+					elections_allowed = no
+        		} 
+				add_popularity = {
+					ideology = syndicalist
+					popularity = 0.80
+				}
+				add_popularity = {
+					ideology = social_democrat
+					popularity = 0.46
+				}
+				add_popularity = {
+					ideology = radical_socialist
+					popularity = 0.2
+				}
+				set_party_name = {
+            		ideology = radical_socialist
+            		long_name = "法兰西西非解放委员会"
+            		name = "法兰西西非解放委员会"
+        		}
+				set_party_name = {
+            		ideology = syndicalist
+            		long_name = "地方合作者"
+            		name = "地方合作者"
+        		}
+				set_party_name = {
+            		ideology = social_democrat
+            		long_name = "地方合作者"
+            		name = "地方合作者"
+        		}
+				set_party_name = {
+            		ideology = social_liberal
+            		long_name = "地方合作者"
+            		name = "地方合作者"
+        		}
+				set_party_name = {
+            		ideology = authoritarian_democrat
+            		long_name = "地方合作者"
+            		name = "地方合作者"
+        		}
+				set_party_name = {
+            		ideology = paternal_autocrat
+            		long_name = "地方合作者"
+            		name = "地方合作者"
+        		}
+    		}
+		}
+		SEN = { country_event = { id = frg.111 days = 7 } }
 	}
 }
 
@@ -4454,6 +4508,28 @@ country_event = {  #划定西非大区管辖范围
 			add_state_core = 968
 			add_state_core = 1192
 			add_state_core = 910
+		}
+		SEN = {
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.13
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.08
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.08
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.03
+			}
 		} 
 	}
 }
@@ -5257,10 +5333,6 @@ country_event = { #煽动德属西非脱钩
 						}
 					}
 				}
-			MAF = {
-					end_puppet = CIV
-					remove_from_faction = CIV
-				}
 			FRG = {
 				add_to_faction = GHA
 				declare_war_on = {
@@ -5347,6 +5419,18 @@ country_event = {  #败者的回复
 
 	option = { #他们还算识趣
 		name = frg.117.a
+		trigger = {
+			NOT = {
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+			}
+		}
 		ai_chance = {
 			factor = 50
 		}
@@ -5908,6 +5992,281 @@ country_event = {  #败者的回复
 			}
 		}
 	}
+	option = { #重燃十月革命
+		name = frg.117.b
+		trigger = {
+			FRG = {
+				OR = {
+					has_government = syndicalist
+					has_government = radical_socialist
+					has_government = social_democrat
+					has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+				}
+			}
+		}
+		ai_chance = {
+			factor = 50
+		}
+		RUS = {
+			country_event = { id = frg.124 days = 30 }
+		}
+		hidden_effect = {
+			FRG = { increase_ruling_party_popularity_by_10 = yes }
+			diplomatic_relation = {
+				country = RUS
+				relation = non_aggression_pact
+				active = yes
+			}
+			RUS = {
+				remove_ideas = FRG_FRG_RUS_Peace
+				add_ideas = RUS_Tver_treaty
+			}
+			every_state = {
+				limit = {
+					is_core_of = RUS
+					is_on_continent = europe
+					NOT = {
+						state = 655
+                        state = 96
+                        state = 11
+                        state = 189
+                        state = 190
+                        state = 1091
+                        state = 12
+                        state = 13
+                        state = 191
+						state = 1329
+                        state = 94
+						state = 1295
+                        state = 95
+						state = 194
+                        state = 204
+						state = 1087
+                        state = 1294
+						state = 206
+                        state = 207
+						state = 1288
+						state = 209
+                        state = 880
+						state = 1290
+						state = 1291
+                        state = 1287
+						state = 243
+                        state = 755
+					}
+					NOT = {
+						is_core_of = UKR
+						is_core_of = DKB
+						is_core_of = KUB
+						is_core_of = MTR
+						is_core_of = KLY
+						is_core_of = GRO
+						is_core_of = ARM
+						is_core_of = AZE
+					}
+				}
+				transfer_state_to = LAT
+				add_core_of = LAT
+			}
+			LAT = {
+				set_party_name = {
+					ideology = radical_socialist
+					long_name = LAT_SOV_radical_socialist_party_long
+					name = LAT_SOV_radical_socialist_party
+				}
+				set_party_name = {
+					ideology = syndicalist
+					long_name = LAT_SOV_syndicalist_party_long
+					name = LAT_SOV_syndicalist_party
+				}
+				set_party_name = {
+					ideology = totalist
+					long_name = LAT_SOV_totalist_party_long
+					name = LAT_SOV_totalist_party
+				}
+				set_party_name = {
+					ideology = national_populist
+					long_name = RUS_national_populist_party_long
+					name = RUS_national_populist_party
+				}
+				set_party_name = {
+					ideology = paternal_autocrat
+					long_name = RUS_paternal_autocrat_party_long
+					name = RUS_paternal_autocrat_party
+				}
+				set_party_name = {
+					ideology = authoritarian_democrat
+					long_name = RUS_authoritarian_democrat_party_long
+					name = RUS_authoritarian_democrat_party
+				}
+				set_party_name = {
+					ideology = social_conservative
+					long_name = RUS_social_conservative_party_long
+					name = RUS_social_conservative_party
+				}
+				set_party_name = {
+					ideology = market_liberal
+					long_name = RUS_market_liberal_party_long
+					name = RUS_market_liberal_party
+				}
+				set_party_name = {
+					ideology = social_liberal
+					long_name = RUS_social_liberal_party_long
+					name = RUS_social_liberal_party
+				}
+				set_party_name = {
+					ideology = social_democrat
+					long_name = RUS_social_democrat_party_long
+					name = RUS_social_democrat_party
+				}
+				set_cosmetic_tag = LAT_RUS
+				add_popularity = {
+					ideology = syndicalist
+					popularity = 0.25
+				}
+				add_popularity = {
+					ideology = radical_socialist
+					popularity = 0.25
+				}
+				add_popularity = {
+					ideology = totalist
+					popularity = 0.25
+				}
+				set_capital = { state = 219 }
+				load_focus_tree = LAT_socialist_focus
+				mark_focus_tree_layout_dirty = yes
+				add_manpower = 300000
+			}
+			every_unit_leader = {
+				limit = { has_character_flag = RUS_socialist }
+				set_nationality = LAT
+			}
+			RUS = {
+				transfer_units_fraction = {
+					target = LAT
+					size = 0.4
+					air_ratio = 0.4
+					navy_ratio = 0.2
+					keep_unit_leaders_trigger = { always = yes }
+				}
+			}
+			if = {
+				limit = {
+					FRG = {
+						OR = {
+							has_government = syndicalist
+							has_government = radical_socialist
+							has_government = social_democrat
+						}
+					}
+				}
+				LAT = {
+					set_politics = {
+            			ruling_party = radical_socialist 
+						elections_allowed = no
+        			} 
+					complete_national_focus = LAT_begin_a_five_year_plan
+				}
+			}
+			if = {
+				limit = {
+					FRG = {
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+				LAT = {
+					set_politics = {
+            			ruling_party = totalist 
+						elections_allowed = no
+        			} 
+					complete_national_focus = LAT_a_syndicalist_model
+				}
+			}
+
+			RUS = {
+				if = {
+					limit = {
+						is_faction_leader = yes
+					}
+					dismantle_faction = yes
+				}
+				else_if = {
+					limit = {
+						is_in_faction = yes
+						is_faction_leader = no
+					}
+					leave_faction = yes
+				}
+			}
+			every_other_country = {
+				limit = { 
+					AND = {
+						is_in_europe = yes
+						or = {
+							is_subject_of = RUS
+							is_in_faction_with = RUS
+						}
+					}
+				}
+				FRG = {	
+					annex_country = {
+						target = PREV
+					}
+			    }
+	        }
+			if = {
+				limit = {
+					OR = {
+						GEO = {
+							is_puppet_of = RUS
+						}
+						231 = {
+							is_owned_and_controlled_by = RUS
+						}
+					}
+				}
+				every_state = {
+					limit = { is_core_of = GEO }
+					transfer_state_to = FRG
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						AZE = {
+							is_puppet_of = RUS
+						}
+						990 = {
+							is_owned_and_controlled_by = RUS
+						}
+					}
+				}
+				every_state = {
+					limit = { is_core_of = AZE }
+					transfer_state_to = FRG
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						ARM = {
+							is_puppet_of = RUS
+						}
+						230 = {
+							is_owned_and_controlled_by = RUS
+						}
+					}
+				}
+				every_state = {
+					limit = { is_core_of = ARM }
+					transfer_state_to = FRG
+				}
+			}
+			RUS = {
+				white_peace = FRG
+			}
+		}
+	}
 }
 
 #入侵俄国
@@ -6057,6 +6416,12 @@ country_event = {  #评估俄国局势
 			RUS = { dismantle_faction = yes }
 			FRG = {
 				add_to_faction = RUS
+			}
+			every_country = {
+				limit = {
+					is_in_faction_with = RUS
+				}
+				add_to_faction = PREV
 			}
 		}
 	}
@@ -6411,7 +6776,7 @@ country_event = {  #向黎凡特地区传播革命
 					} 
 				}
 			}
-			else_if = {
+			if = {
 				limit = {
 					country_exists = OTT
 					OTT = {
@@ -6463,7 +6828,7 @@ country_event = {  #向黎凡特地区传播革命
 					add_to_faction = SYR
 				}
 			} 
-			else_if = {
+			if = {
 				limit = {
 					country_exists = OTT
 					OTT = {
@@ -8209,6 +8574,24 @@ country_event = {  #停战
 					volunteer_only
 				}
 			}	
+		}
+		if = {
+			limit = {
+				30 = { is_controlled_by = BRI }
+			}
+			BRI = {
+				transfer_state = 30
+				add_state_core = 30
+			}
+		}
+		if = {
+			limit = {
+				23 = { is_controlled_by = BRI }
+			}
+			BRI = {
+				transfer_state = 23
+				add_state_core = 23
+			}
 		}
 	}
 }
