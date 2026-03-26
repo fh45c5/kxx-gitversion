@@ -1,40 +1,4 @@
 
-clear_potential_national_government = {
-	hidden_effect = {
-		if = {
-			limit = { has_country_flag = china_is_potential_government }
-			clr_country_flag = china_is_potential_government
-
-			if = {
-				limit = { has_cosmetic_tag = KUM_government_zhongying }
-				set_cosmetic_tag = KUM_zhongying
-			}
-			else = {
-				drop_cosmetic_tag = yes
-			}
-
-			for_each_scope_loop = {
-				array = china_government_ambitions
-				remove_claim_by = PREV
-				clear_variable = ambition_area_@PREV
-			}
-			clear_array = china_government_ambitions
-
-			for_each_loop = {
-				array = china_possible_allies_array
-				remove_targeted_decision = { decision = china_offer_alliance target = var:v }
-			}
-			clear_array = china_possible_allies_array
-
-			for_each_loop = {
-				array = china_possible_allies_array
-				remove_targeted_decision = { decision = china_offer_alliance_northwest target = var:v }
-			}
-			clear_array = china_possible_allies_array_northwest
-		}
-	}
-}
-
 china_add_poor_army = {
 	add_ideas = china_poor_army_3_officers
 	set_country_flag = china_has_poor_army #enables china_army_reform_ai AI strategy plan
