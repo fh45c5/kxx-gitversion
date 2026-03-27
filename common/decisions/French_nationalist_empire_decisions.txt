@@ -6836,6 +6836,47 @@ FRG_ARG_imperialate_decision = { #划分南美洲南部占领区
 			}        
         }
     }
+FRG_Indochina_imperialate_decision = {  #重返中南半岛
+		icon = decision_cat_generic_purge
+		visible = { 
+            has_completed_focus = FRG_Indochina
+		}
+		available = {
+			or = {
+				INC = {
+					is_puppet_of = FRG
+				}
+				VIN = {
+					is_puppet_of = FRG
+				}
+			}
+            NOT = {
+				FRG = {
+					or = {
+						has_country_flag = FRG_conquer_world
+					}
+				}
+			}
+		}
+		fire_only_once = yes
+		cost = 30
+		days_remove = 12
+
+		ai_will_do = {
+			factor = 600
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRG_italian_imperialate_decision"
+			set_country_flag = FRG_imperialate
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
+			clr_country_flag = FRG_imperialate
+            country_event = { id = frg.138 } 
+        }
+    }
 
 
 
