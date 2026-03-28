@@ -42,9 +42,9 @@ country_event = {
 
 	option = {
 		name = polsoc.2.a
-		add_stability = -0.20
-		set_cosmetic_tag = POL_totalist
-		load_focus_tree = KX_Red_Pol_Eco
+		
+		set_cosmetic_tag = POL_soc_fed
+		
 		set_country_flag = pl_kalecki_n_lange_return
 		ai_chance = {
 			factor = 10
@@ -103,7 +103,7 @@ country_event = {
 
 	option = {
 		name = polsoc.4.a
-		complete_national_focus = KX_PL_SOC_Kalecki_Triumphant
+		
 		set_country_flag = pl_kalecki_rules
 		add_popularity = {
 			ideology = totalist
@@ -124,9 +124,15 @@ country_event = {
 				long_name = POL_pzbs_party_long
 				name = "PZBS"
 			}	
+			add_tot_to_coalition = yes
 			remove_all_ministers = yes
-			set_country_flag = KXX_LEADER_GUI_VISIBLE
-			set_country_flag = POL_Michal_Kalecki_VISIBLE
+			clr_country_flag = KXX_LEADER_GUI_VISIBLE
+				create_country_leader = {
+					name = "米哈尔·卡莱茨基"
+					picture = "gfx/leaders/POL/Portrait_POL_Michal_Kalecki.png"
+					expire = "1965.1.1"
+					ideology = market_socialist_subtype
+				}
 			set_politics = {
 				ruling_party = radical_socialist
 				last_election = "1935.11.14"
@@ -139,23 +145,7 @@ country_event = {
 				POL_Oskar_Lange_eco_tot
 				POL_Hilary_Minc_sec_tot
 			}
-			if = {
-				limit = { has_country_flag = Karol_Radek }
-				create_country_leader = {
-					name = "卡尔·拉狄克"
-					picture = "gfx/leaders/POL/Portrait_PLX_Karol_Radek.png"
-					expire = "1965.1.1"
-					ideology = market_socialist_subtype
-				}
-			}
-			else = {
-				create_country_leader = {
-					name = "斯特凡·兹比科夫斯基"
-					picture = "gfx/leaders/POL/Portrait_PLX_Stefan_Zbikowski.png"
-					expire = "1965.1.1"
-					ideology = market_socialist_subtype
-				}
-			}			
+					
 		}		
 		ai_chance = {
 			base = 50
@@ -167,7 +157,7 @@ country_event = {
 		ai_chance = {
 			base = 50
 		}
-		complete_national_focus = KX_PL_SOC_Lange_Triumphant
+		
 		set_country_flag = pl_lange_rules
 		add_popularity = {
 			ideology = radical_socialist
@@ -189,8 +179,8 @@ country_event = {
 				name = "PZBS"
 			}		
 			remove_all_ministers = yes
-			set_country_flag = KXX_LEADER_GUI_VISIBLE
-			set_country_flag = POL_Oskar_Lange_VISIBLE
+			clr_country_flag = KXX_LEADER_GUI_VISIBLE
+			
 			set_politics = {
 				ruling_party = totalist
 				last_election = "1935.11.14"
@@ -203,23 +193,12 @@ country_event = {
 				POL_Michal_Kalecki_eco_rso
 				POL_Hilary_Minc_sec_tot
 			}	
-			if = {
-				limit = { has_country_flag = Karol_Radek }
 				create_country_leader = {
-					name = "卡尔·拉狄克"
-					picture = "gfx/leaders/POL/Portrait_PLX_Karol_Radek.png"
+					name = "奥斯卡·兰格"
+					picture = "gfx/leaders/POL/Portrait_POL_Oskar_Lange.png"
 					expire = "1965.1.1"
 					ideology = technocratic_socialism_subtype
-				}
-			}
-			else = {
-				create_country_leader = {
-					name = "斯特凡·兹比科夫斯基"
-					picture = "gfx/leaders/POL/Portrait_PLX_Stefan_Zbikowski.png"
-					expire = "1965.1.1"
-					ideology = technocratic_socialism_subtype
-				}
-			}			
+				}		
 		}		
 	}
 }
@@ -239,6 +218,10 @@ country_event = {
 	option = {
 		name = polsoc.5.a
 		add_stability = -0.10
+		country_event = {
+			id = polsoc.7
+			days = 15
+		}
 		add_ideas = SOC_POL_housing_issue_1
 		ai_chance = {
 			base = 100
@@ -279,65 +262,46 @@ country_event = {
 		}
 	}	
 }
-
-#Peace out with Austria over Galicia
+### Housing Issue
 country_event = {
 	id = polsoc.7
-	immediate = { log = "[GetDateText]: [Root.GetName]: event polsoc.7" }
+	immediate = { log = "[GetDateText]: [Root.GetName]: event polsoc.5" }
 	title = polsoc.7.t
 	desc = polsoc.7.d
 	#picture = GFX_report_event_soldiers_marching
 
 	fire_only_once = yes
 
-	trigger = {
-		tag = POL
-		has_war_with = GAL
-		has_war_with = AUS
-		NOT = { has_war_with = GER }
-		OR = {
-			AUS = {
-				puppet = GAL
-			}	
-			AUS = { 
-				#owns_state = 88
-				owns_state = 91
-			}
-		}
-		#OR = {
-		#	GAL = { has_capitulated = yes }
-		#	AUS = { owns_state = 91 }			
-		#}
-		POL = { controls_state = 1124 }
-		POL = { controls_state = 91 }
-	}
+	is_triggered_only = yes
 
 	option = {
 		name = polsoc.7.a
-		add_political_power = -5
-		hidden_effect = {
-			AUS = {
-				country_event = {
-					id = polsoc.8
-					days = 3
-				}
+		swap_ideas = {		
+				remove_idea = SOC_POL_rapid_urbanisation_1
+				add_idea = SOC_POL_rapid_urbanisation_2a
 			}
-		}
+		remove_ideas = SOC_POL_housing_issue_1
 		ai_chance = {
-			base = 80
-		}		
+			base = 100
+		}
 	}
 	option = {
-		name = polsoc.7.b		
+		name = polsoc.7.b
+		swap_ideas = {		
+				remove_idea = SOC_POL_rapid_urbanisation_1
+				add_idea = SOC_POL_rapid_urbanisation_2b
+			}	
+		remove_ideas = SOC_POL_housing_issue_1
 		ai_chance = {
-			base = 20
+			base = 100
 		}
-	}	
+	}
 }
 
+### Housing Issue
 country_event = {
 	id = polsoc.8
-	immediate = { log = "[GetDateText]: [Root.GetName]: event polsoc.8" }
+	immediate = { log = "[GetDateText]: [Root.GetName]: event polsoc.5" }
 	title = polsoc.8.t
 	desc = polsoc.8.d
 	#picture = GFX_report_event_soldiers_marching
@@ -348,85 +312,12 @@ country_event = {
 
 	option = {
 		name = polsoc.8.a
-		add_political_power = -50
-		add_stability = -0.05
-		hidden_effect = {
-			if = { 
-				limit = { 
-					GAL = { is_subject_of = AUS }
-				}
-				POL = {
-					annex_country = {
-						target = GAL
-						transfer_troops = no
-					}
-				}
-			}
-			if = { 
-				limit = { 
-					AUS = { 
-						#owns_state = 88
-						owns_state = 91
-					}
-				}
-				POL = { 
-					transfer_state = 1124
-					transfer_state = 88
-					transfer_state = 1319
-					transfer_state = 1314
-					transfer_state = 1125
-					transfer_state = 1126
-					transfer_state = 1127
-					transfer_state = 91
-					transfer_state = 89
-					transfer_state = 1140
-					transfer_state = 1131
-				}
-			}
-			if = { 
-				limit = { 
-					AUS = { 
-						owns_state = 80
-						owns_state = 713
-					}
-				}
-				POL = {
-					transfer_state = 80 
-					transfer_state = 713
-				}
-			}			
-			POL = {
-				white_peace_with_ROOT = yes
-			}
-			#every_other_country = {
-			#	limit = { is_subject_of = AUS }
-			#	white_peace_with_ROOT = yes
-			#}
-			POL = {
-				country_event = {
-					id = polsoc.9
-					days = 1
-				}
-			}			
-		}
+		add_ideas = SOC_POL_engineering_education
 		ai_chance = {
-			factor = 90
-		}		
+			base = 100
+		}
 	}
-	option = {
-		name = polsoc.8.b
-		hidden_effect = {		
-			POL = {
-				country_event = {
-					id = polsoc.10
-					days = 1
-				}
-			}	
-		}
-		ai_chance = {
-			factor = 10
-		}
-	}	
+	
 }
 
 country_event = {
@@ -434,7 +325,7 @@ country_event = {
 	immediate = { log = "[GetDateText]: [Root.GetName]: event polsoc.9" }
 	title = polsoc.9.t
 	desc = polsoc.9.d
-	#picture = GFX_report_event_soldiers_marching
+	#picture = GFX_report_event_soldiers_marchins
 
 	fire_only_once = yes
 
@@ -443,6 +334,8 @@ country_event = {
 	option = {
 		name = polsoc.9.a
 		add_political_power = 10		
+		add_ideas = SOC_POL_female_workforce
+		add_ideas = SOC_POL_childcare_2
 	}
 }
 
