@@ -4026,6 +4026,109 @@ country_event = { #一位社会主义共和国边防部队士兵的日记
 			}
 		}
 	}
+country_event = { #一位社会主义共和国边防部队士兵的日记
+	id = frg.1031
+	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.1031 "}
+	title = frg.1031.t
+	desc = frg.1031.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = frg.1031.a
+		ai_chance = {
+			factor = 50
+		}   
+		trigger = {
+			NOT = {
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+			}
+		}
+		FRG = {transfer_state = 1003}
+		FRG = { 
+			add_state_core = 1003
+			}
+        FRG = {
+			create_wargoal = {
+				type = annex_everything
+				target = SRI
+				} 
+			}
+		}
+	option = {
+		name = frg.1031.b
+		ai_chance = {
+			factor = 50
+		}   
+		trigger = {
+			NOT = {
+				FRG = {
+					OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+			}
+		}
+		leave_faction = yes
+		hidden_effect = {
+			SRI = {
+				add_popularity = {
+					ideology = paternal_autocrat
+					popularity = 0.1
+					}
+				}
+			}
+		FRG = {
+			declare_war_on = {
+         		target = SRI
+         		type = annex_everything
+        		} 
+			}
+		}
+	option = {
+		name = frg.1031.c
+		ai_chance = {
+			factor = 50
+		}   
+		trigger = {
+			FRG = {
+				OR = {
+						has_government = syndicalist
+						has_government = radical_socialist
+						has_government = social_democrat
+						has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+					}
+				}
+			}
+        add_war_support = 0.2
+		FRG = {
+			add_to_faction = SRI
+			}
+		SRI = {
+			create_wargoal = {
+				type = annex_everything
+				target = SIC
+				} 
+			create_wargoal = {
+				type = annex_everything
+				target = ITA
+				}
+			create_wargoal = {
+				type = annex_everything
+				target = PAP
+				}  
+			}
+		}
+	}
 country_event = { #海峡两岸
 	id = frg.104
 	immediate = {log = "[GetDateText]: [Root.GetName]: event frg.100 "}
