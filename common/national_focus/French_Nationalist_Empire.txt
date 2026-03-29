@@ -1520,6 +1520,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_RESEARCH}
 		cancel_if_invalid = yes
 		completion_reward = {
+			add_ideas = FRG_best_equipment
 			add_tech_bonus = {
 				bonus = 0.5
 				uses = 2
@@ -2127,7 +2128,7 @@ focus = {
 	icon = GFX_goal_CEA_fate_of_france
 	x = 80
 	y = 0
-	cost = 5
+	cost = 1
 	available = {
 		has_country_flag = FRG_civil_war_ends
 	}
@@ -2327,7 +2328,7 @@ focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_the_coalition_survives"
-		FRG_increase_recovery = yes
+		remove_ideas = FRG_civil_war_war_aftermath_idea4
 		add_research_slot = 1
 		add_one_random_civilian_factory = yes
 		add_one_random_civilian_factory = yes
@@ -3331,7 +3332,7 @@ focus = {
 	icon = GFX_goal_CEA_new_syndicalist_society
 	x = 100
 	y = 0
-	cost = 5
+	cost = 1
 	ai_will_do = {
 		factor = 120
 	}
@@ -3607,7 +3608,7 @@ focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus COL_the_coalition_survives"
-		FRG_increase_recovery = yes
+		remove_ideas = FRG_civil_war_war_aftermath_idea4
 		add_research_slot = 1
 		add_one_random_civilian_factory = yes
 		add_one_random_civilian_factory = yes
@@ -6581,7 +6582,7 @@ focus = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 		relative_position_id = FRG_Remy_die
 		available = {
-			
+			has_country_leader = { ruling_only = yes name = "加布里埃·香奈儿" }
 		}
 		prerequisite = {
 			focus = FRG_Enterprises_support_the_country
@@ -14316,9 +14317,14 @@ focus = {
 			factor = 120
 		}
 		available = {
-			GER = {
-				exists = yes
-				surrender_progress < 0.6
+			OR = {
+				GER = {
+					exists = yes
+					surrender_progress < 0.6
+					}
+				}
+				NOT = {
+					country_exists = GER
 				}
 			}
 		prerequisite = {
