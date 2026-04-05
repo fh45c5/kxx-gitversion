@@ -3595,8 +3595,8 @@ focus_tree = {
 			has_country_flag = plx_endecja_rules
 		}	
 	
-		x = -60
-		y = 30
+		x = -55
+		y = 25
 		cost = 1
 		ai_will_do = {
 			factor = 100
@@ -3723,11 +3723,13 @@ focus_tree = {
 			has_completed_focus = KX_PLX_CRISIS_RECOVERY_PROSPECT
 		}
 		prerequisite = {
-			focus = KX_PL_NATDEM_YOUNG
+			focus = KX_PL_NATDEM_CHURCH_SUPPORT
+			focus = KX_PL_NATDEM_STATE_CATHOLICISM
+
 		}
 		relative_position_id = KX_PL_NATDEM_YOUNG
-		x = -2
-		y = 1
+		x = 1
+		y = 5
 		cost = 4 #?
 		ai_will_do = {
 			factor = 100
@@ -3746,11 +3748,11 @@ focus_tree = {
 			has_completed_focus = KX_PLX_CRISIS_RECOVERY_PROSPECT
 		}
 		prerequisite = {
-			focus = KX_PL_NATDEM_OLD
+			focus = KX_PL_NATDEM_POLISH_CAPITAL_ONLY
 		}
 		relative_position_id = KX_PL_NATDEM_OLD
-		x = 3
-		y = 1
+		x = -1
+		y = 6
 		cost = 4 #?
 		ai_will_do = {
 			factor = 100
@@ -4038,9 +4040,9 @@ focus_tree = {
 			has_country_flag = plx_anti_endecja
 		}	
 		
-		relative_position_id = KX_PL_NATDEM_MONARCHY_REFERENDUM
-		x = -15
-		y = 1
+		
+		x = -80
+		y = 27
 		cost = 1
 		ai_will_do = {
 			factor = 100
@@ -5813,7 +5815,10 @@ focus_tree = {
 		}		
 		mutually_exclusive = {
 			focus = KX_PL_PG_REAFFIRM_ROYAL_COUNCIL
-		}		
+		}	
+		mutually_exclusive = {
+			focus = KX_PL_KLER_A_NEW_KINGDOM
+		}	
 		relative_position_id = KX_PL_PG_ROYAL_CABINET
 		x = -6
 		y = 1
@@ -6287,6 +6292,12 @@ focus_tree = {
 		prerequisite = {
 			focus = KX_PL_PG_ROYAL_CABINET
 		}
+		mutually_exclusive = {
+			focus = KX_PL_PG_REAFFIRM_ROYAL_COUNCIL
+		}
+		mutually_exclusive = {
+			focus = KX_PL_PG_EXPAND_ROYAL_COMPETENCIES
+		}	
 		#mutually_exclusive = {
 		#	focus = KX_PL_PG_EXPAND_ROYAL_COMPETENCIES
 		#}		
@@ -6313,8 +6324,37 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = KX_PL_KLER_RADICAL_CLERGY
 		}
+		mutually_exclusive = {
+			focus = KX_PL_KLER_YOUNG_CLERGY
+		}
 		relative_position_id = KX_PL_KLER_A_NEW_KINGDOM
-		x = -1
+		x = -2
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			#add_ideas = KX_mon_royal_council_1
+		}
+	}
+	focus = {
+		id = KX_PL_KLER_YOUNG_CLERGY
+		icon = GFX_ITA_church_economic
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_A_NEW_KINGDOM
+		}
+		mutually_exclusive = {
+			focus = KX_PL_KLER_RADICAL_CLERGY
+		}
+		mutually_exclusive = {
+			focus = KX_PL_KLER_OLD_CLERGY
+		}
+		relative_position_id = KX_PL_KLER_A_NEW_KINGDOM
+		x = 0
 		y = 1
 		cost = 8
 		ai_will_do = {
@@ -6336,8 +6376,11 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = KX_PL_KLER_OLD_CLERGY
 		}
+		mutually_exclusive = {
+			focus = KX_PL_KLER_YOUNG_CLERGY
+		}
 		relative_position_id = KX_PL_KLER_A_NEW_KINGDOM
-		x = 1
+		x = 2
 		y = 1
 		cost = 8
 		ai_will_do = {
@@ -6356,9 +6399,10 @@ focus_tree = {
 		prerequisite = {
 			focus = KX_PL_KLER_OLD_CLERGY
 			focus = KX_PL_KLER_RADICAL_CLERGY
+			focus = KX_PL_KLER_YOUNG_CLERGY
 		}		
 		relative_position_id = KX_PL_KLER_OLD_CLERGY
-		x = 1
+		x = 2
 		y = 1
 		cost = 8
 		ai_will_do = {
@@ -6375,10 +6419,12 @@ focus_tree = {
 			#has_country_flag = plx_rc_in_power
 		}
 		prerequisite = {
+			focus = KX_PL_KLER_OLD_CLERGY
 			focus = KX_PL_KLER_RADICAL_CLERGY
-		}		
+			focus = KX_PL_KLER_YOUNG_CLERGY
+		}			
 		relative_position_id = KX_PL_KLER_RADICAL_CLERGY
-		x = 1
+		x = 0
 		y = 1
 		cost = 8
 		ai_will_do = {
@@ -6396,9 +6442,11 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = KX_PL_KLER_OLD_CLERGY
-		}	
+			focus = KX_PL_KLER_RADICAL_CLERGY
+			focus = KX_PL_KLER_YOUNG_CLERGY
+		}		
 		relative_position_id = KX_PL_KLER_OLD_CLERGY
-		x = -1
+		x = 0
 		y = 1
 		cost = 8
 		ai_will_do = {
@@ -6418,13 +6466,16 @@ focus_tree = {
 			focus = KX_PL_KLER_HOLY_PREMIERSHIP
 		}
 		prerequisite = {
+			focus = KX_PL_KLER_EXPAND_SENATE_SEATS
+		}	
+		prerequisite = {
 			focus = KX_PL_KLER_SUSPEND_POLITICAL_SYSTEM
 		}	
 		mutually_exclusive = {
 			focus = KX_PL_KLER_HOLY_STRATOCRACY
 		}		
 		relative_position_id = KX_PL_KLER_SUSPEND_POLITICAL_SYSTEM
-		x = 4
+		x = 3
 		y = 1
 		cost = 8
 		ai_will_do = {
@@ -6464,13 +6515,16 @@ focus_tree = {
 			focus = KX_PL_KLER_HOLY_PREMIERSHIP
 		}
 		prerequisite = {
+			focus = KX_PL_KLER_EXPAND_SENATE_SEATS
+		}	
+		prerequisite = {
 			focus = KX_PL_KLER_SUSPEND_POLITICAL_SYSTEM
 		}	
 		mutually_exclusive = {
 			focus = KX_PL_KLER_PROGRESSIVE_CHURCH
 		}		
 		relative_position_id = KX_PL_KLER_SUSPEND_POLITICAL_SYSTEM
-		x = 6
+		x = 5
 		y = 1
 		cost = 8
 		ai_will_do = {
@@ -6492,12 +6546,227 @@ focus_tree = {
 		prerequisite = {
 			focus = KX_PL_KLER_EXPAND_SENATE_SEATS
 		}	
+		prerequisite = {
+			focus = KX_PL_KLER_SUSPEND_POLITICAL_SYSTEM
+		}		
 		mutually_exclusive = {
 			focus = KX_PL_KLER_CLERICAL_OLIGARCHY
 		}		
 		relative_position_id = KX_PL_KLER_EXPAND_SENATE_SEATS
-		x = -4
+		x = -3
 		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			#add_ideas = KX_mon_royal_council_1
+		}
+	}
+	focus = {
+		id = KX_PL_KLER_HOLY_DEMOCRACY
+		icon = GFX_goal_CZE_clerical
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_HOLY_PREMIERSHIP
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_EXPAND_SENATE_SEATS
+		}	
+		prerequisite = {
+			focus = KX_PL_KLER_SUSPEND_POLITICAL_SYSTEM
+		}	
+		mutually_exclusive = {
+			focus = KX_PL_KLER_LOVE_AND_MERCY
+		}	
+		relative_position_id = KX_PL_KLER_EXPAND_SENATE_SEATS
+		x = 1
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			#add_ideas = KX_mon_royal_council_1
+		}
+	}
+	focus = {
+		id = KX_PL_KLER_LOVE_AND_MERCY
+		icon = GFX_goal_NFA_New_Holy_Father
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_HOLY_PREMIERSHIP
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_EXPAND_SENATE_SEATS
+		}	
+		prerequisite = {
+			focus = KX_PL_KLER_SUSPEND_POLITICAL_SYSTEM
+		}		
+		mutually_exclusive = {
+			focus = KX_PL_KLER_HOLY_DEMOCRACY
+		}		
+		relative_position_id = KX_PL_KLER_EXPAND_SENATE_SEATS
+		x = 3
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			#add_ideas = KX_mon_royal_council_1
+		}
+	}
+	focus = {
+		id = KX_PL_KLER_MARKET_UNDER_PLANNING
+		icon = GFX_goal_KIV_christian_market_socialism
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_LOVE_AND_MERCY
+		}
+		
+		relative_position_id = KX_PL_KLER_LOVE_AND_MERCY
+		x = 1
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			#add_ideas = KX_mon_royal_council_1
+		}
+	}
+	focus = {
+		id = KX_PL_KLER_DEFEND_LIBERTY
+		icon = GFX_goal_TEX_christian_renew
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_HOLY_DEMOCRACY
+			focus = KX_PL_KLER_LOVE_AND_MERCY
+		}
+		
+		relative_position_id = KX_PL_KLER_LOVE_AND_MERCY
+		x = -1
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			#add_ideas = KX_mon_royal_council_1
+		}
+	}
+	
+	focus = {
+		id = KX_PL_KLER_DECENTRALIZE
+		icon = GFX_RUS_Decentralize_Power
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_DEFEND_LIBERTY
+		}
+		
+		relative_position_id = KX_PL_KLER_LOVE_AND_MERCY
+		x = -1
+		y = 2
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			#add_ideas = KX_mon_royal_council_1
+		}
+	}
+	focus = {
+		id = KX_PL_KLER_RESTORE_NATIONAL_MORAL
+		icon = GFX_goal_TEX_christian_commonwealth
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_TAX_HELP_POOR
+			focus = KX_PL_KLER_STATE_SERVES_PEOPLE
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_DECENTRALIZE
+		}
+		relative_position_id = KX_PL_KLER_LOVE_AND_MERCY
+		x = -1
+		y = 3
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			#add_ideas = KX_mon_royal_council_1
+		}
+	}
+	focus = {
+		id = KX_PL_KLER_STATE_SERVES_PEOPLE
+		icon = GFX_DKB_Christian_Social_Justice
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_MARKET_UNDER_PLANNING
+		}
+		
+		relative_position_id = KX_PL_KLER_LOVE_AND_MERCY
+		x = 1
+		y = 2
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			#add_ideas = KX_mon_royal_council_1
+		}
+	}
+	focus = {
+		id = KX_PL_KLER_CENTROLOW
+		icon = GFX_goal_HOL_list_left
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_HOLY_DEMOCRACY
+		}
+			
+			
+		relative_position_id = KX_PL_KLER_HOLY_DEMOCRACY
+		x = -1
+		y = 1
+		cost = 8
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			#add_ideas = KX_mon_royal_council_1
+		}
+	}
+	focus = {
+		id = KX_PL_KLER_TAX_HELP_POOR
+		icon = GFX_goal_TEX_christianity_capitalism
+		available = {
+			#has_country_flag = plx_rc_in_power
+		}
+		prerequisite = {
+			focus = KX_PL_KLER_HOLY_DEMOCRACY
+		}
+			
+			
+		relative_position_id = KX_PL_KLER_HOLY_DEMOCRACY
+		x = -1
+		y = 2
 		cost = 8
 		ai_will_do = {
 			factor = 100
@@ -6513,18 +6782,19 @@ focus_tree = {
 			#has_country_flag = plx_rc_in_power
 		}
 		prerequisite = {
-			focus = KX_PL_KLER_EXPAND_SENATE_SEATS
-			focus = KX_PL_PG_EXPAND_LOCAL_GOVERNANCE
+			focus = KX_PL_KLER_HOLY_PREMIERSHIP
 		}
 		prerequisite = {
-			focus = KX_PL_KLER_HOLY_PREMIERSHIP
-			focus = KX_PL_PG_EXPAND_LOCAL_GOVERNANCE
-		}
+			focus = KX_PL_KLER_EXPAND_SENATE_SEATS
+		}	
+		prerequisite = {
+			focus = KX_PL_KLER_SUSPEND_POLITICAL_SYSTEM
+		}	
 		mutually_exclusive = {
 			focus = KX_PL_KLER_BENELOVENT_THEOCRACY
 		}
 		relative_position_id = KX_PL_KLER_EXPAND_SENATE_SEATS
-		x = -6
+		x = -5
 		y = 1
 		cost = 8
 		ai_will_do = {
@@ -6641,7 +6911,7 @@ focus_tree = {
 	}	
 	focus = {
 		id = KX_PL_KLER_JESUS_COMMUNIST
-		icon = GFX_goal_CZE_clerical
+		icon = GFX_goal_TRM_Orthodox_Integralism
 		available = {
 			#has_country_flag = plx_rc_in_power
 		}
@@ -6706,9 +6976,7 @@ focus_tree = {
 		available = {
 			#has_country_flag = plx_rc_in_power
 		}
-		prerequisite = {
-			focus = KX_PL_KLER_PARISH_ECONOMIC_PLANNING
-		}
+		
 		prerequisite = {
 			focus = KX_PL_KLER_REFORMING_IN_JESUS_IMMAGE
 		}		
@@ -6732,9 +7000,7 @@ focus_tree = {
 		prerequisite = {
 			focus = KX_PL_KLER_JESUS_COMMUNIST
 		}
-		prerequisite = {
-			focus = KX_PL_KLER_PARISH_ECONOMIC_PLANNING
-		}		
+				
 		relative_position_id = KX_PL_KLER_PARISH_ECONOMIC_PLANNING
 		x = 2
 		y = 1
@@ -6748,7 +7014,7 @@ focus_tree = {
 	}
 	focus = {
 		id = KX_PL_KLER_SEPARATION_FROM_VATICAN
-		icon = GFX_goal_NFA_New_Holy_Father
+		icon = GFX_goal_NFA_Sins_Holy_Father
 		available = {
 			#has_country_flag = plx_rc_in_power
 		}
@@ -6821,6 +7087,9 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = KX_PL_PG_EXPAND_ROYAL_COMPETENCIES
+		}	
+		mutually_exclusive = {
+			focus = KX_PL_KLER_A_NEW_KINGDOM
 		}		
 		relative_position_id = KX_PL_PG_ROYAL_CABINET
 		x = 5
@@ -25877,6 +26146,444 @@ focus = {
 			}
 		}
 	}
+	
+	focus = {
+		id = POL_mobsters_reign
+		icon = GFX_goal_NYC_hub_global_organized_crime
+		available = {
+			
+		}
+		x = -62
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_Papa_Tasemka
+		icon = GFX_goal_CSA_Anarchism_Capone_Clearly_Wanted
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_mobsters_reign
+		}
+		relative_position_id = POL_mobsters_reign
+		x = -2
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_no_more_bankers
+		icon = GFX_goal_ROM_Break_Banks
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_13_bandits
+		}
+		relative_position_id = POL_13_bandits
+		x = -1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_integrate_Hashomer_Hatzair
+		icon = ISRA_Israeli_Army
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_no_more_bankers
+		}
+		relative_position_id = POL_13_bandits
+		x = -1
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_protector_of_poor
+		icon = GFX_goal_NYC_Give_Back_To_People
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_13_bandits
+		}
+		relative_position_id = POL_13_bandits
+		x = 1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_welfare_corruption
+		icon = GFX_goal_NYC_Politics_of_Corruption
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_protector_of_poor
+		}
+		relative_position_id = POL_13_bandits
+		x = 1
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_international_smuggle
+		icon = GFX_LEC_Smugglers
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_loyal_to_boss
+		}
+		prerequisite = {
+			focus = POL_bandit_zionism
+		}
+		relative_position_id = POL_13_bandits
+		x = -1
+		y = 4
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_safety_bureau
+		icon = GFX_goal_SRI_liquidate_northern_law_order
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_international_smuggle
+		}
+		
+		relative_position_id = POL_13_bandits
+		x = -1
+		y = 5
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	
+	focus = {
+		id = POL_bow_to_boss
+		icon = GFX_goal_NYC_Mafia_Rule
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_pacify_commie_cons
+		}
+		prerequisite = {
+			focus = POL_safety_bureau
+		}
+		relative_position_id = POL_mobsters_reign
+		x = 0
+		y = 7
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_bandit_zionism
+		icon = ISRA_Advancing_one_country_programmes
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_integrate_Hashomer_Hatzair
+		}
+		prerequisite = {
+			focus = POL_welfare_corruption
+		}
+		relative_position_id = POL_13_bandits
+		x = 0
+		y = 3
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_loyal_to_boss
+		icon = GFX_goal_NYC_mobster_multiculturalism
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_Kercelak_protector
+			focus = POL_integrate_Hashomer_Hatzair
+		}
+		
+		relative_position_id = POL_mobsters_reign
+		x = 0
+		y = 4
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_13_bandits
+		icon = GFX_goal_NYC_Diminish_Influence_Organized_Crime
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_mobsters_reign
+		}
+		relative_position_id = POL_mobsters_reign
+		x = 2
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_tax_protection_fee
+		icon = GFX_goal_LEC_protection_rackets
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_mobsters_reign
+		}
+		relative_position_id = POL_mobsters_reign
+		x = 0
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_worker_demand_employer_comply
+		icon = GFX_goal_FOP_Put_Reaccionarios_Work
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_Papa_Tasemka
+		}
+		relative_position_id = POL_Papa_Tasemka
+		x = -1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_everyone_worship_pilsudski
+		icon = GFX_goal_PLC_follow_pilsudski
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_worker_demand_employer_comply
+		}
+		relative_position_id = POL_Papa_Tasemka
+		x = -1
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_worker_militia_mafia
+		icon = GFX_goal_FOP_Formalize_Army_Red_Bracelet
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_Papa_Tasemka
+		}
+		relative_position_id = POL_Papa_Tasemka
+		x = 1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_Kercelak_protector
+		icon = GFX_goal_FOP_Agrarian_Anarchism_Federacion_Obrera
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_worker_militia_mafia
+		}
+		relative_position_id = POL_Papa_Tasemka
+		x = 1
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_mafia_socialism
+		icon = GFX_goal_CSA_Ignite_Illegalist_Revolution
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_everyone_worship_pilsudski
+		}
+		prerequisite = {
+			focus = POL_Kercelak_protector
+		}
+		relative_position_id = POL_Papa_Tasemka
+		x = 0
+		y = 3
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_union_under_bandits
+		icon = GFX_goal_NYC_Reconcile_Five_Families
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_mafia_socialism
+		}
+		prerequisite = {
+			focus = POL_loyal_to_boss
+		}
+		relative_position_id = POL_Papa_Tasemka
+		x = 1
+		y = 4
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	focus = {
+		id = POL_pacify_commie_cons
+		icon = GFX_BEL_Groote_Kuisch
+		available = {
+			
+		}
+		prerequisite = {
+			focus = POL_union_under_bandits
+		}
+		
+		relative_position_id = POL_Papa_Tasemka
+		x = 1
+		y = 5
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+	}
+	
 	####radical healing movement
 	focus = {
 		id = POL_radical_healing_movement
