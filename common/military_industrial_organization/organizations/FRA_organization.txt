@@ -1,0 +1,2363 @@
+###################
+### Armour MIOs ###
+###################
+FRA_famh_organisation = {
+	
+	name = famh
+	icon = GFX_idea_famh
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+	equipment_type = { 
+		mio_cat_eq_all_heavy_tank 
+	}
+	research_categories = { 
+		mio_cat_tech_heavy_armor_and_modules 
+	}
+
+	initial_trait = {
+		name = FRA_mio_FRA_famh_organisation
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+
+		equipment_bonus = {
+			armor_value = 0.05
+			reliability = -0.1
+		}
+	}
+	
+	trait = {
+		token = FRA_famh_mio_trait_1
+		name = FRA_famh_mio_trait_1
+		icon = GFX_generic_mio_trait_icon_reliability
+
+		position = { x = 4 y = 0 }
+
+		on_complete = {
+			FROM = {
+				add_political_power = 100
+				add_one_random_civilian_factory = yes
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			reliability = 0.07
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_2
+		name = FRA_famh_mio_trait_2
+		icon = GFX_generic_mio_department_icon_tank_heavy_tank_production
+
+		position = { x = -4 y = 1 }
+		relative_position_id = FRA_famh_mio_trait_1
+		all_parents = {
+			FRA_famh_mio_trait_1
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -15
+				add_one_random_civilian_factory = yes
+				add_one_random_civilian_factory = yes
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 1
+					uses = 1
+					category = armor
+				}
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.15
+		}
+		equipment_bonus = {
+			reliability = -0.05
+			build_cost_ic = -0.1
+			armor_value = -0.03
+		}
+		production_bonus = {
+			production_capacity_factor = 0.07
+			production_resource_penalty_factor = -0.1
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_3
+		name = FRA_famh_mio_trait_3
+		icon = GFX_generic_mio_trait_icon_soft_attack
+
+		position = { x = -1 y = 1 }
+		relative_position_id = FRA_famh_mio_trait_1
+		all_parents = {
+			FRA_famh_mio_trait_1
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1000
+					add_mio_funds_gain_factor = 0.1
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			soft_attack = 0.09
+			ap_attack = 0.05
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_4
+		name = FRA_famh_mio_trait_4
+		icon = GFX_generic_mio_department_icon_tank_general_technology
+
+		position = { x = -3 y = 1 }
+		relative_position_id = FRA_famh_mio_trait_1
+		all_parents = {
+			FRA_famh_mio_trait_1
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.1
+			armor_value = -0.05
+		}
+		on_complete = {
+			FROM ={
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 1
+					uses = 1
+					category = armor
+				}
+			}
+		}
+		production_bonus = {
+			production_capacity_factor = 0.07
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_5
+		name = FRA_famh_mio_trait_5
+		icon = GFX_generic_mio_trait_icon_defense
+
+		position = { x = 4 y = 1 }
+		relative_position_id = FRA_famh_mio_trait_1
+		all_parents = {
+			FRA_famh_mio_trait_1
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -15
+				add_one_random_civilian_factory = yes
+				add_one_random_civilian_factory = yes
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 1
+					uses = 1
+					category = armor
+				}
+			}
+		}
+		production_bonus = {
+			production_capacity_factor = 0.07
+		}
+		equipment_bonus = {
+			reliability = 0.1
+			armor_value = 0.1
+			build_cost_ic = 0.07
+			defense = 0.05 
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_6
+		name = FRA_famh_mio_trait_6
+		icon = GFX_generic_mio_trait_icon_hard_attack
+
+		position = { x = 1 y = 1 }
+		relative_position_id = FRA_famh_mio_trait_1
+		all_parents = {
+			FRA_famh_mio_trait_1
+		}
+		on_complete = {
+			FROM ={
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1000
+					add_mio_funds_gain_factor = 0.1
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			hard_attack = 0.09
+			ap_attack = 0.05
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_7
+		name = FRA_famh_mio_trait_7
+		icon = GFX_generic_mio_department_icon_tank_general_armor
+
+		position = { x = 3 y = 1 }
+		relative_position_id = FRA_famh_mio_trait_1
+		all_parents = {
+			FRA_famh_mio_trait_1
+		}
+		on_complete = {
+			FROM ={
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 1
+					uses = 1
+					category = armor
+				}
+			}
+		}
+		production_bonus = {
+			production_capacity_factor = 0.07
+		}
+		equipment_bonus = {
+			reliability = 0.05
+			armor_value = 0.1
+			build_cost_ic = 0.05
+			defense = 0.05 
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_8
+		name = FRA_famh_mio_trait_8
+		icon = GFX_generic_mio_trait_icon_production_capacity
+
+		position = { x = -3 y = 2 }
+		relative_position_id = FRA_famh_mio_trait_1
+		any_parent = {
+			FRA_famh_mio_trait_2
+			FRA_famh_mio_trait_4
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.1
+			armor_value = -0.06
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1500
+				}
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+			military_industrial_organization_design_team_assign_cost = -0.1
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.15
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_9
+		name = FRA_famh_mio_trait_9
+		icon =  GFX_generic_mio_department_icon_tank_general_engine
+
+		position = { x = 3 y = 2 }
+		relative_position_id = FRA_famh_mio_trait_1
+		any_parent = {
+			FRA_famh_mio_trait_5
+			FRA_famh_mio_trait_7
+		}
+		on_complete = {
+			FROM ={
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 1
+					uses = 1
+					category = armor
+				}
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+			military_industrial_organization_design_team_assign_cost = -0.1
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.15
+		}
+		equipment_bonus = {
+			reliability = 0.05
+			maximum_speed = 0.05
+			armor_value = 0.15
+			build_cost_ic = 0.1
+			defense = 0.1 
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_10
+		name = FRA_famh_mio_trait_10
+		icon = GFX_generic_mio_trait_icon_ap_attack
+
+		position = { x = 1 y = 2 }
+		relative_position_id = FRA_famh_mio_trait_1
+		any_parent = {
+			FRA_famh_mio_trait_6
+			FRA_famh_mio_trait_3
+		}
+		on_complete = {
+			FROM ={
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.1
+				}
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.05
+		}
+		equipment_bonus = {
+			hard_attack = 0.11
+			ap_attack = 0.05
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_11
+		name = FRA_famh_mio_trait_11
+		icon = GFX_generic_mio_trait_icon_breakthrough
+
+		position = { x = -1 y = 2 }
+		relative_position_id = FRA_famh_mio_trait_1
+		any_parent = {
+			FRA_famh_mio_trait_6
+			FRA_famh_mio_trait_3
+		}
+		on_complete = {
+			FROM ={
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.1
+				}
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.05
+		}
+		equipment_bonus = {
+			soft_attack = 0.13
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_12
+		name = FRA_famh_mio_trait_12
+		icon = GFX_generic_mio_department_icon_tank_general_conversion
+
+		position = { x = -2 y = 3 }
+		relative_position_id = FRA_famh_mio_trait_1
+		all_parents = {
+			FRA_famh_mio_trait_4
+			FRA_famh_mio_trait_3
+		}
+		equipment_bonus = {
+			reliability = -0.05
+			build_cost_ic = -0.15
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.15
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_13
+		name = FRA_famh_mio_trait_13
+		icon = GFX_generic_mio_department_icon_tank_general_conversion
+
+		position = { x = 2 y = 3 }
+		relative_position_id = FRA_famh_mio_trait_1
+		all_parents = {
+			FRA_famh_mio_trait_7
+			FRA_famh_mio_trait_6
+		}
+		on_complete = {
+			FROM ={
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 1
+					uses = 1
+					category = armor
+				}
+			}
+		}
+		equipment_bonus = {
+			reliability = 0.05
+			build_cost_ic = 0.15
+			armor_value = 0.1
+			maximum_speed = 0.05
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.15
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_14
+		name = FRA_famh_mio_trait_14
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+
+		position = { x = 0 y = 3 }
+		relative_position_id = FRA_famh_mio_trait_1
+		all_parents = {
+			FRA_famh_mio_trait_10
+			FRA_famh_mio_trait_11
+		}
+		equipment_bonus = {
+			maximum_speed = 0.25
+			fuel_consumption = -0.1
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -100
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.1
+					add_mio_funds_gain_factor = 0.15
+				}
+			}
+		}
+	}
+	trait = {
+		token = FRA_famh_mio_trait_15
+		name = FRA_famh_mio_trait_15
+		icon = GFX_generic_mio_department_icon_tank_heavy_tank_quality
+
+		position = { x = 0 y = 4 }
+		relative_position_id = FRA_famh_mio_trait_1
+		all_parents = {
+			FRA_famh_mio_trait_14
+		}
+		any_parent = {
+			FRA_famh_mio_trait_12
+			FRA_famh_mio_trait_13
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -100
+				mio:FRA_famh_organisation = {
+					add_mio_funds = 3000
+					add_mio_research_bonus = 0.1
+					add_mio_funds_gain_factor = 0.1
+				}
+			}
+		}
+		equipment_bonus = {
+			reliability = 0.05
+			maximum_speed = 0.1
+			armor_value = 0.15
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.1
+			production_capacity_factor = 0.1
+		}
+	}
+}
+FRA_de_dion_bouton_organisation = {
+	name = de_dion_bouton
+	icon = GFX_idea_de_dion_bouton
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+
+	#Renault traits from vanilla
+	initial_trait = {
+		name = FRA_mio_FRA_de_dion_bouton_organisation
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+	}
+	equipment_type = { 
+		mio_cat_eq_all_light_tank
+		light_tank_aa_chassis
+		light_tank_artillery_chassis
+		light_tank_destroyer_chassis
+	}
+	research_categories = { 
+		mio_cat_tech_light_armor_and_modules 
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_1_F
+		name = FRA_de_dion_bouton_mio_trait_1_F
+		icon = GFX_generic_mio_department_icon_facilities
+
+		position = { x = 4 y = 0 }
+
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_light_tank
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -25
+				add_one_random_military_factory = yes
+				add_one_random_military_factory = yes
+			}
+		}
+		production_bonus = {
+			production_capacity_factor = 0.05
+			production_efficiency_cap_factor = 0.05
+			production_efficiency_gain_factor = 0.05
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+			military_industrial_organization_design_team_assign_cost = -0.1
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.1
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_2_F
+		name = FRA_de_dion_bouton_mio_trait_2_F
+		icon = GFX_generic_mio_department_icon_tank_general_conversion
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_F
+		position = { x = -3 y = 1 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_1_F
+		}
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_light_tank
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -15
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 1
+					uses = 1
+					category = armor
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.07
+			armor_value = 0.05
+			ap_attack = 0.05
+			soft_attack = 0.05
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_3_F
+		name = FRA_de_dion_bouton_mio_trait_3_F
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_F
+		position = { x = -2 y = 1 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_1_F
+		}
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_light_tank
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -15
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.75
+					uses = 2
+					category = armor
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.1
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_4_F
+		name = FRA_de_dion_bouton_mio_trait_4_F
+		icon = GFX_generic_mio_trait_icon_hardness
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_F
+		position = { x = -1 y = 1 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_1_F
+		}
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_light_tank
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -15
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.75
+					uses = 2
+					category = armor
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = 0.05
+		}
+		equipment_bonus = {
+			reliability = 0.07
+			maximum_speed = 0.09
+			armor_value = 0.05
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_5_F
+		name = FRA_de_dion_bouton_mio_trait_5_F
+		icon = GFX_generic_mio_department_icon_tank_light_tank_production
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_F
+		position = { x = 0 y = 2 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_1_F
+		}
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_light_tank
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = 100
+				add_one_random_civilian_factory = yes
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+			production_capacity_factor = 0.1
+			production_efficiency_cap_factor = 0.1
+			production_efficiency_gain_factor = 0.1
+		}
+		equipment_bonus = {
+			reliability = 0.1
+			build_cost_ic = -0.1
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_6_F
+		name = FRA_de_dion_bouton_mio_trait_6_F
+		icon = GFX_generic_mio_department_icon_tank_general_line_efficiency
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_F
+		position = { x = -2 y = 2 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_2_F
+			FRA_de_dion_bouton_mio_trait_3_F
+			FRA_de_dion_bouton_mio_trait_4_F
+		}
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_light_tank
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -15
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.5
+					uses = 2
+					category = armor
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			reliability = 0.07
+			build_cost_ic = 0.02
+			armor_value = 0.1
+			maximum_speed = 0.05
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_7_F
+		name = FRA_de_dion_bouton_mio_trait_7_F
+		icon = GFX_generic_mio_trait_icon_reliability
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_F
+		position = { x = -1 y = 3 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_5_F
+			FRA_de_dion_bouton_mio_trait_6_F
+		}
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_light_tank
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -100
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.1
+					add_mio_funds_gain_factor = 0.15
+				}
+			}
+		}
+		production_bonus = {
+			production_capacity_factor = 0.05
+			production_efficiency_cap_factor = 0.05
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+			military_industrial_organization_design_team_assign_cost = -0.1
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.1
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_8_F
+		name = FRA_de_dion_bouton_mio_trait_8_F
+		icon = GFX_generic_mio_trait_icon_hard_attack
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_F
+		position = { x = -2 y = 4 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_7_F
+		}
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_light_tank
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.03
+					add_mio_funds_gain_factor = 0.03
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			hard_attack = 0.07
+			ao_attack = 0.03
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_9_F
+		name = FRA_de_dion_bouton_mio_trait_9_F
+		icon = GFX_generic_mio_trait_icon_armor_value
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_F
+		position = { x = -1 y = 4 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_7_F
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.03
+					add_mio_funds_gain_factor = 0.03
+				}
+			}
+		}
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_light_tank
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			armor_value = 0.1
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_10_F
+		name = FRA_de_dion_bouton_mio_trait_10_F
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_F
+		position = { x = 0 y = 4 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_7_F
+		}
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_light_tank
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.03
+					add_mio_funds_gain_factor = 0.03
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			reliability = 0.07
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_1_M
+		name = FRA_de_dion_bouton_mio_trait_1_M
+		icon = GFX_generic_mio_department_icon_facilities
+		position = { x = 5 y = 0 }
+		limit_to_equipment_type = { 
+			light_tank_aa_chassis
+			light_tank_artillery_chassis
+			light_tank_destroyer_chassis
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -25
+				add_one_random_military_factory = yes
+				add_one_random_military_factory = yes
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+			military_industrial_organization_design_team_assign_cost = -0.1
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.1
+		}
+		production_bonus = {
+			production_capacity_factor = 0.05
+			production_efficiency_cap_factor = 0.05
+			production_efficiency_gain_factor = 0.05
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_2_M
+		name = FRA_de_dion_bouton_mio_trait_2_M
+		icon = GFX_generic_mio_department_icon_anti_tank
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_M
+		position = { x = 3 y = 1 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_1_M
+		}
+		limit_to_equipment_type = { 
+			light_tank_destroyer_chassis
+		}
+
+		on_complete = {
+			FROM = {
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.75
+					uses = 1
+					category = cat_anti_tank
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			hard_attack = 0.1
+			ap_attack = 0.05
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_3_M
+		name = FRA_de_dion_bouton_mio_trait_3_M
+		icon = GFX_generic_mio_department_icon_artillery
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_M
+		position = { x = 2 y = 1 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_1_M
+		}
+		limit_to_equipment_type = { 
+			light_tank_artillery_chassis
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.75
+					uses = 1
+					category = artillery
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			soft_attack = 0.15
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_4_M
+		name = FRA_de_dion_bouton_mio_trait_4_M
+		icon = GFX_generic_mio_department_icon_anti_air
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_M
+		position = { x = 1 y = 1 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_1_M
+		}
+		limit_to_equipment_type = { 
+			light_tank_aa_chassis
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1500
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.75
+					uses = 1
+					category = cat_anti_air
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			air_attack = 0.15
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_5_M
+		name = FRA_de_dion_bouton_mio_trait_5_M
+		icon = GFX_generic_mio_trait_icon_efficiency_gain
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_M
+		position = { x = 0 y = 2 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_1_M
+		}
+		limit_to_equipment_type = { 
+			light_tank_aa_chassis
+			light_tank_artillery_chassis
+			light_tank_destroyer_chassis
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = 100
+				add_one_random_civilian_factory = yes
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.1
+			production_capacity_factor = 0.15
+			production_efficiency_gain_factor = 0.1
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.15
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_6_M
+		name = FRA_de_dion_bouton_mio_trait_6_M
+		icon = GFX_generic_mio_department_icon_tank_general_weapons
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_M
+		position = { x = 2 y = 2 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_2_M
+			FRA_de_dion_bouton_mio_trait_3_M
+			FRA_de_dion_bouton_mio_trait_4_M
+		}
+		limit_to_equipment_type = { 
+			light_tank_aa_chassis
+			light_tank_artillery_chassis
+			light_tank_destroyer_chassis
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = 100
+				add_one_random_civilian_factory = yes
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = 0.05
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.15
+		}
+		equipment_bonus = {
+			reliability = 0.1
+			hard_attack = 0.1
+			soft_attack = 0.1
+			build_cost_ic = 0.05
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_7_M
+		name = FRA_de_dion_bouton_mio_trait_7_M
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_M
+		position = { x = 1 y = 3 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_5_M
+			FRA_de_dion_bouton_mio_trait_6_M
+		}
+		limit_to_equipment_type = { 
+			light_tank_aa_chassis
+			light_tank_artillery_chassis
+			light_tank_destroyer_chassis
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = -100
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1000
+					add_mio_funds_gain_factor = 0.05
+				}
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+			military_industrial_organization_design_team_assign_cost = -0.1
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.1
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			reliability = 0.07
+			maximum_speed = 0.15
+			fuel_consumption = -0.25
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_8_M
+		name = FRA_de_dion_bouton_mio_trait_8_M
+		icon = GFX_generic_mio_trait_icon_anti_air_attack
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_M
+		position = { x = 2 y = 4 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_7_M
+		}
+		limit_to_equipment_type = { 
+			light_tank_aa_chassis
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.03
+					add_mio_funds_gain_factor = 0.03
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			air_attack = 0.25
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_9_M
+		name = FRA_de_dion_bouton_mio_trait_9_M
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_M
+		position = { x = 1 y = 4 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_7_M
+		}
+		limit_to_equipment_type = { 
+			light_tank_artillery_chassis
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.03
+					add_mio_funds_gain_factor = 0.03
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			soft_attack = 0.17
+		}
+	}
+	trait = {
+		token = FRA_de_dion_bouton_mio_trait_10_M
+		name = FRA_de_dion_bouton_mio_trait_10_M
+		icon = GFX_generic_mio_trait_icon_ap_attack
+		relative_position_id = FRA_de_dion_bouton_mio_trait_1_M
+		position = { x = 0 y = 4 }
+		all_parents = {
+			FRA_de_dion_bouton_mio_trait_7_M
+		}
+		limit_to_equipment_type = { 
+			light_tank_destroyer_chassis
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_de_dion_bouton_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.03
+					add_mio_funds_gain_factor = 0.03
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+		equipment_bonus = {
+			reliability = 0.07
+		}
+	}
+}
+FRA_lorraine_dietrich_organisation = {
+	include = generic_mobile_tank_organization
+	name = lorraine_dietrich
+	icon = GFX_idea_lorraine_dietrich
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+
+	#Hotchkiss traits from vanilla
+	add_trait = {
+		token = FRA_mio_trait_l_35
+		name = FRA_mio_trait_l_35
+		icon = GFX_generic_mio_department_icon_tank_general_weapons
+		any_parent = { generic_mio_enlarged_breech }
+		relative_position_id = generic_mio_enlarged_breech
+		position = { x=1 y=2 }
+		equipment_bonus = {
+			hard_attack = 0.05
+			ap_attack = 0.05
+		}
+	}
+
+	override_trait = {
+		token = generic_mio_gunner_sight_improvements
+		position = { x=-1 y=2 }
+	}
+}
+FRA_somua_organisation = {
+	include = generic_medium_tank_organization
+	name = somua
+	icon = GFX_idea_somua
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = FRP
+			original_tag = NFA
+		}
+	}
+}
+
+##################
+### Naval MIOs ###
+##################
+FRA_ateliers_de_la_loire_organisation = {
+	include = generic_battle_line_ship_organization
+	name = ateliers_de_la_loire
+	icon = GFX_idea_ateliers_de_la_loire
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = FRP
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
+FRA_ateliers_de_saint_nazaire_organisation = {
+	include = generic_raider_ship_organization
+	name = ateliers_de_saint_nazaire
+	icon = GFX_idea_ateliers_de_saint_nazaire
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
+FRA_fcm_organisation = {
+	include = generic_escort_ship_organization
+	name = fcm
+	icon = GFX_idea_fcm
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
+
+#####################
+### Airplane MIOs ###
+#####################
+FRA_morane_saulnier_organisation = {
+	include = generic_light_aircraft_organization
+	name = morane_saulnier
+	icon = GFX_idea_morane_saulnier
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
+FRA_fouga_organisation = {
+	include = generic_multi_role_aircraft_organization
+	name = fouga
+	icon = GFX_idea_fouga
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
+FRA_potez_organisation = {
+	include = generic_medium_aircraft_organization
+	name = potez
+	icon = GFX_idea_potez
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
+FRA_breguet_organisation = {
+	include = generic_cas_aircraft_organization
+	name = breguet
+	icon = GFX_idea_breguet
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
+FRA_levasseur_organisation = {
+	include = generic_naval_aircraft_organization
+	name = kr_levasseur
+	icon = GFX_idea_kr_levasseur
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
+
+#####################
+### Materiel MIOs ###
+#####################
+FRA_manufacture_saint_etienne_organisation = {
+	name = manufacture_saint_etienne
+	icon = GFX_idea_manufacture_saint_etienne
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+
+	equipment_type = {
+		infantry_equipment
+	}
+	research_categories = { infantry_weapons }
+	initial_trait = {
+		name = FRA_manufacture_saint_etienne_organisation_infantry_manufacturer
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+
+		production_bonus = {
+			production_efficiency_cap_factor = 0.03
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.03
+		}
+	}
+	
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		icon = GFX_generic_mio_department_icon_facilities
+
+		position = { x = 4 y = 0 }
+
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+				add_one_random_military_factory = yes
+				BRI_Urban_Renovation_effect_one = yes
+				BRI_Urban_Renovation_effect_one = yes
+				BRI_Urban_Renovation_effect_one = yes
+				BRI_Urban_Renovation_effect_one = yes
+				BRI_Urban_Renovation_effect_one = yes
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.5
+					uses = 2
+					category = infantry_weapons
+				}
+			}
+		}
+		equipment_bonus = {
+			defense = 0.035
+			build_cost_ic = -0.05
+			reliability = 0.05
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+			military_industrial_organization_design_team_assign_cost = -0.1
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_2
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_2
+		icon = GFX_generic_mio_trait_icon_ap_attack
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = -4 y = 1 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+				
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.5
+					uses = 2
+					category = infantry_weapons
+				}
+			}
+		}
+		equipment_bonus = {
+			hard_attack = 0.07
+			ap_attack = 0.05
+			reliability = -0.02
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_3
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_3
+		icon = GFX_generic_mio_department_icon_infantry_line_efficiency
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = -3 y = 1 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+				
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.5
+					uses = 2
+					category = infantry_weapons
+				}
+			}
+		}
+		equipment_bonus = {
+			defense = 0.035
+			build_cost_ic = -0.05
+			reliability = 0.05
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_4
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_4
+		icon = GFX_generic_mio_trait_icon_reliability
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = -1 y = 1 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.15
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.07
+			reliability = 0.05
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_5
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_5
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = -3 y = 3 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_4
+			FRA_manufacture_saint_etienne_organisation_mio_trait_3
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+				
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 1
+					uses = 1
+					category = infantry_weapons
+				}
+			}
+		}
+		equipment_bonus = {
+			defense = 0.035
+			build_cost_ic = -0.05
+			reliability = 0.05
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_6
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_6
+		icon = GFX_generic_mio_department_icon_tank_general_weapons
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = -2 y = 2 }
+		any_parent = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_3
+			FRA_manufacture_saint_etienne_organisation_mio_trait_2
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.5
+					uses = 1
+					category = infantry_weapons
+				}
+			}
+		}
+		equipment_bonus = {
+			defense = -0.035
+			build_cost_ic = -0.05
+			reliability = 0.05
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_7
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_7
+		icon = GFX_generic_mio_trait_icon_resources
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = -1 y = 3 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_4
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.15
+			production_resource_penalty_factor = -0.15
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.1
+			reliability = -0.03
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_8
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_8
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = -2 y = 4 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_5
+			FRA_manufacture_saint_etienne_organisation_mio_trait_6
+			FRA_manufacture_saint_etienne_organisation_mio_trait_7
+		}
+		on_complete = {
+			FROM = {
+				army_experience = 100
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.5
+					uses = 2
+					category = infantry_weapons
+				}
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.2
+			military_industrial_organization_design_team_assign_cost = -0.2
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.2
+		}
+		equipment_bonus = {
+			soft_attack = 0.1
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_9
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_9
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = 4 y = 1 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		}
+		equipment_bonus = {
+			maximum_speed = 0.1
+			build_cost_ic = 0.02
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_10
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_10
+		icon = GFX_generic_mio_department_icon_support_materials
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = 3 y = 1 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.5
+					uses = 2
+					category = support_tech
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.15
+			production_resource_penalty_factor = -0.15
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.09
+			reliability = -0.02
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_11
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_11
+		icon = GFX_generic_mio_trait_icon_hardness
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = 1 y = 1 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			defense = 0.05
+			build_cost_ic = 0.02
+			reliability = 0.1
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_12
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_12
+		icon = GFX_generic_mio_trait_icon_surface_detection
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = 3 y = 3 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_11
+			FRA_manufacture_saint_etienne_organisation_mio_trait_10
+		}
+		on_complete = {
+			FROM = {
+				add_political_power = 100
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			defense = 0.05
+			soft_attack = 0.05
+			build_cost_ic = 0.02
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_13
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_13
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = 2 y = 2 }
+		any_parent = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_10
+			FRA_manufacture_saint_etienne_organisation_mio_trait_9
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.15
+			production_efficiency_cap_factor = 0.1
+			production_efficiency_gain_factor = 0.1
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.15
+			reliability = -0.05
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_14
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_14
+		icon = GFX_generic_mio_trait_icon_efficiency_gain
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = 1 y = 3 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_11
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		production_bonus = {
+			production_efficiency_gain_factor = 0.1
+			production_conversion_speed_factor = 0.1
+			production_efficiency_cap_factor = 0.1
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.1
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_15
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_15
+		icon = GFX_generic_mio_department_icon_facilities
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = 2 y = 4 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_12
+			FRA_manufacture_saint_etienne_organisation_mio_trait_13
+			FRA_manufacture_saint_etienne_organisation_mio_trait_14
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1500
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+				add_one_random_military_factory = yes
+				BRI_Urban_Renovation_effect_one = yes
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.5
+					uses = 1
+					category = infantry_weapons
+				}
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+			military_industrial_organization_design_team_assign_cost = -0.4
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.3
+		}
+		equipment_bonus = {
+			defense = 0.035
+			maximum_speed = 0.1
+			build_cost_ic = -0.05
+			reliability = 0.05
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_16
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_16
+		icon = GFX_generic_mio_trait_icon_defense
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = 0 y = 2 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.05
+				}
+				
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 0.5
+					uses = 1
+					category = infantry_weapons
+				}
+			}
+		}
+		equipment_bonus = {
+			defense = 0.07
+			reliability = 0.05
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_17
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_17
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = 0 y = 3 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_7
+			FRA_manufacture_saint_etienne_organisation_mio_trait_16
+			FRA_manufacture_saint_etienne_organisation_mio_trait_14
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.5
+			military_industrial_organization_design_team_assign_cost = -0.2
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.2
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 3000
+					add_mio_research_bonus = 0.1
+				}
+			}
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.35
+			production_resource_penalty_factor = -0.35
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.05
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_18
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_18
+		icon = GFX_generic_mio_department_icon_infantry_quality
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_1
+		position = { x = 0 y = 4 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_17
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.35
+			production_resource_penalty_factor = -0.35
+		}
+		any_parent = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_15
+			FRA_manufacture_saint_etienne_organisation_mio_trait_8
+		}
+		equipment_bonus = {
+			defense = 0.05
+			soft_attack = 0.1
+			ap_attack = 0.1
+			hard_attack = 0.1
+			build_cost_ic = 0.1
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_19
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_19
+		icon = GFX_generic_mio_trait_icon_hard_attack
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_2
+		position = { x = 0 y = 1 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_2
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 1000
+					add_mio_research_bonus = 0.1
+				}
+				add_tech_bonus = {
+					name = FRA_comrade_estiennes_heritage
+					bonus = 1.5
+					uses = 1
+					category = infantry_weapons
+				}
+			}
+		}
+		equipment_bonus = {
+			ap_attack = 0.1
+			hard_attack = 0.05
+		}
+	}
+	trait = {
+		token = FRA_manufacture_saint_etienne_organisation_mio_trait_20
+		name = FRA_manufacture_saint_etienne_organisation_mio_trait_20
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+		relative_position_id = FRA_manufacture_saint_etienne_organisation_mio_trait_9
+		position = { x = 0 y = 1 }
+		all_parents = {
+			FRA_manufacture_saint_etienne_organisation_mio_trait_9
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_saint_etienne_organisation = {
+					add_mio_funds = 2000
+					add_mio_research_bonus = 0.1
+				}
+			}
+		}
+		equipment_bonus = {
+			maximum_speed = 0.2
+			build_cost_ic = 0.03
+		}
+	}
+
+}
+FRA_manufacture_bayonne = {
+	name = manufacture_bayonne
+	icon = GFX_idea_manufacture_bayonne
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+	equipment_type = {
+		support_equipment
+	}
+
+	research_categories = {
+		infantry_weapons
+		support_tech
+		night_vision
+		cat_special_forces_generic
+	}
+
+	ai_will_do = { base = 1 }
+
+	initial_trait = {
+		name = manufacture_bayonne_mio
+
+		organization_modifier = {
+			military_industrial_organization_size_up_requirement = -0.25
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_1
+		name = FRA_manufacture_bayonne_mio_trait_1
+		icon = GFX_generic_mio_trait_icon_efficiency_gain
+
+		position = { x = 1 y = 0 }
+
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		production_bonus = {
+			production_efficiency_gain_factor = 0.1
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_2
+		name = FRA_manufacture_bayonne_mio_trait_2
+		icon = GFX_generic_mio_trait_icon_efficiency_cap
+
+		position = { x = 3 y = 0 }
+		all_parents = { FRA_manufacture_bayonne_mio_trait_1 }
+
+		production_bonus = {
+			production_efficiency_cap_factor = 0.2
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.1
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_3
+		name = FRA_manufacture_bayonne_mio_trait_3
+		icon = GFX_generic_mio_trait_icon_resources
+
+		position = { x = 5 y = 0 }
+		all_parents = { FRA_manufacture_bayonne_mio_trait_4 }
+
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.25
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_4
+		name = FRA_manufacture_bayonne_mio_trait_4
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+
+		position = { x = 7 y = 0 }
+
+		equipment_bonus = {
+			build_cost_ic = -0.15
+			reliaibility = -0.05
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		production_bonus = {
+			production_cost_factor = -0.15
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_5
+		name = FRA_manufacture_bayonne_mio_trait_5
+		icon = GFX_generic_mio_trait_icon_efficiency_gain
+
+		position = { x = 0 y = 2 }
+
+
+		all_parents = { FRA_manufacture_bayonne_mio_trait_1 }
+
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		production_bonus = {
+			production_capacity_factor = 0.1
+			production_efficiency_cap_factor = 0.1
+			production_efficiency_gain_factor = 0.1
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_6
+		name = FRA_manufacture_bayonne_mio_trait_6
+		icon = GFX_generic_mio_department_icon_support_production
+
+		position = { x = 2 y = 2 }
+
+
+		all_parents = { FRA_manufacture_bayonne_mio_trait_1 }
+
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		production_bonus = {
+			production_efficiency_gain_factor = 0.1
+			production_efficiency_cap_factor = 0.05
+			production_resource_need_factor = -0.1
+		}
+
+		organization_modifier = {
+			military_industrial_organization_design_team_assign_cost = 2.0
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.1
+			reliability = 0.1
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_7
+		name = FRA_manufacture_bayonne_mio_trait_7
+		icon = GFX_generic_mio_trait_icon_resources
+
+		position = { x = 4 y = 2 }
+
+		all_parents = { FRA_manufacture_bayonne_mio_trait_2 FRA_manufacture_bayonne_mio_trait_3 }
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		production_bonus = {
+			production_efficiency_cap_factor = 0.2
+			production_resource_need_factor = -0.3
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_8
+		name = FRA_manufacture_bayonne_mio_trait_8
+		icon = GFX_generic_mio_department_icon_support_materials
+
+		position = { x = 6 y = 2 }
+
+
+		all_parents = { FRA_manufacture_bayonne_mio_trait_4 }
+
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.3
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.3
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_9
+		name = FRA_manufacture_bayonne_mio_trait_9
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+
+		position = { x = 8 y = 2 }
+
+
+		all_parents = { FRA_manufacture_bayonne_mio_trait_4 }
+
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.15
+			reliaibility = -0.05
+		}
+		production_bonus = {
+			production_cost_factor = -0.025
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_10
+		name = FRA_manufacture_bayonne_mio_trait_10
+		icon = GFX_generic_mio_trait_icon_efficiency_cap
+
+		position = { x = 3 y = 3 }
+
+		all_parents = { FRA_manufacture_bayonne_mio_trait_5 FRA_manufacture_bayonne_mio_trait_6 FRA_manufacture_bayonne_mio_trait_7 }
+
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		production_bonus = {
+			production_capacity_factor = 0.2
+			production_efficiency_cap_factor = 0.15
+		}
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_11
+		name = FRA_manufacture_bayonne_mio_trait_11
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+
+		position = { x = 5 y = 3 }
+
+		all_parents = { FRA_manufacture_bayonne_mio_trait_9 FRA_manufacture_bayonne_mio_trait_8 FRA_manufacture_bayonne_mio_trait_7 }
+
+		equipment_bonus = {
+			build_cost_ic = -0.1
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 800
+					add_mio_research_bonus = 0.05
+				}
+				add_one_random_military_factory = yes
+			}
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.05
+			production_cost_factor = -0.025
+		}
+
+	}
+
+	trait = {
+		token = FRA_manufacture_bayonne_mio_trait_12
+		name = FRA_manufacture_bayonne_mio_trait_12
+		icon = GFX_generic_mio_department_icon_facilities
+
+		special_trait_background = yes
+
+		position = { x = 4 y = 4 }
+
+		all_parents = { FRA_manufacture_bayonne_mio_trait_10 FRA_manufacture_bayonne_mio_trait_11 FRA_manufacture_bayonne_mio_trait_7 }
+
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.3
+		}
+		production_bonus = {
+			production_efficiency_gain_factor = 0.2
+			production_efficiency_cap_factor = 0.2
+			production_resource_need_factor = -0.35
+			production_cost_factor = -0.2
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_manufacture_bayonne = {
+					add_mio_funds = 3000
+					add_mio_research_bonus = 0.5
+				}
+				add_one_random_military_factory = yes
+				add_one_random_military_factory = yes
+				add_one_random_military_factory = yes
+				add_one_random_military_factory = yes
+				BRI_Urban_Renovation_effect_one = yes
+				BRI_Urban_Renovation_effect_one = yes
+				BRI_Urban_Renovation_effect_one = yes
+				BRI_Urban_Renovation_effect_one = yes
+			}
+		}
+	}
+}
+FRA_atelier_de_puteaux = {
+	include = generic_artillery_organization
+	name = atelier_de_puteaux
+	icon = GFX_idea_atelier_de_puteaux
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
+FRA_berliet = {
+	include = generic_motorized_mechanized_organization
+	name = berliet
+	icon = GFX_idea_berliet
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
+FRA_panhard_organisation = {
+	include = generic_armored_car_organization
+	name = panhard
+	icon = GFX_idea_panhard
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = NFA } }
+			FROM = { has_completed_focus = NFA_review_economy }
+		}
+	}
+}
