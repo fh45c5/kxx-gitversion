@@ -1158,7 +1158,6 @@ FRA_de_dion_bouton_organisation = {
 	}
 }
 FRA_lorraine_dietrich_organisation = {
-	include = generic_mobile_tank_organization
 	name = lorraine_dietrich
 	icon = GFX_idea_lorraine_dietrich
 	allowed = {
@@ -1181,24 +1180,522 @@ FRA_lorraine_dietrich_organisation = {
 		}
 	}
 
-	#Hotchkiss traits from vanilla
-	add_trait = {
-		token = FRA_mio_trait_l_35
-		name = FRA_mio_trait_l_35
-		icon = GFX_generic_mio_department_icon_tank_general_weapons
-		any_parent = { generic_mio_enlarged_breech }
-		relative_position_id = generic_mio_enlarged_breech
-		position = { x=1 y=2 }
-		equipment_bonus = {
-			hard_attack = 0.05
-			ap_attack = 0.05
+	equipment_type = { 
+		armor 
+		mio_cat_eq_all_medium_plane
+	}
+	research_categories = { 
+		mio_cat_tech_all_armor_and_modules 
+		mio_cat_all_medium_aircraft_and_modules
+	}
+
+	initial_trait = {
+		name = lorraine_dietrich_mio_initial_trait_fast_tanks_designer
+		
+		organization_modifier = {
+			military_industrial_organization_design_team_assign_cost = -0.1
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.15
 		}
 	}
 
-	override_trait = {
-		token = generic_mio_gunner_sight_improvements
-		position = { x=-1 y=2 }
+	trait = {
+		token = lorraine_dietrich_mio_trait_1
+		name = lorraine_dietrich_mio_trait_1
+		icon = GFX_generic_mio_department_icon_tank_general_engine
+
+		position = { x=2 y=0 }
+		
+		limit_to_equipment_type = { 
+			armor
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.09
+			military_industrial_organization_design_team_assign_cost = -0.1
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.15
+		}
+		equipment_bonus = {
+			maximum_speed = 0.04
+			reliability = 0.06
+		}
 	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_2
+		name = lorraine_dietrich_mio_trait_2
+		icon = GFX_generic_mio_trait_icon_defense
+
+		position = { x=3 y=0 }
+
+		limit_to_equipment_type = { 
+			armor
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+			military_industrial_organization_design_team_assign_cost = -0.1
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.15
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			defense = 0.08
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_3
+		name = lorraine_dietrich_mio_trait_3
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+
+		position = { x=-1 y=1 }
+		relative_position_id = lorraine_dietrich_mio_trait_1
+
+		all_parents = { lorraine_dietrich_mio_trait_1 }
+
+		limit_to_equipment_type = { 
+			armor
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			maximum_speed = 0.07
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_4
+		name = lorraine_dietrich_mio_trait_4
+		icon = GFX_generic_mio_trait_icon_fuel_consumption
+
+		position = { x=0 y=1 }
+		relative_position_id = lorraine_dietrich_mio_trait_1
+
+		all_parents = { lorraine_dietrich_mio_trait_1 }
+
+		limit_to_equipment_type = { 
+			armor
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			fuel_consumption = -0.15
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_5
+		name = lorraine_dietrich_mio_trait_5
+		icon = GFX_generic_mio_trait_icon_defense
+
+		limit_to_equipment_type = { 
+			armor
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		position = { x=0 y=1 }
+		relative_position_id = lorraine_dietrich_mio_trait_2
+
+		any_parent = { lorraine_dietrich_mio_trait_2 generic_mio_reduced_fuel_usage }
+		
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			defense = 0.01
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_6
+		name = lorraine_dietrich_mio_trait_6
+		icon = GFX_generic_mio_trait_icon_breakthrough
+
+		position = { x=0 y=2 }
+		relative_position_id = lorraine_dietrich_mio_trait_1
+
+		any_parent = { lorraine_dietrich_mio_trait_3 lorraine_dietrich_mio_trait_4 }
+		
+		limit_to_equipment_type = { 
+			armor
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			breakthrough = 0.1
+			maximum_speed = 0.15
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_7
+		name = lorraine_dietrich_mio_trait_7
+		icon = GFX_generic_mio_trait_icon_resources
+
+		limit_to_equipment_type = { 
+			armor
+		}
+		position = { x=0 y=2 }
+		relative_position_id = lorraine_dietrich_mio_trait_2
+
+		limit_to_equipment_type = { 
+			armor
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		any_parent = { lorraine_dietrich_mio_trait_5 lorraine_dietrich_mio_trait_9 }
+
+		
+		production_bonus = {
+			production_resource_penalty_factor = -0.3
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_8
+		name = lorraine_dietrich_mio_trait_8
+		icon = GFX_generic_mio_trait_icon_armor_value
+
+		position = { x=-1 y=3 }
+		relative_position_id = lorraine_dietrich_mio_trait_1
+
+		all_parents = { lorraine_dietrich_mio_trait_6 lorraine_dietrich_mio_trait_12 }
+		
+		limit_to_equipment_type = { 
+			armor
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			armor_value = 0.1
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_9
+		name = lorraine_dietrich_mio_trait_9
+		icon = GFX_generic_mio_trait_icon_soft_attack
+
+		position = { x=1 y=1 }
+		relative_position_id = lorraine_dietrich_mio_trait_2
+
+		all_parents = { lorraine_dietrich_mio_trait_2  }
+		
+		limit_to_equipment_type = { 
+			armor
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			soft_attack = 0.08
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_10
+		name = lorraine_dietrich_mio_trait_10
+		icon = GFX_generic_mio_department_icon_tank_general_quality
+
+		position = { x=1 y=3 }
+		relative_position_id = lorraine_dietrich_mio_trait_2
+
+		all_parents = { lorraine_dietrich_mio_trait_7 lorraine_dietrich_mio_trait_11 }
+		
+		limit_to_equipment_type = { 
+			armor
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			breakthrough = 0.1
+			defense = 0.1
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_11
+		name = lorraine_dietrich_mio_trait_11
+		icon = GFX_generic_mio_trait_icon_reliability
+
+		position = { x=2 y=2 }
+		relative_position_id = lorraine_dietrich_mio_trait_2
+
+		any_parent = { lorraine_dietrich_mio_trait_5 lorraine_dietrich_mio_trait_9 }
+		
+		limit_to_equipment_type = { 
+			armor
+		}
+		equipment_bonus = {
+			reliability = -0.05
+			build_cost_ic = -0.1
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_12
+		name = lorraine_dietrich_mio_trait_12
+		icon = GFX_generic_mio_department_icon_tank_general_technology		
+
+		position = { x=-2 y=2 }
+		relative_position_id = lorraine_dietrich_mio_trait_1
+
+		any_parent = { lorraine_dietrich_mio_trait_3 lorraine_dietrich_mio_trait_4 }
+		
+		limit_to_equipment_type = { 
+			armor
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		production_bonus = {
+			production_efficiency_cap_factor = 0.35
+		}
+	}
+
+	trait = {
+		token = lorraine_dietrich_mio_trait_13
+		name = lorraine_dietrich_mio_trait_13
+		icon = GFX_generic_mio_department_icon_air_transport_technology		
+
+		position = { x=7 y=0 }
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_medium_plane
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+			military_industrial_organization_design_team_assign_cost = -0.1
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.15
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			air_defence = 0.07
+			maximum_speed = 0.1
+		}
+		production_bonus = {
+			production_efficiency_cap_factor = 0.2
+			production_capacity_factor = 0.1
+		}
+	}
+	trait = {
+		token = lorraine_dietrich_mio_trait_14
+		name = lorraine_dietrich_mio_trait_14
+		icon = GFX_generic_mio_trait_icon_air_agility		
+
+		position = { x=-1 y=1 }
+
+		relative_position_id = lorraine_dietrich_mio_trait_13
+		all_parents = {
+			lorraine_dietrich_mio_trait_13
+		} 
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_medium_plane
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			air_agility = 0.07
+			air_range = 0.1
+		}
+		production_bonus = {
+			production_efficiency_cap_factor = 0.1
+			production_capacity_factor = 0.1
+		}
+	}
+	trait = {
+		token = lorraine_dietrich_mio_trait_15
+		name = lorraine_dietrich_mio_trait_15
+		icon = GFX_generic_mio_trait_icon_maximum_speed		
+
+		position = { x=1 y=1 }
+		relative_position_id = lorraine_dietrich_mio_trait_13
+		all_parents = {
+			lorraine_dietrich_mio_trait_13
+		} 
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_medium_plane
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			air_agility = 0.09
+		}
+		production_bonus = {
+			production_efficiency_cap_factor = 0.1
+			production_capacity_factor = 0.1
+		}
+	}
+	trait = {
+		token = lorraine_dietrich_mio_trait_16
+		name = lorraine_dietrich_mio_trait_16		
+		icon = GFX_generic_mio_department_icon_plane_medium_quality		
+
+		position = { x=0 y=2 }
+		relative_position_id = lorraine_dietrich_mio_trait_13
+
+		all_parents = {
+			lorraine_dietrich_mio_trait_13
+		} 
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_medium_plane
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		equipment_bonus = {
+			air_agility = 0.1
+			air_range = 0.05
+		}
+		production_bonus = {
+			production_efficiency_cap_factor = 0.1
+			production_capacity_factor = 0.1
+		}
+	}
+	trait = {
+		token = lorraine_dietrich_mio_trait_17
+		name = lorraine_dietrich_mio_trait_17		
+		icon = GFX_generic_mio_department_icon_plane_medium_quality		
+
+		position = { x=0 y=3 }
+		relative_position_id = lorraine_dietrich_mio_trait_13
+
+		all_parents = {
+			lorraine_dietrich_mio_trait_16
+		} 
+		limit_to_equipment_type = { 
+			mio_cat_eq_all_medium_plane
+		}
+		on_complete = {
+			FROM = {
+				mio:FRA_lorraine_dietrich_organisation = {
+					add_mio_funds = 1500
+					add_mio_funds_gain_factor = 0.05
+					add_mio_research_bonus = 0.05
+				}
+			}
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+		}
+		equipment_bonus = {
+			air_agility = 0.15
+			air_range = 0.15
+		}
+		production_bonus = {
+			production_efficiency_cap_factor = 0.2
+			production_capacity_factor = 0.2
+		}
+	}
+
 }
 FRA_somua_organisation = {
 	include = generic_medium_tank_organization
@@ -1210,6 +1707,20 @@ FRA_somua_organisation = {
 			original_tag = FRG
 			original_tag = FRP
 			original_tag = NFA
+		}
+	}
+	available = {
+		if = {
+			limit = { FROM = { original_tag = FRA } }
+			NFA = {
+				exist = no
+			}
+		}
+		if = {
+			limit = { FROM = { original_tag = FRG } }
+			NFA = {
+				exists = no
+			}
 		}
 	}
 }
