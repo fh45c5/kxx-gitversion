@@ -1,0 +1,1072 @@
+##################
+#####-HARBIN-#####
+####-REWORKED-####
+##################
+focus_tree = {
+	id = PSL
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = PSL
+		}
+	}
+	
+	continuous_focus_position = { x = 2000 y = 0 }
+	
+	focus = {
+		id = PLS_PVZ_open_windos
+		icon = GFX_goal_PLS_PVZ_open_windos
+		cost = 5
+		
+		x = 10
+		y = 0
+		
+		completion_reward = { 
+			add_political_power = 200
+		}
+	}
+	focus = {
+		id = PLS_PVZ_build_home
+		icon = GFX_goal_PLS_PVZ_build_home
+		cost = 5
+		relative_position_id = PLS_PVZ_open_windos
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = PLS_PVZ_open_windos
+		}
+		completion_reward = { 
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	focus = {
+		id = PLS_pvz_what_happen
+		icon = GFX_goal_PLS_pvz_what_happen
+		cost = 5
+		relative_position_id = PLS_PVZ_open_windos
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = PLS_PVZ_open_windos
+		}
+		completion_reward = { 
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+			add_war_support = 0.15
+		}
+	}
+	focus = {
+		id = PLS_PVZ_Handcart
+		icon = GFX_goal_PLS_PVZ_Handcart
+		cost = 5
+		relative_position_id = PLS_PVZ_open_windos
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = PLS_PVZ_open_windos
+		}
+		completion_reward = { 
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_infrastructure = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_infrastructure = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+		}
+	}
+	focus = {
+		id = PLS_PVZ_Prepare_game
+		icon = GFX_goal_PLS_PVZ_Prepare_game
+		cost = 6
+		relative_position_id = PLS_PVZ_open_windos
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = PLS_PVZ_build_home
+		}
+		prerequisite = {
+			focus = PLS_pvz_what_happen
+		}
+		prerequisite = {
+			focus = PLS_PVZ_Handcart
+		}
+		completion_reward = { 
+			country_event = {
+				id = PVZ.2
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_deaf_win
+		icon = GFX_goal_PLS_PVZ_deaf_win
+		cost = 5
+		relative_position_id = PLS_PVZ_Prepare_game
+		x = -2
+		y = 1
+		allow_branch = {
+			FROM = {
+				OR = {
+					has_country_flag = PSL_PVZ_Zombies_win
+					has_country_flag = PSL_PVZ_Plants_win
+				}
+			}
+		}
+		available = { has_country_flag = PSL_PVZ_Plants_win }
+		prerequisite = {
+			focus = PLS_PVZ_Prepare_game
+		}
+		
+		completion_reward = { 
+			add_stability = 0.05
+			KXX_PVZ_plant_idea_swap = yes
+			add_ideas = PSL_PVZ_deaf
+			add_ideas = PSL_PVZ_jinzhanhua
+			add_ideas = PSL_PVZ_xianhan
+			add_ideas = PSL_PVZ_caiwen
+		}
+	}
+	focus = {
+		id = PLS_PVZ_sowing
+		icon = GFX_goal_PLS_PVZ_sowing
+		cost = 5
+		relative_position_id = PLS_PVZ_deaf_win
+		x = -2
+		y = 2
+		prerequisite = {
+			focus = PLS_PVZ_deaf_win
+		}
+		available = {
+			has_completed_focus = PLS_PVZ_buy_seed
+		}
+		completion_reward = { 
+			KXX_PVZ_plant_idea_swap = yes
+		}
+	}
+	focus = {
+		id = PLS_PVZ_plants_friend
+		icon = GFX_goal_PLS_PVZ_plants_friend
+		cost = 5
+		relative_position_id = PLS_PVZ_deaf_win
+		x = -3
+		y = 3
+		prerequisite = {
+			focus = PLS_PVZ_sowing 
+		}
+		completion_reward = {
+			add_political_power = 50
+			KXX_PVZ_plant_idea_swap = yes
+			if = {
+				limit = {
+					has_country_flag = PLS_PVZ_trade_over
+				}
+				country_event = {
+					id = PVZ_KXX_plant.2
+				}
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_buy_seed
+		icon = GFX_goal_PLS_PVZ_buy_seed
+		cost = 5
+		relative_position_id = PLS_PVZ_deaf_win
+		x = -1
+		y = 1
+		prerequisite = {
+			focus =  PLS_PVZ_deaf_win
+		}
+		completion_reward = { 
+			add_war_support = 0.01
+			add_manpower = 20000
+			KXX_PVZ_plant_idea_swap = yes
+			country_event = {
+				id = PVZ_KXX_plant.1
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_Resources_sun
+		icon = GFX_goal_PLS_PVZ_Resources_sun
+		cost = 5
+		relative_position_id = PLS_PVZ_deaf_win
+		x = -1
+		y = 3
+		prerequisite = {
+			focus =  PLS_PVZ_buy_seed
+		}
+		completion_reward = { 
+			KXX_PVZ_plant_idea_swap = yes
+		}
+	}
+	focus = {
+		id = PLS_PVZ_plants_new_world
+		icon = GFX_goal_PLS_PVZ_plants_new_world
+		cost = 5
+		relative_position_id = PLS_PVZ_deaf_win
+		x = -2
+		y = 5
+		prerequisite = {
+			focus =  PLS_PVZ_Resources_sun
+		}
+		prerequisite = {
+			focus =  PLS_PVZ_plants_friend
+		}
+		completion_reward = { create_corps_commander = {
+				name = "army_daifu"
+				portrait_path = "gfx/leaders/PVZ/dazuihua.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_baozhayingtao"
+				portrait_path = "gfx/leaders/PVZ/baozhayingtao.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_caiwen"
+				portrait_path = "gfx/leaders/PVZ/caiwen.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_dazuihua"
+				portrait_path = "gfx/leaders/PVZ/dazuihua.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_denglong"
+				portrait_path = "gfx/leaders/PVZ/denglong.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_hanbingsheshou"
+				portrait_path = "gfx/leaders/PVZ/hanbingsheshou.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_juanxincaitoushou"
+				portrait_path = "gfx/leaders/PVZ/juanxincaitoushou.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_jianguo"
+				portrait_path = "gfx/leaders/PVZ/jianguo.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			#
+			create_corps_commander = {
+				name = "army_juwo"
+				portrait_path = "gfx/leaders/PVZ/juwo.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_lajiao"
+				portrait_path = "gfx/leaders/PVZ/lajiao.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_mubeitunshizhe"
+				portrait_path = "gfx/leaders/PVZ/mubeitunshizhe.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_sanyecao"
+				portrait_path = "gfx/leaders/PVZ/sanyecao.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_wandou"
+				portrait_path = "gfx/leaders/PVZ/wandou.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_xgua"
+				portrait_path = "gfx/leaders/PVZ/xgua.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_xiangpu"
+				portrait_path = "gfx/leaders/PVZ/xiangpu.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_xianhan"
+				portrait_path = "gfx/leaders/PVZ/xianhan.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_xrikui"
+				portrait_path = "gfx/leaders/PVZ/xrikui.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_xrzhang"
+				portrait_path = "gfx/leaders/PVZ/xrzhang.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_yangguanggu"
+				portrait_path = "gfx/leaders/PVZ/yangguanggu.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_yangtao"
+				portrait_path = "gfx/leaders/PVZ/yangtao.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_youyudapengu"
+				portrait_path = "gfx/leaders/PVZ/youyudapengu.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_yumitoushou"
+				portrait_path = "gfx/leaders/PVZ/yumitoushou.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_ziyouhun"
+				portrait_path = "gfx/leaders/PVZ/ziyouhun.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			if = {
+				limit = {
+					has_country_flag = PLS_PVZ_trade_over
+					has_country_flag = PLS_PVZ_market_over
+				}
+				country_event = {
+					id = PVZ_KXX_plant.3
+				}
+			}
+			KXX_PVZ_plant_idea_swap = yes
+		}
+	}
+	focus = {
+		id = PLS_PVZ_over
+		icon = GFX_goal_PLS_PVZ_over
+		cost = 5
+		relative_position_id = PLS_PVZ_Prepare_game
+		x = 0
+		y = 2
+		
+		allow_branch = {
+			FROM = {
+				OR = {
+					has_country_flag = PSL_PVZ_Zombies_win
+					has_country_flag = PSL_PVZ_Plants_win
+				}
+			}
+		}
+		prerequisite = {
+			focus =  PLS_PVZ_Prepare_game
+		}
+		completion_reward = { 
+			add_war_support = 0.10
+			
+		}
+	}
+	focus = {
+		id = PLS_PVZ_trade
+		icon = GFX_goal_PLS_PVZ_trade
+		cost = 5
+		relative_position_id = PLS_PVZ_over
+		x = -2
+		y = 1
+		available = {
+			has_country_flag = PLS_PVZ_by_event
+		}
+		prerequisite = {
+			focus =  PLS_PVZ_buy_seed
+		}
+		completion_reward = { 
+			add_ideas = PSL_deaf_idea
+		}
+	}
+	focus = {
+		id = PLS_PVZ_market
+		icon = GFX_goal_PLS_PVZ_market
+		cost = 5
+		relative_position_id = PLS_PVZ_over
+		x = -2
+		y = 3
+		available = {
+			has_country_flag = PLS_PVZ_by_event
+		}
+		prerequisite = {
+			focus =  PLS_PVZ_trade
+		}
+		completion_reward = { 
+			
+			every_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_Little_Thought
+		icon = GFX_goal_PLS_PVZ_Little_Thought
+		cost = 5
+		relative_position_id = PLS_PVZ_over
+		x = -1
+		y = 4
+		available = {
+			has_country_flag = PLS_PVZ_by_event
+		}
+		prerequisite = {
+			focus =  PLS_PVZ_market
+		}
+		completion_reward = { 
+			set_politics = {
+				ruling_party = totalist
+				elections_allowed = no
+			}
+			
+			create_country_leader = {
+				name = "PSL_DEAF_tot"
+				picture = "gfx/leaders/PVZ/daifu.png"
+				expire = "1965.1.1"
+				ideology = tot_waibibabuism_subtype
+			}
+			swap_ideas = {
+				remove_idea = PSL_deaf_idea
+				add_idea = PSL_deaf_idea1
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_earth
+		icon = GFX_goal_PLS_PVZ_earth
+		cost = 2
+		relative_position_id = PLS_PVZ_over
+		x = 0
+		y = 1
+		prerequisite = {
+			focus =  PLS_PVZ_over
+		}
+		completion_reward = { 
+			add_political_power = 200
+			add_stability = 0.1
+			add_war_support = 0.1
+		}
+	}
+	focus = {
+		id = PLS_PVZ_sunshine
+		icon = GFX_goal_PLS_PVZ_sunshine
+		cost = 2
+		relative_position_id = PLS_PVZ_over
+		x = -1
+		y = 2
+		prerequisite = {
+			focus =  PLS_PVZ_earth
+		}
+		available = {
+			has_country_flag = PSL_PVZ_Plants_win
+		}
+		completion_reward = { 
+			KXX_PVZ_plant_idea_swap = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	focus = {
+		id = PLS_PVZ_brain
+		icon = GFX_goal_PLS_PVZ_brain
+		cost = 2
+		relative_position_id = PLS_PVZ_over
+		x = 1
+		y = 2
+		prerequisite = {
+			focus =  PLS_PVZ_earth
+		}
+		available = {
+			has_country_flag = PSL_PVZ_Zombies_win
+		}
+		completion_reward = { 
+			KXX_PVZ_zombie_idea_swap = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	focus = {
+		id = PLS_PVZ_new_game
+		icon = GFX_goal_PLS_PVZ_new_game
+		cost = 2
+		relative_position_id = PLS_PVZ_over
+		x = 0
+		y = 3
+		prerequisite = {
+			focus =  PLS_PVZ_brain
+			focus =  PLS_PVZ_sunshine
+		}
+		completion_reward = { 
+			add_command_power = 10000
+			add_stability = 1
+			add_war_support = 1
+		}
+	}
+	focus = {
+		id = PLS_PVZ_evil_plan
+		icon = GFX_goal_PLS_PVZ_evil_plan
+		cost = 5
+		relative_position_id = PLS_PVZ_over
+		x = 2
+		y = 1
+		available = {
+			has_country_flag = PLS_PVZ_by_event
+		}
+		prerequisite = {
+			focus =  PLS_PVZ_what_is_zombie
+		}
+		completion_reward = { 
+			add_ideas = KXX_PVZ_jiangwang
+			add_pataut_popularity = 300
+		}
+	}
+	focus = {
+		id = PLS_PVZ_contral
+		icon = GFX_goal_PLS_PVZ_contral
+		cost = 5
+		relative_position_id = PLS_PVZ_over
+		x = 2
+		y = 3
+		available = {
+			has_country_flag = PLS_PVZ_by_event
+		}
+		prerequisite = {
+			focus =  PLS_PVZ_evil_plan
+		}
+		completion_reward = { 
+			every_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_evil_plan_success
+		icon = GFX_goal_PLS_PVZ_evil_plan_success
+		cost = 5
+		relative_position_id = PLS_PVZ_over
+		x = 1
+		y = 4
+		available = {
+			has_country_flag = PLS_PVZ_by_event
+		}
+		prerequisite = {
+			focus =  PLS_PVZ_contral
+		}
+		completion_reward = { 
+			set_politics = {
+				ruling_party = national_populist
+			}
+			create_country_leader = {
+				name = "PSL_JIANGWANG_natpop"
+				picture = "gfx/leaders/PVZ/jiangwang.png"
+				expire = "1965.1.1"
+				ideology = natpop_Zombies_subtype
+			}
+			swap_ideas = {
+				remove_idea = KXX_PVZ_jiangwang
+				add_idea = KXX_PVZ_jiangwang1
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_zombies_flag
+		icon = GFX_goal_PLS_PVZ_zombies_flag
+		cost = 5
+		relative_position_id = PLS_PVZ_Prepare_game
+		x = 2
+		y = 1
+		allow_branch = {
+			FROM = {
+				OR = {
+					has_country_flag = PSL_PVZ_Zombies_win
+					has_country_flag = PSL_PVZ_Plants_win
+				}
+			}
+		}
+		available = { has_country_flag = PSL_PVZ_Zombies_win }
+		prerequisite = {
+			focus = PLS_PVZ_Prepare_game
+		}
+		
+		completion_reward = { 
+			set_politics = {
+				ruling_party = radical_socialist
+			}
+			KXX_PVZ_zombie_idea_swap = yes
+			add_political_power = 75
+			set_cosmetic_tag = PSL_PVZ_Zombies
+			add_ideas = PSL_PVZ_jiangwang
+			add_ideas = PSL_PVZ_gcshi
+			add_ideas = PSL_PVZ_kanbaolaotou
+			add_ideas = PSL_PVZ_wuwang
+		}
+	}
+	focus = {
+		id = PLS_PVZ_what_is_zombie
+		icon = GFX_goal_PLS_PVZ_what_is_zombie
+		cost = 5
+		relative_position_id = PLS_PVZ_zombies_flag
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = PLS_PVZ_zombies_flag
+		}
+		
+		completion_reward = { 
+			KXX_PVZ_zombie_idea_swap = yes
+			country_event = {
+				id = PVZ_KXX_zombie.1
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_zombie_rev
+		icon = GFX_goal_PLS_PVZ_zombie_rev
+		cost = 5
+		relative_position_id = PLS_PVZ_zombies_flag
+		x = 1
+		y = 3
+		prerequisite = {
+			focus = PLS_PVZ_what_is_zombie
+		}
+		
+		completion_reward = { 
+			KXX_PVZ_zombie_idea_swap = yes
+		}
+	}
+	focus = {
+		id = PLS_PVZ_not_have_a_stiver
+		icon = GFX_goal_PLS_PVZ_not_have_a_stiver
+		cost = 5
+		relative_position_id = PLS_PVZ_zombies_flag
+		x = 2
+		y = 2
+		prerequisite = {
+			focus = PLS_PVZ_zombies_flag
+		}
+		
+		completion_reward = { 
+			KXX_PVZ_zombie_idea_swap = yes
+		}
+	}
+	focus = {
+		id = PLS_PVZ_will_of_the_majority
+		icon = GFX_goal_PLS_PVZ_will_of_the_majority
+		cost = 5
+		relative_position_id = PLS_PVZ_zombies_flag
+		x = 3
+		y = 3
+		prerequisite = {
+			focus = PLS_PVZ_not_have_a_stiver
+		}
+		
+		completion_reward = { 
+			KXX_PVZ_zombie_idea_swap = yes
+			if = {
+				limit = {
+					has_country_flag = PLS_PVZ_evil_plan_over
+				}
+				country_event = {
+					id = PVZ_KXX_zombie.2
+				}
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_zombies_new_world
+		icon = GFX_goal_PLS_PVZ_zombies_new_world
+		cost = 5
+		relative_position_id = PLS_PVZ_zombies_flag
+		x = 2
+		y = 5
+		prerequisite = {
+			focus = PLS_PVZ_will_of_the_majority
+		}
+		prerequisite = {
+			focus = PLS_PVZ_zombie_rev
+		}
+		
+		completion_reward = { 
+			KXX_PVZ_zombie_idea_swap = yes
+			add_war_support = 0.20
+			add_political_power = 500
+			create_corps_commander = {
+				name = "army_banwujiangshi"
+				portrait_path = "gfx/leaders/PVZ/banwujiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_bengtiaojiangshi"
+				portrait_path = "gfx/leaders/PVZ/bengtiaojiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_bingchejiangshi"
+				portrait_path = "gfx/leaders/PVZ/bingchejiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_chengganjiangshi"
+				portrait_path = "gfx/leaders/PVZ/chengganjiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_feixingjiangshi"
+				portrait_path = "gfx/leaders/PVZ/feixingjiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			#
+			create_corps_commander = {
+				name = "army_ganlanqiujiangshi"
+				portrait_path = "gfx/leaders/PVZ/ganlanqiujiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_jiangwang"
+				portrait_path = "gfx/leaders/PVZ/jiangwang.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_haitunjiangshi"
+				portrait_path = "gfx/leaders/PVZ/haitunjiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_juxingjiangshi"
+				portrait_path = "gfx/leaders/PVZ/juxingjiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_kanbaojiangshi"
+				portrait_path = "gfx/leaders/PVZ/kanbaojiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_kuanggongjiangshi"
+				portrait_path = "gfx/leaders/PVZ/kuanggongjiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_luzhangjiangshi"
+				portrait_path = "gfx/leaders/PVZ/luzhangjiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_qiqiunanhai"
+				portrait_path = "gfx/leaders/PVZ/qiqiunanhai.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_qizhijiangshi"
+				portrait_path = "gfx/leaders/PVZ/qizhijiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_tzijiangshi"
+				portrait_path = "gfx/leaders/PVZ/tzijiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_xiaochoujiangshi"
+				portrait_path = "gfx/leaders/PVZ/xiaochoujiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_xiaohezijiangshi"
+				portrait_path = "gfx/leaders/PVZ/xiaohezijiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_xueqiaojiangshi"
+				portrait_path = "gfx/leaders/PVZ/xueqiaojiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_xuerenjiangshi"
+				portrait_path = "gfx/leaders/PVZ/xuerenjiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			create_corps_commander = {
+				name = "army_yazijiangshi"
+				portrait_path = "gfx/leaders/PVZ/yazijiangshi.png"
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			if = {
+				limit = {
+					has_country_flag = PLS_PVZ_evil_plan_over
+				}
+				country_event = {
+					id = PVZ_KXX_zombie.3
+				}
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_go
+		icon = GFX_goal_PLS_PVZ_go
+		cost = 5
+		relative_position_id = PLS_PVZ_new_game
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = PLS_PVZ_new_game
+		}
+		prerequisite = {
+			focus = PLS_PVZ_plants_new_world
+			focus = PLS_PVZ_zombies_new_world
+		}
+		available = {
+		}
+		
+		completion_reward = { 
+			add_ideas = PVZ_expande
+			hidden_effect = {
+				annex_country = {
+					target = NSW
+					transfer_troops = no
+				}
+			}
+		}
+	}
+	focus = {
+		id = PLS_PVZ_TRUE_end
+		icon = GFX_goal_PLS_PVZ_TRUE_end
+		cost = 5
+		relative_position_id = PLS_PVZ_new_game
+		x = 0
+		y = 3
+		prerequisite = {
+			focus = PLS_PVZ_go
+		}
+		#allow_branch = {
+		#	every_country = {
+		#		limit = {
+		#			NOT = {
+		#				original_tag = PSL
+		#				original_tag = nsw
+		#			}
+		#		}
+		#	}
+		#}
+		available = {
+			owns_state = 219
+			all_other_country = {
+				OR = {
+					is_ally_of_ROOT = yes
+					exists = no
+				}
+			}
+			
+		}
+		completion_reward = { 
+			
+		}
+	}
+}
