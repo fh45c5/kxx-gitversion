@@ -13401,20 +13401,27 @@ country_event = { #Ambush in Shenyang
 				limit = { has_id = 1100 }			
 				remove_unit_leader = yes
 			}
-			create_country_leader = {
-				name = "Zhang Xueliang"
-				desc = "POLITICS_ZHANG_XUELIANG_DESC"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
-				expire = "1.1.1"
-				ideology = authdem_junta_subtype
-			}
-			create_country_leader = {
-				name = "Zhang Xueliang"
-				desc = "POLITICS_ZHANG_XUELIANG_DESC"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
-				expire = "1.1.1"
-				ideology = junta_subtype
-			}
+				create_country_leader = {
+					name = "张学良"
+					desc = "POLITICS_ZHANG_XUELIANG_DESC"
+					picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
+					expire = "1965.1.1"
+					ideology = junta_subtype
+				}
+				create_country_leader = {
+					name = "张学良"
+					desc = "POLITICS_ZHANG_XUELIANG_DESC"
+					picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
+					expire = "1965.1.1"
+					ideology = red_junta_subtype
+				}
+				create_country_leader = {
+					name = "张学良"
+					desc = "POLITICS_ZHANG_XUELIANG_DESC"
+					picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
+					expire = "1965.1.1"
+					ideology = militarism_subtype
+				}
 			country_event = {
 				id = fengtian.291
 				hours = 8
@@ -15037,7 +15044,39 @@ country_event = { #badass syndie
 
 country_event = { #choose communication clique
 	id = fengtian.404
-	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event fengtian.401" 
+		hidden_effect = {
+			set_party_name = {
+				ideology =  market_liberal
+				long_name = FNG_social_conservative_party_long
+				name = FNG_social_conservative_party
+			}
+			set_party_name = {
+				ideology =  social_liberal
+				long_name = FNG_social_conservative_party_long
+				name = FNG_social_conservative_party
+			}
+			create_country_leader = {
+				name = "叶恭绰"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Ye_Gongchuo.png"
+				expire = "1.1.1"
+				ideology = marlib_national_liberalism_subtype
+			}
+			create_country_leader = {
+				name = "中江丑吉"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Ushikichi_Nakae.png"
+				expire = "1.1.1"
+				ideology = soclib_internationalism_subtype
+			}
+			create_country_leader = {
+				name = "章宗祥"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Zongxiang.png"
+				expire = "1.1.1"
+				ideology = soccon_controlled_democracy_subtype
+			}
+		}
+	}
 	title = fengtian.404.t
 	desc = fengtian.404.d
 	is_triggered_only = yes
@@ -15047,12 +15086,12 @@ country_event = { #choose communication clique
 		ai_chance = {
 			factor = 50
 		}
-			create_country_leader = {
-				name = "叶恭绰"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Ye_Gongchuo.png"
-				expire = "1.1.1"
-				ideology = marlib_national_liberalism_subtype
-			}
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = no
+		}
+		add_soclib_to_coalition = yes
+		add_soccon_to_coalition = yes	
 			add_popularity = {
 				ideology = market_liberal
 				popularity = 0.10
@@ -15064,12 +15103,12 @@ country_event = { #choose communication clique
 		ai_chance = {
 			factor = 50
 		}
-			create_country_leader = {
-				name = "中江丑吉"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Ushikichi_Nakae.png"
-				expire = "1.1.1"
-				ideology = soclib_internationalism_subtype
-			}
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = no
+		}	
+		add_marlib_to_coalition = yes
+		add_soccon_to_coalition = yes	
 			add_popularity = {
 				ideology = social_liberal
 				popularity = 0.10
@@ -15080,12 +15119,12 @@ country_event = { #choose communication clique
 		ai_chance = {
 			factor = 50
 		}
-			create_country_leader = {
-				name = "章宗祥"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Zongxiang.png"
-				expire = "1.1.1"
-				ideology = soccon_controlled_democracy_subtype
-			}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}	
+		add_soclib_to_coalition = yes
+		add_marlib_to_coalition = yes	
 			add_popularity = {
 				ideology = social_conservative
 				popularity = 0.10
@@ -15162,13 +15201,49 @@ country_event = { #ideopicker
 		ai_chance = {
 			factor = 50
 		}
+		set_country_leader_ideology = soccon_oligarchy_subtype
+	}
+	option = {
+		name = fengtian.407.c
+		ai_chance = {
+			factor = 50
+		}
 			
 	}
-
 }
 country_event = { #choose recovery clique
 	id = fengtian.408
-	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event fengtian.401"
+		 set_party_name = {
+			ideology =  paternal_autocrat
+			long_name = FNG_authoritarian_democrat_party_long
+			name = FNG_authoritarian_democrat_party
+		}
+		set_party_name = {
+			ideology =  radical_socialist
+			long_name = FNG_authoritarian_democrat_party_long
+			name = FNG_authoritarian_democrat_party
+		}
+		create_country_leader = {
+			name = "王揖唐"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Wang_Yitang.png"
+			expire = "1.1.1"
+			ideology = pataut_neo_citizenism_subtype
+		}
+		create_country_leader = {
+			name = "靳云鹏"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Jin_Yunpeng.png"
+			expire = "1.1.1"
+			ideology = authdem_national_conservative_subtype
+		}
+		create_country_leader = {
+			name = "蓝云武"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Lan_Yunwu.png"
+			expire = "1.1.1"
+			ideology = radsoc_national_socialism_subtype
+		}
+	}
 	title = fengtian.408.t
 	desc = fengtian.408.d
 	is_triggered_only = yes
@@ -15178,12 +15253,12 @@ country_event = { #choose recovery clique
 		ai_chance = {
 			factor = 50
 		}
-			create_country_leader = {
-				name = "王揖唐"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Wang_Yitang.png"
-				expire = "1.1.1"
-				ideology = pataut_neo_citizenism_subtype
-			}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_authdem_to_coalition = yes
+		add_radsoc_to_coalition = yes		
 			add_popularity = {
 				ideology = paternal_autocrat
 				popularity = 0.10
@@ -15195,12 +15270,12 @@ country_event = { #choose recovery clique
 		ai_chance = {
 			factor = 50
 		}
-			create_country_leader = {
-				name = "靳云鹏"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Jin_Yunpeng.png"
-				expire = "1.1.1"
-				ideology = authdem_national_conservative_subtype
-			}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}	
+		add_pataut_to_coalition = yes
+		add_radsoc_to_coalition = yes			
 			add_popularity = {
 				ideology = authoritarian_democrat
 				popularity = 0.10
@@ -15211,12 +15286,12 @@ country_event = { #choose recovery clique
 		ai_chance = {
 			factor = 50
 		}
-			create_country_leader = {
-				name = "蓝云武"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Lan_Yunwu.png"
-				expire = "1.1.1"
-				ideology = radsoc_national_socialism_subtype
-			}
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = no
+		}	
+		add_pataut_to_coalition = yes
+		add_authdem_to_coalition = yes		
 			add_popularity = {
 				ideology = radical_socialist
 				popularity = 0.10
@@ -15394,6 +15469,50 @@ country_event = { #
 		set_country_flag = FNG_zhang_clique_win
 		set_country_flag = FNG_pataut_path_only		
 	}
+}
+country_event = { #
+	id = fengtian.413
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.413.t
+	desc = fengtian.413.d
+	is_triggered_only = yes
+
+	option = {
+		
+		name = fengtian.413.a 
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = FNG_zhang_clique_win	
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = "复东会"
+			name = "复东会"
+		}
+	}
+	option = {
+		
+		name = fengtian.413.b
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = FNG_zhang_clique_win	
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}	
+		set_party_name = {
+			ideology = national_populist
+			long_name = "四维学会"
+			name = "四维学会"
+		}
+	}
+	
+	
 }
 country_event = { #Nobles
 	id = fngdynasty.1
@@ -15981,20 +16100,14 @@ country_event = { #Crown Zuolin?
 		ai_chance = {
 			factor = 67
 		}
-		FNG_decrease_legitimacy = yes
+		
 		country_event = {
 			id = fngnap.2
 			days = 3
 		}
 	}
 	
-	option = { #NAH
-		name = fngnap.1.b
-		ai_chance = {
-			factor = 33
-		}
-		add_stability = 0.05
-	}
+	
 }
 
 country_event = { #Crown Zuolin, intermission?
