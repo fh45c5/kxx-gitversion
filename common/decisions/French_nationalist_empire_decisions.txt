@@ -1059,8 +1059,8 @@ FRG_england_imperialate_decision = {
 				NOT = { country_exists = ENG }
 				NOT = { country_exists = GBR }
 			}
-			126 = { is_owned_and_controlled_by = ROOT }
-            128 = { is_owned_and_controlled_by = ROOT }
+			126 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            128 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -1444,9 +1444,9 @@ FRG_switzerland_imperialate_decision = {
 		}
 		available = {
 			has_completed_focus = FRG_romandy
-						3 = { is_owned_and_controlled_by = ROOT }
-                        151 = { is_owned_and_controlled_by = ROOT }
-                        761 = { is_owned_and_controlled_by = ROOT }
+						3 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+                        151 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+                        761 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -1702,11 +1702,11 @@ FRG_spain_imperialate_decision = {
 		}
 		available = {
 			has_completed_focus = FRG_iberian
-			176 = { is_owned_and_controlled_by = ROOT }
-                        41 = { is_owned_and_controlled_by = ROOT }
-                        173 = { is_owned_and_controlled_by = ROOT }
-                        165 = { is_owned_and_controlled_by = ROOT }
-                        167 = { is_owned_and_controlled_by = ROOT }
+			176 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+                        41 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+                        173 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+                        165 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+                        167 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -1724,8 +1724,6 @@ FRG_spain_imperialate_decision = {
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_spain_imperialate_decision"
 			clr_country_flag = FRG_imperialate
-                        release = GLC
-                        release = SPR
 						FRG = {
 							set_autonomy = {
 								target = SPR
@@ -1762,6 +1760,20 @@ FRG_spain_imperialate_decision = {
                                 add_state_core = 165
                                 add_state_core = 166
                                 add_state_core = 167 }
+						every_state = {
+							limit = {
+								is_owned_and_controlled_by = FRG
+								is_core_of = GLC
+							}
+							transfer_state_to = GLC
+						}
+						every_state = {
+							limit = {
+								is_owned_and_controlled_by = FRG
+								is_core_of = SPR
+							}
+							transfer_state_to = SPR
+						}
                         SPR = { 
                                 set_party_name = {
             	                        ideology = authoritarian_democrat
@@ -2048,23 +2060,72 @@ FRG_spain_imperialate_decision = {
 		available = {
 			has_completed_focus = FRG_italy
 			NOT = {
-				ITA = {
-					is_in_faction_with = FRG
+				SRI = {
+					has_country_flag = FRG_alley
 				}
 				SIC = {
-					is_in_faction_with = FRG
+					has_country_flag = FRG_alley
+				}
+				ITA = {
+					has_country_flag = FRG_alley
 				}
 			}
 			OR = {
-				2 = { is_owned_and_controlled_by = ROOT }
+				NOT = {
+					country_exists = SRI
+				}
+				SRI = {
+					is_puppet_of = FRG
+				}
+			}
+			OR = {
+				NOT = {
+					country_exists = SIC
+				}
+				SIC = {
+					is_puppet_of = FRG
+				}
+			}
+			OR = {
+				NOT = {
+					country_exists = ITA
+				}
+				ITA = {
+					is_puppet_of = FRG
+				}
+			}
+			OR = {
+				NOT = {
+					country_exists = LOM
+				}
+				LOM = {
+					is_puppet_of = FRG
+				}
+			}
+			OR = {
+				NOT = {
+					country_exists = VNC
+				}
+				VNC = {
+					is_puppet_of = FRG
+				}
+			}
+			OR = {
+				NOT = {
+					country_exists = PAP
+				}
+				PAP = {
+					is_puppet_of = FRG
+				}
 				PAP = {
 					is_in_faction_with = FRG
 				}
 			}
-			158 = { is_owned_and_controlled_by = ROOT }
-            159 = { is_owned_and_controlled_by = ROOT }
-            117 = { is_owned_and_controlled_by = ROOT }
-            115 = { is_owned_and_controlled_by = ROOT }
+			2 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+			158 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+			159 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+			117 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+			115 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -2082,28 +2143,12 @@ FRG_spain_imperialate_decision = {
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
 			clr_country_flag = FRG_imperialate
-						release = VNC
                         release = PAP
-                        release = LOM
 						release = IIE
 						release = INA
 						FRG = {
 							set_autonomy = {
-								target = VNC
-								autonomy_state = autonomous_territory
-								end_wars = no
-							}
-						}
-						FRG = {
-							set_autonomy = {
 								target = PAP
-								autonomy_state = autonomous_territory
-								end_wars = no
-							}
-						}
-						FRG = {
-							set_autonomy = {
-								target = LOM
 								autonomy_state = autonomous_territory
 								end_wars = no
 							}
@@ -2122,26 +2167,18 @@ FRG_spain_imperialate_decision = {
 								end_wars = no
 							}
 						}
-                        VNC = { set_cosmetic_tag = FRG_VEN }
-						PAP = { set_cosmetic_tag = FRG_PAP }
-                        LOM = { set_cosmetic_tag = FRG_LOM }
-						VNC = { transfer_state = 759
-                                transfer_state = 160
-                                add_state_core = 759
-                                add_state_core = 160}
                         PAP = { transfer_state = 764
                                 transfer_state = 2
                                 transfer_state = 1149 
                                 add_state_core = 764
                                 add_state_core = 2
                                 add_state_core = 1149}
-                        LOM = { transfer_state = 159 
-								transfer_state = 1004
-								add_state_core = 1004}
-						IIE = { transfer_state = 161
+						IIE = { transfer_state = 1004
+								transfer_state = 161
 								transfer_state = 162
                                 transfer_state = 157
                                 transfer_state = 1005
+								add_state_core = 1004
                                 add_state_core = 161
                                 add_state_core = 157
 								add_state_core = 162
@@ -2158,6 +2195,14 @@ FRG_spain_imperialate_decision = {
                                 add_state_core = 1006
                                 add_state_core = 156
                                 add_state_core = 115 }
+						every_state = {
+							limit = {
+								is_core_of = ITA
+							}
+							transfer_state_to = IIE
+							add_core_of = IIE
+						}
+						PAP = { set_cosmetic_tag = FRG_PAP }
 						PAP = {
 							set_politics = {
             	                ruling_party = paternal_autocrat
@@ -2165,70 +2210,40 @@ FRG_spain_imperialate_decision = {
 							}
 							add_popularity = {
 				    			ideology = authoritarian_democrat
-				    			popularity = 0.16
+				    			popularity = 0.25
 			    			}
 			    			add_popularity = {
 				    			ideology = market_liberal
-				    			popularity = 0.15
+				    			popularity = 0.25
 			    			}
 							add_popularity = {
 				    			ideology = paternal_autocrat
-				    			popularity = 0.15
+				    			popularity = 0.25
 			    			}
                 			add_popularity = {
 				    			ideology = national_populist
-				    			popularity = 0.24
+				    			popularity = 0.25
 			    			}
 						}
-						LOM = {
-							add_popularity = {
-				    			ideology = authoritarian_democrat
-				    			popularity = 0.16
-			    			}
-			    			add_popularity = {
-				    			ideology = market_liberal
-				    			popularity = 0.15
-			    			}
-							add_popularity = {
-				    			ideology = paternal_autocrat
-				    			popularity = 0.15
-			    			}
-                			add_popularity = {
-				    			ideology = national_populist
-				    			popularity = 0.24
-			    			}
-							add_popularity = {
-				    			ideology = totalist
-				    			popularity = 0.08
-			    			}
-							add_popularity = {
-				    			ideology = syndicalist
-				   	 			popularity = 0.08
-			    			}
-						}
-						LOM = {
-							set_politics = {
-            	                ruling_party = national_populist
-				        		elections_allowed = no
+						every_state = {
+							limit = {
+								is_core_of = VNC
+								is_core_of = LOM
 							}
-						}
-						LOM = {
-							create_country_leader = {
-            	                name = "伦巴第行省政府机构"
-				        		desc = "POLITICS_SPR_COLONIAL_DESC_1"
-            	                picture = "gfx/leaders/FRG/Portrait_FRG_Imperial_Regency.png"
-            	                expire = "1965.1.1"
-            	                ideology = natpop_colonial_govt_subtype
-                            }
+							transfer_state_to = IIE
+							add_core_of = IIE
 						}
                         IIE = {
-							set_politics = {
-            	                ruling_party = paternal_autocrat
-				        		elections_allowed = no
-							}
+							create_country_leader = {
+            	                name = "朱塞佩·沃尔皮"
+				        		desc = ""
+            	                picture = "gfx/leaders/VNC/Portrait_VNC_Giuseppe_Volpi.png"
+            	                expire = "1965.1.1"
+            	                ideology = marlib_colonial_govt_subtype
+                            }
 							create_country_leader = {
             	                name = "费鲁吉奥·帕里"
-				        		desc = "POLITICS_SPR_COLONIAL_DESC_1"
+				        		desc = ""
             	                picture = "gfx/leaders/FRG/Portrait_FRG_Ferruccio_Parri.png"
             	                expire = "1965.1.1"
             	                ideology = autocratic_colonial_govt_subtype
@@ -2254,30 +2269,86 @@ FRG_spain_imperialate_decision = {
             	                name = "法兰西伦巴第驻军"
         	                }
 							set_party_name = {
+            	                ideology = radical_socialist
+            	                long_name = "意社残余游击队"
+            	                name = "意社残余游击队"
+        	                }
+							set_party_name = {
             	                ideology = syndicalist
             	                long_name = "意社残余游击队"
             	                name = "意社残余游击队"
         	                }
-							add_popularity = {
-				    			ideology = authoritarian_democrat
-				    			popularity = 0.16
-			    			}
+							set_party_name = {
+            	                ideology = totalist
+            	                long_name = "意社残余游击队(国家工团主义者/意大利共产党/左翼未来主义者)"
+            	                name = "意社残余游击队(国家工团主义者/意大利共产党/左翼未来主义者)"
+        	                }
 			    			add_popularity = {
 				    			ideology = market_liberal
 				    			popularity = 0.15
 			    			}
 							add_popularity = {
 				    			ideology = paternal_autocrat
-				    			popularity = 0.35
+				    			popularity = 0.05
 			    			}
-                			add_popularity = {
-				    			ideology = national_populist
-				    			popularity = 0.1
-			    			}
-							add_popularity = {
-				    			ideology = syndicalist
-				   	 			popularity = 0.09
-			    			}
+							if = {
+								limit = {
+									NOT = {
+                                        FRG = {
+											OR = {
+												has_government = syndicalist
+												has_government = radical_socialist
+												has_government = social_democrat
+												has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+											}
+										}
+                                    }
+									NOT = {
+                                    	FRG = {
+                                    		has_completed_focus = FRG_Chanel_win
+                                    	}
+                                	}
+								}
+								set_politics = {
+            	                	ruling_party = paternal_autocrat
+				        			elections_allowed = no
+								}
+								add_popularity = {
+				    				ideology = authoritarian_democrat
+				    				popularity = 0.1
+			    				}
+								add_popularity = {
+				    				ideology = paternal_autocrat
+				    				popularity = 0.1
+			    				}
+							}
+							if = {
+								limit = {
+									NOT = {
+                                        FRG = {
+											OR = {
+												has_government = syndicalist
+												has_government = radical_socialist
+												has_government = social_democrat
+												has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+											}
+										}
+                                    }
+									FRG = {
+                                    	has_completed_focus = FRG_Chanel_win
+                                	}
+									NOT = {
+                                    	FRG = {
+                                    		has_completed_focus = FRG_Appearing_from_the_shadow
+                                    	}
+                                	}
+								}
+								add_popularity = { ideology = market_liberal popularity = 0.25 }
+								set_politics = {
+									ruling_party = market_liberal
+									elections_allowed = no
+								}
+							}
 						}
 						IIE = { 
 							division_template = {
@@ -2375,13 +2446,13 @@ FRG_spain_imperialate_decision = {
 			    			}
 						}
 						INA = {
-							    create_country_leader = {
-            	                        name = "那不勒斯行省政府机构"
-				        				desc = "POLITICS_SPR_COLONIAL_DESC_1"
-            	                        picture = "gfx/leaders/FRG/Portrait_FRG_Imperial_Regency.png"
-            	                        expire = "1965.1.1"
-            	                        ideology = natpop_colonial_govt_subtype
-                                        }
+							create_country_leader = {
+            	                name = "那不勒斯行省政府机构"
+				        		desc = "POLITICS_SPR_COLONIAL_DESC_1"
+            	                picture = "gfx/leaders/FRG/Portrait_FRG_Imperial_Regency.png"
+            	                expire = "1965.1.1"
+            	                ideology = natpop_colonial_govt_subtype
+                            }
 						}
                         
 
@@ -2393,7 +2464,6 @@ FRG_spain_imperialate_decision = {
 #德意志地区
 FRG_rhineland_imperialate_decision = {
 		icon = decision_cat_generic_purge
-
 		visible = { 
 			has_completed_focus = FRG_Germany
 			NOT = {
@@ -2793,8 +2863,8 @@ FRG_bavaria_imperialate_decision = {
 		available = {
             NOT = { country_exists = GER }
 			has_completed_focus = FRG_Germany
-			52 = { is_owned_and_controlled_by = ROOT }
-            54 = { is_owned_and_controlled_by = ROOT }
+			52 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            54 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -2934,6 +3004,11 @@ FRG_berlin_imperialate_decision = {
 							}
 						}
 					}
+					NOT = {
+                        FRG = {
+                            has_completed_focus = FRG_Chanel_win
+                        }
+                    }
 				}
 				NGF = { transfer_state = 65
                                 transfer_state = 64
@@ -2999,9 +3074,9 @@ FRG_berlin_imperialate_decision = {
 				        		popularity = 0.05
 			            	}
 							set_party_name = {
-            	            	ideology = paternal_autocrat
-            	            	long_name = "法兰西柏林驻军"
-            	            	name = "柏林驻军"
+            	            	ideology = authoritarian_democrat
+            	           	 	long_name = "勃兰登堡自治政府"
+            	            	name = "勃兰登堡自治政府"
         	            	}
 							set_party_name = {
             	            	ideology = market_liberal
@@ -3009,14 +3084,14 @@ FRG_berlin_imperialate_decision = {
             	           	 	name = "祇属于香奈儿的商业帝国分部"
         	            	}
 							set_party_name = {
-            	            	ideology = authoritarian_democrat
-            	           	 	long_name = "勃兰登堡自治政府"
-            	            	name = "勃兰登堡自治政府"
+            	            	ideology = paternal_autocrat
+            	            	long_name = "法兰西柏林驻军"
+            	            	name = "柏林驻军"
         	            	}
 							set_party_name = {
             	            	ideology = totalist
             	            	long_name = "反法游击队"
-            	           	 name = "反法游击队"
+            	           	 	name = "反法游击队"
         	            	}
 							set_party_name = {
             	           	 	ideology = syndicalist
@@ -3029,8 +3104,116 @@ FRG_berlin_imperialate_decision = {
             	            	name = "反法游击队"
         	            	}  
 						}
-			}      
-                        
+			}    
+			if = {
+				limit = {
+					NOT = {
+						FRG = {
+							OR = {
+								has_government = syndicalist
+								has_government = radical_socialist
+								has_government = social_democrat
+								has_country_leader = { ruling_only = yes name = "西蒙·萨比亚尼" }
+							}
+						}
+					}
+					FRG = {
+                        has_completed_focus = FRG_Chanel_win
+                    }
+                    NOT = {
+                    	FRG = {
+                        	has_completed_focus = FRG_Appearing_from_the_shadow
+                   		 }
+                    }
+				}
+				NGF = { transfer_state = 65
+                                transfer_state = 64
+                                transfer_state = 61
+								transfer_state = 62
+                                transfer_state = 1357
+								transfer_state = 66
+								transfer_state = 68
+                                transfer_state = 63
+
+                                add_state_core = 65
+                                add_state_core = 64
+                                add_state_core = 61
+								add_state_core = 62
+                                add_state_core = 1357
+								add_state_core = 66
+								add_state_core = 68
+                                add_state_core = 63
+								set_capital = { state = 64 }
+                        }
+					FRG = {
+						set_autonomy = {
+							target = NGF
+							autonomous_state = autonomous_territory
+						}
+					}
+      			NGF = {
+					create_country_leader = {
+        				name = "古斯塔夫·克虏伯"  # Gustav Krupp
+        				desc = "GRU_Krupp_DESC"
+        				picture = "gfx/leaders/WGR/Portrait_Rhineland_Gustav_Krupp.png"
+        				expire = "1.1.1"
+        				ideology = marlib_colonial_govt_subtype
+      				}
+      				create_country_leader = {
+        				name = "古斯塔夫·克虏伯"  # Gustav Krupp
+        				desc = "GRU_Krupp_DESC"
+        				picture = "gfx/leaders/WGR/Portrait_Rhineland_Gustav_Krupp.png"
+        				expire = "1.1.1"
+        				ideology = colonial_govt_subtype
+      				}
+      				set_party_name = {
+            	  	  	ideology = authoritarian_democrat
+            	   	 	long_name = "祇属于香奈儿的商业帝国分部"
+            	    	name = "祇属于香奈儿的商业帝国分部"
+        	    	}
+					set_party_name = {
+            	    	ideology = market_liberal
+            	    	long_name = "祇属于香奈儿的商业帝国分部"
+            	   	 name = "祇属于香奈儿的商业帝国分部"
+        	    	}
+					set_party_name = {
+            	   		ideology = paternal_autocrat
+            	    	long_name = "法兰西柏林驻军"
+            	    	name = "柏林驻军"
+        	    	}
+					set_party_name = {
+            	    	ideology = totalist
+            	    	long_name = "反法游击队"
+            	    	name = "反法游击队"
+        	    	}
+					set_party_name = {
+            	    	ideology = syndicalist
+            	    	long_name = "反法游击队"
+            	    	name = "反法游击队"
+        	    	}
+					set_party_name = {
+            	    	ideology = national_populist
+            	    	long_name = "反法游击队"
+            	   	 	name = "反法游击队"
+        	    	}
+					add_popularity = {
+        				ideology = authoritarian_democrat
+        				popularity = 0.35
+      				} 
+					add_popularity = {
+        				ideology = paternal_autocrat
+        				popularity = 0.35
+      				} 
+      				add_popularity = {
+        				ideology = market_liberal
+        				popularity = 0.35
+      				}
+      				set_politics = {
+        				ruling_party = market_liberal
+        				elections_allowed = no
+      				}
+				}
+			}           
 			if = {
 				limit = {
 					FRG = {
@@ -3053,6 +3236,17 @@ FRG_berlin_imperialate_decision = {
 							state = 741 #Wallonian Luxembourg
 							state = 781
 							state = 42
+							state = 29
+							state = 735
+							state = 34
+							state = 6
+							state = 979
+							state = 978
+							state = 35
+							state = 1003
+							state = 158 
+							state = 838
+							state = 1
 						}
 					}
 					transfer_state_to = GRU
@@ -3081,6 +3275,22 @@ FRG_berlin_imperialate_decision = {
 						expire = "1965.1.1"
 						ideology = syn_red_junta_subtype
 					}
+					add_popularity = {
+				    	ideology = social_democrat
+				        popularity = 0.2
+			        }
+					add_popularity = {
+				        ideology = radical_socialist
+				        popularity = 0.2
+			        }
+					add_popularity = {
+				        ideology = totalist
+				        popularity = 0.2
+			        }
+					add_popularity = {
+				    	ideology = syndicalist
+				        popularity = 0.2
+			        }
 				}
 			}
         }
@@ -3116,7 +3326,7 @@ FRG_east_prussia_imperialate_decision = {
 		available = {
 			has_completed_focus = FRG_Germany
             NOT = { country_exists = GER }
-			5 = { is_owned_and_controlled_by = ROOT }
+			5 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -3246,8 +3456,8 @@ FRG_schleswig_holstein_imperialate_decision = {
 		available = {
             NOT = { country_exists = GER }
 			has_completed_focus = FRG_Germany
-			58 = { is_owned_and_controlled_by = ROOT }
-            782 = { is_owned_and_controlled_by = ROOT }
+			58 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            782 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -3363,8 +3573,8 @@ FRG_Denmark_imperialate_decision = {
 		available = {
 			has_completed_focus = FRG_Germany
             NOT = { country_exists = DEN }
-			99 = { is_owned_and_controlled_by = ROOT }
-            37 = { is_owned_and_controlled_by = ROOT }
+			99 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            37 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -3603,9 +3813,7 @@ FRG_Norway_imperialate_decision = {
 			}
 			FRG = { has_country_flag = FRG_pupprt_ISH }
 			NOR = {
-				NOT = {
-					is_in_faction_with = FRG
-				}
+				is_puppet_of = FRG
 			}
 		}
 		available = {
@@ -3614,8 +3822,8 @@ FRG_Norway_imperialate_decision = {
 				has_country_flag = FRG_north_conquer
 			}
             NOT = { country_exists = NOR }
-			110 = { is_owned_and_controlled_by = ROOT }
-            142 = { is_owned_and_controlled_by = ROOT }
+			110 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            142 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -3676,9 +3884,8 @@ FRG_sweden_imperialate_decision = {
 			}
 			FRG = { has_country_flag = FRG_pupprt_ISH }
 			SWE = {
-				NOT = {
-					is_in_faction_with = FRG
-				}
+				is_in_faction_with = FRG
+				is_puppet_of = FRG
 			}
 		}
 		available = {
@@ -3686,10 +3893,9 @@ FRG_sweden_imperialate_decision = {
 			FRG = {
 				has_country_flag = FRG_north_conquer
 			}
-            NOT = { country_exists = SWE }
-			141 = { is_owned_and_controlled_by = ROOT }
-            138 = { is_owned_and_controlled_by = ROOT }
-            140 = { is_owned_and_controlled_by = ROOT }
+			141 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            138 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            140 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -3761,9 +3967,10 @@ FRG_finland_imperialate_decision = {
 		}
 		available = {
 			has_completed_focus = FRG_french_might
-            NOT = { country_exists = FIN }
-			840 = { is_owned_and_controlled_by = ROOT }
-            149 = { is_owned_and_controlled_by = ROOT }
+            country_exists = FIN
+			FIN = {
+				is_puppet_of = FRG
+			}
 		}
 		fire_only_once = yes
 		cost = 0
@@ -3790,22 +3997,6 @@ FRG_finland_imperialate_decision = {
 									is_in_faction_with = FRG
 								}
 							}
-							FIN = { transfer_state = 145
-                                transfer_state = 863
-                                transfer_state = 149
-                                transfer_state = 111
-                                transfer_state = 840
-                                transfer_state = 864
-                                transfer_state = 865
-                                transfer_state = 146
-                                transfer_state = 150
-                                transfer_state = 148
-                                transfer_state = 147
-                                transfer_state = 844
-								transfer_state = 1324
-								transfer_state = 1325
-								transfer_state = 1326
-                                 }
 							FRG = {
 								set_autonomy = {
 									target = FIN
@@ -3815,7 +4006,7 @@ FRG_finland_imperialate_decision = {
                         	FIN = { set_cosmetic_tag = FRG_FIN }
                         	FIN = { load_focus_tree = { id = generic_focus } }
 						}
-						else_if = {
+						if = {
 							limit = {
 								OR = {
 									FRG = {
@@ -3831,38 +4022,12 @@ FRG_finland_imperialate_decision = {
 									}
 								}
 							}
-							ISH = { transfer_state = 145
-                                transfer_state = 863
-                                transfer_state = 149
-                                transfer_state = 111
-                                transfer_state = 840
-                                transfer_state = 864
-                                transfer_state = 865
-                                transfer_state = 146
-                                transfer_state = 150
-                                transfer_state = 148
-                                transfer_state = 147
-                                transfer_state = 844
-								transfer_state = 1324
-								transfer_state = 1325
-								transfer_state = 1326
-
-								add_state_core = 145
-                                add_state_core = 863
-                                add_state_core = 149
-                                add_state_core = 111
-                                add_state_core = 840
-                                add_state_core = 864
-                                add_state_core = 865
-                                add_state_core = 146
-                                add_state_core = 150
-                                add_state_core = 148
-                                add_state_core = 147
-                                add_state_core = 844
-								add_state_core = 1324
-								add_state_core = 1325
-								add_state_core = 1326
-                                }
+							every_state = {
+								limit = {
+									is_owned_and_controlled_by = FIN
+								}
+								transfer_state_to = ISH
+							}
 						}
                    }
          }
@@ -3893,17 +4058,18 @@ FRG_austria_imperialate_decision = {
 			}
 		}
 		available = {
-            NOT = { country_exists = AUS }
+            country_exists = AUS
 			has_completed_focus = FRG_habsburgs
-			1137 = { is_owned_and_controlled_by = ROOT }
-            775 = { is_owned_and_controlled_by = ROOT }
+			AUS = {
+				is_puppet_of = FRG
+			}
 		}
 		fire_only_once = yes
 		cost = 0
 		days_remove = 1
 
 		ai_will_do = {
-			factor = 6
+			factor = 60
 		}
 		
 		complete_effect = {
@@ -3914,98 +4080,209 @@ FRG_austria_imperialate_decision = {
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
 			clr_country_flag = FRG_imperialate
-						VNC = { transfer_state = 783
-                            	transfer_state = 39
-								add_state_core = 783
-                                add_state_core = 39}
-                        AUS = { transfer_state = 152
-                                transfer_state = 836
-                                transfer_state = 942
-                                transfer_state = 835
-                                transfer_state = 775
-                                transfer_state = 4
-                                transfer_state = 1137
-                                transfer_state = 153
-								transfer_state = 1272 }
-						FRG = {
-							set_autonomy = {
-								target = AUS
-								autonomous_state = autonomous_territory
-							}
-						}
-                        AUS = { set_cosmetic_tag = FRG_AUS }
+			FRG = {
+				set_autonomy = {
+					target = AUS
+					autonomous_state = autonomous_territory
+				}
+			}
+            AUS = { set_cosmetic_tag = FRG_AUS }
+			AUS = {
+				create_country_leader = {
+					name = "Otto"
+					desc = "POLITICS_OTTO_DESC"
+					picture = "gfx/leaders/AUS/Portrait_AUS_Otto_I.png"
+					expire = "1.1.1"
+					ideology = socdem_colonial_govt_subtype
+				}
+				create_country_leader = {
+					name = "Otto"
+					desc = "POLITICS_OTTO_DESC"
+					picture = "gfx/leaders/AUS/Portrait_AUS_Otto_I.png"
+					expire = "1.1.1"
+					ideology = soclib_clientelism_subtype
+				}
+				create_country_leader = {
+					name = "卡米洛·卡斯蒂廖尼"
+					desc = ""
+					picture = "gfx/leaders/FRG/Portrait_FRG_Camillo_Castiglioni.png"
+					expire = "1.1.1"
+					ideology = marlib_colonial_govt_subtype
+				}
+				create_country_leader = {
+					name = "Otto"
+					desc = "POLITICS_OTTO_DESC"
+					picture = "gfx/leaders/AUS/Portrait_AUS_Otto_I.png"
+					expire = "1.1.1"
+					ideology = soccon_colonial_govt_subtype
+				}
+				create_country_leader = {
+					name = "Otto"
+					desc = "POLITICS_OTTO_DESC"
+					picture = "gfx/leaders/AUS/Portrait_AUS_Otto_I.png"
+					expire = "1.1.1"
+					ideology = colonial_govt_subtype
+				}	
+				create_country_leader = {
+					name = "Otto"
+					desc = "POLITICS_OTTO_DESC"
+					picture = "gfx/leaders/AUS/Portrait_AUS_Otto_I.png"
+					expire = "1.1.1"
+					ideology = autocratic_colonial_govt_subtype
+				}
+				create_country_leader = {
+					name = "Otto"
+					desc = "POLITICS_OTTO_DESC"
+					picture = "gfx/leaders/AUS/Portrait_AUS_Otto_I.png"
+					expire = "1.1.1"
+					ideology = natpop_colonial_govt_subtype
+				}
+				add_popularity = {
+				    ideology = authoritarian_democrat
+				    popularity = 0.32
+			    }
+                add_popularity = {
+				    ideology = paternal_autocrat
+				    popularity = 0.32
+			    }
+				add_popularity = {
+				    ideology = market_liberal
+				    popularity = 0.25
+			    }
+				add_popularity = {
+				    ideology = national_populist
+				    popularity = 0.16
+			    }
+				add_popularity = {
+				    ideology = totalist
+				    popularity = 0.05
+			    }
+				add_popularity = {
+				    ideology = syndicalist
+				    popularity = 0.05
+			    }
+				hidden_effect = {
+					remove_ideas = AUS_karl_habsburg
+				}
+			}
+			if = {
+				limit = {
+					FRG = {
+                   	 	has_country_leader = { ruling_only = yes name = "阿尔弗雷德·法布尔·卢斯" }
+						has_government = totalist
+                	}
+				}
+				AUS = {
+					set_politics = {
+            	   		ruling_party = social_democrat
+				    	elections_allowed = no
+        	    	}
+					add_popularity = {
+				    	ideology = authoritarian_democrat
+				    	popularity = 0.05
+			    	}
+                	add_popularity = {
+				    	ideology = paternal_autocrat
+				    	popularity = 0.05
+			    	}
+					add_popularity = {
+				    	ideology = market_liberal
+				    	popularity = 0.12
+			    	}
+					add_popularity = {
+				    	ideology = national_populist
+				    	popularity = 0.2
+			    	}
+					add_popularity = {
+					    ideology = social_democrat
+				    	popularity = 0.18
+			    	}
+				}	
+			}
+			if = {
+				limit = {
+					FRG = {
+                        has_completed_focus = FRG_Chanel_win
+                    }
+                    NOT = {
+                    	FRG = {
+                        	has_completed_focus = FRG_Appearing_from_the_shadow
+                   		 }
+                    }
+				}
+				AUS = {
+					set_politics = {
+            	   		ruling_party = market_liberal
+				    	elections_allowed = no
+        	    	}
+					add_popularity = {
+				    	ideology = authoritarian_democrat
+				    	popularity = 0.05
+			    	}
+                	add_popularity = {
+				    	ideology = paternal_autocrat
+				    	popularity = 0.15
+			    	}
+					add_popularity = {
+				    	ideology = market_liberal
+				    	popularity = 0.25
+			    	}
+				}	
+			}
+            IIE = { transfer_state = 783
+                    transfer_state = 39
+                    transfer_state = 759
+                    transfer_state = 160
 
-                        VNC = { transfer_state = 783
-                                transfer_state = 39
-                                transfer_state = 759
-                                transfer_state = 160
-
-                                add_state_core = 783
-                                add_state_core = 39
-                                add_state_core = 759
-                                add_state_core = 160
-                                 }
-						if = {
-							limit = {
-								SER = {
-									NOT = {
-										is_in_faction_with = FRG
-									}
-								}
-							}
-							SLO = { 
-								transfer_state = 1103
-                                transfer_state = 736
-                                transfer_state = 1100
-                                transfer_state = 102
-                                transfer_state = 1101
-                                transfer_state = 1104
-								transfer_state = 1144
-
-                                add_state_core = 1103
-                                add_state_core = 736
-                                add_state_core = 1100
-                                add_state_core = 102
-                                add_state_core = 1101
-                                add_state_core = 1104
-                                 }
-                        FRG = {
-							set_autonomy = {
-								target = SLO
-								autonomous_state = autonomous_territory
-							}
+                	add_state_core = 783
+                    add_state_core = 39
+                    add_state_core = 759
+                    add_state_core = 160
+                }
+			if = {
+				limit = {
+					SER = {
+						NOT = {
+							is_in_faction_with = FRG
 						}
-                        SLO = { 
-							set_cosmetic_tag = FRG_SLO 
-							set_politics = {
-            	                ruling_party = paternal_autocrat
-				        		elections_allowed = no
-        	                    }
-							}
+					}
+				}
+				every_state = {
+					limit = {
+						is_core_of = SLO
+					}
+					transfer_state_to = SLO
+					add_core_of = SLO
+				}
+            	FRG = {
+					set_autonomy = {
+						target = SLO
+						autonomous_state = autonomous_territory
+					}
+				}
+                SLO = { 
+					set_cosmetic_tag = FRG_SLO 
+					set_politics = {
+            	        ruling_party = paternal_autocrat
+				        elections_allowed = no
+        	        }
+				}
+			}
+			if = {
+				limit = {
+					country_exists = SER
+					SER = {
+						is_in_faction_with = FRG
 						}
-						else_if = {
-							limit = {
-								country_exists = SER
-								SER = {
-									is_in_faction_with = FRG
-								}
-							}
-						SER = { transfer_state = 1103
-                                transfer_state = 736
-                                transfer_state = 1100
-                                transfer_state = 102
-                                transfer_state = 1101
-                                transfer_state = 1104
-
-                                add_state_core = 1103
-                                add_state_core = 736
-                                add_state_core = 1100
-                                add_state_core = 102
-                                add_state_core = 1101
-                                add_state_core = 1104
-								add_state_core = 1144
-                            }
+					}
+					every_state = {
+						limit = {
+							is_core_of = SLO
 						}
+						transfer_state_to = SER
+						add_core_of = SER
+					}
+				}
             }
 	}
 
@@ -4036,8 +4313,8 @@ FRG_austria_imperialate_decision = {
 		available = {
             NOT = { country_exists = CRO }
 			has_completed_focus = FRG_Balkans
-			109 = { is_owned_and_controlled_by = ROOT }
-            104 = { is_owned_and_controlled_by = ROOT }
+			109 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            104 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -4234,9 +4511,9 @@ FRG_austria_imperialate_decision = {
 				        			elections_allowed = no
         	                    }
 								create_country_leader = {
-            	                    name = "埃默里·雷夫斯"
-				        			desc = "POLITICS_IAR_COLONIAL_DESC_1"
-            	                    picture = "gfx/leaders/FRG/Portrait_FRG_Emery_Reves.png"
+            	                    name = "弗拉达·伊利奇"
+				        			desc = ""
+            	                    picture = "gfx/leaders/FRG/Portrait_FRG_Vlada_Ilić.png"
             	                    expire = "1965.1.1"
             	                    ideology = marlib_colonial_govt_subtype
                                 }
@@ -4359,8 +4636,8 @@ FRG_bohemia_imperialate_decision = {
 		available = {
 			has_completed_focus = FRG_habsburgs
             NOT = { country_exists = CZE }
-			1129 = { is_owned_and_controlled_by = ROOT }
-            75 = { is_owned_and_controlled_by = ROOT }
+			1129 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            75 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -4550,8 +4827,8 @@ FRG_hungry_imperialate_decision = {
 			has_completed_focus = FRG_habsburgs
 			country_exists = CRO
             NOT = { country_exists = HUN }
-			43 = { is_owned_and_controlled_by = ROOT }
-            1123 = { is_owned_and_controlled_by = ROOT }
+			43 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            1123 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -5594,8 +5871,8 @@ FRG_russia_imperialate_decision = {
 		available = {
             #has_country_flag = FRG_rus
 			NOT = { country_exists = RUS }
-			219 = { is_owned_and_controlled_by = ROOT }
-            195 = { is_owned_and_controlled_by = ROOT }
+			219 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            195 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -5800,7 +6077,7 @@ FRG_russia_imperialate_decision = {
                                 create_country_leader = {
 	                   	 			name = "德米特里·巴甫诺维奇"
 	                    			desc = ""
-	                    			picture = "gfx/leaders/FRG/Portrait_FRG_Dmitri_Pavlovich.png"
+									picture = "gfx/leaders/FRG/Portrait_FRG_Dmitri_Pavlovich.png"
 	                   		 		expire = "1965.1.1"
 	                    			ideology = absolute_monarchy_subtype
                     			}
@@ -5950,8 +6227,8 @@ FRG_tunisia_imperialate_decision = {
 		available = {
 			has_completed_focus = FRG_colony
             NOT = { country_exists = NFA }
-			458 = { is_owned_and_controlled_by = ROOT }
-            665 = { is_owned_and_controlled_by = ROOT }
+			458 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
+            665 = { is_owned_and_controlled_by_ROOT_or_subject = yes }
 		}
 		fire_only_once = yes
 		cost = 0
@@ -6116,7 +6393,7 @@ FRG_ottoman_imperialate_decision = { #庆祝第十次十字军东征的胜利
 				create_country_leader = {
             	    name = "勒内·马希利"
 				    desc = ""
-            	    picture = "gfx/leaders/FRG/Portrait_FRG_René_Massigli.jpg"
+            	    picture = "gfx/leaders/FRG/Portrait_FRG_René_Massigli.png"
             	    expire = "1965.1.1"
             	    ideology = autocratic_colonial_govt_subtype
                 }
@@ -6423,7 +6700,7 @@ FRG_BRA_imperialate_decision = { #重建赤道法国殖民地
 					BRA = {
 						is_subject_of = FRG
 					}
-					202 = {
+					498 = {
 						is_controlled_by = BRA
 					}
 				}
@@ -6451,7 +6728,7 @@ FRG_BRA_imperialate_decision = { #重建赤道法国殖民地
 					BRA = {
 						is_subject_of = FRG
 					}
-					202 = {
+					498 = {
 						is_controlled_by = BRA
 					}
 				}
@@ -6728,12 +7005,10 @@ FRG_ARG_imperialate_decision = { #划分南美洲南部占领区
 						}
 					}
 				}
-				FLS = { transfer_state = 52
-                    	transfer_state = 53
-                    	transfer_state = 54
-                   	 	add_state_core = 52
-                    	add_state_core = 53
-                    	add_state_core = 54
+				FLS = { transfer_state = 504
+                    	transfer_state = 1043
+                   	 	add_state_core = 504
+                    	add_state_core = 1043
             	}
 			}
 			if = {
@@ -6748,6 +7023,7 @@ FRG_ARG_imperialate_decision = { #划分南美洲南部占领区
 						is_owned_and_controlled_by = ARG
 					}
 					transfer_state_to = FLS
+					add_core_of = FLS
 				}
 			}    
 			if = {
@@ -6762,6 +7038,7 @@ FRG_ARG_imperialate_decision = { #划分南美洲南部占领区
 						is_owned_and_controlled_by = PIR
 					}
 					transfer_state_to = FLS
+					add_core_of = FLS
 				}
 			} 
 			if = {
@@ -6776,6 +7053,7 @@ FRG_ARG_imperialate_decision = { #划分南美洲南部占领区
 						is_owned_and_controlled_by = CHL
 					}
 					transfer_state_to = FLS
+					add_core_of = FLS
 				}
 			} 
 			if = {
@@ -6790,6 +7068,7 @@ FRG_ARG_imperialate_decision = { #划分南美洲南部占领区
 						is_owned_and_controlled_by = PAR
 					}
 					transfer_state_to = FLS
+					add_core_of = FLS
 				}
 			} 
 			if = {
@@ -6804,6 +7083,7 @@ FRG_ARG_imperialate_decision = { #划分南美洲南部占领区
 						is_owned_and_controlled_by = URG
 					}
 					transfer_state_to = FLS
+					add_core_of = FLS
 				}
 			} 
 			if = {
@@ -6818,6 +7098,7 @@ FRG_ARG_imperialate_decision = { #划分南美洲南部占领区
 						is_owned_and_controlled_by = SPO
 					}
 					transfer_state_to = FLS
+					add_core_of = FLS
 				}
 			} 
 			if = {
@@ -6832,8 +7113,95 @@ FRG_ARG_imperialate_decision = { #划分南美洲南部占领区
 						is_owned_and_controlled_by = BOS
 					}
 					transfer_state_to = FLS
+					add_core_of = FLS
+				}
+			} 
+			if = {
+				limit = {
+					country_exists = RJM
+					RJM = {
+						is_subject_of = FRG
+					}
+				}
+				every_state = {
+					limit = {
+						is_owned_and_controlled_by = RJM
+					}
+					transfer_state_to = GRP
+					add_core_of = GRP
+				}
+			} 
+			if = {
+				limit = {
+					country_exists = GOY
+					GOY = {
+						is_subject_of = FRG
+					}
+				}
+				every_state = {
+					limit = {
+						is_owned_and_controlled_by = GOY
+					}
+					transfer_state_to = GRP
+					add_core_of = GRP
+				}
+			} 
+			if = {
+				limit = {
+					country_exists = BAH
+					BAH = {
+						is_subject_of = FRG
+					}
+				}
+				every_state = {
+					limit = {
+						is_owned_and_controlled_by = BAH
+					}
+					transfer_state_to = GRP
+					add_core_of = GRP
 				}
 			}        
+        }
+    }
+FRG_Indochina_imperialate_decision = {  #重返中南半岛
+		icon = decision_cat_generic_purge
+		visible = { 
+            has_completed_focus = FRG_Indochina
+		}
+		available = {
+			or = {
+				INC = {
+					is_puppet_of = FRG
+				}
+				VIN = {
+					is_puppet_of = FRG
+				}
+			}
+            NOT = {
+				FRG = {
+					or = {
+						has_country_flag = FRG_conquer_world
+					}
+				}
+			}
+		}
+		fire_only_once = yes
+		cost = 30
+		days_remove = 12
+
+		ai_will_do = {
+			factor = 600
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRG_italian_imperialate_decision"
+			set_country_flag = FRG_imperialate
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRG_italian_imperialate_decision"
+			clr_country_flag = FRG_imperialate
+            country_event = { id = frg.138 } 
         }
     }
 
@@ -7099,7 +7467,7 @@ FRG_attack_pol = { #远征华沙
 			has_completed_focus = FRG_Eastern_Europe	
 		}
 		ai_will_do = {
-			factor = 100
+			factor = 500
 		}
 		complete_effect = {
 			FRG = {
@@ -7111,24 +7479,27 @@ FRG_attack_pol = { #远征华沙
 		}
 	}
 FRG_attack_ita = { #攻击剩余的亚平宁半岛势力
-		cost = 0
-		days_remove = 7
+		cost = 20
+		days_remove = 15
 		icon = GFX_decision_generic_nationalism
 		fire_only_once = yes
 		available = {
 			has_completed_focus = FRG_italy
-			NOT = {
-				country_exists = SRI
+			or = {
+				NOT = {
+					country_exists = SRI
+				}
+				SRI = {
+					is_in_faction_with = FRG
+				}
 			}
 		}
 		visible = {
-			is_faction_leader = yes
-			has_completed_focus = FRG_italy
-			NOT = {
-				ITA = {
-					has_socialist_government = yes
-				}
-			}	
+			is_in_faction = yes
+			has_completed_focus = FRG_italy	
+		}
+		ai_will_do = {
+			factor = 500
 		}
 		complete_effect = {
 			if = {
@@ -7228,10 +7599,45 @@ FRG_attack_ita = { #攻击剩余的亚平宁半岛势力
 				}
 			}
 		}
-		ai_will_do = {
-			factor = 5
-		}
 	}
+FRG_attack_brazil_decision = {  #攻击巴西
+		icon = decision_cat_generic_purge
+		visible = {
+			has_completed_focus = FRG_La_Plata
+            country_exists = BRA
+		}
+		available = {
+			has_completed_focus = FRG_La_Plata
+            country_exists = BRA
+			BRA = {
+				is_in_faction = no
+			}
+			NOT = {
+				BRA = {
+					has_war_with = FRG
+					has_country_flag = FRG_alley
+				}
+			}
+		}
+		fire_only_once = yes
+		cost = 20
+		days_remove = 8
+
+		ai_will_do = {
+			factor = 600
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRG_metropolitan_decision"
+		}
+		
+		remove_effect = {
+            declare_war_on = {
+				target = BRA
+				type = annex_everything
+			}
+		}
+    }
 FRG_attack_denmark_decision = {  #攻击丹麦
 		icon = decision_cat_generic_purge
 		visible = {
@@ -7258,7 +7664,7 @@ FRG_attack_denmark_decision = {  #攻击丹麦
 		days_remove = 7
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
@@ -7303,7 +7709,7 @@ FRG_attack_norway_decision = {
 		days_remove = 7
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
@@ -7341,7 +7747,7 @@ FRG_attack_sweden_decision = {
 		days_remove = 8
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
@@ -7389,7 +7795,7 @@ FRG_attack_romania_decision = {
 		days_remove = 8
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
@@ -7466,7 +7872,7 @@ FRG_attack_bulgaria_decision = {
 		days_remove = 8
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
@@ -7538,7 +7944,7 @@ FRG_attack_greece_decision = {
 		days_remove = 8
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
@@ -7618,7 +8024,7 @@ FRG_attack_albania_decision = {
 		days_remove = 8
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
@@ -7677,7 +8083,7 @@ FRG_attack_ottoman_decision = { #发动第十次十字军东征
 		days_remove = 8
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
@@ -7714,7 +8120,7 @@ FRG_attack_LIT_decision = {
 		days_remove = 8
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
@@ -7751,7 +8157,7 @@ FRG_attack_LAT_decision = {
 		days_remove = 8
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
@@ -7788,7 +8194,7 @@ FRG_attack_EST_decision = {
 		days_remove = 8
 
 		ai_will_do = {
-			factor = 6
+			factor = 600
 		}
 		
 		complete_effect = {
