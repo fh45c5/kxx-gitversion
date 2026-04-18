@@ -6800,8 +6800,7 @@ focus_tree = {
 		select_effect = {
 			country_event = {
 				id = fengtian.287
-				days = 24
-				random = 144
+				days = 1
 			}
 		}
 		relative_position_id = FNG_Unification_through_Subjugation
@@ -6828,7 +6827,6 @@ focus_tree = {
 				}
 			}
 			else = {
-				retire_country_leader = yes
 				create_country_leader = {
 					name = "张学良"
 					desc = "POLITICS_ZHANG_XUELIANG_DESC"
@@ -6842,6 +6840,20 @@ focus_tree = {
 					picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
 					expire = "1965.1.1"
 					ideology = militarism_subtype
+				}
+				create_country_leader = {
+					name = "张学良"
+					desc = "POLITICS_ZHANG_XUELIANG_DESC"
+					picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
+					expire = "1965.1.1"
+					ideology = authdem_junta_subtype
+				}
+				create_country_leader = {
+					name = "张学良"
+					desc = "POLITICS_ZHANG_XUELIANG_DESC"
+					picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
+					expire = "1965.1.1"
+					ideology = junta_subtype
 				}
 				hidden_effect = {
 					add_ideas = FNG_Zhang_Xueliang_hog_pau
@@ -7449,17 +7461,7 @@ focus_tree = {
 		icon = GFX_focus_jap_spiritual_mobilization
 		cost = 4
 		available = {
-			OR = {
-				has_country_leader = {
-					name = "杨宇霆"
-					ruling_only = yes
-				}
-				has_global_flag = MON_FNG_new_mandate_enforced
-				AND = {
-					is_subject_of = MON
-					MON = { has_global_flag = MON_new_claimed }
-				}
-			}
+			
 		}
 		prerequisite = {
 			focus = FNG_fake_republic
@@ -7593,7 +7595,7 @@ focus_tree = {
 		ai_will_do = { factor = 90 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_rebirth_of_the_dragon_throne"
-			custom_effect_tooltip = unlock_focuses
+			add_ideas = FNG_hanjian_gov
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -7710,7 +7712,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FNG_yamato_dynasty"
 			custom_effect_tooltip = unlock_focuses
-			custom_effect_tooltip = "Other dynasties will get full trees eventually, worry not"
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -9104,7 +9105,16 @@ focus_tree = {
 			focus = FNG_The_Question_of_the_Presidency
 		}
 		available = {
-			owns_state = 608
+			OR = {
+				has_country_leader = {
+					name = "张作霖"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "张学良"
+					ruling_only = yes
+				}
+			}
 			
 		}
 		
@@ -9112,7 +9122,8 @@ focus_tree = {
 		ai_will_do = { factor = 80 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_dongbeis_final_victory"
-			
+			add_stability = 0.05
+			add_war_support = 0.05
 			
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
@@ -12262,7 +12273,12 @@ focus_tree = {
 		relative_position_id = FNG_The_Question_of_the_Presidency
 		x = 65
 		y = 1
-
+		available = {
+			has_country_leader = {
+				name = "杨宇霆"
+				ruling_only = yes
+			}
+		}
 		prerequisite = {
 			focus = FNG_The_Question_of_the_Presidency
 		}
@@ -12274,7 +12290,17 @@ focus_tree = {
 			log = "[GetLogRoot]: Focus Completed FNG_from_the_ashes"
 			add_stability = 0.05
 			add_war_support = 0.05
-			
+			custom_effect_tooltip = FNG_no_more_bickering_an_shiet_lah
+			set_country_flag = FNG_no_more_bickering_an_shiet_lah_flag
+			clr_country_flag = FNG_communications_clique_active
+			clr_country_flag = FNG_recovery_league_active
+			clr_country_flag = FNG_zhang_clique_active
+			hidden_effect = {
+				country_event = fengtian.406 #for future development
+				add_ideas = FNG_an_army_of_traitors
+				add_ideas = FNG_hollowed_out_economy
+				add_ideas = FNG_collaboration_the_great_evil
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -12489,7 +12515,7 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_a_reformed_government"
-			
+			country_event = fengtian.414
 			remove_ideas = FNG_collaboration_the_great_evil
 			
 			FNG_increase_legitimacy = yes
@@ -12640,7 +12666,10 @@ focus_tree = {
 		}
 
 		available = {
-			
+			has_country_leader = {
+				name = "王荆山"
+				ruling_only = yes
+			}
 		}
 
 		ai_will_do = { factor = 1000 }
@@ -12794,7 +12823,10 @@ focus_tree = {
 		}
 
 		available = {
-			 
+			has_country_leader = {
+				name = "阮振铎"
+				ruling_only = yes
+			}
 		}
 
 		ai_will_do = { factor = 1000 }
@@ -12828,7 +12860,10 @@ focus_tree = {
 		}
 
 		available = {
-			 
+			has_country_leader = {
+				name = "缪斌"
+				ruling_only = yes
+			}
 		}
 
 		ai_will_do = { factor = 1000 }
@@ -12859,9 +12894,11 @@ focus_tree = {
 			focus = FNG_rule_of_the_commercial_cabal
 			focus = FNG_reign_of_the_old_politicians
 		}
-
 		available = {
-			 
+			has_country_leader = {
+				name = "爵青"
+				ruling_only = yes
+			}
 		}
 
 		ai_will_do = { factor = 1000 }
