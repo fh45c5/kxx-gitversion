@@ -16,8 +16,8 @@ political_actions = {
 			has_completed_focus = FNG_build_up_new_government
 		}
 		ai_will_do = { factor = 1000 }
-		cost = 150
-		days_remove = 50
+		cost = 100
+		days_remove = 30
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_Join_The_Zhifeng_War target: [From.GetName]"
 			FNG_increase_legitimacy = yes
@@ -4338,4 +4338,176 @@ FNG_non_chinese_forpol = {
 		}
 	}
 }
+FNG_great_raids_category = {
+	FNG_raid_warlords = {
+		icon = generic_ignite_civil_war
 
+		available = {
+			tag = FNG
+		}
+		visible = {
+			has_completed_focus = FNG_wild_ride
+		}
+		
+
+		targets = { MON SIK TIB TAN ETS QIE LEC LEP CHI SQI ANQ HNN YUN GXC HKC XSM SHX SZC HKC TAI }
+		target_trigger = {
+			OR = {
+				is_neighbor_of = FROM
+				tag = TAI
+			}
+		}
+
+		cost = 20
+		days_remove = 30
+		fire_only_once = yes
+		war_with_target_on_remove = yes
+
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				FROM = { is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { overlord_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { guarantor_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancelled FOP_attack_country target: [From.GetName]"
+			clear_decision_attack_AI = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_attack_country target: [From.GetName]"
+			
+			FROM = { country_event = kr.political.30 } #warning event
+			setup_decision_attack_AI = yes
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FOP_attack_country target: [From.GetName]"
+			clear_decision_attack_AI = yes
+				declare_war_on = {
+					target = FROM
+					type = annex_everything
+				}
+				every_state = {
+					limit = {
+						is_core_of = FROM
+					}
+					add_core_of = FNG
+				}
+		}
+	}
+	FNG_declare_uni_bandits = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			NOT = {
+				country_exists = QIE
+				country_exists = SHX
+				country_exists = SQI
+				country_exists = LEP
+				country_exists = ANQ
+				country_exists = CHI
+				country_exists = GXC
+				country_exists = HNN
+				country_exists = YUN
+				country_exists = SZC
+				country_exists = TIB
+				country_exists = SIK
+				country_exists = ETS
+				country_exists = TAN
+			}
+		}
+		visible = { 
+			tag = FNG 
+			
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 1000 }
+		fire_only_once = yes
+		complete_effect = {
+			set_cosmetic_tag = FNG_bandit_state_uni
+			every_state = {		
+				limit = {
+					OR = {
+					is_core_of = LEP
+					is_core_of = CHI
+					is_core_of = ANQ
+					is_core_of = QIE
+					is_core_of = SQI
+					is_core_of = GXC
+					is_core_of = YUN
+					is_core_of = XSM
+					is_core_of = Mon
+					is_core_of = HNN
+					is_core_of = shx
+					is_core_of = szc
+					is_core_of = lec
+					is_core_of = sik
+					is_core_of = tib
+					is_core_of = TAI
+					is_core_of = JST
+					}
+				}					
+				add_core_of = FNG
+			}
+			add_state_core = 537
+			add_state_core = 525
+			add_state_core = 527
+			add_state_core = 858
+			add_state_core = 745
+			add_state_core = 1246
+			add_state_core = 409
+			add_state_core = 561
+			add_state_core = 560
+			add_state_core = 657
+			add_state_core = 654
+			add_state_core = 1293
+			add_state_core = 811
+			add_state_core = 329
+			add_state_core = 729
+			add_state_core = 600
+			add_state_core = 1046
+			add_state_core = 802
+			add_state_core = 1066
+			add_state_core = 595
+			add_state_core = 1044
+			add_state_core = 1045
+			add_state_core = 1069
+			add_state_core = 803
+			add_state_core = 1068
+			add_state_core = 1067
+			add_state_core = 596
+			add_state_core = 613
+			add_state_core = 1014
+			add_state_core = 606
+			add_state_core = 1050
+			add_state_core = 598
+			add_state_core = 1047
+			add_state_core = 1064
+			add_state_core = 597
+			add_state_core = 1065
+			add_state_core = 996
+			add_state_core = 744
+		}
+	}
+}	

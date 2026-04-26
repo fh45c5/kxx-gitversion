@@ -13415,7 +13415,9 @@ focus_tree = {
 		id = FNG_declare_bandit_state
 		icon = GFX_goal_NYC_Diminish_Influence_Organized_Crime
 		cost = 5
-
+		available = {
+			has_country_flag = FNG_bandits_win
+		}
 		
 		x = -25
 		y = 20
@@ -13593,7 +13595,12 @@ focus_tree = {
 		id = FNG_coop_socialists
 		icon = GFX_goal_FRA_Coop_Dominance
 		cost = 5
-		
+		available = {
+			has_country_leader = {
+				name = "谢文东"
+				ruling_only = yes
+			}
+		}
 		prerequisite = {
 			focus = FNG_from_bandit_to_ruler
 		}
@@ -13610,6 +13617,26 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
 			add_ideas = FNG_socialist_bandits
+		create_country_leader = {
+			name = "谢文东"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Xie_Wendong.png"
+			expire = "1.1.1"
+			ideology = tot_anti_japaneseism_subtype
+		}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+			set_politics = {
+				ruling_party = totalist
+				elections_allowed = no
+			}
+			set_party_name = {
+				ideology = totalist
+				long_name = "匪帮"
+				name = "匪帮"
+			}
+			add_pataut_to_coalition = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13620,6 +13647,12 @@ focus_tree = {
 		
 		prerequisite = {
 			focus = FNG_from_bandit_to_ruler
+		}
+		available = {
+			has_country_leader = {
+				name = "卢占魁"
+				ruling_only = yes
+			}
 		}
 		mutually_exclusive = {
 			focus = FNG_new_mandate_heaven
@@ -13689,6 +13722,12 @@ focus_tree = {
 		prerequisite = {
 			focus = FNG_from_bandit_to_ruler
 		}
+		available = {
+			has_country_leader = {
+				name = "谢文东"
+				ruling_only = yes
+			}
+		}
 		mutually_exclusive = {
 			focus = FNG_new_mandate_heaven
 			focus = FNG_coop_socialists
@@ -13702,7 +13741,27 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
 			add_ideas = FNG_tridem_bandits
+			create_country_leader = {
+				name = "谢文东"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Xie_Wendong.png"
+				expire = "1.1.1"
+				ideology = authdem_tridemism_subtype
+			}
 			
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.1
+			}
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				elections_allowed = no
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = "匪帮"
+				name = "匪帮"
+			}
+			add_pataut_to_coalition = yes
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13710,7 +13769,12 @@ focus_tree = {
 		id = FNG_bow_to_rising_sun
 		icon = GFX_goal_CAN_rising_sun_burns_our_empire
 		cost = 5
-		
+		available = {
+			has_country_leader = {
+				name = "谢文东"
+				ruling_only = yes
+			}
+		}
 		prerequisite = {
 			focus = FNG_from_bandit_to_ruler
 		}
@@ -13727,6 +13791,10 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed FNG_the_winner_takes_it_all"
 			add_ideas = FNG_jap_bandits
+			set_country_leader_ideology = pataut_pan_asianism_subtype
+			JAP = {
+				add_to_faction = FNG
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -13734,7 +13802,12 @@ focus_tree = {
 		id = FNG_new_mandate_heaven
 		icon = GFX_goal_monarchism
 		cost = 5
-		
+		available = {
+			has_country_leader = {
+				name = "姜鹏飞"
+				ruling_only = yes
+			}
+		}
 		prerequisite = {
 			focus = FNG_from_bandit_to_ruler
 		}
@@ -15458,7 +15531,14 @@ focus_tree = {
 		relative_position_id = FNG_story_waiting_to_be_told
 		cost = 5
 		available_if_capitulated = yes
-		
+		available = {
+			NOT = {
+				country_exists = RUS
+				country_exists = TRM
+			}
+			owns_state = 219
+			owns_state = 195
+		}
 		bypass = { }  
         prerequisite = {
             focus = FNG_yermaks_call
@@ -15472,7 +15552,7 @@ focus_tree = {
 			add_research_slot = 1
 			RUS_enable_integration = yes
 			ROOT = { save_global_event_target_as = russia }
-			#set_cosmetic_tag = ARC_Russia
+			set_cosmetic_tag = ARC_Russia
 		}
 	}
 	focus = {
@@ -16926,9 +17006,25 @@ focus_tree = {
 		prerequisite = {
 			focus = FNG_do_not_forget_cause
 		}
-		
+		available = {
+			NOT = {
+				country_exists = RUS
+				country_exists = TRM
+			}
+			owns_state = 219
+			owns_state = 195
+		}
 		completion_reward = { 
-			#set_cosmetic_tag = PSL_uni
+			if = {
+				limit = {
+					has_government = totalist
+				}
+				set_cosmetic_tag = FNG_nazbol_sov
+			}
+			else = {
+				set_cosmetic_tag = SOV_union_alternative_3
+			}
+			
 			add_war_support = 0.3
 			add_stability = 0.3
 			add_research_slot = 1
