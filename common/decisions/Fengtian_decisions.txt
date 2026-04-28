@@ -2832,7 +2832,16 @@ FNG_foreign_policy = { #The Road to Reclamation
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_Proclaim_the_ROC"
 			set_country_flag = FNG_roc_proclaimed
-			set_cosmetic_tag = FNG_ROC
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = FNG_totalist_approach
+						has_completed_focus = FNG_natpop_tendency
+					}
+				}
+				set_cosmetic_tag = FNG_ROC
+			}
+			
 			add_stability = 0.10
 			add_war_support = 0.10
 		}
@@ -3412,6 +3421,9 @@ FNG_foreign_policy = { #The Road to Reclamation
 		visible = {
 			FNG_JAP_hostile = no
 			NOT = { has_global_flag = JAP_Fading_Sun }
+			NOT = { has_country_flag = FNG_no_longer_chinese_tag }
+			NOT = { has_completed_focus = FNG_totalist_approach }
+			NOT = { has_completed_focus = FNG_natpop_tendency }
 			has_war_with = 608.owner
 			FROM = {
 				is_faction_leader = yes
@@ -4485,7 +4497,7 @@ FNG_great_raids_category = {
 		ai_will_do = { factor = 1000 }
 		fire_only_once = yes
 		complete_effect = {
-			set_cosmetic_tag = FNG_bandit_state_uni
+			#set_cosmetic_tag = FNG_bandit_state_uni
 			every_state = {		
 				limit = {
 					OR = {
