@@ -5,6 +5,53 @@
 ###########################
 
 political_actions = {
+	FNG_increase_legitimacy_decision = {
+		icon = GFX_decision_eng_ally_imperialist_coup
+		allowed = { tag = FNG }
+		visible = { 
+			tag = FNG
+			is_subject = no
+		}
+		available = {
+			has_completed_focus = FNG_build_up_new_government
+		}
+		ai_will_do = { factor = 1000 }
+		cost = 100
+		days_remove = 30
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_Join_The_Zhifeng_War target: [From.GetName]"
+			FNG_increase_legitimacy = yes
+		}
+	}
+	FNG_regionalist_wrath = {
+		icon = GFX_decision_eng_ally_imperialist_coup
+
+		allowed = { always = no }
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		days_mission_timeout = 200
+		is_good = no
+		fire_only_once = yes
+
+		cancel_trigger = {
+			
+			has_country_flag = FNG_regionalists_suppressed
+			
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TRM_make_monarchy target: [From.GetName]"
+			
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TRM_make_monarchy target: [From.GetName]"
+			country_event = fngreg.1
+		}
+	}
 	JAP_puppet_FNG = {
 		icon = generic_flags
 		allowed = { tag = JAP }
@@ -2785,7 +2832,16 @@ FNG_foreign_policy = { #The Road to Reclamation
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_Proclaim_the_ROC"
 			set_country_flag = FNG_roc_proclaimed
-			set_cosmetic_tag = FNG_ROC
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = FNG_totalist_approach
+						has_completed_focus = FNG_natpop_tendency
+					}
+				}
+				set_cosmetic_tag = FNG_ROC
+			}
+			
 			add_stability = 0.10
 			add_war_support = 0.10
 		}
@@ -3365,6 +3421,9 @@ FNG_foreign_policy = { #The Road to Reclamation
 		visible = {
 			FNG_JAP_hostile = no
 			NOT = { has_global_flag = JAP_Fading_Sun }
+			NOT = { has_country_flag = FNG_no_longer_chinese_tag }
+			NOT = { has_completed_focus = FNG_totalist_approach }
+			NOT = { has_completed_focus = FNG_natpop_tendency }
 			has_war_with = 608.owner
 			FROM = {
 				is_faction_leader = yes
@@ -4089,6 +4148,501 @@ FNG_Restoring_Order = { #Restoring Order to Manchuria
 					has_country_flag = FNG_north_secured
 				}
 				clr_country_flag = FNG_manchuria_restoring_order
+			}
+		}
+	}
+}
+FNG_non_chinese_forpol = {
+	FNG_join_jap = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			
+			
+		}
+		visible = { 
+			tag = FNG 
+			has_country_flag = FNG_no_longer_chinese_tag
+			OR = {
+				has_completed_focus = FNG_our_partners_the_zaibatsu
+				has_completed_focus = FNG_president_myronovych
+			}
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 1000 }
+		fire_only_once = yes
+		complete_effect = {
+			JAP = {
+				add_to_faction = FNG
+			}
+		}
+	}
+	FNG_join_fra = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			
+		}
+		visible = { 
+			tag = FNG 
+			has_country_flag = FNG_no_longer_chinese_tag
+			has_socialist_government = yes
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 1000 }
+		fire_only_once = yes
+		complete_effect = {
+			INT = {
+				add_to_faction = FNG
+			}
+		}
+	}
+	
+	FNG_declare_sino_ukr_fed = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			
+		}
+		visible = { 
+			tag = FNG 
+			has_completed_focus = FNG_strike_from_upa
+			NOT = {
+				country_exists = QIE
+				country_exists = SHX
+				country_exists = SQI
+				country_exists = LEP
+				country_exists = ANQ
+				country_exists = CHI
+				country_exists = GXC
+				country_exists = HNN
+				country_exists = YUN
+				country_exists = SZC
+				country_exists = TIB
+				country_exists = SIK
+				country_exists = ETS
+				country_exists = TAN
+			}
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 1000 }
+		fire_only_once = yes
+		complete_effect = {
+			set_cosmetic_tag = FNG_SINO_UKR_FED
+				every_state = {		
+					limit = {					
+						is_core_of = UKR
+					}					
+					add_core_of = FNG
+				}
+				every_state = {		
+					limit = {					
+						is_core_of = WSU
+					}					
+					add_core_of = FNG
+				}
+				every_state = {		
+					limit = {					
+						is_core_of = DKB
+					}					
+					add_core_of = FNG
+				}
+				every_state = {		
+					limit = {					
+						is_core_of = KLY
+					}					
+					add_core_of = FNG
+				}
+				every_state = {		
+					limit = {					
+						is_core_of = KUB
+					}					
+					add_core_of = FNG
+				}
+				every_state = {		
+					limit = {					
+						is_core_of = MTR
+					}					
+					add_core_of = FNG
+				}
+				every_state = {		
+					limit = {					
+						is_core_of = ALO
+					}					
+					add_core_of = FNG
+				}
+				every_state = {		
+					limit = {					
+						is_core_of = KHI
+					}					
+					add_core_of = FNG
+				}
+				every_state = {		
+					limit = {					
+						is_core_of = TRK
+					}					
+					add_core_of = FNG
+				}
+				every_state = {		
+					limit = {					
+						is_core_of = UZB
+					}					
+					add_core_of = FNG
+				}
+				every_state = {		
+					limit = {					
+						is_core_of = KYR
+					}					
+					add_core_of = FNG
+				}
+				add_state_core = 1224
+				add_state_core = 236
+		}
+	}
+	FNG_declare_great_green_ukr = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			
+		}
+		visible = { 
+			tag = FNG 
+			has_completed_focus = FNG_president_myronovych
+			NOT = {
+				country_exists = QIE
+				country_exists = SHX
+				country_exists = SQI
+				country_exists = LEP
+				country_exists = ANQ
+				country_exists = CHI
+				country_exists = GXC
+				country_exists = HNN
+				country_exists = YUN
+				country_exists = SZC
+				country_exists = TIB
+				country_exists = SIK
+				country_exists = ETS
+				country_exists = TAN
+			}
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 1000 }
+		fire_only_once = yes
+		complete_effect = {
+			set_cosmetic_tag = GUK_far_east
+		}
+	}
+
+	
+	FNG_declare_sino_kor_fed = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			
+		}
+		visible = { 
+			tag = FNG 
+			has_completed_focus = FNG_liberate_homeland
+			NOT = {
+				country_exists = QIE
+				country_exists = SHX
+				country_exists = SQI
+				country_exists = LEP
+				country_exists = ANQ
+				country_exists = CHI
+				country_exists = GXC
+				country_exists = HNN
+				country_exists = YUN
+				country_exists = SZC
+				country_exists = TIB
+				country_exists = SIK
+				country_exists = ETS
+				country_exists = TAN
+			}
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 1000 }
+		fire_only_once = yes
+		complete_effect = {
+			set_cosmetic_tag = FNG_SINO_KOR_FED
+		}
+	}
+	
+}
+FNG_great_raids_category = {
+	FNG_raid_warlords = {
+		icon = generic_ignite_civil_war
+
+		available = {
+			tag = FNG
+		}
+		visible = {
+			has_completed_focus = FNG_wild_ride
+		}
+		
+
+		targets = { MON SIK TIB TAN ETS QIE LEC LEP CHI SQI ANQ HNN YUN GXC HKC XSM SHX SZC HKC TAI }
+		target_trigger = {
+			OR = {
+				is_neighbor_of = FROM
+				tag = TAI
+			}
+		}
+
+		cost = 20
+		days_remove = 30
+		fire_only_once = yes
+		war_with_target_on_remove = yes
+
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				FROM = { is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { overlord_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { guarantor_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancelled FOP_attack_country target: [From.GetName]"
+			clear_decision_attack_AI = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_attack_country target: [From.GetName]"
+			
+			FROM = { country_event = kr.political.30 } #warning event
+			setup_decision_attack_AI = yes
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FOP_attack_country target: [From.GetName]"
+			clear_decision_attack_AI = yes
+				declare_war_on = {
+					target = FROM
+					type = annex_everything
+				}
+				every_state = {
+					limit = {
+						is_core_of = FROM
+					}
+					add_core_of = FNG
+				}
+		}
+	}
+	FNG_declare_uni_bandits = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			NOT = {
+				country_exists = QIE
+				country_exists = SHX
+				country_exists = SQI
+				country_exists = LEP
+				country_exists = ANQ
+				country_exists = CHI
+				country_exists = GXC
+				country_exists = HNN
+				country_exists = YUN
+				country_exists = SZC
+				country_exists = TIB
+				country_exists = SIK
+				country_exists = ETS
+				country_exists = TAN
+			}
+		}
+		visible = { 
+			tag = FNG 
+			
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 1000 }
+		fire_only_once = yes
+		complete_effect = {
+			#set_cosmetic_tag = FNG_bandit_state_uni
+			every_state = {		
+				limit = {
+					OR = {
+					is_core_of = LEP
+					is_core_of = CHI
+					is_core_of = ANQ
+					is_core_of = QIE
+					is_core_of = SQI
+					is_core_of = GXC
+					is_core_of = YUN
+					is_core_of = XSM
+					is_core_of = Mon
+					is_core_of = HNN
+					is_core_of = shx
+					is_core_of = szc
+					is_core_of = lec
+					is_core_of = sik
+					is_core_of = tib
+					is_core_of = TAI
+					is_core_of = JST
+					}
+				}					
+				add_core_of = FNG
+			}
+			add_state_core = 537
+			add_state_core = 525
+			add_state_core = 527
+			add_state_core = 858
+			add_state_core = 745
+			add_state_core = 1246
+			add_state_core = 409
+			add_state_core = 561
+			add_state_core = 560
+			add_state_core = 657
+			add_state_core = 654
+			add_state_core = 1293
+			add_state_core = 811
+			add_state_core = 329
+			add_state_core = 729
+			add_state_core = 600
+			add_state_core = 1046
+			add_state_core = 802
+			add_state_core = 1066
+			add_state_core = 595
+			add_state_core = 1044
+			add_state_core = 1045
+			add_state_core = 1069
+			add_state_core = 803
+			add_state_core = 1068
+			add_state_core = 1067
+			add_state_core = 596
+			add_state_core = 613
+			add_state_core = 1014
+			add_state_core = 606
+			add_state_core = 1050
+			add_state_core = 598
+			add_state_core = 1047
+			add_state_core = 1064
+			add_state_core = 597
+			add_state_core = 1065
+			add_state_core = 996
+			add_state_core = 744
+		}
+	}
+}	
+FNG_israels_category = {
+	FNG_ally_israel = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			
+		}
+		visible = { 
+			tag = FNG 
+			country_exists = ISR
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 0 }
+		fire_only_once = yes
+		complete_effect = {
+			FNG = {
+				add_to_faction = ISR
+			}
+		}
+	}
+	FNG_ally_uganda = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			
+		}
+		visible = { 
+			tag = FNG 
+			country_exists = UGA
+			UGA = {
+				has_cosmetic_tag = UGA_JUD
+			}
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 0 }
+		fire_only_once = yes
+		complete_effect = {
+			FNG = {
+				add_to_faction = UGA
+			}
+		}
+	}
+	FNG_ally_madagascar = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			
+		}
+		visible = { 
+			tag = FNG 
+			country_exists = MAG
+			MAG = {
+				has_cosmetic_tag = MAG_Free_Settlers
+			}
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 0 }
+		fire_only_once = yes
+		complete_effect = {
+			FNG = {
+				add_to_faction = MAD
+			}
+		}
+	}
+	FNG_ally_alaska = {
+		icon = generic_flags
+		allowed = { 
+			tag = FNG 
+			
+		}
+		visible = { 
+			tag = FNG 
+			country_exists = ALA
+			ALA = {
+				has_cosmetic_tag = ALA_ZION
+			}
+		}
+		available = {
+			
+		}
+		ai_will_do = { factor = 0 }
+		fire_only_once = yes
+		complete_effect = {
+			FNG = {
+				add_to_faction = ALA
 			}
 		}
 	}

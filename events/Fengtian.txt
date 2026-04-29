@@ -12,7 +12,7 @@ add_namespace = fngdynasty
 add_namespace = fngnap
 add_namespace = fngrebels #unused events
 add_namespace = fngmil
-
+add_namespace = fngreg
 #################################
 ### Fengtian Political Events ###
 #################################
@@ -35,6 +35,7 @@ country_event = { #Rumors incite Regionalist Uproar
 			add_idea = FNG_Regionalist_Resentment
 			remove_idea = FNG_Regionalist_Sentiment
 		}
+		activate_mission = FNG_regionalist_wrath
 		hidden_effect = {
 			country_event = {
 				id = fengtian.3
@@ -74,6 +75,7 @@ country_event = { #Protests Continue REPEATING
 			has_country_flag = regionalist_protest_4
 		}
 	}
+	
 	picture = GFX_report_event_CHI_protest
 
 	is_triggered_only = yes
@@ -82,6 +84,8 @@ country_event = { #Protests Continue REPEATING
 		NOT = {
 			has_completed_focus = FNG_Silence_Targeted_Subversives
 			has_completed_focus = FNG_Justify_Mass_Arrests
+			has_country_flag = FNG_no_longer_chinese_tag
+			
 		}
 	}
 
@@ -124,13 +128,15 @@ country_event = { #Protests Continue REPEATING
 				clr_country_flag = regionalist_protest_3
 				set_country_flag = regionalist_protest_4
 			}
+			
 			if = {
 				limit = {
 					has_country_flag = regionalist_protest_4
 				}
 				clr_country_flag = regionalist_protest_4
-				set_country_flag = regionalist_protest_2
+				set_country_flag = regionalist_protest_2	
 			}
+			
 			country_event = { # Repeating
 				id = fengtian.3
 				days = 20
@@ -148,7 +154,11 @@ country_event = { #Agent Provocateurs in Action
 	picture = GFX_report_event_CHI_riot
 
 	fire_only_once = yes
-
+	trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	is_triggered_only = yes
 
 	option = { #Excellent
@@ -174,7 +184,11 @@ country_event = { #The Harbin Riots
 	picture = GFX_report_event_CHI_official_announcement
 
 	fire_only_once = yes
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	is_triggered_only = yes
 
 	option = { #Good... and bad.
@@ -214,7 +228,11 @@ country_event = { #Mass Arrests Begin
 	title = fengtian.6.t
 	desc = fengtian.6.d
 	picture = GFX_report_event_FNG_several_prisoners
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	fire_only_once = yes
 
 	is_triggered_only = yes
@@ -247,7 +265,11 @@ country_event = { #An Offer from the Kempeitai
 	title = fengtian.7.t
 	desc = fengtian.7.d
 	picture = GFX_report_event_FNG_kempeitai
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	fire_only_once = yes
 
 	is_triggered_only = yes
@@ -299,6 +321,11 @@ country_event = { #Regionalists suppressed
 	trigger = {
 		has_completed_focus = FNG_Justify_Mass_Arrests
 		has_completed_focus = FNG_Silence_Targeted_Subversives
+		
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	
 	}
 
 	option = { #Progress
@@ -315,7 +342,11 @@ country_event = { #Picking up the Educational Slack
 	title = fengtian.9.t
 	desc = fengtian.9.d
 	picture = GFX_report_event_FNG_mantetsu_school
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	fire_only_once = yes
 
 	is_triggered_only = yes
@@ -359,7 +390,11 @@ country_event = { #Mantetsu School Open Kimono
 	title = fengtian.10.t
 	desc = fengtian.10.d
 	picture = GFX_report_event_FNG_schooling_kimono
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -404,7 +439,11 @@ country_event = { #Mantetsu School Open Fengtian Youth League
 	title = fengtian.11.t
 	desc = fengtian.11.d
 	picture = GFX_report_event_FNG_youth_league_students
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -439,7 +478,11 @@ country_event = { #Mantetsu School Closed Uniform
 	title = fengtian.12.t
 	desc = fengtian.12.d
 	picture = GFX_report_event_CHI_school_uniform
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -475,7 +518,11 @@ country_event = { #Railway Construction Jilin-Hailong
 
 	fire_only_once = yes
 	is_triggered_only = yes
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	option = { #Chinese Contract
 		name = fengtian.13.a
 		set_country_flag = chinese_railway_contract
@@ -612,7 +659,11 @@ country_event = { #Railway Construction Changchun-Dalai
 	}
 
 	picture = GFX_report_event_FNG_railway_map
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -752,7 +803,11 @@ country_event = { # Railway Construction Taonan-Suolun
 	}
 
 	picture = GFX_report_event_FNG_railway_map
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -871,7 +926,11 @@ country_event = { #Railway Strike
 	picture = GFX_report_event_FNG_railway_strike_2
 
 	is_triggered_only = yes
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	option = {
 		name = fengtian.19.a
 		add_political_power = -10
@@ -959,7 +1018,11 @@ country_event = { #Chinese Interruption
 	picture = GFX_report_event_CHI_interruption
 
 	is_triggered_only = yes
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	option = {
 		name = fengtian.20.a
 		add_political_power = -10
@@ -1011,7 +1074,11 @@ country_event = { #Japanese Interruption
 	picture = GFX_report_event_JAP_infrastructure
 
 	is_triggered_only = yes
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	option = {
 		name = fengtian.21.a
 		add_political_power = -10
@@ -1225,6 +1292,10 @@ country_event = { #Wu Jinglian Criticizes Japan
 	trigger = {
 		FNG_JAP_hostile = no
 		NOT = { has_global_flag = JAP_Fading_Sun }
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	
 	}
 
 	fire_only_once = yes
@@ -1709,6 +1780,11 @@ country_event = { #Red Spears in Cangzhou!
 
 	trigger = {
 		controls_state = 1063
+		
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	
 		NOT = {
 			has_completed_focus = FNG_Secure_the_Rear_Area
 		}
@@ -1742,6 +1818,9 @@ country_event = { #Deserters Rise up in Daming
 		controls_state = 1061
 		NOT = {
 			has_completed_focus = FNG_Secure_the_Rear_Area
+		}
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
 		}
 	}
 
@@ -1778,6 +1857,9 @@ country_event = { #Warlords Resist in Ruyang
 		NOT = {
 			has_completed_focus = FNG_Secure_the_Rear_Area
 		}
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
 	}
 
 	option = {
@@ -1808,6 +1890,9 @@ country_event = { # Bandits Sweep Guanzhong
 		controls_state = 779
 		NOT = {
 			has_completed_focus = FNG_Secure_the_Rear_Area
+		}
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
 		}
 	}
 
@@ -5227,7 +5312,11 @@ country_event = { #honghuzi Attacks in Heilongjiang
 	picture = GFX_report_event_CHI_honghuzi
 
 	is_triggered_only = yes
-
+trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	}
 	option = { #An expedition is a fool's errand
 		name = fengtian.117.a
 		ai_chance = {
@@ -6165,6 +6254,11 @@ country_event = { #The Five Colors
 	trigger = {
 		FNG_JAP_hostile = no
 		NOT = { has_global_flag = JAP_Fading_Sun }
+		
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	
 	}
 
 	is_triggered_only = yes
@@ -6243,6 +6337,11 @@ country_event = { #The Song of the White Orchid/Lice are Frightening
 	trigger = {
 		FNG_JAP_hostile = no
 		NOT = { has_global_flag = JAP_Fading_Sun }
+		
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	
 	}
 
 	fire_only_once = yes
@@ -6335,6 +6434,11 @@ country_event = { #Prince Kan'in Kotohito Visits Fengtian
 	trigger = {
 		FNG_JAP_hostile = no
 		NOT = { has_global_flag = JAP_Fading_Sun }
+		
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	
 	}
 
 	is_triggered_only = yes
@@ -11604,6 +11708,11 @@ country_event = { # matters of occupation
 	trigger = {
 		tag = FNG
 		controls_state = 608
+		
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+	
 	}
 
 	option = { # raid
@@ -11680,6 +11789,9 @@ country_event = { # feeding the north china plain
 	is_triggered_only = yes
 
 	trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
 		OR = {
 			AND = {
 				controls_state = 608
@@ -11775,6 +11887,9 @@ country_event = { # Scandal in Beijing
 
 	trigger = {
 		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+		NOT = {
 			has_country_flag = FNG_Beijing_Baoding_restore_order
 		}
 		controls_state = 608
@@ -11839,6 +11954,9 @@ country_event = { # Desecration in Yi County
 
 	trigger = {
 		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
+		NOT = {
 			has_country_flag = FNG_Beijing_Baoding_restore_order
 		}
 	}
@@ -11882,6 +12000,9 @@ country_event = { # Disorder at Baoding
 	is_triggered_only = yes
 
 	trigger = {
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
 		NOT = {
 			has_country_flag = FNG_Beijing_Baoding_restore_order
 		}
@@ -11928,7 +12049,7 @@ country_event = { # Order returns to Zhili Province
 	picture = GFX_report_event_FNG_troops
 
 	fire_only_once = yes
-
+	
 	is_triggered_only = yes
 
 	option = { #
@@ -11972,6 +12093,9 @@ country_event = { # Railway Chaos in Zhengzhou
 		controls_state = 1059
 		NOT = {
 			has_country_flag = FNG_Beijing_Baoding_restore_order
+		}
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
 		}
 	}
 
@@ -12035,6 +12159,9 @@ country_event = { # Bandits against Bandits
 		controls_state = 1059
 		NOT = {
 			has_country_flag = FNG_Zhengzhou_Luoyang_restore_order
+		}
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
 		}
 	}
 
@@ -12161,6 +12288,9 @@ country_event = { # Destruction in Wuhan
 	trigger = {
 		tag = FNG
 		controls_state = 1048
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
+		}
 	}
 
 	option = { # Shameful
@@ -12218,6 +12348,9 @@ country_event = { # Disaster at the Daye Mines
 	trigger = {
 		NOT = {
 			has_country_flag = FNG_Wuhan_restore_order
+		}
+		NOT = {
+			has_country_flag = FNG_no_longer_chinese_tag
 		}
 	}
 	option = { # Begin Rescue Operations
@@ -13214,11 +13347,6 @@ country_event = { #Zuolin Plans To Retire
 	desc = fengtian.287.d
 	picture = GFX_report_event_FNG_zhang_xueliang_civil
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
-
 	is_triggered_only = yes
 
 	option = {
@@ -13265,10 +13393,7 @@ country_event = { #The Shikan Clique Protests!
 	}
 	picture = GFX_report_event_JAP_officer_saluting
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
+	
 
 	is_triggered_only = yes
 
@@ -13276,7 +13401,7 @@ country_event = { #The Shikan Clique Protests!
 		name = fengtian.288.a
 		hidden_effect = {
 			create_country_leader = {
-				name = "Yang Yuting"
+				name = "杨宇霆"
 				desc = "POLITICS_YANG_YUTING_ARMY_DESC"
 				picture = "gfx/leaders/FNG/Portrait_FNG_Yang_Yuting.png"
 				expire = "1.1.1"
@@ -13307,11 +13432,6 @@ country_event = { #A Sinister Plot
 		trigger = { has_country_flag = FNG_zhuolin_takes_over }
 	}
 	picture = GFX_report_event_FNG_doihara
-
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
 
 	is_triggered_only = yes
 
@@ -13359,12 +13479,6 @@ country_event = { #Ambush in Shenyang
 	title = fengtian.290.t
 	desc = fengtian.290.d
 	picture = GFX_report_event_CHI_militia
-
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
-
 	is_triggered_only = yes
 
 	option = {
@@ -13397,20 +13511,34 @@ country_event = { #Ambush in Shenyang
 				limit = { has_id = 1100 }			
 				remove_unit_leader = yes
 			}
-			create_country_leader = {
-				name = "Zhang Xueliang"
-				desc = "POLITICS_ZHANG_XUELIANG_DESC"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
-				expire = "1.1.1"
-				ideology = authdem_junta_subtype
-			}
-			create_country_leader = {
-				name = "Zhang Xueliang"
-				desc = "POLITICS_ZHANG_XUELIANG_DESC"
-				picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
-				expire = "1.1.1"
-				ideology = junta_subtype
-			}
+				create_country_leader = {
+					name = "张学良"
+					desc = "POLITICS_ZHANG_XUELIANG_DESC"
+					picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
+					expire = "1965.1.1"
+					ideology = junta_subtype
+				}
+				create_country_leader = {
+					name = "张学良"
+					desc = "POLITICS_ZHANG_XUELIANG_DESC"
+					picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
+					expire = "1965.1.1"
+					ideology = authdem_junta_subtype
+				}
+				create_country_leader = {
+					name = "张学良"
+					desc = "POLITICS_ZHANG_XUELIANG_DESC"
+					picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
+					expire = "1965.1.1"
+					ideology = red_junta_subtype
+				}
+				create_country_leader = {
+					name = "张学良"
+					desc = "POLITICS_ZHANG_XUELIANG_DESC"
+					picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Xueliang.png"
+					expire = "1965.1.1"
+					ideology = militarism_subtype
+				}
 			country_event = {
 				id = fengtian.291
 				hours = 8
@@ -13458,11 +13586,7 @@ country_event = { # The Zhaode Dajie Incident - Zuolin Dies
 	desc = fengtian.291.d
 	picture = GFX_report_event_FNG_kempeitai
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
-
+	
 	is_triggered_only = yes
 
 	option = {
@@ -13570,10 +13694,7 @@ country_event = { #Xueliang Rallies The Government
 	desc = fengtian.292.d
 	picture = GFX_report_event_FNG_army1
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
+	
 
 	is_triggered_only = yes
 
@@ -13621,10 +13742,7 @@ country_event = { #A Mystery
 
 	picture = GFX_report_event_CHI_official_announcement
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
+	
 
 	is_triggered_only = yes
 
@@ -13655,11 +13773,6 @@ country_event = { #Zuolin's Funeral
 	desc = fengtian.294.d
 	picture = Mukden
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
-
 	is_triggered_only = yes
 
 	option = {
@@ -13677,10 +13790,6 @@ country_event = { #Purge of the Shikan Clique
 	desc = fengtian.295.d
 	picture = GFX_report_event_QIE_cardgame
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
 
 	is_triggered_only = yes
 
@@ -13721,10 +13830,7 @@ country_event = { #Japan is the True Enemy
 
 	picture = GFX_report_event_FNG_japanese_at_shanhaiguan
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
+	
 
 	is_triggered_only = yes
 
@@ -13782,10 +13888,7 @@ country_event = { #Fengtian Denounces Us!
 		}
 	}
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
+	
 
 	is_triggered_only = yes
 
@@ -13830,10 +13933,7 @@ country_event = { #The Zhaode Dajie Incident
 	desc = fengtian.298.d
 	picture = GFX_report_event_JAP_revolt
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
+	
 
 	is_triggered_only = yes
 
@@ -13866,11 +13966,7 @@ country_event = { #Yuting Takes Over
 	desc = fengtian.299.d
 	picture = GFX_report_event_JAP_conscription
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
-
+	
 	is_triggered_only = yes
 
 	option = {
@@ -13977,10 +14073,7 @@ country_event = { #Yuting Takes Over
 				id = fengtian.308
 				days = 2
 			}
-			country_event = { #Monarchists in the concordia association
-				id = fengtian.310
-				days = 37
-			}
+			
 			#country_event = {
 			#	id = fngrebels.1
 			#	days = 10
@@ -13997,10 +14090,7 @@ country_event = { #A Puppet in Manchuria
 	desc = fengtian.300.d
 	picture = GFX_report_event_JAP_parade_shanghai
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
+	
 
 	is_triggered_only = yes
 
@@ -14017,10 +14107,7 @@ country_event = { #The End of Fengtian (JAP)
 	desc = fengtian.301.d
 	picture = GFX_report_event_JAP_parade_shanghai
 
-	trigger = {
-		FNG_JAP_hostile = no
-		NOT = { has_global_flag = JAP_Fading_Sun }
-	}
+	
 
 	is_triggered_only = yes
 
@@ -14332,7 +14419,10 @@ country_event = { #Monarchists in Concordia
 				}
 			}
 		}
-		add_war_support = 0.05
+		country_event = {
+				id = fengtian.417
+				days = 7
+			}
 	}
 	
 	option = {
@@ -14626,11 +14716,24 @@ country_event = { #Coronation
 		trigger = {
 			has_country_flag = FNG_ming_emperor
 		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
 		create_country_leader = {
-			name = "Hóngwu"
-			picture = "gfx/leaders/FNG/Portrait_FNG_Hongwu.png"
+			name = "洪武"
+			picture = "gfx/leaders/LEC/Portrait_LEC_Hongwu.png"
 			expire = "2165.1.1"
-			ideology = pan_asianism_subtype
+			ideology = natpop_absolute_monarchy_subtype
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.1
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = FNG_ming_national_populist_party_long
+			name = FNG_ming_national_populist_party
 		}
 		set_cosmetic_tag = LEC_MING
 		add_stability = 0.05
@@ -14702,10 +14805,23 @@ country_event = { #Coronation
 			has_country_flag = FNG_qing_empress
 		}
 		create_country_leader = {
-			name = "Xianyu"
+			name = "显玗"
 			picture = "gfx/leaders/FNG/Portrait_FNG_Xianyu_Qing_Uniform.png"
 			expire = "2165.1.1"
-			ideology = pan_asianism_subtype
+			ideology = absolute_monarchy_subtype
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.1
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = QIE_paternal_autocrat_coup_party_long
+			name = QIE_paternal_autocrat_coup_party
 		}
 		set_cosmetic_tag = QIE_unified
 		add_stability = 0.05
@@ -14718,6 +14834,238 @@ country_event = { #Coronation
 				add_idea = FNG_republican_urinating
 			}
 		}
+	}
+}
+country_event = { #election
+	id = fengtian.400
+	immediate = {
+    log = "[GetDateText]: [Root.GetName]: event qieflavor.27"
+    hidden_effect = {
+		set_country_flag = KXX_LEADER_GUI_VISIBLE
+		set_country_flag = FNG_Zhang_Zuolin_VISIBLE
+	set_party_name = {
+        ideology = syndicalist
+        long_name = "青年工团党"
+        name = "青工党"
+      }
+	  set_party_name = {
+        ideology = radical_socialist
+        long_name = "国民党"
+        name = "国民党"
+      }
+      set_party_name = {
+        ideology = social_democrat
+        long_name = "国民常识促进会"
+        name = "国常促会"
+      }
+      set_party_name = {
+        ideology = social_liberal
+        long_name = "共和党"
+        name = "共和党"
+      }
+      set_party_name = {
+        ideology = market_liberal
+        long_name = "民主进步党"
+        name = "民进党"
+      }
+      set_party_name = {
+        ideology = social_conservative
+        long_name = "国民运动"
+        name = "国民运动"
+      }
+      set_party_name = {
+        ideology = authoritarian_democrat
+        long_name = "光复会"
+        name = "光复会"
+      }
+	  set_party_name = {
+        ideology = paternal_autocrat
+        long_name = "红万字会"
+        name = "红万字会"
+      }
+	  set_party_name = {
+        ideology = national_populist
+        long_name = "中国人会"
+        name = "中国人会"
+      }
+      create_country_leader = {
+        name = "周鲸文"  
+        picture = "gfx/leaders/FNG/Portrait_FNG_Zhou_Jingwen.png"
+        expire = "1.1.1"
+        ideology = liberalized_syndicalism_subtype
+      }
+      create_country_leader = {
+        name = "宁武"  
+        picture = "gfx/leaders/FNG/Portrait_FNG_Ning_Wu.png"
+        expire = "1.1.1"
+        ideology = radsoc_tridemism_subtype
+      }
+	  create_country_leader = {
+        name = "车向忱"  
+        picture = "gfx/leaders/FNG/Portrait_FNG_Che_Xiangchen.png"
+        expire = "1.1.1"
+        ideology = socdem_gandhism_subtype
+      }
+	  create_country_leader = {
+        name = "甯恩承"  
+        picture = "gfx/leaders/FNG/Portrait_FNG_Pu_Encheng.png"
+        expire = "1.1.1"
+        ideology = jeffersonianism_subtype
+      }
+	  create_country_leader = {
+        name = "刘博崑"  
+        picture = "gfx/leaders/FNG/Portrait_FNG_Liu_BoKun.png"
+        expire = "1.1.1"
+        ideology = marlib_authoritarian_liberalism_subtype
+      }
+      create_country_leader = {
+        name = "臧式毅"  
+        picture = "gfx/leaders/FNG/Portrait_FNG_Zang_Shiyi.png"
+        expire = "1.1.1"
+        ideology = soccon_chinese_federalism_subtype
+      }
+      create_country_leader = {
+        name = "莫德惠"  
+        picture = "gfx/leaders/FNG/Portrait_FNG_Mo_Dehui.png"
+        expire = "1.1.1"
+        ideology = autdem_progressive_conservatism_subtype
+      }
+	  create_country_leader = {
+        name = "张海鹏"  
+        picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Haipeng.png"
+        expire = "1.1.1"
+        ideology = pataut_social_confucianism_subtype
+      }
+	  create_country_leader = {
+        name = "张本政"  
+        picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Benzheng.png"
+        expire = "1.1.1"
+        ideology = natpop_corporatocracy_subtype
+      }
+      country_event = {
+        id = fengtian.400
+        days = 1460
+      }
+    }
+  }
+	title = fengtian.400.t
+	desc = fengtian.400.d
+	picture = GFX_report_event_JAP_meeting
+	is_triggered_only = yes
+
+	
+	option = {
+		name = fengtian.400.a #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+        ruling_party = social_democrat
+      }
+      add_popularity = { ideology = social_democrat popularity = 0.2 }
+	}
+	option = {
+		name = fengtian.400.b #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+        ruling_party = social_liberal
+      }
+      add_popularity = { ideology = social_liberal popularity = 0.2 }
+	}
+	option = {
+		name = fengtian.400.c #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+        ruling_party = market_liberal
+      }
+      add_popularity = { ideology = market_liberal popularity = 0.2 }
+	}
+	option = {
+		name = fengtian.400.e #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+        ruling_party = social_conservative
+      }
+      add_popularity = { ideology = social_conservative popularity = 0.2 }
+	}
+	option = {
+		name = fengtian.400.f #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+        ruling_party = authoritarian_democrat
+      }
+      add_popularity = { ideology = authoritarian_democrat popularity = 0.2 }
+	}
+	option = {
+		name = fengtian.400.g #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		country_event = fengtian.402
+	}
+}
+country_event = { 
+	id = fengtian.402
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.400.t
+	desc = fengtian.400.d
+	picture = GFX_report_event_JAP_meeting
+	is_triggered_only = yes
+
+	option = {
+		name = fengtian.402.a #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+        ruling_party = syndicalist
+      }
+      add_popularity = { ideology = syndicalist popularity = 0.2 }
+	}
+	option = {
+		name = fengtian.402.b #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+        ruling_party = radical_socialist
+      }
+      add_popularity = { ideology = radical_socialist popularity = 0.2 }
+	}
+	option = {
+		name = fengtian.402.c #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+        ruling_party = paternal_autocrat
+      }
+      add_popularity = { ideology = paternal_autocrat popularity = 0.2 }
+	}
+	option = {
+		name = fengtian.402.e #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+        ruling_party = national_populist
+      }
+      add_popularity = { ideology = national_populist popularity = 0.2 }
+	}
+	option = {
+		name = fengtian.402.f #NOTHING
+		ai_chance = {
+			factor = 50
+		}
+		country_event = fengtian.400
 	}
 }
 
@@ -14771,8 +15119,729 @@ country_event = { #Japan Sends an Ultimatum
 		}
 	}
 }
+country_event = { #badass syndie
+	id = fengtian.403
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.403.t
+	desc = fengtian.403.d
+	is_triggered_only = yes
 
+	option = {
+		name = fengtian.403.a 
+		ai_chance = {
+			factor = 50
+		}
+		 
+	}
 
+	option = {
+		name = fengtian.403.b 
+		ai_chance = {
+			factor = 50
+		}
+		create_country_leader = {
+			name = "程斌"  
+			picture = "gfx/leaders/FNG/Portrait_FNG_Cheng_Bin.png"
+			expire = "1.1.1"
+			ideology = yellow_syndicalism_subtype
+		}
+	}
+
+}
+
+country_event = { #choose communication clique
+	id = fengtian.404
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event fengtian.401" 
+		hidden_effect = {
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = FNG_Zhang_Zuolin_VISIBLE
+			set_party_name = {
+				ideology =  market_liberal
+				long_name = FNG_social_conservative_party_long
+				name = FNG_social_conservative_party
+			}
+			set_party_name = {
+				ideology =  social_liberal
+				long_name = FNG_social_conservative_party_long
+				name = FNG_social_conservative_party
+			}
+			create_country_leader = {
+				name = "叶恭绰"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Ye_Gongchuo.png"
+				expire = "1.1.1"
+				ideology = marlib_national_liberalism_subtype
+			}
+			create_country_leader = {
+				name = "中江丑吉"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Ushikichi_Nakae.png"
+				expire = "1.1.1"
+				ideology = soclib_internationalism_subtype
+			}
+			create_country_leader = {
+				name = "章宗祥"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Zhang_Zongxiang.png"
+				expire = "1.1.1"
+				ideology = soccon_controlled_democracy_subtype
+			}
+		}
+	}
+	title = fengtian.404.t
+	desc = fengtian.404.d
+	is_triggered_only = yes
+
+	option = {
+		name = fengtian.404.a 
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = no
+		}
+		add_soclib_to_coalition = yes
+		add_soccon_to_coalition = yes	
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.10
+			}
+	}
+
+	option = {
+		name = fengtian.404.b 
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = no
+		}	
+		add_marlib_to_coalition = yes
+		add_soccon_to_coalition = yes	
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.10
+			}
+	}
+	option = {
+		name = fengtian.404.c
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}	
+		add_soclib_to_coalition = yes
+		add_marlib_to_coalition = yes	
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.10
+			}
+	}
+	
+}
+country_event = { #ideopicker
+	id = fengtian.405
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.405.t
+	desc = fengtian.405.d
+	is_triggered_only = yes
+
+	option = {
+		name = fengtian.405.a 
+		ai_chance = {
+			factor = 50
+		}
+		set_country_leader_ideology = marlib_tridemism_subtype
+	}
+
+	option = {
+		name = fengtian.405.b 
+		ai_chance = {
+			factor = 50
+		}
+			
+	}
+
+}
+country_event = { #socialists revolts
+	id = fengtian.406
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.406.t
+	desc = fengtian.406.d
+	is_triggered_only = yes
+
+	option = {
+		name = fengtian.406.a 
+		ai_chance = {
+			factor = 50
+		}
+		custom_effect_tooltip = KXX_UNFINISHED_TOOLTIP
+	}
+
+	
+
+}
+
+country_event = { #ideopicker
+	id = fengtian.407
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.407.t
+	desc = fengtian.407.d
+	is_triggered_only = yes
+
+	option = {
+		name = fengtian.407.a 
+		ai_chance = {
+			factor = 50
+		}
+		set_country_leader_ideology = moderate_authoritarianism_subtype
+	}
+
+	option = {
+		name = fengtian.407.b 
+		ai_chance = {
+			factor = 50
+		}
+		set_country_leader_ideology = soccon_oligarchy_subtype
+	}
+	option = {
+		name = fengtian.407.c
+		ai_chance = {
+			factor = 50
+		}
+			
+	}
+}
+country_event = { #choose recovery clique
+	id = fengtian.408
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event fengtian.401"
+		hidden_effect = {
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = FNG_Zhang_Zuolin_VISIBLE
+			set_party_name = {
+			ideology =  paternal_autocrat
+			long_name = FNG_authoritarian_democrat_party_long
+			name = FNG_authoritarian_democrat_party
+		}
+		set_party_name = {
+			ideology =  radical_socialist
+			long_name = FNG_authoritarian_democrat_party_long
+			name = FNG_authoritarian_democrat_party
+		}
+		create_country_leader = {
+			name = "王揖唐"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Wang_Yitang.png"
+			expire = "1.1.1"
+			ideology = pataut_neo_citizenism_subtype
+		}
+		create_country_leader = {
+			name = "靳云鹏"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Jin_Yunpeng.png"
+			expire = "1.1.1"
+			ideology = authdem_national_conservative_subtype
+		}
+		create_country_leader = {
+			name = "蓝公武"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Lan_Gongwu.png"
+			expire = "1.1.1"
+			ideology = radsoc_national_socialism_subtype
+		}
+		}
+		 
+	}
+	title = fengtian.408.t
+	desc = fengtian.408.d
+	is_triggered_only = yes
+
+	option = {
+		name = fengtian.408.a 
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_authdem_to_coalition = yes
+		add_radsoc_to_coalition = yes		
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.10
+			}
+	}
+
+	option = {
+		name = fengtian.408.b 
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}	
+		add_pataut_to_coalition = yes
+		add_radsoc_to_coalition = yes			
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.10
+			}
+	}
+	option = {
+		name = fengtian.408.c
+		ai_chance = {
+			factor = 50
+		}
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = no
+		}	
+		add_pataut_to_coalition = yes
+		add_authdem_to_coalition = yes		
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.10
+			}
+	}
+	
+}
+country_event = { #ideopicker
+	id = fengtian.409
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.409.t
+	desc = fengtian.409.d
+	is_triggered_only = yes
+
+	option = {
+		name = fengtian.409.a 
+		ai_chance = {
+			factor = 50
+		}
+		set_country_leader_ideology = radsoc_datong_shu_subtype
+	}
+
+	option = {
+		name = fengtian.409.b 
+		ai_chance = {
+			factor = 50
+		}
+		set_country_leader_ideology = radsoc_revisionist_marxism_subtype
+	}
+	option = {
+		name = fengtian.409.c
+		ai_chance = {
+			factor = 50
+		}
+			
+	}
+}
+country_event = { #totalist picker
+	id = fengtian.410
+	immediate = { 
+		hidden_effect = {
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = FNG_Zhang_Xueliang_VISIBLE
+		}
+		log = "[GetDateText]: [Root.GetName]: event fengtian.401" 
+	}
+	title = fengtian.410.t
+	desc = fengtian.410.d
+	is_triggered_only = yes
+
+	option = {
+		name = fengtian.410.a 
+		ai_chance = {
+			factor = 50
+		}
+			create_country_leader = {
+				name = "李时雨"
+				picture = "gfx/leaders/FNG/Portrait_FNG_LI_ShiYu.png"
+				expire = "1.1.1"
+				ideology = nationalist_tridemism_subtype
+			}
+			
+	}
+
+	option = {
+		name = fengtian.410.b 
+		ai_chance = {
+			factor = 50
+		}
+			create_country_leader = {
+				name = "黎天才"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Li_Tiancai.png"
+				expire = "1.1.1"
+				ideology = natsynd_subtype
+			}
+	}
+	option = {
+		name = fengtian.410.c
+		ai_chance = {
+			factor = 50
+		}
+			create_country_leader = {
+				name = "阎宝航"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Yan_Baohang.png"
+				expire = "1.1.1"
+				ideology = national_communism_subtype
+			}	
+	}
+}
+country_event = { #national populist picker
+	id = fengtian.411
+	immediate = { 
+		hidden_effect = {
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = FNG_Zhang_Xueliang_VISIBLE
+		}
+		log = "[GetDateText]: [Root.GetName]: event fengtian.401" 
+	}
+	title = fengtian.411.t
+	desc = fengtian.411.d
+	is_triggered_only = yes
+
+	option = {
+		name = fengtian.411.a 
+		ai_chance = {
+			factor = 50
+		}
+			create_country_leader = {
+				name = "沈鸿烈"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Shen_Honglie.png"
+				expire = "1.1.1"
+				ideology = natpop_tridemism_subtype
+			}
+			
+	}
+
+	option = {
+		name = fengtian.411.b 
+		ai_chance = {
+			factor = 50
+		}
+		create_country_leader = {
+			name = "孙铭九"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Sun_Mingjiu.png"
+			expire = "1.1.1"
+			ideology = militarism_subtype
+		}
+
+	}
+	option = {
+		name = fengtian.411.c
+		ai_chance = {
+			factor = 50
+		}
+			create_country_leader = {
+				name = "王师曾"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Wang_Shizeng.png"
+				expire = "1.1.1"
+				ideology = natpop_new_legalism_subtype
+			}	
+	}
+}
+country_event = { #
+	id = fengtian.412
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.412.t
+	desc = fengtian.412.d
+	is_triggered_only = yes
+
+	option = {
+		trigger = {
+			has_idea = FNG_Disastrous_Governance
+		}
+		name = fengtian.412.a 
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = FNG_recovery_league_win
+	}
+	option = {
+		trigger = {
+			has_idea = FNG_Plutocratic_Exploitation
+		}
+		name = fengtian.412.b
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = FNG_communications_clique_win	
+	}
+	option = {
+		trigger = {
+			has_idea = FNG_Army_Dominance
+		}
+		name = fengtian.412.c
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = FNG_zhang_clique_win		
+	}
+	option = {
+		trigger = {
+			NOT = {
+				has_idea = FNG_Army_Dominance
+				has_idea = FNG_Plutocratic_Exploitation
+				has_idea = FNG_Disastrous_Governance
+			}
+			
+		}
+		name = fengtian.412.e
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = FNG_zhang_clique_win
+		set_country_flag = FNG_pataut_path_only		
+	}
+}
+country_event = { #
+	id = fengtian.413
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.413.t
+	desc = fengtian.413.d
+	is_triggered_only = yes
+
+	option = {
+		
+		name = fengtian.413.a 
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = FNG_zhang_clique_win	
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = "复东会"
+			name = "复东会"
+		}
+	}
+	option = {
+		
+		name = fengtian.413.b
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = FNG_zhang_clique_win	
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}	
+		set_party_name = {
+			ideology = national_populist
+			long_name = "四维学会"
+			name = "四维学会"
+		}
+	}
+	
+	
+}
+country_event = { #japan demands corcodia in power
+	id = fengtian.414
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.414.t
+	desc = fengtian.414.d
+	is_triggered_only = yes
+
+	option = {
+		
+		name = fengtian.414.a #give up 
+		ai_chance = {
+			factor = 50
+		}
+		country_event = {
+			id = fengtian.415
+			days = 3
+		}
+	}
+	option = {
+		
+		name = fengtian.414.b #never!
+		ai_chance = {
+			factor = 50
+		}
+		custom_effect_tooltip = KXX_UNFINISHED_TOOLTIP
+		country_event = {
+			id = fengtian.416
+			days = 3
+		}
+	}
+	
+	
+}
+country_event = { #yang stands down
+	id = fengtian.415
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.415.t
+	desc = fengtian.415.d
+	is_triggered_only = yes
+
+	option = {
+		
+		name = fengtian.415.a #give up 
+		ai_chance = {
+			factor = 50
+		}
+		create_country_leader = {
+			name = "阮振铎"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Ruan_Zhenduo.png"
+			expire = "1.1.1"
+			ideology = pan_asianism_subtype
+		}
+		country_event = {
+			id = fengtian.310
+			days = 7
+		}
+	}
+	
+	
+}
+country_event = { #yang dies
+	id = fengtian.416
+	immediate = { log = "[GetDateText]: [Root.GetName]: event fengtian.401" }
+	title = fengtian.416.t
+	desc = fengtian.416.d
+	is_triggered_only = yes
+
+	option = {
+		
+		name = fengtian.416.a #give up 
+		ai_chance = {
+			factor = 50
+		}
+		create_country_leader = {
+			name = "花谷正"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Hanaya_Tadashi.png"
+			expire = "1.1.1"
+			ideology = natpop_pan_asianism_subtype
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = "关东军"
+			name = "关东军"
+		}
+	}
+	
+	
+}
+country_event = { #
+	id = fengtian.417
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event fengtian.401" 
+		hidden_effect = {
+			create_country_leader = {
+			name = "爵青"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Jue_Qing.png"
+			expire = "1.1.1"
+			ideology = decadent_politics_subtype
+		}
+		create_country_leader = {
+			name = "王荆山"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Wang_Jingshan.png"
+			expire = "1.1.1"
+			ideology = corporatocracy_subtype
+		}
+		create_country_leader = {
+			name = "缪斌"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Miu_Bin.png"
+			expire = "1.1.1"
+			ideology = neo_tridemism_subtype
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = FNG_market_liberal_party_long
+			name = FNG_market_liberal_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = FNG_market_liberal_party_long
+			name = FNG_market_liberal_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = FNG_market_liberal_party_long
+			name = FNG_market_liberal_party
+		}
+		}
+		
+	}
+	title = fengtian.417.t
+	desc = fengtian.417.d
+	is_triggered_only = yes
+
+	option = {
+		
+		name = fengtian.417.a #give up 
+		ai_chance = {
+			factor = 50
+		}
+		
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.1
+		}
+	}
+	option = {
+		
+		name = fengtian.417.b #give up 
+		ai_chance = {
+			factor = 50
+		}
+		
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.1
+		}
+	}
+	option = {
+		
+		name = fengtian.417.c #give up 
+		ai_chance = {
+			factor = 50
+		}
+		
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.1
+		}
+	}
+	option = {
+		
+		name = fengtian.417.e #give up 
+		ai_chance = {
+			factor = 50
+		}
+		
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.1
+		}
+	}
+}
 country_event = { #Nobles
 	id = fngdynasty.1
 	title = fngdynasty.1.t
@@ -15359,20 +16428,14 @@ country_event = { #Crown Zuolin?
 		ai_chance = {
 			factor = 67
 		}
-		FNG_decrease_legitimacy = yes
+		
 		country_event = {
 			id = fngnap.2
 			days = 3
 		}
 	}
 	
-	option = { #NAH
-		name = fngnap.1.b
-		ai_chance = {
-			factor = 33
-		}
-		add_stability = 0.05
-	}
+	
 }
 
 country_event = { #Crown Zuolin, intermission?
@@ -15590,10 +16653,10 @@ country_event = { #Unite the parties?
 			factor = 50
 		}
 		add_stability = 0.05
-		country_event = {
-			id = fngnap.14
-			days = 13
-		}
+		#country_event = {
+		#	id = fngnap.14
+		#	days = 13
+		#}
 	}
 }
 
@@ -17896,16 +18959,12 @@ country_event = { #Disastrous Governance
 	trigger = {
 		NOT = { has_idea = FNG_Disastrous_Governance }
 		has_country_flag = FNG_recovery_league_active
-		has_idea = FNG_Unscrupulous_Governance
 		authoritarian_democrat > 0.45
 	}
 
 	option = { #Things are spiralling out of control...
 		name = fngpolitic.21.a
-		swap_ideas = {
-			remove_idea = FNG_Unscrupulous_Governance
-			add_idea = FNG_Disastrous_Governance
-		}
+		add_ideas = FNG_Disastrous_Governance
 	}
 }
 
@@ -17925,10 +18984,10 @@ country_event = { #Disastrous Governance Removal
 	}
 
 	option = {
-		swap_ideas = {
-			remove_idea = FNG_Disastrous_Governance
-			add_idea = FNG_Unscrupulous_Governance
-		}
+		
+			remove_ideas = FNG_Disastrous_Governance
+			
+		
 	}
 }
 
@@ -18388,4 +19447,775 @@ country_event = { #Army Selection
 		trigger = { has_completed_focus = FNG_a_weapon_to_surpass_the_IJA }
 		add_ideas = FNG_army_zeal
 	}
+}
+country_event = { #
+	id = fngreg.1
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event fengtian.1" 
+		hidden_effect = {
+			remove_ideas = FNG_Regionalist_Outrage
+			remove_ideas = FNG_Regionalist_Resentment
+			remove_ideas = FNG_Regionalist_Sentiment
+			remove_ideas = {
+				FNG_Unscrupulous_Governance
+				FNG_Investment_Dearth
+				FNG_The_Kwantung_Army
+				FNG_mantetsu_influence_idea
+				FNG_no_trukk
+				FNG_Backward_Industry
+			}
+			FNG = {
+				every_unit_leader = {	
+					set_nationality = NSW
+				}	
+			}
+			remove_all_ministers = yes
+			clr_country_flag = FNG_concordia_association_active
+			clr_country_flag = FNG_communications_clique_active
+			clr_country_flag = FNG_recovery_league_active
+			clr_country_flag = FNG_zhang_clique_active
+			add_stability = -0.25
+			uncomplete_national_focus = {
+				focus = FNG_Suppress_Regionalist_Sentiment
+				uncomplete_children = yes
+			}
+			uncomplete_national_focus = {
+				focus = FNG_Fuguo_Qiangbing
+				uncomplete_children = yes
+			}
+			set_country_flag = FNG_no_longer_chinese_tag #ban unification decisions
+				JAP = {
+					diplomatic_relation = {
+   						country = FNG
+   						relation = guarantee
+   						active = no
+  					}
+				}
+		}
+	}
+	title = fngreg.1.t
+	desc = fngreg.1.d
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	option = {
+		name = fngreg.1.a #sov
+		set_country_flag = FNG_sov_win
+		set_cosmetic_tag = TRM_SOV
+		create_country_leader = {
+			name = "阿列克谢·波达波夫"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Alexei_Potapov.png"
+			expire = "1.1.1"
+			ideology = radsoc_red_junta_subtype
+		}
+			create_country_leader = {
+				name = "尼古拉·乌斯特里亚洛夫"
+				picture = "gfx/leaders/FNG/Portrait_FNG_Nikolay_Ustryalov.png"
+				expire = "1965.1.1"
+				ideology = national_bolshevik_subtype
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.15
+			}
+			set_politics = {
+				ruling_party = radical_socialist
+				elections_allowed = no
+			}
+			add_tot_to_coalition = yes
+			add_ideas = {
+				FNG_Nikolay_Ustryalov_hog_tot
+				FNG_Ivan_Strod_for_rso
+				FNG_Nestor_Kalandarishvili_eco_rso
+				FNG_Vasiliy_Blyukher_sec_tot
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = SOV_totalist_party_long
+				name = SOV_totalist_party
+			}
+			set_party_name = {
+				ideology = totalist
+				long_name = "俄罗斯民族布尔什维克党"
+				name = "民布党"
+			}
+			hidden_effect = {
+				bolsheviks_gome_home = yes
+				create_field_marshal = {
+					name = "瓦西里·布柳赫尔"
+					portrait_path = "gfx/leaders/TRM/TRM_Vasily_Blyukher.png"
+					traits = {
+						offensive_doctrine
+						politically_connected
+						trickster
+					}
+					skill = 3
+					attack_skill = 3
+					defense_skill = 1
+					planning_skill = 2
+					logistics_skill = 1
+				}
+				create_corps_commander = {
+					name = "根里奇·艾科"
+					portrait_path = "gfx/leaders/TRM/TRM_Genrikh_Eikhe.png"
+					traits = {
+						politically_connected
+						infantry_leader
+						trait_engineer
+					}
+					skill = 2
+					attack_skill = 1
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 1
+				}
+				create_field_marshal = {
+                    name = "迪米特里·卡尔贝舍夫"
+                    portrait_path = "gfx/leaders/RUS/Portrait_SOV_Dimitry_Karbaskyev.png"
+                    traits = { winter_specialist war_hero }
+                    skill = 2
+                    attack_skill = 2
+                    defense_skill = 2
+                    planning_skill = 2
+                    logistics_skill = 2
+                }
+				create_corps_commander = {
+					name = "伊万·斯特罗德"
+					portrait_path = "gfx/leaders/FCR/Ivan_Strod.png"
+						traits = { winter_expert }
+						skill = 3
+						attack_skill = 1
+						defense_skill = 3
+						planning_skill = 3
+						logistics_skill = 4
+				}
+				create_corps_commander = {
+					name = "涅斯托尔·卡兰达里什维利"
+					portrait_path = "gfx/leaders/FCR/Nestor.png"
+						traits = { hill_fighter }
+						skill = 3
+						attack_skill = 3
+						defense_skill = 2
+						planning_skill = 3
+						logistics_skill = 4
+				}
+			}
+	}
+	option = {
+		name = fngreg.1.b #rus
+		set_country_flag = FNG_rus_win
+		set_cosmetic_tag = MAN_ZHR
+		create_country_leader = {
+			name = "康斯坦丁·罗扎耶夫斯基"
+			picture = "gfx/leaders/ARC/Portrait_Rodz_General.png"
+			expire = "1.1.1"
+			ideology = pataut_legionarism_subtype
+		}
+		create_country_leader = {
+			name = "康斯坦丁·罗扎耶夫斯基"
+			picture = "gfx/leaders/ARC/Portrait_Rodz_General.png"
+			expire = "1.1.1"
+			ideology = legionarism_subtype
+		}
+		add_ideas = {
+			FNG_Konstantin_Rodzaevsky_hog_npo
+			FNG_Nicolay_Petlin_for_pau
+			FNG_Mikhail_Matkovsky_eco_npo
+			FNG_Alexander_Bolotov_sec_pau
+		}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = ARC_despotism_party_long
+				name = ARC_despotism_party
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = ARC_reactionism_party_long
+				name = ARC_reactionism_party
+			}
+			set_politics = {
+				ruling_party = national_populist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.15
+			}
+			add_pataut_to_coalition = yes
+		hidden_effect = {
+			create_field_marshal = {
+                    name = "康斯坦丁·罗扎耶夫斯基 "
+                    portrait_path = "gfx/leaders/ARC/Portrait_Rodz_General.png"
+                    traits = { harsh_leader }
+					skill = 2
+					attack_skill = 4
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 2
+                }
+			create_corps_commander = {
+					name = "维克多·拉里奥诺夫"
+					portrait_path = "gfx/leaders/ARC/Portrait_Viktor_Larionov.png"
+					traits = { infantry_officer }
+					skill = 2
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 3
+				}
+			create_corps_commander = {
+					name = "列夫·弗拉谢夫斯基"
+					portrait_path = "gfx/leaders/ARC/Portrait_Lev_Vlasevsky.png"
+					traits = { harsh_leader }
+					skill = 2
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 2
+			}
+			create_corps_commander = {
+					name = "列夫·奥霍廷"
+					portrait_path = "gfx/leaders/ARC/Portrait_Lev_Okhotin.png"
+					traits = { harsh_leader }
+					skill = 2
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 2
+			}
+			create_corps_commander = {
+					name = "尼古莱·佩特林"
+					portrait_path = "gfx/leaders/ARC/Portrait_Nikolay_Petlin.png"
+					traits = { engineer_officer }
+					skill = 2
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 2
+					logistics_skill = 3
+			}
+		}	
+
+				
+	}
+	option = {
+		name = fngreg.1.c #ukr
+		set_country_flag = FNG_ukr_win
+		set_cosmetic_tag = TRM_GU
+		create_country_leader = {
+			name = "尤里·罗伊"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Yuriy_Roy.png"
+			expire = "1.1.1"
+			ideology = natpop_kleptocracy_subtype
+		}
+		create_country_leader = {
+			name = "伊万·斯维特"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Ivan_Svit.png"
+			expire = "1.1.1"
+			ideology = tot_eternal_revolution
+		}
+		add_ideas = {
+			FNG_Yuriy_Roy_hog_npo
+			FNG_Kost_Kyndratovych_Andrushchenko_for_npo
+			FNG_Barilovich_Roman_Romanovich_eco_npo
+			FNG_Ivan_Stefanovych_Paslavskyi_sec_npo
+		}
+			set_party_name = {
+				ideology = national_populist
+				long_name = GUK_right_authoritarianism_party_long
+				name = GUK_right_authoritarianism_party
+			}
+			set_party_name = {
+				ideology = totalist
+				long_name = GUK_reactionism_party_long
+				name = GUK_reactionism_party
+			}
+		hidden_effect = {
+				
+				create_field_marshal = {
+					name = "鲍里斯·赫雷沙蒂茨基"
+					portrait_path = "gfx/leaders/GUK/Portrait_GUK_Borys_Khreshchatyskyi_gen.png"
+					traits = { inflexible_strategist }
+					skill = 4
+					attack_skill = 4
+					defense_skill = 4
+					planning_skill = 4
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "彼得罗·特维尔多夫斯基"
+					portrait_path = "gfx/leaders/GUK/Tver.png"
+					traits = { harsh_leader }
+					skill = 3
+					attack_skill = 2
+					defense_skill = 3
+					planning_skill = 1
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "科斯特·安德鲁先科"
+					portrait_path = "gfx/leaders/GUK/Kost_Andrushchenko.png"
+					traits = { trait_cautious }
+					skill = 3
+					attack_skill = 2
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 4
+				}
+				create_corps_commander = {
+					name = "康斯坦丁·索普利亚科夫"
+					portrait_path = "gfx/leaders/GUK/Soplyakov.png"
+					traits = { harsh_leader }
+					skill = 3
+					attack_skill = 3
+					defense_skill = 3
+					planning_skill = 3
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "德米特罗·丹尼利申"
+					portrait_path = "gfx/leaders/GUK/Portrait_GUK_Dmytro_Danylsyhn.png"
+					traits = { infantry_officer }
+					skill = 2
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "瓦西里·比拉斯"
+					portrait_path = "gfx/leaders/GUK/Portrait_GUK_Vasyl_Bilas.png"
+					traits = { infantry_officer }
+					skill = 2
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "博赫丹-伊万·科尔久克"
+					portrait_path = "gfx/leaders/GUK/Hryhoriy_Kulyk.png"
+					traits = { infantry_officer }
+					skill = 2
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 3
+				}
+		}
+			set_politics = {
+				ruling_party = national_populist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.15
+			}
+			
+	}
+	option = {
+		name = fngreg.1.e #bandits
+		set_country_flag = FNG_bandits_win
+		set_cosmetic_tag = FNG_bandit
+			set_politics = {
+				ruling_party = paternal_autocrat
+				elections_allowed = no
+			}
+		create_country_leader = {
+			name = "谢文东"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Xie_Wendong.png"
+			expire = "1.1.1"
+			ideology = crime_syndicate_subtype
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = "匪帮"
+			name = "匪帮"
+		}
+		add_ideas = {
+			FNG_Xie_Wendong_hog_pau
+			FNG_Zhang_Yuxing_for_ade
+ 			FNG_Sun_Rongjiu_eco_npo
+ 			FNG_Li_huatang_sec_pau
+		}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
+			
+			hidden_effect = {
+			NSW = {
+				every_unit_leader = {	
+					limit = {
+						has_trait = FNG_fei_habit
+					}
+					set_nationality = FNG
+				}	
+			}
+				create_corps_commander = {
+					name = "谢文东 "
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_Xie_Wendong.png"
+					traits = {
+						scavenger
+					}
+					skill = 1
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "姜鹏飞"
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_Jiang_Pengfei.png"
+					traits = {
+						guerilla_fighter
+					}
+					skill = 1
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "卢占魁"
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_Lu_Zhankui.png"
+					traits = {
+						expert_improviser
+					}
+					skill = 2
+					attack_skill = 2
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 2
+				}
+			}
+				
+				
+	}
+	option = {
+		name = fngreg.1.f #kor
+		set_country_flag = FNG_kor_win
+		set_cosmetic_tag = JKR_KPAM
+		create_country_leader = {
+			name = "金佐镇"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Kim_Chwa_chin.png"
+			expire = "1.1.1"
+			ideology = syn_anarchism_subtype
+		}
+		set_party_name = {
+			ideology = syndicalist
+			long_name = "在满韩族总联合会"
+			name = "新民府"
+		}
+			add_ideas = {
+				KOR_Park_Hyong_Yong_hog_rso
+				KOR_Kim_Kyu_joon_for_rso
+				KOR_Yi_Tong_whi_eco_rso
+				KOR_Nam_Suk_Lee_sec_rso
+			}
+			set_politics = {
+				ruling_party = syndicalist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.15
+			}
+			hidden_effect = {
+				create_field_marshal = {
+					name = "金佐镇 "
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_Kim_Chwa_chin.png"
+						traits = { guerilla_fighter }
+						skill = 3
+						attack_skill = 2
+						defense_skill = 1
+						planning_skill = 1
+						logistics_skill = 4
+				}
+				create_field_marshal = {
+					name = "吴成仑 "
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_Wu_Chenglun.png"
+						traits = { politically_connected }
+						skill = 2
+						attack_skill = 2
+						defense_skill = 2
+						planning_skill = 2
+						logistics_skill = 1
+				}
+				create_corps_commander = {
+					name = "金元凤"
+					portrait_path = "gfx/leaders/KOR/Portrait_KOR_Kim_Wonbong_General.png"
+						traits = { politically_connected }
+						skill = 3
+						attack_skill = 2
+						defense_skill = 3
+						planning_skill = 3
+						logistics_skill = 2
+				}
+				
+				create_corps_commander = {
+					name = "申采浩"
+					portrait_path = "gfx/leaders/KOR/Portrait_KOR_Sin_Chaeho.png"
+					traits = {
+						guerilla_fighter
+					}
+					skill = 2
+					attack_skill = 2
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "金日成"
+					portrait_path = "gfx/leaders/KOR/Portrait_KOR_Kim_Il_Sung.png"
+					traits = { politically_connected }
+					skill = 2
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 2
+					logistics_skill = 1
+				}
+				create_corps_commander = {
+					name = "金策"
+					portrait_path = "gfx/leaders/FNG/Portrait_Kim_Chaek.png"
+					traits = { politically_connected }
+					skill = 2
+					attack_skill = 1
+					defense_skill = 2
+					planning_skill = 2
+					logistics_skill = 1
+				}
+				create_corps_commander = {
+					name = "姜健"
+					portrait_path = "gfx/leaders/FNG/Portrait_Kang_Kon.png"
+					traits = { infantry_officer }
+					skill = 2
+					attack_skill = 2
+					defense_skill = 1
+					planning_skill = 2
+					logistics_skill = 1
+				}
+				create_corps_commander = {
+					name = "崔庸健"
+					portrait_path = "gfx/leaders/FNG/Portrait_Choe_Yong_gon.png"
+					traits = { harsh_leader }
+					skill = 2
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 3
+					logistics_skill = 3
+				}
+			}	
+	}
+	option = {
+		name = fngreg.1.g #jew
+		set_country_flag = FNG_jew_win
+		set_cosmetic_tag = YDK
+		create_country_leader = {
+			name = "以利亚胡·兰金"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Elijahu_Lankin.png"
+			expire = "1.1.1"
+			ideology = autdem_zionism
+		}
+		create_country_leader = {
+			name = "以色列·爱泼斯坦"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Israel_Epstein.png"
+			expire = "1.1.1"
+			ideology = radsoc_communism_subtype
+		}
+		add_ideas = {
+			FNG_Abraham_Kaufman_hog_sco
+			FNG_Seman_Soskin_for_sli
+			FNG_Marcel_Leopold_eco_ade
+			FNG_Hans_Shippe_sec_rso
+		}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = "在中犹太复国主义组织"
+				name = "在中犹太复国主义组织"
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = "远东犹太委员会"
+				name = "远东犹太委员会"
+			}
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.15
+			}
+			hidden_effect = {
+				create_corps_commander = {
+					name = "以利亚胡·兰金 "
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_Elijahu_Lankin.png"
+					traits = { trait_reckless }
+					skill = 3
+					attack_skill = 3
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+				}
+				create_corps_commander = {
+					name = "以色列·爱泼斯坦 "
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_Israel_Epstein.png"
+					traits = { trait_cautious }
+					skill = 2
+					attack_skill = 1
+					defense_skill = 2
+					planning_skill = 2
+					logistics_skill = 2
+				}
+				create_corps_commander = {
+					name = "莫尔德凯·奥尔默特"
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_Mordechai_Olmert.png"
+					traits = { trait_engineer }
+					skill = 2
+					attack_skill = 1
+					defense_skill = 3
+					planning_skill = 3
+					logistics_skill = 1
+				}
+				create_corps_commander = {
+					name = "汉斯·希伯"
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_Hans_Shippe.png"
+					traits = { infantry_officer }
+					skill = 3
+					attack_skill = 2
+					defense_skill = 3
+					planning_skill = 1
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "阿哈龙·摩谢·基谢列夫"
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_Aharon_Moshe_Kiselev.png"
+					traits = { organizer }
+					skill = 2
+					attack_skill = 1
+					defense_skill = 3
+					planning_skill = 1
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "何世礼"
+					portrait_path = "gfx/leaders/FNG/Portrait_FNG_He_Shli.png"
+					traits = { media_personality }
+					skill = 3
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 2
+				}
+			}
+	}
+}
+country_event = { 
+	id = fngreg.2
+	title = fngreg.2.t
+	
+	desc = fngreg.2.d
+		
+	picture = GFX_report_event_FNG_several_prisoners
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { 
+		name = fngreg.2.a
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.1
+			}
+		
+	}
+	
+	option = { 
+		name = fngreg.2.b
+		create_country_leader = {
+			name = "姜鹏飞"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Jiang_Pengfei.png"
+			expire = "1.1.1"
+			ideology = natpop_neo_feudalism_subtype
+		}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.1
+			}
+			set_politics = {
+				ruling_party = national_populist
+				elections_allowed = no
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = "黄枪会"
+				name = "黄枪会"
+			}
+	}
+	
+	option = { 
+		name = fngreg.2.c
+		create_country_leader = {
+			name = "卢占魁"
+			picture = "gfx/leaders/FNG/Portrait_FNG_Lu_Zhankui.png"
+			expire = "1.1.1"
+			ideology = crime_syndicate_subtype
+		}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.1
+			}
+			
+		
+	}
+	
+	
+}
+country_event = { 
+	id = fngreg.3
+	title = fngreg.3.t
+	
+	desc = fngreg.3.d
+		
+	picture = GFX_report_event_FNG_several_prisoners
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { 
+		name = fngreg.3.a
+		custom_effect_tooltip = fngreg_3_a_tt
+	}
+	
+	option = { 
+		name = fngreg.3.b
+		set_country_leader_ideology = authdem_new_legalism_subtype
+		custom_effect_tooltip = fngreg_3_b_tt
+	}
+	
+	option = { 
+		name = fngreg.3.c
+		set_country_leader_ideology = authdem_warlordism_subtype
+		custom_effect_tooltip = fngreg_3_c_tt
+	}
+	option = { 
+		name = fngreg.3.e
+		set_country_leader_ideology = authdem_kleptocracy_subtype
+		custom_effect_tooltip = fngreg_3_e_tt
+	}
+	
 }
