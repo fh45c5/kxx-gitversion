@@ -9,28 +9,27 @@ scripted_gui = {
 		}
 
 		triggers = {
+			# 主领袖相框可见性
 			KXX_pm_frame_visible = {
-				OR = {
-					has_country_flag = KXX_HOG_veiw
-					has_country_flag = KXX_HOG_second_veiw
-					has_country_flag = KXX_HOG_third_veiw
-					has_country_flag = KXX_HOG_gru_veiw
-				}
+				has_country_flag = KXX_HOG_veiw
 				NOT = {
 					has_country_flag = KXX_pm_is_hos
 				}
 			}
+			
+			# 第二领袖相框可见性
+			KXX_second_pm_frame_visible = {
+				has_country_flag = KXX_HOG_second_veiw
+				NOT = {
+					has_country_flag = KXX_pm_is_hos
+				}
+			}
+			
 			KXX_leader_button_visible = {
 				KXX_uses_leader_gui = yes
 			}
 			KXX_second_leader_button_visible = {
 				KXX_uses_double_leader_gui = yes
-			}
-			KXX_third_leader_button_visible = {
-				KXX_uses_third_leader_gui = yes
-			}
-			KXX_gru_leader_button_visible = {
-				KXX_uses_gru_leader_gui = yes
 			}
 
 			#小黄副元首
@@ -75,18 +74,6 @@ scripted_gui = {
 				AND = {
 					has_country_flag = KXX_HOG_veiw
 					has_country_flag = GRU_ITT_VISIBLE
-				}
-			}
-			Gregor_Strasser_2_visible = { #施特拉塞
-				AND = {
-					has_country_flag = KXX_HOG_gru_veiw
-					has_country_flag = GRU_Gregor_Strasser_2_VISIBLE
-				}
-			}
-			Albert_Speer_2_visible = { #阿尔伯特·施佩尔
-				AND = {
-					has_country_flag = KXX_HOG_third_veiw
-					has_country_flag = GRU_Albert_Speer_2_VISIBLE
 				}
 			}
 			Horst_Wessel_2_visible = { #威塞尔
@@ -1525,13 +1512,6 @@ scripted_gui = {
 				has_country_flag = KXX_HOG_second_veiw
 			}
 
-			KXX_third_pm_name_visible = {
-				has_country_flag = KXX_HOG_third_veiw
-			}
-
-			KXX_gru_pm_name_visible = {
-				has_country_flag = KXX_HOG_gru_veiw
-			}
 		}
 
 		visible = {
@@ -1555,18 +1535,6 @@ scripted_gui = {
 					}
 					clr_country_flag = KXX_HOG_second_veiw
 				}
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_third_veiw
-					}
-					clr_country_flag = KXX_HOG_third_veiw
-				}
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_gru_veiw
-					}
-					clr_country_flag = KXX_HOG_gru_veiw
-				}
 			}
 			
 			KXX_second_leader_button_click = {
@@ -1584,78 +1552,6 @@ scripted_gui = {
 						has_country_flag = KXX_HOG_veiw
 					}
 					clr_country_flag = KXX_HOG_veiw
-				}
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_third_veiw
-					}
-					clr_country_flag = KXX_HOG_third_veiw
-				}
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_gru_veiw
-					}
-					clr_country_flag = KXX_HOG_gru_veiw
-				}
-			}
-
-			KXX_third_leader_button_click = {
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_third_veiw
-					}
-					clr_country_flag = KXX_HOG_third_veiw
-					else = {
-						set_country_flag = KXX_HOG_third_veiw
-					}
-				}
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_veiw
-					}
-					clr_country_flag = KXX_HOG_veiw
-				}
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_gru_veiw
-					}
-					clr_country_flag = KXX_HOG_gru_veiw
-				}
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_second_veiw
-					}
-					clr_country_flag = KXX_HOG_second_veiw
-				}
-			}
-
-			KXX_gru_leader_button_click = {
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_gru_veiw
-					}
-					clr_country_flag = KXX_HOG_gru_veiw
-					else = {
-						set_country_flag = KXX_HOG_gru_veiw
-					}
-				}
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_veiw
-					}
-					clr_country_flag = KXX_HOG_veiw
-				}
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_second_veiw
-					}
-					clr_country_flag = KXX_HOG_second_veiw
-				}
-				if = {
-					limit = {
-						has_country_flag = KXX_HOG_third_veiw
-					}
-					clr_country_flag = KXX_HOG_third_veiw
 				}
 			}
 		}
@@ -1680,13 +1576,33 @@ scripted_gui = {
 			KXX_for_second_leader_button_visible = {
 				KXX_uses_double_leader_gui = yes
 			}
-
-			KXX_for_third_leader_button_visible = {
-				KXX_uses_third_leader_gui = yes
+		}
+		
+		effects = {
+			KXX_for_leader_button_click = {
+				if = {
+					limit = {
+						has_country_flag = KXX_HOG_veiw
+					}
+					clr_country_flag = KXX_HOG_veiw
+					else = {
+						set_country_flag = KXX_HOG_veiw
+						clr_country_flag = KXX_HOG_second_veiw
+					}
+				}
 			}
-
-			KXX_for_gru_leader_button_visible = {
-				KXX_uses_gru_leader_gui = yes
+			
+			KXX_for_second_leader_button_click = {
+				if = {
+					limit = {
+						has_country_flag = KXX_HOG_second_veiw
+					}
+					clr_country_flag = KXX_HOG_second_veiw
+					else = {
+						set_country_flag = KXX_HOG_second_veiw
+						clr_country_flag = KXX_HOG_veiw
+					}
+				}
 			}
 		}	
 	}
