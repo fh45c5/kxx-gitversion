@@ -11,7 +11,7 @@ focus_tree = {
 		}
 	}
 
-	continuous_focus_position = { x = 0 y = 1000 }
+	continuous_focus_position = { x = 0 y = 4000 }
 
 	
 	######################################################
@@ -24,7 +24,7 @@ focus_tree = {
 	focus = {
 		id = PHI_elections_of_1937
 		icon = GFX_goal_PHI_democracy
-		x = -15
+		x = 20
 		y = 0
 		 cost = 4
 		text_icon = joint_focus_style
@@ -44,14 +44,13 @@ focus_tree = {
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
-
-	# Partido Liberal
 	focus = {
-		id = PHI_partido_liberal
-		icon = GFX_goal_ideology_market_liberal
-		x = -4
-		y = 1
+		id = PHI_elections_of_1941
+		icon = GFX_goal_PHI_democracy
+		x = 20
+		y = 8
 		 cost = 4
+		text_icon = joint_focus_style
 		available = {
 			hidden_trigger = {
 				always = no
@@ -59,12 +58,51 @@ focus_tree = {
 		}
 		bypass = {
 			custom_trigger_tooltip = {
-				tooltip = PHI_liberal_party_victory_tt
-				has_country_flag = PHI_liberal_party_victory
+				tooltip = PHI_elections_has_concluded_tt
+				has_country_flag = PHI_has_1937_elections
 			}
 		}
-		prerequisite = { focus = PHI_elections_of_1937 }
-		relative_position_id = PHI_elections_of_1937
+		completion_reward = {
+			custom_effect_tooltip = PHI_elections_concluded_tt
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = PHI_elections_in_quotes
+		icon = GFX_goal_PHI_democracy
+		x = 64
+		y = 8
+		 cost = 4
+		text_icon = joint_focus_style
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = PHI_elections_has_concluded_tt
+				has_country_flag = PHI_has_1937_elections
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = PHI_elections_concluded_tt
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	# Partido Liberal
+	focus = {
+		id = PHI_partido_liberal
+		icon = GFX_goal_ideology_market_liberal
+		x = 6
+		y = 1
+		 cost = 4
+		available = {
+			
+		}
+		
+		prerequisite = { focus = PHI_elections_in_quotes }
+		relative_position_id = PHI_elections_in_quotes
 		completion_reward = {
 			custom_effect_tooltip = PHI_liberal_party_elected_tt
 		}
@@ -78,10 +116,7 @@ focus_tree = {
 		x = -2
 		y = 1
 		 cost = 4
-		available = {
-			has_capitulated = no
-			has_government = market_liberal
-		}
+		
 		prerequisite = { focus = PHI_partido_liberal }
 		relative_position_id = PHI_partido_liberal
 		completion_reward = {
@@ -101,10 +136,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		 cost = 4
-		available = {
-			has_capitulated = no
-			has_government = market_liberal
-		}
+		
 		prerequisite = { focus = PHI_partido_liberal }
 		relative_position_id = PHI_partido_liberal
 		completion_reward = {
@@ -126,10 +158,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		 cost = 4
-		available = {
-			has_capitulated = no
-			has_government = market_liberal
-		}
+		
 		prerequisite = { focus = PHI_private_public_partnerships }
 		relative_position_id = PHI_private_public_partnerships
 		completion_reward = {
@@ -151,10 +180,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		 cost = 4
-		available = {
-			has_capitulated = no
-			has_government = market_liberal
-		}
+		
 		prerequisite = { focus = PHI_private_public_partnerships }
 		relative_position_id = PHI_private_public_partnerships
 		completion_reward = {
@@ -250,12 +276,17 @@ focus_tree = {
 	focus = {
 		id = PHI_partido_nacionalista
 		icon = GFX_goal_ideology_social_conservative
-		x = -1
+		x = -40
 		y = 1
 		 cost = 4
 		available = {
 			hidden_trigger = {
 				always = no
+			}
+		}
+		allow_branch = {
+			NOT = {
+				tag = PHI
 			}
 		}
 		bypass = {
@@ -300,15 +331,15 @@ focus_tree = {
 	focus = {
 		id = PHI_rural_support
 		icon = GFX_goal_conspiracy
-		x = -1
+		x = 2 
 		y = 1
 		 cost = 4
 		available = {
 			has_capitulated = no
-			has_government = social_conservative
+			
 		}
-		prerequisite = { focus = PHI_partido_nacionalista }
-		relative_position_id = PHI_partido_nacionalista
+		prerequisite = { focus = PHI_partido_liberal}
+		relative_position_id = PHI_partido_liberal
 		completion_reward = {
 			remove_ideas = PHI_lingering_sakdalistas
 		}
@@ -326,15 +357,13 @@ focus_tree = {
 		y = 2
 		 cost = 4
 		available = {
-			has_capitulated = no
-			OR = {
-				has_government = market_liberal
-				has_government = social_conservative
-			}
+			
+		}
+		prerequisite = {
+			focus = PHI_rural_support
 		}
 		prerequisite = {
 			focus = PHI_private_public_partnerships
-			focus = PHI_rural_support
 		}
 		relative_position_id = PHI_rural_support
 		completion_reward = {
@@ -361,11 +390,7 @@ focus_tree = {
 		y = 1
 		 cost = 4
 		available = {
-			has_capitulated = no
-			OR = {
-				has_government = market_liberal
-				has_government = social_conservative
-			}
+			
 		}
 		prerequisite = { focus = PHI_intensify_land_reform_efforts }
 		relative_position_id = PHI_intensify_land_reform_efforts
@@ -388,11 +413,7 @@ focus_tree = {
 		y = 1
 		 cost = 4
 		available = {
-			has_capitulated = no
-			OR = {
-				has_government = market_liberal
-				has_government = social_conservative
-			}
+			
 		}
 		prerequisite = { focus = PHI_intensify_land_reform_efforts }
 		relative_position_id = PHI_intensify_land_reform_efforts
@@ -455,15 +476,14 @@ focus_tree = {
 	focus = {
 		id = PHI_create_nbi
 		icon = GFX_goal_generic_investigation
-		x = 3
+		x = -2
 		y = 1
 		 cost = 4
 		available = {
-			has_capitulated = no
-			has_government = social_conservative
+			
 		}
-		prerequisite = { focus = PHI_partido_nacionalista }
-		relative_position_id = PHI_partido_nacionalista
+		prerequisite = { focus = PHI_partido_progressista }
+		relative_position_id = PHI_partido_progressista
 		completion_reward = {
 			if = {
 				limit = { has_intelligence_agency = no }
@@ -517,7 +537,7 @@ focus_tree = {
 			has_government = social_conservative
 		}
 		prerequisite = { focus = PHI_free_higher_education }
-		prerequisite = { focus = PHI_create_nbi }
+		
 		relative_position_id = PHI_free_higher_education
 		completion_reward = {
 			add_stability = 0.15
@@ -556,22 +576,17 @@ focus_tree = {
 	focus = {
 		id = PHI_partido_progressista
 		icon = GFX_goal_ideology_authoritarian_democrat
-		x = 4
+		x = 0
 		y = 1
+		prerequisite = { focus = PHI_elections_in_quotes }
+		relative_position_id = PHI_elections_in_quotes
 		 cost = 4
 		available = {
-			hidden_trigger = {
-				always = no
-			}
+			
 		}
-		bypass = {
-			custom_trigger_tooltip = {
-				tooltip = PHI_progressista_party_victory_tt
-				has_country_flag = PHI_progressista_party_victory
-			}
-		}
-		prerequisite = { focus = PHI_elections_of_1937 }
-		relative_position_id = PHI_elections_of_1937
+		
+	
+
 		completion_reward = {
 			custom_effect_tooltip = PHI_progressista_elected_tt
 		}
@@ -588,8 +603,7 @@ focus_tree = {
 		y = 1
 		 cost = 4
 		available = {
-			has_capitulated = no
-			has_government = authoritarian_democrat
+			
 		}
 		prerequisite = { focus = PHI_partido_progressista }
 		relative_position_id = PHI_partido_progressista
@@ -615,8 +629,7 @@ focus_tree = {
 		y = 2
 		 cost = 4
 		available = {
-			has_capitulated = no
-			has_government = authoritarian_democrat
+		
 		}
 		prerequisite = { focus = PHI_partido_progressista }
 		relative_position_id = PHI_partido_progressista
@@ -637,8 +650,7 @@ focus_tree = {
 		y = 1
 		 cost = 4
 		available = {
-			has_capitulated = no
-			has_government = authoritarian_democrat
+			
 		}
 		prerequisite = { focus = PHI_promote_nationalism }
 		relative_position_id = PHI_promote_nationalism
@@ -666,8 +678,7 @@ focus_tree = {
 		y = 1
 		 cost = 4
 		available = {
-			has_capitulated = no
-			has_government = authoritarian_democrat
+			
 		}
 		prerequisite = { focus = PHI_promote_nationalism }
 		relative_position_id = PHI_promote_nationalism
@@ -688,8 +699,7 @@ focus_tree = {
 		y = 1
 		 cost = 4
 		available = {
-			has_capitulated = no
-			has_government = authoritarian_democrat
+			
 		}
 		prerequisite = { focus = PHI_for_the_public_good }
 		prerequisite = { focus = PHI_silence_critics }
@@ -712,8 +722,7 @@ focus_tree = {
 		y = 1
 		 cost = 4
 		available = {
-			has_capitulated = no
-			has_government = authoritarian_democrat
+			
 		}
 		prerequisite = { focus = PHI_strengthen_presidential_powers }
 		relative_position_id = PHI_strengthen_presidential_powers
@@ -733,8 +742,7 @@ focus_tree = {
 		y = 2
 		 cost = 4
 		available = {
-			has_capitulated = no
-			has_government = authoritarian_democrat
+			
 		}
 		prerequisite = { focus = PHI_progressive_taxation }
 		relative_position_id = PHI_progressive_taxation
@@ -755,12 +763,18 @@ focus_tree = {
 	focus = {
 		id = PHI_lapiang_sakdalista
 		icon = GFX_goal_ideology_social_democrat
-		x = 4
-		y = 0
+		x = -45
+		y = 1
 		 cost = 4
 		available = {
 			hidden_trigger = {
 				always = no
+			}
+		}
+
+		allow_branch = {
+			NOT = {
+				tag = PHI
 			}
 		}
 		bypass = {
@@ -770,7 +784,7 @@ focus_tree = {
 			}
 		}
 		prerequisite = { focus = PHI_elections_of_1937 }
-		relative_position_id = PHI_partido_progressista
+		relative_position_id = PHI_elections_of_1937
 		completion_reward = {
 			custom_effect_tooltip = PHI_sakdalista_elected_tt
 		}
@@ -783,21 +797,16 @@ focus_tree = {
 	focus = {
 		id = PHI_nationalize_the_lands
 		icon = GFX_goal_OTT_Land_Reform
-		x = -2
+		x = 2
 		y = 1
 		 cost = 4
 		available = {
-			has_capitulated = no
-			OR = {
-				has_government = authoritarian_democrat
-				has_government = social_democrat
-			}
+		
 		}
 		prerequisite = {
-			focus = PHI_lapiang_sakdalista
 			focus = PHI_partido_progressista
 		}
-		relative_position_id = PHI_lapiang_sakdalista
+		relative_position_id = PHI_partido_progressista
 		completion_reward = {
 			add_political_power = -150
 			increase_ruling_party_popularity_by_5 = yes
@@ -820,11 +829,7 @@ focus_tree = {
 		y = 2
 		 cost = 4
 		available = {
-			has_capitulated = no
-			OR = {
-				has_government = authoritarian_democrat
-				has_government = social_democrat
-			}
+			
 		}
 		prerequisite = { focus = PHI_nationalize_the_lands }
 		relative_position_id = PHI_nationalize_the_lands
@@ -849,11 +854,7 @@ focus_tree = {
 		y = 1
 		 cost = 4
 		available = {
-			has_capitulated = no
-			OR = {
-				has_government = social_democrat
-				has_government = authoritarian_democrat
-			}
+			
 		}
 		prerequisite = { focus = PHI_agrarian_investments }
 		relative_position_id = PHI_agrarian_investments
@@ -1036,7 +1037,7 @@ focus_tree = {
 	focus = {
 		id = PHI_the_army_in_control
 		icon = GFX_goal_PHI_military_junta
-		x = 10
+		x = 50
 		y = 0
 		 cost = 4
 		available = {
@@ -1560,8 +1561,10 @@ focus_tree = {
 	focus = {
 		id = PHI_revolution_by_ballot
 		icon = GFX_goal_ideology_libertarian_socialism
-		x = -1
-		y = 10
+		x = -12
+		y = 1
+		prerequisite = { focus = PHI_elections_of_1941 }
+		relative_position_id = PHI_elections_of_1941
 		 cost = 4
 		available = {
 			hidden_trigger = {
@@ -1575,7 +1578,7 @@ focus_tree = {
 			}
 		}
 		
-		relative_position_id = PHI_new_antitrust_laws
+		
 		completion_reward = {
 			custom_effect_tooltip = PHI_revolution_by_ballot_tt
 		}
@@ -3101,8 +3104,8 @@ focus_tree = {
 	focus = {
 		id = PHI_into_the_world
 		icon = GFX_goal_PHI_defense
-		x = 90
-		y = 6
+		x = 105
+		y = 0
 		 cost = 4
 		ai_will_do = {
 			base = 100
@@ -3131,7 +3134,7 @@ focus_tree = {
 			threat > 0.2
 			is_subject = no
 		}
-		relative_position_id = PHI_new_antitrust_laws
+		
 		completion_reward = {
 			add_political_power = 150
 		}
@@ -5603,8 +5606,8 @@ focus_tree = {
 	focus = {
 		id = PHI_sedes_es_patri
 		icon = GFX_goal_PHI_pope
-		x = -8
-		y = 8
+		x = 60
+		y = 0
 		 cost = 4
 		available = {
 			hidden_trigger = {
@@ -7014,12 +7017,14 @@ focus_tree = {
 	focus = {
 		id = PHI_emilio
 		icon = GFX_goal_QIO_revolution
-		x = 20
-		y = 0
-		cost = 5.8
+		x = -9
+		y = 1
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		prerequisite = { focus = PHI_elections_of_1937 }
+		relative_position_id = PHI_elections_of_1937
 		available = { 
 		has_country_flag = PHI_emilio_finally_wins_now
 		not = { has_country_flag = PHI_second_elections } 
@@ -7051,7 +7056,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = -2
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7083,7 +7088,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = 2
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7121,7 +7126,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = 0
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7167,7 +7172,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = -1
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7184,7 +7189,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = -1
 		y = 4
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7202,7 +7207,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = -3
 		y = 5
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7225,7 +7230,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = -1
 		y = 5
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7242,7 +7247,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = 1
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7259,7 +7264,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = 3
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7276,7 +7281,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = 2
 		y = 4
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7293,7 +7298,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = 2
 		y = 5
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7317,7 +7322,7 @@ focus_tree = {
 		relative_position_id = PHI_emilio
 		x = 0
 		y = 6
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7336,9 +7341,11 @@ focus_tree = {
 	focus = {
 		id = PHI_democrata
 		icon = GFX_goal_QIO_revolution
-		x = 27
-		y = 0
-		cost = 5.8
+		x = 9
+		y = 1
+		prerequisite = { focus = PHI_elections_of_1937 }
+		relative_position_id = PHI_elections_of_1937
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7357,7 +7364,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = 0
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7377,7 +7384,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = 2
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7397,7 +7404,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = -2
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7414,7 +7421,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = 1
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7435,7 +7442,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = -1
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7452,7 +7459,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = 3
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7470,7 +7477,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = 3
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7490,7 +7497,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = -1
 		y = 4
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7511,7 +7518,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = 1
 		y = 4
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7529,7 +7536,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = 3
 		y = 4
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7546,7 +7553,7 @@ focus_tree = {
 		relative_position_id = PHI_democrata
 		x = 1
 		y = 5
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7563,12 +7570,14 @@ focus_tree = {
 	focus = {
 		id = PHI_quezon
 		icon = GFX_goal_QIO_revolution
-		x = 35
-		y = 0
-		cost = 5.8
+		x = 0
+		y = 1
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		prerequisite = { focus = PHI_elections_of_1937 }
+		relative_position_id = PHI_elections_of_1937
 		available = { 
 		has_country_flag = PHI_nationalista_survives_again
 		not = { has_country_flag = PHI_second_elections } 
@@ -7584,7 +7593,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = 3
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7603,7 +7612,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = 1
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7623,7 +7632,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = 5
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7643,7 +7652,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = 3
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7663,7 +7672,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = 1
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7682,7 +7691,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = 5
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7703,7 +7712,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = 0
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7723,7 +7732,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = -2
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7743,7 +7752,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = -1
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7760,7 +7769,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = -3
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7781,7 +7790,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = -3
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7798,7 +7807,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = -1
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7819,7 +7828,7 @@ focus_tree = {
 		relative_position_id = PHI_quezon
 		x = 0
 		y = 4
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7836,9 +7845,11 @@ focus_tree = {
 	focus = {
 		id = PHI_gregorio
 		icon = GFX_goal_QIO_revolution
-		x = 46
-		y = 0
-		cost = 5.8
+		x = -18
+		y = 1
+		prerequisite = { focus = PHI_elections_of_1937 }
+		relative_position_id = PHI_elections_of_1937
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7860,7 +7871,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = -1
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7893,7 +7904,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = -2
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7910,7 +7921,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = -2
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7931,7 +7942,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = -4
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7948,7 +7959,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = -3
 		y = 4
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7969,7 +7980,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = 1
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -7986,7 +7997,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = 0
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8007,7 +8018,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = 2
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8027,7 +8038,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = 0
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8045,7 +8056,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = 2
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8064,7 +8075,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = 1
 		y = 4
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8084,7 +8095,7 @@ focus_tree = {
 		relative_position_id = PHI_gregorio
 		x = 0
 		y = 5
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8104,8 +8115,10 @@ focus_tree = {
 	focus = {
 		id = PHI_repub_second
 		icon = GFX_goal_QIO_revolution
-		x = 53
-		y = 8
+		x = -22
+		y = 1
+		prerequisite = { focus = PHI_elections_of_1941 }
+		relative_position_id = PHI_elections_of_1941
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -8407,9 +8420,11 @@ focus_tree = {
 	focus = {
 		id = PHI_santos
 		icon = GFX_goal_QIO_revolution
-		x = 52
-		y = 0
-		cost = 5.8
+		x = 18
+		y = 1
+		prerequisite = { focus = PHI_elections_of_1937 }
+		relative_position_id = PHI_elections_of_1937
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8431,7 +8446,7 @@ focus_tree = {
 		relative_position_id = PHI_santos
 		x = 0
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8451,7 +8466,7 @@ focus_tree = {
 		relative_position_id = PHI_santos
 		x = -2
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8472,7 +8487,7 @@ focus_tree = {
 		relative_position_id = PHI_santos
 		x = 2
 		y = 1
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8489,7 +8504,7 @@ focus_tree = {
 		relative_position_id = PHI_santos
 		x = -2
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8511,7 +8526,7 @@ focus_tree = {
 		relative_position_id = PHI_santos
 		x = 2
 		y = 2
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8532,7 +8547,7 @@ focus_tree = {
 		relative_position_id = PHI_santos
 		x = 3
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8575,7 +8590,7 @@ focus_tree = {
 		relative_position_id = PHI_santos
 		x = 1
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8613,7 +8628,7 @@ focus_tree = {
 		relative_position_id = PHI_santos
 		x = -1
 		y = 3
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8634,7 +8649,7 @@ focus_tree = {
 		relative_position_id = PHI_santos
 		x = 1
 		y = 4
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8683,7 +8698,7 @@ focus_tree = {
 		relative_position_id = PHI_santos
 		x = 1
 		y = 5
-		cost = 5.8
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -8700,8 +8715,10 @@ focus_tree = {
 	focus = {
 		id = PHI_hilario_god
 		icon = GFX_goal_QIO_revolution
-		x = 14
-		y = 8
+		x = -6
+		y = 1
+		prerequisite = { focus = PHI_elections_in_quotes }
+		relative_position_id = PHI_elections_in_quotes
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -8922,8 +8939,10 @@ focus_tree = {
 	focus = {
 		id = PHI_cult_start
 		icon = GFX_goal_QIO_revolution
-		x = 5
-		y = 8
+		x = -14
+		y = 1
+		prerequisite = { focus = PHI_elections_in_quotes }
+		relative_position_id = PHI_elections_in_quotes
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -9016,7 +9035,7 @@ focus_tree = {
 		id = PHI_cult_equal
 		icon = GFX_goal_QIO_revolutionary_zone
 		relative_position_id = PHI_cult_start
-		x = 4
+		x = 3
 		y = 2
 		cost = 5
 		search_filters = {
@@ -9156,12 +9175,14 @@ focus_tree = {
 	focus = {
 		id = PHI_osemna
 		icon = GFX_goal_QIO_revolution
-		x = 24
-		y = 8
+		x = 4
+		y = 1
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		prerequisite = { focus = PHI_elections_of_1941 }
+		relative_position_id = PHI_elections_of_1941
 		available = { 
 		always = no
 		}
@@ -9382,8 +9403,10 @@ focus_tree = {
 	focus = {
 		id = PHI_roxas_lib
 		icon = GFX_goal_QIO_revolution
-		x = 45
-		y = 8
+		x = 22
+		y = 1
+		prerequisite = { focus = PHI_elections_of_1941 }
+		relative_position_id = PHI_elections_of_1941
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -9607,8 +9630,10 @@ focus_tree = {
 	focus = {
 		id = PHI_pop_vict
 		icon = GFX_goal_QIO_revolution
-		x = 34
-		y = 8
+		x = 12
+		y = 1
+		prerequisite = { focus = PHI_elections_of_1941 }
+		relative_position_id = PHI_elections_of_1941
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -10014,8 +10039,10 @@ focus_tree = {
 	focus = {
 		id = PHI_lincoln
 		icon = GFX_goal_QIO_revolution
-		x = 63
-		y = 8
+		x = 14
+		y = 1
+		prerequisite = { focus = PHI_elections_in_quotes }
+		relative_position_id = PHI_elections_in_quotes
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -12086,7 +12113,7 @@ has_country_leader = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = PHI_soc_tenancy } prerequisite = { focus = PHI_soc_crush_em } prerequisite = { focus = PHI_soc_work_landlords }  
-		mutually_exclusive = { focus = PHI_soc_crush_em }
+
 		completion_reward = {
 			add_to_variable = {
 				var = PHI_land_reform_progress
@@ -12640,14 +12667,15 @@ has_country_leader = {
 	focus = {
 		id = PHI_antisoc_republicanism_survival
 		icon = GFX_goal_QIO_revolutionary_zone
-		relative_position_id = PHI_antisoc_vict
-		x = 10
+		prerequisite = { focus = PHI_elections_of_1941 }
+		relative_position_id = PHI_elections_of_1941
+		x = -4
 		y = 1
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = PHI_antisoc_vict }  
+	  
 		available = {
 		always = no
 		}
