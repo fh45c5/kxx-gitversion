@@ -11,12 +11,9 @@ focus_tree = {
 		}
 	}
 
-	continuous_focus_position = { x = 1400 y = 1000 }
+	continuous_focus_position = { x = 0 y = 1000 }
 
-	initial_show_position = {
-		focus = PHI_elections_of_1937
-	}
-
+	
 	######################################################
 	#                                                    #
 	#                      POLITICS                      #
@@ -27,7 +24,7 @@ focus_tree = {
 	focus = {
 		id = PHI_elections_of_1937
 		icon = GFX_goal_PHI_democracy
-		x = 6
+		x = -15
 		y = 0
 		 cost = 4
 		text_icon = joint_focus_style
@@ -1039,8 +1036,8 @@ focus_tree = {
 	focus = {
 		id = PHI_the_army_in_control
 		icon = GFX_goal_PHI_military_junta
-		x = -1
-		y = 2
+		x = 10
+		y = 0
 		 cost = 4
 		available = {
 			hidden_trigger = {
@@ -1054,7 +1051,7 @@ focus_tree = {
 			}
 		}
 		
-		relative_position_id = PHI_new_antitrust_laws
+		
 		completion_reward = {
 			custom_effect_tooltip = PHI_military_junta_tt
 		}
@@ -1941,12 +1938,16 @@ focus_tree = {
 	focus = {
 		id = PHI_eurasianism_in_philippines
 		icon = GFX_goal_PHI_eurasianism_in_philippines
-		x = 5
-		y = 25
+		relative_position_id = PHI_soc_victoryyay
+		x = -21
+		y = 1
 		 cost = 4
 		available = {
 			has_capitulated = no
 			has_country_flag = PHI_eurasianism
+		}
+		prerequisite = {
+			focus = PHI_soc_victoryyay
 		}
 		completion_reward = {
 			add_political_power = 100
@@ -2692,7 +2693,7 @@ focus_tree = {
 	focus = {
 		id = PHI_osmena_industrialization_plan
 		icon = GFX_goal_PHI_osmena_plan
-		x = 21
+		x = 80
 		y = 0
 		 cost = 4
 		text_icon = joint_focus_style
@@ -3100,7 +3101,7 @@ focus_tree = {
 	focus = {
 		id = PHI_into_the_world
 		icon = GFX_goal_PHI_defense
-		x = 10
+		x = 90
 		y = 6
 		 cost = 4
 		ai_will_do = {
@@ -5602,8 +5603,8 @@ focus_tree = {
 	focus = {
 		id = PHI_sedes_es_patri
 		icon = GFX_goal_PHI_pope
-		x = 20
-		y = 12
+		x = -8
+		y = 8
 		 cost = 4
 		available = {
 			hidden_trigger = {
@@ -5617,7 +5618,7 @@ focus_tree = {
 			}
 		}
 		
-		relative_position_id = PHI_crop_insurance
+	
 		completion_reward = {
 			custom_effect_tooltip = PHI_pope_in_control_tt
 		}
@@ -6523,15 +6524,18 @@ focus_tree = {
 	focus = {
 		id = PHI_huk_rises
 		icon = GFX_PHI_a_new_sun-445
-		x = 20
-		y = 25
+		relative_position_id = PHI_soc_victoryyay
+		x = 21
+		y = 1
 		 cost = 4
 		available = {
 			is_subject = no
 			has_capitulated = no
 			has_country_flag = PHI_huk_win
 		}
-		
+		prerequisite = {
+			focus = PHI_soc_victoryyay
+		}
 		
 		completion_reward = {
 			add_political_power = 100
@@ -7004,6 +7008,5950 @@ focus_tree = {
 				add_core_of = PHI
 			}
 			custom_effect_tooltip = PHI_liberate_china_tooltip
+		}
+	}
+	#emilio leads from Partido filipinista
+	focus = {
+		id = PHI_emilio
+		icon = GFX_goal_QIO_revolution
+		x = 20
+		y = 0
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		has_country_flag = PHI_emilio_finally_wins_now
+		not = { has_country_flag = PHI_second_elections } 
+		}
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_repub_coal
+		days = 130 #originally left it but whatever
+		}
+		hidden_effect = {
+		set_power_balance = {
+   		 id = PHI_emil_left_right_balance
+    		left_side = PHI_left_emilio_side
+    		right_side = PHI_right_emilio_side
+		}
+		set_variable = {
+		    var = PHI_rizalite_cults_times
+		    value = 0
+		}
+
+		}
+
+		}
+	}
+	#stengthen influence over party 
+	focus = {
+		id = PHI_emilio_influence 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = -2
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio } 
+		available = { not = { has_country_flag = PHI_second_elections } } 
+		mutually_exclusive = { focus = PHI_emilio_sakdalista  }
+		completion_reward = {
+			random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		add_political_power = -50
+		add_power_balance_value = {
+		id = PHI_emil_left_right_balance
+		value = 0.06
+		}
+
+
+		}
+	}
+	#maintain support 
+	focus = {
+		id = PHI_emilio_sakdalista 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = 2
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio } 
+		mutually_exclusive = { focus = PHI_emilio_influence }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+			random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1 
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			}
+			random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			}
+
+		add_power_balance_value = {
+		id = PHI_emil_left_right_balance
+		value = -0.06
+		}
+
+		}
+	}
+	#remember flag of first republic 
+	focus = {
+		id = PHI_emilio_flag_focus
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = 0
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio_sakdalista focus = PHI_emilio_influence } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		hidden_effect = { country_event = { id = rd_phil.45 days = 60 } } 
+		add_popularity = {
+    		ideology = ROOT
+    		popularity = 0.025
+		}
+		add_war_support = 0.05
+		if = { 
+		limit = { 
+		is_subject_of = USA
+		has_completed_focus = PHI_start_cuck
+		}
+		country_event = { id = rd_phil.8 days = 41 }
+		}
+		else = {
+		army_experience = 50
+		add_stability = 0.05
+		}
+		hidden_effect = {
+		if = { 
+		limit = { has_war = yes }
+		set_cosmetic_tag = PHI_emilio_flag_commonwealth_war
+		}
+		else = { set_cosmetic_tag = PHI_emilio_flag_commonwealth }
+		if = { 
+		limit = { 
+		is_subject = no
+		}
+		rd_phil_commonwealth_to_republic = yes
+		}
+		}
+		}
+	}
+	#legacy of the republic
+	focus = {
+		id = PHI_emilio_republic_legacy 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = -1
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio_flag_focus } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_emil_revolution
+		}
+	}
+	#concessions to labor
+	focus = {
+		id = PHI_emilio_labor_concession
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = -1
+		y = 4
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio_republic_legacy } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_emil_labor
+
+		}
+	}
+	#taxes
+	focus = {
+		id = PHI_emilio_slash_govt_salary
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = -3
+		y = 5
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio_labor_concession } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		custom_effect_tooltip = PHI_kx_steal_merge_spirits_tt
+		add_ideas = PHI_emil_all_people_combind
+		hidden_effect = {
+		remove_ideas = {
+		PHI_emil_labor PHI_emil_revolution
+		}
+		}
+		}
+	}
+	#education
+	focus = {
+		id = PHI_emilio_education_expand
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = -1
+		y = 5
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio_labor_concession } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_research_slot = 1	
+		}
+	}
+	#NBSCRT
+	focus = {
+		id = PHI_emilio_NBSCRT 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = 1
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio_flag_focus } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_emil_nsbacsome
+		}
+	}
+	#unemployment bearo
+	focus = {
+		id = PHI_emilio_unemployment 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = 3
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio_flag_focus } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_emil_unemployed
+		}
+	}
+	#national defense
+	focus = {
+		id = PHI_emilio_national_defense 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = 2
+		y = 4
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio_unemployment } prerequisite = { focus = PHI_emilio_NBSCRT } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_emil_natdef
+		}
+	}
+	#good gov
+	focus = {
+		id = PHI_emilio_tax_revise 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = 2
+		y = 5
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio_national_defense } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		custom_effect_tooltip = PHI_kx_steal_merge_spirits_tt
+		add_ideas = PHI_emil_combined
+		hidden_effect = {
+		country_event = { id = rd_phil.33 days = 31 }
+		remove_ideas = {
+		PHI_emil_natdef PHI_emil_unemployed PHI_emil_nsbacsome
+		}
+		}
+		}
+	}
+	#glorious first republic
+	focus = {
+		id = PHI_emilio_first_republic
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emilio
+		x = 0
+		y = 6
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emilio_education_expand } prerequisite = { focus = PHI_emilio_tax_revise } prerequisite = { focus = PHI_emilio_slash_govt_salary} 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		country_event = rd_phil.28 
+		complete_national_focus = PHI_emi_new
+		add_timed_idea = {
+		idea = PHI_krot_national
+		days = 180
+		}
+		}
+	}
+	#legacy of the democrata party
+	focus = {
+		id = PHI_democrata
+		icon = GFX_goal_QIO_revolution
+		x = 27
+		y = 0
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		has_country_flag = PHI_pop_front_win
+		not = { has_country_flag = PHI_second_elections } 
+		}
+		completion_reward = {
+		add_ideas = PHI_dem_juan_start
+		}
+	}
+	#social_justice
+	focus = {
+		id = PHI_democrata_social_justice
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = 0
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_quez_social_justice
+		add_idea = PHI_dem_social_justice
+		}
+		}
+	}
+	#wanring against radicalism
+	focus = {
+		id = PHI_democrata_against_radicalism
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = 2
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_dem_syndies_bad
+		days = 180
+		}
+		}
+	}
+	#form filipino welfare org
+	focus = {
+		id = PHI_democrata_welfare_org
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = -2
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata_social_justice } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_dem_agriculutral_banks
+		}
+	}
+	#national labor commission
+	focus = {
+		id = PHI_democrata_labor_commission
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = 1
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata_social_justice } prerequisite = { focus = PHI_democrata_against_radicalism } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_manpower = 1000
+		add_popularity = {
+		ideology = social_liberal
+		popularity = 0.05
+		}
+		}
+	}
+	#Pursuing Protectionist Policies
+	focus = {
+		id = PHI_democrata_subdue_monopolies
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = -1
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata_labor_commission } prerequisite = { focus = PHI_democrata_welfare_org  } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_dem_protectionism
+		}
+	}
+	#a focus on public utilities
+	focus = {
+		id = PHI_democrata_public_utilities
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = 3
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata_against_radicalism } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_stability = 0.05
+		add_political_power = 50
+		}
+	}
+	#strike down belo act
+	focus = {
+		id = PHI_democrata_belo_act
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = 3
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata_public_utilities } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_dem_belo_act
+		days = 120
+		}
+		}
+	}
+	#Building Towards Economic Independence
+	focus = {
+		id = PHI_democrata_protectionist_policies
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = -1
+		y = 4
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata_belo_act } prerequisite = { focus = PHI_democrata_subdue_monopolies }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_dem_protectionism
+		add_idea = PHI_dem_protectionism_1
+		}
+		}
+	}
+
+	#enactment of sotto law
+	focus = {
+		id = PHI_democrata_sotto_law
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = 1
+		y = 4
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata_belo_act } prerequisite = { focus = PHI_democrata_subdue_monopolies }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		rd_phil_stto_spirt_upgrade = yes
+		}
+	}
+
+	#looking to the youth students
+	focus = {
+		id = PHI_democrata_hare_haws 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = 3
+		y = 4
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata_belo_act } prerequisite = { focus = PHI_democrata_subdue_monopolies }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+	#a man of prestige for a great nation
+	focus = {
+		id = PHI_democrata_great_man 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_democrata
+		x = 1
+		y = 5
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_democrata_hare_haws } prerequisite = { focus = PHI_democrata_sotto_law } prerequisite = { focus = PHI_democrata_protectionist_policies }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_dem_juan_start
+		add_idea = PHI_dem_dreaming
+		}
+		}
+	}
+	#quezon beats back the popular front
+	focus = {
+		id = PHI_quezon
+		icon = GFX_goal_QIO_revolution
+		x = 35
+		y = 0
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		has_country_flag = PHI_nationalista_survives_again
+		not = { has_country_flag = PHI_second_elections } 
+		}
+		completion_reward = {
+		add_ideas = PHI_quezon_struggle
+		}
+	}
+	#rice share tenancy act
+	focus = {
+		id = PHI_quezon_rice_share 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = 3
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = {
+		PHI_quezon_rice_share_tenacy
+		}
+		}
+	}
+	#50 50 sharing
+	focus = {
+		id = PHI_quezon_fifty_fifty 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = 1
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon_rice_share } 
+		mutually_exclusive = { focus = PHI_quezon_nlsa }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = {
+		PHI_quezon_sharing_half_half
+		}
+		}
+	}
+	#form the nlsa
+	focus = {
+		id = PHI_quezon_nlsa 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = 5
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon_rice_share } 
+		mutually_exclusive = { focus = PHI_quezon_fifty_fifty }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = {
+		PHI_quezon_nlsa
+		}
+		}
+	}
+#placate both sides
+	focus = {
+		id = PHI_quezon_work_with_both 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = 3
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon_nlsa focus = PHI_quezon_fifty_fifty } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_quezon_rice_share_tenacy
+		add_idea = PHI_quezon_rice_share_tenacy_both_sides
+		}
+		}
+	}
+#regulate the coops
+	focus = {
+		id = PHI_quezon_regulate_coops 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = 1
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon_fifty_fifty } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = {
+		PHI_quezon_crop_regulation
+		}
+		}
+	}
+	#hacienda support
+	focus = {
+		id = PHI_quezon_big_farms 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = 5
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon_nlsa } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = {
+		PHI_quezon_haciendas
+		}
+		}
+	}
+
+
+	#initiate women's sufferage
+	focus = {
+		id = PHI_quezon_women_sufferage
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = 0
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_womens_suffering
+		days = 200
+		}
+		}
+	}
+	#contiunance of the social justice reforms
+	focus = {
+		id = PHI_quezon_continue_justice
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = -2
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_quez_social_justice
+		add_idea = PHI_quezon_social_just
+		}
+		}
+	}
+	#create insititiuion of national language
+	focus = {
+		id = PHI_quezon_national_language
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = -1
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon_continue_justice } prerequisite = { focus = PHI_quezon_women_sufferage }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+	#maintaing publc education system
+	focus = {
+		id = PHI_quezon_public_education
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = -3
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon_continue_justice } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_quezon_struggle
+		add_idea = PHI_quezon_struggle_1
+		}
+
+		}
+	}
+	#establish public assistance service
+	focus = {
+		id = PHI_quezon_public_assistance
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = -3
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon_continue_justice } prerequisite = { focus = PHI_quezon_national_language }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_quezon_thingy_idk
+		}
+	}
+	#enact the minimum wage law
+	focus = {
+		id = PHI_quezon_minimum_wage
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = -1
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon_continue_justice } prerequisite = { focus = PHI_quezon_national_language }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_quezon_social_just
+		add_idea = PHI_quezon_social_just_1
+		}
+
+		}
+	}
+#quezon's historic victory
+	focus = {
+		id = PHI_quezon_history_remembered 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_quezon
+		x = 0
+		y = 4
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_quezon_minimum_wage } prerequisite = { focus = PHI_quezon_public_assistance } prerequisite = { focus = PHI_quezon_work_with_both } prerequisite = { focus = PHI_quezon_regulate_coops focus = PHI_quezon_big_farms } 
+		available = {has_government = social_conservative not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_quezon_dead_idea
+		}
+	}
+
+
+#republican
+	#a victory for the republicans
+	focus = {
+		id = PHI_gregorio
+		icon = GFX_goal_QIO_revolution
+		x = 46
+		y = 0
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		has_country_flag = PHI_republican_party_win
+		not = { has_country_flag = PHI_second_elections } 
+		}
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_repub_coal
+		days = 180
+		}
+		}
+	}
+	#happiness of freedom
+	focus = {
+		id = PHI_gregorio_happiness
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = -1
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		if = { 
+		limit = { 
+		is_subject_of = USA
+		has_completed_focus = PHI_start_cuck
+		}
+		country_event = { id = rd_phil.8 days = 103 } #idk time
+		}
+		else = {
+		#if not commonwealth do something else cool idk
+		army_experience = 50
+		add_stability = 0.05
+		add_popularity = {
+    		ideology = ROOT
+    		popularity = 0.05
+		}
+		}
+
+		}
+	}
+	#promintg public welfare
+	focus = {
+		id = PHI_gregorio_public_welfare
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = -2
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio_happiness } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_repub_goo
+		}
+	}
+	#attack buerocratuc octpus
+	focus = {
+		id = PHI_gregorio_octopus
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = -2
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio_public_welfare } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_repub_goo
+		add_idea = PHI_repub_bad
+		}
+
+		}
+	}
+	#revival of tagalog
+	focus = {
+		id = PHI_gregorio_tagalog_revive
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = -4
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio_public_welfare } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+	#salvation through a loving christ
+	focus = {
+		id = PHI_gregorio_christ_love
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = -3
+		y = 4
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio_octopus } prerequisite = { focus = PHI_gregorio_tagalog_revive } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_repub_bad
+		add_idea = PHI_repub_life
+		}
+		}
+	}
+
+	#enhance lives of masses
+	focus = {
+		id = PHI_gregorio_enhance_lives
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = 1
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_repub_mass
+		}
+	}
+	#reforms for the peasantry like land reform
+	focus = {
+		id = PHI_gregorio_peasantry_reforms
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = 0
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio_enhance_lives } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_repub_mass
+		add_idea = PHI_repub_mass_1
+		}
+		}
+	}
+
+	#new means of production new industries
+	focus = {
+		id = PHI_gregorio_new_industries
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = 2
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio_enhance_lives } 
+		available = { has_completed_focus = PHI_gregorio_peasantry_reforms not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_repub_mass_1
+		add_idea = PHI_repub_mass_2
+		}
+		}
+	}
+	#legacy of isabelo
+	focus = {
+		id = PHI_gregorio_isabelo_legacy
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = 0
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio_peasantry_reforms } prerequisite = { focus = PHI_gregorio_new_industries } 
+		mutually_exclusive = { focus = PHI_gregorio_evangelista_learn }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_repub_anar
+		}
+	}
+	#learning like evangelista
+	focus = {
+		id = PHI_gregorio_evangelista_learn
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = 2
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio_peasantry_reforms } prerequisite = { focus = PHI_gregorio_new_industries } 
+		mutually_exclusive = { focus = PHI_gregorio_isabelo_legacy }
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_repub_synd
+
+		}
+	}
+	#revising tax process lower_land_tax
+	focus = {
+		id = PHI_gregorio_revise_tax
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = 1
+		y = 4
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio_isabelo_legacy focus = PHI_gregorio_evangelista_learn } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_repub_mass_2
+		add_idea = PHI_repub_mass_3
+		}
+		}
+	}
+	#For god and fatherland
+	focus = {
+		id = PHI_gregorio_nationalist_church
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_gregorio
+		x = 0
+		y = 5
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_gregorio_revise_tax } prerequisite = { focus = PHI_gregorio_christ_love } 
+		available = { has_country_leader = {
+    		name = "Santiago Fonacier"
+  	  	ruling_only = yes
+		}
+	not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		country_event = rd_phil.14
+		add_political_power = 100
+		random_owned_state = { add_extra_state_shared_building_slots = 1 }
+		}
+	}
+	#second victory repub aglipay
+	focus = {
+		id = PHI_repub_second
+		icon = GFX_goal_QIO_revolution
+		x = 53
+		y = 8
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+		}
+	}
+ 	#liberty
+	focus = {
+		id = PHI_aglipay_liberty
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = -3
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_repub_second }
+		available = { has_country_leader = {
+    		name = "Isebelo de los Reyes Jr."
+  	  	ruling_only = yes
+		}
+		}
+		mutually_exclusive = { focus = PHI_aglipay_norbeto focus = PHI_aglipay_fonocier }
+		completion_reward = {
+		add_ideas = PHI_repub_libertry
+		}
+	}
+	
+ 	#reason
+	focus = {
+		id = PHI_aglipay_fonocier
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_repub_second }
+		available = { has_country_leader = {
+    		name = "Santiago Fonacier"
+  	  	ruling_only = yes
+		}
+		}
+		mutually_exclusive = { focus = PHI_aglipay_norbeto focus = PHI_aglipay_liberty }
+		completion_reward = {
+		add_ideas = PHI_repub_unitarianism
+		}
+	}
+ 	#apprecient labor and 
+	focus = {
+		id = PHI_aglipay_norbeto
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = 3
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_repub_second }
+		available = { has_country_leader = {
+    		name = "Norberto Nabong"
+  	  	ruling_only = yes
+		}
+		}
+		mutually_exclusive = { focus = PHI_aglipay_fonocier focus = PHI_aglipay_liberty }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_repub_synd
+		add_idea = PHI_repub_synd_1
+		}
+		}
+	}
+ 	#unity and 
+	focus = {
+		id = PHI_aglipay_sec_unity
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = -4
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_liberty }
+		completion_reward = {
+		add_country_leader_trait = PHI_isabelo_trait
+
+		}
+	}
+	
+ 	#divine science 
+	focus = {
+		id = PHI_aglipay_sec_science
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_fonocier }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_repub_unitarianism
+		add_idea = PHI_repub_unitarianism_1
+		}
+		country_event = rd_phil.27
+		}
+	}
+ 	#struggle 
+	focus = {
+		id = PHI_aglipay_sec_struggle
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = 4
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_norbeto }
+		completion_reward = {
+		add_ideas = PHI_repub_struugl
+		}
+	}
+ 	#kkk 
+	focus = {
+		id = PHI_aglipay_sec_kkk
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = -2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_norbeto focus = PHI_aglipay_fonocier focus = PHI_aglipay_liberty  }
+		completion_reward = {
+		add_ideas = PHI_repub_nationa
+		}
+	}
+ 	#own labor
+	focus = {
+		id = PHI_aglipay_sec_labr
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = 2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_norbeto focus = PHI_aglipay_fonocier focus = PHI_aglipay_liberty  }
+		completion_reward = {
+		add_ideas = PHI_repub_marxist_labor
+		}
+	}
+ 	#general well being
+	focus = {
+		id = PHI_aglipay_sec_well
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = 3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_sec_labr } prerequisite = { focus = PHI_aglipay_sec_struggle focus = PHI_aglipay_sec_science focus = PHI_aglipay_sec_unity }
+		completion_reward = {
+		add_ideas = PHI_repub_gen
+		}
+	}
+ 	#youth
+	focus = {
+		id = PHI_aglipay_sec_young
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = 0
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_sec_labr } prerequisite = { focus = PHI_aglipay_sec_kkk } prerequisite = { focus = PHI_aglipay_sec_struggle focus = PHI_aglipay_sec_science focus = PHI_aglipay_sec_unity }
+		completion_reward = {
+		add_war_support = 0.05
+		add_manpower = 5000
+		add_political_power = 25
+		}
+	}
+
+ 	#revolution
+	focus = {
+		id = PHI_aglipay_sec_revolutionary
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = -3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_sec_kkk } prerequisite = { focus = PHI_aglipay_sec_struggle focus = PHI_aglipay_sec_science focus = PHI_aglipay_sec_unity }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_repub_nationa	
+		add_idea = PHI_repub_nationa_1
+		}
+		}
+	}
+
+ 	#progess
+	focus = {
+		id = PHI_aglipay_sec_progresss
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = -2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_sec_well } prerequisite = { focus = PHI_aglipay_sec_young }
+		completion_reward = {
+			random_scientist = { 
+			add_scientist_xp = {
+  			experience = 1
+  			specialization = specialization_nuclear
+			}
+			}
+			add_timed_idea = {
+			idea = generic_research_advances
+			days = 360
+			}
+			random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			}
+
+		}
+	}
+ 	#deeds
+	focus = {
+		id = PHI_aglipay_sec_deeds
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = 2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_sec_revolutionary } prerequisite = { focus = PHI_aglipay_sec_young }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_repub_marxist_labor
+		add_idea = PHI_repub_marxist_labor_1
+		}
+		}
+	}
+ 	#reldeas
+	focus = {
+		id = PHI_aglipay_sec_released
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_repub_second
+		x = 0
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_aglipay_sec_deeds } prerequisite = { focus = PHI_aglipay_sec_progresss }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_repub_release
+		days = 200
+		}
+		}
+	}
+
+
+
+
+	#The Abad Santos wing wins
+	focus = {
+		id = PHI_santos
+		icon = GFX_goal_QIO_revolution
+		x = 52
+		y = 0
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		has_country_flag = PHI_santos_party_win
+		not = { has_country_flag = PHI_second_elections } 
+		}
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_repub_coal
+		days = 180
+		}
+		}
+	}
+	#building upon the eight hour work day
+	focus = {
+		id = PHI_santos_eight_hour 
+		icon = GFX_goal_CSA_for_fair_days_work
+		relative_position_id = PHI_santos
+		x = 0
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_santos } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_quez_social_justice
+		add_idea = PHI_santos_real_social_jus
+		}
+		}
+	}
+	#denounce sumulong moderatism
+	focus = {
+		id = PHI_santos_denounce_sumulong 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_santos
+		x = -2
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_santos } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_santos_get_others_in
+		add_synd_to_coalition = yes
+		add_tot_to_coalition = yes
+		
+
+		}
+	}
+	#putting a leash on corrupt judiciary
+	focus = {
+		id = PHI_santos_corrupt_judiciary
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_santos
+		x = 2
+		y = 1
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_santos } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_ideas = PHI_santos_jose_do_shit
+		}
+	}
+	#assistance to unemployed and radicalization
+	focus = {
+		id = PHI_santos_unemployed_assistance
+		icon = GFX_goal_NZL_unemployment_insurance
+		relative_position_id = PHI_santos
+		x = -2
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_santos_eight_hour } prerequisite = { focus = PHI_santos_denounce_sumulong } prerequisite = { focus = PHI_santos_corrupt_judiciary } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_santos_get_others_in
+		add_idea = PHI_santos_get_others_in_1
+		}
+
+
+		}
+	}
+ 	#explaining the failures of the Sakdalistas
+	focus = {
+		id = PHI_santos_sakdalistas
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_santos
+		x = 2
+		y = 2
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_santos_eight_hour } prerequisite = { focus = PHI_santos_denounce_sumulong } prerequisite = { focus = PHI_santos_corrupt_judiciary } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_krot_national
+		days = 200
+		}
+		army_experience = 25
+		}
+	}
+ 	#aid to the peasants
+	focus = {
+		id = PHI_santos_peasant_aid
+		icon = GFX_goal_SPR_peasant_coop_focus
+		relative_position_id = PHI_santos
+		x = 3
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_santos_sakdalistas } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		random_owned_state = { 
+				add_manpower = 1000
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+		increase_state_category_by_one_level = yes
+		}
+		random_owned_state = { 
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+		increase_state_category_by_one_level = yes
+		}
+		random_owned_state = { 
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+		increase_state_category_by_one_level = yes
+		}
+
+		}
+	}
+
+ 	#strengthen the union power
+	focus = {
+		id = PHI_santos_union_power
+		icon = GFX_goal_KIV_encourage_unionism
+		relative_position_id = PHI_santos
+		x = 1
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_santos_sakdalistas } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_war_support = 0.05
+		random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_state_modifier = {
+					modifier = {
+						local_resources_factor = 0.03
+						local_factories = 0.05
+					}
+				}
+			}
+		random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_state_modifier = {
+					modifier = {
+						local_resources_factor = 0.03
+						state_production_speed_buildings_factor = 0.05
+					}
+				}
+			}
+
+
+
+		}
+	}
+ 	#begin the monomply breakups
+	focus = {
+		id = PHI_santos_monopoly_break
+		icon = GFX_goal_TEX_Oppose_Coastal_Elitism_Monopoly
+		relative_position_id = PHI_santos
+		x = -1
+		y = 3
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_santos_unemployed_assistance } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_santos_real_social_jus
+		add_idea = PHI_santos_real_social_jus_1
+		}
+
+		}
+	}
+ 	#breaking free from the empire
+	focus = {
+		id = PHI_santos_break_empire
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_santos
+		x = 1
+		y = 4
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_santos_monopoly_break } prerequisite = { focus = PHI_santos_peasant_aid } prerequisite = { focus = PHI_santos_union_power } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		hidden_effect = { country_event = { id = rd_phil.45 days = 30 } } 
+		if = { 
+		limit = { 
+		is_subject_of = USA
+		has_completed_focus = PHI_start_cuck
+		}
+		rd_phil_commonwealth_to_republic = yes
+		USA = {
+		set_autonomy = {
+   		target = PHI
+   		autonomous_state = autonomy_free
+    		end_wars = no
+		}
+		}
+		leave_faction = yes 
+		}
+		else = {
+		add_political_power = 50
+		add_command_power = 50
+		add_war_support = 0.05
+		add_popularity = {
+		ideology = radical_socialist
+		popularity = 0.05
+		}
+		add_popularity = {
+		ideology = syndicalist
+		popularity = 0.025
+		}
+		add_popularity = {
+		ideology = totalist
+		popularity = 0.025
+		}
+		}
+		}
+	}
+ 	#the revolution is afoot
+	focus = {
+		id = PHI_santos_afoot_rev
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_santos
+		x = 1
+		y = 5
+		cost = 5.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_santos_break_empire } 
+		available = { not = { has_country_flag = PHI_second_elections } }
+		completion_reward = {
+		add_war_support = 0.05
+		army_experience = 10
+		country_event = {id = rd_phil.39 days = 30 }#rev event for unlocking the correct focus
+		}
+	}
+#second elections
+	#nation of god  loyalty
+	focus = {
+		id = PHI_hilario_god
+		icon = GFX_goal_QIO_revolution
+		x = 14
+		y = 8
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+		}
+	}
+ 	#expand fn 
+	focus = {
+		id = PHI_hilario_fn
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_god } 
+		available = { 
+		hidden_trigger = {
+		    NOT = { has_completed_focus = PHI_cult_start }
+		}
+		}
+		cancel_if_invalid = yes
+		completion_reward = {
+		add_political_power = 50
+		add_popularity = {
+		ideology = national_populist
+		popularity = 0.08
+		}
+		}
+	}
+ 	#crush the syndicalist threat
+	focus = {
+		id = PHI_hilario_anticom
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = -2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_god } 
+		available = { 
+		hidden_trigger = {
+		    NOT = { has_completed_focus = PHI_cult_start }
+		}
+		}
+		cancel_if_invalid = yes
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_moncado_communism
+		days = 200
+		}
+		}
+	}
+ 	#loyalty to great general
+	focus = {
+		id = PHI_hilario_loyal_general
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = -3
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_anticom }  
+		cancel_if_invalid = yes
+		completion_reward = {
+		add_ideas = PHI_moncado_army
+		}
+	}
+ 	#man equal god
+	focus = {
+		id = PHI_hilario_man_god
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = -1
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_fn } prerequisite = { focus = PHI_hilario_anticom }  
+		completion_reward = {
+		add_ideas = PHI_moncado_moralism
+		}
+	}
+ 	#creation of fwca 
+	focus = {
+		id = PHI_hilario_fwca
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = -3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_man_god } prerequisite = { focus = PHI_hilario_loyal_general }  
+		completion_reward = {
+		add_country_leader_trait = PHI_moncado_genral
+		}
+	}
+ 	#golf courses  
+	focus = {
+		id = PHI_hilario_golf_god
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = -1
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_man_god } prerequisite = { focus = PHI_hilario_loyal_general }  
+		completion_reward = {
+		country_event = rd_phil.17
+		}
+	}
+ 	#publish the moncado mission billboard
+	focus = {
+		id = PHI_hilario_misson_billboard
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = 2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_god } 	
+		available = { 
+		hidden_trigger = {
+		    NOT = { has_completed_focus = PHI_cult_start }
+		}
+		}
+		cancel_if_invalid = yes
+		completion_reward = {
+		add_ideas = PHI_moncado_trvth
+		}
+	}
+ 	#cane fields
+	focus = {
+		id = PHI_hilario_cane_field
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = 3
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_misson_billboard }
+		completion_reward = {
+		add_ideas = PHI_moncado_cane
+		}
+	}
+
+ 	#the moncadian calendar
+	focus = {
+		id = PHI_hilario_calendar
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = 1
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_misson_billboard } prerequisite = { focus = PHI_hilario_anticom }
+		completion_reward = {
+		add_ideas = PHI_moncado_women
+		}
+	}
+ 	#celebrating the Reincarnation
+	focus = {
+		id = PHI_hilario_reincarnation
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = 2
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_calendar } prerequisite = { focus = PHI_hilario_cane_field }
+		completion_reward = {
+		add_country_leader_trait = PHI_moncado_jesus
+		}
+	}
+ 	#a genral worth more than 5 stars
+	focus = {
+		id = PHI_hilario_six_stars
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_hilario_god
+		x = 0
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_hilario_reincarnation } prerequisite = { focus = PHI_hilario_golf_god } prerequisite = { focus = PHI_hilario_fwca }
+
+		completion_reward = {
+		add_country_leader_trait = PHI_moncado_end
+		country_event = rd_phil.18
+		}
+	}
+	#The Bolo Cuts Through the Steel Beast
+	focus = {
+		id = PHI_cult_start
+		icon = GFX_goal_QIO_revolution
+		x = 5
+		y = 8
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+		}
+	}
+ 	#Everyone is a Skadalista (the tradition of resistancee)
+	focus = {
+		id = PHI_cult_christ
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = -2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_start }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_krot_national
+		days = 180
+		}
+		country_event = rd_phil.25
+		}
+	}
+ 	#Standing Up for Poor 
+	focus = {
+		id = PHI_cult_beauty
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = -2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_christ }
+		completion_reward = {
+		add_ideas = {
+		PHI_stand_up_for_the_poor
+		}
+		}
+	}
+ 	#An Accord with the Socialists
+	focus = {
+		id = PHI_cult_rizal
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = -2
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_beauty }
+		completion_reward = {
+		country_event = rd_phil.26
+		add_war_support = 0.05
+		army_experience = 50
+		PHI_leftist_generals = yes
+		#do a scripted effect to add a bunch of socialist generals
+		}
+	}
+ 	#Gentle eyes, foregiving ears, and sealed lips
+	focus = {
+		id = PHI_cult_poor
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = 2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_start }
+		completion_reward = {
+			add_ideas = {
+			PHI_eyes_and_ears
+			}
+		}
+	}
+ 	#Follow in the footsteps of a Kaluluwang Wagas (Pure Soul)
+	focus = {
+		id = PHI_cult_equal
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = 4
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_poor }
+		completion_reward = {
+		add_ideas = {
+		PHI_pure_soul
+		}
+		}
+	}
+ 	#Taking up the mantle of the Katipunan
+	focus = {
+		id = PHI_cult_peace
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_poor }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_repub_release
+		days = 200
+		}
+		}
+	}
+ 	#Led by the Light of Rizal
+	focus = {
+		id = PHI_cult_nat
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = 2
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_peace }prerequisite = { focus = PHI_cult_equal }
+		completion_reward = {
+		add_political_power = 50
+		add_popularity = {
+		ideology = ROOT
+		popularity = 0.1
+		}
+		}
+	}
+
+ 	#amulet of glory
+	focus = {
+		id = PHI_cult_amulets
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = 0
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_nat } prerequisite = { focus = PHI_cult_rizal }
+		available = { 
+		has_country_leader = {
+   		 name = "Valentin de los Santos"
+    		ruling_only = yes
+		}
+		}
+		completion_reward = {
+			add_ideas = {
+			PHI_amulets
+			}
+		}
+	}
+	
+	#Opening up the Invention Room
+	focus = {
+		id = PHI_cult_invention_room
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = -1
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_amulets } 
+		completion_reward = {
+		add_research_slot = 1 #he can get an extra one cause he's cool idk
+
+		}
+	}
+	
+	#Forming the Christian-Bathala Fusion
+	focus = {
+		id = PHI_cult_bathala
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = 1
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_amulets } 
+		completion_reward = {
+			add_ideas = {
+			PHI_religion_fusion
+			}
+		}
+	}
+	
+	#The Way of National Beauty
+	focus = {
+		id = PHI_cult_national_beauty
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_cult_start
+		x = 0
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_cult_invention_room } prerequisite = { focus = PHI_cult_bathala }
+		completion_reward = {
+			add_ideas = {
+			PHI_national_beauty
+			}
+		}
+	}
+	
+	
+
+	#osemna's victory under nationsita
+	focus = {
+		id = PHI_osemna
+		icon = GFX_goal_QIO_revolution
+		x = 24
+		y = 8
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+		}
+	}
+ 	#power to supreme court
+	focus = {
+		id = PHI_osemna_empower_court
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = -2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna }
+		completion_reward = {
+		add_stability = 0.05
+		add_popularity = {
+		ideology = social_conservative
+		popularity = 0.05
+		}
+		}
+	}
+ 	#abolish court of appeals
+	focus = {
+		id = PHI_osemna_court_appeals
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = -2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna_empower_court }
+		completion_reward = {
+		add_ideas = PHI_osmena_victory
+		}
+	}
+ 	#public works
+	focus = {
+		id = PHI_osemna_public_works
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = -4
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna_court_appeals }
+		completion_reward = {
+			random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			}
+			random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			}
+
+		}
+	}
+ 	#inqury board creation
+	focus = {
+		id = PHI_osemna_inqury_board
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = -2
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna_court_appeals }
+		completion_reward = {
+		add_ideas = PHI_os_inqury_board
+
+		}
+	}
+
+ 	#repeal the sedition laws
+	focus = {
+		id = PHI_osemna_sedition_law
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna }
+
+		completion_reward = {
+		add_country_leader_trait = PHI_osemna_trait
+		}
+	}
+ 	#expand local government powers
+	focus = {
+		id = PHI_osemna_local_government
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = 2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna }
+
+		completion_reward = {
+		add_political_power = 50
+		add_popularity = {
+		ideology = social_conservative
+		popularity = 0.075
+		}
+
+		}
+	}
+ 	#authorize wireless press
+	focus = {
+		id = PHI_osemna_wireless_press
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna_sedition_law } prerequisite = { focus = PHI_osemna_local_government }
+		completion_reward = {
+		swap_ruler_traits = { remove = PHI_osemna_trait add = PHI_osemna_trait_1 }
+
+		}
+	}
+ 	#attention to land reofrmation
+	focus = {
+		id = PHI_osemna_land_reform
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = 2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna_sedition_law } prerequisite = { focus = PHI_osemna_local_government }
+		completion_reward = {
+		add_ideas = PHI_osemna_land_ref
+		}
+	}
+ 	#urban planning commission
+	focus = {
+		id = PHI_osemna_urban_planning 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = 1
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna_land_reform } prerequisite = { focus = PHI_osemna_wireless_press }
+		available = { has_full_control_of_state = 327 }
+		completion_reward = {
+		country_event = rd_phil.19
+		}
+	}
+ 	#executive order 25
+	focus = {
+		id = PHI_osemna_executive_order
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = -1
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna_inqury_board } prerequisite = { focus = PHI_osemna_urban_planning } prerequisite = { focus = PHI_osemna_public_works } 
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_osmena_victory	
+		add_idea = PHI_osmena_victory_1
+		}
+		}
+	}
+ 	#nation lives on
+	focus = {
+		id = PHI_osemna_nation_on
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_osemna
+		x = -1
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_osemna_executive_order } 
+		completion_reward = {
+		swap_ruler_traits = { remove = PHI_osemna_trait_1 add = PHI_osemna_trait_2 }
+
+		}
+	}
+	#roxas liberal
+	focus = {
+		id = PHI_roxas_lib
+		icon = GFX_goal_QIO_revolution
+		x = 45
+		y = 8
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+		}
+	}
+ 	#social justice revamp
+	focus = {
+		id = PHI_roxas_social_justice
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_lib }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_roxas_social_just
+		days = 150
+		}
+		}
+	}
+ 	#newspapers
+	focus = {
+		id = PHI_roxas_integrity_board
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = -2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_social_justice }
+		completion_reward = {
+		add_popularity = {
+		ideology = market_liberal
+		popularity = 0.05
+		}
+		add_political_power = 50
+		}
+	}
+ 	#PACSA
+	focus = {
+		id = PHI_roxas_PACSA
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = -3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_integrity_board }
+		completion_reward = {
+		add_ideas = {
+		PHI_roxas_pacsa
+		}
+		}
+	}
+ 	#7 point program
+	focus = {
+		id = PHI_roxas_program
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = -1
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_integrity_board }
+		completion_reward = {
+			add_ideas = {
+			PHI_roxas_seven_point_program
+			}
+		}
+	}
+ 	#terminate all reds
+	focus = {
+		id = PHI_roxas_ban_demalliance
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = -2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_program  } prerequisite = { focus = PHI_roxas_PACSA  }
+		completion_reward = {
+			add_timed_idea = {
+			idea = PHI_roxas_crush_reds
+			days = 180
+			}
+		}
+	}
+
+ 	#system ours and filopino
+	focus = {
+		id = PHI_roxas_system_ours
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_lib }
+		completion_reward = {
+			add_ideas = {
+			PHI_roxas_filopino_system
+			}
+		}
+	}
+ 	#judiciary org
+	focus = {
+		id = PHI_roxas_judiciary_reorg
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_system_ours }
+		completion_reward = {
+			add_timed_idea = {
+			idea = PHI_roxas_reorg_judiciary
+			days = 180
+			}
+		}
+	}
+ 	#decentralize power
+	focus = {
+		id = PHI_roxas_decentralize_power
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = 2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_system_ours }
+		completion_reward = {
+			add_timed_idea = {
+			idea = PHI_roxas_decentralization
+			days = 60
+			}
+		}
+	}
+ 	#tenant act
+	focus = {
+		id = PHI_roxas_tenant_act
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = 1
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_decentralize_power } prerequisite = { focus = PHI_roxas_judiciary_reorg }
+		completion_reward = {
+		rd_phil_roxas_spirt_upgrade = yes
+		}
+	}
+
+ 	#support from foreign
+	focus = {
+		id = PHI_roxas_foreign_market
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = 1
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_tenant_act }
+		completion_reward = {
+		add_ideas = {
+		PHI_roxas_international_markets
+		}
+		}
+	}
+ 	#the new party proven
+	focus = {
+		id = PHI_roxas_party_proven
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_roxas_lib
+		x = 0
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_roxas_foreign_market } prerequisite = { focus = PHI_roxas_ban_demalliance } 
+		available = { has_full_control_of_state = 327 
+		has_country_leader = {
+		    name = "Elpidio Quirino"
+		    ruling_only = yes
+		}
+		}
+		completion_reward = {
+		country_event = rd_phil.19
+		}
+	}
+	#popular front at a crossroads
+	focus = {
+		id = PHI_pop_vict
+		icon = GFX_goal_QIO_revolution
+		x = 34
+		y = 8
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+		}
+	}
+ 	#aveino at the helm new guy who is really nationalista 
+	focus = {
+		id = PHI_avelino_won
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = -2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_pop_vict }
+		available = { has_government = social_liberal }
+		completion_reward = {
+		add_country_leader_trait = PHI_avelino_rizz
+		}
+	}
+ 	#calm down middle class
+	focus = {
+		id = PHI_avelino_middle_class
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = -2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_avelino_won }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_dem_jose_middle
+		days = 150
+		}
+		}
+	}
+ 	#fix peasant plight
+	focus = {
+		id = PHI_avelino_peasant_plight
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = -4
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_avelino_won }
+		completion_reward = {
+		add_ideas = PHI_dem_jose_pesant
+		}
+	}
+ 	#filerbuster
+	focus = {
+		id = PHI_avelino_filerbuster
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = -4
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_avelino_peasant_plight } prerequisite = { focus = PHI_avelino_middle_class }
+		completion_reward = {
+		add_popularity = {
+		ideology = social_liberal
+		popularity = 0.075
+		}
+		add_political_power = 25
+		}
+	}
+ 	#unify npl ncl
+	focus = {
+		id = PHI_avelino_ncp_ncl
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = -2
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_avelino_peasant_plight } prerequisite = { focus = PHI_avelino_middle_class }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_dem_jose_pesant
+		add_idea = PHI_dem_jose_workers
+		}
+		}
+	}
+ 	#public school everywere
+	focus = {
+		id = PHI_avelino_public_school 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = -4
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_avelino_ncp_ncl } prerequisite = { focus = PHI_avelino_filerbuster }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_dem_jose_workers
+		add_idea = PHI_dem_jose_students
+		}
+		}
+	}
+ 	#cebu charter
+	focus = {
+		id = PHI_avelino_cebu_charter 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = -2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_avelino_ncp_ncl } prerequisite = { focus = PHI_avelino_filerbuster }
+		completion_reward = {
+		country_event = rd_phil.15
+		}
+	}
+ 	#social security
+	focus = {
+		id = PHI_avelino_social_security
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = -4
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_avelino_cebu_charter } prerequisite = { focus = PHI_avelino_public_school }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_dem_jose_students
+		add_idea = PHI_dem_jose_socsec
+		}
+
+		}
+	}
+ 	#mandate from the people
+	focus = {
+		id = PHI_avelino_people_mandate
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = -2
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_avelino_cebu_charter } prerequisite = { focus = PHI_avelino_public_school }
+		available = { has_completed_focus = PHI_avelino_social_security }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_dem_jose_socsec
+		add_idea = PHI_dem_jose_infra
+		}
+		}
+	}
+
+ 	#collossus of the south
+	focus = {
+		id = PHI_avelino_big_south
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = -3
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_avelino_people_mandate } prerequisite = { focus = PHI_avelino_social_security }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_dem_jose_infra
+		add_idea = PHI_dem_jose_mandate
+		}
+		}
+	}
+
+
+ 	#sotto actual fucking person in popular fornt party
+	focus = {
+		id = PHI_sotto_won
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_pop_vict }
+		available = { has_government = social_democrat }
+		completion_reward = {
+		add_country_leader_trait = PHI_sotto_trait
+		
+		}
+	}
+ 	#against reds
+	focus = {
+		id = PHI_pop_against_reds
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_sotto_won focus = PHI_avelino_won } 
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_dem_against_radicals 
+		days = 115
+		}
+		add_popularity = {
+		ideology = radical_socialist
+		popularity = -0.05
+		}
+		}
+	}
+
+ 	#support labor struggle
+	focus = {
+		id = PHI_sotto_labor_struggle
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_sotto_won }
+		completion_reward = {
+		add_ideas = PHI_sotto_workers
+		}
+	}
+ 	#national_language discussion
+	focus = {
+		id = PHI_sotto_national_language
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 4
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_sotto_won }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_sotto_language
+		days = 120
+		}
+		}
+	}
+ 	#looking inti religios reofrm
+	focus = {
+		id = PHI_sotto_religion_reform
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_sotto_national_language } prerequisite = { focus = PHI_sotto_labor_struggle }
+		completion_reward = {
+		add_ideas = PHI_sotto_religion
+		}
+	}
+ 	#filipino pride
+	focus = {
+		id = PHI_sotto_pride
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 1
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_sotto_religion_reform }
+		completion_reward = {
+		add_ideas = PHI_sotto_phil
+
+		}
+	}
+ 	#cenbau intellectuial
+	focus = {
+		id = PHI_sotto_intellectuals
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 3
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_sotto_religion_reform }
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_sotto_inte
+		days = 120
+		}
+		}
+	}
+ 	#agipalyan movment
+	focus = {
+		id = PHI_sotto_church_movement
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 5
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_sotto_religion_reform }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_sotto_religion 
+		add_idea = PHI_sotto_aglipay
+		}
+		}
+	}
+ 	#press freedom
+	focus = {
+		id = PHI_sotto_press_freedom
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 2
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_sotto_intellectuals } prerequisite = { focus = PHI_sotto_pride } prerequisite = { focus = PHI_sotto_church_movement }
+		completion_reward = {
+		rd_phil_stto_spirt_upgrade = yes
+		}
+	}
+ 	#motherland redeemed
+	focus = {
+		id = PHI_sotto_motherland_redeemed
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 4
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_sotto_intellectuals } prerequisite = { focus = PHI_sotto_church_movement } prerequisite = { focus = PHI_sotto_pride }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_sotto_phil
+		add_idea = PHI_sotto_motherland
+		}
+
+		}
+	}
+ 	#rebellious yet principles
+	focus = {
+		id = PHI_sotto_rebellious_principles
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_pop_vict
+		x = 3
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_sotto_motherland_redeemed } prerequisite = { focus = PHI_sotto_press_freedom }
+		completion_reward = {
+		add_country_leader_trait = PHI_great_dissenter
+
+		}
+	}
+
+	#abe Lincoln of philipines
+	focus = {
+		id = PHI_lincoln
+		icon = GFX_goal_QIO_revolution
+		x = 63
+		y = 8
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+		}
+	}
+ 	#naturotheropy for Radicals
+	focus = {
+		id = PHI_lincoln_naturotheropy
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = -2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln }
+		completion_reward = {
+		army_experience = 50
+		add_manpower = 10000
+		add_command_power = 50
+		add_popularity = {
+		ideology = social_democrat
+		popularity = 0.05
+		}
+		add_popularity = {
+		ideology = totalist
+		popularity = -0.025
+		}
+		add_popularity = {
+		ideology = syndicalist
+		popularity = -0.05
+		}
+		hidden_effect = {
+		add_popularity = {
+		ideology = social_conservative
+		popularity = -0.075
+		}
+		add_popularity = {
+		ideology = market_liberal
+		popularity = -0.025
+		}
+		add_popularity = {
+		ideology = social_conservative
+		popularity = -0.05
+		}
+		}
+		}
+	}
+ 	#new roads moveable
+	focus = {
+		id = PHI_lincoln_new_roads
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = 2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln }
+		completion_reward = {
+		add_ideas = PHI_pasucal_plastic
+		}
+	}
+ 	#air conditioning manila
+	focus = {
+		id = PHI_lincoln_air_conditioning
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = 3
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln_new_roads }
+		completion_reward = {
+		hidden_effect = { country_event = { id = rd_phil.20 days = 53 } }
+		swap_ideas = {
+		remove_idea = PHI_pasucal_plastic
+		add_idea = PHI_pasucal_plastic_1
+		}
+		}
+	}
+ 	#nationwide dykes
+	focus = {
+		id = PHI_lincoln_dykes
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = 2
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln_air_conditioning }
+		completion_reward = {
+		add_ideas = PHI_pasual_infragoat
+		}
+	}
+ 	#riverless bridges
+	focus = {
+		id = PHI_lincoln_bridges
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = 4
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln_air_conditioning }
+		available = { has_completed_focus = PHI_lincoln_dykes }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_pasual_infragoat
+		add_idea = PHI_pasual_infragoat_1
+		}
+		}
+	}
+ 	#friar lands
+	focus = {
+		id = PHI_lincoln_friar_lands
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = 3
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln_air_conditioning }
+		completion_reward = {
+		add_ideas = PHI_pasucal_farm
+		}
+	}
+
+ 	#fireproof currency
+	focus = {
+		id = PHI_lincoln_fireproof_currency
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln_new_roads } prerequisite = { focus = PHI_lincoln_naturotheropy }
+		completion_reward = {
+		random_owned_state = { add_extra_state_shared_building_slots = 1 }
+		random_owned_state = { add_extra_state_shared_building_slots = 1 }
+		add_political_power = 25
+		add_cic = 500
+		}
+	}
+ 	#aggainst rackets
+	focus = {
+		id = PHI_lincoln_against_rackets
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = -4
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln_naturotheropy }
+		completion_reward = {
+		hidden_effect = { country_event = { id = rd_phil.22 days = 81 } }
+		if = {
+			limit = { has_dlc_got = yes }
+			complete_special_project = sp:sp_air_helicopter
+			add_equipment_to_stockpile = { type = helicopter_equipment_1 amount = 200 }
+		}
+		else = {
+			set_technology = {
+				helicopter = 1
+			}
+			add_equipment_to_stockpile = { type = helicopter_1 amount = 200 }
+		}
+		#heli raids
+		}
+	}
+	#anti corruption
+	focus = {
+		id = PHI_lincoln_anti_corruption
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = -1
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln_against_rackets } prerequisite = { focus = PHI_lincoln_fireproof_currency }
+		completion_reward = {
+		add_ideas = PHI_pasucal_corrupt
+		}
+	}
+	#local inspections
+	focus = {
+		id = PHI_lincoln_local_inspections
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = -3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln_against_rackets } prerequisite = { focus = PHI_lincoln_fireproof_currency }
+		completion_reward = {
+		add_country_leader_trait = PHI_pascual_trait
+		}
+	}
+	#1000 questions
+	focus = {
+		id = PHI_lincoln_thousand_questions
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = -2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln_local_inspections } prerequisite = { focus = PHI_lincoln_anti_corruption }
+		completion_reward = {
+		hidden_effect = { country_event = { id = rd_phil.21 days = 23 } }
+		swap_ideas = {
+		remove_idea = PHI_pasucal_corrupt
+		add_idea = PHI_pasucal_corruption
+		}
+		}
+	}
+ 	#average president
+	focus = {
+		id = PHI_lincoln_average_president
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_lincoln
+		x = 0
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_lincoln_thousand_questions } prerequisite = { focus = PHI_lincoln_friar_lands }
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_quezon_dead_idea
+		add_idea = PHI_pasucal_getty
+		}
+
+		}
+	}
+	#The completion of the revolution
+	focus = {
+		id = PHI_emi_new
+		icon = GFX_goal_QIO_revolution
+		x = 0
+		y = 18
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses	
+		}
+	}
+	#first president 
+	focus = {
+		id = PHI_emi_first_pres
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_new } 
+		available = { 
+						has_country_leader = {
+    name = "Emilio Aguinaldo"
+    ruling_only = yes
+				}
+
+		}
+		mutually_exclusive = { focus = PHI_emi_ramos focus = PHI_emi_miguel}
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_repub_release
+		days = 200
+		}
+
+		}
+	}
+	#ramos 
+	focus = {
+		id = PHI_emi_ramos
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 3
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_new } 
+		mutually_exclusive = { focus = PHI_emi_first_pres focus = PHI_emi_miguel}
+
+		available = { 
+		has_country_leader = {
+    name = "Benigno Ramos"
+    ruling_only = yes
+}
+
+		}
+		mutually_exclusive = { focus = PHI_emi_first_pres focus = PHI_emi_miguel}
+		completion_reward = {
+		country_event = rd_phil.34
+		add_timed_idea = {
+		idea = PHI_emil_anarchist_hitler
+		days = 200
+		}
+		}
+	}
+	#lapi 
+	focus = {
+		id = PHI_emi_miguel
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -3
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_new } 
+		mutually_exclusive = { focus = PHI_emi_first_pres focus = PHI_emi_ramos}
+		available = {
+has_country_leader = {
+    name = "Miguel Cornejo"
+    ruling_only = yes
+}
+		}
+		completion_reward = {
+		add_timed_idea = {
+		idea = PHI_emil_lapi_loser
+		days = 200
+		}
+		}
+	}
+
+	#inside common tree
+	#social justice 
+	focus = {
+		id = PHI_emi_social_justice
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_ramos focus = PHI_emi_first_pres focus = PHI_emi_miguel} 
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_quez_social_justice
+		add_idea = PHI_emil_social_justice
+		}
+		}
+	}
+	#hear the students 
+	focus = {
+		id = PHI_emi_students_hear
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -1
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_social_justice } 
+		completion_reward = {
+		rd_phil_vinzons_spirt_upgrade = yes
+		}
+	}
+	#reject white 
+	focus = {
+		id = PHI_emi_anti_white
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 1
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_social_justice } 
+		completion_reward = {
+		add_ideas = PHI_emil_fuck_kkkrackkkers
+		}
+	}
+	#tagalog 
+	focus = {
+		id = PHI_emi_noeng_tagalog
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -1
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_students_hear } prerequisite = {  focus = PHI_emi_anti_white } 
+		completion_reward = {
+		swap_ideas = {	
+		remove_idea = PHI_emil_all_people_combind
+		add_idea = PHI_emil_all_people_combind_1
+		}
+
+		}
+	}
+	#rural peasants 
+	focus = {
+		id = PHI_emi_poor_peasants
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 1
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_students_hear } prerequisite = {  focus = PHI_emi_anti_white } 
+		completion_reward = {
+		swap_ideas = {	
+		remove_idea = PHI_emil_combined
+		add_idea = PHI_emil_combined_1
+		}
+		}
+	}
+	#decentralization 
+	focus = {
+		id = PHI_emi_seven_obj
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 0
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_poor_peasants } prerequisite = {  focus = PHI_emi_noeng_tagalog } 
+		completion_reward = {
+			add_manpower = 10000
+			add_offsite_building = { type = industrial_complex level = 1 }
+							add_tech_bonus = {
+    bonus = 0.5
+    uses = 1
+    category = electronics
+}
+
+							add_tech_bonus = {
+    bonus = 1
+    uses = 1
+    category = industry
+}
+
+		}
+	}
+	#left trees
+	#country and poor 
+	focus = {
+		id = PHI_emi_avenge_poor
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 6
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_ramos } 
+		available = { has_government = totalist }
+		completion_reward = {
+		add_ideas = PHI_emil_little_people
+		}
+	}
+	#fili govt 
+	focus = {
+		id = PHI_emi_fili_govt 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 7
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_avenge_poor } 
+		completion_reward = {
+		add_ideas = PHI_emil_new_govt_not_commie
+		}
+	}
+	#wildcat 
+	focus = {
+		id = PHI_emi_wildcat
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 8
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_fili_govt } 
+		completion_reward = {
+		add_ideas = PHI_emil_anarchist
+		}
+	}
+	#santos and the socialists
+	focus = {
+		id = PHI_emi_avenge_opprsed
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 3
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_ramos focus = PHI_emi_first_pres } 
+		available = { has_government = radical_socialist }
+		completion_reward = {
+		#give some idea from the santos tree/socialist generals 
+		add_popularity = {
+	    ideology = radical_socialist
+	    popularity = 0.03
+		}
+		add_popularity = {
+	    ideology = social_democrat
+	    popularity = 0.05
+		}
+		add_tot_to_coalition = yes #this is probably also fine ngl because ramos had connections to the syndies beforehand
+		add_synd_to_coalition = yes #this is also fine ngl because ramos had connections to the syndies beforehand
+		add_socdem_to_coalition = yes #ifi is always here
+		if = { limit = { has_completed_focus = PHI_emi_first_pres  } 
+
+		set_power_balance = {
+   		 id = PHI_emil_left_right_balance
+   		 left_side = PHI_left_emilio_side
+    		right_side = PHI_raymundo_democracy_side
+		}
+
+		unlock_decision_tooltip = PHI_emilio_raymond_go_right_moderate
+		}
+
+		}
+	}
+	#  avenge opprsed 
+	focus = {
+		id = PHI_emi_quest_socialists
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 4
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_avenge_opprsed } 
+		completion_reward = {
+		add_ideas = PHI_emil_oppressed_people
+
+		}
+	}
+	#completing rev 
+	focus = {
+		id = PHI_emi_completing_rev
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 4
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_quest_socialists } 
+		completion_reward = {
+		add_ideas = PHI_emil_peaceful_rev
+		}
+	}
+	#equal_rights 
+	focus = {
+		id = PHI_emi_equal_rights
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 6
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_fili_govt focus = PHI_emi_quest_socialists } 
+		completion_reward = {
+		random_owned_state = { add_extra_state_shared_building_slots = 1 }
+
+		add_political_power = 100
+		add_stability = 0.05
+		}
+	}
+	#traiditional woman 
+	focus = {
+		id = PHI_emi_traiditional_woman 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 8
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_equal_rights } prerequisite = { focus = PHI_emi_wildcat } 
+		completion_reward = {
+		add_ideas = PHI_emil_women
+		}
+	}
+	#fruit child 
+	focus = {
+		id = PHI_emi_fruit_child 
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 4
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_equal_rights } prerequisite = { focus = PHI_emi_completing_rev } 
+		completion_reward = {
+		add_ideas = PHI_emil_future_gens
+		if = { limit = {has_completed_focus = PHI_emi_ramos }
+		country_event = rd_phil.31
+		}
+		
+		}
+	}
+	#national protection 
+	focus = {
+		id = PHI_emi_nat_protect
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -6
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_miguel } 
+		available = { has_government = national_populist }
+		completion_reward = {
+		add_ideas = PHI_emil_grow_lapi 
+		}
+	}
+	#labor capt 
+	focus = {
+		id = PHI_emi_labor_capt
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -7
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_nat_protect } 
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_emil_grow_lapi
+		add_idea = PHI_emil_grow_lapi_1
+		}
+		}
+	}
+	#church state
+	focus = {
+		id = PHI_emi_church_state
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -8
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_labor_capt } 
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = PHI_emil_grow_lapi_1
+		add_idea = PHI_emil_grow_lapi_2
+		}
+
+		}
+	}
+
+	#filipino authority 
+	focus = {
+		id = PHI_emi_filipino_authority
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -3
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_miguel focus = PHI_emi_first_pres } 
+		available = { has_government = paternal_autocrat }
+		completion_reward = {
+		add_ideas = PHI_emil_new_govt
+		if = { limit = { has_completed_focus = PHI_emi_first_pres  } 
+		set_power_balance = {
+   		 id = PHI_emil_left_right_balance
+   		 left_side = PHI_vinzons_democracy_side
+    		right_side = PHI_right_emilio_side
+		}
+
+		unlock_decision_tooltip = PHI_emilio_vinzons_go_left_moderate 
+		}
+		}
+	}
+	#fruits of nation 
+	focus = {
+		id = PHI_emi_nation_fruit
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -4
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_filipino_authority } 
+		completion_reward = {
+		add_ideas = PHI_emil_natural_resources
+		}
+	}
+	#unite the youht 
+	focus = {
+		id = PHI_emi_youth_unite
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -4
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_nation_fruit } 
+		completion_reward = {
+		rd_phil_vinzons_spirt_upgrade = yes
+		}
+	}
+	#govt slarar
+	focus = {
+		id = PHI_emi_govt_slarar
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -6
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_labor_capt focus = PHI_emi_nation_fruit  } 
+		completion_reward = {
+		add_political_power = 100
+		add_command_power = 50
+		
+		}
+	}
+	#less school
+	focus = {
+		id = PHI_emi_less_school
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -8
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_church_state  } prerequisite = { focus = PHI_emi_govt_slarar } 
+		completion_reward = {
+		add_ideas = PHI_emil_lapi_anarchism
+		}
+	}
+	#oppressed  down
+	focus = {
+		id = PHI_emi_oppressed_down
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -4
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_youth_unite } prerequisite = { focus = PHI_emi_govt_slarar } 
+		completion_reward = {
+		add_ideas = PHI_emil_poor_oppressed
+		}
+	}
+	#honor the rev and kkk
+	focus = {
+		id = PHI_emi_kkk_ope
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 0
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_oppressed_down focus = PHI_emi_fruit_child } prerequisite = { focus = PHI_emi_seven_obj } 
+		available = {
+		has_country_leader = {
+    		name = "Emilio Aguinaldo"
+  	  	ruling_only = yes
+		}
+		}
+		completion_reward = {
+		add_ideas = PHI_emil_new_society
+		custom_effect_tooltip = PHI_emilio_restore_democracy_tt
+		if = { 
+		limit = {
+		has_completed_focus = PHI_emi_filipino_authority
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value < -0.14
+		}
+		}
+		set_politics = {
+   		ruling_party = social_liberal
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Emilio Aguinaldo"
+			picture = "gfx/leaders/PHI/Portrait_Philippines_Emilio_Aguinaldo.png"
+			expire = "1.1.1"
+			ideology = soclib_popular_patriotism_subtype
+		}
+		set_party_name = {
+   			 ideology = social_liberal
+   			 long_name = PHI_filipinista_party_long
+   			 name = PHI_filipinista_party
+			}
+		add_autdem_to_coalition = yes
+		add_pataut_to_coalition = yes
+		}
+		else_if = {
+		limit = { 
+		has_completed_focus = PHI_emi_avenge_opprsed
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value > 0.14
+		}
+		}
+		set_politics = {
+   		ruling_party = social_democrat
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Emilio Aguinaldo"
+			picture = "gfx/leaders/PHI/Portrait_Philippines_Emilio_Aguinaldo.png"
+			expire = "1.1.1"
+			ideology = popular_patriotism_subtype
+		}
+		set_party_name = {
+   			 ideology = social_democrat
+   			 long_name = PHI_filipinista_party_long
+   			 name = PHI_filipinista_party
+			}
+		add_tot_to_coalition = yes
+		add_synd_to_coalition = yes
+		add_radsoc_to_coalition = yes
+		add_autdem_to_coalition = yes
+		
+		}
+		remove_power_balance = {
+		    id = PHI_emil_left_right_balance
+		}
+
+
+
+		}
+	}
+	#against strong_dict
+	focus = {
+		id = PHI_emi_strong_dict
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -3
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_oppressed_down } prerequisite = { focus = PHI_emi_seven_obj } 
+		available = {
+		has_country_leader = {
+    		name = "Wenceslao Vinzons"
+  	  	ruling_only = yes
+		}
+		}
+		completion_reward = {
+		add_country_leader_trait = PHI_vinzons_trait
+
+		}
+	}
+
+	#self govt at last
+	focus = {
+		id = PHI_emi_self_govt_good
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 3
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_fruit_child } prerequisite = { focus = PHI_emi_seven_obj } 
+		available = {
+		has_country_leader = {
+    		name = "Raymundo Melliza"
+  	  	ruling_only = yes
+		}
+		}
+		completion_reward = {
+		add_ideas = PHI_sotto_phil
+		}
+	}
+	#rizal and christ
+	focus = {
+		id = PHI_emi_ramos_and_rizal
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = 6
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_traiditional_woman } prerequisite = { focus = PHI_emi_seven_obj } 
+		available = {
+		has_country_leader = {
+    		name = "Benigno Ramos"
+  	  	ruling_only = yes
+		}
+		}
+		completion_reward = {
+		add_country_leader_trait = PHI_ramos_trait
+
+		}
+	}
+	#Indepednent free
+	focus = {
+		id = PHI_emi_indepednent_free
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_emi_new
+		x = -6
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_emi_less_school } prerequisite = { focus = PHI_emi_seven_obj } 
+		available = {
+		has_country_leader = {
+    		name = "Miguel Cornejo"
+  	  	ruling_only = yes
+		}
+		}
+		completion_reward = {
+		add_ideas = PHI_emil_new_militarism
+		country_event = rd_phil.32
+		}
+	}
+	#soc nd anti soc paths
+	#Hands of the Revolution Raised by the Fruits of Labour
+	focus = {
+		id = PHI_soc_victoryyay
+		icon = GFX_goal_QIO_revolution
+		x = 40
+		y = 18
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+
+
+		}
+	}
+	#fiveprinciples
+	focus = {
+		id = PHI_syndie_fivepri
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_victoryyay
+		x = 12
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			always = no
+		}
+		prerequisite = { focus = PHI_soc_victoryyay } 
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	#resist eactcionaries
+	focus = {
+		id = PHI_syndie_resist
+		icon = GFX_goal_ALB_Smash_Reaction
+		relative_position_id = PHI_syndie_fivepri
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_fivepri } 
+		available = { has_government = syndicalist }
+		completion_reward = {
+			add_timed_idea = {
+			idea = PHI_syndie_anti_reactionary
+			days = 90
+			}
+		}
+	}
+	#read the works of the commune
+	focus = {
+		id = PHI_syndie_read_french
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_syndie_fivepri
+		x = -1
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_resist } 
+		available = { has_government = syndicalist }
+		completion_reward = {
+		add_research_slot_until_five = yes
+			add_equipment_to_stockpile = {
+				type = small_plane_airframe
+				amount = 100
+				producer = INT
+			}
+
+		}
+	}
+	#the prole
+	focus = {
+		id = PHI_syndie_unions_proles
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_syndie_fivepri
+		x = 1
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_resist } 
+		available = { has_government = syndicalist }
+		completion_reward = {
+			add_popularity = {
+			ideology = syndicalist
+			popularity = 0.05
+			}
+			add_political_power = 25
+		add_mastery = {
+    		amount = 100
+    		# FILTERS:
+    		folder = land
+		track = infantry
+		}
+
+		}
+	}
+	#rural struggle
+	focus = {
+		id = PHI_syndie_union_rural
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_syndie_fivepri
+		x = 0
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_unions_proles } prerequisite = { focus = PHI_syndie_read_french } 
+		available = { has_government = syndicalist }
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = PHI_santos_real_social_jus
+			add_idea = PHI_syndie_from_town_to_province
+			}
+		}
+	}
+	#evanglista rev
+	focus = {
+		id = PHI_syndie_evanglista_rev
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_syndie_fivepri
+		x = 0
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_union_rural } 
+		available = { has_government = syndicalist }
+		completion_reward = {
+		add_country_leader_trait = PHI_comrade_anto
+		}
+	}
+
+
+
+	#tan malakas
+	focus = {
+		id = PHI_syndie_malaka
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_syndie_fivepri
+		x = 2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_fivepri } 
+		available = { has_government = syndicalist }
+		completion_reward = {
+			country_event = rd_phil.55
+		}
+	}
+	#nationalism
+	focus = {
+		id = PHI_syndie_nationalism
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_syndie_fivepri
+		x = 3
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_malaka } 
+		available = { has_government = syndicalist }
+		completion_reward = {
+			country_event = rd_phil.56
+		}
+	}
+	#aglipyan support
+	focus = {
+		id = PHI_syndie_aglipyan
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_syndie_fivepri
+		x = 2
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_nationalism } 
+		available = { has_government = syndicalist }
+		mutually_exclusive = { focus = PHI_syndie_athiesm } 
+		completion_reward = {
+			add_timed_idea = {
+			idea = PHI_syndie_get_others_in
+			days = 130
+			}
+			add_socdem_to_coalition = yes
+		}
+	}
+	#aethisim
+	focus = {
+		id = PHI_syndie_athiesm
+		icon = GFX_UKR_Anti_Religious_Propaganda
+		relative_position_id = PHI_syndie_fivepri
+		x = 4
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_nationalism } 
+		available = { has_government = syndicalist }
+		mutually_exclusive = { focus = PHI_syndie_aglipyan } 
+		completion_reward = {
+			add_timed_idea = {
+			idea = PHI_syndie_get_others_in_1
+			days = 340
+			}
+		}
+	}
+	#anti imperailsim
+	focus = {
+		id = PHI_syndie_anti_imperialism
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_syndie_fivepri
+		x = 3
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_athiesm focus = PHI_syndie_aglipyan } 
+		available = { has_government = syndicalist }
+		completion_reward = {
+			add_political_power = 25
+			add_popularity = {
+			ideology = syndicalist
+			popularity = 0.05
+			}
+			add_popularity = {
+			ideology = totalist
+			popularity = 0.025
+			}
+			add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.025
+			}
+			add_ideas = {
+			PHI_syndie_anti_imperialism
+			}
+		}
+	}
+	#south_seas
+	focus = {
+		id = PHI_syndie_south_seas
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_syndie_fivepri
+		x = 1
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_syndie_anti_imperialism } prerequisite = { focus = PHI_syndie_evanglista_rev } 
+		available = { has_government = syndicalist }
+		completion_reward = {
+			add_ideas = {
+			PHI_syndie_south_seas
+			}
+		}
+	}
+
+
+
+	#dop working classes
+	focus = {
+		id = PHI_com_dotp
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_victoryyay
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_victoryyay } 
+		available = { always = no }
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+		}
+	}
+	#church
+	focus = {
+		id = PHI_com_church_bad
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_dotp } 
+		available = { has_government = totalist }
+		completion_reward = {
+			add_timed_idea = {
+				idea = PHI_syndie_get_others_in_1
+				days = 360
+			}
+		}
+	}
+	#Removing the Yellow Labor Leaders
+	focus = {
+		id = PHI_com_labor_code
+		icon = GFX_goal_GER_Moderate_Unions
+		relative_position_id = PHI_com_dotp
+		x = -3
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_church_bad } 
+		available = { has_government = totalist }
+		completion_reward = {
+		add_ideas = PHI_com_fuck_socs
+		}
+	}
+	#The National Labor Code
+	focus = {
+		id = PHI_com_pptus
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = -3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_labor_code } 
+		available = { has_government = totalist }
+		completion_reward = {
+				add_ideas = {
+					PHI_com_national_labour_code
+				}
+		}
+	}
+	#overcome secertarians
+	focus = {
+		id = PHI_com_secertarians
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = -4
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_pptus } 
+		available = { has_government = totalist }
+		completion_reward = {
+		add_ideas = PHI_com_new_rule
+		}
+	}
+	#Taking Root Amongst the Masses
+	focus = {
+		id = PHI_com_kalayaan
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = -2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_pptus } 
+		available = { has_government = totalist }
+		completion_reward = {
+		add_research_slot_until_five = yes
+
+		add_tech_bonus = {
+    		bonus = 0.5
+    		uses = 1
+    		category = artillery
+		}
+		add_tech_bonus = {
+    		bonus = 0.75
+    		uses = 2
+    		category = armor
+		}
+		}
+	}
+
+	#The Resumption of the Unfinished Revolution
+	focus = {
+		id = PHI_com_right_unions
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_dotp } 
+		available = { has_government = totalist }
+		completion_reward = {
+		add_ideas = PHI_com_cont_rev
+		}
+	}
+	#learning without charge
+	focus = {
+		id = PHI_com_charge
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_church_bad } prerequisite = { focus = PHI_com_right_unions } 
+		available = { has_government = totalist }
+		completion_reward = {
+		hidden_effect = { country_event = { id = rd_phil.93 days = 32 } } 
+		add_ideas = PHI_com_edu
+		}
+	}
+	#8 hours
+	focus = {
+		id = PHI_com_eight_hours
+		icon = GFX_goal_CSA_for_fair_days_work
+		relative_position_id = PHI_com_dotp
+		x = 3
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_right_unions } 
+		available = { has_government = totalist }
+		completion_reward = {
+			add_ideas = {
+				PHI_com_eight_hours
+			}
+		}
+	}
+	#political_power in country_side
+	focus = {
+		id = PHI_com_country_side
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = 2
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_eight_hours } prerequisite = { focus = PHI_com_charge } 
+		available = { has_government = totalist }
+		mutually_exclusive = { focus = PHI_com_democractic_misson } 
+		completion_reward = {
+		add_ideas = PHI_com_new_power
+
+		}
+	}
+	#demnocratic mission
+	focus = {
+		id = PHI_com_democractic_misson
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = 0
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_eight_hours } prerequisite = { focus = PHI_com_charge } 
+		available = { has_government = totalist }
+		mutually_exclusive = { focus = PHI_com_country_side } 
+		completion_reward = {
+		add_ideas = PHI_com_dems
+		}
+	}
+	#National Liberation and Democracy, towards Socialism
+	focus = {
+		id = PHI_com_moro_probs
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = 0
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_democractic_misson focus = PHI_com_country_side } 
+		available = { has_government = totalist }
+		completion_reward = {
+		add_equipment_to_stockpile = {
+    		type = infantry_equipment_1
+    		amount = 1000
+		}
+		add_equipment_to_stockpile = {
+    		type = infantry_equipment_2
+    		amount = 750
+		}
+		add_equipment_to_stockpile = {
+    		type = infantry_equipment_3
+    		amount = 500
+		}
+		country_event = rd_phil.58
+		}
+	}
+	#Taking Over the Haciendas and Friar Lands
+	focus = {
+		id = PHI_com_root_mass
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = 2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			has_completed_focus = PHI_soc_reforms
+		}
+		prerequisite = { focus = PHI_com_democractic_misson focus = PHI_com_country_side } 
+		available = { has_government = totalist }
+		completion_reward = {
+			if = {
+				limit = {
+					has_active_mission = PHI_land_reform_mission
+				}
+				add_to_variable = {
+					var = PHI_land_reform_progress
+					value = 6
+					tooltip = add_PHI_land_reform_var_tt
+				}
+			}
+			add_timed_idea = {
+				idea = PHI_com_taking_our_lands
+				days = 180
+			}
+			
+		}
+	}
+	#class liberation worldwide
+	focus = {
+		id = PHI_com_independence_free
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_com_dotp
+		x = 0
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_com_root_mass } prerequisite = { focus = PHI_com_moro_probs } prerequisite = { focus = PHI_com_secertarians } prerequisite = { focus = PHI_com_kalayaan } 
+		available = { has_government = totalist }
+		completion_reward = {
+		add_ideas = PHI_com_communism
+		}
+	}
+
+	#Mentoring the Socialist Path
+	focus = {
+		id = PHI_soc_second_santos
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_victoryyay
+		x = -10
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_victoryyay } 
+		available = { always = no }
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+		}
+	}
+	#spirit of labor
+	focus = {
+		id = PHI_soc_second_labor
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_santos } 
+		available = { or = { has_government = social_democrat has_government = radical_socialist } }
+		completion_reward = {
+			add_ideas = {
+			PHI_santos_spirit_of_labour
+			}
+		}
+	}
+
+	#nationalista
+	focus = {
+		id = PHI_soc_second_santos_nationalista
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = -2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		has_country_flag = PHI_Jose_Elected
+		}
+		prerequisite = { focus = PHI_soc_second_labor } 
+		completion_reward = {
+		add_popularity = {
+		ideology = social_democrat
+		popularity = 0.10
+		}
+		swap_ideas = {
+		remove_idea = PHI_santos_get_others_in_1
+		add_idea = PHI_santos_get_others_in_3
+		}
+		}
+	}
+	#marxist struggle
+	focus = {
+		id = PHI_soc_second_marxism
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = 2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		has_country_flag = PHI_Pedro_Elected
+		has_government = radical_socialist
+		}
+		prerequisite = { focus = PHI_soc_second_labor } 
+		completion_reward = {
+		add_political_power = 50
+		swap_ideas = {
+		remove_idea = PHI_santos_get_others_in_1
+		add_idea = PHI_santos_get_others_in_2
+		}
+		}
+	}
+	#socialist humanism
+	focus = {
+		id = PHI_soc_second_humanism
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = 3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_marxism } 
+		available = { has_government = radical_socialist }
+		completion_reward = {
+		add_country_leader_trait = PHI_don_porico
+		hidden_effect = { country_event = {id = rd_phil.53 days = 21 } }
+
+		}
+	}
+	#A Showdown Against Radicals
+	focus = {
+		id = PHI_soc_second_no_rads
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = -3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_santos_nationalista } 
+		completion_reward = {
+		add_soclib_to_coalition = yes
+		add_soccon_to_coalition = yes
+		add_popularity = {
+		ideology = social_liberal
+		popularity = 0.05
+		}
+		add_popularity = {
+		ideology = social_conservative
+		popularity = 0.05
+		}
+
+			add_timed_idea = {
+			idea = PHI_santos_anti_radicalism
+			days = 120
+			}
+		}
+	}
+	#over pacisif
+	focus = {
+		id = PHI_soc_second_pacific
+		icon = GFX_goal_CAN_target_the_pacific
+		relative_position_id = PHI_soc_second_santos
+		x = 0
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_marxism focus = PHI_soc_second_santos_nationalista } 
+		available = { or = { has_government = social_democrat has_government = radical_socialist } }
+		completion_reward = {
+			add_political_power = 25
+			add_ideas = {
+			PHI_santos_reach_pacific
+			}
+		}
+	}
+	#cygan welfare
+	focus = {
+		id = PHI_soc_second_welfare
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = 2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_humanism } prerequisite = { focus = PHI_soc_second_pacific }
+		available = { has_government = radical_socialist }
+		completion_reward = {
+			add_ideas = {
+			PHI_santos_welfare_cuyugan
+			}
+		}
+	}
+	#mutual aid
+	focus = {
+		id = PHI_soc_second_mutual_aid
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = 4
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_humanism } 
+		available = { has_government = radical_socialist }
+		completion_reward = {
+			add_ideas = {
+			PHI_santos_mutual_aid
+			}
+		}
+	}
+	#strengthen labor
+	focus = {
+		id = PHI_soc_second_labor_strength
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = 3
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_mutual_aid } prerequisite = { focus = PHI_soc_second_welfare } 
+		available = { has_government = radical_socialist }
+		completion_reward = {
+		add_research_slot_until_five = yes
+		add_tech_bonus = {
+    bonus = 0.5
+    uses = 1
+    category = industry
+		}
+		add_tech_bonus = {
+    		bonus = 0.5
+    		uses = 1
+    		category = electronics
+		}
+
+		}
+	}
+
+	#ppttus
+	focus = {
+		id = PHI_soc_second_ppttus
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = 0
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_no_rads focus = PHI_soc_second_humanism } prerequisite = { focus = PHI_soc_second_pacific }
+		available = { or = { has_government = social_democrat has_government = radical_socialist } }
+		completion_reward = {
+			country_event = rd_phil.51
+		}
+	}
+	#tobbacco
+	focus = {
+		id = PHI_soc_second_tobbacco
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = 0
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_ppttus }
+		available = { or = { has_government = social_democrat has_government = radical_socialist } }
+		completion_reward = {
+			add_ideas = {
+			PHI_santos_tobbacco
+			}
+		}
+	}
+
+
+	#oppose militans
+	focus = {
+		id = PHI_soc_second_militans
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = -4
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_no_rads  } 
+		completion_reward = {
+			add_ideas = {
+			PHI_santos_anti_militancy
+			}
+		}
+	}
+	#guilds and mututal
+	focus = {
+		id = PHI_soc_second_guilds
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = -2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_pacific } prerequisite = { focus = PHI_soc_second_no_rads } 
+		completion_reward = {
+		add_research_slot = 1
+
+		}
+	}
+
+	#social_just
+	focus = {
+		id = PHI_soc_second_social_just
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = -4
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_guilds } prerequisite = { focus = PHI_soc_second_militans } 
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = PHI_santos_jose_do_shit
+			add_idea = PHI_santos_jose_real_socialism
+			}
+		}
+	}
+
+	#kkk
+	focus = {
+		id = PHI_soc_second_kkk
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = -2
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_social_just } prerequisite = { focus = PHI_soc_second_tobbacco } 
+		completion_reward = {
+			country_event = rd_phil.52
+			        army_experience = 50
+			add_offsite_building = { type = arms_factory level = 1 }
+		}
+	}
+
+	#rev tiger
+	focus = {
+		id = PHI_soc_second_tiger
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_second_santos
+		x = 2
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_second_labor_strength } prerequisite = { focus = PHI_soc_second_tobbacco } 
+		available = { has_government = radical_socialist }
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = PHI_santos_jose_do_shit
+			add_idea = PHI_santos_jose_do_shit_1
+			}
+		}
+	}
+	#land reform
+	focus = {
+		id = PHI_soc_reforms
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_victoryyay
+		x = 7
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_victoryyay } 
+		completion_reward = {
+			unlock_decision_category_tooltip = PHI_land_reform_movement_decision_category
+			set_variable = {
+				var = PHI_land_reform_progress
+				value = 0
+				tooltip = add_PHI_land_reform_var_tt
+			}
+		}
+	}
+	#distriube in rura
+	focus = {
+		id = PHI_soc_distriube
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_reforms
+		x = 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_reforms } 
+		completion_reward = {
+			add_to_variable = {
+				var = PHI_land_reform_progress
+				value = 8
+				tooltip = add_PHI_land_reform_var_tt
+			}
+			
+		}
+	}
+	#crush landowners
+	focus = {
+		id = PHI_soc_crush_em
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_reforms
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_distriube } 
+		mutually_exclusive = { focus = PHI_soc_work_landlords }
+		completion_reward = {
+			unlock_decision_tooltip = PHI_anti_land_lord_campaign
+		}
+	}
+	#work wthe em landowners
+	focus = {
+		id = PHI_soc_work_landlords
+		icon = GFX_goal_SKM_Moderate_Land_Reform
+		relative_position_id = PHI_soc_reforms
+		x = 2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_distriube } 
+		mutually_exclusive = { focus = PHI_soc_crush_em }
+		completion_reward = {
+			unlock_decision_tooltip = PHI_anti_land_lord_campaign_moderate
+		}
+	}
+
+	#cops
+	focus = {
+		id = PHI_soc_rural_coop
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_reforms
+		x = -2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_reforms } 
+		completion_reward = {
+			unlock_decision_tooltip = PHI_establish_coops
+		}
+	}
+	#rice tenancy
+	focus = {
+		id = PHI_soc_tenancy
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_reforms
+		x = -2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_rural_coop } 
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = PHI_quezon_rice_share_tenacy
+				}
+				swap_ideas = {
+				remove_idea = PHI_quezon_rice_share_tenacy
+				add_idea = PHI_sco_rice_share_tenacy
+				}
+			}
+			else = {
+				add_ideas = {
+					PHI_sco_rice_share_tenacy
+				}
+			}
+			add_to_variable = {
+				var = PHI_land_reform_progress
+				value = 10
+				tooltip = add_PHI_land_reform_var_tt
+			}
+		}
+	}
+	#rev land
+	focus = {
+		id = PHI_soc_land_done
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_soc_reforms
+		x = 0
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_soc_tenancy } prerequisite = { focus = PHI_soc_crush_em } prerequisite = { focus = PHI_soc_work_landlords }  
+		mutually_exclusive = { focus = PHI_soc_crush_em }
+		completion_reward = {
+			add_to_variable = {
+				var = PHI_land_reform_progress
+				value = 15
+				tooltip = add_PHI_land_reform_var_tt
+			}
+			add_political_power = 50
+			add_popularity = {
+			ideology = ROOT
+			popularity = 0.1
+			}
+			add_ideas = {
+				PHI_soc_revolution_tiller
+			}
+		}
+	}
+
+
+
+	#antisoc victory
+	focus = {
+		id = PHI_antisoc_vict
+		icon = GFX_goal_QIO_revolution
+		x = 82
+		y = 18
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+
+		}
+	}
+
+	#safegaurd against poisins 
+	focus = {
+		id = PHI_antisoc_poisons
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_vict
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_vict } 
+		available = {
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses	
+		swap_ideas = {
+		remove_idea = PHI_santos_jose_do_shit
+		add_idea = PHI_antisoc_dead_justice
+		}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_safeguard_filipino_identity
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = -2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_landowner_cooperation } prerequisite = { focus = PHI_antisoc_deal_with_industrialists } 
+		
+		completion_reward = {
+			add_ideas = {
+			free_trade
+			}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_america_lean
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_landowner_cooperation } prerequisite = { focus = PHI_antisoc_deal_with_industrialists }  
+		completion_reward = {
+			add_ideas = {
+			PHI_junta_exports
+			}
+		}
+	}
+	focus = {
+		id = PHI_antisoc_national_reorganization
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = 2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_poisons } 
+		completion_reward = {
+			add_political_power = 100
+			add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.075
+			}
+		}
+	}
+
+	focus = {
+		id = PHI_antisoc_landowner_cooperation
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = -2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_poisons } 
+		completion_reward = {
+		swap_ideas = {
+			remove_idea = PHI_santos_get_others_in_1
+			add_idea = PHI_junta_land_lord_support
+			}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_deal_with_industrialists
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		
+		prerequisite = { focus = PHI_antisoc_poisons } 
+		completion_reward = {
+			swap_ideas = {	
+			remove_idea = PHI_santos_real_social_jus_1
+			add_idea = PHI_junta_deal_with_industrialists
+			}
+		}
+	}
+	focus = {
+		id = PHI_antisoc_attack_pan_asianists
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = 2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_national_reorganization } 
+		completion_reward = {
+		add_research_slot = 1
+			add_popularity = {
+			ideology = national_populist 
+			popularity = -0.05
+			}
+			add_war_support = 0.05
+			add_opinion_modifier = {
+				target = JAP
+				modifier = KR_hostile
+			}
+			reverse_add_opinion_modifier = {
+				target = JAP
+				modifier = KR_hostile
+			}
+
+		}
+	}
+	
+	
+	focus = {
+		id = PHI_antisoc_crush_red_devil
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = 3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_attack_pan_asianists } 
+		completion_reward = {
+			country_event = rd_phil.46
+		}
+	}
+	focus = {
+		id = PHI_antisoc_deal_with_piracy
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = 1
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_attack_pan_asianists }  prerequisite = { focus = PHI_antisoc_america_lean }
+		completion_reward = {
+			#Will link it to the Sulut stuff
+			add_timed_idea = {
+				idea = PHI_junta_attack_moro
+				days = 90
+			}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_coalition_gov
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = -3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_safeguard_filipino_identity } 
+		completion_reward = {
+			country_event = rd_phil.47
+		}
+	}
+	focus = {
+		id = PHI_antisoc_strengthen_scouts
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = -1
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_safeguard_filipino_identity }  prerequisite = { focus = PHI_antisoc_america_lean }
+		completion_reward = {
+			add_ideas = {
+			PHI_junta_scouts
+			}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_republic_free_foreign_influence
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = -2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		mutually_exclusive = { focus = PHI_antisoc_stars_stripes_sun }
+		prerequisite = { focus = PHI_antisoc_strengthen_scouts }  prerequisite = { focus = PHI_antisoc_coalition_gov }
+		prerequisite = { focus = PHI_antisoc_crush_red_devil }  prerequisite = { focus = PHI_antisoc_deal_with_piracy }
+		completion_reward = {
+			add_ideas = {
+			PHI_junta_strong
+			}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_stars_stripes_sun
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_poisons
+		x = 2
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		mutually_exclusive = { focus = PHI_antisoc_republic_free_foreign_influence }
+		prerequisite = { focus = PHI_antisoc_strengthen_scouts }  prerequisite = { focus = PHI_antisoc_coalition_gov }
+		prerequisite = { focus = PHI_antisoc_crush_red_devil }  prerequisite = { focus = PHI_antisoc_deal_with_piracy }
+		completion_reward = {
+			country_event = rd_phil.48
+		}
+	}
+	
+	
+	focus = {
+		id = PHI_antisoc_pheonix_rises
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_vict
+		x = -10
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_vict }  
+		available = {
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses	
+		swap_ideas = {
+		remove_idea = PHI_santos_jose_do_shit
+		add_idea = PHI_antisoc_dead_justice
+		}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_secure_hacienda
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_pheonix_rises
+		x = -3
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_pheonix_rises }  
+		completion_reward = {
+		add_ideas = {
+		PHI_hispanic_hacienda_support
+		}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_good_employee_relations
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_secure_hacienda
+		x = -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_secure_hacienda }  
+		completion_reward = {
+			add_timed_idea = {
+			idea = PHI_hispanic_employee_relations
+			days = 180
+			}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_madrid_cultural_influence
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_secure_hacienda
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		 prerequisite = { focus = PHI_antisoc_pension_plan  }  prerequisite = { focus = PHI_antisoc_good_employee_relations }
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_pension_plan
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_secure_hacienda
+		x = 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		
+		prerequisite = { focus = PHI_antisoc_secure_hacienda } 
+		completion_reward = {
+			add_popularity = {
+			ideology = national_populist
+			popularity = 0.05
+			}
+			add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.05
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+			add_political_power = 25
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_charitable_fund
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_secure_hacienda
+		x = 0
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_madrid_cultural_influence }  
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = PHI_santos_get_others_in_1
+			add_idea = PHI_hispanic_charity_fund
+			}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_art_cultivation
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_pheonix_rises
+		x = 2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_pheonix_rises }  
+		completion_reward = {
+		add_ideas = {
+		PHI_hispanic_art_cultivation
+		}
+		country_event = rd_phil.36
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_church_ties
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_art_cultivation
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_art_cultivation }  
+		completion_reward = {
+			add_political_power = 50
+			add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.1
+			}
+			add_war_support = 0.1
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_middle_class_support
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_art_cultivation
+		x = -2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_church_ties }  
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = PHI_santos_real_social_jus_1
+			add_idea = PHI_hispanic_middle_class
+			}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_continue_hispanization
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_art_cultivation
+		x = 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_church_ties }  
+		completion_reward = {
+			add_timed_idea = {
+			idea = PHI_hispanic_continued
+			days = 180
+			}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_socio_civic_club
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_art_cultivation
+		x = 2
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_church_ties }  
+		completion_reward = {
+			country_event = rd_phil.37
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_end_red_pests
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_art_cultivation
+		x = 0
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_socio_civic_club } prerequisite = { focus = PHI_antisoc_middle_class_support }  prerequisite = { focus = PHI_antisoc_continue_hispanization  }
+		completion_reward = {
+			add_timed_idea = {
+			idea = PHI_hispanic_red_purge
+			days = 90
+			}
+		}
+	}
+	
+	
+	focus = {
+		id = PHI_antisoc_manila_madrid_duality
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_pheonix_rises
+		x = 0
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_end_red_pests }  prerequisite = { focus = PHI_antisoc_charitable_fund } 
+		completion_reward = {
+			country_event = rd_phil.38
+			swap_ideas = {	
+			remove_idea = PHI_hispanic_art_cultivation
+			add_idea = PHI_hispanic_final
+			}
+		}
+	}
+	
+	
+	focus = {
+		id = PHI_antisoc_republicanism_survival
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_vict
+		x = 10
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_vict }  
+		available = {
+		always = no
+		}
+		completion_reward = {
+		custom_effect_tooltip = unlock_focuses	
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_rizal_law
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = -2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_republicanism_survival }  
+		completion_reward = {
+		add_research_slot = 1
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_social_justice_stability
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_republicanism_survival }  
+		completion_reward = {
+		swap_ideas = {
+			remove_idea = PHI_santos_real_social_jus_1
+			add_idea = PHI_laurel_social_just
+			}
+
+
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_pink_liberalism
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = 2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_republicanism_survival }  
+		completion_reward = {
+		swap_ideas = {
+			remove_idea = PHI_santos_get_others_in_1
+			add_idea = PHI_laruel_pinky_liber
+			}
+
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_two_party
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = 3
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		mutually_exclusive = { focus = PHI_antisoc_transformation_society }
+		prerequisite = { focus = PHI_antisoc_pink_liberalism }  prerequisite = { focus = PHI_antisoc_rizal_law } prerequisite = { focus = PHI_antisoc_social_justice_stability }   
+		completion_reward = {
+		every_state = { 
+		limit = { is_fully_controlled_by_ROOT_and_is_core_of_ROOT = yes }
+		add_state_modifier = {
+    		modifier = {
+        	local_factories = 0.05
+		local_supplies = 0.025
+    		}
+		}
+		}
+
+		set_party_name = {
+   			 ideology = social_liberal
+   			 long_name = PHI_nationalisa_party_long
+   			 name = PHI_nationalisa_party
+		}
+
+		if = { 
+		limit = { has_completed_focus = PHI_antisoc_divine_principle_humanity } 
+		set_country_leader_ideology = soclib_internationalism_subtype
+		}
+		else_if = { 
+		limit = { has_completed_focus = PHI_antisoc_mother_asia_civilization } 
+		set_country_leader_ideology = soclib_progressive_democracy_subtype
+		}
+
+
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_transformation_society
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = 1
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		mutually_exclusive = { focus = PHI_antisoc_two_party }
+		prerequisite = { focus = PHI_antisoc_pink_liberalism }  prerequisite = { focus = PHI_antisoc_rizal_law } prerequisite = { focus = PHI_antisoc_social_justice_stability }   
+		completion_reward = {
+			add_political_power = 25
+			random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+ 			random_owned_controlled_state = {
+ 			add_extra_state_shared_building_slots = 1
+ 			add_building_construction = {
+ 				type = arms_factory
+ 				level = 1
+ 				instant_build = yes
+ 			}
+ 		}
+
+		if = { 
+		limit = { has_completed_focus = PHI_antisoc_mother_asia_civilization } 
+		set_country_leader_ideology = pan_asianism_subtype
+		}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_divine_principle_humanity
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = -3
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		mutually_exclusive = { focus = PHI_antisoc_mother_asia_civilization }
+		prerequisite = { focus = PHI_antisoc_pink_liberalism }  prerequisite = { focus = PHI_antisoc_rizal_law } prerequisite = { focus = PHI_antisoc_social_justice_stability }   
+		completion_reward = {
+		add_breakthrough_points = {
+  		specialization = all
+  		value = 1
+		}
+		unlock_decision_tooltip = PHI_laurel_unique_asia
+		unlock_decision_tooltip = PHI_laurel_unique_africa
+		unlock_decision_tooltip = PHI_laurel_unique_europe
+		unlock_decision_tooltip = PHI_laurel_unique_americas
+
+		if = { 
+		limit = { has_completed_focus = PHI_antisoc_two_party } 
+		set_country_leader_ideology = soclib_internationalism_subtype
+		}
+		if = { 
+		limit = { has_completed_focus = PHI_antisoc_transformation_society } 
+		set_country_leader_ideology = soclib_authoritarian_liberalism_subtype
+		}
+
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_mother_asia_civilization
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = -1
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		mutually_exclusive = { focus = PHI_antisoc_divine_principle_humanity }
+		prerequisite = { focus = PHI_antisoc_pink_liberalism }  prerequisite = { focus = PHI_antisoc_rizal_law } prerequisite = { focus = PHI_antisoc_social_justice_stability }   
+		completion_reward = {
+		 add_command_power = 50
+		add_breakthrough_progress = {
+  		specialization = specialization_land
+ 		 value = 1
+		}
+		unlock_decision_tooltip = PHI_laurel_unique_asia
+
+		if = { 
+		limit = { has_completed_focus = PHI_antisoc_two_party } 
+		set_country_leader_ideology = soclib_christian_democracy_subtype
+		}
+		else_if = { 
+		limit = { has_completed_focus = PHI_antisoc_transformation_society } 
+		set_country_leader_ideology = pan_asianism_subtype
+		}
+
+
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_express_racial_will
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = -3
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_divine_principle_humanity focus = PHI_antisoc_mother_asia_civilization }  
+		completion_reward = {
+		add_manpower = 10000
+		add_mastery = {
+    		amount = 75
+    		# FILTERS:
+    		folder = land
+		}
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_spiritual_east
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = -1
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_divine_principle_humanity focus = PHI_antisoc_mother_asia_civilization }  
+		completion_reward = {
+		add_ideas = PHI_laurel_materialism_bad
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_laissez_socialism
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = 2
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_transformation_society focus = PHI_antisoc_two_party }  
+		completion_reward = {
+		swap_ideas = {
+			remove_idea = PHI_laurel_social_just
+			add_idea = PHI_laurel_state_eco
+			}
+
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_common_happiness
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = 0
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_express_racial_will } prerequisite = { focus = PHI_antisoc_spiritual_east } prerequisite = { focus = PHI_antisoc_laissez_socialism }
+		completion_reward = {
+		custom_effect_tooltip = PHI_laurel_invite_peeps_tt
+		add_ideas = PHI_laurel_free_nations
+		}
+	}
+	
+	focus = {
+		id = PHI_antisoc_popular_gov
+		icon = GFX_goal_QIO_revolutionary_zone
+		relative_position_id = PHI_antisoc_republicanism_survival
+		x = 0
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = PHI_antisoc_common_happiness }  
+		completion_reward = {
+		swap_ideas = {
+			remove_idea = PHI_santos_jose_do_shit
+			add_idea = PHI_laurel_pop_govt
+			}
+
+
 		}
 	}
 }
