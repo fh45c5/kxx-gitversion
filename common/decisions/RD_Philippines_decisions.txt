@@ -1,0 +1,1285 @@
+political_actions = {
+PHI_Jose_laurel_Picker = {
+		icon = GFX_decision_portraits_picker
+		allowed = {
+			tag = PHI
+		}
+		visible = {
+			has_country_leader = { name = "Jose P. Laurel" ruling_only = yes }
+			is_ai = no
+		}
+		cost = 0
+		fire_only_once = no
+		days_re_enable = 1
+		ai_will_do = {
+			factor = 0
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_Shaoyu_Ming_Picker"
+			country_event = rd_phil.82
+	    }
+	}
+}
+
+PHI_foreign_decision_category = { 
+	PHI_soc_csa_puppet_des = { # america
+		icon = GFX_decision_generic_nationalism
+		fire_only_once = yes
+		allowed = { tag = PHI }
+		available = {
+			CSA = {
+			is_subject_of = PHI
+			}
+		}
+		visible = { 
+			CSA = {
+			is_subject_of = PHI
+			}
+		}
+		fire_only_once = yes
+		cost = 50
+		ai_will_do = {
+			factor = 10
+			}
+		complete_effect = {
+			CSA = {
+			create_country_leader = {
+			name = "Larry Itliong"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Larry_Itliong.png"
+			expire = "1.1.1"
+			ideology = broad_communism_subtype
+			}	
+			create_country_leader = {
+			name = "Larry Itliong"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Larry_Itliong.png"
+			expire = "1.1.1"
+			ideology = agrarian_syndicalism_subtype
+			}	
+			create_country_leader = {
+			name = "Larry Itliong"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Larry_Itliong.png"
+			expire = "1.1.1"
+			ideology = radical_progressivism_subtype
+			}	
+			create_country_leader = {
+			name = "Larry Itliong"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Larry_Itliong.png"
+			expire = "1.1.1"
+			ideology = syndie_social_democrat_subtype
+			}	
+
+			
+			if = {
+			limit = {
+			owns_state = 361
+			}
+			set_capital = { state = 361 }
+			}
+			set_cosmetic_tag = PHI_csa_puppet
+		}
+	}
+	}
+
+
+
+PHI_form_malaysia = { 
+		icon = GFX_decision_category_filo_map_icon
+		allowed = {tag = PHI }
+		available = {
+		NOT = {
+        any_state = {
+            OR = {
+                region = 91 #Arafura Sea
+                region = 158 #Sunda Islands
+                region = 159 #Borneo
+                region = 192 #Sumatra
+		state = 673
+		state = 1333
+                state = 336 
+                state = 846 
+
+            }
+            NOT = {
+                is_owned_and_controlled_by_ROOT_or_subject = yes
+            }
+        }
+    }
+
+	}
+		visible = { has_country_flag =  PHI_claimed_pan_malaysia }
+		cost = 100
+		fire_only_once = yes
+		days_remove = 120
+		ai_will_do = {
+			factor = 100
+			}
+
+		complete_effect = {
+			
+		}
+		remove_effect = {
+		if = { limit = { has_subject = INS }
+		annex_country = {
+   		 target = INS
+  		  transfer_troops = no
+		}
+		}
+		if = { limit = { has_subject = MLY } 
+		annex_country = {
+   		 target = MLY
+  		  transfer_troops = no
+		}
+		}
+
+		every_state = {
+		limit = {
+		OR = { is_indonesia = yes region = 194 }
+		}
+		add_core_of = PHI
+		}
+		#needs a event for a new cosmetic tag btw 
+		country_event = rd_phil.80
+		country_event = { id = rd_phil.65 days = 10 }
+
+
+
+		}
+	}
+	
+PHI_laurel_unique_asia = { #
+		icon = GFX_decision_category_foreign_policy
+		allowed = { tag = PHI }
+		visible = { OR = { has_completed_focus = PHI_antisoc_mother_asia_civilization has_completed_focus = PHI_antisoc_divine_principle_humanity } }
+
+
+		cost = 200
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 10
+			}
+
+		days_remove = 10
+		complete_effect = {
+			
+		}
+		remove_effect = {
+		every_other_country = {
+		limit = {
+		NOT = { has_war_with = PHI }
+		is_major = no
+		is_in_faction = no
+		is_subject = no
+		num_subjects < 2
+		OR = {
+		is_in_asia = yes	
+		is_in_india = yes
+		is_in_middle_east = yes
+		is_in_australia = yes
+		}	
+		}
+		country_event = rd_phil.49
+		}
+		
+
+		}
+	}
+
+PHI_laurel_unique_africa = { #
+		icon = GFX_decision_category_foreign_policy
+		allowed = { tag = PHI }
+		visible = { has_completed_focus = PHI_antisoc_divine_principle_humanity }
+
+
+		cost = 150
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 10
+			}
+
+		days_remove = 10
+		complete_effect = {
+			
+		}
+		remove_effect = {
+		every_other_country = {
+		limit = {
+		NOT = { has_war_with = PHI }
+		is_major = no
+		is_in_faction = no
+		is_subject = no
+		num_subjects < 2
+		is_in_africa = yes
+		}
+		country_event = rd_phil.49
+		}
+		
+
+		}
+	}
+
+PHI_laurel_unique_europe = { #
+		icon = GFX_decision_category_foreign_policy
+		allowed = { tag = PHI }
+		visible = { has_completed_focus = PHI_antisoc_divine_principle_humanity }
+
+
+		cost = 150
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 10
+			}
+
+		days_remove = 10
+		complete_effect = {
+			
+		}
+		remove_effect = {
+		every_other_country = {
+		limit = {
+		NOT = { has_war_with = PHI }
+		is_major = no
+		is_in_faction = no
+		is_subject = no
+		num_subjects < 2
+		is_in_europe = yes
+		}
+		country_event = rd_phil.49
+		}
+		
+
+		}
+	}
+
+PHI_laurel_unique_americas = { #
+		icon = GFX_decision_category_foreign_policy
+		allowed = { tag = PHI }
+		visible = { has_completed_focus = PHI_antisoc_divine_principle_humanity }
+
+
+		cost = 150
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 10
+			}
+		days_remove = 10
+
+		complete_effect = {
+			
+		}
+		remove_effect = {
+		every_other_country = {
+		limit = {
+		NOT = { has_war_with = PHI }
+		is_major = no
+		is_in_faction = no
+		is_subject = no
+		num_subjects < 2
+		is_in_americas = yes
+		}
+		country_event = rd_phil.49
+		}
+		
+
+		}
+	}
+
+
+PHI_laurel_unite_faction = { #
+		icon = GFX_decision_category_foreign_policy
+		allowed = { tag = PHI }
+		available = {
+		OR = {
+		is_faction_leader = yes
+		is_in_faction = no
+		}
+		}
+		visible = { has_completed_focus = PHI_antisoc_common_happiness has_completed_focus = PHI_foreign_own }
+
+
+		cost = 200
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 10
+			}
+		days_remove = 10
+		complete_effect = {
+			
+		}
+		remove_effect = {
+		if = { limit = { is_in_faction = yes } 
+		set_faction_name = PHI_laurel_faction
+		}
+		else = { 
+		create_faction_from_template = {
+   		template = faction_template_rd_china_world_faction
+   			name = PHI_laurel_faction
+   			icon = GFX_faction_logo_generic_2 #give this a faction icon bro
+		}
+		}
+		every_other_country = {
+		limit = {
+		is_subject = no
+		NOT = { has_war_with = PHI }
+		OR = { 
+		is_in_faction = no
+		is_faction_leader = yes
+		}
+		OR = {
+		has_idea = PHI_laurel_rest_allies
+		has_idea = PHI_laurel_asia_allies 
+		}
+		}
+		country_event = rd_phil.50
+		}
+		
+
+		}
+	}
+
+
+
+PHI_create_with_indonesia = { #
+		icon = GFX_decision_category_indonesia_icon #add a icon for Indonesia flag idk how to do that
+		allowed = { tag = PHI }
+		available = {
+		is_in_faction = no
+		}
+		visible = { INS = { exists = yes is_subject = no not = {has_war_with = PHI} }  has_completed_focus = PHI_foreign_own }
+
+		cost = 75
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 10
+			}
+		complete_effect = {
+		INS = { country_event = rd_phil.63 }
+
+		}
+	}
+
+PHI_annex_indonesia_descition = { #
+		icon = GFX_decision_category_indonesia_icon #add a icon for Indonesia flag idk how to do that
+		allowed = { tag = PHI }
+		available = {
+		is_subject = no
+		}
+		visible = { INS = { exists = yes is_in_faction_with = PHI }  has_country_flag = PHI_created_malphido has_country_flag =  PHI_claimed_pan_malaysia }
+
+		cost = 150
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 10
+			}
+		complete_effect = {
+		INS = { 
+			every_unit_leader = {
+			set_nationality = PHI
+			}
+		}
+		annex_country = {
+   		target = INS
+    		transfer_troops = yes
+		}
+
+		}
+	}
+
+PHI_core_taiwan_descition = { #
+		icon = GFX_decision_cat_annexation #add a icon idk how to do that
+		allowed = { tag = PHI }
+		available = {
+		controls_state = 524
+		524 = { compliance > 60 }
+		}
+		visible = { owns_state = 524 has_completed_focus = PHI_foreign_spain_fact }
+
+		cost = 75
+		cancel_if_not_visible = yes
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 10
+			}
+		days_remove = 120
+		complete_effect = {
+		
+		}
+		remove_effect = {
+		add_state_core = 524
+		}
+
+	}
+PHI_core_madagascar_descition = { #
+		icon = GFX_decision_cat_annexation #add a icon idk how to do that
+		allowed = { tag = PHI }
+		available = {
+		controls_state = 543
+		543 = { compliance > 60 }
+		controls_state = 1178
+		1178 = { compliance > 60 }
+		controls_state = 1177
+		1177 = { compliance > 60 }
+		controls_state = 1179
+		1179 = { compliance > 60 }
+
+		}
+		visible = { has_country_flag = PHI_take_madagascar owns_state = 543 owns_state = 1178 }
+
+		cost = 100
+		cancel_if_not_visible = yes
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 10
+			}
+		days_remove = 150
+		complete_effect = {
+		
+		}
+		remove_effect = {
+	every_state = {
+	limit = { or = { region = 193 state = 707 state = 706 state = 708 } }
+	add_core_of = PHI
+	}
+
+		}
+
+	}
+
+
+PHI_core_borneo_descition = { #
+		icon = GFX_decision_cat_annexation #add a icon idk how to do that
+		allowed = { tag = PHI }
+		available = {
+		controls_state = 828
+		828 = { compliance > 50 }
+		}
+		visible = { owns_state = 828 828 = { NOT = { is_core_of = PHI } } }
+
+		cost = 50
+		cancel_if_not_visible = yes
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 100
+			}
+		days_remove = 50
+		complete_effect = {
+		
+		}
+		remove_effect = {
+		add_state_core = 828
+		}
+
+	}
+
+PHI_invade_ins = { #
+		icon = GFX_decision_cat_annexation #add a icon idk how to do that
+		allowed = { tag = PHI }
+		available = {
+		not = {has_war_with = INS} 
+		}
+		visible = { country_exists = INS NOT = { is_ally_with = INS } has_country_flag =  PHI_claimed_pan_malaysia }
+
+		cost = 50
+		fire_only_once = yes
+		ai_will_do = {
+			base = 0
+		modifier = { or = { strength_ratio = {
+    		tag = INS
+    			ratio > 1
+		}
+		INS = { has_defensive_war = yes }
+ 		} add = 5 }
+			}
+		days_remove = 14
+		complete_effect = {
+		
+		}
+		remove_effect = {
+	create_wargoal = {
+    	type = annex_everything
+    	target = INS
+	}
+		}
+
+	}
+
+
+PHI_end_dei = { #maybe these should also be unlocked for the americans and he other western factions idk?
+		icon = GFX_decision_cat_annexation #add a icon idk how to do that
+		allowed = { tag = PHI }
+		available = {
+		not = {has_war_with = DEI} 
+		}
+		visible = { country_exists = DEI NOT = { is_ally_with  = DEI }  OR = { has_completed_focus = PHI_foreign_apostate_orienta has_completed_focus = PHI_foreign_surfing_red_waves has_completed_focus = PHI_foreign_self_determination has_completed_focus = PHI_foreign_post_war_deals } }
+
+		cost = 50
+		cancel_if_not_visible = yes
+		fire_only_once = yes
+		ai_will_do = {
+			base = 0
+		modifier = { or = { strength_ratio = {
+    		tag = DEI
+    			ratio > 1.2
+		}
+		DEI = { has_defensive_war = yes }
+ 		} add = 5 }
+			}
+		days_remove = 14
+		complete_effect = {
+		
+		}
+		remove_effect = {
+	create_wargoal = {
+    	type = annex_everything
+    	target = DEI
+	}
+		}
+
+	}
+
+PHI_invade_gea = { #
+		icon = GFX_decision_category_foreign_policy #add a icon idk how to do that
+		allowed = { tag = PHI }
+		available = {
+		not = {has_war_with = GEA} 
+		}
+		visible = { country_exists = GEA NOT = { is_ally_with = GEA } OR = { has_completed_focus = PHI_foreign_apostate_orienta has_completed_focus = PHI_foreign_surfing_red_waves has_completed_focus = PHI_foreign_self_determination has_completed_focus = PHI_foreign_post_war_deals  } }
+
+		cost = 50
+		fire_only_once = yes
+		ai_will_do = {
+			base = 0
+		modifier = { or = { strength_ratio = {
+    		tag = GEA
+    			ratio > 1.2
+		}
+		GEA = { has_defensive_war = yes }
+ 		} add = 5 }
+			}
+		days_remove = 14
+		complete_effect = {
+		
+		}
+		remove_effect = {
+	create_wargoal = {
+    	type = annex_everything
+    	target = GEA
+	}
+		}
+
+	}
+
+
+PHI_invade_JAP = { #
+		icon = GFX_decision_category_foreign_policy #add a icon idk how to do that
+		allowed = { tag = PHI }
+		available = {
+		not = {has_war_with = JAP} 
+		}
+		visible = { country_exists = JAP JAP = { is_subject = no } NOT = { is_ally_with = JAP } date > 1941.12.31 }
+
+		cost = 50
+		fire_only_once = yes
+		ai_will_do = {
+			base = 0
+		modifier = { has_war = no 
+		or = { strength_ratio = {
+    		tag = JAP
+    			ratio > 1.2
+		}
+		JAP = { has_defensive_war = yes }
+ 		} add = 5 }
+			}
+		days_remove = 14
+		complete_effect = {
+		
+		}
+		remove_effect = {
+	create_wargoal = {
+    	type = annex_everything
+    	target = JAP
+	}
+		}
+
+	}
+	
+	
+	PHI_Chinese_Pirates = { #
+		icon = GFX_decision_category_foreign_policy #add a icon idk how to do that
+		allowed = { tag = PHI }
+		target_root_trigger = {
+			has_completed_focus = PHI_foreign_chinese_pirates
+		}
+		targets = { TAI GXC HNN LEP ANQ SQI LEC YUN SZC QIE CHI SHX FNG MAN XSM SIK ETS TAN TIB MON }
+		target_trigger = {
+			FROM = {
+					exists = yes
+				AND = {
+					NOT = {
+						is_ally_with = PHI
+					}
+					NOT = {
+						is_subject_of = PHI
+					}
+				}
+			}
+		}
+		visible = { has_completed_focus = PHI_foreign_chinese_pirates }
+
+		cost = 50
+		fire_only_once = yes
+		ai_will_do = {
+		base = 0
+		modifier = { has_war = no or = { is_owner_neighbor_of = FROM any_allied_country = { is_owner_neighbor_of = FROM } } add = 2 }
+		}
+		days_remove = 25
+		complete_effect = {
+			
+		}
+		remove_effect = {
+			create_wargoal = {
+				type = annex_everything
+				target = FROM
+			}
+		}
+
+	}
+
+}
+
+
+PHI_emilio_politics_decisions = {
+	
+	PHI_emilio_left_cults = {
+		icon = GFX_decision_generic_independence
+
+		available = {
+			NOT = {
+				has_country_flag = PHI_doing_decision
+			}
+		}
+
+		visible = {
+		is_power_balance_side_active = {
+   		 id = PHI_emil_left_right_balance 
+   		 side = PHI_left_emilio_side
+		}
+
+		}
+		
+
+		cost = 40
+		days_re_enable = 10
+		fire_only_once = no
+		days_remove = 30
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAN_showcase_british_culture"
+			set_country_flag = PHI_doing_decision
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_showcase_british_culture"
+			clr_country_flag = PHI_doing_decision
+			PHI_improve_left_influence_small_bop = yes
+			add_political_power = 45
+		add_to_variable = {
+  		  var = PHI_rizalite_cults_times
+   		 value = 1
+			}
+
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	PHI_emilio_left_aglipay = { #decision once for aglipay and skadal connection haha 
+		icon = GFX_decision_generic_independence
+
+		available = {
+			NOT = {
+				has_country_flag = PHI_doing_decision
+			}
+		}
+
+		visible = {
+		is_power_balance_side_active = {
+   		 id = PHI_emil_left_right_balance 
+   		 side = PHI_left_emilio_side
+		}
+		check_variable = {
+   		 PHI_rizalite_cults_times > 5
+		}
+
+		}
+		
+		cost = 50
+		fire_only_once = yes
+		days_remove = 40
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAN_showcase_british_culture"
+			set_country_flag = PHI_doing_decision
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_showcase_british_culture"
+			clr_country_flag = PHI_doing_decision
+			PHI_improve_left_influence_big_bop = yes
+		add_popularity = {
+  	  ideology = social_democrat
+   		 popularity = 0.13
+		}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	PHI_emilio_left_boycott_peaceful = { #
+		icon = GFX_decision_generic_independence
+
+		available = {
+			NOT = {
+				has_country_flag = PHI_doing_decision
+			}
+		}
+
+		visible = {
+		is_power_balance_side_active = {
+   		 id = PHI_emil_left_right_balance 
+   		 side = PHI_left_emilio_side
+		}
+
+		}
+		modifier = {
+		min_export = -0.1
+
+		}
+		cost = 50
+		days_re_enable = 20
+		fire_only_once = no
+		days_remove = 30
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAN_showcase_british_culture"
+			set_country_flag = PHI_doing_decision
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_showcase_british_culture"
+			clr_country_flag = PHI_doing_decision
+			PHI_improve_left_influence_big_bop = yes
+			add_stability = 0.025
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	PHI_emilio_left_mutual_aid = { #
+		icon = GFX_decision_generic_independence
+
+		available = {
+			NOT = {
+				has_country_flag = PHI_doing_decision
+			}
+		}
+
+		visible = {
+		is_power_balance_side_active = {
+   		 id = PHI_emil_left_right_balance 
+   		 side = PHI_left_emilio_side
+		}
+
+		}
+		
+
+		cost = 30
+		days_re_enable = 20
+		fire_only_once = no
+		days_remove = 25
+		modifier = {
+		consumer_goods_factor = -0.05
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAN_showcase_british_culture"
+			set_country_flag = PHI_doing_decision
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_showcase_british_culture"
+			clr_country_flag = PHI_doing_decision
+			PHI_improve_left_influence_bop = yes
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+
+	PHI_emilio_rightist_anticom = {
+		icon = GFX_decision_generic_military
+
+		available = {
+			NOT = {
+				has_country_flag = PHI_doing_decision
+			}
+		}
+
+		visible = {
+		is_power_balance_side_active = {
+   		 id = PHI_emil_left_right_balance 
+   		 side = PHI_right_emilio_side
+		}
+
+		}
+		cost = 45
+		days_re_enable = 20
+		fire_only_once = no
+		days_remove = 40
+        	modifier = {
+		totalist_drift = -0.025
+            syndicalist_drift = -0.025
+		consumer_goods_factor = -0.025
+        	}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAN_showcase_british_culture"
+			set_country_flag = PHI_doing_decision
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_showcase_british_culture"
+			clr_country_flag = PHI_doing_decision
+			PHI_improve_right_influence_big_bop = yes
+			add_command_power = 25
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	PHI_emilio_military_ranks_secret_societies = {
+		icon = GFX_decision_generic_military
+
+		available = {
+			NOT = {
+				has_country_flag = PHI_doing_decision
+			}
+		}
+
+		visible = {
+		is_power_balance_side_active = {
+   		 id = PHI_emil_left_right_balance 
+   		 side = PHI_right_emilio_side
+		}
+
+		}
+		
+
+		cost = 50
+		days_re_enable = 30
+		fire_only_once = no
+		days_remove = 40
+        	modifier = {
+            grant_medal_cost_factor = -0.2
+		field_officer_promotion_penalty = -0.2
+        	}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAN_showcase_british_culture"
+			set_country_flag = PHI_doing_decision
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_showcase_british_culture"
+			clr_country_flag = PHI_doing_decision
+			PHI_improve_right_influence_small_bop = yes
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	PHI_emilio_middle_sacrafice_for = {
+		icon = GFX_decision_generic_military
+
+		available = {
+			NOT = {
+				has_country_flag = PHI_doing_decision
+			}
+		}
+
+		visible = {
+		is_power_balance_side_active = {
+   		 id = PHI_emil_left_right_balance 
+   		 side = PHI_right_emilio_side
+		}
+
+		}
+		
+
+		cost = 50
+		days_re_enable = 30
+		fire_only_once = no
+		days_remove = 40
+        	modifier = {
+            training_time_factor = -0.05
+        	}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAN_showcase_british_culture"
+			set_country_flag = PHI_doing_decision
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_showcase_british_culture"
+			clr_country_flag = PHI_doing_decision
+			PHI_improve_right_influence_small_bop = yes
+			add_manpower = 1200
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	PHI_emilio_vinzons_go_left_moderate = {
+		icon = GFX_decision_generic_military
+
+		available = {
+			NOT = {
+				has_country_flag = PHI_doing_decision
+			}
+		}
+
+		visible = {
+		is_power_balance_side_active = {
+   		 id = PHI_emil_left_right_balance 
+   		 side = PHI_vinzons_democracy_side
+		}
+		has_completed_focus = PHI_emi_filipino_authority
+		}
+		
+		cost = 50
+		days_re_enable = 30
+		fire_only_once = no
+		days_remove = 30
+        	modifier = {
+		political_power_gain = 0.05
+        	}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAN_showcase_british_culture"
+			set_country_flag = PHI_doing_decision
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_showcase_british_culture"
+			clr_country_flag = PHI_doing_decision
+			PHI_improve_left_influence_big_bop = yes
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	PHI_emilio_raymond_go_right_moderate = {
+		icon = GFX_decision_generic_military
+
+		available = {
+			NOT = {
+				has_country_flag = PHI_doing_decision
+			}
+		}
+
+		visible = {
+		is_power_balance_side_active = {
+   		 id = PHI_emil_left_right_balance 
+   		 side = PHI_raymundo_democracy_side
+		}
+		has_completed_focus = PHI_emi_avenge_opprsed
+		}
+		
+
+		cost = 50
+		days_re_enable = 30
+		fire_only_once = no
+		days_remove = 30
+        	modifier = {
+		political_power_gain = 0.05
+        	}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAN_showcase_british_culture"
+			set_country_flag = PHI_doing_decision
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_showcase_british_culture"
+			clr_country_flag = PHI_doing_decision
+			PHI_improve_right_influence_big_bop = yes
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+
+
+
+
+
+
+
+}
+
+PHI_land_reform_movement_decision_category = {
+PHI_land_reform_mission = {
+		activation = {
+			has_completed_focus = PHI_soc_reforms
+		}
+		available = {
+			
+			
+			custom_trigger_tooltip = {
+				tooltip = land_reform_completed_tt		
+				check_variable = { PHI_land_reform_progress > 89 }
+			}
+			
+		}
+		cancel_trigger = {
+			
+		}
+		
+		icon = mission_icon     # For GFX_decision_mission_icon
+		is_good = no
+	   
+		days_mission_timeout = 730
+		selectable_mission = no
+		fire_only_once = yes
+		complete_effect = {
+		set_country_flag = PHI_socialist_land_reform_success
+		add_political_power = 50
+		add_stability = 0.25
+		add_war_support = 0.1
+		}
+		timeout_effect = {
+		set_country_flag = PHI_socialist_land_reform_failed
+		if = { limit = { is_ai = no } 
+		add_stability = -0.5
+		add_war_support = -0.25
+		add_political_power = -200
+		}
+		}
+	}
+	
+	
+	PHI_rural_restribution = {
+		icon = GFX_decision_generic_agriculture
+		
+		available = {
+			has_completed_focus = PHI_soc_distriube
+		}
+		
+		visible = {
+			tag = PHI
+			
+		}
+		cost = 10
+		ai_will_do = {
+		base = 50
+		}
+		days_remove = 50
+		days_re_enable = 5
+		fire_only_once = no
+		
+		complete_effect = {
+			random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		remove_effect = {
+			
+			add_to_variable = {
+				var = PHI_land_reform_progress
+				value = 5
+				tooltip = add_PHI_land_reform_var_tt
+			}
+		}
+	}
+	
+	
+	
+	PHI_establish_coops = {
+		icon = GFX_decision_generic_agriculture
+		
+		available = {
+			has_completed_focus = PHI_soc_rural_coop
+		}
+		
+		visible = {
+			tag = PHI
+			
+		}
+		cost = 10
+		ai_will_do = {
+		base = 50
+		}
+		days_remove = 60
+		days_re_enable = 5
+		fire_only_once = no
+		modifier = {
+			production_lack_of_resource_penalty_factor = -0.05
+			production_speed_buildings_factor = 0.05
+			production_speed_industrial_complex_factor = 0.1
+			consumer_goods_factor = -0.05
+			research_speed_factor = 0.01
+		}
+		complete_effect = {
+			
+		}
+		remove_effect = {
+			
+			add_to_variable = {
+				var = PHI_land_reform_progress
+				value = 7
+				tooltip = add_PHI_land_reform_var_tt
+			}
+		}
+	}
+	
+	PHI_anti_land_lord_campaign = {
+		icon = GFX_decision_generic_agriculture
+		
+		available = {
+			has_completed_focus = PHI_soc_crush_em
+		}
+		
+		visible = {
+			tag = PHI
+			
+		}
+		cost = 25
+		ai_will_do = {
+		base = 50
+		}
+		days_remove = 100
+		days_re_enable = 20
+		fire_only_once = no
+		modifier = {
+			consumer_goods_factor = -0.05
+			stability_factor = -0.1
+			political_power_gain = 0.3
+			war_support_factor = 0.05
+			weekly_manpower = -100
+			conscription_factor = -0.01
+		}
+		complete_effect = {
+			add_days_mission_timeout = {
+				mission = PHI_land_reform_mission
+				days = -30
+			}
+		}
+		remove_effect = {
+			
+			add_to_variable = {
+				var = PHI_land_reform_progress
+				value = 7
+				tooltip = add_PHI_land_reform_var_tt
+			}
+		}
+	}
+	
+	PHI_anti_land_lord_campaign_moderate = {
+		icon = GFX_decision_generic_agriculture
+		
+		available = {
+			has_completed_focus = PHI_soc_work_landlords
+		}
+		
+		visible = {
+			tag = PHI
+			
+		}
+		cost = 25
+		ai_will_do = {
+		base = 50
+		}
+		days_remove = 75
+		days_re_enable = 20
+		fire_only_once = no
+		modifier = {
+			consumer_goods_factor = 0.025
+			stability_factor = -0.15
+			political_power_gain = 0.2
+			war_support_factor = -0.05
+			production_speed_buildings_factor = 0.05
+			conscription_factor = 0.05
+		}
+		complete_effect = {
+			add_days_mission_timeout = {
+				mission = PHI_land_reform_mission
+				days = 30
+			}
+		}
+		remove_effect = {
+			
+			add_to_variable = {
+				var = PHI_land_reform_progress
+				value = 10
+				tooltip = add_PHI_land_reform_var_tt
+			}
+		}
+	}
+}
+
+PHI_supoort_revolution_decision_category = {
+	PHI_support_revolution = { #
+		icon = GFX_decision_category_anti_colonial_filo_icon #add a icon idk how to do that
+		allowed = { tag = PHI }
+		target_root_trigger = {
+			has_completed_focus = PHI_foreign_south_revolutionaries
+		}
+		targets = { INS VIN LAO CAM INC SIA SIR THM BRM MLY BOR KAC SHA SAR PNG }
+		target_trigger = {
+			FROM = {
+				has_socialist_government = yes
+			}
+		}
+		visible = { has_completed_focus = PHI_foreign_south_revolutionaries  }
+
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 50
+		ai_will_do = {
+		base = 50
+		}
+		days_remove = 14
+		complete_effect = {
+			FROM = {
+				add_timed_idea = {
+					idea = PHI_fp_support_revolution_international
+					days = 120
+				}
+			}
+		}
+		remove_effect = {
+			FROM = {
+				add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1000
+				producer = PHI
+				}
+			}
+			PHI = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -1000
+					producer = PHI
+				}
+			}
+		}
+
+	}
+}

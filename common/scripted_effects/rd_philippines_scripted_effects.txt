@@ -1,0 +1,330 @@
+rd_phil_change_flag_peace_war = {
+if = { limit = { has_cosmetic_tag = PHI_republic_peace_tag }
+set_cosmetic_tag = PHI_republic_war_tag
+}
+else_if = { limit = { has_cosmetic_tag = PHI }
+set_cosmetic_tag = PHW
+}
+else_if = { limit = { has_cosmetic_tag = PHI_emilio_flag }
+set_cosmetic_tag = PHI_emilio_flag_war
+}
+else_if = { limit = { has_cosmetic_tag = PHI_jap_puppet }
+set_cosmetic_tag = PHI_jap_puppet_war
+}
+else_if = { limit = { has_cosmetic_tag = PHI_emilio_flag_commonwealth }
+set_cosmetic_tag = PHI_emilio_flag_commonwealth_war
+}
+else_if = { limit = { has_cosmetic_tag = PHI_moncado_flag }
+set_cosmetic_tag = PHI_moncado_flag_war
+}
+
+}
+
+rd_phil_change_flag_war_peace = {
+if = { limit = { has_cosmetic_tag = PHI_republic_war_tag }
+set_cosmetic_tag = PHI_republic_peace_tag
+}
+else_if = { limit = { has_cosmetic_tag = PHW }
+set_cosmetic_tag = PHI
+}
+else_if = { limit = { has_cosmetic_tag = PHI_emilio_flag_war }
+set_cosmetic_tag = PHI_emilio_flag
+}
+else_if = { limit = { has_cosmetic_tag = PHI_jap_puppet_war }
+set_cosmetic_tag = PHI_jap_puppet
+}
+else_if = { limit = { has_cosmetic_tag = PHI_emilio_flag_commonwealth_war }
+set_cosmetic_tag = PHI_emilio_flag_commonwealth
+}
+else_if = { limit = { has_cosmetic_tag = PHI_moncado_flag_war }
+set_cosmetic_tag = PHI_moncado_flag 
+}
+
+}
+
+rd_phil_commonwealth_to_republic = {
+if = { limit = { has_cosmetic_tag = PHI }
+set_cosmetic_tag = PHI_republic_peace_tag
+}
+else_if = { limit = { has_cosmetic_tag = PHW }
+set_cosmetic_tag = PHI_republic_war_tag
+}
+else_if = { limit = { has_cosmetic_tag = PHI_emilio_flag_commonwealth_war }
+set_cosmetic_tag = PHI_emilio_flag_war
+}
+else_if = { limit = { has_cosmetic_tag = PHI_emilio_flag_commonwealth }
+set_cosmetic_tag = PHI_emilio_flag
+}
+}
+
+rd_phil_calculate_length_second_election = {
+if = { limit = { check_variable = { phi_quick_election = 1 } } #early election means 6 years for an election unless Japan makes it earlier cause beat em
+hidden_effect = { country_event = { id = rd_phil.4 days = 2190 } }
+}
+if = { limit = { check_variable = { phi_quick_election = 0 } } #normal election means 4 years for an election cause new admendment
+hidden_effect = { country_event = { id = rd_phil.4 days = 1460 } }
+}
+
+
+}
+
+rd_phil_soc_calculate_length_second_election = {#socs tbh would probably make em 6 years no matter what but fuck you 6 years is ass for a player that got #them in 1941
+if = { limit = { check_variable = { phi_quick_election = 1 } } #early election means 6 years for an election unless Japan makes it earlier cause beat em
+hidden_effect = { country_event = { id = rd_phil.57 days = 2190 } }
+}
+if = { limit = { check_variable = { phi_quick_election = 0 } } #normal election means 4 years for an election cause new admendment
+hidden_effect = { country_event = { id = rd_phil.57 days = 1460 } }
+}
+
+
+}
+
+
+rd_phil_military_spirt_upgrade = {
+if = { limit = { has_idea = PHI_new_nothing_army_0 } 
+swap_ideas = {
+remove_idea = PHI_new_nothing_army_0
+add_idea = PHI_new_nothing_army
+}
+}
+else_if = { limit = { has_idea = PHI_new_nothing_army } #etc copy this shit
+swap_ideas = {
+remove_idea = PHI_new_nothing_army
+add_idea = PHI_new_nothing_army_1
+}
+}
+
+
+}
+
+rd_phil_stto_spirt_upgrade = { #first sumulong tree, and then the sotto tree depends on whether the pop front won before
+if = { limit = { has_idea = PHI_dem_sotto_law }
+swap_ideas = {
+remove_idea = PHI_dem_sotto_law 
+add_idea = PHI_dem_sotto_law_1
+}
+}
+else = { add_ideas = PHI_dem_sotto_law }
+}
+
+rd_phil_vinzons_spirt_upgrade = { 
+if = { limit = { has_idea = PHI_emil_youth_gen }
+swap_ideas = {
+remove_idea = PHI_emil_youth_gen
+add_idea = PHI_emil_youth_gen_1
+}
+}
+else = { add_ideas = PHI_emil_youth_gen }
+}
+
+
+rd_phil_roxas_spirt_upgrade = { #first sumulong tree, and then the sotto tree depends on whether the pop front won before
+if = { limit = { has_idea = PHI_quezon_nlsa }
+			swap_ideas = {
+			remove_idea = PHI_quezon_nlsa
+			add_idea = PHI_roxas_tenant_act
+			}
+}
+else = { add_ideas = PHI_quezon_nlsa }
+}
+
+
+PHI_improve_right_influence_bop = {
+	add_power_balance_value = {
+		id = PHI_emil_left_right_balance
+		value = 0.10	
+	}
+}
+
+PHI_improve_right_influence_small_bop = {
+	add_power_balance_value = {
+		id = PHI_emil_left_right_balance
+		value = 0.05
+	}
+}
+
+PHI_improve_right_influence_big_bop = {
+	add_power_balance_value = {
+		id = PHI_emil_left_right_balance
+		value = 0.15
+	}
+}
+
+PHI_improve_right_influence_huge_bop = {
+	add_power_balance_value = {
+		id = PHI_emil_left_right_balance
+		value = 0.50
+	}
+}
+
+PHI_improve_left_influence_bop = {
+	add_power_balance_value = {
+		id = PHI_emil_left_right_balance
+		value = -0.10	
+	}
+}
+
+PHI_improve_left_influence_small_bop = {
+	add_power_balance_value = {
+		id = PHI_emil_left_right_balance
+		value = -0.05
+	}
+}
+
+PHI_improve_left_influence_big_bop = {
+	add_power_balance_value = {
+		id = PHI_emil_left_right_balance
+		value = -0.15
+	}
+}
+
+PHI_improve_left_influence_huge_bop = {
+	add_power_balance_value = {
+		id = PHI_emil_left_right_balance
+		value = -0.5
+	}
+}
+
+
+PHI_leftist_generals = {
+		create_field_marshal = {
+			name = "Luis Taruc " 
+			portrait_path = "gfx/leaders/PHI/Portrait_Philippines_Luis_Taruc.png"
+			traits = { adaptable trickster commando }
+			skill = 3
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 2
+		}
+		create_corps_commander = {
+			name = "Juan Feleo " 
+			portrait_path = "gfx/leaders/PHI/Portrait_Philippines_Juan_Feleo.png"
+			traits = { ambusher trickster commando }
+			skill = 2
+			attack_skill = 1
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 2
+		}
+		create_field_marshal = {
+			name = "Casto Alejandrino" 
+			portrait_path = "gfx/leaders/PHI/Portrait_Philippines_Casto_Alejandrino.png"
+			traits = { logistics_wizard organisational_leader thorough_planner }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 3
+			logistics_skill = 4
+		}
+		create_corps_commander = {
+			name = "Bernardo Poblete" 
+			portrait_path = "gfx/leaders/PHI/PHI_bernardo_poblete.png"
+			traits = { brilliant_strategist }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 2
+		}
+		create_corps_commander = {
+			name = "Amado V. Hernandez" 
+			portrait_path = "gfx/leaders/PHI/Portrait_PHI_Amado_Vera_Hernandez.png"
+			traits = { }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+		}
+		create_corps_commander = {
+			name = "Remedios Gomez"  #Remedios Gomez Kumander Liwayway
+			portrait_path = "gfx/leaders/PHI/Portrait_PHI_Kumander_Liwayway.png"
+			traits = { trickster media_personality brave }
+			female = yes
+			skill = 1
+			attack_skill = 1
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 1
+		}
+		create_corps_commander = {
+			name = "Xu Li"  #Xu Jingcheng
+			portrait_path = "gfx/leaders/PHI/Portrait_PHI_Xu_Li.png"
+			traits = { scavenger trickster commando }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 3
+		}
+
+}
+
+PHI_nationalist_generals = {
+		if = { limit = { date < 1945.01.01 }
+		country_event = { id = rd_phil.85 days = 56 } 
+		create_field_marshal = {
+			name = "Artemio Ricarte" 
+			portrait_path = "gfx/leaders/PHI/Portrait_PHI_Artemio_Ricarte.png"
+			traits = { war_hero inspirational_leader unyielding_defender old_guard }
+			skill = 4
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 3
+		}
+		}
+		country_event = { id = rd_phil.84 days = 112 } 
+		country_event = { id = rd_phil.86 days = 221 } 
+		create_corps_commander = {
+			name = "Aurelio Alvero " 
+			portrait_path = "gfx/leaders/PHI/Portrait_PHI_Aurelio_Alvero.png"
+			traits = { politically_connected }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+		}
+		create_corps_commander = {
+			name = "Miguel Cornejo " 
+			portrait_path = "gfx/leaders/PHI/Portrait_PHI_Miguel_Cornejo.png"
+			traits = { organizer politically_connected }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+		}
+
+		create_corps_commander = {
+			name = "Agapito Zamora Zialcita" 
+			portrait_path = "gfx/leaders/PHI/Portrait_PHI_Agapito_Zamora_Zialcita.png"
+			traits = { trickster old_guard skirmisher }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 4
+			logistics_skill = 3
+		}
+		create_corps_commander = {
+			name = "Salud Algabre " 
+			portrait_path = "gfx/leaders/PHI/Portrait_PHI_Salud_Algabre.png"
+			traits = { militias_specialist guerilla_officer brave }
+			female = yes
+			skill = 2
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 2
+		}
+		
+
+}
+
+
+
+
+
+
