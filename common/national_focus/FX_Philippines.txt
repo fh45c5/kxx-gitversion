@@ -3912,27 +3912,12 @@ focus_tree = {
 		}
 		
 		available = {
-			OR = {
-				has_country_flag = PHI_has_1937_elections
-				custom_trigger_tooltip = {
-					tooltip = PHI_junta_in_control_tt
-					has_country_flag = PHI_junta_in_control
-				}
-
-				if = {
-					limit = { has_country_flag = PHI_exiled_pope }
-					custom_trigger_tooltip = {
-						tooltip = PHI_pope_has_control_NOT_tt
-						NOT = { has_country_flag = PHI_pope_in_control }
-					}
-				}
-			}
-			threat > 0.2
+			
 			is_subject = no
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			add_war_support = 0.1
 		}
 	}
 	focus = {
@@ -3959,7 +3944,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			add_stability = 0.1
 		}
 	}
 	focus = {
@@ -4123,12 +4108,28 @@ focus_tree = {
 		}
 		
 		available = {
-			
+			country_exists = SPR
+			spanish_civil_war_will_happen_or_is_happening = yes
 			is_subject = no
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			add_opinion_modifier = {
+				target = SPR
+				modifier = KR_approves_of_govt
+			}
+			reverse_add_opinion_modifier = {
+				target = SPR
+				modifier =  KR_approves_of_govt
+			}
+			SPR = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment_0
+						amount = 5000
+						producer = PHI
+					}
+				
+			}
 		}
 	}
 	focus = {
@@ -4153,12 +4154,16 @@ focus_tree = {
 		}
 		
 		available = {
-			
+			country_exists = SPR
+			spanish_civil_war_will_happen_or_is_happening = no
 			is_subject = no
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			
+			#set cosmetic here
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
 		}
 	}
 	focus = {
@@ -4181,12 +4186,48 @@ focus_tree = {
 		}
 		
 		available = {
-			
+			NOT = {
+				country_exists = SPR
+			}
 			is_subject = no
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			#set cosmetic tag here, maybe allow king flee here?
+			every_state = {#Coring
+					limit = {
+						OR = {
+							is_core_of = CNT
+							is_core_of = SPR
+							is_core_of = CAR
+							is_core_of = BAS
+							is_core_of = CAT
+							is_core_of = GLC
+						}
+
+					}
+					add_core_of = PHI
+			}
+				create_wargoal = {
+					type = annex_everything
+					target = CNT
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CAR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = BAS
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CAT
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = GLC
+				}
 		}
 	}
 	focus = {
@@ -4215,7 +4256,116 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			#set cosmetic tag here
+			every_state = {#Coring
+					limit = {
+						OR = {
+							is_core_of = MEX
+							is_core_of = YUC
+							is_core_of = CUB
+							is_core_of = DOM
+							is_core_of = GUA
+							is_core_of = HON
+							is_core_of = ELS
+							is_core_of = NIC
+							is_core_of = COS
+							is_core_of = PAN
+							is_core_of = COL
+							is_core_of = VEN
+							is_core_of = ECU
+							is_core_of = PRU
+							is_core_of = BOL
+							is_core_of = PAR
+							is_core_of = CHL
+							is_core_of = ARG
+							is_core_of = FOP
+							is_core_of = URG
+							
+						}
+
+					}
+					add_core_of = PHI
+			}
+				create_wargoal = {
+					type = annex_everything
+					target = MEX
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = YUC
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CUB
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = DOM
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = GUA
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = HON
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = ELS
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = NIC
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = COS
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = PAN
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = COL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = VEN
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = ECU
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = PRU
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = BOL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = PAR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CHL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = ARG
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = FOP
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = URG
+				}
 		}
 	}
 	focus = {
@@ -4244,7 +4394,55 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			add_state_core = 1166
+			add_state_core = 1161
+			add_state_core = 1175
+			add_state_core = 1174
+			add_state_core = 1165
+			add_state_core = 1096
+			add_state_core = 833
+			add_state_core = 375
+			add_state_core = 376
+			add_state_core = 377
+			add_state_core = 1096
+			add_state_core = 379
+			add_state_core = 380
+			add_state_core = 829
+			add_state_core = 797
+			add_state_core = 378
+			add_state_core = 798
+				create_wargoal = {
+					type = annex_everything
+					target = USA
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CSA
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = COR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = NEE
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = TEX
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = WCC
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CAL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = TXS
+				}
 		}
 	}
 	focus = {
@@ -4271,12 +4469,25 @@ focus_tree = {
 		}
 		
 		available = {
-			
+			owns_state = 41
+			NOT = {
+				country_exists = CAR
+				country_exists = CNT
+			}
 			is_subject = no
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+				every_state = {#Coring
+					limit = {
+						is_core_of = POR
+					}
+					add_core_of = PHI
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = POR
+				}
 		}
 	}
 	focus = {
@@ -4334,7 +4545,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			#a event to form fe
 		}
 	}
 	focus = {
@@ -4361,7 +4572,38 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			every_state = {#Coring
+					limit = {
+						OR = {
+							is_core_of = MAL
+							is_core_of = SAR
+							is_core_of = INS
+							is_core_of = DEI
+						}
+
+					}
+					add_core_of = PHI
+			}
+				create_wargoal = {
+					type = annex_everything
+					target = MAL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = SAR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = INS
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = DEI
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = GEA
+				}
 		}
 	}
 	focus = {
@@ -4388,7 +4630,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			add_ideas = PHI_spread_religious_fervor
 		}
 	}
 	focus = {
@@ -4577,7 +4819,12 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+				every_state = {#Coring
+					limit = {
+						is_southeast_asia = yes
+					}
+					add_core_of = PHI
+				}
 		}
 	}
 	focus = {
@@ -4604,7 +4851,14 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			#insert cosmetic tag
+				every_state = {#Coring
+					limit = {
+						is_on_continent = asia
+					}
+					add_core_of = PHI
+				}
+				
 		}
 	}
 	focus = {
@@ -4637,7 +4891,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			#insert cosmetic tag
+				every_state = {#Coring
+					
+					add_core_of = PHI
+				}
 		}
 	}
 	focus = {
@@ -4670,7 +4928,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			#insert cosmetic tag
+				every_state = {#Coring
+					
+					add_core_of = PHI
+				}
 		}
 	}
 	focus = {
@@ -4703,7 +4965,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			#insert cosmetic tag
+				every_state = {#Coring
+					
+					add_core_of = PHI
+				}
 		}
 	}
 	focus = {
@@ -4730,7 +4996,14 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+				every_state = {#Coring
+					limit = {
+						
+						is_pacific_islands = yes
+						
+					}
+					add_core_of = PHI
+				}
 		}
 	}
 	focus = {
@@ -4757,7 +5030,16 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+				every_state = {#Coring
+					limit = {
+						is_core_of = MAG
+					}
+					add_core_of = PHI
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = MAG
+				}
 		}
 	}
 	focus = {
@@ -4787,7 +5069,40 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			set_cosmetic_tag = TAI_AUSTRONESIA
+			every_state = {#Coring
+					limit = {
+						OR = {
+							is_core_of = AST
+							is_core_of = NZL
+							is_core_of = TAI
+							is_core_of = PNG
+							is_core_of = HAW
+						}
+
+					}
+					add_core_of = PHI
+			}
+				create_wargoal = {
+					type = annex_everything
+					target = AST
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = NZL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = TAI
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = PNG
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = HAW
+				}
 		}
 	}
 	focus = {
@@ -4815,7 +5130,13 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			set_cosmetic_tag = PHI_asean_tag_democratic
+				every_state = {#Coring
+					limit = {
+						is_southeast_asia = yes
+					}
+					add_core_of = PHI
+				}
 		}
 	}
 	# Into the World
