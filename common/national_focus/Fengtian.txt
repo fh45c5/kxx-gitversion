@@ -19199,12 +19199,16 @@ focus_tree = {
 
 		x = 60
 		y = 20
-
+		available = {
+			
+			has_country_flag = FNG_no_longer_chinese_tag
+			
+		}
 		ai_will_do = { factor = 500 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus MAN_The_Manchuria_Project"
 			add_war_support = 0.1
-			remove_ideas = FNG_Backward_Industry
+			
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
 	}
@@ -19225,6 +19229,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus MAN_Industrial_Development_Commission"
 			add_stability = 0.05
+			add_ideas = FNG_Industrial_Development_Commission
 			add_tech_bonus = {
 				name = FNG_Found_the_Northeast_IDC
 				bonus = 0.5
@@ -19297,7 +19302,7 @@ focus_tree = {
 	focus = {
 		id = FNG_Fushun_Mines
 		icon = GFX_goal_UMN_cobalt_mines
-		cost = 9
+		cost = 5
 
 		relative_position_id = FNG_Industrial_Development_Commission
 		x = -2
@@ -19327,7 +19332,7 @@ focus_tree = {
 	focus = {
 		id = FNG_National_Transportation_Commission
 		icon = GFX_goal_NIC_Pacific_Rail_Expansion
-		cost = 15
+		cost = 5
 
 		relative_position_id = FNG_Industrial_Development_Commission
 		x = 1
@@ -19339,6 +19344,7 @@ focus_tree = {
 		ai_will_do = { factor = 150 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus MAN_National_Transportation_Commission"
+			add_ideas = FNG_National_Transportation_Commission
 			random_owned_controlled_state = {
 				prioritize = { 886 }
 				add_extra_state_shared_building_slots = 2
@@ -19373,7 +19379,7 @@ focus_tree = {
 	focus = {
 		id = FNG_Yalu_And_Songhua_Hydroelectricity
 		icon = GFX_goal_AUS_tauernkraftwerk_hydro_power
-		cost = 10
+		cost = 5
 
 		relative_position_id = FNG_National_Transportation_Commission
 		x = -1
@@ -19424,7 +19430,7 @@ focus_tree = {
 	focus = {
 		id = FNG_Jinzhou_Industrial_Zone
 		icon = GFX_RUS_Begin_Industrialization
-		cost = 10
+		cost = 5
 
 		relative_position_id = FNG_National_Transportation_Commission
 		x = 1
@@ -19467,7 +19473,7 @@ focus_tree = {
 
 		prerequisite = {
 			focus = FNG_Yalu_And_Songhua_Hydroelectricity
-			focus = MAN_Jinzhou_Industrial_Zone
+			focus = FNG_Jinzhou_Industrial_Zone
 		}
 		#Swapped positions with Jinzhou because now Japan can annex the Manchurian coast
 		available = {
@@ -19534,6 +19540,7 @@ focus_tree = {
 				uses = 1
 				category = excavation_tech
 			}
+			add_ideas = FNG_The_Northeast_Breadbasket
 		}
 		search_filters = { FOCUS_FILTER_RESEARCH }
 	}
@@ -19569,7 +19576,7 @@ focus_tree = {
 	focus = {
 		id = FNG_Fuelling_Mechanization
 		icon = GFX_goal_AUS_galicia_oil
-		cost = 10
+		cost = 5
 
 		relative_position_id = FNG_Soy_Agricultural_Initiative
 		x = -1
@@ -19726,7 +19733,7 @@ focus_tree = {
 		ai_will_do = { factor = 150 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus MAN_mobilise_manchurian_industrial_might"
-
+			add_ideas = FNG_mobilise_manchurian_industrial_might
 			increase_mobilisation = yes
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -19791,7 +19798,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus MAN_secure_international_legitimacy"
 			add_stability = 0.10
-			remove_ideas = FNG_Investment_Dearth
+			
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 	}
@@ -19805,8 +19812,14 @@ focus_tree = {
 		x = -1
 		y = 1
 
-		mutually_exclusive = { focus = MAN_work_with_concordia }
-		available = { NOT = { is_subject_of = JAP } }
+		mutually_exclusive = { focus = FNG_work_with_concordia }
+		available = { 
+			NOT = {
+				has_completed_focus = FNG_our_partners_the_zaibatsu
+				has_completed_focus = FNG_president_myronovych
+				has_completed_focus = FNG_bow_to_rising_sun
+			}
+		}
 		prerequisite = {
 			focus = FNG_secure_international_legitimacy
 		}
@@ -19835,8 +19848,14 @@ focus_tree = {
 		x = 1
 		y = 1
 
-		mutually_exclusive = { focus = MAN_nationalise_japanese_assets }
-		available = { is_subject_of = JAP }
+		mutually_exclusive = { focus = FNG_nationalise_japanese_assets }
+		available = { 
+			OR = {
+				has_completed_focus = FNG_our_partners_the_zaibatsu
+				has_completed_focus = FNG_president_myronovych
+				has_completed_focus = FNG_bow_to_rising_sun
+			}
+		}
 		prerequisite = {
 			focus = FNG_secure_international_legitimacy
 		}
@@ -19876,8 +19895,7 @@ focus_tree = {
 	focus = {
 		id = FNG_jewel_of_the_northeast
 		icon = GFX_goal_UMN_diamonds
-		cost = 10
-
+		cost = 5
 		relative_position_id = FNG_The_Manchuria_Project
 		x = 0
 		y = 5
@@ -19896,7 +19914,7 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = FNG_work_with_concordia
-			focus = MAN_nationalise_japanese_assets
+			focus = FNG_nationalise_japanese_assets
 		}
 		ai_will_do = { factor = 150 }
 		completion_reward = {
@@ -19944,7 +19962,11 @@ focus_tree = {
 
 		x = 60
 		y = 27
-
+		available = {
+			
+			has_country_flag = FNG_no_longer_chinese_tag
+			
+		}
 		ai_will_do = { factor = 400 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus MAN_reorganise_regional_forces"
@@ -19966,7 +19988,7 @@ focus_tree = {
 			886 = {
 				create_unit = {
 					division = "name = \"Jilin Sheng Jingbei Jun\" division_template = \"Sheng Jingbei Jun\" start_experience_factor = 0.1"
-					owner = MAN
+					owner = FNG
 				}
 				#Jilin Guard Corps
 			}
@@ -20084,7 +20106,7 @@ focus_tree = {
 		ai_will_do = { factor = 150 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus MAN_enlist_mongolian_cavalry"
-			add_ideas = MON_scourge_of_the_steppes
+			add_ideas = FNG_cavalry_reform_1
 		}
 		search_filters = { FOCUS_FILTER_RESEARCH }
 	}
@@ -20227,7 +20249,7 @@ focus_tree = {
 		}
 
 		available = {
-			716 = { is_owned_and_controlled_by = MAN }
+			716 = { is_owned_and_controlled_by = ROOT }
 		}
 
 		ai_will_do = { factor = 150 }
@@ -20316,6 +20338,11 @@ focus_tree = {
 
 		available = {
 			owns_state_with_naval_base = yes
+			
+			
+			has_country_flag = FNG_no_longer_chinese_tag
+			
+		
 		}
 
 		ai_will_do = { factor = 300 }
@@ -20388,7 +20415,7 @@ focus_tree = {
 		y = 1
 
 		available = {
-			885 = { is_owned_and_controlled_by = MAN }
+			885 = { is_owned_and_controlled_by = ROOT }
 		}
 
 		prerequisite = {
@@ -20413,7 +20440,7 @@ focus_tree = {
 
 		available = {
 			885 = {
-				is_owned_and_controlled_by = MAN
+				is_owned_and_controlled_by = ROOT
 			}
 		}
 
@@ -20518,7 +20545,7 @@ focus_tree = {
 
 		available = {
 			745 = {
-				is_owned_and_controlled_by = MAN
+				is_owned_and_controlled_by = ROOT
 			}
 		}
 
@@ -20567,7 +20594,7 @@ focus_tree = {
 
 		available = {
 			408 = {
-				is_owned_and_controlled_by = MAN
+				is_owned_and_controlled_by = ROOT
 			}
 		}
 
@@ -20642,7 +20669,11 @@ focus_tree = {
 
 		x = 70
 		y = 27
-
+		available = {
+			
+			has_country_flag = FNG_no_longer_chinese_tag
+			
+		}
 		ai_will_do = { factor = 300 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus MAN_scavenge_fengtian_air_projects"
