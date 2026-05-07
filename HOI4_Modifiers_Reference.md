@@ -444,6 +444,26 @@
 | `war_support_weekly` | 每周战争支持度 | 战争支持度周增长 |
 | `surrender_limit` | 投降界限 | 投降阈值 |
 
+### 14.3 意识形态漂移
+
+| 代码名称 | 中文名称 | 说明 |
+|---------|---------|------|
+| `drift_defence_factor` | 漂移防御因子 | 降低意识形态漂移效果（正值减少漂移，负值增加漂移） |
+| `democratic_drift` | 民主主义漂移 | 向民主主义意识形态漂移的速度 |
+| `fascism_drift` | 法西斯主义漂移 | 向法西斯主义意识形态漂移的速度 |
+| `communism_drift` | 共产主义漂移 | 向共产主义意识形态漂移的速度 |
+| `neutrality_drift` | 中立主义漂移 | 向中立主义意识形态漂移的速度 |
+| `master_ideology_drift` | 主流意识形态漂移 | 向当前主流意识形态漂移的速度 |
+| `democratic_acceptance` | 民主主义接受度 | 民主主义意识形态的接受度 |
+| `fascism_acceptance` | 法西斯主义接受度 | 法西斯主义意识形态的接受度 |
+| `communism_acceptance` | 共产主义接受度 | 共产主义意识形态的接受度 |
+| `neutrality_acceptance` | 中立主义接受度 | 中立主义意识形态的接受度 |
+| `democratic_drift_from_guarantees` | 民主主义保障漂移 | 来自保障的民主主义漂移 |
+| `fascism_drift_from_guarantees` | 法西斯主义保障漂移 | 来自保障的法西斯主义漂移 |
+| `communism_drift_from_guarantees` | 共产主义保障漂移 | 来自保障的共产主义漂移 |
+| `embargo_cost_factor` | 禁运花费因子 | 禁运操作的花费修正 |
+| `embargo_threshold_factor` | 禁运阈值因子 | 触发禁运的阈值修正 |
+
 ---
 
 ## 十五、阵营与外交
@@ -610,6 +630,134 @@
 |---------|---------|------|
 | `convoy_raiding_efficiency_factor` | 袭击运输船任务效率 | 破交效率 |
 | `convoy_escort_efficiency` | 运输护航效率 | 护航效率 |
+
+---
+
+---
+
+## 二十四、AI 行为修正
+
+### 24.1 AI 行为参数
+
+| 代码名称 | 中文名称 | 说明 |
+|---------|---------|------|
+| `ai_badass_factor` | AI 强硬程度 | AI 决策强硬程度 |
+| `ai_call_ally_desire_factor` | AI 召唤盟友意愿 | 召唤盟友的欲望 |
+| `ai_desired_divisions_factor` | AI 期望师数量 | 目标师数量 |
+| `ai_focus_aggressive_factor` | AI 侵略倾向 | 侵略国策倾向 |
+| `ai_focus_aviation_factor` | AI 空军倾向 | 空军国策倾向 |
+| `ai_focus_defense_factor` | AI 防御倾向 | 防御国策倾向 |
+| `ai_focus_military_advancements_factor` | AI 军事科技倾向 | 军事科技国策 |
+| `ai_focus_military_equipment_factor` | AI 装备倾向 | 装备国策倾向 |
+| `ai_focus_naval_air_factor` | AI 海航倾向 | 海航国策倾向 |
+| `ai_focus_naval_factor` | AI 海军倾向 | 海军国策倾向 |
+| `ai_focus_peaceful_factor` | AI 和平倾向 | 和平国策倾向 |
+| `ai_focus_war_production_factor` | AI 军工倾向 | 军工国策倾向 |
+| `ai_get_ally_desire_factor` | AI 获取盟友意愿 | 获取盟友欲望 |
+| `ai_join_ally_desire_factor` | AI 加入盟友意愿 | 加入盟友欲望 |
+| `ai_license_acceptance` | AI 许可接受度 | 接受许可证意愿 |
+
+---
+
+## 二十五、自治度修正
+
+### 25.1 自治度获取
+
+| 代码名称 | 中文名称 | 说明 |
+|---------|---------|------|
+| `autonomy_gain` | 自治度获取 | 自治度基础增长 |
+| `autonomy_gain_global_factor` | 自治度全局修正 | 自治度增长因子 |
+| `autonomy_gain_ll_to_overlord` | 自治度流向宗主国 | 自治度流向宗主 |
+| `autonomy_gain_ll_to_overlord_factor` | 自治度流向宗主因子 | 流向因子 |
+| `autonomy_gain_ll_to_subject` | 自治度流向附属国 | 自治度流向附属 |
+| `autonomy_gain_ll_to_subject_factor` | 自治度流向附属因子 | 流向因子 |
+| `autonomy_gain_trade` | 贸易自治度获取 | 贸易带来的自治度 |
+| `autonomy_gain_trade_factor` | 贸易自治度因子 | 贸易因子 |
+| `autonomy_gain_warscore` | 战争分数自治度 | 战争分数带来的自治度 |
+| `autonomy_gain_warscore_factor` | 战争分数自治度因子 | 因子 |
+
+### 25.2 资源与贸易
+
+| 代码名称 | 中文名称 | 说明 |
+|---------|---------|------|
+| `autonomy_manpower_share` | 人力份额 | 人力分配比例 |
+| `autonomy_manpower_share_from_subjects` | 附属国人力份额 | 附属国人力 |
+| `cic_to_overlord_factor` | 民用工厂流向宗主 | 民工厂输出 |
+| `mic_to_overlord_factor` | 军用工厂流向宗主 | 军工厂输出 |
+| `resources_to_overlord_factor` | 资源流向宗主 | 资源输出 |
+| `extra_trade_to_overlord_factor` | 额外贸易流向宗主 | 额外贸易 |
+| `overlord_trade_cost_factor` | 宗主贸易花费 | 与宗主贸易花费 |
+
+---
+
+## 二十六、流亡政府修正
+
+### 26.1 流亡政府参数
+
+| 代码名称 | 中文名称 | 说明 |
+|---------|---------|------|
+| `legitimacy_daily` | 合法性每日增长 | 每日合法性 |
+| `legitimacy_gain_factor` | 合法性增长因子 | 合法性修正 |
+| `targeted_legitimacy_daily` | 定向合法性增长 | 定向合法性 |
+| `exile_manpower_factor` | 流亡人力因子 | 流亡人力修正 |
+| `industrial_factory_donations` | 工厂捐献 | 工厂捐赠数量 |
+| `military_factory_donations` | 军工厂捐献 | 军工厂捐赠 |
+| `dockyard_donations` | 船坞捐献 | 船坞捐赠 |
+
+---
+
+## 二十七、军事进步修正
+
+### 27.1 经验获取
+
+| 代码名称 | 中文名称 | 说明 |
+|---------|---------|------|
+| `experience_gain_factor` | 经验获取因子 | 全局经验修正 |
+| `experience_gain_army` | 陆军经验获取 | 陆军经验 |
+| `experience_gain_army_factor` | 陆军经验因子 | 陆军经验修正 |
+| `experience_gain_army_unit` | 陆军单位经验 | 单位经验 |
+| `experience_gain_army_unit_factor` | 陆军单位经验因子 | 单位经验修正 |
+| `experience_gain_navy` | 海军经验获取 | 海军经验 |
+| `experience_gain_navy_factor` | 海军经验因子 | 海军经验修正 |
+| `experience_gain_navy_unit` | 海军单位经验 | 海军单位经验 |
+| `experience_gain_navy_unit_factor` | 海军单位经验因子 | 单位经验修正 |
+| `research_speed_factor` | 研究速度因子 | 研究速度修正 |
+
+---
+
+## 二十八、科学家修正
+
+### 28.1 科学家参数
+
+| 代码名称 | 中文名称 | 说明 |
+|---------|---------|------|
+| `female_random_scientist_chance` | 女性科学家几率 | 随机生成女性科学家 |
+| `scientist_breakthrough_bonus_factor` | 突破奖励因子 | 突破几率修正 |
+| `scientist_research_bonus_factor` | 研究奖励因子 | 研究速度修正 |
+| `scientist_xp_gain_factor` | 科学家经验因子 | 经验获取修正 |
+
+---
+
+## 二十九、战争生产修正
+
+### 29.1 生产效率
+
+| 代码名称 | 中文名称 | 说明 |
+|---------|---------|------|
+| `production_factory_efficiency_gain_factor` | 工厂效率增长 | 效率增长速度 |
+| `production_factory_max_efficiency_factor` | 最大工厂效率 | 效率上限 |
+| `production_factory_start_efficiency_factor` | 初始工厂效率 | 初始效率 |
+| `line_change_production_efficiency_factor` | 生产线切换效率 | 切换效率损失 |
+
+### 29.2 资源与工业
+
+| 代码名称 | 中文名称 | 说明 |
+|---------|---------|------|
+| `industrial_capacity_factory` | 工业产能工厂 | 工厂产能 |
+| `industrial_capacity_factory_powered` | 通电工厂产能 | 通电产能 |
+| `industrial_capacity_dockyard` | 船坞产能 | 船坞产能 |
+| `industrial_capacity_dockyard_powered` | 通电船坞产能 | 通电船坞 |
+| `local_factories` | 本地工厂 | 地区工厂数 |
 
 ---
 
