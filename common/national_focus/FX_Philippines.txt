@@ -1017,7 +1017,10 @@ focus_tree = {
 		y = 1
 		 cost = 4
 		available = {
-			
+				has_country_leader = {
+					ruling_only = yes
+					name = "Hadji Kamlon"
+				}
 		}
 		prerequisite = {
 			focus = PHI_wrath_moros
@@ -1036,7 +1039,10 @@ focus_tree = {
 		y = 1
 		 cost = 4
 		available = {
-			
+			has_country_leader = {
+					ruling_only = yes
+					name = "Ombra Amilbangsa"
+				}
 		}
 		prerequisite = {
 			focus = PHI_wrath_moros
@@ -1689,6 +1695,7 @@ focus_tree = {
 		prerequisite = { focus = PHI_the_army_in_control }
 		relative_position_id = PHI_the_army_in_control
 		completion_reward = {
+			
 			if = {
 				limit = { has_intelligence_agency = no }
 				custom_effect_tooltip = PHI_create_nbi_tt
@@ -2430,13 +2437,14 @@ focus_tree = {
 		 cost = 4
 		available = {
 			has_capitulated = no
-			
+			has_country_flag = PHI_red_mafia
 		}
 		prerequisite = {
 			focus = PHI_soc_victoryyay
 		}
 		completion_reward = {
 			add_political_power = 100
+			country_event = philippines.127
 		}
 		
 	}
@@ -2449,7 +2457,10 @@ focus_tree = {
 		 cost = 4
 		available = {
 			has_capitulated = no
-			
+				has_country_leader = {
+					ruling_only = yes
+					name = "Faustino del Mundo"
+				}
 		}
 		prerequisite = {
 			focus = PHI_red_jolly_flag_in_south_sea
@@ -2468,7 +2479,10 @@ focus_tree = {
 		 cost = 4
 		available = {
 			has_capitulated = no
-			
+				has_country_leader = {
+					ruling_only = yes
+					name = "Teodoro Asedillo"
+				}
 		}
 		prerequisite = {
 			focus = PHI_red_jolly_flag_in_south_sea
@@ -3310,7 +3324,7 @@ focus_tree = {
 			every_owned_state = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
-					type = inPHIstructure
+					type = infrastructure
 					level = 2
 					instant_build = yes
 				}
@@ -3590,6 +3604,7 @@ focus_tree = {
 		relative_position_id = PHI_farmer_subsidization_act
 		completion_reward = {
 			custom_effect_tooltip = PHI_build_up_irrigation_systems_tt
+			remove_ideas = PHI_hacienda_questions
 		}
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
@@ -3629,6 +3644,7 @@ focus_tree = {
 		relative_position_id = PHI_farmer_subsidization_act
 		completion_reward = {
 			add_ideas = PHI_food_sufficient
+			remove_ideas = PHI_lingering_sakdalistas
 		}
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
@@ -3949,6 +3965,10 @@ focus_tree = {
 			NOT = {
 				has_country_leader = {
 					ruling_only = yes
+					name = "儒略四世"
+				}
+				has_country_leader = {
+					ruling_only = yes
 					name = "塞德里克·多佛"
 				}
 				has_country_leader = {
@@ -4103,7 +4123,16 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 2000
+				producer = GXC
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 1000
+				producer = LEP
+			}
 		}
 	}
 	focus = {
@@ -4133,6 +4162,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
+			set_cosmetic_tag = PHI_panislam
 every_state = {
 		limit = { is_core_of = OMA }
 		add_core_of = PHI
@@ -4289,16 +4319,7 @@ every_state = {
 		add_core_of = PHI
 }
 create_wargoal = { type = annex_everything target = SIE }
-every_state = {
-		limit = { is_core_of = ALB }
-		add_core_of = PHI
-}
-create_wargoal = { type = annex_everything target = ALB }
-every_state = {
-		limit = { is_core_of = BOS }
-		add_core_of = PHI
-}
-create_wargoal = { type = annex_everything target = BOS }
+
 every_state = {
 		limit = { is_core_of = SIK }
 		add_core_of = PHI
@@ -4373,7 +4394,16 @@ hidden_effect = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+every_state = {
+		limit = { is_core_of = ALB }
+		add_core_of = PHI
+}
+create_wargoal = { type = annex_everything target = ALB }
+every_state = {
+		limit = { is_core_of = BOS }
+		add_core_of = PHI
+}
+create_wargoal = { type = annex_everything target = BOS }
 		}
 	}
 	focus = {
@@ -4450,7 +4480,27 @@ hidden_effect = {
 		}
 		
 		completion_reward = {
-			
+			set_cosmetic_tag = PHI_hispanic_puppet
+			if = {
+				limit = {
+					SPR = {
+						is_faction_leader = yes
+					}
+					SPR = {
+						add_to_faction = PHI
+					}
+				}
+			}
+			else = {
+				create_faction_from_template = { 
+					template = faction_template_generic_dominance              
+					name = "西班牙圈"
+					icon = GFX_faction_Spain
+				}			
+					PHI = {
+						add_to_faction = SPR
+					}
+			}
 			#set cosmetic here
 			add_one_random_civilian_factory = yes
 			add_one_random_civilian_factory = yes
@@ -4484,6 +4534,7 @@ hidden_effect = {
 		
 		completion_reward = {
 			#set cosmetic tag here, maybe allow king flee here?
+			set_cosmetic_tag = PHI_hispanic_empire
 			every_state = {#Coring
 					limit = {
 						OR = {
@@ -4806,7 +4857,16 @@ hidden_effect = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+				every_state = {#Coring
+					limit = {
+						is_core_of = BRA
+					}
+					add_core_of = PHI
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = BRA
+				}
 		}
 	}
 	focus = {
@@ -4957,7 +5017,7 @@ hidden_effect = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			add_ideas = PHI_final_state
 		}
 	}
 	focus = {
@@ -4984,7 +5044,46 @@ hidden_effect = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+				create_wargoal = {
+					type = annex_everything
+					target = USA
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CSA
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = COR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = NEE
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = BBR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = NYC
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = TEX
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = WCC
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CAL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = TXS
+				}
 		}
 	}
 	focus = {
@@ -5006,12 +5105,28 @@ hidden_effect = {
 		}
 		
 		available = {
+			OR = {
+				NOT = {
+					country_exists = USA
+					country_exists = CSA
+					country_exists = COR
+					country_exists = NEE
+					country_exists = NYC
+					country_exists = TEX
+					country_exists = WCC
+					country_exists = CAL
+					country_exists = TXS
+				}
+				USA = {
+					is_subject_of = PHI
+				}
+			}
 			
 			is_subject = no
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			add_ideas = CAL_spirit_of_monroe_idea
 		}
 	}
 	focus = {
@@ -5038,7 +5153,58 @@ hidden_effect = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			create_wargoal = {
+					type = annex_everything
+					target = MAL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = SAR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = INS
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = DEI
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = GEA
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = AST
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = NZL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = SIA
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = INC
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = BRM
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = VIN
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = LAO
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CAM
+				}
 		}
 	}
 	focus = {
@@ -5059,13 +5225,29 @@ hidden_effect = {
 			}
 		}
 		
-		available = {
+			available = {
+			OR = {
+				NOT = {
+					country_exists = USA
+					country_exists = CSA
+					country_exists = COR
+					country_exists = NEE
+					country_exists = NYC
+					country_exists = TEX
+					country_exists = WCC
+					country_exists = CAL
+					country_exists = TXS
+				}
+				USA = {
+					is_subject_of = PHI
+				}
+			}
 			
 			is_subject = no
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			 add_ideas = USA_american_imperialism_idea_3
 		}
 	}
 	focus = {
@@ -5092,7 +5274,98 @@ hidden_effect = {
 		}
 		
 		completion_reward = {
-			add_political_power = 150
+			create_wargoal = {
+					type = annex_everything
+					target = MEX
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = YUC
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CUB
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = DOM
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = GUA
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = HON
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = ELS
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = NIC
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = COS
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = PAN
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = COL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = VEN
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = ECU
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = PRU
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = BOL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = PAR
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CHL
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = ARG
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = FOP
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = URG
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = HAI
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = CAF
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = BRA
+				}
 		}
 	}
 	focus = {
@@ -5152,6 +5425,30 @@ hidden_effect = {
 		
 		completion_reward = {
 			#insert cosmetic tag
+			if = {
+				limit = {
+					has_country_leader = {
+					ruling_only = yes
+					name = "Jose P. Laurel"
+				}
+				}
+				set_cosmetic_tag = PHI_laruel_asia
+			}
+			if = {
+				limit = {
+					has_country_leader = {
+					ruling_only = yes
+					name = "Hilario Moncado"
+				}
+				}
+				set_cosmetic_tag = PHI_moncado_asia
+			}
+			if = {
+				limit = {
+					has_completed_focus = PHI_cult_start
+				}
+				set_cosmetic_tag = PHI_rizal_asia
+			}
 				every_state = {#Coring
 					limit = {
 						is_on_continent = asia
@@ -5194,6 +5491,7 @@ hidden_effect = {
 		}
 		
 		completion_reward = {
+			set_cosmetic_tag = PHI_moncado_world
 			#insert cosmetic tag
 				every_state = {#Coring
 					
@@ -5232,6 +5530,7 @@ hidden_effect = {
 		
 		completion_reward = {
 			#insert cosmetic tag
+			set_cosmetic_tag = PHI_rizal_world
 				every_state = {#Coring
 					
 					add_core_of = PHI
@@ -5272,6 +5571,7 @@ hidden_effect = {
 		
 		completion_reward = {
 			#insert cosmetic tag
+			set_cosmetic_tag = PHI_laruel_world
 				every_state = {#Coring
 					
 					add_core_of = PHI
@@ -5436,7 +5736,7 @@ hidden_effect = {
 		}
 		
 		completion_reward = {
-			set_cosmetic_tag = PHI_asean_tag_democratic
+			set_cosmetic_tag = PHI_asean
 				every_state = {#Coring
 					limit = {
 						is_southeast_asia = yes
@@ -5507,7 +5807,7 @@ hidden_effect = {
 	# Look to the West
 	focus = {
 		id = PHI_look_to_the_west
-		icon = GFX_goal_PHI_ally_PHInce
+		icon = GFX_goal_PHI_ally_france
 		x = -2
 		y = 1
 		 cost = 4
@@ -5922,10 +6222,10 @@ hidden_effect = {
 		available = {
 			is_in_faction = no
 			has_socialist_government = yes
-			country_exists = PHI
+			country_exists = FRA
 		}
 		bypass = {
-			is_in_faction_with = PHI
+			is_in_faction_with = FRA
 		}
 		mutually_exclusive = {
 			focus = PHI_look_to_the_west
@@ -5937,7 +6237,7 @@ hidden_effect = {
 		relative_position_id = PHI_into_the_world
 		completion_reward = {
 			unlock_decision_tooltip = PHI_join_internationale
-			PHI = {
+			FRA = {
 				add_opinion_modifier = {
 					target = PHI
 					modifier =  CHI_mission_to_the_soviet_union
@@ -7698,7 +7998,7 @@ hidden_effect = {
 		completion_reward = {
 			air_experience = 25
 			add_equipment_to_stockpile = {
-				type = small_plane_airPHIme
+				type = small_plane_airframe
 				amount = 100
 				producer = USA
 			}
@@ -8944,7 +9244,7 @@ hidden_effect = {
 	}
 	focus = {
 		id = PHI_intergrate_revolutionary_army
-		icon = GFX_goal_PHI_sword_of_revolution
+		icon = GFX_goal_FRA_sword_of_revolution
 		x = 0
 		y = 2
 		relative_position_id = PHI_huk_rises
@@ -8964,7 +9264,7 @@ hidden_effect = {
 			add_equipment_to_stockpile = {
 				type = infantry_equipment_0
 				amount = 5000
-				producer = PHI
+				producer = FRA
 			}
 		}
 	}
@@ -8991,7 +9291,7 @@ hidden_effect = {
 	}
 	focus = {
 		id = PHI_socialist_education
-		icon = GFX_goal_PHI_union_education
+		icon = GFX_goal_FRA_union_education
 		x = -3
 		y = 3
 		relative_position_id = PHI_huk_rises
@@ -9233,7 +9533,7 @@ hidden_effect = {
 			every_owned_state = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
-					type = inPHIstructure
+					type = infrastructure
 					level = 1
 					instant_build = yes
 				}
@@ -9439,14 +9739,14 @@ hidden_effect = {
 			random_owned_controlled_state = {
 			add_extra_state_shared_building_slots = 1 
 			add_building_construction = {
-				type = inPHIstructure
+				type = infrastructure
 				level = 1
 				instant_build = yes
 			}
 			}
 			random_owned_controlled_state = {
 			add_building_construction = {
-				type = inPHIstructure
+				type = infrastructure
 				level = 1
 				instant_build = yes
 			}
@@ -10653,7 +10953,7 @@ hidden_effect = {
 			}
 			random_owned_controlled_state = {
 			add_building_construction = {
-				type = inPHIstructure
+				type = infrastructure
 				level = 1
 				instant_build = yes
 			}
@@ -10830,7 +11130,7 @@ hidden_effect = {
 		random_owned_state = { 
 				add_manpower = 1000
 				add_building_construction = {
-					type = inPHIstructure
+					type = infrastructure
 					level = 1
 					instant_build = yes
 				}
@@ -10838,7 +11138,7 @@ hidden_effect = {
 		}
 		random_owned_state = { 
 				add_building_construction = {
-					type = inPHIstructure
+					type = infrastructure
 					level = 1
 					instant_build = yes
 				}
@@ -10846,7 +11146,7 @@ hidden_effect = {
 		}
 		random_owned_state = { 
 				add_building_construction = {
-					type = inPHIstructure
+					type = infrastructure
 					level = 1
 					instant_build = yes
 				}
@@ -11486,14 +11786,14 @@ hidden_effect = {
 		completion_reward = {
 			random_owned_controlled_state = {
 			add_building_construction = {
-				type = inPHIstructure
+				type = infrastructure
 				level = 1
 				instant_build = yes
 			}
 			}
 			random_owned_controlled_state = {
 			add_building_construction = {
-				type = inPHIstructure
+				type = infrastructure
 				level = 1
 				instant_build = yes
 			}
@@ -12067,7 +12367,7 @@ hidden_effect = {
 		completion_reward = {
 		swap_ideas = {
 		remove_idea = PHI_dem_jose_socsec
-		add_idea = PHI_dem_jose_inPHI
+		add_idea = PHI_dem_jose_infra
 		}
 		}
 	}
@@ -12086,7 +12386,7 @@ hidden_effect = {
 		prerequisite = { focus = PHI_avelino_people_mandate } prerequisite = { focus = PHI_avelino_social_security }
 		completion_reward = {
 		swap_ideas = {
-		remove_idea = PHI_dem_jose_inPHI
+		remove_idea = PHI_dem_jose_infra
 		add_idea = PHI_dem_jose_mandate
 		}
 		}
@@ -12418,7 +12718,7 @@ hidden_effect = {
 		}
 		prerequisite = { focus = PHI_lincoln_air_conditioning }
 		completion_reward = {
-		add_ideas = PHI_pasual_inPHIgoat
+		add_ideas = PHI_pasual_infragoat
 		}
 	}
  	#riverless bridges
@@ -12436,8 +12736,8 @@ hidden_effect = {
 		available = { has_completed_focus = PHI_lincoln_dykes }
 		completion_reward = {
 		swap_ideas = {
-		remove_idea = PHI_pasual_inPHIgoat
-		add_idea = PHI_pasual_inPHIgoat_1
+		remove_idea = PHI_pasual_infragoat
+		add_idea = PHI_pasual_infragoat_1
 		}
 		}
 	}
@@ -13387,7 +13687,7 @@ hidden_effect = {
 		completion_reward = {
 		add_research_slot = 1
 			add_equipment_to_stockpile = {
-				type = small_plane_airPHIme
+				type = small_plane_airframe
 				amount = 100
 				producer = INT
 			}
@@ -15217,7 +15517,7 @@ hidden_effect = {
 			327 = {
 		add_extra_state_shared_building_slots = 2
 		add_building_construction = {
-				type = inPHIstructure
+				type = infrastructure
 				level = 1
 				instant_build = yes
 			}
@@ -16147,6 +16447,7 @@ hidden_effect = {
 			has_country_flag = PHI_federalista_win 
 		}
 		completion_reward = {
+			set_cosmetic_tag = PHI_united_states
 				every_state = {#Coring
 					limit = {
 						is_united_states = yes

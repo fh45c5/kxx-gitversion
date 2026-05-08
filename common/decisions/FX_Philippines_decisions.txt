@@ -1750,3 +1750,75 @@ PHI_lost_lands = {
 	}
 }
 }
+PHI_release_usa_cat = {
+	PHI_release_usa = {
+	icon = ger_military_buildup
+	
+	available = {
+			NOT = { country_exists = CSA } 
+			NOT = { country_exists = USA } 
+			NOT = { country_exists = COR } 
+			NOT = { country_exists = TEX } 
+			NOT = { country_exists = BBR } 
+			NOT = { country_exists = NEE } 
+			NOT = { country_exists = WCC } 
+			NOT = { country_exists = CAL } 
+			NOT = { country_exists = TXS } 
+			owns_state = 386
+		PHI = {
+			is_subject = no
+			is_ai = no
+			
+		}
+	}
+	
+	visible = {
+		tag = PHI
+		has_completed_focus = PHI_save_the_republic_from_chaos
+	}
+	cost = 10
+	
+	days_remove = 14
+	days_re_enable = 0
+	fire_only_once = yes
+	ai_will_do = {
+		factor = 30
+		modifier = {
+			factor = 0
+			has_equipment = { infantry_equipment < 4000 }
+		}
+		modifier = {
+			factor = 0
+			has_war = yes
+		}
+	}
+	complete_effect = {
+		
+	}
+	remove_effect = {
+				every_state = {#Coring
+					limit = {
+						is_united_states = yes
+					}
+					add_core_of = USA
+				}
+		set_temp_variable = { tag_to_release = USA }
+		release_targeted_tag = yes
+		USA = {
+			add_ideas = yun_seize_puppets_factories
+		set_cosmetic_tag = PHI_USA_federalista
+			create_country_leader = {
+				name = "Wendell Fertig"
+				picture = "gfx/leaders/PHI/Portrait_PHI_Wendell_Fertig.png"
+				expire = "1.1.1"
+				ideology = marlib_centrist_subtype
+			}	
+			set_politics = {
+				ruling_party = market_liberal
+				elections_allowed = no
+			}
+			
+	}
+	}
+}
+}
