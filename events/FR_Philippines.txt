@@ -39,7 +39,7 @@ country_event = { # Independence At Last
 			diplomatic_relation = { country = PHI relation = non_aggression_pact }
 		}
 		hidden_effect = {
-			country_event = { id = philippines.9 days = 60 }
+			country_event = { id = philippines.9 days = 5 }
 		}
 	}
 }
@@ -88,7 +88,6 @@ country_event = { # FROM invests in the Philippines
 	option = {
 		log = "[GetDateText]: [Root.GetName]: event philippines.5 option philippines.5.a"
 		name = philippines.5.a
-		custom_effect_tooltip = PHI_companies_available_tt
 		FROM = { set_country_flag = PHI_investments }
 		add_offsite_building = {
 			type = industrial_complex
@@ -222,7 +221,7 @@ country_event = { # Aguinaldo Publishes Criticisms
 		log = "[GetDateText]: [Root.GetName]: event philippines.12 option philippines.12.a"
 		name = philippines.12.a
 		hidden_effect = {
-			country_event = { id = philippines.13 days = 42 }
+			country_event = { id = philippines.13 days = 12 }
 		}
 	}
 	option = { # He may have a point
@@ -233,7 +232,7 @@ country_event = { # Aguinaldo Publishes Criticisms
 			popularity = 0.05
 		}
 		hidden_effect = {
-			country_event = { id = philippines.13 days = 42 }
+			country_event = { id = philippines.13 days = 12 }
 		}
 	}
 }
@@ -258,16 +257,7 @@ country_event = { # Proclamation of the Liberal Party
 			add_popularity = { ideology = market_liberal popularity = 0.05 }
 			add_popularity = { ideology = social_liberal popularity = 0.05 }
 
-			set_party_name = {
-				ideology = market_liberal
-				name = PHI_new_liberal_party
-				long_name = PHI_new_liberal_party_long
-			}
-			set_party_name = {
-				ideology = social_liberal
-				name = PHI_new_liberal_party
-				long_name = PHI_new_liberal_party_long
-			}
+			
 		}
 	}
 }
@@ -336,6 +326,7 @@ country_event = { # Government Response
 		name = philippines.17.a
 		hidden_effect = {
 			country_event = { id = philippines.18 days = 2 }
+			country_event = { id = philippines.34 days = 50 }
 		}
 	}
 }
@@ -353,7 +344,7 @@ country_event = { # Anti-Government Protests in Tarlac
 		name = philippines.18.a
 		decrease_ruling_party_popularity_by_10 = yes
 		hidden_effect = {
-			country_event = { id = philippines.34 days = 30 }
+			country_event = { id = philippines.19 days = 7 }
 		}
 	}
 }
@@ -365,16 +356,16 @@ country_event = { # London Stock Market Crash
 	desc = philippines.19.d
 	picture = GFX_report_event_gathering_protest
 	fire_only_once = yes
-	trigger = {
-		tag = PHI
-		has_global_flag = black_monday
-		days = 30
-	}
+	is_triggered_only = yes
 
 	option = { # Diyos ko!
 		log = "[GetDateText]: [Root.GetName]: event philippines.19 option philippines.19.a"
 		name = philippines.19.a
-		add_ideas = PHI_hindered_british_trade
+		add_timed_idea = {
+			idea = PHI_hindered_british_trade
+			days = 365
+		}
+
 		hidden_effect = {
 			country_event = { id = philippines.20 days = 8 }
 		}
@@ -721,8 +712,13 @@ country_event = { # Elections of 1937
 	desc = philippines.34.d
 	picture = GFX_report_event_PHI_malacanan
 	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_country_flag = PHI_junta_in_control
+		}
+	}
 	fire_only_once = yes
-	option = { # Liberal
+	option = { # federalista
 		log = "[GetDateText]: [Root.GetName]: event philippines.34 option philippines.34.a"
 		name = philippines.34.a
 		ai_chance = {
@@ -742,7 +738,7 @@ country_event = { # Elections of 1937
 		}
 		increase_ruling_party_popularity_by_20 = yes
 		remove_all_ministers = yes
-		add_ideas = {
+		add_ideas = { #remove later
 			PHI_Sergio_Osmena_hog_sli
 			PHI_Joaquin_Elizalde_for_sli
 			PHI_Antonio_de_las_Alas_eco_sli
@@ -751,13 +747,12 @@ country_event = { # Elections of 1937
 
 		hidden_effect = {
 			add_stability = 0.15
-			random_other_country = {
-				news_event = { id = fxnews.3 days = 2 }
-			}
-			country_event = { id = philippines.55 days = 230 }
+			
+
 			country_event = { id = philippines.95 days = 14 }
 			set_country_flag = PHI_has_1937_elections
-			set_country_flag = PHI_liberal_party_victory
+			set_country_flag = PHI_federalista_win
+			set_country_flag = PHI_no_second_election
 		}
 	}
 	option = { # Nacionalista
@@ -781,23 +776,21 @@ country_event = { # Elections of 1937
 		increase_ruling_party_popularity_by_5 = yes
 		remove_all_ministers = yes
 		add_ideas = {
-			PHI_Elpidio_Quirino_hog_sco
-			PHI_Elpidio_Quirino_for_sco
-			PHI_Jose_G_David_eco_sco
-			PHI_Jose_G_Lukban_sec_sco
+			PHI_Manuel_Quezon_hog_sli
+			PHI_Sergio_Osmena_for_sco
+			PHI_Elpidio_Quirino_eco_mli
+			PHI_Jose_Yulo_sec_sli
 		}
 		hidden_effect = {
 			add_stability = 0.15
-			random_other_country = {
-				news_event = { id = fxnews.2 days = 2 }
-			}
-			country_event = { id = philippines.55 days = 230 }
+			
+
 			country_event = { id = philippines.95 days = 14 }
 			set_country_flag = PHI_has_1937_elections
-			set_country_flag = PHI_nacionalista_party_victory
+			set_country_flag = PHI_nationalista_survives_again
 		}
 	}
-	option = { # Progressista
+	option = { # national socialist party
 		log = "[GetDateText]: [Root.GetName]: event philippines.34 option philippines.34.c"
 		name = philippines.34.c
 		set_politics = {
@@ -814,23 +807,22 @@ country_event = { # Elections of 1937
 		increase_ruling_party_popularity_by_20 = yes
 		remove_all_ministers = yes
 		add_ideas = {
-			PHI_Basilio_J_Valdez_hog_ade
-			PHI_Elpidio_Quirino_for_sco
-			PHI_Ferdinand_Marcos_for_sco
-			PHI_Serafin_Fausto_eco_sco
+			PHI_Emilio_Aguinaldo_hog_rso
+			PHI_Jose_Timog_eco_tot
+			PHI_Raymundo_Melliza_for_sde
+			PHI_Wenceslao_Vinzons_sec_tot
 		}
 		hidden_effect = {
 			add_stability = 0.15
-			random_other_country = {
-				news_event = { id = fxnews.4 days = 2 }
-			}
+			
 			country_event = { id = philippines.93 days = 60 }
 			country_event = { id = philippines.94 days = 14 }
 			set_country_flag = PHI_has_1937_elections
-			set_country_flag = PHI_progressista_party_victory
+			set_country_flag = PHI_emilio_finally_wins_now
+			set_country_flag = PHI_no_second_election
 		}
 	}
-	option = { # Sakdalista
+	option = { # repubicans
 		log = "[GetDateText]: [Root.GetName]: event philippines.34 option philippines.34.e"
 		name = philippines.34.e
 		ai_chance = {
@@ -847,26 +839,24 @@ country_event = { # Elections of 1937
 		increase_ruling_party_popularity_by_20 = yes
 		remove_all_ministers = yes
 		add_ideas = {
-			PHI_Juan_Sumulong_hog_sde
-			PHI_Emilio_Aguinaldo_for_sde
-			PHI_Carlos_P_Garcia_eco_sde
-			PHI_Jose_MCrisol_sec_sde
+			PHI_Gregorio_Aglipay_hog_sde
+			PHI_Isebelo_de_los_Reyes_Jr_eco_rso
+			PHI_Santiago_Fonacier_for_sde
+			PHI_Juan_Cailles_sec_sde
 		}
+		add_synd_to_coalition = yes
 
 		hidden_effect = {
 			add_stability = 0.15
-			random_other_country = {
-				news_event = { id = fxnews.5 days = 2 }
-			}
-			country_event = { id = philippines.55 days = 230 }
+			
 			country_event = { id = philippines.93 days = 60 }
 			country_event = { id = philippines.94 days = 14 }
-			remove_ideas = PHI_lingering_sakdalistas
+			
 			set_country_flag = PHI_has_1937_elections
-			set_country_flag = PHI_sakdalista_party_victory
+			set_country_flag = PHI_republican_party_win
 		}
 	}
-	option = {
+	option = { #psp
 		log = "[GetDateText]: [Root.GetName]: event philippines.34 option philippines.34.f"
 		name = philippines.34.f
 		
@@ -875,22 +865,52 @@ country_event = { # Elections of 1937
 			elections_allowed = no
 		}
 		increase_ruling_party_popularity_by_20 = yes
+		
 		remove_all_ministers = yes
 		add_ideas = {
-			PHI_Pedro_Abad_Santos_hog_syn
-			PHI_Casto_Alejandrino_for_syn
-			PHI_Crisanto_Evangelista_eco_syn
-			PHI_Mariano_Balgos_sec_rso
+			PHI_Pedro_Abad_Santos_hog_rso
+			PHI_Lius_Taruc_eco_rso
+			PHI_Pedro_Abad_Santos_for_rso
+			PHI_Vivencio_Cuyugan_sec_rso
 		}
 
 		hidden_effect = {
-			country_event = { id = philippines.102 days = 48 }
-			random_other_country = {
-				news_event = { id = fxnews.46 days = 2 }
-			}
+			country_event = { id = philippines.102 days = 48 }	
 			set_country_flag = PHI_has_1937_elections
-			set_country_flag = PHI_socialists_in_control
-			mark_focus_tree_layout_dirty = yes
+			set_country_flag = PHI_santos_party_win
+			set_country_flag = PHI_no_second_election
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+		}
+	}
+	option = { #popular front
+		log = "[GetDateText]: [Root.GetName]: event philippines.34 option philippines.34.f"
+		name = philippines.34.g
+		
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = no
+		}
+		increase_ruling_party_popularity_by_20 = yes
+		
+		remove_all_ministers = yes
+		add_ideas = {
+			PHI_Juan_Sumulong_hog_sli
+			PHI_Manuel_Bernabe_for_sde
+			PHI_Vincente_Soto_eco_sde
+			PHI_Hilario_Abellana_sec_sde
+		}
+
+		hidden_effect = {
+			country_event = { id = philippines.102 days = 48 }	
+			set_country_flag = PHI_has_1937_elections
+			set_country_flag = PHI_pop_front_win
 			add_popularity = {
 				ideology = syndicalist
 				popularity = 0.1
@@ -1343,60 +1363,60 @@ country_event = { # Land Reform Finished
 
 country_event = { # 1941 Presidential Elections
 	id = philippines.56
-	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.56"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event philippines.56"
+		set_country_flag = PHI_second_elections
+		hidden_effect = {
+			set_party_name = {
+   			 ideology = market_liberal
+   			 long_name = PHI_liberal_party_long
+   			 name = PHI_liberal_party
+			}
+			set_party_name = {
+   			 ideology = radical_socialist
+   			 long_name = PHI_worker_party_long
+   			 name = PHI_worker_party
+			}
+		} 
+		
+	}
 	title = philippines.56.t
-	desc = {
-		text = philippines.56.d
-		trigger = {
-			NOT = { has_government = market_liberal }
-		}
-	}
-	desc = {
-		text = philippines.56.d.1
-		trigger = {
-			has_government = market_liberal
-		}
-	}
+	desc =  philippines.56.d
 	picture = GFX_report_event_election_vote
-	is_triggered_only = yes
-
+	fire_only_once = yes
 	trigger = {
 		tag = PHI
 		date > 1941.1.1
-		date < 1942.1.1
 		NOT = { has_country_flag = PHI_has_1941_elections }
+		NOT = { has_country_flag = PHI_no_second_election }
 	}
 
 	option = { # Sergio Osmena
 		log = "[GetDateText]: [Root.GetName]: event philippines.56 option philippines.56.a"
 		name = philippines.56.a
-	
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
 		set_politics = {
 			ruling_party = social_conservative
 			elections_allowed = yes
 		}
+		create_country_leader = {
+			name = "Sergio Osmena"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Sergio_P_Osmena.png"
+			expire = "1.1.1"
+			ideology = national_conservative_subtype
+		}
 		remove_all_ministers = yes
 		add_ideas = {
-			PHI_Elpidio_Quirino_hog_sco
-			PHI_Elpidio_Quirino_for_sco
-			PHI_Jose_G_David_eco_sco
-			PHI_Jose_G_Lukban_sec_sco
+			PHI_Sergio_Osmena_hog_sco
+			PHI_Jamie_Hernandez_eco_sco
+			PHI_Sergio_Osmena_for_sco
+			PHI_Thomas_Confesor_sec_sco
 		}
-
-		hidden_effect = {
-			set_country_flag = PHI_has_1941_elections
-			if = {
-				limit = { social_conservative < 0.1 }
-				increase_ruling_party_popularity_by_20 = yes
-			}
-			else_if = {
-				limit = { social_conservative < 0.2 }
-				increase_ruling_party_popularity_by_15 = yes
-			}
-			else = {
-				increase_ruling_party_popularity_by_10 = yes
-			}
-		}
+		complete_national_focus = PHI_osemna
+		complete_national_focus = PHI_elections_of_1941
 	}
 
 	option = { # Manuel A. Roxas
@@ -1406,119 +1426,339 @@ country_event = { # 1941 Presidential Elections
 			ruling_party = market_liberal
 			elections_allowed = yes
 		}
+		create_country_leader = {
+			name = "Manuel Roxas"
+			picture = "gfx/leaders/PHI/Portrait_Philippines_Manuel_Roxas.png"
+			expire = "1960.1.1"
+			ideology = marlib_oligarchy_subtype
+		}
 		increase_ruling_party_popularity_by_10 = yes
 		remove_all_ministers = yes
 		add_ideas = {
-			PHI_Sergio_Osmena_hog_sli
-			PHI_Joaquin_Elizalde_for_sli
-			PHI_Antonio_de_las_Alas_eco_sli
-			PHI_Alberto_Ramos_sec_sli 
+			PHI_Manuel_Roxas_hog_mli
+			PHI_Miguel_Cuaderno_eco_mli
+			PHI_Elpidio_Quirino_for_mli
+			PHI_Jose_Zulueta_sec_mli
 		}
-
-		hidden_effect = {
-			set_country_flag = PHI_has_1941_elections
-			if = {
-				limit = { market_liberal < 0.1 }
-				increase_ruling_party_popularity_by_20 = yes
-			}
-			else_if = {
-				limit = { market_liberal < 0.2 }
-				increase_ruling_party_popularity_by_15 = yes
-			}
-			else = {
-				increase_ruling_party_popularity_by_10 = yes
-			}
+		complete_national_focus = PHI_roxas_lib
+		complete_national_focus = PHI_elections_of_1941
+		
+	}
+	option = { # popular front
+		log = "[GetDateText]: [Root.GetName]: event philippines.56 option philippines.56.b"
+		name = philippines.56.c
+		complete_national_focus = PHI_pop_vict # insert that event in focus
+		
+	}
+	option = { # worker party
+		log = "[GetDateText]: [Root.GetName]: event philippines.56 option philippines.56.b"
+		name = philippines.56.e
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Pablo Manlapit"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Pablo_Manlapit.png"
+			expire = "1960.1.1"
+			ideology = moderate_socialist_subtype
+		}
+		complete_national_focus = PHI_revolution_by_ballot
+		increase_ruling_party_popularity_by_10 = yes
+		remove_all_ministers = yes
+		add_ideas = {
+			PHI_Jose_Abad_Santos_hog_sde
+			PHI_Lope_K_Santos_eco_sde
+			PHI_Pedro_Abad_Santos_for_rso
+			PHI_Pablo_Manlapit_sec_sde
 		}
 	}
-}
-
-country_event = { # 1945 Presidential Elections
-	id = philippines.57
-	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.57"}
-	title = philippines.57.t
-	desc = {
-		text = philippines.57.d
-		trigger = {
-			NOT = { has_government = market_liberal }
+	option = { # republican party
+		log = "[GetDateText]: [Root.GetName]: event philippines.56 option philippines.56.b"
+		name = philippines.56.f
+		complete_national_focus = PHI_repub_second # insert that event in focus
+		
+	}
+	option = { # laruel
+		log = "[GetDateText]: [Root.GetName]: event philippines.56 option philippines.56.b"
+		name = philippines.56.g
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
 		}
-	}
-	desc = {
-		text = philippines.57.d.1
-		trigger = {
-			has_government = market_liberal
-		}
-	}
-	picture = GFX_report_event_election_vote
-	is_triggered_only = yes
-
-	trigger = {
-		tag = PHI
-		date > 1945.1.1
-		date < 1946.1.1
-		NOT = { has_country_flag = PHI_has_1945_elections }
-	}
-
-	option = { # Sergio Osmena
-		log = "[GetDateText]: [Root.GetName]: event philippines.57 option philippines.57.a"
-		name = philippines.57.a
 		set_politics = {
 			ruling_party = social_conservative
 			elections_allowed = yes
 		}
-		increase_ruling_party_popularity_by_10 = yes
+		create_country_leader = {
+			name = "Jose P. Laurel"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Jose_P_Laurel.png"
+			expire = "1.1.1"
+			ideology = soccon_occultism_subtype
+		}
 		remove_all_ministers = yes
 		add_ideas = {
-			PHI_Elpidio_Quirino_hog_sco
-			PHI_Elpidio_Quirino_for_sco
-			PHI_Jose_G_David_eco_sco
-			PHI_Jose_G_Lukban_sec_sco
+			PHI_Jose_P_Laurel_hog_ade
+			PHI_Emiliano_Tria_Tirona_eco_ade
+			PHI_Claro_M_Recto_for_ade
+			PHI_Jorge_B_Vargas_sec_pau
 		}
-
-		hidden_effect = {
-			set_country_flag = PHI_has_1945_elections
-		}
+		complete_national_focus = PHI_antisoc_pheonix_rises
+		complete_national_focus = PHI_elections_of_1941
+		
 	}
+}
+country_event = { #socdem or soclib popular front choose jose or vinctinte sotto
+	id = philippines.57
+	immediate = {log = "[GetDateText]: [Root.GetName]: event rd_phil.16"}
+	title = philippines.57.title
+	desc = philippines.57.desc
+	fire_only_once = yes 
+	picture = "GFX_report_event_philippines_29"
+	is_triggered_only = yes
+	option = { #
+		name = philippines.57.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PHI_politic_two option = RULE_OPTION_PHI_POLITIC_TWO_DEMOCRACY_DEMOCRATA_ONE }
+			}
+		}
+		add_popularity = {
+		ideology = social_democrat
+		popularity = 0.075 #idk
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			PHI_Vincente_Soto_hog_sde
+			PHI_Vincente_Soto_eco_sde
+			PHI_Manuel_Bernabe_for_sde
+			PHI_Hilario_Abellana_sec_sde
+		}
+		
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_democrat
+					last_election = "[CURRENT_DATE]"
+					election_frequency = "[MONTH_ELECTIONS]"
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			MONTH_ELECTIONS = "[THIS.PHILengthTerm]"
+		}
+		create_country_leader = {
+			name = "Vincente Sotto"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Vincente_Sotto.png"
+			expire = "1.1.1"
+			ideology = socdem_humanistic_capitalism_subtype #idk 
+		}
+		set_party_name = {
+   			 ideology = social_democrat
+   			 long_name = PHI_social_liberal_party_long
+   			 name = PHI_social_liberal_party
+			}
 
-	option = { # Elpidio Quirino
-		log = "[GetDateText]: [Root.GetName]: event philippines.57 option philippines.57.b"
+
+	}
+	option = { #
 		name = philippines.57.b
-		set_politics = {
-			ruling_party = market_liberal
-			elections_allowed = yes
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PHI_politic_two option = RULE_OPTION_PHI_POLITIC_TWO_DEMOCRACY_DEMOCRATA_TWO }
+			}
 		}
-		increase_ruling_party_popularity_by_10 = yes
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.075
+		}
 		remove_all_ministers = yes
 		add_ideas = {
-			PHI_Sergio_Osmena_hog_sli
-			PHI_Joaquin_Elizalde_for_sli
-			PHI_Antonio_de_las_Alas_eco_sli
-			PHI_Alberto_Ramos_sec_sli 
+			PHI_Jose_Avelino_hog_sli
+			PHI_Vincente_Soto_eco_sde
+			PHI_Proceso_Sebastian_for_sli
+			PHI_Emiliano_Tria_Tirona_sec_sli
 		}
-
-		hidden_effect = {
-			set_country_flag = PHI_has_1945_elections
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_liberal
+					last_election = "[CURRENT_DATE]"
+					election_frequency = "[MONTH_ELECTIONS]"
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			MONTH_ELECTIONS = "[THIS.PHILengthTerm]"
 		}
+		create_country_leader = {
+			name = "José Avelino"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Jose_Avelino.png"
+			expire = "1.1.1"
+			ideology = soclib_humanistic_capitalism_subtype
+		}
+		
 	}
 
-	option = { # Juan Sumulong
-		log = "[GetDateText]: [Root.GetName]: event philippines.57 option philippines.57.c"
-		name = philippines.57.c
-		set_politics = {
-			ruling_party = social_democrat
-			elections_allowed = yes
+}
+country_event = { # socdem candidate,original one is too complictated,so i seperated it
+	id = philippines.58
+	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.61"}
+	title = philippines.58.t
+	desc = philippines.58.d
+	picture = GFX_report_event_PHI_malacanan
+	is_triggered_only = yes
+
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.61 option philippines.61.a"
+		name = philippines.58.a
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_democrat
+					last_election = "[CURRENT_DATE]"
+					election_frequency = "[MONTH_ELECTIONS]"
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			MONTH_ELECTIONS = "[THIS.PHILengthTerm]"
 		}
-		increase_ruling_party_popularity_by_10 = yes
+		add_radsoc_to_coalition = yes
+		add_synd_to_coalition = yes
+		create_country_leader = {
+			name = "Isebelo de los Reyes Jr."
+			picture = "gfx/leaders/PHI/Portrait_PHI_Isebelo_de_los_Reyes_Jr.png"
+			expire = "1.1.1"
+			ideology = socdem_christian_socialism_subtype
+		}
+		set_country_flag = soc_dems_are_socialists
 		remove_all_ministers = yes
 		add_ideas = {
-			PHI_Juan_Sumulong_hog_sde
-			PHI_Emilio_Aguinaldo_for_sde
-			PHI_Carlos_P_Garcia_eco_sde
-			PHI_Jose_MCrisol_sec_sde
+			PHI_Santiago_Fonacier_hog_sde 
+			PHI_Isebelo_de_los_Reyes_Jr_eco_rso
+			PHI_Santiago_Fonacier_for_sde
+			PHI_Juan_Cailles_sec_sde
 		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+	}
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.61 option philippines.61.b"
+		name = philippines.58.b
+		create_country_leader = { #give him an event for radsoc chrisitan ocialism or colorum i guess
+			name = "Santiago Fonacier"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Santiago_Fonacier.png"
+			expire = "1.1.1"
+			ideology = christian_socialism_subtype
+		}
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = PHI_social_democrat_party
+			name = PHI_social_democrat_party
+		}
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = radical_socialist
+					last_election = "[CURRENT_DATE]"
+					election_frequency = "[MONTH_ELECTIONS]"
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			MONTH_ELECTIONS = "[THIS.PHILengthTerm]"
+		}
+		add_synd_to_coalition = yes
+		add_socdem_to_coalition = yes
+		remove_all_ministers = yes
+		add_ideas = {
+			PHI_Santiago_Fonacier_hog_sde 
+			PHI_Isebelo_de_los_Reyes_Jr_eco_rso
+			PHI_Santiago_Fonacier_for_sde
+			PHI_Juan_Cailles_sec_sde
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.1
+		}
+	}
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.61 option philippines.61.b"
+		name = philippines.58.c
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = syndicalist
+					last_election = "[CURRENT_DATE]"
+					election_frequency = "[MONTH_ELECTIONS]"
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			MONTH_ELECTIONS = "[THIS.PHILengthTerm]"
+		}
+		set_party_name = {
+			ideology = syndicalist
+			long_name = PHI_social_democrat_party
+			name = PHI_social_democrat_party
+		}
+		add_radsoc_to_coalition = yes
+		add_socdem_to_coalition = yes
+		create_country_leader = { #he's in the syndie party name actually now.
+			name = "Norberto Nabong"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Norberto_Nabong.png"
+			expire = "1.1.1"
+			ideology = christian_syndicalism_subtype 
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.1
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			PHI_Santiago_Fonacier_hog_sde 
+			PHI_Isebelo_de_los_Reyes_Jr_eco_rso
+			PHI_Santiago_Fonacier_for_sde
+			PHI_Juan_Cailles_sec_sde
+		}
+	}
+}
+country_event = { # federalists new leader
+	id = philippines.59
+	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.61"}
+	title = philippines.59.t
+	desc = philippines.59.d
+	picture = GFX_report_event_PHI_malacanan
+	is_triggered_only = yes
 
-		hidden_effect = {
-			set_country_flag = PHI_has_1945_elections
+	option = { # Accept
+		log = "[GetDateText]: [Root.GetName]: event philippines.61 option philippines.61.a"
+		name = philippines.59.a
+		create_country_leader = {
+			name = "Salvador Araneta"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Salvador_Araneta.png"
+			expire = "1.1.1"
+			ideology = liberal_conservative_subtype
 		}
+		complete_national_focus = PHI_my_unfinised_business
+	}
+	option = { # Refuse
+		log = "[GetDateText]: [Root.GetName]: event philippines.61 option philippines.61.b"
+		name = philippines.59.b
+		create_country_leader = {
+			name = "Bartolome Cabangbang"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Bartolome_Cabangbang.png"
+			expire = "1.1.1"
+			ideology = marlib_authoritarian_liberalism_subtype
+		}
+		complete_national_focus = PHI_my_unfinised_business
 	}
 }
 country_event = { # Philippine Entry to the Entente
@@ -2267,27 +2507,27 @@ country_event = { # President Quezon Assassinated
 	option = {
 		log = "[GetDateText]: [Root.GetName]: event philippines.101 option philippines.101.a"
 		name = philippines.101.a
-		create_country_leader = {
-			name = "塞尔吉奥·奥斯米纳"
-			picture = "gfx/leaders/PHI/Portrait_PHI_Sergio_P_Osmena.png"
-			expire = "1.1.1"
-			ideology = pataut_national_conservative_subtype
-		}
+		hidden_effect = {
+				country_event = {
+					id = philippines.128
+					days = 7
+				}
+			}
 		set_country_flag = PHI_junta_in_control
-		mark_focus_tree_layout_dirty = yes
 		set_politics = {
 			ruling_party = paternal_autocrat
 			elections_allowed = no
 		}
 		increase_ruling_party_popularity_by_20 = yes
-		
-
-		hidden_effect = {
-			random_other_country = {
-				news_event = { id = fxnews.44 days = 1 }
-			}
-			country_event = { id = philippines.24 days = 2 }
+		remove_all_ministers = yes
+		add_ideas = {
+			PHI_Guillermo_B_Francisco_hog_pau
+			PHI_Silvestre_Sancho_for_npo
+			PHI_Emiliano_Tria_Tirona_eco_ade
+			PHI_Ruperto_Kangleon_sec_ade
 		}
+
+		
 	}
 }
 
@@ -2317,7 +2557,7 @@ country_event = { # Pope Arrives in the Philippines
 		tag = PHI
 		has_global_flag = PAP_julius_iv
 		NOT = { country_exists = PAP }
-		
+		has_democratic_government = yes
 	}
 
 	mean_time_to_happen = {
@@ -2499,7 +2739,12 @@ country_event = { # Rumours of Aswang in Capiz
 }
 country_event = { # hardliners wrath
 	id = philippines.111
-	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.110"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event philippines.110"
+		hidden_effect = {
+			complete_national_focus = PHI_soc_victoryyay
+		}
+	}
 	title = philippines.111.t
 	desc = philippines.111.d
 	picture = GFX_report_event_PHI_aswang
@@ -2508,15 +2753,117 @@ country_event = { # hardliners wrath
 	option = { 
 		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
 		name = philippines.111.a
-		set_global_flag = PHI_SOCIALIST
-		add_popularity = {
-			ideology = radical_socialist
-			popularity = 0.15
+		complete_national_focus = PHI_soc_second_santos
+		set_country_flag = PHI_Pedro_Elected
+
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = radical_socialist
+					last_election = "[CURRENT_DATE]"
+					election_frequency = "[MONTH_ELECTIONS]"
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			MONTH_ELECTIONS = "[THIS.PHILengthTerm]"
+		}
+		add_synd_to_coalition = yes
+		add_tot_to_coalition = yes
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Pedro_Abad_Santos_hog_rso
+		PHI_Lius_Taruc_eco_rso
+		PHI_Pedro_Abad_Santos_for_rso
+		PHI_Vivencio_Cuyugan_sec_rso
 		}
 	}
 	option = { 
 		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
 		name = philippines.111.b
+		complete_national_focus = PHI_soc_second_santos
+		set_country_flag = PHI_Jose_Elected
+		set_politics = {
+   		ruling_party = social_democrat
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "José Abad Santos"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Jose_Abad_Santos.png"
+			expire = "1.1.1"
+			ideology = socdem_agrarianism_subtype
+		}
+		set_country_flag = soc_dems_are_socialists
+		add_radsoc_to_coalition = yes
+		set_party_name = {
+   			 ideology = social_democrat
+   			 long_name = PHI_nationalisa_party_long
+   			 name = PHI_nationalisa_party
+			}
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Jose_Abad_Santos_hog_sde
+		PHI_Lope_K_Santos_eco_sde
+		PHI_Pedro_Abad_Santos_for_rso
+		PHI_Pablo_Manlapit_sec_sde
+		}
+	}
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.111.c
+		complete_national_focus = PHI_syndie_fivepri
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = syndicalist
+					last_election = "[CURRENT_DATE]"
+					election_frequency = "[MONTH_ELECTIONS]"
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			MONTH_ELECTIONS = "[THIS.PHILengthTerm]"
+		}
+
+		add_tot_to_coalition = yes
+		add_radsoc_to_coalition = yes
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Crisanto_Evangelista_hog_syn
+		PHI_Cirilo_Bognot_eco_syn
+		PHI_Mariano_Balgos_for_syn
+		PHI_Antonion_D_Ora_for_tot #
+		}
+	}
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.111.e
+		complete_national_focus = PHI_com_dotp
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = totalist
+					last_election = "[CURRENT_DATE]"
+					election_frequency = "[MONTH_ELECTIONS]"
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			MONTH_ELECTIONS = "[THIS.PHILengthTerm]"
+		}
+		add_synd_to_coalition = yes
+		add_radsoc_to_coalition = yes
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Guillermo_Capodocia_hog_tot
+		PHI_Ka_Antos_eco_tot
+		PHI_Vincente_Lava_sec_tot #I changed him to fp, via the traits section and moved him into the fp minister section of the file
+		PHI_Juan_Feleo_sec_syn 
+		}
+	}
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.111.f
 		create_country_leader = {
 			name = "塞德里克·多佛"
 			picture = "gfx/leaders/PHI/Portrait_WNG_Cedric_Dover.png"
@@ -2535,14 +2882,14 @@ country_event = { # hardliners wrath
 			long_name = PHI_eurasians
 			name = PHI_eurasians
 		}
-		set_global_flag = PHI_SOCIALIST
+		
 		set_cosmetic_tag = PHI_eurasia
 		set_country_flag = PHI_eurasianism
 	}
 	option = { 
 		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
-		name = philippines.111.c
-		set_global_flag = PHI_SOCIALIST
+		name = philippines.111.g
+		
 		create_country_leader = {
 			name = "西思托·麦尔卡托·迪翁戈"
 			picture = "gfx/leaders/PHI/Portrait_PHI_Sixto_Mercado_Tiongco.png"
@@ -2564,6 +2911,37 @@ country_event = { # hardliners wrath
 		set_cosmetic_tag = PHI_sino_phi
 		set_country_flag = PHI_huk_win
 	}
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.111.h
+		
+		create_country_leader = {
+			name = "Faustino del Mundo"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Faustino_del_Mundo.png"
+			expire = "1.1.1"
+			ideology = caponism_subtype
+		}
+		set_politics = {
+			ruling_party = totalist
+		}	
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = "抗美人民军"
+			name = "抗美人民军"
+		}
+		set_country_flag = PHI_red_mafia
+		remove_all_ministers = yes
+		add_ideas = {
+			PHI_Faustino_del_Mundo_hog_tot
+			PHI_Divino_Talastas_for_tot
+			PHI_Lope_K_Santos_eco_sde
+			PHI_Vincente_Lava_sec_tot
+		}
+	}
 }
 country_event = { # chinese name
 	id = philippines.112
@@ -2578,11 +2956,11 @@ country_event = { # chinese name
 		name = philippines.112.a
 		hidden_effect = {
 			create_country_leader = {
-			name = "叶飞"
-			picture = "gfx/leaders/PHI/Portrait_PHI_Sixto_Mercado_Tiongco.png"
-			expire = "1.1.1"
-			ideology = syn_left_nationalism_subtype
-		}
+				name = "叶飞"
+				picture = "gfx/leaders/PHI/Portrait_PHI_Sixto_Mercado_Tiongco.png"
+				expire = "1.1.1"
+				ideology = syn_left_nationalism_subtype
+			}
 		}
 		
 	}
@@ -2641,3 +3019,1210 @@ country_event = { # men of the trees
 	
 }
 
+country_event = { # new leader junta
+	id = philippines.115
+	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.102"}
+	title = philippines.115.t
+	desc = philippines.115.d
+	picture = GFX_report_event_PHI_aquino_speech
+	is_triggered_only = yes
+
+	option = {
+		log = "[GetDateText]: [Root.GetName]: event philippines.102 option philippines.102.a"
+		name = philippines.115.a
+		complete_national_focus = PHI_antisoc_poisons
+		add_authdem_to_coalition = yes
+		add_popularity = {
+		ideology = paternal_autocrat
+		popularity = 0.4
+		}
+	}
+	option = {
+		log = "[GetDateText]: [Root.GetName]: event philippines.102 option philippines.102.a"
+		name = philippines.115.b
+		trigger = {
+			has_completed_focus = PHI_support_from_capitalists
+		}
+		complete_national_focus = PHI_antisoc_pheonix_rises
+		set_politics = {
+   		ruling_party = paternal_autocrat
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Andrés Soriano"
+			picture = "gfx/leaders/PHI/Portrait_Philippines_Andres_Soriano.png"
+			expire = "1.1.1"
+			ideology = natpop_oligarchy_subtype
+		}
+		create_country_leader = {
+			name = "Andrés Soriano"
+			picture = "gfx/leaders/PHI/Portrait_Philippines_Andres_Soriano.png"
+			expire = "1.1.1"
+			ideology = pataut_oligarchy_subtype
+		}
+
+		set_party_name = {
+   			 ideology = national_populist
+   			 long_name = PHI_spanish_hispanic_party_long
+   			 name = PHI_spanish_hispanic_party
+			}
+		set_party_name = {
+   			 ideology = paternal_autocrat
+   			 long_name = PHI_spanish_hispanic_party_long
+   			 name = PHI_spanish_hispanic_party
+			}
+		add_natpop_to_coalition = yes
+		add_popularity = {
+		ideology = paternal_autocrat
+		popularity = 0.4
+		}
+		hidden_effect = {
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Andres_Soriano_hog_npo
+		PHI_Silvestre_Sancho_for_npo
+		PHI_Andres_Soriano_eco_npo
+		PHI_Enrique_Zobel_de_Ayala_sec_npo
+		}
+	}
+	}
+	option = {
+		log = "[GetDateText]: [Root.GetName]: event philippines.102 option philippines.102.a"
+		name = philippines.115.c
+		trigger = {
+			has_completed_focus = PHI_populist_junta
+		}
+		complete_national_focus = PHI_the_humble_sons_of_the_people
+		set_politics = {
+   			ruling_party = authoritarian_democrat
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Artemio Ricarte"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Artemio_Ricarte.png"
+			expire = "1.1.1"
+			ideology = authdem_pan_asianism_subtype
+		}
+		set_party_name = {
+   			 ideology = authoritarian_democrat
+   			 long_name = PHI_Duran_party_long
+   			 name = PHI_Duran_party
+			}
+		add_pataut_to_coalition = yes
+		add_popularity = {
+		ideology = authoritarian_democrat
+		popularity = 0.4
+		}
+	}
+}
+country_event = { # new elections
+	id = philippines.116
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event philippines.110"
+		hidden_effect = {
+			complete_national_focus = PHI_elections_in_quotes
+		}
+	}
+	title = philippines.116.t
+	desc = philippines.116.d
+	picture = GFX_report_event_PHI_aswang
+	is_triggered_only = yes
+
+	option = { #marcos
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.116.a 
+		complete_national_focus = PHI_partido_progressista
+		set_politics = {
+   			ruling_party = authoritarian_democrat
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Ferdinand Marcos"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Ferdinand_Marcos.png"
+			expire = "1.1.1"
+			ideology = authdem_kleptocracy_subtype
+		}
+		set_party_name = {
+   			 ideology = authoritarian_democrat
+   			 long_name = PHI_marcos_party_long
+   			 name = PHI_marcos_party
+			}
+		add_pataut_to_coalition = yes
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.4
+		}
+	}
+	option = { #recto
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.116.b
+		set_politics = {
+   			ruling_party = market_liberal
+    		elections_allowed = no
+		}
+		complete_national_focus = PHI_partido_liberal
+		create_country_leader = {
+			name = "Claro Recto"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Claro_Recto.png"
+			expire = "1.1.1"
+			ideology = marlib_national_liberalism_subtype
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			PHI_Manuel_Roxas_hog_mli
+			PHI_Miguel_Cuaderno_eco_mli
+			PHI_Elpidio_Quirino_for_mli
+			PHI_Jose_Zulueta_sec_mli
+		}
+		set_party_name = {
+   			 ideology = market_liberal
+   			 long_name = PHI_democrata_party_long
+   			 name = PHI_democrata_party
+			}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.4
+		}
+	}
+	option = { #Pascual Racuyal
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.116.c
+		complete_national_focus = PHI_lincoln
+		set_politics = {
+   			ruling_party = social_liberal
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Pascual Racuyal"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Pascual_Racuyal.png"
+			expire = "1.1.1"
+			ideology = soclib_progressive_democracy_subtype
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.4
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Pascual_Racuyal_hog_sli
+		PHI_Rogelio_de_la_Rosa_eco_sli #need pic
+		PHI_Pascual_Racuyal_for_sli
+		PHI_Arsenio_Lacson_sec_sli #need pic
+		}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = PHI_independent_party_long
+				name = PHI_independent_party
+			}
+	}
+	option = { #moderistas
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.116.e
+		complete_national_focus = PHI_hilario_god
+		set_cosmetic_tag = PHI_moncado_flag
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = national_populist
+					last_election = "[CURRENT_DATE]"
+					election_frequency = "[MONTH_ELECTIONS]"
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			MONTH_ELECTIONS = "[THIS.PHILengthTerm]"
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			PHI_Hilario_Moncado_hog_npo
+			PHI_Federico_E_Jayme_eco_npo
+			PHI_Hilario_Moncado_for_npo
+			PHI_Federico_E_Jayme_sec_npo
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.4
+		}
+	}
+	option = { #kolorumism
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.116.f
+		set_politics = {
+   			ruling_party = national_populist
+    		elections_allowed = no
+		}
+		set_party_name = {
+    		ideology = national_populist
+    		long_name = PHI_skadal_remnants_party_long
+    		name = PHI_skadal_remnants_party
+		}
+		set_cosmetic_tag = PHI_rizal
+		#country_event = { id = rd_phil.81 days = 10 }  #flag event
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.4
+		}
+		complete_national_focus = PHI_cult_start
+		# stuff like deleting genrals and giving new ones
+		remove_all_ministers = yes
+		add_ideas = {
+			PHI_Jeremias_Adia_hog_npo
+			PHI_Restituto_Fresto_eco_npo
+			PHI_Valentin_de_los_Santos_for_npo
+			PHI_Salud_Algabre_sec_npo
+		}
+
+		create_country_leader = {
+			name = "Jeremias Adia"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Jeremias_Adia.png"
+			expire = "1.1.1"
+			ideology = lapiang_malaya_subtype
+		}
+	}
+}
+country_event = { #the new leader of the the new republic Emilio
+	id = philippines.117
+	immediate = {
+
+	
+	log = "[GetDateText]: [Root.GetName]: event rd_phil.28"}
+	title = philippines.117.title
+	desc = philippines.117.desc
+	fire_only_once = yes 
+	picture = "GFX_report_event_philippines_5"
+	is_triggered_only = yes
+	option = { #emilio left
+		name = philippines.117.a
+		trigger = { 
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value < 0.0
+		}
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value > -0.65
+		}
+
+		}
+
+		ai_chance = {
+			base = 50
+		}
+		set_politics = {
+   		ruling_party = radical_socialist
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Emilio Aguinaldo"
+			picture = "gfx/leaders/PHI/Portrait_Philippines_Emilio_Aguinaldo.png"
+			expire = "1.1.1"
+			ideology = radsoc_popular_patriotism_subtype
+		}
+		set_party_name = {
+   			 ideology = radical_socialist
+   			 long_name = PHI_filipinista_party_long
+   			 name = PHI_filipinista_party
+			}
+		add_authdem_to_coalition = yes
+		add_popularity = {
+		ideology = radical_socialist
+		popularity = 0.05
+		}
+		swap_ideas = { 
+		remove_idea = PHI_Wenceslao_Vinzons_sec_tot
+		add_idea = PHI_Celerino_Tiongcco_sec_rso
+		}
+	
+		
+	}
+	option = { #emilio right
+		name = philippines.117.b
+		trigger = { 
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value > -0.01
+		}
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value < 0.65
+		}
+		}
+
+		ai_chance = {
+			base = 50
+		}
+		set_politics = {
+   		ruling_party = paternal_autocrat
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Emilio Aguinaldo"
+			picture = "gfx/leaders/PHI/Portrait_Philippines_Emilio_Aguinaldo.png"
+			expire = "1.1.1"
+			ideology = pataut_popular_patriotism_subtype
+		}
+		set_party_name = {
+   			 ideology = paternal_autocrat
+   			 long_name = PHI_filipinista_party_long
+   			 name = PHI_filipinista_party
+			}
+		add_authdem_to_coalition = yes
+		add_popularity = {
+		ideology = paternal_autocrat
+		popularity = 0.05
+		}
+		swap_ideas = { 
+		remove_idea = PHI_Jose_Timog_eco_tot
+		add_idea = PHI_Miguel_Cornejo_eco_npo 
+		}
+
+
+	}
+	option = { #moderate ganap
+		name = philippines.117.c
+		trigger = { 
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value < -0.64
+		}
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value > -0.90
+		}
+
+		}
+
+		ai_chance = {
+			base = 50
+		}
+		remove_power_balance = {
+    		id = PHI_emil_left_right_balance 
+		}
+		set_politics = {
+   		ruling_party = radical_socialist
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Benigno Ramos"
+			picture = "gfx/leaders/PHI/Portrait_Philippines_Benigno_Ramos.png"
+			expire = "1.1.1"
+			ideology = left_nationalism_subtype
+		}
+		set_party_name = {
+   			 ideology = radical_socialist
+   			 long_name = PHI_ganap_party_long
+   			 name = PHI_ganap_party
+			}
+
+		add_authdem_to_coalition = yes
+		add_popularity = {
+		ideology = radical_socialist
+		popularity = 0.05
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Benigno_Ramos_hog_rso
+		PHI_Emilio_Aguinaldo_for_rso
+		PHI_Jose_Timog_eco_tot
+		PHI_Artemio_Ricarte_sec_pau
+		}
+
+
+	}
+	option = { #totalist ganap
+		name = philippines.117.d
+		trigger = { 
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value < -0.89
+		}
+
+		}
+
+		ai_chance = {
+			base = 50
+		}
+		remove_power_balance = {
+    		id = PHI_emil_left_right_balance 
+		}
+		set_politics = {
+   		ruling_party = totalist
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Benigno Ramos"
+			picture = "gfx/leaders/PHI/Portrait_Philippines_Benigno_Ramos.png"
+			expire = "1.1.1"
+			ideology = tot_left_nationalism_subtype
+		}
+		set_party_name = {
+   			 ideology = totalist
+   			 long_name = PHI_ganap_party_long
+   			 name = PHI_ganap_party
+			}
+
+
+		add_authdem_to_coalition = yes
+		add_popularity = {
+		ideology = totalist
+		popularity = 0.05
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Benigno_Ramos_hog_rso
+		PHI_Emilio_Aguinaldo_for_rso
+		PHI_Jose_Timog_eco_tot
+		PHI_Artemio_Ricarte_sec_pau
+		}
+
+
+	}
+	option = { #moderate lapi
+		name = philippines.117.e
+		trigger = { 
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value > 0.64
+		}
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value < 0.90
+		}
+		}
+
+		ai_chance = {
+			base = 50
+		}
+		remove_power_balance = {
+    		id = PHI_emil_left_right_balance 
+		}
+
+		set_politics = {
+   		ruling_party = paternal_autocrat
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Miguel Cornejo"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Miguel_Cornejo.png"
+			expire = "1.1.1"
+			ideology = pataut_right_syndicalism_subtype
+		}
+		set_party_name = {
+   			 ideology = paternal_autocrat
+   			 long_name = PHI_lapi_larp_party_long
+   			 name = PHI_lapi_larp_party
+			}
+
+
+		add_authdem_to_coalition = yes
+		add_popularity = {
+		ideology = paternal_autocrat
+		popularity = 0.05
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Miguel_Cornejo_hog_npo
+		PHI_Emilio_Aguinaldo_for_rso
+		PHI_Miguel_Cornejo_eco_npo
+		PHI_Wenceslao_Vinzons_sec_tot
+		}
+
+
+	}
+	option = { #natpop lapi
+		name = philippines.117.f
+		trigger = { 
+		power_balance_value = {
+   		 id = PHI_emil_left_right_balance 
+   		 value > 0.89
+		}
+		}
+
+		ai_chance = {
+			base = 50
+		}
+		remove_power_balance = {
+    		id = PHI_emil_left_right_balance 
+		}
+		set_politics = {
+   		ruling_party = national_populist
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Miguel Cornejo"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Miguel_Cornejo.png"
+			expire = "1.1.1"
+			ideology = right_syndicalism_subtype
+		}
+		set_party_name = {
+   			 ideology = national_populist
+   			 long_name = PHI_lapi_larp_party_long
+   			 name = PHI_lapi_larp_party
+			}
+
+		add_authdem_to_coalition = yes
+		add_popularity = {
+		ideology = national_populist
+		popularity = 0.05
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Miguel_Cornejo_hog_npo
+		PHI_Emilio_Aguinaldo_for_rso
+		PHI_Miguel_Cornejo_eco_npo
+		PHI_Wenceslao_Vinzons_sec_tot
+		}
+
+
+	}
+
+
+}
+country_event = { # 
+	id = philippines.118
+	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.110"}
+	title = philippines.118.t
+	desc = philippines.118.d
+	picture = GFX_report_event_PHI_aswang
+	is_triggered_only = yes
+
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.118.a
+		remove_power_balance = {
+    		id = PHI_emil_left_right_balance 
+		}
+		set_politics = {
+   		ruling_party = social_liberal
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Wenceslao Vinzons"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Wenceslao_Vinzons.png"
+			expire = "1.1.1"
+			ideology = radical_liberalism_subtype
+		}
+		set_party_name = {
+   			 ideology = social_liberal
+   			 long_name = PHI_young_party_long
+   			 name = PHI_young_party
+			}
+		add_authdem_to_coalition = yes
+		add_popularity = {
+		ideology = social_liberal
+		popularity = 0.05
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Wenceslao_Vinzons_hog_sli
+		PHI_Emilio_Aguinaldo_for_rso
+		PHI_Narciso_Alegre_eco_sli
+		PHI_Wenceslao_Vinzons_sec_tot
+		}
+		
+	}
+	
+}
+country_event = { # 
+	id = philippines.119
+	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.110"}
+	title = philippines.119.t
+	desc = philippines.119.d
+	picture = GFX_report_event_PHI_aswang
+	is_triggered_only = yes
+
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.119.a
+		remove_power_balance = {
+    		id = PHI_emil_left_right_balance 
+		}
+		set_politics = {
+   		ruling_party = social_democrat
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Raymundo Melliza"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Raymundo_Meliza.png"
+			expire = "1.1.1"
+			ideology = socdem_left_nationalism_subtype
+		}
+		set_party_name = {
+   			 ideology = social_democrat
+   			 long_name = PHI_filipinista_party_long
+   			 name = PHI_filipinista_party
+			}
+		add_radsoc_to_coalition = yes
+		add_authdem_to_coalition = yes
+		add_soclib_to_coalition = yes
+		add_popularity = {
+		ideology = social_democrat
+		popularity = 0.05
+		}
+		hidden_effect = {
+		remove_all_ministers = yes
+		add_ideas = {
+		PHI_Raymundo_Melliza_hog_sde
+		PHI_Raymundo_Melliza_for_sde
+		PHI_Vincente_Soto_eco_sde
+		PHI_Calixto_Zaldivar_sec_sde
+		}
+
+		create_country_leader = {
+			name = "José Alejandrino"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Jose_Alejandrino.png"
+			expire = "1.1.1"
+			ideology = national_liberalism_subtype
+		}
+		
+
+		}
+		
+	}
+	
+}
+country_event = { #A Struggle in the Chamber
+	id = philippines.120
+	immediate = {log = "[GetDateText]: [Root.GetName]: event rd_phil.38"}
+	title = philippines.120.title
+	desc = philippines.120.desc
+	fire_only_once = yes 
+	picture = "GFX_report_event_philippines_14"
+	is_triggered_only = yes
+	option = { #Support the Soriano Corporation
+		name = philippines.120.a
+		ai_chance = { base = 100 }
+		
+	}
+	
+	option = { #Compromise With Enrique
+		name = philippines.120.b
+		ai_chance = { base = 100 }
+		set_politics = {
+   		ruling_party = national_populist
+    		elections_allowed = no
+		}
+		add_pataut_to_coalition = yes
+		add_popularity = {
+		ideology = national_populist 
+		popularity = 0.2
+		}
+		add_popularity = {
+		ideology = paternal_autocrat
+		popularity = -0.2
+		}
+	}
+
+	
+	option = { #Enrique replaces Soriano via winning
+		name = philippines.120.c
+		ai_chance = { base = 100 }
+		set_politics = {
+   		ruling_party = national_populist
+    		elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Enrique Zóbel de Ayala"
+			picture = "gfx/leaders/PHI/PHI_Enrique_Zóbel_de_Ayala.png"
+			expire = "1.1.1"
+			ideology = hispanism_subtype
+		}
+		swap_ideas = {
+		remove_idea = PHI_Andres_Soriano_hog_npo
+		add_idea = PHI_Enrique_Zobel_de_Ayala_hog_npo
+		}
+		add_pataut_to_coalition = yes
+		add_popularity = {
+		ideology = national_populist 
+		popularity = 0.2
+		}
+		add_popularity = {
+		ideology = paternal_autocrat
+		popularity = -0.2
+		}
+
+	}
+}
+country_event = { #who is leader?
+	id = philippines.121
+	immediate = {log = "[GetDateText]: [Root.GetName]: event rd_phil.25"}
+	title = philippines.121.title
+	desc = philippines.121.desc
+	fire_only_once = yes 
+	picture = "GFX_report_event_philippines_34"
+	is_triggered_only = yes
+	option = { #stay dude
+		name = philippines.121.a
+		ai_chance = { base = 100 }
+		complete_national_focus = PHI_emi_avenge_poor
+
+	}
+	option = { #the woman
+		name = philippines.121.b
+		ai_chance = { base = 100 }
+		#give ministers? and stuff idk
+		complete_national_focus = PHI_emi_avenge_poor
+		create_country_leader = { #minister
+			name = "Salud Algabre"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Salud_Algabre.png"
+			female = yes
+			expire = "1.1.1"
+			ideology = natpop_agrarianism_subtype
+		}
+		swap_ideas = { 
+		remove_idea = PHI_Jeremias_Adia_hog_npo
+		add_idea = PHI_Salud_Algabre_hog_npo
+		}
+		
+	}
+	option = { #valintin
+		name = philippines.121.c
+		ai_chance = { base = 100 }
+		create_country_leader = { #ministers
+			name = "Valentin de los Santos"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Valentin_de_los_Santos.png"
+			expire = "1.1.1"
+			ideology = lapiang_malaya_subtype
+		}
+		set_party_name = {
+    		ideology = national_populist
+    		long_name = PHI_real_malaya_party_long
+    		name = PHI_real_malaya_party
+		}
+		swap_ideas = { 
+			remove_idea = PHI_Jeremias_Adia_hog_npo
+			add_idea = PHI_Valentin_de_los_Santos_hog_npo
+		}
+
+
+	}
+
+
+}
+
+country_event = { #radsoc or natpop
+	id = philippines.122
+	immediate = {log = "[GetDateText]: [Root.GetName]: event rd_phil.26"}
+	title = philippines.122.title
+	desc = philippines.122.desc
+	fire_only_once = yes 
+	picture = "GFX_report_event_philippines_34"
+	is_triggered_only = yes
+	option = { #natpop
+		name = philippines.122.a
+		ai_chance = { base = 100 }
+				add_socdem_to_coalition = yes #ifi is always pro nationalism
+				add_radsoc_to_coalition = yes #ifi if nabong or santos either way works
+	}
+	option = { #radsoc
+		name = philippines.122.b
+		ai_chance = { base = 100 }
+		hidden_effect = {
+		add_popularity = {
+		    ideology = radical_socialist
+		    popularity = 0.1
+		}
+		}
+		if = {
+		limit = {
+				has_country_leader = {
+					name = "Jeremias Adia"
+					ruling_only = yes
+				}
+		 }
+		create_country_leader = {
+			name = "Jeremias Adia"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Jeremias_Adia.png"
+			expire = "1.1.1"
+			ideology = radsoc_lapiang_malaya_subtype
+		}
+		set_party_name = {
+    		ideology = radical_socialist
+    		long_name = PHI_skadal_remnants_party_long
+    		name = PHI_skadal_remnants_party
+		}
+		set_politics = {
+   		ruling_party = radical_socialist
+    		elections_allowed = no
+		}
+		}
+		if = {
+		limit = {
+				has_country_leader = {
+					name = "Salud Algabre"
+					ruling_only = yes
+				}
+		 }
+		create_country_leader = { #minister
+			name = "Salud Algabre"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Salud_Algabre.png"
+			female = yes
+			expire = "1.1.1"
+			ideology = agrarian_socialism_subtype
+		}
+		set_party_name = {
+    		ideology = radical_socialist
+    		long_name = PHI_skadal_remnants_party_long
+    		name = PHI_skadal_remnants_party
+		}
+		set_politics = {
+   		ruling_party = radical_socialist
+    		elections_allowed = no
+		}
+		}
+		if = {
+		limit = {
+				has_country_leader = {
+					name = "Valentin de los Santos"
+					ruling_only = yes
+				}
+		 }
+		set_party_name = {#for valtinine
+    		ideology = radical_socialist
+    		long_name = PHI_real_malaya_party_long
+    		name = PHI_real_malaya_party
+		}
+		set_politics = {
+   		ruling_party = radical_socialist
+    		elections_allowed = no
+		}
+		create_country_leader = { #ministers
+			name = "Valentin de los Santos"
+			picture = "gfx/leaders/PHI/Portrait_PHI_Valentin_de_los_Santos.png"
+			expire = "1.1.1"
+			ideology = radsoc_lapiang_malaya_subtype
+		}
+		}
+		add_natpop_to_coalition = yes
+		add_socdem_to_coalition = yes #ifi is always pro nationalism
+
+	}
+
+}
+country_event = { #ramos radsoc ideologies
+	id = philippines.123
+	immediate = {log = "[GetDateText]: [Root.GetName]: event rd_phil.31"}
+	title = philippines.123.title
+	desc = philippines.123.desc
+	fire_only_once = yes 
+	picture = "GFX_report_event_philippines_38"
+	is_triggered_only = yes
+	option = { #stay rdsoc leftnat
+		name = philippines.123.a
+		ai_chance = { base = 100 }
+		add_stability = 0.025
+		add_political_power = 20
+	}
+	option = { #gandhism and peaceful means of victory as  “Mapayapang Pagsuway" civil disobidience
+		name = philippines.123.b
+		ai_chance = { base = 100 }
+		set_country_leader_ideology = gandhism_subtype 
+		add_stability = 0.1
+		add_war_support = -0.025
+
+	}
+
+	option = { #kolorum one of sacrifice and moral teaching from the revolution's leaders thought, striving to love neighbors and shit
+		name = philippines.123.c
+		ai_chance = { base = 100 }
+		set_country_leader_ideology = radsoc_lapiang_malaya_subtype 
+		add_political_power = 50
+
+	}
+	option = { #focus on the economics of unity of the Filipino people and working for each other with a larger sense of society
+		name = philippines.123.d
+		ai_chance = { base = 100 }
+		set_country_leader_ideology = radsoc_paternal_socialism_subtype
+		add_stability = 0.01
+		add_popularity = {
+		ideology = radical_socialist
+		popularity = 0.05
+		}
+	}
+}
+country_event = { #miguel subideos
+	id = philippines.124
+	immediate = {log = "[GetDateText]: [Root.GetName]: event rd_phil.32"}
+	title = philippines.124.title
+	desc = philippines.124.desc
+	fire_only_once = yes 
+	picture = "GFX_report_event_philippines_39"
+	is_triggered_only = yes
+	option = { #stay the same as natsynd right
+		name = philippines.124.a
+		ai_chance = { base = 100 }
+		add_stability = 0.05
+
+	}
+
+	option = { #as a pataut less power in his hands leans towards the popular church and stuff and still the moralist all classes together 
+		name = philippines.124.b
+		trigger = { has_government = paternal_autocrat }
+		ai_chance = { base = 100 }
+		set_country_leader_ideology = pataut_christian_democracy_subtype
+		add_stability = 0.025
+		add_political_power = 25
+	}
+	option = { #natpop on his own, lead towards strengthening the military and stuff as a sovering country to defend itself strong
+		name = philippines.124.c
+		trigger = { has_government = national_populist }
+		ai_chance = { base = 100 }
+		set_country_leader_ideology = militarism_subtype
+		add_war_support = 0.05
+	}
+
+}
+country_event = { #Nasyonalismo-Proteksiyonismo vs. Internasyonalismo-Radikalismo"
+	id = philippines.125
+	immediate = {log = "[GetDateText]: [Root.GetName]: event rd_phil.56"}
+	title = philippines.125.title
+	desc = philippines.125.desc
+	fire_only_once = yes 
+	picture = "GFX_report_event_philippines_6"
+	is_triggered_only = yes
+	option = { #Develop Domestic Industries
+		name = philippines.125.a
+		ai_chance = { base = 100 }
+		add_ideas = PHI_syndie_develop_domestic_industry
+	}
+	option = { #Push Forward International Cooperation
+		name = philippines.125.b
+		ai_chance = { base = 100 }
+		add_ideas = PHI_syndie_radical_international_cooperation
+	}
+}
+country_event = { #communist leadership
+	id = philippines.126
+	immediate = {log = "[GetDateText]: [Root.GetName]: event rd_phil.58"}
+	title = philippines.126.title
+	desc = philippines.126.desc
+	fire_only_once = yes 
+	picture = "GFX_report_event_philippines_50"
+	is_triggered_only = yes
+	option = { #stay the main guy
+		name = philippines.126.a
+		ai_chance = {
+			base = 50
+		}
+		
+	}
+	option = { #go agrarian under juan feleo
+		name = philippines.126.b
+		trigger = { has_completed_focus = PHI_com_country_side }
+		ai_chance = {
+			base = 50
+		}
+		create_country_leader = {
+			name = "Juan Feleo"
+			picture = "gfx/leaders/PHI/Portrait_Philippines_Juan_Feleo.png"
+			expire = "1.1.1"
+			ideology = tot_agrarian_socialism_subtype
+		}
+		add_ideas = {
+		PHI_Juan_Feleo_hog_tot
+		}
+		
+	}
+	option = { #Vincinte Lava go pop/broad idk
+		name = philippines.126.c
+		trigger = { has_completed_focus = PHI_com_democractic_misson }
+		ai_chance = {
+			base = 50
+		}
+		
+		if = {
+			limit = {
+				has_completed_focus = PHI_com_democractic_misson 
+				CSA = {
+				has_global_flag = USA_civil_war_over_flag
+					NOT = {
+						country_exists = COR
+						country_exists = USA
+						country_exists = TEX
+						has_global_flag = PSA_rockies_ceasefire
+						has_war_with = CAL
+					}
+				OR = {
+				has_country_flag = CSA_syndicalist_victory
+				has_country_flag = CSA_social_patriot_victory
+				has_country_flag = CSA_capone_acw_flag
+				has_country_flag = CSA_Foster_coup
+				has_country_flag = CSA_Peaceful_Browder
+				}
+				}
+			}
+			create_country_leader = {
+				name = "Vincinte Lava"
+				picture = "gfx/leaders/PHI/PHI_Portrait_Vincente_Lava.png"
+				expire = "1.1.1"
+				ideology = popcom_subtype
+			}
+		}
+		else = {
+			create_country_leader = {
+				name = "Vincinte Lava"
+				picture = "gfx/leaders/PHI/PHI_Portrait_Vincente_Lava.png"
+				expire = "1.1.1"
+				ideology = broad_communism_subtype
+			}
+		}
+		add_ideas = {
+		PHI_Vincente_Lava_hog_tot
+		}
+	}
+
+}
+country_event = { # 
+	id = philippines.127
+	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.110"}
+	title = philippines.127.t
+	desc = philippines.127.d
+	picture = GFX_report_event_PHI_aswang
+	is_triggered_only = yes
+
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.127.a
+			create_country_leader = {
+				name = "Teodoro Asedillo"
+				picture = "gfx/leaders/PHI/Portrait_PHI_Teodoro_Asedillo.png"
+				expire = "1.1.1"
+				ideology = tot_illegalism_subtype
+			}
+			remove_all_ministers = yes
+		add_ideas = {
+			PHI_Teodoro_Asedillo_hog_tot
+			PHI_Cesario_Manarang_for_tot
+			PHI_Ka_Antos_eco_tot
+			PHI_Eusebio_Aquino_sec_tot
+		}
+	}
+	
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.127.b
+		
+	}
+}
+
+country_event = { # 
+	id = philippines.128
+	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.110"}
+	title = philippines.128.t
+	desc = philippines.128.d
+	is_triggered_only = yes
+
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.128.a
+			
+	}
+	
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.128.b
+		set_cosmetic_tag = PHI_sulu_paternal_autocrat
+			create_country_leader = {
+				name = "Hadji Kamlon"
+				picture = "gfx/leaders/PHI/Portrait_PHI_Hadji_Kamlon.png"
+				expire = "1.1.1"
+				ideology = pataut_islamism_subtype
+			}
+			complete_national_focus = PHI_wrath_moros
+			remove_ideas = PHI_catholic_nation
+			set_politics = {
+				ruling_party = paternal_autocrat
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = "摩洛伊斯兰解放阵线"
+				name = "摩洛伊斯兰解放阵线"
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = "摩洛民族解放阵线"
+				name = "摩洛民族解放阵线"
+			}
+			uncomplete_national_focus = {
+				focus = PHI_the_army_in_control
+				uncomplete_children = yes
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
+			remove_all_ministers = yes
+			add_ideas = {
+				PHI_Hadji_Kamlon_hog_pau
+				PHI_Gumby_Piang_for_sco
+				PHI_Salipada_Pendatun_eco_ade
+				PHI_Najeeb_Saleeby_sec_sco
+			}
+	}
+}
+country_event = { # 
+	id = philippines.129
+	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.110"}
+	title = philippines.129.t
+	desc = philippines.129.d
+	is_triggered_only = yes
+
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.129.a
+			
+	}
+	
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.129.b
+		set_cosmetic_tag = PHI_sulu_social_conservative
+			create_country_leader = {
+				name = "Ombra Amilbangsa"
+				picture = "gfx/leaders/PHI/Portrait_PHI_Ombra_Amilbangsa.png"
+				expire = "1.1.1"
+				ideology = soccon_prussian_constitutionalism_subtype
+			}
+			
+			set_politics = {
+				ruling_party = social_conservative
+			}
+		
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.15
+			}
+			remove_all_ministers = yes
+			add_ideas = {
+				PHI_Ombra_Amilbangsa_hog_sco
+				PHI_Gumby_Piang_for_sco
+				PHI_Salipada_Pendatun_eco_ade
+				PHI_Najeeb_Saleeby_sec_sco
+			}
+	}
+}
+country_event = { # 
+	id = philippines.130
+	immediate = {log = "[GetDateText]: [Root.GetName]: event philippines.110"}
+	title = philippines.130.t
+	desc = philippines.130.d
+	is_triggered_only = yes
+
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.130.a
+		set_party_name = {
+			ideology = national_populist
+			long_name = "西班牙长枪党"
+			name = "长枪党"
+		}	
+		set_country_leader_ideology = falangism
+		#gui
+	}
+	
+	option = { 
+		log = "[GetDateText]: [Root.GetName]: event philippines.110 option philippines.110.a"
+		name = philippines.130.b
+		
+	}
+}
