@@ -271,7 +271,7 @@ focus_tree = {
 					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
 					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
 					has_country_flag = BRI_Britanny_Morvan_Marchal_gain_power
-					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_radsoc_soclib_win
 					has_country_flag = BRI_France_Marcel_Cachin_win
 				}
 		}
@@ -306,7 +306,7 @@ focus_tree = {
 					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
 					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
 					has_country_flag = BRI_autonomists
-					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_radsoc_soclib_win
 					has_country_flag = BRI_France_Marcel_Cachin_win
 				}
 			}
@@ -880,10 +880,22 @@ focus_tree = {
 			
 		}
 		completion_reward = {
-			create_faction_from_template = { 
-				template = faction_template_generic_dominance
-				name = 	"伊姆萨夫集团"
-				icon = GFX_faction_celtic_internationale
+			if = {
+				limit = {
+					has_country_flag = BRI_France_Marcel_Cachin_win
+				}
+				create_faction_from_template = { 
+					template = faction_template_generic_dominance
+					name = 	"第三国际"
+					icon = GFX_faction_third_internationale #GFX_faction_celtic_internationale
+				}
+			}
+			else = {
+				create_faction_from_template = { 
+					template = faction_template_generic_dominance
+					name = 	"伊姆萨夫集团"
+					icon = GFX_faction_Alliance_celtique #GFX_faction_celtic_internationale
+				}
 			}
 			add_political_power = 200
 			add_stability = 0.2
@@ -1301,7 +1313,7 @@ focus_tree = {
 					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
 					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
 					has_country_flag = BRI_Britanny_Morvan_Marchal_gain_power
-					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_radsoc_soclib_win
 					has_country_flag = BRI_France_Marcel_Cachin_win
 				}
 			}
@@ -1612,7 +1624,9 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
+			
 			NOT = {
+				has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
 				has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
 			}
 		}
@@ -2127,7 +2141,7 @@ focus_tree = {
 		relative_position_id = BRI_PNB_holds
 		cost = 4
 		prerequisite = {
-			focus = BRI_mordel_again
+			focus = BRI_corporatism_policy
 		}
 		ai_will_do = {
 			factor = 100
@@ -4058,9 +4072,6 @@ focus_tree = {
 				limit = {
 					has_government = social_liberal
 				}
-				country_event = {
-					id = brittany.11
-				}
 			}
 		}
 	}
@@ -5105,11 +5116,10 @@ focus_tree = {
 			has_country_flag = BRI_DATE_DELETE
 		}
 		completion_reward = {
-			set_power_balance = {
+			add_political_power = 300
+			add_power_balance_value = {
 				id = BRI_Corbusier_Savina_balance
-				left_side = BRI_Corbusier_balance_high_side
-				right_side = BRI_Joseph_Savina_high_side
-				set_value = -1
+				value = 0.1
 			}
 		}
 	}
@@ -5759,7 +5769,7 @@ focus_tree = {
 					name = "安东尼·吕布"
 					picture = "gfx/leaders/BRI/Portrait_Antoine_Riboud.png"
 					expire = "1965.1.1"
-					ideology = socdem_utopian_technocracy_subtype
+					ideology = socdem_burnhamite_thought_subtype
 				}
 			}
 		}
@@ -5838,7 +5848,7 @@ focus_tree = {
 	}
 	focus = {
 		id = BRI_sansimon_lagacy
-		icon = GFX_goal_GER_Vision_Saint_Simon
+		icon = GFX_goal_FRA_resurgent_of_sansimonism
 		x = 0
 		y = 3	
 		cost = 4
@@ -7443,6 +7453,28 @@ focus_tree = {
 			swap_ideas = {
 				remove_idea = BRI_economy_2
 				add_idea = BRI_economy_3
+			}
+			14 = {
+				add_resource = {
+					type = oil
+					amount = 5
+				}
+				add_resource = {
+					type = steel
+					amount = 26
+				}
+				add_resource = {
+					type = tungsten
+					amount = 15
+				}
+				add_resource = {
+					type = chromium
+					amount = 15
+				}
+				add_resource = {
+					type = coal
+					amount = 10
+				}
 			}
 		}
 	}
