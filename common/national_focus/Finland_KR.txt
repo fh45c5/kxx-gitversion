@@ -2116,20 +2116,12 @@ focus_tree = {
   }
   focus = {
     id = FIN_a_truly_finnish_party
-    icon = {
-      trigger = {
-        has_government = paternal_autocrat
-      }
-      value = GFX_goal_FIN_kokoomus_pataut
-    }
-    icon = {
-      trigger = {
-        NOT = {
-          has_government = paternal_autocrat
-        }
-      }
-      value = GFX_goal_FIN_kokoomus
-    }
+   icon = {
+			GFX_goal_FIN_kokoomus_pataut = {
+				has_government = paternal_autocrat
+			}
+			GFX_goal_FIN_kokoomus = yes
+		}
     available = {
     }
     prerequisite = {
@@ -3190,709 +3182,7 @@ focus_tree = {
       FOCUS_FILTER_STABILITY
     }
   }
-  focus = {
-    id = FIN_kill_the_predator
-    icon = GFX_goal_MON_we_dont_need_russia
-    cost = 5
-    relative_position_id = FIN_consolidate_mannerheims_rule
-    x = 0
-    y = 1
-    ai_will_do = {
-      factor = 2000
-    }
-    available = {
-      is_neighbor_of = RUS
-      has_war = no
-    }
-    prerequisite = {
-      focus = FIN_consolidate_mannerheims_rule
-    }
-    will_lead_to_war_with = RUS
-    completion_reward = {
-      for_each_scope_loop = {
-        array = RUS.RUS_starting_states_array
-        add_claim_by = ROOT
-      }
-     remove_ideas = FIN_constitution_of_finland_idea
-     add_ideas = DKB_All_For_The_Liberation
-     add_ideas = DKB_New_ROA
-
-    }
-  }
-  focus = {
-    id = FIN_new_russia
-    icon = GFX_goal_RUS_flag
-    cost = 5
-    relative_position_id = FIN_consolidate_mannerheims_rule
-    x = 0
-    y = 2
-    ai_will_do = {
-      factor = 2000
-    }
-    available = {
-      NOT = {
-        country_exists = RUS
-      }
-      195 = {
-        is_owned_and_controlled_by = ROOT
-      }
-      219 = {
-        is_owned_and_controlled_by = ROOT
-      }
-    }
-    prerequisite = {
-      focus = FIN_kill_the_predator
-    }
-    completion_reward = {
-      set_cosmetic_tag = RUS_empire
-      RUS_enable_integration = yes
-      every_owned_state = {
-        limit = {
-          is_core_of = RUS
-        }
-        add_core_of = ROOT
-      }
-      add_ideas = DKB_aftermath_uch_idea
-      add_ideas = DKB_aftermath_uch_economic_idea
-    }
-  }
   
-  focus = {
-    id = FIN_Begin_Reconstruction
-    icon = GFX_goal_generic_construction
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = 0
-    y = 1
-    ai_will_do = {
-      factor = 40
-    }
-    prerequisite = {
-      focus = FIN_new_russia
-    }
-    completion_reward = {
-      swap_ideas = {
-        remove_idea = DKB_aftermath_uch_economic_idea
-        add_idea = DKB_aftermath_uch_economic_idea_1
-      }
-    }
-  }
-  focus = {
-    id = FIN_Deal_With_Trade_Unions
-    icon = GFX_GBR_fate_of_unions
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = 1
-    y = 2
-    ai_will_do = {
-      factor = 40
-    }
-    prerequisite = {
-      focus = FIN_Begin_Reconstruction
-    }
-    completion_reward = {
-      country_event = {
-        id = DKB.109
-        days = 2
-      }
-      swap_ideas = {
-        remove_idea = DKB_aftermath_uch_economic_idea_1
-        add_idea = DKB_aftermath_uch_economic_idea_2
-      }
-    }
-  }
-  focus = {
-    id = FIN_Electrification_Programme
-    icon = GFX_focus_generic_electricity
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = 0
-    y = 3
-    ai_will_do = {
-      factor = 40
-    }
-    prerequisite = {
-      focus = FIN_Deal_With_Trade_Unions
-    }
-    completion_reward = {
-      if = {
-        limit = {
-          has_idea = DKB_aftermath_uch_economic_idea_2
-        }
-        swap_ideas = {
-          remove_idea = DKB_aftermath_uch_economic_idea_2
-          add_idea = DKB_aftermath_uch_economic_idea_3
-        }
-      }
-      else = {
-        swap_ideas = {
-          remove_idea = DKB_aftermath_uch_economic_idea_3
-          add_idea = DKB_aftermath_uch_economic_idea_4
-        }
-      }
-    }
-  }
-  focus = {
-    id = FIN_Business_Subdidies
-    icon = GFX_goal_bag_of_money
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = 2
-    y = 3
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Deal_With_Trade_Unions
-    }
-    completion_reward = {
-      if = {
-        limit = {
-          has_idea = DKB_aftermath_uch_economic_idea_2
-        }
-        swap_ideas = {
-          remove_idea = DKB_aftermath_uch_economic_idea_2
-          add_idea = DKB_aftermath_uch_economic_idea_3
-        }
-      }
-      else = {
-        swap_ideas = {
-          remove_idea = DKB_aftermath_uch_economic_idea_3
-          add_idea = DKB_aftermath_uch_economic_idea_4
-        }
-      }
-    }
-  }
-  focus = {
-    id = FIN_Rebuild_Industry
-    icon = GFX_goal_workers_for_business
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = 1
-    y = 4
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Electrification_Programme
-    }
-    prerequisite = {
-      focus = FIN_Business_Subdidies
-    }
-    completion_reward = {
-      random_owned_state = {
-        add_extra_state_shared_building_slots = 1
-        add_building_construction = {
-          type = industrial_complex
-          level = 1
-          instant_build = yes
-        }
-      }
-      random_owned_state = {
-        add_extra_state_shared_building_slots = 1
-        add_building_construction = {
-          type = industrial_complex
-          level = 1
-          instant_build = yes
-        }
-      }
-      random_owned_state = {
-        add_extra_state_shared_building_slots = 1
-        add_building_construction = {
-          type = industrial_complex
-          level = 1
-          instant_build = yes
-        }
-      }
-    }
-  }
-  focus = {
-    id = FIN_Rebuild_Agriculture
-    icon = GFX_focus_AUS_agriculture
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = 3
-    y = 4
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Electrification_Programme
-    }
-    prerequisite = {
-      focus = FIN_Business_Subdidies
-    }
-    completion_reward = {
-      add_ideas = dkb_agriculture_expansion
-    }
-  }
-  focus = {
-    id = FIN_Naval_Industry
-    icon = GFX_goal_generic_construct_naval_dockyard
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = 3
-    y = 5
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Rebuild_Agriculture
-    }
-    completion_reward = {
-      random_owned_state = {
-        limit = {
-          is_coastal = yes
-        }
-        add_extra_state_shared_building_slots = 2
-        add_building_construction = {
-          type = dockyard
-          level = 2
-          instant_build = yes
-        }
-      }
-      random_owned_state = {
-        limit = {
-          is_coastal = yes
-        }
-        add_extra_state_shared_building_slots = 2
-        add_building_construction = {
-          type = dockyard
-          level = 2
-          instant_build = yes
-        }
-      }
-      random_owned_state = {
-        limit = {
-          is_coastal = yes
-        }
-        add_extra_state_shared_building_slots = 2
-        add_building_construction = {
-          type = dockyard
-          level = 2
-          instant_build = yes
-        }
-      }
-    }
-  }
-  focus = {
-    id = FIN_Rebuild_Railroads
-    icon = GFX_goal_generic_railroad
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = 2
-    y = 6
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Rebuild_Agriculture
-    }
-    prerequisite = {
-      focus = FIN_Rebuild_Industry
-    }
-    completion_reward = {
-      add_ideas = RUS_military_infrastructure_focus
-    }
-  }
-  focus = {
-    id = FIN_Fate_Of_Russian_Army_UCH
-    icon = GFX_goal_RUS_army
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = -2
-    y = 2
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Begin_Reconstruction
-    }
-    completion_reward = {
-      RUS = {
-        every_unit_leader = {
-          set_nationality = ROOT
-        }
-      }
-    }
-  }
-  focus = {
-    id = FIN_Adopt_The_Doctrine_Of_Cossack_Tactics
-    icon = GFX_MNR_Cossacks
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = -2
-    y = 3
-    ai_will_do = {
-      factor = 50
-    }
-    available = {
-      
-    }
-    prerequisite = {
-      focus = FIN_Fate_Of_Russian_Army_UCH
-    }
-    completion_reward = {
-      add_ideas = fin_GUARD1
-      
-    }
-  }
-  focus = {
-    id = FIN_New_Officer_School
-    icon = GFX_focus_generic_military_academy
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = -3
-    y = 4
-    ai_will_do = {
-      factor = 25
-    }
-    prerequisite = {
-      focus = FIN_Adopt_The_Doctrine_Of_Cossack_Tactics
-    }
-    completion_reward = {
-      add_ideas = general_school
-    }
-  }
-  focus = {
-    id = FIN_Improve_The_Artillery
-    icon = GFX_goal_artillery
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = -1
-    y = 4
-    ai_will_do = {
-      factor = 25
-    }
-    prerequisite = {
-      focus = FIN_Adopt_The_Doctrine_Of_Cossack_Tactics
-    }
-    completion_reward = {
-      add_tech_bonus = {
-        name = DKB_Improve_The_Artillery
-        bonus = 0.5
-        uses = 2
-        category = artillery
-      }
-    }
-  }
-  focus = {
-    id = FIN_Motorize_The_Cossacks
-    icon = GFX_goal_generic_army_motorized
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = -3
-    y = 5
-    ai_will_do = {
-      factor = 25
-    }
-    prerequisite = {
-      focus = FIN_New_Officer_School
-    }
-    completion_reward = {
-      add_tech_bonus = {
-        name = DKB_Motorize_The_Cossacks
-        bonus = 1
-        uses = 2
-        category = cat_mechanized_equipment
-        category = motorized_equipment
-      }
-    }
-  }
-  focus = {
-    id = FIN_Engineer_Corps
-    icon = GFX_goal_generic_construction2
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = -1
-    y = 5
-    ai_will_do = {
-      factor = 25
-    }
-    prerequisite = {
-      focus = FIN_Improve_The_Artillery
-    }
-    completion_reward = {
-      custom_effect_tooltip = expanded_engineer_corps_tech_effect
-      hidden_effect = {
-        set_technology = {
-          expanded_engineer_corps_tech = 1
-        }
-      }
-    }
-  }
-  focus = {
-    id = FIN_Ural_Tanks
-    icon = GFX_goal_generic_heavy_armour_russian
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = -2
-    y = 6
-    ai_will_do = {
-      factor = 25
-    }
-    prerequisite = {
-      focus = FIN_Motorize_The_Cossacks
-    }
-    prerequisite = {
-      focus = FIN_Engineer_Corps
-    }
-    completion_reward = {
-      add_ideas = TRM_ural_tractor_plants
-      add_tech_bonus = {
-        name = DKB_Ural_Tanks
-        bonus = 0.5
-        uses = 2
-        category = armor
-      }
-    }
-  }
-  focus = {
-    id = FIN_Expand_Airfields
-    icon = GFX_goal_generic_airports
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = 0
-    y = 6
-    ai_will_do = {
-      factor = 25
-    }
-    prerequisite = {
-      focus = FIN_Motorize_The_Cossacks
-    }
-    prerequisite = {
-      focus = FIN_Engineer_Corps
-    }
-    completion_reward = {
-      random_owned_controlled_state = {
-        limit = {
-          state_population > 500000
-          air_base < 8
-        }
-        add_building_construction = {
-          type = air_base
-          level = 3
-          instant_build = yes
-        }
-      }
-      random_owned_controlled_state = {
-        limit = {
-          state_population > 500000
-          air_base < 8
-        }
-        add_building_construction = {
-          type = air_base
-          level = 3
-          instant_build = yes
-        }
-      }
-      if = {
-        limit = {
-          owns_state = 260
-        }
-        260 = {
-          add_building_construction = {
-            type = air_base
-            level = 2
-            instant_build = yes
-          }
-        }
-      }
-      if = {
-        limit = {
-          owns_state = 566
-        }
-        566 = {
-          add_building_construction = {
-            type = air_base
-            level = 2
-            instant_build = yes
-          }
-        }
-      }
-      add_doctrine_cost_reduction = {
-        name = air_doc_bonus
-        cost_reduction = 0.5
-        uses = 1
-        category = air_doctrine
-      }
-    }
-  }
-  focus = {
-    id = FIN_Restore_Monarchy
-    icon = GFX_RUS_Long_Live_Tsar
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = -6
-    y = 1
-    ai_will_do = {
-      factor = 50
-    }
-    available = {
-      NOT = {
-        has_completed_focus = FIN_Restore_The_Republic
-      }
-    }
-    prerequisite = {
-      focus = FIN_new_russia
-    }
-    completion_reward = {
-      country_event = {
-        id = DKB.110
-        days = 2
-      }
-      swap_ideas = {
-        remove_idea = DKB_aftermath_uch_idea
-        add_idea = DKB_aftermath_uch_idea_1
-      }
-    }
-  }
-  focus = {
-    id = FIN_Tsar_Of_All_Cossacks
-    icon = GFX_DKB_tsar_of_all_cossacks
-    cost = 5
-    relative_position_id = FIN_new_russia
-    x = -6
-    y = 2
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Restore_Monarchy
-    }
-    completion_reward = {
-      set_party_name = {
-        ideology = paternal_autocrat
-        name = RUS_tsar_party
-        long_name = RUS_tsar_party_long
-      }
-      set_politics = {
-        ruling_party = paternal_autocrat
-        elections_allowed = no
-      }
-      add_popularity = {
-        ideology = paternal_autocrat
-        popularity = 0.3
-      }
-      country_event = {
-        id = DKB.111
-        days = 1
-      }
-      swap_ideas = {
-        remove_idea = DKB_aftermath_uch_idea_1
-        add_idea = DKB_aftermath_uch_idea_2
-      }
-    }
-  }
-  focus = {
-    id = FIN_Maintain_Cossack_Rule
-    icon = GFX_RUS_figurehead_monarch
-    cost = 5
-    relative_position_id = FIN_Restore_Monarchy
-    x = 1
-    y = 2
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Tsar_Of_All_Cossacks
-    }
-    mutually_exclusive = {
-      focus = FIN_All_The_Power_To_Tsar
-    }
-    completion_reward = {
-      add_country_leader_trait = CAN_popular_figurehead
-      swap_ideas = {
-        remove_idea = DKB_aftermath_uch_idea_2
-        add_idea = DKB_aftermath_uch_idea_3
-      }
-    }
-  }
-  focus = {
-    id = FIN_All_The_Power_To_Tsar
-    icon = GFX_focus_rus_absolute
-    cost = 5
-    relative_position_id = FIN_Restore_Monarchy
-    x = -1
-    y = 2
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Tsar_Of_All_Cossacks
-    }
-    mutually_exclusive = {
-      focus = FIN_Maintain_Cossack_Rule
-    }
-    completion_reward = {
-      add_country_leader_trait = roman_autocrat_of_old
-      swap_ideas = {
-        remove_idea = DKB_aftermath_uch_idea_2
-        add_idea = DKB_aftermath_uch_idea_3
-      }
-    }
-  }
-  focus = {
-    id = FIN_Imperial_Glory
-    icon = GFX_RUS_Monarchist_Propaganda
-    cost = 5
-    relative_position_id = FIN_Restore_Monarchy
-    x = 0
-    y = 3
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Maintain_Cossack_Rule
-      focus = FIN_All_The_Power_To_Tsar
-    }
-    completion_reward = {
-      add_political_power = 25
-      add_ideas = RUS_imperial_glory_1
-      swap_ideas = {
-        remove_idea = DKB_aftermath_uch_idea_3
-        add_idea = DKB_aftermath_uch_idea_4
-      }
-    }
-  }
-  focus = {
-    id = FIN_Devoted_Subjects
-    icon = GFX_RUS_Enlist_Popular_Support
-    cost = 5
-    relative_position_id = FIN_Restore_Monarchy
-    x = 0
-    y = 4
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Imperial_Glory
-    }
-    completion_reward = {
-      swap_ideas = {
-        remove_idea = RUS_imperial_glory_1
-        add_idea = RUS_imperial_glory_3
-      }
-    }
-  }
-  focus = {
-    id = FIN_One_And_Indivisible
-    icon = GFX_RUS_Russian_Monarch_Symbol
-    cost = 5
-    relative_position_id = FIN_Restore_Monarchy
-    x = 0
-    y = 5
-    ai_will_do = {
-      factor = 50
-    }
-    prerequisite = {
-      focus = FIN_Devoted_Subjects
-    }
-    completion_reward = {
-      add_ideas = one_and_indivisible
-      remove_ideas = DKB_aftermath_uch_idea_4
-    }
-  }
   focus = {
     id = FIN_relinquish_control_to_the_parties
     icon = GFX_RUS_Lessons_Of_Democracy
@@ -9317,17 +8607,11 @@ focus_tree = {
   focus = {
     id = FIN_white_air_force
     icon = {
-      trigger = {
-        has_socialist_government = yes
-      }
-      value = GFX_goal_FIN_Airforce2
-    }
-    icon = {
-      trigger = {
-        has_socialist_government = no
-      }
-      value = GFX_goal_FIN_Airforce
-    }
+			GFX_goal_FIN_Airforce2 = {
+				has_socialist_government = yes
+			}
+			GFX_goal_FIN_Airforce = yes
+		}
     relative_position_id = FIN_finnish_army
     x = 8
     y = 1
@@ -13378,4 +12662,322 @@ focus_tree = {
       FOCUS_FILTER_WAR_SUPPORT
     }
   }
+  ### - Matti path
+
+	focus = {
+		id = FIN_the_unlikely_coronation
+		icon = GFX_goal_FIN_Unlikely_Coronation
+		x = 54
+		y = 0
+		available = {
+			has_country_flag = FIN_king_matti
+		}
+		bypass = {
+			has_country_flag = FIN_king_matti
+		}
+		cost = 0
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = FIN_rally_the_maalaisliitto
+		icon = GFX_goal_FIN_Orphan_Lord_His_Loyal_Agrarians
+		x = 1
+		y = 1
+		prerequisite = { 
+			focus = FIN_the_unlikely_coronation
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 3
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.315
+		}
+	}
+	focus = {
+		id = FIN_the_king_in_the_aether
+		icon = GFX_goal_FIN_King_Aether
+		x = 0
+		y = 2
+		prerequisite = { 
+			focus = FIN_rally_the_maalaisliitto
+		}
+		prerequisite = { 
+			focus = FIN_government_of_national_salvation
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.318
+			add_tech_bonus = {
+				name = FIN_matti_radio_bonus
+				bonus = 1
+				uses = 1
+				category = signal_company_tech
+			}
+			every_unit_leader = {
+				add_planning = 1
+			}
+		}
+	}
+	focus = {
+		id = FIN_apostles_of_pacifism
+		icon = GFX_goal_FIN_Matti_Apostle_Peace
+		x = 0
+		y = 3
+		prerequisite = { 
+			focus = FIN_the_king_in_the_aether
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.303
+			add_ideas = FIN_apostle_of_peace
+		}
+	}
+	focus = {
+		id = FIN_finalizing_alkios_dream
+		icon = GFX_goal_FIN_Finalizing_Alkios_Vision_Europe
+		x = 1
+		y = 4
+		prerequisite = { 
+			focus = FIN_apostles_of_pacifism
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.311
+		}
+	}
+	focus = {
+		id = FIN_the_kings_tour
+		icon = GFX_goal_FIN_Fourth_Clover_Leaf_Nordic_Monarchies
+		x = -1
+		y = 4
+		prerequisite = { 
+			focus = FIN_apostles_of_pacifism
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 3
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.317
+			add_ideas = FIN_fourth_clover_leaf
+		}
+	}
+	focus = {
+		id = FIN_legimitising_the_realm
+		icon = GFX_goal_FIN_Legitimate_House_Klemettila
+		x = 3
+		y = 2
+		prerequisite = { 
+			focus = FIN_rally_the_maalaisliitto
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.302
+			remove_ideas = FIN_illegitimate_monarch
+			hidden_effect = {
+			FIN = { country_event = { id = finland.312 days = 30 }}
+			}
+		}
+	}
+	focus = {
+		id = FIN_kreivin_aika
+		icon = GFX_goal_FIN_Second_Gustavian_Era
+		x = 2
+		y = 3
+		prerequisite = { 
+			focus = FIN_legimitising_the_realm
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.307
+			add_research_slot = 1
+		}
+	}
+	focus = {
+		id = FIN_new_finnish_nobility
+		icon = GFX_goal_FIN_Authentic_Finnish_Aristocracy
+		x = 4
+		y = 3
+		prerequisite = { 
+			focus = FIN_legimitising_the_realm
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.316
+				swap_ideas = {
+					add_idea = FIN_authentic_aristocracy
+					remove_idea = FIN_lingering_german_monarchists
+			}
+		}
+	}
+	focus = {
+		id = FIN_entente_outreach
+		icon = GFX_goal_FIN_Allure_Windsors
+		x = 3
+		y = 4
+		prerequisite = { 
+			focus = FIN_new_finnish_nobility
+		}
+		prerequisite = { 
+			focus = FIN_kreivin_aika
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.306
+			activate_targeted_decision = { target = ENT decision = fin_join_entente }
+		}
+	}
+	focus = {
+		id = FIN_government_of_national_salvation
+		icon = GFX_goal_FIN_Cabinet_National_Salvation
+		x = -1
+		y = 1
+		prerequisite = { 
+			focus = FIN_the_unlikely_coronation
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.304
+		}
+	}
+	focus = {
+		id = FIN_unite_the_realm
+		icon = GFX_goal_FIN_Unity_Through_Eccentric_Gentleman
+		x = -3
+		y = 2
+		prerequisite = { 
+			focus = FIN_government_of_national_salvation
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.314
+			add_ideas = FIN_unity_through_amnesty
+		}
+	}
+	focus = {
+		id = FIN_regal_Ruralism
+		icon = GFX_goal_FIN_Regal_Progressive_Ruralism
+		x = -2
+		y = 3
+		prerequisite = { 
+			focus = FIN_unite_the_realm
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.310
+			add_ideas = FIN_regal_ruralism
+				149 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = FIN_question_of_fire_water
+		icon = GFX_goal_FIN_Desert_Firewater
+		x = -4
+		y = 3
+		prerequisite = { 
+			focus = FIN_unite_the_realm
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.305
+		}
+	}
+	focus = {
+		id = FIN_protectionism_on_all_societal_areas
+		icon = GFX_goal_FIN_Patriotic_Protectionism_Prosperity
+		x = -3
+		y = 4
+		prerequisite = { 
+			focus = FIN_question_of_fire_water
+		}
+		prerequisite = { 
+			focus = FIN_regal_Ruralism
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 4
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.309
+				random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+					}
+				}
+				random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+					}
+				}
+				random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = FIN_god_in_heaven_matti_on_earth
+		icon = GFX_goal_FIN_God_Heaven_Matti_Earth
+		x = 0
+		y = 5
+		prerequisite = { 
+			focus = FIN_protectionism_on_all_societal_areas
+		}
+		prerequisite = { 
+			focus = FIN_entente_outreach
+		}
+		prerequisite = { 
+			focus = FIN_the_kings_tour
+		}
+		prerequisite = { 
+			focus = FIN_finalizing_alkios_dream
+		}
+		relative_position_id = FIN_the_unlikely_coronation
+		cost = 5
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus FIN_socialist_victory"
+			country_event = finland.319
+			add_ideas = FIN_matti_and_god
+		}
+	}	
 }
