@@ -21,6 +21,26 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus JSR_raise_the_banner_of_joint_struggle"
 			add_political_power = 100
+			set_country_flag = {
+				flag = JSR_Religion
+				value = 0
+			}
+			set_country_flag = {
+				flag = JSR_Anar
+				value = 0
+			}
+			set_country_flag = {
+				flag = JSR_Syn
+				value = 0
+			}
+			set_country_flag = {
+				flag = JSR_Communist
+				value = 0
+			}
+			set_country_flag = {
+				flag = JSR_National
+				value = 0
+			}
 		}
 	}
 	#动员劳动组合
@@ -36,7 +56,9 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
-		completion_reward = {}
+		completion_reward = {
+			add_ideas = JSR_mobilize_labor_unions_idea
+		}
 	}
 	#收买乡军团体
 	focus = {
@@ -51,7 +73,9 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
-		completion_reward = {}
+		completion_reward = {
+			country_event = SCBJSR.2
+		}
 	}
 	#发动日莲一揆
 	focus = {
@@ -85,7 +109,32 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
-		completion_reward = {}
+		completion_reward = {
+			533 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+				}
+			}
+			1356 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+				}
+			}
+			533 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+				}
+			}
+		}
 	}
 	#通过黑帮走私援助
 	focus = {
@@ -102,7 +151,28 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_TRADE }
 
-		completion_reward = {}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2500
+				producer = FRA
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2500
+				producer = ENG
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2500
+				producer = SRI
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2500
+				producer = RUS
+			}
+		}
 	}
 	#尽力而为！
 	focus = {
@@ -118,7 +188,12 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
-		completion_reward = {}
+		completion_reward = {
+			add_timed_idea = {
+			  idea = JSR_do_our_utmost_idea
+			  days = 160
+		  	}
+		}
 	}
 	#强迫战时集中制
 	focus = {
@@ -133,7 +208,13 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		completion_reward = {}
+		completion_reward = {
+			add_ideas = war_economy
+			swap_ideas = {
+				remove_idea = JSR_mobilize_labor_unions_idea
+				add_idea = JSR_mobilize_labor_unions_idea_2
+			}
+		}
 	}
 	#无差别的革命恐怖
 	focus = {
@@ -148,7 +229,9 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		completion_reward = {}
+		completion_reward = {
+			country_event = SCBJSR.3
+		}
 	}
 	#日之丸的新生
 	focus = {
@@ -158,13 +241,18 @@ focus_tree = {
 		x = 1
 		y = 2
 		cost = 10
-		
+		available = {
+			has_completed_focus = JSR_ideology_and_faith_control
+		}
 		prerequisite = { focus = JSR_enforce_wartime_centralization }
 		prerequisite = { focus = JSR_indiscriminate_revolutionary_terror }
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		completion_reward = {}
+		completion_reward = {
+			custom_effect_tooltip = JSR_rebirth_of_hinomaru_tt
+			country_event = SCBJSR.10
+		}
 	}
 
 	#重建日出之国
@@ -176,10 +264,14 @@ focus_tree = {
 		cost = 7
 		prerequisite = { focus = JSR_raise_the_banner_of_joint_struggle }
 		available = {
-			has_completed_focus = JSR_rebirth_of_hinomaru
+			NOT = {
+				country_exists = JAP
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		completion_reward = {}
+		completion_reward = {
+			country_event = SCBJSR.4
+		}
 	}
 
 	#工业与财阀清算
@@ -187,12 +279,17 @@ focus_tree = {
 		id = JSR_industrial_and_zaibatsu_liquidation
 		icon = GFX_goal_JSR_industrial_and_zaibatsu_liquidation
 		relative_position_id = JSR_reconstruct_the_rising_sun
+		available = {
+			has_completed_focus = JSR_land_and_rural_ownership
+		}
 		x = 0
 		y = 2
 		cost = 7
 		prerequisite = { focus = JSR_reconstruct_the_rising_sun }
 		search_filters = { FOCUS_FILTER_INDUSTRY }
-		completion_reward = {}
+		completion_reward = {
+			country_event = SCBJSR.6
+		}
 	}
 
 	#土地与农村所有制
@@ -205,7 +302,9 @@ focus_tree = {
 		cost = 7
 		prerequisite = { focus = JSR_reconstruct_the_rising_sun }
 		search_filters = { FOCUS_FILTER_INDUSTRY }
-		completion_reward = {}
+		completion_reward = {
+			country_event = SCBJSR.5
+		}
 	}
 
 	#军队建制与指挥权
@@ -216,11 +315,16 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 7
+		available = {
+			has_completed_focus = JSR_emperor_and_national_polity
+		}
 		prerequisite = { focus = JSR_land_and_rural_ownership }
 		prerequisite = { focus = JSR_emperor_and_national_polity }
 		prerequisite = { focus = JSR_industrial_and_zaibatsu_liquidation }		
 		search_filters = { FOCUS_FILTER_MILITARY }
-		completion_reward = {}
+		completion_reward = {
+			country_event = SCBJSR.8
+		}
 	}
 
 	#皇统与国体问题
@@ -231,9 +335,14 @@ focus_tree = {
 		x = 2
 		y = 1
 		cost = 7
+		available = {
+			has_completed_focus = JSR_industrial_and_zaibatsu_liquidation
+		}
 		prerequisite = { focus = JSR_land_and_rural_ownership }
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		completion_reward = {}
+		completion_reward = {
+			country_event = SCBJSR.7
+		}
 	}
 
 	#意识形态与信仰
@@ -244,10 +353,15 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 7
+		available = {
+			has_completed_focus = JSR_military_structure_and_command
+		}
 		prerequisite = { focus = JSR_emperor_and_national_polity }
 		prerequisite = { focus = JSR_military_structure_and_command }
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		completion_reward = {}
+		completion_reward = {
+			country_event = SCBJSR.9
+		}
 	}	
 
 	#东京上空，赤旗飘扬！
@@ -257,10 +371,15 @@ focus_tree = {
         x = 5
         y = 7
         cost = 10
+		available = {
+			has_country_flag = JSR_Communist_win
+		}
         search_filters = { FOCUS_FILTER_POLITICAL }
 		prerequisite = { focus = JSR_rebirth_of_hinomaru }
 		prerequisite = { focus = JSR_ideology_and_faith_control }		
-        completion_reward = {}
+        completion_reward = {
+			custom_effect_tooltip = JSR_red_flag_over_tokyo_tt
+		}
     }
 
 	#人民阵线政府
@@ -270,10 +389,15 @@ focus_tree = {
         x = 7
         y = 7
         cost = 10
+		available = {
+			has_country_flag = JSR_Syn_win
+		}
         search_filters = { FOCUS_FILTER_POLITICAL }
 		prerequisite = { focus = JSR_rebirth_of_hinomaru }
 		prerequisite = { focus = JSR_ideology_and_faith_control }			
-        completion_reward = {}
+        completion_reward = {
+			custom_effect_tooltip = JSR_popular_front_government_tt
+		}
     }
 
 	#让大杉荣为我们骄傲
@@ -283,10 +407,15 @@ focus_tree = {
         x = 9
         y = 7
         cost = 10
+		available = {
+			has_country_flag = JSR_Anar_win
+		}
         search_filters = { FOCUS_FILTER_POLITICAL }
 		prerequisite = { focus = JSR_rebirth_of_hinomaru }
 		prerequisite = { focus = JSR_ideology_and_faith_control }			
-        completion_reward = {}
+        completion_reward = {
+			custom_effect_tooltip = JSR_make_osugi_sakae_proud_tt
+		}
     }
 
 	#社会主义弥勒之世
@@ -296,10 +425,15 @@ focus_tree = {
         x = 11
         y = 7
         cost = 10
+		available = {
+			has_country_flag = JSR_Religion_win
+		}
         search_filters = { FOCUS_FILTER_POLITICAL }
 		prerequisite = { focus = JSR_rebirth_of_hinomaru }
 		prerequisite = { focus = JSR_ideology_and_faith_control }			
-        completion_reward = {}
+        completion_reward = {
+			custom_effect_tooltip = JSR_maitreya_socialism_tt
+		}
     }
 
 	#皇威下的一国社会主义
@@ -309,9 +443,14 @@ focus_tree = {
         x = 13
         y = 7
         cost = 10
+		available = {
+			has_country_flag = JSR_National_win
+		}
         search_filters = { FOCUS_FILTER_POLITICAL }
 		prerequisite = { focus = JSR_rebirth_of_hinomaru }
 		prerequisite = { focus = JSR_ideology_and_faith_control }			
-        completion_reward = {}
+        completion_reward = {
+			custom_effect_tooltip = JSR_one_country_socialism_under_imperial_majesty_tt
+		}
     }
 }
