@@ -1,0 +1,1321 @@
+###########################
+# Chile Decisions
+###########################
+
+political_actions = {
+	CHL_own_faction = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = CHL
+		}
+
+		available = {
+			
+			is_subject = no
+			is_in_faction = no
+			
+		}
+
+		visible = {
+			OR = {
+				has_country_flag = CHL_has_united_southam
+				has_country_flag = CHL_has_united_patria_grande
+			}
+		}
+
+		
+
+		fire_only_once = yes
+		cost = 25
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHL_join_internationale target: [From.GetName]"
+			if = {
+				limit = {
+					has_socialist_government = yes
+				}
+				create_faction_from_template = { 
+					template = faction_template_generic_dominance              
+					name = CHL_soc_faction
+					icon = GFX_faction_south_america_socialist
+				}	
+			}
+			if = {
+				limit = {
+					has_democratic_government = yes
+				}
+				create_faction_from_template = { 
+					template = faction_template_generic_dominance              
+					name = CHL_dem_faction
+					icon = GFX_faction_organization_of_american_states
+				}	
+			}
+			if = {
+				limit = {
+					has_authoritarian_government = yes
+				}
+				create_faction_from_template = { 
+					template = faction_template_generic_dominance              
+					name = CHL_nat_faction
+					icon = GFX_faction_integralist_entente
+				}	
+			}
+		}
+	}
+	CHL_join_internationale = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = CHL
+		}
+
+		available = {
+			OR = {
+				has_war = no
+				custom_trigger_tooltip = {
+					tooltip = BRA_same_wars_as_intl
+					has_war = yes
+					any_enemy_country = { has_war_with = FROM }
+				}
+			}
+			is_subject = no
+			is_in_faction = no
+			has_socialist_government = yes
+			FROM = {
+				exists = yes
+				has_socialist_government = yes
+				is_faction_leader = yes
+			}
+		}
+
+		visible = {
+			OR = {
+				has_country_flag = CHL_has_united_southam
+				has_country_flag = CHL_has_united_patria_grande
+			}
+		}
+
+		targets = { INT }
+
+		target_trigger = {
+			FROM = {
+				has_socialist_government = yes
+				is_faction_leader = yes
+			}
+		}
+
+		fire_only_once = yes
+		cost = 25
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHL_join_internationale target: [From.GetName]"
+			FROM = { country_event = chl.ally.1 }
+		}
+	}
+	CHL_join_rp = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = CHL
+		}
+
+		available = {
+			OR = {
+				has_war = no
+				custom_trigger_tooltip = {
+					tooltip = BRA_same_wars_as_germany
+					has_war = yes
+					any_enemy_country = { has_war_with = FROM }
+				}
+			}
+			is_subject = no
+			is_in_faction = no
+			has_socialist_government = no
+			FROM = {
+				exists = yes
+				has_socialist_government = no
+				is_faction_leader = yes
+			}
+		}
+
+		visible = {
+			OR = {
+				has_country_flag = CHL_has_united_southam
+				has_country_flag = CHL_has_united_patria_grande
+			}
+		}
+
+		targets = { GER }
+
+		target_trigger = {
+			FROM = {
+				has_socialist_government = no
+				is_faction_leader = yes
+			}
+		}
+
+		fire_only_once = yes
+		cost = 25
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHL_join_internationale target: [From.GetName]"
+			FROM = { country_event = chl.ally.1 }
+		}
+	}
+	CHL_join_ent = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = CHL
+		}
+
+		available = {
+			OR = {
+				has_war = no
+				custom_trigger_tooltip = {
+					tooltip = BRA_same_wars_as_entente
+					has_war = yes
+					any_enemy_country = { has_war_with = FROM }
+				}
+			}
+			is_subject = no
+			is_in_faction = no
+			has_socialist_government = no
+			FROM = {
+				exists = yes
+				has_socialist_government = no
+				is_faction_leader = yes
+			}
+		}
+
+		visible = {
+			OR = {
+				has_country_flag = CHL_has_united_southam
+				has_country_flag = CHL_has_united_patria_grande
+			}
+		}
+
+		targets = { ENT }
+
+		target_trigger = {
+			FROM = {
+				has_socialist_government = no
+				is_faction_leader = yes
+			}
+		}
+
+		fire_only_once = yes
+		cost = 25
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHL_join_internationale target: [From.GetName]"
+			FROM = { country_event = chl.ally.1 }
+		}
+	}
+}
+
+CHL_form_south_america_decisions = {
+	CHL_attack_country_southam = {
+		icon = generic_ignite_civil_war
+		
+		visible = {
+			OR = {
+				has_completed_focus = CHL_unite_south_america
+				has_completed_focus = CHL_unite_latin_america
+			}
+		}
+		cancel_trigger = {
+			OR = {
+				NOT = { is_neighbor_of = FROM }
+				NOT = {
+					can_declare_war_on = FROM
+					AND = {
+						is_in_faction_with = FROM
+						NOT = { has_subject = FROM }
+					}
+				}
+			}
+		}
+
+		targets = { COL VEN ECU PRU BOL FOP PAR URG ARG BRA }
+		target_trigger = {
+			is_neighbor_of = FROM
+			OR = {
+				can_declare_war_on = FROM
+				AND = {
+					is_in_faction_with = FROM
+					NOT = { has_subject = FROM }
+				}
+			}
+		}
+
+		cost = 20
+		days_remove = 30
+		fire_only_once = yes
+		war_with_target_on_remove = yes
+
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				FROM = { is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { overlord_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { guarantor_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancelled FOP_attack_country target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_attack_country target: [From.GetName]"
+			if = {
+				limit = {
+					is_faction_leader = yes
+					is_in_faction_with = FROM
+				}
+				remove_from_faction = FROM
+			}
+			FROM = { country_event = kr.political.30 } #warning event
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FOP_attack_country target: [From.GetName]"
+			if = {
+				limit = { 
+					FROM = { has_socialist_government = yes }
+					ROOT = { has_socialist_government = yes }
+				}
+				ROOT = {
+					annex_country = {
+						target = FROM
+						transfer_troops = yes
+					}
+				}
+			}	
+			if = {
+					limit = {
+						is_faction_leader = yes
+						is_in_faction_with = FROM
+					}
+					remove_from_faction = FROM
+				}
+				declare_war_on = {
+					target = FROM
+					type = annex_everything
+				}
+		}
+	}
+	CHL_integrate_country_southam = {
+		icon = eng_trade_unions_support
+
+		available = {
+			OR = {
+				has_completed_focus = CHL_unite_south_america
+				has_completed_focus = CHL_unite_latin_america
+			}
+		}
+
+		visible = {
+			has_subject = FROM
+		}
+
+		targets = { COL VEN ECU PRU BOL FOP PAR URG ARG BRA }
+		target_trigger = {
+			FROM = { is_subject_of = ROOT }
+		}
+
+		cost = 20
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_integrate_country target: [From.GetName]"
+			
+				FROM = {
+					every_owned_state = {
+						limit = {
+							is_claim_or_core_of_PREV = yes
+							is_claim_or_core_of_ROOT = no
+						}
+						add_core_of = ROOT
+					}
+				}
+			
+			annex_country = {
+				target = FROM
+				transfer_troops = no
+			}
+		}
+	}
+	CHL_declare_south_america_uni = {
+		icon = generic_nationalism
+
+		available = {
+			has_war = no
+			279 = { is_owned_and_controlled_by = ROOT }
+			300 = { is_owned_and_controlled_by = ROOT }
+			301 = { is_owned_and_controlled_by = ROOT }
+			302 = { is_owned_and_controlled_by = ROOT }
+			303 = { is_owned_and_controlled_by = ROOT }
+			305 = { is_owned_and_controlled_by = ROOT }
+			306 = { is_owned_and_controlled_by = ROOT }
+			307 = { is_owned_and_controlled_by = ROOT }
+			500 = { is_owned_and_controlled_by = ROOT }
+		}
+
+		cost = 0
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_declare_Andesia"
+				set_cosmetic_tag = CHL_SA #replace it later
+				set_country_flag = CHL_has_united_southam
+				every_state = {
+					limit = {
+						is_on_continent = south_america
+						is_claim_or_core_of_ROOT = no
+						
+					}
+					add_core_of = ROOT
+				}
+		}
+	}
+	CHL_demand_guiana = {
+		icon = generic_nationalism
+
+		available = {
+			#has_country_flag = CHL_has_united_southam			
+			has_completed_focus = CHL_attack_guiana				
+		}
+
+		cost = 20
+		targets = { CAF HOL GYA SUR }
+		target_trigger = {
+			is_neighbor_of = FROM
+			OR = {
+				can_declare_war_on = FROM
+				AND = {
+					is_in_faction_with = FROM
+					NOT = { has_subject = FROM }
+				}
+			}
+		}
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_declare_Andesia"
+			FROM = {
+				country_event = chile.41
+			}
+		}
+	}
+	CHL_liberate_central_america = {
+		icon = hol_draw_up_staff_plans
+		available = {
+			has_country_flag = CHL_has_united_southam			
+			#has_completed_focus = CHL_unite_latin_america					
+		}
+		visible = {
+			can_declare_war_on = FROM
+			has_completed_focus = CHL_attack_centroamerica
+		}
+
+		targets = { GUA ELS NIC COS PAN YUC HON MEX CEN }
+		
+		target_trigger = {
+			can_declare_war_on = FROM
+		}
+
+		cost = 10
+		days_remove = 30
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		war_with_target_on_remove = yes
+
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				factor = 0
+				OR = {
+					ROOT_is_threatened_cautious = yes
+					FROM = { default_attack_AI_trigger_FROM = yes }
+				}
+			}
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancelled FOP_AND_liberate_central_america target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_AND_liberate_central_america target: [From.GetName]"
+			FROM = { country_event = kr.political.30 } #warning event
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FOP_AND_liberate_central_america target: [From.GetName]"
+			if = {
+				limit = { 
+					FROM = { has_socialist_government = yes }
+					ROOT = { has_socialist_government = yes }
+				}
+				ROOT = {
+					annex_country = {
+						target = FROM
+						transfer_troops = yes
+					}
+				}
+			}	
+				FROM = {
+					every_owned_state = {
+						limit = {
+							is_claim_or_core_of_PREV = yes
+							is_claim_or_core_of_ROOT = no
+						}
+						add_core_of = ROOT
+					}
+				}
+			declare_war_on = {
+				target = FROM
+				type = puppet_wargoal_focus
+			}
+			
+		}
+	}
+	CHL_liberate_carribean_southam = {
+		icon = hol_draw_up_staff_plans
+		available = {
+			has_country_flag = CHL_has_united_southam			
+			#has_completed_focus = CHL_unite_latin_america					
+		}
+		visible = {
+			has_completed_focus = CHL_attack_carribean	
+		}
+
+		cost = 10
+		days_remove = 30
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+
+
+		ai_will_do = {
+			factor = 20
+			
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancelled FOP_AND_liberate_central_america target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_AND_liberate_central_america target: [From.GetName]"
+
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FOP_AND_liberate_central_america target: [From.GetName]"
+				every_state = {
+					limit = {
+						is_on_continent = central_america
+						is_claim_or_core_of_ROOT = no
+						
+					}
+					add_core_of = ROOT
+				}
+			create_wargoal = {
+				target = CUB
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = CAF
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = HAI
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = DOM
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = PRI
+				type = annex_everything
+			}
+		}
+	}
+}
+
+CHL_form_patria_grande_decisions = {
+	CHL_attack_country_patgrad = {
+		icon = generic_ignite_civil_war
+		
+		visible = {
+			has_completed_focus = CHL_unite_spanish_america
+		}
+		cancel_trigger = {
+			OR = {
+				NOT = { is_neighbor_of = FROM }
+				NOT = {
+					can_declare_war_on = FROM
+					AND = {
+						is_in_faction_with = FROM
+						NOT = { has_subject = FROM }
+					}
+				}
+			}
+		}
+
+		targets = { COL VEN ECU PRU BOL FOP PAR URG ARG GUA ELS NIC COS PAN YUC HON MEX CEN }
+		target_trigger = {
+			is_neighbor_of = FROM
+			OR = {
+				can_declare_war_on = FROM
+				AND = {
+					is_in_faction_with = FROM
+					NOT = { has_subject = FROM }
+				}
+			}
+		}
+
+		cost = 20
+		days_remove = 30
+		fire_only_once = yes
+		war_with_target_on_remove = yes
+
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				factor = 0
+				ROOT_is_threatened = yes
+			}
+			modifier = {
+				factor = 0
+				FROM = { is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { overlord_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+			modifier = {
+				factor = 0
+				FROM = { guarantor_is_stronger_than_ROOT_and_not_vulnerable = yes }
+			}
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancelled FOP_attack_country target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_attack_country target: [From.GetName]"
+			if = {
+				limit = {
+					is_faction_leader = yes
+					is_in_faction_with = FROM
+				}
+				remove_from_faction = FROM
+			}
+			FROM = { country_event = kr.political.30 } #warning event
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FOP_attack_country target: [From.GetName]"
+			
+			if = {
+					limit = {
+						is_faction_leader = yes
+						is_in_faction_with = FROM
+					}
+					remove_from_faction = FROM
+				}
+				declare_war_on = {
+					target = FROM
+					type = annex_everything
+				}
+		}
+	}
+	CHL_integrate_country_patgrad = {
+		icon = eng_trade_unions_support
+
+		available = {
+			has_completed_focus = CHL_unite_spanish_america
+		}
+
+		visible = {
+			has_subject = FROM
+		}
+
+		targets = { COL VEN ECU PRU BOL FOP PAR URG ARG GUA ELS NIC COS PAN YUC HON MEX CEN }
+		target_trigger = {
+			FROM = { is_subject_of = ROOT }
+		}
+
+		cost = 20
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_integrate_country target: [From.GetName]"
+			
+				FROM = {
+					every_owned_state = {
+						limit = {
+							is_claim_or_core_of_PREV = yes
+							is_claim_or_core_of_ROOT = no
+						}
+						add_core_of = ROOT
+					}
+				}
+			
+			annex_country = {
+				target = FROM
+				transfer_troops = no
+			}
+		}
+	}
+	CHL_declare_patria_grande_uni = {
+		icon = generic_nationalism
+
+		available = {
+			has_war = no
+			279 = { is_owned_and_controlled_by = ROOT }
+			300 = { is_owned_and_controlled_by = ROOT }
+			301 = { is_owned_and_controlled_by = ROOT }
+			302 = { is_owned_and_controlled_by = ROOT }
+			303 = { is_owned_and_controlled_by = ROOT }
+			305 = { is_owned_and_controlled_by = ROOT }
+			306 = { is_owned_and_controlled_by = ROOT }
+			307 = { is_owned_and_controlled_by = ROOT }
+			304 = { is_owned_and_controlled_by = ROOT }
+			316 = { is_owned_and_controlled_by = ROOT }
+			317 = { is_owned_and_controlled_by = ROOT }
+			842 = { is_owned_and_controlled_by = ROOT }
+			314 = { is_owned_and_controlled_by = ROOT }
+			313 = { is_owned_and_controlled_by = ROOT }
+			277 = { is_owned_and_controlled_by = ROOT }
+		}
+
+		cost = 0
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_declare_Andesia"
+			if = {
+				limit = {
+					has_socialist_government = yes
+				}
+				set_cosmetic_tag = CHL_patgrad_soc
+			}
+			else = {
+				set_cosmetic_tag = CHL_patgrad
+			}
+				
+				set_country_flag = CHL_has_united_patria_grande
+				every_state = {
+					limit = {
+						OR = {
+							is_on_continent = central_america
+							is_on_continent = south_america
+						}
+						NOT = {
+							is_core_of = WIF
+							is_core_of = BRA
+							is_core_of = SUR
+						}
+						is_claim_or_core_of_ROOT = no
+						
+					}
+					add_core_of = ROOT
+				}
+		}
+	}
+	CHL_attack_fillipino = {
+		icon = generic_nationalism
+
+		available = {
+			has_country_flag = CHL_has_united_patria_grande		
+			has_completed_focus = CHL_attack_filipino
+		}
+
+		cost = 20
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_declare_Andesia"
+				every_state = {
+					limit = {
+						is_core_of = PHI
+					}
+					add_core_of = ROOT
+				}
+				create_wargoal = {
+					target = PHI
+					type = annex_everything
+				}
+		}
+	}
+	CHL_restore_new_spain = {
+		icon = generic_nationalism
+
+		available = {
+			has_country_flag = CHL_has_united_patria_grande		
+			has_completed_focus = CHL_attack_america			
+		}
+
+		cost = 20
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FOP_declare_Andesia"
+			add_state_core = 1166
+			add_state_core = 1161
+			add_state_core = 1175
+			add_state_core = 1174
+			add_state_core = 1165
+			add_state_core = 1096
+			add_state_core = 833
+			add_state_core = 375
+			add_state_core = 376
+			add_state_core = 377
+			add_state_core = 1096
+			add_state_core = 379
+			add_state_core = 380
+			add_state_core = 829
+			add_state_core = 797
+			add_state_core = 378
+			add_state_core = 798
+			add_state_core = 385
+			add_state_core = 386
+			add_state_core = 387
+			add_state_core = 473
+			add_state_core = 1332
+			add_state_core = 471
+			add_state_core = 740
+			add_state_core = 463
+			add_state_core = 1348
+		    add_state_core = 1349
+		    add_state_core = 1350
+		    add_state_core = 1273
+			add_state_core = 371
+			add_state_core = 372
+			add_state_core = 1156
+			add_state_core = 373
+			add_state_core = 1163
+			add_state_core = 392
+			add_state_core = 391
+			add_state_core = 1173
+			add_state_core = 374
+			add_state_core = 383
+			add_state_core = 384
+			add_state_core = 390
+			add_state_core = 389
+			add_state_core = 388
+			add_state_core = 1157
+			add_state_core = 381
+			add_state_core = 1164
+			add_state_core = 1150
+			add_state_core = 382
+			add_state_core = 370
+			add_state_core = 629
+			add_state_core = 632
+			add_state_core = 631
+			add_state_core = 642
+			add_state_core = 630
+			add_state_core = 726
+			add_state_core = 727
+			add_state_core = 686
+			add_state_core = 1172
+			add_state_core = 1171
+			add_state_core = 366
+		}
+	}
+	
+}
+CHL_a_new_spain = {
+	CHL_proclaim_new_spain = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = CHL
+		}
+
+		available = {
+			NOT = {
+				country_exists = SPR
+				country_exists = CAR
+				country_exists = CNT
+			}
+			owns_state = 41
+		}
+
+		fire_only_once = yes
+		cost = 25
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHL_join_internationale target: [From.GetName]"
+			if = {
+				limit = {
+					has_completed_focus = CHL_national_falange_rise
+				}
+				set_cosmetic_tag = SPA_CHL_falanglist
+			}
+			if = {
+				limit = {
+					has_completed_focus = CHL_rise_of_carlism
+				}
+				set_cosmetic_tag = SPA_CHL_carlist
+			}
+			if = {
+				limit = {
+					has_completed_focus = CHL_revolutionary_syndicalist_movement
+				}
+				set_cosmetic_tag = SPA_CHL_national_syndicalism
+			}
+		}
+	}
+}
+CHL_IWW_puppet = {
+	CHL_PUPPET_europe = {
+	icon = generic_ignite_civil_war
+		available = {
+			all_other_country = {	
+				NOT = {
+					original_tag = NSW
+				}			
+				is_in_europe = yes
+				exists = no
+			}
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {	
+		}
+		remove_effect = {
+		set_temp_variable = { tag_to_release = GRU }
+			release_targeted_tag = yes
+		GRU = {
+			load_focus_tree = generic_focus
+			set_cosmetic_tag = GRU_iww_europe
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.50
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = "IWW"
+				name = "IWW"
+			} 
+			set_politics = {
+				ruling_party = syndicalist
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "弗里茨·沃尔夫海姆"
+				picture = "gfx/leaders/CHL/Portrait_GER_Fritz_Wolffheim.png"
+				expire = "1.1.1"
+				ideology = de_leonism_subtype
+			}
+		}
+			every_state = {
+					limit = {
+						is_on_continent = europe
+					}
+					add_core_of = GRU
+					transfer_state_to = GRU
+					remove_claim_by = CHL
+				}
+		}
+	}
+	CHL_PUPPET_africa = {
+	icon = generic_ignite_civil_war
+		available = {
+			all_other_country = {	
+				is_in_africa = yes
+				exists = no
+			}
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {	
+		}
+		remove_effect = {
+		set_temp_variable = { tag_to_release = SAF }
+			release_targeted_tag = yes
+		SAF = {
+			load_focus_tree = generic_focus
+			set_cosmetic_tag = SAF_iww_africa
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.50
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = "IWW"
+				name = "IWW"
+			} 
+			set_politics = {
+				ruling_party = syndicalist
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "T.W.蒂贝迪"
+				picture = "gfx/leaders/CHL/Portrait_SAF_TW_Thibedi.png"
+				expire = "1.1.1"
+				ideology = de_leonism_subtype
+			}
+		}
+			every_state = {
+					limit = {
+						is_on_continent = africa
+					}
+					add_core_of = SAF
+					transfer_state_to = SAF
+					remove_claim_by = CHL
+				}
+		}
+	}
+	CHL_PUPPET_asia = {
+	icon = generic_ignite_civil_war
+		available = {
+			all_other_country = {
+				OR = {
+					is_in_asia = yes
+					is_in_india = yes
+					is_in_middle_east = yes
+				}
+				exists = no
+			}
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {	
+		}
+		remove_effect = {
+			
+		set_temp_variable = { tag_to_release = JAP }
+			release_targeted_tag = yes
+		JAP = {
+			load_focus_tree = generic_focus
+			set_cosmetic_tag = JAP_iww_asia
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.50
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = "IWW"
+				name = "IWW"
+			} 
+			set_politics = {
+				ruling_party = syndicalist
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "吉原太郎"
+				picture = "gfx/leaders/CHL/Portrait_JAP_Tarou_Yoshihara.png"
+				expire = "1.1.1"
+				ideology = de_leonism_subtype
+			}
+		}
+			every_state = {
+					limit = {
+						OR = {
+							is_on_continent = asia
+							is_on_continent = middle_east
+							is_on_continent = india
+						}
+						
+					}
+					add_core_of = JAP
+					transfer_state_to = JAP
+					remove_claim_by = CHL
+				}
+		}
+	}
+	CHL_PUPPET_ast = {
+	icon = generic_ignite_civil_war
+		available = {
+			all_other_country = {
+				is_in_australia = yes
+				exists = no
+			}
+		}
+		cost = 10
+		days_remove = 15
+		fire_only_once = yes
+		complete_effect = {	
+		}
+		remove_effect = {
+			
+		set_temp_variable = { tag_to_release = AST }
+			release_targeted_tag = yes
+		AST = {
+			load_focus_tree = generic_focus
+			set_cosmetic_tag = AST_iww_oceania
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.50
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = "IWW"
+				name = "IWW"
+			} 
+			set_politics = {
+				ruling_party = syndicalist
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "唐纳德·格兰特"
+				picture = "gfx/leaders/AST/Portrait_AST_Donald_Grant.png"
+				expire = "1.1.1"
+				ideology = de_leonism_subtype
+			}
+		}
+			every_state = {
+					limit = {
+						is_on_continent = australia
+						
+					}
+					add_core_of = AST
+					transfer_state_to = AST
+					remove_claim_by = CHL
+				}
+		}
+	}
+}
+CHL_a_new_soviet = {
+	CHL_proclaim_soviet = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = CHL
+		}
+
+		available = {
+			NOT = {
+				country_exists = RUS
+				country_exists = TRM
+				
+			}
+			owns_state = 219
+			owns_state = 195
+		}
+
+		fire_only_once = yes
+		cost = 25
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHL_join_internationale target: [From.GetName]"
+			set_cosmetic_tag = SOV_union_alternative_2
+			RUS_enable_integration = yes
+			ROOT = { save_global_event_target_as = soviet_russia }
+		}
+	}
+}
+CHL_suzerain = {
+	CHL_retake_ger = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = CHL
+		}
+
+		available = {
+			NOT = {
+				country_exists = GER
+				country_exists = GRU
+				country_exists = WGR
+				country_exists = NGF
+				country_exists = BAY
+				country_exists = DDR
+			}
+			owns_state = 64
+		}
+		visible = {
+			has_completed_focus = CHL_German_colonies
+		}
+		fire_only_once = yes
+		cost = 25
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHL_join_internationale target: [From.GetName]"
+			set_cosmetic_tag = GER_German_Greater #placeholder
+			
+		}
+	}
+	CHL_retake_aus = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = CHL
+		}
+
+		available = {
+			NOT = {
+				country_exists = AUS
+				
+			}
+			owns_state = 1137
+		}
+		visible = {
+			has_completed_focus = CHL_Austrian_rule
+		}
+		fire_only_once = yes
+		cost = 25
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHL_join_internationale target: [From.GetName]"
+			set_cosmetic_tag = AUS_AHE #placeholder
+			
+		}
+	}
+	CHL_retake_can = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = CHL
+		}
+
+		available = {
+			NOT = {
+				country_exists = ENG
+				country_exists = WAL
+				country_exists = SCT
+				country_exists = GBP
+				country_exists = GBR
+			}
+			owns_state = 126
+		}
+		visible = {
+			has_completed_focus = CHL_British_dominions
+		}
+		fire_only_once = yes
+		cost = 25
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHL_join_internationale target: [From.GetName]"
+			set_cosmetic_tag = CAN_UK #placeholder
+			
+		}
+	}
+	CHL_retake_cor = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = CHL
+		}
+
+		available = {
+			NOT = {
+				country_exists = CSA
+				country_exists = USA
+				country_exists = COR
+				country_exists = TEX
+				country_exists = WCC
+				country_exists = BBR
+				country_exists = CAL
+			}
+			owns_state = 361
+		}
+		visible = {
+			has_completed_focus = CHL_Allies_of_constitutional_countries
+		}
+		fire_only_once = yes
+		cost = 25
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHL_join_internationale target: [From.GetName]"
+			set_cosmetic_tag = COR_KKK #placeholder
+			
+		}
+	}
+}
