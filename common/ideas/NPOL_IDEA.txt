@@ -577,8 +577,9 @@ ideas = {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_nation_of_small_farms" }
 			picture = RUS_land_reforms
 			modifier = {
-				stability_factor = 0.25
-				monthly_population = 0.45
+				supply_consumption_factor = -0.1
+				monthly_population = 0.5
+				supply_node_range = 0.15
 			}
 		}
 
@@ -1898,9 +1899,20 @@ ideas = {
 		POL_revolutionary_republic_idea = {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_revolutionary_republic_idea" }
 			picture = SPR_masters_of_our_own_fate
+			name = "民族革命国度"
 			modifier = {
-				consumer_goods_factor = -0.15
-				stability_factor = -0.25
+				line_change_production_efficiency_factor = 0.1
+				army_infantry_attack_factor = 0.1
+				army_infantry_defence_factor = 0.1
+			}
+		}
+		POL_Pilsudskis_Vision = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_moral_syndicalism_1" }
+			picture = PLC_intermarium_idea
+			modifier = {
+				army_org_factor = 0.1
+				army_morale_factor = 0.1
+				conscription = 0.01
 			}
 		}
 		POL_moral_syndicalism_1 = {
@@ -1910,7 +1922,7 @@ ideas = {
 			modifier = {
 				political_power_gain = 0.05
 				consumer_goods_factor = -0.15
-				stability_factor = -0.15
+				stability_factor = 0.1
 			}
 		}
 		POL_moral_syndicalism_2 = {
@@ -1920,7 +1932,10 @@ ideas = {
 			modifier = {
 				political_power_gain = 0.05
 				consumer_goods_factor = -0.15
+				stability_factor = 0.1
 				conscription_factor = 0.1
+				industrial_capacity_factory = 0.1
+				army_morale_factor = 0.1
 			}
 		}
 		POL_moral_syndicalism_3 = {
@@ -1930,12 +1945,24 @@ ideas = {
 			modifier = {
 				political_power_gain = 0.05
 				consumer_goods_factor = -0.15
+				stability_factor = 0.1
 				conscription_factor = 0.1
+				industrial_capacity_factory = 0.1
+				army_morale_factor = 0.1
 				party_popularity_stability_factor = 0.25
+				production_speed_buildings_factor = 0.1
 			}
 			targeted_modifier = {
 				tag = RUS
 				attack_bonus_against = 0.1
+				defense_bonus_against = 0.1
+				breakthrough_bonus_against = 0.1
+			}
+			targeted_modifier = {
+				tag = GER
+				attack_bonus_against = 0.1
+				defense_bonus_against = 0.1
+				breakthrough_bonus_against = 0.1
 			}
 		}
 		POL_revolutionary_republic_idea_2 = {
@@ -1953,7 +1980,7 @@ ideas = {
 			name = POL_french_model
 			modifier = {
 				consumer_goods_factor = -0.15
-				stability_factor = -0.05
+				production_factory_efficiency_gain_factor = 0.1
 				production_factory_max_efficiency_factor = 0.1
 			}
 		}
@@ -1964,8 +1991,13 @@ ideas = {
 			modifier = {
 				consumer_goods_factor = -0.15
 				production_factory_max_efficiency_factor = 0.1
+				production_factory_efficiency_gain_factor = 0.1
 			}
 			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
 				mechanized_equipment = {
 					build_cost_ic = -0.1
 					instant = yes
@@ -2003,8 +2035,9 @@ ideas = {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_eternal_polish_revolution" }
 			picture = MEX_revolutionary_army
 			modifier = {
-				war_support_factor = 0.08
-				conscription_factor = 0.05
+				war_stability_factor = 0.1
+				conscription_factor = 0.1
+				production_speed_buildings_factor = 0.1
 			}
 		}
 
@@ -2040,12 +2073,93 @@ ideas = {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_phalanstere_aid" }
 			picture = FRA_phalanstere
 			modifier = {
-				syndicalist_drift = 0.02
+				
 				production_speed_buildings_factor = 0.1
 				industry_free_repair_factor = 0.25
 			}
 		}
-
+		POL_Topple_the_Tyrants = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_phalanstere_aid" }
+			picture = SWE_political_crisis
+			modifier = {
+				command_power_gain_mult = 0.15
+				max_command_power_mult = 0.15
+				army_attack_factor = 0.1
+			}
+		}
+		POL_god_syndicalism = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_phalanstere_aid" }
+			picture = christian_commonwealth
+			modifier = {
+				consumer_goods_expected_value = -0.1
+				production_lack_of_resource_penalty_factor = -0.1
+				political_power_cost = -0.1
+			}
+		}
+		POL_loyal_legionaries = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_phalanstere_aid" }
+			picture = POL_royal_army
+			modifier = {
+				army_strength_factor = 0.1
+				army_attack_speed_factor = 0.1
+				initiative_factor = 0.1
+			}
+		}
+		POL_seize_cartel_wealth = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_phalanstere_aid" }
+			picture = KIV_anti_corruption_idea
+			modifier = {
+				production_speed_buildings_factor = 0.1
+				consumer_goods_factor = -0.15
+				local_resources_factor = 0.15
+			}
+		}
+		POL_christian_worker_union = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_phalanstere_aid" }
+			picture = SPR_catholic_unions
+			modifier = {
+				global_building_slots_factor = 0.1
+				industrial_capacity_factory = 0.1
+				production_factory_start_efficiency_factor = 0.1
+			}
+		}
+		POL_eyes_on_west = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_phalanstere_aid" }
+			picture = PLC_germany_enemy
+			modifier = {
+				production_speed_bunker_factor = 0.1
+			}
+			targeted_modifier = {
+				tag = RUS
+				attack_bonus_against = 0.1
+				defense_bonus_against = 0.1
+				breakthrough_bonus_against = 0.1
+			}
+			targeted_modifier = {
+				tag = AUS
+				attack_bonus_against = 0.1
+				defense_bonus_against = 0.1
+				breakthrough_bonus_against = 0.1
+			}
+		}
+		POL_unity_through_labor = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_phalanstere_aid" }
+			picture = SWE_international_worker_idea
+			modifier = {
+				industrial_capacity_factory = 0.1
+			}
+			equipment_bonus = {
+				support_equipment = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+				artillery_equipment = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+				
+			}
+		}
 		POL_eastern_governments_1 = {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea POL_eastern_governments" }
 			picture = por_iberian_workers_united
