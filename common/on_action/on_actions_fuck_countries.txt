@@ -1,0 +1,580 @@
+on_actions = {
+	on_startup = {
+		#吞并国家
+		effect = {
+			#中央非洲
+			if = {
+				limit = { has_game_rule = { rule = KXX_annex_MAF option = KXX_annex_MAF_YES } }
+				MAF = {
+                    set_country_flag = MAF_no_collapse
+                    every_state = {
+	        			limit = { 
+	        				OR = {
+	    	    				is_owned_by = NGR
+	        					is_owned_by = CIV
+	    	    				is_owned_by = KEN
+	    	    				is_owned_by = ZAM
+	    		    			is_owned_by = COG
+	    		    			is_owned_by = MAG
+                                is_owned_by = KIK
+                                is_owned_by = LIB
+                                state = 268
+                                #is_core_of = ANG
+                                #is_core_of = MZB
+                                #is_core_of = EQG
+                                is_core_of = ZIM
+	        				}
+		        		}
+						set_demilitarized_zone = no
+	         			MAF = {
+		        			add_state_core = PREV
+		        		}
+		        	}
+		        	every_country = {
+		        		limit = { 
+                            or = {
+                                is_subject_of = MAF 
+                                tag = KIK
+                            }
+                        }
+			        	MAF = {
+			        		annex_country = {
+		        				target = PREV
+			        			transfer_troops = yes
+			        		}
+			        	}
+		        	}
+                }
+			}
+
+			#阿拉什
+			if = {
+				limit = { has_game_rule = { rule = KXX_annex_ALO option = KXX_annex_ALO_YES } }
+				ALO = {
+                    annex_country = { target = TRK }
+                    annex_country = { target = UZB }
+                    annex_country = { target = KHI }
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_central_asia = yes
+                                state = 1208
+                            }   
+                        }
+                        add_core_of = ALO
+                    }
+                }
+			}
+
+			#墨西哥与西印度
+			if = {
+				limit = { 
+					or = {
+						has_game_rule = { rule = KXX_annex_MEX_CAF option = KXX_annex_MEX_CAF_YES } 
+						has_game_rule = { rule = KXX_annex_MEX_CAF option = KXX_annex_MEX_YES } 
+					}
+				}
+				every_state = {
+					limit = {
+						or = {
+							is_core_of = CUB  
+							is_core_of = HAI
+							is_core_of = DOM
+							is_core_of = PRI
+							state = 818
+							state = 1077
+							state = 695
+							state = 309
+							state = 1038
+						}         
+					}
+					add_core_of = CAF
+				}
+				every_country = {
+		        	limit = { 
+                        or = {
+                            tag = CUB
+							tag = HAI
+							tag = DOM
+							tag = PRI
+                        }
+                     }
+			        CAF = { annex_country = { target = PREV } }
+		        }
+				CAF = { 
+					transfer_state = 818
+					transfer_state = 1312
+					transfer_state = 1077
+					transfer_state = 695
+					transfer_state = 309
+					transfer_state = 1038 
+					transfer_state = 311
+					transfer_state = 686
+				}
+				every_state = {
+                    limit = {
+                        or = {
+                            is_core_of = CAF
+                            is_core_of = GUA
+                            is_core_of = ELS
+                            is_core_of = HON
+                            is_core_of = NIC
+                            is_core_of = COS
+                            is_core_of = PAN
+                        }
+                    }
+                    add_core_of = MEX
+                    set_demilitarized_zone = no
+                }
+				every_country = {
+		        	limit = { 
+                        or = {
+                            tag = GUA
+							tag = HON
+							tag = ELS
+							tag = NIC
+							tag = COS
+							tag = PAN
+                        }
+                     }
+			        MEX = { annex_country = { target = PREV } }
+		        }
+				MEX = { transfer_state = 685 }
+				every_country = {
+					set_country_flag = CEN_CONQ
+			        set_country_flag = CEN_CONQ2
+					set_country_flag = GUA_CONQ
+					set_country_flag = ELS_CONQ
+					set_country_flag = HON_CONQ
+					set_country_flag = NIC_CONQ
+					set_country_flag = COS_CONQ
+					set_country_flag = PAN_CONQ
+					set_country_flag = CUB_CONQ
+					set_country_flag = HAI_CONQ
+					set_country_flag = DOM_CONQ
+					set_country_flag = PRI_CONQ
+					set_country_flag = JAM_CONQ
+					set_country_flag = TRI_CONQ
+					set_country_flag = GYA_CONQ
+					set_country_flag = SUR_CONQ
+					set_country_flag = FRE_GYA_CONQ
+				}
+				if = {
+					limit = { has_game_rule = { rule = KXX_annex_MEX_CAF option = KXX_annex_MEX_YES } }
+					MEX = { annex_country = { target = CAF } }
+					CAF = { every_unit_leader = { set_nationality = CAN } }
+					every_country = { set_country_flag = CAF_CONQ }
+				}
+			}
+
+			#高加索
+			if = {
+				limit = { has_game_rule = { rule = KXX_annex_Caucasus option = KXX_annex_Caucasus_GEO_YES } }
+				GEO = {
+                    annex_country = { target = ARM }
+                    annex_country = { target = AZE }
+                    every_state = {
+                        limit = {
+                            or = {
+                                region = 134
+                                region = 135
+                                state = 265
+                                state = 217
+                                state = 236
+                                state = 1224
+                            }       
+                        }
+                        add_core_of = GEO
+                    }
+                }
+			}
+
+			#南美
+			if = {
+				limit = { has_game_rule = { rule = KXX_annex_South_America option = KXX_annex_South_America_YES } }
+				RJM = {
+					set_cosmetic_tag = FORM_SOU
+					add_ideas = absolutely_negative
+					annex_country = { target = FOP }
+					annex_country = { target = ARG }
+					annex_country = { target = VEN }
+					annex_country = { target = COL }
+					annex_country = { target = ECU }
+					annex_country = { target = CHL }
+					annex_country = { target = PRU }
+					annex_country = { target = BOL }
+					annex_country = { target = PAR }
+					annex_country = { target = URG }
+					annex_country = { target = BRA }
+					create_country_leader = {
+	    				name = "南美洲联邦议会"
+	    				picture = "gfx/leaders/funny/Yun_Council.png"
+	    				expire = "1.1.1"
+	      				ideology = totalist_subtype
+	    			}
+	    			create_country_leader = {
+      					name = "南美洲联邦议会"
+	    				picture = "gfx/leaders/funny/Yun_Council.png"
+	    				expire = "1.1.1"
+	    				ideology = syndicalist_subtype
+	    			}
+	    			create_country_leader = {
+	    				name = "南美洲联邦议会"
+	    				picture = "gfx/leaders/funny/Yun_Council.png"
+	    				expire = "1.1.1"
+		    			ideology = radical_socialist_subtype
+			    	}
+    				create_country_leader = {
+	    				name = "南美洲联邦议会"
+		    			picture = "gfx/leaders/funny/Yun_Council.png"
+			    		expire = "1.1.1"
+				    	ideology = social_democrat_subtype
+			    	}
+    				create_country_leader = {
+	    				name = "南美洲联邦议会"
+		    			picture = "gfx/leaders/funny/Yun_Council.png"
+			     		expire = "1.1.1"
+			    		ideology = social_liberal_subtype
+			    	}
+    				create_country_leader = {
+	    				name = "南美洲联邦议会"
+		    			picture = "gfx/leaders/funny/Yun_Council.png"
+			    		expire = "1.1.1"
+			    		ideology = market_liberal_subtype
+			    	}
+				    create_country_leader = {
+					    name = "南美洲联邦议会"
+    					picture = "gfx/leaders/funny/Yun_Council.png"
+	    				expire = "1.1.1"
+		    			ideology = social_conservative_subtype
+			    	}
+    				create_country_leader = {
+	    				name = "南美洲联邦议会"
+		    			picture = "gfx/leaders/funny/Yun_Council.png"
+			    		expire = "1.1.1"
+				    	ideology = authoritarian_democrat_subtype
+				    }
+    				create_country_leader = {
+	    				name = "南美洲联邦议会"
+		    			picture = "gfx/leaders/funny/Yun_Council.png"
+			    		expire = "1.1.1"
+				    	ideology = paternal_autocrat_subtype
+				    }
+    				create_country_leader = {
+	    				name = "南美洲联邦议会"
+		    			picture = "gfx/leaders/funny/Yun_Council.png"
+			    		expire = "1.1.1"
+				    	ideology = national_populist_subtype
+					}					
+				}				
+				every_state = {
+		       		limit = { is_on_continent = south_america }
+		    		add_core_of = RJM
+		    		transfer_state_to = RJM
+					set_demilitarized_zone = no		
+		    	}	
+				#every_country = {
+				#   set_country_flag = ARG_CONQ
+				#	set_country_flag = CHL_CONQ
+				#	set_country_flag = BOL_CONQ
+				#	set_country_flag = PRU_CONQ
+				#	set_country_flag = PAR_CONQ
+				#	set_country_flag = URG_CONQ
+				#	set_country_flag = SPO_CONQ
+				#	set_country_flag = PIR_CONQ
+				#	set_country_flag = GOY_CONQ
+				#	set_country_flag = AMA_CONQ
+				#	set_country_flag = COL_CONQ
+				#	set_country_flag = VEN_CONQ
+				#	set_country_flag = ECU_CONQ
+				#	set_country_flag = BRA_CONQ
+				#}
+			}
+
+			#接管伊比利亚殖民地
+			if = {
+				limit = { has_game_rule = { rule = KXX_annex_SPR_POR option = KXX_annex_SPR_POR_YES } }
+				every_state = {
+					limit = {
+						or = {
+							is_core_of = MOR
+						}
+					}
+					transfer_state_to = MOR
+				}
+				every_state = {
+					limit = {
+						or = {
+							state = 296
+						}
+					}
+					transfer_state_to = NFA
+				}
+				every_state = {
+					limit = {
+						or = {
+							is_core_of = EQG
+							is_core_of = ANG
+							is_core_of = MZB
+						}
+					}
+					transfer_state_to = MAF
+					add_core_of = MAF
+				}
+				every_state = {
+					limit = {
+						or = {
+							state = 729
+						}
+					}
+					transfer_state_to = LEP
+				}
+				every_state = {
+					limit = {
+						or = {
+							state = 321
+						}
+					}
+					transfer_state_to = PRF
+				}
+				every_state = {
+					limit = {
+						or = {
+							state = 721
+							state = 972
+						}
+					}
+					transfer_state_to = DEI
+					add_core_of = DEI
+				}
+			}
+
+			#吞并北美
+			if = {
+				limit = {
+					or = {
+						has_game_rule = { rule = KXX_annex_North_America option = KXX_annex_North_America_USA }
+						has_game_rule = { rule = KXX_annex_North_America option = KXX_annex_North_America_USA_MEX }
+					}
+				}
+				CAN = {
+					every_state = {
+						limit = { 
+							or = {
+								is_core_of = USA
+							}
+						}
+						add_core_of = CAN
+					}
+					annex_country = { target = USA }
+					every_country = {
+						set_country_flag = USA_CONQ
+						set_country_flag = NEE_CONQ
+						set_country_flag = ALA_CONQ
+						set_country_flag = HAW_CONQ
+						set_country_flag = SSI_CONQ
+					}
+					set_global_flag = USA_civil_war_avoided_flag
+				}
+				if = {
+					limit = { has_game_rule = { rule = KXX_annex_North_America option = KXX_annex_North_America_USA_MEX } }
+					CAN = {
+						every_state = {
+				    		limit = { 
+				    			or = {
+				    				is_core_of = MEX
+				    			}
+					    	}
+					    	add_core_of = CAN
+					    }
+				    	annex_country = { target = MEX }
+					    every_country = { 
+							set_country_flag = MEX_CONQ 
+							set_country_flag = YUC_CONQ
+						}
+					}
+				}
+			}
+		}
+		#恢复开局不显示的国家
+		effect = {
+			#恢复马耳他
+			if = {
+				limit = { has_game_rule = { rule = KXX_recover_MLT option = KXX_recover_MLT_YES } }
+				every_state = {
+					limit = {
+						or = {
+							state = 116
+						}
+					}
+					transfer_state_to = MLT
+				}
+			}
+			else = {
+				GER = { annex_country = { target = MLT } }
+				every_country = { set_country_flag = MLT_CONQ }
+			}
+
+			#恢复纽芬兰
+			if = {
+				limit = { has_game_rule = { rule = KXX_recover_NFL option = KXX_recover_NFL_YES } }
+				every_state = {
+					limit = {
+						or = {
+							state = 332
+							state = 331
+							state = 730
+						}
+					}
+					transfer_state_to = NFL
+				}
+			}
+			else = {
+				CAN = { annex_country = { target = NFL } }
+				NFL = { every_unit_leader = { set_nationality = CAN } }
+			}
+
+			#恢复南罗德西亚
+			if = {
+				limit = { has_game_rule = { rule = KXX_recover_ZIM option = KXX_recover_ZIM_YES } }
+				every_state = {
+					limit = {
+						or = {
+							state = 545
+						}
+					}
+					transfer_state_to = ZIM
+				}
+			}
+			else = {
+				SAF = { annex_country = { target = ZIM } }
+				ZIM = { every_unit_leader = { set_nationality = SAF } }
+				every_country = { set_country_flag = ZIM_CONQ }
+			}
+
+			#恢复克里特
+			if = {
+				limit = { has_game_rule = { rule = KXX_recover_CRE option = KXX_recover_CRE_YES } }
+				every_state = {
+					limit = {
+						or = {
+							state = 182
+						}
+					}
+					transfer_state_to = CRE
+				}
+			}
+			else = {
+				GRE = { annex_country = { target = CRE } }
+				CRE = { every_unit_leader = { set_nationality = GER } }
+				every_country = { set_country_flag = CRE_CONQ }
+			}
+
+			#恢复冰岛
+			if = {
+				limit = { has_game_rule = { rule = KXX_recover_ICE option = KXX_recover_ICE_YES } }
+				every_state = {
+					limit = {
+						or = {
+							state = 100
+						}
+					}
+					transfer_state_to = ICE
+				}
+			}
+			else = {
+				DEN = { annex_country = { target = ICE } }
+				ICE = { every_unit_leader = { set_nationality = DEN } }
+				every_country = { set_country_flag = ICE_CONQ }
+			}
+
+			#恢复对岸
+			if = {
+				limit = { has_game_rule = { rule = KXX_recover_TAI option = KXX_recover_TAI_YES } }
+				every_state = {
+					limit = {
+						or = {
+							state = 524
+						}
+					}
+					transfer_state_to = TAI
+				}
+			}
+			else = {
+				JAP = { annex_country = { target = TAI } }
+			}
+
+			#恢复马岛
+			if = {
+				limit = { has_game_rule = { rule = KXX_recover_FLS option = KXX_recover_FLS_YES } }
+				every_state = {
+					limit = {
+						or = {
+							state = 299
+						}
+					}
+					transfer_state_to = FLS
+				}
+			}
+			else = {
+				ARG = { annex_country = { target = FLS } }
+			}
+
+			#恢复马德拉斯
+			if = {
+				limit = { has_game_rule = { rule = KXX_recover_MAD option = KXX_recover_MAD_YES } }
+				every_state = {
+					limit = {
+						or = {
+							state = 320
+							state = 1095
+						}
+					}
+					transfer_state_to = MAD
+				}
+			}
+			else = {
+				PRF = { annex_country = { target = MAD } }
+			}
+
+			#恢复库班与山地
+			if = {
+				limit = { has_game_rule = { rule = KXX_recover_KUB option = KXX_recover_KUB_YES } }
+				every_state = {
+					limit = {
+						or = {
+							state = 234
+							state = 235
+							state = 1227
+						}
+					}
+					transfer_state_to = KUB
+				}
+				every_state = {
+					limit = {
+						or = {
+							state = 1189
+							state = 1191
+							state = 1187
+							state = 232
+							state = 787
+							state = 233
+							state = 1186
+						}
+					}
+					transfer_state_to = MTR
+				}
+			}
+			else = {
+				KUB = {
+			    	every_unit_leader = {
+			    		limit = { has_trait = RUS_lineytsy_cossack }
+				    	demote_if_marshal = yes
+				    	set_nationality = DKB
+				    }
+			    }
+			}
+		}
+		
+	}
+}
