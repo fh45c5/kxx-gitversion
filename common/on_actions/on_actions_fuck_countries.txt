@@ -2,6 +2,96 @@ on_actions = {
 	on_startup = {
 		#吞并国家
 		effect = {
+			#傻逼KX瞎鸡巴搞的占用内存CPU的
+			if = {
+				limit = { has_game_rule = { rule = KXX_annex_SBPOL option = KXX_annex_SBPOL_YES } }
+				GER = {
+                    annex_country = { target = MLT }
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_core_of = MLT
+                            }   
+                        }
+                        add_core_of = GER
+                    }
+                }
+				DEN = {
+                    annex_country = { target = ICE }
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_core_of = ICE
+                            }   
+                        }
+                        add_core_of = DEN
+                    }
+                }
+				SAF = {
+                    annex_country = { target = ZIM }
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_core_of = ZIM
+                            }   
+                        }
+                        add_core_of = SAF
+                    }
+					ZIM = { every_unit_leader = { set_nationality = SAF } }
+                }
+				GRE = {
+                    annex_country = { target = CRE }
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_core_of = CRE
+                            }   
+                        }
+                        add_core_of = GRE
+                    }
+					CRE = { every_unit_leader = { set_nationality = GER } }
+                }
+				ARG = {
+                    annex_country = { target = FLS }
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_core_of = FLS
+                            }   
+                        }
+                        add_core_of = ARG
+                    }
+                }
+				DKB = {
+                    annex_country = { target = KUB }
+					annex_country = { target = MTR }
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_core_of = KUB
+								is_core_of = MTR
+                            }   
+                        }
+                        add_core_of = DKB
+                    }
+					KUB = {
+			    	    every_unit_leader = {
+			        		limit = { has_trait = RUS_lineytsy_cossack }
+				        	demote_if_marshal = yes
+				        	set_nationality = DKB
+				        }
+			        }
+					set_cosmetic_tag = DKB_don_caucasus
+                }
+				every_country = { 
+					set_country_flag = MLT_CONQ 
+					set_country_flag = ICE_CONQ 
+					set_country_flag = ZIM_CONQ 
+					set_country_flag = CRE_CONQ 
+				}
+			}
+
+
 			#中央非洲
 			if = {
 				limit = { has_game_rule = { rule = KXX_annex_MAF option = KXX_annex_MAF_YES } }
@@ -403,23 +493,23 @@ on_actions = {
 		}
 		#恢复开局不显示的国家
 		effect = {
-			#恢复马耳他
-			if = {
-				limit = { has_game_rule = { rule = KXX_recover_MLT option = KXX_recover_MLT_YES } }
-				every_state = {
-					limit = {
-						or = {
-							state = 116
-						}
-					}
-					transfer_state_to = MLT
-				}
-			}
-			else = {
-				GER = { annex_country = { target = MLT } }
-				every_country = { set_country_flag = MLT_CONQ }
-			}
-
+		#	#恢复马耳他
+		#	if = {
+		#		limit = { has_game_rule = { rule = KXX_recover_MLT option = KXX_recover_MLT_YES } }
+		#		every_state = {
+		#			limit = {
+		#				or = {
+		#					state = 116
+		#				}
+		#			}
+		#			transfer_state_to = MLT
+		#		}
+		#	}
+		#	else = {
+		#		GER = { annex_country = { target = MLT } }
+		#		every_country = { set_country_flag = MLT_CONQ }
+		#	}
+		#
 			#恢复纽芬兰
 			if = {
 				limit = { has_game_rule = { rule = KXX_recover_NFL option = KXX_recover_NFL_YES } }
@@ -438,92 +528,92 @@ on_actions = {
 				CAN = { annex_country = { target = NFL } }
 				NFL = { every_unit_leader = { set_nationality = CAN } }
 			}
-
-			#恢复南罗德西亚
-			if = {
-				limit = { has_game_rule = { rule = KXX_recover_ZIM option = KXX_recover_ZIM_YES } }
-				every_state = {
-					limit = {
-						or = {
-							state = 545
-						}
-					}
-					transfer_state_to = ZIM
-				}
-			}
-			else = {
-				SAF = { annex_country = { target = ZIM } }
-				ZIM = { every_unit_leader = { set_nationality = SAF } }
-				every_country = { set_country_flag = ZIM_CONQ }
-			}
-
-			#恢复克里特
-			if = {
-				limit = { has_game_rule = { rule = KXX_recover_CRE option = KXX_recover_CRE_YES } }
-				every_state = {
-					limit = {
-						or = {
-							state = 182
-						}
-					}
-					transfer_state_to = CRE
-				}
-			}
-			else = {
-				GRE = { annex_country = { target = CRE } }
-				CRE = { every_unit_leader = { set_nationality = GER } }
-				every_country = { set_country_flag = CRE_CONQ }
-			}
-
-			#恢复冰岛
-			if = {
-				limit = { has_game_rule = { rule = KXX_recover_ICE option = KXX_recover_ICE_YES } }
-				every_state = {
-					limit = {
-						or = {
-							state = 100
-						}
-					}
-					transfer_state_to = ICE
-				}
-			}
-			else = {
-				DEN = { annex_country = { target = ICE } }
-				ICE = { every_unit_leader = { set_nationality = DEN } }
-				every_country = { set_country_flag = ICE_CONQ }
-			}
-
-			#恢复对岸
-			if = {
-				limit = { has_game_rule = { rule = KXX_recover_TAI option = KXX_recover_TAI_YES } }
-				every_state = {
-					limit = {
-						or = {
-							state = 524
-						}
-					}
-					transfer_state_to = TAI
-				}
-			}
-			else = {
-				JAP = { annex_country = { target = TAI } }
-			}
-
-			#恢复马岛
-			if = {
-				limit = { has_game_rule = { rule = KXX_recover_FLS option = KXX_recover_FLS_YES } }
-				every_state = {
-					limit = {
-						or = {
-							state = 299
-						}
-					}
-					transfer_state_to = FLS
-				}
-			}
-			else = {
-				ARG = { annex_country = { target = FLS } }
-			}
+		
+		#	#恢复南罗德西亚
+		#	if = {
+		#		limit = { has_game_rule = { rule = KXX_recover_ZIM option = KXX_recover_ZIM_YES } }
+		#		every_state = {
+		#			limit = {
+		#				or = {
+		#					state = 545
+		#				}
+		#			}
+		#			transfer_state_to = ZIM
+		#		}
+		#	}
+		#	else = {
+		#		SAF = { annex_country = { target = ZIM } }
+		#		ZIM = { every_unit_leader = { set_nationality = SAF } }
+		#		every_country = { set_country_flag = ZIM_CONQ }
+		#	}
+		#
+		#	#恢复克里特
+		#	if = {
+		#		limit = { has_game_rule = { rule = KXX_recover_CRE option = KXX_recover_CRE_YES } }
+		#		every_state = {
+		#			limit = {
+		#				or = {
+		#					state = 182
+		#				}
+		#			}
+		#			transfer_state_to = CRE
+		#		}
+		#	}
+		#	else = {
+		#		GRE = { annex_country = { target = CRE } }
+		#		CRE = { every_unit_leader = { set_nationality = GER } }
+		#		every_country = { set_country_flag = CRE_CONQ }
+		#	}
+		#
+		#	#恢复冰岛
+		#	if = {
+		#		limit = { has_game_rule = { rule = KXX_recover_ICE option = KXX_recover_ICE_YES } }
+		#		every_state = {
+		#			limit = {
+		#				or = {
+		#					state = 100
+		#				}
+		#			}
+		#			transfer_state_to = ICE
+		#		}
+		#	}
+		#	else = {
+		#		DEN = { annex_country = { target = ICE } }
+		#		ICE = { every_unit_leader = { set_nationality = DEN } }
+		#		every_country = { set_country_flag = ICE_CONQ }
+		#	}
+		#
+		#	#恢复对岸
+		#	if = {
+		#		limit = { has_game_rule = { rule = KXX_recover_TAI option = KXX_recover_TAI_YES } }
+		#		every_state = {
+		#			limit = {
+		#				or = {
+		#					state = 524
+		#				}
+		#			}
+		#			transfer_state_to = TAI
+		#		}
+		#	}
+		#	else = {
+		#		JAP = { annex_country = { target = TAI } }
+		#	}
+		#
+		#	#恢复马岛
+		#	if = {
+		#		limit = { has_game_rule = { rule = KXX_recover_FLS option = KXX_recover_FLS_YES } }
+		#		every_state = {
+		#			limit = {
+		#				or = {
+		#					state = 299
+		#				}
+		#			}
+		#			transfer_state_to = FLS
+		#		}
+		#	}
+		#	else = {
+		#		ARG = { annex_country = { target = FLS } }
+		#	}
 
 			#恢复马德拉斯
 			if = {
@@ -542,43 +632,43 @@ on_actions = {
 				PRF = { annex_country = { target = MAD } }
 			}
 
-			#恢复库班与山地
-			if = {
-				limit = { has_game_rule = { rule = KXX_recover_KUB option = KXX_recover_KUB_YES } }
-				every_state = {
-					limit = {
-						or = {
-							state = 234
-							state = 235
-							state = 1227
-						}
-					}
-					transfer_state_to = KUB
-				}
-				every_state = {
-					limit = {
-						or = {
-							state = 1189
-							state = 1191
-							state = 1187
-							state = 232
-							state = 787
-							state = 233
-							state = 1186
-						}
-					}
-					transfer_state_to = MTR
-				}
-			}
-			else = {
-				KUB = {
-			    	every_unit_leader = {
-			    		limit = { has_trait = RUS_lineytsy_cossack }
-				    	demote_if_marshal = yes
-				    	set_nationality = DKB
-				    }
-			    }
-			}
+		#	#恢复库班与山地
+		#	if = {
+		#		limit = { has_game_rule = { rule = KXX_recover_KUB option = KXX_recover_KUB_YES } }
+		#		every_state = {
+		#			limit = {
+		#				or = {
+		#					state = 234
+		#					state = 235
+		#					state = 1227
+		#				}
+		#			}
+		#			transfer_state_to = KUB
+		#		}
+		#		every_state = {
+		#			limit = {
+		#				or = {
+		#					state = 1189
+		#					state = 1191
+		#					state = 1187
+		#					state = 232
+		#					state = 787
+		#					state = 233
+		#					state = 1186
+		#				}
+		#			}
+		#			transfer_state_to = MTR
+		#		}
+		#	}
+		#	else = {
+		#		KUB = {
+		#	    	every_unit_leader = {
+		#	    		limit = { has_trait = RUS_lineytsy_cossack }
+		#		    	demote_if_marshal = yes
+		#		    	set_nationality = DKB
+		#		    }
+		#	    }
+		#	}
 		}
 		
 	}
