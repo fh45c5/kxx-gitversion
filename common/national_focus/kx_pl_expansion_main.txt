@@ -9894,8 +9894,10 @@ focus_tree = {
 		id = POL_The_General_Inspectorate
 		icon = GFX_goal_POL_army
 		cost = 4
-
-		x = 70
+		available = {
+			has_country_flag = POL_ready_to_go_foreign
+		}
+		x = 40
 		y = 0
 
 		completion_reward = {
@@ -9963,7 +9965,51 @@ focus_tree = {
 		}
 		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_ARMY_BONUS }
 	}
-
+	focus = {
+		id = POL_modern_cavalry
+		icon = GFX_goal_POL_New_Age_Cavalry
+		prerequisite = {
+			focus = POL_Mossors_Cavalry_Reform
+		}
+		relative_position_id = POL_Mossors_Cavalry_Reform
+		x = -1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus POL_modern_cavalry"
+			add_tech_bonus = {
+				name = POL_modern_cavalry
+				bonus = 1
+				uses = 1
+				category = motorized_equipment
+				category = cat_mechanized_equipment
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	focus = {
+		id = POL_winged_hussars
+		icon = GFX_goal_POL_Hussar_Tanks
+		prerequisite = {
+			focus = POL_modern_cavalry
+		}
+		
+		relative_position_id = POL_Mossors_Cavalry_Reform
+		x = -2
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus POL_winged_hussars"
+			add_ideas = POL_winged_hussars_idea
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
 	focus = {
 		id = POL_Saving_Polish_Blood
 		icon = GFX_goal_generic_support_equipment
@@ -10000,7 +10046,7 @@ focus_tree = {
 		cost = 4
 
 		relative_position_id = POL_Malkowski_And_Malkowskas_Legacy
-		x = 0
+		x = -2
 		y = 2
 
 		prerequisite = {
@@ -10179,7 +10225,71 @@ focus_tree = {
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_PRODUCTION }
 	}
-
+	focus = {
+		id = POL_military_desgin_bureaus
+		icon = GFX_goal_military_research_2
+		prerequisite = {
+			focus = POL_Start_The_Six_Year_Plan
+		}
+		relative_position_id = POL_Start_The_Six_Year_Plan
+		x = 5
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus POL_military_desgin_bureaus"
+			add_research_slot = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	focus = {
+		id = POL_combined_arms
+		icon = GFX_goal_GUA_Military_Legacy
+		prerequisite = {
+			focus = POL_military_desgin_bureaus
+		}
+		relative_position_id = POL_military_desgin_bureaus
+		x = 0
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus POL_combined_arms"
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	
+	
+	focus = {
+		id = POL_infantry_tactics
+		icon = GFX_goal_POL_Integrated_Infantry_Tactics
+		prerequisite = {
+			focus = POL_combined_arms
+		}
+		
+		relative_position_id = POL_combined_arms
+		x = -1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 15
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus POL_infantry_tactics"
+			army_experience = 75
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
 	focus = {
 		id = POL_Military_Research_And_Education_Institute
 		icon = GFX_goal_military_research
@@ -10319,8 +10429,10 @@ focus_tree = {
 				division_template = "Dywizja Pancerna"
 				is_locked = no
 			}
-			set_temp_variable = { POL_influence_change = 5 }
-			POL_add_german_influence = yes
+			country_event = {
+				id = poland.208
+				days = 2
+			}
 		}
 		search_filters = { FOCUS_FILTER_MANPOWER }
 	}
@@ -10352,7 +10464,7 @@ focus_tree = {
 		}
 		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_RESEARCH }
 	}
-
+	
 	focus = {
 		id = POL_Improved_Tank_Designs
 		icon = GFX_goal_generic_army_tanks2
@@ -10377,7 +10489,34 @@ focus_tree = {
 		}
 		search_filters = { FOCUS_FILTER_RESEARCH }
 	}
-
+	focus = {
+		id = POL_modern_military_thought
+		icon = GFX_goal_POL_Modern_Military_Thought
+		prerequisite = {
+			focus = POL_Artillery_Modernisation
+			focus = POL_Improved_Tank_Designs
+		}
+		relative_position_id = POL_Artillery_Modernisation
+		x = 1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus POL_modern_military_thought"
+			air_experience = 30
+			army_experience = 30
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	
 	focus = {
 		id = POL_Combined_Arms_Warfare
 		icon = GFX_focus_generic_combined_arms
@@ -10748,6 +10887,100 @@ focus_tree = {
 			}
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = POL_military_ideals
+		icon = GFX_goal_POL_Offensive_Fighting_Force
+		prerequisite = {
+			focus = POL_Wojna_Blyskawiczna
+			focus = POL_Unshakeable_Will
+			focus = POL_Shield_of_the_Slavic_World
+			focus = POL_Tactical_Annihilation
+		}
+		
+		relative_position_id = POL_Expand_The_Academy_Of_Warsaw
+		x = 0
+		y = 6
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus POL_military_ideals"
+			add_ideas = POL_offensive_force_idea
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+focus = {
+		id = POL_integrate_wermacht
+		icon = GFX_goal_POL_Integrate_Polnische_Wehrmacht
+		prerequisite = {
+			focus = POL_Germanys_Eastern_Bulwark
+		}
+		available = {
+			has_idea = POL_warsaw_garrison
+		}
+		relative_position_id = POL_Germanys_Eastern_Bulwark
+		x = -4
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus POL_military_desgin_bureaus"
+			swap_ideas = {
+				remove_idea = POL_warsaw_garrison
+				add_idea = POL_warsaw_garrison2
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = POL_polish_war_effort
+		icon = GFX_goal_POL_Polish_War_Effort
+		prerequisite = {
+			focus = POL_integrate_wermacht
+		}
+		available = {
+			has_war_with = RUS
+		}
+		relative_position_id = POL_integrate_wermacht
+		x = 0
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus POL_military_desgin_bureaus"
+			swap_ideas = {
+				remove_idea = POL_warsaw_garrison2
+				add_idea = POL_warsaw_garrison3
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = POL_manstien_reform_plan
+		icon = GFX_goal_POL_Manstein_Lewinski_Reform_Plan
+		prerequisite = {
+			focus = POL_integrate_wermacht
+		}
+		relative_position_id = POL_integrate_wermacht
+		x = 1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus POL_military_desgin_bureaus"
+			add_ideas = POL_manstien_reform_plan
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
 	}
 
 #Centrolew military
@@ -30141,360 +30374,11 @@ focus = {
 			}			
 		}
 	}
-	### Army Tree ###
-	focus = {
-		id = POL_army_reform
-		icon = GFX_goal_POL_army
-		available = {
-			has_country_flag = POL_ready_to_go_foreign
-		}
-		x = 51
-		y = 0
-		cost = 4
-		ai_will_do = {
-			factor = 10
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_army_reform"
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-	focus = {
-		id = POL_modern_cavalry
-		icon = GFX_goal_POL_New_Age_Cavalry
-		prerequisite = {
-			focus = POL_army_reform
-		}
-		relative_position_id = POL_army_reform
-		x = -2
-		y = 1
-		cost = 4
-		ai_will_do = {
-			factor = 10
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_modern_cavalry"
-			add_tech_bonus = {
-				name = POL_modern_cavalry
-				bonus = 1
-				uses = 1
-				category = motorized_equipment
-				category = cat_mechanized_equipment
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-	focus = {
-		id = POL_winged_hussars
-		icon = GFX_goal_POL_Hussar_Tanks
-		prerequisite = {
-			focus = POL_modern_cavalry
-		}
-		relative_position_id = POL_army_reform
-		x = -3
-		y = 2
-		cost = 4
-		ai_will_do = {
-			factor = 10
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_winged_hussars"
-			add_ideas = POL_winged_hussars_idea
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS }
-	}
-	focus = {
-		id = POL_military_ideals
-		icon = GFX_goal_POL_Offensive_Fighting_Force
-		prerequisite = {
-			focus = POL_winged_hussars
-		}
-		mutually_exclusive = {
-			focus = POL_defensive_tactics
-		}
-		relative_position_id = POL_army_reform
-		x = -3
-		y = 3
-		cost = 4
-		ai_will_do = {
-			factor = 10
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_military_ideals"
-			add_ideas = POL_offensive_force_idea
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS }
-	}
-	focus = {
-		id = POL_combined_arms
-		icon = GFX_goal_GUA_Military_Legacy
-		prerequisite = {
-			focus = POL_army_reform
-		}
-		relative_position_id = POL_army_reform
-		x = 0
-		y = 1
-		cost = 4
-		ai_will_do = {
-			factor = 10
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_combined_arms"
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-	focus = {
-		id = POL_a_modern_panzer
-		icon = GFX_goal_AUS_modernize_panzers
-		prerequisite = {
-			focus = POL_modern_cavalry
-			focus = POL_combined_arms
-		}
-		relative_position_id = POL_army_reform
-		x = -1
-		y = 2
-		cost = 4
-		ai_will_do = {
-			factor = 10
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_a_modern_panzer"
-			add_tech_bonus = {
-				name = POL_a_modern_panzer
-				bonus = 1
-				uses = 1
-				category = armor
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-	focus = {
-		id = POL_tp_program
-		icon = GFX_goal_POL_light_tanks
-		prerequisite = {
-			focus = POL_a_modern_panzer
-		}
-		relative_position_id = POL_army_reform
-		x = -1
-		y = 3
-		cost = 4
-		ai_will_do = {
-			factor = 10
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_tp_program"
-			country_event = {
-				id = poland.208
-				days = 2
-			}
-		}
-	}
-	focus = {
-		id = POL_import_rifles
-		icon = GFX_goal_OTT_arms_purchase
-		prerequisite = {
-			focus = POL_army_reform
-		}
-		relative_position_id = POL_army_reform
-		x = 2
-		y = 1
-		cost = 4
-		ai_will_do = {
-			factor = 15
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_import_rifles"
-			add_tech_bonus = {
-				name = POL_import_rifles
-				bonus = 1
-				uses = 1
-				category = infantry_weapons
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-	focus = {
-		id = POL_a_new_rifle
-		icon = GFX_goal_POL_New_Polish_Rifle
-		prerequisite = {
-			focus = POL_import_rifles
-		}
-		relative_position_id = POL_army_reform
-		x = 2
-		y = 2
-		cost = 4
-		ai_will_do = {
-			factor = 15
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_a_new_rifle"
-			army_experience = 10
-			add_tech_bonus = {
-				name = POL_a_new_rifle
-				bonus = 1
-				uses = 1
-				category = infantry_weapons
-			}
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH }
-	}
-	focus = {
-		id = POL_infantry_tactics
-		icon = GFX_goal_POL_Integrated_Infantry_Tactics
-		prerequisite = {
-			focus = POL_a_new_rifle
-		}
-		prerequisite = {
-			focus = POL_combined_arms
-		}
-		relative_position_id = POL_army_reform
-		x = 1
-		y = 3
-		cost = 4
-		ai_will_do = {
-			factor = 15
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_infantry_tactics"
-			army_experience = 75
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS }
-	}
-	focus = {
-		id = POL_modern_military_thought
-		icon = GFX_goal_POL_Modern_Military_Thought
-		prerequisite = {
-			focus = POL_tp_program
-			focus = POL_infantry_tactics
-		}
-		relative_position_id = POL_army_reform
-		x = -2
-		y = 4
-		cost = 4
-		ai_will_do = {
-			factor = 10
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_modern_military_thought"
-			air_experience = 30
-			army_experience = 30
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
-			}
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
-	}
-	focus = {
-		id = POL_military_desgin_bureaus
-		icon = GFX_goal_military_research_2
-		prerequisite = {
-			focus = POL_tp_program
-			focus = POL_infantry_tactics
-		}
-		relative_position_id = POL_army_reform
-		x = 2
-		y = 4
-		cost = 4
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_military_desgin_bureaus"
-			add_research_slot = 1
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
 	
-	# - German Mission Sub-Branch
 	
-	focus = {
-		id = POL_integrate_wermacht
-		icon = GFX_goal_POL_Integrate_Polnische_Wehrmacht
-		prerequisite = {
-			focus = POL_tp_program
-			focus = POL_infantry_tactics
-		}
-		available = {
-			has_idea = POL_warsaw_garrison
-		}
-		relative_position_id = POL_army_reform
-		x = 0
-		y = 4
-		cost = 4
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_military_desgin_bureaus"
-			swap_ideas = {
-				remove_idea = POL_warsaw_garrison
-				add_idea = POL_warsaw_garrison2
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
 
-	focus = {
-		id = POL_polish_war_effort
-		icon = GFX_goal_POL_Polish_War_Effort
-		prerequisite = {
-			focus = POL_integrate_wermacht
-		}
-		available = {
-			has_war_with = RUS
-		}
-		relative_position_id = POL_integrate_wermacht
-		x = -1
-		y = 1
-		cost = 4
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_military_desgin_bureaus"
-			swap_ideas = {
-				remove_idea = POL_warsaw_garrison2
-				add_idea = POL_warsaw_garrison3
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = POL_manstien_reform_plan
-		icon = GFX_goal_POL_Manstein_Lewinski_Reform_Plan
-		prerequisite = {
-			focus = POL_integrate_wermacht
-		}
-		relative_position_id = POL_integrate_wermacht
-		x = 1
-		y = 1
-		cost = 4
-		ai_will_do = {
-			factor = 100
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_military_desgin_bureaus"
-			add_ideas = POL_manstien_reform_plan
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
+	
+	
 	### Air Tree ###
 	focus = {
 		id = POL_new_airforce
@@ -30502,8 +30386,12 @@ focus = {
 		available = {
 			has_country_flag = POL_ready_to_go_foreign
 		}
-		x = 45
-		y = 4
+		prerequisite = {
+			focus = POL_The_General_Inspectorate
+		}
+		relative_position_id = POL_The_General_Inspectorate
+		x = 12
+		y = 1
 		cost = 4
 		ai_will_do = {
 			factor = 5
@@ -30730,10 +30618,16 @@ focus = {
 	focus = {
 		id = POL_kickstart_navy
 		icon = GFX_goal_POL_navy
-		available = { has_country_flag = POL_ready_to_go_foreign }
-		available = { any_owned_state = { is_coastal = yes } }
-		x = 59
-		y = 4
+		available = { 
+			any_owned_state = { is_coastal = yes } 
+			has_country_flag = POL_ready_to_go_foreign
+		}
+		prerequisite = {
+			focus = POL_The_General_Inspectorate
+		}
+		relative_position_id = POL_The_General_Inspectorate
+		x = -8
+		y = 1
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -30997,8 +30891,8 @@ focus = {
 				has_country_flag = plx_slavic_communists
 			}
 		}
-		x = 51
-		y = 7
+		x = 40
+		y = 17
 		cost = 4
 		ai_will_do = { factor = 10 }
 		completion_reward = {
