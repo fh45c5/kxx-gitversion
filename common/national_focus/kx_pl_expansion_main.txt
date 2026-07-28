@@ -6,7 +6,7 @@ focus_tree = {
 	country = {
 		factor = 0
 		modifier = {
-			add = 10
+			add = 100
 			tag = POL
 		}		
 	}
@@ -3363,7 +3363,7 @@ focus_tree = {
 		icon = GFX_focus_rus_panslavism
 		available = {
 			#has_country_flag = plx_start
-			#has_completed_focus = POL_join_international_community
+			#has_completed_focus = PLX_join_international_community
 		}
 		prerequisite = {
 			focus = POL_Supreme_Chamber_of_Commerce
@@ -6257,7 +6257,7 @@ focus_tree = {
 		icon = GFX_goal_MEX_Worker_Base
 		available = {
 			has_country_flag = plx_communism_pl_flag
-			#has_completed_focus = POL_join_international_community
+			#has_completed_focus = PLX_join_international_community
 		}
 		prerequisite = {
 			focus = KX_PL_KPP_WORK_WITH_NATIONALISTS
@@ -9962,6 +9962,7 @@ focus_tree = {
 				uses = 1
 				category = recon_tech
 			}
+			add_ideas = PLC_supply_chains_idea
 		}
 		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -10059,8 +10060,8 @@ focus_tree = {
 			hidden_effect = {
 				set_technology = { expanded_engineer_corps_tech = 1 }
 			}
-			activate_targeted_decision = { target = ROOT decision = POL_build_ostroleka_line }
-			activate_targeted_decision = { target = ROOT decision = POL_build_chelm_line }
+			add_ideas = PLC_trench_warfare_idea
+
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -10143,6 +10144,7 @@ focus_tree = {
 			hidden_effect = {
 				set_technology = { tech_at_cavalry = 1 }
 			}
+			add_ideas = PLC_mobile_army_idea
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -10287,6 +10289,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_infantry_tactics"
 			army_experience = 75
+			add_ideas = PLC_impenetrable_defense_idea
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -10318,6 +10321,7 @@ focus_tree = {
 				uses = 1
 				category = land_doctrine
 			}
+			add_research_slot = 1
 			swap_ideas = {
 				remove_idea = POL_industrial_mobilisation_1
 				add_idea = POL_industrial_mobilisation_2
@@ -10513,6 +10517,7 @@ focus_tree = {
 				uses = 1
 				category = land_doctrine
 			}
+			add_ideas = PLC_killing_blow_idea
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
 	}
@@ -10542,6 +10547,7 @@ focus_tree = {
 				remove_idea = POL_professional_army_4
 				add_idea = POL_professional_army_5
 			}
+			add_ideas = PLC_wartime_rationing_idea
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -10908,6 +10914,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_military_ideals"
 			add_ideas = POL_offensive_force_idea
+			add_ideas = PLC_never_surrender_idea
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
@@ -12232,7 +12239,9 @@ focus = {
 		id = KX_PLX_SOCDEM_COOPERATION
 		icon = GFX_goal_HOL_thriving_socdem
 		available = {
-			#has_country_flag = plx_supernation_flag
+			has_country_flag = POL_centro_committee_win
+			has_country_flag = POL_economists_win
+			has_country_flag = POL_lux_win
 		}
 		prerequisite = {
 			focus = KX_PLX_CLEANSE_REACTION
@@ -12260,7 +12269,9 @@ focus = {
 		id = KX_PLX_FOUNDING_COMMUNISM
 		icon = GFX_goal_socialist_infrastructure
 		available = {
-			#has_country_flag = plx_supernation_flag
+			has_country_flag = POL_natolinists_win
+			has_country_flag = POL_futurists_win
+			has_country_flag = POL_centro_committee_win
 		}
 		prerequisite = {
 			focus = KX_PLX_CLEANSE_REACTION
@@ -12287,7 +12298,9 @@ focus = {
 		id = KX_PLX_INTEGRATE_TRADE_UNIONS
 		icon = GFX_goal_WHR_Fair_Division_Labour
 		available = {
-			#has_country_flag = plx_supernation_flag
+			has_country_flag = POL_futurists_win
+			has_country_flag = POL_centro_committee_win
+			has_country_flag = POL_lux_win
 		}
 		prerequisite = {
 			focus = KX_PLX_FOUNDING_COMMUNISM
@@ -12325,7 +12338,9 @@ focus = {
 		id = KX_PLX_DEFENCE_FROM_SABOTAGE
 		icon = GFX_goal_CAN_Standardized_Industrial_Codes
 		available = {
-			#has_country_flag = plx_supernation_flag
+			has_country_flag = POL_natolinists_win
+			has_country_flag = POL_centro_committee_win
+			has_country_flag = POL_economists_win
 		}
 		prerequisite = {
 			focus = KX_PLX_FOUNDING_COMMUNISM
@@ -14234,7 +14249,7 @@ focus = {
 	relative_position_id = KX_PL_KPP_CREATING_COUNCILIARY_SYSTEM
     x = -18
     y = 2
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -14886,6 +14901,31 @@ focus = {
 
   ###波兰立陶宛
   focus = {
+		id = PLX_PLC_return_lublin_castle
+		icon = GFX_goal_POL_commonwealth
+		cost = 4.00
+		
+		x = 12
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_poland_first"
+			add_political_power = 40
+			set_capital = { state = 10 }
+			PLC_favour_poland = yes
+			set_country_flag = pol_beike01
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		available = {
+			has_completed_focus = PLX_PLC_mitteleuropa_question
+			10 = { is_owned_and_controlled_by = ROOT }
+		}
+	}
+  focus = {
 		id = PLX_PLC_poland_first
 		icon = GFX_goal_POL_polish_king
 		cost = 4.00
@@ -14893,14 +14933,12 @@ focus = {
 			focus = PLX_PLC_lithuania_first
 			focus = PLX_PLC_striking_the_balance
 		}
-		select_effect = {
-			country_event = {
-				id = kxplc.5
-				days = 9
-			}
+		prerequisite = {
+			focus = PLX_PLC_return_lublin_castle
 		}
-		x = -82
-		y = 30
+		relative_position_id = PLX_PLC_return_lublin_castle
+		x = -3
+		y = 1
 		ai_will_do = {
 			factor = 5
 		}
@@ -14920,80 +14958,13 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_build_warsaw_palace
-		icon = GFX_goal_POL_Procession_Wawel_Cathedral
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_poland_first
-		}
-		relative_position_id = PLX_PLC_poland_first
-		x = -1
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_build_warsaw_palace"
-			10 = {
-				add_building_construction = {
-					type = bunker
-					level = 2
-					province = 3544
-					instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			10 = { is_owned_and_controlled_by = ROOT }
-			has_socialist_government = no
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_sejm_dominance
-		icon = GFX_goal_POL_New_Polish_Republic
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_poland_first
-		}
-		relative_position_id = PLX_PLC_poland_first
-		x = 1
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_sejm_dominance"
-			add_political_power = 120
-			add_stability = 0.06
-		}
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-		available = {
-			has_socialist_government = no
-		}
-	}
+	
+	
 
 	focus = {
 		id = PLX_PLC_polish_language
 		icon = GFX_goal_POL_Poland_Forever
-		cost = 4.8
+		cost = 4
 		prerequisite = {
 			focus = PLX_PLC_poland_first
 		}
@@ -15027,6 +14998,9 @@ focus = {
 			focus = PLX_PLC_lithuania_first
 			focus = PLX_PLC_poland_first
 		}
+		prerequisite = {
+			focus = PLX_PLC_return_lublin_castle
+		}
 		relative_position_id = PLX_PLC_poland_first
 		x = 3
 		y = 0
@@ -15049,135 +15023,9 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_a_new_capital
-		icon = GFX_goal_POL_Rebuilding_Krakow
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_striking_the_balance
-		}
-		relative_position_id = PLX_PLC_poland_first
-		x = 3
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_a_new_capital"
-			if = {
-				limit = {
-					NOT = { has_completed_focus = PLX_PLC_striking_the_balance }
-				}
-				custom_effect_tooltip = PLC_select_capital
-			}
-			else = {
-				capital_scope = {
-					add_extra_state_shared_building_slots = 1
-					add_building_construction = {
-						type = industrial_complex
-						level = 1
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = infrastructure
-						level = 1
-						instant_build = yes
-					}
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			capital_scope = { is_owned_and_controlled_by = ROOT }
-		}
-	}
+	
     
-	focus = {     
-		id = PLX_PLC_building_the_capital
-		icon = GFX_goal_POL_Research_Cities
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_a_new_capital
-		}
-		relative_position_id = PLX_PLC_poland_first
-		x = 2
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_building_the_capital"
-			if = {
-				limit = {
-					NOT = { has_completed_focus = PLX_PLC_striking_the_balance }
-				}
-				custom_effect_tooltip = PLC_select_capital
-			}
-			else = {
-				capital_scope = {
-					add_extra_state_shared_building_slots = 5
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			capital_scope = { is_owned_and_controlled_by = ROOT }
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_vilnius_warsaw_railway
-		icon = GFX_goal_POL_Warszawa_Glowna_Railway_Station
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_a_new_capital
-		}
-		relative_position_id = PLX_PLC_poland_first
-		x = 4
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_vilnius_warsaw_railway"
-			10 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			96 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			97 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			build_railway = {
-				path = { 3320 9274 3393 318 347 11301 290 402 }
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			10 = { is_owned_and_controlled_by = ROOT }
-			96 = { is_owned_and_controlled_by = ROOT }
-			97 = { is_owned_and_controlled_by = ROOT }
-		}
-	}
+	
 
 	###Political Tree - favour Lithuania
 	focus = {
@@ -15187,6 +15035,9 @@ focus = {
 		mutually_exclusive = {
 			focus = PLX_PLC_striking_the_balance
 			focus = PLX_PLC_poland_first
+		}
+		prerequisite = {
+			focus = PLX_PLC_return_lublin_castle
 		}
 		relative_position_id = PLX_PLC_poland_first
 		x = 6
@@ -15210,54 +15061,11 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_expand_vilnius
-		icon = GFX_goal_ATH_in_the_castle
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_lithuania_first
-		}
-		relative_position_id = PLX_PLC_poland_first
-		x = 7
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_expand_vilnius"
-			96 = {
-				add_building_construction = {
-					type = bunker
-					level = 2
-					province = 3320
-					instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			96 = { is_owned_and_controlled_by = ROOT }
-			has_socialist_government = no
-		}
-	}
-
+	
 	focus = {
 		id = PLX_PLC_mendog_iii
 		icon = GFX_goal_LIT_King
-		cost = 4.8
+		cost = 4
 		prerequisite = {
 			focus = PLX_PLC_lithuania_first
 		}
@@ -15280,41 +15088,16 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_lithuanian_lead
-		icon = GFX_goal_POL_Lithuania_My_Homeland
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_lithuania_first
-		}
-		relative_position_id = PLX_PLC_poland_first
-		x = 5
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_lithuanian_lead"
-			add_stability = 0.15
-		}
-		search_filters = { FOCUS_FILTER_STABILITY }
-
-		available = {
-			has_socialist_government = no
-		}
-	}
+	
 
 	###Political Tree shared - Cultural Tensions
 	focus = {
 		id = PLX_PLC_solve_racial_tensions
 		icon = GFX_goal_POL_Union_Of_Races
-		cost = 4.8
+		cost = 4
 		prerequisite = {
-			focus = PLX_PLC_polish_language
-			focus = PLX_PLC_building_the_capital
-			focus = PLX_PLC_vilnius_warsaw_railway
-			focus = PLX_PLC_mendog_iii
+			focus = PLX_PLC_centralizing_power
+			focus = PLX_PLC_decentralization
 		}
 		relative_position_id = PLX_PLC_poland_first
 		x = 2
@@ -15336,15 +15119,15 @@ focus = {
 	focus = {
 		id = PLX_PLC_a_unifying_faith
 		icon = GFX_goal_POL_Convince_Chadecja
-		cost = 4.8
+		cost = 4
 		prerequisite = {
-			focus = PLX_PLC_solve_racial_tensions
+			focus = PLX_PLC_minority_rights
 		}
 		prerequisite = {
-			focus = PLX_PLC_a_combined_constitution
+			focus = PLX_PLC_a_common_currency
 		}
 		relative_position_id = PLX_PLC_poland_first
-		x = 2
+		x = 3
 		y = 6
 		ai_will_do = {
 			factor = 10
@@ -15361,16 +15144,16 @@ focus = {
 	focus = {
 		id = PLX_PLC_minority_rights
 		icon = GFX_goal_POL_Our_Oldest_Brothers
-		cost = 4.8
+		cost = 4
 		prerequisite = {
-			focus = PLX_PLC_a_unifying_faith
+			focus = PLX_PLC_a_smaller_circle
 		}
 		prerequisite = {
-			focus = PLX_PLC_redefining_territories
+			focus = PLX_PLC_solve_racial_tensions
 		}
 		relative_position_id = PLX_PLC_poland_first
-		x = 1
-		y = 7
+		x = 2
+		y = 5
 		ai_will_do = {
 			factor = 10
 		}
@@ -15386,12 +15169,10 @@ focus = {
 	focus = {
 		id = PLX_PLC_centralizing_power
 		icon = GFX_goal_POL_Convert_Ruthenian_Brethren
-		cost = 4.8
+		cost = 4
 		prerequisite = {
-			focus = PLX_PLC_polish_language
-			focus = PLX_PLC_building_the_capital
-			focus = PLX_PLC_vilnius_warsaw_railway
-			focus = PLX_PLC_mendog_iii
+			focus = PLX_PLC_polish_structure
+			focus = PLX_PLC_lithuanian_structure
 		}
 		mutually_exclusive = {
 			focus = PLX_PLC_decentralization
@@ -15409,13 +15190,7 @@ focus = {
 			factor = 10
 		}
 
-		bypass = {
-			has_country_leader = {
-				name = "Józef Beck"
-				ruling_only = yes
-			}
-		}
-
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_centralizing_power"
 			add_ideas = PLC_centralized_state_idea
@@ -15431,12 +15206,12 @@ focus = {
 	focus = {
 		id = PLX_PLC_a_smaller_circle
 		icon = GFX_goal_POL_Peoples_King
-		cost = 4.8
+		cost = 4
 		prerequisite = {
 			focus = PLX_PLC_centralizing_power
 		}
 		relative_position_id = PLX_PLC_poland_first
-		x = -2
+		x = 0
 		y = 4
 		ai_will_do = {
 			factor = 10
@@ -15454,56 +15229,15 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_an_absolute_monarch
-		icon = GFX_goal_POL_kingdom
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_centralizing_power
-		}
-		relative_position_id = PLX_PLC_poland_first
-		x = 0
-		y = 4
-
-		ai_will_do = {
-			factor = 10
-		}
-		
-		bypass = {
-			has_country_leader = {
-				name = "Józef Beck"
-				ruling_only = yes
-			}
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_an_absolute_monarch"
-			set_politics = {
-				ruling_party = paternal_autocrat
-				elections_allowed = no
-			}
-			add_popularity = {
-				ideology = paternal_autocrat
-				popularity = 0.80
-			}
-		}
-		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		available = {
-			has_authoritarian_government = yes
-		}
-	}
 
 	###Political Tree shared - Centralisation vs Decentralisation - Decentralisation Path
 	focus = {
 		id = PLX_PLC_decentralization
 		icon = GFX_goal_POL_Golden_Liberty
-		cost = 4.8
+		cost = 4
 		prerequisite = {
-			focus = PLX_PLC_polish_language
-			focus = PLX_PLC_building_the_capital
-			focus = PLX_PLC_vilnius_warsaw_railway
-			focus = PLX_PLC_mendog_iii
+			focus = PLX_PLC_polish_structure
+			focus = PLX_PLC_lithuanian_structure
 		}
 		mutually_exclusive = {
 			focus = PLX_PLC_centralizing_power
@@ -15538,28 +15272,7 @@ focus = {
 	focus = {
 		id = PLX_PLC_local_representatives
 		icon = GFX_goal_POL_Hold_Free_Elections
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_decentralization
-		}
-		relative_position_id = PLX_PLC_poland_first
-		x = 8
-		y = 4
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_local_representatives"
-			add_political_power = 200
-		}
-		search_filters = { FOCUS_FILTER_POLITICAL }
-	}
-
-	focus = {
-		id = PLX_PLC_complete_suffrage
-		icon = GFX_goal_POL_Polish_Culture
-		cost = 4.8
+		cost = 4
 		prerequisite = {
 			focus = PLX_PLC_decentralization
 		}
@@ -15571,22 +15284,21 @@ focus = {
 		}
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_complete_suffrage"
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_local_representatives"
 			add_ideas = PLC_universal_suffrage_idea
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 
+
 	###Political Tree shared - Bureaucracy
 	focus = {
 		id = PLX_PLC_the_new_bureaucracy
 		icon = GFX_goal_POL_Reform_Monarchy
-		cost = 4.8
+		cost = 4
 		prerequisite = {
-			focus = PLX_PLC_polish_language
-			focus = PLX_PLC_building_the_capital
-			focus = PLX_PLC_vilnius_warsaw_railway
-			focus = PLX_PLC_mendog_iii
+			focus = PLX_PLC_centralizing_power
+			focus = PLX_PLC_decentralization
 		}
 		relative_position_id = PLX_PLC_poland_first
 		x = 4
@@ -15605,44 +15317,21 @@ focus = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 	}
 
-	focus = {
-		id = PLX_PLC_redefining_territories
-		icon = GFX_goal_POL_Land_Of_Your_Youth
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_the_new_bureaucracy
-		}
-		prerequisite = {
-			focus = PLX_PLC_a_combined_constitution
-		}
-		relative_position_id = PLX_PLC_poland_first
-		x = 4
-		y = 6
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_redefining_territories"
-			add_political_power = 150
-			remove_ideas = PLC_scattered_bureaucracy_idea1
-		}
-		search_filters = { FOCUS_FILTER_POLITICAL }
-	}
+	
 
 	focus = {
 		id = PLX_PLC_a_common_currency
 		icon = GFX_goal_POL_Reintroduce_Zloty
-		cost = 4.8
+		cost = 4
 		prerequisite = {
-			focus = PLX_PLC_redefining_territories
+			focus = PLX_PLC_the_new_bureaucracy
 		}
 		prerequisite = {
-			focus = PLX_PLC_a_unifying_faith
+			focus = PLX_PLC_local_representatives
 		}
 		relative_position_id = PLX_PLC_poland_first
-		x = 5
-		y = 7
+		x = 4
+		y = 5
 		ai_will_do = {
 			factor = 10
 		}
@@ -15657,8 +15346,9 @@ focus = {
 		id = PLX_PLC_mitteleuropa_question
 		icon = GFX_goal_NFE_take_down_germany
 		cost = 1.00
-		x = -79
-		y = 40
+		relative_position_id = POL_fp
+		x = 12
+		y = 2
 		ai_will_do = {
 			factor = 10
 			modifier = {
@@ -15669,7 +15359,9 @@ focus = {
 				}
 			}
 		}
-
+		prerequisite = {
+			focus = PLX_stay_with_germany
+		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_mitteleuropa_question"
 			add_political_power = 30
@@ -15693,22 +15385,19 @@ focus = {
 			is_in_faction_with = GER
 			96 = { is_owned_and_controlled_by = ROOT }
 		}
-		bypass = {
-			NOT = {	is_in_faction_with = GER }
-			96 = { is_owned_and_controlled_by = ROOT }
-		}
+		
 	}
 
 	###Diplomatic Tree - Germany
 	focus = {
 		id = PLX_PLC_stick_with_germany
-		icon = GFX_goal_germany
+		icon = GFX_BAT_germanisation
 		cost = 4.00
 		prerequisite = {
 			focus = PLX_PLC_mitteleuropa_question
 		}
 		mutually_exclusive = {
-			focus = PLX_PLC_the_monarch
+			focus = PLX_PLC_new_zion
 			focus = PLX_PLC_the_revolution
 		}
 		relative_position_id = PLX_PLC_mitteleuropa_question
@@ -15729,11 +15418,119 @@ focus = {
 			is_in_faction_with = GER
 		}
 	}
+	###Diplomatic Tree - Germany
+	focus = {
+		id = PLX_PLC_new_zion
+		icon = ISRA_Symbol_of_settlement_culture
+		cost = 4.00
+		prerequisite = {
+			focus = PLX_PLC_mitteleuropa_question
+		}
+		mutually_exclusive = {
+			focus = PLX_PLC_stick_with_germany
+			focus = PLX_PLC_the_revolution
+		}
+		relative_position_id = PLX_PLC_mitteleuropa_question
+		x = 0
+		y = 1
+		ai_will_do = {
+			factor = 50
+		}
 
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_stick_with_germany"
+			add_political_power = 50
+			add_war_support = 0.1
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
+
+		available = {
+			is_in_faction_with = GER
+		}
+	}
+	focus = {
+		id = PLX_PLC_seek_jewish_immgrants
+		icon = GFX_goal_PAL_Private_Investement
+		cost = 4.00
+		prerequisite = {
+			focus = PLX_PLC_new_zion
+		}
+		
+		relative_position_id = PLX_PLC_mitteleuropa_question
+		x = 0
+		y = 2
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_stick_with_germany"
+			add_political_power = 50
+			add_war_support = 0.1
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
+
+		available = {
+			is_in_faction_with = GER
+		}
+	}
+	focus = {
+		id = PLX_PLC_integrate_zionist_forces
+		icon = Lehi_Israel_united_and_strong
+		cost = 4.00
+		prerequisite = {
+			focus = PLX_PLC_new_zion
+		}
+		
+		relative_position_id = PLX_PLC_mitteleuropa_question
+		x = -1
+		y = 3
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_stick_with_germany"
+			add_political_power = 50
+			add_war_support = 0.1
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
+
+		available = {
+			is_in_faction_with = GER
+		}
+	}
+	focus = {
+		id = PLX_PLC_relation_with_isr
+		icon = Lehi_Support_for_radical_Zionists
+		cost = 4.00
+		prerequisite = {
+			focus = PLX_PLC_new_zion
+		}
+		
+		relative_position_id = PLX_PLC_mitteleuropa_question
+		x = 1
+		y = 3
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_stick_with_germany"
+			add_political_power = 50
+			add_war_support = 0.1
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
+
+		available = {
+			is_in_faction_with = GER
+		}
+	}
+	
 	focus = {
 		id = PLX_PLC_economic_treaties
 		icon = GFX_GER_use_the_wealth_of_the_junkers-32619
-		cost = 4.8
+		cost = 4
 		prerequisite = {
 			focus = PLX_PLC_stick_with_germany
 		}
@@ -15760,7 +15557,7 @@ focus = {
 	focus = {
 		id = PLX_PLC_german_advisors
 		icon = GFX_german_army_advisors
-		cost = 4.8
+		cost = 4
 		prerequisite = {
 			focus = PLX_PLC_stick_with_germany
 		}
@@ -15785,7 +15582,7 @@ focus = {
 		id = PLX_PLC_german_tech_sharing
 		text = POL_German_Armour_Designs
 		icon = GFX_goal_AUS_panzerturmumbau
-		cost = 4.8
+		cost = 4
 		available = {
 			is_in_faction_with = GER
 		}
@@ -15806,64 +15603,8 @@ focus = {
 		search_filters = { FOCUS_FILTER_RESEARCH }
 	}
 
-	###Diplomatic Tree - Commonwealth Alone
-	focus = {
-		id = PLX_PLC_the_monarch
-		icon = GFX_goal_plc
-		cost = 4.00
-		prerequisite = {
-			focus = PLX_PLC_mitteleuropa_question
-		}
-		mutually_exclusive = {
-			focus = PLX_PLC_stick_with_germany
-			focus = PLX_PLC_the_revolution
-		}
-		relative_position_id = PLX_PLC_mitteleuropa_question
-		x = 0
-		y = 1
-		ai_will_do = {
-			factor = 5
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_the_monarch"
-			add_political_power = 200
-			add_stability = 0.1
-		}
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-		available = {
-			NOT = { is_in_faction_with = GER }
-			has_socialist_government = no
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_diplomatic_offices
-		icon = GFX_goal_ATH_diplomats
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_the_monarch
-		}
-		relative_position_id = PLX_PLC_mitteleuropa_question
-		x = 0
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_diplomatic_offices"
-			add_political_power = 70
-			add_ideas = PLC_diplomatic_offices_idea
-		}
-		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		available = {
-			NOT = { is_in_faction_with = GER }
-			has_socialist_government = no
-		}
-	}
+	
+	
 
 	focus = {
 		id = PLX_PLC_the_revolution
@@ -15873,7 +15614,7 @@ focus = {
 			focus = PLX_PLC_mitteleuropa_question
 		}
 		mutually_exclusive = {
-			focus = PLX_PLC_the_monarch
+			focus = PLX_PLC_new_zion
 			focus = PLX_PLC_stick_with_germany
 		}
 		relative_position_id = PLX_PLC_mitteleuropa_question
@@ -15909,8 +15650,8 @@ focus = {
 
 	focus = {
 		id = PLX_PLC_new_secret_police
-		icon = GFX_goal_POL_International_Polish_Agents
-		cost = 4.8
+		icon = GFX_goal_NOR_secret_police
+		cost = 4
 		prerequisite = {
 			focus = PLX_PLC_the_revolution
 		}
@@ -15935,7 +15676,7 @@ focus = {
 	focus = {
 		id = PLX_PLC_mobilize_the_people
 		icon = GFX_goal_POL_Spreading_Revolution
-		cost = 4.8
+		cost = 4
 		prerequisite = {
 			focus = PLX_PLC_the_revolution
 		}
@@ -16003,7 +15744,8 @@ focus = {
 		cost = 4.00
 		prerequisite = {
 			focus = PLX_PLC_german_advisors
-			focus = PLX_PLC_diplomatic_offices
+			focus = PLX_PLC_integrate_zionist_forces
+			focus = PLX_PLC_relation_with_isr
 			focus = PLX_PLC_mobilize_the_people
 		}
 		mutually_exclusive = {
@@ -16026,60 +15768,15 @@ focus = {
 			is_subject = no
 		}
 	}
-
 	focus = {
-		id = PLX_PLC_strike_east
-		icon = GFX_goal_GER_Butcher_Russian_Bear
+		id = PLX_PLC_strike_south
+		icon = GFX_focus_rus_balkans
 		cost = 4.00
-		available = { NOT = { is_in_faction_with = GER } }
 		prerequisite = {
 			focus = PLX_PLC_our_natural_borders
 		}
 		relative_position_id = PLX_PLC_mitteleuropa_question
 		x = -3
-		y = 5
-		ai_will_do = {
-			factor = 10
-			modifier = { # Do Not Commit Suicide
-				factor = 0
-				has_war = yes
-			}
-		}
-
-		will_lead_to_war_with = RUS
-		
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_strike_east"
-			195 = {
-				owner = {
-					ROOT = {
-						create_wargoal = {
-							type = annex_everything
-							target = PREV
-						}
-					}
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_ANNEXATION }
-
-		available = {
-			is_subject = no
-			195 = {
-				owner = { is_russian_tag_that_can_integrate = yes }
-			}
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_strike_south
-		icon = GFX_goal_GAL_divide_nation
-		cost = 4.00
-		prerequisite = {
-			focus = PLX_PLC_our_natural_borders
-		}
-		relative_position_id = PLX_PLC_mitteleuropa_question
-		x = -1
 		y = 5
 		ai_will_do = {
 			factor = 10
@@ -16119,16 +15816,147 @@ focus = {
 			}
 		}
 	}
+	focus = {
+		id = PLX_PLC_3i_shadow_rule
+		icon = GFX_goal_POL_International_Polish_Agents
+		cost = 4.00
+		prerequisite = {
+			focus = PLX_PLC_the_greater_commonwealth
+		}
+		relative_position_id = PLX_PLC_mitteleuropa_question
+		x = 3
+		y = 5
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_galician_referendum"
+			country_event = plcommon.19
+		}
+
+		available = {
+			country_exists = AUS
+			has_war = no
+			is_subject = no
+			AUS = {
+				has_war = no
+				is_subject = no
+			}
+		}
+	}
+	focus = {
+		id = PLX_PLC_commie_volkism
+		icon = GFX_goal_AUS_Ein_Volk
+		cost = 4.00
+		prerequisite = {
+			focus = PLX_PLC_the_greater_commonwealth
+		}
+		relative_position_id = PLX_PLC_mitteleuropa_question
+		x = 5
+		y = 5
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_galician_referendum"
+			country_event = plcommon.19
+		}
+
+		available = {
+			country_exists = AUS
+			has_war = no
+			is_subject = no
+			AUS = {
+				has_war = no
+				is_subject = no
+			}
+		}
+	}
+	
+	focus = {
+		id = PLX_PLC_red_millinaire_stays
+		icon = GFX_SOV_middle_class
+		cost = 4.00
+		prerequisite = {
+			focus = PLX_PLC_the_greater_commonwealth
+		}
+		relative_position_id = PLX_PLC_mitteleuropa_question
+		x = 7
+		y = 5
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_galician_referendum"
+			country_event = plcommon.19
+		}
+
+		available = {
+			country_exists = AUS
+			has_war = no
+			is_subject = no
+			AUS = {
+				has_war = no
+				is_subject = no
+			}
+		}
+	}
+	focus = {
+		id = PLX_PLC_strike_east
+		icon = GFX_goal_GER_Butcher_Russian_Bear
+		cost = 4.00
+		available = { NOT = { is_in_faction_with = GER } }
+		prerequisite = {
+			focus = PLX_PLC_our_natural_borders
+		}
+		relative_position_id = PLX_PLC_mitteleuropa_question
+		x = -1
+		y = 5
+		ai_will_do = {
+			factor = 10
+			modifier = { # Do Not Commit Suicide
+				factor = 0
+				has_war = yes
+			}
+		}
+
+		will_lead_to_war_with = RUS
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_strike_east"
+			195 = {
+				owner = {
+					ROOT = {
+						create_wargoal = {
+							type = annex_everything
+							target = PREV
+						}
+					}
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		available = {
+			is_subject = no
+			195 = {
+				owner = { is_russian_tag_that_can_integrate = yes }
+			}
+		}
+	}
+
+	
 
 	###Diplomatic Tree - Peaceful path
 	focus = {
 		id = PLX_PLC_the_greater_commonwealth
-		icon = GFX_goal_POL_slavic_union
+		icon = GFX_GRU_deutsche_syndikalisiische_republik-3971
 		cost = 4.00
 		prerequisite = {
 			focus = PLX_PLC_mobilize_the_people
-			focus = PLX_PLC_diplomatic_offices
-			focus = PLX_PLC_german_advisors
 		}
 		mutually_exclusive = {
 			focus = PLX_PLC_our_natural_borders
@@ -16153,7 +15981,7 @@ focus = {
 
 	focus = {
 		id = PLX_PLC_ruthenian_invitation
-		icon = GFX_goal_AUS_brest_litovsk
+		icon = GFX_RUS_Power_To_Local_Councils
 		cost = 4.00
 		prerequisite = {
 			focus = PLX_PLC_the_greater_commonwealth
@@ -16182,35 +16010,7 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_galician_referendum
-		icon = GFX_goal_POL_union
-		cost = 4.00
-		prerequisite = {
-			focus = PLX_PLC_the_greater_commonwealth
-		}
-		relative_position_id = PLX_PLC_mitteleuropa_question
-		x = 3
-		y = 5
-		ai_will_do = {
-			factor = 10
-		}
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_galician_referendum"
-			country_event = plcommon.19
-		}
-
-		available = {
-			country_exists = AUS
-			has_war = no
-			is_subject = no
-			AUS = {
-				has_war = no
-				is_subject = no
-			}
-		}
-	}
 	focus = {
 		id = PLX_PLC_polish_leadership
 		icon = GFX_goal_POL_army
@@ -16219,8 +16019,13 @@ focus = {
 			focus = PLX_PLC_integrating_two_armies
 			focus = PLX_PLC_lithuanian_tactics
 		}
+		prerequisite = {
+			focus = PLX_PLC_poland_first
+			focus = PLX_PLC_lithuania_first
+			focus = PLX_PLC_striking_the_balance
+		}
 		relative_position_id = PLX_PLC_integrating_two_armies
-		x = -4
+		x = -2
 		y = 0
 		ai_will_do = {
 			factor = 5
@@ -16248,8 +16053,13 @@ focus = {
 			focus = PLX_PLC_polish_leadership
 			focus = PLX_PLC_integrating_two_armies
 		}
+		prerequisite = {
+			focus = PLX_PLC_poland_first
+			focus = PLX_PLC_lithuania_first
+			focus = PLX_PLC_striking_the_balance
+		}
 		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 4
+		x = 2
 		y = 0
 		ai_will_do = {
 			factor = 5
@@ -16267,591 +16077,7 @@ focus = {
 		}
 	}
 
-	###Army Tree - Mobile
-	focus = {
-		id = PLX_PLC_mobile_army
-		icon = GFX_goal_POL_Cavaliers_Triumphant
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_integrating_two_armies
-			focus = PLX_PLC_polish_leadership
-		}
-		mutually_exclusive = {
-			focus = PLX_PLC_impenetrable_defense
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = -2
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_mobile_army"
-			add_ideas = PLC_mobile_army_idea
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS }
-	}
-
-	focus = {
-		id = PLX_PLC_special_forces
-		icon = GFX_goal_POL_Do_Boju
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_mobile_army
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = -7
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_special_forces"
-			army_experience = 10
-			add_tech_bonus = {
-				name = PLC_special_forces
-				bonus = 1
-				uses = 1
-				category = para_tech
-				category = marine_tech
-				category = mountaineers_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_mobile_infantry
-		icon = GFX_goal_POL_New_Age_Cavalry
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_mobile_army
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = -5
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_mobile_infantry"
-			add_tech_bonus = {
-				name = PLC_mobile_infantry
-				bonus = 1
-				uses = 1
-				category = motorized_equipment
-				category = cat_mechanized_equipment
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_supply_chains
-		icon = GFX_goal_POL_State_Road_Fund
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_mobile_infantry
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = -5
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_supply_chains"
-			add_tech_bonus = {
-				name = PLC_supply_chains
-				bonus = 1
-				uses = 1
-				category = motorized_equipment
-				category = cat_mechanized_equipment
-			}
-			add_ideas = PLC_supply_chains_idea
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_armored_spearhead
-		icon = GFX_goal_POL_light_tanks
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_mobile_army
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = -3
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_armored_spearhead"
-			add_tech_bonus = {
-				name = PLC_armored_spearhead
-				bonus = 1
-				category = cat_light_armor
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_tank_innovations
-		icon = GFX_goal_POL_Hussar_Tanks
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_armored_spearhead
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = -3
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_tank_innovations"
-			army_experience = 25
-			add_tech_bonus = {
-				name = PLC_tank_innovations
-				bonus = 1
-				uses = 1
-				category = cat_heavy_armor
-			}
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_killing_blow
-		icon = GFX_goal_POL_Condemn_Teuton_Heresy
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_tank_innovations
-		}
-
-		prerequisite = {
-			focus = PLX_PLC_supply_chains
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = -4
-		y = 4
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_killing_blow"
-			add_ideas = PLC_killing_blow_idea
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS }
-	}
-
-	###Army Tree - Defensive
-	focus = {
-		id = PLX_PLC_impenetrable_defense
-		icon = GFX_goal_POL_Establish_Border_Forts
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_integrating_two_armies
-			focus = PLX_PLC_lithuanian_tactics
-		}
-		mutually_exclusive = {
-			focus = PLX_PLC_mobile_army
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 2
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_impenetrable_defense"
-			add_ideas = PLC_impenetrable_defense_idea
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS }
-	}
-
-	focus = {
-		id = PLX_PLC_russian_forts
-		icon = GFX_goal_POL_Panstwowe_Wytwornie_Uzbrojenia
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_impenetrable_defense
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 3
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_russian_forts"
-			custom_effect_tooltip = expanded_engineer_corps_tech_effect
-			hidden_effect = {
-				set_technology = { expanded_engineer_corps_tech = 1 popup = no }
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_holding_our_gains
-		icon = GFX_goal_POL_Defensive_Tactics
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_russian_forts
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 3
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_holding_our_gains"
-			96 = {
-				add_building_construction = {
-					type = bunker
-					level = 2
-					province = 6296
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = bunker
-					level = 2
-					province = 3320
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = bunker
-					level = 2
-					province = 3393
-					instant_build = yes
-				}
-			}
-			189 = {
-				add_building_construction = {
-					type = bunker
-					level = 2
-					province = 9483
-					instant_build = yes
-				}
-			}
-			92 = {
-				add_building_construction = {
-					type = bunker
-					level = 2
-					province = 3559
-					instant_build = yes
-				}
-			}
-			87 = {
-				add_building_construction = {
-					type = bunker
-					level = 2
-					province = 9508
-					instant_build = yes
-				}
-			}
-			10 = {
-				add_building_construction = {
-					type = bunker
-					level = 2
-					province = 3544
-					instant_build = yes
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			OR = {
-				96 = { is_owned_and_controlled_by = ROOT }
-				189 = { is_owned_and_controlled_by = ROOT }
-				92 = { is_owned_and_controlled_by = ROOT }
-				87 = { is_owned_and_controlled_by = ROOT }
-				10 = { is_owned_and_controlled_by = ROOT }
-			}
-		}
-		bypass = {
-			NOT = {
-				96 = { is_owned_and_controlled_by = ROOT }
-				189 = { is_owned_and_controlled_by = ROOT }
-				92 = { is_owned_and_controlled_by = ROOT }
-				87 = { is_owned_and_controlled_by = ROOT }
-				10 = { is_owned_and_controlled_by = ROOT }
-			}
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_artillery_focus
-		icon = GFX_goal_POL_Munitions_Districts
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_impenetrable_defense
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 5
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_artillery_focus"
-			add_tech_bonus = {
-				name = PLC_artillery_focus
-				uses = 2
-				bonus = 1
-				category = artillery
-				category = support_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_trench_warfare
-		icon = GFX_goal_NVN_Fortify_Fort_Defiance
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_artillery_focus
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 5
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_trench_warfare"
-			add_ideas = PLC_trench_warfare_idea
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS }
-	}
-
-	focus = {
-		id = PLX_PLC_never_surrender
-		icon = GFX_goal_POL_Not_Yet_Lost
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_trench_warfare
-		}
-
-		prerequisite = {
-			focus = PLX_PLC_holding_our_gains
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 4
-		y = 4
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_never_surrender"
-			add_ideas = PLC_never_surrender_idea
-		}
-		search_filters = { FOCUS_FILTER_RESISTANCE }
-	}
-
-	focus = {
-		id = PLX_PLC_moving_fortresses
-		icon = GFX_goal_KSV_rail_gun
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_impenetrable_defense
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 7
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_moving_fortresses"
-			add_tech_bonus = {
-				name = PLC_moving_fortresses
-				bonus = 1
-				uses = 1
-				category = cat_heavy_armor
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	###Army Tree shared
-	focus = {
-		id = PLX_PLC_army_drills
-		icon = GFX_goal_POL_Integrated_Infantry_Tactics
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_impenetrable_defense
-			focus = PLX_PLC_mobile_army
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = -1
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_army_drills"
-			army_experience = 25
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
-			}
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_new_tactics
-		icon = GFX_goal_POL_Modern_Military_Thought
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_army_drills
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = -1
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_new_tactics"
-			army_experience = 50
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
-			}
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_mobilization
-		icon = GFX_goal_POL_Defend_Newborn_State
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_impenetrable_defense
-			focus = PLX_PLC_mobile_army
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 1
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_mobilization"
-			increase_conscription = yes
-		}
-
-		bypass = {
-			has_idea = scraping_the_barrel
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_wartime_rations
-		icon = GFX_goal_CAL_Rations_Poor
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_mobilization
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 1
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_wartime_rations"
-			add_ideas = PLC_wartime_rationing_idea
-			increase_mobilisation = yes
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			has_war = yes
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_reforming_high_command
-		icon = GFX_goal_generic_army_high_command
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_mobilization
-		}
-
-		prerequisite = {
-			focus = PLX_PLC_new_tactics
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 0
-		y = 4
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_reforming_high_command"
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_army_designs
-		icon = GFX_goal_POL_New_Polish_Rifle
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_reforming_high_command
-		}
-		relative_position_id = PLX_PLC_integrating_two_armies
-		x = 0
-		y = 5
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_army_designs"
-			add_research_slot = 1
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
+	
 	### Economic Tree ###
 
 	###Economic Tree - favour Lithuania
@@ -16862,8 +16088,14 @@ focus = {
 		mutually_exclusive = {
 			focus = PLX_PLC_polish_structure
 		}
-		x = -45
-		y = 33
+		prerequisite = {
+			focus = PLX_PLC_poland_first
+			focus = PLX_PLC_lithuania_first
+			focus = PLX_PLC_striking_the_balance
+		}
+		relative_position_id = PLX_PLC_striking_the_balance
+		x = 1
+		y = 2
 		ai_will_do = {
 			factor = 30
 		}
@@ -16882,7 +16114,7 @@ focus = {
 					instant_build = yes
 				}
 			}
-			PLC_favour_lithuania = yes
+			add_ideas = PLC_conforming_rail_gauge_idea
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
@@ -16891,98 +16123,9 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_urban_districts
-		icon = GFX_goal_NEE_Meritocracy_Focused_Growing_Urban_Heart
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_lithuanian_structure
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = 0
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
+	
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_urban_districts"
-			random_owned_controlled_state = {
-				prioritize = {
-					11
-				}
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-	}
 
-	focus = {
-		id = PLX_PLC_tungsten_mining
-		icon = GFX_goal_GAL_sell_oil
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_urban_districts
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = 1
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_tungsten_mining"
-			add_resource = {
-				type = oil
-				amount = 10
-				state = 189
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			189 = { is_owned_and_controlled_by = ROOT }
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_lithuanian_corporations
-		icon = GFX_goal_TEX_Fair_Price_Oil
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_lithuanian_structure
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = 2
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_lithuanian_corporations"
-			add_tech_bonus = {
-				name = PLC_lithuanian_corporations
-				bonus = 1
-				uses = 1
-				category = synth_resources
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
 	### Army Tree ###
 
 	###Army Tree - strike a balance
@@ -16994,8 +16137,14 @@ focus = {
 			focus = PLX_PLC_polish_leadership
 			focus = PLX_PLC_lithuanian_tactics
 		}
-		x = -61
-		y = 33
+		prerequisite = {
+			focus = PLX_PLC_poland_first
+			focus = PLX_PLC_lithuania_first
+			focus = PLX_PLC_striking_the_balance
+		}
+		relative_position_id = PLX_PLC_striking_the_balance
+		x = 0
+		y = 1
 		ai_will_do = {
 			factor = 5
 		}
@@ -17024,8 +16173,14 @@ focus = {
 		mutually_exclusive = {
 			focus = PLX_PLC_lithuanian_ships
 		}
-		x = -62
-		y = 40
+		prerequisite = {
+			focus = PLX_PLC_poland_first
+			focus = PLX_PLC_lithuania_first
+			focus = PLX_PLC_striking_the_balance
+		}
+		relative_position_id = PLX_PLC_striking_the_balance
+		x = -6
+		y = 1
 		ai_will_do = {
 			factor = 5
 		}
@@ -17042,29 +16197,7 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_polish_officers
-		icon = GFX_goal_POL_New_Vision
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_poles_in_the_navy
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = -1
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_polish_officers"
-			add_timed_idea = {
-				idea = PLC_polish_enthusiasm_idea
-				days = 900
-			}
-		}
-	}
-
+	
 	###Navy Tree - favour Lithuania
 	focus = {
 		id = PLX_PLC_lithuanian_ships
@@ -17072,6 +16205,11 @@ focus = {
 		cost = 4.00
 		mutually_exclusive = {
 			focus = PLX_PLC_poles_in_the_navy
+		}
+		prerequisite = {
+			focus = PLX_PLC_poland_first
+			focus = PLX_PLC_lithuania_first
+			focus = PLX_PLC_striking_the_balance
 		}
 		relative_position_id = PLX_PLC_poles_in_the_navy
 		x = 2
@@ -17092,42 +16230,23 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_lithuanian_experience
-		icon = GFX_goal_LIT_Academy
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_lithuanian_ships
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 3
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_lithuanian_experience"
-			navy_experience = 120
-		}
-		search_filters = { FOCUS_FILTER_NAVY_BONUS }
-	}
+	
 
 	###Navy Tree - Baltic Protection path
 	focus = {
 		id = PLX_PLC_baltic_protection
 		icon = GFX_goal_generic_baltic_sea
-		cost = 4.8
+		cost = 4
 		prerequisite = {
-			focus = PLX_PLC_polish_officers
-			focus = PLX_PLC_lithuanian_experience
+			focus = POL_unrestircted_submarine_warfare
+			focus = POL_pride_of_the_baltic
 		}
 		mutually_exclusive = {
 			focus = PLX_PLC_atlantic_fleet
 		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = -1
-		y = 2
+		relative_position_id = POL_kickstart_navy
+		x = 0
+		y = 3
 		ai_will_do = {
 			factor = 10
 		}
@@ -17138,164 +16257,23 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_naval_bombers
-		icon = GFX_goal_FIU_naval_bomber
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_baltic_protection
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = -2
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_naval_bombers"
-			air_experience = 5
-			navy_experience = 5
-			add_tech_bonus = {
-				name = PLC_naval_bombers
-				bonus = 1
-				uses = 1
-				category = naval_bomber
-			}
-		}
-		search_filters = { FOCUS_FILTER_NAVY_BONUS FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
-	}
-
-	focus = {
-		id = PLX_PLC_coastal_forts
-		icon = GFX_USA_secure_coastline
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_naval_bombers
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = -2
-		y = 4
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_coastal_forts"
-			189 = {
-				add_building_construction = {
-					type = coastal_bunker
-					level = 6
-					province = 6314
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = bunker
-					level = 2
-					province = 6314
-					instant_build = yes
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			189 = { is_owned_and_controlled_by = ROOT }
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_versatile_fleet
-		icon = GFX_MAF_naval_aerial_observation
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_baltic_protection
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 0
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_versatile_fleet"
-			add_tech_bonus = {
-				name = PLC_versatile_fleet
-				bonus = 1
-				uses = 1
-				category = dd_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_anti_submarines
-		icon = GFX_goal_ENG_Q_Ships
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_versatile_fleet
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 0
-		y = 4
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_anti_submarines"
-			add_ideas = PLC_anti_submarine_idea
-		}
-		search_filters = { FOCUS_FILTER_NAVY_BONUS }
-	}
-
-	focus = {
-		id = PLX_PLC_cruiser_research
-		icon = GFX_goal_CRO_cruiser_models
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_anti_submarines
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 0
-		y = 5
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_garrison_training"
-			add_tech_bonus = {
-				name = PLC_versatile_fleet
-				bonus = 1
-				uses = 1
-				category = cl_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_MANPOWER }
-
-		available = {
-			189 = { is_owned_and_controlled_by = ROOT }
-		}
-	}
-
+	
+	
 	###Navy Tree - Atlantic Fleet path
 	focus = {
 		id = PLX_PLC_atlantic_fleet
 		icon = GFX_goal_AUS_Rediscover_Atlantis
-		cost = 4.8
+		cost = 4
 		prerequisite = {
-			focus = PLX_PLC_lithuanian_experience
-			focus = PLX_PLC_polish_officers
+			focus = POL_unrestircted_submarine_warfare
+			focus = POL_pride_of_the_baltic
 		}
 		mutually_exclusive = {
 			focus = PLX_PLC_baltic_protection
 		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 3
-		y = 2
+		relative_position_id = POL_kickstart_navy
+		x = -2
+		y = 3
 		ai_will_do = {
 			factor = 10
 		}
@@ -17306,309 +16284,9 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_battleships
-		icon = GFX_goal_FIU_secure_fleet
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_atlantic_fleet
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 2
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
+	
+	
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_battleships"
-			add_tech_bonus = {
-				name = PLC_battleships
-				bonus = 1
-				uses = 1
-				category = bb_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_carrier_experiments
-		icon = GFX_goal_generic_carrier_aircraft
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_battleships
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 2
-		y = 4
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_carrier_experiments"
-			add_tech_bonus = {
-				name = PLC_carrier_experiments
-				bonus = 1
-				uses = 1
-				category = cv_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_marines
-		icon = GFX_goal_NFE_elite_marines
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_carrier_experiments
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 2
-		y = 5
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_marines"
-			add_tech_bonus = {
-				name = PLC_marines
-				bonus = 1
-				uses = 1
-				category = tp_tech
-			}
-			add_tech_bonus = {
-				name = PLC_marines
-				bonus = 1
-				uses = 1
-				category = marine_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_submarine_tactics
-		icon = GFX_goal_AUS_unrestricted_submarine_warfare
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_atlantic_fleet
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 4
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_submarine_tactics"
-			add_tech_bonus = {
-				name = PLC_submarine_tactics
-				bonus = 1
-				uses = 1
-				category = ss_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_trade_interdiction
-		icon = GFX_HUN_trade_war
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_submarine_tactics
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 4
-		y = 4
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_trade_interdiction"
-			add_tech_bonus = {
-				name = PLC_trade_interdiction
-				bonus = 1
-				uses = 1
-				category = ss_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	###Navy Tree shared
-	focus = {
-		id = PLX_PLC_new_dockyards
-		icon = GFX_USA_ports_atlantic
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_polish_officers
-			focus = PLX_PLC_lithuanian_experience
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = -3
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_new_dockyards"
-			if = {
-				limit = {
-					all_owned_state = {
-						is_coastal = no
-					}
-				}
-				custom_effect_tooltip = POL_must_own_coast
-			}
-			else = {
-				random_owned_controlled_state = {
-					limit = {
-						is_coastal = yes
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			any_owned_state = {
-				is_coastal = yes
-			}
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_naval_infrastructure
-		icon = GFX_goal_MAG_open_port_for_all
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_new_dockyards
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = -4
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_naval_infrastructure"
-			if = {
-				limit = {
-					all_owned_state = {
-						is_coastal = no
-					}
-				}
-				custom_effect_tooltip = POL_must_own_coast
-			}
-			else = {
-				random_owned_controlled_state = {
-					limit = {
-						is_coastal = yes
-						free_building_slots = {
-							building = dockyard
-							size > 2
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 3
-					add_building_construction = {
-						type = dockyard
-						level = 3
-						instant_build = yes
-					}
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			any_owned_state = {
-				is_coastal = yes
-			}
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_naval_academy
-		icon = GFX_goal_navy_hat_ships
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_lithuanian_experience
-			focus = PLX_PLC_polish_officers
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 5
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_naval_academy"
-			navy_experience = 25
-			add_doctrine_cost_reduction = {
-				name = naval_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = naval_doctrine
-			}
-		}
-		search_filters = { FOCUS_FILTER_NAVY_BONUS FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_experimental_designs
-		icon = GFX_goal_generic_naval_industry
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_naval_academy
-		}
-		relative_position_id = PLX_PLC_poles_in_the_navy
-		x = 6
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_experimental_designs"
-			navy_experience = 25
-			add_doctrine_cost_reduction = {
-				name = naval_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = naval_doctrine
-			}
-			add_tech_bonus = {
-				name = PLC_experimental_designs
-				bonus = 1
-				uses = 1
-				category = bb_tech
-				category = shbb_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_NAVY_BONUS FOCUS_FILTER_RESEARCH }
-	}
 	###Economic Tree - favour Poland
 	focus = {
 		id = PLX_PLC_polish_structure
@@ -17617,8 +16295,13 @@ focus = {
 		mutually_exclusive = {
 			focus = PLX_PLC_lithuanian_structure
 		}
+		prerequisite = {
+			focus = PLX_PLC_poland_first
+			focus = PLX_PLC_lithuania_first
+			focus = PLX_PLC_striking_the_balance
+		}
 		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -4
+		x = -2
 		y = 0
 		ai_will_do = {
 			factor = 30
@@ -17639,8 +16322,7 @@ focus = {
 					instant_build = yes
 				}
 			}
-			PLC_favour_poland = yes
-			set_country_flag = pol_beike03
+			add_ideas = PLC_international_railways_idea
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
@@ -17649,463 +16331,6 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_polish_monopolies
-		icon = GFX_goal_POL_Investors_Paradise
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_polish_structure
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -6
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_polish_monopolies"
-			add_tech_bonus = {
-				name = PLC_polish_monopolies
-				bonus = 1
-				uses = 1
-				category = construction_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_polish_farms
-		icon = GFX_goal_POL_Invest_Rural_Education
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_polish_structure
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -4
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_polish_farms"
-			10 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			87 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			90 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			92 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			97 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			10 = { is_owned_and_controlled_by = ROOT }
-			87 = { is_owned_and_controlled_by = ROOT }
-			90 = { is_owned_and_controlled_by = ROOT }
-			92 = { is_owned_and_controlled_by = ROOT }
-			97 = { is_owned_and_controlled_by = ROOT }
-		}
-	}
-
-	focus = {
-		id = PLX_PLC_steel_factories
-		icon = GFX_goal_AOG_Metal_Cog_Economy
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_polish_farms
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -5
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_steel_factories"
-			add_resource = {
-				type = steel
-				amount = 8
-				state = 10
-			}
-			add_resource = {
-				type = steel
-				amount = 8
-				state = 87
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			10 = { is_owned_and_controlled_by = ROOT }
-			87 = { is_owned_and_controlled_by = ROOT }
-		}
-	}
-
-	###Economic Tree shared
-	focus = {
-		id = PLX_PLC_railways
-		icon = GFX_goal_NIC_Pacific_Rail_Expansion
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_reform_economy
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -3
-		y = 2
-		ai_will_do = {
-			factor = 20
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_railways"
-			add_ideas = PLC_international_railways_idea
-			build_railway = {
-				path = { 3544 6511 3458 3458 6416 11532 11430 13611 9427 }
-			}
-			build_railway = {
-				path = { 3544 6567 9290 6321 6347 3351 3380 362 }
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-	}
-
-	focus = {
-		id = PLX_PLC_combined_infrastructure
-		icon = GFX_goal_POL_New_Polish_Worker
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_railways
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -3
-		y = 3
-		ai_will_do = {
-			factor = 20
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_combined_infrastructure"
-			random_owned_controlled_state = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-
-			random_owned_controlled_state = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-	}
-
-	focus = {
-		id = PLX_PLC_new_economy
-		icon = GFX_goal_POL_International_Trade_Reform
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_railways
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -5
-		y = 3
-		ai_will_do = {
-			factor = 20
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_new_economy"
-			random_owned_controlled_state = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-
-			random_owned_controlled_state = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-	}
-
-	focus = {
-		id = PLX_PLC_more_railways
-		icon = GFX_thenorthernraillink
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_reform_economy
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -1
-		y = 2
-		ai_will_do = {
-			factor = 20
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_more_railways"
-			add_ideas = PLC_conforming_rail_gauge_idea
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-	}
-
-	focus = {
-		id = PLX_PLC_military_factories
-		icon = GFX_goal_NEE_Nationalize_Key_Industries_Railways
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_more_railways
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -1
-		y = 3
-		ai_will_do = {
-			factor = 20
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_military_factories"
-			random_owned_controlled_state = {
-				limit = {
-					free_building_slots = {
-						building = arms_factory
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-
-			random_owned_controlled_state = {
-				limit = {
-					free_building_slots = {
-						building = arms_factory
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-	}
-
-	focus = {
-		id = PLX_PLC_more_military_factories
-		icon = GFX_goal_POL_Contemporary_Assembly_Lines
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_more_railways
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = 1
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_more_military_factories"
-			random_owned_controlled_state = {
-				limit = {
-					free_building_slots = {
-						building = arms_factory
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-
-			random_owned_controlled_state = {
-				limit = {
-					free_building_slots = {
-						building = arms_factory
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		available = {
-			has_war = yes
-		}
-	}
-
-	###Economic Tree shared - Black Monday
-	focus = {
-		id = PLX_PLC_reform_economy
-		icon = GFX_goal_POL_Restructure_Bank_Poland
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_polish_structure
-			focus = PLX_PLC_lithuanian_structure
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -2
-		y = 1
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_reform_economy"
-			add_one_random_military_factory = yes
-			add_one_random_military_factory = yes
-		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-	}
-
-	focus = {
-		id = PLX_PLC_recover_black_monday
-		icon = GFX_goal_POL_New_Central_Industrial_Region
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_new_economy
-			focus = PLX_PLC_combined_infrastructure
-		}
-		prerequisite = {
-			focus = PLX_PLC_military_factories
-			focus = PLX_PLC_more_military_factories
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = -4
-		y = 4
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_recover_black_monday"
-			
-			add_research_slot = 1
-		}
-	}
-
-	###Economic Tree final focus
-	focus = {
-		id = PLX_PLC_industrial_innovations
-		icon = GFX_goal_POL_Private_Research_Initiatives
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_new_economy
-			focus = PLX_PLC_combined_infrastructure
-		}
-		prerequisite = {
-			focus = PLX_PLC_military_factories
-			focus = PLX_PLC_more_military_factories
-		}
-		relative_position_id = PLX_PLC_lithuanian_structure
-		x = 0
-		y = 4
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_industrial_innovations"
-			add_research_slot = 1
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
 	### Air Tree ###
 
 	###Air Tree - Poland
@@ -18116,8 +16341,14 @@ focus = {
 		mutually_exclusive = {
 			focus = PLX_PLC_lithuanian_air_force
 		}
-		x = -50
-		y = 40
+		prerequisite = {
+			focus = PLX_PLC_poland_first
+			focus = PLX_PLC_lithuania_first
+			focus = PLX_PLC_striking_the_balance
+		}
+		relative_position_id = PLX_PLC_striking_the_balance
+		x = 4
+		y = 1
 		ai_will_do = {
 			factor = 50
 		}
@@ -18135,57 +16366,7 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_tactical_bombers
-		icon = GFX_MON_tactical_bomber
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_royal_air_force
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = -1
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_tactical_bombers"
-			add_tech_bonus = {
-				name = PLC_tactical_bombers
-				uses = 1
-				bonus = 1
-				category = tactical_bomber
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_cas
-		icon = GFX_goal_USA_organic_air_support
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_tactical_bombers
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = -1
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_cas"
-			add_tech_bonus = {
-				name = PLC_cas
-				uses = 1
-				bonus = 1
-				category = cas_bomber
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
+	
 
 	###Air Tree - Lithuania
 	focus = {
@@ -18195,8 +16376,13 @@ focus = {
 		mutually_exclusive = {
 			focus = PLX_PLC_royal_air_force
 		}
+		prerequisite = {
+			focus = PLX_PLC_poland_first
+			focus = PLX_PLC_lithuania_first
+			focus = PLX_PLC_striking_the_balance
+		}
 		relative_position_id = PLX_PLC_royal_air_force
-		x = 6
+		x = 2
 		y = 0
 		ai_will_do = {
 			factor = 5
@@ -18215,253 +16401,6 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = PLX_PLC_heavy_fighters
-		icon = GFX_MON_heavy_fighter
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_lithuanian_air_force
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = 7
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_heavy_fighters"
-			add_tech_bonus = {
-				name = PLC_heavy_fighters
-				bonus = 1
-				uses = 1
-				category = heavy_air
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_strategic_bombers
-		icon = GFX_goal_generic_bombing_pacification
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_heavy_fighters
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = 7
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_strategic_bombers"
-			add_tech_bonus = {
-				name = PLC_strategic_bombers
-				bonus = 1
-				uses = 1
-				category = heavy_air
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	###Air Tree shared
-	focus = {
-		id = PLX_PLC_fighters
-		icon = GFX_HUN_fighters
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_lithuanian_air_force
-			focus = PLX_PLC_royal_air_force
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = 1
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_fighters"
-			add_tech_bonus = {
-				name = PLC_fighters
-				bonus = 1
-				uses = 1
-				category = light_fighter
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_better_fighters
-		icon = GFX_goal_generic_air_jet_2
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_fighters
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = 1
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_better_fighters"
-			add_tech_bonus = {
-				name = PLC_better_fighters
-				bonus = 1
-				uses = 1
-				category = light_fighter
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_radar
-		icon = GFX_goal_CZE_radar_research
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_royal_air_force
-			focus = PLX_PLC_lithuanian_air_force
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = 3
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_radar"
-			add_tech_bonus = {
-				name = PLC_radar
-				bonus = 1
-				uses = 1
-				category = radar_tech
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
-
-	focus = {
-		id = PLX_PLC_paratroopers
-		icon = GFX_goeringshundreds
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_radar
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = 3
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_paratroopers"
-			army_experience = 5
-			air_experience = 5
-			add_tech_bonus = {
-				name = PLC_paratroopers
-				bonus = 1
-				uses = 1
-				technology = paratroopers
-				technology = paratroopers2
-			}
-		}
-		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
-	}
-
-	focus = {
-		id = PLX_PLC_air_tactics
-		icon = GFX_goal_generic_air_command
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_lithuanian_air_force
-			focus = PLX_PLC_royal_air_force
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = 5
-		y = 1
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_air_tactics"
-
-			air_experience = 25
-			add_doctrine_cost_reduction = {
-				name = air_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = air_doctrine
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
-	}
-
-	focus = {
-		id = PLX_PLC_more_air_tactics
-		icon = GFX_MON_air_doctrines_II
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_air_tactics
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = 5
-		y = 2
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_more_air_tactics"
-			air_experience = 50
-			add_doctrine_cost_reduction = {
-				name = air_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = air_doctrine
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
-	}
-
-	focus = {
-		id = PLX_PLC_rocket_experiments
-		icon = GFX_goal_generic_rocket_weapon
-		cost = 4.8
-		prerequisite = {
-			focus = PLX_PLC_better_fighters
-		}
-
-		prerequisite = {
-			focus = PLX_PLC_more_air_tactics
-		}
-		relative_position_id = PLX_PLC_royal_air_force
-		x = 3
-		y = 3
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			add_tech_bonus = {
-				name = PLC_rocket_experiments
-				bonus = 1
-				uses = 1
-				category = rocketry
-			}
-		}
-		search_filters = { FOCUS_FILTER_RESEARCH }
-	}
 	focus = {
 		id = KX_PL_trimuph_liberal_zadruga
 		icon = GFX_goal_POL_trimuph_liberal_zadruga
@@ -20230,7 +18169,11 @@ focus = {
 		ai_will_do = {
 			factor = 10
 		}
-
+		allow_branch = {
+			NOT = {
+				tag = POL
+			}
+		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
 			add_political_power = 100
@@ -20260,42 +18203,7 @@ focus = {
 	}
 	
 	
-	focus = {
-		id = PLX_PLC_intermarium_dreams
-		icon = GFX_goal_PLC_follow_pilsudski
-		cost = 4
-		x = 8
-		y = 37
-		prerequisite = {
-			focus = PLX_PLC_solidify_poland
-		}
-		prerequisite = {
-			focus = PLX_PLC_a_bound_military
-		}
-		available = {
-			has_socialist_government = no
-		}
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			add_war_support = 0.2
-			add_ideas = PLC_miedzymorze_idea
-			
-			hidden_effect = {
-				country_event = {
-					id = kxplc.16
-					days = 93
-				}
-				country_event = {
-					id = kxplc.18
-					days = 5
-				}
-			}
-		}
-	}
+	
 	
 	focus = {
 		id = PLX_PLC_enemy_in_the_west
@@ -20311,7 +18219,7 @@ focus = {
 		}
 		
 		prerequisite = {
-			focus = PLX_PLC_intermarium_dreams
+			focus = PLX_PLC_night_in_vilnius
 		}
 		ai_will_do = {
 			factor = 10
@@ -20339,7 +18247,7 @@ focus = {
 			has_socialist_government = no
 		}
 		prerequisite = {
-			focus = PLX_PLC_intermarium_dreams
+			focus = PLX_PLC_night_in_vilnius
 		}
 		ai_will_do = {
 			factor = 10
@@ -20405,8 +18313,9 @@ focus = {
 		id = PLX_PLC_entente
 		icon = GFX_goal_PLC_with_canada
 		cost = 4
-		x = 8
-		y = 40
+		relative_position_id = PLX_unite_with_entente
+		x = 0
+		y = 1
 		available = {
 			NOT = {
 				CAN = {
@@ -20430,7 +18339,7 @@ focus = {
 			has_socialist_government = no
 		}
 		prerequisite = {
-			focus = PLX_PLC_enemy_in_the_east
+			focus = PLX_unite_with_entente
 		}
 		ai_will_do = {
 			factor = 10
@@ -20758,521 +18667,7 @@ focus = {
 		}
 	}
 	
-	focus = {
-		id = PLX_PLC_assert_diplomatic_independence
-		icon = GFX_goal_PLC_foreign_policy
-		cost = 4
-		x = 6
-		y = 40
-		prerequisite = {
-			focus = PLX_PLC_night_in_vilnius
-		}
-		available = {
-			has_socialist_government = no
-		}
-		ai_will_do = {
-			factor = 10
-		}
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			add_ideas = PLC_poland_not_lost
-			add_political_power = 50
-			add_popularity = {
-				ideology = authoritarian_democrat
-				popularity = 0.1
-			}
-			
-			add_state_claim = 776
-			add_state_claim = 777
-			add_state_claim = 5
-			add_state_core = 188
-			
-			hidden_effect = {
-				country_event = {
-					id = kxplc.12
-					days = 4
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_old_poland
-		icon = GFX_goal_PLC_old_poland
-		cost = 4
-		x = 5
-		y = 41
-		prerequisite = {
-			focus = PLX_PLC_assert_diplomatic_independence
-		}
-		prerequisite = {
-			focus = PLX_PLC_show_her_the_destiny
-		}
-		available = {
-			has_socialist_government = no
-		}
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			
-			custom_effect_tooltip = PLC_form_intermarium_decision
-			
-			
-			add_state_claim = 1124
-			add_state_claim = 88
-			add_state_claim = 1125
-			add_state_claim = 1127
-			add_state_claim = 1126
-			add_state_claim = 1140
-			add_state_claim = 89
-			add_state_claim = 91
-			add_state_claim = 80
-			add_state_claim = 713
-			add_state_claim = 79
-			add_state_claim = 78
-			add_state_claim = 86
-			add_state_claim = 93
-			hidden_effect = {
-				country_event = {
-					id = kxplc.20
-					days = 14
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_old_lithuania
-		icon = GFX_goal_PLC_old_lithuania
-		cost = 4
-		x = 7
-		y = 41
-		prerequisite = {
-			focus = PLX_PLC_assert_diplomatic_independence
-		}
-		prerequisite = {
-			focus = PLX_PLC_enemy_in_the_east
-		}
-		available = {
-			has_socialist_government = no
-		}
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			
-			custom_effect_tooltip = PLC_form_intermarium_decision
-			every_state = {
-				limit = { 
-					OR = {
-						is_core_of = WHR
-						state = 95
-						state = 207
-						state = 206
-						state = 1087
-						state = 204
-						state = 194
-						state = 1329
-						state = 755
-						state = 243
-						state = 1228
-						state = 1230
-						state = 1233
-						state = 1237
-						state = 1238
-						state = 1240
-						state = 1241
-						state = 1242
-						state = 1243
-						state = 1244
-						state = 1245
-						state = 193
-						state = 198
-						state = 199
-						state = 201
-						state = 202
-						state = 203
-						state = 225
-						state = 241
-						state = 259
-						state = 792
-						state = 997
-						state = 1287
-						state = 791
-						state = 192
-						state = 1232
-                        state = 197
-						state = 226
-					}
-				}
-				add_claim_by = ROOT
-			}
-			
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_into_russia
-		icon = GFX_goal_PLC_russia
-		cost = 1.5
-		x = 7
-		y = 42
-		available = {
-			can_declare_war_on = 219.owner
-			is_subject = no
-			has_war = no
-		}
-		prerequisite = {
-			focus = PLX_PLC_old_lithuania
-		}
-		ai_will_do = {
-			factor = 10
-		}
-		will_lead_to_war_with = RUS
-		
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			create_wargoal = {
-				target = 219.owner
-				type = annex_everything
-			}
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_ukrainian_debut
-		icon = GFX_goal_PLC_ukraine
-		cost = 1.5
-		x = 9
-		y = 42
-		available = {
-			country_exists = UKR
-			is_subject = no
-			has_war = no
-		}
-		prerequisite = {
-			focus = PLX_PLC_old_lithuania
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-		will_lead_to_war_with = UKR
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			
-			create_wargoal = {
-				target = UKR
-				type = annex_everything
-			}
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_westwards_reclamation
-		icon = GFX_goal_PLC_germany
-		cost = 1.5
-		x = 5
-		y = 42
-		available = {
-			OR = {
-				country_exists = GER
-				country_exists = GRU
-				country_exists = DDR
-			}
-			is_subject = no
-			has_war = no
-		}
-		prerequisite = {
-			focus = PLX_PLC_old_poland
-		}
-		ai_will_do = {
-			factor = 10
-		}
-		
-		will_lead_to_war_with = GER
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			
-			if = {
-				limit = {
-					country_exists = GER
-					NOT = {
-						is_in_faction_with = GER
-					}
-				}
-				create_wargoal = {
-					target = GER
-					type = annex_everything
-				}
-				else = {
-					create_wargoal = {
-						target = GRU
-						type = annex_everything
-					}
-					if = {
-						limit = {
-							country_exists = DDR
-						}
-						create_wargoal = {
-							target = DDR
-							type = annex_everything
-						}
-					}
-				}
-			}
-			
-			if = {
-				limit = {
-					country_exists = GER
-					is_in_faction_with = GER
-				}
-				leave_faction = yes
-				create_wargoal = {
-					target = GER
-					type = annex_everything
-				}
-				else = {
-					create_wargoal = {
-						target = GRU
-						type = annex_everything
-					}
-					if = {
-						limit = {
-							country_exists = DDR
-						}
-						create_wargoal = {
-							target = DDR
-							type = annex_everything
-						}
-					}
-				}
-			}
-			
-			add_state_claim = 67
-			add_state_claim = 66
-			add_state_claim = 68
-			add_state_claim = 63
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_southern_strike
-		icon = GFX_goal_PLC_galicia
-		cost = 1.5
-		x = 3
-		y = 42
-		prerequisite = {
-			focus = PLX_PLC_old_poland
-		}
-		available = {
-			OR = {
-				country_exists = GAL
-				AUS = {
-					owns_state = 91
-				}
-			}
-			is_subject = no
-			has_war = no
-		}
-		ai_will_do = {
-			factor = 10
-		}
-		
-		will_lead_to_war_with = GAL
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-
-			every_state = {
-				limit = {
-					is_core_of = GAL
-				}
-				add_core_of = POL
-			}
-			if = {
-				limit = {
-					country_exists = GAL
-				}
-				create_wargoal = {
-					target = GAL
-					type = annex_everything
-				}
-				else = {
-					if = {
-						limit = {
-							AUS = {
-								owns_state = 91
-							}
-						}
-						create_wargoal = {
-							target = AUS
-							type = annex_everything
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_attack_WHR
-		icon = GFX_goal_PLC_WHR
-		cost = 1.5
-		x = 6
-		y = 43
-		available = {
-			country_exists = WHR
-			is_subject = no
-			has_war = no
-		}
-		prerequisite = {
-			focus = PLX_PLC_old_poland
-			focus = PLX_PLC_old_lithuania
-		}
-		ai_will_do = {
-			factor = 10
-		}
-		
-		will_lead_to_war_with = WHR
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			
-			create_wargoal = {
-				target = WHR
-				type = annex_everything
-			}
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_heir_to_moldavia
-		icon = GFX_goal_PLC_romania
-		cost = 1.5
-		x = 4
-		y = 43
-		available = {
-			country_exists = ROM
-			is_subject = no
-			has_war = no
-		}
-		prerequisite = {
-			focus = PLX_PLC_old_poland
-		}
-		ai_will_do = {
-			factor = 10
-		}
-		
-		will_lead_to_war_with = ROM
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			
-			if = {
-				limit = {
-					country_exists = ROM
-				}
-				create_wargoal = {
-					target = ROM
-					type = annex_everything
-				}
-				else = {
-					if = {
-						limit = {
-							BAN = {
-								owns_state = 78
-								owns_state = 1222
-							}
-						}
-						create_wargoal = {
-							target = BAN
-							type = annex_everything
-						}
-					}
-				}
-			}
-			add_state_core = 80
-			add_state_core = 713
-			add_state_core = 1320
-			add_state_core = 78
-			add_state_core = 1222
-			add_state_core = 79
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_knocking_north
-		icon = GFX_goal_PLC_baltic
-		cost = 1.5
-		x = 8
-		y = 43
-		available = {
-			OR = {
-				country_exists = BAT
-				country_exists = LAT
-				country_exists = EST
-			}
-			is_subject = no
-			has_war = no
-		}
-		prerequisite = {
-			focus = PLX_PLC_old_lithuania
-		}
-		ai_will_do = {
-			factor = 10
-		}
-		
-		will_lead_to_war_with = BAT
-		will_lead_to_war_with = LAT
-		will_lead_to_war_with = EST
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			
-			if = {
-				limit = {
-					country_exists = BAT
-				}
-				create_wargoal = {
-					target = BAT
-					type = annex_everything
-				}
-			}
-			if = {
-				limit = {
-					country_exists = EST
-				}
-				create_wargoal = {
-					target = EST
-					type = annex_everything
-				}
-			}
-			if = {
-				limit = {
-					country_exists = LAT
-				}
-				create_wargoal = {
-					target = LAT
-					type = annex_everything
-				}
-			}
-			add_state_claim = 880
-			add_state_claim = 12
-			add_state_claim = 1091
-			add_state_claim = 190
-			add_state_claim = 13
-			add_state_claim = 191
-		}
-	}
 
 	#基督降临
 	focus = {
@@ -23689,7 +21084,7 @@ focus = {
     relative_position_id = PLX_POL_the_great_debate
     x = 3
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -23719,7 +21114,7 @@ focus = {
     relative_position_id = PLX_POL_the_great_debate
     x = -3
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -23749,7 +21144,7 @@ focus = {
     relative_position_id = PLX_POL_the_great_debate
     x = -5
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -23779,7 +21174,7 @@ focus = {
     relative_position_id = PLX_POL_the_great_debate
     x = -7
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -23809,7 +21204,7 @@ focus = {
     relative_position_id = PLX_POL_the_great_debate
     x = -9
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -23834,7 +21229,7 @@ focus = {
     relative_position_id = PLX_POL_romanian_king
     x = 0
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -23859,7 +21254,7 @@ focus = {
     relative_position_id = PLX_POL_romanian_king
     x = 0
     y = 2
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -23884,7 +21279,7 @@ focus = {
     relative_position_id = PLX_POL_romanian_king
     x = 0
     y = 3
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -24221,7 +21616,7 @@ focus = {
     relative_position_id = PLX_POL_the_great_debate
     x = -11
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -24487,7 +21882,7 @@ focus = {
     relative_position_id = PLX_POL_the_great_debate
     x = 5
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -24530,7 +21925,7 @@ focus = {
     relative_position_id = PLX_POL_the_great_debate
     x = 7
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -24563,7 +21958,7 @@ focus = {
     relative_position_id = PLX_POL_the_great_debate
     x = 9
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -24821,7 +22216,7 @@ focus = {
     relative_position_id = PLX_POL_the_great_debate
     x = 11
     y = 1
-    cost = 2.9
+    cost = 4
     ai_will_do = {
       factor = 1500
     }
@@ -30409,6 +27804,60 @@ focus = {
 		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
 	}
 	focus = {
+		id = PLX_PLC_paratroopers
+		icon = GFX_goeringshundreds
+		cost = 4
+		prerequisite = {
+			focus = POL_new_airforce
+		}
+		relative_position_id = POL_new_airforce
+		x = 4
+		y = 1
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_paratroopers"
+			army_experience = 5
+			air_experience = 5
+			add_tech_bonus = {
+				name = PLC_paratroopers
+				bonus = 1
+				uses = 1
+				technology = paratroopers
+				technology = paratroopers2
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = PLX_PLC_rocket_experiments
+		icon = GFX_goal_generic_rocket_weapon
+		cost = 4
+		
+		prerequisite = {
+			focus = POL_air_superiority
+		}
+		relative_position_id = POL_new_airforce
+		x = 0
+		y = 3
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			add_tech_bonus = {
+				name = PLC_rocket_experiments
+				bonus = 1
+				uses = 1
+				category = rocketry
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	focus = {
 		id = POL_experiment_with_radar
 		icon = GFX_goal_CZE_radar_research
 		prerequisite = {
@@ -30876,8 +28325,120 @@ focus = {
 
 	### FP tree ###
 	focus = {
-		id = POL_join_international_community
+		id = POL_fp
 		icon = GFX_goal_generic_world_diplomacy
+		available = { 
+			has_country_flag = POL_ready_to_go_foreign
+			
+		}
+		
+		x = 116
+		y = 1
+		cost = 4
+		ai_will_do = { factor = 10 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_join_international_community"
+			#add_political_power = 50
+			country_event = plx.25
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = POL_leave_rp
+		icon = GFX_goal_WHR_Assert_Independence_Germany
+		available = { 
+			
+		}
+		prerequisite = {
+			focus = POL_fp
+		}
+		mutually_exclusive = {
+			focus = PLX_stay_with_germany
+		}
+		relative_position_id = POL_fp
+		x = -1
+		y = 1
+		cost = 4
+		ai_will_do = { factor = 10 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_join_international_community"
+			#add_political_power = 50
+			country_event = plx.25
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = PLX_stay_with_germany
+		icon = GFX_goal_germany
+		available = {
+			NOT = {
+				has_government = authoritarian_democrat
+				has_government = paternal_autocrat
+				has_government = radical_socialist
+				has_government = syndicalist
+				has_government = totalist
+			}	
+			is_subject = no
+			is_in_faction = no	
+			GER = {
+				is_subject = no
+				exists = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = POL
+				}					
+			}
+		}
+		prerequisite = { focus = POL_fp }
+		mutually_exclusive = {
+			focus = POL_leave_rp
+		}
+		relative_position_id = POL_fp
+		x = 1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 10 
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = POL_foreign_policy
+						option = POL_FOREIGN_POLICY_NEUTRALITY
+					}
+					has_game_rule = {
+						rule = POL_foreign_policy
+						option = POL_FOREIGN_POLICY_UKRAINE
+					}
+					has_game_rule = {
+						rule = POL_foreign_policy
+						option = POL_FOREIGN_POLICY_AUSTRIA
+					}
+					has_game_rule = {
+						rule = POL_foreign_policy
+						option = POL_FOREIGN_POLICY_RUSSIA
+					}
+					has_game_rule = {
+						rule = POL_foreign_policy
+						option = POL_FOREIGN_POLICY_ENTENTE
+					}
+					has_game_rule = {
+						rule = POL_foreign_policy
+						option = POL_FOREIGN_POLICY_INTERNATIONALE
+					}
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_stay_with_germany"
+			add_stability = 0.05
+			GER = { add_to_faction = POL} 
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+	focus = {
+		id = PLX_join_international_community
+		icon = GFX_goal_poland
 		available = { 
 			has_country_flag = POL_ready_to_go_foreign
 			if = {
@@ -30891,19 +28452,23 @@ focus = {
 				has_country_flag = plx_slavic_communists
 			}
 		}
-		x = 40
-		y = 17
+		prerequisite = {
+			focus = POL_leave_rp
+		}
+		relative_position_id = POL_leave_rp
+		x = -12
+		y = 1
 		cost = 4
 		ai_will_do = { factor = 10 }
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_join_international_community"
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_join_international_community"
 			#add_political_power = 50
 			country_event = plx.25
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 	focus = {
-		id = POL_ally_internationale
+		id = PLX_ally_internationale
 		icon = GFX_goal_comfrance
 		available = {
 			OR = {
@@ -30921,20 +28486,20 @@ focus = {
 				}					
 			}
 		}
-		prerequisite = { focus = POL_join_international_community }
+		prerequisite = { focus = PLX_join_international_community }
 		mutually_exclusive = {
-			focus = POL_ally_russia
-			focus = POL_poland_alone
-			focus = POL_stay_with_germany
-			focus = POL_go_with_austria
+			focus = PLX_ally_russia
+			focus = PLX_poland_alone
+			focus = PLX_unite_with_entente
+			focus = PLX_go_with_austria
 		}
-		relative_position_id = POL_join_international_community
-		x = -3
+		relative_position_id = PLX_join_international_community
+		x = -2
 		y = 1
 		cost = 4
 		ai_will_do = { factor = 10 }
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_poland_alone"
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_poland_alone"
 			add_political_power = 50
 			add_stability = -0.01
 			FRA = { add_to_faction = POL} 
@@ -30942,12 +28507,12 @@ focus = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 	focus = {
-		id = POL_mobilize_the_people
+		id = PLX_mobilize_the_people
 		icon = GFX_goal_FRA_classical_heroic_socialism
 		cost = 4
-		prerequisite = { focus = POL_ally_internationale  focus = POL_poland_alone }
+		prerequisite = { focus = PLX_ally_internationale  focus = PLX_poland_alone }
 		available = { has_socialist_government = yes }
-		relative_position_id = POL_ally_internationale
+		relative_position_id = PLX_ally_internationale
 		x = 0
 		y = 1
 		ai_will_do = { factor = 10 }
@@ -30958,21 +28523,21 @@ focus = {
 		search_filters = { FOCUS_FILTER_MANPOWER }
 	}
 	focus = {
-		id = POL_poland_alone
-		icon = GFX_goal_poland
+		id = PLX_poland_alone
+		icon = GFX_goal_CZE_attack_poland
 		available = {
 			has_socialist_government = no
 			is_subject = no
 			is_in_faction = no
 		}
-		prerequisite = { focus = POL_join_international_community }
+		prerequisite = { focus = PLX_join_international_community }
 		mutually_exclusive = {
-			focus = POL_ally_internationale
-			focus = POL_ally_russia
-			focus = POL_stay_with_germany
-			focus = POL_go_with_austria
+			focus = PLX_ally_internationale
+			focus = PLX_ally_russia
+			focus = PLX_unite_with_entente
+			focus = PLX_go_with_austria
 		}
-		relative_position_id = POL_join_international_community
+		relative_position_id = PLX_join_international_community
 		x = 0
 		y = 1
 		cost = 1
@@ -31001,7 +28566,7 @@ focus = {
 			}
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_poland_alone"
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_poland_alone"
 			add_war_support = 0.10
 			add_political_power = 100
 			country_event = poland.450
@@ -31009,23 +28574,10 @@ focus = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 	focus = {
-		id = POL_unite_with_entente
+		id = PLX_unite_with_entente
 		icon = GFX_goal_ROM_Old_Entente_Ties
 		available = {
-			is_faction_leader = yes
-			NOT = { has_country_flag = plx_communist_revolution }
-			NOT = {
-				has_war_with = AUS
-				has_war_with = GER
-				has_war_with = RUS
-			}
-			OR = {
-				AND = {
-					owns_state = 776
-					owns_state = 91
-				}
-				any_neighbor_country = { is_in_faction_with = ENT }
-			}
+			has_socialist_government = no
 			ENT = {
 				exists = yes
 				is_faction_leader = yes
@@ -31036,10 +28588,16 @@ focus = {
 			}
 			#has_socialist_government = no
 		}
-		prerequisite = { focus = POL_poland_alone }
-		relative_position_id = POL_poland_alone
-		x = 0
-		y = 2
+		mutually_exclusive = {
+			focus = PLX_ally_internationale
+			focus = PLX_ally_russia
+			focus = PLX_poland_alone
+			focus = PLX_go_with_austria
+		}
+		prerequisite = { focus = PLX_join_international_community }
+		relative_position_id = PLX_join_international_community
+		x = 4
+		y = 1
 		cost = 4
 		ai_will_do = {
 			factor = 10 
@@ -31058,35 +28616,57 @@ focus = {
 			}
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_unite_with_entente"
-			ENT = { country_event = poland.460 }
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_unite_with_entente"
+			add_political_power = -50
+			add_stability = 0.01
+			ENT = { add_to_faction = POL}
 		}
 	}
+	
+	
 	focus = {
-		id = POL_ally_russia
+		id = PLX_ally_russia
 		icon = GFX_goal_russia
 		available = {
-			has_socialist_government = no
+			OR = {
+				AND = {
+					has_socialist_government = no
+					RUS = {
+						has_socialist_government = no
+						is_subject = no
+						exists = yes
+						is_faction_leader = yes
+						NOT = {
+							has_war_with = POL
+						}					
+					}
+				}
+				AND = {
+					has_socialist_government = yes
+					RUS = {
+						has_socialist_government = yes
+						is_subject = no
+						exists = yes
+						is_faction_leader = yes
+						NOT = {
+							has_war_with = POL
+						}					
+					}
+				}
+			}
 			is_subject = no
 			is_in_faction = no
-			RUS = {
-				is_subject = no
-				exists = yes
-				is_faction_leader = yes
-				NOT = {
-					has_war_with = POL
-				}					
-			}
+			
 		}
-		prerequisite = { focus = POL_join_international_community }
+		prerequisite = { focus = PLX_join_international_community }
 		mutually_exclusive = {
-			focus = POL_ally_internationale
-			focus = POL_poland_alone
-			focus = POL_stay_with_germany
-			focus = POL_go_with_austria
+			focus = PLX_ally_internationale
+			focus = PLX_poland_alone
+			focus = PLX_unite_with_entente
+			focus = PLX_go_with_austria
 		}
-		relative_position_id = POL_join_international_community
-		x = -5
+		relative_position_id = PLX_join_international_community
+		x = -4
 		y = 1
 		cost = 4
 		ai_will_do = {
@@ -31122,18 +28702,18 @@ focus = {
 			}
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_ally_russia"
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_ally_russia"
 			add_political_power = 20
 			RUS = { add_to_faction = POL} 
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 	focus = {
-		id = POL_Russian_Artillery_Designs
+		id = PLX_Russian_Artillery_Designs
 		icon = GFX_goal_SKM_Modern_Artillery
 		available = { is_in_faction_with = RUS }
-		prerequisite = { focus = POL_ally_russia }
-		relative_position_id = POL_ally_russia
+		prerequisite = { focus = PLX_ally_russia }
+		relative_position_id = PLX_ally_russia
 		x = 0
 		y = 1
 		cost = 4
@@ -31141,33 +28721,34 @@ focus = {
 			factor = 10
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_Russian_Artillery_Designs"
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_Russian_Artillery_Designs"
 			add_ideas = POL_russian_research_idea
 		}
 	}
 	focus = {
-		id = POL_opportunism
+		id = PLX_opportunism
 		icon = GFX_goal_POL_Towards_Dmowskis_Line
 		available = { is_subject = no }
 		prerequisite = {
-			focus = POL_ally_internationale
-			focus = POL_poland_alone
-			focus = POL_ally_russia
-			focus = POL_go_with_austria
+			focus = PLX_ally_internationale
+			focus = PLX_poland_alone
+			focus = PLX_ally_russia
+			focus = PLX_go_with_austria
+			focus = PLX_unite_with_entente
 		}
 		#prerequisite = { focus = POL_the_stab_in_the_back }
-		relative_position_id = POL_join_international_community
-		x = -1
+		relative_position_id = PLX_join_international_community
+		x = 0
 		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 50
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_opportunism"
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_opportunism"
 			if = {
 				limit = { NOT = { has_country_flag = plx_internationalist_communists } }
-				add_ideas = POL_opportunism_idea
+				add_ideas = PLX_opportunism_idea
 			}
 			unlock_decision_tooltip = POL_seize_galicia
 			unlock_decision_tooltip = POL_seize_brzesc
@@ -31177,129 +28758,571 @@ focus = {
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 	}
 	focus = {
-		id = POL_stay_with_germany
-		icon = GFX_goal_germany
-		available = {
-			NOT = {
-				has_government = authoritarian_democrat
-				has_government = paternal_autocrat
-				has_government = radical_socialist
-				has_government = syndicalist
-				has_government = totalist
-			}	
-			is_subject = no
-			is_in_faction = no	
-			GER = {
-				is_subject = no
-				exists = yes
-				is_faction_leader = yes
-				NOT = {
-					has_war_with = POL
-				}					
-			}
-		}
-		prerequisite = { focus = POL_join_international_community }
-		mutually_exclusive = {
-			focus = POL_ally_russia
-			focus = POL_poland_alone
-			focus = POL_ally_internationale
-			focus = POL_go_with_austria
-		}
-		relative_position_id = POL_join_international_community
-		x = 6
-		y = 1
+		id = PLX_PLC_assert_diplomatic_independence
+		icon = GFX_goal_PLC_foreign_policy
 		cost = 4
-		ai_will_do = {
-			factor = 10 
-			modifier = {
-				factor = 0
-				OR = {
-					has_game_rule = {
-						rule = POL_foreign_policy
-						option = POL_FOREIGN_POLICY_NEUTRALITY
-					}
-					has_game_rule = {
-						rule = POL_foreign_policy
-						option = POL_FOREIGN_POLICY_UKRAINE
-					}
-					has_game_rule = {
-						rule = POL_foreign_policy
-						option = POL_FOREIGN_POLICY_AUSTRIA
-					}
-					has_game_rule = {
-						rule = POL_foreign_policy
-						option = POL_FOREIGN_POLICY_RUSSIA
-					}
-					has_game_rule = {
-						rule = POL_foreign_policy
-						option = POL_FOREIGN_POLICY_ENTENTE
-					}
-					has_game_rule = {
-						rule = POL_foreign_policy
-						option = POL_FOREIGN_POLICY_INTERNATIONALE
-					}
-				}
-			}
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_stay_with_germany"
-			add_stability = 0.05
-			GER = { add_to_faction = POL} 
-		}
-		search_filters = { FOCUS_FILTER_POLITICAL }
-	}
-	focus = {
-		id = POL_German_Armour_Designs
-		icon = GFX_goal_AUS_panzerturmumbau
-		available = { is_in_faction_with = GER }
-		prerequisite = { focus = POL_stay_with_germany }
-		relative_position_id = POL_stay_with_germany
-		x = 0
+		relative_position_id = POL_fp
+		x = -4
 		y = 2
-		cost = 4
-		ai_will_do = { factor = 10 }
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_German_Armour_Designs"
-			add_ideas = POL_german_research_idea
+		prerequisite = {
+			focus = POL_leave_rp
+			focus = PLX_stay_with_germany
 		}
-	}
-	focus = {
-		id = POL_ask_for_kresy_just_one_state_miss
-		icon = GFX_goal_GER_Eastern_Workers
-		available = {
-			has_war = no
-			is_in_faction_with = GER
-			94 = { owner = { is_in_faction_with = POL } }
-			792 = { owner = { is_in_faction_with = POL } }
-			95 = { owner = { is_in_faction_with = POL } }
-			219 = { owner = { is_in_faction_with = POL } }
-			242 = {
-				owner = {
-					is_in_faction_with = POL
-					OR = {
-						is_subject = yes
-						NOT = { tag = RUS }
-					}
+		
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			add_ideas = PLC_poland_not_lost
+			add_ideas = PLC_diplomatic_offices_idea
+			add_political_power = 50
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.1
+			}
+			
+			add_state_claim = 776
+			add_state_claim = 777
+			add_state_claim = 5
+			add_state_core = 188
+			
+			hidden_effect = {
+				country_event = {
+					id = kxplc.12
+					days = 4
 				}
 			}
 		}
-		prerequisite = { focus = POL_stay_with_germany }
-		relative_position_id = POL_stay_with_germany
+	}
+	
+	focus = {
+		id = PLX_PLC_old_poland
+		icon = GFX_goal_PLC_old_poland
+		cost = 4
+		relative_position_id = PLX_PLC_assert_diplomatic_independence
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = PLX_PLC_assert_diplomatic_independence
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			
+			custom_effect_tooltip = PLC_form_intermarium_decision
+			
+			
+			add_state_claim = 1124
+			add_state_claim = 88
+			add_state_claim = 1125
+			add_state_claim = 1127
+			add_state_claim = 1126
+			add_state_claim = 1140
+			add_state_claim = 89
+			add_state_claim = 91
+			add_state_claim = 80
+			add_state_claim = 713
+			add_state_claim = 79
+			add_state_claim = 78
+			add_state_claim = 86
+			add_state_claim = 93
+			hidden_effect = {
+				country_event = {
+					id = kxplc.20
+					days = 14
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = PLX_PLC_old_lithuania
+		icon = GFX_goal_PLC_old_lithuania
+		cost = 4
+		relative_position_id = PLX_PLC_assert_diplomatic_independence
 		x = 1
 		y = 1
-		cost = 4
-		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = PLX_PLC_assert_diplomatic_independence
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_ask_for_kresy_just_one_state_miss"
-			add_state_claim = 94
-			add_state_claim = 93
-			add_state_claim = 997
-			add_state_claim = 204
-			add_state_claim = 95
-			add_state_claim = 792
-			GER = { country_event = poland.410 }
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			
+			custom_effect_tooltip = PLC_form_intermarium_decision
+			every_state = {
+				limit = { 
+					OR = {
+						is_core_of = WHR
+						state = 95
+						state = 207
+						state = 206
+						state = 1087
+						state = 204
+						state = 194
+						state = 1329
+						state = 755
+						state = 243
+						state = 1228
+						state = 1230
+						state = 1233
+						state = 1237
+						state = 1238
+						state = 1240
+						state = 1241
+						state = 1242
+						state = 1243
+						state = 1244
+						state = 1245
+						state = 193
+						state = 198
+						state = 199
+						state = 201
+						state = 202
+						state = 203
+						state = 225
+						state = 241
+						state = 259
+						state = 792
+						state = 997
+						state = 1287
+						state = 791
+						state = 192
+						state = 1232
+                        state = 197
+						state = 226
+					}
+				}
+				add_claim_by = ROOT
+			}
+			
 		}
 	}
+	
+	focus = {
+		id = PLX_PLC_into_russia
+		icon = GFX_goal_PLC_russia
+		cost = 4
+		relative_position_id = PLX_PLC_assert_diplomatic_independence
+		x = 1
+		y = 2
+		available = {
+			can_declare_war_on = 219.owner
+			is_subject = no
+			has_war = no
+		}
+		prerequisite = {
+			focus = PLX_PLC_old_lithuania
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		will_lead_to_war_with = RUS
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			create_wargoal = {
+				target = 219.owner
+				type = annex_everything
+			}
+		}
+	}
+	
+	focus = {
+		id = PLX_PLC_ukrainian_debut
+		icon = GFX_goal_PLC_ukraine
+		cost = 4
+		relative_position_id = PLX_PLC_assert_diplomatic_independence
+		x = 3
+		y = 2
+		available = {
+			country_exists = UKR
+			is_subject = no
+			has_war = no
+		}
+		prerequisite = {
+			focus = PLX_PLC_old_lithuania
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		will_lead_to_war_with = UKR
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			
+			create_wargoal = {
+				target = UKR
+				type = annex_everything
+			}
+		}
+	}
+	
+	focus = {
+		id = PLX_PLC_westwards_reclamation
+		icon = GFX_goal_PLC_germany
+		cost = 4
+		relative_position_id = PLX_PLC_assert_diplomatic_independence
+		x = -1
+		y = 2
+		available = {
+			OR = {
+				country_exists = GER
+				country_exists = GRU
+				country_exists = DDR
+			}
+			is_subject = no
+			has_war = no
+		}
+		prerequisite = {
+			focus = PLX_PLC_old_poland
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		
+		will_lead_to_war_with = GER
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			
+			if = {
+				limit = {
+					country_exists = GER
+					NOT = {
+						is_in_faction_with = GER
+					}
+				}
+				create_wargoal = {
+					target = GER
+					type = annex_everything
+				}
+				else = {
+					create_wargoal = {
+						target = GRU
+						type = annex_everything
+					}
+					if = {
+						limit = {
+							country_exists = DDR
+						}
+						create_wargoal = {
+							target = DDR
+							type = annex_everything
+						}
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					country_exists = GER
+					is_in_faction_with = GER
+				}
+				leave_faction = yes
+				create_wargoal = {
+					target = GER
+					type = annex_everything
+				}
+				else = {
+					create_wargoal = {
+						target = GRU
+						type = annex_everything
+					}
+					if = {
+						limit = {
+							country_exists = DDR
+						}
+						create_wargoal = {
+							target = DDR
+							type = annex_everything
+						}
+					}
+				}
+			}
+			
+			add_state_claim = 67
+			add_state_claim = 66
+			add_state_claim = 68
+			add_state_claim = 63
+		}
+	}
+	
+	focus = {
+		id = PLX_PLC_southern_strike
+		icon = GFX_goal_CZE_attack_austria
+		cost = 4
+		relative_position_id = PLX_PLC_assert_diplomatic_independence
+		x = -3
+		y = 2
+		prerequisite = {
+			focus = PLX_PLC_old_poland
+		}
+		available = {
+			OR = {
+				country_exists = GAL
+				AUS = {
+					owns_state = 91
+				}
+			}
+			is_subject = no
+			has_war = no
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		
+		will_lead_to_war_with = GAL
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+
+			every_state = {
+				limit = {
+					is_core_of = GAL
+				}
+				add_core_of = POL
+			}
+			if = {
+				limit = {
+					country_exists = GAL
+				}
+				create_wargoal = {
+					target = GAL
+					type = annex_everything
+				}
+				else = {
+					if = {
+						limit = {
+							AUS = {
+								owns_state = 91
+							}
+						}
+						create_wargoal = {
+							target = AUS
+							type = annex_everything
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = PLX_PLC_attack_WHR
+		icon = GFX_goal_PLC_WHR
+		cost = 4
+		relative_position_id = PLX_PLC_assert_diplomatic_independence
+		x = 0
+		y = 3
+		available = {
+			country_exists = WHR
+			is_subject = no
+			has_war = no
+		}
+		prerequisite = {
+			focus = PLX_PLC_old_poland
+			focus = PLX_PLC_old_lithuania
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		
+		will_lead_to_war_with = WHR
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			
+			create_wargoal = {
+				target = WHR
+				type = annex_everything
+			}
+		}
+	}
+	
+	focus = {
+		id = PLX_PLC_heir_to_moldavia
+		icon = GFX_goal_PLC_romania
+		cost = 4
+		relative_position_id = PLX_PLC_assert_diplomatic_independence
+		x = -2
+		y = 3
+		available = {
+			country_exists = ROM
+			is_subject = no
+			has_war = no
+		}
+		prerequisite = {
+			focus = PLX_PLC_old_poland
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		
+		will_lead_to_war_with = ROM
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			
+			if = {
+				limit = {
+					country_exists = ROM
+				}
+				create_wargoal = {
+					target = ROM
+					type = annex_everything
+				}
+				else = {
+					if = {
+						limit = {
+							BAN = {
+								owns_state = 78
+								owns_state = 1222
+							}
+						}
+						create_wargoal = {
+							target = BAN
+							type = annex_everything
+						}
+					}
+				}
+			}
+			add_state_core = 80
+			add_state_core = 713
+			add_state_core = 1320
+			add_state_core = 78
+			add_state_core = 1222
+			add_state_core = 79
+		}
+	}
+	
+	focus = {
+		id = PLX_PLC_knocking_north
+		icon = GFX_goal_PLC_baltic
+		cost = 4
+		relative_position_id = PLX_PLC_assert_diplomatic_independence
+		x = 2
+		y = 3
+		available = {
+			OR = {
+				country_exists = BAT
+				country_exists = LAT
+				country_exists = EST
+			}
+			is_subject = no
+			has_war = no
+		}
+		prerequisite = {
+			focus = PLX_PLC_old_lithuania
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		
+		will_lead_to_war_with = BAT
+		will_lead_to_war_with = LAT
+		will_lead_to_war_with = EST
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			
+			if = {
+				limit = {
+					country_exists = BAT
+				}
+				create_wargoal = {
+					target = BAT
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = EST
+				}
+				create_wargoal = {
+					target = EST
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = LAT
+				}
+				create_wargoal = {
+					target = LAT
+					type = annex_everything
+				}
+			}
+			add_state_claim = 880
+			add_state_claim = 12
+			add_state_claim = 1091
+			add_state_claim = 190
+			add_state_claim = 13
+			add_state_claim = 191
+		}
+	}
+	focus = {
+		id = PLX_PLC_intermarium_dreams
+		icon = GFX_goal_POL_slavic_union
+		cost = 4
+		relative_position_id = PLX_PLC_assert_diplomatic_independence
+		x = 0
+		y = 4
+		prerequisite = {
+			focus = PLX_PLC_southern_strike
+			focus = PLX_PLC_heir_to_moldavia
+			focus = PLX_PLC_westwards_reclamation
+			focus = PLX_PLC_attack_WHR
+			focus = PLX_PLC_into_russia
+			focus = PLX_PLC_knocking_north
+			focus = PLX_PLC_ukrainian_debut
+		}
+		prerequisite = {
+			
+		}
+		available = {
+			NOT = { 
+					has_country_flag = plx_zsp_rules_true
+					has_country_flag = plx_communist_revolution
+					has_country_flag = POL_zadruga_in_power
+					has_country_flag = PLX_libzadruga
+					has_country_flag = PLX_natsoc
+				}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
+			add_war_support = 0.2
+			add_ideas = PLC_miedzymorze_idea
+			
+			hidden_effect = {
+				country_event = {
+					id = kxplc.16
+					days = 93
+				}
+				country_event = {
+					id = kxplc.18
+					days = 5
+				}
+			}
+		}
+	}
+
+
 	#focus = {
 	#	id = POL_claim_east
 	#	icon = GFX_focus_rus_ukraine
@@ -31326,10 +29349,10 @@ focus = {
 	#		}
 	#	}
 	#	prerequisite = {
-	#		focus = POL_stay_with_germany
-	#		focus = POL_go_with_austria
+	#		focus = PLX_stay_with_germany
+	#		focus = PLX_go_with_austria
 	#	}
-	#	relative_position_id = POL_stay_with_germany
+	#	relative_position_id = PLX_stay_with_germany
 	#	x = 1
 	#	y = 1
 	#	cost = 4
@@ -31342,37 +29365,536 @@ focus = {
 	#		unlock_decision_tooltip = POL_claim_east_ukraine
 	#	}
 	#}
-	#focus = {
-	#	id = POL_bargain_for_galicia
-	#	icon = GFX_goal_GAL_tough_year
-	#	available = {
-	#		has_war = no
-	#		is_subject = no
-	#		AUS = { has_war = no }
-	#		if = {
-	#			limit = { 91 = { owner = { tag = GAL } } }
-	#			GAL = { is_subject_of = AUS }
-	#		}
-	#		else = { 91 = { is_owned_and_controlled_by = AUS } }
-	#	}
-	#	prerequisite = {
-	#		focus = POL_stay_with_germany
-	#		focus = POL_go_with_austria
-	#	}
-	#	relative_position_id = POL_stay_with_germany
-	#	x = 2
-	#	y = 2
-	#	cost = 4
-	#	ai_will_do = {
-	#		factor = 10
-	#	}
-	#	completion_reward = {
-	#		log = "[GetDateText]: [Root.GetName]: Focus POL_bargain_for_galicia"
-	#		country_event = poland.400
-	#	}
-	#}
 	focus = {
-		id = POL_go_with_austria
+		id = POL_polish_colonialism
+		icon = GFX_focus_POL_colonial_league
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
+		relative_position_id = PLX_stay_with_germany
+		x = 3
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_aus
+		icon = GFX_goal_AUS_ausgleich
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = 0
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_sarmatia
+		icon = GFX_BRY_Nomads
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = 2
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_great_plc
+		icon = GFX_goal_POL_commonwealth
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = 6
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_great_intermarium
+		icon = GFX_goal_POL_intermarium
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = 8
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_hre
+		icon = GFX_goal_COG_HRE_Africa
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = 10
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_usa
+		icon = GFX_USA_SIS
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = 4
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_rom
+		icon = GFX_goal_ROM_greater_romania
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = -2
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_rus
+		icon = GFX_goal_RUS_monarchy
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = -4
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_hun
+		icon = GFX_goal_hungary
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = -6
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_fra
+		icon = GFX_goal_NFE_warsaw_duchy
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = -8
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_core_ita_spr
+		icon = GFX_goal_ITA_Bourbon
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		#prerequisite = {
+		#	focus = PLX_stay_with_germany
+		#	focus = POL_leave_rp
+		#}
+		relative_position_id = POL_fp
+		x = -10
+		y = 9
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = PLX_bargain_for_galicia
+		icon = GFX_goal_POL_union
+		available = {
+			has_war = no
+			is_subject = no
+			AUS = { has_war = no }
+			if = {
+				limit = { 91 = { owner = { tag = GAL } } }
+				GAL = { is_subject_of = AUS }
+			}
+			else = { 91 = { is_owned_and_controlled_by = AUS } }
+		}
+		prerequisite = {
+			focus = POL_polish_colonialism
+		}
+		relative_position_id = POL_polish_colonialism
+		x = -1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_destroy_oun
+		icon = GFX_focus_rus_ukraine
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		prerequisite = {
+			focus = POL_polish_colonialism
+		}
+		relative_position_id = POL_polish_colonialism
+		x = 1
+		y = 1
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_takeover_maf
+		icon = GFX_BAY_AFRICAN_COLONIES
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		prerequisite = {
+			focus = PLX_bargain_for_galicia
+			focus = POL_destroy_oun
+		}
+		relative_position_id = POL_polish_colonialism
+		x = 0
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_expand_morska_wola
+		icon = GFX_goal_FOP_fonte_brazil
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		prerequisite = {
+			focus = PLX_bargain_for_galicia
+			focus = POL_destroy_oun
+		}
+		relative_position_id = POL_polish_colonialism
+		x = -2
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_seize_far_east
+		icon = GFX_BAY_ASIAN_COLONIES
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		prerequisite = {
+			focus = PLX_bargain_for_galicia
+			focus = POL_destroy_oun
+		}
+		relative_position_id = POL_polish_colonialism
+		x = 2
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	
+	focus = {
+		id = POL_legacy_bronislaw_pilsudski
+		icon = GFX_goal_JAP_samurai
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		prerequisite = {
+			focus = POL_seize_far_east
+		}
+		relative_position_id = POL_polish_colonialism
+		x = 3
+		y = 3
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_ucayali_expedition
+		icon = GFX_goal_PRU_coa
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		prerequisite = {
+			focus = PLX_bargain_for_galicia
+			focus = POL_destroy_oun
+		}
+		relative_position_id = POL_polish_colonialism
+		x = -3
+		y = 3
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_demand_portugal_colony
+		icon = GFX_goal_POR_mozambique
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		prerequisite = {
+			focus = POL_takeover_maf
+		}
+		relative_position_id = POL_polish_colonialism
+		x = -1
+		y = 3
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_to_liberia
+		icon = GFX_goal_LIB_invite_exiles
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		prerequisite = {
+			focus = POL_takeover_maf
+		}
+		relative_position_id = POL_polish_colonialism
+		x = 1
+		y = 3
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = POL_new_crusade
+		icon = GFX_goal_PAL_abolish_MOJ
+		available = {
+			has_war = no
+			is_subject = no
+			
+		}
+		prerequisite = {
+			focus = POL_takeover_maf
+		}
+		relative_position_id = POL_polish_colonialism
+		x = 0
+		y = 4
+		cost = 4
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
+			country_event = poland.400
+		}
+	}
+	focus = {
+		id = PLX_go_with_austria
 		icon = GFX_goal_austria
 		available = {
 			has_socialist_government = no
@@ -31387,15 +29909,15 @@ focus = {
 				}					
 			}
 		}
-		prerequisite = { focus = POL_join_international_community }
+		prerequisite = { focus = PLX_join_international_community }
 		mutually_exclusive = {
-			focus = POL_ally_internationale
-			focus = POL_ally_russia
-			focus = POL_poland_alone
-			focus = POL_stay_with_germany
+			focus = PLX_ally_internationale
+			focus = PLX_ally_russia
+			focus = PLX_poland_alone
+			focus = PLX_unite_with_entente
 		}
-		relative_position_id = POL_join_international_community
-		x = 3
+		relative_position_id = PLX_join_international_community
+		x = 2
 		y = 1
 		cost = 4
 		ai_will_do = {
@@ -31431,27 +29953,27 @@ focus = {
 			}
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_go_with_austria"
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_go_with_austria"
 			add_political_power = 20
 			AUS = { add_to_faction = POL} 
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
 	focus = {
-		id = POL_austrian_tech_sharing
+		id = PLX_austrian_tech_sharing
 		icon = GFX_goal_AUS_vienna_university
 		available = {
 			NOT = { has_war_with = AUS }
 			AUS = { has_completed_focus = AUS_vienna_circle_2 }
 		}
-		prerequisite = { focus = POL_go_with_austria }
-		relative_position_id = POL_go_with_austria
+		prerequisite = { focus = PLX_go_with_austria }
+		relative_position_id = PLX_go_with_austria
 		x = 0
 		y = 1
 		cost = 4
 		ai_will_do = { factor = 10 }
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus POL_austrian_tech_sharing"
+			log = "[GetDateText]: [Root.GetName]: Focus PLX_austrian_tech_sharing"
 			if = {
 				limit = { has_dlc = "Together for Victory" }
 				add_to_tech_sharing_group = austrian_research
