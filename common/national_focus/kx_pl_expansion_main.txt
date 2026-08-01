@@ -9597,24 +9597,19 @@ focus_tree = {
 		y = 1
 
 		prerequisite = { focus = POL_Circle }
-		available = { has_government = market_liberal }
+		available = { 
+			NOT = {
+				has_government = national_populist
+			}
+		}
 		mutually_exclusive = {
 			focus = POL_Empower_Geheimrat
 		}
-		ai_will_do = {
-			factor = 500
-			modifier = {
-				factor = 2
-				has_active_mission = POL_syndicalist_threat
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Entrenched_Constitutionalism"
 			add_ideas = POL_enshrine_constitution
-			set_temp_variable = { POL_influence_change = -5 }
-			POL_add_republican_influence = yes
-			POL_reduce_polarisation = yes
-			activate_mission = POL_curtail_veto_mission
+			
 		}
 		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_STABILITY }
 	}
@@ -9629,22 +9624,19 @@ focus_tree = {
 		y = 1
 
 		prerequisite = { focus = POL_Circle }
-		available = { POL_evil_monarchy = yes }
+		available = { 
+			NOT = {
+				has_government = radical_socialist
+			}
+		}
 		mutually_exclusive = {
 			focus = POL_Entrenched_Constitutionalism
 		}
-		ai_will_do = {
-			factor = 500
-			modifier = {
-				factor = 2
-				has_active_mission = POL_syndicalist_threat
-			}
-		}
+	
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Empower_Geheimrat"
 			add_ideas = POL_control_by_geheimrat
-			set_temp_variable = { POL_influence_change = 5 }
-			POL_add_republican_influence = yes
+			
 		}
 		search_filters = { FOCUS_FILTER_PRODUCTION FOCUS_FILTER_INTERNAL_AFFAIRS }
 	}
@@ -9659,20 +9651,11 @@ focus_tree = {
 		y = 1
 
 		prerequisite = { focus = POL_Empower_Geheimrat }
-		available = { POL_evil_monarchy = yes }
-		ai_will_do = {
-			factor = 500
-			modifier = {
-				factor = 2
-				check_variable = { POL_nat_influence > 30 }
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Purge_Nationalist_Terrorists"
-			set_temp_variable = { POL_influence_change = -15 }
-			POL_add_nationalist_influence = yes
-			multiply_variable = { POL_coup_timer = 2 }
-			custom_effect_tooltip = POL_denounce_nationalists_tt
+			add_political_power = 100
+			increase_ruling_party_popularity_by_10 = yes
 		}
 		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
 	}
@@ -9688,31 +9671,11 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_Ally_with_Szlachta
 		}
-		available = {
-			OR = {
-				has_government = social_conservative
-				has_authoritarian_government = yes
-			}
-		}
-		cancelable = no
-		select_effect = {
-			log = "[GetLogRoot]: Select Focus POL_Arrest_Socialist_Agitators"
-			country_event = { id = poland_events.382 days = 12 }
-		}
-		ai_will_do = {
-			factor = 500
-			modifier = {
-				factor = 2
-				check_variable = { POL_soc_influence > 30 }
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Arrest_Socialist_Agitators"
-			set_temp_variable = { POL_influence_change = -15 }
-			POL_add_syndicalist_influence = yes
-
-			multiply_variable = { POL_revolution_timer = 2 }
-			custom_effect_tooltip = POL_denounce_socialists_tt
+			add_stability = 0.1
+			increase_ruling_party_popularity_by_10 = yes
 		}
 		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
 	}
@@ -9728,40 +9691,10 @@ focus_tree = {
 
 		prerequisite = { focus = POL_Purge_Nationalist_Terrorists }
 
-		available = {
-			is_monarchy = yes
-			has_country_flag = POL_zamoyski_cooperation
-		}
-		ai_will_do = {
-			factor = 500
-			modifier = {
-				factor = 2
-				check_variable = { POL_nat_influence > POL_royal_influence }
-			}
-			modifier = {
-				factor = 0
-				is_subject = no
-				OR = {
-					has_game_rule = { rule = POL_revolts option = POL_REVOLTS_NATPOP }
-					has_game_rule = { rule = POL_revolts option = POL_REVOLTS_PATAUT }
-					has_game_rule = { rule = POL_revolts option = POL_REVOLTS_SOCCON }
-				}
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_The_Christian_Coalition"
-			if = {
-				limit = { is_in_coalition_with_social_conservative = no }
-				set_temp_variable = { coalition_partner_var = token:social_conservative }
-				add_to_coalition = yes
-			}
-			set_temp_variable = { POL_influence_change = 6 }
-			POL_add_royal_influence = yes
-			set_temp_variable = { POL_influence_change = -8 }
-			POL_add_nationalist_influence = yes
-
-			add_popularity = { ideology = national_populist popularity = -0.05 }
-			custom_effect_tooltip = POL_nationalism_tt
+			add_ideas = POL_coop_chadecja
 		}
 		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS FOCUS_FILTER_POLITICAL }
 	}
@@ -9782,11 +9715,7 @@ focus_tree = {
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Ally_with_Szlachta"
-			add_political_power = 75
-			set_temp_variable = { ideology_change_var = 5 }
-			change_ruling_party_popularity = yes
-			set_temp_variable = { POL_influence_change = -5 }
-			POL_add_nationalist_influence = yes
+			add_ideas = POL_coop_aristocracy
 		}
 		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS FOCUS_FILTER_POLITICAL }
 	}
@@ -9803,18 +9732,14 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_Allies_in_Berlin
 		}
-		cancelable = no
-		select_effect = {
-			log = "[GetLogRoot]: Select Focus POL_Address_Land_Issue"
-			country_event = { id = poland_events.263 days = 10 }
-		}
+		
 		ai_will_do = { factor = 750 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Address_Land_Issue"
-			set_temp_variable = { POL_influence_change = 5 }
-			POL_add_royal_influence = yes
-			country_event = poland_events.440
-			custom_effect_tooltip = POL_land_reform_tt
+			swap_ideas = {
+				remove_idea = POL_german_control1
+				add_idea = POL_german_control2
+			}
 		}
 		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
 	}
@@ -9832,57 +9757,14 @@ focus_tree = {
 			focus = POL_Ally_with_Szlachta
 		}
 	
-		available = {
-			has_government = market_liberal
-			custom_override_tooltip = {
-				tooltip = { localization_key = has_completed_decision DECISION = POL_renegotiate_economic_treaties }
-				has_country_flag = POL_trade_finished
-			}
-		}
+		
 		ai_will_do = { factor = 500 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Allies_in_Lewiatan"
-			if = {
-				limit = { has_idea = POL_german_hegemony }
-				swap_ideas = {
-					remove_idea = POL_german_hegemony
-					add_idea = POL_polish_control
-				}
+			swap_ideas = {
+				remove_idea = POL_coop_aristocracy
+				add_idea = POL_coop_aristocracy2
 			}
-			else_if = {
-				limit = { has_idea = POL_german_cooperation }
-				swap_ideas = {
-					remove_idea = POL_german_cooperation
-					add_idea = POL_polish_control
-				}
-			}
-			else_if = {
-				limit = { has_idea = POL_austro_german_condominium }
-				swap_ideas = {
-					remove_idea = POL_austro_german_condominium
-					add_idea = POL_polish_control
-				}
-			}
-			else_if = {
-				limit = { has_idea = POL_austrian_cooperation }
-				swap_ideas = {
-					remove_idea = POL_austrian_cooperation
-					add_idea = POL_polish_control
-				}
-			}
-			else_if = {
-				limit = { has_idea = POL_austrian_friendship }
-				swap_ideas = {
-					remove_idea = POL_austrian_friendship
-					add_idea = POL_polish_control
-				}
-			}
-			else = {
-				add_one_random_civilian_factory = yes
-			}
-			custom_effect_tooltip = tooltip_white_line
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = POL_andrzej_wierzbicki_advisor
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
 	}
@@ -9898,74 +9780,11 @@ focus_tree = {
 
 		prerequisite = { focus = POL_Unite_the_Poles }
 		
-		available = {
-			custom_override_tooltip = {
-				tooltip = { localization_key = has_completed_decision DECISION = POL_renegotiate_economic_treaties }
-				has_country_flag = POL_trade_finished
-			}
-		}
+		
 		ai_will_do = { factor = 500 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Allies_in_Berlin"
-			add_political_power = 50
-			set_temp_variable = { POL_influence_change = 10 }
-			POL_add_german_influence = yes
-			set_temp_variable = { POL_influence_change = 5 }
-			POL_add_syndicalist_influence = yes
-			if = {
-				limit = { has_idea = POL_polish_control }
-				swap_ideas = {
-					remove_idea = POL_polish_control
-					add_idea = POL_german_cooperation
-				}
-			}
-			else_if = {
-				limit = { has_idea = POL_austrian_friendship }
-				swap_ideas = {
-					remove_idea = POL_austrian_friendship
-					add_idea = POL_austro_german_condominium
-				}
-			}
-			else_if = {
-				limit = { has_idea = POL_austrian_cooperation }
-				swap_ideas = {
-					remove_idea = POL_austrian_cooperation
-					add_idea = POL_austro_german_condominium
-				}
-			}
-			else_if = {
-				limit = { has_idea = POL_austro_german_condominium }
-				swap_ideas = {
-					remove_idea = POL_austro_german_condominium
-					add_idea = POL_german_cooperation
-				}
-			}
-			else_if = {
-				limit = { has_idea = POL_german_cooperation }
-				swap_ideas = {
-					remove_idea = POL_german_cooperation
-					add_idea = POL_german_hegemony
-				}
-			}
-			else_if = {
-				limit = { has_idea = POL_german_hegemony }
-				reduce_focus_completion_cost = {
-					focus = { POL_Wojna_Blyskawiczna POL_Mechanisation_of_Cavalry POL_Develop_The_22TP }
-					cost = 10
-				}
-			}
-			else = {
-				custom_effect_tooltip = {
-					localization_key = tooltip_if_national_spirit_is_active
-					IDEA = POL_german_hegemony
-				}
-				effect_tooltip = {
-					reduce_focus_completion_cost = {
-						focus = { POL_Wojna_Blyskawiczna POL_Mechanisation_of_Cavalry POL_Develop_The_22TP }
-						cost = 10
-					}
-				}
-			}
+			add_ideas = POL_german_control1
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL FOCUS_FILTER_PRODUCTION FOCUS_FILTER_INTERNAL_AFFAIRS }
 	}
@@ -9981,7 +9800,7 @@ focus_tree = {
 
 		prerequisite = { focus = POL_Allies_in_Berlin }
 
-		available = { POL_evil_monarchy = yes }
+		
 		ai_will_do = { factor = 500 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Attract_German_Corporations"
@@ -10001,12 +9820,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			set_temp_variable = { POL_influence_change = 5 }
-			POL_add_german_influence = yes
-			set_temp_variable = { POL_influence_change = 2 }
-			POL_add_nationalist_influence = yes
-			set_temp_variable = { POL_influence_change = 2 }
-			POL_add_syndicalist_influence = yes
+			
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_INTERNAL_AFFAIRS }
 	}
@@ -10023,7 +9837,7 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_Secure_Magnates
 		}
-		available = { POL_has_circle = yes }
+
 		ai_will_do = {
 			factor = 500
 			modifier = {
@@ -10033,11 +9847,10 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Manage_the_Unions"
-			set_temp_variable = { POL_influence_change = -6 }
-			POL_add_syndicalist_influence = yes
-			POL_reduce_polarisation = yes
-			multiply_temp_variable = { POL_revolution_timer = 2 }
-			custom_effect_tooltip = POL_denounce_socialists_tt
+			swap_ideas = {
+				remove_idea = POL_german_control3
+				add_idea = POL_german_control4
+			}
 		}
 		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_INTERNAL_AFFAIRS }
 	}
@@ -10055,59 +9868,11 @@ focus_tree = {
 			focus = POL_Empower_Geheimrat
 			focus = POL_Entrenched_Constitutionalism
 		}
-		available = {
-			has_government = market_liberal
-			if = {
-				limit = { is_ai = no }
-				AUS = {
-					has_opinion = { target = ROOT value > 50 }
-				}
-			}
-			NOT = { has_war_with = AUS }
-			NOT = { AUS = { has_war_with = GER } }
-			NOT = { AUS = { has_war_with = HUN } }
-			NOT = { AUS = { has_war_with = GAL } }
-			set_temp_variable = { POL_influence_check = 40 }
-			POL_polish_influence_check = yes
-			var:88.owner = {
-				has_full_control_of_state = 88
-				if = {
-					limit = { owns_state = 80 }
-					has_full_control_of_state = 80
-				}
-				if = {
-					limit = { owns_state = 89 }
-					has_full_control_of_state = 89
-				}
-				if = {
-					limit = { owns_state = 91 }
-					has_full_control_of_state = 91
-				}
-				if = {
-					limit = { owns_state = 713 }
-					has_full_control_of_state = 713
-				}
-			}
-		}
-		bypass = {
-			OR = {
-				owns_state = 88
-				GAL = {
-					is_subject = yes
-					NOT = { is_subject_of = AUS }
-				}
-			}
-		}
+		
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Unite_the_Poles"
-			var:88.owner = {
-				if = {
-					limit = { is_subject = yes }
-					OVERLORD = { country_event = poland_events.233 }
-				}
-				else = { country_event = poland_events.233 }
-			}
+			add_stability = 0.2
 		}
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 	}
@@ -10122,41 +9887,9 @@ focus_tree = {
 
 		prerequisite = { focus = POL_Purge_Nationalist_Terrorists }
 	
-		available = {
-			is_monarchy = yes
-			has_country_flag = POL_downarowicz_cooperation
-		}
-		ai_will_do = {
-			factor = 500
-			modifier = {
-				factor = 2
-				check_variable = { POL_rep_influence > POL_royal_influence }
-			}
-			modifier = {
-				factor = 0
-				is_subject = no
-				OR = {
-					has_game_rule = { rule = POL_revolts option = POL_REVOLTS_TOTALIST }
-					has_game_rule = { rule = POL_revolts option = POL_REVOLTS_SYNDIE }
-					has_game_rule = { rule = POL_revolts option = POL_REVOLTS_RADSOC }
-				}
-			}
-		}
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Constitutionalist_Coalition"
-			set_temp_variable = { coalition_partner_var = token:social_liberal }
-			add_to_coalition = yes
-			set_temp_variable = { coalition_partner_var = token:social_democrat }
-			add_to_coalition = yes
-			set_temp_variable = { coalition_partner_var = token:social_conservative }
-			remove_from_coalition = yes
-			set_temp_variable = { coalition_partner_var = token:authoritarian_democrat }
-			remove_from_coalition = yes
-			set_temp_variable = { POL_influence_change = -10 }
-			POL_add_republican_influence = yes
-			set_temp_variable = { POL_influence_change = 8 }
-			POL_add_royal_influence = yes
-			custom_effect_tooltip = POL_secularism_tt
+			add_ideas = POL_coop_democrats
 		}
 		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS FOCUS_FILTER_POLITICAL }
 	}
@@ -10173,9 +9906,7 @@ focus_tree = {
 		x = 0
 		y = 2
 
-		available = {
-			POL_has_black_monday = no
-		}
+		
 		prerequisite = { 
 			focus = KX_PL_PG_FEED_THE_CITIES
 			focus = KX_PL_PG_CASH_CROPS
@@ -10185,10 +9916,7 @@ focus_tree = {
 		ai_will_do = { factor = 500 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Eastern_Europes_Workshop"
-			swap_ideas = {
-				remove_idea = POL_central_industrial_region_4
-				add_idea = POL_central_industrial_region_5
-			}
+			add_ideas = POL_hub_of_mitteleuropa
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_PRODUCTION }
 	}
@@ -10205,16 +9933,13 @@ focus_tree = {
 		prerequisite = {
 			focus = KX_PL_PG_MASS_PRIVATISATION
 		}
-		available = {
-			has_completed_focus = POL_Eastern_Europes_Workshop
-			POL_has_circle = yes
-		}
+		
 		ai_will_do = { factor = 250 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Mitteleuropa_Ties"
 			swap_ideas = {
-				remove_idea = POL_central_industrial_region_5
-				add_idea = POL_hub_of_mitteleuropa
+				remove_idea = KX_PL_PG_satelite_economy_2
+				add_idea = KX_PL_PG_satelite_economy_3
 			}
 		}
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_PRODUCTION }
@@ -10231,19 +9956,13 @@ focus_tree = {
 
 		prerequisite = { focus = POL_Address_Land_Issue }
 
-		available = { POL_evil_monarchy = yes }
 		ai_will_do = { factor = 500 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Secure_Magnates"
 			swap_ideas = {
-				remove_idea = POL_control_by_geheimrat_2
-				add_idea = POL_control_by_geheimrat_3
+				remove_idea = POL_german_control2
+				add_idea = POL_german_control3
 			}
-			set_temp_variable = { POL_influence_change = 5 }
-			POL_add_republican_influence = yes
-			set_temp_variable = { POL_influence_change = 5 }
-			POL_add_syndicalist_influence = yes
-			hidden_effect = { country_event = { id = poland_events.251 days = 150 } }
 		}
 		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS FOCUS_FILTER_PRODUCTION }
 	}
@@ -10258,22 +9977,13 @@ focus_tree = {
 		y = 6
 
 		prerequisite = { focus = POL_Manage_the_Unions }
-		available = { has_government = market_liberal }
-		ai_will_do = {
-			factor = 1000
-			modifier = {
-				factor = 2
-				has_active_mission = POL_curtail_veto_mission
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Abolish_The_Royal_Veto"
 			swap_ideas = {
-				remove_idea = POL_enshrine_constitution_2
-				add_idea = POL_enshrine_constitution_3
+				remove_idea = POL_german_control4
+				add_idea = POL_german_cooperation
 			}
-			set_temp_variable = { POL_influence_change = 10 }
-			POL_add_royal_influence = yes
 		}
 		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 	}
@@ -10296,43 +10006,13 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_Mitteleuropa_Ties
 		}
-		available = { POL_has_circle = yes }
+		
 		ai_will_do = { factor = 1000 }
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Path_of_Least_Resistance"
-			if = {
-				limit = { has_government = market_liberal }
-				effect_tooltip = { add_country_leader_trait = POL_figurehead_hohenzollern }
-				hidden_effect = {
-					var:country_leader = {
-						set_character_flag = POL_figurehead_hohenzollern
-						set_temp_variable = { trait_token = token:POL_figurehead_hohenzollern }
-						add_trait_to_all_country_leader_roles = yes
-					}
-				}
-			}
-			else_if = {
-				limit = { has_government = authoritarian_democrat }
-				effect_tooltip = { add_country_leader_trait = POL_king_of_the_elite }
-				hidden_effect = {
-					var:country_leader = {
-						set_character_flag = POL_king_of_the_elite
-						set_temp_variable = { trait_token = token:POL_king_of_the_elite }
-						add_trait_to_all_country_leader_roles = yes
-					}
-				}
-			}
-			else_if = {
-				limit = { has_government = paternal_autocrat }
-				add_country_leader_trait = POL_eternal_general_governor
-			}
-			if = {
-				limit = { has_idea = POL_martial_law }
-				remove_ideas = POL_martial_law
-			}
-			POL_reduce_polarisation = yes
-			hidden_effect = {
-				country_event = { id = poland_events.800 days = 100 random_days = 250 }
+			swap_ideas = {
+				remove_idea = POL_german_cooperation
+				add_idea = POL_german_hegemony
 			}
 		}
 		search_filters = { FOCUS_FILTER_STABILITY }
@@ -16868,14 +16548,11 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_stick_with_germany"
-			add_political_power = 50
-			add_war_support = 0.1
+			add_political_power = 120
+			
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
 
-		available = {
-			is_in_faction_with = GER
-		}
 	}
 	###Diplomatic Tree - Germany
 	focus = {
@@ -16898,13 +16575,13 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_stick_with_germany"
-			add_political_power = 50
-			add_war_support = 0.1
+			
+			add_stability = 0.1
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
 
 		available = {
-			is_in_faction_with = GER
+			has_country_flag = PLX_jew
 		}
 	}
 	focus = {
@@ -17085,7 +16762,7 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_the_revolution"
-			add_political_power = 120
+	
 			add_war_support = 0.1
 			add_popularity = {
 				ideology = totalist
@@ -17099,11 +16776,12 @@ focus = {
 				ideology = radical_socialist
 				popularity = 0.20
 			}
+
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
 
 		available = {
-			has_socialist_government = yes
+			has_country_flag = PLX_parvus
 		}
 	}
 
