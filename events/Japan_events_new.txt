@@ -964,20 +964,52 @@ country_event = { #Japanese Civil War
 	}
 	set_global_flag = JAP_CW_FLAG
 		JAP = {
-		dismantle_faction = yes
-		release = KOR
-		end_puppet = TAI
+	    	dismantle_faction = yes
+	    	release = KOR
+	    	end_puppet = TAI
 		}
-		TRM = {
-		transfer_state = 537
-		transfer_state = 555
+		if = {
+			limit = {
+				or = {
+					has_game_rule = { rule = KXX_annex_RUS option = KXX_annex_RUS_TRM }
+					has_game_rule = { rule = KXX_annex_RUS option = KXX_annex_RUS_DKB }
+					has_game_rule = { rule = KXX_annex_RUS option = KXX_annex_RUS_KR }
+					has_game_rule = { rule = KXX_annex_RUS option = KXX_annex_RUS_PVP }
+				}
+			}
+			RUS = {
+				transfer_state = 537
+		        transfer_state = 555
+				add_state_core = 537
+				add_state_core = 555
+			}
+		}
+		else = {
+			TRM = {
+        		transfer_state = 537
+        		transfer_state = 555
+				add_state_core = 537
+				add_state_core = 555
+    		}
 		}
 		TAI = {
 		country_event = taiwan.18
 		}
-		FNG = {
-					transfer_state = 745
+		if = {
+			limit = { 
+				or = {
+					has_game_rule = { rule = KXX_annex_China option = KXX_annex_CHI }
 				}
+			}
+			CHI = {
+				transfer_state = 745
+			}
+		}
+		else = {
+			FNG = {
+				transfer_state = 745
+			}
+		}
 		every_state = {
 					limit = {
 						is_core_of = "JAP"
@@ -988,7 +1020,6 @@ country_event = { #Japanese Civil War
 					transfer_state = 536
 					transfer_state = 533
 					transfer_state = 534
-					transfer_state = 555
 					transfer_state = 1351
 					transfer_state = 1356
 					inherit_technology = GER		
