@@ -1,249 +1,5 @@
 foreign_politics = {
-	PLX_faction_join_russia = {
-		icon = generic_agreement
-		allowed = { tag = POL }
-		
-		available = {
-			FROM = {
-				NOT = { has_country_flag = plx_asking_for_faction }
-			}
-		}
-
-		visible = {
-			FROM = {
-				is_subject = no
-				219 = {
-					owner = {
-						is_subject = no
-						is_russian_tag = yes
-						NOT = {
-							is_in_faction_with = AUS
-							is_in_faction_with = GER
-						}
-						exists = yes
-						NOT = {
-							has_war_with = POL
-						}
-						#OR = {
-						#	has_socialist_government = no
-						#	ROOT = { has_socialist_government = yes }
-						#}
-						#is_faction_leader = yes
-					}
-				}
-				is_in_faction = no
-				OR = {
-					has_country_flag = plx_claiming_poland
-					has_country_flag = plx_expansionist_poland
-					AND = { 
-						has_country_flag = plx_revolutionary_bulwark 
-						RUS = { has_socialist_government = yes }
-					}
-				}
-				NOT = { has_country_flag = plx_rus_refused }
-				NOT = { has_active_mission = PLX_surviving_german_invasion_pol }
-			}
-		}
-
-		cost = 10
-		#days_remove = 120
-		#cancel_if_not_visible = yes
-
-		ai_will_do = {
-			factor = 1000
-		}
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove PLX_faction_join_russia target: [From.GetName]"
-			219 = {
-				owner = {
-					country_event = plxf.1 
-				}
-			}
-			set_country_flag = plx_asking_for_faction
-		}
-	}
-	PLX_faction_join_internationale = {
-		icon = generic_agreement
-		allowed = { tag = POL }
-		
-		available = {
-			FROM = {
-				NOT = { has_country_flag = plx_asking_for_faction }
-			}
-		}
-
-		visible = {
-			FROM = {
-				is_subject = no
-				INT = {
-					is_subject = no
-					exists = yes
-					has_socialist_government = yes
-					is_faction_leader = yes
-					NOT = {
-						has_war_with = POL
-					}
-				}
-				is_in_faction = no
-				NOT = { has_government = authoritarian_democrat }
-				OR = {
-					has_country_flag = plx_claiming_poland
-					has_country_flag = plx_expansionist_poland
-					has_country_flag = plx_revolutionary_bulwark
-				}
-				NOT = { has_country_flag = plx_int_refused }
-				NOT = { has_active_mission = PLX_surviving_german_invasion_pol }
-			}
-		}
-
-		cost = 10
-		#days_remove = 120
-		#cancel_if_not_visible = yes
-
-		ai_will_do = {
-			factor = 1000
-		}
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove PLX_faction_join_internationale target: [From.GetName]"
-			INT = { country_event = plxf.2 }
-			set_country_flag = plx_asking_for_faction
-		}
-	}
-	PLX_faction_join_austria = {
-		icon = generic_agreement
-		allowed = { tag = POL }
-		
-		available = {
-			FROM = {
-				NOT = { has_country_flag = plx_asking_for_faction }
-			}
-		}
-
-		visible = {
-			FROM = {
-				has_country_leader = { name = "卡罗尔·奥布拉希特二世" ruling_only = yes }
-				is_subject = no
-				AUS = {
-					is_subject = no
-					exists = yes
-					is_faction_leader = yes
-					NOT = {
-						has_war_with = POL
-					}					
-				}
-				is_in_faction = no
-				NOT = { has_government = authoritarian_democrat }
-				OR = {
-					has_country_flag = plx_claiming_poland
-					has_country_flag = plx_expansionist_poland
-				}
-				NOT = { has_country_flag = plx_aus_refused }
-				NOT = { has_active_mission = PLX_surviving_german_invasion_pol }
-			}
-		}
-
-		cost = 10
-		#days_remove = 120
-		#cancel_if_not_visible = yes
-
-		ai_will_do = {
-			factor = 1000
-		}
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove PLX_faction_join_internationale target: [From.GetName]"
-			AUS = { country_event = plxf.23 }
-			set_country_flag = plx_asking_for_faction
-		}
-	}	
-	#PLX_faction_join_austria_2 = {
-	#	icon = generic_agreement
-	#	allowed = { tag = POL }
-	#	
-	#	available = {
-	#		FROM = {
-	#			NOT = { has_country_flag = plx_asking_for_faction }
-	#		}
-	#	}
-	#
-	#	visible = {
-	#		FROM = {
-	#			is_subject = no
-	#			AUS = {
-	#				is_subject = no
-	#				exists = yes
-	#				is_faction_leader = yes
-	#				NOT = {
-	#					has_war_with = POL
-	#				}					
-	#			}
-	#			is_in_faction = no
-	#			NOT = { has_government = authoritarian_democrat }
-	#			OR = {
-	#				has_country_flag = plx_claiming_poland
-	#				has_country_flag = plx_expansionist_poland
-	#			}
-	#			NOT = { has_country_flag = plx_aus_refused }
-	#			NOT = { has_active_mission = PLX_surviving_german_invasion_pol }
-	#			OR = {
-	#				owns_state = 1124
-	#				owns_state = 91	
-	#			}
-	#		}
-	#	}
-	#
-	#	cost = 10
-	#	#days_remove = 120
-	#	#cancel_if_not_visible = yes
-	#
-	#	ai_will_do = {
-	#		factor = 1000
-	#	}
-	#
-	#	complete_effect = {
-	#		log = "[GetDateText]: [Root.GetName]: Decision remove PLX_faction_join_internationale target: [From.GetName]"
-	#		AUS = { country_event = plxf.10 }
-	#		set_country_flag = plx_asking_for_faction
-	#	}
-	#}		
-	PLX_faction_poland_is_alone = {
-		icon = generic_agreement
-		allowed = { tag = POL }
-		
-		available = {
-			FROM = {
-				NOT = { has_country_flag = plx_asking_for_faction }
-			}
-		}
-
-		visible = {
-			FROM = {
-				is_subject = no
-				is_in_faction = no
-				OR = {
-					has_country_flag = plx_claiming_poland
-					has_country_flag = plx_expansionist_poland
-					has_country_flag = plx_revolutionary_bulwark
-				}
-			}
-		}
-
-		cost = 10
-		#days_remove = 120
-		#cancel_if_not_visible = yes
-
-		ai_will_do = {
-			factor = 1000
-		}
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove PLX_faction_join_internationale target: [From.GetName]"
-			country_event = poland.450
-			set_country_flag = plx_asking_for_faction
-		}
-	}
+	
 	PLX_formin_intermarium = {
 		icon = generic_agreement
 		allowed = { tag = POL }
@@ -773,91 +529,7 @@ political_actions = {
 		}
 	}
 
-	PLX_austria_demands_galicia = {
-		icon = generic_army_support
-		available = {
-			date > 1939.1.1
-		}
-		visible = {
-			NOT = { has_war_with = POL }
-			OR = {
-				is_ai = no
-				has_war = no
-			}
-			OR = {
-				is_ai = no
-				POL = { has_war = yes }
-			}
-			tag = AUS
-			NOT = { is_in_faction_with = POL }
-			NOT = { GER = { is_in_faction_with = POL } }
-		}
-		cost = 50
-		days_remove = 60
-		fire_only_once = yes
-		
-		complete_effect = {
-			POL = { country_event = plxf.24 }
-		}
-		timeout_effect = {
-			declare_war_on = {
-				target = POL
-				type = annex_everything
-			}
-		}	
-		#ai_strategy = {
-		#	type = declare_war
-		#	id = "POL"
-		#	value = 1000
-		#}		
-	}
-	PLX_austria_demands_galicia_ukr = {
-		icon = generic_army_support
-		available = {
-			date > 1940.1.1
-			OR = {
-				GAL = {
-					is_subject_of = AUS
-				}	
-				AUS = {
-					owns_state = 1124
-					owns_state = 91
-				}
-			}
-		}
-		visible = {
-			NOT = { has_war_with = UKR }
-			OR = {
-				is_ai = no
-				has_war = no
-			}
-			OR = {
-				is_ai = no
-				UKR = { has_war = yes }
-			}			
-			tag = AUS
-			NOT = { is_in_faction_with = UKR }
-			NOT = { GER = { is_in_faction_with = UKR } }
-		}
-		cost = 50
-		days_remove = 60
-		fire_only_once = yes
-		
-		complete_effect = {
-			UKR = { country_event = plxf.24 }
-		}
-		timeout_effect = {
-			declare_war_on = {
-				target = UKR
-				type = annex_everything
-			}
-		}	
-		#ai_strategy = {
-		#	type = declare_war
-		#	id = "UKR"
-		#	value = 1000
-		#}		
-	}	
+	
 }
 
 operations = { 
@@ -1466,15 +1138,7 @@ PLX_choose_monarch = {
 		available = {
 			has_completed_focus = PLX_POL_the_great_debate
 		}
-		visible = {
-			has_country_leader = { 
-				name = "皇家委员会" 
-				ruling_only = yes 
-			}
-			NOT = {
-				has_country_flag = POL_king_picked
-			}
-		}
+		
 		cost = 10
 		fire_only_once = yes
 		
@@ -1758,4 +1422,36 @@ PLX_choose_monarch = {
 		}
 	}
 }
-
+PLX_colony = {
+	PLX_southam_colony = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		
+		remove_effect = {
+		set_temp_variable = { tag_to_release = BRA }
+		release_targeted_tag = yes
+		BRA = {
+			load_focus_tree = generic_focus
+			set_cosmetic_tag = POL_southam
+			every_state = {
+				limit = {
+					is_core_of = PRU
+				}
+				BRA = {
+					add_state_core = PREV
+				}
+				transfer_state_to = BRA
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = tot_colonial_government
+			}
+			
+		}	
+	}
+}
+}
