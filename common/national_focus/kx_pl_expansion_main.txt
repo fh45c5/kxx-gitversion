@@ -5153,9 +5153,7 @@ focus_tree = {
 		prerequisite = {
 			focus = KX_PL_PZPR_FORMING_COALITION
 		}	
-		mutually_exclusive = {
-            focus = KX_PL_PZPR_STICK_TO_LEFT
-		}
+		
 		relative_position_id = KX_PL_PZPR_FORMING_COALITION
 		x = 4
 		y = 1
@@ -5443,20 +5441,18 @@ focus_tree = {
 			#has_country_flag = plx_start
 		}	
 		prerequisite = {
-			focus = KX_PL_PZPR_WELFARE_ENSURES_SUPPORT
+			focus = KX_PL_PZPR_FORMING_COALITION
 		}	
-		prerequisite = {
-			focus = KX_PL_PZPR_SUBJUGATE_JUDICIAL_SYSTEM
-		}		
+			
 		relative_position_id = KX_PL_PZPR_WELFARE_ENSURES_SUPPORT
 		x = 1
-		y = 1
+		y = -3
 		cost = 4 #?
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
-			#add_political_power = 50
+			
 			country_event = plx.22
 		}
 	}	
@@ -5467,11 +5463,14 @@ focus_tree = {
 			has_country_flag = plx_pzpr_republic
 		}	
 		prerequisite = {
-			focus = KX_PL_PZPR_FATE_OF_MONARCHY
+			focus = KX_PL_PZPR_WELFARE_ENSURES_SUPPORT
+		}	
+		prerequisite = {
+			focus = KX_PL_PZPR_SUBJUGATE_JUDICIAL_SYSTEM
 		}			
 		relative_position_id = KX_PL_PZPR_FATE_OF_MONARCHY
-		x = 1
-		y = 1
+		x = 0
+		y = 4
 		cost = 2
 		ai_will_do = {
 			factor = 100
@@ -5490,9 +5489,7 @@ focus_tree = {
 		prerequisite = {
 			focus = KX_PL_PZPR_FORMING_COALITION
 		}	
-		mutually_exclusive = {
-            focus = KX_PL_PZPR_REACH_TO_YOUNG_NATDEM
-		}			
+				
 		relative_position_id = KX_PL_PZPR_FORMING_COALITION
 		x = -4
 		y = 1
@@ -6483,8 +6480,7 @@ focus_tree = {
 		id = KX_PLX_COMMUNIST_SUPERSTATE
 		icon = GFX_goal_FRA_european_peoples_republicanism
 		available = {
-			has_country_flag = plx_internationalist_communists
-			has_completed_focus = KX_PL_KPP_CULTURAL_REVOLUTION			
+			has_country_flag = plx_internationalist_communists	
 			OR = {
 				controls_state = 64
 				controls_state = 1137
@@ -16601,8 +16597,7 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_stick_with_germany"
-			add_political_power = 50
-			add_war_support = 0.1
+			add_ideas = POL_jew_immgrants
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
 
@@ -16627,8 +16622,7 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_stick_with_germany"
-			add_political_power = 50
-			add_war_support = 0.1
+			add_ideas = POL_integrate_zionists
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
 
@@ -16653,8 +16647,11 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_stick_with_germany"
-			add_political_power = 50
-			add_war_support = 0.1
+			add_manpower = 100000
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 3000
+			}
 		}
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
 
@@ -16762,7 +16759,29 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_the_revolution"
-	
+			hidden_effect = {
+				country_event = {
+				id = plx.38 days = 3
+			}		
+			GER_remove_from_mitteleuropa = yes
+			leave_faction = yes		
+			every_unit_leader = {
+				limit = { has_trait = POL_german_commander }
+				set_nationality = GER
+				remove_unit_leader_trait = POL_german_commander
+			}
+			remove_ideas = POL_warsaw_garrison
+			GER = {
+				country_event = {
+					id = plxf.16 days = 7
+				} 
+			}
+			create_wargoal = {
+				target = GER
+				type = independence_wargoal
+			}		
+			}
+			custom_effect_tooltip = PLX_break_with_germany
 			add_war_support = 0.1
 			add_popularity = {
 				ideology = totalist
@@ -16897,13 +16916,146 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_our_natural_borders"
-			add_ideas = PLC_expansionism_idea
+			if = {
+				limit = {
+					UKR = {
+						is_in_faction_with = GER
+					}
+				}
+				UKR = {
+					country_event = plxf.23
+				}
+			}
+			if = {
+				limit = {
+					WHR = {
+						is_in_faction_with = GER
+					}
+				}
+				WHR = {
+					country_event = plxf.23
+				}
+			}
+			if = {
+				limit = {
+					BAT = {
+						is_in_faction_with = GER
+					}
+				}
+				BAT = {
+					country_event = plxf.23
+				}
+			}
+			if = {
+				limit = {
+					LIT = {
+						is_in_faction_with = GER
+					}
+				}
+				LIT = {
+					country_event = plxf.23
+				}
+			}
+			create_wargoal = {
+				target = UKR
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = UKR
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = WHR
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = WHR
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = BAT
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = BAT
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = EST
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = EST
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = LAT
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = LAT
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = LIT
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = LIT
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = GAL
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = GAL
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = WSU
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = WSU
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
 		}
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 
-		available = {
-			is_subject = no
-		}
+		
 	}
 	focus = {
 		id = PLX_PLC_strike_south
@@ -16923,35 +17075,144 @@ focus = {
 			}
 		}
 
-		will_lead_to_war_with = GAL
-		will_lead_to_war_with = AUS
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_strike_south"
-			91 = {
-				owner = {
-					ROOT = {
-						create_wargoal = {
-							type = annex_everything
-							target = PREV
-						}
-					}
+			create_wargoal = {
+				target = AUS
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = AUS
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = HUN
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = HUN
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = CZE
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = CZE
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = SVK
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SVK
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = ROM
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = ROM
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = CRO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = CRO
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = SLO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SLO
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = SER
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SER
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = MNT
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = MNT
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = BUL
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = BUL
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = GRE
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = GRE
+				}
+				POL = {
+					add_state_core = PREV
 				}
 			}
 		}
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 
-		available = {
-			is_subject = no
-			91 = {
-				owner = {
-					OR = {
-						tag = GAL
-						tag = AUS
-					}
-				}
-			}
-		}
 	}
 	focus = {
 		id = PLX_PLC_3i_shadow_rule
@@ -16972,7 +17233,7 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_galician_referendum"
-			country_event = plcommon.19
+			add_ideas = PLX_PLC_3i_shadow_rule
 		}
 
 		
@@ -16996,7 +17257,7 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_galician_referendum"
-			country_event = plcommon.19
+			add_ideas = PLX_PLC_commie_volkism
 		}
 
 		
@@ -17045,29 +17306,17 @@ focus = {
 			}
 		}
 
-		will_lead_to_war_with = RUS
+	
 		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_strike_east"
-			195 = {
-				owner = {
-					ROOT = {
-						create_wargoal = {
-							type = annex_everything
-							target = PREV
-						}
-					}
-				}
+			create_wargoal = {
+				target = RUS
+				type = annex_everything
 			}
 		}
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 
-		available = {
-			is_subject = no
-			195 = {
-				owner = { is_russian_tag_that_can_integrate = yes }
-			}
-		}
 	}
 
 	
@@ -17092,13 +17341,22 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_the_greater_commonwealth"
-			add_ideas = PLC_peace_idea
+			create_wargoal = {
+				target = GER
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = GER
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_ANNEXATION }
 
-		available = {
-			is_subject = no
-		}
 	}
 
 	focus = {
@@ -17120,8 +17378,6 @@ focus = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_ruthenian_invitation"
 			country_event = plxv2.150
 		}
-
-		
 	}
 
 
@@ -30185,6 +30441,7 @@ focus = {
 		}
 		available = {
 			NOT = { 
+					is_in_faction_with = GER
 					has_country_flag = plx_zsp_rules_true
 					has_country_flag = plx_communist_revolution
 					has_country_flag = POL_zadruga_in_power
@@ -30278,7 +30535,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			has_country_leader = { 
+				name = "卡罗尔·奥布拉希特二世" 
+				ruling_only = yes 
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30293,7 +30553,91 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			
+			create_wargoal = {
+				target = AUS
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = AUS
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = HUN
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = HUN
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = CZE
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = CZE
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = SVK
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SVK
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = CRO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = CRO
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = SLO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SLO
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = MNT
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = MNT
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
 		}
 	}
 	focus = {
@@ -30302,7 +30646,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			has_country_leader = { 
+				name = "帕维乌一世·萨尔瓦托" 
+				ruling_only = yes 
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30317,7 +30664,189 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			create_wargoal = {
+				target = UKR
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = UKR
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = DKB
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = DKB
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = KLY
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = KLY
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = KUB
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = KUB
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = MTR
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = MTR
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = GEO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = GEO
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = AZE
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = AZE
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = ARM
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = ARM
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = PER
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = PER
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = AFG
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = AFG
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = UZB
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = UZB
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = KHI
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = KHI
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = KYR
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = KYR
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = ALO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = ALO
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = TRK
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = TRK
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			add_state_core = 217
+			add_state_core = 236
+			add_state_core = 1224
 		}
 	}
 	focus = {
@@ -30326,7 +30855,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			 has_country_leader = {
+				name = "瓦迪斯瓦夫五世"  
+				ruling_only = yes
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30341,7 +30873,185 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			#poland
+			create_wargoal = {
+				target = LIT
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = UKR
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = WHR
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = GER
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = RUS
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = GAL
+				type = annex_everything
+			}
+				10 = { add_core_of = ROOT 
+				         }
+				90 = { add_core_of = ROOT 
+				         }
+				87 = { add_core_of = ROOT 
+				         }
+				98 = { add_core_of = ROOT 
+				         }
+				92 = { add_core_of = ROOT 
+				         }
+				1088 = { add_core_of = ROOT 
+				         }
+				97 = { add_core_of = ROOT 
+				         }
+				1148 = { add_core_of = ROOT 
+				         }
+				#ukraine
+				997 = { add_core_of = ROOT 
+				         }
+				93 = { add_core_of = ROOT 
+				         }
+				792 = { add_core_of = ROOT 
+				         }
+				1228 = { add_core_of = ROOT 
+				         }
+				1244 = { add_core_of = ROOT 
+				         }
+				201 = { add_core_of = ROOT 
+				         }
+				199 = { add_core_of = ROOT 
+				         }
+				1245 = { add_core_of = ROOT 
+				         }
+				198 = { add_core_of = ROOT 
+				         }
+				791 = { add_core_of = ROOT 
+				         }
+				1241 = { add_core_of = ROOT 
+				         }
+				1240 = { add_core_of = ROOT 
+				         }
+				1233 = { add_core_of = ROOT 
+				         }
+				226 = { add_core_of = ROOT 
+				         }
+				203 = { add_core_of = ROOT 
+				         }
+				1237 = { add_core_of = ROOT 
+				         }
+				202 = { add_core_of = ROOT 
+				         }
+				1238 = { add_core_of = ROOT 
+				         }
+				259 = { add_core_of = ROOT 
+				         }
+				1243 = { add_core_of = ROOT 
+				         }
+				225 = { add_core_of = ROOT 
+				         }
+				1242 = { add_core_of = ROOT 
+				         }
+				193 = { add_core_of = ROOT 
+				         }
+				1230 = { add_core_of = ROOT 
+				         }
+				241 = { add_core_of = ROOT 
+				         }
+				#white ruthenia
+				207 = { add_core_of = ROOT 
+				         }
+				1295 = { add_core_of = ROOT 
+				         }
+				206 = { add_core_of = ROOT 
+				         }
+				95 = { add_core_of = ROOT 
+				         }
+				204 = { add_core_of = ROOT 
+				         }
+				194 = { add_core_of = ROOT 
+				         }
+				1087 = { add_core_of = ROOT 
+				         }
+				1294 = { add_core_of = ROOT 
+				         }
+				#galicia
+				1124 = { add_core_of = ROOT 
+				         }
+				88 = { add_core_of = ROOT 
+				         }
+				1314 = { add_core_of = ROOT 
+				         }
+				1125 = { add_core_of = ROOT 
+				         }
+				1127 = { add_core_of = ROOT 
+				         }
+				1319 = { add_core_of = ROOT 
+				         }
+				91 = { add_core_of = ROOT 
+				         }
+				1126 = { add_core_of = ROOT 
+				         }
+				89 = { add_core_of = ROOT 
+				         }
+				1140 = { add_core_of = ROOT 
+				         }
+				80 = { add_core_of = ROOT 
+				         }
+				#lithunania
+				94 = { add_core_of = ROOT 
+				         }
+				96 = { add_core_of = ROOT 
+				         }
+				655 = { add_core_of = ROOT 
+				         }
+				11 = { add_core_of = ROOT 
+				         }
+				189 = { add_core_of = ROOT 
+				         }
+				1329 = { add_core_of = ROOT 
+				         }
+				#baltic duchy
+				190 = { add_core_of = ROOT 
+				         }
+				1091 = { add_core_of = ROOT 
+				         }
+				12 = { add_core_of = ROOT 
+				         }
+				191 = { add_core_of = ROOT 
+				         }
+				#germany
+				188 = { add_core_of = ROOT 
+				         }
+				5 = { add_core_of = ROOT 
+				         }
+				777 = { add_core_of = ROOT 
+				         }
+				776 = { add_core_of = ROOT 
+				         }
+				86 = { add_core_of = ROOT 
+				         }
+				#russia
+				755 = { add_core_of = ROOT 
+				         }
+				242 = { add_core_of = ROOT 
+				         }
+				243 = { add_core_of = ROOT 
+				         }
+				224 = { add_core_of = ROOT 
+				         }
+				880 = { add_core_of = ROOT 
+				         }
+				1287 = { add_core_of = ROOT 
+				         }
+			
 		}
 	}
 	focus = {
@@ -30350,7 +31060,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			has_country_leader = {
+				name = "雅德威加二世"  #
+				ruling_only = yes
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30365,7 +31078,31 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			create_wargoal = {
+				target = LIT
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = UKR
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = WHR
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = GER
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = RUS
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = GAL
+				type = annex_everything
+			}
+			PLX_effect_intermarium_4_cores = yes
 		}
 	}
 	focus = {
@@ -30374,7 +31111,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			 has_country_leader = {
+				name = "弗雷德里克二世·克里斯蒂安"  #
+				ruling_only = yes
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30389,7 +31129,263 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			create_wargoal = {
+				target = GER
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = AUS
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = SWI
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = HOL
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = SRI
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = ITA
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = BEL
+				type = annex_everything
+			}
+				53 = { add_core_of = ROOT 
+				        }
+				54 = { add_core_of = ROOT 
+				        }
+				60 = { add_core_of = ROOT 
+				        }
+				59 = { add_core_of = ROOT 
+				        }
+				56 = { add_core_of = ROOT 
+				        }
+				57 = { add_core_of = ROOT 
+				        }
+				55 = { add_core_of = ROOT 
+				        }
+				52 = { add_core_of = ROOT 
+				        }
+				50 = { add_core_of = ROOT 
+				        }
+				28 = { add_core_of = ROOT 
+				        }
+				779 = { add_core_of = ROOT 
+				        }
+				780 = { add_core_of = ROOT 
+				        }
+				42 = { add_core_of = ROOT 
+				        }	
+				51 = { add_core_of = ROOT 
+				        }
+				781 = { add_core_of = ROOT 
+				        }
+				8 = { add_core_of = ROOT 
+				        }
+				741 = { add_core_of = ROOT 
+				        }
+				58 = { add_core_of = ROOT 
+				        }
+				61 = { add_core_of = ROOT 
+				        }
+				62 = { add_core_of = ROOT 
+				        }
+				63 = { add_core_of = ROOT 
+				        }
+				64 = { add_core_of = ROOT 
+				        }
+				65 = { add_core_of = ROOT 
+				        }
+				66 = { add_core_of = ROOT 
+				        }
+				67 = { add_core_of = ROOT 
+				        }
+				68 = { add_core_of = ROOT 
+				        }
+				86 = { add_core_of = ROOT 
+				        }
+				776 = { add_core_of = ROOT 
+				        }
+				777 = { add_core_of = ROOT 
+				        }
+				5 = { add_core_of = ROOT 
+				        }
+				188 = { add_core_of = ROOT 
+				        }
+				839 = { add_core_of = ROOT 
+				        }
+				782 = { add_core_of = ROOT 
+				        }
+				#austria
+				152 = { add_core_of = ROOT 
+				        }
+				4 = { add_core_of = ROOT 
+				        }
+				1137 = { add_core_of = ROOT 
+				        }
+				775 = { add_core_of = ROOT 
+				        }
+				836 = { add_core_of = ROOT 
+				        }
+				153 = { add_core_of = ROOT 
+				        }
+				39 = { add_core_of = ROOT 
+				        }
+				835 = { add_core_of = ROOT 
+				        }
+				102 = { add_core_of = ROOT 
+				        }
+				1272 = { add_core_of = ROOT 
+				        }
+				1272 = { add_core_of = ROOT 
+				        }
+				1101 = { add_core_of = ROOT 
+				        }
+				1144 = { add_core_of = ROOT 
+				        }
+				736 = { add_core_of = ROOT 
+				        }
+				39 = { add_core_of = ROOT 
+				        }
+				1100 = { add_core_of = ROOT 
+				        }
+				783 = { add_core_of = ROOT 
+				        }
+				942 = { add_core_of = ROOT 
+				        }
+				1235 = { add_core_of = ROOT 
+				        }
+				1104 = { add_core_of = ROOT 
+				        }
+				1103 = { add_core_of = ROOT 
+				        }
+				784 = { add_core_of = ROOT 
+				        }
+				#swiss
+				943 = { add_core_of = ROOT 
+				        }
+				760 = { add_core_of = ROOT 
+				        }
+				3 = { add_core_of = ROOT 
+				        }
+				151 = { add_core_of = ROOT 
+				        }
+				761 = { add_core_of = ROOT 
+				        }
+				#bohemia
+				1139 = { add_core_of = ROOT 
+				        }
+				1133 = { add_core_of = ROOT 
+				        }
+				1130 = { add_core_of = ROOT 
+				        }
+				786 = { add_core_of = ROOT 
+				        }
+				9 = { add_core_of = ROOT 
+				        }
+				1132 = { add_core_of = ROOT 
+				        }
+				71 = { add_core_of = ROOT 
+				        }
+				75 = { add_core_of = ROOT 
+				        }
+				74 = { add_core_of = ROOT 
+				        }
+				1134 = { add_core_of = ROOT 
+				        }
+				1138 = { add_core_of = ROOT 
+				        }
+				69 = { add_core_of = ROOT 
+				        }
+				1129 = { add_core_of = ROOT 
+				        }
+				1131 = { add_core_of = ROOT 
+				        }
+				#netherlands
+				36 = { add_core_of = ROOT 
+				        }
+				866 = { add_core_of = ROOT 
+				        }
+				7 = { add_core_of = ROOT 
+				        }
+				978 = { add_core_of = ROOT 
+				        }
+				35 = { add_core_of = ROOT 
+				        }
+				979 = { add_core_of = ROOT 
+				        }
+				#wallonia
+				6 = { add_core_of = ROOT 
+				        }
+				34 = { add_core_of = ROOT 
+				        }
+				29 = { add_core_of = ROOT 
+				        }
+				#france
+				762 = { add_core_of = ROOT 
+				        }
+				735 = { add_core_of = ROOT 
+				        }
+				763 = { add_core_of = ROOT 
+				        }
+				21 = { add_core_of = ROOT 
+				        }
+				32 = { add_core_of = ROOT 
+				        }
+				20 = { add_core_of = ROOT 
+				        }
+				785 = { add_core_of = ROOT 
+				        }
+				27 = { add_core_of = ROOT 
+				        }
+				980 = { add_core_of = ROOT 
+				        }
+				17 = { add_core_of = ROOT 
+				        }
+				18 = { add_core_of = ROOT 
+				        }
+				24 = { add_core_of = ROOT 
+				        }
+				#lombardy
+				759 = { add_core_of = ROOT 
+				        }
+				160 = { add_core_of = ROOT 
+				        }
+				159 = { add_core_of = ROOT 
+				        }
+				#socialist italy
+				158 = { add_core_of = ROOT 
+				        }
+				1003 = { add_core_of = ROOT 
+				        }
+				838 = { add_core_of = ROOT 
+				        }
+				1004 = { add_core_of = ROOT 
+				        }
+				161 = { add_core_of = ROOT 
+				        }
+				157 = { add_core_of = ROOT 
+				        }
+				162 = { add_core_of = ROOT 
+				        }
+				1005 = { add_core_of = ROOT 
+				        }
+				1236 = { add_core_of = ROOT 
+				        }
+				764 = { add_core_of = ROOT 
+				        }
+				#papal
+				2 = { add_core_of = ROOT 
+				        }
+				1149 = { add_core_of = ROOT 
+				        }
 		}
 	}
 	focus = {
@@ -30398,7 +31394,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			 has_country_leader = {
+				name = "约翰四世·索别斯基"  
+				ruling_only = yes
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30413,7 +31412,126 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			create_wargoal = {
+				target = USA
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = USA
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = CSA
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = CSA
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = COR
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = COR
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = TEX
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = TEX
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = WCC
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = WCC
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = CAL
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = CAL
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = TXS
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = TXS
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = NEE
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = BBR
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = BBR
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = NYC
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = NYC
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
 		}
 	}
 	focus = {
@@ -30422,7 +31540,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			has_country_leader = { 
+				name = "米哈伊一世" 
+				ruling_only = yes 
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30437,7 +31558,41 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			create_wargoal = {
+				target = ROM
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = ROM
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = TRS
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			if = {
+				limit = {
+					ROM = {
+						has_country_leader = { 
+								name = "Mihai I"
+								ruling_only = yes
+							}
+					}
+
+				}
+				ROM = {
+					country_event = plxf.23
+				}
+			}
+			
 		}
 	}
 	focus = {
@@ -30446,7 +31601,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			 has_country_leader = { 
+				name = "弗谢沃洛德一世" 
+				ruling_only = yes 
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30461,7 +31619,54 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			create_wargoal = {
+				target = RUS
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = RUS
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = TRM
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = TRM
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_country_flag = RUS_monarchy_restored
+					}
+
+				}
+				RUS = {
+					country_event = plxf.23
+				}
+			}
+			if = {
+				limit = {
+					TRM = {
+						TRM_do_rovs_in_power = yes
+					}
+
+				}
+				TRM = {
+					country_event = plxf.23
+				}
+			}
+			
+			
 		}
 	}
 	focus = {
@@ -30470,7 +31675,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			has_country_leader = { 
+				name = "亚历山大二世" 
+				ruling_only = yes 
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30485,7 +31693,21 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			create_wargoal = {
+				target = HUN
+				type = annex_everything
+			}
+			HUN = {
+				country_event = plxf.23
+			}
+			every_state = {
+				limit = {
+					is_core_of = HUN
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
 		}
 	}
 	focus = {
@@ -30494,7 +31716,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			 has_country_leader = { 
+				name = "安德烈一世" 
+				ruling_only = yes 
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30509,7 +31734,18 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			create_wargoal = {
+				target = FRA
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = FRA
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
 		}
 	}
 	focus = {
@@ -30518,7 +31754,10 @@ focus = {
 		available = {
 			has_war = no
 			is_subject = no
-			
+			has_country_leader = { 
+				name = "奥古斯丁一世" 
+				ruling_only = yes 
+			}
 		}
 		#prerequisite = {
 		#	focus = PLX_stay_with_germany
@@ -30533,7 +31772,133 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
-			country_event = poland.400
+			SIC = {
+				country_event = plxf.23
+			}
+			SPR = {
+				country_event = plxf.23
+			}
+			create_wargoal = {
+				target = SPR
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SPR
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = CAR
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = CAR
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = CNT
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = CNT
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = LOM
+				type = annex_everything
+			}
+			
+			every_state = {
+				limit = {
+					is_core_of = LOM
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = VNC
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = VNC
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = SRD
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SRD
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = SRI
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SRI
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = PAP
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = PAP
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = ITA
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = ITA
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = SIC
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SIC
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
 		}
 	}
 	focus = {
@@ -31065,4 +32430,707 @@ focus = {
 		}
 		search_filters = { FOCUS_FILTER_RESEARCH }
 	}
+	
+# ------------------------------------------------------------
+# 第1行 - 保持工会领导（作为基准位置国策）
+# ------------------------------------------------------------
+focus = {
+	id = POL_keep_union_leadership
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_decide_leadership
+	x = -6
+	y = 1
+	prerequisite = { focus = POL_decide_leadership }
+	prerequisite = { }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 第2行 - 左：经济学家的政治
+# ------------------------------------------------------------
+focus = {
+	id = POL_economists_politics
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_keep_union_leadership
+	x = -1
+	y = 1
+
+	prerequisite = { focus = POL_keep_union_leadership }
+	mutually_exclusive = { focus = POL_socialist_party_remnants }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 第2行 - 右：社会党的残余（与经济学家的政治互斥，红线连接）
+# ------------------------------------------------------------
+focus = {
+	id = POL_socialist_party_remnants
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_keep_union_leadership
+	x = 1
+	y = 1
+
+	prerequisite = { focus = POL_keep_union_leadership }
+	mutually_exclusive = { focus = POL_economists_politics }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 第3行 - 左：自由技官市场社会主义
+# 前置：经济学家的政治
+# ------------------------------------------------------------
+focus = {
+	id = POL_free_technocrat_market_socialism
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_economists_politics
+	x = -1
+	y = 1
+
+	prerequisite = { focus = POL_economists_politics }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 第3行 - 中：工人防御委员会
+# 前置：经济学家的政治
+# ------------------------------------------------------------
+focus = {
+	id = POL_workers_defense_committee
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_economists_politics
+	x = 1
+	y = 1
+	prerequisite = { 
+		focus = POL_socialist_party_remnants
+		focus = POL_economists_politics 
+	}
+	
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 第3行 - 右：集结军团与工人
+# 前置：社会党的残余
+# ------------------------------------------------------------
+focus = {
+	id = POL_mobilize_legions_and_workers
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_socialist_party_remnants
+	x = 1
+	y = 1
+
+	prerequisite = { focus = POL_socialist_party_remnants }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 第4行 - 左：共济会式专家统治
+# 前置：自由技官市场社会主义
+# ------------------------------------------------------------
+focus = {
+	id = POL_masonic_technocracy
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_free_technocrat_market_socialism
+	x = 0
+	y = 1
+
+	prerequisite = { focus = POL_free_technocrat_market_socialism }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 第4行 - 中：延展社会福利
+# 前置：工人防御委员会
+# ------------------------------------------------------------
+focus = {
+	id = POL_extend_social_welfare
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_workers_defense_committee
+	x = 0
+	y = 1
+
+	prerequisite = { focus = POL_workers_defense_committee }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 第4行 - 右：工团主义去激进化
+# 前置：集结军团与工人
+# ------------------------------------------------------------
+focus = {
+	id = POL_syndicalism_deradicalization
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_mobilize_legions_and_workers
+	x = 0
+	y = 1
+
+	prerequisite = { focus = POL_mobilize_legions_and_workers }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 第5行 - 左：迈向乌托邦
+# 前置：共济会式专家统治 + 延展社会福利（两者都完成）
+# ------------------------------------------------------------
+focus = {
+	id = POL_towards_utopia
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_masonic_technocracy
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = POL_masonic_technocracy
+	}
+	prerequisite = {
+		focus = POL_extend_social_welfare
+	}
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 第5行 - 右：自由, 平等, 独立
+# 前置：工团主义去激进化
+# ------------------------------------------------------------
+focus = {
+	id = POL_liberty_equality_independence
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_syndicalism_deradicalization
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = POL_extend_social_welfare
+	}
+	prerequisite = { focus = POL_syndicalism_deradicalization }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+focus = {
+	id = POL_the_wall_must_fall
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+	x = 10
+	y = 50
+	prerequisite = { }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+focus = {
+	id = POL_contact_with_polish_united_workers_right
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_decide_leadership
+	x = 6
+	y = 1
+
+	prerequisite = { focus = POL_decide_leadership }
+	
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+focus = {
+	id = POL_agrarianism_first
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_contact_with_polish_united_workers_right
+	x = -1
+	y = 1
+
+	prerequisite = { focus = POL_contact_with_polish_united_workers_right }
+	mutually_exclusive = {
+		focus = POL_national_unity_congress
+	}
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+focus = {
+	id = POL_national_unity_congress
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_contact_with_polish_united_workers_right
+	x = 1
+	y = 1
+
+	prerequisite = { focus = POL_contact_with_polish_united_workers_right }
+	mutually_exclusive = {
+		focus = POL_agrarianism_first
+	}
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+
+focus = {
+	id = POL_united_agrarian_movement
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_agrarianism_first
+	x = -1
+	y = 1
+
+	prerequisite = { focus = POL_agrarianism_first }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+focus = {
+	id = POL_respect_catholicism
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_national_unity_congress
+	x = -1
+	y = 1
+
+	prerequisite = { 
+		focus = POL_national_unity_congress 
+		focus = POL_agrarianism_first
+	}
+	
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+focus = {
+	id = POL_rule_of_catholic_intellectuals_club
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_national_unity_congress
+	x = 1
+	y = 1
+
+	prerequisite = { focus = POL_national_unity_congress }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+focus = {
+	id = POL_moderate_corporatism
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_united_agrarian_movement
+	x = 0
+	y = 1
+
+	prerequisite = { focus = POL_united_agrarian_movement }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+focus = {
+	id = POL_solidarity_and_mutual_aid
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_respect_catholicism
+	x = 0
+	y = 1
+
+	prerequisite = { focus = POL_respect_catholicism }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+focus = {
+	id = POL_defend_human_rights
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_rule_of_catholic_intellectuals_club
+	x = 0
+	y = 1
+
+	prerequisite = { focus = POL_rule_of_catholic_intellectuals_club }
+	
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+focus = {
+	id = POL_struggle_for_social_moral_renewal
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_moderate_corporatism
+	x = 1
+	y = 1
+
+	prerequisite = { 
+		focus = POL_moderate_corporatism 
+	}
+	prerequisite = { 
+		focus = POL_solidarity_and_mutual_aid
+	}
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+focus = {
+	id = POL_conservative_rebirth
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_solidarity_and_mutual_aid
+	x = 1
+	y = 1
+	prerequisite = { 
+		focus = POL_defend_human_rights 
+
+	}
+	prerequisite = { 
+
+		focus = POL_solidarity_and_mutual_aid
+	}
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+focus = {
+	id = POL_decide_leadership
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_the_wall_must_fall
+	x = 0
+	y = 1
+
+	prerequisite = { focus = POL_the_wall_must_fall }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+focus = {
+	id = POL_settle_scores_with_fake_revolutionaries
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_decide_leadership
+	x = -1
+	y = 3
+
+	prerequisite = { focus = POL_keep_union_leadership }
+	
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+focus = {
+	id = POL_end_of_socialist_tyranny
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_decide_leadership
+	x = 1
+	y = 3
+
+	prerequisite = { focus = POL_contact_with_polish_united_workers_right }
+	
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+# ============================================================
+# 第4行 - 三选一互斥（红线贯穿）
+# ============================================================
+
+# ------------------------------------------------------------
+# 照搬英法模式（左）
+# 互斥：一党专政之民主、回归社区共同体
+# ------------------------------------------------------------
+focus = {
+	id = POL_copy_british_french_model
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_settle_scores_with_fake_revolutionaries
+	x = -1
+	y = 1
+
+	prerequisite = { focus = POL_settle_scores_with_fake_revolutionaries }
+	
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 一党专政之民主（中）
+# 互斥：照搬英法模式、回归社区共同体
+# ------------------------------------------------------------
+focus = {
+	id = POL_one_party_democracy
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_settle_scores_with_fake_revolutionaries
+	x = 1
+	y = 1
+
+	prerequisite = { focus = POL_settle_scores_with_fake_revolutionaries }
+	prerequisite = { focus = POL_end_of_socialist_tyranny }
+	
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 回归社区共同体（右）
+# 前置：社会主义暴政的终结
+# 互斥：照搬英法模式、一党专政之民主
+# ------------------------------------------------------------
+focus = {
+	id = POL_return_to_community
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_end_of_socialist_tyranny
+	x = 1
+	y = 1
+
+	prerequisite = { focus = POL_end_of_socialist_tyranny }
+	
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+# ============================================================
+# 第5行 - 二选一互斥（红线）
+# ============================================================
+
+# ------------------------------------------------------------
+# 建立工人自治（左）
+# 互斥：唯有自由工会（红线）
+# ------------------------------------------------------------
+focus = {
+	id = POL_establish_worker_self_governance
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_one_party_democracy
+	x = -1
+	y = 1
+
+	prerequisite = { focus = POL_one_party_democracy }
+
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+# ------------------------------------------------------------
+# 唯有自由工会（右）
+# 互斥：建立工人自治（红线）
+# ------------------------------------------------------------
+focus = {
+	id = POL_only_free_trade_unions
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_one_party_democracy
+	x = 1
+	y = 1
+
+	prerequisite = { focus = POL_one_party_democracy }
+
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+# ============================================================
+# 第6行
+# ============================================================
+
+# ------------------------------------------------------------
+# 有个老问题……（居中）
+# 前置：建立工人自治 / 唯有自由工会 均可到达
+# ------------------------------------------------------------
+focus = {
+	id = POL_an_old_question
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_establish_worker_self_governance
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = POL_establish_worker_self_governance
+	}
+	prerequisite = {
+		focus = POL_only_free_trade_unions
+	}
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
+
+# ============================================================
+# 第7行（底部终局）
+# ============================================================
+
+# ------------------------------------------------------------
+# 清算君主制（居中）
+# 前置：有个老问题……
+# ------------------------------------------------------------
+focus = {
+	id = POL_settle_scores_with_monarchy
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_an_old_question
+	x = 0
+	y = -5
+
+	prerequisite = { focus = POL_decide_leadership }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+
 }
