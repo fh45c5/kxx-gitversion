@@ -5114,7 +5114,7 @@ focus_tree = {
 		}	
 		
 		x = -73
-		y = 9
+		y = 35
 		
 		cost = 1
 		ai_will_do = {
@@ -6099,7 +6099,7 @@ focus_tree = {
 		id = KX_PL_KPP_MANDATORY_COLLECTIVISATION
 		icon = GFX_goal_CZE_state_agriculture
 		available = {
-			has_country_flag = POL_Adolf_Warski
+			
 		}
 		prerequisite = {
 			focus = KX_PL_KPP_CENTRALIZED_PLANNING
@@ -6126,7 +6126,7 @@ focus_tree = {
 		id = KX_PL_KPP_VOLOUNTARY_COLLECTIVIZATION
 		icon = GFX_goal_ALB_Village_Collectivization
 		available = {
-			has_country_flag = POL_Alfred_Lampe
+			
 		}	
 		prerequisite = {
 			focus = KX_PL_KPP_CENTRALIZED_PLANNING
@@ -6153,7 +6153,7 @@ focus_tree = {
 		id = KX_PL_KPP_STATE_AGRICULTURE
 		icon = GFX_goal_CSA_collective_farms
 		available = {
-			has_country_flag = POL_Julian
+			
 		}	
 		prerequisite = {
 			focus = KX_PL_KPP_CENTRALIZED_PLANNING
@@ -6274,6 +6274,7 @@ focus_tree = {
 				remove_idea = SOC_POL_KPP_internationalism_2b
 				add_idea = SOC_POL_KPP_internationalism_3c
 			}
+			country_event = plx.36
 		}
 	}	
 	focus = {
@@ -6403,7 +6404,7 @@ focus_tree = {
 				remove_idea = SOC_POL_KPP_internationalism_2b
 				add_idea = SOC_POL_KPP_internationalism_3b
 			}
-			country_event = plx.45
+			country_event = plx.28
 		}
 	}
 	focus = {
@@ -6642,7 +6643,12 @@ focus_tree = {
 		id = KX_PLX_SLAVIC_VANGUARD
 		icon = GFX_goal_ALB_Vanguard
 		available = {
-			#has_country_flag = plx_supernation_flag
+			OR = {
+				has_country_flag = PLX_natsoc
+				has_country_flag = plx_zsp_rules_true
+				has_country_flag = plx_communism_slav_flag
+			}
+			
 		}
 		prerequisite = {
 			focus = KX_PLX_BROAD_PANSLAVISM
@@ -6665,10 +6671,36 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = KX_PLX_SLAVIC_SOUTH
+		icon = GFX_goal_MNT_yugoslav_supremacism
+		available = {
+			
+		}
+		prerequisite = {
+			focus = KX_PLX_SLAVIC_VANGUARD
+			focus = KX_PLX_FOR_SLAVS_ONLY
+		}
+			
+		relative_position_id = KX_PLX_BROAD_PANSLAVISM		
+		x = 0
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			country_event = plxf.24		
+		}
+	}
+	focus = {
 		id = KX_PLX_FOR_SLAVS_ONLY
 		icon = GFX_goal_SRI_natinalism
 		available = {
-			has_country_flag = plx_ally_zadruga
+			OR = {
+				has_country_flag = POL_zadruga_in_power
+				has_country_flag = PLX_libzadruga
+			}
+			
 		}
 		prerequisite = {
 			focus = KX_PLX_BROAD_PANSLAVISM
@@ -6741,6 +6773,27 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_ideas = KX_PLX_customs
+		}
+	}
+	focus = {
+		id = KX_PLX_EXPAND_INTERMURIUM
+		icon = GFX_goal_CAN_one_currency_entente
+		available = {
+			#has_country_flag = plx_supernation_flag
+		}
+		prerequisite = {
+			focus = KX_PLX_CURRENCY_AND_CUSTOMS
+		}
+		relative_position_id = KX_PLX_POLISH_PRIMACY
+		x = 0
+		y = 3
+		cost = 4
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			custom_effect_tooltip = "解锁决议邀请芬兰与希腊加入联邦。"
+			add_political_power = 150
 		}
 	}
 	focus = {
@@ -6836,7 +6889,7 @@ focus_tree = {
 		
 		
 		x = 45
-		y = 21
+		y = 15
 		cost = 1
 		ai_will_do = {
 			factor = 100
@@ -7375,6 +7428,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_stability = 0.10
+			
 		}
 	}
 	focus = {
@@ -8566,14 +8620,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_ideas = PLX_mon_moderate_welfare
-			hidden_effect = {
-				country_event = {
-					id = plxv2.119 days = 60
-				}	
-				country_event = {
-					id = plxv2.120 days = 40
-				}
-			}			
+					
 		}
 	}
 	focus = {
@@ -8827,6 +8874,15 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
+			if = {
+				limit = {
+					has_idea = POL_Janusz_Radziwill_hog_ade
+					NOT = {
+						has_country_flag = POL_king_picked
+					}
+				}
+				country_event = plxv2.141
+			}
 			if = { 
 				limit = { has_idea = KX_mon_royal_council_2 }
 				swap_ideas = {
@@ -9544,8 +9600,8 @@ focus_tree = {
         #    focus = KX_PL_PG_KING_IN_POWER
 		#}		
 		
-		x = 80
-		y = 15
+		x = 50
+		y = 35
 		cost = 1
 		ai_will_do = {
 			factor = 100
@@ -12067,7 +12123,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
 	focus = {
-		id = POL_military_ideals
+		id = PLX_military_ideals
 		icon = GFX_goal_POL_Offensive_Fighting_Force
 		prerequisite = {
 			focus = POL_Wojna_Blyskawiczna
@@ -12091,7 +12147,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 	}
 focus = {
-		id = POL_integrate_wermacht
+		id = PLX_integrate_wermacht
 		icon = GFX_goal_POL_Integrate_Polnische_Wehrmacht
 		prerequisite = {
 			focus = POL_Germanys_Eastern_Bulwark
@@ -12117,15 +12173,15 @@ focus = {
 	}
 
 	focus = {
-		id = POL_polish_war_effort
+		id = PLX_polish_war_effort
 		icon = GFX_goal_POL_Polish_War_Effort
 		prerequisite = {
-			focus = POL_integrate_wermacht
+			focus = PLX_integrate_wermacht
 		}
 		available = {
 			has_war_with = RUS
 		}
-		relative_position_id = POL_integrate_wermacht
+		relative_position_id = PLX_integrate_wermacht
 		x = 0
 		y = 2
 		cost = 4
@@ -12143,12 +12199,12 @@ focus = {
 	}
 
 	focus = {
-		id = POL_manstien_reform_plan
+		id = PLX_manstien_reform_plan
 		icon = GFX_goal_POL_Manstein_Lewinski_Reform_Plan
 		prerequisite = {
-			focus = POL_integrate_wermacht
+			focus = PLX_integrate_wermacht
 		}
-		relative_position_id = POL_integrate_wermacht
+		relative_position_id = PLX_integrate_wermacht
 		x = 1
 		y = 1
 		cost = 4
@@ -13411,9 +13467,12 @@ focus = {
 		id = KX_PLX_SOCDEM_COOPERATION
 		icon = GFX_goal_HOL_thriving_socdem
 		available = {
-			has_country_flag = POL_centro_committee_win
-			has_country_flag = POL_economists_win
-			has_country_flag = POL_lux_win
+			OR = {
+				has_country_flag = POL_centro_committee_win
+				has_country_flag = POL_economists_win
+				has_country_flag = POL_lux_win
+			}
+			
 		}
 		prerequisite = {
 			focus = KX_PLX_CLEANSE_REACTION
@@ -13441,9 +13500,12 @@ focus = {
 		id = KX_PLX_FOUNDING_COMMUNISM
 		icon = GFX_goal_socialist_infrastructure
 		available = {
-			has_country_flag = POL_natolinists_win
-			has_country_flag = POL_futurists_win
-			has_country_flag = POL_centro_committee_win
+			OR = {
+				has_country_flag = POL_natolinists_win
+				has_country_flag = POL_futurists_win
+				has_country_flag = POL_centro_committee_win
+			}
+			
 		}
 		prerequisite = {
 			focus = KX_PLX_CLEANSE_REACTION
@@ -13470,9 +13532,12 @@ focus = {
 		id = KX_PLX_INTEGRATE_TRADE_UNIONS
 		icon = GFX_goal_WHR_Fair_Division_Labour
 		available = {
-			has_country_flag = POL_futurists_win
-			has_country_flag = POL_centro_committee_win
-			has_country_flag = POL_lux_win
+			OR = {
+				has_country_flag = POL_futurists_win
+				has_country_flag = POL_centro_committee_win
+				has_country_flag = POL_lux_win
+			}
+			
 		}
 		prerequisite = {
 			focus = KX_PLX_FOUNDING_COMMUNISM
@@ -13510,9 +13575,12 @@ focus = {
 		id = KX_PLX_DEFENCE_FROM_SABOTAGE
 		icon = GFX_goal_CAN_Standardized_Industrial_Codes
 		available = {
-			has_country_flag = POL_natolinists_win
-			has_country_flag = POL_centro_committee_win
-			has_country_flag = POL_economists_win
+			OR = {
+				has_country_flag = POL_natolinists_win
+				has_country_flag = POL_centro_committee_win
+				has_country_flag = POL_economists_win
+			}
+			
 		}
 		prerequisite = {
 			focus = KX_PLX_FOUNDING_COMMUNISM
@@ -13968,13 +14036,14 @@ focus = {
 		}
 		completion_reward = {
 			add_ideas = POL_polonia_march_onwards
+			set_cosmetic_tag = POL_futurist_cosmetic
 		}
 	}
 	focus = {
 		id = KX_PL_SOC_cursed_poet
 		icon = GFX_goal_POL_cursed_poet
 		available = {
-			
+			has_government = totalist
 		}
 		prerequisite = {
 			focus = KX_PL_SOC_polonia_march_onwards
@@ -14133,7 +14202,7 @@ focus = {
 			
 		}
 		prerequisite = {
-			focus = KX_PL_SOC_revo_art_revo_society
+			focus = KX_PL_SOC_ignite_berlin
 		}	
 		
 		relative_position_id = KX_PL_SOC_polonia_march_onwards
@@ -14154,7 +14223,7 @@ focus = {
 			
 		}
 		prerequisite = {
-			focus = KX_PL_SOC_revo_art_revo_society
+			focus = KX_PL_SOC_jesus_marx_marlinetti
 		}	
 		
 		relative_position_id = KX_PL_SOC_polonia_march_onwards
@@ -14390,7 +14459,7 @@ focus = {
 		id = KX_PL_SOC_anti_current
 		icon = GFX_goal_POL_anti_current
 		available = {
-			
+			has_government = syndicalist
 		}
 		prerequisite = {
 			focus = KX_PL_SOC_polonia_march_onwards
@@ -14416,7 +14485,7 @@ focus = {
 		id = KX_PL_SOC_vistula_scatmander
 		icon = GFX_goal_POL_vistula_scatmander
 		available = {
-			
+			has_government = radical_socialist
 		}
 		prerequisite = {
 			focus = KX_PL_SOC_polonia_march_onwards
@@ -14456,6 +14525,7 @@ focus = {
 		}
 		completion_reward = {
 			add_ideas = POL_rise_Natolinism
+			set_cosmetic_tag = POL_natolinist_cosmetic
 		}
 	}
 	focus = {
@@ -14502,7 +14572,7 @@ focus = {
 		id = KX_PL_SOC_reign_of_general
 		icon = GFX_goal_POL_reign_of_general
 		available = {
-			
+			has_government = totalist
 		}
 		mutually_exclusive = {
 			focus = KX_PL_SOC_defected_endecja
@@ -14531,7 +14601,7 @@ focus = {
 		id = KX_PL_SOC_defected_endecja
 		icon = GFX_goal_POL_defected_endecja
 		available = {
-			
+			has_government = syndicalist
 		}
 		mutually_exclusive = {
 			focus = KX_PL_SOC_reign_of_general
@@ -14560,7 +14630,7 @@ focus = {
 		id = KX_PL_SOC_only_true_communism
 		icon = GFX_goal_POL_only_true_communism
 		available = {
-			
+			has_government = radical_socialist
 		}
 		mutually_exclusive = {
 			focus = KX_PL_SOC_defected_endecja
@@ -14883,6 +14953,7 @@ focus = {
 		completion_reward = {
 			add_ideas = SOC_POL_equilibrum
 			country_event = polsoc.3
+			set_cosmetic_tag = POL_soc_fed
 		}
 	}
 	focus = {
@@ -15119,7 +15190,7 @@ focus = {
 		id = KX_PL_SOC_pzbs_Creation
 		icon = GFX_goal_FRA_red_politburo
 		available = {
-			has_country_flag = pl_kalecki_n_lange_return
+			
 		}
 		prerequisite = {
 			focus = KX_PL_AS_NOT_SO_MARKET
@@ -16271,10 +16342,9 @@ focus = {
 		cost = 4
 		prerequisite = {
 			focus = PLX_PLC_minority_rights
-		}
-		prerequisite = {
 			focus = PLX_PLC_a_common_currency
 		}
+		
 		relative_position_id = PLX_PLC_poland_first
 		x = 3
 		y = 6
@@ -16298,7 +16368,7 @@ focus = {
 		icon = GFX_goal_POL_Our_Oldest_Brothers
 		cost = 4
 		prerequisite = {
-			focus = PLX_PLC_a_smaller_circle
+			focus = PLX_PLC_the_new_bureaucracy
 		}
 		prerequisite = {
 			focus = PLX_PLC_solve_racial_tensions
@@ -16473,7 +16543,7 @@ focus = {
 			focus = PLX_PLC_the_new_bureaucracy
 		}
 		prerequisite = {
-			focus = PLX_PLC_local_representatives
+			focus = PLX_PLC_solve_racial_tensions
 		}
 		relative_position_id = PLX_PLC_poland_first
 		x = 4
@@ -16764,6 +16834,21 @@ focus = {
 				country_event = {
 				id = plx.38 days = 3
 			}		
+			set_party_name = {
+				ideology = totalist
+				long_name = POL_kprp_party
+				name = POL_kprp_party
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = POL_kprp_party
+				name = POL_kprp_party
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = POL_kprp_party
+				name = POL_kprp_party
+			}
 			GER_remove_from_mitteleuropa = yes
 			leave_faction = yes		
 			separate_peace_all_wars = yes
@@ -16918,6 +17003,7 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_our_natural_borders"
+			set_cosmetic_tag = WHR_OSTEUROPE
 			if = {
 				limit = {
 					UKR = {
@@ -17284,7 +17370,7 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_galician_referendum"
-			country_event = plcommon.19
+			add_ideas = PLX_PLC_red_millinaire_stays
 		}
 
 		
@@ -17355,7 +17441,7 @@ focus = {
 					add_state_core = PREV
 				}
 			}
-
+			set_cosmetic_tag = GRU_GDU
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_ANNEXATION }
 
@@ -17441,9 +17527,7 @@ focus = {
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 
-		available = {
-			has_completed_focus = PLX_PLC_mitteleuropa_question
-		}
+		
 	}
 
 	
@@ -17526,9 +17610,7 @@ focus = {
 		}
 		search_filters = { FOCUS_FILTER_ARMY_BONUS }
 
-		available = {
-			has_completed_focus = PLX_PLC_mitteleuropa_question
-		}
+		
 	}
 	### Navy Tree ###
 
@@ -17757,8 +17839,8 @@ focus = {
 		id = KX_PL_trimuph_liberal_zadruga
 		icon = GFX_goal_POL_trimuph_liberal_zadruga
 		cost = 4
-		x = -18
-		y = 42
+		x = -10
+		y = 35
 		available = {
 			has_country_flag = PLX_libzadruga
 		}
@@ -18101,8 +18183,8 @@ focus = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
 			swap_ideas = {
-				remove_idea = POL_libzadruga_soccon
-				add_idea = POL_libzadruga_soccon2
+				remove_idea = POL_libzadruga_radsoc2
+				add_idea = POL_libzadruga_radsoc3
 			}
 			
 		}
@@ -18796,8 +18878,8 @@ focus = {
 		id = KX_PL_lechia_dawn
 		icon = GFX_goal_POL_lechia_dawn
 		cost = 4
-		x = -18
-		y = 32
+		x = -26
+		y = 35
 		available = {
 			has_country_flag = POL_zadruga_in_power
 		}
@@ -18829,7 +18911,7 @@ focus = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			country_event = plxv2.047
+			
 			add_stability = 0.1
 			add_research_slot = 1
 		}
@@ -22402,7 +22484,7 @@ focus = {
     }
     cancelable = no
     x = 45
-    y = 33
+    y = 28
     cost = 4
     ai_will_do = {
       factor = 100
@@ -22643,7 +22725,7 @@ focus = {
     
      
     prerequisite = {
-      focus = PLX_POL_the_great_debate
+      focus = PLX_POL_russian_king
     }
     
     relative_position_id = PLX_POL_russian_king
@@ -22869,7 +22951,7 @@ focus = {
     
     
     prerequisite = {
-      focus = PLX_POL_the_great_debate
+      focus = PLX_POL_False_Piast
     }
    
     relative_position_id = PLX_POL_False_Piast
@@ -23397,7 +23479,7 @@ focus = {
     
     
     prerequisite = {
-      focus = PLX_POL_the_great_debate
+      focus = PLX_POL_sobieski
     }
    
     relative_position_id = PLX_POL_sobieski
@@ -25287,15 +25369,10 @@ focus = {
 		ai_will_do = {
 			factor = 100
 		}
-		bypass = {
-			has_country_flag = plx_pps_reunited
-		}		
+			
 		completion_reward = {
 			add_political_power = 50
-			if = {
-				limit = { NOT = { has_country_flag = plx_pps_reunited } }
-				country_event = plxv2.005
-			}		
+			country_event = plxv2.005	
 		}
 	}
 	focus = {
@@ -25643,12 +25720,7 @@ focus = {
 				remove_idea = PLX_pps_guided_democracy_1
 				add_idea = PLX_pps_guided_democracy_2
 			}
-			hidden_effect = {
-				country_event = {
-					id = plxv2.009
-					days = 7
-				}		
-			}			
+				
 		}
 	}
 	focus = {
@@ -25702,6 +25774,7 @@ focus = {
 		}
 		prerequisite = {
 			focus = KX_PLX_PPS_Reunited
+			focus = KX_PLX_PPS_Compromising_Our_Position
 		}			
 		relative_position_id = KX_PL_PPS_FR_WINS_ELECTIONS
 		x = -5
@@ -25898,7 +25971,7 @@ focus = {
 		#mutually_exclusive = {
 		#	focus = KX_PL_PNPR_WINS_ELECTIONS
 		#}	
-		x = 3
+		x = 5
 		y = 8
 		cost = 1
 		ai_will_do = {
@@ -25918,12 +25991,39 @@ focus = {
 		}
 		mutually_exclusive = {
 			focus = KX_PLX_PSL_Right
+			focus = KX_PLX_PSL_Center
 		}
 		prerequisite = {
 			focus = KX_PL_PSL_WINS_ELECTIONS
 		}		
 		relative_position_id = KX_PL_PSL_WINS_ELECTIONS
-		x = -1
+		x = -2
+		y = 1
+		cost = 2
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = KX_PLX_PSL_Center
+		icon = GFX_goal_generic_workers_rights
+		available = {
+			has_country_flag = plx_psl_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+			has_country_flag = plx_psl_center
+		}
+		mutually_exclusive = {
+			focus = KX_PLX_PSL_Right
+			focus = KX_PLX_PSL_Left
+		}
+		prerequisite = {
+			focus = KX_PL_PSL_WINS_ELECTIONS
+		}		
+		relative_position_id = KX_PL_PSL_WINS_ELECTIONS
+		x = 0
 		y = 1
 		cost = 2
 		ai_will_do = {
@@ -25935,19 +26035,20 @@ focus = {
 	}
 	focus = {
 		id = KX_PLX_PSL_Right
-		icon = GFX_goal_generic_workers_rights
+		icon = GFX_goal_INS_focus_party_coalition
 		available = {
 			has_country_flag = plx_psl_rules
 			has_country_flag = plx_psl_right
 		}
 		mutually_exclusive = {
 			focus = KX_PLX_PSL_Left
+			focus = KX_PLX_PSL_Center
 		}		
 		prerequisite = {
 			focus = KX_PL_PSL_WINS_ELECTIONS
 		}		
 		relative_position_id = KX_PL_PSL_WINS_ELECTIONS
-		x = 1
+		x = 2
 		y = 1
 		cost = 2
 		ai_will_do = {
@@ -25965,9 +26066,10 @@ focus = {
 		}
 		prerequisite = {
 			focus = KX_PLX_PSL_Right
+			focus = KX_PLX_PSL_Center
 		}		
 		relative_position_id = KX_PLX_PSL_Right
-		x = 1
+		x = 0
 		y = 1
 		cost = 4
 		ai_will_do = {
@@ -26010,7 +26112,7 @@ focus = {
 			focus = KX_PLX_PSL_Left
 		}		
 		relative_position_id = KX_PLX_PSL_Left
-		x = -1
+		x = 0
 		y = 1
 		cost = 4
 		ai_will_do = {
@@ -26052,9 +26154,10 @@ focus = {
 		prerequisite = {
 			focus = KX_PLX_PSL_Right
 			focus = KX_PLX_PSL_Left
+			focus = KX_PLX_PSL_Center
 		}		
 		relative_position_id = KX_PLX_PSL_Left
-		x = 1
+		x = 2
 		y = 1
 		cost = 4
 		ai_will_do = {
@@ -26332,15 +26435,17 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = KX_PL_PSL_MINORITIES_ARE_PEASANTS_TOO
-		icon = GFX_goal_POL_Ally_Ukrainian_Workers
+focus = {
+		id = KX_PLX_PSL_Rural_Development_Fund
+		icon = GFX_UKR_Rural_Development
 		available = {
-			#has_country_flag = plx_start
-		}
+			has_country_flag = plx_psl_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}	
 		prerequisite = {
 			focus = KX_PLX_PSL_Modernising_Our_Party
-		}			
+		}
+			
 		relative_position_id = KX_PLX_PSL_Modernising_Our_Party
 		x = 0
 		y = 1
@@ -26349,21 +26454,28 @@ focus = {
 			factor = 100
 		}
 		completion_reward = {
-			add_stability = 0.03
-			add_political_power = 30
-				
+			add_ideas = PLX_psl_development_fund_1
+			hidden_effect = {
+				country_event = {
+					id = plxv2.119 days = 60
+				}	
+				country_event = {
+					id = plxv2.120 days = 40
+				}				
+			}
 		}
-	}	
-
+	}
 	focus = {
-		id = KX_PL_PSL_APPEAL_TO_PEASANT_CHRISTIANITY
-		icon = GFX_goal_MEX_secular_but_catholic
+		id = KX_PLX_PSL_Municipal_Industry
+		icon = GFX_RUS_Begin_Industrialization
 		available = {
-			#has_country_flag = plx_start
-		}
+			has_country_flag = plx_psl_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}	
 		prerequisite = {
 			focus = KX_PLX_PSL_Modernising_Our_Party
-		}			
+		}
+			
 		relative_position_id = KX_PLX_PSL_Modernising_Our_Party
 		x = -2
 		y = 1
@@ -26372,28 +26484,30 @@ focus = {
 			factor = 100
 		}
 		completion_reward = {
-			add_political_power = 50		
+			add_ideas = PLX_psl_municipal_industry
+					
 		}
 	}
 
 	focus = {
-		id = KX_PL_PSL_INDEPENDANCE_OVER_ALL
-		icon = GFX_goal_POL_Not_Yet_Lost
+		id = KX_PLX_PSL_Economic_Zones
+		icon = GFX_RUS_Economic_Draft_Scheme
 		available = {
-			#has_country_flag = plx_start
-		}
+			has_country_flag = plx_psl_rules
+			NOT = { has_country_flag = plx_not_2nd_term }
+		}	
 		prerequisite = {
 			focus = KX_PLX_PSL_Modernising_Our_Party
-		}			
+		}
+			
 		relative_position_id = KX_PLX_PSL_Modernising_Our_Party
 		x = 2
 		y = 1
-		cost = 4
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
-			add_ideas = SOC_POL_PSL_independance	
+			add_ideas = PLX_psl_economic_zones
 		}
 	}
 
@@ -26404,24 +26518,26 @@ focus = {
 			#has_country_flag = plx_start
 		}
 		prerequisite = {
-			focus = KX_PL_PSL_INDEPENDANCE_OVER_ALL
+			focus = KX_PLX_PSL_Municipal_Industry
 		}		
 		prerequisite = {
-			focus = KX_PLX_PSL_Modernising_Our_Party
+			focus = KX_PLX_PSL_Rural_Development_Fund
 		}	
 		prerequisite = {
-			focus = KX_PL_PSL_APPEAL_TO_PEASANT_CHRISTIANITY
+			focus = KX_PLX_PSL_Economic_Zones
 		}				
-		relative_position_id = KX_PL_PSL_INDEPENDANCE_OVER_ALL
-		x = -2
-		y = 1
+		
+		relative_position_id = KX_PLX_PSL_Modernising_Our_Party
+		x = 0
+		y = 2
 		cost = 4 #?
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
 			add_stability = 0.10
-			add_political_power = 50		
+			add_political_power = 50	
+			add_ideas = SOC_POL_PSL_independance		
 		}
 	}
 
@@ -26443,7 +26559,7 @@ focus = {
 		#mutually_exclusive = {
 		#	focus = KX_PL_PSL_WINS_ELECTIONS
 		#}	
-		x = 16
+		x = 18
 		y = 8
 		cost = 1
 		ai_will_do = {
@@ -26468,7 +26584,7 @@ focus = {
 			focus = KX_PL_PNPR_WINS_ELECTIONS
 		}
 		relative_position_id = KX_PL_PNPR_WINS_ELECTIONS
-		x = -1
+		x = 0
 		y = 1
 		cost = 2
 		ai_will_do = {
@@ -26496,7 +26612,7 @@ focus = {
 			focus = KX_PL_PNPR_WINS_ELECTIONS
 		}		
 		relative_position_id = KX_PL_PNPR_WINS_ELECTIONS
-		x = -5
+		x = -2
 		y = 1
 		cost = 4
 		ai_will_do = {
@@ -26517,7 +26633,7 @@ focus = {
 			focus = KX_PL_Chadecja_Left
 		}
 		relative_position_id = KX_PL_Chadecja_Left
-		x = 0
+		x = -2
 		y = 1
 		cost = 4
 		ai_will_do = {
@@ -26651,8 +26767,6 @@ focus = {
 			focus = KX_PL_Chadecja_Promote_Class_Solidarity
 		}		
 		prerequisite = {
-			focus = KX_PL_PNPR_CLASS_COLABORATION
-			focus = KX_PL_PNPR_STABLE_PROGRESS
 			focus = KX_PL_Chadecja_Continue_Nationalisation
 		}
 		
@@ -26712,7 +26826,6 @@ focus = {
 		prerequisite = {
 			focus = KX_PL_PNPR_CLASS_COLABORATION
 			focus = KX_PL_PNPR_STABLE_PROGRESS
-			focus = KX_PL_Chadecja_Continue_Nationalisation
 		}
 		relative_position_id = KX_PL_PNPR_CLASS_COLABORATION
 		x = 2
@@ -26745,14 +26858,7 @@ focus = {
 		}
 		completion_reward = {
 			add_ideas = PLX_chad_welfare
-			hidden_effect = {
-				country_event = {
-					id = plxv2.119 days = 60
-				}	
-				country_event = {
-					id = plxv2.120 days = 40
-				}
-			}
+			
 		}
 	}
 	
@@ -26779,7 +26885,7 @@ focus = {
 				remove_idea = PLX_chad_social_christ_dem_4
 				add_idea = PLX_chad_social_christ_dem_5
 			}		
-			country_event = plxv2.112
+			
 		}
 	}
 	focus = {
@@ -26825,11 +26931,7 @@ focus = {
 		}
 		completion_reward = {
 			add_ideas = PLX_chad_tamed_natdem
-			hidden_effect = {
-				country_event = {
-					id = plxv2.123 days = 10
-				}				
-			}
+			
 		}
 	}
 	focus = {
@@ -27129,7 +27231,7 @@ focus = {
 			focus = KX_PL_PNPR_WINS_ELECTIONS
 		}
 		relative_position_id = KX_PL_PNPR_WINS_ELECTIONS
-		x = 1
+		x = 2
 		y = 1
 		cost = 2
 		ai_will_do = {
@@ -27155,10 +27257,9 @@ focus = {
 		}
 		prerequisite = {
 			focus = KX_PL_Chadecja_State_Owned_Utilities
-		}
-		prerequisite = {
 			focus = KX_PL_Chadecja_Pacify_with_Welfare
-		}				
+		}
+					
 		relative_position_id = KX_PL_Chadecja_State_Owned_Utilities
 		x = 1
 		y = 1
@@ -27179,11 +27280,10 @@ focus = {
 			#has_country_flag = plx_start
 		}
 		prerequisite = {
-			focus = KX_PL_Chadecja_State_Owned_Utilities
-		}	
-		prerequisite = {
+			focus = KX_PL_Chadecja_Pacify_with_Welfare
 			focus = KX_PL_Chadecja_State_Shares
-		}			
+		}	
+				
 		relative_position_id = KX_PL_Chadecja_State_Owned_Utilities
 		x = 3
 		y = 1
@@ -27206,10 +27306,9 @@ focus = {
 		}
 		prerequisite = {
 			focus = KX_PL_Chadecja_Creating_Welfare_State
-		}	
-		prerequisite = {
 			focus = KX_PL_Chadecja_Protect_Constitution
-		}			
+		}	
+					
 		relative_position_id = KX_PL_PNPR_CLASS_COLABORATION
 		x = 1
 		y = 3
@@ -27397,7 +27496,7 @@ focus = {
 		}
 		
 		x = -40
-		y = 50
+		y = 35
 		cost = 4
 		ai_will_do = {
 			factor = 100
@@ -27603,7 +27702,7 @@ focus = {
 			factor = 100
 		}
 		completion_reward = {
-			country_event = plx.76
+			country_event = plx.28
 		}
 	}
 	focus = {
@@ -28301,7 +28400,7 @@ focus = {
 			has_country_flag = PLX_radical_healing
 		}
 		x = -52
-		y = 50
+		y = 35
 		cost = 4
 		ai_will_do = {
 			factor = 100
@@ -29242,7 +29341,7 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_air_radios"
-			add_ideas = PLX_air_radios_idea
+			add_ideas = POL_air_radios_idea
 		}
 		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
 	}
@@ -29680,14 +29779,14 @@ focus = {
 			}
 		}
 		
-		x = 116
+		x = 72
 		y = 1
 		cost = 4
 		ai_will_do = { factor = 10 }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_join_international_community"
 			#add_political_power = 50
-			country_event = plx.25
+			country_event = plxv2.041
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 	}
@@ -29742,14 +29841,12 @@ focus = {
 		id = PLX_stay_with_germany
 		icon = GFX_goal_germany
 		available = {
-			
+			is_ally_with = GER
 			GER = {
 				is_subject = no
 				exists = yes
 				is_faction_leader = yes
-				NOT = {
-					has_war_with = POL
-				}					
+								
 			}
 		}
 		prerequisite = { focus = POL_fp }
@@ -30109,10 +30206,7 @@ focus = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_opportunism"
-			if = {
-				limit = { NOT = { has_country_flag = plx_internationalist_communists } }
-				add_ideas = PLX_opportunism_idea
-			}
+			add_ideas = PLX_opportunism_idea
 			unlock_decision_tooltip = POL_seize_galicia
 			unlock_decision_tooltip = POL_seize_brzesc
 			unlock_decision_tooltip = POL_reclaim_vilnius
@@ -30181,7 +30275,11 @@ focus = {
 		ai_will_do = {
 			factor = 10
 		}
-
+		bypass = {
+			NOT = {
+				country_exists = LIT
+			}
+		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
 			
@@ -31909,6 +32007,11 @@ focus = {
 		available = {
 			country_exists = GAL
 		}
+		bypass = {
+			NOT = {
+				country_exists = GAL
+			}
+		}
 		prerequisite = {
 			focus = POL_polish_colonialism
 		}
@@ -31949,6 +32052,11 @@ focus = {
 			is_subject = no
 			
 		}
+		bypass = {
+			NOT = {
+				country_exists = WSU
+			}
+		}
 		prerequisite = {
 			focus = POL_polish_colonialism
 		}
@@ -31967,7 +32075,7 @@ focus = {
 			}
 			add_timed_idea = {
 				idea = POL_pacify_oun
-				time = 120
+				days = 120
 			}
 		}
 	}
@@ -32307,6 +32415,14 @@ focus = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLX_bargain_for_galicia"
 			LIB = {
 				country_event = plxf.23
+			}
+			every_state = {
+				limit = {
+					is_core_of = LIB
+				}
+				POL = {
+					add_state_claim = PREV
+				}
 			}
 		}
 	}
