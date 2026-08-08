@@ -6777,7 +6777,7 @@ focus_tree = {
 	}
 	focus = {
 		id = KX_PLX_EXPAND_INTERMURIUM
-		icon = GFX_goal_CAN_one_currency_entente
+		icon = GFX_goal_POL_Towards_Dmowskis_Line
 		available = {
 			#has_country_flag = plx_supernation_flag
 		}
@@ -6865,7 +6865,7 @@ focus_tree = {
 		relative_position_id = KX_PL_PG_GERMAN_TAKEOVER
 		x = 2
 		y = 0
-		cost = 12
+		cost = 1
 		ai_will_do = {
 			factor = 100
 		}
@@ -6877,7 +6877,7 @@ focus_tree = {
 				expire = "1965.1.1"
 				ideology = elective_monarchy_subtype
 			}
-			set_country_flag = PLX_elect_king
+			
 		}
 	}
 	focus = {
@@ -9702,7 +9702,7 @@ focus_tree = {
 		x = -2
 		y = 1
 
-		prerequisite = { focus = POL_Empower_Geheimrat }
+		prerequisite = { focus = POL_Entrenched_Constitutionalism }
 		
 		completion_reward = {
 			log = "[GetLogRoot]: Focus Completed POL_Purge_Nationalist_Terrorists"
@@ -9760,7 +9760,7 @@ focus_tree = {
 		y = 1
 
 		prerequisite = {
-			focus = POL_Entrenched_Constitutionalism
+			
 			focus = POL_Empower_Geheimrat
 		}
 		available = { POL_has_circle = yes }
@@ -16868,7 +16868,7 @@ focus = {
 				type = independence_wargoal
 			}		
 			}
-			custom_effect_tooltip = PLX_break_with_germany
+
 			add_war_support = 0.1
 			add_popularity = {
 				ideology = totalist
@@ -17312,6 +17312,9 @@ focus = {
 		available = {
 			has_country_flag = PLX_oppo
 		}
+		allow_branch = {
+			has_country_flag = PLX_oppo
+		}
 		relative_position_id = PLX_PLC_mitteleuropa_question
 		x = 3
 		y = 5
@@ -17336,8 +17339,11 @@ focus = {
 		available = {
 			has_country_flag = PLX_brun
 		}
+		allow_branch = {
+			has_country_flag = PLX_brun
+		}
 		relative_position_id = PLX_PLC_mitteleuropa_question
-		x = 5
+		x = 3
 		y = 5
 		ai_will_do = {
 			factor = 10
@@ -17358,11 +17364,17 @@ focus = {
 		prerequisite = {
 			focus = PLX_PLC_the_greater_commonwealth
 		}
+		allow_branch = {
+			NOT = {
+				has_country_flag = PLX_oppo
+				has_country_flag = PLX_brun
+			}
+		}
 		available = {
 			has_country_flag = PLX_parvus_again
 		}
 		relative_position_id = PLX_PLC_mitteleuropa_question
-		x = 7
+		x = 3
 		y = 5
 		ai_will_do = {
 			factor = 10
@@ -17371,6 +17383,13 @@ focus = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_galician_referendum"
 			add_ideas = PLX_PLC_red_millinaire_stays
+			hidden_effect = {
+				country_event = {
+					id = plxv2.151
+					days = 365
+				}
+				
+			}
 		}
 
 		
@@ -30640,13 +30659,19 @@ focus = {
 				ruling_only = yes 
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			NOT  = {
+				has_completed_focus = KX_PL_PG_A_MONARCH_TO_CHOOSE
+			}
+			
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
 		x = 0
-		y = 9
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -30751,13 +30776,19 @@ focus = {
 				ruling_only = yes 
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			has_country_leader = { 
+				name = "帕维乌一世·萨尔瓦托" 
+				ruling_only = yes 
+			}
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
-		x = 2
-		y = 9
+		x = 0
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -30960,13 +30991,19 @@ focus = {
 				ruling_only = yes
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			has_country_leader = {
+				name = "瓦迪斯瓦夫五世"  
+				ruling_only = yes
+			}
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
-		x = 6
-		y = 9
+		x = 0
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -31165,13 +31202,19 @@ focus = {
 				ruling_only = yes
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			has_country_leader = {
+				name = "雅德威加二世"  #
+				ruling_only = yes
+			}
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
-		x = 8
-		y = 9
+		x = 0
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -31216,13 +31259,19 @@ focus = {
 				ruling_only = yes
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			has_country_leader = {
+				name = "弗雷德里克二世·克里斯蒂安"  #
+				ruling_only = yes
+			}
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
-		x = 10
-		y = 9
+		x = 0
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -31499,13 +31548,19 @@ focus = {
 				ruling_only = yes
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			has_country_leader = {
+				name = "约翰四世·索别斯基"  
+				ruling_only = yes
+			}
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
-		x = 4
-		y = 9
+		x = 0
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -31645,13 +31700,19 @@ focus = {
 				ruling_only = yes 
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			 has_country_leader = { 
+				name = "米哈伊一世" 
+				ruling_only = yes 
+			}
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
-		x = -2
-		y = 9
+		x = 0
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -31706,13 +31767,19 @@ focus = {
 				ruling_only = yes 
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			 has_country_leader = { 
+				name = "弗谢沃洛德一世" 
+				ruling_only = yes 
+			}
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
-		x = -4
-		y = 9
+		x = 0
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -31780,13 +31847,19 @@ focus = {
 				ruling_only = yes 
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			has_country_leader = { 
+				name = "亚历山大二世" 
+				ruling_only = yes 
+			}
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
-		x = -6
-		y = 9
+		x = 0
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -31821,13 +31894,19 @@ focus = {
 				ruling_only = yes 
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			 has_country_leader = { 
+				name = "安德烈一世" 
+				ruling_only = yes 
+			}
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
-		x = -8
-		y = 9
+		x = 0
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
@@ -31859,13 +31938,19 @@ focus = {
 				ruling_only = yes 
 			}
 		}
-		#prerequisite = {
-		#	focus = PLX_stay_with_germany
-		#	focus = POL_leave_rp
-		#}
+		allow_branch = {
+			has_country_leader = { 
+				name = "奥古斯丁一世" 
+				ruling_only = yes 
+			}
+		}
+		prerequisite = {
+			focus = PLX_stay_with_germany
+			focus = POL_leave_rp
+		}
 		relative_position_id = POL_fp
-		x = -10
-		y = 9
+		x = 0
+		y = 2
 		cost = 4
 		ai_will_do = {
 			factor = 10
