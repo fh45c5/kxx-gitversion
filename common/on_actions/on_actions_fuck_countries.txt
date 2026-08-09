@@ -774,6 +774,98 @@ on_actions = {
 					}
                 }
 			}
+
+			#东南亚
+			if = {
+				limit = { has_game_rule = { rule = KXX_annex_GEA option = KXX_annex_GEA_YES } }
+				GEA = {
+                    annex_country = { target = SIA }
+                    annex_country = { target = BRM }
+                    annex_country = { target = DEI }
+					annex_country = { target = PHI }
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_southeast_asia = yes
+                                state = 523
+								state = 636
+								state = 711
+                            }   
+                        }
+                        add_core_of = GEA
+                    }
+                }
+				every_country = { 
+					set_country_flag = SIA_CONQ 
+					set_country_flag = BRM_CONQ
+					set_country_flag = INS_CONQ
+					set_country_flag = PHI_CONQ
+					set_country_flag = MLY_CONQ
+					set_country_flag = SAR_CONQ
+					set_country_flag = PNG_CONQ
+					set_country_flag = SSI_CONQ
+				}
+				every_state = {
+					limit = {
+						is_core_of = GEA
+					}
+					add_core_of = INC
+				}
+			}
+
+			#印度
+			if = {
+				limit = { has_game_rule = { rule = KXX_annex_India option = KXX_annex_India_BHC } }
+				BHC = {
+                    annex_country = { target = DEH }
+                    annex_country = { target = PRF }
+					annex_country = { target = MAD }
+                    annex_country = { target = NEP }
+                    every_state = {
+                        limit = {
+                            or = {
+								AND = {
+									is_on_continent = india
+									NOT = {
+										state = 858
+									}
+								}
+								is_core_of = AFG
+                            }   
+                        }
+                        add_core_of = BHC
+                    }
+					complete_national_focus = BHC_unite_india
+					complete_national_focus = BHC_special_INC_meeting
+                }
+				AFG = {
+					set_country_flag = AFG_afghanistan_victory
+	            	set_country_flag = AFG_initial_war_over
+            		transfer_state = 442
+            		transfer_state = 445
+            		transfer_state = 1219
+            		transfer_state = 441 #Kashmir
+            		transfer_state = 444 #Baluchistan
+            		transfer_state = 891 #Lahore
+            		transfer_state = 890 #Shimla
+            		transfer_state = 440 #East Punjab
+              		transfer_state = 443 #Sindh
+					add_state_core = 890
+					add_state_core = 440
+					add_state_core = 443
+					add_state_core = 1219 #Dalbandin
+            		add_state_core = 445 #Quetta
+               		add_state_core = 442 #Peshawar
+              		add_state_core = 441 #Kashmir
+              		add_state_core = 444 #Baluchistan
+               		add_state_core = 891 #Lahore
+             		add_state_core = 443 #Sindh
+            		add_state_core = 804 #Northern Khorasan
+            		add_state_core = 416 #Khorasan
+             		add_state_core = 410 #Sistan
+					country_event = afghanredux.1
+		    	}
+			}
 		}
 		#恢复开局不显示的国家
 		effect = {

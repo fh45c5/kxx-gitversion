@@ -786,33 +786,51 @@ country_event = {
 	is_triggered_only = yes
 	fire_only_once = yes
 
-option = { 
-	name = kxxfrance.16.a
-	complete_national_focus = FRA_Restoring_Socialist_Order
-}
-option = { 
-	name = kxxfrance.16.b
-	ai_chance = {
-		factor = 90
-	}	
-	country_event = {
-		id = kxxfrance.17
-		days = 7
-	}
-}
-option = {
-	name = kxxfrance.16.c
-	ai_chance = {
-		factor = 10
-	}	
-	add_stability = -0.1
-	hidden_effect = {
-		country_event = {
-			id = kxxfrance.84
-			days = 7
-		}
-	}
-}
+    option = { 
+    	name = kxxfrance.16.a
+	    complete_national_focus = FRA_Restoring_Socialist_Order
+    }
+    option = { 
+	    name = kxxfrance.16.b
+	    ai_chance = {
+			factor = 90
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_day_of_imfamy
+			    		option = FRA_DAY_OF_INFAMY_BATAILLE  #主宰者之叛
+			    	}
+				}
+		    }
+		}	
+	    country_event = {
+		    id = kxxfrance.17
+	    	days = 7
+	    }
+    }
+    option = {
+	    name = kxxfrance.16.c
+	    ai_chance = {
+			factor = 10
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_day_of_imfamy
+			    		option = FRA_DAY_OF_INFAMY_DEAT  #戴亚恢复秩序
+			    	}
+				}
+		    }
+		}	
+	    add_stability = -0.1
+	    hidden_effect = {
+	    	country_event = {
+	    		id = kxxfrance.84
+	    		days = 7
+	    	}
+	    }
+    }
 }
 country_event = {	
 	id = kxxfrance.17 #elections!
@@ -6743,6 +6761,26 @@ country_event = {
 option = { 
 	name = kxxfrance.81.a
 	add_stability = -0.2
+	ai_chance = {
+		factor = 50
+		modifier = {
+			factor = 0
+			or = {
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_DAY_OF_INFAMY_BLACK_GUARD_COUNTERREVOLUTION  #黑卫军反革命
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_DAY_OF_INFAMY_BLACK_GUARD_COUNTERREVOLUTION_NOGOV  #纯粹的无政府主义
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_DAY_OF_INFAMY_BLACK_GUARD_COUNTERREVOLUTION_MAKHNO  #马赫诺的无政府共产主义
+			    }
+			}
+		}
+	}
 	create_country_leader = {
 		name = "黑卫军"
 		desc = "POLITICS_BLACK_GUARD_DESC"
@@ -6758,7 +6796,18 @@ option = {
 }	
 option = { 
 	name = kxxfrance.81.b
-	
+	ai_chance = {
+		factor = 50
+		modifier = {
+			factor = 0
+			or = {
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_DAY_OF_INFAMY_TECH  #共治主义阴谋
+			    }
+			}
+		}
+	}
 }	
 }
 country_event = {	
@@ -6782,6 +6831,18 @@ option = {
 option = { 
 	name = kxxfrance.82.b
 	custom_effect_tooltip = KXX_UNFINISHED_TOOLTIP
+	ai_chance = {
+		factor = 70
+		modifier = {
+			factor = 0
+			or = {
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_DAY_OF_INFAMY_TECH  #共治主义阴谋
+			    }
+			}
+		}
+	}
 }	
 }
 country_event = {	
