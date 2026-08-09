@@ -5,6 +5,9 @@
 ###########################
 
 add_namespace = uob
+add_namespace = uob_eu
+add_namespace = uob_eu_nat
+add_namespace = uob_eu_as
 
 ### Introduction Event
 
@@ -115,6 +118,10 @@ country_event = { # Economic policy
 						rule = ENG_start_election
 						option = ENG_START_TOTALIST
 					}
+					has_game_rule = {
+						rule = ENG_start_election
+						option = ENG_START_STALEMATE
+					}
 				}
 			}
 		}
@@ -148,6 +155,10 @@ country_event = { # Economic policy
 					has_game_rule = {
 						rule = ENG_start_election
 						option = ENG_START_TOTALIST
+					}
+					has_game_rule = {
+						rule = ENG_start_election
+						option = ENG_START_STALEMATE
 					}
 				}
 			}
@@ -193,6 +204,10 @@ country_event = { # Internal policy
 					has_game_rule = {
 						rule = ENG_start_election
 						option = ENG_START_RADICAL_SOCIALIST
+					}
+					has_game_rule = {
+						rule = ENG_start_election
+						option = ENG_START_STALEMATE
 					}
 				}
 			}
@@ -260,6 +275,10 @@ country_event = { # Internal policy
 						rule = ENG_start_election
 						option = ENG_START_TOTALIST
 					}
+					has_game_rule = {
+						rule = ENG_start_election
+						option = ENG_START_STALEMATE
+					}
 				}
 			}
 		}
@@ -303,6 +322,10 @@ country_event = { # Military policy
 						rule = ENG_start_election
 						option = ENG_START_RADICAL_SOCIALIST
 					}
+					has_game_rule = {
+						rule = ENG_start_election
+						option = ENG_START_STALEMATE
+					}
 				}
 			}
 		}
@@ -336,6 +359,10 @@ country_event = { # Military policy
 					has_game_rule = {
 						rule = ENG_start_election
 						option = ENG_START_TOTALIST
+					}
+					has_game_rule = {
+						rule = ENG_start_election
+						option = ENG_START_STALEMATE
 					}
 				}
 			}
@@ -403,7 +430,7 @@ country_event = { # The Resignation of Philip Snowden
 	option = {
 		name = uob.6.a
 		create_country_leader = {
-			name = "Executive Committee"
+			name = "执行委员会"
 			desc = "POLITICS_INTERIM_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Trade_Union_Congress.png"
 			expire = "1.1.1"
@@ -509,6 +536,7 @@ country_event = { # Maximist Victory
 				}
 			}
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 country_event = { # Federalist Victory
@@ -529,11 +557,23 @@ country_event = { # Federalist Victory
 	option = { # Kenney
 		name = uob.8.a
 		retire_country_leader = yes
+		ai_chance = {
+			factor = 45
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_new_chairman
+						option = ENG_NEW_CHAIRMAN_ARTHUR_HORNER
+					}
+				}
+			}
+		}
 		set_politics = {
 			ruling_party = syndicalist
 		}
 		create_country_leader = {
-			name = "Annie Kenney"
+			name = "安妮·肯尼"
 			desc = "POLITICS_ANNIE_KENNEY_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Annie_Kenney.png"
 			expire = "1.1.1"
@@ -562,14 +602,27 @@ country_event = { # Federalist Victory
 				}
 			}
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 
 	option = { # Arthur Horner
 		name = uob.8.b # Arthur Horner
 		retire_country_leader = yes
+		ai_chance = {
+			factor = 45
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_new_chairman
+						option = ENG_NEW_CHAIRMAN_ANNIE_KENNEY
+					}
+				}
+			}
+		}
 		# Since Horner is set as Snowden's successor in the country file, he's automatically be next in line
 		create_country_leader = {
-			name = "Arthur Horner"
+			name = "亚瑟·霍纳"
 			desc = "POLITICS_ARTHUR_HORNER_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Arthur_Horner.png"
 			expire = "1.1.1"
@@ -602,6 +655,7 @@ country_event = { # Federalist Victory
 				}
 			}
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 country_event = { # Autonomist Victory
@@ -643,6 +697,7 @@ country_event = { # Autonomist Victory
 				}
 			}
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 country_event = { # No majority achieved
@@ -662,6 +717,22 @@ country_event = { # No majority achieved
 
 	option = { # Compromise between Federalist and Maximist
 		name = uob.10.a
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_election_stalemate
+						option = ENG_ELECTION_STALEMATE_CPGB_2
+					}
+					has_game_rule = {
+						rule = ENG_election_stalemate
+						option = ENG_ELECTION_STALEMATE_LB
+					}
+				}
+			}
+		}
 		retire_country_leader = yes
 		set_politics = {
 			ruling_party = syndicalist
@@ -698,15 +769,32 @@ country_event = { # No majority achieved
 			}
 		}
 		create_country_leader = {
-			name = "Tom Mann"
+			name = "汤姆·曼恩"
 			desc = "POLITICS_TOM_MANN_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Tom_Mann.png"
 			expire = "1.1.1"
 			ideology = syndicalist_subtype
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 	option = { # Compromise between Federalist and Autonomist
 		name = uob.10.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_election_stalemate
+						option = ENG_ELECTION_STALEMATE_CPGB_1
+					}
+					has_game_rule = {
+						rule = ENG_election_stalemate
+						option = ENG_ELECTION_STALEMATE_LB
+					}
+				}
+			}
+		}
 		retire_country_leader = yes
 		set_politics = {
 			ruling_party = syndicalist
@@ -725,7 +813,7 @@ country_event = { # No majority achieved
 			name = ENG_FED_syndicalist_party
 		}
 		create_country_leader = {
-			name = "Tom Mann"
+			name = "汤姆·曼恩"
 			desc = "POLITICS_TOM_MANN_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Tom_Mann.png"
 			expire = "1.1.1"
@@ -749,9 +837,26 @@ country_event = { # No majority achieved
 				}
 			}
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 	option = { # Social democrat
 		name = uob.10.c
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_election_stalemate
+						option = ENG_ELECTION_STALEMATE_CPGB_1
+					}
+					has_game_rule = {
+						rule = ENG_election_stalemate
+						option = ENG_ELECTION_STALEMATE_CPGB_2
+					}
+				}
+			}
+		}
 		retire_country_leader = yes
 		set_politics = {
 			ruling_party = social_democrat
@@ -770,7 +875,7 @@ country_event = { # No majority achieved
 			name = ENG_FED_syndicalist_party
 		}
 		create_country_leader = {
-					name = "Clem Attlee"
+					name = "克莱门特·艾德礼"
 					desc = "POLITICS_CLEM_ATTLEE_DESC"
 					picture = "gfx/leaders/ENG/Portrait_England_Clem_Attlee.png"
 					expire = "1965.1.1"
@@ -784,6 +889,7 @@ country_event = { # No majority achieved
 			set_country_flag = labour_party_victory
 			}
 		}
+		mark_focus_tree_layout_dirty = yes
     }
 	country_event = { # reelection
 	id = uob.1004
@@ -803,7 +909,25 @@ country_event = { # No majority achieved
 	    name = uob.1004.a
 		ai_chance = {
 			factor = 50
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_reelection
+						option = ENG_REELECTION_RADICAL_SOCIALIST_AUTONOMIST
+					}
+					has_game_rule = {
+						rule = ENG_reelection
+						option = ENG_REELECTION_RADICAL_SOCIALIST_AUTONOMIST_DISSOLVE
+					}
+					has_game_rule = {
+						rule = ENG_reelection
+						option = ENG_REELECTION_LB
+					}
+				}
+			}
 		}
+		clr_country_flag = labour_party_victory
 		country_event = uob.8
 		add_popularity = {
 			ideology = syndicalist
@@ -814,7 +938,21 @@ country_event = { # No majority achieved
 	    name = uob.1004.b
 		ai_chance = {
 			factor = 50
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_reelection
+						option = ENG_REELECTION_SYNDICALIST_FEDERATIONIST
+					}
+					has_game_rule = {
+						rule = ENG_reelection
+						option = ENG_REELECTION_LB
+					}
+				}
+			}
 		}
+		clr_country_flag = labour_party_victory
 		country_event = uob.9
 		add_popularity = {
 			ideology = radical_socialist
@@ -825,6 +963,23 @@ country_event = { # No majority achieved
 	    name = uob.1004.c
 		ai_chance = {
 			factor = 80
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_reelection
+						option = ENG_REELECTION_SYNDICALIST_FEDERATIONIST
+					}
+					has_game_rule = {
+						rule = ENG_reelection
+						option = ENG_REELECTION_RADICAL_SOCIALIST_AUTONOMIST
+					}
+					has_game_rule = {
+						rule = ENG_reelection
+						option = ENG_REELECTION_RADICAL_SOCIALIST_AUTONOMIST_DISSOLVE
+					}
+				}
+			}
 		}
 		country_event = uob.1003
 	}
@@ -840,13 +995,23 @@ country_event = { # presdinal election
 	is_triggered_only = yes	
 	option = {
 		name = uob.1003.a
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_new_chairman
+					option = ENG_NEW_CHAIRMAN_CLEMENT_ATTLEE
+				}
+			}
+		}
 		add_political_power = 50
 		add_popularity = {
 			ideology = social_democrat
 			popularity = 0.05
 		}
 		create_country_leader = {
-			name = "Clement Attlee"
+			name = "克莱门特·艾德礼"
 			picture = "gfx/leaders/ENG/Portrait_England_Clem_Attlee.png"
 			expire = "1.1.1"
 			ideology = liberal_socialism_subtype 
@@ -875,13 +1040,23 @@ country_event = { # presdinal election
 	}
 	option = {
 		name = uob.1003.b
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_new_chairman
+					option = ENG_NEW_CHAIRMAN_H_G_WELLS
+				}
+			}
+		}
 		add_political_power = 50
 		add_popularity = {
 			ideology = social_democrat
 			popularity = 0.05
 		}
 		create_country_leader = {
-			name = "H.G. Wells"
+			name = "H·G·威尔斯"
 			picture = "gfx/leaders/ENG/Portrait_England_H_G_Wells.png"
 			expire = "1.1.1"
 			ideology = socdem_internationalism_subtype 
@@ -910,6 +1085,16 @@ country_event = { # presdinal election
 	}
 	option = {
 		name = uob.1003.c
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_new_chairman
+					option = ENG_NEW_CHAIRMAN_H_G_WELLS
+				}
+			}
+		}
 		add_political_power = 50
 		add_popularity = {
 			ideology = radical_socialist
@@ -920,7 +1105,7 @@ country_event = { # presdinal election
 			popularity = -0.2
 		}
 		create_country_leader = {
-			name = "Ebenezer Edwards"
+			name = "埃贝内泽·爱德华兹"
 			picture = "gfx/leaders/BRG/Portrait_BRG_Ebby_Edwards.png"
 			expire = "1.1.1"
 			ideology = moderate_socialist_subtype
@@ -3085,7 +3270,7 @@ country_event = {
 				is_ai = no
 				NOT = {
 				ENG = {
-					has_country_leader = { name = "Loígaire I" ruling_only = yes}
+					has_country_leader = { name = "洛伊盖尔一世" ruling_only = yes}
 				}
 				}
 			}
@@ -3133,7 +3318,7 @@ country_event = {
 				is_ai = no
 				NOT = {
 				ENG = {
-					has_country_leader = { name = "Loígaire I" ruling_only = yes}
+					has_country_leader = { name = "洛伊盖尔一世" ruling_only = yes}
 				}
 				}
 			}
@@ -3275,26 +3460,26 @@ country_event = {
 			load_focus_tree = generic_focus
 			drop_cosmetic_tag = yes
 			create_country_leader = {
-				name = "James Gralton"
+				name = "詹姆斯·格拉尔顿"
 				picture = "gfx/leaders/IRE/Portrait_Ireland_James_Gralton.png"
 				expire = "1.1.1"
 				ideology = authcom_subtype
 			}
 			create_country_leader = {
-				name = "Jim Larkin"
+				name = "吉姆·拉金"
 				desc = "POLITICS_JIM_LARKIN_DESC"
 				picture = "gfx/leaders/IRE/Portrait_Ireland_Jim_Larkin.png"
 				expire = "1.1.1"
 				ideology = centralized_syndicalism_subtype
 			}
 			create_country_leader = {
-				name = "Peadar O'Donnell"
+				name = "皮达尔·奥唐奈"
 				picture = "gfx/leaders/IRE/Portrait_Ireland_Peadar_ODonnell.png"
 				expire = "1.1.1"
 				ideology = left_nationalism_subtype
 			}
 			create_country_leader = {
-				name = "Cathal Brugha"
+				name = "卡哈尔·布鲁阿"
 				desc = "POLITICS_CATHAL_BRUGHA_DESC"
 				picture = "gfx/leaders/IRE/Portrait_Ireland_Cathal_Brugha.png"
 				expire = "1.1.1"
@@ -4626,7 +4811,7 @@ country_event = {
 					elections_allowed = no
 				}
 				create_country_leader = {
-					name = "Seán Lemass"
+					name = "肖恩·勒马斯"
 					desc = "POLITICS_SEAN_LEMASS_DESC"
 					picture = "gfx/leaders/Ire/Portrait_Ireland_Sean_Lemass.png"
 					expire = "1.1.1"
@@ -4708,7 +4893,7 @@ country_event = {
 					elections_allowed = no
 				}
 				create_country_leader = {
-					name = "Seán Lemass"
+					name = "肖恩·勒马斯"
 					desc = "POLITICS_SEAN_LEMASS_DESC"
 					picture = "gfx/leaders/Ire/Portrait_Ireland_Sean_Lemass.png"
 					expire = "1.1.1"
@@ -4750,7 +4935,7 @@ country_event = {
 					elections_allowed = no
 				}
 				create_country_leader = {
-					name = "Seán Lemass"
+					name = "肖恩·勒马斯"
 					desc = "POLITICS_SEAN_LEMASS_DESC"
 					picture = "gfx/leaders/Ire/Portrait_Ireland_Sean_Lemass.png"
 					expire = "1.1.1"
@@ -4789,7 +4974,7 @@ country_event = {
 		}
 		hidden_effect = {
 			if = {	
-				limit = { has_country_leader = { name = "Oswald Mosley" ruling_only = yes } }
+				limit = { has_country_leader = { name = "奥斯瓦尔德·莫斯利" ruling_only = yes } }
 				set_country_leader_portrait = {
 					portrait = "gfx/leaders/ENG/Portrait_England_Oswald_Mosley_Grand_Protector.png"
 				}
@@ -5534,12 +5719,13 @@ country_event = {
 			}
 		}
 		create_country_leader = {
-			name = "Arthur Horner"
+			name = "亚瑟·霍纳"
 			desc = "POLITICS_ARTHUR_HORNER_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Arthur_Horner.png"
 			expire = "1.1.1"
 			ideology = syndicalist_subtype
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 	option = {#The Military takes Charge!
 		ai_chance = {
@@ -5578,6 +5764,7 @@ country_event = {
 				}
 			}
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -5596,7 +5783,7 @@ country_event = {
 		name = uob.213.a
 		hidden_effect = {
 			if = {	
-				limit = { has_country_leader = { name = "Oswald Mosley" ruling_only = yes } }
+				limit = { has_country_leader = { name = "奥斯瓦尔德·莫斯利" ruling_only = yes } }
 				set_country_leader_portrait = {
 					portrait = "gfx/leaders/ENG/Portrait_England_Oswald_Mosley_Dictator.png"
 				}
@@ -6564,7 +6751,7 @@ country_event = {
 		}
 		retire_country_leader = yes
 		create_country_leader = {
-			name = "Eric Blair"
+			name = "埃里克·布莱尔"
 			desc = "POLITICS_ERIC_BLAIR_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Eric_Blair.png"
 			expire = "1.1.1"
@@ -6584,7 +6771,7 @@ country_event = {
 			ruling_party = syndicalist
 		}
 		create_country_leader = {
-			name = "Annie Kenney"
+			name = "安妮·肯尼"
 			desc = "POLITICS_ANNIE_KENNEY_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Annie_Kenney.png"
 			expire = "1.1.1"
@@ -6695,7 +6882,7 @@ country_event = {
 			ruling_party = syndicalist
 		}
 		create_country_leader = {
-			name = "William Gallacher"
+			name = "威廉·加拉赫"
 			desc = "POLITICS_WILLIAM_GALLACHER_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_William_Gallacher.png"
 			expire = "1.1.1"
@@ -6731,6 +6918,19 @@ country_event = {
 		name = uob.359.a
 		ai_chance = {
 			factor = 20
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_second_election
+						option = ENG_SECOND_ELECTION_CLEM_ATTLEE
+					}
+					has_game_rule = {
+						rule = ENG_second_election
+						option = ENG_SECOND_ELECTION_BARBARA_CASTLE
+					}
+				}
+			}
 		}
 		add_ideas = ENG_GDH_Cole_hog_syn
 		add_political_power = -60
@@ -6740,10 +6940,23 @@ country_event = {
 		name = uob.359.b
 		ai_chance = {
 			factor = 20
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_second_election
+						option = ENG_SECOND_ELECTION_ARTHUR_HORNER
+					}
+					has_game_rule = {
+						rule = ENG_second_election
+						option = ENG_SECOND_ELECTION_BARBARA_CASTLE
+					}
+				}
+			}
 		}
 		retire_country_leader = yes
 		create_country_leader = {
-			name = "Clem Attlee"
+			name = "克莱门特·艾德礼"
 			desc = "POLITICS_CLEM_ATTLEE_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Clem_Attlee.png"
 			expire = "1.1.1"
@@ -6756,6 +6969,23 @@ country_event = {
 		name = uob.359.c
 		ai_chance = {
 			factor = 40
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_second_election
+						option = ENG_SECOND_ELECTION_ARTHUR_HORNER
+					}
+					has_game_rule = {
+						rule = ENG_second_election
+						option = ENG_SECOND_ELECTION_CLEM_ATTLEE
+					}
+					has_game_rule = {
+						rule = ENG_second_election
+						option = ENG_SECOND_ELECTION_BARBARA_CASTLE
+					}
+				}
+			}
 		}
 		set_politics = {
 			ruling_party = totalist
@@ -6768,10 +6998,23 @@ country_event = {
 		name = uob.359.e
 		ai_chance = {
 			factor = 20
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ENG_second_election
+						option = ENG_SECOND_ELECTION_ARTHUR_HORNER
+					}
+					has_game_rule = {
+						rule = ENG_second_election
+						option = ENG_SECOND_ELECTION_CLEM_ATTLEE
+					}
+				}
+			}
 		}
 		retire_country_leader = yes
 		create_country_leader = {
-			name = "Barbara Castle"
+			name = "芭芭拉·卡素尔"
 			desc = "POLITICS_BARBARA_CASTLE_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Barbara_Castle.png"
 			expire = "1.1.1"
@@ -6870,11 +7113,18 @@ country_event = {
 	option = {
 		name = uob.361.a
 		ai_chance = {
-			factor = 65
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_Eric_Blair
+					option = ENG_ERIC_BLAIR_WIN
+				}
+			}
 		}
 		retire_country_leader = yes
 		create_country_leader = {
-			name = "Eric Blair"
+			name = "埃里克·布莱尔"
 			desc = "POLITICS_ERIC_BLAIR_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Eric_Blair.png"
 			expire = "1.1.1"
@@ -6900,11 +7150,26 @@ country_event = {
 	
 	option = {
 		name = uob.361.b
-		ai_chance = { factor = 25 }
+		ai_chance = {
+			factor = 10
+			modifier = {
+				add = 100
+				or = {
+					has_game_rule = {
+					    rule = ENG_Eric_Blair
+					    option = ENG_ERIC_BLAIR_LAWRENCE_1
+				    }
+					has_game_rule = {
+					    rule = ENG_Eric_Blair
+					    option = ENG_ERIC_BLAIR_LAWRENCE_2
+				    }
+				}
+			}
+		}
 		set_politics = { ruling_party = syndicalist }
 		retire_country_leader = yes
 		create_country_leader = {
-			name = "T.E. Lawrence"
+			name = "T·E·劳伦斯"
 			desc = "ENG_lawrence_desc"
 			picture = "gfx/leaders/ENG/Portrait_England_T_E_Lawrence.png"
 			expire = "1.1.1"
@@ -6920,15 +7185,61 @@ country_event = {
 		add_ideas = ENG_Clement_Attlee_eco_syn
 		add_ideas = ENG_Nye_Bevan_sec_syn
 		add_political_power = -50
+		mark_focus_tree_layout_dirty = yes
 	}
 
 	option = {
 		name = uob.361.c
 		ai_chance = {
-			factor = 30
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_Eric_Blair
+					option = ENG_ERIC_BLAIR_FAIL
+				}
+			}
 		}
 		set_country_flag = Eric_Blair_dead
 		add_political_power = -600
+	}
+
+	option = {
+		name = uob.361.e
+		ai_chance = {
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_Eric_Blair
+					option = ENG_ERIC_BLAIR_WIN_TOT
+				}
+			}
+		}
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "埃里克·布莱尔"
+			desc = "POLITICS_ERIC_BLAIR_DESC"
+			picture = "gfx/leaders/ENG/Portrait_England_Eric_Blair.png"
+			expire = "1.1.1"
+			ideology = ingsoc_subtype
+		}
+		remove_all_ministers = yes
+		add_ideas = ENG_Harry_Pollitt_hog_syn
+		add_ideas = ENG_Barbara_Castle_eco_syn
+		add_ideas = ENG_Nye_Bevan_sec_syn
+		add_ideas = ENG_James_Maxton_for_syn
+		add_political_power = -50
+		set_politics = {
+			ruling_party = totalist
+		}
+		hidden_effect = {
+			set_party_name = {
+				ideology = totalist
+				long_name = ENG_BLR_radical_socialist_party_long
+				name = ENG_BLR_radical_socialist_party
+			}
+		}
 	}
 }
 
@@ -7708,7 +8019,7 @@ country_event = {
 			}
 		}
 		create_country_leader = {
-			name = "Arthur Horner"
+			name = "亚瑟·霍纳"
 			desc = "POLITICS_ARTHUR_HORNER_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Arthur_Horner.png"
 			expire = "1.1.1"
@@ -7776,7 +8087,7 @@ country_event = {
 			ruling_party = syndicalist
 		}
 		create_country_leader = {
-			name = "Christabel Pankhurst"
+			name = "克丽丝特布尔·潘克赫斯特"
 			picture = "gfx/leaders/ENG/Portrait_England_Christabel_Pankhurst.png"
 			expire = "1.1.1"
 			ideology = feminist_syndicalist_subtype
@@ -8536,9 +8847,11 @@ country_event = { # Wales Breaks Off Too!
 		add_stability = -0.10
 		WAL = {
 			transfer_state = 122
+			transfer_state = 1225
 		}
 		WAL = {
 			add_state_core = 122
+			add_state_core = 1225
 		}
 		
 		WAL = {
@@ -8569,9 +8882,11 @@ country_event = { # Wales Breaks Off Too!
 		add_stability = -0.10
 		WAL = {
 			transfer_state = 122
+			transfer_state = 1225
 		}
 		WAL = {
 			add_state_core = 122
+			add_state_core = 1225
 		}
 		country_event = uob.507
 		
@@ -8719,6 +9034,7 @@ country_event = { # Peace With Wales
 		
 		WAL = {
 			transfer_state = 122
+			transfer_state = 1225
 		}
 		add_stability = -0.30
 		
@@ -8802,7 +9118,7 @@ country_event = {
 				name = BRG_paternal_autocrat_party
 			}
 				create_country_leader = {# Percy Hobart
-					name = "Percy Hobart"
+					name = "珀西·霍巴特"
 					desc = "POLITICS_HOBART_DESC"
 					picture = "gfx/leaders/ENG/Portrait_England_Percy_Hobart.png"
 					expire = "1.1.1"
@@ -8810,7 +9126,7 @@ country_event = {
 					traits = {}
 				}
 				create_country_leader = {# Percy Hobart
-					name = "Percy Hobart"
+					name = "珀西·霍巴特"
 					desc = "POLITICS_HOBART_DESC"
 					picture = "gfx/leaders/ENG/Portrait_England_Percy_Hobart.png"
 					expire = "1.1.1"
@@ -8819,6 +9135,7 @@ country_event = {
 				}
 
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 	option = {
 		name = uob.510.b
@@ -8902,7 +9219,7 @@ country_event = {
 			set_politics = { ruling_party = syndicalist }
 			retire_country_leader = yes
 			create_country_leader = {
-				name = "T.E. Lawrence"
+				name = "T·E·劳伦斯"
 				desc = "POLITICS_TE_LAWRENCE_DESC"
 				picture = "gfx/leaders/ENG/Portrait_England_T_E_Lawrence.png"
 				expire = "1.1.1"
@@ -8931,6 +9248,7 @@ country_event = {
 			123 = { set_demilitarized_zone = yes}
 			set_country_flag = ENG_civil_war
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -8947,9 +9265,21 @@ country_event = {
 
 	option = {
 		name = uob.512.a
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				OR = {
+					has_game_rule = {
+						rule = ENG_new_chairman
+						option = ENG_NEW_CHAIRMAN_ERIC_BLAIR
+					}
+				}
+			}
+		}
 		hidden_effect = {
 			create_country_leader = {
-			name = "Eric Blair"
+			name = "埃里克·布莱尔"
 			desc = "POLITICS_ERIC_BLAIR_DESC"
 			picture = "gfx/leaders/ENG/Portrait_England_Eric_Blair.png"
 			expire = "1.1.1"
@@ -8964,6 +9294,18 @@ country_event = {
 	}
 	option = {
 		name = uob.512.b
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				OR = {
+					has_game_rule = {
+						rule = ENG_new_chairman
+						option = ENG_NEW_CHAIRMAN_BARBARA_CASTLE
+					}
+				}
+			}
+		}
 		set_country_flag = Eric_Blair_dead
 		hidden_effect = {
 			set_party_name = {
@@ -8972,7 +9314,7 @@ country_event = {
 				name = ENG_NAT_radical_socialist_party_long
 			}
 			create_country_leader = {
-				name = "Barbara Castle"
+				name = "芭芭拉·卡素尔"
 				desc = "POLITICS_BARBARA_CASTLE_DESC"
 				picture = "gfx/leaders/ENG/Portrait_England_Barbara_Castle.png"
 				expire = "1.1.1"
@@ -8997,7 +9339,7 @@ country_event = {
 		hidden_effect = {
 			retire_country_leader = yes
 			create_country_leader = {
-				name = "Arthur Horner"
+				name = "亚瑟·霍纳"
 				desc = "POLITICS_ARTHUR_HORNER_DESC"
 				picture = "gfx/leaders/ENG/Portrait_England_Arthur_Horner.png"
 				expire = "1.1.1"
@@ -9013,30 +9355,73 @@ country_event = {
 
 	option = {
 		name = uob.513.a
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				OR = {
+					has_game_rule = {
+						rule = ENG_new_chairman
+						option = ENG_NEW_CHAIRMAN_BARBARA_CASTLE
+					}
+					has_game_rule = {
+						rule = ENG_new_chairman
+						option = ENG_NEW_CHAIRMAN_ERIC_BLAIR
+					}
+				}
+			}
+		}
 		set_politics = { ruling_party = radical_socialist}
 		remove_all_ministers = yes
 		add_ideas = ENG_Jim_Callaghan_hog_rso
 		add_ideas = ENG_Ethel_MacDonald_for_rso
 		add_ideas = ENG_David_Kirkwood_eco_rso
 		add_ideas = ENG_Cecil_Dudgeon_sec_rso
+		mark_focus_tree_layout_dirty = yes
 	}
 	option = {
 		name = uob.513.b
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				OR = {
+					has_game_rule = {
+						rule = ENG_new_chairman
+						option = ENG_NEW_CHAIRMAN_ARTHUR_HORNER
+					}
+				}
+			}
+		}
 		set_politics = { ruling_party = syndicalist }
 		remove_all_ministers = yes
 		add_ideas = ENG_Arthur_Horner_hog_syn
 		add_ideas = ENG_Elizabeth_Andrews_for_syn
 		add_ideas = ENG_Clement_Attlee_eco_syn
 		add_ideas = ENG_John_Platts_Mills_sec_syn
+		mark_focus_tree_layout_dirty = yes
 	}
 	option = {
 		name = uob.513.c
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				OR = {
+					has_game_rule = {
+						rule = ENG_new_chairman
+						option = ENG_NEW_CHAIRMAN_CLEMENT_ATTLEE
+					}
+				}
+			}
+		}
 		set_politics = { ruling_party = social_democrat }
 		remove_all_ministers = yes
 		add_ideas = GBR_Clement_Attlee_hog_sde
 		add_ideas = ENG_Ishbel_MacDonald_for_sde
 		add_ideas = ENG_Malcom_MacDonald_eco_sde
 		add_ideas = GBR_James_Chuter_Ede_sec_sde
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -9048,7 +9433,11 @@ country_event = {
 	picture = GFX_report_event_election_vote
 	immediate = {
 		hidden_effect = {
-			set_cosmetic_tag = ENG_england 
+			if = {
+				limit = {
+					has_completed_focus = ENG_dissolve_tuc
+				}
+				set_cosmetic_tag = ENG_england 
 				SCT = {
 					add_state_core = 133
 					add_state_core = 121
@@ -9066,6 +9455,7 @@ country_event = {
 				}
 				WAL = {
 					add_state_core = 122
+					add_state_core = 1225
 				}
 				WAL = {
 					set_country_flag = devolved_government
@@ -9075,43 +9465,26 @@ country_event = {
 				}
 				release = WAL
 				release = SCT
-				if = {
-					limit = {
-						NOT = { has_completed_focus = ENG_dissolve_tuc }
-					}
-					set_autonomy = {
-						target = WAL
-						autonomy_state = kr_integrated_puppet
-						freedom_level = 0.3
-					}
-					set_autonomy = {
-						target = SCT
-						autonomy_state = kr_integrated_puppet
-						freedom_level = 0.3
-					}
-					hidden_effect = { set_cosmetic_tag = ENG_england }
+			}
+			if = {
+				limit = { is_faction_leader = yes }
+				add_to_faction = WAL
+				add_to_faction = SCT
+			}
+			else_if = {
+				limit = {
+					is_in_faction = yes
+					is_faction_leader = no
 				}
-
-				if = {
-					limit = { is_faction_leader = yes }
+				random_country = {
+					limit = {
+						is_faction_leader = yes
+						is_in_faction_with = ENG
+					}
 					add_to_faction = WAL
 					add_to_faction = SCT
 				}
-				else_if = {
-					limit = {
-						is_in_faction = yes
-						is_faction_leader = no
-					}
-					random_country = {
-						limit = {
-							is_faction_leader = yes
-							is_in_faction_with = ENG
-						}
-						add_to_faction = WAL
-						add_to_faction = SCT
-					}
-				}
-
+			}
 			hidden_effect = {
 				add_opinion_modifier = { target = SCT modifier = ENG_devolution_op }
 				SCT = { add_opinion_modifier = { target = ENG modifier = ENG_devolution_op } }
@@ -9351,173 +9724,893 @@ country_event = { # Ah alright. I wish Mosely could unite Europe without that on
 	is_triggered_only = yes
 	
 	option = { # nah
+	    name = uob.1000.a
 		ai_chance = {
-			factor = 100
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_Maximist_ambition
+					option = ENG_MAXIMIST_AMBITION_IRE
+				}
 			}
-		name = uob.1000.a
 		}
-	option = { # Let's eat europe
-		ai_chance = {
-			factor = 0
+		every_state = {
+			limit = {
+				is_core_of = IRE
 			}
-		name = uob.1000.b
+			add_core_of = ENG
+		}
+		create_wargoal = {
+			target = IRE
+			type = annex_everything
+		}
+	}
+	option = { # Let's eat europe
+	    name = uob.1000.b
+		ai_chance = {
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_Maximist_ambition
+					option = ENG_MAXIMIST_AMBITION_EUR
+				}
+			}
+		}
+		set_country_flag = ENG_social_europe
 		leave_faction = yes
 		create_faction_from_template = { 
 			template = faction_template_internationale_successor  
 			name = "准则国际"
 			icon = GFX_faction_totalist_internationale
 		}
-		set_country_flag = ENG_social_europe
+		every_state = {
+            limit = {
+                OR = {
+                    is_on_continent = europe
+                    is_core_of = MOR
+                    is_core_of = LBA
+                    is_core_of = GEO
+                    is_core_of = AZE
+                    is_core_of = ARM
+                    state = 805
+                    state = 513
+                    state = 514
+                    state = 459
+                    state = 460
+                    state = 458
+                    state = 665
+                    state = 968
+                    state = 557
+                    state = 967
+                    state = 699
+                    state = 1318
+                    state = 290
+                    state = 178
+                    state = 448
+                    state = 273
+                    state = 1009
+                    state = 663
+                    state = 451
+                    state = 450
+                    state = 452
+                    state = 552
+                    state = 447
+                    state = 446
+                    state = 457
+                    state = 1008
+                    state = 456
+                    state = 753
+                    state = 453
+                    state = 454
+                    state = 992
+                    state = 553
+                    state = 680
+                    state = 677
+                    state = 995
+                    state = 554
+                    state = 455
+                    state = 350
+                    state = 352
+                    state = 344
+                    state = 345
+                    state = 354
+                    state = 1000
+                    state = 1213
+                    state = 1001
+                    state = 355
+                    state = 346
+                    state = 49
+                    state = 356
+                    state = 342
+                    state = 343
+                    state = 340
+                    state = 339
+                    state = 187
+                    state = 926
+                    state = 101
+                    state = 573
+                }
+            }
+            add_core_of = ENG
+        }
 		every_country = {
-				limit = {
+			limit = {
+				or = {
 					is_in_europe = yes
+				    tag = NFA
+				    tag = TUR
+				    tag = EGY
+				    tag = MOR
+				    tag = LBA
+				    tag = GEO
+				    tag = AZE
+				    tag = ARM
+				    tag = MTR
 				}
-				ENG = {
-					create_wargoal = {
-						target = PREV
-						type = annex_everything
-				}
+			}
+			ENG = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+			    }
 			}
 		}
-		every_state = {
-					limit = {
-						is_on_continent = europe
-					}
-					ENG = { 
-						add_state_claim = PREV 
-				}
-			}
-		every_state = {
-				limit = {
-					is_core_of = MOR
-				}
-				add_claim_by = ENG
-		}
-		every_state = {
-				limit = {
-					is_core_of = LBA
-				}
-				add_claim_by = ENG
-		}
-		every_state = {
-				limit = {
-					is_core_of = GEO
-				}
-				add_claim_by = ENG
-		}
-		every_state = {
-				limit = {
-					is_core_of = AZE
-				}
-				add_claim_by = ENG
-		}
-		every_state = {
-				limit = {
-					is_core_of = ARM
-				}
-				add_claim_by = ENG
-		}
-		hidden_effect = {
-			add_state_claim = 805
-			add_state_claim = 513
-			add_state_claim = 514
-			add_state_claim = 459
-			add_state_claim = 460
-			add_state_claim = 458
-			add_state_claim = 665
-			add_state_claim = 968
-			add_state_claim = 557
-			add_state_claim = 967
-			add_state_claim = 699
-			add_state_claim = 1318
-			add_state_claim = 290
-			add_state_claim = 178
-			add_state_claim = 448
-			add_state_claim = 273
-			add_state_claim = 1009
-			add_state_claim = 663
-			add_state_claim = 451
-			add_state_claim = 450
-			add_state_claim = 452
-			add_state_claim = 552
-			add_state_claim = 447
-			add_state_claim = 446
-			add_state_claim = 457
-			add_state_claim = 1008
-			add_state_claim = 456
-			add_state_claim = 753
-			add_state_claim = 453
-			add_state_claim = 454
-			add_state_claim = 992
-			add_state_claim = 553
-			add_state_claim = 680
-			add_state_claim = 677
-			add_state_claim = 995
-			add_state_claim = 554
-			add_state_claim = 455
-			add_state_claim = 350
-			add_state_claim = 352
-			add_state_claim = 344
-			add_state_claim = 345
-			add_state_claim = 354
-			add_state_claim = 1000
-			add_state_claim = 1213
-			add_state_claim = 1001
-			add_state_claim = 355
-			add_state_claim = 346
-			add_state_claim = 49
-			add_state_claim = 356
-			add_state_claim = 342
-			add_state_claim = 343
-			add_state_claim = 340
-			add_state_claim = 339
-			add_state_claim = 187
-			add_state_claim = 926
-			add_state_claim = 101
-			add_state_claim = 573
-		}
-		create_wargoal = {
-			   target = NFA
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = TUR	
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = EGY
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = MOR
-			   type = annex_everything
-			}	
-			create_wargoal = {
-			   target = LBA
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = GEO
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = AZE
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = ARM
-			   type = annex_everything
-			}	
-		create_wargoal = {
-			   target = MTR
-			   type = annex_everything
-			}	
 	}
 	option = { # Let's eat the anglos
+	    name = uob.1000.c
 		ai_chance = {
-			factor = 0
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_Maximist_ambition
+					option = ENG_MAXIMIST_AMBITION_CON
+				}
 			}
-		name = uob.1000.c
+		}
+		set_country_flag = ENG_maximist_fed
+		hidden_effect = {
+			add_state_claim = 1219
+			add_state_claim = 445
+			add_state_claim = 442
+		}
+		every_state = {
+            limit = {
+                OR = {
+                    ##########KX自带的##########
+                    is_core_of = IRE
+                    is_core_of = CAN
+                    is_core_of = NFL
+                    is_core_of = DEH
+                    is_core_of = MAD
+                    is_core_of = BHC
+                    is_core_of = PRF
+                    is_core_of = USA
+                    is_core_of = CSA
+                    is_core_of = NEE
+                    is_core_of = COR
+                    is_core_of = BBR
+                    is_core_of = TXS
+                    is_core_of = TEX
+                    is_core_of = WCC
+                    is_core_of = CAL
+                    is_core_of = ALA
+					state = 1146
+					state = 337
+					state = 100
+					state = 926
+					state = 101
+					state = 326
+                    ##########澳大利亚##########
+                    is_core_of = AST
+                    is_core_of = PHI
+                    is_core_of = DEI
+                    is_core_of = MLY
+                    is_core_of = SAR
+                    ###polynesia
+                    state = 632
+                    state = 631
+                    state = 634
+                    state = 639
+                    state = 646
+                    state = 638
+                    state = 633
+                    state = 725
+                    state = 647
+                    state = 684
+                    state = 669
+                    state = 843
+                    state = 757
+                    state = 523
+                    state = 737
+                    state = 635
+                    state = 734
+                    state = 636
+                    state = 643
+                    state = 642 
+                    state = 828
+                    ###new_guinea
+                    state = 669
+                    state = 843
+                    state = 757
+                    state = 523
+                    state = 737
+                    ###austronesia
+                    state = 543
+                    state = 1177
+                    state = 1179
+                    state = 1178
+                    state = 707
+                    state = 706
+                    state = 708
+                    state = 711
+                    state = 846
+                    state = 336
+                    state = 524
+                    state = 333
+                    state = 721
+                    state = 972
+                    state = 627
+                    state = 628
+                    state = 625
+                    state = 626
+                    state = 624
+                    state = 327
+                    state = 623
+                    state = 668
+                    state = 673
+                    state = 1333
+                    state = 1018
+                    state = 1017
+                    state = 667
+                    state = 1019
+                    state = 335
+                    state = 1020
+                    state = 334
+                    state = 1016
+                    state = 1021
+                    state = 1022
+                    state = 672
+                    state = 1023
+                    ##########非洲##########
+                    ###南非
+                    is_core_of = SAF
+                    is_core_of = ZIM
+                    is_core_of = MZB
+                    is_core_of = NMB
+					state = 542
+					state = 85
+					state = 738
+                    ###其他
+                    #is_core_of = KEN
+                    #is_claimed_by = KEN
+                    #is_core_of = NGR
+                    #is_core_of = ZAM
+                    #is_core_of = CIV
+                    ##########西印度##########
+                    is_core_of = CAF
+                    is_core_of = CUB  
+                    is_core_of = HAI
+                    is_core_of = DOM
+                    is_core_of = PRI
+                    state = 818
+                    state = 1077
+                    state = 695
+                    state = 309
+                    state = 1038 
+                    state = 1307
+                    state = 1310
+                    state = 1311
+                    state = 1305
+                    state = 1306
+                    state = 1031
+                    ##########印度和阿富汗##########
+                    is_core_of = CEY
+                    is_core_of = BRM
+                    state = 756
+                    is_core_of = NEP
+                    is_core_of = SKM
+                    is_core_of = BHU
+                    is_core_of = AFG
+                    is_claimed_by = AFG
+					state = 321
+					state = 733
+                }   
+            }
+            add_core_of = ENG
+        } 
+		every_country = {
+			limit = {
+				or = {
+					tag = IRE
+                    tag = CAN
+                    tag = NFL
+                    tag = DEH
+                    tag = MAD
+                    tag = BHC
+                    tag = PRF
+                    tag = USA
+                    tag = CSA
+                    tag = NEE
+                    tag = COR
+                    tag = BBR
+                    tag = TXS
+                    tag = TEX
+                    tag = WCC
+                    tag = CAL
+                    tag = ALA
+                    tag = AST
+                    tag = PHI
+                    tag = DEI
+                    tag = MLY
+                    tag = SAR
+                    tag = SAF
+                    tag = ZIM
+                    tag = MZB
+                    tag = NMB
+                    tag = CAF
+                    tag = CUB
+                    tag = HAI
+                    tag = DOM
+                    tag = PRI
+                    tag = CEY
+                    tag = BRM
+                    tag = NEP
+                    tag = SKM
+                    tag = BHU
+                    tag = AFG
+				}
+            }          
+			ENG = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+			    }
+			}
+		}
+	}
+	option = { # Let's eat the anglos
+	    name = uob.1000.e
+		ai_chance = {
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_Maximist_ambition
+					option = ENG_MAXIMIST_AMBITION_CON_MEX
+				}
+			}
+		}
+		set_country_flag = ENG_maximist_fed
+		hidden_effect = {
+			add_state_claim = 1219
+			add_state_claim = 445
+			add_state_claim = 442
+		}
+		every_state = {
+            limit = {
+                OR = {
+                    ##########KX自带的##########
+                    is_core_of = IRE
+                    is_core_of = CAN
+                    is_core_of = NFL
+                    is_core_of = DEH
+                    is_core_of = MAD
+                    is_core_of = BHC
+                    is_core_of = PRF
+                    is_core_of = USA
+                    is_core_of = CSA
+                    is_core_of = NEE
+                    is_core_of = COR
+                    is_core_of = BBR
+                    is_core_of = TXS
+                    is_core_of = TEX
+                    is_core_of = WCC
+                    is_core_of = CAL
+                    is_core_of = ALA
+					state = 1146
+					state = 337
+					state = 100
+					state = 926
+					state = 101
+					state = 326
+                    ##########澳大利亚##########
+                    is_core_of = AST
+                    is_core_of = PHI
+                    is_core_of = DEI
+                    is_core_of = MLY
+                    is_core_of = SAR
+                    ###polynesia
+                    state = 632
+                    state = 631
+                    state = 634
+                    state = 639
+                    state = 646
+                    state = 638
+                    state = 633
+                    state = 725
+                    state = 647
+                    state = 684
+                    state = 669
+                    state = 843
+                    state = 757
+                    state = 523
+                    state = 737
+                    state = 635
+                    state = 734
+                    state = 636
+                    state = 643
+                    state = 642 
+                    state = 828
+                    ###new_guinea
+                    state = 669
+                    state = 843
+                    state = 757
+                    state = 523
+                    state = 737
+                    ###austronesia
+                    state = 543
+                    state = 1177
+                    state = 1179
+                    state = 1178
+                    state = 707
+                    state = 706
+                    state = 708
+                    state = 711
+                    state = 846
+                    state = 336
+                    state = 524
+                    state = 333
+                    state = 721
+                    state = 972
+                    state = 627
+                    state = 628
+                    state = 625
+                    state = 626
+                    state = 624
+                    state = 327
+                    state = 623
+                    state = 668
+                    state = 673
+                    state = 1333
+                    state = 1018
+                    state = 1017
+                    state = 667
+                    state = 1019
+                    state = 335
+                    state = 1020
+                    state = 334
+                    state = 1016
+                    state = 1021
+                    state = 1022
+                    state = 672
+                    state = 1023
+                    ##########非洲##########
+                    ###南非
+                    is_core_of = SAF
+                    is_core_of = ZIM
+                    is_core_of = MZB
+                    is_core_of = NMB
+					state = 542
+					state = 85
+					state = 738
+                    ###其他
+                    #is_core_of = KEN
+                    #is_claimed_by = KEN
+                    #is_core_of = NGR
+                    #is_core_of = ZAM
+                    #is_core_of = CIV
+                    ##########西印度##########
+                    is_core_of = CAF
+                    is_core_of = CUB  
+                    is_core_of = HAI
+                    is_core_of = DOM
+                    is_core_of = PRI
+                    state = 818
+                    state = 1077
+                    state = 695
+                    state = 309
+                    state = 1038 
+                    state = 1307
+                    state = 1310
+                    state = 1311
+                    state = 1305
+                    state = 1306
+                    state = 1031
+                    ##########印度和阿富汗##########
+                    is_core_of = CEY
+                    is_core_of = BRM
+                    state = 756
+                    is_core_of = NEP
+                    is_core_of = SKM
+                    is_core_of = BHU
+                    is_core_of = AFG
+                    is_claimed_by = AFG
+					state = 321
+					state = 733
+					##########墨西哥##########
+					is_core_of = MEX
+					is_core_of = GUA
+					is_core_of = HON
+					is_core_of = ELS
+					is_core_of = NIC
+					is_core_of = COS
+					is_core_of = PAN
+					state = 685
+					is_core_of = CAF
+					is_core_of = VEN
+					is_core_of = COL
+					is_core_of = ECU
+					state = 375
+					state = 376
+					state = 1161
+					state = 377
+					state = 378
+					state = 379
+					state = 1165
+					state = 797
+					state = 798
+					state = 829
+					state = 1096
+					state = 833
+					state = 1174
+					state = 380
+					state = 1096
+					state = 1175
+					state = 1166
+                }   
+            }
+            add_core_of = ENG
+        } 
+		every_country = {
+			limit = {
+				or = {
+					tag = IRE
+                    tag = CAN
+                    tag = NFL
+                    tag = DEH
+                    tag = MAD
+                    tag = BHC
+                    tag = PRF
+                    tag = USA
+                    tag = CSA
+                    tag = NEE
+                    tag = COR
+                    tag = BBR
+                    tag = TXS
+                    tag = TEX
+                    tag = WCC
+                    tag = CAL
+                    tag = ALA
+                    tag = AST
+                    tag = PHI
+                    tag = DEI
+                    tag = MLY
+                    tag = SAR
+                    tag = SAF
+                    tag = ZIM
+                    tag = MZB
+                    tag = NMB
+                    tag = CAF
+                    tag = CUB
+                    tag = HAI
+                    tag = DOM
+                    tag = PRI
+                    tag = CEY
+                    tag = BRM
+                    tag = NEP
+                    tag = SKM
+                    tag = BHU
+                    tag = AFG
+                    tag = GUA
+                    tag = HON
+                    tag = ELS
+                    tag = NIC
+                    tag = COS
+                    tag = PAN
+                    tag = VEN
+                    tag = COL
+                    tag = ECU
+					tag = MEX
+				} 
+            }
+			ENG = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+			    }
+			}
+		}
+	}
+	option = { # Let's eat the anglos
+	    name = uob.1000.g
+		ai_chance = {
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_Maximist_ambition
+					option = ENG_MAXIMIST_AMBITION_CON_AMERICAS
+				}
+			}
+		}
+		set_country_flag = ENG_maximist_fed
+		hidden_effect = {
+			add_state_claim = 1219
+			add_state_claim = 445
+			add_state_claim = 442
+		}
+		every_state = {
+            limit = {
+                OR = {
+                    ##########KX自带的##########
+                    is_core_of = IRE
+                    is_core_of = CAN
+                    is_core_of = NFL
+                    is_core_of = DEH
+                    is_core_of = MAD
+                    is_core_of = BHC
+                    is_core_of = PRF
+                    is_core_of = USA
+                    is_core_of = CSA
+                    is_core_of = NEE
+                    is_core_of = COR
+                    is_core_of = BBR
+                    is_core_of = TXS
+                    is_core_of = TEX
+                    is_core_of = WCC
+                    is_core_of = CAL
+                    is_core_of = ALA
+					state = 1146
+					state = 337
+					state = 100
+					state = 926
+					state = 101
+					state = 326
+                    ##########澳大利亚##########
+                    is_core_of = AST
+                    is_core_of = PHI
+                    is_core_of = DEI
+                    is_core_of = MLY
+                    is_core_of = SAR
+                    ###polynesia
+                    state = 632
+                    state = 631
+                    state = 634
+                    state = 639
+                    state = 646
+                    state = 638
+                    state = 633
+                    state = 725
+                    state = 647
+                    state = 684
+                    state = 669
+                    state = 843
+                    state = 757
+                    state = 523
+                    state = 737
+                    state = 635
+                    state = 734
+                    state = 636
+                    state = 643
+                    state = 642 
+                    state = 828
+                    ###new_guinea
+                    state = 669
+                    state = 843
+                    state = 757
+                    state = 523
+                    state = 737
+                    ###austronesia
+                    state = 543
+                    state = 1177
+                    state = 1179
+                    state = 1178
+                    state = 707
+                    state = 706
+                    state = 708
+                    state = 711
+                    state = 846
+                    state = 336
+                    state = 524
+                    state = 333
+                    state = 721
+                    state = 972
+                    state = 627
+                    state = 628
+                    state = 625
+                    state = 626
+                    state = 624
+                    state = 327
+                    state = 623
+                    state = 668
+                    state = 673
+                    state = 1333
+                    state = 1018
+                    state = 1017
+                    state = 667
+                    state = 1019
+                    state = 335
+                    state = 1020
+                    state = 334
+                    state = 1016
+                    state = 1021
+                    state = 1022
+                    state = 672
+                    state = 1023
+                    ##########非洲##########
+                    ###南非
+                    is_core_of = SAF
+                    is_core_of = ZIM
+                    is_core_of = MZB
+                    is_core_of = NMB
+					state = 542
+					state = 85
+					state = 738
+                    ###其他
+                    #is_core_of = KEN
+                    #is_claimed_by = KEN
+                    #is_core_of = NGR
+                    #is_core_of = ZAM
+                    #is_core_of = CIV
+                    ##########西印度##########
+                    is_core_of = CAF
+                    is_core_of = CUB  
+                    is_core_of = HAI
+                    is_core_of = DOM
+                    is_core_of = PRI
+                    state = 818
+                    state = 1077
+                    state = 695
+                    state = 309
+                    state = 1038 
+                    state = 1307
+                    state = 1310
+                    state = 1311
+                    state = 1305
+                    state = 1306
+                    state = 1031
+                    ##########印度和阿富汗##########
+                    is_core_of = CEY
+                    is_core_of = BRM
+                    state = 756
+                    is_core_of = NEP
+                    is_core_of = SKM
+                    is_core_of = BHU
+                    is_core_of = AFG
+                    is_claimed_by = AFG
+					state = 321
+					state = 733
+					##########墨西哥##########
+					is_core_of = MEX
+					is_core_of = GUA
+					is_core_of = HON
+					is_core_of = ELS
+					is_core_of = NIC
+					is_core_of = COS
+					is_core_of = PAN
+					state = 685
+					is_core_of = CAF
+					is_core_of = VEN
+					is_core_of = COL
+					is_core_of = ECU
+					state = 375
+					state = 376
+					state = 1161
+					state = 377
+					state = 378
+					state = 379
+					state = 1165
+					state = 797
+					state = 798
+					state = 829
+					state = 1096
+					state = 833
+					state = 1174
+					state = 380
+					state = 1096
+					state = 1175
+					state = 1166
+					##########南美剩下的#########
+					is_core_of = BRA
+					is_core_of = CHL
+					is_core_of = PAR
+					is_core_of = URG
+					is_core_of = BOL
+					is_core_of = PRU
+					is_core_of = ARG
+					is_core_of = FOP
+					is_core_of = ECU
+					is_core_of = VEN
+					is_core_of = COL
+					is_core_of = PAN
+					is_guyana = yes
+                }   
+            }
+            add_core_of = ENG
+        } 
+		every_country = {
+			limit = {
+				or = {
+					tag = IRE
+                    tag = CAN
+                    tag = NFL
+                    tag = DEH
+                    tag = MAD
+                    tag = BHC
+                    tag = PRF
+                    tag = USA
+                    tag = CSA
+                    tag = NEE
+                    tag = COR
+                    tag = BBR
+                    tag = TXS
+                    tag = TEX
+                    tag = WCC
+                    tag = CAL
+                    tag = ALA
+                    tag = AST
+                    tag = PHI
+                    tag = DEI
+                    tag = MLY
+                    tag = SAR
+                    tag = SAF
+                    tag = ZIM
+                    tag = MZB
+                    tag = NMB
+                    tag = CAF
+                    tag = CUB
+                    tag = HAI
+                    tag = DOM
+                    tag = PRI
+                    tag = CEY
+                    tag = BRM
+                    tag = NEP
+                    tag = SKM
+                    tag = BHU
+                    tag = AFG
+                    tag = GUA
+                    tag = HON
+                    tag = ELS
+                    tag = NIC
+                    tag = COS
+                    tag = PAN
+                    tag = VEN
+                    tag = COL
+                    tag = ECU
+                    tag = CHL
+                    tag = PAR
+                    tag = URG
+                    tag = BOL
+                    tag = PRU
+                    tag = ARG
+                    tag = FOP
+					tag = MEX
+					tag = BRA
+				}
+			}
+			ENG = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+			    }
+			}
+		}
+	}
+	option = {
+		name = uob.1000.h
+		ai_chance = {
+			factor = 10
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_Maximist_ambition
+					option = ENG_MAXIMIST_AMBITION_CON_ALL
+				}
+			}
+		}
 		set_country_flag = ENG_maximist_fed
 		leave_faction = yes
 		create_faction_from_template = { 
@@ -9525,460 +10618,22 @@ country_event = { # Ah alright. I wish Mosely could unite Europe without that on
 			name = "准则国际"
 			icon = GFX_faction_totalist_internationale
 		}
-		hidden_effect = {
-			add_state_claim = 1219
-			add_state_claim = 445
-			add_state_claim = 442
-			}
-		create_wargoal = { type = annex_everything target = CAN }
-			every_state = {
-				limit = {
-					is_owned_by = CAN
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = PRF }
-			every_state = {
-				limit = {
-					is_owned_by = PRF
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = DEH }
-			every_state = {
-				limit = {
-					is_owned_by = DEH
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = MAD }
-			every_state = {
-				limit = {
-					is_owned_by = MAD
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = BHC }
-			every_state = {
-				limit = {
-					is_owned_by = BHC
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = AST }
-			every_state = {
-				limit = {
-					is_owned_by = AST
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = SAF }
-			every_state = {
-				limit = {
-					is_owned_by = SAF
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = DEH }
-			every_state = {
-				limit = {
-					is_owned_by = DEH
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = USA }
-			every_state = {
-				limit = {
-					is_owned_by = USA
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = IRE }
-				every_state = {
-					limit = {
-						is_owned_by = IRE
-					}
-					add_claim_by = ENG
-				}
-		create_wargoal = { type = annex_everything target = CAF }
-				every_state = {
-					limit = {
-						is_owned_by = CAF
-					}
-					add_claim_by = ENG
-				}
-		hidden_effect = {
-			create_wargoal = { type = annex_everything target = CSA }
-				every_state = {
-					limit = {
-						is_owned_by = CSA
-					}
-					add_claim_by = ENG
-				}
-			create_wargoal = { type = annex_everything target = NEE }
-				every_state = {
-					limit = {
-						is_owned_by = NEE
-					}
-					add_claim_by = ENG
-				}
-			create_wargoal = { type = annex_everything target = COR }
-				every_state = {
-					limit = {
-						is_owned_by = COR
-					}
-					add_claim_by = ENG
-				}
-			create_wargoal = { type = annex_everything target = BBR }
-				every_state = {
-					limit = {
-						is_owned_by = BBR
-					}
-					add_claim_by = ENG
-				}	
-			create_wargoal = { type = annex_everything target = TXS }
-				every_state = {
-					limit = {
-						is_owned_by = TXS
-					}
-					add_claim_by = ENG
-				}	
-			create_wargoal = { type = annex_everything target = TEX }
-				every_state = {
-					limit = {
-						is_owned_by = TEX
-					}
-					add_claim_by = ENG
-				}	
-			create_wargoal = { type = annex_everything target = WCC }
-				every_state = {
-					limit = {
-						is_owned_by = WCC
-					}
-					add_claim_by = ENG
-				}
-			create_wargoal = { type = annex_everything target = CAL }
-				every_state = {
-					limit = {
-						is_owned_by = CAL
-					}
-					add_claim_by = ENG
-				}
-			create_wargoal = { type = annex_everything target = ALA }
-				every_state = {
-					limit = {
-						is_owned_by = ALA
-					}
-					add_claim_by = ENG
-				}
-			}
-	}
-	option = {
-		ai_chance = {
-			factor = 0
+		every_state = {
+			add_core_of = ENG
 		}
-		name = uob.1000.f
-		leave_faction = yes
-		create_faction_from_template = { 
-			template = faction_template_internationale_successor  
-			name = "准则国际"
-			icon = GFX_faction_totalist_internationale
-		}
-		set_country_flag = ENG_social_europe
 		every_country = {
-				limit = {
-					is_in_europe = yes
+			limit = {
+				NOT = {
+					tag = ENG
 				}
-				ENG = {
-					create_wargoal = {
-						target = PREV
-						type = annex_everything
-				}
+			}
+			ENG = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+			    }
 			}
 		}
-		every_state = {
-					limit = {
-						is_on_continent = europe
-					}
-					ENG = { 
-						add_state_claim = PREV 
-				}
-			}
-		every_state = {
-				limit = {
-					is_core_of = MOR
-				}
-				add_claim_by = ENG
-		}
-		every_state = {
-				limit = {
-					is_core_of = LBA
-				}
-				add_claim_by = ENG
-		}
-		every_state = {
-				limit = {
-					is_core_of = GEO
-				}
-				add_claim_by = ENG
-		}
-		every_state = {
-				limit = {
-					is_core_of = AZE
-				}
-				add_claim_by = ENG
-		}
-		every_state = {
-				limit = {
-					is_core_of = ARM
-				}
-				add_claim_by = ENG
-		}
-		hidden_effect = {
-			add_state_claim = 805
-			add_state_claim = 513
-			add_state_claim = 514
-			add_state_claim = 459
-			add_state_claim = 460
-			add_state_claim = 458
-			add_state_claim = 665
-			add_state_claim = 968
-			add_state_claim = 557
-			add_state_claim = 967
-			add_state_claim = 699
-			add_state_claim = 1318
-			add_state_claim = 290
-			add_state_claim = 178
-			add_state_claim = 448
-			add_state_claim = 273
-			add_state_claim = 1009
-			add_state_claim = 663
-			add_state_claim = 451
-			add_state_claim = 450
-			add_state_claim = 452
-			add_state_claim = 552
-			add_state_claim = 447
-			add_state_claim = 446
-			add_state_claim = 457
-			add_state_claim = 1008
-			add_state_claim = 456
-			add_state_claim = 753
-			add_state_claim = 453
-			add_state_claim = 454
-			add_state_claim = 992
-			add_state_claim = 553
-			add_state_claim = 680
-			add_state_claim = 677
-			add_state_claim = 995
-			add_state_claim = 554
-			add_state_claim = 455
-			add_state_claim = 350
-			add_state_claim = 352
-			add_state_claim = 344
-			add_state_claim = 345
-			add_state_claim = 354
-			add_state_claim = 1000
-			add_state_claim = 1213
-			add_state_claim = 1001
-			add_state_claim = 355
-			add_state_claim = 346
-			add_state_claim = 49
-			add_state_claim = 356
-			add_state_claim = 342
-			add_state_claim = 343
-			add_state_claim = 340
-			add_state_claim = 339
-			add_state_claim = 187
-			add_state_claim = 926
-			add_state_claim = 101
-			add_state_claim = 573
-		}
-		create_wargoal = {
-			   target = NFA
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = TUR	
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = EGY
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = MOR
-			   type = annex_everything
-			}	
-			create_wargoal = {
-			   target = LBA
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = GEO
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = AZE
-			   type = annex_everything
-			}
-		create_wargoal = {
-			   target = ARM
-			   type = annex_everything
-			}	
-		create_wargoal = {
-			   target = MTR
-			   type = annex_everything
-			}	
-			set_country_flag = ENG_maximist_fed
-		
-		hidden_effect = {
-			add_state_claim = 1219
-			add_state_claim = 445
-			add_state_claim = 442
-			}
-		create_wargoal = { type = annex_everything target = CAN }
-			every_state = {
-				limit = {
-					is_owned_by = CAN
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = PRF }
-			every_state = {
-				limit = {
-					is_owned_by = PRF
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = DEH }
-			every_state = {
-				limit = {
-					is_owned_by = DEH
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = MAD }
-			every_state = {
-				limit = {
-					is_owned_by = MAD
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = BHC }
-			every_state = {
-				limit = {
-					is_owned_by = BHC
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = AST }
-			every_state = {
-				limit = {
-					is_owned_by = AST
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = SAF }
-			every_state = {
-				limit = {
-					is_owned_by = SAF
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = DEH }
-			every_state = {
-				limit = {
-					is_owned_by = DEH
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = USA }
-			every_state = {
-				limit = {
-					is_owned_by = USA
-				}
-				add_claim_by = ENG
-			}
-		create_wargoal = { type = annex_everything target = IRE }
-				every_state = {
-					limit = {
-						is_owned_by = IRE
-					}
-					add_claim_by = ENG
-				}
-		create_wargoal = { type = annex_everything target = CAF }
-				every_state = {
-					limit = {
-						is_owned_by = CAF
-					}
-					add_claim_by = ENG
-				}
-		hidden_effect = {
-			create_wargoal = { type = annex_everything target = CSA }
-				every_state = {
-					limit = {
-						is_owned_by = CSA
-					}
-					add_claim_by = ENG
-				}
-			create_wargoal = { type = annex_everything target = NEE }
-				every_state = {
-					limit = {
-						is_owned_by = NEE
-					}
-					add_claim_by = ENG
-				}
-			create_wargoal = { type = annex_everything target = COR }
-				every_state = {
-					limit = {
-						is_owned_by = COR
-					}
-					add_claim_by = ENG
-				}
-			create_wargoal = { type = annex_everything target = BBR }
-				every_state = {
-					limit = {
-						is_owned_by = BBR
-					}
-					add_claim_by = ENG
-				}	
-			create_wargoal = { type = annex_everything target = TXS }
-				every_state = {
-					limit = {
-						is_owned_by = TXS
-					}
-					add_claim_by = ENG
-				}	
-			create_wargoal = { type = annex_everything target = TEX }
-				every_state = {
-					limit = {
-						is_owned_by = TEX
-					}
-					add_claim_by = ENG
-				}	
-			create_wargoal = { type = annex_everything target = WCC }
-				every_state = {
-					limit = {
-						is_owned_by = WCC
-					}
-					add_claim_by = ENG
-				}
-			create_wargoal = { type = annex_everything target = CAL }
-				every_state = {
-					limit = {
-						is_owned_by = CAL
-					}
-					add_claim_by = ENG
-				}
-			create_wargoal = { type = annex_everything target = ALA }
-				every_state = {
-					limit = {
-						is_owned_by = ALA
-					}
-					add_claim_by = ENG
-				}
-			}
-
 	}
 }
 
@@ -10330,4 +10985,889 @@ country_event = { #eat uob?
 	is_triggered_only = yes
 
 
+}
+
+
+##soccred
+
+country_event = { #Knock knock...its the ERC
+	id = uob.2003
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob.2002" }
+	title = uob.2003.t
+	desc = uob.2003.d
+	picture = GFX_report_event_generic_diplomacy
+	trigger = {
+		tag = ENG
+		ENG = {
+			has_completed_focus = ENG_merge
+		}
+	}
+	fire_only_once = yes
+
+	option = {
+		name = uob.2003.a
+		add_popularity = { ideology = radical_socialist popularity = 0.02 }
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				or = {
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_AGREE
+				    }
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_AGREE_FUCK_MOSLEY
+				    }
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_AGREE_EUR
+				    }
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_AGREE_EUR_FUCK_MOSLEY
+				    }
+				}
+			}
+		}
+		#radsoc_social_credit_subtype
+		hidden_effect = {
+			custom_effect_tooltip =  ERC_accepted
+			set_country_flag = ERC_Accepted
+		}
+	}
+
+	option = {
+		name = uob.2003.b
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				or = {
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_REFUSE
+				    }
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_REFUSE_EUR
+				    }
+				}
+			}
+		}
+	}
+}
+
+country_event = { ##Undermine soccred opposition
+	id = uob.2004
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob.2004" }
+	title = uob.2004.t
+	desc = uob.2004.d
+	picture = GFX_report_event_ENG_arrests
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = uob.2004.a
+		add_popularity = { ideology = radical_socialist popularity = 0.05 }
+		ai_chance = {
+			base = 20
+		}
+		add_timed_idea = {
+			idea = ENG_Soccred_Purges
+			days = 70
+		}
+	}
+}
+
+country_event = { ##WHOMSTVE gets the funding
+	id = uob.2005
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob.2005" }
+	title = uob.2005.t
+	desc = uob.2005.d
+	picture = GFX_report_event_generic_economy_growth
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = uob.2005.aa
+		ai_chance = {
+			base = 25
+		}
+		if = {
+			limit = { has_dlc_aat = no }
+			add_tech_bonus = {
+				name = infantry_tech
+				bonus = 0.5
+				uses = 3
+			}
+		}
+		else = {
+			mio:ENG_republican_arsenal_organisation = { add_mio_size = 1 }
+			mio:ENG_vauxhallorganisation = { add_mio_size = 1 }
+			mio:ENG_aec_organisation = { add_mio_size = 1 }
+			mio:ENG_webley_scott_organisation = { add_mio_size = 1 }
+			mio:ENG_bsa_organisation = { add_mio_size = 1 }
+		}
+	}
+	option = {
+		name = uob.2005.ab
+		ai_chance = {
+			base = 25
+		}
+		if = {
+			limit = { has_dlc_aat = no }
+			add_tech_bonus = {
+				name = air_equipment 
+				bonus = 0.5
+				uses = 3
+			}
+		}
+		else = {		
+			mio:ENG_hawker_organisation = { add_mio_size = 1 }
+			mio:ENG_supermarine_organisation = { add_mio_size = 1 }
+			mio:ENG_baulton_paul_organisation = { add_mio_size = 1 }
+			mio:ENG_westland_organisation = { add_mio_size = 1 }
+			mio:ENG_short_organisation = { add_mio_size = 1 }
+			mio:ENG_handley_page_organisation = { add_mio_size = 1 }
+			mio:ENG_blackburn_organisation = { add_mio_size = 1 }
+		}
+	}
+	option = {
+		name = uob.2005.ac
+		ai_chance = {
+			base = 25
+		}
+			if = {
+				limit = { has_dlc_aat = no }
+				add_tech_bonus = {
+					name = naval_equipment
+					bonus = 0.5
+					uses = 3
+				}
+			}
+			else = {
+				mio:ENG_kr_cammell_laird_organisation = { add_mio_size = 1 }
+				mio:ENG_john_brown_company_organisation = { add_mio_size = 1 }
+				mio:ENG_swan_hunter_organisation = { add_mio_size = 1 }
+			}
+		}		
+	option = {
+		name = uob.2005.ad
+		ai_chance = {
+			base = 25
+		}
+		add_political_power = 100
+	}
+}
+
+country_event = { ##WHOMSTVE gets the funding (industrial)
+	id = uob.2009
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob.2005" }
+	title = uob.2009.t
+	desc = uob.2009.d
+	picture = GFX_report_event_generic_economy_growth
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = uob.2009.aa
+		ai_chance = {
+			factor = 25
+		}
+		set_country_flag = improve_imperial_chemical_industries
+		if = {
+			limit = { has_idea = ENG_imperial_chemical_industries }
+			swap_ideas = {
+				remove_idea = imperial_chemical_industries
+				add_idea = imperial_chemical_industries_improved
+			}
+		}
+		else = {
+			add_ideas = imperial_chemical_industries_improved
+		}
+	}
+	option = {
+		name = uob.2009.ab
+		ai_chance = {
+			factor = 25
+		}
+		set_country_flag = improve_english_electric
+		if = {
+			limit = { has_idea = english_electric }
+			swap_ideas = {
+				remove_idea = english_electric
+				add_idea = english_electric_improved
+			}
+		}
+		else = {
+			add_ideas = english_electric_improved
+		}
+	}
+	option = {
+		name = uob.2009.ac
+		ai_chance = {
+			factor = 25
+		}
+		set_country_flag = improve_marconi
+		if = {
+			limit = { has_idea = marconi }
+			swap_ideas = {
+				remove_idea = marconi
+				add_idea = marconi_improved
+			}
+		}
+		else = {
+			add_ideas = marconi_improved
+		}
+	}
+	option = {
+		name = uob.2009.ad
+		ai_chance = {
+			factor = 25
+		}
+		add_political_power = 70
+	}
+}
+
+country_event = { ##Mosley is a sock puppet
+	id = uob.2006
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob.2004" }
+	title = uob.2006.t
+	desc = uob.2006.d
+	picture = GFX_news_event_ENG_Mosley_Victory
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = uob.2006.a
+		add_popularity = { ideology = radical_socialist popularity = 0.02 }
+		ai_chance = {
+			factor = 20
+		}
+		add_country_leader_trait = ENG_Muppet		
+	}
+}
+
+country_event = { ##Mosley rip bozo you wont be missed
+	id = uob.2007
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob.2005" }
+	title = uob.2007.t
+	desc = uob.2007.d
+	picture = GFX_news_event_ENG_Mosley_Victory
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = uob.2007.a
+		ai_chance = {
+			factor = 33
+		}
+		add_political_power = 30	
+		add_stability = 0.01
+	}
+	option = {
+		name = uob.2007.b
+		ai_chance = {
+			factor = 33
+		}
+		hidden_effect = {
+			remove_ideas_with_trait = head_of_government
+		}
+		add_ideas = ENG_Puppet_Mosley_hog_tot
+		
+	}
+	option = {
+		name = uob.2007.c
+		ai_chance = {
+			factor = 33
+		}
+		add_political_power = 75	
+		add_manpower = -1
+	}
+}
+
+	##mosley beats russell
+	country_event = { ##Russell death/arrest
+		id = uob.2010
+		immediate = { log = "[GetDateText]: [Root.GetName]: event uob.2008" }
+		title = uob.2010.t
+		desc = uob.2010.d
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {##death
+			name = uob.2010.a
+			ai_chance = {
+				base = 50
+			}
+			add_stability = 0.02
+			hidden_effect = {
+				news_event = {
+					id = worldnews.1260
+					days = 5
+				}
+			}
+		}
+		option = {##arrest
+			name = uob.2010.b
+			ai_chance = {
+				base = 50
+			}
+			add_manpower = -4
+			add_war_support = 0.03
+		}
+	}
+
+
+
+country_event = { #paneuropeanism embraced
+	id = uob_eu.0
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.0" }
+	title = uob_eu.0.t
+	desc = uob_eu.0.d
+	picture = GFX_report_event_generic_map_brit
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+
+		name = "这个概念似乎很有趣"
+		#set_country_leader_ideology = tot_euro_mosleyism
+		set_country_flag = EUR_Accept
+		hidden_effect = {
+			country_event = {
+				id =  uob_eu_misc.0
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				or = {
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_REFUSE_EUR
+				    }
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_AGREE_EUR
+				    }
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_AGREE_EUR_FUCK_MOSLEY
+				    }
+				}
+			}
+		}
+	}
+
+	
+	option = {
+		name = "我们不需要那些无稽之谈。"
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				or = {
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_AGREE
+				    }
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_AGREE_FUCK_MOSLEY
+				    }
+					has_game_rule = {
+					    rule = ENG_Maximist_ERC
+					    option = ENG_MAXIMIST_ERC_REFUSE
+				    }
+				}
+			}
+		}
+		custom_effect_tooltip = ENG_revolution_tp
+					hidden_effect = {
+							country_event = uob.201
+						}
+	}
+}
+
+country_event = { #school flavor
+	id = uob_eu.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.1" }
+	title = uob_eu.1.t
+	desc = uob_eu.1.d
+	picture = GFX_report_event_NYC_mosley
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "人人都应掌握这些知识"
+	}
+
+	
+	
+}
+
+country_event = { #mosley gets fucking shot 
+	id = uob_eu.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.2" }
+	title = uob_eu.2.t
+	desc = uob_eu.2.d
+	picture = GFX_report_event_UK_bombing2
+
+	trigger = {
+		tag = ENG
+		has_completed_focus = ENG_retake_lost_colony
+	}
+
+	mean_time_to_happen = { days = 14 }
+	
+	fire_only_once = yes
+
+	option = {
+		name = "最高领袖逝世"
+		create_country_leader = {
+			name = "紧急会议"
+			desc = "POLITICS_MAXIMITES_EU_DESC"
+			picture = "gfx/leaders/uob_eu/NMKF.tga"
+			expire = "1965.1.1"
+			ideology = tot_euro_mosleyism
+		}
+		hidden_effect = {
+			country_event = {
+				id = uob_eu.3
+				days = 14
+			}
+		}
+	}
+	
+	option = {
+		name = "最高领袖奇迹般地活了下来！"
+		ai_chance = {
+			factor = 65
+		}
+		add_political_power = 100
+		hidden_effect = {
+			country_event = {
+				id = uob_eu_as.0
+				days = 14
+			
+			}
+		}
+	}
+}
+country_event = { #mosley heir decision
+	id = uob_eu.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.2" }
+	title = uob_eu.2.t
+	desc = uob_eu.2.d
+	picture = GFX_report_event_UK_bombing2
+
+	trigger = {
+		tag = ENG
+		has_completed_focus = ENG_retake_lost_colony
+	}
+
+	mean_time_to_happen = { days = 14 }
+	
+	fire_only_once = yes
+
+	option = {
+		name = "阿诺德·利斯是一个明智的选择。"
+		create_country_leader = {
+			name = "阿诺德·利斯"
+			desc = "POLITICS_LEESE_EU_DESC"
+			picture = "gfx/leaders/ENG/Portrait_England_Arnold_Leese.png"
+			expire = "1965.1.1"
+			ideology = tot_euro_mosleyism
+		}
+		hidden_effect = {
+			country_event = {
+				id = uob_eu.4
+				days = 14
+			}
+		}
+	}
+	
+	option = {
+		name = "埃里克·布莱尔是个不错的决定。"
+		trigger = {
+			has_completed_focus = ENG_truth
+		}
+		create_country_leader = {
+			name = "埃里克·布莱尔"
+			desc = "POLITICS_ERIC_BLAIR_EU_DESC"
+			picture = "gfx/leaders/ENG/Portrait_England_Eric_Blair.png"
+			expire = "1965.1.1"
+			ideology = ingsoc_subtype
+		}
+		hidden_effect = {
+			country_event = {
+				id = uob_eu.4
+				days = 14
+			}
+		}
+	}
+
+	
+	
+}
+
+country_event = { #underground against Mosleyites forms
+	id = uob_eu.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.2" }
+	title = uob_eu.3.t
+	desc = uob_eu.3.d
+	picture = GFX_report_event_antimo
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "立即进行调查！"
+		hidden_effect = {
+				party_name_change_post_mosley = yes
+				country_event = {
+					id = uob_eu.4
+					days = 14
+				}
+		}
+	}
+}
+
+country_event = { #interlude
+	id = uob_eu.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.2" }
+	title = uob_eu.4.t
+	desc = uob_eu.4.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "我们有麻烦了"
+		hidden_effect = {
+			country_event = {
+				id = uob_eu.5
+				days = 14
+			}
+		}
+	}
+
+}
+
+country_event = { #fighting on the streets
+	id = uob_eu.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.5" }
+	title = uob_eu.5.t
+	desc = uob_eu.5.d
+	picture = GFX_report_event_banter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "看在上帝的份上，阻止他们吧！"
+		set_country_flag = mosley_infighting
+		unlock_decision_category_tooltip = UOB_struggle_for_power_category
+	}
+
+}
+
+country_event = { #Coup from the commies
+	id = uob_eu.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.7" }
+	title = uob_eu.7.t
+	desc = uob_eu.7.d
+	picture = GFX_report_event_ENG_lord_blair
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "......失败。我们输了"
+		ENG = {
+			set_politics = {
+				ruling_party = totalist
+				elections_allowed = no
+				last_election = "1935.12.17"
+				election_frequency = 48
+			}
+			set_party_name = { #
+				ideology = totalist
+				long_name = "All-Union Communist Party"
+				name = "AUCP"
+			}
+			set_cosmetic_tag = ENG_europa_commie
+			create_country_leader = {
+				name = "哈利·波利特"
+				desc = "POLITICS_HARRY_POLLITT_EUROPEAN_DESC"
+				picture = "gfx/leaders/WAL/Portrait_Wales_Harry_Pollitt.png"
+				expire = "1965.1.1"
+				ideology = autocratic_socialist_subtype
+				traits = {}
+			}
+			hidden_effect = {
+				country_event = {
+					id = uob_eu_commie.1
+					days = 14
+				}
+				clear_variable = govt_influence
+			    clear_variable = nationalist_influence
+				clear_variable = lib_influence
+			    clear_variable = commie_influence
+			}
+		}
+	}
+
+}
+
+country_event = { #Coup from da libz
+	id = uob_eu.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.6" }
+	title = uob_eu.8.t
+	desc = uob_eu.8.d
+	picture = GFX_report_event_ENG_lord_blair
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "......莫名其妙地胜利了。"
+		create_country_leader = {
+			name = "莫里斯·甘末林"
+			desc = "POLITICS_GAMELIN_DESC"
+			picture = "gfx/leaders/FRA/Portrait_France_Maurice_Gamelin_KR.png"
+			expire = "1965.1.1"
+			ideology = socdem_junta_subtype
+			traits = {marshal_leader}
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+			last_election = "1935.12.17"
+			election_frequency = 48
+		}
+		set_cosmetic_tag = ENG_europa_free
+		hidden_effect = {
+			country_event = {
+				id = uob_eu_lib.1
+				days = 31
+			}
+			clear_variable = govt_influence
+			clear_variable = nationalist_influence
+			clear_variable = lib_influence
+			clear_variable = commie_influence
+		}
+	}
+}
+
+country_event = { #Coup from the nationalists
+	id = uob_eu.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.6" }
+	title = uob_eu.9.t
+	desc = uob_eu.9.d
+	picture = GFX_report_event_ENG_lord_blair
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "......取得成功。"
+		create_country_leader = {
+			name = "库尔特·冯·施莱歇尔"
+			desc = "POLITICS_SCHLEICHER_EUROPEAN_DESC"
+			picture = "gfx/leaders/GRU/Portrait_Germany_Kurt_von_Schleicher.png"
+			expire = "1965.1.1"
+			ideology = authdem_junta_subtype
+			traits = {
+			}
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+			last_election = "1935.12.17"
+			election_frequency = 48
+		}
+		set_cosmetic_tag = ENG_europa_auth
+		clear_variable = govt_influence
+		clear_variable = nationalist_influence
+		clear_variable = lib_influence
+		clear_variable = commie_influence
+	}
+
+}
+
+country_event = { #Form the oceania
+	id = uob_eu.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.10" }
+	title = uob_eu.10.t
+	desc = uob_eu.10.d
+	picture = GFX_report_event_ENG_lord_blair
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "莫斯利的永恒愿景得以保留。"
+		set_cosmetic_tag = ENG_eu_1984
+		set_country_leader_ideology = ingsoc_subtype
+	}
+
+}
+#############################################################################################NATS
+
+country_event = { #countercoup by the nazis
+	id = uob_eu_nat.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu_nat.1" }
+	title = uob_eu_nat.1.t
+	desc = uob_eu_nat.1.d
+	picture = GFX_report_event_ENG_lord_blair
+
+	is_triggered_only = yes
+
+	option = { #bruh stays the same
+		name = "......失败了，我们会让他们少走弯路"
+		set_country_leader_ideology = junta_subtype
+		hidden_effect = {
+			country_event = {
+				id = uob_eu_as.0
+				days = 14
+			}
+			country_event = {
+				id = uob_eu_nat.2
+				days = 60
+			}
+		}
+	}
+	
+	option = { #bruh stays the same
+		name = "为什么特里亚特不能负责呢？"
+		custom_effect_tooltip = EUR_thiriart_removed_tt
+		set_country_leader_ideology = junta_subtype
+		hidden_effect = {
+			country_event = {
+				id = uob_eu_as.0
+				days = 14
+			}
+			country_event = {
+				id = uob_eu_nat.2
+				days = 60
+			}
+		}
+	}
+}
+
+country_event = { #liberalize maybe
+	id = uob_eu_nat.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu_nat.2" }
+	title = uob_eu_nat.2.t
+	desc = uob_eu_nat.2.d
+	picture = GFX_report_event_ENG_lord_blair
+
+	is_triggered_only = yes
+
+	option = { #yeah, maybe
+		name = "我们必须减轻人民的负担。"
+		set_country_leader_ideology = autdem_christian_democracy_subtype
+		
+	}
+	
+	option = { #Hell nah bruh
+		name = "我们不能冒着把这片大陆变成无政府的风险"
+		create_country_leader = {
+			name = "库尔特·冯·施莱歇尔"
+			desc = "POLITICS_SCHLEICHER_EUROPEAN_DESC"
+			picture = "gfx/leaders/GRU/Portrait_Germany_Kurt_von_Schleicher.png"
+			expire = "1965.1.1"
+			ideology = pataut_christian_democracy_subtype
+			traits = {
+			}
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+			last_election = "1935.12.17"
+			election_frequency = 48
+		}
+	}
+}
+######################################ASIAN CONQUEST
+country_event = { #paneuropeanism embraced
+	id = uob_eu_as.0
+	immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu_as.0" }
+	title = uob_eu_as.0.t
+	desc = uob_eu_as.0.d
+	picture = GFX_report_event_generic_map_brit
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+
+	option = {
+		name = "我们应该传播我们的影响力！"
+		custom_effect_tooltip = eng_eu_asian_conquest_unlocked_tt
+		unlock_decision_category_tooltip = UOB_yeeting_asia_category
+		set_country_flag = eng_asian_conquest
+		
+		
+	}
+	country_event = { 
+		id = uob_eu.12
+		immediate = { log = "[GetDateText]: [Root.GetName]: event uob_eu.12" }
+		title = uob_eu.12.t
+		desc = uob_eu.12.d
+		picture = GFX_report_event_SRI_Socialist_Liberty
+	
+		is_triggered_only = yes
+	
+		option = {
+			ai_chance = {
+				factor = 0
+			}
+			name = uob_eu.12.a
+			every_country = {
+				limit = {
+					is_in_europe = yes
+				}
+				SRI = {
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+			
+			
+			every_state = {
+				limit = {
+					is_on_continent = europe
+				}
+				SRI = { 
+					add_state_core = PREV 
+				}
+			}
+		}
+		option = {
+			name = uob_eu.12.b
+		}
+	}
+	
+	
 }

@@ -74,6 +74,7 @@ BRI_factionism = {
 					}
 				}
 			}
+			set_country_flag = BRI_Sb_trouble_over
 		}
 	}
 	BRI_PNB_action = { #民族党
@@ -525,7 +526,7 @@ BRI_factionism = {
 		days_re_enable = 20
 		priority = 978
 		complete_effect = {
-			BRI_BALA_gain_power_low = yes
+			BRI_BLBA_gain_power_mid = yes
 			add_one_random_infrastructure = yes
 			add_one_random_infrastructure = yes
 			add_one_random_infrastructure = yes
@@ -541,7 +542,7 @@ BRI_factionism = {
 		days_re_enable = 20
 		priority = 977
 		complete_effect = {
-			BRI_BALA_gain_power_low = yes
+			BRI_BLBA_gain_power_high = yes
 			BRI_FLB_lose_power_mid = yes
 			BRI_PNB_lose_power_mid = yes
 			add_popularity = {
@@ -560,7 +561,7 @@ BRI_factionism = {
 		days_re_enable = 20
 		priority = 976
 		complete_effect = {
-			BRI_BALA_gain_power_low = yes
+			BRI_BLBA_gain_power_mid = yes
 			BRI_AB_lose_power_mid = yes
 			add_popularity = {
 				ideology = market_liberal
@@ -579,7 +580,7 @@ BRI_factionism = {
 		days_re_enable = 20
 		priority = 975
 		complete_effect = {
-			BRI_BALA_gain_power_mid = yes
+			BRI_BLBA_gain_power_mid = yes
 			add_popularity = {
 				ideology = market_liberal
 				popularity = 0.06
@@ -948,6 +949,11 @@ BRI_Giant_enterprises_governing_the_country = { #巨企治国
 				limit = {
 					NOT = {
 						has_idea = BRI_ARMY_Giant_enterprises_0
+						has_idea = BRI_ARMY_Giant_enterprises_1
+						has_idea = BRI_ARMY_Giant_enterprises_2
+						has_idea = BRI_ARMY_Giant_enterprises_3
+						has_idea = BRI_ARMY_Giant_enterprises_4
+						has_idea = BRI_ARMY_Giant_enterprises_5
 					}
 				}
 				add_ideas = BRI_ARMY_Giant_enterprises_0
@@ -1028,6 +1034,11 @@ BRI_Giant_enterprises_governing_the_country = { #巨企治国
 				limit = {
 					NOT = {
 						has_idea = BRI_AIR_Giant_enterprises_0
+						has_idea = BRI_AIR_Giant_enterprises_1
+						has_idea = BRI_AIR_Giant_enterprises_2
+						has_idea = BRI_AIR_Giant_enterprises_3
+						has_idea = BRI_AIR_Giant_enterprises_4
+						has_idea = BRI_AIR_Giant_enterprises_5
 					}
 				}
 				add_ideas = BRI_AIR_Giant_enterprises_0
@@ -1107,6 +1118,11 @@ BRI_Giant_enterprises_governing_the_country = { #巨企治国
 				limit = {
 					NOT = {
 						has_idea = BRI_NAVY_Giant_enterprises_0
+						has_idea = BRI_NAVY_Giant_enterprises_5
+						has_idea = BRI_NAVY_Giant_enterprises_1
+						has_idea = BRI_NAVY_Giant_enterprises_2
+						has_idea = BRI_NAVY_Giant_enterprises_3
+						has_idea = BRI_NAVY_Giant_enterprises_4
 					}
 				}
 				add_ideas = BRI_NAVY_Giant_enterprises_0
@@ -2911,12 +2927,14 @@ BRI_britanny_on_world_stage_cat = {
 	BRI_against_fra = { #举起反旗
 		icon = GFX_decision_generic_break_treaty
 		days_mission_timeout = 30
+		priority = 985
 		available = {
 			hidden_trigger = {
 				always = no
 			}
 		}
 		activation = {
+			original_tag = BRI
 			OR = {
 				has_war_with = NFA
 				has_war_with = FRG
@@ -2931,23 +2949,13 @@ BRI_britanny_on_world_stage_cat = {
 			}
 		}
 		cancel_effect = {
-			add_stability = -0.2
-			add_war_support = -0.2
+			add_stability = -0.05
+			add_war_support = -0.05
+			add_political_power = 150
 		}
-		modifier = {
-			army_attack_factor = 0.1
-			breakthrough_factor = 0.1
-			army_defence_factor = 0.1
-			production_factory_start_efficiency_factor = 0.05
-			line_change_production_efficiency_factor = 0.05
-			production_factory_efficiency_gain_factor = 0.1
-			production_factory_max_efficiency_factor = 0.1
-			industrial_capacity_factory = 0.05
-		}
-		priority = 985
 		timeout_effect = {
-			add_stability = -0.02
-			add_war_support = -0.02
+			add_stability = 0.01
+			add_war_support = 0.01
 			activate_mission = BRI_against_fra
 		}
 	}
@@ -3076,6 +3084,7 @@ BRI_britanny_on_world_stage_cat = {
 		}
 		visible = {
 			has_completed_focus = BRI_join_faction
+			is_in_faction = no
 		}
 		fire_only_once = yes
 		days_remove = 30
@@ -3113,6 +3122,7 @@ BRI_britanny_on_world_stage_cat = {
 		}
 		visible = {
 			has_completed_focus = BRI_join_faction
+			is_in_faction = no
 		}
 		fire_only_once = yes
 		days_remove = 30
@@ -3139,7 +3149,7 @@ BRI_britanny_on_world_stage_cat = {
 			has_socialist_government = no
 			is_subject = no
 			is_in_faction = no
-			RUS = {
+			CAN = {
 				is_subject = no
 				exists = yes
 				is_faction_leader = yes
@@ -3150,6 +3160,7 @@ BRI_britanny_on_world_stage_cat = {
 		}
 		visible = {
 			has_completed_focus = BRI_join_faction
+			is_in_faction = no
 		}
 		fire_only_once = yes
 		days_remove = 30
@@ -3172,10 +3183,11 @@ BRI_britanny_on_world_stage_cat = {
 			factor = 10
 		}
 		available = {
+			country_exists = ENG
 			has_socialist_government = yes
 			is_subject = no
 			is_in_faction = no
-			RUS = {
+			ENG = {
 				is_subject = no
 				exists = yes
 				is_faction_leader = yes
@@ -3186,6 +3198,7 @@ BRI_britanny_on_world_stage_cat = {
 		}
 		visible = {
 			has_completed_focus = BRI_join_faction
+			is_in_faction = no
 		}
 		fire_only_once = yes
 		days_remove = 30
@@ -3272,8 +3285,8 @@ BRI_britanny_on_world_stage_cat = {
 		}
 		remove_effect = {
 			set_cosmetic_tag = BRI_sov_enterprises
-			set_capital = { state = 129 remember_old_capital = no }
-			set_province_name = { id = 129 name = "列宁格勒" }
+			set_capital = { state = 195 remember_old_capital = yes }
+			set_province_name = { id = 6174 name = "列宁格勒" }
 		}
 	}
 	BRI_Anglo_Saxons_intergration = {
@@ -3777,24 +3790,6 @@ BRI_POPF_puppet_category = {
 					expire = "1.1.1"
 					ideology = tot_bukharinist_subtype
 				}
-			}
-		}
-	}
-}
-BRI_guide = {
-	BRI_guide_total = {
-	icon = generic_ignite_civil_war
-		available = {
-			original_tag = BRI
-		}
-		
-		visible = {
-			tag = BRI
-			is_ai = no
-		}
-		complete_effect = {
-			country_event = {
-				id = BRI_guideance.1
 			}
 		}
 	}

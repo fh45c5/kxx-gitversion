@@ -270,8 +270,8 @@ focus_tree = {
 			OR = {
 					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
 					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
-					has_country_flag = BRI_autonomists
-					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_Britanny_Morvan_Marchal_gain_power
+					has_country_flag = BRI_radsoc_soclib_win
 					has_country_flag = BRI_France_Marcel_Cachin_win
 				}
 		}
@@ -306,7 +306,7 @@ focus_tree = {
 					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
 					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
 					has_country_flag = BRI_autonomists
-					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_radsoc_soclib_win
 					has_country_flag = BRI_France_Marcel_Cachin_win
 				}
 			}
@@ -880,10 +880,22 @@ focus_tree = {
 			
 		}
 		completion_reward = {
-			create_faction_from_template = { 
-				template = faction_template_generic_dominance
-				name = 	"伊姆萨夫集团"
-				icon = GFX_faction_celtic_internationale
+			if = {
+				limit = {
+					has_country_flag = BRI_France_Marcel_Cachin_win
+				}
+				create_faction_from_template = { 
+					template = faction_template_generic_dominance
+					name = 	"第三国际"
+					icon = GFX_faction_third_internationale #GFX_faction_celtic_internationale
+				}
+			}
+			else = {
+				create_faction_from_template = { 
+					template = faction_template_generic_dominance
+					name = 	"伊姆萨夫集团"
+					icon = GFX_faction_Alliance_celtique #GFX_faction_celtic_internationale
+				}
 			}
 			add_political_power = 200
 			add_stability = 0.2
@@ -961,6 +973,97 @@ focus_tree = {
 			
 		}
 		completion_reward = {
+			custom_effect_tooltip = BRI_attack_Anglo_Saxons_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = BRI_Wales_aid
+					}
+					BRI = {
+						transfer_state = 122 
+						add_state_core = 1225
+						transfer_state = 1225 
+						add_state_core = 122
+					}
+					division_template = {
+						name = "起义军"
+						priority = 3
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 0 y = 4 }
+							infantry = { x = 0 y = 5 }
+							infantry = { x = 0 y = 6 }
+						}
+					}
+					random_owned_controlled_state = {
+						prioritize = { 122 1225 }
+						limit = {
+							is_in_home_area = yes
+							impassable = no
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = BRI_Scotland_aid
+					}
+					BRI = {
+						transfer_state = 120
+						add_state_core = 120
+					}
+					division_template = {
+						name = "起义军"
+						priority = 3
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 0 y = 4 }
+							infantry = { x = 0 y = 5 }
+							infantry = { x = 0 y = 6 }
+						}
+					}
+					random_owned_controlled_state = {
+						prioritize = { 120 }
+						limit = {
+							is_in_home_area = yes
+							impassable = no
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+						create_unit = {
+							division = "division_template = \"起义军\" start_experience_factor = 0.3"
+							owner = BRI
+						}
+					}
+				}
+			}
+			declare_war_on = { 
+				target = 126.owner 
+				type = annex_everything
+			}
 			unlock_decision_tooltip = BRI_Anglo_Saxons_intergration
 			unlock_decision_tooltip = BRI_France_intergration
 			unlock_decision_tooltip = BRI_Iberian_intergration
@@ -984,7 +1087,6 @@ focus_tree = {
 						is_core_of = POR
 						is_core_of = FRG
 					}
-
 				}
 				add_claim_by = BRI
 			}
@@ -1188,6 +1290,9 @@ focus_tree = {
 		}
 		completion_reward = {
 			custom_effect_tooltip = BRI_reclaim_france_effect_tooltip
+			unlock_decision_tooltip = BRI_Lock_Occitania_back_in_the_cage
+			unlock_decision_tooltip = BRI_Lock_Lorraine_back_in_the_cage
+			unlock_decision_tooltip = BRI_Lock_Normandy_back_in_the_cage
 		}
 	}
 	focus = {
@@ -1207,8 +1312,8 @@ focus_tree = {
 				OR = {
 					has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
 					has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
-					has_country_flag = BRI_autonomists
-					has_country_flag = BRI_radsoc_soclib
+					has_country_flag = BRI_Britanny_Morvan_Marchal_gain_power
+					has_country_flag = BRI_radsoc_soclib_win
 					has_country_flag = BRI_France_Marcel_Cachin_win
 				}
 			}
@@ -1519,7 +1624,9 @@ focus_tree = {
 			factor = 100
 		}
 		available = {
+			
 			NOT = {
+				has_country_flag = Bri_Alphonse_de_Chateaubriant_VISIBLE
 				has_country_flag = BRI_France_Marcel_Cachin_puppeted_by_popf
 			}
 		}
@@ -1577,8 +1684,8 @@ focus_tree = {
 					}
 				}
 				add_core_of = BRI
-				add_stability = -0.2
 			}
+			add_stability = -0.2
 		}
 	}
 	focus = {
@@ -2034,7 +2141,7 @@ focus_tree = {
 		relative_position_id = BRI_PNB_holds
 		cost = 4
 		prerequisite = {
-			focus = BRI_mordel_again
+			focus = BRI_corporatism_policy
 		}
 		ai_will_do = {
 			factor = 100
@@ -3965,9 +4072,6 @@ focus_tree = {
 				limit = {
 					has_government = social_liberal
 				}
-				country_event = {
-					id = brittany.11
-				}
 			}
 		}
 	}
@@ -5012,11 +5116,10 @@ focus_tree = {
 			has_country_flag = BRI_DATE_DELETE
 		}
 		completion_reward = {
-			set_power_balance = {
+			add_political_power = 300
+			add_power_balance_value = {
 				id = BRI_Corbusier_Savina_balance
-				left_side = BRI_Corbusier_balance_high_side
-				right_side = BRI_Joseph_Savina_high_side
-				set_value = -1
+				value = 0.1
 			}
 		}
 	}
@@ -5666,7 +5769,7 @@ focus_tree = {
 					name = "安东尼·吕布"
 					picture = "gfx/leaders/BRI/Portrait_Antoine_Riboud.png"
 					expire = "1965.1.1"
-					ideology = socdem_utopian_technocracy_subtype
+					ideology = socdem_burnhamite_thought_subtype
 				}
 			}
 		}
@@ -5745,7 +5848,7 @@ focus_tree = {
 	}
 	focus = {
 		id = BRI_sansimon_lagacy
-		icon = GFX_goal_GER_Vision_Saint_Simon
+		icon = GFX_goal_FRA_resurgent_of_sansimonism
 		x = 0
 		y = 3	
 		cost = 4
@@ -7351,6 +7454,28 @@ focus_tree = {
 				remove_idea = BRI_economy_2
 				add_idea = BRI_economy_3
 			}
+			14 = {
+				add_resource = {
+					type = oil
+					amount = 5
+				}
+				add_resource = {
+					type = steel
+					amount = 26
+				}
+				add_resource = {
+					type = tungsten
+					amount = 15
+				}
+				add_resource = {
+					type = chromium
+					amount = 15
+				}
+				add_resource = {
+					type = coal
+					amount = 10
+				}
+			}
 		}
 	}
 
@@ -7375,8 +7500,8 @@ focus_tree = {
 					has_completed_focus = BRI_Investing_in_the_South_Nantes_Frying_Plant
 				}
 				swap_ideas = {
-					remove_ideas = BRI_economy_1
-					add_ideas = BRI_economy_2
+					remove_idea = BRI_economy_1
+					add_idea = BRI_economy_2
 				}
 			}
 			BRI_Urban_Renovation_effect_one = yes
@@ -7562,16 +7687,16 @@ focus_tree = {
 		
 		completion_reward = {
 			add_political_power = 45
+			add_one_random_civilian_factory = yes
+			add_two_random_civilian_factories = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
+			BRI_Urban_Renovation_effect_one = yes
 			if = {
 				limit = {
 					has_completed_focus = BRI_Expanding_the_Tourist_Resort_of_Saint_Malo_Saint_Nazaire
 				}
-				add_one_random_civilian_factory = yes
-				add_two_random_civilian_factories = yes
-				BRI_Urban_Renovation_effect_one = yes
-				BRI_Urban_Renovation_effect_one = yes
-				BRI_Urban_Renovation_effect_one = yes
-				BRI_Urban_Renovation_effect_one = yes
 				swap_ideas = {
 					remove_idea = BRI_economy_1
 					add_idea = BRI_economy_2

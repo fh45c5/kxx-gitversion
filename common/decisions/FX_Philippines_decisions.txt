@@ -1142,13 +1142,28 @@ PHI_industrialization_plan = {
 		}
 		complete_effect = {
 			set_country_flag = PHI_has_expanded_pnr
-			build_railway = {
-				level = 5
-				build_only_on_allied = yes
-				fallback = yes
-				path = { 623 1033 327 624 625 1075 }
-				start_state = 1072
-				target_state = 627
+			327 = { #Manila
+				build_railway = {
+					path = { 10265 1221 12236 10306 1372 12279 4228 1311 1340 4373 1224 4269 1293 12188 1379 1407 4241 } #Okay the actual Manila Railroad did not extent this far but for balance we're going to make this go all the way.
+					start_state = 327 #Central Luzon
+					target_state = 627 #Mindanao
+					level = 1
+					fallback = yes
+				}
+			}
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = train_tech
+				name = PHI_electrify_the_manila_railroad
+			}
+			add_equipment_to_stockpile = {
+				type = train_equipment_1
+				amount = 20
+			}
+			if = {
+				limit = { NOT = { has_tech = basic_train } }
+				set_technology = { basic_train = 1 }
 			}
 		}
 	}
@@ -1747,6 +1762,78 @@ PHI_lost_lands = {
 			add_state_core = 404
 			add_state_core = 745
 			add_state_core = 858
+	}
+}
+}
+PHI_release_usa_cat = {
+	PHI_release_usa = {
+	icon = ger_military_buildup
+	
+	available = {
+			NOT = { country_exists = CSA } 
+			NOT = { country_exists = USA } 
+			NOT = { country_exists = COR } 
+			NOT = { country_exists = TEX } 
+			NOT = { country_exists = BBR } 
+			NOT = { country_exists = NEE } 
+			NOT = { country_exists = WCC } 
+			NOT = { country_exists = CAL } 
+			NOT = { country_exists = TXS } 
+			owns_state = 386
+		PHI = {
+			is_subject = no
+			is_ai = no
+			
+		}
+	}
+	
+	visible = {
+		tag = PHI
+		has_completed_focus = PHI_save_the_republic_from_chaos
+	}
+	cost = 10
+	
+	days_remove = 14
+	days_re_enable = 0
+	fire_only_once = yes
+	ai_will_do = {
+		factor = 30
+		modifier = {
+			factor = 0
+			has_equipment = { infantry_equipment < 4000 }
+		}
+		modifier = {
+			factor = 0
+			has_war = yes
+		}
+	}
+	complete_effect = {
+		
+	}
+	remove_effect = {
+				every_state = {#Coring
+					limit = {
+						is_united_states = yes
+					}
+					add_core_of = USA
+				}
+		set_temp_variable = { tag_to_release = USA }
+		release_targeted_tag = yes
+		USA = {
+			add_ideas = yun_seize_puppets_factories
+		set_cosmetic_tag = PHI_USA_federalista
+			create_country_leader = {
+				name = "温德尔·费蒂格"
+				picture = "gfx/leaders/PHI/Portrait_PHI_Wendell_Fertig.png"
+				expire = "1.1.1"
+				ideology = marlib_centrist_subtype
+			}	
+			set_politics = {
+				ruling_party = market_liberal
+				elections_allowed = no
+			}
+			
+	}
 	}
 }
 }

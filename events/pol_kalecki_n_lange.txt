@@ -42,9 +42,9 @@ country_event = {
 
 	option = {
 		name = polsoc.2.a
-		add_stability = -0.20
-		set_cosmetic_tag = POL_totalist
-		load_focus_tree = KX_Red_Pol_Eco
+		
+		set_cosmetic_tag = POL_soc_fed
+		
 		set_country_flag = pl_kalecki_n_lange_return
 		ai_chance = {
 			factor = 10
@@ -103,7 +103,7 @@ country_event = {
 
 	option = {
 		name = polsoc.4.a
-		complete_national_focus = KX_PL_SOC_Kalecki_Triumphant
+		
 		set_country_flag = pl_kalecki_rules
 		add_popularity = {
 			ideology = totalist
@@ -117,16 +117,22 @@ country_event = {
 			set_party_name = {
 				ideology = totalist
 				long_name = POL_pzbs_party_long
-				name = "PZBS"
+				name = POL_pzbs_party
 			}
 			set_party_name = {
 				ideology = radical_socialist
 				long_name = POL_pzbs_party_long
-				name = "PZBS"
+				name = POL_pzbs_party
 			}	
+			add_tot_to_coalition = yes
 			remove_all_ministers = yes
-			set_country_flag = KXX_LEADER_GUI_VISIBLE
-			set_country_flag = POL_Michal_Kalecki_VISIBLE
+			clr_country_flag = KXX_LEADER_GUI_VISIBLE
+				create_country_leader = {
+					name = "米哈尔·卡莱茨基"
+					picture = "gfx/leaders/POL/Portrait_POL_Michal_Kalecki.png"
+					expire = "1965.1.1"
+					ideology = market_socialist_subtype
+				}
 			set_politics = {
 				ruling_party = radical_socialist
 				last_election = "1935.11.14"
@@ -139,23 +145,7 @@ country_event = {
 				POL_Oskar_Lange_eco_tot
 				POL_Hilary_Minc_sec_tot
 			}
-			if = {
-				limit = { has_country_flag = Karol_Radek }
-				create_country_leader = {
-					name = "卡尔·拉狄克"
-					picture = "gfx/leaders/POL/Portrait_PLX_Karol_Radek.png"
-					expire = "1965.1.1"
-					ideology = market_socialist_subtype
-				}
-			}
-			else = {
-				create_country_leader = {
-					name = "斯特凡·兹比科夫斯基"
-					picture = "gfx/leaders/POL/Portrait_PLX_Stefan_Zbikowski.png"
-					expire = "1965.1.1"
-					ideology = market_socialist_subtype
-				}
-			}			
+					
 		}		
 		ai_chance = {
 			base = 50
@@ -167,7 +157,7 @@ country_event = {
 		ai_chance = {
 			base = 50
 		}
-		complete_national_focus = KX_PL_SOC_Lange_Triumphant
+		
 		set_country_flag = pl_lange_rules
 		add_popularity = {
 			ideology = radical_socialist
@@ -189,8 +179,8 @@ country_event = {
 				name = "PZBS"
 			}		
 			remove_all_ministers = yes
-			set_country_flag = KXX_LEADER_GUI_VISIBLE
-			set_country_flag = POL_Oskar_Lange_VISIBLE
+			clr_country_flag = KXX_LEADER_GUI_VISIBLE
+			
 			set_politics = {
 				ruling_party = totalist
 				last_election = "1935.11.14"
@@ -203,23 +193,12 @@ country_event = {
 				POL_Michal_Kalecki_eco_rso
 				POL_Hilary_Minc_sec_tot
 			}	
-			if = {
-				limit = { has_country_flag = Karol_Radek }
 				create_country_leader = {
-					name = "卡尔·拉狄克"
-					picture = "gfx/leaders/POL/Portrait_PLX_Karol_Radek.png"
+					name = "奥斯卡·兰格"
+					picture = "gfx/leaders/POL/Portrait_POL_Oskar_Lange.png"
 					expire = "1965.1.1"
 					ideology = technocratic_socialism_subtype
-				}
-			}
-			else = {
-				create_country_leader = {
-					name = "斯特凡·兹比科夫斯基"
-					picture = "gfx/leaders/POL/Portrait_PLX_Stefan_Zbikowski.png"
-					expire = "1965.1.1"
-					ideology = technocratic_socialism_subtype
-				}
-			}			
+				}		
 		}		
 	}
 }
@@ -239,6 +218,10 @@ country_event = {
 	option = {
 		name = polsoc.5.a
 		add_stability = -0.10
+		country_event = {
+			id = polsoc.7
+			days = 15
+		}
 		add_ideas = SOC_POL_housing_issue_1
 		ai_chance = {
 			base = 100
@@ -279,65 +262,46 @@ country_event = {
 		}
 	}	
 }
-
-#Peace out with Austria over Galicia
+### Housing Issue
 country_event = {
 	id = polsoc.7
-	immediate = { log = "[GetDateText]: [Root.GetName]: event polsoc.7" }
+	immediate = { log = "[GetDateText]: [Root.GetName]: event polsoc.5" }
 	title = polsoc.7.t
 	desc = polsoc.7.d
 	#picture = GFX_report_event_soldiers_marching
 
 	fire_only_once = yes
 
-	trigger = {
-		tag = POL
-		has_war_with = GAL
-		has_war_with = AUS
-		NOT = { has_war_with = GER }
-		OR = {
-			AUS = {
-				puppet = GAL
-			}	
-			AUS = { 
-				#owns_state = 88
-				owns_state = 91
-			}
-		}
-		#OR = {
-		#	GAL = { has_capitulated = yes }
-		#	AUS = { owns_state = 91 }			
-		#}
-		POL = { controls_state = 1124 }
-		POL = { controls_state = 91 }
-	}
+	is_triggered_only = yes
 
 	option = {
 		name = polsoc.7.a
-		add_political_power = -5
-		hidden_effect = {
-			AUS = {
-				country_event = {
-					id = polsoc.8
-					days = 3
-				}
+		swap_ideas = {		
+				remove_idea = SOC_POL_rapid_urbanisation_1
+				add_idea = SOC_POL_rapid_urbanisation_2a
 			}
-		}
+		remove_ideas = SOC_POL_housing_issue_1
 		ai_chance = {
-			base = 80
-		}		
+			base = 100
+		}
 	}
 	option = {
-		name = polsoc.7.b		
+		name = polsoc.7.b
+		swap_ideas = {		
+				remove_idea = SOC_POL_rapid_urbanisation_1
+				add_idea = SOC_POL_rapid_urbanisation_2b
+			}	
+		remove_ideas = SOC_POL_housing_issue_1
 		ai_chance = {
-			base = 20
+			base = 100
 		}
-	}	
+	}
 }
 
+### Housing Issue
 country_event = {
 	id = polsoc.8
-	immediate = { log = "[GetDateText]: [Root.GetName]: event polsoc.8" }
+	immediate = { log = "[GetDateText]: [Root.GetName]: event polsoc.5" }
 	title = polsoc.8.t
 	desc = polsoc.8.d
 	#picture = GFX_report_event_soldiers_marching
@@ -348,85 +312,12 @@ country_event = {
 
 	option = {
 		name = polsoc.8.a
-		add_political_power = -50
-		add_stability = -0.05
-		hidden_effect = {
-			if = { 
-				limit = { 
-					GAL = { is_subject_of = AUS }
-				}
-				POL = {
-					annex_country = {
-						target = GAL
-						transfer_troops = no
-					}
-				}
-			}
-			if = { 
-				limit = { 
-					AUS = { 
-						#owns_state = 88
-						owns_state = 91
-					}
-				}
-				POL = { 
-					transfer_state = 1124
-					transfer_state = 88
-					transfer_state = 1319
-					transfer_state = 1314
-					transfer_state = 1125
-					transfer_state = 1126
-					transfer_state = 1127
-					transfer_state = 91
-					transfer_state = 89
-					transfer_state = 1140
-					transfer_state = 1131
-				}
-			}
-			if = { 
-				limit = { 
-					AUS = { 
-						owns_state = 80
-						owns_state = 713
-					}
-				}
-				POL = {
-					transfer_state = 80 
-					transfer_state = 713
-				}
-			}			
-			POL = {
-				white_peace_with_ROOT = yes
-			}
-			#every_other_country = {
-			#	limit = { is_subject_of = AUS }
-			#	white_peace_with_ROOT = yes
-			#}
-			POL = {
-				country_event = {
-					id = polsoc.9
-					days = 1
-				}
-			}			
-		}
+		add_ideas = SOC_POL_engineering_education
 		ai_chance = {
-			factor = 90
-		}		
+			base = 100
+		}
 	}
-	option = {
-		name = polsoc.8.b
-		hidden_effect = {		
-			POL = {
-				country_event = {
-					id = polsoc.10
-					days = 1
-				}
-			}	
-		}
-		ai_chance = {
-			factor = 10
-		}
-	}	
+	
 }
 
 country_event = {
@@ -434,7 +325,7 @@ country_event = {
 	immediate = { log = "[GetDateText]: [Root.GetName]: event polsoc.9" }
 	title = polsoc.9.t
 	desc = polsoc.9.d
-	#picture = GFX_report_event_soldiers_marching
+	#picture = GFX_report_event_soldiers_marchins
 
 	fire_only_once = yes
 
@@ -443,6 +334,8 @@ country_event = {
 	option = {
 		name = polsoc.9.a
 		add_political_power = 10		
+		add_ideas = SOC_POL_female_workforce
+		add_ideas = SOC_POL_childcare_2
 	}
 }
 
@@ -558,6 +451,7 @@ country_event = {
 	option = {
 		name = polsoc.12.a
 		add_political_power = -5
+
 	}
 	option = {
 		name = poland.7.c
@@ -602,8 +496,18 @@ country_event = {
        	 		factor = 0
       		}
     	}
+		create_country_leader = {
+			name = "尤利安·莱什琴斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Julian_Leszczynski.png"
+			expire = "1.1.1"
+			ideology = authcom_subtype
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
 		set_country_flag = KXX_LEADER_GUI_VISIBLE
-		set_country_flag = POL_Julian_Leszczyński_VISIBLE
+		#set_country_flag = POL_Julian_Leszczyński_VISIBLE
 		set_country_flag = POL_Julian
   	}
   	option = {
@@ -615,8 +519,22 @@ country_event = {
       		}
     	}
 		set_country_flag = KXX_LEADER_GUI_VISIBLE
-		set_country_flag = POL_Adolf_Warski_VISIBLE
+		#set_country_flag = POL_Adolf_Warski_VISIBLE
 		set_country_flag = POL_Adolf_Warski
+		create_country_leader = {
+			name = "阿道夫·瓦尔斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Adolf_Warski.png"
+			expire = "1.1.1"
+			ideology = radsoc_communism_subtype
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.1
+		}
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = no
+		}
   	}	
   	option = {
     	name = polsoc.13.c
@@ -626,8 +544,22 @@ country_event = {
         		factor = 0
       		}
     	}
+		create_country_leader = {
+			name = "阿尔弗雷德·兰佩"
+			picture = "gfx/leaders/POL/Portrait_POL_Alfred_Lampe.png"
+			expire = "1.1.1"
+			ideology = centralized_syndicalism_subtype
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.1
+		}
+		set_politics = {
+			ruling_party = syndicalist
+			elections_allowed = no
+		}
 		set_country_flag = KXX_LEADER_GUI_VISIBLE
-		set_country_flag = POL_Alfred_Lampe_VISIBLE
+		#set_country_flag = POL_Alfred_Lampe_VISIBLE
 		set_country_flag = POL_Alfred_Lampe
   	}
 }
@@ -643,112 +575,30 @@ country_event = {
   	is_triggered_only = yes
 	fire_only_once = yes
   	option = {
-    	name = poland.20.a
-    	ai_chance = {
-      		factor = 15
-      		modifier = {
-        		factor = 0
-      		}
-    	}
-    	add_political_power = 60
-		POL_setup_fryderyk = yes
-		set_country_flag = POL_fryderyk
-		complete_national_focus = PLX_POL_the_great_debate
-    	set_politics = {
-      		ruling_party = authoritarian_democrat
-      		elections_allowed = yes
-    	}
-		country_event = {id = plx.8 }
+    	name = polsoc.14.a
+		set_country_flag = POL_centro_committee_win
+    	country_event = polsoc.13
   	}
-  option = {
-    name = poland.20.c
-    ai_chance = {
-      factor = 20
-      	modifier = {
-        	factor = 0
-      	}
-    }
-    complete_national_focus = PLX_POL_the_great_debate
-    add_political_power = 20
-	POL_setup_mendog = yes
-    set_politics = {
-      ruling_party = authoritarian_democrat
-      elections_allowed = yes
-    }
-	country_event = {id = polsoc.15 }
-  }
-  option = {
-    name = poland.20.e
-    ai_chance = {
-      factor = 30
-      modifier = {
-        factor = 0
-        OR = {
-          has_game_rule = {
-            rule = POL_the_great_debate
-            option = POL_THE_GREAT_DEBATE_KING_SAXON
-          }
-          has_game_rule = {
-            rule = POL_the_great_debate
-            option = POL_THE_GREAT_DEBATE_KING_HABSBURG
-          }
-          has_game_rule = {
-            rule = POL_the_great_debate
-            option = POL_THE_GREAT_DEBATE_KING_LITHUANIAN_COMMONWEALTH
-          }
-          has_game_rule = {
-            rule = POL_the_great_debate
-            option = POL_THE_GREAT_DEBATE_KING_LITHUANIAN_SEPERATE
-          }
-        }
-      }
-    }
-    complete_national_focus = PLX_POL_the_great_debate
-    add_political_power = -20
-    set_politics = {
-      ruling_party = authoritarian_democrat
-      elections_allowed = yes
-    }
-	POL_setup_augustyn = yes
-	set_country_flag = POL_augustyn
-	country_event = {id = plx.8 }
-  }
-  option = {
-    name = poland.20.f
-    ai_chance = {
-      factor = 10
-      modifier = {
-        factor = 0
-        OR = {
-          has_game_rule = {
-            rule = POL_the_great_debate
-            option = POL_THE_GREAT_DEBATE_KING_SAXON
-          }
-          has_game_rule = {
-            rule = POL_the_great_debate
-            option = POL_THE_GREAT_DEBATE_KING_HABSBURG
-          }
-          has_game_rule = {
-            rule = POL_the_great_debate
-            option = POL_THE_GREAT_DEBATE_KING_LITHUANIAN_COMMONWEALTH
-          }
-          has_game_rule = {
-            rule = POL_the_great_debate
-            option = POL_THE_GREAT_DEBATE_KING_LITHUANIAN_SEPERATE
-          }
-        }
-      }
-    }
-    complete_national_focus = PLX_POL_the_great_debate
-    add_political_power = -100
-    POL_setup_salvator = yes
-	set_country_flag = POL_Pawel_Salwator
-    set_politics = {
-      ruling_party = social_democrat
-      elections_allowed = no
-    }
-	country_event = {id = plx.8 }
-  }
+	option = {
+		name = polsoc.14.b
+		country_event = plxv2.111
+		set_country_flag = POL_futurists_win
+	}
+	option = {
+		name = polsoc.14.c
+		set_country_flag = POL_economists_win
+		country_event = polsoc.4
+	}
+	option = {
+		name = polsoc.14.e
+		set_country_flag = POL_natolinists_win
+		country_event = plxv2.110
+	}
+	option = {
+		name = polsoc.14.f
+		set_country_flag = POL_lux_win
+		country_event = plxv2.112
+	}
 }
 
 country_event = { # The decision of Mendog
@@ -837,19 +687,7 @@ country_event = { # The decision of Mendog
 	desc = polsoc.16.d
 	picture = GFX_POL_kingdom_flag
 	fire_only_once = yes
-	trigger = {
-		tag = POL
-		96 = { is_owned_and_controlled_by = ROOT }
-		POL = {
-			OR = {
-				has_completed_focus = KX_PL_PG_KING_IN_POWER
-				has_country_leader = {
-          			name = "卡罗尔·奥布拉希特二世"  # Heck Gandersoński
-          			ruling_only = yes
-       			}
-			}
-		}
-	}
+	is_triggered_only = yes
 	option = {
 		name = poland.36.a
 		ai_chance = {

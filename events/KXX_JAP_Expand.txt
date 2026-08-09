@@ -24,6 +24,7 @@ country_event = { #崛起之龙还是旭日骨寒
 			base = 0
 		}
 		set_country_flag = RD_SCB_path_decided
+		country_event = { id = japan_new_event.0 days = 1 }
 		country_event = {
 			id = japan_new_event.7
 			days = 45
@@ -31,6 +32,35 @@ country_event = { #崛起之龙还是旭日骨寒
 		country_event = { 
 			id = japan_new_event.15 
 			days = 135 
+		}
+		create_country_leader = {
+			name = "犬养毅"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Inukai_Tsuyoshi.png"
+			expire = "1965.1.1"
+			ideology = national_conservative_subtype
+		}
+		create_country_leader = {
+			name = "永田铁山"
+			picture = "gfx/leaders/JAP/Portrait_JAP_Nagata_Tetsuzan.png"
+			expire = "1965.1.1"
+			ideology = kokubo_kokka_subtype
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = yes
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			name = "帝国陆军（永田派）"
+			long_name = "大日本帝国陆军（永田派）"
+		}
+		add_ideas = JAP_red_army_resistance_1
+		remove_all_ministers = yes
+		add_ideas = {
+			JAP_Inukai_Tsuyoshi_hog_sco
+			JAP_Yoshizawa_Kenkichi_for_sco
+			JAP_Mitsuchi_Chuzo_eco_sco
+			JAP_Suzuki_Kisaburo_sec_sco
 		}
 	}	
 
@@ -41,8 +71,19 @@ country_event = { #崛起之龙还是旭日骨寒
 		}
 		set_country_flag = SCB_path_decided
 		country_event = { 
-			id = KXXJAP.10
-			days = 60
+			id = SCBJAP.1
+			days = 1
+		}
+		load_focus_tree = SCB_JAP_natunity_bureaucracy_military
+		mark_focus_tree_layout_dirty = yes
+		add_ideas = yun_arlt_dongbei
+		add_ideas = yun_comical_performance
+		if = {
+			limit = {
+				is_ai = no
+			}
+			add_ideas = KXX_power_of_fh45c5
+			add_ideas = yun_skull_army
 		}
 	}	
 
@@ -2964,7 +3005,7 @@ country_event = { #民间右翼维新路线最终决定
 			picture = "gfx/leaders/JAP/Portrait_JAP_Kishio_Satomi.png"
 			expire = "1965.1.1"
 			ideology = socdem_nichiren_buddhism_subtype
-		}			
+		}
 		set_party_name = {
 			ideology = social_democrat
 			long_name = "JAP_party_nichiren_long"
@@ -3206,7 +3247,7 @@ country_event = { #民间右翼-日莲主义者
 			desc = "GIRO_LEADER_DESC"
 			expire = "1965.1.1"
 			ideology = radsoc_nichiren_buddhism_subtype
-		}		
+		}
 		set_politics = {
 			ruling_party = radical_socialist
 			elections_allowed = no
@@ -6186,7 +6227,7 @@ country_event = { #朝鲜起义优化
 	option = { #总督府扩大自治
 		name = KXXJAP.181.a
 		ai_chance = {
-			base = 90
+			base = 5
 		}
 		trigger = {
 			JAP = {
@@ -6245,7 +6286,7 @@ country_event = { #朝鲜起义优化
 	option = { #那咋了
 		name = KXXJAP.181.b
 		ai_chance = {
-			base = 90
+			base = 2
 		}
 		hidden_effect = {
 			news_event = {
@@ -6266,7 +6307,7 @@ country_event = { #朝鲜起义优化
 	option = { #起义
 		name = KXXJAP.181.c
 		ai_chance = {
-			base = 10
+			base = 3
 		}
 		country_event = {
 			id = rework_japan.300
@@ -6275,6 +6316,15 @@ country_event = { #朝鲜起义优化
 		set_country_flag = JAP_korea_revolt_now
 	}
 
+	option = { #AI防止过分多的分离朝鲜
+		name = KXXJAP.181.d
+		trigger = {
+			is_ai = yes
+		}
+		ai_chance = {
+			base = 90
+		}
+	}	
 	
 
 }
