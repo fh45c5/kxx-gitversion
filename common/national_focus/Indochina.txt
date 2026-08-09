@@ -673,6 +673,8 @@ focus_tree = {
     relative_position_id = INC_Anarchist_Revolution
     completion_reward = {
       log = "[GetDateText]: [Root.GetName]: Focus INC_Expand_the_Societies"
+      add_stability = -0.15
+      add_ideas = INC_Get_rid_of_religion_idea
     }
     search_filters = {
       FOCUS_FILTER_POLITICAL
@@ -794,7 +796,7 @@ focus_tree = {
       has_government = radical_socialist
     }
     completion_reward = {
-      
+      add_ideas = INC_Moderate_resistance_idea
     }
     search_filters = {
       FOCUS_FILTER_MANPOWER
@@ -823,7 +825,10 @@ focus_tree = {
       has_government = radical_socialist
     }
     completion_reward = {
-      
+      swap_ideas = {
+        remove_idea = INC_Moderate_resistance_idea
+        add_idea = INC_Moderate_resistance_2_idea
+      }
     }
     search_filters = {
       FOCUS_FILTER_MANPOWER
@@ -850,7 +855,7 @@ focus_tree = {
       has_government = radical_socialist
     }
     completion_reward = {
-      
+       add_ideas = INC_inspire_national_spirits_idea
     }
     search_filters = {
       FOCUS_FILTER_MANPOWER
@@ -879,7 +884,10 @@ focus_tree = {
       has_government = radical_socialist
     }
     completion_reward = {
-      
+      swap_ideas = {
+        remove_idea = INC_violent_revolution_idea
+        add_idea = INC_violent_revolutiont_2_idea
+      }
     }
     search_filters = {
       FOCUS_FILTER_MANPOWER
@@ -908,6 +916,10 @@ focus_tree = {
       has_government = radical_socialist
     }
     completion_reward = {
+      swap_ideas = {
+        remove_idea = INC_violent_revolutiont_2_idea
+        add_idea = INC_violent_revolutiont_3_idea
+      }
       hidden_effect = {
         country_event = {
           days = 21
@@ -1008,7 +1020,7 @@ focus_tree = {
       has_government = radical_socialist
     }
     completion_reward = {
-      
+      add_ideas = INC_violent_revolution_idea
     }
     search_filters = {
       FOCUS_FILTER_MANPOWER
@@ -1038,6 +1050,10 @@ focus_tree = {
       swap_ideas = {
         remove_idea = INC_rev_spontaneity_idea
         add_idea = INC_rev_spontaneity_idea_2
+      }
+      swap_ideas = {
+        remove_idea = INC_Moderate_resistance_2_idea
+        add_idea = INC_Moderate_resistance_3_idea
       }
       hidden_effect = {
         country_event = {
@@ -1084,6 +1100,14 @@ focus_tree = {
     bypass = {
       has_country_leader = {
         name = "谢秋收"
+        ruling_only = yes
+      }
+      has_country_leader = {
+          name = "陈定龙"
+          ruling_only = yes
+        }
+      has_country_leader = {
+        name = "黄国越"
         ruling_only = yes
       }
       custom_trigger_tooltip = {
@@ -5120,7 +5144,7 @@ focus_tree = {
 		}
 		available = {
 		  has_country_leader = {
-		    name = "吴文雪"
+		    name = "吴文"
 		    ruling_only = yes
 		  }
       custom_trigger_tooltip = {
@@ -5130,7 +5154,7 @@ focus_tree = {
 		}
     bypass = {
       has_country_leader = {
-		    name = "吴文雪"
+		    name = "吴文"
 		    ruling_only = yes
 		  }
       custom_trigger_tooltip = {
@@ -5459,9 +5483,9 @@ focus_tree = {
 		}
 		prerequisite = { focus = VININC_GIAP_a_nation_of_equals  }
 		completion_reward = {
-		add_ideas = {
-		INC_cannon_moves
-		}
+		  add_ideas = {
+		    INC_as_the_cannon_moves_idea
+		  }
 		}
 	}
 
@@ -5478,7 +5502,11 @@ focus_tree = {
 		}
 		prerequisite = { focus = VININC_GIAP_a_nation_of_equals  }
 		completion_reward = {
-		add_manpower = -10000
+		  add_war_support = 0.1
+	    add_political_power = 100
+	    army_experience = 50
+	    navy_experience = 50
+	    air_experience = 50
 		}
 	}
 
@@ -5495,10 +5523,17 @@ focus_tree = {
 		}
 		prerequisite = { focus = VININC_GIAP_a_nation_of_equals  }
 		completion_reward = {
-		add_popularity = {
-		ideology = radical_socialist
-		popularity = 0.15
-		}
+      custom_effect_tooltip = VININC_GIAP_under_the_revolutionary_banner_tt
+      if = {
+        limit= {
+          has_country_flag = INC_Pham_Cong_Tac_Religion
+        }
+        add_ideas = INC_GIAP_under_the_revolutionary_banner_3_idea
+        else = {
+          add_ideas = INC_GIAP_under_the_revolutionary_banner_idea
+        }
+      }
+
 		}
 	}
 
@@ -5515,11 +5550,21 @@ focus_tree = {
 		}
 		prerequisite = { focus = VININC_GIAP_under_the_revolutionary_banner  }
 		completion_reward = {
-		add_popularity = {
-		ideology = totalist
-		popularity = -0.5
-		}
-		add_manpower = -1
+		  if = {
+        limit= {
+          has_idea = INC_GIAP_under_the_revolutionary_banner_3_idea
+        }
+        swap_ideas = {
+          remove_idea = INC_GIAP_under_the_revolutionary_banner_3_idea
+          add_idea = INC_GIAP_under_the_revolutionary_banner_4_idea 
+        }
+        else = {
+          swap_ideas = {
+            remove_idea = INC_GIAP_under_the_revolutionary_banner_idea
+            add_idea = INC_GIAP_under_the_revolutionary_banner_2_idea 
+          }
+        }
+      }
 		}
 	}
 
@@ -5537,7 +5582,7 @@ focus_tree = {
 		prerequisite = { focus = VININC_GIAP_huntdowntherightistdogs  }
 		completion_reward = {
 		add_ideas = {
-		INC_agricultural_coops
+		INC_agricultural_coops_idea
 		}
 		}
 	}
@@ -5575,11 +5620,256 @@ focus_tree = {
 		}
 		prerequisite = { focus = VININC_GIAP_negotiate_with_social_buddhists  } prerequisite = { focus = VININC_GIAP_sideline_giap  } prerequisite = { focus = VININC_GIAP_win_back_peasant_support  }
 		completion_reward = {
-		add_ideas = {
-		INC_lao_kamasaki
-		}
+      custom_effect_tooltip = indochina_flaovietkhmersamaki_tt
+      add_ideas = {
+        INC_lao_kamasaki_idea
+      }
+      hidden_effect = {
+        LAO = {
+          transfer_state = 670
+          set_politics = {
+            ruling_party = radical_socialist
+          }
+          set_party_name = {
+            ideology = radical_socialist
+            long_name = "老挝爱国阵线(Pathet Lao)"
+            name = "巴特寮"
+          }
+          create_country_leader = {
+            name = "梭发那·富马"  # 
+            picture = "gfx/leaders/LAO/Portrait_LAO_Souvanna_Phouma.png"
+            expire = "1990.10.13"
+            ideology = radical_progressivism_subtype
+          }
+          set_country_flag = KXX_LEADER_GUI_VISIBLE
+          set_country_flag = LAO_Souphanouvong_Emperor_VISIBLE
+          set_cosmetic_tag = LAO_autonomy
+          add_ideas = {
+            INC_lao_kamasaki_idea
+          }
+        }
+        CAM = {
+          transfer_state = 826
+          set_politics = {
+            ruling_party = radical_socialist
+          }
+          set_party_name = {
+            ideology = radical_socialist
+            long_name = "人民社会同盟(Sangkum Reastr Niyum)"
+            name = "人民社会同盟"
+          }
+          create_country_leader = {
+            name = "诺罗敦·西哈努克"  # 
+            picture = "gfx/leaders/CAM/Portrait_Cambodia_Norodom_Sihanouk.png"
+            expire = "1990.10.13"
+            ideology = monsoc_subtype
+          }
+          set_country_flag = KXX_LEADER_GUI_VISIBLE
+          set_country_flag = CAM_Achar_Mean_VISIBLE
+          set_cosmetic_tag = CAM_autonomy
+          add_ideas = {
+            INC_lao_kamasaki_idea
+          }
+        }
+
+        INC = {
+          create_faction_from_template = { 
+            template = faction_template_generic_dominance
+            name = "联邦人民王国南天"
+            icon = GFX_faction_union_of_peoples_crowns
+				  }
+          add_to_faction = LAO
+          add_to_faction = CAM
+			  }
+      }
+      
 		}
 	}
+
+  #黎德寿隐藏线
+  focus = {
+    id = INC_The_true_revolution_has_arrived #真正革命已到来
+    icon = GFX_goal_FRA_orthodox_jacobins
+    x = 21
+    y = 12
+    cost = 3
+    available = {
+		  always = no
+		}
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      custom_effect_tooltip = unlock_focuses
+      add_stability = 0.1
+    }	
+  }
+
+  focus = {
+    id = INC_Mobilize_the_peasants #动员农民积极性
+    icon = GFX_goal_ALB_Albanian_Farmers
+    relative_position_id = INC_The_true_revolution_has_arrived
+    x = -1
+    y = 1
+    cost = 3
+    prerequisite = { 
+      focus = INC_The_true_revolution_has_arrived
+    }
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_ideas = INC_Mobilize_the_peasant
+    }	
+  }
+
+  focus = {
+    id = INC_Unite_the_moderates # 工农协作
+    icon = GFX_goal_CSA_coop_clubs
+    relative_position_id = INC_The_true_revolution_has_arrived
+    x = -1
+    y = 2
+    cost = 3
+    prerequisite = { 
+      focus = INC_Mobilize_the_peasants
+    }
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_ideas = INC_Unite_the_moderate
+    }	
+  }
+
+  focus = {
+    id = INC_The_UTOPIA_of_workers_and_peasants # 列宁之梦终实现
+    icon = GFX_goal_AUS_lenin_bust
+    relative_position_id = INC_The_true_revolution_has_arrived
+    x = 0
+    y = 3
+    cost = 3
+    prerequisite = { 
+      focus = INC_Unite_the_moderates
+    }
+    prerequisite = { 
+      focus = INC_Judge_the_national_traitors
+    }
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_ideas = INC_The_UTOPIA_of_workers_and_peasant 
+    }	
+  }
+
+  focus = {
+    id = INC_Salute_to_the_French_Revolution # 向法国大革命致敬
+    icon = GFX_goal_NYC_Understand_Syndicalism
+    relative_position_id = INC_The_true_revolution_has_arrived
+    x = 1
+    y = 1
+    cost = 3
+    prerequisite = { 
+      focus = INC_The_true_revolution_has_arrived
+      focus = INC_Vietnams_Robespierre
+    }
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_ideas = INC_Salute_to_the_French_Revolution
+    }	
+  }
+
+  focus = {
+    id = INC_Judge_the_national_traitors # 审判民族败类
+    icon = GFX_goal_BAN_order_streets
+    relative_position_id = INC_The_true_revolution_has_arrived
+    x = 1
+    y = 2
+    cost = 3
+    prerequisite = { 
+      focus = INC_Salute_to_the_French_Revolution
+    }
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_timed_idea = {
+        idea = INC_Judge_the_national_traitor
+        days = 365
+      }
+    }	
+  }
+
+  focus = {
+    id = INC_Vietnams_Robespierre #恐怖统治终降临
+    icon = GFX_goal_NFA_Saint_Just_Blanc_alt
+    relative_position_id = INC_The_true_revolution_has_arrived
+    x = 2
+    y = 0
+    cost = 3
+    available = {
+		  always = no
+		}
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_ideas = INC_Vietnams_Robespierre
+    }	
+  }
+
+  focus = {
+    id = INC_Maintain_revolutionary_terror # 毁灭宗教遗毒
+    icon = GFX_BRY_Destroy_Churches
+    relative_position_id = INC_The_true_revolution_has_arrived
+    x = 3
+    y = 1
+    cost = 3
+    prerequisite = { focus = INC_Vietnams_Robespierre  }
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      war_support_factor = -0.08
+      stability_factor = -0.08
+    }	
+  }
+
+  focus = {
+    id = INC_Operation_Guillotine # 以恐怖震慑革命之敌
+    icon = GFX_goal_FRA_red_terror
+    relative_position_id = INC_The_true_revolution_has_arrived
+    x = 3
+    y = 2
+    cost = 3
+    prerequisite = { focus = INC_Maintain_revolutionary_terror  }
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+     add_manpower = -10000
+     stability_factor = 0.10
+    }	
+  }
+
+  focus = {
+    id = INC_Saigons_brand_new_dawn # 西贡的崭新黎明
+    icon = GFX_goal_GEO_dawn_of_orient
+    relative_position_id = INC_The_true_revolution_has_arrived
+    x = 2
+    y = 3
+    cost = 3
+    prerequisite = { focus = INC_Operation_Guillotine  }
+    prerequisite = { focus = INC_Judge_the_national_traitors  }
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_ideas = INC_Saigons_brand_new_dawn
+    }	
+  }
 
   #崩溃国策
   focus = {
@@ -5900,7 +6190,7 @@ focus_tree = {
 	#Begin Purging Reactionary Elements
 	focus = {
 		id = INC-GIAP_begin_purging_reactionary_elements
-		icon = GFX_Organs_that_see
+		icon = GFX_goal_SWE_Organs_that_see
 		x = 1
 		y = 1
     relative_position_id = INC-GIAP_giapsrevolutionarycourse
@@ -5917,7 +6207,7 @@ focus_tree = {
 	#Galvanize Rural Support
 	focus = {
 		id = INC-GIAP_galvanize_rural_support
-		icon = GFX_Breaking_false_socialism
+		icon = GFX_goal_SWE_Breaking_false_socialism
 		x = 2
 		y = 2
     relative_position_id = INC-GIAP_giapsrevolutionarycourse
@@ -6299,111 +6589,10 @@ focus_tree = {
 		completion_reward = {
 		  add_war_support = 0.15
       army_experience = 500
-      custom_effect_tooltip = indochina_liberation_front_tooltip
-      hidden_effect = {      
-        create_corps_commander = {
-          name = "凯山·丰威汉"  #
-          portrait_path = "gfx/leaders/LAO/Portrait_LAO_Kaysone_Phomvihane.png"
-          traits = {
-            LAO_OFFICER
-            infantry_leader
-            skirmisher
-          }
-          skill = 3
-          attack_skill = 2
-          defense_skill = 2
-          planning_skill = 2
-          logistics_skill = 1
-        }
-        
-        create_corps_commander = {
-          name = "苏发努冯"  #
-          portrait_path = "gfx/leaders/LAO/Portrait_Laos_Souphanouvong.png"
-          traits = {
-            LAO_OFFICER
-          }
-          skill = 2
-          attack_skill = 1
-          defense_skill = 2
-          planning_skill = 3
-          logistics_skill = 1
-        }
-
-        create_corps_commander = {
-          name = "杜斯木"  #
-          portrait_path = "gfx/leaders/CAM/Portrait_Cambodia_Tou_Samouth.png"
-          traits = {
-            CAM_OFFICER
-            commando
-            hill_fighter
-            skirmisher
-          }
-          skill = 3
-          attack_skill = 2
-          defense_skill = 2
-          planning_skill = 1
-          logistics_skill = 2
-        }
-        
-        create_corps_commander = {
-          name = "沙洛特绍"  #
-          portrait_path = "gfx/leaders/CAM/Portrait_CAM_Saloth_Sar.png"
-          traits = {
-            CAM_OFFICER
-            
-          }
-          skill = 1
-          attack_skill = 1
-          defense_skill = 1
-          planning_skill = 1
-          logistics_skill = 1
-        }
-        
-        create_corps_commander = {
-          name = "乔帕娜莉"  #
-          portrait_path = "gfx/leaders/CAM/Portrait_CAM_Khieu_Ponnary.png"
-          traits = {
-            CAM_OFFICER
-            infantry_leader
-            skirmisher
-          }
-          skill = 2
-          attack_skill = 1
-          defense_skill = 1
-          planning_skill = 3
-          logistics_skill = 2
-        }
-
-        create_corps_commander = {
-          name = "达春"  #
-          portrait_path = "gfx/leaders/CAM/Portrait_CAM_Dap_Chhuon.png"
-          traits = {
-            CAM_OFFICER
-            politically_connected
-            hidden_sympathies
-          }
-          skill = 2
-          attack_skill = 2
-          defense_skill = 2
-          planning_skill = 2
-          logistics_skill = 1
-        }
-        
-        create_corps_commander = {
-          name = "山玉成"  #
-          portrait_path = "gfx/leaders/CAM/Portrait_Cambodia_Son_Ngoc_Thanh.png"
-          traits = {
-            CAM_OFFICER
-            hill_fighter
-            infantry_leader
-          }
-          skill = 2
-          attack_skill = 3
-          defense_skill = 2
-          planning_skill = 1
-          logistics_skill = 1
-        }
-      }
+      unlock_decision_tooltip = INC_form_Cao_Dai_decision
+      unlock_decision_tooltip = INC_form_Hoa_Hao_decision
+      unlock_decision_tooltip = INC_form_Catholicism_decision
+      
 		}
 	}
 
@@ -6423,10 +6612,8 @@ focus_tree = {
 		}
 		prerequisite = { focus = INC_indochina_liberation_front  }
 		completion_reward = {
-      custom_effect_tooltip = "我们将获得来自老挝的四支志愿师"
-    hidden_effect = {
-      load_oob = "INC_siam_laos"
-    }
+      unlock_decision_tooltip = INC_form_pathet_lao_decision
+    
 		}
 	}
 
@@ -6446,10 +6633,8 @@ focus_tree = {
 		}
 		prerequisite = { focus = INC_indochina_liberation_front  }
 		completion_reward = {
-      custom_effect_tooltip = "我们将获得来自柬埔寨的四支志愿师"
-      hidden_effect = {
-        load_oob = "INC_siam_uprising"
-      }
+      unlock_decision_tooltip = INC_form_khmer_issarak_decision
+      
 		}
 	}
 
@@ -6554,16 +6739,11 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		available = {
-		has_idea = INC_hcmt_0
-	
-		}
 		prerequisite = { focus = INC_ho_chi_minh_thought  }
 		completion_reward = {
-		swap_ideas = {
-		remove_idea = INC_hcmt_0
-		add_idea = INC_hcmt_1
-		}
+      add_ideas = {
+        INC_hcmt
+      }
 		}
 	}
 
@@ -6581,7 +6761,7 @@ focus_tree = {
 		prerequisite = { focus = INC_ho_chi_minh_thought  }
 		completion_reward = {
 		add_ideas = {
-		INC_part_strength_0
+		  INC_part_strength
 		}
 		}
 	}
@@ -6596,16 +6776,12 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		available = {
-		has_idea = INC_hcmt_2
-		
-		}
 		prerequisite = { focus = INC_entrench_the_party_constitution  } prerequisite = { focus = INC_strengthen_the_party  }
 		completion_reward = {
-		swap_ideas = {
-		remove_idea = INC_hcmt_2
-		add_idea = INC_hcmt_3
-		}
+		  swap_ideas = {
+		    remove_idea = INC_hcmt
+		    add_idea = INC_hcmt_2
+		  }
 		}
 	}
 
@@ -6620,15 +6796,12 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		available = {
-		has_idea = INC_hcmt_1
-		}
 		prerequisite = { focus = INC_entrench_the_party_constitution  } prerequisite = { focus = INC_strengthen_the_party  }
 		completion_reward = {
-		swap_ideas = {
-		remove_idea = INC_hcmt_1
-		add_idea = INC_hcmt_2
-		}
+      swap_ideas = {
+		    remove_idea = INC_part_strength
+		    add_idea = INC_part_strength_1
+		  }
 		}
 	
 	}
@@ -6644,16 +6817,33 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		available = {
-		has_idea = INC_hcmt_3
-		
-		}
 		prerequisite = { focus = INC_entrench_the_party_constitution  } prerequisite = { focus = INC_strengthen_the_party  }
 		completion_reward = {
-		swap_ideas = {
-		remove_idea = INC_hcmt_3
-		add_idea = INC_hcmt_4
-		}
+      add_tech_bonus = {
+        name = INC_Rifle_Standardization
+        bonus = 1
+        uses = 2
+        category = infantry_weapons
+      }
+      add_tech_bonus = {
+        name = INC_Specialized_Support_Unit
+        bonus = 1
+        uses = 2
+        category = support_tech
+      }
+      if = {
+        limit = {
+          has_completed_focus = INC_General_Nguyen_Chi_Thanhs_Reform
+        }
+        add_ideas = INC_The_Night_Belongs_to_Charlie_idea
+      }
+      if = {
+        limit = {
+          has_completed_focus = INC_General_Van_Tien_Dungs_Reform
+        }
+        add_ideas = INC_Tiger_and_Elephant_idea
+      }
+      custom_effect_tooltip = INC_peoplesnationaldefense_tt
 		}
 	}
 
@@ -6669,7 +6859,10 @@ focus_tree = {
 		}
 		prerequisite = { focus = INC_improve_revolutionary_morality  } prerequisite = { focus = INC_socialist_people  }
 		completion_reward = {
-		add_war_support = 0.05
+      swap_ideas = {
+		    remove_idea = INC_hcmt_2
+		    add_idea = INC_hcmt_3
+		  }
 		}
 	}
 
@@ -6685,7 +6878,12 @@ focus_tree = {
 		}
 		prerequisite = { focus = INC_peoplesnationaldefense  } prerequisite = { focus = INC_improve_revolutionary_morality  }
 		completion_reward = {
-		add_stability = 0.15
+		  add_stability = 0.3
+      add_research_slot = 1
+	    add_political_power = 100
+      army_experience = 100
+	    navy_experience = 100
+	    air_experience = 100
 		}
 	}
 
@@ -6699,16 +6897,12 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		available = {
-		has_idea = INC_hcmt_4
-		
-		}
 		prerequisite = { focus = INC_wipe_out_individualism  } prerequisite = { focus = INC_unbreakable_union_of_free_republics  }
 		completion_reward = {
-		swap_ideas = {
-		remove_idea = INC_hcmt_4
-		add_idea = INC_hcmt_5
-		}
+      swap_ideas = {
+		    remove_idea = INC_hcmt_3
+		    add_idea = INC_hcmt_4
+		  }
 		}
 	}
 
@@ -6724,7 +6918,10 @@ focus_tree = {
 		}
 		prerequisite = { focus = INC_indochinese_way_to_socialism  } 
 		completion_reward = {
-		country_event = inc_rework.7
+      swap_ideas = {
+		    remove_idea = INC_hcmt_4
+		    add_idea = INC_hcmt_5
+		  }
 		}
 	}
 
@@ -6773,6 +6970,12 @@ focus_tree = {
 		y = 1
     relative_position_id = INC_parallel_adminstration
 		cost = 7
+    available = {
+		  has_country_leader = {
+		    name = "黎笋"
+		    ruling_only = yes
+		  }
+		}
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -6787,7 +6990,7 @@ focus_tree = {
 		prerequisite = { focus = INC_parallel_adminstration  }
 		completion_reward = {
       
-      add_ideas = INC_great_purge_army_1
+      add_ideas = INC_great_purge_army_1_idea
 		}
 	}
 
@@ -6799,12 +7002,19 @@ focus_tree = {
 		y = 1
     relative_position_id = INC_parallel_adminstration
 		cost = 3
+    available = {
+		  has_country_leader = {
+		    name = "黎笋"
+		    ruling_only = yes
+		  }
+		}
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = INC_parallel_adminstration  }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus INC_Urbanization_Effort"
+       add_ideas = INC_Urban_Development 
 			286 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -6823,15 +7033,24 @@ focus_tree = {
 		y = 1
     relative_position_id = INC_parallel_adminstration
 		cost = 3
+    available = {
+		  has_country_leader = {
+		    name = "黎笋"
+		    ruling_only = yes
+		  }
+		}
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = INC_parallel_adminstration  } 
 		completion_reward = {
-		add_popularity = {
-		ideology = radical_socialist
-		popularity = 0.25
-		}
+		  add_war_support = 0.1                        # 战争支持度 +10%
+      add_political_power = 25                      # 政治点数 +25
+      add_popularity = {
+        ideology = totalist
+        popularity = 0.05                          # 极权主义支持度 +5%
+      }
+      add_ideas = INC_Nationalist_Fervor 
 		}
 	}
 
@@ -6845,6 +7064,12 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+    available = {
+		  has_country_leader = {
+		    name = "黎笋"
+		    ruling_only = yes
+		  }
+		}
     select_effect = {
       hidden_effect = {
         country_event = {
@@ -6857,6 +7082,12 @@ focus_tree = {
     prerequisite = { focus = INC_in_the_army  }
     prerequisite = { focus = INC_urbanisation_effort  }
 		completion_reward = {
+      add_stability = 0.15                         # 稳定度 +15%
+      add_political_power = 100                     # 政治点数 +100
+      add_popularity = {  
+        ideology = totalist
+        popularity = 0.15                          # 极权主义支持度 +15
+      }
 		add_ideas = {
 		INC_great_purge_party_0
 		}
@@ -6872,6 +7103,12 @@ focus_tree = {
 		cost = 7
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
+		}
+    available = {
+		  has_country_leader = {
+		    name = "黎笋"
+		    ruling_only = yes
+		  }
 		}
     select_effect = {
       hidden_effect = {
@@ -6933,12 +7170,16 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+    available = {
+		  has_country_leader = {
+		    name = "黎笋"
+		    ruling_only = yes
+		  }
+		}
 		prerequisite = { focus = INC_the_great_purge  }
 		completion_reward = {
-		swap_ideas = {
-		remove_idea = INC_great_purge_army_1
-		add_idea = INC_great_purge_army_2
-		}
+      remove_ideas = INC_great_purge_army_1_idea
+      add_ideas = INC_great_purge_army_2_idea
 		}
 	}
 
@@ -6952,11 +7193,11 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		available = {
-		AND = {
-		has_idea = INC_great_purge_army_2
-		has_idea = INC_great_purge_party_1
-		}
+    available = {
+		  has_country_leader = {
+		    name = "黎笋"
+		    ruling_only = yes
+		  }
 		}
 		prerequisite = { focus = INC_purge_the_ultranationalist  }
 		completion_reward = {
@@ -6976,15 +7217,17 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		available = {
-		has_idea = INC_hcmt_3
-		
+    available = {
+		  has_country_leader = {
+		    name = "黎笋"
+		    ruling_only = yes
+		  }
 		}
 		prerequisite = { focus = INC_professional_army }
 		completion_reward = {
 		swap_ideas = {
-		remove_idea = INC_hcmt_3
-		add_idea = INC_hcmt_5
+		remove_idea = INC_Urban_Development
+		add_idea = INC_Workers_Paradise 
 		}
 		}
 	}
@@ -6997,16 +7240,19 @@ focus_tree = {
 		x = 0
 		y = 5
     cost = 3
+    available = {
+		  has_country_leader = {
+		    name = "黎笋"
+		    ruling_only = yes
+		  }
+		}
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		} 
 		prerequisite = { focus = INC_paradise_of_the_working_class  } 
     prerequisite = { focus = INC_loyal_to_the_party_loyal_to_the_union  } 
 		completion_reward = {
-		custom_effect_tooltip = indochina_final_stepp_tt
-		hidden_effect = {
-		country_event = inc_rework.8
-		}
+      add_ideas = INC_one_step_to_communism
 		}
 	}
 
@@ -7017,7 +7263,7 @@ focus_tree = {
     relative_position_id = INC_National_Assembly
 		x = 13
 		y = 1
-    cost = 3
+    cost = 1
     prerequisite = {
       focus = INC_National_Assembly
     }
@@ -7025,6 +7271,30 @@ focus_tree = {
       OR = {
         has_country_leader = {
           name = "陶维英"
+          ruling_only = yes
+        }
+        has_country_leader = {
+          name = "孙德胜"
+          ruling_only = yes
+        }
+        has_country_leader = {
+          name = "杨伯濯"
+          ruling_only = yes
+        }
+      }
+      custom_trigger_tooltip = {
+        tooltip = INC_national_assembly_tooltip
+        has_country_flag = INC_national_assembly
+      }
+    }
+    bypass = {
+      OR = {
+        has_country_leader = {
+          name = "陶维英"
+          ruling_only = yes
+        }
+        has_country_leader = {
+          name = "孙德胜"
           ruling_only = yes
         }
         has_country_leader = {
@@ -7059,7 +7329,7 @@ focus_tree = {
       FOCUS_FILTER_POLITICAL
     }
     completion_reward = {
-      custom_effect_tooltip = unlock_focuses
+      add_research_slot = 1
     }	
   }
 
@@ -7078,7 +7348,7 @@ focus_tree = {
       FOCUS_FILTER_POLITICAL
     }
     completion_reward = {
-      custom_effect_tooltip = unlock_focuses
+      add_ideas = INC_Large_scale_education_reform_idea
     }	
   }
 
@@ -7099,7 +7369,7 @@ focus_tree = {
       FOCUS_FILTER_POLITICAL
     }
     completion_reward = {
-      custom_effect_tooltip = unlock_focuses
+      add_ideas = INC_Trade_Unionism_idea_1
     }	
   }
 
@@ -7111,7 +7381,7 @@ focus_tree = {
     relative_position_id = INC_Take_the_pen_as_a_sword
 		x = 2
 		y = 0
-    cost = 3
+    cost = 1
     prerequisite = {
       focus = INC_National_Assembly
     }
@@ -7123,6 +7393,30 @@ focus_tree = {
         }
         has_country_leader = {
           name = "高朝发"
+          ruling_only = yes
+        }
+        has_country_leader = {
+          name = "孙德胜"
+          ruling_only = yes
+        }
+      }
+      custom_trigger_tooltip = {
+        tooltip = INC_national_assembly_tooltip
+        has_country_flag = INC_national_assembly
+      }
+    }
+    bypass = {
+      OR = {
+        has_country_leader = {
+          name = "阮氏南"
+          ruling_only = yes
+        }
+        has_country_leader = {
+          name = "高朝发"
+          ruling_only = yes
+        }
+        has_country_leader = {
+          name = "孙德胜"
           ruling_only = yes
         }
       }
@@ -7153,7 +7447,10 @@ focus_tree = {
       FOCUS_FILTER_POLITICAL
     }
     completion_reward = {
-      custom_effect_tooltip = unlock_focuses
+      add_one_random_civilian_factory = yes
+      add_one_random_military_factory = yes
+      add_one_random_civilian_factory = yes
+      add_one_random_military_factory = yes
     }	
   }
 
@@ -7174,7 +7471,7 @@ focus_tree = {
       FOCUS_FILTER_POLITICAL
     }
     completion_reward = {
-      custom_effect_tooltip = unlock_focuses
+      add_ideas = INC_Agricultural_cooperatives_idea
     }	
   }
 
@@ -7193,7 +7490,18 @@ focus_tree = {
       FOCUS_FILTER_POLITICAL
     }
     completion_reward = {
-      custom_effect_tooltip = unlock_focuses
+      286 = {		
+				increase_state_category_by_one_level = yes
+			}
+      827 = {		
+				increase_state_category_by_one_level = yes
+			}
+      671 = {		
+				increase_state_category_by_one_level = yes
+			}
+      857 = {		
+				increase_state_category_by_one_level = yes
+			}
     }	
   }
 
@@ -7211,7 +7519,24 @@ focus_tree = {
       FOCUS_FILTER_POLITICAL
     }
     completion_reward = {
-      custom_effect_tooltip = unlock_focuses
+      671 = {
+        add_resource = {
+          type = steel
+          amount = 11
+        }
+      }	
+      827 = {
+        add_resource = {
+          type = coal
+          amount = 6
+        }
+      }	
+      286 = {
+        add_resource = {
+          type = rubber
+          amount = 7
+        }
+      }	
     }	
   }
 
@@ -7229,7 +7554,12 @@ focus_tree = {
       FOCUS_FILTER_POLITICAL
     }
     completion_reward = {
-      custom_effect_tooltip = unlock_focuses
+        add_manpower = 30000
+        add_stability = 0.1
+        add_war_support = 0.1
+        set_rule = {
+				  can_generate_female_aces = yes
+			  }
     }	
   }
 
@@ -7250,7 +7580,7 @@ focus_tree = {
       FOCUS_FILTER_POLITICAL
     }
     completion_reward = {
-      custom_effect_tooltip = unlock_focuses
+      add_ideas = INC_Gather_the_strength_of_the_masses_to_build_a_peoples_homeland_idea
     }	
   }
 
@@ -7285,11 +7615,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      addI_ideas = INC_New_Town_Pressure_Law
 		}
 	}
 
@@ -7305,11 +7631,8 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      add_ideas = INC_high_pressure
+		
 		}
 	}
 
@@ -7325,11 +7648,8 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      add_ideas = INC_Revolution_to_death
+		
 		}
 	}
 
@@ -7345,11 +7665,8 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      add_ideas = INC_garrison_state
+		
 		}
 	}
 
@@ -7384,12 +7701,10 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
-		}
+      add_ideas = INC_nationalism
+
+     }
+		
 	}
 
   focus = {
@@ -7404,11 +7719,8 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      add_ideas = INC_Patriotic_nation
+		
 		}
 	}
 
@@ -7425,11 +7737,15 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      add_popularity = {
+        ideology = authoritarian_democrat
+        popularity = 0.30
+      }
+      add_socdem_to_coalition = yes
+      add_synd_to_coalition = yes
+      add_radsoc_to_coalition = yes
+      add_idea = INC_last_revolution
+		
 		}
 	}
 
@@ -7468,11 +7784,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      add_ideas = INC_Empower_the_secret_police_idea
 		}
 	}
 
@@ -7510,11 +7822,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      custom_effect_tooltip = INC_A_Fictional_Article_by_Fan_Van_Thong_tt
+      set_country_flag = KXX_LEADER_GUI_VISIBLE
+		  set_country_flag = INC_Tran_Quoc_Hoan_VISIBLE
 		}
 	}
 
@@ -7530,11 +7840,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      add_ideas = INC_Voluntary_collectivization_idea
 		}
 	}
 
@@ -7550,11 +7856,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      add_ideas = INC_Suppressing_Opponents_idea
 		}
 	}
 
@@ -7570,11 +7872,10 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      swap_ideas = {
+		    remove_idea = INC_Suppressing_Opponents_idea
+		    add_idea = INC_Suppressing_Opponents_2_idea 
+		  }
 		}
 	}
 
@@ -7591,12 +7892,15 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		  add_stability = 0.1
-      add_political_power = 25
-      hidden_effect = {
+      custom_effect_tooltip = INC_Red_Empire_tt
         country_event = {
           id = viet_new.8
+          days = 15
         }
+      hidden_effect = {
+        remove_ideas = INC_Suppressing_Opponents_2_idea
+        remove_ideas = INC_Voluntary_collectivization_idea
+        add_ideas = INC_Red_Empire_idea
       }
 		}
 	}
@@ -7635,11 +7939,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+		  country_event = viet_new.32
 		}
 	}
 
@@ -7655,11 +7955,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+		  add_ideas = INC_Urban_rural_differences_idea
 		}
 	}
 
@@ -7675,11 +7971,17 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      add_stability = 0.1
+      add_political_power = 100
+      set_politics = {
+        ruling_party = radical_socialist
+      }
+      create_country_leader = {
+        name = "阮中月"  # 
+        picture = "gfx/leaders/INC/Portrait_INC_Nguyen_Trung_Nguyet.png"
+        expire = "1990.10.13"
+        ideology = radsoc_communism_subtype
+      }
 		}
 	}
 
@@ -7695,11 +7997,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      add_ideas = INC_red_terror_idea
 		}
 	}
 
@@ -7716,11 +8014,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+      custom_effect_tooltip = INC_monitor_tt
 		}
 	}
 
@@ -7754,15 +8048,14 @@ focus_tree = {
 		y = 1
     relative_position_id = INC_deng_chun_qu
     prerequisite = { focus = INC_deng_chun_qu } 
+    available = { 
+     has_completed_focus = INC_Healing_scars
+    }
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+		  add_ideas = INC_rehabilitate_vnqdd_members_idea
 		}
 	}
 
@@ -7774,15 +8067,17 @@ focus_tree = {
 		y = 2
     relative_position_id = INC_deng_chun_qu
     prerequisite = { focus = INC_rehabilitate_vnqdd_members } 
+    available = { 
+     has_completed_focus = INC_lkmt
+    } 
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+		  swap_ideas = {
+		    remove_idea = INC_rehabilitate_vnqdd_members_2_idea
+		    add_idea = INC_rehabilitate_vnqdd_members_3_idea 
+		  }
 		}
 	}
 
@@ -7798,11 +8093,8 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+		  add_stability = 0.15
+      add_political_power = 200
 		}
 	}
 
@@ -7813,16 +8105,19 @@ focus_tree = {
     x = -1
 		y = 2
     relative_position_id = INC_deng_chun_qu
-    prerequisite = { focus = INC_Healing_scars } 
+    prerequisite = { focus = INC_Healing_scars }
+    available = { 
+     has_completed_focus = INC_rehabilitate_vnqdd_members
+    } 
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+		  
+      swap_ideas = {
+		    remove_idea = INC_rehabilitate_vnqdd_members_idea
+		    add_idea = INC_rehabilitate_vnqdd_members_2_idea 
+		  }
 		}
 	}
 
@@ -7839,11 +8134,10 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+		  swap_ideas = {
+		    remove_idea = INC_rehabilitate_vnqdd_members_3_idea
+		    add_idea = INC_rehabilitate_vnqdd_members_4_idea 
+		  }
 		}
 	}
 
@@ -7864,186 +8158,344 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-		country_event = inc_rework.0
-		add_manpower = 80000
-		add_ideas = {
-			INC_indepen_war_0
-			}
+		  add_ideas = INC_Reaffirming_Democracy_idea
 		}
 	}
 
   #阮文灵
-  	#Under the Yellow Star
+	#阮文灵-杜梅线路
 	focus = {
-		id = INC_Chief_Designer
-		icon = GFX_goal_COR_Market_Orientated_Economics
-    relative_position_id = INC_Return_to_the_leadership_of_the_Party
-		x = -8
-		y = 1
-		cost = 3
-    prerequisite = { focus = INC_Return_to_the_leadership_of_the_Party } 
-    available = {
-      has_country_leader = {
-      name = "阮文灵"
-      ruling_only = yes
-      }
-    }
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
+		id = INC_the_designer_debuts #设计师闪亮登场
+		icon = GFX_goal_unknown
+		x = 30 
+		y = 25
+		cost = 1
+		
 		completion_reward = {
-      custom_effect_tooltip = unlock_focuses
+			add_political_power = 120
 		}
 	}
 
-  focus = {
-		id = INC_Prudent_industrialization
-		icon = GFX_RUS_Cautious_Industrialization
+	focus = {
+		id = INC_advance_towards_the_city #向城市进发
+		icon = GFX_goal_unknown
+		relative_position_id = INC_the_designer_debuts
 		x = -1
 		y = 1
-    relative_position_id = INC_Chief_Designer
-    prerequisite = { focus = INC_Chief_Designer } 
+		prerequisite = { focus = INC_the_designer_debuts }
 		cost = 3
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
+		
 		completion_reward = {
-		add_political_power = 25
+      add_ideas = {
+
+      }
 		}
 	}
 
-  focus = {
-		id = INC_Rural_Cooperative
-		icon = GFX_goal_FRA_Coop_Dominance
+	focus = {
+		id = INC_step_from_the_countryside #从乡村迈步
+		icon = GFX_goal_unknown
+		relative_position_id = INC_the_designer_debuts
 		x = 1
 		y = 1
-    relative_position_id = INC_Chief_Designer
-    prerequisite = { focus = INC_Chief_Designer } 
+		prerequisite = { focus = INC_the_designer_debuts }
 		cost = 3
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
+		
 		completion_reward = {
-		add_political_power = 25
 		}
 	}
 
-  focus = {
-		id = INC_Pilot_of_New_Economic_Policy
-		icon = GFX_RUS_Introduce_NEP
+	focus = {
+		id = INC_universal_social_dividend #全民社会分红
+		icon = GFX_goal_unknown
+		relative_position_id = INC_advance_towards_the_city
+		x = -1
+		y = 1
+		prerequisite = { focus = INC_advance_towards_the_city }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_implement_trade_union_autonomy #落实工会自治
+		icon = GFX_goal_unknown
+		relative_position_id = INC_the_designer_debuts
 		x = 0
 		y = 2
-    relative_position_id = INC_Chief_Designer
-    prerequisite = { focus = INC_Prudent_industrialization } 
-    prerequisite = { focus = INC_Rural_Cooperative } 
+		# 汇聚了左右两条线
+		prerequisite = { focus = INC_advance_towards_the_city }
+		prerequisite = { focus = INC_step_from_the_countryside }
 		cost = 3
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
+		
 		completion_reward = {
-		add_political_power = 25
 		}
 	}
 
-  focus = {
-		id = INC_Supporting_wealthy_farmers
-		icon = GFX_RUS_Support_Kulaks
-		x = -2
-		y = 3
-    relative_position_id = INC_Chief_Designer
-    prerequisite = { focus = INC_Pilot_of_New_Economic_Policy } 
-		cost = 3
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		completion_reward = {
-		add_political_power = 25
-		}
-	}
-
-  focus = {
-		id = INC_Call_for_Foreign_Investment
-		icon = GFX_RUS_Foreign_Concessions
-		x = 0
-		y = 3
-    relative_position_id = INC_Chief_Designer
-    prerequisite = { focus = INC_Pilot_of_New_Economic_Policy } 
-		cost = 3
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		completion_reward = {
-		add_political_power = 25
-		}
-	}
-
-
-  focus = {
-		id = INC_Vietnamese_middle_class
-		icon = GFX_goal_AST_indissoluble_association_of_capital_and_labour
-		x = 2
-		y = 3
-    relative_position_id = INC_Chief_Designer
-    prerequisite = { focus = INC_Pilot_of_New_Economic_Policy } 
-		cost = 3
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		completion_reward = {
-		add_political_power = 25
-		}
-	}
-
-  focus = {
-		id = INC_Eliminating_urban_rural_disparities
-		icon = GFX_RUS_Workers_Peasants_State
-		x = -1
-		y = 4
-    relative_position_id = INC_Chief_Designer
-    prerequisite = { focus = INC_Supporting_wealthy_farmers } 
-    prerequisite = { focus = INC_Call_for_Foreign_Investment } 
-    prerequisite = { focus = INC_Vietnamese_middle_class } 
-		cost = 3
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		completion_reward = {
-		add_political_power = 25
-		}
-	}
-
-  focus = {
-		id = INC_Nationalization_of_the_New_Economic_Policy
-		icon = GFX_SOV_socialist_market
+	focus = {
+		id = INC_unleash_small_enterprise_vitality #释放小微企业活力
+		icon = GFX_goal_unknown
+		relative_position_id = INC_step_from_the_countryside
 		x = 1
-		y = 4
-    relative_position_id = INC_Chief_Designer
-    prerequisite = { focus = INC_Supporting_wealthy_farmers } 
-    prerequisite = { focus = INC_Call_for_Foreign_Investment } 
-    prerequisite = { focus = INC_Vietnamese_middle_class } 
+		y = 1
+		prerequisite = { focus = INC_step_from_the_countryside }
 		cost = 3
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
+		
 		completion_reward = {
-		add_political_power = 25
 		}
 	}
 
-  focus = {
-		id = INC_moneymoneymoney
-		icon = GFX_SOV_middle_class
-		x = 0
-		y = 5
-    relative_position_id = INC_Chief_Designer
-    prerequisite = { focus = INC_Eliminating_urban_rural_disparities } 
-    prerequisite = { focus = INC_Nationalization_of_the_New_Economic_Policy } 
+	focus = {
+		id = INC_spokesperson_for_bukharins_policies #布哈林政策的代言者
+		icon = GFX_goal_unknown
+		relative_position_id = INC_advance_towards_the_city
+		x = -1
+		y = 2
+		prerequisite = { focus = INC_universal_social_dividend }
+		prerequisite = { focus = INC_implement_trade_union_autonomy }
 		cost = 3
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
+		
 		completion_reward = {
-		add_political_power = 25
+		}
+	}
+
+	focus = {
+		id = INC_do_muoi_implements_the_market_prosperity_policy #杜梅践行市场繁荣方针
+		icon = GFX_goal_unknown
+		relative_position_id = INC_step_from_the_countryside
+		x = 1
+		y = 2
+		prerequisite = { focus = INC_implement_trade_union_autonomy }
+		prerequisite = { focus = INC_unleash_small_enterprise_vitality }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_let_the_reform_proceed_steadily #改革稳行起来
+		icon = GFX_goal_unknown
+		relative_position_id = INC_spokesperson_for_bukharins_policies
+		x = -1
+		y = 1
+		prerequisite = { focus = INC_spokesperson_for_bukharins_policies }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_let_the_money_flow #让金钱流动起来
+		icon = GFX_goal_unknown
+		relative_position_id = INC_spokesperson_for_bukharins_policies
+		x = 1
+		y = 1
+		prerequisite = { focus = INC_spokesperson_for_bukharins_policies }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_small_enterprises_go_global #小企业走向大世界
+		icon = GFX_goal_unknown
+		relative_position_id = INC_do_muoi_implements_the_market_prosperity_policy
+		x = 0
+		y = 1
+		prerequisite = { focus = INC_do_muoi_implements_the_market_prosperity_policy }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_the_renovation_miracle_on_the_mekong #湄公河上的革新奇迹
+		icon = GFX_goal_unknown
+		relative_position_id = INC_spokesperson_for_bukharins_policies
+		x = 0
+		y = 2
+		prerequisite = { focus = INC_let_the_reform_proceed_steadily }
+		prerequisite = { focus = INC_let_the_money_flow }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_make_the_cake_bigger #把蛋糕做大
+		icon = GFX_goal_unknown
+		relative_position_id = INC_small_enterprises_go_global
+		x = -1
+		y = 1
+		prerequisite = { focus = INC_small_enterprises_go_global }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_divide_the_cake_fairly #把蛋糕分好
+		icon = GFX_goal_unknown
+		relative_position_id = INC_small_enterprises_go_global
+		x = 1
+		y = 1
+		prerequisite = { focus = INC_small_enterprises_go_global }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	#阮志清线路
+	focus = {
+		id = INC_nguyen_chi_thanhs_new_revolutionary_order # 阮志清的革命新秩序
+		icon = GFX_goal_unknown
+		x = 40 
+		y = 25
+		cost = 1
+		
+		completion_reward = {
+			add_political_power = 120
+		}
+	}
+
+	focus = {
+		id = INC_reshape_national_identity #重塑民族认同
+		icon = GFX_goal_unknown
+		relative_position_id = INC_nguyen_chi_thanhs_new_revolutionary_order
+		x = -1
+		y = 1
+		prerequisite = { focus = INC_nguyen_chi_thanhs_new_revolutionary_order }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_purge_western_remnants #清除“西方”余毒
+		icon = GFX_goal_unknown
+		relative_position_id = INC_nguyen_chi_thanhs_new_revolutionary_order
+		x = 1
+		y = 1
+		prerequisite = { focus = INC_nguyen_chi_thanhs_new_revolutionary_order }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_worker_peasant_welfare_system #工农福利体系
+		icon = GFX_goal_unknown
+		relative_position_id = INC_nguyen_chi_thanhs_new_revolutionary_order
+		x = 0
+		y = 2
+		prerequisite = { focus = INC_nguyen_chi_thanhs_new_revolutionary_order }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_family_is_the_cornerstone_of_society #家庭是社会的基石
+		icon = GFX_goal_unknown
+		relative_position_id = INC_reshape_national_identity
+		x = -1
+		y = 2
+		prerequisite = { focus = INC_reshape_national_identity }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_ensure_military_first_hegemony #确保先军霸权
+		icon = GFX_goal_unknown
+		relative_position_id = INC_worker_peasant_welfare_system
+		x = 0
+		y = 1
+		prerequisite = { focus = INC_worker_peasant_welfare_system }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_resist_cultural_decadence #抵制文化堕落
+		icon = GFX_goal_unknown
+		relative_position_id = INC_purge_western_remnants
+		x = 1
+		y = 2
+		prerequisite = { focus = INC_purge_western_remnants }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_destroy_the_opium_of_religion #摧毁宗教鸦片
+		icon = GFX_goal_unknown
+		relative_position_id = INC_ensure_military_first_hegemony
+		x = 0
+		y = 1
+		prerequisite = { focus = INC_ensure_military_first_hegemony }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = INC_confucian_marxism #儒家马克思主义
+		icon = GFX_goal_unknown
+		relative_position_id = INC_destroy_the_opium_of_religion
+		x = -1
+		y = 1
+		prerequisite = { focus = INC_family_is_the_cornerstone_of_society }
+		prerequisite = { focus = INC_destroy_the_opium_of_religion }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_conservative_command_economy #保守统制经济
+		icon = GFX_goal_unknown
+		relative_position_id = INC_destroy_the_opium_of_religion
+		x = 1
+		y = 1
+		prerequisite = { focus = INC_resist_cultural_decadence }
+		prerequisite = { focus = INC_destroy_the_opium_of_religion }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = INC_solid_fortress_of_red_authoritarianism #红色威权的坚固堡垒
+		icon = GFX_goal_unknown
+		relative_position_id = INC_destroy_the_opium_of_religion
+		x = 0
+		y = 2
+		prerequisite = { focus = INC_confucian_marxism }
+		prerequisite = { focus = INC_conservative_command_economy }
+		cost = 3
+		
+		completion_reward = {
 		}
 	}
 
@@ -9636,7 +10088,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-
+      add_ideas = INC_loyal_army
     }
 		
 	}
@@ -9653,7 +10105,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
-
+      add_stability = -0.1
     }
 		
 	}
@@ -9670,6 +10122,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
+      add_ideas = INC_Appointment_and_removal_of_officials
 
     }
 		
@@ -9689,6 +10142,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
+      add_ideas = INC_social_centralization
 
     }
 		
@@ -9708,6 +10162,10 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
+      add_stability = 0.15
+      add_war_support = -0.15
+      add_ideas = INC_landlord
+      
 
     }
 		
@@ -9726,6 +10184,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
+      add_ideas = Free_market
 
     }
 		
@@ -9747,6 +10206,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
+      add_ideas = state_controll_land
 
     }
 		
@@ -9901,4 +10361,378 @@ focus_tree = {
       custom_effect_tooltip = unlock_focuses
     }	
   }
+  focus = {
+    id = INC_back_of_Hu
+    icon = GFX
+    x = 50
+    y = 0
+    cost = 5
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      stability_factor = 0.15
+      war_support_factor = 0.15
+    }
+  }
+  focus = {
+    id = INC_father_of_party
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_back_of_Hu } 
+    x = 4
+    y = 1
+    cost = 5
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_ideas = INC_leader
+    }
+  }
+  focus = {
+    id = INC_father_of_our_people
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_back_of_Hu }
+    x = 2
+    y = 1
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      stability_factor = 0.15
+      war_support_factor = 0.15
+      add_ideas = INC_gether_the_party
+    }
+  }
+
+  focus = {
+    id = INC_father_of_our_army
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_back_of_Hu }
+    x = 0
+    y = 1
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_ideas = INC_union_with_other
+      add_synd_to_coalition = yes
+      add_radsoc_to_coalition = yes
+    }
+  }
+  focus = {
+    id = INC_father_of_our_federal
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_back_of_Hu}
+    x = -2
+    y = 1
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_ideas = INC_National_autonomy
+    }
+  }
+  focus = {
+    id = INC_our_countrys_gods_father
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_back_of_Hu }
+    x = -4
+    y = 1
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      stability_factor = 0.15
+      war_support_factor = 0.15
+    }
+  }
+  focus = {
+    id = INC_purge_partys_bug
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_our_countrys_gods_father }
+    x = -3
+    y = 2
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_ideas = INC_new_com
+    }
+  }
+  focus = {
+    id = INC_control_all_moderates
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_father_of_our_army }
+    prerequisite = { focus = INC_father_of_our_federal }
+    prerequisite = { focus = INC_our_countrys_gods_father }
+    x = -1
+    y = 2
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+      add_timed_idea = {
+        idea = INC_purge_bugs
+        days = 365
+      }
+    }
+  }
+  focus = {
+    id = INC_Hosparty_Hos_army
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_father_of_party }
+    prerequisite = { focus = INC_father_of_our_people }
+    prerequisite = { focus = INC_father_of_our_army }
+    x = 1
+    y = 2
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+
+    }
+  }
+  focus = {
+    id = INC_the_supreme_ruler_of_religion
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_father_of_party }
+    x = 3
+    y = 2
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+
+    }
+  }
+  focus = {
+    id = INC_one_step_forward_of_Ho_Thought
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_purge_partys_bug }
+    prerequisite = { focus = INC_control_all_moderates }
+    prerequisite = { focus = INC_Hosparty_Hos_army }
+    prerequisite = { focus = INC_the_supreme_ruler_of_religion }
+    mutually_exclusive = { focus = INC_captain_of_country focus = INC_Constitutionalization_of_Hu_thought }
+    x = 2
+    y = 3
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+
+    }
+  }
+  focus = {
+    id = INC_captain_of_country
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_purge_partys_bug }
+    prerequisite = { focus = INC_control_all_moderates }
+    prerequisite = { focus = INC_Hosparty_Hos_army }
+    prerequisite = { focus = INC_the_supreme_ruler_of_religion }
+    mutually_exclusive = { focus = INC_one_step_forward_of_Ho_Thought focus = INC_Constitutionalization_of_Hu_thought }
+    x = 0
+    y = 3
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+
+    }
+  }
+  focus = {
+    id = INC_Constitutionalization_of_Hu_thought
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_purge_partys_bug }
+    prerequisite = { focus = INC_control_all_moderates }
+    prerequisite = { focus = INC_Hosparty_Hos_army }
+    prerequisite = { focus = INC_the_supreme_ruler_of_religion }
+    mutually_exclusive = { focus = INC_one_step_forward_of_Ho_Thought focus = INC_captain_of_country }
+    x = -2
+    y = 3
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+
+    }
+  }
+  focus = {
+    id = INC_develop_hole_countrys_countryside
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_Constitutionalization_of_Hu_thought }
+    prerequisite = { focus = INC_captain_of_country }
+    x = -1
+    y = 4
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+
+    }
+  }
+  focus = {
+    id = INC_Go_all_out_to_build_the_country
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_captain_of_country }
+    prerequisite = { focus = INC_one_step_forward_of_Ho_Thought }
+    x = 1
+    y = 4
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+
+    }
+  }
+  focus = {
+    id = INC_The_real_communist_Southeast_Asia
+    icon = GFX
+    relative_position_id = INC_back_of_Hu
+    prerequisite = { focus = INC_develop_hole_countrys_countryside focus = INC_Go_all_out_to_build_the_country }
+    x = 0
+    y = 5
+    search_filters = {
+      FOCUS_FILTER_POLITICAL
+    }
+    completion_reward = {
+
+    }
+  }
+	#曾雪红线路
+	focus = { #聆听圣胡的教诲
+		id = INC_listen_to_teachings_of_holy_ho
+		icon = GFX_goal_unknown
+		x = 50
+		y = 7
+		cost = 1
+		
+		completion_reward = {
+			add_political_power = 120
+		}
+	}
+
+	focus = { #镰锤与佛经携手并进
+		id = INC_hammer_sickle_and_sutras_hand_in_hand
+		icon = GFX_goal_unknown
+		relative_position_id = INC_listen_to_teachings_of_holy_ho
+		x = -2
+		y = 1
+		prerequisite = { focus = INC_listen_to_teachings_of_holy_ho }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = { #构筑无产阶级秘传神权体系
+		id = INC_construct_proletarian_esoteric_theocracy
+		icon = GFX_goal_unknown
+		relative_position_id = INC_listen_to_teachings_of_holy_ho
+		x = 0
+		y = 1
+		prerequisite = { focus = INC_listen_to_teachings_of_holy_ho }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = { #传颂赤色大乘先驱的革命业果
+		id = INC_extol_revolutionary_karma_of_red_mahayana_pioneers
+		icon = GFX_goal_unknown
+		relative_position_id = INC_listen_to_teachings_of_holy_ho
+		x = 2
+		y = 1
+		prerequisite = { focus = INC_listen_to_teachings_of_holy_ho }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = { #革命业火重塑大乘佛光
+		id = INC_revolutionary_karmic_fire_reshapes_mahayana_light
+		icon = GFX_goal_unknown
+		relative_position_id = INC_hammer_sickle_and_sutras_hand_in_hand
+		x = -1
+		y = 1
+		prerequisite = { focus = INC_hammer_sickle_and_sutras_hand_in_hand }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = { #平等始得铸就团结
+		id = INC_equality_forges_unity
+		icon = GFX_goal_unknown
+		relative_position_id = INC_construct_proletarian_esoteric_theocracy
+		x = -1
+		y = 1
+		prerequisite = { focus = INC_hammer_sickle_and_sutras_hand_in_hand }
+		prerequisite = { focus = INC_construct_proletarian_esoteric_theocracy }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = { #苦修方可铸就良知
+		id = INC_asceticism_forges_conscience
+		icon = GFX_goal_unknown
+		relative_position_id = INC_construct_proletarian_esoteric_theocracy
+		x = 1
+		y = 1
+		prerequisite = { focus = INC_construct_proletarian_esoteric_theocracy }
+		prerequisite = { focus = INC_extol_revolutionary_karma_of_red_mahayana_pioneers }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = { #唯物之弹难灭赤色精神
+		id = INC_material_bullets_cannot_extinguish_red_spirit
+		icon = GFX_goal_unknown
+		relative_position_id = INC_extol_revolutionary_karma_of_red_mahayana_pioneers
+		x = 1
+		y = 1
+		prerequisite = { focus = INC_extol_revolutionary_karma_of_red_mahayana_pioneers }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+
+	focus = { #履行圣胡的涅槃大愿
+		id = INC_fulfill_holy_hos_great_vow_of_nirvana
+		icon = GFX_goal_unknown
+		relative_position_id = INC_construct_proletarian_esoteric_theocracy
+		x = 0
+		y = 2
+		prerequisite = { focus = INC_revolutionary_karmic_fire_reshapes_mahayana_light }
+		prerequisite = { focus = INC_equality_forges_unity }
+		prerequisite = { focus = INC_asceticism_forges_conscience }
+		prerequisite = { focus = INC_material_bullets_cannot_extinguish_red_spirit }
+		cost = 3
+		
+		completion_reward = {
+		}
+	}
+  
 }
