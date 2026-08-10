@@ -251,7 +251,7 @@ country_event = {
 
 option = { 
 	name = kxxfrance.9.a
-	custom_effect_tooltip = "New Communal Elections will take place every 5 years!"
+	custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	hidden_effect = {
 		country_event = { id = comfrance.1004 days = 1825 } # Repeat communal election every 5 years
 	}
@@ -261,9 +261,15 @@ option = {
 	name = kxxfrance.9.b
 	if = {
 		limit = {
-			power_balance_value = {
-				id = FRA_cachin_bop
-				value < 0 
+			or = {
+				power_balance_value = {
+			    	id = FRA_cachin_bop
+		    		value < 0 
+		    	}
+				has_game_rule = {
+			    	rule = FRA_start_election
+			    	option = FRA_START_NO_MAJORITY_MARCEL_CACHIN  #马塞尔·加香
+			    }
 			}
 		}
 		hidden_effect = {
@@ -272,8 +278,8 @@ option = {
 				days = 2
 			}
 		}
-		
-	}else = {
+	}
+	else = {
 		hidden_effect = {
 			country_event = {
 				id = kxxfrance.11
@@ -281,7 +287,6 @@ option = {
 			}
 		}
 	}
-	
 }
 }
 country_event = {	
@@ -833,480 +838,994 @@ country_event = {
     }
 }
 country_event = {	
-	id = kxxfrance.17 #elections!
-	immediate = {log = "[GetDateText]: [Root.GetName]: event Frajocbin.war"}
-	title = kxxfrance.17.t
-	desc = kxxfrance.17.d
+    id = kxxfrance.17 #elections!
+    immediate = {log = "[GetDateText]: [Root.GetName]: event Frajocbin.war"}
+    title = kxxfrance.17.t
+    desc = kxxfrance.17.d
 
-	is_triggered_only = yes
+    is_triggered_only = yes
 
-option = { 
-	name = kxxfrance.17.a #yay deat again
-	ai_chance = {
-		factor = 0
-	}
-	complete_national_focus = FRA_Restoring_Socialist_Order
-}
-option = { 
-	name = kxxfrance.17.b #yay dorgeres
-	ai_chance = {
-		base = 25
-	}
-	create_country_leader = {
-		name = "乔治·阿尔贝蒂尼"
-		picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
-		expire = "1.1.1"
-		traits = { the_oppotunist }
-		ideology = tot_united_front
-	}
-	set_politics = {
-		ruling_party = totalist
-	}
-	set_party_name = {
-		ideology = totalist
-		long_name = "法兰西社会党—统一战线派"
-		name = "法兰西社会党—统一战线派"
-	}
-	set_cosmetic_tag = FRA_albetini
-	hidden_effect = {	
-		remove_ideas_with_trait = head_of_government
-		add_ideas = FRA_Guy_Mollet_hog_sde
-		remove_ideas_with_trait = foreign_minister
-		add_ideas = FRA_Boris_Souvarine_hog_syn
-		remove_ideas_with_trait = economy_minister
-		add_ideas = FRA_Vincent_Auriol_eco_rso
-		remove_ideas_with_trait = security_minister
-		add_ideas = FRA_Henri_Barbe_sec_tot
-		add_popularity = {
-		  ideology = totalist
-		   popularity = 0.20
-		}
-		complete_national_focus = FRA_albertini_power
-		remove_ideas = FRA_valois_dead_idea
-		remove_ideas = French_Revanchism_idea
-		 
-	}
-}
+    option = { 
+        name = kxxfrance.17.a #yay deat again
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ANTIGOD  #安德烈·洛吕奥
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CELTIC  #罗伯特·佩尔蒂埃
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_GAURADY  #罗杰·加罗迪
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_RENAUDEL  #皮埃尔·雷诺德尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_PUCHEU  #皮埃尔·普丘
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHATEAUBRIANT  #阿尔方斯·德·沙托布里昂
+			    	}
+				}
+		    }
+        }
+        complete_national_focus = FRA_Restoring_Socialist_Order
+    }
 
-option = { 
-	name = kxxfrance.17.c #yay herve
-	ai_chance = {
-		base = 25
-	}
-	create_country_leader = {
-		name = "古斯塔夫·爱尔威"
+    option = { 
+        name = kxxfrance.17.b #yay dorgeres
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ANTIGOD  #安德烈·洛吕奥
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CELTIC  #罗伯特·佩尔蒂埃
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_GAURADY  #罗杰·加罗迪
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_RENAUDEL  #皮埃尔·雷诺德尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_PUCHEU  #皮埃尔·普丘
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHATEAUBRIANT  #阿尔方斯·德·沙托布里昂
+			    	}
+				}
+		    }
+        }
+        create_country_leader = {
+            name = "乔治·阿尔贝蒂尼"
+            picture = "gfx/leaders/FRA/Portrait_FRA_Georges_Albertini.png"
+            expire = "1.1.1"
+            traits = { the_oppotunist }
+            ideology = tot_united_front
+        }
+        set_politics = {
+            ruling_party = totalist
+        }
+        set_party_name = {
+            ideology = totalist
+            long_name = "法兰西社会党—统一战线派"
+            name = "法兰西社会党—统一战线派"
+        }
+        set_cosmetic_tag = FRA_albetini
+        hidden_effect = {	
+            remove_ideas_with_trait = head_of_government
+            add_ideas = FRA_Guy_Mollet_hog_sde
+            remove_ideas_with_trait = foreign_minister
+            add_ideas = FRA_Boris_Souvarine_hog_syn
+            remove_ideas_with_trait = economy_minister
+            add_ideas = FRA_Vincent_Auriol_eco_rso
+            remove_ideas_with_trait = security_minister
+            add_ideas = FRA_Henri_Barbe_sec_tot
+            add_popularity = {
+                ideology = totalist
+                popularity = 0.20
+            }
+            complete_national_focus = FRA_albertini_power
+            remove_ideas = FRA_valois_dead_idea
+            remove_ideas = French_Revanchism_idea		 
+        }
+    }
 
-		picture = "gfx/leaders/FRA/Portrait_FRA_Gustaf_Herve.png"
-		expire = "1.1.1"
-		traits = { pacifist_millitarist }
-		ideology = hervism_subtype
-	}
-	set_politics = {
-		ruling_party = totalist
-	}
-	set_party_name = {
-		ideology = totalist
-		long_name = FRA_herve_party
-		name = FRA_herve_party
-	}
-	set_cosmetic_tag = FRA_herve
-	hidden_effect = {	
-		remove_ideas_with_trait = head_of_government
-		add_ideas = FRA_Gustaf_Herve_hog_tot
-		remove_ideas_with_trait = foreign_minister
-		add_ideas = FRA_Jean_Allemane_for_tot
-		remove_ideas_with_trait = economy_minister
-		add_ideas = FRA_Victor_Meric_eco_tot
-		remove_ideas_with_trait = security_minister
-		add_ideas = FRA_Alexandre_Zevaes_sec_tot
-		add_popularity = {
-		  ideology = totalist
-		   popularity = 0.20
-		 }
-		complete_national_focus = FRA_herve_win
-		remove_ideas = FRA_valois_dead_idea
-		remove_ideas = French_Revanchism_idea
-		 
-	}
-}
-option = { 
-	name = kxxfrance.17.f #ohhhhhh napoleon!!!!
-	ai_chance = {
-		base = 25
-	}
-	create_country_leader = {
-		name = "安德烈·肖梅"
+    option = { 
+        name = kxxfrance.17.c #yay herve
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ANTIGOD  #安德烈·洛吕奥
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CELTIC  #罗伯特·佩尔蒂埃
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_GAURADY  #罗杰·加罗迪
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_RENAUDEL  #皮埃尔·雷诺德尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_PUCHEU  #皮埃尔·普丘
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHATEAUBRIANT  #阿尔方斯·德·沙托布里昂
+			    	}
+				}
+		    }
+        }
+        create_country_leader = {
+            name = "古斯塔夫·爱尔威"
 
-		picture = "gfx/leaders/FRA/Portrait_FRA_Andre_Chaumet.png"
-		expire = "1.1.1"
-		ideology = radsoc_bonapartism_subtype
-	}
-	set_politics = {
-		ruling_party = radical_socialist
-	}
-	set_party_name = {
-		ideology = radical_socialist
-		long_name = FRA_nap_party
-		name = FRA_nap_party
-	}
-	set_cosmetic_tag = FRA_consulat
-	hidden_effect = {	
-		remove_ideas_with_trait = head_of_government
-		add_ideas = FRA_Andre_Chaumet_hog_rso
-		remove_ideas_with_trait = foreign_minister
-		add_ideas = FRA_Jean_Turlais_for_rso
-		remove_ideas_with_trait = economy_minister
-		add_ideas = FRA_Paul_Cassagnac_eco_rso
-		remove_ideas_with_trait = security_minister
-		add_ideas = FRA_Joachim_Napoleon_sec_rso
-		add_popularity = {
-		  ideology = radical_socialist
-		   popularity = 0.20
-		 }
-		complete_national_focus = FRA_red_bonaparte
-		remove_ideas = FRA_valois_dead_idea
-		remove_ideas = French_Revanchism_idea
-		 
-	}
-}
-option = { 
-	name = kxxfrance.17.e #yay red flood garbage
-	ai_chance = {
-		base = 25
-	}
-	create_country_leader = {
-		name = "西蒙娜·威尔"
+            picture = "gfx/leaders/FRA/Portrait_FRA_Gustaf_Herve.png"
+            expire = "1.1.1"
+            traits = { pacifist_millitarist }
+            ideology = hervism_subtype
+        }
+        set_politics = {
+            ruling_party = totalist
+        }
+        set_party_name = {
+            ideology = totalist
+            long_name = FRA_herve_party
+            name = FRA_herve_party
+        }
+        set_cosmetic_tag = FRA_herve
+        hidden_effect = {	
+            remove_ideas_with_trait = head_of_government
+            add_ideas = FRA_Gustaf_Herve_hog_tot
+            remove_ideas_with_trait = foreign_minister
+            add_ideas = FRA_Jean_Allemane_for_tot
+            remove_ideas_with_trait = economy_minister
+            add_ideas = FRA_Victor_Meric_eco_tot
+            remove_ideas_with_trait = security_minister
+            add_ideas = FRA_Alexandre_Zevaes_sec_tot
+            add_popularity = {
+                ideology = totalist
+                popularity = 0.20
+            }
+            complete_national_focus = FRA_herve_win
+            remove_ideas = FRA_valois_dead_idea
+            remove_ideas = French_Revanchism_idea
+             
+        }
+    }
+    option = { 
+        name = kxxfrance.17.f #ohhhhhh napoleon!!!!
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ANTIGOD  #安德烈·洛吕奥
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CELTIC  #罗伯特·佩尔蒂埃
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_GAURADY  #罗杰·加罗迪
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_RENAUDEL  #皮埃尔·雷诺德尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_PUCHEU  #皮埃尔·普丘
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHATEAUBRIANT  #阿尔方斯·德·沙托布里昂
+			    	}
+				}
+		    }
+        }
+        create_country_leader = {
+            name = "安德烈·肖梅"
 
-		picture = "gfx/leaders/FRA/Portrait_Simone_Weil.png"
-		expire = "1.1.1"
-		traits = { Devout }
-		ideology = christian_socialism_subtype
-	}
-	set_politics = {
-		ruling_party = radical_socialist
-	}
-	set_party_name = {
-		ideology = radical_socialist
-		long_name = FRA_christsoc_party
-		name = FRA_christsoc_party
-	}
-	set_cosmetic_tag = FRA_christsoc
-	hidden_effect = {	
-		remove_ideas_with_trait = head_of_government
-		add_ideas = FRA_Simone_Weil_hog_rso
-		remove_ideas_with_trait = foreign_minister
-		add_ideas = FRA_Gaston_Tessier_for_rso
-		remove_ideas_with_trait = economy_minister
-		add_ideas = FRA_Pierre_Pascal_eco_rso
-		remove_ideas_with_trait = security_minister
-		add_ideas = FRA_Jules_Catoire_sec_rso
-		add_popularity = {
-		  ideology = radical_socialist
-		   popularity = 0.20
-		 }
-		complete_national_focus = FRA_chrisitian_socialists
-		remove_ideas = FRA_valois_dead_idea
-		remove_ideas = French_Revanchism_idea
-		 
-	}
-}
-option = { 
-	name = kxxfrance.30.a #who fucking cares just a cringe commie chad
-	ai_chance = {
-		base = 25
-	}
-	country_event = {
-		id = kxxfrance.30
-	}
-}
+            picture = "gfx/leaders/FRA/Portrait_FRA_Andre_Chaumet.png"
+            expire = "1.1.1"
+            ideology = radsoc_bonapartism_subtype
+        }
+        set_politics = {
+            ruling_party = radical_socialist
+        }
+        set_party_name = {
+            ideology = radical_socialist
+            long_name = FRA_nap_party
+            name = FRA_nap_party
+        }
+        set_cosmetic_tag = FRA_consulat
+        hidden_effect = {	
+            remove_ideas_with_trait = head_of_government
+            add_ideas = FRA_Andre_Chaumet_hog_rso
+            remove_ideas_with_trait = foreign_minister
+            add_ideas = FRA_Jean_Turlais_for_rso
+            remove_ideas_with_trait = economy_minister
+            add_ideas = FRA_Paul_Cassagnac_eco_rso
+            remove_ideas_with_trait = security_minister
+            add_ideas = FRA_Joachim_Napoleon_sec_rso
+            add_popularity = {
+                ideology = radical_socialist
+                popularity = 0.20
+            }
+            complete_national_focus = FRA_red_bonaparte
+            remove_ideas = FRA_valois_dead_idea
+            remove_ideas = French_Revanchism_idea
+             
+        }
+    }
+    option = { 
+        name = kxxfrance.17.e #yay red flood garbage
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ANTIGOD  #安德烈·洛吕奥
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CELTIC  #罗伯特·佩尔蒂埃
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_GAURADY  #罗杰·加罗迪
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_RENAUDEL  #皮埃尔·雷诺德尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_PUCHEU  #皮埃尔·普丘
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHATEAUBRIANT  #阿尔方斯·德·沙托布里昂
+			    	}
+				}
+		    }
+        }
+        create_country_leader = {
+            name = "西蒙娜·威尔"
+
+            picture = "gfx/leaders/FRA/Portrait_Simone_Weil.png"
+            expire = "1.1.1"
+            traits = { Devout }
+            ideology = christian_socialism_subtype
+        }
+        set_politics = {
+            ruling_party = radical_socialist
+        }
+        set_party_name = {
+            ideology = radical_socialist
+            long_name = FRA_christsoc_party
+            name = FRA_christsoc_party
+        }
+        set_cosmetic_tag = FRA_christsoc
+        hidden_effect = {	
+            remove_ideas_with_trait = head_of_government
+            add_ideas = FRA_Simone_Weil_hog_rso
+            remove_ideas_with_trait = foreign_minister
+            add_ideas = FRA_Gaston_Tessier_for_rso
+            remove_ideas_with_trait = economy_minister
+            add_ideas = FRA_Pierre_Pascal_eco_rso
+            remove_ideas_with_trait = security_minister
+            add_ideas = FRA_Jules_Catoire_sec_rso
+            add_popularity = {
+                ideology = radical_socialist
+                popularity = 0.20
+            }
+            complete_national_focus = FRA_chrisitian_socialists
+            remove_ideas = FRA_valois_dead_idea
+            remove_ideas = French_Revanchism_idea
+             
+        }
+    }
+    option = { 
+        name = kxxfrance.30.a #who fucking cares just a cringe commie chad
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+				}
+		    }
+        }
+        country_event = {
+            id = kxxfrance.30
+        }
+    }
 }
 
 country_event = {	#戴亚选举第二部分
-	id = kxxfrance.30
-	immediate = {log = "[GetDateText]: [Root.GetName]: event Frajocbin.war"}
-	title = kxxfrance.17.t
-	desc = kxxfrance.17.d
+    id = kxxfrance.30
+    immediate = {log = "[GetDateText]: [Root.GetName]: event Frajocbin.war"}
+    title = kxxfrance.17.t
+    desc = kxxfrance.17.d
 
-	is_triggered_only = yes
+    is_triggered_only = yes
 
-	option = { 
-		name = kxxfrance.17.g #who fucking cares just a cringe commie chad
-		ai_chance = {
-			base = 18
-		}
-		create_country_leader = {
-			name = "安德烈·洛吕奥"
-	
-			picture = "gfx/leaders/FRA/Portrait_FRA_Andre_Lorulot.png"
-			expire = "1.1.1"
-			traits = { anti_christ }
-			ideology = militant_atheism_subtype
-		}
-		set_politics = {
-			ruling_party = totalist
-		}
-		set_party_name = {
-			ideology = totalist
-			long_name = FRA_atheist_party
-			name = FRA_atheist_party
-		}
-		set_cosmetic_tag = FRA_atheist
-		hidden_effect = {	
-			remove_ideas_with_trait = head_of_government
-			add_ideas = FRA_Jacques_Duclos_hog_tot
-			remove_ideas_with_trait = foreign_minister
-			add_ideas = FRA_Marcel_Cachin_for_tot
-			remove_ideas_with_trait = economy_minister
-			add_ideas = FRA_Jean_Jerome_eco_tot
-			remove_ideas_with_trait = security_minister
-			add_ideas = FRA_Lucien_Midol_sec_tot
-			add_popularity = {
-			  ideology = totalist
-			   popularity = 0.20
-			 }
-			complete_national_focus = FRA_millitant_godless
-			remove_ideas = FRA_valois_dead_idea
-			remove_ideas = French_Revanchism_idea
-			 
-		}
-	}
-	option = { 
-		name = kxxfrance.17.h #red flood garbage again
-		ai_chance = {
-			base = 18
-		}
-		create_country_leader = {
-			name = "罗伯特·佩尔蒂埃"
-	
-			picture = "gfx/leaders/FRA/FRA_Robert_Pelletier.png"
-			expire = "1.1.1"
-			traits = { gaul_man }
-			ideology = radical_soc_pan_celticism_subtype
-		}
-		set_politics = {
-			ruling_party = radical_socialist
-		}
-		set_party_name = {
-			ideology = radical_socialist
-			long_name = FRA_celt_party
-			name = FRA_celt_party
-		}
-		set_cosmetic_tag = FRA_celt
-		hidden_effect = {	
-			remove_ideas_with_trait = head_of_government
-			add_ideas = FRA_Robert_Pelletier_hog_rso
-			remove_ideas_with_trait = foreign_minister
-			add_ideas = FRA_Phileas_Lebesgue_for_rso
-			remove_ideas_with_trait = economy_minister
-			add_ideas = FRA_Eugene_Figuiere_eco_rso
-			remove_ideas_with_trait = security_minister
-			add_ideas = FRA_Francois_Jaffrennou_sec_rso
-			add_popularity = {
-			  ideology = radical_socialist
-			   popularity = 0.20
-			 }
-			complete_national_focus = FRA_return_to_past
-			remove_ideas = FRA_valois_dead_idea
-			remove_ideas = French_Revanchism_idea
-			 
-		}
-	}
-	option = { 
-		name = kxxfrance.30.c #伊斯兰
-		ai_chance = {
-			base = 10
-		}
-		create_country_leader = {
-			name = "罗杰·加罗迪"
-	
-			picture = "gfx/leaders/FRA/Portrait_FRA_Roger_Gaurady.png"
-			expire = "1.1.1"
-			traits = {  }
-			ideology = tot_islamic_socialism_subtype
-		}
-		set_politics = {
-			ruling_party = totalist
-		}
-		set_party_name = {
-			ideology = totalist
-			long_name = "绿党-政治生态运动"
-			name = "绿党"
-		}
-		set_party_name = {
-			ideology = radical_socialist
-			long_name = "绿党-政治生态运动"
-			name = "绿党"
-		}
-		set_cosmetic_tag = FRA_islam
-		hidden_effect = {	
-			remove_ideas_with_trait = head_of_government
-			add_ideas = FRA_Roger_Gaurady_hog_tot
-			remove_ideas_with_trait = foreign_minister
-			add_ideas = FRA_Paul_Rassinier_for_tot
-			remove_ideas_with_trait = economy_minister
-			add_ideas = FRA_Khalid_ibn_Hashim_eco_tot
-			remove_ideas_with_trait = security_minister
-			add_ideas = FRA_Abbe_Pierre_sec_tot
-			add_popularity = {
-			  ideology = totalist
-			   popularity = 0.20
-			}
-			complete_national_focus = FRA_islamic_socialism
-			remove_ideas = FRA_valois_dead_idea
-			remove_ideas = French_Revanchism_idea
-			 
-		}
-	}
-	option = { 
-		name = kxxfrance.17.i #可能派
-		ai_chance = {
-			base = 18
+    option = { 
+        name = kxxfrance.17.g #who fucking cares just a cringe commie chad
+        ai_chance = {
+            factor = 50
 			modifier = {
-				factor = 1000
-				has_game_rule = {
-					rule = FRA_after_deat
-					option = FRA_AFTER_DEAT_POSSIBLE
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CELTIC  #罗伯特·佩尔蒂埃
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_GAURADY  #罗杰·加罗迪
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_RENAUDEL  #皮埃尔·雷诺德尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_PUCHEU  #皮埃尔·普丘
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHATEAUBRIANT  #阿尔方斯·德·沙托布里昂
+			    	}
 				}
-			}
-		}
-		create_country_leader = {
-			name = "皮埃尔·雷诺德尔"
-			picture = "gfx/leaders/FRA/Portrait_FRA_Pierre_Renaudel.png"
-			expire = "1.1.1"
-			traits = {  }
-			ideology = socdem_possibilism_subtype
-		}
-		set_politics = {
-			ruling_party = social_democrat
-		}
-		set_party_name = {
-			ideology = social_democrat
-			long_name = "法兰西社会党-可能派"
-			name = "法兰西社会党"
-		}
-		set_party_name = {
-			ideology = radical_socialist
-			long_name = "法兰西社会党"
-			name = "法兰西社会党"
-		}
-		set_cosmetic_tag = FRA_Possibiliste
-		hidden_effect = {	
-			remove_ideas_with_trait = head_of_government
-			add_ideas = FRA_Guy_Mollet_hog_sde
-			remove_ideas_with_trait = foreign_minister
-			add_ideas = FRA_Joseph_Paul_Boncour_for_sde
-			remove_ideas_with_trait = economy_minister
-			add_ideas = FRA_Daniel_Guerin_eco_rso
-			remove_ideas_with_trait = security_minister
-			add_ideas = FRA_Sebastien_Faure_sec_rso
-			add_popularity = {
-			  ideology = social_democrat
-			   popularity = 0.20
-			}
-			complete_national_focus = FRA_Possibiliste_win
-			remove_ideas = FRA_valois_dead_idea
-			remove_ideas = French_Revanchism_idea
-			 
-		}
-	}
-	option = { 
-		name = kxxfrance.30.e #dysutopia
-		ai_chance = {
-			base = 18
-		}
-		create_country_leader = {
-			name = "皮埃尔·普丘"
-			picture = "gfx/leaders/FRP/Portrait_France_Pierre_Pucheu.png"
-			expire = "1.1.1"
-			traits = {  }
-			ideology = radsoc_saint_simonianism_subtype
-		}
-		set_politics = {
-			ruling_party = radical_socialist
-		}
-		
-		set_party_name = {
-			ideology = radical_socialist
-			long_name = "共治帝国运动"
-			name = "共治帝国运动"
-		}
-		set_party_name = {
-			ideology = paternal_autocrat
-			long_name = "共治帝国运动"
-			name = "共治帝国运动"
-		}
-		add_pataut_to_coalition = yes
-		set_cosmetic_tag = FRA_sansimon
-		hidden_effect = {	
-			remove_ideas_with_trait = head_of_government
-			add_ideas = FRA_Francois_Lehideux_hog_tot
-			remove_ideas_with_trait = foreign_minister
-			add_ideas = FRA_Jean_Coutrot_for_tot
-			remove_ideas_with_trait = economy_minister
-			add_ideas = FRA_Le_Corbusier_eco_tot
-			remove_ideas_with_trait = security_minister
-			add_ideas = FRA_Francis_Delaisi_sec_sde
-			add_popularity = {
-			  ideology = radical_socialist
-			   popularity = 0.20
-			}
-			complete_national_focus = FRA_resurgent_of_sansimonism
-			remove_ideas = FRA_valois_dead_idea
-			remove_ideas = French_Revanchism_idea
-			 
-		}
-	}
-	option = { 
-		name = kxxfrance.30.f #red flood again and again
-		ai_chance = {
-			base = 18
-		}
-		create_country_leader = {
-			name = "阿尔方斯·德·沙托布里昂"
-			picture = "gfx/leaders/FRP/Portrait_France_Alphonse_de_Chateaubriant.png"
-			expire = "1.1.1"
-			traits = {  }
-			ideology = popular_legionism
-		}
-		set_politics = {
-			ruling_party = totalist
-		}
-		
-		set_party_name = {
-			ideology = totalist
-			long_name = "民族革命阵线"
-			name = "民族革命阵线"
-		}
-		set_cosmetic_tag = FRA_legionary
-		hidden_effect = {	
-			remove_ideas_with_trait = head_of_government
-			add_ideas = FRA_Jean_Giono_hog_tot
-			remove_ideas_with_trait = foreign_minister
-			add_ideas = FRA_Paul_Morand_for_tot
-			remove_ideas_with_trait = economy_minister
-			add_ideas = FRA_Jean_Cocteau_eco_tot
-			remove_ideas_with_trait = security_minister
-			add_ideas = FRA_FRA_Marcel_Ayme_sec_tot
-			add_popularity = {
-			  ideology = totalist
-			   popularity = 0.20
-			}
-			complete_national_focus = FRA_restore_calavry_spirits
-			remove_ideas = FRA_valois_dead_idea
-			remove_ideas = French_Revanchism_idea
-			 
-		}
-	}
-	option = { 
-		name = kxxfrance.30.b #who fucking cares just a cringe commie chad
-		ai_chance = {
-			factor = 0
-		}
-		country_event = {
-			id = kxxfrance.17
-		}
-	}
+		    }
+        }
+        create_country_leader = {
+            name = "安德烈·洛吕奥"
+    
+            picture = "gfx/leaders/FRA/Portrait_FRA_Andre_Lorulot.png"
+            expire = "1.1.1"
+            traits = { anti_christ }
+            ideology = militant_atheism_subtype
+        }
+        set_politics = {
+            ruling_party = totalist
+        }
+        set_party_name = {
+            ideology = totalist
+            long_name = FRA_atheist_party
+            name = FRA_atheist_party
+        }
+        set_cosmetic_tag = FRA_atheist
+        hidden_effect = {	
+            remove_ideas_with_trait = head_of_government
+            add_ideas = FRA_Jacques_Duclos_hog_tot
+            remove_ideas_with_trait = foreign_minister
+            add_ideas = FRA_Marcel_Cachin_for_tot
+            remove_ideas_with_trait = economy_minister
+            add_ideas = FRA_Jean_Jerome_eco_tot
+            remove_ideas_with_trait = security_minister
+            add_ideas = FRA_Lucien_Midol_sec_tot
+            add_popularity = {
+                ideology = totalist
+                popularity = 0.20
+            }
+            complete_national_focus = FRA_millitant_godless
+            remove_ideas = FRA_valois_dead_idea
+            remove_ideas = French_Revanchism_idea
+             
+        }
+    }
+    option = { 
+        name = kxxfrance.17.h #red flood garbage again
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ANTIGOD  #安德烈·洛吕奥
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_GAURADY  #罗杰·加罗迪
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_RENAUDEL  #皮埃尔·雷诺德尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_PUCHEU  #皮埃尔·普丘
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHATEAUBRIANT  #阿尔方斯·德·沙托布里昂
+			    	}
+				}
+		    }
+        }
+        create_country_leader = {
+            name = "罗伯特·佩尔蒂埃"
+    
+            picture = "gfx/leaders/FRA/FRA_Robert_Pelletier.png"
+            expire = "1.1.1"
+            traits = { gaul_man }
+            ideology = radical_soc_pan_celticism_subtype
+        }
+        set_politics = {
+            ruling_party = radical_socialist
+        }
+        set_party_name = {
+            ideology = radical_socialist
+            long_name = FRA_celt_party
+            name = FRA_celt_party
+        }
+        set_cosmetic_tag = FRA_celt
+        hidden_effect = {	
+            remove_ideas_with_trait = head_of_government
+            add_ideas = FRA_Robert_Pelletier_hog_rso
+            remove_ideas_with_trait = foreign_minister
+            add_ideas = FRA_Phileas_Lebesgue_for_rso
+            remove_ideas_with_trait = economy_minister
+            add_ideas = FRA_Eugene_Figuiere_eco_rso
+            remove_ideas_with_trait = security_minister
+            add_ideas = FRA_Francois_Jaffrennou_sec_rso
+            add_popularity = {
+                ideology = radical_socialist
+                popularity = 0.20
+            }
+            complete_national_focus = FRA_return_to_past
+            remove_ideas = FRA_valois_dead_idea
+            remove_ideas = French_Revanchism_idea
+             
+        }
+    }
+    option = { 
+        name = kxxfrance.30.c #伊斯兰
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ANTIGOD  #安德烈·洛吕奥
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CELTIC  #罗伯特·佩尔蒂埃
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_RENAUDEL  #皮埃尔·雷诺德尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_PUCHEU  #皮埃尔·普丘
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHATEAUBRIANT  #阿尔方斯·德·沙托布里昂
+			    	}
+				}
+		    }
+        }
+        create_country_leader = {
+            name = "罗杰·加罗迪"
+    
+            picture = "gfx/leaders/FRA/Portrait_FRA_Roger_Gaurady.png"
+            expire = "1.1.1"
+            traits = {  }
+            ideology = tot_islamic_socialism_subtype
+        }
+        set_politics = {
+            ruling_party = totalist
+        }
+        set_party_name = {
+            ideology = totalist
+            long_name = "绿党-政治生态运动"
+            name = "绿党"
+        }
+        set_party_name = {
+            ideology = radical_socialist
+            long_name = "绿党-政治生态运动"
+            name = "绿党"
+        }
+        set_cosmetic_tag = FRA_islam
+        hidden_effect = {	
+            remove_ideas_with_trait = head_of_government
+            add_ideas = FRA_Roger_Gaurady_hog_tot
+            remove_ideas_with_trait = foreign_minister
+            add_ideas = FRA_Paul_Rassinier_for_tot
+            remove_ideas_with_trait = economy_minister
+            add_ideas = FRA_Khalid_ibn_Hashim_eco_tot
+            remove_ideas_with_trait = security_minister
+            add_ideas = FRA_Abbe_Pierre_sec_tot
+            add_popularity = {
+                ideology = totalist
+                popularity = 0.20
+            }
+            complete_national_focus = FRA_islamic_socialism
+            remove_ideas = FRA_valois_dead_idea
+            remove_ideas = French_Revanchism_idea
+             
+        }
+    }
+    option = { 
+        name = kxxfrance.17.i #可能派
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ANTIGOD  #安德烈·洛吕奥
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CELTIC  #罗伯特·佩尔蒂埃
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_GAURADY  #罗杰·加罗迪
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_PUCHEU  #皮埃尔·普丘
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHATEAUBRIANT  #阿尔方斯·德·沙托布里昂
+			    	}
+				}
+		    }
+        }
+        create_country_leader = {
+            name = "皮埃尔·雷诺德尔"
+            picture = "gfx/leaders/FRA/Portrait_FRA_Pierre_Renaudel.png"
+            expire = "1.1.1"
+            traits = {  }
+            ideology = socdem_possibilism_subtype
+        }
+        set_politics = {
+            ruling_party = social_democrat
+        }
+        set_party_name = {
+            ideology = social_democrat
+            long_name = "法兰西社会党-可能派"
+            name = "法兰西社会党"
+        }
+        set_party_name = {
+            ideology = radical_socialist
+            long_name = "法兰西社会党"
+            name = "法兰西社会党"
+        }
+        set_cosmetic_tag = FRA_Possibiliste
+        hidden_effect = {	
+            remove_ideas_with_trait = head_of_government
+            add_ideas = FRA_Guy_Mollet_hog_sde
+            remove_ideas_with_trait = foreign_minister
+            add_ideas = FRA_Joseph_Paul_Boncour_for_sde
+            remove_ideas_with_trait = economy_minister
+            add_ideas = FRA_Daniel_Guerin_eco_rso
+            remove_ideas_with_trait = security_minister
+            add_ideas = FRA_Sebastien_Faure_sec_rso
+            add_popularity = {
+                ideology = social_democrat
+                popularity = 0.20
+            }
+            complete_national_focus = FRA_Possibiliste_win
+            remove_ideas = FRA_valois_dead_idea
+            remove_ideas = French_Revanchism_idea
+             
+        }
+    }
+    option = { 
+        name = kxxfrance.30.e #dysutopia
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ANTIGOD  #安德烈·洛吕奥
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CELTIC  #罗伯特·佩尔蒂埃
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_GAURADY  #罗杰·加罗迪
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_RENAUDEL  #皮埃尔·雷诺德尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHATEAUBRIANT  #阿尔方斯·德·沙托布里昂
+			    	}
+				}
+		    }
+        }
+        create_country_leader = {
+            name = "皮埃尔·普丘"
+            picture = "gfx/leaders/FRP/Portrait_France_Pierre_Pucheu.png"
+            expire = "1.1.1"
+            traits = {  }
+            ideology = radsoc_saint_simonianism_subtype
+        }
+        set_politics = {
+            ruling_party = radical_socialist
+        }
+        
+        set_party_name = {
+            ideology = radical_socialist
+            long_name = "共治帝国运动"
+            name = "共治帝国运动"
+        }
+        set_party_name = {
+            ideology = paternal_autocrat
+            long_name = "共治帝国运动"
+            name = "共治帝国运动"
+        }
+        add_pataut_to_coalition = yes
+        set_cosmetic_tag = FRA_sansimon
+        hidden_effect = {	
+            remove_ideas_with_trait = head_of_government
+            add_ideas = FRA_Francois_Lehideux_hog_tot
+            remove_ideas_with_trait = foreign_minister
+            add_ideas = FRA_Jean_Coutrot_for_tot
+            remove_ideas_with_trait = economy_minister
+            add_ideas = FRA_Le_Corbusier_eco_tot
+            remove_ideas_with_trait = security_minister
+            add_ideas = FRA_Francis_Delaisi_sec_sde
+            add_popularity = {
+                ideology = radical_socialist
+                popularity = 0.20
+            }
+            complete_national_focus = FRA_resurgent_of_sansimonism
+            remove_ideas = FRA_valois_dead_idea
+            remove_ideas = French_Revanchism_idea
+             
+        }
+    }
+    option = { 
+        name = kxxfrance.30.f #red flood again and again
+        ai_chance = {
+            factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_DEAT  #马塞尔·戴亚
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ALBERTINI  #乔治·阿尔贝蒂尼
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_HERVE  #古斯塔夫·爱尔威
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_NAPOLEON  #安德烈·肖梅
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CHRIST  #西蒙娜·威尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_ANTIGOD  #安德烈·洛吕奥
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_CELTIC  #罗伯特·佩尔蒂埃
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_GAURADY  #罗杰·加罗迪
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_RENAUDEL  #皮埃尔·雷诺德尔
+			    	}
+					has_game_rule = {
+			    		rule = FRA_snap_election
+			    		option = FRA_SNAP_ELECTION_PUCHEU  #皮埃尔·普丘
+			    	}
+				}
+		    }
+        }
+        create_country_leader = {
+            name = "阿尔方斯·德·沙托布里昂"
+            picture = "gfx/leaders/FRP/Portrait_France_Alphonse_de_Chateaubriant.png"
+            expire = "1.1.1"
+            traits = {  }
+            ideology = popular_legionism
+        }
+        set_politics = {
+            ruling_party = totalist
+        }
+        
+        set_party_name = {
+            ideology = totalist
+            long_name = "民族革命阵线"
+            name = "民族革命阵线"
+        }
+        set_cosmetic_tag = FRA_legionary
+        hidden_effect = {	
+            remove_ideas_with_trait = head_of_government
+            add_ideas = FRA_Jean_Giono_hog_tot
+            remove_ideas_with_trait = foreign_minister
+            add_ideas = FRA_Paul_Morand_for_tot
+            remove_ideas_with_trait = economy_minister
+            add_ideas = FRA_Jean_Cocteau_eco_tot
+            remove_ideas_with_trait = security_minister
+            add_ideas = FRA_FRA_Marcel_Ayme_sec_tot
+            add_popularity = {
+                ideology = totalist
+                popularity = 0.20
+            }
+            complete_national_focus = FRA_restore_calavry_spirits
+            remove_ideas = FRA_valois_dead_idea
+            remove_ideas = French_Revanchism_idea
+             
+        }
+    }
+    option = { 
+        name = kxxfrance.30.b #who fucking cares just a cringe commie chad
+        ai_chance = {
+            factor = 0
+        }
+        country_event = {
+            id = kxxfrance.17
+        }
+    }
 }
+
 country_event = {	
 	id = kxxfrance.18 #core italy
 	immediate = {log = "[GetDateText]: [Root.GetName]: event Frajocbin.war"}
@@ -6656,6 +7175,30 @@ country_event = {
 
 option = { 
 	name = kxxfrance.80.a
+	ai_chance = {
+		factor = 50
+		modifier = {
+			factor = 0
+			or = {
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_ARON  #雷蒙德·阿隆
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_CORBUSIER  #勒·柯布西耶
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_DELAISI  #弗朗西斯·德拉西
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_COUTROT  #让·库特罗
+			    }
+			}
+		}
+	}
 	set_politics = {
 		ruling_party = totalist
 		elections_allowed = no
@@ -6674,6 +7217,30 @@ option = {
 }	
 option = { 
 	name = kxxfrance.80.b
+	ai_chance = {
+		factor = 50
+		modifier = {
+			factor = 0
+			or = {
+				has_game_rule = {
+			    	rule = FRA_tech_conference
+			    	option = FRA_TECH_CONFERENCE_LEHIDEUX  #弗朗索瓦·勒海杜
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_CORBUSIER  #勒·柯布西耶
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_DELAISI  #弗朗西斯·德拉西
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_COUTROT  #让·库特罗
+			    }
+			}
+		}
+	}
 	set_politics = {
 		ruling_party = totalist
 		elections_allowed = no
@@ -6692,6 +7259,30 @@ option = {
 }	
 option = { 
 	name = kxxfrance.80.c
+	ai_chance = {
+		factor = 50
+		modifier = {
+			factor = 0
+			or = {
+				has_game_rule = {
+			    	rule = FRA_tech_conference
+			    	option = FRA_TECH_CONFERENCE_LEHIDEUX  #弗朗索瓦·勒海杜
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_ARON  #雷蒙德·阿隆
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_DELAISI  #弗朗西斯·德拉西
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_COUTROT  #让·库特罗
+			    }
+			}
+		}
+	}
 	set_politics = {
 		ruling_party = totalist
 		elections_allowed = no
@@ -6710,6 +7301,30 @@ option = {
 }	
 option = { 
 	name = kxxfrance.80.e
+	ai_chance = {
+		factor = 50
+		modifier = {
+			factor = 0
+			or = {
+				has_game_rule = {
+			    	rule = FRA_tech_conference
+			    	option = FRA_TECH_CONFERENCE_LEHIDEUX  #弗朗索瓦·勒海杜
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_ARON  #雷蒙德·阿隆
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_CORBUSIER  #勒·柯布西耶
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_COUTROT  #让·库特罗
+			    }
+			}
+		}
+	}
 	set_politics = {
 		ruling_party = social_democrat
 		elections_allowed = no
@@ -6728,6 +7343,30 @@ option = {
 }	
 option = { 
 	name = kxxfrance.80.f
+	ai_chance = {
+		factor = 50
+		modifier = {
+			factor = 0
+			or = {
+				has_game_rule = {
+			    	rule = FRA_tech_conference
+			    	option = FRA_TECH_CONFERENCE_LEHIDEUX  #弗朗索瓦·勒海杜
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_ARON  #雷蒙德·阿隆
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_CORBUSIER  #勒·柯布西耶
+			    }
+				has_game_rule = {
+			    	rule = FRA_day_of_imfamy
+			    	option = FRA_TECH_CONFERENCE_DELAISI  #弗朗西斯·德拉西
+			    }
+			}
+		}
+	}
 	set_politics = {
 		ruling_party = totalist
 		elections_allowed = no
@@ -7034,6 +7673,50 @@ country_event = {
 }
 option = { 
 	name = kxxfrance.86.a
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_CANONGE  #亨利·阿尔伯特·卡农热
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PRIGENT  #弗朗索瓦·唐吉-普利金特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_BARTHE  #爱德华·巴特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_DORGERES  #亨利·多尔热
+			    }
+				has_game_rule = {
+			        rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_LADURIE  #雅克·罗伊-拉杜里
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUILLON  #路易斯·吉隆
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_TONNERRE  #弗朗索瓦·德·克莱蒙-托内尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_ANTIER  #保罗·安提尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUEBRIANT  #爱尔威·布德斯·德·盖布里昂
+			    }
+			}
+		}
+	}
 	create_country_leader = {
 		name = "伯纳德·鲍米耶"
 		picture = "gfx/leaders/PDL/Portrait_CHP_Bernard_Paumier.png"
@@ -7051,11 +7734,95 @@ option = {
 }	
 option = { 
 	name = kxxfrance.86.b
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PAUMIER  #伯纳德·鲍米耶
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_BARTHE  #爱德华·巴特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_DORGERES  #亨利·多尔热
+			    }
+				has_game_rule = {
+			        rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_LADURIE  #雅克·罗伊-拉杜里
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUILLON  #路易斯·吉隆
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_TONNERRE  #弗朗索瓦·德·克莱蒙-托内尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_ANTIER  #保罗·安提尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUEBRIANT  #爱尔威·布德斯·德·盖布里昂
+			    }
+			}
+		}
+	}
 	country_event = kxxfrance.87
 	
 }	
 option = { 
 	name = kxxfrance.86.c
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PAUMIER  #伯纳德·鲍米耶
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_CANONGE  #亨利·阿尔伯特·卡农热
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PRIGENT  #弗朗索瓦·唐吉-普利金特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_DORGERES  #亨利·多尔热
+			    }
+				has_game_rule = {
+			        rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_LADURIE  #雅克·罗伊-拉杜里
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUILLON  #路易斯·吉隆
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_TONNERRE  #弗朗索瓦·德·克莱蒙-托内尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_ANTIER  #保罗·安提尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUEBRIANT  #爱尔威·布德斯·德·盖布里昂
+			    }
+			}
+		}
+	}
 	create_country_leader = {
 		name = "爱德华·巴特"
 		picture = "gfx/leaders/FRA/Portrait_FRA_Edouard_Barthe.png"
@@ -7072,14 +7839,138 @@ option = {
 }
 option = { 
 	name = kxxfrance.86.e
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PAUMIER  #伯纳德·鲍米耶
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_CANONGE  #亨利·阿尔伯特·卡农热
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PRIGENT  #弗朗索瓦·唐吉-普利金特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_BARTHE  #爱德华·巴特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUILLON  #路易斯·吉隆
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_TONNERRE  #弗朗索瓦·德·克莱蒙-托内尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_ANTIER  #保罗·安提尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUEBRIANT  #爱尔威·布德斯·德·盖布里昂
+			    }
+			}
+		}
+	}
 	country_event = kxxfrance.88
 }
 option = { 
 	name = kxxfrance.86.f
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PAUMIER  #伯纳德·鲍米耶
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_CANONGE  #亨利·阿尔伯特·卡农热
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PRIGENT  #弗朗索瓦·唐吉-普利金特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_BARTHE  #爱德华·巴特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_DORGERES  #亨利·多尔热
+			    }
+				has_game_rule = {
+			        rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_LADURIE  #雅克·罗伊-拉杜里
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_ANTIER  #保罗·安提尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUEBRIANT  #爱尔威·布德斯·德·盖布里昂
+			    }
+			}
+		}
+	}
 	country_event = kxxfrance.89
 }
 option = { 
 	name = kxxfrance.86.g
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PAUMIER  #伯纳德·鲍米耶
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_CANONGE  #亨利·阿尔伯特·卡农热
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PRIGENT  #弗朗索瓦·唐吉-普利金特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_BARTHE  #爱德华·巴特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_DORGERES  #亨利·多尔热
+			    }
+				has_game_rule = {
+			        rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_LADURIE  #雅克·罗伊-拉杜里
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUILLON  #路易斯·吉隆
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_TONNERRE  #弗朗索瓦·德·克莱蒙-托内尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUEBRIANT  #爱尔威·布德斯·德·盖布里昂
+			    }
+			}
+		}
+	}
 	create_country_leader = {
 		name = "保罗·安提尔"
 		picture = "gfx/leaders/PDL/Portrait_PDL_Paul_Antier.png"
@@ -7095,6 +7986,50 @@ option = {
 }
 option = { 
 	name = kxxfrance.86.h
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PAUMIER  #伯纳德·鲍米耶
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_CANONGE  #亨利·阿尔伯特·卡农热
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PRIGENT  #弗朗索瓦·唐吉-普利金特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_BARTHE  #爱德华·巴特
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_DORGERES  #亨利·多尔热
+			    }
+				has_game_rule = {
+			        rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_LADURIE  #雅克·罗伊-拉杜里
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUILLON  #路易斯·吉隆
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_TONNERRE  #弗朗索瓦·德·克莱蒙-托内尔
+			    }
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_ANTIER  #保罗·安提尔
+			    }
+			}
+		}
+	}
 	set_cosmetic_tag = FRA_agarian_republic
 	create_country_leader = {
 		name = "爱尔威·布德斯·德·盖布里昂"
@@ -7119,6 +8054,18 @@ country_event = {
 
 option = { 
 	name = kxxfrance.87.a
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_PRIGENT  #弗朗索瓦·唐吉-普利金特
+			    }
+			}
+		}
+	}
 	create_country_leader = {
 		name = "亨利·阿尔伯特·卡农热"
 		picture = "gfx/leaders/PDL/Portrait_DOB_Henri_Albert_Canonge.png"
@@ -7134,6 +8081,18 @@ option = {
 }	
 option = { 
 	name = kxxfrance.87.b
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_CANONGE  #亨利·阿尔伯特·卡农热
+			    }
+			}
+		}
+	}
 	create_country_leader = {
 		name = "弗朗索瓦·唐吉-普利金特"
 		picture = "gfx/leaders/FRA/Portrait_FRA_Francois_Tanguy_Prigent.png"
@@ -7158,7 +8117,18 @@ country_event = {
 
 option = { 
 	name = kxxfrance.88.a #yay dorgeres
-	 
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			        rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_LADURIE  #雅克·罗伊-拉杜里
+			    }
+			}
+		}
+	}
 	create_country_leader = {
 		name = "亨利·多尔热"
 		picture = "gfx/leaders/FRP/Portrait_France_Henri_Dorgeres.png"
@@ -7176,6 +8146,18 @@ option = {
 }	
 option = { 
 	name = kxxfrance.88.b
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_DORGERES  #亨利·多尔热
+			    }
+			}
+		}
+	}
 	create_country_leader = {
 		name = "雅克·罗伊-拉杜里"
 		picture = "gfx/leaders/FRP/Portrait_France_Jacques_Roy_Ladurie.png"
@@ -7200,6 +8182,18 @@ country_event = {
 
 option = { 
 	name = kxxfrance.89.a #yay dorgeres
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_TONNERRE  #弗朗索瓦·德·克莱蒙-托内尔
+			    }
+			}
+		}
+	}
 	set_cosmetic_tag = FRA_agarian_republic
 	create_country_leader = {
 		name = "路易斯·吉隆"
@@ -7218,6 +8212,18 @@ option = {
 }	
 option = { 
 	name = kxxfrance.89.b
+	ai_chance = {
+		factor = 50
+		modifier = {
+		    factor = 0
+		    OR = {
+				has_game_rule = {
+			    	rule = FRA_Farmer_revolution
+			    	option = FRA_FARMER_REVOLUTION_GUILLON  #路易斯·吉隆
+			    }
+			}
+		}
+	}
 	set_cosmetic_tag = FRA_agarian_republic
 	create_country_leader = {
 		name = "弗朗索瓦·德·克莱蒙-托内尔"
