@@ -329,6 +329,7 @@ country_event = {
 			flag = FRA_TRAV
 			value = 1
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 
 	option = {
@@ -414,6 +415,7 @@ country_event = {
 			flag = FRA_JACO
 			value = 1
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 
 	option = {
@@ -491,6 +493,7 @@ country_event = {
 			flag = FRA_SORE
 			value = 1
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 
 	option = {
@@ -572,6 +575,7 @@ country_event = {
 			flag = FRA_ANAR
 			value = 1
 		}
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -2551,11 +2555,11 @@ country_event = {
             }
             CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
         }
+		set_country_flag = FRA_SYNDIE_ZYROMSKI
+        add_tot_to_coalition = yes
+        custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
+        mark_focus_tree_layout_dirty = yes
     }
-	set_country_flag = FRA_SYNDIE_ZYROMSKI
-    add_tot_to_coalition = yes
-    custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
-    mark_focus_tree_layout_dirty = yes
 }
 
 
@@ -6739,7 +6743,8 @@ country_event = {
 		set_country_flag = Marcel_Cachin_dead
 		set_country_flag = Jacques_Duclos_dead
 		set_country_flag = FRA_gamelins_coup
-		set_country_flag = FRA_counter_revolution
+		FRA_clear_all_focus_tree_flag = yes
+		set_country_flag = FRA_counter_revolution_Gamelin
 		mark_focus_tree_layout_dirty = yes
 		if = {
 			limit = {
@@ -8033,8 +8038,8 @@ country_event = {
 		 	}
 			set_party_name = {
 			  ideology = totalist
-			  long_name = FRA_vanguard
-			  name = FRA_vanguard
+			  long_name = FRA_vanguard_party
+			  name = FRA_vanguard_party
 			}	 
 			country_event = {
 				id = comfrance.929
@@ -8608,8 +8613,6 @@ country_event = {
 		set_country_flag = Hubert_Lagradelle_dead
 		set_country_flag = Gabriel_Jeantet_dead
 		set_country_flag = Pierre_Clementi_dead
-		set_country_flag = FRA_counter_revolution
-		mark_focus_tree_layout_dirty = yes
 		set_party_name = {
 			ideology = radical_socialist
 			long_name = FRA_makhno
@@ -8621,6 +8624,10 @@ country_event = {
 				days = 5
 			}
 		}
+		FRA_clear_all_focus_tree_flag = yes
+		set_country_flag = FRA_counter_revolution_Makhno
+		mark_focus_tree_layout_dirty = yes
+		set_country_flag = LEADER_GUI_VISIBLE
 	}
 
 	option = { 
@@ -8677,6 +8684,9 @@ country_event = {
 			   popularity = 0.20
 		 	} 
 		}
+		FRA_clear_Valois_dead_focus_tree_flag = yes
+		set_country_flag = FRA_sorelian_Arthuys
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -8905,7 +8915,9 @@ country_event = {
 			}	 
 			set_cosmetic_tag = FRA_Vanguard	 
 		}
-		
+		FRA_clear_Valois_dead_focus_tree_flag = yes
+		set_country_flag = FRA_sorelian_Vanguard
+		mark_focus_tree_layout_dirty = yes
 	}
 	
 	option = { 
@@ -8972,7 +8984,9 @@ country_event = {
 				days = 10
 			}
 		}
-		
+		FRA_clear_Valois_dead_focus_tree_flag = yes
+		set_country_flag = FRA_sorelian_Ultranatsynd
+		mark_focus_tree_layout_dirty = yes
 	}
 	option = { 
 		name = comfrance.926.c
@@ -9005,12 +9019,10 @@ country_event = {
 			}
 		}
 		add_stability = 0.12
-		
 			country_event = {
 				id = comfranceeu.1
 				days = 5
 			}
-		
 	}
 	option = { 
 		name = comfrance.926.f
@@ -9068,6 +9080,9 @@ country_event = {
 		 	}
 			set_cosmetic_tag = FRA_revisionist_sorelianists
 		}
+		FRA_clear_Valois_dead_focus_tree_flag = yes
+		set_country_flag = FRA_sorelian_revisionist
+		mark_focus_tree_layout_dirty = yes
 	}
 	option = { 
 		name = comfrance.926.e
@@ -9122,8 +9137,6 @@ country_event = {
 			  ideology = totalist
 			   popularity = 0.20
 		 	}
-			set_country_flag = FRA_deat_supreme
-			mark_focus_tree_layout_dirty = yes
 			complete_national_focus = FRA_Paris_en_ordre
 			remove_ideas = FRA_valois_dead_idea
 			remove_ideas = French_Revanchism_idea
@@ -9133,6 +9146,9 @@ country_event = {
 				days = 5
 			}	 
 		}
+		FRA_clear_all_focus_tree_flag = yes
+		set_country_flag = FRA_deat_supreme
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -10512,6 +10528,7 @@ country_event = {
 			traits = { anarchy_leader
 			}
 		}
+		clr_country_flag = LEADER_GUI_VISIBLE
 	}
 }
 
@@ -10774,16 +10791,139 @@ country_event = { #Election after the 1936 ones (repeating)
 
 	option = { #current gov no change
 		name = comfrance.1004.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					#41年激进派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marquet  #马凯
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Duclos  #杜克洛
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Rochelle  #拉罗谢尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Binet  #比奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marchais  #马歇
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Lanoir  #拉努瓦尔
+			    	}
+					#41年工团派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Monatte  #莫纳特
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Epstein  #爱泼斯坦
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Manouchian  #马努尚
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Frenay  #弗勒奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Vardelle  #瓦尔代勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Bietry  #比耶特里
+			    	}
+					#41年无政府派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Makhno  #马赫诺
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Picqueray  #皮克雷
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Guerin  #介朗
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Jacob  #雅各布
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Faure  #富尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Breton  #布勒东
+			    	}
+					#41年温和派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Blum  #布鲁姆
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Gouin  #古安
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Auriol  #奥里奥尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Laval  #赖伐尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Mollet  #摩勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Longuet  #龙格
+			    	}
+				}
+		    }
+		}
 		trigger = {
 			OR = {
 				NOT  = {
-					has_country_leader = { name = "Conseil de Gouvernance Temporaire" ruling_only = yes }
+					has_country_leader = { name = "临时政务会议" ruling_only = yes }
 				}
 				NOT = {
 					has_country_flag = FRA_no_elections
 				}
 			}
-			
 		}
 		hidden_effect = {
 			country_event = { id = comfrance.1004 days = 1825 } # Repeat communal election every 5 years
@@ -10793,6 +10933,105 @@ country_event = { #Election after the 1936 ones (repeating)
 	
 	option = { #militant
 		name = comfrance.1004.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_CONTINUE
+			    	}
+					#41年工团派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Monatte  #莫纳特
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Epstein  #爱泼斯坦
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Manouchian  #马努尚
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Frenay  #弗勒奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Vardelle  #瓦尔代勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Bietry  #比耶特里
+			    	}
+					#41年无政府派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Makhno  #马赫诺
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Picqueray  #皮克雷
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Guerin  #介朗
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Jacob  #雅各布
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Faure  #富尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Breton  #布勒东
+			    	}
+					#41年温和派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Blum  #布鲁姆
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Gouin  #古安
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Auriol  #奥里奥尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Laval  #赖伐尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Mollet  #摩勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Longuet  #龙格
+			    	}
+				}
+		    }
+		}
 		trigger = {
 			OR = {
 			NOT = { has_country_flag = FRA_gamelins_coup }
@@ -10807,6 +11046,105 @@ country_event = { #Election after the 1936 ones (repeating)
 	
 	option = { #syndie
 		name = comfrance.1004.c
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_CONTINUE
+			    	}
+					#41年激进派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marquet  #马凯
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Duclos  #杜克洛
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Rochelle  #拉罗谢尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Binet  #比奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marchais  #马歇
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Lanoir  #拉努瓦尔
+			    	}
+					#41年无政府派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Makhno  #马赫诺
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Picqueray  #皮克雷
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Guerin  #介朗
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Jacob  #雅各布
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Faure  #富尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Breton  #布勒东
+			    	}
+					#41年温和派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Blum  #布鲁姆
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Gouin  #古安
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Auriol  #奥里奥尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Laval  #赖伐尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Mollet  #摩勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Longuet  #龙格
+			    	}
+				}
+		    }
+		}
 		trigger = {
 			NOT = {
 				has_country_flag = FRA_no_elections
@@ -10820,6 +11158,105 @@ country_event = { #Election after the 1936 ones (repeating)
 	
 	option = { #anarchist
 		name = comfrance.1004.e
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_CONTINUE
+			    	}
+					#41年激进派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marquet  #马凯
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Duclos  #杜克洛
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Rochelle  #拉罗谢尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Binet  #比奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marchais  #马歇
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Lanoir  #拉努瓦尔
+			    	}
+					#41年工团派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Monatte  #莫纳特
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Epstein  #爱泼斯坦
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Manouchian  #马努尚
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Frenay  #弗勒奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Vardelle  #瓦尔代勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Bietry  #比耶特里
+			    	}
+					#41年温和派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Blum  #布鲁姆
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Gouin  #古安
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Auriol  #奥里奥尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Laval  #赖伐尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Mollet  #摩勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Longuet  #龙格
+			    	}
+				}
+		    }
+		}
 		trigger = {
 			NOT = {
 				has_country_flag = FRA_no_elections
@@ -10833,6 +11270,105 @@ country_event = { #Election after the 1936 ones (repeating)
 	
 	option = { #moderates
 		name = comfrance.1004.f
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+					has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_CONTINUE
+			    	}
+					#41年激进派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marquet  #马凯
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Duclos  #杜克洛
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Rochelle  #拉罗谢尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Binet  #比奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marchais  #马歇
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Lanoir  #拉努瓦尔
+			    	}
+					#41年工团派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Monatte  #莫纳特
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Epstein  #爱泼斯坦
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Manouchian  #马努尚
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Frenay  #弗勒奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Vardelle  #瓦尔代勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Bietry  #比耶特里
+			    	}
+					#41年无政府派
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Makhno  #马赫诺
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Picqueray  #皮克雷
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Guerin  #介朗
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Jacob  #雅各布
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Faure  #富尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Breton  #布勒东
+			    	}
+				}
+		    }
+		}
 		trigger = {
 			NOT = {
 				has_country_flag = FRA_no_elections
@@ -10845,10 +11381,12 @@ country_event = { #Election after the 1936 ones (repeating)
 	}
 	option = { #moderates
 		name = comfrance.1004.g
+		ai_chance = {
+			base = 50
+		}
 		trigger = {
 			has_country_flag = FRA_no_elections
 		}
-		
 	}
 }
 
@@ -10863,8 +11401,6 @@ country_event = { #militant leader
 	
 	immediate = {
 		hidden_effect = {
-			set_country_flag = FRA_SECOND_RAD
-			mark_focus_tree_layout_dirty = yes
 			remove_all_ministers = yes
 			add_ideas = {
 				FRA_Marcel_Cachin_hog_tot
@@ -10877,6 +11413,34 @@ country_event = { #militant leader
 
 	option = {
 		name = comfrance.1005.a #Marquet (neo-socialist)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Duclos  #杜克洛
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Rochelle  #拉罗谢尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Binet  #比奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marchais  #马歇
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Lanoir  #拉努瓦尔
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "阿德里安·马凯"
 			picture = "gfx/leaders/FRA/Portrait_FRA_Adrien_Marquet.png"
@@ -10905,10 +11469,42 @@ country_event = { #militant leader
 			popularity = 0.3
 		}
 		set_cosmetic_tag = FRA_Deat
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_RAD
+		set_country_flag = FRA_SECOND_RAD_Marquet
+		mark_focus_tree_layout_dirty = yes
 	}
 
 	option = {
 		name = comfrance.1005.b #Duclos (communist)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marquet  #马凯
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Rochelle  #拉罗谢尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Binet  #比奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marchais  #马歇
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Lanoir  #拉努瓦尔
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "雅克·杜克洛"
 			picture = "gfx/leaders/FRA/Portrait_France_Jacques_Duclos.png"
@@ -10937,10 +11533,42 @@ country_event = { #militant leader
 			popularity = 0.3
 		}
 		set_cosmetic_tag = FRA_Lenin
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_RAD
+		set_country_flag = FRA_SECOND_RAD_Duclos
+		mark_focus_tree_layout_dirty = yes
 	}
 	
 	option = {
 		name = comfrance.1005.c #la Rochelle(Sorelians)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marquet  #马凯
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Duclos  #杜克洛
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Binet  #比奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marchais  #马歇
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Lanoir  #拉努瓦尔
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "皮埃尔·德里厄·拉罗谢尔"
 			picture = "gfx/leaders/FRA/Portrait_Pierre_Drieu_La_Rochelle.png"
@@ -10969,10 +11597,42 @@ country_event = { #militant leader
 			popularity = 0.3
 		}
 		set_cosmetic_tag = FRA_Sorelian
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_RAD
+		set_country_flag = FRA_SECOND_RAD_Rochelle
+		mark_focus_tree_layout_dirty = yes
 	}
 	
 	option = {
 		name = comfrance.1005.e #Binet (jacobins but nat)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marquet  #马凯
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Duclos  #杜克洛
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Rochelle  #拉罗谢尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marchais  #马歇
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Lanoir  #拉努瓦尔
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "勒内·比奈"
 			picture = "gfx/leaders/FRA/Portrait_France_Rene_Binet.png"
@@ -11001,9 +11661,41 @@ country_event = { #militant leader
 			popularity = 0.3
 		}
 		set_cosmetic_tag = FRA_Jacobin
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_RAD
+		set_country_flag = FRA_SECOND_RAD_Binet
+		mark_focus_tree_layout_dirty = yes
 	}
 	option = {
     name = comfrance.1005.f
+	    ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marquet  #马凯
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Duclos  #杜克洛
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Rochelle  #拉罗谢尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Binet  #比奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Lanoir  #拉努瓦尔
+			    	}
+				}
+		    }
+		}
     create_country_leader = {
       name = "乔治·马歇"  # Georges Marchais
       picture = "gfx/leaders/NRM/Portrait_Normandy_Georges_Marchais.png"
@@ -11031,9 +11723,41 @@ country_event = { #militant leader
       popularity = 0.3
     }
    set_cosmetic_tag = FRA_Marchais
+        FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_RAD
+		set_country_flag = FRA_SECOND_RAD_Marchais
+		mark_focus_tree_layout_dirty = yes
   }
   option = {
     name = comfrance.1005.g
+	    ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marquet  #马凯
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Duclos  #杜克洛
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Rochelle  #拉罗谢尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Binet  #比奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_RAD_Marchais  #马歇
+			    	}
+				}
+		    }
+		}
     create_country_leader = {
       name = "保罗·拉努瓦尔"  # Paul Lanoir
       picture = "gfx/leaders/FRA/Portrait_FRA_Paul_Lanoir.png"
@@ -11061,6 +11785,10 @@ country_event = { #militant leader
       popularity = 0.3
     }
      set_cosmetic_tag = FRA_vanguard_socialism
+    	FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_RAD
+		set_country_flag = FRA_SECOND_RAD_Lanoir
+		mark_focus_tree_layout_dirty = yes
   }
 }
 
@@ -11084,12 +11812,38 @@ country_event = { #syndie leader
 				FRA_Alfred_Rosmer_sec_syn
 			}
 		}
-		set_country_flag = FRA_SECOND_SYND
-		mark_focus_tree_layout_dirty = yes
 	}
 
 	option = {
 		name = comfrance.1006.a #Monatte (ansynd)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Epstein  #爱泼斯坦
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Manouchian  #马努尚
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Frenay  #弗勒奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Vardelle  #瓦尔代勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Bietry  #比耶特里
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "皮埃尔·莫纳特"
 			picture = "gfx/leaders/FRA/Portrait_FRA_Pierre_Monatte.png"
@@ -11112,11 +11866,43 @@ country_event = { #syndie leader
 			ideology = syndicalist
 			popularity = 0.3
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SYND
+		set_country_flag = FRA_SECOND_SYND_Monatte
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 
 	option = {
 		name = comfrance.1006.b #Epstein (centralist syndie)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Monatte  #莫纳特
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Manouchian  #马努尚
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Frenay  #弗勒奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Vardelle  #瓦尔代勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Bietry  #比耶特里
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "约瑟夫·爱泼斯坦"
 			picture = "gfx/leaders/FRA/Portrait_France_Joseph_Epstein.png"
@@ -11139,11 +11925,43 @@ country_event = { #syndie leader
 			ideology = syndicalist
 			popularity = 0.3
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SYND
+		set_country_flag = FRA_SECOND_SYND_Epstein
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 	
 	option = {
 		name = comfrance.1006.c #manouchkian (dem synd)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Monatte  #莫纳特
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Epstein  #爱泼斯坦
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Frenay  #弗勒奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Vardelle  #瓦尔代勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Bietry  #比耶特里
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "米萨克·马努尚"
 			picture = "gfx/leaders/FRA/Portrait_France_Missak_Manouchian.png"
@@ -11166,11 +11984,43 @@ country_event = { #syndie leader
 			ideology = syndicalist
 			popularity = 0.3
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SYND
+		set_country_flag = FRA_SECOND_SYND_Manouchian
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 	
 	option = {
 		name = comfrance.1006.e #Frenay (lib synd)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Monatte  #莫纳特
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Epstein  #爱泼斯坦
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Manouchian  #马努尚
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Vardelle  #瓦尔代勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Bietry  #比耶特里
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "亨利·弗勒奈"
 			picture = "gfx/leaders/FRA/Portrait_FRA_Henri_Frenay.png"
@@ -11193,10 +12043,42 @@ country_event = { #syndie leader
 			ideology = syndicalist
 			popularity = 0.3
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SYND
+		set_country_flag = FRA_SECOND_SYND_Frenay
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 	option = {
     name = comfrance.1006.f
+	    ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Monatte  #莫纳特
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Epstein  #爱泼斯坦
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Manouchian  #马努尚
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Frenay  #弗勒奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Bietry  #比耶特里
+			    	}
+				}
+		    }
+		}
     create_country_leader = {
       name = "马塞尔·瓦尔代勒"  # Marcel Vardelle
       picture = "gfx/leaders/OCC/Portrait_OCC_Marcel_Vardelle.png"
@@ -11223,10 +12105,42 @@ country_event = { #syndie leader
       long_name = FRA_syndicalist_party_long
       name = FRA_syndicalist_party
     }
+	    FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SYND
+		set_country_flag = FRA_SECOND_SYND_Vardelle
+		mark_focus_tree_layout_dirty = yes
     custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years  # 每五年举行一次公社大选！
   }
   option = {
     name = comfrance.1006.g
+	    ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Monatte  #莫纳特
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Epstein  #爱泼斯坦
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Manouchian  #马努尚
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Frenay  #弗勒奈
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SYND_Vardelle  #瓦尔代勒
+			    	}
+				}
+		    }
+		}
     create_country_leader = {
       name = "皮埃尔·比耶特里"  # Pierre Biétry
       picture = "gfx/leaders/FRA/Portrait_FRA_Pierre_Bietry.png"
@@ -11253,6 +12167,10 @@ country_event = { #syndie leader
       long_name = FRA_yellow_synd_party_long
       name = FRA_yellow_synd_party
     }
+    	FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SYND
+		set_country_flag = FRA_SECOND_SYND_Bietry
+		mark_focus_tree_layout_dirty = yes
 	set_cosmetic_tag = FRA_yellowsyndie
     custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years  # 每五年举行一次公社大选！
   }
@@ -11278,14 +12196,40 @@ country_event = { #anarchist leader
 				FRA_Maurice_Joyeux_sec_rso
 			}
 		}
-		set_country_flag = FRA_SECOND_ANAR
-		mark_focus_tree_layout_dirty = yes
 	}
 
 	option = {
 		name = comfrance.1007.a #Makhno (ancom)
 		trigger = {
 			NOT = { has_country_flag = Nestor_Makhno_dead }
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Picqueray  #皮克雷
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Guerin  #介朗
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Jacob  #雅各布
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Faure  #富尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Breton  #布勒东
+			    	}
+				}
+		    }
 		}
 		create_country_leader = {
 			name = "涅斯托尔·马赫诺"
@@ -11314,11 +12258,43 @@ country_event = { #anarchist leader
 			long_name = FRA_cgt_anarchist_long
 			name = FRA_cgt_anarchist
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_ANAR
+		set_country_flag = FRA_SECOND_ANAR_Makhno
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 
 	option = {
 		name = comfrance.1007.b #Picqueray (fem soc)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Makhno  #马赫诺
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Guerin  #介朗
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Jacob  #雅各布
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Faure  #富尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Breton  #布勒东
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "迈·皮克雷"
 			picture = "gfx/leaders/FRA/Portrait_France_May_Picqueray.png"
@@ -11346,11 +12322,43 @@ country_event = { #anarchist leader
 			long_name = FRA_cgt_anarchist_long
 			name = FRA_cgt_anarchist
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_ANAR
+		set_country_flag = FRA_SECOND_ANAR_Picqueray
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 	
 	option = {
 		name = comfrance.1007.c #Guérin (AnCom)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Makhno  #马赫诺
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Picqueray  #皮克雷
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Jacob  #雅各布
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Faure  #富尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Breton  #布勒东
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "达尼埃尔·介朗"
 			picture = "gfx/leaders/FRA/Portrait_France_Daniel_Guerin.png"
@@ -11378,11 +12386,43 @@ country_event = { #anarchist leader
 			long_name = FRA_cgt_anarchist_long
 			name = FRA_cgt_anarchist
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_ANAR
+		set_country_flag = FRA_SECOND_ANAR_Guerin
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 	
 	option = {
 		name = comfrance.1007.e #jacob (illegalism)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Makhno  #马赫诺
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Picqueray  #皮克雷
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Guerin  #介朗
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Faure  #富尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Breton  #布勒东
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "马里于斯·雅各布"
 			picture = "gfx/leaders/FRA/Portrait_France_Marius_Jacob.png"
@@ -11410,11 +12450,43 @@ country_event = { #anarchist leader
 			long_name = FRA_cgt_anarchist_long
 			name = FRA_cgt_anarchist
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_ANAR
+		set_country_flag = FRA_SECOND_ANAR_Jacob
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 	
 	option = {
 		name = comfrance.1007.f #faure (anarchism)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Makhno  #马赫诺
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Picqueray  #皮克雷
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Guerin  #介朗
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Jacob  #雅各布
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Breton  #布勒东
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "塞巴斯蒂安·富尔"
 			desc = "POLITICS_SEBASTIEN_FAURE_DESC"
@@ -11442,10 +12514,42 @@ country_event = { #anarchist leader
 			long_name = FRA_cgt_anarchist_long
 			name = FRA_cgt_anarchist
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_ANAR
+		set_country_flag = FRA_SECOND_ANAR_Faure
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 	option = {
 		name = comfrance.1007.g #BRETON
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Makhno  #马赫诺
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Picqueray  #皮克雷
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Guerin  #介朗
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Jacob  #雅各布
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_ANAR_Faure  #富尔
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "安德烈·布勒东"
 			picture = "gfx/leaders/FRA/Portrait_FRA_Andre_Breton.png"
@@ -11469,6 +12573,10 @@ country_event = { #anarchist leader
 			long_name = "法兰西超现实主义党"
 			name = "法兰西超现实主义党"
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_ANAR
+		set_country_flag = FRA_SECOND_ANAR_Breton
+		mark_focus_tree_layout_dirty = yes
 		set_cosmetic_tag = FRA_Breton
 		set_country_flag = FRA_no_elections
 	}
@@ -11494,12 +12602,38 @@ country_event = { #moderates leader
 				FRA_Paul_Ramadier_sec_rso
 			}
 		}
-		set_country_flag = FRA_SECOND_SOCDEM
-		mark_focus_tree_layout_dirty = yes
 	}
 
 	option = {
 		name = comfrance.1008.a #Blum (Rev Marxism)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Gouin  #古安
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Auriol  #奥里奥尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Laval  #赖伐尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Mollet  #摩勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Longuet  #龙格
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "莱昂·布鲁姆"
 			picture = "gfx/leaders/FRA/Portrait_FRA_Leon_Blum_KX.png"
@@ -11527,11 +12661,43 @@ country_event = { #moderates leader
 			long_name = FRA_sfio_party_long
 			name = FRA_sfio_party
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SOCDEM
+		set_country_flag = FRA_SECOND_SOCDEM_Blum
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 
 	option = {
 		name = comfrance.1008.b #Gouin (Lib Soc)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Blum  #布鲁姆
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Auriol  #奥里奥尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Laval  #赖伐尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Mollet  #摩勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Longuet  #龙格
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "费利克斯·古安"
 			picture = "gfx/leaders/FRA/Portrait_France_Felix_Gouin.png"
@@ -11559,11 +12725,43 @@ country_event = { #moderates leader
 			long_name = FRA_sfio_party_long
 			name = FRA_sfio_party
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SOCDEM
+		set_country_flag = FRA_SECOND_SOCDEM_Gouin
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 	
 	option = {
 		name = comfrance.1008.c #Auriol (RadProg)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Blum  #布鲁姆
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Gouin  #古安
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Laval  #赖伐尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Mollet  #摩勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Longuet  #龙格
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "樊尚·奥里奥尔"
 			picture = "gfx/leaders/FRA/Portrait_France_Vincent_Auriol.png"
@@ -11586,11 +12784,43 @@ country_event = { #moderates leader
 			ideology = social_democrat
 			popularity = 0.3
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SOCDEM
+		set_country_flag = FRA_SECOND_SOCDEM_Auriol
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 	
 	option = {
 		name = comfrance.1008.e #Laval (paternal socialism)
+		ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Blum  #布鲁姆
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Gouin  #古安
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Auriol  #奥里奥尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Mollet  #摩勒
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Longuet  #龙格
+			    	}
+				}
+		    }
+		}
 		create_country_leader = {
 			name = "皮埃尔·赖伐尔"
 			picture = "gfx/leaders/FRA/Portrait_France_Pierre_Laval.png"
@@ -11613,10 +12843,42 @@ country_event = { #moderates leader
 			ideology = social_democrat
 			popularity = 0.3
 		}
+		FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SOCDEM
+		set_country_flag = FRA_SECOND_SOCDEM_Laval
+		mark_focus_tree_layout_dirty = yes
 		custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years
 	}
 	option = {
     name = comfrance.1008.f
+	    ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Blum  #布鲁姆
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Gouin  #古安
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Auriol  #奥里奥尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Laval  #赖伐尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Longuet  #龙格
+			    	}
+				}
+		    }
+		}
     create_country_leader = {
       name = "居伊·摩勒"  # Guy Mollet
       picture = "gfx/leaders/NRM/Portrait_Normandy_Guy_Mollet.png"
@@ -11638,10 +12900,42 @@ country_event = { #moderates leader
       ideology = social_democrat
       popularity = 0.3
     }
+	    FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SOCDEM
+		set_country_flag = FRA_SECOND_SOCDEM_Mollet
+		mark_focus_tree_layout_dirty = yes
     custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years  # 每五年举行一次公社大选！
   }
   option = {
     name = comfrance.1008.g
+	    ai_chance = {
+			factor = 50
+			modifier = {
+		    	factor = 0
+			    OR = {
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Blum  #布鲁姆
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Gouin  #古安
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Auriol  #奥里奥尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Laval  #赖伐尔
+			    	}
+			    	has_game_rule = {
+			    		rule = FRA_second_election
+			    		option = FRA_SECOND_SOCDEM_Mollet  #摩勒
+			    	}
+				}
+		    }
+		}
     create_country_leader = {
       name = "让·龙格"  # Jean Longuet
       picture = "gfx/leaders/FRA/Portrait_FRA_Jean_Longuet.png"
@@ -11663,6 +12957,10 @@ country_event = { #moderates leader
       ideology = radical_socialist
       popularity = 0.3
     }
+	    FRA_clear_second_election_focus_tree_flag = yes
+		set_country_flag = FRA_SECOND_SOCDEM
+		set_country_flag = FRA_SECOND_SOCDEM_Longuet
+		mark_focus_tree_layout_dirty = yes
     custom_effect_tooltip = FRA_New_Communal_Elections_will_take_place_every_5_years  # 每五年举行一次公社大选！
   }
 }
@@ -11680,7 +12978,7 @@ country_event = { #gamelin restore democracy?
 	option = { #restore democracy
 		name = comfrance.1009.a
 		ai_chance = {
-			factor = 50
+			factor = 0
 			modifier = {
 				factor = 0
 				has_game_rule = {
@@ -11697,6 +12995,7 @@ country_event = { #gamelin restore democracy?
 			    }
 			}
 		}
+		complete_national_focus = FRA_last_good_to_do
 		custom_effect_tooltip = FRA_New_Communal_Elections_Gamelin
 		hidden_effect = {
 			country_event = { id = comfrance.1004 days = 90 } # elections start
@@ -11734,6 +13033,7 @@ country_event = { #gamelin restore democracy?
 				name = FRA_social_democrat_party
 			}
 			clr_country_flag = LEADER_GUI_VISIBLE
+			FRA_clear_all_focus_tree_flag_and_mark_layout_dirty = yes
 		}
 	}
 	
