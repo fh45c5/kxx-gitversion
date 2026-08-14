@@ -1,4 +1,4 @@
-﻿###################
+###################
 # Galicia Events
 ###################
 
@@ -154,7 +154,48 @@ country_event = {#Introduction
 		name = gal.10.a
 	}
 }
+country_event = {
+	id = gal.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.10" }
+	title = gal.11.t
+	desc = gal.11.d
 
+	is_triggered_only = yes
+
+	option = { 
+		name = gal.11.a
+		set_country_flag = GAL_natdem
+	}
+	option = { 
+		name = gal.11.b
+		set_country_flag = GAL_onr
+		create_country_leader = {
+			name = "安东尼·沙茨基"
+			picture = "gfx/leaders/GAL/Portrait_GAL_Antoni_Szacki.png"
+			expire = "1.1.1"
+			ideology = national_radicalism_subtype
+		}
+	}
+	option = { 
+		name = gal.11.c
+		set_country_flag = GAL_yellowsynd
+		create_country_leader = {
+			name = "奥斯卡·斯图尔"
+			picture = "gfx/leaders/GAL/Portrait_GAL_Oskar_Stuhr.png"
+			expire = "1.1.1"
+			ideology = yellow_syndicalism_subtype
+		}
+		set_politics = {
+			ruling_party = syndicalist
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = syndicalist
+			long_name = GAL_national_populist_party_long
+			name = GAL_national_populist_party
+		}
+	}
+}
 country_event = {#BM 
 	id = gal.12
 	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.12" }
@@ -218,7 +259,10 @@ country_event = {#Vienna
 
 country_event = {#Elections 
 	id = gal.15
-	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.15" }
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event gal.15" 
+		set_country_flag = GAL_democracy_mandate
+	}
 	title = gal.15.t
 	desc = gal.15.d
 
@@ -226,19 +270,74 @@ country_event = {#Elections
 
 	option = { 
 		name = gal.15.a
-				add_popularity = {
-				ideology = social_liberal
-				popularity = 0.1
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.1
 		}
-				set_politics = {
+		remove_all_ministers = yes
+		add_ideas = {
+			GAL_Jakub_Bojko_hog_sli 
+			GAL_Adam_Krezel_for_sli
+			GAL_Andrzej_Kedzior_eco_sli
+			GAL_Wladyslaw_Kiernik_sec_sli
+		}
+		set_politics = {
 			ruling_party = social_liberal
 			election_frequency = 48
 			elections_allowed = no
 		}
-				hidden_effect = {
+		hidden_effect = {
 			set_country_flag = GAL_psl_elected
 		}
 	}
+	option = { 
+		name = gal.15.c
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			election_frequency = 48
+			elections_allowed = no
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			GAL_Kazimierz_Puzak_hog_sde
+			GAL_Herman_Lieberman_for_sde
+			GAL_Jedrzej_Moraczewski_eco_sde
+			GAL_Tadeusz_Reger_sec_sde
+		}
+		hidden_effect = {
+			set_country_flag = GAL_ppsd_elected
+		}
+	}
+ 	option = { 
+		name = gal.15.f
+				
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.1
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			GAL_Adam_Heydel_hog_mli
+			GAL_Maksymilian_Fingerchut_for_mli
+			GAL_Ferdynand_Zweig_eco_mli
+			GAL_Natan_Loewenstein_sec_mli
+		}
+		set_politics = {
+			ruling_party = market_liberal
+			election_frequency = 48
+			elections_allowed = no
+		}
+		hidden_effect = {
+			set_country_flag = GAL_kse_elected
+		}
+	}
+
+
+
 
 		option = { 
 		name = gal.15.b
@@ -263,74 +362,165 @@ country_event = {#Elections
 		}
 	}
 
-		option = { 
-		name = gal.15.c
+		
+
+	
+
+		
+}
+country_event = { #
+	id = gal.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.20 FROM = [From.GetName]" }
+	title = gal.16.t
+	desc = gal.16.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = gal.16.a
+		set_country_leader_ideology = authdem_junta_subtype
+		set_country_flag = GAL_autocracy
 		add_popularity = {
-				ideology = social_democrat
-				popularity = 0.1
+			ideology = authoritarian_democrat
+			popularity = 0.1
 		}
-				set_politics = {
-			ruling_party = social_democrat
-			election_frequency = 48
-			elections_allowed = no
-		}
-				remove_all_ministers = yes
-		add_ideas = {
-			GAL_Kazimierz_Puzak_hog_sde
-			GAL_Herman_Lieberman_for_sde
-			GAL_Jedrzej_Moraczewski_eco_sde
-			GAL_Tadeusz_Reger_sec_sde
-		}
-				hidden_effect = {
-			set_country_flag = GAL_ppsd_elected
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = GAL_authoritarian_democrat_haller_party
+			name = GAL_authoritarian_democrat_haller
 		}
 	}
+}
+country_event = { #
+	id = gal.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.20 FROM = [From.GetName]" }
+	title = gal.17.t
+	desc = gal.17.d
 
-		option = { 
-		name = gal.15.e
-		add_popularity = {
-				ideology = social_conservative
-				popularity = 0.1
-		}
-				set_politics = {
-			ruling_party = social_conservative
-			election_frequency = 48
+	is_triggered_only = yes
+
+	option = {
+		name = gal.17.a
+		set_politics = {
+			ruling_party = totalist
 			elections_allowed = no
 		}
-				remove_all_ministers = yes
+		remove_all_ministers = yes
 		add_ideas = {
-			GAL_Andrzej_Lubomirski_hog_pau
-			GAL_Roman_Longchamps_Berier_for_pau
+			KRK_Edward_Ochab_hog_tot
+			KRK_Henryk_Werynski_for_tot
+			KRK_Marcin_Waligora_eco_tot
+			KRK_Michal_Zymierski_sec_tot
+		}
+		set_country_flag = GAL_socialist_revolution
+		add_synd_to_coalition = yes
+		add_radsoc_to_coalition = yes
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.1
+		}
+		leave_faction = yes
+	}
+}
+country_event = { #
+	id = gal.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.20 FROM = [From.GetName]" }
+	title = gal.18.t
+	desc = gal.18.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = gal.18.a
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.1
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			GAL_Hieronim_Tarnowski_hog_sco
+			GAL_Jan_Hupka_for_sco
 			GAL_Wladyslaw_Leopold_Jaworski_eco_sco
 			GAL_Aleksander_Skrzynski_sec_sco
 		}
-				hidden_effect = {
-			set_country_flag = GAL_spn_elected
-		}
+		set_country_flag = GAL_szlachata_coup
+		
+		
+		
 	}
-
-		 option = { 
-		name = gal.15.f
-				trigger = { has_country_flag = GAL_market_help }
+	option = {
+		name = gal.18.b
 		add_popularity = {
-				ideology = market_liberal
-				popularity = 0.1
+			ideology = social_conservative
+			popularity = 0.1
 		}
-				remove_all_ministers = yes
-		add_ideas = {
-			GAL_Adam_Heydel_hog_mli
-			GAL_Maksymilian_Fingerchut_for_mli
-			GAL_Ferdynand_Zweig_eco_mli
-			GAL_Natan_Loewenstein_sec_mli
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.1
 		}
-				set_politics = {
-			ruling_party = market_liberal
-			election_frequency = 48
+		set_politics = {
+			ruling_party = paternal_autocrat
 			elections_allowed = no
 		}
-				hidden_effect = {
-			set_country_flag = GAL_kse_elected
+		remove_all_ministers = yes
+		add_ideas = {
+			GAL_Andrzej_Lubomirski_hog_pau
+			GAL_Roman_Longchamps_Berier_for_pau
+			GAL_Jan_Nepomucen_Potocki_eco_pau
+			GAL_Leon_Pininski_sec_pau
 		}
+		set_country_flag = GAL_szlachata_coup
+		
+		
+		
+	}
+}
+country_event = { #
+	id = gal.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.20 FROM = [From.GetName]" }
+	title = gal.19.t
+	desc = gal.19.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = gal.19.a
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.1
+		}
+		
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			KRK_Jan_Piwowarczyk_hog_npo
+			KRK_Oskar_Stuhr_for_mli
+			KRK_Leopold_Caro_eco_npo
+			KRK_Czeslaw_Strzeszewski_sec_npo
+		}
+		set_country_flag = GAL_nationalist_coup
+		leave_faction = yes
+		
+		
 	}
 }
 country_event = { #UWO Attacks
@@ -658,6 +848,7 @@ country_event = { #End of the UWO
 			}
 			force_disable_resistance = { clear = yes }
 		}
+		remove_ideas = GAL_minority_unrest_3
 	}
 }
 country_event = { #Prosvita
