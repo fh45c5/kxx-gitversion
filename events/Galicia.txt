@@ -335,37 +335,14 @@ country_event = {#Elections
 			set_country_flag = GAL_kse_elected
 		}
 	}
-
-
-
-
-		option = { 
+	option = { 
 		name = gal.15.b
-		add_popularity = {
-				ideology = radical_socialist
-				popularity = 0.1
-		}
-				set_politics = {
-			ruling_party = radical_socialist
-			election_frequency = 48
-			elections_allowed = no
-		}
-				remove_all_ministers = yes
-		add_ideas = {
-			GAL_Tomasz_Dabal_hog_rso
-			GAL_Andrzej_Huszno_for_rso
-			GAL_Franciszek_Krempa_eco_rso
-			GAL_Antoni_Kurowski_sec_rso
-		}
-				hidden_effect = {
-			set_country_flag = GAL_chsr_elected
+				
+		
+		hidden_effect = {
+			country_event = gal.44
 		}
 	}
-
-		
-
-	
-
 		
 }
 country_event = { #
@@ -409,8 +386,8 @@ country_event = { #
 		add_ideas = {
 			KRK_Edward_Ochab_hog_tot
 			KRK_Henryk_Werynski_for_tot
-			KRK_Marcin_Waligora_eco_tot
-			KRK_Michal_Zymierski_sec_tot
+			KRK_Stanislaw_Berent_eco_syn
+			KRK_Adam_Prochnik_sec_rso
 		}
 		set_country_flag = GAL_socialist_revolution
 		add_synd_to_coalition = yes
@@ -993,14 +970,473 @@ country_event = { #UGA
 	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.41 FROM = [From.GetName]" }
 	title = gal.42.t
 	desc = gal.42.d
+	trigger = {
+		tag = GAL
+		check_variable = { UKR_ukrainian_resistance > 90 }
+		
+	}
 	
 	
-	is_triggered_only = yes
 
 	option = {
 		name = gal.42.a
 		ai_chance = { base = 70 }
 		activate_mission = GAL_near_collapse
+	}
+	
+}
+country_event = { #collapse
+	id = gal.43
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event gal.41 FROM = [From.GetName]" 
+		hidden_effect = {
+			OVERLORD =  {
+				end_puppet = ROOT
+			}
+			leave_faction = yes
+			
+			news_event = {
+				id = wsunewsevent.1
+				days = 1
+			}
+		
+		WSU = {
+		transfer_state = 89
+		transfer_state = 1140
+		transfer_state = 91
+		transfer_state = 1127
+		transfer_state = 1126
+		}
+		WSU =  {
+		89 = { add_core_of = WSU }
+		1140 = { add_core_of = WSU }
+		91 = { add_core_of = WSU }
+		1127 = { add_core_of = WSU }
+		1126 = { add_core_of = WSU }
+		}
+		BUK = {
+		transfer_state = 713
+		transfer_state = 80
+		}
+		BUK = {
+		add_state_core = 713
+		add_state_core =  80
+		}
+		WSU = {
+			division_template = {
+			name = "Dywizja Piechoty Obrony Krajowej"
+			priority = 1
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 0 y = 4 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+				}
+				support = { 
+					engineer = { x = 0 y = 0 }
+				} 
+			}
+		random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"1-ma Lvivska bryhada\" division_template = \"Dywizja Piechoty Obrony Krajowej\" start_experience_factor = 1 start_equipment_factor = 1"
+					allow_spawning_on_enemy_provs = yes
+					owner = WSU
+				}
+				create_unit = {
+					division = "name = \"2-ma Sambirska bryhada\" division_template = \"Dywizja Piechoty Obrony Krajowej\" start_experience_factor = 1 start_equipment_factor = 1"
+					allow_spawning_on_enemy_provs = yes
+					owner = WSU
+				}
+				create_unit = {
+					division = "name = \"3-ma Sambirska bryhada\" division_template = \"Dywizja Piechoty Obrony Krajowej\" start_experience_factor = 1 start_equipment_factor = 1"
+					allow_spawning_on_enemy_provs = yes
+					owner = WSU
+				}
+				create_unit = {
+					division = "name = \"4-ma Sambirska bryhada\" division_template = \"Dywizja Piechoty Obrony Krajowej\" start_experience_factor = 1 start_equipment_factor = 1"
+					allow_spawning_on_enemy_provs = yes
+					owner = WSU
+				}
+				create_unit = {
+					division = "name = \"5-ma Sambirska bryhada\" division_template = \"Dywizja Piechoty Obrony Krajowej\" start_experience_factor = 1 start_equipment_factor = 1"
+					allow_spawning_on_enemy_provs = yes
+					owner = WSU
+				}
+				create_unit = {
+					division = "name = \"6-ma Sambirska bryhada\" division_template = \"Dywizja Piechoty Obrony Krajowej\" start_experience_factor = 1 start_equipment_factor = 1"
+					allow_spawning_on_enemy_provs = yes
+					owner = WSU
+				}
+				create_unit = {
+					division = "name = \"3-ta Belzka bryhada\" division_template = \"Dywizja Piechoty Obrony Krajowej\" start_experience_factor = 1 start_equipment_factor = 1"
+					allow_spawning_on_enemy_provs = yes
+					owner = WSU
+				}
+			}
+		
+		}
+		}
+	}
+	title = gal.43.t
+	desc = gal.43.d
+	
+	
+	is_triggered_only = yes
+
+	option = {
+		name = gal.43.a
+		ai_chance = { base = 70 }
+		GAL = {
+			declare_war_on = {
+				target = WSU
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = BUK
+				type = annex_everything
+			}
+		}
+		
+	}
+	option = {
+		name = gal.43.b
+		ai_chance = { base = 70 }
+		WSU = {
+			change_tag_from = GAL
+		}
+		GAL = {
+			declare_war_on = {
+				target = WSU
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = BUK
+				type = annex_everything
+			}
+		}
+	}
+	option = {
+		name = gal.43.c
+		ai_chance = { base = 70 }
+		BUK = {
+			change_tag_from = GAL
+		}
+		GAL = {
+			declare_war_on = {
+				target = WSU
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = BUK
+				type = annex_everything
+			}
+		}
+	}
+
+}
+country_event = { 
+	id = gal.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.41 FROM = [From.GetName]" }
+	title = gal.44.t
+	desc = gal.44.d
+	is_triggered_only = yes
+	
+
+	
+	option = {
+		name = gal.44.a
+		ai_chance = { base = 30 }
+		clr_country_flag = GAL_democracy_mandate
+		set_country_flag = GAL_technocracy
+		create_country_leader = {
+			name = "利奥波德·卡罗"
+			picture = "gfx/leaders/GAL/Portrait_GAL_Witold_Czartoryski.png"
+			expire = "1.1.1"
+			ideology = authdem_right_technocracy_subtype
+		}
+	}
+}
+country_event = { 
+	id = gal.45
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.41 FROM = [From.GetName]" }
+	title = gal.45.t
+	desc = gal.45.d
+	is_triggered_only = yes
+	
+
+	option = {
+		name = gal.45.a
+		ai_chance = { base = 70 }
+		
+	}
+	option = {
+		name = gal.45.b
+		ai_chance = { base = 30 }
+		clr_country_flag = GAL_szlachata_coup
+		set_country_flag = GAL_esoteric
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.1
+		}
+		create_country_leader = {
+			name = "安杰伊·胡萨诺"
+			picture = "gfx/leaders/GAL/Portrait_GAL_Andrzej_Huszno.png"
+			expire = "1.1.1"
+			ideology = radsoc_left_occultism_subtype
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = POL_pnkp_party_long
+			name = POL_pnkp_party
+		}
+		set_party_name = {
+			ideology = syndicalist
+			long_name = POL_pnkp_party_long
+			name = POL_pnkp_party
+		}
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = POL_pnkp_party_long
+			name = POL_pnkp_party
+		}
+		add_tot_to_coalition = yes
+		add_synd_to_coalition = yes
+		remove_all_ministers = yes
+		add_ideas = {
+			GAL_Tomasz_Dabal_hog_rso
+			GAL_Andrzej_Huszno_for_rso
+			GAL_Franciszek_Krempa_eco_rso
+			GAL_Antoni_Kurowski_sec_rso
+		}
+	}
+}
+country_event = { 
+	id = gal.46
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.41 FROM = [From.GetName]" }
+	title = gal.46.t
+	desc = gal.46.d
+	is_triggered_only = yes
+	
+
+	
+	option = {
+		name = gal.46.a
+		ai_chance = { base = 30 }
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
+	}
+	option = {
+		name = gal.46.b
+		ai_chance = { base = 30 }
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.1
+		}
+		set_politics = {
+			ruling_party = syndicalist
+			elections_allowed = no
+		}
+		add_tot_to_coalition = yes
+		add_radsoc_to_coalition = yes
+	}
+	option = {
+		name = gal.46.c
+		ai_chance = { base = 30 }
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.1
+		}
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = no
+		}
+		add_tot_to_coalition = yes
+		add_synd_to_coalition = yes
+	}
+}
+country_event = { 
+	id = gal.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.41 FROM = [From.GetName]" }
+	title = gal.47.t
+	desc = gal.47.d
+	is_triggered_only = yes
+
+	option = {
+		name = gal.47.a
+		ai_chance = { base = 70 }
+		
+	}
+	option = {
+		name = gal.47.b
+		ai_chance = { base = 30 }
+		clr_country_flag = GAL_socialist_revolution
+		set_country_flag = GAL_moscow
+		if = {
+			limit = {
+				RUS = {
+					has_socialist_government = yes
+				}
+			}
+			create_country_leader = {
+				name = "瓦西里·罗曼诺维奇·瓦夫里克"
+				picture = "gfx/leaders/GAL/Portrait_GAL_Vasiliy_Romanovich_Vavrik.png"
+				expire = "1.1.1"
+				ideology = left_nationalism_subtype
+			}
+			set_politics = {
+				ruling_party = radical_socialist
+				elections_allowed = no
+			}
+		}
+		if = {
+			limit = {
+				RUS = {
+					has_democratic_government = yes
+				}
+			}
+			create_country_leader = {
+				name = "米哈伊尔·德米特里耶维奇·蒙迪奇"
+				picture = "gfx/leaders/GAL/Portrait_GAL_Mikhaylo_Dmitrovich_Mondich.png"
+				expire = "1.1.1"
+				ideology = authdem_solidarism_subtype
+			}
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				elections_allowed = no
+			}
+		}
+		if = {
+			limit = {
+				RUS = {
+					has_authoritarian_government = yes
+				}
+			}
+			create_country_leader = {
+				name = "格里高利·谢苗诺维奇·马列茨"
+				picture = "gfx/leaders/GAL/Portrait_GAL_Grigoriy_Semyonovich_Malets.png"
+				expire = "1.1.1"
+				ideology = junta_subtype
+			}
+			set_politics = {
+				ruling_party = paternal_autocrat
+				elections_allowed = no
+			}
+		}
+		
+		
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = POL_moscow_party_long
+			name = POL_moscow_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = POL_moscow_party_long
+			name = POL_moscow_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = POL_moscow_party_long
+			name = POL_moscow_party
+		}
+	}
+}
+country_event = { 
+	id = gal.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.41 FROM = [From.GetName]" }
+	title = gal.48.t
+	desc = gal.48.d
+	is_triggered_only = yes
+	
+
+	
+	option = {
+		name = gal.48.a
+		ai_chance = { base = 30 }
+		create_country_leader = {
+			name = "安杰伊·胡萨诺"
+			picture = "gfx/leaders/GAL/Portrait_GAL_Andrzej_Huszno.png"
+			expire = "1.1.1"
+			ideology = tot_theosophy_subtype
+		}
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		add_synd_to_coalition = yes
+		add_radsoc_to_coalition = yes
+	}
+	option = {
+		name = gal.48.b
+		ai_chance = { base = 30 }
+		create_country_leader = {
+			name = "安杰伊·胡萨诺"
+			picture = "gfx/leaders/GAL/Portrait_GAL_Andrzej_Huszno.png"
+			expire = "1.1.1"
+			ideology = christian_syndicalism_subtype
+		}
+		set_politics = {
+			ruling_party = syndicalist
+			elections_allowed = no
+		}
+		add_tot_to_coalition = yes
+		add_radsoc_to_coalition = yes
+	}
+	option = {
+		name = gal.48.c
+		ai_chance = { base = 30 }
+		create_country_leader = {
+			name = "安杰伊·胡萨诺"
+			picture = "gfx/leaders/GAL/Portrait_GAL_Andrzej_Huszno.png"
+			expire = "1.1.1"
+			ideology = radsoc_zadrugism_subtype
+		}
+		
+	}
+}
+country_event = { 
+	id = gal.49
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gal.41 FROM = [From.GetName]" }
+	title = gal.49.t
+	desc = gal.49.d
+	trigger = {
+		tag = GAL
+		has_war_with = WSU
+		surrender_progress > 0.5
+	}
+
+	option = {
+		name = gal.49.a
+		ai_chance = { base = 100 }
+		
+	}
+	option = {
+		name = gal.49.b
+		ai_chance = { base = 0 }
+		create_country_leader = {
+			name = "弗朗西谢克·涅波科尔奇茨基"
+			picture = "gfx/leaders/GAL/Portrait_GAL_Franciszek_Niepokolczycki.png"
+			expire = "1.1.1"
+			ideology = left_nationalism_subtype
+		}
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = no
+		}
+		clr_country_flag = GAL_autocracy
+		clr_country_flag = GAL_democracy_mandate
+		set_country_flag = GAL_hidden_parth_unlock
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = GAL_WiN_party_long
+			name = GAL_WiN_party
+		}
 	}
 	
 }
