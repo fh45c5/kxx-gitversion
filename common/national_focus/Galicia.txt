@@ -1,0 +1,4530 @@
+focus_tree = {
+	id = Galicia
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = GAL
+		}
+	}
+	default = no
+	initial_show_position = { focus = GAL_tough_year }
+	continuous_focus_position = { x = 3500 y = 0 }
+
+#黑色星期一
+	focus = { #无可逃避的黑色星期一
+		id = GAL_monday_1
+		icon = GFX_goal_generic_crisis
+		cost = 0
+		x = 10
+		y = 0
+		available = {
+			has_idea = GAL_black_monday
+		}
+		bypass = {
+			has_idea = GAL_black_monday
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = { #维持货币稳定
+		id = GAL_monday_2
+		icon = GFX_goal_GAL_COP
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_monday_1
+		}
+		x = 8
+		y = 1
+		completion_reward = {
+			add_political_power = 50
+			swap_ideas = {
+				remove_idea = GAL_black_monday
+				add_idea = GAL_black_monday_2
+			}
+		}
+	}
+	focus = { #农村信用银行
+		id = GAL_monday_3
+		icon = GFX_goal_generic_landowner_tax_cuts
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_monday_1
+		}
+		x = 12
+		y = 1
+		available = {
+			has_idea = GAL_black_monday_2
+		}
+		completion_reward = {
+			add_political_power = 50
+			swap_ideas = {
+				remove_idea = GAL_black_monday_2
+				add_idea = GAL_black_monday_3
+			}
+		}
+	}
+	focus = { #共克时艰
+		id = GAL_monday_4
+		icon = GFX_GRU_CONS_TAX_CUT
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_monday_3
+		}
+		x = 10
+		y = 2
+		completion_reward = {
+			add_political_power = 50
+			swap_ideas = {
+				remove_idea = GAL_black_monday_3
+				add_idea = GAL_black_monday_4
+			}
+		}
+	}
+	focus = { #吸引外商投资
+		id = GAL_monday_5
+		icon = GFX_goal_AST_an_open_door_to_investment
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_monday_3
+		}
+		x = 12
+		y = 2
+		completion_reward = {
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	focus = { #国家资助建筑
+		id = GAL_monday_6
+		icon = GFX_goal_FIU_loans_bailouts
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_monday_4
+		}
+		prerequisite = {
+			focus = GAL_monday_2
+		}
+		x = 8
+		y = 3
+		completion_reward = {
+			add_political_power = 50
+			swap_ideas = {
+				remove_idea = GAL_black_monday_4
+				add_idea = GAL_black_monday_5
+			}
+			
+		}
+	}
+	focus = { #鼓励地方投资
+		id = GAL_monday_7
+		icon = GFX_goal_MAF_Bank
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_monday_4
+		}
+		x = 10
+		y = 3
+		available = {
+			has_idea = GAL_black_monday_5
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_black_monday_5
+				add_idea = GAL_black_monday_6
+			}
+		}
+	}
+	focus = { #扩大石油出口
+		id = GAL_monday_8
+		icon = GFX_goal_AUS_galicia_oil
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_monday_5
+		}
+		x = 12
+		y = 3
+		completion_reward = {
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+		}
+	}
+	focus = { #经济新生
+		id = GAL_monday_9
+		icon = GFX_goal_MNT_decade_to_prosperity
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_monday_6
+		}
+		prerequisite = {
+			focus = GAL_monday_7
+		}
+		prerequisite = {
+			focus = GAL_monday_8
+		}
+		x = 10
+		y = 4
+		completion_reward = {
+			set_country_flag = GAL_black_monday_ends
+			swap_ideas = {
+				remove_idea = GAL_black_monday_6
+				add_idea = GAL_black_monday_7
+			}
+			
+		}
+	}
+
+#农业线
+	focus = { #土地改革
+		id = GAL_nongye_1
+		icon = GFX_goal_CSA_agricultural_revolution
+		cost = 4.00
+		x = 16
+		y = 0
+		available = {
+			has_idea = GAL_golicja_glodomeria_2
+		}
+		completion_reward = {
+			
+			every_owned_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}	
+	}
+    focus = { #建立农业合作社
+		id = GAL_nongye_2
+		icon = GFX_goal_COR_Free_Market_Appeals
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_nongye_1
+		}
+		x = 14
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_golicja_glodomeria_2
+				add_idea = GAL_golicja_glodomeria_3
+			}
+		}
+	}
+	focus = { #表彰先进集体
+		id = GAL_nongye_3
+		icon = GFX_goal_AUS_Enact_Hainischs_Agrarreformplan
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_nongye_2
+		}
+		x = 14
+		y = 2
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_golicja_glodomeria_3
+				add_idea = GAL_golicja_glodomeria_4
+			}
+		}
+	}
+	focus = { #改善储粮状况
+		id = GAL_nongye_4
+		icon = GFX_UKR_Agrarian_Economy
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_nongye_1
+		}
+		x = 16
+		y = 1
+	    completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_rural_society
+				add_idea = GAL_rural_society_2
+			}
+		}
+	}
+	focus = { #建立国家预警系统
+		id = GAL_nongye_5
+		icon = GFX_goal_SRD_tackle_agrarian_issues
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_nongye_4
+		}
+		available = {
+			has_idea = GAL_golicja_glodomeria_4
+		}
+		
+		x = 16
+		y = 2
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_golicja_glodomeria_4
+				add_idea = GAL_golicja_glodomeria_5
+			}
+		}
+	}
+	focus = { #虔诚田园
+		id = GAL_nongye_6
+		icon = GFX_goal_HON_Agrarian
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_nongye_5
+		}
+		prerequisite = {
+			focus = GAL_nongye_3
+		}
+		x = 15
+		y = 3
+		completion_reward = {
+			remove_ideas = GAL_golicja_glodomeria_5
+		}
+	}
+	focus = { #提升识字率
+		id = GAL_nongye_7
+		icon = GFX_goal_CZE_autonomy_bills
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_nongye_1
+		}
+		x = 18
+		y = 1
+		completion_reward = {
+			add_ideas = GAL_xueshuguodu
+		}
+	}
+	focus = { #开办农业大学
+		id = GAL_nongye_8
+		icon = GFX_goal_COR_University_System_of_America
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_nongye_7
+		}
+		x = 18
+		y = 3
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_xueshuguodu
+				add_idea = GAL_xueshuguodu_1
+			}
+		}
+	}
+	focus = { #工农联合
+		id = GAL_nongye_9
+		icon = GFX_goal_FIN_Orphan_Lord_His_Loyal_Agrarians
+		cost = 4
+		prerequisite = {
+			focus = GAL_monday_6
+			focus = GAL_monday_7
+			focus = GAL_monday_8
+		}
+		prerequisite = {
+			focus = GAL_nongye_6
+			focus = GAL_nongye_8
+		}
+		completion_reward = {
+			every_owned_state = {
+				add_state_modifier = {
+					modifier = {
+						local_supplies = 0.1
+						state_production_speed_buildings_factor = 0.1
+					}
+				}
+			}
+			
+		}
+		x = 13
+		y = 4
+
+	}
+	focus = { #小康社会已不是梦想
+		id = GAL_nongye_10
+		icon = GFX_goal_CAN_agrarian_heritage
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_nongye_6
+		}
+		prerequisite = {
+			focus = GAL_nongye_8
+		}
+		x = 16
+		y = 4
+		completion_reward = {
+			
+			swap_ideas = {
+				remove_idea = GAL_rural_society_2
+				add_idea = GAL_rural_society_3
+			}
+		}
+	}
+
+#四年计划	
+	focus = { #四年计划
+		id = GAL_jihua_1
+		icon = GFX_goal_generic_industrial_planning
+		cost = 4.00
+		x = 13
+		y = 5
+		prerequisite = {
+			focus = GAL_monday_9
+		}
+		prerequisite = {
+			focus = GAL_nongye_6
+		}
+		prerequisite = {
+			focus = GAL_nongye_9
+		}
+		prerequisite = {
+			focus = GAL_nongye_10
+		}
+		completion_reward = {
+			91 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes 
+				}
+			}
+			add_timed_idea = { idea = GAL_sinianjihua days = 1460 }
+		}
+	}
+	focus = { #利沃夫坦克厂
+		id = GAL_jihua_2
+		icon = GFX_goal_Focus_Military_Mobilisation
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_jihua_1
+		}
+		x = 9
+		y = 6
+		completion_reward = {
+			91 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes 
+				}
+			}
+			add_tech_bonus = {
+				bonus = 1.0 
+				ahead_reduction = 1 
+				uses = 1
+				category = armor 
+			}
+			add_ideas = liwofutankechangi
+		}
+	}
+	focus = { #斯坦洛瓦沃拉钢铁公司
+		id = GAL_jihua_3
+		icon = GFX_goal_CRO_steel_deposits
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_jihua_2
+		}
+		x = 9
+		y = 7
+		completion_reward = {
+			89 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes 
+				}
+				add_resource = {
+					type = steel
+					amount = 36
+				}
+			}
+		}	
+	}
+	focus = { #扩建克拉科夫大学
+		id = GAL_jihua_4
+		icon = GFX_goal_UMN_university
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_jihua_1
+		}
+		x = 11
+		y = 6
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	focus = { #扩建利沃夫大学
+		id = GAL_jihua_5
+		icon = GFX_goal_AUS_Sign_Universitasbeschluss
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_jihua_4
+		}
+		x = 11
+		y = 7
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	focus = { #发展轻工业
+		id = GAL_jihua_6
+		icon = GFX_RUS_Begin_Industrialization
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_jihua_1
+		}
+		x = 13
+		y = 6
+		completion_reward = {
+			88={
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes 
+				}
+			}
+		}
+	}
+	focus = { #发展重工业
+		id = GAL_jihua_7
+		icon = GFX_goal_IRE_generic_construction
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_jihua_6
+		}
+		x = 13
+		y = 7
+		completion_reward = {
+			1140={
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes 
+				}
+			}
+		}
+	}
+	focus = { #全国铁路电气化
+		id = GAL_jihua_8
+		icon = GFX_NEE_infrastructure_integration
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_jihua_1
+		}
+		x = 15
+		y = 6
+		completion_reward = {
+			every_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes 
+				}
+			}
+		}
+	}
+	focus = { #铁路规划
+		id = GAL_jihua_9
+		icon = GFX_goal_NIC_Pacific_Rail_Expansion
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_jihua_8
+		}
+		x = 15
+		y = 7
+		completion_reward = {
+			add_ideas = GAL_tieluguihua
+			build_railway = {
+				level = 1
+				start_province = 9427
+				target_province = 11479
+			}
+			build_railway = {
+				level = 1
+				start_province = 11479
+				target_province = 6761
+			}
+		}
+	}
+	focus = { #黑色的黄金
+		id = GAL_jihua_10
+		icon = GFX_goal_TEX_Fair_Price_Oil
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_jihua_1
+		}
+		x = 17
+		y = 6
+		completion_reward = {
+			1140 = {
+				add_resource={
+					type = oil
+					amount = 20
+				}
+			}
+			89 = {
+				add_resource={
+					type = oil
+					amount = 20
+				}
+			}
+			1126 = {
+				add_resource={
+					type = oil
+					amount = 20
+				}
+			}
+			add_ideas = GAL_shiyoulirun
+		}
+
+	}
+	focus = { #稀有资源勘测
+		id = GAL_jihua_11
+		icon = GFX_BBR_resources_of_black_america
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_jihua_10
+		}
+		x = 17
+		y = 7
+		completion_reward = {
+			1126 = {
+				add_resource={
+					type = tungsten
+					amount = 10
+				}
+				add_resource={
+					type = chromium
+					amount = 5
+				}
+				add_resource={
+					type = aluminium
+					amount = 8
+				}
+			}
+			add_ideas = GAL_ziyuantance
+		}
+	}
+
+#陆军线
+	focus = { #建立最高指挥部
+		id = GAL_lujun_1
+		icon = GFX_goal_GAL_zwiazek_strzelecki
+		cost = 4.00
+		x = 27
+		y = 0
+		available = {
+			has_idea = GAL_xiangcunzhenxing
+		}
+		completion_reward = {
+			add_ideas = GAL_zuigaozhihuibu
+			army_experience = 50
+			set_country_flag = zuigaozhihuibu
+		}
+	}
+	focus = { #崭新的加利西亚方式
+		id = GAL_lujun_2
+		icon = GFX_goal_POL_Defending_Polish_Nationhood
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_1
+		}
+		mutually_exclusive = {
+			focus = GAL_legacy_of_blue_army
+		}
+		x = 24
+		y = 1
+		completion_reward = {
+			add_ideas = GAL_integrated_army
+		}
+	}
+	focus = { 
+		id = GAL_legacy_of_blue_army
+		icon = GFX_goal_POL_Polish_War_Effort
+		cost = 4.00
+		relative_position_id = GAL_lujun_1
+		prerequisite = {
+			focus = GAL_lujun_1
+		}
+		mutually_exclusive = {
+			focus = GAL_lujun_2
+		}
+		x = 3
+		y = 1
+		completion_reward = {
+			add_ideas = GAL_legacy_of_blue_army
+		}
+	}
+	focus = { #装备改进
+		id = GAL_lujun_6
+		icon = GFX_goal_POL_New_Polish_Rifle
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_legacy_of_blue_army
+		}
+		relative_position_id = GAL_legacy_of_blue_army
+		x = -1
+		y = 1
+		completion_reward = {
+			army_experience = 15
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = artillery
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = support_tech
+			}
+			add_ideas = zhuangbeigengxin
+		}
+	}
+	focus = { #机动作战
+		id = GAL_lujun_4
+		icon = GFX_goal_VIN_motorization
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_6
+		}
+		prerequisite = {
+			focus = GAL_battlefield_hospital
+		}
+		relative_position_id = GAL_legacy_of_blue_army
+		x = -2
+		y = 2
+		completion_reward = {
+			army_experience = 15
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = motorized_equipment
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				category = land_doctrine
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = 500
+			}
+		}
+	}
+	focus = { 
+		id = GAL_focus_artillery
+		icon = GFX_goal_SKM_Modern_Artillery
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_6
+		}
+		prerequisite = {
+			focus = GAL_battlefield_hospital
+		}
+		relative_position_id = GAL_legacy_of_blue_army
+		x = 2
+		y = 2
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_legacy_of_blue_army2
+				add_idea = GAL_legacy_of_blue_army3
+			}
+		}
+	}
+	focus = { 
+		id = GAL_battlefield_hospital
+		icon = GFX_goal_WHR_Paint_Red_Cross_Black
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_legacy_of_blue_army
+		}
+		relative_position_id = GAL_legacy_of_blue_army
+		x = 1
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_legacy_of_blue_army
+				add_idea = GAL_legacy_of_blue_army2
+			}
+		}
+	}
+	focus = { 
+		id = GAL_intenational_volunteer
+		icon = GFX_goal_GAL_recruitment_among_polonia
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_6
+		}
+		prerequisite = {
+			focus = GAL_battlefield_hospital
+		}
+		relative_position_id = GAL_legacy_of_blue_army
+		x = 0
+		y = 2
+		completion_reward = {
+			add_ideas = GAL_intenational_volunteer
+		}
+	}
+	focus = { #专业化训练
+		id = GAL_lujun_11
+		icon = GFX_goal_CZE_squad_tactics
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_4
+		}
+		prerequisite = {
+			focus = GAL_intenational_volunteer
+		}
+		prerequisite = {
+			focus = GAL_focus_artillery
+		}
+		relative_position_id = GAL_legacy_of_blue_army
+		x = 0
+		y = 3
+		
+		completion_reward = {
+			army_experience = 15
+			swap_ideas = {
+				remove_idea = GAL_legacy_of_blue_army3
+				add_idea = GAL_legacy_of_blue_army4
+			}
+		}
+	}
+	
+	
+
+	focus = { #优化配给
+		id = GAL_lujun_8
+		icon = GFX_DKB_Secure_Supply_Lines
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_10
+		}
+		prerequisite = {
+			focus = GAL_conscript_minority
+		}
+		relative_position_id = GAL_lujun_2
+		x = 2
+		y = 2
+		completion_reward = {
+			army_experience = 15
+			add_ideas = youhuapeiji
+		}
+	}
+	focus = { #集中大众
+		id = GAL_lujun_9
+		icon = GFX_goal_POL_Defensive_Tactics
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_10
+		}
+		prerequisite = {
+			focus = GAL_conscript_minority
+		}
+		relative_position_id = GAL_lujun_2
+		x = 0
+		y = 2
+		completion_reward = {
+			army_experience = 15
+			add_manpower = 100000
+			add_command_power = 50
+		}
+	}
+	focus = { 
+		id = GAL_people_army
+		icon = GFX_SOV_militia
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_20
+		}
+		prerequisite = {
+			focus = GAL_lujun_9
+		}
+		prerequisite = {
+			focus = GAL_lujun_8
+		}
+		relative_position_id = GAL_lujun_2
+		x = 0
+		y = 3
+		completion_reward = {
+			add_manpower = 100000
+			swap_ideas = {
+				remove_idea = GAL_integrated_army3
+				add_idea = GAL_integrated_army4
+			}
+		}
+	}
+	focus = { #成立预备役
+		id = GAL_lujun_10
+		icon = GFX_goal_NFA_army_merger
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_2
+		}
+		relative_position_id = GAL_lujun_2
+		x = 1
+		y = 1
+		completion_reward = {
+			army_experience = 15
+			add_manpower = 100000
+			add_ideas = GAL_reservations
+		}
+	}
+	focus = { 
+		id = GAL_conscript_minority
+		icon = GFX_TRM_Obligatory_Conscription
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_2
+		}
+		relative_position_id = GAL_lujun_2
+		x = -1
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_integrated_army
+				add_idea = GAL_integrated_army2
+			}
+		}
+	}
+	
+	
+	focus = { #大规模生产
+		id = GAL_lujun_20
+		icon = GFX_goal_POL_industry_warsaw
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_lujun_10
+		}
+		prerequisite = {
+			focus = GAL_conscript_minority
+		}
+		relative_position_id = GAL_lujun_2
+		x = -2
+		y = 2
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_integrated_army2
+				add_idea = GAL_integrated_army3
+			}
+		}
+	}
+#海军线
+	focus = { #建立海军事务部
+		id = GAL_haijun_1
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		cost = 4.00
+		x = 24
+		y = 5
+		available = { 
+			any_owned_state = { is_coastal = yes } 
+			has_country_flag = zuigaozhihuibu
+		}
+		completion_reward = {
+			navy_experience = 75
+		}
+	}
+	focus = { #扩建造船厂
+		id = GAL_haijun_2
+		icon = GFX_goal_generic_construct_naval_dockyard
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_haijun_1
+		}
+		x = 23
+		y = 6
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+			add_ideas = haijungongye
+		}
+	}
+	focus = { #商船总局
+		id = GAL_haijun_3
+		icon = GFX_USA_ports_atlantic
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_haijun_2
+		}
+		x = 22
+		y = 7
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = convoy_1
+				amount = 200
+			}
+			add_ideas = shangchuan
+		}
+	}
+	focus = { #采购舰艇
+		id = GAL_haijun_4
+		icon = GFX_goal_CRO_submarine_enterprise
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_haijun_1
+		}
+		x = 25
+		y = 6
+		completion_reward = {
+			add_political_power = -100
+			custom_effect_tooltip = CRO_ship_purchase_tooltip
+			hidden_effect = {
+				load_oob = CRO_purchase
+			}
+		}
+	}
+	focus = { #训练海军将领
+		id = GAL_haijun_5
+		icon = GFX_goal_navy_hat_ships
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_haijun_4
+		}
+		x = 26
+		y = 7
+		completion_reward = {
+			navy_experience = 75
+		}
+	}
+	focus = { #重组岸防力量
+		id = GAL_haijun_6
+		icon = GFX_goal_CRO_second_best_navy
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_haijun_2
+		}
+		prerequisite = {
+			focus = GAL_haijun_4
+		}
+		x = 24
+		y = 7
+		completion_reward = {
+			add_tech_bonus = {
+				name = GAL_unrestircted_submarine_warfare
+				bonus = 1
+				uses = 2
+				category = ss_tech
+			}
+			add_tech_bonus = {
+				name = GAL_doctrine_fleet2
+				bonus = 1
+				uses = 2
+				category = dd_tech
+			}
+			custom_effect_tooltip = FIU_summon_three_cruisers
+			hidden_effect = {
+				load_oob = FIU_three_cruiser_decision
+			}
+			custom_effect_tooltip = FIU_summon_one_battleship
+			hidden_effect = {
+				load_oob = FIU_one_battleship_decision
+			}
+		}
+	}
+	focus = { #绿水战略
+		id = GAL_haijun_7
+		icon = GFX_goal_generic_navy_anti_submarine
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_haijun_3
+		}
+		prerequisite = {
+			focus = GAL_haijun_5
+		}
+		prerequisite = {
+			focus = GAL_haijun_6
+		}
+		x = 24
+		y = 8
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 5
+				category = trade_interdiction_tree
+			}
+			add_ideas = lvshuizhanlue
+		}
+	}
+#空军线
+	focus = { #加利西亚空军
+		id = GAL_kongjun_1
+		icon = GFX_goal_generic_air_doctrine
+		cost = 4.00
+		x = 30
+		y = 5
+		available = {
+			has_country_flag = zuigaozhihuibu
+		}
+		completion_reward = {
+			air_experience = 75
+		}
+	}
+	focus = { #标准化飞行员训练
+		id = GAL_kongjun_2
+		icon = GFX_focus_SOV_flying_clubs
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_kongjun_1
+		}
+		x = 28
+		y = 6
+		completion_reward = {
+			air_experience = 75
+		}
+	}
+	focus = { #扩建机场
+		id = GAL_kongjun_3
+		icon = GFX_goal_generic_airports
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_kongjun_1
+		}
+		x = 30
+		y = 6
+		completion_reward = {
+			1125 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+			1127 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+			88 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			89 = {
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+			91 = {
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = { #领空防卫
+		id = GAL_kongjun_4
+		icon = GFX_goal_generic_anti_air_gun
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_kongjun_3
+		}
+		prerequisite = {
+			focus = GAL_kongjun_2
+		}
+		x = 29
+		y = 7
+		completion_reward = {
+			add_tech_bonus = {
+				name = GAL_close_combat
+				bonus = 1
+				uses = 2
+				category = light_fighter
+			}
+			every_owned_state = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_ideas = lingkongfangwei
+		}
+	}
+	focus = { #灵活战术
+		id = GAL_kongjun_5
+		icon = GFX_goal_generic_air_command
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_kongjun_4
+		}
+		x = 28
+		y = 8
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 5
+				category = air_doctrine
+			}
+		}
+	}
+	focus = { #扩建航空工业
+		id = GAL_kongjun_6
+		icon = GFX_goal_CZE_air_industry
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_kongjun_1
+		}
+		x = 32
+		y = 6
+		completion_reward = {
+			88 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			89 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			91 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_ideas = hangkonggongye
+		}
+	} 
+	focus = { #地方航空局
+		id = GAL_kongjun_7
+		icon = GFX_goal_generic_air_fighter2
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_kongjun_3
+		}
+		prerequisite = {
+			focus = GAL_kongjun_6
+		}
+		x = 31
+		y = 7
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = transport_plane_equipment_1
+				amount = 50
+			}
+		}
+	}
+	focus = { #地面支援特化
+		id = GAL_kongjun_8
+		icon = GFX_goal_CZE_radar_research
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_kongjun_7
+		}
+		x = 32
+		y = 8
+		completion_reward = {
+			add_tech_bonus = {
+				name = POL_experiment_with_radar
+				bonus = 1
+				uses = 2
+				category = radar_tech
+			}
+			every_owned_state = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = { #创立空降兵
+		id = GAL_kongjun_9
+		icon = GFX_goal_generic_paratroopers
+		cost = 4.00
+		prerequisite = {
+			focus = GAL_kongjun_4
+		}
+		prerequisite = {
+			focus = GAL_kongjun_7
+		}
+		x = 30
+		y = 8
+		completion_reward = {
+			add_tech_bonus = {
+				name = GAL_para
+				bonus = 1
+				uses = 2
+				category = para_tech
+			}
+		}
+	}
+	focus = {
+		id = GAL_fp
+		icon = GFX_goal_generic_world_diplomacy
+		cost = 4
+		x = 37
+		y = 3
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+	focus = {
+		id = GAL_loyal_aus
+		icon = GFX_goal_AUS_Austrian_Auspices
+		cost = 4
+		relative_position_id = GAL_fp
+		x = -2
+		y = 1
+		mutually_exclusive = {
+			focus = GAL_legacy_krakow_uprising
+			focus = GAL_join_poland
+		}
+		available = {
+			is_in_faction_with = AUS
+		}
+		prerequisite = {
+			focus = GAL_fp
+		}
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			add_war_support = 0.1
+		}
+	}
+	focus = {
+		id = GAL_legacy_krakow_uprising
+		icon = GFX_goal_GAL_tough_year
+		cost = 4
+		relative_position_id = GAL_fp
+		x = 0
+		y = 1
+		mutually_exclusive = {
+			focus = GAL_loyal_aus
+			focus = GAL_join_poland
+		}
+		bypass = {
+			NOT = {
+				is_in_faction_with = AUS
+			}
+		}
+		prerequisite = {
+			focus = GAL_fp
+		}
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			leave_faction = yes
+		}
+	}
+	focus = {
+		id = GAL_join_poland
+		icon = GFX_goal_GAL_tough_year
+		cost = 4
+		relative_position_id = GAL_fp
+		x = 2
+		y = 1
+		mutually_exclusive = {
+			focus = GAL_loyal_aus
+			focus = GAL_legacy_krakow_uprising
+		}
+		prerequisite = {
+			focus = GAL_fp
+		}
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			custom_effect_tooltip = GAME_OVER_TT
+			POL = {
+				country_event = {
+					id = gal.2
+				} 
+			}
+		}
+	}
+	focus = {
+		id = GAL_liberate_pol
+		icon = GFX_goal_GAL_tough_year
+		cost = 4
+		relative_position_id = GAL_fp
+		x = -1
+		y = 2
+		prerequisite = {
+			focus = GAL_loyal_aus
+			focus = GAL_legacy_krakow_uprising
+		}
+		
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			create_wargoal = {
+				target = POL
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = POL
+				}
+				GAL = {
+					add_state_core = PREV
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = GAL_bigger_ambition
+		icon = GFX_goal_GAL_tough_year
+		cost = 4
+		relative_position_id = GAL_fp
+		x = 0
+		y = 3
+		prerequisite = {
+			focus = GAL_liberate_pol
+		}
+		
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			custom_effect_tooltip = "该国策的效果取决于路线。"
+			#insert event later
+		}
+	}
+#原版国策
+	focus = {
+		id = GAL_tough_year
+		icon = GFX_goal_GAL_tough_year
+		cost = 2
+		x = 3
+		y = 0
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			add_political_power = 30
+			country_event = {
+				id = gal.10
+				days = 3
+			} 
+		}
+	}
+	focus = {
+		id = GAL_downwards_spiral
+		icon = GFX_goal_GAL_downwards_spiral
+		cost = 2
+        prerequisite = {
+			focus = GAL_tough_year
+		}
+		available = {
+			has_idea = GAL_golicja_glodomeria_2
+			has_idea = GAL_minority_unrest_2
+		}
+		relative_position_id = GAL_tough_year
+		x = 0
+		y = 1
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			add_political_power = -20
+			add_manpower = -4000
+		}
+	}
+	focus = {
+		id = GAL_calm_minorities
+		icon = GFX_goal_GAL_calm_minorities
+		cost = 4
+		prerequisite = {
+			focus = GAL_call_gentry
+			focus = GAL_emergency_peasant
+		}
+		mutually_exclusive = {
+			focus = GAL_another_committee
+		}
+		relative_position_id = GAL_tough_year
+		x = -1
+		y = 3
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			set_country_flag = GAL_calmed_minority
+			swap_ideas = {
+				remove_idea = GAL_minority_unrest_2
+				add_idea = GAL_minority_unrest_3
+			}
+			add_political_power = 100
+			activate_targeted_decision = { target = 89 decision = GAL_Ukrainian_Schools_In_State }
+			activate_targeted_decision = { target = 1127 decision = GAL_Ukrainian_Schools_In_State }
+			activate_targeted_decision = { target = 1126 decision = GAL_Ukrainian_Schools_In_State }
+			activate_targeted_decision = { target = 91 decision = GAL_Ban_Ukrainian_Schools_In_State }
+			activate_targeted_decision = { target = 80 decision = GAL_Ban_Ukrainian_Schools_In_State }
+			activate_targeted_decision = { target = 1140 decision = GAL_Ban_Ukrainian_Schools_In_State }
+		}
+	}
+	focus = {
+		id = GAL_another_committee
+		icon = GFX_goal_GAL_another_committee
+		cost = 4
+		prerequisite = {
+			focus = GAL_call_gentry
+			focus = GAL_emergency_peasant
+		}
+		mutually_exclusive = {
+			focus = GAL_calm_minorities
+		}
+		relative_position_id = GAL_tough_year
+		x = 1
+		y = 3
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			set_country_flag = GAL_committee_formed
+			swap_ideas = {
+				remove_idea = GAL_minority_unrest_2
+				add_idea = GAL_minority_unrest_3
+			}
+			activate_targeted_decision = { target = 89 decision = GAL_Ukrainian_Schools_In_State }
+			activate_targeted_decision = { target = 1127 decision = GAL_Ukrainian_Schools_In_State }
+			activate_targeted_decision = { target = 1126 decision = GAL_Ukrainian_Schools_In_State }
+			activate_targeted_decision = { target = 91 decision = GAL_Ban_Ukrainian_Schools_In_State }
+			activate_targeted_decision = { target = 80 decision = GAL_Ban_Ukrainian_Schools_In_State }
+			activate_targeted_decision = { target = 1140 decision = GAL_Ban_Ukrainian_Schools_In_State }
+			add_stability = 0.1
+		}
+	}
+	focus = {
+		id = GAL_call_gentry
+		icon = GFX_goal_GAL_call_gentry
+		cost = 4
+		prerequisite = {
+			focus = GAL_downwards_spiral
+		}
+		mutually_exclusive = {
+			focus = GAL_emergency_peasant
+		}
+		relative_position_id = GAL_tough_year
+		x = -1
+		y = 2
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			add_political_power = 100
+			set_country_flag = GAL_called_gentry
+		}
+
+	}
+	focus = {
+		id = GAL_emergency_peasant
+		icon = GFX_goal_GAL_emergency_peasant
+		cost = 4
+		prerequisite = {
+			focus = GAL_downwards_spiral
+		}
+		mutually_exclusive = {
+			focus = GAL_call_gentry
+		}
+		relative_position_id = GAL_tough_year
+		x = 1
+		y = 2
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			add_stability = 0.1
+			set_country_flag = GAL_helped_peasant
+		}
+	}
+	focus = {
+		id = GAL_contact_vienna
+		icon = GFX_goal_GAL_contact_vienna
+		cost = 4
+		prerequisite = {
+			focus = GAL_calm_minorities
+			focus = GAL_another_committee
+		}
+		relative_position_id = GAL_tough_year
+		x = 0
+		y = 4
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			add_political_power = 30
+			country_event = {
+				id = gal.14
+				days = 1
+			} 
+		}
+	}
+	focus = {
+		id = GAL_trust_market
+		icon = GFX_goal_GAL_trust_market
+		cost = 4
+		prerequisite = {
+			focus = GAL_contact_vienna
+		}
+		available = {
+			has_country_flag = GAL_market_help
+		}
+		mutually_exclusive = {
+			focus = GAL_sell_oil
+		}
+		relative_position_id = GAL_tough_year
+		x = -1
+		y = 5
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			set_country_flag = GAL_trusted_market_help
+			add_timed_idea = {
+				idea = GAL_market_influence
+				days = 60
+			}
+		}
+	}
+	focus = {
+		id = GAL_sell_oil
+		icon = GFX_goal_GAL_sell_oil
+		cost = 4
+		prerequisite = {
+			focus = GAL_contact_vienna
+		}
+		available = {
+			NOT = {
+			has_country_flag = GAL_market_help
+			}
+		}
+		mutually_exclusive = {
+			focus = GAL_trust_market
+		}
+		relative_position_id = GAL_tough_year
+		x = 1
+		y = 5
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			set_country_flag = GAL_selled_oil
+			add_timed_idea = {
+				idea = GAL_selling_oil
+				days = 60
+			}
+		}
+	}
+	focus = {
+		id = GAL_special_elections
+		icon = GFX_goal_GAL_special_elections
+		cost = 4
+		
+		prerequisite = {
+			focus = GAL_trust_market
+			focus = GAL_sell_oil
+		}
+		x = 3
+		y = 6
+        ai_will_do = {
+			factor = 1500
+		}
+		completion_reward = {
+			remove_ideas = GAL_shattered_unity
+			if = {
+				limit = {
+					has_country_flag = GAL_called_gentry
+					has_country_flag = GAL_calmed_minority
+				}
+				#nationalist coup
+				hidden_effect = {
+					country_event = gal.19
+				}
+			}
+			else_if = {
+				limit = { 
+					has_country_flag = GAL_called_gentry
+					has_country_flag = GAL_committee_formed
+					has_country_flag = GAL_trusted_market_help
+				}
+				#landlord government
+				hidden_effect = {
+					country_event = gal.18
+				}
+			}
+			else_if = {
+				limit = { 
+					has_country_flag = GAL_called_gentry
+					has_country_flag = GAL_committee_formed
+					has_country_flag = GAL_selled_oil
+				}
+				#military government
+				hidden_effect = {
+					country_event = gal.16
+				}
+			}
+			else_if = {
+				limit = { 
+					has_country_flag = GAL_helped_peasant
+					has_country_flag = GAL_committee_formed
+				}
+				#socialist coup
+				hidden_effect = {
+					country_event = gal.17
+				}
+			}
+			else_if = {
+				limit = { 
+					has_country_flag = GAL_helped_peasant
+					has_country_flag = GAL_calmed_minority
+				}
+				#election
+				hidden_effect = {
+					country_event = gal.15
+				}
+			}
+			
+		}
+	}
+
+
+
+	
+	 focus = {
+        id = GAL_rebuild_civilian_governance
+        icon = GFX_goal_WCC_civilian_allies
+        cost = 4
+        available = {
+			has_country_flag = GAL_democracy_mandate
+		}
+        completion_reward = { 
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			
+		}
+        
+        
+        x = 0
+        y = 10
+    }
+
+    # Tier 2
+    focus = {
+        id = GAL_restore_public_confidence
+        icon = GFX_goal_generic_civilian_oversight
+        cost = 4
+        available = {}
+        completion_reward = { 
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.15
+			}
+			set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+		}
+        prerequisite = { focus = GAL_rebuild_civilian_governance }
+        
+        relative_position_id = GAL_rebuild_civilian_governance
+        x = -1
+        y = 1
+        
+        
+    }
+    focus = {
+        id = GAL_crackdown_extremists
+        icon = GFX_goal_DSR_extremism
+        cost = 4
+        available = {}
+        completion_reward = { 
+			set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.15
+			}
+
+		}
+        prerequisite = { focus = GAL_rebuild_civilian_governance }
+        
+        relative_position_id = GAL_rebuild_civilian_governance
+        x = 1
+        y = 1
+        
+       
+    }
+
+    # Tier 3
+    focus = {
+        id = GAL_implement_land_reform
+        icon = GFX_goal_SKM_Dire_Need_Land_Reforms
+        cost = 4
+        available = {}
+        completion_reward = { 
+			add_ideas = GAL_implement_land_reform
+		}
+        prerequisite = { focus = GAL_restore_public_confidence }
+        
+        relative_position_id = GAL_restore_public_confidence
+        x = 0
+        y = 1
+        
+       
+    }
+    focus = {
+        id = GAL_safeguard_parliamentary_democracy
+        icon = GFX_goal_NFL_the_unbroken_promise_of_democracy
+        cost = 4
+        available = {}
+        completion_reward = { 
+			add_ideas = GAL_safeguard_parliamentary_democracy
+
+		}
+        prerequisite = { focus = GAL_crackdown_extremists }
+        
+        relative_position_id = GAL_crackdown_extremists
+        x = 0
+        y = 1
+        
+       
+    }
+
+    # Tier 4
+    focus = {
+        id = GAL_appease_military
+        icon = GFX_goal_GUA_Military_Ready
+        cost = 4
+        available = {}
+        completion_reward = { 
+			add_manpower = 50000
+			add_command_power = 50
+			army_experience = 25
+		}
+        prerequisite = { focus = GAL_implement_land_reform }
+        prerequisite = { focus = GAL_safeguard_parliamentary_democracy }
+        
+        relative_position_id = GAL_implement_land_reform
+        x = 1
+        y = 1
+    }
+
+    # Tier 5
+    focus = {
+        id = GAL_heal_national_trauma
+        icon = GFX_goal_GAL_heal_nation
+        cost = 4
+        available = {}
+        completion_reward = { 
+			add_ideas = GAL_heal_national_trauma
+		}
+        prerequisite = { focus = GAL_appease_military }
+        
+        relative_position_id = GAL_appease_military
+        x = 0
+        y = 1
+    }
+
+    # Tier 6
+    focus = {
+        id = GAL_partially_nationalise_foreign_factories
+        icon = GFX_RUS_Nationalize_Vital_Sectors
+        cost = 4
+        available = {
+			OR = {
+				has_government = social_democrat
+				has_government = social_liberal
+			}
+		}
+        completion_reward = { 
+			add_ideas = GAL_partially_nationalise_foreign_factories
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+		}
+        prerequisite = { focus = GAL_heal_national_trauma }
+        
+        relative_position_id = GAL_heal_national_trauma
+        x = -1
+        y = 1
+        
+        mutually_exclusive = { focus = GAL_economic_liberalisation }
+    }
+    focus = {
+        id = GAL_economic_liberalisation
+        icon = GFX_goal_NFA_Liberal_Economic_Boom
+        cost = 4
+        available = {
+			OR = {
+				has_government = market_liberal
+				has_government = social_liberal
+			}
+		}
+        completion_reward = { 
+			add_ideas = GAL_economic_liberalisation
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+        prerequisite = { focus = GAL_heal_national_trauma }
+        
+        relative_position_id = GAL_heal_national_trauma
+        x = 1
+        y = 1
+        
+        mutually_exclusive = { focus = GAL_partially_nationalise_foreign_factories }
+    }
+
+    # Tier 7
+    focus = {
+        id = GAL_cincinnatus_return
+        icon = GFX_goal_HON_Socialist_Reforms
+        cost = 4
+        available = {
+			has_government = social_democrat
+		}
+        completion_reward = { 
+			add_ideas = GAL_socdem_pol
+		}
+        prerequisite = { focus = GAL_partially_nationalise_foreign_factories }
+        
+        relative_position_id = GAL_partially_nationalise_foreign_factories
+        x = -1
+        y = 1
+        
+        mutually_exclusive = { focus = GAL_peoples_party_hegemony }
+        mutually_exclusive = { focus = GAL_krakow_school_rule }
+    }
+    focus = {
+        id = GAL_peoples_party_hegemony
+        icon = GFX_goal_FIN_Agrarians
+        cost = 4
+        available = {
+			has_government = social_liberal
+		}
+        completion_reward = { 
+			add_ideas = GAL_soclib_pol
+		}
+        prerequisite = { 
+			focus = GAL_partially_nationalise_foreign_factories 
+			focus = GAL_economic_liberalisation
+		}
+      
+		
+        
+        relative_position_id = GAL_partially_nationalise_foreign_factories
+        x = 1
+        y = 1
+        
+        mutually_exclusive = { focus = GAL_cincinnatus_return }
+        mutually_exclusive = { focus = GAL_krakow_school_rule }
+    }
+    focus = {
+        id = GAL_krakow_school_rule
+        icon = GFX_goal_MEX_open_markets_for_entente
+        cost = 4
+        available = {
+			has_government = market_liberal
+		}
+        completion_reward = { 
+			add_ideas = GAL_marlib_pol
+		}
+        prerequisite = { focus = GAL_economic_liberalisation }
+        
+        relative_position_id = GAL_economic_liberalisation
+        x = 1
+        y = 1
+        
+        mutually_exclusive = { focus = GAL_cincinnatus_return }
+        mutually_exclusive = { focus = GAL_peoples_party_hegemony }
+    }
+
+    # Tier 8
+    focus = {
+        id = GAL_study_austrian_marxism
+        icon = GFX_goal_MNT_marxist_stitch
+        cost = 4
+        available = {}
+        completion_reward = { 
+			swap_ideas = {
+				remove_idea = GAL_socdem_pol
+				add_idea = GAL_socdem_pol2
+			}
+		}
+        prerequisite = { focus = GAL_cincinnatus_return }
+        
+        relative_position_id = GAL_cincinnatus_return
+        x = 0
+        y = 1
+    }
+    focus = {
+        id = GAL_skalka_ii
+        icon = GFX_goal_AUS_Enact_Hainischs_Agrarreformplan
+        cost = 4
+        available = {}
+        completion_reward = { 
+			swap_ideas = {
+				remove_idea = GAL_soclib_pol
+				add_idea = GAL_soclib_pol2
+			}
+		}
+        prerequisite = { focus = GAL_peoples_party_hegemony }
+        
+        relative_position_id = GAL_peoples_party_hegemony
+        x = 0
+        y = 1
+    }
+    focus = {
+        id = GAL_classical_methods_modern_population
+        icon = GFX_goal_CSA_Break_Malthusian_Limits_Growth
+        cost = 4
+        available = {}
+        completion_reward = { 
+			swap_ideas = {
+				remove_idea = GAL_marlib_pol
+				add_idea = GAL_marlib_pol2
+			}
+		}
+        prerequisite = { focus = GAL_krakow_school_rule }
+        
+        relative_position_id = GAL_krakow_school_rule
+        x = 0
+        y = 1
+    }
+
+    # Tier 9 (Final)
+    focus = {
+        id = GAL_defend_our_freedom
+        icon = GFX_goal_CZE_defend_freedom
+        cost = 4
+        available = {}
+        completion_reward = { 
+			add_ideas = GAL_defend_our_freedom
+		}
+        prerequisite = { 
+			focus = GAL_study_austrian_marxism 
+			focus = GAL_skalka_ii
+			focus = GAL_classical_methods_modern_population
+		}
+        
+		
+        relative_position_id = GAL_study_austrian_marxism
+        x = 2
+        y = 1
+    }
+	# ============================================================
+	# Tier 1: 根节点
+	# ============================================================
+	focus = {
+		id = GAL_strongman_politics
+		icon = GFX_goal_GAL_strongman_in_uniform
+		cost = 4
+		available = {
+			has_country_flag = GAL_autocracy
+		}
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+		}
+	
+		
+		x = 10
+		y = 10
+	}
+
+	# ============================================================
+	# Tier 2: 分叉为2
+	# ============================================================
+	focus = {
+		id = GAL_declare_martial_law
+		icon = GFX_goal_GAL_military_in_charge
+		cost = 4
+		prerequisite = { focus = GAL_strongman_politics }
+		available = {}
+		completion_reward = {
+			add_ideas = GAL_declare_martial_law
+		}
+		
+		relative_position_id = GAL_strongman_politics
+		x = -1
+		y = 1
+	}
+
+	focus = {
+		id = GAL_abolish_parliament
+		icon = GFX_goal_NFA_end_parliamentarism
+		cost = 4
+		prerequisite = { focus = GAL_strongman_politics }
+		available = {}
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.05
+			set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = -0.10
+			}
+		}
+		
+		relative_position_id = GAL_strongman_politics
+		x = 1
+		y = 1
+	}
+
+	# ============================================================
+	# Tier 3: 各自向下
+	# ============================================================
+	focus = {
+		id = GAL_national_militarisation
+		icon = GFX_goal_GUA_Militarized_Society
+		cost = 4
+		prerequisite = { focus = GAL_declare_martial_law }
+		available = {}
+		completion_reward = {
+			add_ideas = GAL_national_militarisation_idea
+		}
+		
+		relative_position_id = GAL_declare_martial_law
+		x = 0
+		y = 1
+	}
+
+	focus = {
+		id = GAL_arrest_jewish_socialist_spokesmen
+		icon = GFX_goal_AUS_Arrest_Anti_Habsburg_Unpatriotic_Sentiments
+		cost = 4
+		prerequisite = { focus = GAL_abolish_parliament }
+		available = {}
+		completion_reward = {
+			add_political_power = 50
+			set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.10
+			}
+		}
+		
+		relative_position_id = GAL_abolish_parliament
+		x = 0
+		y = 1
+	}
+
+	# ============================================================
+	# Tier 4: 汇合点
+	# ============================================================
+	focus = {
+		id = GAL_head_of_state_first
+		icon = GFX_goal_POL_Integrate_Patriots
+		cost = 4
+		prerequisite = { focus = GAL_national_militarisation }
+		prerequisite = { focus = GAL_arrest_jewish_socialist_spokesmen }
+		available = {}
+		completion_reward = {
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.15
+			}
+			add_manpower = 50000
+			add_command_power = 50
+			
+		}
+		relative_position_id = GAL_national_militarisation
+		x = 1
+		y = 1
+	}
+
+	# ============================================================
+	# Tier 5: 分叉为2
+	# ============================================================
+	focus = {
+		id = GAL_agricultural_cooperative_movement
+		icon = GFX_goal_GLC_Cooperative_economy
+		cost = 4
+		prerequisite = { focus = GAL_head_of_state_first }
+		available = {}
+		completion_reward = {
+			add_ideas = GAL_agricultural_cooperative_movement
+		}
+		
+		relative_position_id = GAL_head_of_state_first
+		x = -1
+		y = 1
+	}
+
+	focus = {
+		id = GAL_blue_army_legacy
+		icon = GFX_goal_POL_Do_Boju
+		cost = 4
+		prerequisite = { focus = GAL_head_of_state_first }
+		available = {}
+		completion_reward = {
+			add_ideas = GAL_blue_army_legacy
+		}
+		
+		relative_position_id = GAL_head_of_state_first
+		x = 1
+		y = 1
+	}
+
+	# ============================================================
+	# Tier 6: 各自向下
+	# ============================================================
+	focus = {
+		id = GAL_cooperate_with_nationalists
+		icon = GFX_goal_national_populism
+		cost = 4
+		prerequisite = { focus = GAL_agricultural_cooperative_movement }
+		prerequisite = { focus = GAL_blue_army_legacy }
+		available = {}
+		completion_reward = {
+			add_ideas = GAL_natcoop_pol
+			add_natpop_to_coalition = yes
+			set_country_leader_ideology = national_democracy_subtype
+			
+		}
+		mutually_exclusive = { focus = GAL_military_christian_democracy }
+		relative_position_id = GAL_agricultural_cooperative_movement
+		x = 0
+		y = 1
+	}
+
+	focus = {
+		id = GAL_military_christian_democracy
+		icon = GFX_goal_LPD_democracy_in_quotation_marks
+		cost = 4
+		prerequisite = { focus = GAL_blue_army_legacy }
+		prerequisite = { focus = GAL_agricultural_cooperative_movement }
+		available = {}
+		completion_reward = {
+			add_ideas = GAL_milchristdem_pol
+			add_soccon_to_coalition = yes
+			add_pataut_to_coalition = yes
+			set_country_leader_ideology = controlled_democracy_subtype
+
+		}
+		mutually_exclusive = { focus = GAL_cooperate_with_nationalists }
+		relative_position_id = GAL_blue_army_legacy
+		x = 0
+		y = 1
+	}
+
+	# ============================================================
+	# Tier 7: 各自向下
+	# ============================================================
+	focus = {
+		id = GAL_force_polonisation
+		icon = GFX_goal_GER_Subjugate_East
+		cost = 4
+		prerequisite = { focus = GAL_cooperate_with_nationalists }
+		available = {}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_natcoop_pol
+				add_idea = GAL_natcoop_pol2
+			}
+		}
+		
+		relative_position_id = GAL_cooperate_with_nationalists
+		x = 0
+		y = 1
+	}
+
+	focus = {
+		id = GAL_form_christian_national_unity
+		icon = GFX_goal_SHX_Christian_Influence
+		cost = 4
+		prerequisite = { focus = GAL_military_christian_democracy }
+		available = {}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_milchristdem_pol
+				add_idea = GAL_milchristdem_pol2
+			}
+		}
+		
+		relative_position_id = GAL_military_christian_democracy
+		x = 0
+		y = 1
+	}
+
+	# ============================================================
+	# Tier 8: 终点汇合
+	# ============================================================
+	focus = {
+		id = GAL_eternal_military_dictatorship
+		icon = GFX_goal_COR_Truly_Christian_Army
+		cost = 4
+		prerequisite = {
+			focus = GAL_force_polonisation
+			focus = GAL_form_christian_national_unity
+		}
+
+
+		available = {}
+		completion_reward = {
+			add_ideas = GAL_eternal_military_dictatorship
+		}
+		relative_position_id = GAL_force_polonisation
+		x = 1
+		y = 1
+	}
+	# Tier 1: 根节点
+	focus = {
+		id = GAL_szlachta_state
+		icon = GFX_goal_GLC_Sanctifiers_of_land
+		cost = 4
+		available = {
+			has_country_flag = GAL_szlachata_coup
+		}
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+		}
+		select_effect = {
+			hidden_effect = {
+				country_event = {
+					id = gal.45
+					days = 3
+				}
+			}
+		}
+		x = 20
+		y = 10
+	}
+
+	# Tier 2: 两派分支（互斥）
+	focus = {
+		id = GAL_stanczyk_majority
+		icon = GFX_goal_ideology_social_conservative
+		cost = 4
+		prerequisite = { focus = GAL_szlachta_state }
+		available = {
+			has_government = social_conservative
+		}
+		completion_reward = {
+			add_ideas = GAL_soccon_pol
+		}
+		mutually_exclusive = { focus = GAL_podolia_majority }
+		relative_position_id = GAL_szlachta_state
+		x = -1
+		y = 1
+	}
+
+	focus = {
+		id = GAL_podolia_majority
+		icon = GFX_goal_ideology_paternal_autocrat
+		cost = 4
+		prerequisite = { focus = GAL_szlachta_state }
+		available = {
+			has_government = paternal_autocrat
+		}
+		completion_reward = {
+			add_ideas = GAL_pataut_pol
+		}
+		mutually_exclusive = { focus = GAL_stanczyk_majority }
+		relative_position_id = GAL_szlachta_state
+		x = 1
+		y = 1
+	}
+
+	# Tier 3: 三路分支
+	focus = {
+		id = GAL_integrate_other_parties
+		icon = GFX_UKR_Entrench_Party
+		cost = 4
+		prerequisite = { focus = GAL_stanczyk_majority }
+		available = {}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_soccon_pol
+				add_idea = GAL_soccon_pol2
+			}
+		}
+		relative_position_id = GAL_stanczyk_majority
+		x = -1
+		y = 1
+	}
+
+	focus = {
+		id = GAL_oppose_all_progress
+		icon = GFX_goal_AUS_Industrialisms_Past_Present_Future
+		cost = 4
+		prerequisite = {
+			focus = GAL_podolia_majority
+			focus = GAL_stanczyk_majority
+		}
+		available = {}
+		completion_reward = {
+			add_political_power = 50
+			add_ideas = GAL_oppose_all_progress_idea
+		}
+		relative_position_id = GAL_podolia_majority
+		x = -1
+		y = 1
+	}
+
+	focus = {
+		id = GAL_embrace_nationalism
+		icon = GFX_goal_SWE_true_national_revolution_2
+		cost = 4
+		prerequisite = { focus = GAL_podolia_majority }
+		available = {}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_pataut_pol
+				add_idea = GAL_pataut_pol2
+			}
+		}
+		relative_position_id = GAL_podolia_majority
+		x = 1
+		y = 1
+	}
+
+	# Tier 4: 三路分支
+	focus = {
+		id = GAL_church_supremacy
+		icon = GFX_goal_HON_Work_With_Church
+		cost = 4
+		prerequisite = { focus = GAL_integrate_other_parties }
+		available = {}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_soccon_pol2
+				add_idea = GAL_soccon_pol3
+			}
+		}
+		relative_position_id = GAL_integrate_other_parties
+		x = 0
+		y = 1
+	}
+	focus = {
+		id = GAL_no_minority_rights
+		icon = GFX_goal_SKM_Chain_Minorities
+		cost = 4
+		prerequisite = {
+			focus = GAL_courting_vienna
+			focus = GAL_church_supremacy
+		}
+		prerequisite = { focus = GAL_courting_vienna }
+		available = {}
+		completion_reward = {
+			add_stability = 0.2
+			set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+		}
+		relative_position_id = GAL_integrate_other_parties
+		x = -1
+		y = 2
+	}
+	focus = {
+		id = GAL_sarmatianism_revival
+		icon = GFX_TRM_Buryat_Mongolian_Cavalry
+		cost = 4
+		prerequisite = {
+			focus = GAL_courting_vienna
+			focus = GAL_church_supremacy
+		}
+		prerequisite = { focus = GAL_courting_vienna }
+		available = {}
+		completion_reward = {
+			add_political_power = 200
+			set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+		}
+		relative_position_id = GAL_integrate_other_parties
+		x = 5
+		y = 2
+	}
+	focus = {
+		id = GAL_courting_vienna
+		icon = GFX_goal_AUS_direct_rule_vienna
+		cost = 4
+		prerequisite = { focus = GAL_oppose_all_progress }
+		available = {}
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.10
+			add_war_support = 0.10
+		}
+		relative_position_id = GAL_oppose_all_progress
+		x = 0
+		y = 1
+	}
+
+	focus = {
+		id = GAL_iron_fist_rule
+		icon = GFX_goal_CAT_Iron_fist_shrouded_in_shadows
+		cost = 4
+		prerequisite = { focus = GAL_embrace_nationalism }
+		available = {}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GAL_pataut_pol2
+				add_idea = GAL_pataut_pol3
+			}
+		}
+		relative_position_id = GAL_embrace_nationalism
+		x = 0
+		y = 1
+	}
+
+	# Tier 5: 两路分支（互斥）
+	focus = {
+		id = GAL_form_agricultural_enterprises
+		icon = GFX_RUS_National_Agrarian_Fund
+		cost = 4
+		prerequisite = {
+			focus = GAL_courting_vienna
+			focus = GAL_church_supremacy
+		}
+		prerequisite = { focus = GAL_courting_vienna }
+		available = {}
+		completion_reward = {
+			
+			add_ideas = GAL_form_agricultural_enterprises_idea
+			
+		}
+
+		relative_position_id = GAL_church_supremacy
+		x = 1
+		y = 1
+	}
+
+	focus = {
+		id = GAL_workers_peasants_obey
+		icon = GFX_goal_AST_unionists_obey_your_master
+		cost = 4
+		prerequisite = { focus = GAL_iron_fist_rule }
+		prerequisite = {
+			focus = GAL_courting_vienna
+			focus = GAL_church_supremacy
+		}
+		available = {}
+		completion_reward = {
+			add_political_power = 50
+			add_ideas = GAL_workers_peasants_obey_idea
+		}
+
+		relative_position_id = GAL_iron_fist_rule
+		x = -1
+		y = 1
+	}
+
+	# Tier 6: 终极节点（汇合）
+	focus = {
+		id = GAL_realism_triumphs
+		icon = GFX_goal_POL_Never_Another_1905
+		cost = 4
+		prerequisite = {
+			focus = GAL_form_agricultural_enterprises
+			focus = GAL_workers_peasants_obey
+		}
+		available = {}
+		completion_reward = {
+			
+			add_ideas = GAL_realism_triumphs
+		}
+		relative_position_id = GAL_form_agricultural_enterprises
+		x = 1
+		y = 1
+	}
+	focus = {
+		id = GAL_red_sun_over_krakow
+		icon = GFX_goal_SWE_revolution_victory
+		cost = 4
+		available = {
+			has_country_flag = GAL_socialist_revolution
+		}
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+		}
+
+		x = 30
+		y = 10
+	}
+
+	# =========================================
+	# Tier 2: 第二层 (左右分布，间距2)
+	# =========================================
+	focus = {
+		id = GAL_settle_scores_with_reactionaries
+		icon = GFX_goal_ALB_Permanent_Purge
+		cost = 4
+		prerequisite = { focus = GAL_red_sun_over_krakow }
+		available = {}
+		completion_reward = {
+			set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+
+		relative_position_id = GAL_red_sun_over_krakow
+		x = -1
+		y = 1
+	}
+
+	focus = {
+		id = GAL_land_to_peasants
+		icon = GFX_goal_SKM_Socialized_Land_Redistribution
+		cost = 4
+		prerequisite = { focus = GAL_red_sun_over_krakow }
+		available = {}
+		completion_reward = {
+			add_ideas = GAL_land_to_peasants_idea
+		}
+		relative_position_id = GAL_red_sun_over_krakow
+		x = 1
+		y = 1
+	}
+	focus = {
+		id = GAL_factory_to_workers
+		icon = GFX_goal_SRI_Worker_Councils
+		cost = 4
+		prerequisite = { focus = GAL_land_to_peasants }
+		available = {}
+		completion_reward = {
+			add_ideas = GAL_factory_to_workers_idea
+		}
+		relative_position_id = GAL_red_sun_over_krakow
+		x = 1
+		y = 2
+	}
+	# =========================================
+	# Tier 3: 第三层 (左侧分支 + 独立节点)
+	# =========================================
+	# 终止民族压迫 (从根节点直接分出，位于左侧)
+	focus = {
+		id = GAL_end_national_oppression
+		icon = GFX_TRM_Federation_Equal_Peoples
+		cost = 4
+		prerequisite = { focus = GAL_settle_scores_with_reactionaries }
+		available = {}
+		completion_reward = {
+			set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+			add_stability = 0.1
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.10
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.10
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.10
+			}
+		}
+		relative_position_id = GAL_red_sun_over_krakow
+		x = -1
+		y = 2
+	}
+
+	# 向第三国际求援 (从"对反动派算总账"下方)
+	focus = {
+		id = GAL_appeal_to_comintern
+		icon = GFX_RUS_Internationalists
+		cost = 4
+		prerequisite = { focus = GAL_end_national_oppression }
+		prerequisite = { focus = GAL_factory_to_workers }
+		available = {}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 3000
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 1500
+			}
+		}
+		relative_position_id = GAL_settle_scores_with_reactionaries
+		x = 1
+		y = 2
+	}
+
+	# 组建国家安全局 (从"土地归农民"下方)
+	focus = {
+		id = GAL_form_state_security_bureau
+		icon = GFX_goal_POL_International_Polish_Agents
+		cost = 4
+		prerequisite = { focus = GAL_appeal_to_comintern }
+		available = {}
+		completion_reward = {
+			add_ideas = GAL_form_state_security_bureau_ide
+			country_event = gal.46
+		}
+		relative_position_id = GAL_land_to_peasants
+		x = -1
+		y = 3
+	}
+
+	# =========================================
+	# Tier 4: 第四层 (三条并行路线，间距2)
+	# =========================================
+	focus = {
+		id = GAL_uphold_communist_orthodoxy
+		icon = GFX_goal_MEX_Full_Communist_Orthodoxy
+		cost = 4
+		prerequisite = { focus = GAL_form_state_security_bureau }
+		available = {
+			has_government = totalist
+		}
+		completion_reward = {
+			add_political_power = 50
+			add_ideas = GAL_orthocom_pol
+		}
+		mutually_exclusive = { focus = GAL_revolution_moderation }
+		mutually_exclusive = { focus = GAL_socialism_bathed_in_gods_light }
+		relative_position_id = GAL_appeal_to_comintern
+		x = -2
+		y = 2
+	}
+	focus = {
+		id = GAL_enpower_worker_council
+		icon = GFX_goal_HOL_council_communism
+		cost = 4
+		prerequisite = { focus = GAL_uphold_communist_orthodoxy}
+		available = {}
+		completion_reward = {
+			add_political_power = 50
+			swap_ideas = {
+				remove_idea = GAL_orthocom_pol
+				add_idea = GAL_orthocom_pol2
+			}
+		}
+
+		relative_position_id = GAL_appeal_to_comintern
+		x = -2
+		y = 3
+	}
+	focus = {
+		id = GAL_alert_nationalism_revisionism
+		icon = GFX_goal_BAS_Communism_Without_Orthodox_Puritanism
+		cost = 4
+		prerequisite = { focus = GAL_enpower_worker_council }
+		available = {}
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.05
+		}
+
+		relative_position_id = GAL_appeal_to_comintern
+		x = -2
+		y = 4
+	}
+	focus = {
+		id = GAL_work_with_socdem
+		icon = GFX_UKR_Social_Democrats
+		cost = 4
+		prerequisite = { focus = GAL_revolution_moderation }
+		available = {}
+		completion_reward = {
+			add_political_power = 50
+			swap_ideas = {
+				remove_idea = GAL_revmod_pol
+				add_idea = GAL_revmod_pol2
+			}
+		}
+
+		relative_position_id = GAL_appeal_to_comintern
+		x = 0
+		y = 3
+	}
+	focus = {
+		id = GAL_economic_first
+		icon = GFX_TRM_Socialize_Land
+		cost = 4
+		prerequisite = { focus = GAL_work_with_socdem }
+		available = {}
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.05
+		}
+
+		relative_position_id = GAL_appeal_to_comintern
+		x = 0
+		y = 4
+	}
+	focus = {
+		id = GAL_red_priests
+		icon = GFX_ITA_socchurch
+		cost = 4
+		prerequisite = { focus = GAL_socialism_bathed_in_gods_light }
+		available = {}
+		completion_reward = {
+			add_political_power = 50
+			swap_ideas = {
+				remove_idea = GAL_godsoc_pol
+				add_idea = GAL_godsoc_pol2
+			}
+		}
+
+		relative_position_id = GAL_appeal_to_comintern
+		x = 2
+		y = 3
+	}
+	focus = {
+		id = GAL_all_under_god_will
+		icon = GFX_goal_GAL_chlop_wami
+		cost = 4
+		prerequisite = { focus = GAL_red_priests }
+		available = {}
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.05
+		}
+
+		relative_position_id = GAL_appeal_to_comintern
+		x = 2
+		y = 4
+	}
+	focus = {
+		id = GAL_revolution_moderation
+		icon = GFX_goal_CEA_new_syndicalist_society
+		cost = 4
+		prerequisite = { focus = GAL_form_state_security_bureau }
+		available = {
+			has_government = syndicalist
+		}
+		completion_reward = {
+			add_political_power = 50
+			add_ideas = GAL_revmod_pol
+		}
+		mutually_exclusive = { focus = GAL_uphold_communist_orthodoxy }
+		mutually_exclusive = { focus = GAL_socialism_bathed_in_gods_light }
+		relative_position_id = GAL_appeal_to_comintern
+		x = 0
+		y = 2
+	}
+
+	focus = {
+		id = GAL_socialism_bathed_in_gods_light
+		icon = GFX_ITA_christbol
+		cost = 4
+		prerequisite = { focus = GAL_form_state_security_bureau }
+		available = {
+			has_government = radical_socialist
+		}
+		completion_reward = {
+			add_political_power = 50
+			add_ideas = GAL_godsoc_pol
+		}
+		mutually_exclusive = { focus = GAL_uphold_communist_orthodoxy }
+		mutually_exclusive = { focus = GAL_revolution_moderation }
+		relative_position_id = GAL_form_state_security_bureau
+		x = 2
+		y = 1
+	}
+
+	# =========================================
+	# Tier 5: 顶层终点 (汇合)
+	# =========================================
+	focus = {
+		id = GAL_people_rise_up
+		icon = GFX_DKB_People
+		cost = 4
+		prerequisite = {
+			focus = GAL_alert_nationalism_revisionism
+			focus = GAL_economic_first
+			focus = GAL_all_under_god_will
+		}
+
+
+		available = {}
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.10
+			add_war_support = 0.10
+			add_ideas = GAL_people_rise_up
+		}
+		relative_position_id = GAL_uphold_communist_orthodoxy
+		x = 2
+		y = 3
+	}
+	 focus = {
+        id = GAL_renational_democratic_party_revival
+        icon = GFX_goal_POL_National_Rebirth
+
+        x = 40
+        y = 10
+        cost = 4
+        available = {
+			has_country_flag = GAL_nationalist_coup
+		}
+        completion_reward = {
+            add_political_power = 100
+            add_stability = 0.1
+            add_war_support = 0.1
+        }
+    }
+
+    # Tier 2
+    focus = {
+        id = GAL_eradicate_red_bandits
+        icon = GFX_goal_AST_purge_the_syndicalist_menace
+        relative_position_id = GAL_renational_democratic_party_revival
+        x = -1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_renational_democratic_party_revival }
+        completion_reward = {
+           set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+			add_stability = 0.1
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.10
+			}
+        }
+    }
+    focus = {
+        id = GAL_galicia_belongs_to_poland
+        icon = GFX_goal_POL_Raise_Gwardia_Ludowa
+        relative_position_id = GAL_renational_democratic_party_revival
+        x = 1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_renational_democratic_party_revival }
+        completion_reward = {
+            add_ideas = GAL_galicia_belongs_to_poland_idea
+        }
+    }
+
+    # Tier 3
+    focus = {
+        id = GAL_end_liberal_democratic_heresy
+        icon = GFX_RUS_I_Was_Never_A_Liberal
+        relative_position_id = GAL_eradicate_red_bandits
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_eradicate_red_bandits }
+        completion_reward = {
+            set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+			add_political_power = 100
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = -0.10
+			}
+        }
+    }
+    focus = {
+        id = GAL_nationalist_propaganda
+        icon = GFX_goal_NFA_national_propaganda
+        relative_position_id = GAL_galicia_belongs_to_poland
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_galicia_belongs_to_poland }
+        completion_reward = {
+            add_ideas = GAL_nationalist_propaganda_idea
+        }
+    }
+
+    # Tier 4 (汇合)
+    focus = {
+        id = GAL_dmowski_will
+        icon = GFX_goal_POL_Peoples_King
+        relative_position_id = GAL_end_liberal_democratic_heresy
+        x = 1
+        y = 1 # 参考左节点，向右移2格，正好对齐上方两个节点的中间
+        cost = 4
+        prerequisite = { focus = GAL_end_liberal_democratic_heresy }
+        prerequisite = { focus = GAL_nationalist_propaganda }
+        completion_reward = {
+            add_manpower = 50000
+          	add_war_support = 0.1
+			add_command_power = 50
+        }
+    }
+
+    # Tier 5
+    focus = {
+        id = GAL_anti_german_austrian_independence
+        icon = GFX_goal_POL_Teuton_Menace
+        relative_position_id = GAL_dmowski_will
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_dmowski_will }
+        completion_reward = {
+            add_ideas = GAL_anti_german_austrian_independence_idea
+			country_event = gal.11
+        }
+    }
+
+    # Tier 6
+    focus = {
+        id = GAL_syndicalism_for_the_state
+        icon = GFX_goals_FRA_yellow_replace_red
+        relative_position_id = GAL_anti_german_austrian_independence
+        x = -1
+        y = 1
+        cost = 4
+		available = {
+			NOT = {
+				has_country_flag = GAL_onr
+			}
+		}
+        prerequisite = { focus = GAL_anti_german_austrian_independence }
+        mutually_exclusive = { focus = GAL_agrarian_national_fascism }
+        completion_reward = {
+
+            add_ideas = GAL_syndstat_pol
+        }
+    }
+    focus = {
+        id = GAL_agrarian_national_fascism
+        icon = GFX_goal_BAS_Obrascons_Corporatist_Construction
+        relative_position_id = GAL_anti_german_austrian_independence
+        x = 1
+        y = 1
+        cost = 4
+		available = {
+			NOT = {
+				has_country_flag = GAL_yellowsynd
+			}
+		}
+        prerequisite = { focus = GAL_anti_german_austrian_independence }
+        mutually_exclusive = { focus = GAL_syndicalism_for_the_state }
+        completion_reward = {
+            add_ideas = GAL_agrfasc_pol
+        }
+    }
+
+    # Tier 7
+    focus = {
+        id = GAL_manage_labor_movement
+        icon = GFX_goals_FRA_yellow_syndicalists
+        relative_position_id = GAL_syndicalism_for_the_state
+        x = -1
+        y = 1
+        cost = 4
+		available = {
+			has_country_flag = GAL_yellowsynd
+		}
+        prerequisite = { focus = GAL_syndicalism_for_the_state }
+        mutually_exclusive = { focus = GAL_rise_of_ethnic_radicalism }
+        mutually_exclusive = { focus = GAL_orthodox_nationalism_bastion }
+        completion_reward = {
+            add_political_power = 50
+            swap_ideas = {
+                remove_idea = GAL_syndstat_pol
+                add_idea = GAL_syndstat_pol2
+            }
+        }
+    }
+    focus = {
+        id = GAL_rise_of_ethnic_radicalism
+        icon = GFX_goal_GAL_national
+        relative_position_id = GAL_syndicalism_for_the_state
+        x = 3
+        y = 1
+        cost = 4
+		available = {
+			has_country_flag = GAL_onr
+		}
+        prerequisite = { focus = GAL_agrarian_national_fascism }
+        mutually_exclusive = { focus = GAL_manage_labor_movement }
+        mutually_exclusive = { focus = GAL_orthodox_nationalism_bastion }
+        completion_reward = {
+            add_political_power = 50
+            swap_ideas = {
+                remove_idea = GAL_agrfasc_pol
+                add_idea = GAL_agrfasc_pol2
+            }
+        }
+    }
+    focus = {
+        id = GAL_orthodox_nationalism_bastion
+        icon = GFX_goal_POL_Write_New_Constitution
+        relative_position_id = GAL_agrarian_national_fascism
+        x = -1
+        y = 1
+        cost = 4
+        prerequisite = { 
+			focus = GAL_agrarian_national_fascism 
+			focus = GAL_syndicalism_for_the_state
+		}
+		available = {
+			has_country_flag = GAL_natdem
+		}
+        mutually_exclusive = { focus = GAL_manage_labor_movement }
+        mutually_exclusive = { focus = GAL_rise_of_ethnic_radicalism }
+        completion_reward = {
+            add_political_power = 50
+            swap_ideas = {
+                remove_idea = GAL_agrfasc_pol
+                add_idea = GAL_orthodox_nationalism_bastion_pol
+            }
+        }
+    }
+
+    # Tier 8
+    focus = {
+        id = GAL_achieve_worker_employer_reconciliation
+        icon = GFX_goal_NFA_People_Corporatism
+        relative_position_id = GAL_manage_labor_movement
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_manage_labor_movement }
+        completion_reward = {
+            add_political_power = 50
+            add_stability = 0.05
+        }
+    }
+    focus = {
+        id = GAL_under_holy_cross
+        icon = GFX_goal_YUC_State_Cross
+        relative_position_id = GAL_rise_of_ethnic_radicalism
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_rise_of_ethnic_radicalism }
+        completion_reward = {
+            add_political_power = 50
+            add_stability = 0.05
+        }
+    }
+    focus = {
+        id = GAL_achieve_national_unity
+        icon = GFX_goal_POL_Beacon_Polish_Spirit
+        relative_position_id = GAL_orthodox_nationalism_bastion
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_orthodox_nationalism_bastion }
+        completion_reward = {
+            add_political_power = 50
+            add_stability = 0.05
+        }
+    }
+
+    # Tier 9 (汇合)
+    focus = {
+        id = GAL_polish_nation_awakens
+        icon = GFX_goal_POL_Cast_Demons_Back_To_Abaddon
+        relative_position_id = GAL_achieve_worker_employer_reconciliation
+        x = 2
+        y = 1 # 参考最左节点，向右移4格，对齐下方三个节点的中间
+        cost = 4
+        prerequisite = {
+			focus = GAL_achieve_worker_employer_reconciliation
+			focus = GAL_under_holy_cross
+			focus = GAL_achieve_national_unity
+		}
+
+
+        completion_reward = {
+            add_political_power = 100
+            add_stability = 0.10
+            add_war_support = 0.10
+            add_ideas = GAL_polish_nation_awakens
+        }
+    }
+	focus = {
+        id = GAL_change_of_freedom_and_independence_association
+        icon = GFX_goal_JAP_For_Their_Freedom_Ours
+        x = 0
+        y = 20
+        cost = 4
+        ai_will_do = {
+            factor = 100
+        }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_save_galicia
+        }
+    }
+
+    # Tier 2
+    focus = {
+        id = GAL_stop_ethnic_killing
+        icon = GFX_goal_POL_New_Polish_Worker
+        relative_position_id = GAL_change_of_freedom_and_independence_association
+        x = -1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_change_of_freedom_and_independence_association }
+        ai_will_do = { factor = 80 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_stop_ethnic_killing_idea
+        }
+    }
+
+    focus = {
+        id = GAL_negotiate_with_ukrainians
+        icon = GFX_goal_UKR_Ukrainization
+        relative_position_id = GAL_change_of_freedom_and_independence_association
+        x = 1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_change_of_freedom_and_independence_association }
+        ai_will_do = { factor = 80 }
+        available = {}
+        completion_reward = {
+           add_political_power = 100
+            add_stability = 0.1
+            add_war_support = 0.1
+			#insert event later
+        }
+    }
+
+    # Tier 3 (汇合节点)
+    focus = {
+        id = GAL_zakerzonia_ceasefire
+        icon = GFX_UKR_German_Garrison_Leaves
+        relative_position_id = GAL_change_of_freedom_and_independence_association
+        x = 0
+        y = 2
+        cost = 4
+        # 需要同时完成左右两个前置
+        prerequisite = { focus = GAL_stop_ethnic_killing }
+        prerequisite = { focus = GAL_negotiate_with_ukrainians }
+        ai_will_do = { factor = 90 }
+        available = {}
+        completion_reward = {
+           #insert event later
+        }
+    }
+
+    # Tier 4
+    focus = {
+        id = GAL_our_common_history
+        icon = GFX_UKR_Concordism
+        relative_position_id = GAL_zakerzonia_ceasefire
+        x = -2
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_zakerzonia_ceasefire }
+        ai_will_do = { factor = 70 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_our_common_history_idea
+        }
+    }
+
+    focus = {
+        id = GAL_socialized_large_enterprises
+        icon = GFX_goal_AST_post_war_socialized_reconstruction
+        relative_position_id = GAL_zakerzonia_ceasefire
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_zakerzonia_ceasefire }
+        ai_will_do = { factor = 70 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_socialized_large_enterprises_idea
+        }
+    }
+
+    focus = {
+        id = GAL_our_common_enemy
+        icon = GFX_goal_AUS_Reject_Habsburgs
+        relative_position_id = GAL_zakerzonia_ceasefire
+        x = 2
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_zakerzonia_ceasefire }
+        ai_will_do = { factor = 70 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_our_common_enemy_idea
+        }
+    }
+
+    # Tier 5 (汇合节点：左+中 -> 终结；中+右 -> 榨干)
+    # 注意：HOI4中一个focus可以有多个prerequisite块，表示“与”逻辑
+    focus = {
+        id = GAL_end_cycle_of_hatred
+        icon = GFX_goal_POL_Ally_Ukrainian_Workers
+        relative_position_id = GAL_zakerzonia_ceasefire
+        x = -1
+        y = 2
+        cost = 4
+        prerequisite = { focus = GAL_our_common_history }
+        prerequisite = { focus = GAL_socialized_large_enterprises }
+        ai_will_do = { factor = 85 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_end_cycle_of_hatred_idea
+        }
+    }
+
+    focus = {
+        id = GAL_squeeze_landlords_and_bourgeoisie
+        icon = GFX_goal_CSA_squeeze_elites
+        relative_position_id = GAL_zakerzonia_ceasefire
+        x = 1
+        y = 2
+        cost = 4
+        prerequisite = { focus = GAL_socialized_large_enterprises }
+        prerequisite = { focus = GAL_our_common_enemy }
+        ai_will_do = { factor = 85 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_squeeze_landlords_and_bourgeoisie_idea
+        }
+    }
+
+    # Tier 6 (汇合节点)
+    focus = {
+        id = GAL_rebuild_polish_ukrainian_friendship
+        icon = GFX_goal_NIC_Victory_Social_Democracy
+        relative_position_id = GAL_zakerzonia_ceasefire
+        x = 0
+        y = 3
+        cost = 4
+        prerequisite = { focus = GAL_end_cycle_of_hatred }
+        prerequisite = { focus = GAL_squeeze_landlords_and_bourgeoisie }
+        ai_will_do = { factor = 95 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_rebuild_polish_ukrainian_friendship_idea
+        }
+    }
+
+    # Tier 7 (最终节点)
+    focus = {
+        id = GAL_freedom_for_you_and_me
+        icon = GFX_goal_GUA_Peaceful_Revolution
+        relative_position_id = GAL_zakerzonia_ceasefire
+        x = 0
+        y = 4
+        cost = 4
+        prerequisite = { focus = GAL_rebuild_polish_ukrainian_friendship }
+        ai_will_do = { factor = 100 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_freedom_for_you_and_me
+        }
+    }
+	 focus = {
+        id = GAL_political_rationalization
+        icon = GFX_goal_COR_fordist_rule
+        x = 10
+        y = 20
+        cost = 4
+        ai_will_do = { factor = 90 }
+        available = {
+			has_country_flag = GAL_technocracy
+		}
+        completion_reward = {
+            add_political_power = 100
+            add_stability = 0.1
+            add_war_support = 0.1
+        }
+    }
+
+    # Tier 2
+    focus = {
+        id = GAL_technobureaucratic_economic_cooperatives
+        icon = GFX_goal_COR_fordism
+        relative_position_id = GAL_political_rationalization
+        x = -1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_political_rationalization }
+        ai_will_do = { factor = 85 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_technobureaucratic_economic_cooperatives_idea
+        }
+    }
+    focus = {
+        id = GAL_social_organization_community
+        icon = GFX_goal_COR_our_allies_economic_vision
+        relative_position_id = GAL_political_rationalization
+        x = 1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_political_rationalization }
+        ai_will_do = { factor = 85 }
+        available = {}
+        completion_reward = {
+			add_manpower = 50000
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+           set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+        }
+    }
+
+    # Tier 3
+    focus = {
+        id = GAL_mild_statist_interventionism
+        icon = GFX_goal_state_economy
+        relative_position_id = GAL_technobureaucratic_economic_cooperatives
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_technobureaucratic_economic_cooperatives }
+        ai_will_do = { factor = 80 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_mild_statist_interventionism_idea
+        }
+    }
+    focus = {
+        id = GAL_jewish_anti_semitism
+        icon = GFX_goal_BBR_economic_aid_from_jew_allies
+        relative_position_id = GAL_social_organization_community
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_social_organization_community }
+        ai_will_do = { factor = 60 } # 反犹倾向AI权重略低
+        available = {}
+        completion_reward = {
+            add_stability = 0.2
+            set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+        }
+    }
+
+    # Tier 4 (汇合节点)
+    focus = {
+        id = GAL_catholic_social_movement
+        icon = GFX_goal_SWE_catholic_issue
+        relative_position_id = GAL_mild_statist_interventionism
+        x = 1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_mild_statist_interventionism }
+        prerequisite = { focus = GAL_jewish_anti_semitism }
+        ai_will_do = { factor = 90 }
+        available = {}
+        completion_reward = {
+          add_one_random_military_factory = yes
+		  add_one_random_military_factory = yes
+		  add_one_random_military_factory = yes
+        }
+    }
+
+    # Tier 5
+    focus = {
+        id = GAL_third_way_between_individualism_collectivism
+        icon = GFX_goal_AUS_Three_Arrows_Third_Way
+        relative_position_id = GAL_catholic_social_movement
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_catholic_social_movement }
+        ai_will_do = { factor = 95 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_third_way_idea
+        }
+    }
+
+    # Tier 6 (互斥)
+    focus = {
+        id = GAL_grinskas_mild_left_wing_policy
+        icon = GFX_goal_SPR_spend_more_get_less_left
+        relative_position_id = GAL_third_way_between_individualism_collectivism
+        x = -1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_third_way_between_individualism_collectivism }
+        mutually_exclusive = { focus = GAL_heiders_neoclassical_liberalism }
+        ai_will_do = { factor = 85 }
+        available = {}
+        completion_reward = {
+			add_socdem_to_coalition = yes
+            add_ideas = GAL_grinskas_left_pol
+        }
+    }
+    focus = {
+        id = GAL_heiders_neoclassical_liberalism
+        icon = GFX_goal_NVN_Economic_Expansion_Under_Business_Council
+        relative_position_id = GAL_third_way_between_individualism_collectivism
+        x = 1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_third_way_between_individualism_collectivism }
+        mutually_exclusive = { focus = GAL_grinskas_mild_left_wing_policy }
+        ai_will_do = { factor = 85 }
+        available = {}
+        completion_reward = {
+			add_marlib_to_coalition = yes
+            add_ideas = GAL_heiders_neolib_pol
+        }
+    }
+
+    # Tier 7 (互斥)
+    focus = {
+        id = GAL_towards_christian_cooperatism
+        icon = GFX_goal_KIV_christian_market_socialism
+        relative_position_id = GAL_grinskas_mild_left_wing_policy
+        x = -1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_grinskas_mild_left_wing_policy }
+        mutually_exclusive = { focus = GAL_implement_technocratic_rule }
+        mutually_exclusive = { focus = GAL_conservative_regression }
+        ai_will_do = { factor = 80 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_christcoop_pol
+			add_soccon_to_coalition = yes
+			set_country_leader_ideology = authdem_solidarism_subtype
+        }
+    }
+    focus = {
+        id = GAL_implement_technocratic_rule
+        icon = GFX_goal_COR_committee_of_all_technocrats
+        relative_position_id = GAL_grinskas_mild_left_wing_policy
+        x = 1
+        y = 1
+        cost = 4
+        prerequisite = {
+			focus = GAL_grinskas_mild_left_wing_policy
+			focus = GAL_heiders_neoclassical_liberalism
+		}
+
+        mutually_exclusive = { focus = GAL_towards_christian_cooperatism }
+        mutually_exclusive = { focus = GAL_conservative_regression }
+        ai_will_do = { factor = 80 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_technocrat_pol
+			add_pataut_to_coalition = yes
+        }
+    }
+    focus = {
+        id = GAL_conservative_regression
+        icon = GFX_goal_NZL_conservative_outreach
+        relative_position_id = GAL_heiders_neoclassical_liberalism
+        x = 1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_heiders_neoclassical_liberalism }
+        mutually_exclusive = { focus = GAL_towards_christian_cooperatism }
+        mutually_exclusive = { focus = GAL_implement_technocratic_rule }
+        ai_will_do = { factor = 70 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_conservative_regression_pol
+			set_country_leader_ideology = national_democracy_subtype
+			add_natpop_to_coalition = yes
+        }
+    }
+
+    # Tier 8
+    focus = {
+        id = GAL_social_welfare_and_labor_legislation
+        icon = GFX_RUS_Welfare_State
+        relative_position_id = GAL_towards_christian_cooperatism
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_towards_christian_cooperatism }
+        ai_will_do = { factor = 90 }
+        available = {}
+        completion_reward = {
+            add_political_power = 50
+            swap_ideas = {
+                remove_idea = GAL_christcoop_pol
+                add_idea = GAL_christcoop_pol2
+            }
+        }
+    }
+    focus = {
+        id = GAL_crush_usury_middlemen_groups
+        icon = GFX_goal_CSA_End_Politics
+        relative_position_id = GAL_implement_technocratic_rule
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_implement_technocratic_rule }
+        ai_will_do = { factor = 90 }
+        available = {}
+        completion_reward = {
+            add_political_power = 50
+            swap_ideas = {
+                remove_idea = GAL_technocrat_pol
+                add_idea = GAL_technocrat_pol2
+            }
+        }
+    }
+    focus = {
+        id = GAL_admit_national_democrats
+        icon = GFX_focus_HOL_deal_with_right
+        relative_position_id = GAL_conservative_regression
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_conservative_regression }
+        ai_will_do = { factor = 90 }
+        available = {}
+        completion_reward = {
+            add_political_power = 50
+            swap_ideas = {
+                remove_idea = GAL_conservative_regression_pol
+                add_idea = GAL_conservative_regression_pol2
+            }
+        }
+    }
+
+    # Tier 9 (最终汇合节点)
+    focus = {
+        id = GAL_social_solidarity_achieved
+        icon = GFX_focus_rus_solidarists
+        relative_position_id = GAL_social_welfare_and_labor_legislation
+        x = 2
+        y = 1
+        cost = 4
+        prerequisite = {
+			focus = GAL_social_welfare_and_labor_legislation
+			focus = GAL_crush_usury_middlemen_groups
+			focus = GAL_admit_national_democrats
+		}
+
+
+        ai_will_do = { factor = 100 }
+        available = {}
+        completion_reward = {
+            add_political_power = 100
+            add_stability = 0.10
+            add_war_support = 0.10
+            add_ideas = GAL_social_solidarity_achieved
+        }
+    }
+	 # Tier 1: 起始节点
+    focus = {
+        id = GAL_awakening_of_myth_philosophy
+        icon = GFX_goal_GAL_awakening_of_myth_philosophy
+        x = 20
+        y = 20
+        cost = 4
+        ai_will_do = { factor = 90 }
+        available = {
+			has_country_flag = GAL_esoteric
+		}
+        completion_reward = {
+            add_political_power = 100
+            add_stability = 0.1
+            add_war_support = 0.1
+        }
+    }
+
+    # Tier 2: 左中右三分支
+    focus = {
+        id = GAL_overthrow_dead_church
+        icon = GFX_goal_GAL_overthrow_dead_church
+        relative_position_id = GAL_awakening_of_myth_philosophy
+        x = -2
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_awakening_of_myth_philosophy }
+        ai_will_do = { factor = 85 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_overthrow_dead_church_idea
+        }
+    }
+
+    focus = {
+        id = GAL_god_images_differ_truth_eternel
+        icon = GFX_goal_GAL_god_images_differ_truth_eternel
+        relative_position_id = GAL_awakening_of_myth_philosophy
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_awakening_of_myth_philosophy }
+        ai_will_do = { factor = 85 }
+        available = {}
+        completion_reward = {
+			set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+            add_ideas = GAL_god_images_differ_truth_eternel_idea
+			hidden_effect = {
+				country_event = gal.48
+			}
+        }
+    }
+
+    focus = {
+        id = GAL_hell_purgatory_heaven_are_present
+        icon = GFX_goal_GAL_hell_purgatory_heaven_are_present
+        relative_position_id = GAL_awakening_of_myth_philosophy
+        x = 2
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_awakening_of_myth_philosophy }
+        ai_will_do = { factor = 80 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_hell_purgatory_heaven_are_present_idea
+        }
+    }
+
+    # Tier 3: 左中右子节点
+    focus = {
+        id = GAL_day_of_judgment_tyrants_exploiters
+        icon = GFX_goal_GAL_day_of_judgment_tyrants_exploiters
+        relative_position_id = GAL_overthrow_dead_church
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_overthrow_dead_church }
+        ai_will_do = { factor = 80 }
+        available = {}
+        completion_reward = {
+			add_ideas = GAL_day_of_judgment_tyrants_exploiters
+           
+        }
+    }
+
+    focus = {
+        id = GAL_cross_swastika_baal_star
+        icon = GFX_goal_GAL_cross_swastika_baal_star
+        relative_position_id = GAL_god_images_differ_truth_eternel
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_god_images_differ_truth_eternel }
+        ai_will_do = { factor = 80 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_cross_swastika_baal_star
+        }
+    }
+
+    focus = {
+        id = GAL_eternal_cycle_world
+        icon = GFX_goal_GAL_eternal_cycle_world
+        relative_position_id = GAL_hell_purgatory_heaven_are_present
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_hell_purgatory_heaven_are_present }
+        ai_will_do = { factor = 80 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_eternal_cycle_world
+        }
+    }
+
+    # Tier 4: 汇合节点 (需同时完成上层三个节点的输出)
+    focus = {
+        id = GAL_perpetual_war_good_evil
+        icon = GFX_goal_GAL_perpetual_war_good_evil
+        relative_position_id = GAL_day_of_judgment_tyrants_exploiters
+        x = 1
+        y = 1
+        cost = 4
+        # 需同时完成左侧和中间分支
+        prerequisite = { focus = GAL_day_of_judgment_tyrants_exploiters }
+        prerequisite = { focus = GAL_cross_swastika_baal_star }
+        ai_will_do = { factor = 90 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_perpetual_war_good_evil_idea
+        }
+    }
+
+    focus = {
+        id = GAL_new_savior_born_in_poland
+        icon = GFX_goal_GAL_new_savior_born_in_poland
+        relative_position_id = GAL_cross_swastika_baal_star
+        x = 1
+        y = 1
+        cost = 4
+        # 需同时完成中间和右侧分支
+        prerequisite = { focus = GAL_cross_swastika_baal_star }
+        prerequisite = { focus = GAL_eternal_cycle_world }
+        ai_will_do = { factor = 90 }
+        available = {}
+        completion_reward = {
+            add_political_power = 100
+            add_stability = 0.1
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.1
+			}
+            set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+        }
+    }
+
+    # Tier 5: 汇合节点
+    focus = {
+        id = GAL_arrival_new_world
+        icon = GFX_goal_GAL_arrival_new_world
+        relative_position_id = GAL_perpetual_war_good_evil
+        x = 1
+        y = 1
+        cost = 4
+        # 需同时完成 Tier 4 的两个节点
+        prerequisite = { focus = GAL_perpetual_war_good_evil }
+        prerequisite = { focus = GAL_new_savior_born_in_poland }
+        ai_will_do = { factor = 100 }
+        available = {}
+        completion_reward = {
+            swap_ideas = {
+                remove_idea = GAL_perpetual_war_good_evil_idea
+                add_idea = GAL_arrival_new_world_idea
+            }
+        }
+    }
+
+    # Tier 6: 最终节点
+    focus = {
+        id = GAL_liberation_all_humanity
+        icon = GFX_goal_GAL_liberation_all_humanity
+        relative_position_id = GAL_arrival_new_world
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_arrival_new_world }
+        ai_will_do = { factor = 100 }
+        available = {}
+        completion_reward = {
+           swap_ideas = {
+                remove_idea = GAL_arrival_new_world_idea
+                add_idea = GAL_liberation_all_humanity
+            }
+        }
+    }
+	 focus = {
+        id = GAL_muscovite_regime
+        icon = GFX_TRM_For_Russian_Greatness
+        x = 30
+        y = 20
+        cost = 4
+        ai_will_do = { factor = 100 }
+        available = {
+			has_country_flag = GAL_moscow
+		}
+        completion_reward = {
+            add_political_power = 100
+            add_stability = 0.1
+            add_war_support = 0.1
+        }
+    }
+
+    # Tier 2
+    focus = {
+        id = GAL_crush_polish_resistance
+        icon = GFX_UKR_Requisition_Polish_Farms
+        relative_position_id = GAL_muscovite_regime
+        x = -1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_muscovite_regime }
+        ai_will_do = { factor = 90 }
+        available = {}
+        completion_reward = {
+           set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.10
+			}
+        }
+    }
+
+    focus = {
+        id = GAL_more_extreme_russification
+        icon = GFX_TRM_Unity_Russian_People
+        relative_position_id = GAL_muscovite_regime
+        x = 1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_muscovite_regime }
+        ai_will_do = { factor = 90 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_more_extreme_russification_idea
+        }
+    }
+
+    # Tier 3
+    focus = {
+        id = GAL_remember_battle_of_tannenberg
+        icon = GFX_goal_ZAM_punishment_camps
+        relative_position_id = GAL_crush_polish_resistance
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_crush_polish_resistance }
+        ai_will_do = { factor = 85 }
+        available = {}
+        completion_reward = {
+            set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+			add_stability = 0.2
+        }
+    }
+
+    focus = {
+        id = GAL_forced_conversion_to_orthodox
+        icon = GFX_RUS_Official_Religion
+        relative_position_id = GAL_more_extreme_russification
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_more_extreme_russification }
+        ai_will_do = { factor = 85 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_forced_conversion_to_orthodox_idea
+        }
+    }
+
+    # Tier 4: 汇合节点
+    focus = {
+        id = GAL_revival_of_the_wild_bull
+        icon = GFX_goal_POL_Heck_Cattle
+        relative_position_id = GAL_remember_battle_of_tannenberg
+        x = 1
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_remember_battle_of_tannenberg }
+        prerequisite = { focus = GAL_forced_conversion_to_orthodox }
+        ai_will_do = { factor = 90 }
+        available = {}
+        completion_reward = {
+            add_ideas = GAL_revival_of_the_wild_bull_idea
+        }
+    }
+
+    # Tier 5
+    focus = {
+        id = GAL_mother_russia_welcomes_her_children
+        icon = GFX_RUS_Guardians_Russian_Spirit
+        relative_position_id = GAL_revival_of_the_wild_bull
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_revival_of_the_wild_bull }
+        ai_will_do = { factor = 95 }
+        available = {}
+        completion_reward = {
+            add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+        }
+    }
+
+    # Tier 6
+    focus = {
+        id = GAL_mild_left_turn
+        icon = GFX_RUS_Truly_Socialist_Party
+        relative_position_id = GAL_mother_russia_welcomes_her_children
+        x = -2
+        y = 1
+        cost = 4
+		 mutually_exclusive = { focus = GAL_corporatism_and_democracy }
+		  mutually_exclusive = { focus = GAL_second_galicia_governorate }
+        prerequisite = { focus = GAL_mother_russia_welcomes_her_children }
+        ai_will_do = { factor = 80 }
+        available = {
+			has_government = radical_socialist
+		}
+        completion_reward = {
+            add_ideas = GAL_mild_left_turn_pol
+        }
+    }
+
+    focus = {
+        id = GAL_corporatism_and_democracy
+        icon = GFX_RUS_Establish_Local_Syndicates
+        relative_position_id = GAL_mother_russia_welcomes_her_children
+        x = 0
+        y = 1
+        cost = 4
+		 mutually_exclusive = { focus = GAL_mild_left_turn }
+        mutually_exclusive = { focus = GAL_second_galicia_governorate }
+        prerequisite = { focus = GAL_mother_russia_welcomes_her_children }
+        ai_will_do = { factor = 80 }
+        available = {
+			has_government = authoritarian_democrat
+		}
+        completion_reward = {
+            add_ideas = GAL_corporatism_and_democracy_pol
+        }
+    }
+
+    focus = {
+        id = GAL_second_galicia_governorate
+        icon = GFX_RUS_Stratocracy
+        relative_position_id = GAL_mother_russia_welcomes_her_children
+        x = 2
+        y = 1
+        cost = 4
+		mutually_exclusive = { focus = GAL_corporatism_and_democracy }
+		mutually_exclusive = { focus = GAL_mild_left_turn }
+        prerequisite = { focus = GAL_mother_russia_welcomes_her_children }
+        ai_will_do = { factor = 80 }
+        available = {
+			has_government = paternal_autocrat
+		}
+        completion_reward = {
+            add_ideas = GAL_second_galicia_governorate_pol
+        }
+    }
+
+    # Tier 7 (互斥)
+    focus = {
+        id = GAL_cooperate_with_ukrainian_left
+        icon = GFX_UKR_Unite_Ukapists
+        relative_position_id = GAL_mild_left_turn
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_mild_left_turn }
+
+        ai_will_do = { factor = 75 }
+        available = {}
+        completion_reward = {
+            swap_ideas = {
+                remove_idea = GAL_mild_left_turn_pol
+                add_idea = GAL_mild_left_turn_pol2
+            }
+        }
+    }
+
+    focus = {
+        id = GAL_parliament_for_russians_only
+        icon = GFX_RUS_Appease_Military
+        relative_position_id = GAL_corporatism_and_democracy
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_corporatism_and_democracy }
+
+        ai_will_do = { factor = 75 }
+        available = {}
+        completion_reward = {
+            swap_ideas = {
+                remove_idea = GAL_corporatism_and_democracy_pol
+                add_idea = GAL_corporatism_and_democracy_pol2
+            }
+        }
+    }
+
+    focus = {
+        id = GAL_remember_kharbin_volunteers
+        icon = GFX_goal_RUS_Martial_Law
+        relative_position_id = GAL_second_galicia_governorate
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_second_galicia_governorate }
+
+        ai_will_do = { factor = 75 }
+        available = {}
+        completion_reward = {
+   
+            swap_ideas = {
+                remove_idea = GAL_second_galicia_governorate_pol
+                add_idea = GAL_second_galicia_governorate_pol2
+            }
+        }
+    }
+
+    # Tier 8
+    focus = {
+        id = GAL_socialism_serving_russians
+        icon = GFX_RUS_Involve_Peasants_Into_Socialism
+        relative_position_id = GAL_cooperate_with_ukrainian_left
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_cooperate_with_ukrainian_left }
+        ai_will_do = { factor = 70 }
+        available = {}
+        completion_reward = {
+            add_political_power = 50
+            add_stability = 0.05
+        }
+    }
+
+    focus = {
+        id = GAL_spread_pro_russian_propaganda
+        icon = GFX_focus_rus_voice_tsar
+        relative_position_id = GAL_parliament_for_russians_only
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_parliament_for_russians_only }
+        ai_will_do = { factor = 70 }
+        available = {}
+        completion_reward = {
+            add_political_power = 50
+            add_stability = 0.05
+        }
+    }
+
+    focus = {
+        id = GAL_prosperity_for_peasants
+        icon = GFX_UKR_Love_Peasants
+        relative_position_id = GAL_remember_kharbin_volunteers
+        x = 0
+        y = 1
+        cost = 4
+        prerequisite = { focus = GAL_remember_kharbin_volunteers }
+        ai_will_do = { factor = 70 }
+        available = {}
+        completion_reward = {
+            add_political_power = 50
+            add_stability = 0.05
+        }
+    }
+
+    # Tier 9: 最终汇合节点
+    focus = {
+        id = GAL_fight_for_holy_russia_trinity
+        icon = GFX_TRM_Panslavic_Direction
+        relative_position_id = GAL_socialism_serving_russians
+        x = 2
+        y = 1
+        cost = 4
+        prerequisite = {
+			focus = GAL_socialism_serving_russians
+			focus = GAL_spread_pro_russian_propaganda
+			focus = GAL_prosperity_for_peasants
+		}
+
+
+        ai_will_do = { factor = 100 }
+        available = {}
+        completion_reward = {
+            add_political_power = 100
+            add_stability = 0.10
+            add_war_support = 0.10
+            add_ideas = GAL_fight_for_holy_russia_trinity
+        }
+    }
+	 focus = {
+       id = GAL_new_german_colony
+       icon = GFX_BAT_germanisation
+       x = 40
+       y = 20
+       cost = 4
+       ai_will_do = { factor = 100 }
+       available = {}
+       completion_reward = {
+           add_political_power = 100
+           add_stability = 0.1
+           add_war_support = 0.1
+       }
+   }
+
+   # Tier 2
+   focus = {
+       id = GAL_empower_german_minorities
+       icon = GFX_goal_UMN_german_civil_engineering
+       relative_position_id = GAL_new_german_colony
+       x = -1
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_new_german_colony }
+       ai_will_do = { factor = 80 }
+       available = {}
+       completion_reward = {
+           add_ideas = GAL_empower_german_minorities_idea
+       }
+   }
+   focus = {
+       id = GAL_eliminate_nationalist_resistance
+       icon = GFX_germanprimacy
+       relative_position_id = GAL_new_german_colony
+       x = 1
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_new_german_colony }
+       ai_will_do = { factor = 80 }
+       available = {}
+       completion_reward = {
+           add_stability = 0.1
+		   add_political_power = 100
+           set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+       }
+   }
+
+   # Tier 3
+   focus = {
+       id = GAL_request_berlin_aid
+       icon = GFX_german_army_advisors
+       relative_position_id = GAL_empower_german_minorities
+       x = 0
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_empower_german_minorities }
+       ai_will_do = { factor = 70 }
+       available = {}
+       completion_reward = {
+           swap_ideas = {
+               remove_idea = GAL_empower_german_minorities_idea
+               add_idea = GAL_empower_german_minorities_idea2
+           }
+       }
+   }
+   focus = {
+       id = GAL_germanization_policy
+       icon = GFX_MAF_german_settlement_committee
+       relative_position_id = GAL_eliminate_nationalist_resistance
+       x = 0
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_eliminate_nationalist_resistance }
+       ai_will_do = { factor = 70 }
+       available = {}
+       completion_reward = {
+           set_temp_variable = { WSU_threat_change = -20 }
+			GAL_change_WSU_threat = yes
+			set_temp_variable = { GAL_centralisation_change = 20 }
+			GAL_change_centralisation = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+       }
+   }
+
+   # Tier 4 (汇合点)
+   focus = {
+       id = GAL_distribute_land_to_germans
+       icon = GFX_goal_CZE_german_concession
+       relative_position_id = GAL_request_berlin_aid
+       x = 1 # 居中调整
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_request_berlin_aid }
+       prerequisite = { focus = GAL_germanization_policy }
+       ai_will_do = { factor = 90 }
+       available = {}
+       completion_reward = {
+          add_one_random_military_factory = yes
+		  add_one_random_military_factory = yes
+		  add_one_random_military_factory = yes
+       }
+   }
+
+   # Tier 5
+   focus = {
+       id = GAL_implement_corporatist_policy
+       icon = GFX_goal_GER_Support_Small_Business
+       relative_position_id = GAL_distribute_land_to_germans
+       x = 0
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_distribute_land_to_germans }
+       ai_will_do = { factor = 90 }
+       available = {}
+       completion_reward = {
+           add_political_power = 50
+           swap_ideas = {
+               remove_idea = GAL_distribute_land_to_germans_idea
+               add_idea = GAL_implement_corporatist_policy_idea
+           }
+       }
+   }
+
+   # Tier 6
+   focus = {
+       id = GAL_adhere_pan_germanism
+       icon = GFX_goal_GER_Central_Culture
+       relative_position_id = GAL_implement_corporatist_policy
+       x = -1
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_implement_corporatist_policy }
+	   mutually_exclusive = { focus = GAL_adopt_pan_germanism }
+       ai_will_do = { factor = 80 }
+       available = {}
+       completion_reward = {
+           add_ideas = GAL_adhere_pan_germanism_pol
+       }
+   }
+   focus = {
+       id = GAL_adopt_pan_germanism
+       icon = GFX_goal_NOR_free_germanic_peoples
+       relative_position_id = GAL_implement_corporatist_policy
+       x = 1
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_implement_corporatist_policy }
+       ai_will_do = { factor = 80 }
+       mutually_exclusive = { focus = GAL_adhere_pan_germanism }
+       available = {}
+       completion_reward = {
+           add_ideas = GAL_adopt_pan_germanism_pol
+       }
+   }
+
+   # Tier 7
+   focus = {
+       id = GAL_young_germans_step_forward
+       icon = GFX_goal_GER_Pax_Germanica
+       relative_position_id = GAL_adhere_pan_germanism
+       x = -1
+       y = 1
+       cost = 4
+		mutually_exclusive = {
+			focus = GAL_populist_artists
+			focus = GAL_roar_of_sarmatians
+		}
+
+
+       prerequisite = { focus = GAL_adhere_pan_germanism }
+       ai_will_do = { factor = 70 }
+       available = {}
+       completion_reward = {
+          add_ideas = GAL_young_german_pol
+       }
+   }
+   focus = {
+       id = GAL_populist_artists
+       icon = GFX_goal_AUS_New_Age_Ariosophic_Artistry
+       relative_position_id = GAL_adhere_pan_germanism
+       x = 1
+       y = 1
+       cost = 4
+       prerequisite = {
+		focus = GAL_adopt_pan_germanism
+		focus = GAL_adhere_pan_germanism
+		}
+       ai_will_do = { factor = 70 }
+       mutually_exclusive = {
+			focus = GAL_young_germans_step_forward
+			focus = GAL_roar_of_sarmatians
+		}
+
+       available = {}
+       completion_reward = {
+           add_ideas = GAL_populist_artists_pol
+       }
+   }
+   focus = {
+       id = GAL_roar_of_sarmatians
+       icon = GFX_goal_GER_Polish_Party
+       relative_position_id = GAL_adopt_pan_germanism
+       x = 1
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_adopt_pan_germanism }
+       ai_will_do = { factor = 70 }
+       mutually_exclusive = {
+		focus = GAL_populist_artists
+		focus = GAL_young_germans_step_forward
+	}
+
+
+       available = {}
+       completion_reward = {
+          add_ideas = GAL_roar_of_sarmatians_pol
+       }
+   }
+
+   # Tier 8
+   focus = {
+       id = GAL_encourage_german_migration
+       icon = GFX_goal_GER_Eastern_Workers
+       relative_position_id = GAL_young_germans_step_forward
+       x = 0
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_young_germans_step_forward }
+       ai_will_do = { factor = 60 }
+       available = {}
+       completion_reward = {
+           swap_ideas = {
+               remove_idea = GAL_young_german_pol
+               add_idea = GAL_young_german_pol2
+           }
+       }
+   }
+   focus = {
+       id = GAL_reaction_against_renaissance
+       icon = GFX_CSA_Rage_Against_Enlightenment
+       relative_position_id = GAL_populist_artists
+       x = 0
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_populist_artists }
+       ai_will_do = { factor = 60 }
+       available = {}
+       completion_reward = {
+           add_political_power = 75
+           swap_ideas = {
+               remove_idea = GAL_populist_artists_pol
+               add_idea = GAL_populist_artists_pol2
+           }
+       }
+   }
+   focus = {
+       id = GAL_our_sarmatian_aryan_bloodline
+       icon = GFX_goal_AUS_Pure_Clairvoyancy_Nordic_Aryans
+       relative_position_id = GAL_roar_of_sarmatians
+       x = 0
+       y = 1
+       cost = 4
+       prerequisite = { focus = GAL_roar_of_sarmatians }
+       ai_will_do = { factor = 60 }
+       available = {}
+       completion_reward = {
+           swap_ideas = {
+               remove_idea = GAL_roar_of_sarmatians_pol
+               add_idea = GAL_roar_of_sarmatians_pol2
+           }
+       }
+   }
+
+   # Tier 9 (最终节点)
+   focus = {
+       id = GAL_go_east
+       icon = GFX_goal_GER_For_Germany
+       relative_position_id = GAL_encourage_german_migration
+       x = 2
+       y = 1
+       cost = 4
+       prerequisite = {
+		focus = GAL_encourage_german_migration
+		focus = GAL_reaction_against_renaissance
+		focus = GAL_our_sarmatian_aryan_bloodline
+	}
+
+
+       ai_will_do = { factor = 100 }
+       available = {}
+       completion_reward = {
+           add_political_power = 100
+           add_stability = 0.10
+           add_war_support = 0.10
+           add_ideas = GAL_go_east
+       }
+   }
+}
