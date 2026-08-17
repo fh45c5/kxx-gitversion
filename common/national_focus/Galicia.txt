@@ -1303,6 +1303,7 @@ focus_tree = {
 		}
 		available = {
 			is_in_faction_with = AUS
+			is_subject = no
 		}
 		prerequisite = {
 			focus = GAL_fp
@@ -1316,7 +1317,7 @@ focus_tree = {
 	}
 	focus = {
 		id = GAL_legacy_krakow_uprising
-		icon = GFX_goal_GAL_tough_year
+		icon = GFX_goal_POL_New_Knightly_Orders
 		cost = 4
 		relative_position_id = GAL_fp
 		x = 0
@@ -1330,6 +1331,9 @@ focus_tree = {
 				is_in_faction_with = AUS
 			}
 		}
+		available = {
+			is_subject = no
+		}
 		prerequisite = {
 			focus = GAL_fp
 		}
@@ -1337,12 +1341,19 @@ focus_tree = {
 			factor = 1500
 		}
 		completion_reward = {
-			leave_faction = yes
+			add_stability = 0.1
+			if = {
+				limit = {
+					is_in_faction_with = AUS
+				}
+				leave_faction = yes
+			}
+			
 		}
 	}
 	focus = {
 		id = GAL_join_poland
-		icon = GFX_goal_GAL_tough_year
+		icon = GFX_goal_POL_Poland_Forever
 		cost = 4
 		relative_position_id = GAL_fp
 		x = 2
@@ -1357,6 +1368,9 @@ focus_tree = {
         ai_will_do = {
 			factor = 1500
 		}
+		available = {
+			is_subject = no
+		}
 		completion_reward = {
 			custom_effect_tooltip = GAME_OVER_TT
 			POL = {
@@ -1368,7 +1382,7 @@ focus_tree = {
 	}
 	focus = {
 		id = GAL_liberate_pol
-		icon = GFX_goal_GAL_tough_year
+		icon = GFX_goal_POL_Spreading_Revolution
 		cost = 4
 		relative_position_id = GAL_fp
 		x = -1
@@ -1382,6 +1396,7 @@ focus_tree = {
 			factor = 1500
 		}
 		completion_reward = {
+			custom_effect_tooltip = "解锁决议加入阵营。"
 			create_wargoal = {
 				target = POL
 				type = annex_everything
@@ -1399,20 +1414,26 @@ focus_tree = {
 	
 	focus = {
 		id = GAL_bigger_ambition
-		icon = GFX_goal_GAL_tough_year
+		icon = GFX_goal_POL_Cavaliers_Triumphant
 		cost = 4
 		relative_position_id = GAL_fp
-		x = 0
+		x = -1
 		y = 3
 		prerequisite = {
 			focus = GAL_liberate_pol
 		}
-		
+		available = {
+			is_subject = no
+			NOT = {
+				country_exists = POL
+			}
+		}
         ai_will_do = {
 			factor = 1500
 		}
 		completion_reward = {
-			custom_effect_tooltip = "该国策的效果取决于路线。"
+			country_event = gal.52
+			set_cosmetic_tag = POL
 			#insert event later
 		}
 	}
@@ -2613,7 +2634,14 @@ focus_tree = {
 			add_stability = 0.1
 			add_war_support = 0.1
 		}
-
+		select_effect = {
+			hidden_effect = {
+				country_event = {
+					id = gal.47
+					days = 3
+				}
+			}
+		}
 		x = 30
 		y = 10
 	}
@@ -2934,6 +2962,14 @@ focus_tree = {
         available = {
 			has_country_flag = GAL_nationalist_coup
 		}
+		select_effect = {
+			hidden_effect = {
+				country_event = {
+					id = gal.50
+					days = 3
+				}
+			}
+		}
         completion_reward = {
             add_political_power = 100
             add_stability = 0.1
@@ -3236,7 +3272,9 @@ focus_tree = {
         ai_will_do = {
             factor = 100
         }
-        available = {}
+        available = {
+			has_country_flag = GAL_hidden_parth_unlock
+		}
         completion_reward = {
             add_ideas = GAL_save_galicia
         }
@@ -4232,7 +4270,9 @@ focus_tree = {
        y = 20
        cost = 4
        ai_will_do = { factor = 100 }
-       available = {}
+       available = {
+		has_country_flag = GAL_german_colony
+	   }
        completion_reward = {
            add_political_power = 100
            add_stability = 0.1
@@ -4350,6 +4390,7 @@ focus_tree = {
                remove_idea = GAL_distribute_land_to_germans_idea
                add_idea = GAL_implement_corporatist_policy_idea
            }
+		   country_event = gal.51
        }
    }
 
@@ -4364,7 +4405,11 @@ focus_tree = {
        prerequisite = { focus = GAL_implement_corporatist_policy }
 	   mutually_exclusive = { focus = GAL_adopt_pan_germanism }
        ai_will_do = { factor = 80 }
-       available = {}
+       available = {
+			NOT = {
+				has_government = national_populist
+			}
+	   }
        completion_reward = {
            add_ideas = GAL_adhere_pan_germanism_pol
        }
@@ -4379,7 +4424,11 @@ focus_tree = {
        prerequisite = { focus = GAL_implement_corporatist_policy }
        ai_will_do = { factor = 80 }
        mutually_exclusive = { focus = GAL_adhere_pan_germanism }
-       available = {}
+       available = {
+			NOT = {
+				has_government = authoritarian_democrat
+			}
+	   }
        completion_reward = {
            add_ideas = GAL_adopt_pan_germanism_pol
        }
@@ -4401,7 +4450,9 @@ focus_tree = {
 
        prerequisite = { focus = GAL_adhere_pan_germanism }
        ai_will_do = { factor = 70 }
-       available = {}
+       available = {
+			has_government = authoritarian_democrat
+	   }
        completion_reward = {
           add_ideas = GAL_young_german_pol
        }
@@ -4423,7 +4474,9 @@ focus_tree = {
 			focus = GAL_roar_of_sarmatians
 		}
 
-       available = {}
+       available = {
+			has_government = paternal_autocrat
+	   }
        completion_reward = {
            add_ideas = GAL_populist_artists_pol
        }
@@ -4443,7 +4496,9 @@ focus_tree = {
 	}
 
 
-       available = {}
+       available = {
+		has_government = national_populist
+	   }
        completion_reward = {
           add_ideas = GAL_roar_of_sarmatians_pol
        }
