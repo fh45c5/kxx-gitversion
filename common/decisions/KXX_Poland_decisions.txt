@@ -1,15 +1,308 @@
-POL_sanation_decisions = {
-	icon = generic_propaganda
-	
-	POL_TEST = {
-		cost = 150
-		icon = GFX_decision_generic_nationalism
-		fire_only_once = yes
-		
-		visible = {
-			tag = POL
-			always = no #temp
+POL_sanation_bop_decisions_category = {
+	POL_criticize_government = {
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
 		}
-		
+		icon = GFX_decision_generic_political_discourse
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 50
+				has_political_power > 150
+			}
+		}
+		fire_only_once = no
+		days_re_enable = 14
+		cost = 35
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_stack_the_bureaucracy_decision"
+			add_power_balance_value = {
+				id = POL_sanation_bop
+				value = 0.1
+			}
+		}
+	}
+	POL_pro_governemnt_propaganda = {
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
+		}
+		icon = GFX_decision_eng_propaganda_campaigns
+		ai_will_do = { base = 0 }
+		fire_only_once = no
+		days_re_enable = 14
+		custom_cost_trigger = {
+			has_war_support > 0.10
+		}
+		custom_cost_text = CHI_decision_cost_ws_10
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_enforce_party_orthodoxy_decision"
+			add_power_balance_value = {
+				id = POL_sanation_bop
+				value = -0.1
+			}
+			hidden_effect = {
+				add_war_support = -0.10
+			}
+		}
+	}
+	POL_seek_politician_support = {
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
+		}
+		icon = GFX_decision_POL_looming_peasants_strike
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 50
+				has_political_power > 150
+			}
+		}
+		fire_only_once = no
+		days_re_enable = 14
+		cost = 35
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_shore_up_peasant_communes_decision"
+			add_power_balance_value = {
+				id = POL_sanation_bop
+				value = -0.15
+			}
+		}
+	}
+	POL_arm_militia = {
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
+		}
+		icon = GFX_decision_generic_speech
+		ai_will_do = { base = 0 }
+		fire_only_once = no
+		days_re_enable = 14
+		custom_cost_trigger = {
+			has_stability > 0.10
+		}
+		custom_cost_text = CHI_decision_cost_stb_10
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_undermine_the_chairmans_grip_decision"
+			add_power_balance_value = {
+				id = POL_sanation_bop
+				value = 0.15
+			}
+			hidden_effect = {
+				add_stability = -0.10
+			}
+		}
+	}
+	
+}
+
+POL_sanation_opposition_decisions_category = {
+	POL_military_action = {
+		icon = generic_civil_support
+		priority = 10
+
+		allowed = { always = no } #manually activated
+
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
+		}
+
+		cancel_trigger = {
+			has_country_flag = POL_struggle_is_over
+		}
+
+		cost = 40
+		is_good = no
+		fixed_random_seed = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+
+		ai_will_do = {
+			base = 10			
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GAL_WSU_guerilla_activity"
+			hidden_effect = { activate_mission = POL_military_action }
+			POL_sanation_military_lose_power = yes
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout GAL_WSU_guerilla_activity"
+			hidden_effect = { activate_mission = POL_military_action }
+			POL_sanation_military_gain_power_big = yes
+		}
+	}
+	POL_agrarian_action = {
+		icon = generic_civil_support
+		priority = 10
+
+		allowed = { always = no } #manually activated
+
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
+		}
+
+		cancel_trigger = {
+			has_country_flag = POL_struggle_is_over
+		}
+
+		cost = 40
+		is_good = no
+		fixed_random_seed = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+
+		ai_will_do = {
+			base = 10			
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GAL_WSU_guerilla_activity"
+			hidden_effect = { activate_mission = POL_agrarian_action }
+			POL_sanation_agrarian_lose_power = yes
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout GAL_WSU_guerilla_activity"
+			hidden_effect = { activate_mission = POL_agrarian_action }
+			POL_sanation_agrarian_gain_power_big = yes
+		}
+	}
+	POL_natdem_action = {
+		icon = generic_civil_support
+		priority = 10
+
+		allowed = { always = no } #manually activated
+
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
+		}
+
+		cancel_trigger = {
+			has_country_flag = POL_struggle_is_over
+		}
+
+		cost = 40
+		is_good = no
+		fixed_random_seed = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+
+		ai_will_do = {
+			base = 10			
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GAL_WSU_guerilla_activity"
+			hidden_effect = { activate_mission = POL_natdem_action }
+			POL_sanation_natdem_lose_power = yes
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout GAL_WSU_guerilla_activity"
+			hidden_effect = { activate_mission = POL_natdem_action }
+			POL_sanation_natdem_gain_power_big = yes
+		}
+	}
+	POL_revolutionary_fevor = {
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
+		}
+		icon = GFX_decision_POL_looming_peasants_strike
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 50
+				has_political_power > 150
+			}
+		}
+		fire_only_once = no
+		days_re_enable = 14
+		cost = 35
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_shore_up_peasant_communes_decision"
+			POL_sanation_increase_radicalism = yes
+		}
+	}
+	POL_realism_thoughts = {
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
+		}
+		icon = GFX_decision_POL_looming_peasants_strike
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 50
+				has_political_power > 150
+			}
+		}
+		fire_only_once = no
+		days_re_enable = 14
+		cost = 35
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_shore_up_peasant_communes_decision"
+			POL_sanation_decrease_radicalism = yes
+		}
+	}
+	POL_promote_unity = {
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
+		}
+		icon = GFX_decision_POL_looming_peasants_strike
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 50
+				has_political_power > 150
+			}
+		}
+		fire_only_once = no
+		days_re_enable = 14
+		cost = 35
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_shore_up_peasant_communes_decision"
+			POL_sanation_increase_unity = yes
+		}
+	}
+	POL_crackdown_dissents = {
+		available = {
+			NOT = {
+				has_country_flag = POL_struggle_is_over
+			}
+		}
+		icon = GFX_decision_POL_looming_peasants_strike
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 50
+				has_political_power > 150
+			}
+		}
+		fire_only_once = no
+		days_re_enable = 14
+		cost = 35
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_shore_up_peasant_communes_decision"
+			POL_sanation_decrease_unity = yes
+		}
 	}
 }
