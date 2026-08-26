@@ -2,6 +2,7 @@ add_namespace = rednap
 add_namespace = COF_BCD
 add_namespace = COF_Valois
 add_namespace = COF_redflood
+add_namespace = COF_tech
 
 country_event = { 
 	id = rednap.1
@@ -669,24 +670,14 @@ country_event = {
 	option = { 
 		name = COF_Valois.1.a
 		ai_chance = {
-			factor = 50
+			base = 30
 			modifier = {
-		    	factor = 0
-			    OR = {
-					has_game_rule = {
-			    		rule = FRA_start_election
-			    		option = FRA_START_TOTALIST_SORELIAN_KING  #乔治一世
-			    	}
-					has_game_rule = {
-			    		rule = FRA_start_election
-			    		option = FRA_START_TOTALIST_SORELIAN_BERTH  #爱德华·贝尔特
-			    	}
-					has_game_rule = {
-			    		rule = FRA_start_election
-			    		option = FRA_START_TOTALIST_SORELIAN_DIE  #至暗之日
-			    	}
+				factor = 100
+				has_game_rule = {
+					rule = FRA_xday_of_imfamy
+					option = FRA_VALOIS_ETERNAL_CONTROL
 				}
-		    }
+			}
 		}
 		country_event = COF_Valois.2
 	}
@@ -694,24 +685,40 @@ country_event = {
 	option = { 
 		name = COF_Valois.1.b
 		ai_chance = {
-			factor = 50
+			base = 40
 			modifier = {
-		    	factor = 0
-			    OR = {
+				factor = 100
+				OR = {
 					has_game_rule = {
-			    		rule = FRA_start_election
-			    		option = FRA_START_TOTALIST_SORELIAN_ALIVE  #乔治·瓦卢瓦
-			    	}
+						rule = FRA_xday_of_imfamy
+						option = FRA_ARTHUYS_ASSUMES_CONTROL
+					}
 					has_game_rule = {
-			    		rule = FRA_start_election
-			    		option = FRA_START_TOTALIST_SORELIAN_KING  #乔治一世
-			    	}
+						rule = FRA_day_of_imfamy
+						option = FRA_BUCARD_ASSUMES_CONTROL
+					}
 					has_game_rule = {
-			    		rule = FRA_start_election
-			    		option = FRA_START_TOTALIST_SORELIAN_BERTH  #爱德华·贝尔特
-			    	}
+						rule = FRA_xday_of_imfamy
+						option = FRA_ORTHOR_ASSUMES_CONTROL
+					}
+					has_game_rule = {
+						rule = FRA_day_of_imfamy
+						option = FRA_DEAT_ASSUMES_CONTROL
+					}
+					has_game_rule = {
+						rule = FRA_day_of_imfamy
+						option = FRA_BLACK_GUARD_COUNTERREVOLUTION
+					}
+					has_game_rule = {
+						rule = FRA_xday_of_imfamy
+						option = FRA_CLEMEN_ASSUMES_CONTROL
+					}
+					has_game_rule = {
+						rule = FRA_xday_of_imfamy
+						option = FRA_DORIOT_ASSUMES_CONTROL
+					}
 				}
-		    }
+			}
 		}
 		country_event = comfrance.904
 	}
@@ -719,20 +726,7 @@ country_event = {
 	option = { 
 		name = COF_Valois.1.c
 		ai_chance = {
-			factor = 50
-			modifier = {
-		    	factor = 0
-			    OR = {
-					has_game_rule = {
-			    		rule = FRA_start_election
-			    		option = FRA_START_TOTALIST_SORELIAN_ALIVE  #乔治·瓦卢瓦
-			    	}
-					has_game_rule = {
-			    		rule = FRA_start_election
-			    		option = FRA_START_TOTALIST_SORELIAN_DIE  #至暗之日
-			    	}
-				}
-		    }
+			base = 30
 		}
 		country_event = COF_Valois.9
 	}
@@ -747,17 +741,15 @@ country_event = {
 
 	option = { 
 		name = COF_Valois.2.a
+		set_country_flag = Georges_Valois_lived
 		hidden_effect = {
 			set_politics = {
 				ruling_party = totalist
 				elections_allowed = no
 			}			
 		}
-		FRA_clear_Valois_live_focus_tree_flag = yes
-		FRA_clear_Valois_dead_focus_tree_flag = yes
-		set_country_flag = Georges_Valois_lived
-		mark_focus_tree_layout_dirty = yes
 	}
+
 }
 
 country_event = { #调查革命法兰西主义者
@@ -783,7 +775,7 @@ country_event = { #调查革命法兰西主义者
 	option = {
 		name = COF_Valois.3.b
 		ai_chance = {
-			base = 0
+			base = 30
 		}
 		hidden_effect = {
 			country_event = {
@@ -859,20 +851,6 @@ country_event = { #秃鹫的啄食
 				expire = "1965.1.1"
 				ideology = natpop_sorelism_subtype
 			}
-			create_country_leader = {
-				name = "公共安全委员会"
-				desc = "POLITICS_FRENCH_COUNCIL_DESC"
-				picture = "gfx/leaders/FRA/Portrait_France_Council.png"
-				expire = "1965.1.1"
-				ideology = radical_socialist_subtype
-			}
-			create_country_leader = {
-				name = "公共安全委员会"
-				desc = "POLITICS_FRENCH_COUNCIL_DESC"
-				picture = "gfx/leaders/FRA/Portrait_France_Council.png"
-				expire = "1965.1.1"
-				ideology = syndicalist_subtype
-			}
 			set_politics = {
 				ruling_party = totalist
 			}
@@ -911,11 +889,8 @@ country_event = { #秃鹫的啄食
 		  ideology = totalist
 		   popularity = 0.20
 		}
-		FRA_clear_all_focus_tree_flag = yes
-		set_country_flag = FRA_deat_supreme
-		set_country_flag = FRA_deat_herve
 		complete_national_focus = FRA_herve_win	
-		set_country_flag = FRA_tragic_ending	
+		set_country_flag = Deat_coup	
 	}
 
 	option = {
@@ -945,12 +920,8 @@ country_event = { #秃鹫的啄食
 		add_ideas = FRA_Gabriel_Jeantet_eco_tot
 		remove_ideas_with_trait = security_minister
 		add_ideas = FRA_Marc_Augier_sec_tot
-		FRA_clear_Valois_live_focus_tree_flag = yes
-		FRA_clear_Valois_dead_focus_tree_flag = yes
-		set_country_flag = FRA_sorelian_orthodox
-		mark_focus_tree_layout_dirty = yes
-		set_country_flag = FRA_tragic_ending
-		complete_national_focus = FRA_sorels_win
+		complete_national_focus = FRA_who_shall_lead
+		complete_national_focus = FRA_woke_gang_win
 	}
 
 	option = {
@@ -975,17 +946,13 @@ country_event = { #秃鹫的啄食
 		  ideology = totalist
 		   popularity = 0.20
 		 }
+		 complete_national_focus = FRA_who_shall_lead
+		 complete_national_focus = FRA_woke_gang_win
 		set_party_name = {
 		  ideology = totalist
 		  long_name = FRA_ultranatsynd
 		  name = FRA_ultranatsynd
-		}	
-		FRA_clear_Valois_live_focus_tree_flag = yes
-		FRA_clear_Valois_dead_focus_tree_flag = yes
-		set_country_flag = FRA_sorelian_Ultranatsynd
-		mark_focus_tree_layout_dirty = yes
-		complete_national_focus = FRA_woke_gang_win 
-		set_country_flag = FRA_tragic_ending
+		}	 
 		country_event = {
 			id = comfrance.928
 			days = 10
@@ -994,6 +961,8 @@ country_event = { #秃鹫的啄食
 
 	option = {
 		name = COF_Valois.6.e
+		clr_country_flag = Georges_Valois_dead
+		set_country_flag = FRA_SECOND_RAD
 		create_country_leader = {
 			name = "皮埃尔·德里厄·拉罗谢尔"
 			picture = "gfx/leaders/FRA/Portrait_Pierre_Drieu_La_Rochelle.png"
@@ -1018,10 +987,6 @@ country_event = { #秃鹫的啄食
 			FRA_Marcel_Deat_eco_tot
 			FRA_Claudine_Chomat_sec_tot
 		}
-		FRA_clear_all_focus_tree_flag = yes
-		set_country_flag = FRA_SECOND_RAD
-		set_country_flag = FRA_SECOND_RAD_Rochelle
-		mark_focus_tree_layout_dirty = yes
 	}
 
 }
@@ -1065,7 +1030,7 @@ country_event = { #泛欧主义问题
 	option = {
 		name = COF_Valois.8.a
 		ai_chance = {
-			base = 0
+			base = 20
 		}
 		set_cosmetic_tag = FRA_Sorel_EU
 		every_country = {
@@ -1091,7 +1056,7 @@ country_event = { #泛欧主义问题
     option = {
 		name = COF_Valois.8.b
 		ai_chance = {
-			base = 0
+			base = 30
 		}
 		set_cosmetic_tag = FRA_Sorel_EU
 		every_country = {
@@ -1224,7 +1189,7 @@ country_event = { #泛欧主义问题
     option = {
 		name = COF_Valois.8.c
 		ai_chance = {
-			base = 100
+			base = 50
 		}
 		add_ideas = FRA_soreleu3_idea
 		29 = { add_core_of = ROOT }
@@ -1257,45 +1222,26 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = {
-		name = COF_Valois.9.a
 		ai_chance = {
-			factor = 1
-			modifier = {
-		    	factor = 0
-			    OR = {
-					has_game_rule = {
-			    		rule = FRA_start_election
-			    		option = FRA_START_TOTALIST_SORELIAN_BERTH  #爱德华·贝尔特
-			    	}
-				}
-		    }
+			base = 0
 		}
+		name = COF_Valois.9.a
 		add_stability = -0.2
+		set_country_flag = Georges_Valois_crazy
 		set_party_name = {
 			ideology = totalist
 			long_name = FRA_Sorel_Capetiens_Party
 			name = FRA_Sorel_Capetiens_Party
 		}
-		FRA_clear_Valois_dead_focus_tree_flag = yes
-		FRA_clear_Valois_live_focus_tree_flag = yes
-		set_country_flag = Georges_Valois_crazy
 		mark_focus_tree_layout_dirty = yes
 	}
 	option = {
 		name = COF_Valois.9.b
 		ai_chance = {
-			factor = 100
-			modifier = {
-		    	factor = 0
-			    OR = {
-					has_game_rule = {
-			    		rule = FRA_start_election
-			    		option = FRA_START_TOTALIST_SORELIAN_KING  #乔治一世
-			    	}
-				}
-		    }
+			base = 100
 		}		
 		add_stability = 0.2
+		set_country_flag = Valois_Berth
 		create_country_leader = {
 			name = "爱德华·贝尔特"
 			picture = "gfx/leaders/FRA/Portrait_France_Edouard_Berth.png"
@@ -1303,23 +1249,6 @@ country_event = {
 			ideology = sorelianism_subtype
 			traits = {}
 		}
-		create_country_leader = {
-			name = "爱德华·贝尔特"
-			picture = "gfx/leaders/FRA/Portrait_France_Edouard_Berth.png"
-			expire = "1.1.1"
-			ideology = syndicalist_subtype
-			traits = {}
-		}
-		create_country_leader = {
-			name = "爱德华·贝尔特"
-			picture = "gfx/leaders/FRA/Portrait_France_Edouard_Berth.png"
-			expire = "1.1.1"
-			ideology = radical_socialist_subtype
-			traits = {}
-		}
-		FRA_clear_Valois_dead_focus_tree_flag = yes
-		FRA_clear_Valois_live_focus_tree_flag = yes
-		set_country_flag = Valois_Berth
 		mark_focus_tree_layout_dirty = yes
 	}
 }
@@ -1335,9 +1264,7 @@ country_event = {
 
 option = { 
 	name = COF_Valois.10.a
-	ai_chance = {
-		base = 35
-	}
+	
 }	
 option = { 
 	name = COF_Valois.10.b
@@ -1652,4 +1579,510 @@ country_event = {
 		
 	}
 
+}
+
+
+country_event = { 
+	id = COF_tech.1
+	title = COF_tech.1.t
+	desc = COF_tech.1.d
+	is_triggered_only = yes
+	picture = GFX_report_event_FRA_le_corbusier_designer
+
+	option = { 
+		name = COF_tech.1.a
+		add_country_leader_trait = COF_supreme_designer
+	}
+}
+
+country_event = { 
+	id = COF_tech.2
+	title = COF_tech.2.t
+	desc = COF_tech.2.d
+	is_triggered_only = yes
+	picture = GFX_report_event_FRA_le_corbusier_order
+
+	option = { 
+		name = COF_tech.2.a
+	}
+}
+
+country_event = { 
+	id = COF_tech.3
+	title = COF_tech.3.t
+	desc = COF_tech.3.d
+	is_triggered_only = yes
+	picture = GFX_news_event_FRA_central_state
+
+	option = { 
+		name = COF_tech.3.a
+		add_stability = -0.1
+	}
+}
+
+country_event = { 
+	id = COF_tech.4
+	title = COF_tech.4.t
+	desc = COF_tech.4.d
+	is_triggered_only = yes
+	picture = GFX_report_event_FRA_le_corbusier_modulor
+
+	option = { 
+		name = COF_tech.4.a		
+	}
+}
+
+country_event = { 
+	id = COF_tech.5
+	title = COF_tech.5.t
+	desc = COF_tech.5.d
+	is_triggered_only = yes
+	picture = GFX_report_event_FRA_alexis_carrel_comic
+
+	option = { 
+		name = COF_tech.5.a
+		add_manpower = -10000
+		add_stability = -0.1
+		add_war_support = -0.1
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
+	}
+
+	option = { 
+		name = COF_tech.5.b
+		add_stability = -0.1
+		add_war_support = -0.1
+		add_popularity = {
+			ideology = totalist
+			popularity = -0.2
+		}
+		random_owned_state = {
+			limit = { arms_factory > 0 }
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+		}
+		random_owned_state = {
+			limit = { arms_factory > 0 }
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+		}
+		random_owned_state = {
+			limit = { arms_factory > 0 }
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+		}		
+	}
+}
+
+country_event = { 
+	id = COF_tech.6
+	title = COF_tech.6.t
+	desc = COF_tech.6.d
+	is_triggered_only = yes
+	picture = GFX_report_event_FRA_le_corbusier_newtype
+
+	option = { 
+		name = COF_tech.6.a
+		set_country_leader_ideology = tot_dystopian_subtype
+		swap_ideas = {
+			remove_idea = FRA_pure_race
+			add_idea = FRA_pure_race2
+		}
+		country_event = COF_tech.8
+	}
+
+	option = { 
+		name = COF_tech.6.b
+		add_stability = 0.2
+		add_war_support = 0.2		
+		add_popularity = {
+			ideology = totalist
+			popularity = -0.15
+		}
+		random_owned_state = {
+			limit = { arms_factory > 0 }
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+		}
+		random_owned_state = {
+			limit = { arms_factory > 0 }
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+		}
+		random_owned_state = {
+			limit = { arms_factory > 0 }
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+		}				
+	}
+}
+
+country_event = { 
+	id = COF_tech.7
+	title = COF_tech.7.t
+	desc = COF_tech.7.d
+	is_triggered_only = yes
+	picture = GFX_report_event_FRA_le_corbusier_architecture
+
+	option = { 
+		name = COF_tech.7.a	
+		set_cosmetic_tag = FRA_corb_larp
+		every_state = {
+			FRA = { 
+				add_state_core = PREV 
+			}
+		}
+		every_country = {
+			FRA = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}		
+		if = {
+			limit = { 
+				ENG = { has_socialist_government = yes }
+			}
+			ENG = { 
+				create_faction_from_template = { 
+					template = faction_template_generic_dominance
+					name = "anticorb_fact"
+					icon = GFX_faction_anti_Le_Corbusier
+				}
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = FRA }
+					is_in_faction_with = FRA
+				}
+				leave_faction = yes
+				separate_peace_all_wars = yes
+				ENG = {
+					add_to_faction = PREV
+				}				
+			}
+		}
+		else = {
+			every_country = {
+				limit = { 
+					is_in_faction_with = FRA
+				}
+				leave_faction = yes
+				separate_peace_all_wars = yes
+				declare_war_on = {
+					target = FRA
+				}
+			}
+		}
+	}
+
+	option = { 	
+		name = COF_tech.7.b
+		trigger = {
+			NOT = {
+				has_idea = FRA_pure_race2
+			}
+		}			
+	}
+	option = { 
+		name = COF_tech.7.c
+		trigger = {
+			has_idea = FRA_pure_race2
+			has_war_support < 0.8
+		}		
+		FRG = { transfer_state = 762 }
+		FRG = { transfer_state = 21 }
+		FRG = { transfer_state = 763 }
+		FRG = { transfer_state = 32 }
+		FRG = { transfer_state = 735 }
+		FRG = { transfer_state = 20 }
+		FRG = { transfer_state = 26 }
+		FRG = { transfer_state = 22 }
+		FRG = { transfer_state = 817 }
+		FRG = { transfer_state = 984 }
+		FRG = { transfer_state = 31 }
+		FRG = { transfer_state = 1334 }
+		LRE = { transfer_state = 27 }
+		LRE = { transfer_state = 785 }
+		LRE = { transfer_state = 18 }
+		LRE = { transfer_state = 980 }
+		LRE = { transfer_state = 17 }
+		LRE = { transfer_state = 24 }
+		BRI = { transfer_state = 983 }
+		BRI = { transfer_state = 14 }
+		NRM = { transfer_state = 15 }
+		NRM = { transfer_state = 30 }
+		NRM = { transfer_state = 983 }
+		NRM = { transfer_state = 14 }
+		hidden_effect = {		
+			leave_faction = yes
+			transfer_units_fraction = {
+				target = LRE
+				size = 1
+				army_ratio = 0.3
+				keep_unit_leaders_trigger = { always = yes }
+			}
+			transfer_units_fraction = {
+				target = NRM
+				size = 1
+				army_ratio = 0.4
+				keep_unit_leaders_trigger = { always = yes }
+			}		
+			declare_war_on = {
+				target = FRG
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = LRE
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = NRM
+				type = annex_everything
+			}
+			every_state = {
+				limit = { is_core_of = FRA }
+				add_claim_by = FRG
+			}
+			every_state = {
+				limit = { is_core_of = FRA }
+				add_claim_by = LRE
+			}
+			every_state = {
+				limit = { is_core_of = FRA }
+				add_claim_by = NRM
+			}	
+			NRM = { 
+				set_cosmetic_tag = FRA_Jacobinmod
+				add_state_core = 15
+				add_state_core = 30
+				add_state_core = 983
+				add_state_core = 14
+				set_politics = {
+					ruling_party = totalist
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "雅克·杜克洛"
+					picture = "gfx/leaders/FRA/Portrait_France_Jacques_Duclos.png"
+					expire = "1.1.1"
+					ideology = jacobinism_subtype
+					traits = {}
+				}				
+				add_manpower = 800000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 50000
+					producer = FRA
+				}
+				declare_war_on = {
+					target = FRG
+					type = annex_everything
+				}
+				declare_war_on = {
+					target = LRE
+					type = annex_everything
+				}					
+				add_timed_idea = { idea = yun_skull_army days = 100 }
+			}
+			LRE	= {
+				create_country_leader = {
+					name = "皮埃尔·普丘"
+					picture = "gfx/leaders/FRP/Portrait_France_Pierre_Pucheu.png"
+					expire = "1.1.1"
+					traits = {  }
+					ideology = right_technocracy_subtype
+				}
+				set_politics = {
+					ruling_party = paternal_autocrat
+					elections_allowed = no
+				}	
+				add_popularity = {
+					ideology = paternal_autocrat
+					popularity = 0.8
+				}
+				set_party_name = {
+					name = "共治帝国运动（普丘派）"
+					long_name = "共治帝国运动（普丘派）"
+					ideology = paternal_autocrat
+				}				
+				add_state_core = 27
+				add_state_core = 785
+				add_state_core = 18
+				add_state_core = 980
+				add_state_core = 17		
+				add_state_core = 24		
+				set_cosmetic_tag = FRA_sansimon
+				add_manpower = 800000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 50000
+					producer = FRA
+				}
+				add_timed_idea = { idea = yun_skull_army days = 100 }
+			}
+		    FRG = {
+				add_state_core = 762
+				add_state_core = 21
+				add_state_core = 763
+				add_state_core = 32
+				add_state_core = 735
+				add_state_core = 20
+				add_state_core = 26
+				add_state_core = 25	
+				add_manpower = 800000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 50000
+					producer = FRA
+				}
+				load_oob = FRG
+				add_timed_idea = { idea = yun_skull_army days = 100 }		
+			}
+			GER	= {
+				add_to_faction = LRE
+			}
+			if = {
+				limit = { 
+					ENG = {
+						has_socialist_government = yes
+						is_faction_leader = yes
+					}					
+				}
+				ENG	= {
+					add_to_faction = NRM
+				}						
+			}
+			else = {
+				NRM = {
+					create_faction_from_template = { 
+						template = faction_template_generic_dominance
+						name = "正统第三国际"
+						icon = GFX_faction_third_internationale
+					}
+				}
+				every_country = {
+					limit = {
+						has_socialist_government = yes
+						is_in_europe = yes
+					}
+					add_to_faction = NRM
+				}
+			}			
+		}
+	}
+}
+
+country_event = { 
+	id = COF_tech.8
+	title = COF_tech.8.t
+	desc = COF_tech.8.d
+	is_triggered_only = yes
+
+	option = { 
+		name = COF_tech.8.a
+		hidden_effect = { 
+			country_event = {
+				id = COF_tech.9
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = COF_tech.9
+	title = COF_tech.9.t
+	desc = COF_tech.9.d
+	is_triggered_only = yes
+
+	option = { 
+		name = COF_tech.9.a
+		hidden_effect = { 
+			country_event = {
+				id = COF_tech.10
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = COF_tech.10
+	title = COF_tech.10.t
+	desc = COF_tech.10.d
+	is_triggered_only = yes
+
+	option = { 
+		name = COF_tech.10.a
+		hidden_effect = { 
+			if = {
+				limit = { 
+					country_exists = BHC			
+				}		
+				country_event = {
+					id = COF_tech.79
+					days = 30
+				}					
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = COF_tech.11
+	title = COF_tech.11.t
+	desc = COF_tech.11.d
+	is_triggered_only = yes
+
+	option = { 
+		name = COF_tech.11.a
+		complete_national_focus = INT_SSSP_goal
+	}
+}
+
+country_event = { 
+	id = COF_tech.79
+	title = COF_tech.79.t
+	desc = COF_tech.79.d
+	is_triggered_only = yes
+
+	option = { 
+		name = COF_tech.79.a
+		hidden_effect = { 
+			country_event = COF_tech.80
+		}
+	}
+}
+
+country_event = { 
+	id = COF_tech.80
+	title = COF_tech.80.t
+	desc = COF_tech.80.d
+	is_triggered_only = yes
+
+	option = { 
+		name = COF_tech.80.a
+		hidden_effect = { 
+			country_event = {
+				id = COF_tech.11
+				days = 3
+			}
+		}		
+	}
 }
