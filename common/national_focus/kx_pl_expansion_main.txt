@@ -19622,11 +19622,7 @@ focus = {
 		ai_will_do = {
 			factor = 10
 		}
-		allow_branch = {
-			NOT = {
-				tag = POL
-			}
-		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
 			add_political_power = 100
@@ -23777,7 +23773,11 @@ focus = {
 	available = {
 	  has_country_flag = POL_Temporal_Rift
 	}
-	
+	allow_branch = {
+		NOT = {
+			tag = POL
+		}
+	}
 	x = 24
 	y = 46
 	cost = 4
@@ -28752,7 +28752,7 @@ focus = {
 	}
 	focus = {
 		id = POL_aristocracy_corporatism
-		icon = GFX_BAY_CORPORATE_MONARCHY
+		icon = GFX_goal_GER_Enlightening_Spirit_Capitalism
 		prerequisite = {
 			focus = POL_ideas_of_intermaurium_empire
 		}
@@ -32878,11 +32878,7 @@ focus = {
 	cost = 4
 	x = 10
 	y = 50
-	allow_branch = {
-		NOT = {
-			tag = POL
-		}
-	}
+	
 	prerequisite = { }
 	available = { always = yes }
 	ai_will_do = { factor = 100 }
@@ -33340,5 +33336,257 @@ focus = {
 		add_war_support = 0.1
 	}
 }
+  focus = {
+        id = POL_PROLETARIAT_UPRISING
+        icon = GFX_focus_generic_communism
+        x = -10
+        y = 50
+        cost = 4
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "无产阶级奋起效果占位"
+        }
+    }
 
+    # =========================================
+    # 第2行（y=1）：合作者的归来 / 少数派的崛起（互斥，左右距离2）
+    # =========================================
+    focus = {
+        id = POL_COLLABORATORS_RETURN
+        icon = GFX_focus_generic_political
+        relative_position_id = POL_PROLETARIAT_UPRISING
+        x = -1
+        y = 1
+        cost = 4
+        prerequisite = { focus = POL_PROLETARIAT_UPRISING }
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "合作者的归来效果占位"
+        }
+    }
+
+    focus = {
+        id = POL_MINORITY_RISE
+        icon = GFX_focus_generic_political
+        relative_position_id = POL_PROLETARIAT_UPRISING
+        x = 1
+        y = 1
+        cost = 4
+        prerequisite = { focus = POL_PROLETARIAT_UPRISING }
+        mutually_exclusive = { focus = POL_COLLABORATORS_RETURN }
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "少数派的崛起效果占位"
+        }
+    }
+
+    # =========================================
+    # 第3行（y=2）：放弃无产阶级专政（来自 合作者的归来）
+    # =========================================
+    focus = {
+        id = POL_ABANDON_PROLETARIAT_DICTATORSHIP
+        icon = GFX_focus_generic_political
+        relative_position_id = POL_COLLABORATORS_RETURN
+        x = -1
+        y = 1
+        cost = 4
+        prerequisite = { focus = POL_COLLABORATORS_RETURN }
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "放弃无产阶级专政效果占位"
+        }
+    }
+
+    # =========================================
+    # 第4行（y=3）：学习布哈林主义（来自 放弃无产阶级专政）
+    # =========================================
+    focus = {
+        id = POL_LEARN_BUKHARINISM
+        icon = GFX_focus_generic_communism
+        relative_position_id = POL_ABANDON_PROLETARIAT_DICTATORSHIP
+        x = 2
+        y = 0
+        cost = 4
+        prerequisite = { 
+			focus = POL_COLLABORATORS_RETURN
+			focus = POL_MINORITY_RISE
+		}
+
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "学习布哈林主义效果占位"
+        }
+    }
+
+    # =========================================
+    # 第5行（y=4）：左翼人民阵线
+    #   前置：学习布哈林主义 + 少数派的崛起（汇合）
+    # =========================================
+    focus = {
+        id = POL_LEFT_POPULAR_FRONT
+        icon = GFX_focus_generic_communism
+        relative_position_id = POL_LEARN_BUKHARINISM
+        x = 2
+        y = 0
+        cost = 4
+        prerequisite = { focus = POL_MINORITY_RISE }
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "左翼人民阵线效果占位"
+        }
+    }
+
+    # =========================================
+    # 第6行（y=5）：驾驭萨纳齐亚官僚
+    # =========================================
+    focus = {
+        id = POL_HARNESS_SANACJA_BUREAUCRACY
+        icon = GFX_focus_generic_bureaucracy
+        relative_position_id = POL_LEFT_POPULAR_FRONT
+        x = -5
+        y = 1
+        cost = 4
+        prerequisite = { focus = POL_ABANDON_PROLETARIAT_DICTATORSHIP }
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "驾驭萨纳齐亚官僚效果占位"
+        }
+    }
+
+    # =========================================
+    # 第7行（y=6）：隔墙有耳
+    # =========================================
+    focus = {
+        id = POL_WALLS_HAVE_EARS
+        icon = GFX_focus_generic_intelligence
+        relative_position_id = POL_HARNESS_SANACJA_BUREAUCRACY
+        x = 2
+        y = 0
+        cost = 4
+        prerequisite = { focus = POL_LEARN_BUKHARINISM }
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "隔墙有耳效果占位"
+        }
+    }
+
+    # =========================================
+    # 第8行（y=7）：统战富农 / 清洗少数派（互斥，左右距离2）
+    # =========================================
+    focus = {
+        id = POL_UNITE_KULAKS
+        icon = GFX_focus_generic_political
+        relative_position_id = POL_WALLS_HAVE_EARS
+        x = 2
+        y = 0
+        cost = 4
+        prerequisite = { focus = POL_LEARN_BUKHARINISM }
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "统战富农效果占位"
+        }
+    }
+
+    focus = {
+        id = POL_PURGE_MINORITIES
+        icon = GFX_focus_generic_repression
+        relative_position_id = POL_WALLS_HAVE_EARS
+        x = 4
+        y = 0
+        cost = 4
+        prerequisite = { focus = POL_LEFT_POPULAR_FRONT }
+
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "清洗少数派效果占位"
+        }
+    }
+
+    # =========================================
+    # 第9行（y=8）：共产主义法团
+    #   前置：统战富农 + 清洗少数派（汇合）
+    # =========================================
+    focus = {
+        id = POL_COMMUNIST_CORPORATISM
+        icon = GFX_focus_generic_industry
+        relative_position_id = POL_UNITE_KULAKS
+        x = -3
+        y = 1
+        cost = 4
+        prerequisite = { focus = POL_HARNESS_SANACJA_BUREAUCRACY }
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "共产主义法团效果占位"
+        }
+    }
+
+    # =========================================
+    # 第10行（y=9）：允许资本主义存在
+    # =========================================
+    focus = {
+        id = POL_ALLOW_CAPITALISM
+        icon = GFX_focus_generic_capitalism
+        relative_position_id = POL_COMMUNIST_CORPORATISM
+        x = 2
+        y = 0
+        cost = 4
+        prerequisite = { focus = POL_WALLS_HAVE_EARS }
+		prerequisite = { focus = POL_UNITE_KULAKS }
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "允许资本主义存在效果占位"
+        }
+    }
+
+    # =========================================
+    # 第11行（y=10）：建立社会主义民主
+    # =========================================
+    focus = {
+        id = POL_ESTABLISH_SOCIALIST_DEMOCRACY
+        icon = GFX_focus_generic_democracy
+        relative_position_id = POL_ALLOW_CAPITALISM
+        x = 2
+        y = 0
+        cost = 4
+        prerequisite = { focus = POL_PURGE_MINORITIES }
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "建立社会主义民主效果占位"
+        }
+    }
+
+    # =========================================
+    # 第12行（y=11）：实现捷尔任斯基之愿（终点）
+    # =========================================
+    focus = {
+        id = POL_FULFILL_DZERZHINSKY_WISH
+        icon = GFX_focus_generic_communism
+        relative_position_id = POL_ESTABLISH_SOCIALIST_DEMOCRACY
+        x = -2
+        y = 1
+        cost = 4
+        prerequisite = { focus = POL_ALLOW_CAPITALISM }
+		prerequisite = { 
+			focus = POL_COMMUNIST_CORPORATISM
+			focus = POL_ESTABLISH_SOCIALIST_DEMOCRACY
+		}
+        ai_will_do = { factor = 1 }
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = "实现捷尔任斯基之愿效果占位"
+        }
+    }
 }
