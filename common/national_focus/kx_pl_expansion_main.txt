@@ -32638,6 +32638,53 @@ focus = {
 # ------------------------------------------------------------
 # 第1行 - 保持工会领导（作为基准位置国策）
 # ------------------------------------------------------------
+
+focus = {
+	id = POL_the_wall_must_fall
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+	x = 10
+	y = 50
+	
+	prerequisite = { }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+focus = {
+	id = POL_decide_leadership
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_the_wall_must_fall
+	x = 0
+	y = 1
+
+	prerequisite = { focus = POL_the_wall_must_fall }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
+focus = {
+	id = POL_settle_scores_with_monarchy
+	icon = GFX_goal_TRM_Orthodox_Integralism
+	cost = 4
+
+	relative_position_id = POL_an_old_question
+	x = 0
+	y = -5
+
+	prerequisite = { focus = POL_decide_leadership }
+	available = { always = yes }
+	ai_will_do = { factor = 100 }
+	completion_reward = {
+		add_war_support = 0.1
+	}
+}
 focus = {
 	id = POL_keep_union_leadership
 	icon = GFX_goal_TRM_Orthodox_Integralism
@@ -32874,21 +32921,6 @@ focus = {
 	}
 }
 focus = {
-	id = POL_the_wall_must_fall
-	icon = GFX_goal_TRM_Orthodox_Integralism
-	cost = 4
-	x = 10
-	y = 50
-	
-	prerequisite = { }
-	available = { always = yes }
-	ai_will_do = { factor = 100 }
-	completion_reward = {
-		add_war_support = 0.1
-	}
-}
-
-focus = {
 	id = POL_contact_with_polish_united_workers_right
 	icon = GFX_goal_TRM_Orthodox_Integralism
 	cost = 4
@@ -33105,22 +33137,7 @@ focus = {
 		add_war_support = 0.1
 	}
 }
-focus = {
-	id = POL_decide_leadership
-	icon = GFX_goal_TRM_Orthodox_Integralism
-	cost = 4
 
-	relative_position_id = POL_the_wall_must_fall
-	x = 0
-	y = 1
-
-	prerequisite = { focus = POL_the_wall_must_fall }
-	available = { always = yes }
-	ai_will_do = { factor = 100 }
-	completion_reward = {
-		add_war_support = 0.1
-	}
-}
 
 
 focus = {
@@ -33321,22 +33338,7 @@ focus = {
 # 清算君主制（居中）
 # 前置：有个老问题……
 # ------------------------------------------------------------
-focus = {
-	id = POL_settle_scores_with_monarchy
-	icon = GFX_goal_TRM_Orthodox_Integralism
-	cost = 4
 
-	relative_position_id = POL_an_old_question
-	x = 0
-	y = -5
-
-	prerequisite = { focus = POL_decide_leadership }
-	available = { always = yes }
-	ai_will_do = { factor = 100 }
-	completion_reward = {
-		add_war_support = 0.1
-	}
-}
   focus = {
         id = POL_PROLETARIAT_UPRISING
         icon = GFX_goal_BAS_Communism_Without_Orthodox_Puritanism
@@ -33344,9 +33346,7 @@ focus = {
         y = 60
         cost = 4
         ai_will_do = { factor = 1 }
-		allow_branch = {
-			has_country_flag = POL_sanation_commie_win
-		}
+		
         completion_reward = {
             add_political_power = 100
             custom_effect_tooltip = "无产阶级奋起效果占位"
@@ -33599,9 +33599,7 @@ focus = {
 		x = -70
 		y = 60
 		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_dlugo_win
-		}
+		
 		ai_will_do = { factor = 1 }
 		completion_reward = {
 			add_political_power = 100
@@ -33638,24 +33636,7 @@ focus = {
 		}
 		# 巴黎茶歇
 	}
-	focus = {
-		id = POL_long_live_the_chief
-		icon = GFX_goal_GER_Awaken_German_Proletariat
-		prerequisite = {
-			focus = POL_parisian_tea_break
-		}
-		prerequisite = {
-			focus = POL_omniscient_omnipotent_omnibenevolent
-		}
-		relative_position_id = POL_parisian_tea_break
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 首长万岁！
-	}
+	
 	focus = {
 		id = POL_trade_union_communism_for_all
 		icon = GFX_SOV_soviet_syndicalist_system
@@ -33685,24 +33666,6 @@ focus = {
 			add_political_power = 100
 		}
 		# 全知、全能、全善
-	}
-	focus = {
-		id = POL_unleash_the_vanguardist_war_machine
-		icon = GFX_goal_FRA_warrior_ethics
-		prerequisite = {
-			focus = POL_omniscient_omnipotent_omnibenevolent
-		}
-		prerequisite = {
-			focus = POL_modern_legion_chivalry
-		}
-		relative_position_id = POL_omniscient_omnipotent_omnibenevolent
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 发动先锋主义战争引擎
 	}
 	focus = {
 		id = POL_romantic_national_charterism
@@ -33736,14 +33699,49 @@ focus = {
 		# 现代军团骑士精神
 	}
 	focus = {
+		id = POL_long_live_the_chief
+		icon = GFX_goal_GER_Awaken_German_Proletariat
+		prerequisite = {
+			focus = POL_parisian_tea_break
+		}
+		prerequisite = {
+			focus = POL_omniscient_omnipotent_omnibenevolent
+		}
+		relative_position_id = POL_parisian_tea_break
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 首长万岁！
+	}
+	focus = {
+		id = POL_unleash_the_vanguardist_war_machine
+		icon = GFX_goal_FRA_warrior_ethics
+		prerequisite = {
+			focus = POL_omniscient_omnipotent_omnibenevolent
+		}
+		prerequisite = {
+			focus = POL_modern_legion_chivalry
+		}
+		relative_position_id = POL_omniscient_omnipotent_omnibenevolent
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 发动先锋主义战争引擎
+	}
+	
+	focus = {
 		id = POL_socialist_party_second_chance
 		icon = GFX_goal_POL_socialist_party_second_chance
 		x = -63
 		y = 60
 		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_pps_win
-		}
+		
 		ai_will_do = { factor = 1 }
 		completion_reward = {
 			add_political_power = 100
@@ -33888,9 +33886,7 @@ focus = {
 		x = -56
 		y = 60
 		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_synd_win
-		}
+		
 		ai_will_do = { factor = 1 }
 		completion_reward = {
 			add_political_power = 100
@@ -34092,9 +34088,7 @@ focus = {
 		x = -50
 		y = 60
 		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_npr_win
-		}
+		
 		ai_will_do = { factor = 1 }
 		completion_reward = {
 			add_political_power = 100
@@ -34230,9 +34224,7 @@ focus = {
 		x = -40
 		y = 60
 		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_slawek_win
-		}
+		
 		ai_will_do = { factor = 1 }
 		completion_reward = {
 			add_political_power = 100
@@ -34261,327 +34253,6 @@ focus = {
 		# 实现毕苏斯基的愿景
 	}
 	focus = {
-		id = POL_purge_the_traitors
-		icon = GFX_goal_SWE_purge_reaction
-		prerequisite = {
-			focus = POL_realize_pilsudskis_vision
-		}
-		relative_position_id = POL_realize_pilsudskis_vision
-		x = -3
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 清理国贼
-	}
-	focus = {
-		id = POL_a_national_moral_revolution
-		icon = GFX_goal_CSA_revolution_will_be_broadcasted_2
-		prerequisite = {
-			focus = POL_purge_the_traitors
-		}
-		prerequisite = {
-			focus = POL_purification_of_sanacja
-		}
-		relative_position_id = POL_purge_the_traitors
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 一场国民道德革命
-	}
-	focus = {
-		id = POL_vanguardist_elite_stratum
-		icon = GFX_goal_ALB_Vanguard
-		prerequisite = {
-			focus = POL_a_national_moral_revolution
-		}
-		relative_position_id = POL_purification_of_sanacja
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 先锋队精英阶层
-	}
-	focus = {
-		id = POL_achieve_state_socialization
-		icon = GFX_SRI_economy
-		prerequisite = {
-			focus = POL_vanguardist_elite_stratum
-		}
-		relative_position_id = POL_a_national_moral_revolution
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 实现国家社会化
-	}
-	focus = {
-		id = POL_the_marshal_was_the_marshal_is_the_marshal_shall_be
-		icon = POL_the_marshal_was_the_marshal_is_the_marshal_shall_be
-		prerequisite = {
-			focus = POL_achieve_state_socialization
-		}
-		prerequisite = {
-			focus = POL_vision_of_the_total_state
-		}
-		relative_position_id = POL_vanguardist_elite_stratum
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 元帅活在过去！元帅活在现在！元帅将会永存！
-	}
-	focus = {
-		id = POL_the_military_coup
-		icon = GFX_goal_POL_army
-		
-		relative_position_id = POL_the_marshal_was_the_marshal_is_the_marshal_shall_be
-		x = 0
-		y = 2
-		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_mil_win
-		}
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 军事政变
-	}
-	focus = {
-		id = POL_declare_martial_law
-		icon = GFX_goal_POL_Establish_Border_Forts
-		prerequisite = {
-			focus = POL_hammer_and_sickle
-			focus = POL_purge_the_left
-		}
-		relative_position_id = POL_the_military_coup
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 颁布戒严令
-	}
-	focus = {
-		id = POL_military_patronage
-		icon = GFX_goal_POL_Offensive_Fighting_Force
-		prerequisite = {
-			focus = POL_try_the_traitors
-		}
-		prerequisite = {
-			focus = POL_the_new_marshal_cult
-		}
-		relative_position_id = POL_declare_martial_law
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 军政庇护主义
-	}
-	focus = {
-		id = POL_the_military_salvation_council_above_all
-		icon = GFX_goal_POL_Poland_Forever
-		prerequisite = {
-			focus = POL_military_patronage
-		}
-		prerequisite = {
-			focus = POL_the_gun_commands_the_party
-			focus = POL_regime_of_police_and_agents
-		}
-		relative_position_id = POL_military_patronage
-		x = 0
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 军事救国委员会高于一切
-	}
-	focus = {
-		id = POL_hammer_and_sickle
-		icon = GFX_goal_POL_Spreading_Revolution
-		prerequisite = {
-			focus = POL_the_military_coup
-		}
-		mutually_exclusive = {
-			focus = POL_purge_the_left
-		}
-		relative_position_id = POL_the_military_coup
-		x = -1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 锤子与镰刀
-	}
-	focus = {
-		id = POL_purge_the_left
-		icon = GFX_goal_POL_Cleanse_Whites_And_Reds
-		prerequisite = {
-			focus = POL_the_military_coup
-		}
-		mutually_exclusive = {
-			focus = POL_hammer_and_sickle
-		}
-		relative_position_id = POL_hammer_and_sickle
-		x = 2
-		y = 0
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 清洗左派
-	}
-	focus = {
-		id = POL_rule_by_supreme_decree
-		icon = GFX_goal_POL_Write_New_Constitution
-		prerequisite = {
-			focus = POL_purge_the_left
-		}
-		relative_position_id = POL_purge_the_left
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 乾纲独断
-	}
-	focus = {
-		id = POL_regime_of_police_and_agents
-		icon = GFX_goal_POL_Ministry_Public_Security
-		prerequisite = {
-			focus = POL_puppetize_democrats_and_unions
-		}
-		relative_position_id = POL_rule_by_supreme_decree
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 警察与特工的政权
-	}
-	focus = {
-		id = POL_the_new_marshal_cult
-		icon = GFX_goal_POL_Poland_Forever
-		prerequisite = {
-			focus = POL_declare_martial_law
-		}
-		relative_position_id = POL_purge_the_left
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 新元帅崇拜
-	}
-	focus = {
-		id = POL_try_the_traitors
-		icon = GFX_goal_POL_Cleanse_Whites_And_Reds
-		prerequisite = {
-			focus = POL_declare_martial_law
-		}
-		relative_position_id = POL_hammer_and_sickle
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 审判国贼
-	}
-	focus = {
-		id = POL_vision_of_the_total_state
-		icon = GFX_HUN_total_recovery
-		prerequisite = {
-			focus = POL_vanguardist_elite_stratum
-		}
-		relative_position_id = POL_realize_pilsudskis_vision
-		x = 0
-		y = 4
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 总体国度之愿景
-	}
-	focus = {
-		id = POL_force_merger_of_communist_parties
-		icon = GFX_goal_POL_Spreading_Revolution
-		prerequisite = {
-			focus = POL_hammer_and_sickle
-		}
-		relative_position_id = POL_hammer_and_sickle
-		x = -1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 强迫合并共产党
-	}
-	focus = {
-		id = POL_reach_out_to_the_international
-		icon = GFX_goal_POL_International_Trade_Reform
-		prerequisite = {
-			focus = POL_force_merger_of_communist_parties
-		}
-		relative_position_id = POL_force_merger_of_communist_parties
-		x = -1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 向国际示好
-	}
-	focus = {
-		id = POL_the_gun_commands_the_party
-		icon = GFX_goal_POL_army
-		prerequisite = {
-			focus = POL_reach_out_to_the_international
-		}
-		relative_position_id = POL_force_merger_of_communist_parties
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 枪指挥党
-	}
-	focus = {
-		id = POL_purification_of_sanacja
-		icon = GFX_goal_POL_purification_of_sanacja
-		prerequisite = {
-			focus = POL_realize_pilsudskis_vision
-		}
-		relative_position_id = POL_realize_pilsudskis_vision
-		x = -1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 萨纳齐亚的净化
-	}
-	focus = {
 		id = POL_return_to_socialist_roots
 		icon = GFX_goal_POL_return_to_socialist_roots
 		prerequisite = {
@@ -34601,225 +34272,6 @@ focus = {
 			add_political_power = 100
 		}
 		# 回归社会主义根源
-	}
-	focus = {
-		id = POL_the_loyal_henchmen
-		icon = GFX_goal_GER_New_Life_Schutzkorps
-		prerequisite = {
-			focus = POL_return_to_socialist_roots
-		}
-		mutually_exclusive = {
-			focus = POL_olive_branch_to_old_comrades
-		}
-		
-		relative_position_id = POL_return_to_socialist_roots
-		x = -1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 忠诚的打手们
-	}
-	focus = {
-		id = POL_redder_than_britain_and_france
-		icon = GFX_goal_GER_Oppose_Labour_Aristocrats
-		prerequisite = {
-			focus = POL_the_loyal_henchmen
-			focus = POL_olive_branch_to_old_comrades
-			focus = POL_purification_of_sanacja
-		}
-		relative_position_id = POL_the_loyal_henchmen
-		x = -1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 比英法更红
-	}
-	focus = {
-		id = POL_blue_socialist_reconstruction
-		icon = GFX_goal_SWE_socialist_workers
-		prerequisite = {
-			focus = POL_redder_than_britain_and_france
-		}
-		relative_position_id = POL_redder_than_britain_and_france
-		x = 0
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 蓝色社会主义式重构
-	}
-	focus = {
-		id = POL_peoples_capitalism
-		icon = GFX_goal_COR_Establish_Progressive_Capitalist_Economics
-		prerequisite = {
-			focus = POL_blue_socialist_reconstruction
-		}
-		prerequisite = {
-			focus = POL_unite_the_socialist_parties
-		}
-		relative_position_id = POL_the_loyal_henchmen
-		x = 0
-		y = 3
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 人民资本主义
-	}
-	focus = {
-		id = POL_republic_shining_new
-		icon = GFX_goal_POL_New_Polish_Republic
-		prerequisite = {
-			focus = POL_peoples_capitalism
-		}
-		prerequisite = {
-			focus = POL_welfarist_safety_net
-		}
-		relative_position_id = POL_unite_the_socialist_parties
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 共和国，崭新闪亮
-	}
-	focus = {
-		id = POL_puppetize_democrats_and_unions
-		icon = GFX_goal_POL_New_Polish_Worker
-		prerequisite = {
-			focus = POL_rule_by_supreme_decree
-		}
-		relative_position_id = POL_rule_by_supreme_decree
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 傀儡化民主派与工会
-	}
-	focus = {
-		id = POL_unite_the_socialist_parties
-		icon = GFX_RUS_Truly_Socialist_Party
-		prerequisite = {
-			focus = POL_redder_than_britain_and_france
-		}
-		prerequisite = {
-			focus = POL_overcome_party_politics
-		}
-		relative_position_id = POL_return_to_socialist_roots
-		x = 0
-		y = 3
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 统合社会主义政党
-	}
-	focus = {
-		id = POL_overcome_party_politics
-		icon = GFX_goal_GER_Anti_Parliamentarian_Democratization
-		prerequisite = {
-			focus = POL_the_loyal_henchmen
-			focus = POL_olive_branch_to_old_comrades
-			focus = POL_unlimited_presidential_power
-		}
-		relative_position_id = POL_olive_branch_to_old_comrades
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 战胜党派政治
-	}
-	focus = {
-		id = POL_know_everything_intervene_everywhere
-		icon = GFX_RUS_Economic_Draft_Scheme
-		prerequisite = {
-			focus = POL_overcome_party_politics
-		}
-		relative_position_id = POL_overcome_party_politics
-		x = 0
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 了解一切，干预一切
-	}
-	focus = {
-		id = POL_welfarist_safety_net
-		icon = GFX_goal_CAN_right_welfare_state
-		prerequisite = {
-			focus = POL_know_everything_intervene_everywhere
-		}
-		prerequisite = {
-			focus = POL_unite_the_socialist_parties
-		}
-		relative_position_id = POL_olive_branch_to_old_comrades
-		x = 0
-		y = 3
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 福利主义托底
-	}
-	focus = {
-		id = POL_peasant_self_help_organizations
-		icon = GFX_goal_POL_Stockmen_Funding
-		prerequisite = {
-			focus = POL_the_red_general
-		}
-		relative_position_id = POL_the_red_general
-		x = -1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 农民自助组织
-	}
-	focus = {
-		id = POL_expose_bolshevik_anticommunism
-		icon = GFX_goal_POL_Spreading_Revolution
-		prerequisite = {
-			focus = POL_peasant_self_help_organizations
-		}
-		relative_position_id = POL_peasant_self_help_organizations
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 揭露布尔什维克的反共主义
-	}
-	focus = {
-		id = POL_olive_branch_to_old_comrades
-		icon = GFX_goal_NIC_Victory_Social_Democracy
-		prerequisite = {
-			focus = POL_return_to_socialist_roots
-		}
-		mutually_exclusive = {
-			focus = POL_the_loyal_henchmen
-		}
-		
-		relative_position_id = POL_return_to_socialist_roots
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 老同志们的橄榄枝
 	}
 	focus = {
 		id = POL_reward_the_majors_clique
@@ -34856,6 +34308,21 @@ focus = {
 			add_political_power = 100
 		}
 		# 总统权力无限
+	}
+	focus = {
+		id = POL_purge_syndicalist_filth
+		icon = GFX_goal_BRM_syndicalists_humiliated
+		prerequisite = {
+			focus = POL_reward_the_majors_clique
+		}
+		relative_position_id = POL_reward_the_majors_clique
+		x = 3
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 净化工团污秽
 	}
 	focus = {
 		id = POL_socialism_in_jackboots
@@ -34906,6 +34373,21 @@ focus = {
 		# 暴力高压统治
 	}
 	focus = {
+		id = POL_hyperindustrialization_under_authority
+		icon = GFX_RUS_Inevitable_Industrialisation
+		prerequisite = {
+			focus = POL_build_a_patronage_network
+		}
+		relative_position_id = POL_socialism_in_jackboots
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 威权指导下的超工业化
+	}
+	focus = {
 		id = POL_the_nation_sings_in_unison
 		icon = GFX_RUS_National_High_Command_Formation_School
 		prerequisite = {
@@ -34924,308 +34406,541 @@ focus = {
 		# 全国同声歌唱
 	}
 	focus = {
-		id = POL_liquidate_the_sanacja_nobility
-		icon = GFX_goal_POL_Cleanse_Whites_And_Reds
+		id = POL_the_loyal_henchmen
+		icon = GFX_goal_GER_New_Life_Schutzkorps
 		prerequisite = {
-			focus = POL_the_red_general
-		}
-		relative_position_id = POL_the_red_general
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 清算萨纳齐亚贵族
-	}
-	focus = {
-		id = POL_bolshevik_peasant_revolution
-		icon = GFX_goal_POL_Ramparts_Clarus_Mons
-		prerequisite = {
-			focus = POL_land_to_the_peasants
-		}
-		relative_position_id = POL_liquidate_the_sanacja_nobility
-		x = 1
-		y = 3
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 布尔什维工农革命
-	}
-	focus = {
-		id = POL_the_red_general
-		icon = GFX_goal_POL_Offensive_Fighting_Force
-		prerequisite = {
-			focus = POL_the_peasant_strike
+			focus = POL_return_to_socialist_roots
 		}
 		mutually_exclusive = {
-			focus = POL_green_poland
+			focus = POL_olive_branch_to_old_comrades
 		}
-		mutually_exclusive = {
-			focus = POL_blue_flame
-		}
-		relative_position_id = POL_the_peasant_strike
-		x = -4
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 红色将军
-	}
-	focus = {
-		id = POL_green_poland
-		icon = GFX_goal_POL_Stockmen_Funding
-		prerequisite = {
-			focus = POL_the_peasant_strike
-		}
-		mutually_exclusive = {
-			focus = POL_the_red_general
-		}
-		mutually_exclusive = {
-			focus = POL_blue_flame
-		}
-		relative_position_id = POL_the_red_general
-		x = 4
-		y = 0
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 绿色波兰
-	}
-	focus = {
-		id = POL_blue_flame
-		icon = GFX_goal_POL_Frenetic_Future_Today
-		prerequisite = {
-			focus = POL_the_peasant_strike
-		}
-		mutually_exclusive = {
-			focus = POL_green_poland
-		}
-		mutually_exclusive = {
-			focus = POL_the_red_general
-		}
-		relative_position_id = POL_green_poland
-		x = 4
-		y = 0
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 蓝色火焰
-	}
-	focus = {
-		id = POL_encourage_agricultural_cooperatives
-		icon = GFX_goal_POL_Ramparts_Clarus_Mons
-		prerequisite = {
-			focus = POL_blue_flame
-		}
-		relative_position_id = POL_blue_flame
+		
+		relative_position_id = POL_return_to_socialist_roots
 		x = -1
 		y = 1
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 鼓励农业合作社
+		# 忠诚的打手们
 	}
 	focus = {
-		id = POL_all_peasants_are_patriots
-		icon = GFX_goal_POL_Stockmen_Funding
+		id = POL_olive_branch_to_old_comrades
+		icon = GFX_goal_NIC_Victory_Social_Democracy
 		prerequisite = {
-			focus = POL_poland_for_the_poles
+			focus = POL_return_to_socialist_roots
 		}
-		relative_position_id = POL_encourage_agricultural_cooperatives
-		x = -1
-		y = 3
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
+		mutually_exclusive = {
+			focus = POL_the_loyal_henchmen
 		}
-		# 全体农民皆爱国
-	}
-	focus = {
-		id = POL_poland_for_the_poles
-		icon = GFX_goal_POL_Defending_Polish_Nationhood
-		prerequisite = {
-			focus = POL_peasant_dictator
-		}
-		relative_position_id = POL_blue_flame
-		x = -1
-		y = 3
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 波兰的土地，波兰人耕种
-	}
-	focus = {
-		id = POL_grand_coalition_of_free_parties
-		icon = GFX_goal_POL_Union_Of_Races
-		prerequisite = {
-			focus = POL_green_poland
-		}
-		relative_position_id = POL_green_poland
+		
+		relative_position_id = POL_return_to_socialist_roots
 		x = 1
 		y = 1
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 自由政党大联合
+		# 老同志们的橄榄枝
 	}
 	focus = {
-		id = POL_revenge_landlords
-		icon = GFX_goal_POL_Hold_Free_Elections
+		id = POL_overcome_party_politics
+		icon = GFX_goal_GER_Anti_Parliamentarian_Democratization
 		prerequisite = {
-			focus = POL_unify_the_peoples_movement
+			focus = POL_the_loyal_henchmen
+			focus = POL_olive_branch_to_old_comrades
+			focus = POL_unlimited_presidential_power
 		}
-		prerequisite = {
-			focus = POL_strengthen_peasant_guards
-		}
-		relative_position_id = POL_green_poland
-		x = 0
-		y = 3
+		relative_position_id = POL_olive_branch_to_old_comrades
+		x = 1
+		y = 1
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 为自由民主而战
+		# 战胜党派政治
 	}
 	focus = {
-		id = POL_fight_for_liberal_democracy
-		icon = GFX_goal_POL_Hold_Free_Elections
+		id = POL_know_everything_intervene_everywhere
+		icon = GFX_RUS_Economic_Draft_Scheme
 		prerequisite = {
-			focus = POL_revenge_landlords
+			focus = POL_overcome_party_politics
 		}
-		relative_position_id = POL_green_poland
-		x = 0
-		y = 4
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 为自由民主而战
-	}
-	focus = {
-		id = POL_revenge_against_the_cities
-		icon = GFX_goal_POL_Undivine_Comedy
-		prerequisite = {
-			focus = POL_fight_for_liberal_democracy
-			focus = POL_bolshevik_peasant_revolution
-			focus = POL_all_peasants_are_patriots
-		}
-		relative_position_id = POL_fight_for_liberal_democracy
+		relative_position_id = POL_overcome_party_politics
 		x = 0
 		y = 1
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 向城市复仇
+		# 了解一切，干预一切
+	}
+	
+	focus = {
+		id = POL_redder_than_britain_and_france
+		icon = GFX_goal_GER_Oppose_Labour_Aristocrats
+		prerequisite = {
+			focus = POL_the_loyal_henchmen
+			focus = POL_olive_branch_to_old_comrades
+			focus = POL_purification_of_sanacja
+		}
+		relative_position_id = POL_the_loyal_henchmen
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 比英法更红
 	}
 	focus = {
-		id = POL_land_to_the_peasants
-		icon = GFX_goal_POL_Ramparts_Clarus_Mons
+		id = POL_blue_socialist_reconstruction
+		icon = GFX_goal_SWE_socialist_workers
 		prerequisite = {
-			focus = POL_expose_bolshevik_anticommunism
+			focus = POL_redder_than_britain_and_france
 		}
-		relative_position_id = POL_the_red_general
-		x = 1
+		relative_position_id = POL_redder_than_britain_and_france
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 蓝色社会主义式重构
+	}
+		focus = {
+		id = POL_unite_the_socialist_parties
+		icon = GFX_RUS_Truly_Socialist_Party
+		prerequisite = {
+			focus = POL_redder_than_britain_and_france
+		}
+		prerequisite = {
+			focus = POL_overcome_party_politics
+		}
+		relative_position_id = POL_return_to_socialist_roots
+		x = 0
 		y = 3
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 土地归于农民
+		# 统合社会主义政党
+	}
+	
+	focus = {
+		id = POL_peoples_capitalism
+		icon = GFX_goal_COR_Establish_Progressive_Capitalist_Economics
+		prerequisite = {
+			focus = POL_blue_socialist_reconstruction
+		}
+		prerequisite = {
+			focus = POL_unite_the_socialist_parties
+		}
+		relative_position_id = POL_the_loyal_henchmen
+		x = 0
+		y = 3
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 人民资本主义
 	}
 	focus = {
-		id = POL_hyperindustrialization_under_authority
-		icon = GFX_RUS_Inevitable_Industrialisation
+		id = POL_welfarist_safety_net
+		icon = GFX_goal_CAN_right_welfare_state
 		prerequisite = {
-			focus = POL_build_a_patronage_network
+			focus = POL_know_everything_intervene_everywhere
 		}
-		relative_position_id = POL_socialism_in_jackboots
+		prerequisite = {
+			focus = POL_unite_the_socialist_parties
+		}
+		relative_position_id = POL_olive_branch_to_old_comrades
+		x = 0
+		y = 3
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 福利主义托底
+	}
+	focus = {
+		id = POL_republic_shining_new
+		icon = GFX_goal_POL_New_Polish_Republic
+		prerequisite = {
+			focus = POL_peoples_capitalism
+		}
+		prerequisite = {
+			focus = POL_welfarist_safety_net
+		}
+		relative_position_id = POL_unite_the_socialist_parties
 		x = 0
 		y = 2
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 威权指导下的超工业化
+		# 共和国，崭新闪亮
 	}
 	focus = {
-		id = POL_unify_the_peoples_movement
-		icon = GFX_goal_POL_National_Rebirth
+		id = POL_purification_of_sanacja
+		icon = GFX_goal_POL_purification_of_sanacja
 		prerequisite = {
-			focus = POL_liquidate_the_sanacja_nobility
-			focus = POL_restore_democratic_institutions
+			focus = POL_realize_pilsudskis_vision
 		}
-		relative_position_id = POL_restore_democratic_institutions
+		relative_position_id = POL_realize_pilsudskis_vision
 		x = -1
 		y = 1
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 统一人民运动
+		# 萨纳齐亚的净化
 	}
 	focus = {
-		id = POL_purge_syndicalist_filth
-		icon = GFX_goal_BRM_syndicalists_humiliated
+		id = POL_purge_the_traitors
+		icon = GFX_goal_SWE_purge_reaction
 		prerequisite = {
-			focus = POL_reward_the_majors_clique
+			focus = POL_realize_pilsudskis_vision
 		}
-		relative_position_id = POL_reward_the_majors_clique
-		x = 3
+		relative_position_id = POL_realize_pilsudskis_vision
+		x = -3
 		y = 1
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 净化工团污秽
+		# 清理国贼
 	}
 	focus = {
-		id = POL_the_peasant_strike
-		icon = GFX_goal_POL_Ramparts_Clarus_Mons
-		allow_branch = {
-			has_country_flag = POL_sanation_agar_win
+		id = POL_a_national_moral_revolution
+		icon = GFX_goal_CSA_revolution_will_be_broadcasted_2
+		prerequisite = {
+			focus = POL_purge_the_traitors
 		}
-		relative_position_id = POL_purge_syndicalist_filth
+		prerequisite = {
+			focus = POL_purification_of_sanacja
+		}
+		relative_position_id = POL_purge_the_traitors
 		x = 1
-		y = 5
+		y = 1
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 农民大罢工！
+		# 一场国民道德革命
 	}
 	focus = {
-		id = POL_restore_democratic_institutions
-		icon = GFX_goal_POL_Hold_Free_Elections
+		id = POL_vanguardist_elite_stratum
+		icon = GFX_goal_ALB_Vanguard
 		prerequisite = {
-			focus = POL_green_poland
+			focus = POL_a_national_moral_revolution
 		}
-		relative_position_id = POL_green_poland
+		relative_position_id = POL_purification_of_sanacja
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 先锋队精英阶层
+	}
+	focus = {
+		id = POL_vision_of_the_total_state
+		icon = GFX_HUN_total_recovery
+		prerequisite = {
+			focus = POL_vanguardist_elite_stratum
+		}
+		relative_position_id = POL_realize_pilsudskis_vision
+		x = 0
+		y = 4
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 总体国度之愿景
+	}
+	focus = {
+		id = POL_achieve_state_socialization
+		icon = GFX_SRI_economy
+		prerequisite = {
+			focus = POL_vanguardist_elite_stratum
+		}
+		relative_position_id = POL_a_national_moral_revolution
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 实现国家社会化
+	}
+	focus = {
+		id = POL_the_marshal_was_the_marshal_is_the_marshal_shall_be
+		icon = POL_the_marshal_was_the_marshal_is_the_marshal_shall_be
+		prerequisite = {
+			focus = POL_achieve_state_socialization
+		}
+		prerequisite = {
+			focus = POL_vision_of_the_total_state
+		}
+		relative_position_id = POL_vanguardist_elite_stratum
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 元帅活在过去！元帅活在现在！元帅将会永存！
+	}
+	focus = {
+		id = POL_the_military_coup
+		icon = GFX_goal_POL_army
+		
+		relative_position_id = POL_the_marshal_was_the_marshal_is_the_marshal_shall_be
+		x = 0
+		y = 2
+		cost = 4
+		
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 军事政变
+	}
+	focus = {
+		id = POL_hammer_and_sickle
+		icon = GFX_goal_POL_Spreading_Revolution
+		prerequisite = {
+			focus = POL_the_military_coup
+		}
+		mutually_exclusive = {
+			focus = POL_purge_the_left
+		}
+		relative_position_id = POL_the_military_coup
 		x = -1
 		y = 1
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 恢复民主制度
+		# 锤子与镰刀
 	}
+	focus = {
+		id = POL_force_merger_of_communist_parties
+		icon = GFX_goal_POL_Spreading_Revolution
+		prerequisite = {
+			focus = POL_hammer_and_sickle
+		}
+		relative_position_id = POL_hammer_and_sickle
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 强迫合并共产党
+	}
+	focus = {
+		id = POL_reach_out_to_the_international
+		icon = GFX_goal_POL_International_Trade_Reform
+		prerequisite = {
+			focus = POL_force_merger_of_communist_parties
+		}
+		relative_position_id = POL_force_merger_of_communist_parties
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 向国际示好
+	}
+	focus = {
+		id = POL_the_gun_commands_the_party
+		icon = GFX_goal_POL_army
+		prerequisite = {
+			focus = POL_reach_out_to_the_international
+		}
+		relative_position_id = POL_force_merger_of_communist_parties
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 枪指挥党
+	}
+	focus = {
+		id = POL_purge_the_left
+		icon = GFX_goal_POL_Cleanse_Whites_And_Reds
+		prerequisite = {
+			focus = POL_the_military_coup
+		}
+		mutually_exclusive = {
+			focus = POL_hammer_and_sickle
+		}
+		relative_position_id = POL_hammer_and_sickle
+		x = 2
+		y = 0
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 清洗左派
+	}
+	focus = {
+		id = POL_declare_martial_law
+		icon = GFX_goal_POL_Establish_Border_Forts
+		prerequisite = {
+			focus = POL_hammer_and_sickle
+			focus = POL_purge_the_left
+		}
+		relative_position_id = POL_the_military_coup
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 颁布戒严令
+	}
+	focus = {
+		id = POL_the_new_marshal_cult
+		icon = GFX_goal_POL_Poland_Forever
+		prerequisite = {
+			focus = POL_declare_martial_law
+		}
+		relative_position_id = POL_purge_the_left
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 新元帅崇拜
+	}
+	focus = {
+		id = POL_try_the_traitors
+		icon = GFX_goal_POL_Cleanse_Whites_And_Reds
+		prerequisite = {
+			focus = POL_declare_martial_law
+		}
+		relative_position_id = POL_hammer_and_sickle
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 审判国贼
+	}
+	focus = {
+		id = POL_military_patronage
+		icon = GFX_goal_POL_Offensive_Fighting_Force
+		prerequisite = {
+			focus = POL_try_the_traitors
+		}
+		prerequisite = {
+			focus = POL_the_new_marshal_cult
+		}
+		relative_position_id = POL_declare_martial_law
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 军政庇护主义
+	}
+	focus = {
+		id = POL_rule_by_supreme_decree
+		icon = GFX_goal_POL_Write_New_Constitution
+		prerequisite = {
+			focus = POL_purge_the_left
+		}
+		relative_position_id = POL_purge_the_left
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 乾纲独断
+	}
+	focus = {
+		id = POL_puppetize_democrats_and_unions
+		icon = GFX_goal_POL_New_Polish_Worker
+		prerequisite = {
+			focus = POL_rule_by_supreme_decree
+		}
+		relative_position_id = POL_rule_by_supreme_decree
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 傀儡化民主派与工会
+	}
+	focus = {
+		id = POL_regime_of_police_and_agents
+		icon = GFX_goal_POL_Ministry_Public_Security
+		prerequisite = {
+			focus = POL_puppetize_democrats_and_unions
+		}
+		relative_position_id = POL_rule_by_supreme_decree
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 警察与特工的政权
+	}
+	focus = {
+		id = POL_the_military_salvation_council_above_all
+		icon = GFX_goal_POL_Poland_Forever
+		prerequisite = {
+			focus = POL_military_patronage
+		}
+		prerequisite = {
+			focus = POL_the_gun_commands_the_party
+			focus = POL_regime_of_police_and_agents
+		}
+		relative_position_id = POL_military_patronage
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 军事救国委员会高于一切
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	focus = {
 		id = POL_beks_victory
 		icon = GFX_goal_POL_army
 		x = -28
 		y = 60
 		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_beck_win
-		}
+		
 		completion_reward = {
 			add_political_power = 100
 		}
@@ -35260,22 +34975,6 @@ focus = {
 			add_political_power = 100
 		}
 		# 道德盖特曼
-	}
-	focus = {
-		id = POL_strengthen_peasant_guards
-		icon = GFX_goal_POL_Stockmen_Funding
-		prerequisite = {
-			focus = POL_grand_coalition_of_free_parties
-			focus = POL_encourage_agricultural_cooperatives
-		}
-		relative_position_id = POL_grand_coalition_of_free_parties
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 强化农民卫队
 	}
 	focus = {
 		id = POL_theosophic_freemason_aristocracy
@@ -35353,36 +35052,6 @@ focus = {
 		# 神秘学研究教育化
 	}
 	focus = {
-		id = POL_unite_the_national_democratic_movement
-		icon = GFX_goal_POL_National_Rebirth
-		prerequisite = {
-			focus = POL_return_of_the_specter
-		}
-		relative_position_id = POL_return_of_the_specter
-		x = -2
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 团结民族民主运动
-	}
-	focus = {
-		id = POL_fiscal_system_reform
-		icon = GFX_goal_POL_Reintroduce_Zloty
-		prerequisite = {
-			focus = POL_market_freedom_against_liberalism
-		}
-		relative_position_id = POL_market_freedom_against_liberalism
-		x = -2
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 财政体系改革
-	}
-	focus = {
 		id = POL_toward_polish_national_ascension
 		icon = GFX_goal_POL_National_Rebirth
 		prerequisite = {
@@ -35396,6 +35065,219 @@ focus = {
 			add_political_power = 100
 		}
 		# 迈向波兰国家飞升
+	}
+	focus = {
+		id = POL_the_peasant_strike
+		icon = GFX_goal_POL_Ramparts_Clarus_Mons
+		
+		relative_position_id = POL_purge_syndicalist_filth
+		x = 1
+		y = 5
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 农民大罢工！
+	}
+	focus = {
+		id = POL_the_red_general
+		icon = GFX_goal_POL_Offensive_Fighting_Force
+		prerequisite = {
+			focus = POL_the_peasant_strike
+		}
+		mutually_exclusive = {
+			focus = POL_green_poland
+		}
+		mutually_exclusive = {
+			focus = POL_blue_flame
+		}
+		relative_position_id = POL_the_peasant_strike
+		x = -4
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 红色将军
+	}
+	focus = {
+		id = POL_peasant_self_help_organizations
+		icon = GFX_goal_POL_Stockmen_Funding
+		prerequisite = {
+			focus = POL_the_red_general
+		}
+		relative_position_id = POL_the_red_general
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 农民自助组织
+	}
+	focus = {
+		id = POL_expose_bolshevik_anticommunism
+		icon = GFX_goal_POL_Spreading_Revolution
+		prerequisite = {
+			focus = POL_peasant_self_help_organizations
+		}
+		relative_position_id = POL_peasant_self_help_organizations
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 揭露布尔什维克的反共主义
+	}
+	focus = {
+		id = POL_land_to_the_peasants
+		icon = GFX_goal_POL_Ramparts_Clarus_Mons
+		prerequisite = {
+			focus = POL_expose_bolshevik_anticommunism
+		}
+		relative_position_id = POL_the_red_general
+		x = 1
+		y = 3
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 土地归于农民
+	}
+	focus = {
+		id = POL_bolshevik_peasant_revolution
+		icon = GFX_goal_POL_Ramparts_Clarus_Mons
+		prerequisite = {
+			focus = POL_land_to_the_peasants
+		}
+		relative_position_id = POL_liquidate_the_sanacja_nobility
+		x = 1
+		y = 3
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 布尔什维工农革命
+	}
+	focus = {
+		id = POL_liquidate_the_sanacja_nobility
+		icon = GFX_goal_POL_Cleanse_Whites_And_Reds
+		prerequisite = {
+			focus = POL_the_red_general
+		}
+		relative_position_id = POL_the_red_general
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 清算萨纳齐亚贵族
+	}
+	focus = {
+		id = POL_unify_the_peoples_movement
+		icon = GFX_goal_POL_National_Rebirth
+		prerequisite = {
+			focus = POL_liquidate_the_sanacja_nobility
+			focus = POL_restore_democratic_institutions
+		}
+		relative_position_id = POL_restore_democratic_institutions
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 统一人民运动
+	}
+	
+	focus = {
+		id = POL_green_poland
+		icon = GFX_goal_POL_Stockmen_Funding
+		prerequisite = {
+			focus = POL_the_peasant_strike
+		}
+		mutually_exclusive = {
+			focus = POL_the_red_general
+		}
+		mutually_exclusive = {
+			focus = POL_blue_flame
+		}
+		relative_position_id = POL_the_red_general
+		x = 4
+		y = 0
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 绿色波兰
+	}
+	focus = {
+		id = POL_grand_coalition_of_free_parties
+		icon = GFX_goal_POL_Union_Of_Races
+		prerequisite = {
+			focus = POL_green_poland
+		}
+		relative_position_id = POL_green_poland
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 自由政党大联合
+	}
+	focus = {
+		id = POL_restore_democratic_institutions
+		icon = GFX_goal_POL_Hold_Free_Elections
+		prerequisite = {
+			focus = POL_green_poland
+		}
+		relative_position_id = POL_green_poland
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 恢复民主制度
+	}
+	focus = {
+		id = POL_blue_flame
+		icon = GFX_goal_POL_Frenetic_Future_Today
+		prerequisite = {
+			focus = POL_the_peasant_strike
+		}
+		mutually_exclusive = {
+			focus = POL_green_poland
+		}
+		mutually_exclusive = {
+			focus = POL_the_red_general
+		}
+		relative_position_id = POL_green_poland
+		x = 4
+		y = 0
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 蓝色火焰
+	}
+	focus = {
+		id = POL_encourage_agricultural_cooperatives
+		icon = GFX_goal_POL_Ramparts_Clarus_Mons
+		prerequisite = {
+			focus = POL_blue_flame
+		}
+		relative_position_id = POL_blue_flame
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 鼓励农业合作社
 	}
 	focus = {
 		id = POL_stand_up_for_tradition
@@ -35428,28 +35310,115 @@ focus = {
 		# 农民的独裁者
 	}
 	focus = {
-		id = POL_new_king_in_the_castle
-		icon = GFX_goal_POL_kingdom
-		x = -10
-		y = 60
-		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_moci_win
+		id = POL_strengthen_peasant_guards
+		icon = GFX_goal_POL_Stockmen_Funding
+		prerequisite = {
+			focus = POL_grand_coalition_of_free_parties
+			focus = POL_encourage_agricultural_cooperatives
 		}
+		relative_position_id = POL_grand_coalition_of_free_parties
+		x = 1
+		y = 1
+		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 城堡里的新王
+		# 强化农民卫队
 	}
+	focus = {
+		id = POL_revenge_landlords
+		icon = GFX_goal_POL_Hold_Free_Elections
+		prerequisite = {
+			focus = POL_unify_the_peoples_movement
+		}
+		prerequisite = {
+			focus = POL_strengthen_peasant_guards
+		}
+		relative_position_id = POL_green_poland
+		x = 0
+		y = 3
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 为自由民主而战
+	}
+	focus = {
+		id = POL_fight_for_liberal_democracy
+		icon = GFX_goal_POL_Hold_Free_Elections
+		prerequisite = {
+			focus = POL_revenge_landlords
+		}
+		relative_position_id = POL_green_poland
+		x = 0
+		y = 4
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 为自由民主而战
+	}
+	
+	focus = {
+		id = POL_poland_for_the_poles
+		icon = GFX_goal_POL_Defending_Polish_Nationhood
+		prerequisite = {
+			focus = POL_peasant_dictator
+		}
+		relative_position_id = POL_blue_flame
+		x = -1
+		y = 3
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 波兰的土地，波兰人耕种
+	}
+	focus = {
+		id = POL_all_peasants_are_patriots
+		icon = GFX_goal_POL_Stockmen_Funding
+		prerequisite = {
+			focus = POL_poland_for_the_poles
+		}
+		relative_position_id = POL_encourage_agricultural_cooperatives
+		x = -1
+		y = 3
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 全体农民皆爱国
+	}
+	focus = {
+		id = POL_revenge_against_the_cities
+		icon = GFX_goal_POL_Undivine_Comedy
+		prerequisite = {
+			focus = POL_fight_for_liberal_democracy
+			focus = POL_bolshevik_peasant_revolution
+			focus = POL_all_peasants_are_patriots
+		}
+		relative_position_id = POL_fight_for_liberal_democracy
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 向城市复仇
+	}
+	
+	
+	
+	
+	
+	
 	focus = {
 		id = POL_first_free_elections
 		icon = GFX_goal_POL_Hold_Free_Elections
 		x = 5
 		y = 60
 		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_demo_win
-		}
+		
 		completion_reward = {
 			add_political_power = 100
 		}
@@ -35472,6 +35441,58 @@ focus = {
 			add_political_power = 100
 		}
 		# 民主党多数
+	}
+		focus = {
+		id = POL_defend_democratic_institutions
+		icon = GFX_goal_POL_Defend_Newborn_State
+		prerequisite = {
+			focus = POL_democratic_party_majority
+			focus = POL_conservative_election_victory
+		}
+		relative_position_id = POL_first_free_elections
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 保卫民主制度
+	}
+	focus = {
+		id = POL_integrate_sanacja_liberals
+		icon = GFX_goal_COR_liberal
+		prerequisite = {
+			focus = POL_defend_democratic_institutions
+		}
+		mutually_exclusive = {
+			focus = POL_down_with_sanacja
+		}
+		relative_position_id = POL_denounce_authoritarian_tyranny
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 整合萨纳齐亚自由派
+	}
+	focus = {
+		id = POL_down_with_sanacja
+		icon = GFX_goal_break_rifle
+		prerequisite = {
+			focus = POL_defend_democratic_institutions
+		}
+		mutually_exclusive = {
+			focus = POL_integrate_sanacja_liberals
+		}
+		relative_position_id = POL_integrate_sanacja_liberals
+		x = 2
+		y = 0
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 打倒萨纳齐亚！
 	}
 	focus = {
 		id = POL_conservative_election_victory
@@ -35507,21 +35528,6 @@ focus = {
 		# 强化教会角色
 	}
 	focus = {
-		id = POL_win_over_right_wing_radicals
-		icon = GFX_goal_POL_National_Rebirth
-		prerequisite = {
-			focus = POL_xyz_principle
-		}
-		relative_position_id = POL_strengthen_the_churchs_role
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 拉拢右翼激进派
-	}
-	focus = {
 		id = POL_xyz_principle
 		icon = GFX_goal_FRA_flag
 		prerequisite = {
@@ -35536,6 +35542,22 @@ focus = {
 		}
 		# XYZ原则
 	}
+	focus = {
+		id = POL_win_over_right_wing_radicals
+		icon = GFX_goal_POL_National_Rebirth
+		prerequisite = {
+			focus = POL_xyz_principle
+		}
+		relative_position_id = POL_strengthen_the_churchs_role
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 拉拢右翼激进派
+	}
+	
 	focus = {
 		id = POL_arm_the_catholic_faithful
 		icon = GFX_goal_POL_Church_Militant
@@ -35585,57 +35607,6 @@ focus = {
 		# 谴责威权主义暴政
 	}
 	focus = {
-		id = POL_integrate_sanacja_liberals
-		icon = GFX_goal_COR_liberal
-		prerequisite = {
-			focus = POL_defend_democratic_institutions
-		}
-		mutually_exclusive = {
-			focus = POL_down_with_sanacja
-		}
-		relative_position_id = POL_denounce_authoritarian_tyranny
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 整合萨纳齐亚自由派
-	}
-	focus = {
-		id = POL_down_with_sanacja
-		icon = GFX_goal_break_rifle
-		prerequisite = {
-			focus = POL_defend_democratic_institutions
-		}
-		mutually_exclusive = {
-			focus = POL_integrate_sanacja_liberals
-		}
-		relative_position_id = POL_integrate_sanacja_liberals
-		x = 2
-		y = 0
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 打倒萨纳齐亚！
-	}
-	focus = {
-		id = POL_rapid_armament
-		icon = GFX_goal_POL_Modern_Military_Thought
-		prerequisite = {
-			focus = POL_organize_free_unions
-		}
-		relative_position_id = POL_denounce_authoritarian_tyranny
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 急速扩军
-	}
-	focus = {
 		id = POL_organize_free_unions
 		icon = GFX_goal_POL_New_Polish_Worker
 		prerequisite = {
@@ -35666,6 +35637,22 @@ focus = {
 		# 提高教育水平
 	}
 	focus = {
+		id = POL_rapid_armament
+		icon = GFX_goal_POL_Modern_Military_Thought
+		prerequisite = {
+			focus = POL_organize_free_unions
+		}
+		relative_position_id = POL_denounce_authoritarian_tyranny
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 急速扩军
+	}
+
+	focus = {
 		id = POL_rule_of_the_warsaw_democratic_club
 		icon = GFX_goal_POL_Reform_Senate_Chamber
 		prerequisite = {
@@ -35683,45 +35670,15 @@ focus = {
 		}
 		# 华沙民主俱乐部的统治
 	}
-	focus = {
-		id = POL_defend_democratic_institutions
-		icon = GFX_goal_POL_Defend_Newborn_State
-		prerequisite = {
-			focus = POL_democratic_party_majority
-			focus = POL_conservative_election_victory
-		}
-		relative_position_id = POL_first_free_elections
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 保卫民主制度
-	}
-	focus = {
-		id = POL_a_new_augustus
-		icon = GFX_goal_POL_Reform_Monarchy
-		x = 15
-		y = 60
-		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_demo_win
-		}
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 一位新奥古斯都
-	}
+
+	
 	focus = {
 		id = POL_zeligowski_coup
 		icon = GFX_goal_POL_army
 		x = 25
 		y = 60
 		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_zeli_win
-		}
+		
 		completion_reward = {
 			add_political_power = 100
 		}
@@ -35756,6 +35713,21 @@ focus = {
 			add_political_power = 100
 		}
 		# 同泛斯拉夫主义者合作
+	}
+	focus = {
+		id = POL_national_self_sufficiency
+		icon = GFX_goal_POL_Economic_Solidarity
+		prerequisite = {
+			focus = POL_zeligowski_coup
+		}
+		relative_position_id = POL_zeligowski_coup
+		x = 2
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 民族的自给自足
 	}
 	focus = {
 		id = POL_the_night_of_vilnius
@@ -35832,29 +35804,13 @@ focus = {
 		}
 		# 为斯拉夫统一而战
 	}
-	focus = {
-		id = POL_national_self_sufficiency
-		icon = GFX_goal_POL_Economic_Solidarity
-		prerequisite = {
-			focus = POL_zeligowski_coup
-		}
-		relative_position_id = POL_zeligowski_coup
-		x = 2
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 民族的自给自足
-	}
+
 	focus = {
 		id = POL_dream_of_a_superpower
 		icon = GFX_goal_POL_Savior_Europe
 		x = 32
 		y = 60
-		allow_branch = {
-			has_country_flag = POL_sanation_super_win
-		}
+		
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
@@ -35987,9 +35943,7 @@ focus = {
 		x = 40
 		y = 60
 		cost = 4
-		allow_branch = {
-			has_country_flag = POL_sanation_savin_win
-		}
+		
 		completion_reward = {
 			add_political_power = 100
 		}
@@ -36210,9 +36164,7 @@ focus = {
 		icon = GFX_goal_GER_Love_Thy_Neighbor
 		x = 48
 		y = 60
-		allow_branch = {
-			has_country_flag = POL_sanation_szla_win
-		}
+		
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
@@ -36344,9 +36296,7 @@ focus = {
 		icon = GFX_goal_BEL_Radicalize_Rexist_Ideology_Further
 		x = 55
 		y = 60
-		allow_branch = {
-			has_country_flag = POL_sanation_onr_win
-		}
+		
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
@@ -36367,6 +36317,36 @@ focus = {
 			add_political_power = 100
 		}
 		# 统一民族激进阵营
+	}
+	focus = {
+		id = POL_embrace_charter_totalitarian_ideas
+		icon = GFX_goal_POL_New_Vision
+		prerequisite = {
+			focus = POL_a_national_revolution
+		}
+		relative_position_id = POL_a_national_revolution
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 接纳宪章极权主义思想
+	}
+	focus = {
+		id = POL_merciless_struggle
+		icon = GFX_goal_POL_Do_Boju
+		prerequisite = {
+			focus = POL_embrace_charter_totalitarian_ideas
+		}
+		relative_position_id = POL_embrace_charter_totalitarian_ideas
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 无情斗争
 	}
 	focus = {
 		id = POL_strengthen_statist_policies
@@ -36420,21 +36400,6 @@ focus = {
 		# 威权警察国家
 	}
 	focus = {
-		id = POL_hail_the_leader
-		icon = GFX_goal_POL_Poland_Forever
-		prerequisite = {
-			focus = POL_authoritarian_police_state
-		}
-		relative_position_id = POL_authoritarian_police_state
-		x = 0
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 向领袖致敬！
-	}
-	focus = {
 		id = POL_national_pacification_plan
 		icon = GFX_goal_POL_Establish_Border_Forts
 		prerequisite = {
@@ -36453,34 +36418,33 @@ focus = {
 		# 国家平定计划
 	}
 	focus = {
-		id = POL_embrace_charter_totalitarian_ideas
-		icon = GFX_goal_POL_New_Vision
+		id = POL_hail_the_leader
+		icon = GFX_goal_POL_Poland_Forever
 		prerequisite = {
-			focus = POL_a_national_revolution
+			focus = POL_authoritarian_police_state
 		}
-		relative_position_id = POL_a_national_revolution
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 接纳宪章极权主义思想
-	}
-	focus = {
-		id = POL_merciless_struggle
-		icon = GFX_goal_POL_Do_Boju
-		prerequisite = {
-			focus = POL_embrace_charter_totalitarian_ideas
-		}
-		relative_position_id = POL_embrace_charter_totalitarian_ideas
+		relative_position_id = POL_authoritarian_police_state
 		x = 0
 		y = 1
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 无情斗争
+		# 向领袖致敬！
+	}
+	
+	
+	focus = {
+		id = POL_new_king_in_the_castle
+		icon = GFX_goal_POL_kingdom
+		x = -10
+		y = 60
+		cost = 4
+		
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 城堡里的新王
 	}
 	focus = {
 		id = POL_maintain_the_triumvirate_alliance
@@ -36576,6 +36540,24 @@ focus = {
 		# 胁迫其他党派
 	}
 	focus = {
+		id = POL_bartel_parliament
+		icon = GFX_goal_POL_Reform_Senate_Chamber
+		prerequisite = {
+			focus = POL_no_more_oligarchic_democracy
+		}
+		prerequisite = {
+			focus = POL_intimidate_other_parties
+		}
+		relative_position_id = POL_rise_of_the_labor_clubs
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 巴特尔议会
+	}
+	focus = {
 		id = POL_economic_development_first
 		icon = GFX_goal_POL_New_Central_Industrial_Region
 		prerequisite = {
@@ -36606,6 +36588,21 @@ focus = {
 		# 军队去政治化
 	}
 	focus = {
+		id = POL_strengthen_administrative_apparatus
+		icon = GFX_goal_POL_Regency_Thing
+		prerequisite = {
+			focus = POL_economic_development_first
+		}
+		relative_position_id = POL_bartel_parliament
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 强化行政机构
+	}
+	focus = {
 		id = POL_genuine_parliamentary_democracy
 		icon = GFX_goal_POL_Hold_Free_Elections
 		prerequisite = {
@@ -36623,39 +36620,8 @@ focus = {
 		}
 		# 真正的议会民主
 	}
-	focus = {
-		id = POL_bartel_parliament
-		icon = GFX_goal_POL_Reform_Senate_Chamber
-		prerequisite = {
-			focus = POL_no_more_oligarchic_democracy
-		}
-		prerequisite = {
-			focus = POL_intimidate_other_parties
-		}
-		relative_position_id = POL_rise_of_the_labor_clubs
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 巴特尔议会
-	}
-	focus = {
-		id = POL_strengthen_administrative_apparatus
-		icon = GFX_goal_POL_Regency_Thing
-		prerequisite = {
-			focus = POL_economic_development_first
-		}
-		relative_position_id = POL_bartel_parliament
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 强化行政机构
-	}
+	
+	
 	focus = {
 		id = POL_lessons_of_the_syndicalist_model
 		icon = GFX_goal_POL_Establish_New_Communes
@@ -36725,6 +36691,22 @@ focus = {
 		# 简化税制
 	}
 	focus = {
+		id = POL_establish_institute_of_prices_and_conjuncture
+		icon = GFX_goal_POL_industry_lublin
+		prerequisite = {
+			focus = POL_lessons_of_the_syndicalist_model
+			focus = POL_establish_economic_control
+		}
+		relative_position_id = POL_regime_of_the_disciples
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 建立经济状况与价格研究所
+	}
+	focus = {
 		id = POL_equal_civil_rights
 		icon = GFX_goal_POL_Golden_Liberty
 		prerequisite = {
@@ -36754,22 +36736,7 @@ focus = {
 		}
 		# 增加公共投资
 	}
-	focus = {
-		id = POL_establish_institute_of_prices_and_conjuncture
-		icon = GFX_goal_POL_industry_lublin
-		prerequisite = {
-			focus = POL_lessons_of_the_syndicalist_model
-			focus = POL_establish_economic_control
-		}
-		relative_position_id = POL_regime_of_the_disciples
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 建立经济状况与价格研究所
-	}
+	
 	focus = {
 		id = POL_implement_the_four_year_plan
 		icon = GFX_goal_POL_New_Central_Industrial_Region
@@ -36819,6 +36786,71 @@ focus = {
 		# 左翼煽动不再
 	}
 	focus = {
+		id = POL_the_pitiful_democrats
+		icon = GFX_goal_POL_Reform_Senate_Chamber
+		prerequisite = {
+			focus = POL_maintain_the_triumvirate_alliance
+		}
+		relative_position_id = POL_maintain_the_triumvirate_alliance
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 可悲的民主派
+	}
+	focus = {
+		id = POL_implement_land_reform
+		icon = GFX_goal_agrarian_reform
+		prerequisite = {
+			focus = POL_the_pitiful_democrats
+			focus = POL_lessons_of_the_syndicalist_model
+		}
+		relative_position_id = POL_the_pitiful_democrats
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 实施土地改革
+	}
+	focus = {
+		id = POL_decentralized_planned_economy
+		icon = GFX_goal_POL_Establish_New_Communes
+		prerequisite = {
+			focus = POL_implement_land_reform
+			focus = POL_increase_public_investment
+		}
+		relative_position_id = POL_implement_land_reform
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 去中心化计划经济
+	}
+	focus = {
+		id = POL_enact_authoritarian_constitution
+		icon = GFX_goal_POL_Write_New_Constitution
+		prerequisite = {
+			focus = POL_no_more_leftist_agitation
+		}
+		prerequisite = {
+			focus = POL_the_pitiful_democrats
+		}
+		relative_position_id = POL_maintain_the_triumvirate_alliance
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 颁布威权宪法
+	}
+	focus = {
 		id = POL_appease_right_wing_forces
 		icon = GFX_goal_POL_National_Rebirth
 		prerequisite = {
@@ -36849,11 +36881,43 @@ focus = {
 		# 赋权警察
 	}
 	focus = {
+		id = POL_bureaucratic_economic_system
+		icon = GFX_goal_POL_Golden_Liberty
+		prerequisite = {
+			focus = POL_appease_right_wing_forces
+		}
+		relative_position_id = POL_enact_authoritarian_constitution
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 官僚经济体系
+	}
+	focus = {
+		id = POL_no_turning_against_the_state
+		icon = GFX_goal_POL_Not_Yet_Lost
+		prerequisite = {
+			focus = POL_empower_the_police
+		}
+		prerequisite = {
+			focus = POL_bureaucratic_economic_system
+		}
+		relative_position_id = POL_appease_right_wing_forces
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 无逆于国
+	}
+	
+	focus = {
 		id = POL_return_of_the_specter
 		icon = GFX_goal_POL_Spreading_Revolution
-		allow_branch = {
-			has_country_flag = POL_sanation_natdem_win
-		}
+		
 		relative_position_id = POL_empower_the_police
 		x = 0
 		y = 2
@@ -36877,6 +36941,36 @@ focus = {
 			add_political_power = 100
 		}
 		# 现代化民族主义
+	}
+	focus = {
+		id = POL_appease_the_sanacja_followers
+		icon = GFX_goal_POL_National_Rebirth
+		prerequisite = {
+			focus = POL_return_of_the_specter
+		}
+		relative_position_id = POL_return_of_the_specter
+		x = 2
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 安抚萨纳齐亚分子
+	}
+	focus = {
+		id = POL_unite_the_national_democratic_movement
+		icon = GFX_goal_POL_National_Rebirth
+		prerequisite = {
+			focus = POL_return_of_the_specter
+		}
+		relative_position_id = POL_return_of_the_specter
+		x = -2
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 团结民族民主运动
 	}
 	focus = {
 		id = POL_dmowski_pilsudski_synthesis
@@ -36952,6 +37046,21 @@ focus = {
 		# 自治，民主，科学领导
 	}
 	focus = {
+		id = POL_slay_the_capitalist_hydra
+		icon = GFX_goal_POL_Spreading_Revolution
+		prerequisite = {
+			focus = POL_anti_liberal_revolution
+		}
+		relative_position_id = POL_anti_liberal_revolution
+		x = 2
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 杀死资本主义九头蛇
+	}
+	focus = {
 		id = POL_nationalism_the_inevitable_result_of_progress
 		icon = GFX_goal_POL_Modern_Military_Thought
 		prerequisite = {
@@ -36982,6 +37091,21 @@ focus = {
 		# 反多元化总体天主教
 	}
 	focus = {
+		id = POL_fiscal_system_reform
+		icon = GFX_goal_POL_Reintroduce_Zloty
+		prerequisite = {
+			focus = POL_market_freedom_against_liberalism
+		}
+		relative_position_id = POL_market_freedom_against_liberalism
+		x = -2
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 财政体系改革
+	}
+	focus = {
 		id = POL_polish_national_community
 		icon = GFX_goal_POL_National_Rebirth
 		prerequisite = {
@@ -36996,133 +37120,20 @@ focus = {
 		}
 		# 波兰民族共同体
 	}
+	
+	
+	
 	focus = {
-		id = POL_no_turning_against_the_state
-		icon = GFX_goal_POL_Not_Yet_Lost
-		prerequisite = {
-			focus = POL_empower_the_police
-		}
-		prerequisite = {
-			focus = POL_bureaucratic_economic_system
-		}
-		relative_position_id = POL_appease_right_wing_forces
-		x = 0
-		y = 2
+		id = POL_a_new_augustus
+		icon = GFX_goal_POL_Reform_Monarchy
+		x = 15
+		y = 60
 		cost = 4
+		
 		completion_reward = {
 			add_political_power = 100
 		}
-		# 无逆于国
-	}
-	focus = {
-		id = POL_the_pitiful_democrats
-		icon = GFX_goal_POL_Reform_Senate_Chamber
-		prerequisite = {
-			focus = POL_maintain_the_triumvirate_alliance
-		}
-		relative_position_id = POL_maintain_the_triumvirate_alliance
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 可悲的民主派
-	}
-	focus = {
-		id = POL_implement_land_reform
-		icon = GFX_goal_agrarian_reform
-		prerequisite = {
-			focus = POL_the_pitiful_democrats
-			focus = POL_lessons_of_the_syndicalist_model
-		}
-		relative_position_id = POL_the_pitiful_democrats
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 实施土地改革
-	}
-	focus = {
-		id = POL_decentralized_planned_economy
-		icon = GFX_goal_POL_Establish_New_Communes
-		prerequisite = {
-			focus = POL_implement_land_reform
-			focus = POL_increase_public_investment
-		}
-		relative_position_id = POL_implement_land_reform
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 去中心化计划经济
-	}
-	focus = {
-		id = POL_slay_the_capitalist_hydra
-		icon = GFX_goal_POL_Spreading_Revolution
-		prerequisite = {
-			focus = POL_anti_liberal_revolution
-		}
-		relative_position_id = POL_anti_liberal_revolution
-		x = 2
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 杀死资本主义九头蛇
-	}
-	focus = {
-		id = POL_enact_authoritarian_constitution
-		icon = GFX_goal_POL_Write_New_Constitution
-		prerequisite = {
-			focus = POL_no_more_leftist_agitation
-		}
-		prerequisite = {
-			focus = POL_the_pitiful_democrats
-		}
-		relative_position_id = POL_maintain_the_triumvirate_alliance
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 颁布威权宪法
-	}
-	focus = {
-		id = POL_bureaucratic_economic_system
-		icon = GFX_goal_POL_Golden_Liberty
-		prerequisite = {
-			focus = POL_appease_right_wing_forces
-		}
-		relative_position_id = POL_enact_authoritarian_constitution
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 官僚经济体系
-	}
-	focus = {
-		id = POL_appease_the_sanacja_followers
-		icon = GFX_goal_POL_National_Rebirth
-		prerequisite = {
-			focus = POL_return_of_the_specter
-		}
-		relative_position_id = POL_return_of_the_specter
-		x = 2
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 安抚萨纳齐亚分子
+		# 一位新奥古斯都
 	}
 	focus = {
 		id = POL_establish_the_camp_of_national_unity
@@ -37186,6 +37197,57 @@ focus = {
 			add_political_power = 100
 		}
 		# 授权总统密党
+	}
+	focus = {
+		id = POL_the_social_pyramid_stands
+		icon = GFX_goal_POL_Land_Of_Saints_Kings
+		prerequisite = {
+			focus = POL_authorize_the_presidents_cabal
+		}
+		relative_position_id = POL_authorize_the_presidents_cabal
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 社会金字塔不可撼动
+	}
+	focus = {
+		id = POL_artist_spiritual_aristocracy
+		icon = GFX_goal_POL_Brahmin_Experience
+		prerequisite = {
+			focus = POL_authorize_the_presidents_cabal
+		}
+		prerequisite = {
+			focus = POL_the_social_pyramid_stands
+		}
+		relative_position_id = POL_authorize_the_presidents_cabal
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 艺术家精神贵族
+	}
+	focus = {
+		id = POL_master_race_polish_superman
+		icon = GFX_goal_POL_Fusion_Gods
+		prerequisite = {
+			focus = POL_patriotic_dictator
+		}
+		prerequisite = {
+			focus = POL_artist_spiritual_aristocracy
+		}
+		relative_position_id = POL_individualist_monad_society
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 超级种族—波兰超人
 	}
 	focus = {
 		id = POL_individualist_monad_society
@@ -37269,57 +37331,8 @@ focus = {
 		}
 		# 邦戈高于一切！
 	}
-	focus = {
-		id = POL_master_race_polish_superman
-		icon = GFX_goal_POL_Fusion_Gods
-		prerequisite = {
-			focus = POL_patriotic_dictator
-		}
-		prerequisite = {
-			focus = POL_artist_spiritual_aristocracy
-		}
-		relative_position_id = POL_individualist_monad_society
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 超级种族—波兰超人
-	}
-	focus = {
-		id = POL_the_social_pyramid_stands
-		icon = GFX_goal_POL_Land_Of_Saints_Kings
-		prerequisite = {
-			focus = POL_authorize_the_presidents_cabal
-		}
-		relative_position_id = POL_authorize_the_presidents_cabal
-		x = 1
-		y = 1
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 社会金字塔不可撼动
-	}
-	focus = {
-		id = POL_artist_spiritual_aristocracy
-		icon = GFX_goal_POL_Brahmin_Experience
-		prerequisite = {
-			focus = POL_authorize_the_presidents_cabal
-		}
-		prerequisite = {
-			focus = POL_the_social_pyramid_stands
-		}
-		relative_position_id = POL_authorize_the_presidents_cabal
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 艺术家精神贵族
-	}
+	
+	
 	focus = {
 		id = POL_establish_the_marshal_cult
 		icon = GFX_goal_POL_Poland_Forever
@@ -37380,6 +37393,42 @@ focus = {
 			add_political_power = 100
 		}
 		# 实现全社会团结
+	}
+	focus = {
+		id = POL_liberal_interventionism
+		icon = GFX_goal_POL_International_Trade_Reform
+		prerequisite = {
+			focus = POL_achieve_total_social_unity
+		}
+		prerequisite = {
+			focus = POL_ministry_of_state_defence
+		}
+		relative_position_id = POL_establish_the_camp_of_national_unity
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 自由干预主义
+	}
+	focus = {
+		id = POL_cooperate_with_the_catholic_church
+		icon = GFX_goal_POL_Unity_In_Christ
+		prerequisite = {
+			focus = POL_liberal_interventionism
+		}
+		prerequisite = {
+			focus = POL_forced_polonization
+		}
+		relative_position_id = POL_ministry_of_state_defense
+		x = 0
+		y = 2
+		cost = 4
+		completion_reward = {
+			add_political_power = 100
+		}
+		# 与天主教会合作
 	}
 	focus = {
 		id = POL_ministry_of_state_defense
@@ -37463,40 +37512,6 @@ focus = {
 		}
 		# 实现彻底政治支配
 	}
-	focus = {
-		id = POL_cooperate_with_the_catholic_church
-		icon = GFX_goal_POL_Unity_In_Christ
-		prerequisite = {
-			focus = POL_liberal_interventionism
-		}
-		prerequisite = {
-			focus = POL_forced_polonization
-		}
-		relative_position_id = POL_ministry_of_state_defense
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 与天主教会合作
-	}
-	focus = {
-		id = POL_liberal_interventionism
-		icon = GFX_goal_POL_International_Trade_Reform
-		prerequisite = {
-			focus = POL_achieve_total_social_unity
-		}
-		prerequisite = {
-			focus = POL_ministry_of_state_defence
-		}
-		relative_position_id = POL_establish_the_camp_of_national_unity
-		x = 0
-		y = 2
-		cost = 4
-		completion_reward = {
-			add_political_power = 100
-		}
-		# 自由干预主义
-	}
+	
+	
 }
