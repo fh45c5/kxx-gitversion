@@ -1,0 +1,142 @@
+on_actions = {
+	on_daily_CAL = { 
+		effect = {
+			if = {
+				limit = {
+					check_variable = { econ_progress > 99 }
+				}
+				set_country_flag = CAL_finished_reform
+			}
+		}
+    }
+	on_weekly_CAL = { 
+		effect = {
+			if = {
+				limit = {
+					check_variable = { CAL_people_attitude > 5 }
+				}
+				set_variable = { CAL_people_attitude = 5 }
+				gui_dirty_change_cal = yes			
+			}
+			else_if = {
+				limit = {
+					check_variable = { CAL_people_attitude > 3 }
+				}	
+				set_variable = { CAL_asio_people_stability_factor = 0.1 }
+			}
+			else_if = {
+				limit = {
+					check_variable = { CAL_people_attitude > 0 }
+				}	
+				set_variable = { CAL_asio_people_stability_factor = 0.05 }
+			}
+			else = {
+				set_variable = { CAL_asio_people_stability_factor = -0.1 }
+			}
+		}
+    }
+	on_monthly_CAL = { 
+		effect = {
+			if = {
+				limit = {
+					has_completed_focus = CAL_Pacific_shipping_lane
+					NOT = {
+						has_completed_focus = CAL_Complete_integration
+					}
+					check_variable = { CAL_TOKYO_attitude > 6 }
+				}
+				add_political_power = 30
+				add_equipment_to_stockpile = {
+					type = convoy
+					amount = 150
+					producer = JAP
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 200
+					producer = JAP
+				}				
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = CAL_Pacific_shipping_lane
+					NOT = {
+						has_completed_focus = CAL_Complete_integration
+					}
+					check_variable = { CAL_TOKYO_attitude > 2 }
+				}	
+				add_political_power = 10
+				add_equipment_to_stockpile = {
+					type = convoy
+					amount = 50
+					producer = JAP
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 100
+					producer = JAP
+				}		
+			}
+			if = {
+				limit = {
+					check_variable = { CAL_antijap_attitude > 3 }
+				}	
+				add_to_variable = { CAL_TOKYO_attitude = -1 }		
+			}
+			else_if = {
+				limit = {
+					check_variable = { CAL_antijap_attitude > 0 }
+				}	
+				add_to_variable = { CAL_TOKYO_attitude = 0 }		
+			}
+			else = {
+				add_to_variable = { CAL_TOKYO_attitude = 1 }
+			}
+		}
+    }
+	on_weekly_CAL = { 
+		effect = {
+			if = {
+				limit = {
+					has_completed_focus = CAL_Pacific_shipping_lane
+					NOT = {
+						has_completed_focus = CAL_Complete_integration
+					}
+					check_variable = { CAL_TOKYO_attitude > 10 }	
+				}	
+				set_variable = { CAL_TOKYO_attitude = 10 }	
+			}
+			if = {
+				limit = {
+					has_completed_focus = CAL_Pacific_shipping_lane
+					NOT = {
+						has_completed_focus = CAL_Complete_integration
+					}
+					check_variable = { CAL_jap_army_attitude > 5 }
+				}		
+				set_variable = { CAL_jap_army_attitude = 5 }
+			}
+			if = {
+				limit = {
+					has_completed_focus = CAL_Pacific_shipping_lane
+					NOT = {
+						has_completed_focus = CAL_Complete_integration
+					}
+					check_variable = { CAL_TOKYO_attitude < 0 }	
+				}	
+				set_variable = { CAL_TOKYO_attitude = 0 }	
+			}
+			if = {
+				limit = {
+					has_completed_focus = CAL_Pacific_shipping_lane
+					NOT = {
+						has_completed_focus = CAL_Complete_integration
+					}
+					check_variable = { CAL_jap_army_attitude < -5 }
+				}		
+				set_variable = { CAL_jap_army_attitude = -5 }
+			}
+		}
+    }
+}
+

@@ -1,0 +1,325 @@
+faction_manifest_reinforce_the_monroe_doctrine = {
+	name = faction_manifest_reinforce_the_monroe_doctrine_name
+	description = faction_manifest_reinforce_the_monroe_doctrine_desc
+	is_manifest = yes
+	ratio_progress = {
+		total_amount_collection = collection:american_countries
+		completed_amount_collection = collection:allied_american_countries
+		scale = {
+			consumer_goods_factor = -0.15
+			political_power_factor = 0.10
+			trade_laws_cost_factor = -0.15
+		}
+
+		progress_sections = {
+			manifest_fulfilled = {
+				min = 0.75
+
+				modifier = {
+					overlord_trade_cost_factor = -0.10
+					trade_opinion_factor = 0.10
+					extra_trade_to_overlord_factor = 0.20
+				}
+			}
+		}
+	}
+}
+
+faction_goal_USA_Rule_American = {
+	name = goal_USA_Rule_American
+	description = goal_USA_Rule_American_desc
+	category = long_term
+	group = FOCUS_FILTER_ANNEXATION
+	
+	allowed = { original_tag = USA }
+	
+	completed = {
+		OR = {
+			739 = { is_owned_by_ROOT_or_ally = yes }
+			NOT = { country_exists = CAN }
+			CAN = { has_capitulated = yes }
+		}
+		OR = {
+			277 = { is_owned_by_ROOT_or_ally = yes }
+			NOT = { country_exists = MEX }
+			MEX = { has_capitulated = yes }
+		}
+		OR = {
+			278 = { is_owned_by_ROOT_or_ally = yes }
+			NOT = { country_exists = ARG }
+			ARG = { has_capitulated = yes }
+		}
+		OR = {
+			500 = { is_owned_by_ROOT_or_ally = yes }
+			NOT = { country_exists = BRA }
+			BRA = { has_capitulated = yes }
+		}
+		OR = {
+			306 = { is_owned_by_ROOT_or_ally = yes }
+			NOT = { country_exists = COL }
+			COL = { has_capitulated = yes }
+		}
+	}
+	complete_effect = {
+		add_faction_power_projection = 400
+		add_faction_initiative = 1
+		custom_effect_tooltip = tooltip_white_line
+		every_faction_member = {
+			limit = { 
+				is_subject = no
+				faction_influence_rank < 4
+			}
+			add_political_power = 100
+		}
+	}
+	ai_will_do = { base = 100 }
+}
+
+faction_goal_USA_Control_Asia = {
+	name = goal_USA_Control_Asia
+	description = goal_USA_Control_Asia_desc
+	category = long_term
+	group = FOCUS_FILTER_ANNEXATION
+	
+	visible = { 
+		USA = {
+			has_completed_focus = USA_Intimidate_the_mad_dog_of_the_military_state
+		}
+	}
+	allowed = { original_tag = USA }
+	
+	completed = {
+		OR = {
+			282 = { is_owned_by_ROOT_or_ally = yes }
+			NOT = { country_exists = JAP }
+			JAP = { has_capitulated = yes }
+			JAP = { has_elected_government = yes }
+		}
+		NOT = {
+			JAP = {
+				286 = { is_owned_by_ROOT_or_ally = yes } #Cochinchina
+				336 = { is_owned_by_ROOT_or_ally = yes } #Singapore
+				1020 = { is_owned_by_ROOT_or_ally = yes } #Batavia
+				327 = { is_owned_by_ROOT_or_ally = yes } #Central Luzon
+				629 = { is_owned_by_ROOT_or_ally = yes } #Hawaii
+				608 = { is_owned_by_ROOT_or_ally = yes } #Beijing
+				743 = { is_owned_by_ROOT_or_ally = yes } #Shanghai
+			}
+		}
+		OR = {
+			327 = { is_owned_by_ROOT_or_ally = yes }
+			PHI = { is_in_faction_with = USA }
+		}
+		OR = {
+			286 = { is_owned_by_ROOT_or_ally = yes }
+			AND = {
+				country_exists = VIN
+				VIN = { is_in_faction_with = USA }
+			}
+		}
+		OR = {
+			289 = { is_owned_by_ROOT_or_ally = yes }
+			AND = {
+				country_exists = SIA
+				SIA = { is_in_faction_with = USA }
+			}
+		}
+		OR = {
+			288 = { is_owned_by_ROOT_or_ally = yes }
+			AND = {
+				country_exists = BRM
+				BRM = { is_in_faction_with = USA }
+			}
+		}
+	}
+	complete_effect = {
+		add_faction_power_projection = 400
+		add_faction_initiative = 1
+		custom_effect_tooltip = tooltip_white_line
+		every_faction_member = {
+			limit = { faction_influence_rank < 2}
+			add_ideas = USA_Far_East_Military_Police			
+		}
+	}
+	ai_will_do = { base = 100 }
+}
+
+faction_goal_Control_Guantanamo_Bay = { #控制关塔那摩湾
+	name = goal_Control_Guantanamo_Bay
+	description = goal_Control_Guantanamo_Bay_desc
+	category = medium_term
+	group = FOCUS_FILTER_ANNEXATION
+	allowed = {
+		tag = USA
+	}
+	visible = {
+	}
+	available = {
+	}
+
+	completed = {
+		818 = { is_controlled_by = USA }
+	}
+	complete_effect = {
+		add_faction_power_projection = 100
+		custom_effect_tooltip = tooltip_white_line
+		custom_effect_tooltip = TARGET_STATE_CONTROLLERS
+		every_faction_member = {
+			visible_when_empty = yes
+			limit = {
+				controls_state = 818
+			}
+			add_faction_initiative = 1
+		}
+		818 = { #关塔那摩湾
+			add_building_construction = {
+				type = anti_air_building
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = air_base
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 3
+				province = 13205
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				level = 2
+				province = 13205
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				level = 1
+				province = 13205
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 20 # Target of opportunity - already at war anyway
+			var:818.owner = { has_war_with = ROOT }
+		}
+	}
+}
+
+faction_goal_Control_Iwo_Jima = { #控制远东岛屿
+	name = goal_Control_Iwo_Jima
+	description = goal_Control_Iwo_Jima_desc
+	category = medium_term
+	group = FOCUS_FILTER_ANNEXATION
+	allowed = {
+		tag = USA
+	}
+	visible = {
+	}
+	available = {
+	}
+
+	completed = {
+		526 = { is_controlled_by = USA }
+		645 = { is_controlled_by = USA }
+		648 = { is_controlled_by = USA }
+	}
+	complete_effect = {
+		add_faction_power_projection = 100
+		custom_effect_tooltip = tooltip_white_line
+		custom_effect_tooltip = TARGET_STATE_CONTROLLERS
+		every_faction_member = {
+			visible_when_empty = yes
+			limit = {
+				controls_state = 526
+				controls_state = 645
+				controls_state = 648
+			}
+			add_faction_initiative = 1
+		}
+		526 = { #关塔那摩湾
+			add_building_construction = {
+				type = anti_air_building
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 1
+				province = 7115
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				level = 1
+				province = 7115
+				instant_build = yes
+			}
+		}
+		645 = { #关塔那摩湾
+			add_building_construction = {
+				type = anti_air_building
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 1
+				province = 13025
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				level = 1
+				province = 13025
+				instant_build = yes
+			}
+		}
+		648 = { #关塔那摩湾
+			add_building_construction = {
+				type = anti_air_building
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 1
+				province = 13026
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				level = 1
+				province = 13026
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 20 # Target of opportunity - already at war anyway
+			var:818.owner = { has_war_with = ROOT }
+		}
+	}
+}

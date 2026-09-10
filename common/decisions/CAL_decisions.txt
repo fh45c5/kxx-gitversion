@@ -1,0 +1,620 @@
+CAL_Hughes_category = {#休斯bop
+	CAL_Hughes_power_grow = {
+		icon = hughes
+		priority = 20
+		activation = { #manually activated
+			has_country_flag = CAL_has_choose_council
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_trigger = {
+			has_completed_focus = CAL_we_rule
+		}
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 30
+		fire_only_once = no
+		timeout_effect = {
+			random_list = {
+				20 = { CAL_increase_hughes_influence_15 = yes }
+				40 = { CAL_increase_hughes_influence_10 = yes }
+				40 = { CAL_increase_hughes_influence_5 = yes }
+			}	
+			hidden_effect = {
+				activate_mission = CAL_Hughes_power_grow
+			}
+		}
+	}
+
+	CAL_council_power_grow = {
+		icon = council
+		priority = 20
+		activation = { #manually activated
+			has_country_flag = CAL_has_choose_hughes 
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_trigger = {
+			has_completed_focus = CAL_hughes_the_creator
+		}
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 30
+		fire_only_once = no
+		timeout_effect = {
+			random_list = {
+				20 = { CAL_increase_council_influence_15 = yes }
+				40 = { CAL_increase_council_influence_10 = yes }
+				40 = { CAL_increase_council_influence_5 = yes }
+			}	
+			hidden_effect = {
+				activate_mission = CAL_Hughes_power_grow
+			}
+		}
+	}
+
+    CAL_Increase_public_exposure = { #增加公众曝光度
+		icon = political1
+		cost = 20
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = CAL_The_work_of_a_genius
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Increase_public_exposure"
+			add_stability = 0.01
+			CAL_increase_hughes_influence_5 = yes
+		}
+    }
+
+    CAL_Hold_a_launch_event_for_new_products = { #为休斯航空的产品举行发布会
+		icon = political1
+		cost = 40
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = CAL_The_work_of_a_genius
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Hold_a_launch_event_for_new_products"
+			add_stability = 0.03
+			CAL_increase_hughes_influence_10 = yes
+		}
+    }
+
+    CAL_Avoid_Hughes_coming_out_in_public = { #避免休斯在公众面前出面
+		icon = political1
+		cost = 20
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = CAL_Our_marionettes
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Avoid_Hughes_coming_out_in_public"
+			increase_ruling_party_popularity_by_3 = yes
+			CAL_increase_council_influence_5 = yes
+		}
+    }
+}
+
+CAL_asio_decision_category = {
+    CAL_Improve_the_treatment_of_military = { #提高军队待遇
+		icon = rubber
+		cost = 20
+		days_remove = 7
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_pol_gui
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Improve_the_treatment_of_military"
+			add_to_variable = { CAL_army_power = 1 }
+			gui_dirty_change_cal = yes
+			custom_effect_tooltip = CAL_Improve_the_treatment_of_military_tt
+		}
+    }	
+    CAL_Introduce_Japanese_instructors = { #引进日本教官
+		icon = martial_law
+		cost = 30
+		days_remove = 7
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_pol_gui
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Introduce_Japanese_instructors"
+			army_experience = 30
+			navy_experience = 10
+			add_to_variable = { CAL_army_power = -1 }
+			gui_dirty_change_cal = yes
+			custom_effect_tooltip = CAL_Introduce_Japanese_instructors_tt
+		}
+    }	
+    CAL_Meet_with_pro_Japanese_people = { #会面亲日人士
+		icon = Citizen
+		cost = 10
+		days_remove = 7
+		days_re_enable = 40
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_pol_gui
+		}
+		available = {
+			has_completed_focus = CAL_Follow_pro_Japanese_groups
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAL_Meet_with_pro_Japanese_people"
+			add_stability = 0.02
+			add_to_variable = { CAL_TOKYO_attitude = 0.5 }
+			add_to_variable = { CAL_thornburg_power = 1 }
+			add_to_variable = { CAL_projap_national_populist_drift = 0.01 }
+			add_to_variable = { CAL_projap_political_power_cost = 0.01 }
+			add_to_variable = { CAL_projap_war_support_factor = 0.01 }
+			gui_dirty_change_cal = yes
+			custom_effect_tooltip = CAL_Meet_with_pro_Japanese_people_tt
+		}
+    }	
+    CAL_Inject_capital_into_standard_oil = { #注资标准石油
+		icon = Capitalist
+		cost = 30
+		days_remove = 7
+		days_re_enable = 100
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_pol_gui
+		}
+		available = {
+			has_completed_focus = CAL_Follow_pro_Japanese_groups
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAL_Inject_capital_into_standard_oil"
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+						type = synthetic_refinery
+						level = 1
+						instant_build = yes
+				}
+			}
+			add_to_variable = { CAL_thornburg_power = 1 }
+			add_to_variable = { CAL_projap_national_populist_drift = 0.01 }
+			add_to_variable = { CAL_projap_political_power_cost = 0.01 }
+			add_to_variable = { CAL_projap_war_support_factor = 0.01 }
+			gui_dirty_change_cal = yes
+			custom_effect_tooltip = CAL_Inject_capital_into_standard_oil_tt
+		}
+    }
+    CAL_Start_propaganda_machine = { #开动宣传机器
+		icon = martial_law
+		cost = 30
+		days_remove = 7
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_pol_gui
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Start_propaganda_machine"
+			army_experience = 30
+			navy_experience = 10
+			add_to_variable = { CAL_antijap_attitude = -1 }
+			gui_dirty_change_cal = yes
+			custom_effect_tooltip = CAL_Start_propaganda_machine_tt
+		}
+    }
+    CAL_Please_Tokyo = { #讨好东京方面
+		icon = propaganda1
+		cost = 20
+		days_remove = 7
+		days_re_enable = 120
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_jap_gui
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Please_Tokyo"
+			add_to_variable = { CAL_TOKYO_attitude = 1 }
+			add_to_variable = { CAL_thornburg_power = -1 }
+			add_to_variable = { CAL_projap_national_populist_drift = -0.01 }
+			add_to_variable = { CAL_projap_political_power_cost = -0.01 }
+			add_to_variable = { CAL_projap_war_support_factor = -0.01 }
+			gui_dirty_change_cal = yes
+			custom_effect_tooltip = CAL_Please_Tokyo_tt
+		}
+    }	
+    CAL_Request_financial_assistance = { #请求经济援助
+		icon = political1
+		days_remove = 7
+		days_re_enable = 120
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_jap_gui
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Please_Tokyo"
+			decrease_ruling_party_popularity_by_5 = yes
+			add_to_variable = { CAL_TOKYO_attitude = -1 }
+			add_political_power = 100
+			gui_dirty_change_cal = yes
+			custom_effect_tooltip = CAL_Request_financial_assistance_tt
+		}
+    }	
+    CAL_Pacify_Japanese_soldiers = { #
+		icon = political1
+		cost = 30
+		days_remove = 7
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_jap_gui
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Pacify_Japanese_soldiers"
+			add_to_variable = { CAL_jap_army_attitude = 1 }
+			gui_dirty_change_cal = yes
+			custom_effect_tooltip = CAL_Pacify_Japanese_soldiers_tt
+		}
+    }	
+    CAL_Criticize_Japanese_army_overstepping_of_the_border = { #
+		icon = political1
+		cost = 30
+		days_remove = 7
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_jap_gui
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Criticize_Japanese_army_overstepping_of_the_border"
+			add_to_variable = { CAL_jap_army_attitude = -1 }
+			gui_dirty_change_cal = yes
+			custom_effect_tooltip = CAL_Criticize_Japanese_army_overstepping_of_the_border_tt
+		}
+    }	
+    CAL_finish_economic_reform = { #宣布经济改革完成
+		icon = political1
+		fire_only_once = yes
+		visible = {
+			AND = {
+				has_country_flag = CAL_open_eco_gui
+				has_country_flag = CAL_finished_reform
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAL_Undertake_military_industry_orders"
+			add_dynamic_modifier = { modifier = CAL_economic_miracle  }
+			gui_dirty_change_cal = yes
+		}
+    }
+    CAL_Reached_cooperation_agreement_with_Mitsubishi = { #与三菱达成合作协议
+		icon = political1
+		cost = 0
+		days_remove = 30
+		fire_only_once = yes
+
+		custom_cost_text = CAL_Reached_cooperation_agreement_with_Mitsubishi_cost_tt
+		custom_cost_trigger = {
+			has_air_experience > 50
+		}
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_eco_gui
+			check_variable = {
+				econ_progress < 100
+			}
+		}
+		available = {
+			has_completed_focus = CAL_Invite_Japanese_enterprises
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Reached_cooperation_agreement_with_Mitsubishi"
+			custom_effect_tooltip = CAL_Reached_cooperation_agreement_with_Mitsubishi_tt
+			add_to_variable = {
+				var = econ_progress
+				value = 5
+			}
+			add_to_variable = {
+				var = CAL_asio_production_speed_arms_factory_factor
+				value = 0.05
+			}
+			add_to_variable = {
+				var = CAL_asio_air_mission_efficiency
+				value = 0.05
+			}
+			add_to_variable = {
+				var = CAL_asio_air_agility_factor 
+				value = 0.05
+			}	
+			if = {
+				limit = { has_dlc_aat = yes }
+				mio:CAL_mitsubishi_organisation = {
+					add_mio_size = 2
+					add_mio_funds = 1000
+				}
+			}
+			gui_dirty_change_cal = yes		
+		}
+    }
+    CAL_Open_immigration_restrictions = { #开放移民限制
+		icon = political1
+		cost = 50
+		days_remove = 30
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_eco_gui
+			check_variable = {
+				econ_progress < 100
+			}
+		}
+		available = {
+			has_completed_focus = CAL_the_immigration_wave
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Open_immigration_restrictions"
+			custom_effect_tooltip = CAL_Open_immigration_restrictions_tt
+			add_manpower = 10000
+			
+			add_to_variable = {
+				var = econ_progress
+				value = 10
+			}
+			add_to_variable = {
+				var = CAL_asio_authoritarian_democrat_drift
+				value = 0.02
+			}
+			add_to_variable = {
+				var = CAL_asio_paternal_autocrat_drift
+				value = 0.02
+			}
+			add_to_variable = {
+				var = CAL_asio_stability_factor 
+				value = -0.1
+			}
+			add_to_variable = {
+				var = CAL_asio_industrial_capacity_factory
+				value = 0.05
+			}
+			gui_dirty_change_cal = yes
+		}
+    }
+    CAL_Support_Japanese_zaibatsu = { #支持日本财阀
+		icon = political1
+		cost = 30
+		days_remove = 30
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_eco_gui
+			check_variable = {
+				econ_progress < 100
+			}
+		}
+		available = {
+			has_completed_focus = CAL_Invite_Japanese_enterprises
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Support_Japanese_zaibatsu"
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = CAL_past_sins
+					}
+				}
+				add_to_variable = {
+					var = CAL_antijap_attitude
+					value = 1
+				}	
+				add_to_variable = {
+					var = CAL_people_attitude
+					value = -1
+				}	
+				custom_effect_tooltip = CAL_JAP_ATTITUDE_WORSE			
+			}
+			custom_effect_tooltip = CAL_Support_Japanese_zaibatsu_tt
+			
+			add_to_variable = {
+				var = econ_progress
+				value = 5
+			}
+			add_to_variable = {
+				var = CAL_asio_political_power_gain
+				value = -0.02
+			}
+			add_to_variable = {
+				var = CAL_asio_industrial_capacity_factory
+				value = 0.05
+			}
+			add_to_variable = {
+				var = CAL_asio_local_building_slots_factor
+				value = 0.05
+			}
+			gui_dirty_change_cal = yes
+		}
+    }
+    CAL_Undertake_military_industry_orders = { #承接军工订单
+		icon = political1
+		cost = 50
+		days_remove = 120
+		days_re_enable = 90
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_eco_gui
+			check_variable = {
+				econ_progress < 100
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CAL_Undertake_military_industry_orders"
+			custom_effect_tooltip = CAL_Undertake_military_industry_orders_tt
+			add_to_variable = {
+				var = econ_progress
+				value = 5
+			}	
+			add_ideas = CAL_use_arm_factory 
+			gui_dirty_change_cal = yes
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Open_immigration_restrictions"
+			custom_effect_tooltip = remove_CAL_Open_immigration_restrictions_tt
+			add_to_variable = {
+				var = econ_progress
+				value = 5
+			}	
+			add_to_variable = {
+				var = CAL_asio_production_factory_start_efficiency_factor
+				value = 0.05
+			}		
+			add_to_variable = {
+				var = CAL_asio_production_factory_efficiency_gain_factor
+				value = 0.05
+			}
+			gui_dirty_change_cal = yes
+		}
+    }
+    CAL_Investing_in_Seattle = { #投资建设沿海城市
+		icon = political1
+		cost = 80
+		days_remove = 50
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = CAL_open_eco_gui
+			check_variable = {
+				econ_progress < 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAL_Investing_in_Seattle"
+			custom_effect_tooltip = CAL_Investing_in_Seattle_tt
+			random_list = {
+				40 = {
+					797 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = dockyard
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				30 = {
+					798 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = dockyard
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				30 = {
+					386 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = dockyard
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+			add_to_variable = {
+				var = econ_progress
+				value = 5
+			}
+			add_to_variable = {
+				var = CAL_asio_political_power_gain
+				value = -0.02
+			}
+			add_to_variable = {
+				var = CAL_asio_industrial_capacity_dockyard
+				value = 0.1
+			}
+			add_to_variable = {
+				var = CAL_asio_production_speed_buildings_factor
+				value = 0.05
+			}
+			gui_dirty_change_cal = yes
+		}
+    }
+}
