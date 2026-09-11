@@ -2,6 +2,18 @@ on_actions = {
 	on_startup = {
 		#其他
 		effect = {
+			#必须让卡尔死
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_karl_habsburg
+					}
+				}
+				AUS = {
+					set_country_flag = GER_AUS_KAISER_VISIBLE
+					country_event = { id = austria.3 days = 2423 } #Death of Karl I
+				}
+			}
 			#阿富汗阵营
 			if = {
 				limit = { has_game_rule = { rule = AFG_forpol option = AFG_FORPOL_ALONE } }
@@ -559,11 +571,20 @@ on_actions = {
 							state = 586
 							state = 887
 							state = 1359
+							state = 701
+							state = 72
+							state = 756
+							state = 857
+							state = 671
+							state = 526
                         }   
                     }
 					set_demilitarized_zone = no
                     add_core_of = CHI
                 }
+				RUS = {
+					country_event = zhinan_gunmu.2
+				}
 			}
 			else_if = {
 				limit = { 
@@ -605,6 +626,12 @@ on_actions = {
 							state = 586
 							state = 887
 							state = 1359
+							state = 701
+							state = 72
+							state = 756
+							state = 857
+							state = 671
+							state = 526
                         }   
                     }
 					set_demilitarized_zone = no
@@ -651,6 +678,12 @@ on_actions = {
 							state = 586
 							state = 887
 							state = 1359
+							state = 701
+							state = 72
+							state = 756
+							state = 857
+							state = 671
+							state = 526
                         }   
                     }
 					set_demilitarized_zone = no
@@ -865,6 +898,159 @@ on_actions = {
              		add_state_core = 410 #Sistan
 					country_event = afghanredux.1
 		    	}
+			}
+
+			#北欧
+			if = {
+				limit = { has_game_rule = { rule = KXX_annex_SCA option = KXX_annex_SCA_YES } }
+				SCA = {
+                    annex_country = { target = NOR }
+                    annex_country = { target = SWE }
+                    annex_country = { target = FIN }
+					annex_country = { target = ICE }
+					annex_country = { target = DEN }
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_core_of = NOR
+								is_core_of = SWE
+								is_core_of = FIN
+								is_core_of = ICE
+								is_core_of = DEN
+                                state = 216
+								state = 1327
+								state = 215
+								state = 1274
+								state = 722
+								state = 213
+								state = 782
+								state = 839
+								state = 58
+                            }   
+                        }
+                        add_core_of = SCA
+                    }
+                }
+			}
+
+			#奥地利
+			if = {
+				limit = { 
+					or = {
+						has_game_rule = { rule = KXX_annex_AUS option = KXX_annex_AUS_YES }
+						has_game_rule = { rule = KXX_annex_AUS option = KXX_annex_AUS_YES_ADD } 
+					}
+				}
+				AUS = {
+					complete_national_focus = AUS_status_quo
+                    annex_country = { target = CZE }
+                    annex_country = { target = HUN }
+                    annex_country = { target = GAL }
+					annex_country = { target = CRO }
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_core_of = CZE
+								is_core_of = HUN
+								is_core_of = GAL
+								is_core_of = CRO
+								is_core_of = ITA
+								state = 761
+                            }   
+                        }
+                        add_core_of = AUS
+                    }
+					if = {
+						limit = {
+							has_game_rule = { rule = KXX_annex_AUS option = KXX_annex_AUS_YES_ADD } 
+						}
+						set_cosmetic_tag = AUS_united_states
+						set_global_flag = balkan_war_ended
+						annex_country = { target = MNT }
+						annex_country = { target = ROM }
+						annex_country = { target = SER }
+						annex_country = { target = BUL }
+						annex_country = { target = ALB }
+						every_state = {
+							limit = {
+								or = {
+									is_claimed_by = GRE
+									state = 1089
+									state = 731
+								}
+							}
+							transfer_state_to = GRE
+							add_core_of = GRE
+						}
+						every_state = {
+							limit = {
+								is_owned_by = AUS
+							}
+							set_demilitarized_zone = no
+							add_core_of = AUS
+						}
+					}
+                }
+			}
+
+			#东方领
+			if = {
+				limit = { has_game_rule = { rule = KXX_annex_BAT option = KXX_annex_BAT_YES } }
+				BAT = {
+                    annex_country = { 
+						target = LIT 
+						transfer_troops = yes
+					}
+                    annex_country = { 
+						target = WHR 
+						transfer_troops = yes
+					}
+                    every_state = {
+                        limit = {
+                            or = {
+                                is_core_of = LIT
+								is_core_of = WHR
+								state = 880
+								state = 1288
+								state = 1291
+	                           	state = 209
+                        		state = 1329
+                          		state = 94
+                        		state = 93
+                           		state = 997
+                         		state = 1295
+                         		state = 1294
+	                            state = 95
+	                         	state = 207
+                        		state = 206
+                        		state = 204
+                        		state = 194
+                        		state = 1087
+                          		state = 243
+                         		state = 755
+                          		state = 1287
+                        		state = 1289
+                        		state = 1290
+                           		state = 210
+	                         	state = 242
+	                           	state = 208
+	                           	state = 263
+	                        	state = 244
+	                        	state = 195
+		                        state = 1328
+								state = 241
+								state = 1230
+                            }       
+                        }
+                        add_core_of = BAT
+                    }
+                }
+				UKR = {
+					transfer_state = 95
+					transfer_state = 194
+					add_state_core = 95
+					add_state_core = 194
+				}
 			}
 		}
 		#恢复开局不显示的国家
