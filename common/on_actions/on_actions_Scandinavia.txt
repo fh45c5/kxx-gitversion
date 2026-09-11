@@ -1,0 +1,146 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			#Coalitions
+			DEN = {
+				set_temp_variable = { coalition_partner_var = token:social_liberal }
+				add_to_coalition = yes
+			}
+			NOR = {
+				set_temp_variable = { coalition_partner_var = token:social_liberal }
+				add_to_coalition = yes
+				set_temp_variable = { coalition_partner_var = token:social_conservative }
+				add_to_coalition = yes
+			}
+			SWE = {
+				set_temp_variable = { coalition_partner_var = token:market_liberal }
+				add_to_coalition = yes
+			}
+			FIN = {
+				set_temp_variable = { coalition_partner_var = token:social_conservative }
+				add_to_coalition = yes
+			}
+		}
+	}
+
+	on_government_change = {
+		effect = {
+			if = {
+				limit = {
+					tag = SWE
+					has_socialist_government = yes
+				}
+				remove_ideas = SWE_union_activity
+			}
+			if = {
+				limit = {
+					OR = {
+						tag = SWE
+						tag = NOR
+					}
+				}
+				DEN = { country_event = { id = den.91 days = 2 random_days = 2 } }
+			}
+		}
+	}
+
+	on_new_term_election = {
+		effect = {
+			### Denmark ###
+			if = {
+				limit = { tag = DEN }
+				country_event = { id = den.60 }
+				country_event = { id = den.61 }
+			}
+			### Norway ###
+			if = {
+				limit = { tag = NOR }
+				country_event = norway.14	#1936
+				country_event = norway.30	#1939
+				country_event = norway.33	#1942
+			}
+			### Scandinavia ###
+			if = {
+				limit = { tag = SCA }
+				country_event = scandinavia.3
+			}
+			### Sweden ###
+			if = {
+				limit = { tag = SWE }
+				country_event = { id = swe.8 }
+				country_event = { id = swe.55 }
+			}
+		}
+	}
+
+	#FROM is country getting invited.
+	on_offer_join_faction = {
+		effect = {
+			if = {
+				limit = { tag = NOR }
+				SWE = {
+					country_event = {
+						id = swe.45
+						days = 2
+						random_days = 2
+					}
+				}
+			}
+		}
+	}
+
+	on_peace = {
+		effect = {
+			# Demilitarization of Aland
+			if = {
+				limit = {
+					tag = FIN
+					is_subject = no
+					SWE = {
+						exists = yes
+						is_subject = no
+					}
+				}
+				145 = {
+					set_demilitarized_zone = yes
+				}
+			}
+		}
+		effect = {
+			# Swedish events
+			if = {
+				limit = { tag = SWE }
+				country_event = {
+					id = swe.127
+					days = 2
+					random_days = 4
+				}
+			}
+		}
+	}
+
+	#ROOT is new controller #FROM is old controller #FROM.FROM is state ID
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					FROM = { tag = SWE }
+					141 = { NOT = { is_fully_controlled_by = SWE } } #Stockholm
+				}
+				ROOT = { country_event = swe.120}
+			}
+		}
+	}
+	
+	on_daily_NOR = {
+		effect = {
+			if = {
+				limit = {
+					has_idea = NOR_kings_party_idea
+				}
+				NOR_recalculate_kings_party = yes
+			}
+		}
+	}
+}
+
