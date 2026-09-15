@@ -124,45 +124,10 @@ add_namespace = wcc
 			add_manpower = 20000
 			add_stability = 0.05
 			CAL = {
-					every_unit_leader = {
-						limit = {
-							has_id = 982 #White
-						}
-						set_nationality = WCC
-					}
+				every_unit_leader = {
+					set_nationality = WCC
 				}
-				CAL = {
-					every_unit_leader = {
-						limit = {
-							has_id = 984 #Vandegrift
-						}
-						set_nationality = WCC
-					}
-				}
-				CAL = {
-					every_unit_leader = {
-						limit = {
-							has_id = 986 #Doolittle
-						}
-						set_nationality = WCC
-					}
-				}
-				CAL = {
-					every_unit_leader = {
-						limit = {
-							has_id = 62 #Arnold
-						}
-						set_nationality = WCC
-					}
-				}
-				CAL = {
-					every_unit_leader = {
-						limit = {
-							has_id = 60 #Marshall
-						}
-						set_nationality = WCC
-					}
-				}
+			}
 		}
 		option = {
 			name = wcc.4.b
@@ -231,9 +196,6 @@ add_namespace = wcc
 			add_stability = 0.05
 			COR = {
 				every_unit_leader = {
-					limit = {
-						has_id = 124 #Patton
-					}
 					set_nationality = WCC
 				}
 			}
@@ -254,15 +216,14 @@ add_namespace = wcc
 		
 		picture = GFX_event_wcc_1
 
+		is_triggered_only = yes
 		trigger = {
 			tag = USA
 			NOT = {
 				USA = {
 					OR = {
 						has_country_leader = { ruling_only = yes name = "Ernest J. King" } 
-						has_country_leader = { ruling_only = yes name = "欧内斯特·J·金" }
 						has_country_leader = { ruling_only = yes name = "William D. Leahy" } 
-						has_country_leader = { ruling_only = yes name = "威廉·D·莱希" }
 					}
 				}
 			}
@@ -422,7 +383,7 @@ add_namespace = wcc
 			add_stability = 0.02
 			add_war_support = 0.02
 			USA = {
-			country_event = {
+				country_event = {
 					id = wcc.7002
 					days = 2
 				} 
@@ -534,7 +495,7 @@ add_namespace = wcc
 				name = USA_prov_govt_party
 			}
 			create_country_leader = {
-				name = "总统空缺"
+				name = "Vacant Presidency"
 				picture = "gfx/leaders/USA/Portrait_USA_Vacant_Presidency.png"
 				expire = "1.1.1"
 				ideology = authoritarian_democrat_subtype
@@ -620,7 +581,7 @@ add_namespace = wcc
 				name = USA_paternal_autocrat_military_junta
 			}
 			create_country_leader = {
-				name = "道格拉斯·麦克阿瑟"
+				name = "Douglas MacArthur"
 				desc = "POLITICS_DOUGLAS_MACARTHUR_DESC"
 				picture = "GFX_Portrait_USA_general_douglas_macarthur_animated"
 				expire = "1.1.1"
@@ -877,7 +838,7 @@ add_namespace = wcc
 			}
 			set_country_flag = WCC_mac_is_here
 			create_country_leader = {
-					name = "道格拉斯·麦克阿瑟"
+					name = "Douglas MacArthur"
 					desc = "POLITICS_DOUGLAS_MACARTHUR_TWO_DESC"
 					picture = "GFX_Portrait_USA_general_douglas_macarthur_animated"
 					expire = "1.1.1"
@@ -932,7 +893,9 @@ add_namespace = wcc
 						add_state_core = PREV 
 					}
 				}
-				remove_ACW_cores = yes
+				every_state = {
+					remove_ACW_cores = yes
+				}
 			}
 		}
 	}
@@ -1007,7 +970,7 @@ add_namespace = wcc
 			random_owned_controlled_state = {
 				limit = {
 					is_mainland_america = yes
-					free_building_slots = { building = infrastructure size > 0 include_locked = yes }
+				
 				}
 				add_extra_state_shared_building_slots = 1
 			}
@@ -1063,7 +1026,7 @@ add_namespace = wcc
 		option = { #Very Well
 			name = wcc.18.a
 			CAN = {
-			add_to_faction = WCC
+				add_to_faction = WCC
 			}
 			add_war_support = 0.03
 		}
@@ -1242,7 +1205,7 @@ add_namespace = wcc
 			add_stability = 0.05
 			set_country_flag = WCC_ike
 			create_country_leader = {
-					name = "德怀特·艾森豪威尔"
+					name = "Dwight Eisenhower"
 					desc = "POLITICS_DWIGHT_EISENHOWER_DESC"
 					picture = "gfx/leaders/USA/Portrait_USA_Dwight_Eisenhower.png"
 					expire = "1.1.1"
@@ -1260,7 +1223,7 @@ add_namespace = wcc
 				ruling_party = paternal_autocrat
 			}
 			create_country_leader = {
-					name = "柯蒂斯·李梅"
+					name = "Curtis LeMay"
 					desc = "POLITICS_CURTIS_LEMAY_DESC"
 					picture = "gfx/leaders/WCC/Portrait_WCC_Curtis_LeMay.png"
 					expire = "1.1.1"
@@ -1299,6 +1262,12 @@ add_namespace = wcc
 				}
 			}
 		}
+		option = { #
+			name = wcc.23.b
+			add_popularity = { ideology = national_populist popularity = 0.03 }
+			add_political_power = 100
+			add_stability = -0.02
+		}
 	}
 
 	country_event = { #金融大亨们的下场
@@ -1313,14 +1282,14 @@ add_namespace = wcc
 
 		is_triggered_only = yes
 
-		option = { #吸纳民间精英与旧政府文官进入内阁
+		option = { #把所有不干净的金融家们都抓起来，同时收缴资产
 			name = wcc.24.a
 			add_ideas = WCC_liquidating_the_Bourgeosie
 			add_stability = -0.08
 			add_command_power = -30
 		}
 
-		option = { #吸纳民间精英与旧政府文官进入内阁
+		option = { #如果他们肯大出血，我们倒是能高抬贵手
 			name = wcc.24.b
 			add_command_power = 100
 			random_owned_state = {
@@ -1718,7 +1687,7 @@ add_namespace = wcc
 					name = WCC_authoritarian_democrat_patriots_party
 				}
 				create_country_leader = {
-					name = "道格拉斯·麦克阿瑟"
+					name = "Douglas MacArthur"
 					desc = "POLITICS_DOUGLAS_MACARTHUR_DESC"
 					picture = "GFX_Portrait_USA_general_douglas_macarthur_animated"
 					expire = "1.1.1"
@@ -1731,7 +1700,7 @@ add_namespace = wcc
 					name = WCC_paternal_autocrat_patriots_party
 				}
 				create_country_leader = {
-					name = "道格拉斯·麦克阿瑟"
+					name = "Douglas MacArthur"
 					desc = "POLITICS_DOUGLAS_MACARTHUR_DESC"
 					picture = "GFX_Portrait_USA_general_douglas_macarthur_animated"
 					expire = "1.1.1"
@@ -1849,14 +1818,9 @@ add_namespace = wcc
 			add_stability = 0.10
 			hidden_effect = {
 				if = {	
-					limit = { 
-						OR = {
-							has_country_leader = { name = "道格拉斯·麦克阿瑟" ruling_only = yes }
-							has_country_leader = { name = "Douglas MacArthur" ruling_only = yes }
-						}
-						set_country_leader_portrait = {
-							portrait = "GFX_Portrait_USA_gen_douglas_macarthur_caesar_animated"
-						}
+					limit = { has_country_leader = { name = "Douglas MacArthur" ruling_only = yes } }
+					set_country_leader_portrait = {
+						portrait = "GFX_Portrait_USA_gen_douglas_macarthur_caesar_animated"
 					}
 				}
 				set_country_flag = USA_mac_portrait_switch
@@ -1868,14 +1832,9 @@ add_namespace = wcc
 			increase_ruling_party_popularity_by_5 = yes
 			hidden_effect = {
 				if = {	
-					limit = { 
-						OR = {
-							has_country_leader = { name = "道格拉斯·麦克阿瑟" ruling_only = yes }
-							has_country_leader = { name = "Douglas MacArthur" ruling_only = yes }
-						}
-						set_country_leader_portrait = {
-							portrait = "gfx/leaders/USA/Portrait_USA_glasses_douglas_macarthur.png"
-						}
+					limit = { has_country_leader = { name = "Douglas MacArthur" ruling_only = yes } }
+					set_country_leader_portrait = {
+						portrait = "gfx/leaders/USA/Portrait_USA_glasses_douglas_macarthur.png"
 					}
 				}
 			}
@@ -1889,14 +1848,9 @@ add_namespace = wcc
 			set_country_flag = WCC_LARP_LARP_LARP
 			hidden_effect = {
 				if = {	
-					limit = { 
-						OR = {
-							has_country_leader = { name = "道格拉斯·麦克阿瑟" ruling_only = yes }
-							has_country_leader = { name = "Douglas MacArthur" ruling_only = yes }
-						}
-						set_country_leader_portrait = {
-							portrait = "GFX_Portrait_WCC_Douglas_MacArthur_Caesar_Larp_Animated"
-						}
+					limit = { has_country_leader = { name = "Douglas MacArthur" ruling_only = yes } }
+					set_country_leader_portrait = {
+						portrait = "GFX_Portrait_WCC_Douglas_MacArthur_Caesar_Larp_Animated"
 					}
 				}
 			}
@@ -2119,7 +2073,7 @@ add_namespace = wcc
 			name = wcc.1000.a
 			set_country_flag = election_first_rso_Upton_Sinclair
 			create_country_leader = {
-				name = "厄普顿·辛克莱"
+				name = "Upton Sinclair"
 				desc = "POLITICS_UPTON_SINCLAIR_DESC"
 				picture = "gfx/leaders/CAL/Portrait_CAL_Upton_Sinclair.png"
 				expire = "1.1.1"
@@ -2135,7 +2089,7 @@ add_namespace = wcc
 			name = wcc.1000.b
 			set_country_flag = election_first_rso_Culbert_Olson
 			create_country_leader = {
-				name = "卡伯特·奥尔森"
+				name = "Culbert Olson"
 				desc = "POLITICS_CULBERT_OLSON_DESC"
 				picture = "gfx/leaders/CAL/Portrait_CAL_Culbert_Olson.png"
 				expire = "1.1.1"
@@ -2172,7 +2126,7 @@ add_namespace = wcc
 			name = wcc.1001.a
 			set_country_flag = election_first_sde_Henry_Wallace
 			create_country_leader = { # Henry Wallace
-				name = "亨利·华莱士"
+				name = "Henry Wallace"
 				desc = "POLITICS_HENRY_WALLLACE_DESC"
 				picture = "gfx/leaders/USA/Portrait_USA_Henry_Wallace.png"
 				expire = "1.1.1"
@@ -2188,7 +2142,7 @@ add_namespace = wcc
 			name = wcc.1001.b
 			set_country_flag = election_first_sde_George_W_Norris
 			create_country_leader = {
-				name = "乔治·诺里斯"
+				name = "George Norris"
 				desc = "POLITICS_GEORGE_NORRIS_DESC"
 				picture = "gfx/leaders/USA/Portrait_George_W_Norris.png"
 				expire = "1.1.1"
@@ -2225,7 +2179,7 @@ add_namespace = wcc
 			name = wcc.1002.a
 			set_country_flag = election_first_sli_Earl_Warren
 			create_country_leader = {
-				name = "厄尔·沃伦"
+				name = "Earl Warren"
 				desc = "POLITICS_EARL_WARREN_DESC"
 				picture = "gfx/leaders/CAL/Portrait_CAL_Earl_Warren.png"
 				expire = "1.1.1"
@@ -2241,7 +2195,7 @@ add_namespace = wcc
 			name = wcc.1002.b
 			set_country_flag = election_first_sli_Philip_La_Follette
 			create_country_leader = {
-				name = "菲利普·拉福莱特"
+				name = "Philip Fox La Follette"
 				desc = "POLITICS_PHILIP_FOLLETTE_DESC"
 				picture = "gfx/leaders/TEX/Portrait_TEX_Philip_La_Follette.png"
 				expire = "1.1.1"
@@ -2278,7 +2232,7 @@ add_namespace = wcc
 			name = wcc.1003.a
 			set_country_flag = election_first_mli_Thomas_Dewey
 			create_country_leader = {
-				name = "托马斯·杜威"
+				name = "Thomas Dewey"
 				desc = "POLITICS_THOMAS_DEWEY_DESC"
 				picture = "gfx/leaders/NEE/Portrait_NEE_Thomas_Dewey.png"
 				expire = "1.1.1"
@@ -2296,7 +2250,7 @@ add_namespace = wcc
 			name = wcc.1003.b
 			set_country_flag = election_first_mli_Howard_Hughes
 			create_country_leader = {
-				name = "霍华德·休斯"
+				name = "Howard Hughes"
 				desc = "POLITICS_HOWARD_HUGES_DESC"
 				picture = "gfx/leaders/CAL/Portrait_CAL_Howard_Hughes_3.png"
 				expire = "1.1.1"
@@ -2333,7 +2287,7 @@ add_namespace = wcc
 			name = wcc.1004.a
 			set_country_flag = election_first_sco_John_Nance_Garner
 			create_country_leader = {# John Nance Garner
-				name = "约翰·南斯·加纳"
+				name = "John Nance Garner"
 				desc = "POLITICS_JOHN_NANCE_GARNER_DESC"
 				picture = "gfx/leaders/CAL/Portrait_CAL_John_Nance_Garner.png"
 				expire = "1.1.1"
@@ -2349,7 +2303,7 @@ add_namespace = wcc
 			name = wcc.1004.b
 			set_country_flag = election_first_sco_Alben_Barkley
 			create_country_leader = {
-				name = "阿尔本·巴克利"
+				name = "Alben W. Barkley"
 				desc = "POLITICS_ALBEN_BARKLEY_DESC"
 				picture = "gfx/leaders/USA/Portrait_USA_Alben_Barkley.png"
 				expire = "1.1.1"
@@ -2498,7 +2452,7 @@ add_namespace = wcc
 			name = wcc.1006.c
 			if = {
 				limit = {
-					set_country_flag = election_first_sli_Earl_Warren
+					has_country_flag = election_first_sli_Earl_Warren
 				}
 				set_politics = {
 					ruling_party = social_liberal
@@ -2539,7 +2493,7 @@ add_namespace = wcc
 			name = wcc.1006.e
 			if = {
 				limit = {
-					set_country_flag = election_first_mli_Thomas_Dewey
+					has_country_flag = election_first_mli_Thomas_Dewey
 				}
 				set_politics = {
 					ruling_party = market_liberal
@@ -2558,7 +2512,7 @@ add_namespace = wcc
 			}
 			else_if = {
 				limit = {
-					set_country_flag = election_first_mli_Howard_Hughes
+					has_country_flag = election_first_mli_Howard_Hughes
 				}
 				set_politics = {
 					ruling_party = market_liberal
@@ -2580,7 +2534,7 @@ add_namespace = wcc
 			name = wcc.1006.f
 			if = {
 				limit = {
-					set_country_flag = election_first_sco_John_Nance_Garner
+					has_country_flag = election_first_sco_John_Nance_Garner
 				}
 				set_politics = {
 					ruling_party = social_conservative
@@ -2599,7 +2553,7 @@ add_namespace = wcc
 			}
 			else_if = {
 				limit = {
-					set_country_flag = election_first_sco_Alben_Barkley
+					has_country_flag = election_first_sco_Alben_Barkley
 				}
 				set_politics = {
 					ruling_party = social_conservative
@@ -2625,7 +2579,7 @@ add_namespace = wcc
 				long_name = WCC_new_aut_dem_party_long
 			}
 			create_country_leader = {
-				name = "威廉·伦道夫·赫斯特"
+				name = "William Randolph Hearst"
 				desc = "POLITICS_WILLIAM_RANDOLPH_HEARST_DESC"
 				picture = "gfx/leaders/CAL/Portrait_CAL_William_Randolph_Hearst.png"
 				expire = "1.1.1"
