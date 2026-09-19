@@ -15,7 +15,7 @@ focus_tree = {
 	shared_focus = GEX_war_in_the_east
 	shared_focus = GEX_darkest_hour
 	default = no
-	continuous_focus_position = { x = -50 y = 2000 }
+	continuous_focus_position = { x = 2300 y = 2000 }
 
 	### 开局国策 ###
 	focus = {
@@ -30,6 +30,46 @@ focus_tree = {
 		cost = 7
 		x = 0
 		y = 0
+		offset = {
+			x = -2
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Heye_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = -6
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Mucke_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = -3
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Pyrmont_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = -1
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_bloody_ferdinand_Appointed
+			    }
+			}
+			
+		}
 		ai_will_do = {
 			factor = 1000
 		}
@@ -78,6 +118,9 @@ focus_tree = {
 		relative_position_id = GEA_New_governor
 		x = 0
 		y = 2
+		allow_branch = {
+    		has_country_flag = GEA_Pyrmont_Appointed
+    	}
 		available = {
 			has_country_flag = GEA_Pyrmont_Appointed
 		}	
@@ -796,13 +839,16 @@ focus_tree = {
 		}
 	} 
     ### 海耶线 ###
-		focus = {
+	focus = {
 		id = GEA_Heye
 		icon = GFX_GEA_Heye
 		cost = 0
 		relative_position_id = GEA_New_governor
-		x = 16
+		x = 0
 		y = 2
+		allow_branch = {
+    		has_country_flag = GEA_Heye_Appointed
+    	}
 		available = {
 			has_country_flag = GEA_Heye_Appointed
 		}
@@ -1434,13 +1480,16 @@ focus_tree = {
 		}
 	}
  ### 穆克线 ###
- focus = {
+    focus = {
 		id = GEA_Mucke
 		icon = GFX_GEA_Mucke
 		cost = 0
 		relative_position_id = GEA_New_governor
-		x = -16
+		x = 0
 		y = 2
+		allow_branch = {
+    		has_country_flag = GEA_Mucke_Appointed
+    	}
 		available = {
 			has_country_flag = GEA_Mucke_Appointed
 		}
@@ -2544,15 +2593,19 @@ focus_tree = {
 		id = GEA_financial_reform
 		icon = GFX_goal_GEA_Mucke_Mark
 		cost = 5
-		relative_position_id = GEA_Mucke
-		x = 8
+		relative_position_id = GEA_New_governor
+		x = -2
 		y = 1
-		prerequisite = {focus = GEA_Mucke focus = GEA_Josias}
+		prerequisite = {focus = GEA_New_governor }
+		mutually_exclusive = { focus = GEA_military_economy }
 		ai_will_do = {
 			factor = 1000
 		}
-		available = { NOT = {
-		    has_completed_focus = GEA_military_economy}
+		available = { 
+			or = {
+				has_country_flag = GEA_Mucke_Appointed
+				has_country_flag = GEA_Pyrmont_Appointed
+			}
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEA_financial_reform"
@@ -2561,21 +2614,28 @@ focus_tree = {
 				add_idea = GEA_collapsing_colonial_finances2
 			}            
 			add_stability = 0.08
+			set_country_flag = GEA_financial_reform
+			mark_focus_tree_layout_dirty = yes
 		}
 	}      
 	focus = {
 		id = GEA_military_economy
 		icon = GFX_MAF_ostafrikanischer_kaisersfabrikkomplex
 		cost = 5
-		relative_position_id = GEA_Josias
-		x = 8
+		relative_position_id = GEA_New_governor
+		mutually_exclusive = { focus = GEA_financial_reform }
+		x = 2
 		y = 1
-		prerequisite = {focus = GEA_Josias focus = GEA_Heye}
+		prerequisite = {focus = GEA_New_governor }
 		ai_will_do = {
 			factor = 1000
 		}
-		available = { NOT = {
-		    has_completed_focus = GEA_financial_reform}
+		available = { 
+			or = {
+				has_country_flag = GEA_Heye_Appointed
+				has_country_flag = GEA_Pyrmont_Appointed
+				has_country_flag = GEA_bloody_ferdinand_Appointed
+			}
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEA_military_economy"
@@ -2584,6 +2644,8 @@ focus_tree = {
 				add_idea = GEA_collapsing_colonial_finances2
 			}   
 			add_war_support = 0.1
+			set_country_flag = GEA_military_economy
+			mark_focus_tree_layout_dirty = yes
 		}
 	}
 	focus = {
@@ -2591,7 +2653,30 @@ focus_tree = {
 		icon = GFX_GEA_save_crumbling_finances
 		cost = 5
 		x = -18
-		y = 15
+		y = 0
+		offset = {
+			x = 2
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Mucke_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = 4
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Pyrmont_Appointed
+			    }
+			}
+			
+		}
+		allow_branch = {
+    		has_country_flag = GEA_financial_reform
+    	}
 		ai_will_do = {
 			factor = 1000
 		}
@@ -2656,7 +2741,30 @@ focus_tree = {
 		icon = GFX_GEA_we_need_arms
 		cost = 5
 		x = -10
-		y = 15
+		y = 0
+		offset = {
+			x = -2
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Heye_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = -4
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Pyrmont_Appointed
+			    }
+			}
+			
+		}
+		allow_branch = {
+    		has_country_flag = GEA_military_economy
+    	}
 		ai_will_do = {
 			factor = 1000
 		}
@@ -2829,9 +2937,52 @@ focus_tree = {
 		id = GEA_ensure_efficient_production
 		icon = GFX_goal_NFA_army_money
 		cost = 5
-		x = 3
-		y = 1
-        relative_position_id = GEA_reduce_expenditure
+		x = -14
+		y = 2
+		offset = {
+			x = -2
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Heye_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = 2
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Mucke_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = 4
+			y = 0
+			trigger = {
+				AND = {
+				    has_country_flag = GEA_Pyrmont_Appointed
+					has_country_flag = GEA_financial_reform
+			    }
+			}
+			
+		}
+		offset = {
+			x = -4
+			y = 0
+			trigger = {
+				AND = {
+				    has_country_flag = GEA_Pyrmont_Appointed
+					has_country_flag = GEA_military_economy
+			    }
+			}
+			
+		}
+
+        #relative_position_id = GEA_reduce_expenditure
 		prerequisite = {focus = GEA_reduce_expenditure focus = GEA_introduce_cruelty}
 		ai_will_do = {
 			factor = 70
@@ -3603,8 +3754,63 @@ focus_tree = {
 		id = GEA_we_are_in_crisis
 		icon = GFX_GEA_we_are_in_crisis
 		cost = 0
-		x = -28
-		y = 2
+		x = -14
+		y = 9
+		offset = {
+			x = 2
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Heye_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = -2
+			y = 3
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_Mucke_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = 0
+			y = 0
+			trigger = {
+				AND = {
+					has_country_flag = GEA_military_economy
+				    has_country_flag = GEA_Pyrmont_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = 0
+			y = 0
+			trigger = {
+				AND = {
+					has_country_flag = GEA_financial_reform
+				    has_country_flag = GEA_Pyrmont_Appointed
+			    }
+			}
+			
+		}
+		offset = {
+			x = 4
+			y = 0
+			trigger = {
+				OR = {
+				    has_country_flag = GEA_bloody_ferdinand_Appointed
+			    }
+			}
+			
+		}
+		allow_branch = {
+    		has_country_flag = GEA_indochina_war_broke_out
+    	}
 		ai_will_do = {
 			factor = 1000
 		}
@@ -4125,8 +4331,15 @@ focus_tree = {
 		id = GEA_bloody_ferdinand
 		icon = GFX_GEA_bloody_ferdinand
 		cost = 0
-		x = 30
+		relative_position_id = GEA_New_governor
+		x = 0
 		y = 2
+		prerequisite = {
+			focus = GEA_New_governor
+		}
+		allow_branch = {
+    		has_country_flag = GEA_bloody_ferdinand_Appointed
+    	}
 		ai_will_do = {
 			factor = 20
 		}
@@ -4647,37 +4860,31 @@ focus_tree = {
 			every_state = {
 				limit = {
 					OR = {
-						is_controlled_by = JAP
-						is_controlled_by = ETS
-						is_controlled_by = BHC
-						is_controlled_by = CHI
-						is_controlled_by = DEH
-						is_controlled_by = ANQ
-						is_controlled_by = PRF
-						is_controlled_by = FNG
-						is_controlled_by = MAD
-						is_controlled_by = QIE
-						is_controlled_by = LEP
-						is_controlled_by = SQI
-						is_controlled_by = GXC
-						is_controlled_by = XSM
-						is_controlled_by = MON
-						is_controlled_by = HNN
-						is_controlled_by = YUN
-						is_controlled_by = SZC
-						is_controlled_by = TIB
-						is_controlled_by = TRM
-						is_controlled_by = BHU
-						is_controlled_by = NEP
-						is_controlled_by = SKM
-						is_controlled_by = SHX
-						is_controlled_by = TAN
-						is_controlled_by = SIK
-						is_controlled_by = AST
-						is_controlled_by = AFG
-						is_controlled_by = BRY
-						is_controlled_by = YAK
-						is_controlled_by = TRV
+						AND = {
+							is_on_continent = asia
+							NOT = {
+								is_central_asia = yes
+								region = 162
+								AND = {
+									is_siberia = yes
+									NOT = {
+							    		is_russian_far_east = yes
+						    			region = 152
+								    }
+								}
+							}
+						}
+						region = 146
+						state = 887
+						state = 1359
+						is_on_continent = australia
+						is_pacific_islands = yes
+						is_american_pacific_islands = yes
+						#state = 654
+						#state = 404
+						#state = 589
+						#region = 245
+						#state = 407
 					}
 				}
 				add_core_of = GEA	
@@ -4689,8 +4896,8 @@ focus_tree = {
 	id = GEA_Ostasiatische_Heer
 	icon = GFX_GEA_Ostasiatische_Heer
 	cost = 2
-	x = 4
-	y = 15
+	x = 12
+	y = 0
 	ai_will_do = {
 		factor = 1000
 	}
@@ -5983,8 +6190,8 @@ focus_tree = {
 		id = GEA_relaunch_navy_program
 		icon = GFX_GEA_Ostasiatische_Station
 		cost = 5
-		x = 27
-		y = 15
+		x = 9
+		y = 7
 		ai_will_do = {factor = 100}
 		available = {OR = {has_country_flag = GEA_indochina_war_broke_out
 		has_completed_focus = GEA_economic_recovery
@@ -6693,8 +6900,8 @@ focus_tree = {
 		id = GEA_Expansion_of_Singapore_Air_Force
 		icon = GFX_GEA_Fliegerabteilung
 		cost = 5
-		x = 42
-		y = 15
+		x = 24
+		y = 7
 		ai_will_do = {factor = 100}
 		available = {OR = {has_country_flag = GEA_indochina_war_broke_out
 		has_completed_focus = GEA_economic_recovery
@@ -7207,13 +7414,16 @@ focus_tree = {
 		id = GEA_Fleet_departure
 		icon = GFX_GEA_Fleet_departure
 		cost = 1
-		x = 39
-		y = 2
+		x = 32
+		y = 0
 		ai_will_do = {factor = 100}
 		available = {OR = {has_completed_focus = GEA_the_best_of_colonies has_completed_focus = GEA_our_iron_cross}}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEA_Fleet_departure"
 			add_political_power = 50
+			add_state_core = 523
+			add_state_core = 636
+			add_state_core = 711
 		}	
 	}
 	focus = {
@@ -7236,8 +7446,8 @@ focus_tree = {
 		id = GEA_second_expedition_to_China
 		icon = GFX_goal_AOG_Goose_Step
 		cost = 1
-		x = 0
-		y = 10
+		x = 32
+		y = 12
 		available = {has_country_flag = GEA_nanjing_crisis}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEA_second_expedition_to_China"}
@@ -7376,12 +7586,27 @@ focus_tree = {
 		relative_position_id = GEA_Invest_in_eight_provinces
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEA_Restart_Yunnan_mining_development_negotiations"
-			YUN = {
-				country_event = {
-					id = Ostasien.801
-					days = 1
-				}		
-			}	
+			if = {
+				limit = {
+					YUN = {
+		            	exists = no
+		            }
+				}
+				every_state = {
+		    		limit = {
+			    		region = 215
+			    	}
+			    	add_claim_by = GEA
+			    }
+			}
+			else = {
+				YUN = {
+		    		country_event = {
+		    			id = Ostasien.801
+		    			days = 1
+		    		}		
+			    }
+			}
 		}
 	}
 	focus = {
@@ -7481,6 +7706,12 @@ focus_tree = {
 				target = LEC
 				}	
 			}
+			add_state_core = 609
+			add_state_core = 743
+			add_state_core = 746
+			add_state_core = 747
+			add_state_core = 801
+			add_state_core = 326
 		}
 	}
 	focus = {
@@ -7505,6 +7736,10 @@ focus_tree = {
 					days = 1
 				}		
 			}		
+			add_state_core = 729
+			add_state_core = 972
+			add_state_core = 721
+			add_state_core = 321
 		}
 	}
 	focus = {
@@ -7514,7 +7749,6 @@ focus_tree = {
 		x = 2
 		y = 1
 		ai_will_do = {factor = 20}
-		available = {country_exists = GXC}
 		available = {
 			date > 1939.1.1
 		}
@@ -7525,11 +7759,26 @@ focus_tree = {
 		relative_position_id = GEA_Restart_Yunnan_mining_development_negotiations
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEA_Make_sure_Guangzhou_obeys"
-			GXC = {
-				country_event = {
-					id = Ostasien.809
-					days = 1
-				}	
+			if = {
+				limit = {
+					GXC = {
+		            	exists = no
+		            }
+				}
+				every_state = {
+		    		limit = {
+			    		region = 216
+			    	}
+			    	add_claim_by = GEA
+			    }
+			}
+			else = {
+				GXC = {
+				    country_event = {
+			    		id = Ostasien.809
+			    		days = 1
+				    }	
+			    }
 			}
 		}
 	}
@@ -7654,6 +7903,12 @@ focus_tree = {
 				add_state_core = 744
 				add_state_core = 996
 			}
+			add_state_core = 1075
+			add_state_core = 592
+			add_state_core = 802
+			add_state_core = 803
+			add_state_core = 745
+			add_state_core = 524
 		}
 	}
 	focus = {
@@ -7961,6 +8216,9 @@ focus_tree = {
 				type = annex_everything
 				target = JAP
 			}	
+			add_state_core = 526
+			add_state_core = 645
+			add_state_core = 648
 		}
 	}
 	focus = {
@@ -8083,6 +8341,9 @@ focus_tree = {
 		ai_will_do = {factor = 100}
 		relative_position_id = GEA_East_Asia_is_in_my_hands
 		prerequisite = {focus = GEA_East_Asia_is_in_my_hands}    
+		available = {
+			always = no
+		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEA_division_of_Japanese_power"
 			release = JAP

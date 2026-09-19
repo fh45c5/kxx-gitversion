@@ -1,249 +1,5 @@
 foreign_politics = {
-	PLX_faction_join_russia = {
-		icon = generic_agreement
-		allowed = { tag = POL }
-		
-		available = {
-			FROM = {
-				NOT = { has_country_flag = plx_asking_for_faction }
-			}
-		}
-
-		visible = {
-			FROM = {
-				is_subject = no
-				219 = {
-					owner = {
-						is_subject = no
-						is_russian_tag = yes
-						NOT = {
-							is_in_faction_with = AUS
-							is_in_faction_with = GER
-						}
-						exists = yes
-						NOT = {
-							has_war_with = POL
-						}
-						#OR = {
-						#	has_socialist_government = no
-						#	ROOT = { has_socialist_government = yes }
-						#}
-						#is_faction_leader = yes
-					}
-				}
-				is_in_faction = no
-				OR = {
-					has_country_flag = plx_claiming_poland
-					has_country_flag = plx_expansionist_poland
-					AND = { 
-						has_country_flag = plx_revolutionary_bulwark 
-						RUS = { has_socialist_government = yes }
-					}
-				}
-				NOT = { has_country_flag = plx_rus_refused }
-				NOT = { has_active_mission = PLX_surviving_german_invasion_pol }
-			}
-		}
-
-		cost = 10
-		#days_remove = 120
-		#cancel_if_not_visible = yes
-
-		ai_will_do = {
-			factor = 1000
-		}
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove PLX_faction_join_russia target: [From.GetName]"
-			219 = {
-				owner = {
-					country_event = plxf.1 
-				}
-			}
-			set_country_flag = plx_asking_for_faction
-		}
-	}
-	PLX_faction_join_internationale = {
-		icon = generic_agreement
-		allowed = { tag = POL }
-		
-		available = {
-			FROM = {
-				NOT = { has_country_flag = plx_asking_for_faction }
-			}
-		}
-
-		visible = {
-			FROM = {
-				is_subject = no
-				INT = {
-					is_subject = no
-					exists = yes
-					has_socialist_government = yes
-					is_faction_leader = yes
-					NOT = {
-						has_war_with = POL
-					}
-				}
-				is_in_faction = no
-				NOT = { has_government = authoritarian_democrat }
-				OR = {
-					has_country_flag = plx_claiming_poland
-					has_country_flag = plx_expansionist_poland
-					has_country_flag = plx_revolutionary_bulwark
-				}
-				NOT = { has_country_flag = plx_int_refused }
-				NOT = { has_active_mission = PLX_surviving_german_invasion_pol }
-			}
-		}
-
-		cost = 10
-		#days_remove = 120
-		#cancel_if_not_visible = yes
-
-		ai_will_do = {
-			factor = 1000
-		}
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove PLX_faction_join_internationale target: [From.GetName]"
-			INT = { country_event = plxf.2 }
-			set_country_flag = plx_asking_for_faction
-		}
-	}
-	PLX_faction_join_austria = {
-		icon = generic_agreement
-		allowed = { tag = POL }
-		
-		available = {
-			FROM = {
-				NOT = { has_country_flag = plx_asking_for_faction }
-			}
-		}
-
-		visible = {
-			FROM = {
-				has_country_leader = { name = "卡罗尔·奥布拉希特二世" ruling_only = yes }
-				is_subject = no
-				AUS = {
-					is_subject = no
-					exists = yes
-					is_faction_leader = yes
-					NOT = {
-						has_war_with = POL
-					}					
-				}
-				is_in_faction = no
-				NOT = { has_government = authoritarian_democrat }
-				OR = {
-					has_country_flag = plx_claiming_poland
-					has_country_flag = plx_expansionist_poland
-				}
-				NOT = { has_country_flag = plx_aus_refused }
-				NOT = { has_active_mission = PLX_surviving_german_invasion_pol }
-			}
-		}
-
-		cost = 10
-		#days_remove = 120
-		#cancel_if_not_visible = yes
-
-		ai_will_do = {
-			factor = 1000
-		}
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove PLX_faction_join_internationale target: [From.GetName]"
-			AUS = { country_event = plxf.23 }
-			set_country_flag = plx_asking_for_faction
-		}
-	}	
-	#PLX_faction_join_austria_2 = {
-	#	icon = generic_agreement
-	#	allowed = { tag = POL }
-	#	
-	#	available = {
-	#		FROM = {
-	#			NOT = { has_country_flag = plx_asking_for_faction }
-	#		}
-	#	}
-	#
-	#	visible = {
-	#		FROM = {
-	#			is_subject = no
-	#			AUS = {
-	#				is_subject = no
-	#				exists = yes
-	#				is_faction_leader = yes
-	#				NOT = {
-	#					has_war_with = POL
-	#				}					
-	#			}
-	#			is_in_faction = no
-	#			NOT = { has_government = authoritarian_democrat }
-	#			OR = {
-	#				has_country_flag = plx_claiming_poland
-	#				has_country_flag = plx_expansionist_poland
-	#			}
-	#			NOT = { has_country_flag = plx_aus_refused }
-	#			NOT = { has_active_mission = PLX_surviving_german_invasion_pol }
-	#			OR = {
-	#				owns_state = 1124
-	#				owns_state = 91	
-	#			}
-	#		}
-	#	}
-	#
-	#	cost = 10
-	#	#days_remove = 120
-	#	#cancel_if_not_visible = yes
-	#
-	#	ai_will_do = {
-	#		factor = 1000
-	#	}
-	#
-	#	complete_effect = {
-	#		log = "[GetDateText]: [Root.GetName]: Decision remove PLX_faction_join_internationale target: [From.GetName]"
-	#		AUS = { country_event = plxf.10 }
-	#		set_country_flag = plx_asking_for_faction
-	#	}
-	#}		
-	PLX_faction_poland_is_alone = {
-		icon = generic_agreement
-		allowed = { tag = POL }
-		
-		available = {
-			FROM = {
-				NOT = { has_country_flag = plx_asking_for_faction }
-			}
-		}
-
-		visible = {
-			FROM = {
-				is_subject = no
-				is_in_faction = no
-				OR = {
-					has_country_flag = plx_claiming_poland
-					has_country_flag = plx_expansionist_poland
-					has_country_flag = plx_revolutionary_bulwark
-				}
-			}
-		}
-
-		cost = 10
-		#days_remove = 120
-		#cancel_if_not_visible = yes
-
-		ai_will_do = {
-			factor = 1000
-		}
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove PLX_faction_join_internationale target: [From.GetName]"
-			country_event = poland.450
-			set_country_flag = plx_asking_for_faction
-		}
-	}
+	
 	PLX_formin_intermarium = {
 		icon = generic_agreement
 		allowed = { tag = POL }
@@ -323,9 +79,15 @@ foreign_politics = {
 		visible = {
 			FROM = {
 				is_subject = no
-				has_country_flag = plx_expansionist_poland
-				NOT = { has_country_flag = plx_slavic_communists }
-				#NOT = { has_government = authoritarian_democrat }
+				has_completed_focus = PLX_PLC_intermarium_dreams
+				NOT = { 
+					has_country_flag = plx_zsp_rules_true
+					has_country_flag = plx_communist_revolution
+					has_country_flag = POL_zadruga_in_power
+					has_country_flag = PLX_libzadruga
+					has_country_flag = PLX_natsoc
+				}
+				
 			}
 		}
 		
@@ -386,10 +148,10 @@ foreign_politics = {
 			state = 202
 		}
 	
-		cost = 500
+		cost = 100
 		#days_remove = 120
 		#cancel_if_not_visible = yes
-	
+		fire_only_once = yes
 		ai_will_do = {
 			factor = 0
 		}
@@ -397,6 +159,10 @@ foreign_politics = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove PLX_formin_intermarium target: [From.GetName]"
 			country_event = plx.39
+			swap_ideas = {
+				remove_idea = PLC_miedzymorze_idea
+				add_idea = PLC_miedzymorze_idea_2
+			}
 		}
 	}	
 	PLX_break_with_revisionists = {
@@ -763,91 +529,7 @@ political_actions = {
 		}
 	}
 
-	PLX_austria_demands_galicia = {
-		icon = generic_army_support
-		available = {
-			date > 1939.1.1
-		}
-		visible = {
-			NOT = { has_war_with = POL }
-			OR = {
-				is_ai = no
-				has_war = no
-			}
-			OR = {
-				is_ai = no
-				POL = { has_war = yes }
-			}
-			tag = AUS
-			NOT = { is_in_faction_with = POL }
-			NOT = { GER = { is_in_faction_with = POL } }
-		}
-		cost = 50
-		days_remove = 60
-		fire_only_once = yes
-		
-		complete_effect = {
-			POL = { country_event = plxf.24 }
-		}
-		timeout_effect = {
-			declare_war_on = {
-				target = POL
-				type = annex_everything
-			}
-		}	
-		#ai_strategy = {
-		#	type = declare_war
-		#	id = "POL"
-		#	value = 1000
-		#}		
-	}
-	PLX_austria_demands_galicia_ukr = {
-		icon = generic_army_support
-		available = {
-			date > 1940.1.1
-			OR = {
-				GAL = {
-					is_subject_of = AUS
-				}	
-				AUS = {
-					owns_state = 1124
-					owns_state = 91
-				}
-			}
-		}
-		visible = {
-			NOT = { has_war_with = UKR }
-			OR = {
-				is_ai = no
-				has_war = no
-			}
-			OR = {
-				is_ai = no
-				UKR = { has_war = yes }
-			}			
-			tag = AUS
-			NOT = { is_in_faction_with = UKR }
-			NOT = { GER = { is_in_faction_with = UKR } }
-		}
-		cost = 50
-		days_remove = 60
-		fire_only_once = yes
-		
-		complete_effect = {
-			UKR = { country_event = plxf.24 }
-		}
-		timeout_effect = {
-			declare_war_on = {
-				target = UKR
-				type = annex_everything
-			}
-		}	
-		#ai_strategy = {
-		#	type = declare_war
-		#	id = "UKR"
-		#	value = 1000
-		#}		
-	}	
+	
 }
 
 operations = { 
@@ -1448,4 +1130,965 @@ PLX_arm_decisions = {
 			}
 		}
 	}
+}
+
+PLX_choose_monarch = {
+	PLX_saxon_king = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		visible = {
+			NOT = {
+				has_country_flag = POL_king_picked
+			}
+		}
+		cost = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+		set_country_flag = POL_king_picked
+		mark_focus_tree_layout_dirty = yes
+	create_country_leader = {
+		name = "弗雷德里克二世·克里斯蒂安"
+		desc = "POLITICS_FRYDERYK_KRYSTIAN_SASKI_DESC"
+		picture = "gfx/leaders/POL/Portrait_POL_Fryderyk_Krystian_Saski.png"
+		expire = "1.1.1"
+		ideology = prussian_constitutionalism_subtype
+	}
+	create_country_leader = {
+		name = "弗雷德里克二世·克里斯蒂安"
+		desc = "POLITICS_FRYDERYK_KRYSTIAN_SASKI_DESC"
+		picture = "gfx/leaders/POL/Portrait_POL_Fryderyk_Krystian_Saski.png"
+		expire = "1.1.1"
+		ideology = absolute_monarchy_subtype
+	}
+		}
+	}
+	PLX_lithuanian_king = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		visible = {
+			NOT = {
+				has_country_flag = POL_king_picked
+			}
+		}
+		cost = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			set_country_flag = POL_king_picked
+			mark_focus_tree_layout_dirty = yes
+	create_country_leader = {
+		name = "瓦迪斯瓦夫五世"
+		desc = "POLITICS_MENDOG_III_DESC"
+		picture = "gfx/leaders/POL/Portrait_POL_Wladyslaw_Urach.png"
+		expire = "1.1.1"
+		ideology = prussian_constitutionalism_subtype
+	}
+	create_country_leader = {
+		name = "瓦迪斯瓦夫五世"
+		desc = "POLITICS_MENDOG_III_DESC"
+		picture = "gfx/leaders/POL/Portrait_POL_Wladyslaw_Urach.png"
+		expire = "1.1.1"
+		ideology = absolute_monarchy_subtype
+	}
+		}
+	}
+	PLX_Czartoryski_king = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		visible = {
+			NOT = {
+				has_country_flag = POL_king_picked
+			}
+		}
+		cost = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			set_country_flag = POL_king_picked
+			mark_focus_tree_layout_dirty = yes
+	create_country_leader = {
+		name = "奥古斯丁一世"
+		desc = "POLITICS_AUGUSTYN_I_CZARTORYSKI_DESC"
+		picture = "gfx/leaders/POL/Portrait_POL_Augustyn_Czartoryski.png"
+		expire = "1.1.1"
+		ideology = prussian_constitutionalism_subtype
+	}
+	create_country_leader = {
+		name = "奥古斯丁一世"
+		desc = "POLITICS_AUGUSTYN_I_CZARTORYSKI_DESC"
+		picture = "gfx/leaders/POL/Portrait_POL_Augustyn_Czartoryski.png"
+		expire = "1.1.1"
+		ideology = absolute_monarchy_subtype
+	}
+		}
+	}
+	PLX_piast_king = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		visible = {
+			NOT = {
+				has_country_flag = POL_king_picked
+			}
+		}
+		cost = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			set_country_flag = POL_king_picked
+			mark_focus_tree_layout_dirty = yes
+	create_country_leader = {
+		name = "帕维乌一世·萨尔瓦托"
+		desc = "POLITICS_POLISH_PAUL_SALVATOR_DESC"
+		picture = "gfx/leaders/POL/Portrait_POL_Pawel_Salwator.png"
+		expire = "1.1.1"
+		ideology = red_tinted_autocracy_subtype
+		traits = {
+			mad_piast
+		}
+	}
+		create_country_leader = {
+		name = "帕维乌一世·萨尔瓦托"
+		desc = "POLITICS_POLISH_PAUL_SALVATOR_DESC"
+		picture = "gfx/leaders/POL/Portrait_POL_Pawel_Salwator.png"
+		expire = "1.1.1"
+		ideology = authdem_red_tinted_autocracy_subtype
+		traits = {
+			mad_piast
+		}
+	}
+		}
+	}
+	PLX_nap_king = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		visible = {
+			NOT = {
+				has_country_flag = POL_king_picked
+			}
+		}
+		cost = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			set_country_flag = POL_king_picked
+			mark_focus_tree_layout_dirty = yes
+	create_country_leader = {
+		name = "安德烈一世"
+		picture = "gfx/leaders/POL/portrait_POL_andrzej_walewski.png"
+		expire = "1.1.1"
+		ideology = authdem_bonapartism_subtype
+		
+	}
+	create_country_leader = {
+		name = "安德烈一世"
+		picture = "gfx/leaders/POL/portrait_POL_andrzej_walewski.png"
+		expire = "1.1.1"
+		ideology = pataut_bonapartism_subtype
+	}
+		}
+	}
+	PLX_hungarian_king = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		visible = {
+			NOT = {
+				has_country_flag = POL_king_picked
+			}
+		}
+		cost = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			set_country_flag = POL_king_picked
+			mark_focus_tree_layout_dirty = yes
+	create_country_leader = {
+		name = "亚历山大二世"
+		picture = "gfx/leaders/POL/portrait_POL_andrassy_sandor.png"
+		expire = "1.1.1"
+		ideology = authdem_agrarianism_subtype
+		
+	}
+	create_country_leader = {
+		name = "亚历山大二世"
+		picture = "gfx/leaders/POL/portrait_POL_andrassy_sandor.png"
+		expire = "1.1.1"
+		ideology = pataut_agrarianism_subtype
+	}
+		}
+	}
+	PLX_russian_king = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		visible = {
+			NOT = {
+				has_country_flag = POL_king_picked
+			}
+		}
+		cost = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			set_country_flag = POL_king_picked
+			mark_focus_tree_layout_dirty = yes
+			create_country_leader = {
+				name = "弗谢沃洛德一世"
+				picture = "gfx/leaders/POL/Portrait_POL_Vsevolod_I.png"
+				expire = "1965.1.1"
+				ideology = authdem_absolute_monarchy_subtype
+			}
+			
+			create_country_leader = {
+				name = "弗谢沃洛德一世"
+				picture = "gfx/leaders/POL/Portrait_POL_Vsevolod_I.png"
+				expire = "1965.1.1"
+				ideology = absolute_monarchy_subtype
+			}
+		}
+	}
+	PLX_romanian_king = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		visible = {
+			NOT = {
+				has_country_flag = POL_king_picked
+			}
+		}
+		cost = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			set_country_flag = POL_king_picked
+			mark_focus_tree_layout_dirty = yes
+			create_country_leader = {
+				name = "米哈伊一世"
+				picture = "gfx/leaders/ROM/Portrait_ROM_Michael_I.png"
+				expire = "1965.1.1"
+				ideology = controlled_democracy_subtype
+			}
+			
+			create_country_leader = {
+				name = "米哈伊一世"
+				picture = "gfx/leaders/ROM/Portrait_ROM_Michael_I.png"
+				expire = "1965.1.1"
+				ideology = pataut_controlled_democracy_subtype
+			}
+		}
+	}
+	PLX_sobecki_king = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		visible = {
+			NOT = {
+				has_country_flag = POL_king_picked
+			}
+		}
+		cost = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			set_country_flag = POL_king_picked
+			mark_focus_tree_layout_dirty = yes
+			create_country_leader = {
+				name = "约翰四世·索别斯基"
+				picture = "gfx/leaders/POL/Portrait_POL_Jan_Sobieski.png"
+				expire = "1965.1.1"
+				ideology = autdem_moral_discipline_system_subtype
+			}
+			
+			create_country_leader = {
+				name = "约翰四世·索别斯基"
+				picture = "gfx/leaders/POL/Portrait_POL_Jan_Sobieski.png"
+				expire = "1965.1.1"
+				ideology = pataut_moral_discipline_system_subtype
+			}
+		}
+	}
+	PLX_Pilsudski_king = {
+		icon = generic_independence
+		available = {
+			has_completed_focus = PLX_POL_the_great_debate
+		}
+		visible = {
+			NOT = {
+				has_country_flag = POL_king_picked
+			}
+		}
+		cost = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			set_country_flag = POL_king_picked
+			mark_focus_tree_layout_dirty = yes
+			create_country_leader = {
+				name = "雅德威加二世"
+				picture = "gfx/leaders/POL/portrait_POL_jadwiga_pilsudska.png"
+				expire = "1965.1.1"
+				ideology = authdem_conservative_feminism_subtype
+			}
+			
+			create_country_leader = {
+				name = "雅德威加二世"
+				picture = "gfx/leaders/POL/portrait_POL_jadwiga_pilsudska.png"
+				expire = "1965.1.1"
+				ideology = pataut_conservative_feminism_subtype
+			}
+		}
+	}
+}
+PLX_colony = {
+	PLX_southam_colony = {
+		icon = generic_independence
+		available = {
+			owns_state = 303
+			owns_state = 500
+			NOT = {
+				country_exists = PRU
+			}
+			NOT = {
+				country_exists = BRA
+			}
+		}
+		visible = {
+			has_completed_focus = POL_expand_morska_wola
+			has_completed_focus = POL_ucayali_expedition
+		}
+		cost = 10
+		fire_only_once = yes
+		remove_effect = {
+		set_temp_variable = { tag_to_release = BRA }
+		release_targeted_tag = yes
+		BRA = {
+			load_focus_tree = generic_focus
+			set_cosmetic_tag = POL_southam
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = PRU
+						is_core_of = BRA
+					}
+				}
+				BRA = {
+					add_state_core = PREV
+				}
+				POL = {
+					remove_state_claim = PREV
+				}
+				transfer_state_to = BRA
+			}
+			set_party_name = {
+				ideology = totalist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = tot_colonial_government
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = syn_colonial_government
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = radsoc_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = socdem_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = soclib_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = marlib_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = soccon_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = autocratic_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = natpop_colonial_govt_subtype
+			}
+		}	
+	}
+}
+PLX_fareast_colony = {
+		icon = generic_independence
+		available = {
+			
+			owns_state = 282
+			owns_state = 716
+			owns_state = 525
+			owns_state = 330
+			owns_state = 608
+			owns_state = 1072
+			owns_state = 597
+			owns_state = 613
+			owns_state = 743
+			owns_state = 605
+			owns_state = 604
+			owns_state = 617
+			owns_state = 322
+			owns_state = 325
+			owns_state = 592
+			owns_state = 524
+			owns_state = 602
+			owns_state = 827
+			owns_state = 333
+			owns_state = 336
+		}
+		visible = {
+			has_completed_focus = POL_seize_far_east
+			has_completed_focus = POL_legacy_bronislaw_pilsudski
+		}
+		cost = 10
+		fire_only_once = yes
+		remove_effect = {
+		set_temp_variable = { tag_to_release = JAP }
+		release_targeted_tag = yes
+		JAP = {
+			load_focus_tree = generic_focus
+			set_cosmetic_tag = POL_fareast
+			every_state = {
+				limit = {
+					OR = {
+						is_claims_china = yes
+						is_core_of = GEA
+						is_core_of = INC
+						is_core_of = VIN
+						is_core_of = LAO
+						is_core_of = CAM
+						is_core_of = MLY
+						is_core_of = SAR
+						is_core_of = JAP
+					}
+				}
+				JAP = {
+					add_state_core = PREV
+				}
+				POL = {
+					remove_state_claim = PREV
+				}
+				transfer_state_to = JAP
+			}
+			set_party_name = {
+				ideology = totalist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = tot_colonial_government
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = syn_colonial_government
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = radsoc_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = socdem_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = soclib_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = marlib_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = soccon_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = autocratic_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = natpop_colonial_govt_subtype
+			}
+		}	
+	}
+}
+PLX_africa_colony = {
+		icon = generic_independence
+		available = {
+			
+			543 = { is_owned_by = ROOT }
+			221 = { is_owned_by = ROOT }
+			813 = { is_owned_by = ROOT }
+			541 = { is_owned_by = ROOT }
+			950 = { is_owned_by = ROOT }
+			965 = { is_owned_by = ROOT }
+			547 = { is_owned_by = ROOT }
+			917 = { is_owned_by = ROOT }
+			881 = { is_owned_by = ROOT }
+			660 = { is_owned_by = ROOT }
+			558 = { is_owned_by = ROOT }
+			913 = { is_owned_by = ROOT }
+			877 = { is_owned_by = ROOT }
+			876 = { is_owned_by = ROOT }
+			274 = { is_owned_by = ROOT }
+			1321 = { is_owned_by = ROOT }
+			1322 = { is_owned_by = ROOT }
+			1323 = { is_owned_by = ROOT }
+			807 = { is_owned_by = ROOT }
+			298 = { is_owned_by = ROOT }
+			1335 = { is_owned_by = ROOT }
+			879 = { is_owned_by = ROOT }
+			548 = { is_owned_by = ROOT }
+		}
+		visible = {
+			has_completed_focus = POL_takeover_maf
+			has_completed_focus = POL_demand_portugal_colony
+			has_completed_focus = POL_to_liberia
+		}
+		cost = 10
+		fire_only_once = yes
+		remove_effect = {
+		set_temp_variable = { tag_to_release = MAF }
+		release_targeted_tag = yes
+		MAF = {
+			load_focus_tree = generic_focus
+			set_cosmetic_tag = POL_africa
+			core_mittelafrika = yes
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = ANG
+						is_core_of = MZB
+						is_core_of = LIB
+						is_core_of = MAF
+					}
+				}
+				MAF = {
+					add_state_core = PREV
+				}
+				POL = {
+					remove_state_claim = PREV
+				}
+				transfer_state_to = MAF
+			}
+			set_party_name = {
+				ideology = totalist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = tot_colonial_government
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = syn_colonial_government
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = radsoc_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = socdem_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = soclib_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = marlib_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = soccon_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = autocratic_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = natpop_colonial_govt_subtype
+			}
+		}	
+	}
+}
+PLX_pal_colony = {
+		icon = generic_independence
+		available = {
+
+			owns_state = 453
+			owns_state = 454
+			owns_state = 992
+		}
+		visible = {
+			has_completed_focus = POL_new_crusade
+		}
+		cost = 10
+		fire_only_once = yes
+		remove_effect = {
+		set_temp_variable = { tag_to_release = PAL }
+		release_targeted_tag = yes
+		PAL = {
+			load_focus_tree = generic_focus
+			set_cosmetic_tag = POL_pal
+			transfer_state = 453
+			transfer_state = 454
+			transfer_state = 992
+				POL = {
+					remove_state_claim = 453
+					remove_state_claim = 454
+					remove_state_claim = 992
+				}
+			set_party_name = {
+				ideology = totalist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = syndicalist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = "波兰殖民管理局"
+				name = "波兰殖民管理局"
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = tot_colonial_government
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = syn_colonial_government
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = radsoc_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = socdem_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = soclib_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = marlib_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = soccon_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = autocratic_colonial_govt_subtype
+			}
+			create_country_leader = {
+				name = "波兰殖民管理局"
+				picture = "gfx/leaders/POL/Portrait_Poland_Temporary_Government.png"
+				expire = "1.1.1"
+				ideology = natpop_colonial_govt_subtype
+			}
+		}	
+	}
+}
 }

@@ -1,9 +1,5 @@
-###########################
-# WCC
-# By ClothCoat
-###########################
 focus_tree = {
-	id = WCC
+	id = wcc_focus
 	country = {
 		factor = 0
 		modifier = {
@@ -80,7 +76,7 @@ focus_tree = {
 			add_manpower = 3500
 			add_equipment_to_stockpile = {
 			type = infantry_equipment
-			amount = 2500
+			amount = 2000
 			producer = WCC
 			}
 			add_equipment_to_stockpile = {
@@ -138,36 +134,35 @@ focus_tree = {
 			remove_idea = WCC_bradley_plan
 			add_idea = WCC_bradley_plan_2
 			}
-			add_war_support = 0.05
 		387 = {
 			add_building_construction = {
 				type = bunker
 				province = 1832
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 			add_building_construction = {
 				type = bunker
 				province = 12124
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 			add_building_construction = {
 				type = bunker
 				province = 4778
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 			add_building_construction = {
 				type = bunker
 				province = 9616
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 			add_building_construction = {
 				type = bunker
 				province = 12607
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 		}
@@ -175,37 +170,37 @@ focus_tree = {
 			add_building_construction = {
 				type = bunker
 				province = 1862
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 			add_building_construction = {
 				type = bunker
 				province = 7827
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 			add_building_construction = {
 				type = bunker
 				province = 12399
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 			add_building_construction = {
 				type = bunker
 				province = 4816
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 			add_building_construction = {
 				type = bunker
 				province = 1242
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 			add_building_construction = {
 				type = bunker
 				province = 4799
-				level = 2
+				level = 4
 				instant_build = yes
 			}
 		}
@@ -213,7 +208,7 @@ focus_tree = {
 			add_building_construction = {
 				type = bunker
 				province = 6710
-				level = 1
+				level = 3
 				instant_build = yes
 			}
 		}
@@ -221,7 +216,7 @@ focus_tree = {
 			add_building_construction = {
 				type = bunker
 				province = 9724
-				level = 1
+				level = 3
 				instant_build = yes
 			}
 		}
@@ -424,6 +419,71 @@ focus_tree = {
 			add_war_support = 0.05
 		}
 	}
+	focus = {#民事搬迁
+		id = WCC_civilian_relocation
+		icon = GFX_goal_COR_America_Dragged_Out_Mud
+		cost = 5.00
+		prerequisite = {
+			focus = WCC_fortify_the_rockies
+		}
+		prerequisite = {
+			focus = WCC_Elite_training
+		}
+		relative_position_id = WCC_grand_reorganization
+		x = 1
+		y = 2
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WCC_civilian_relocation"
+			add_stability = -0.05
+			add_political_power = 30
+			add_manpower = 6000
+			random_owned_state = {
+				limit = {
+					is_core_of = WCC
+					is_controlled_by = WCC
+					arms_factory > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = WCC
+					is_controlled_by = WCC
+					arms_factory > 0
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = WCC
+					is_controlled_by = WCC
+					arms_factory > 0
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = WCC
+					is_controlled_by = WCC
+					arms_factory > 0
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
 	focus = {#红球快递车队
 		id = WCC_Red_Ball_Express_team
 		icon = GFX_WCC_Red_Ball_Express_team
@@ -466,7 +526,7 @@ focus_tree = {
 			add_stability = 0.03
 			add_manpower = 1500
 			create_corps_commander = {#
-				name = "休·布朗"
+				name = "Hugh B. Brown"
 				portrait_path = "gfx/leaders/DSR/Portrait_DSR_Hugh_Brown.png"
 				traits = {
 					old_guard
@@ -540,71 +600,6 @@ focus_tree = {
 			add_war_support = 0.1
 			army_experience = 35
 			add_stability = 0.04
-		}
-	}
-	focus = {#民事搬迁
-		id = WCC_civilian_relocation
-		icon = GFX_goal_COR_America_Dragged_Out_Mud
-		cost = 5.00
-		prerequisite = {
-			focus = WCC_fortify_the_rockies
-		}
-		prerequisite = {
-			focus = WCC_Elite_training
-		}
-		relative_position_id = WCC_grand_reorganization
-		x = 1
-		y = 2
-		ai_will_do = {
-			factor = 50
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus WCC_civilian_relocation"
-			add_stability = -0.02
-			add_political_power = 60
-			add_manpower = 6000
-			random_owned_state = {
-				limit = {
-					is_core_of = WCC
-					is_controlled_by = WCC
-					arms_factory > 0
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					is_core_of = WCC
-					is_controlled_by = WCC
-					arms_factory > 0
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					is_core_of = WCC
-					is_controlled_by = WCC
-					arms_factory > 0
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-			random_owned_state = {
-				limit = {
-					is_core_of = WCC
-					is_controlled_by = WCC
-					arms_factory > 0
-				}
-				add_extra_state_shared_building_slots = 1
-			}
 		}
 	}
 	focus = {#协约国支援
@@ -1728,7 +1723,7 @@ focus_tree = {
 	category = air_doctrine
 			}
 			hidden_effect = {
-				country_event = { id = ustates.623 days = 75 }
+				country_event = { id = USA.2021 days = 75 }
 			}
 		}
 
@@ -3328,11 +3323,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus WCC_american_imperialism"
-			create_faction_from_template = { 
-				template = faction_template_generic_dominance              
-				name = "league_of_american_states"
-				icon = GFX_faction_organization_of_american_states
-			}
+			create_faction = "league_of_american_states"
 			add_ideas = USA_american_imperialism_idea
 			add_war_support = 0.05
 			add_popularity = { ideology = paternal_autocrat popularity = 0.03 }
@@ -4190,7 +4181,7 @@ focus_tree = {
 			add_stability = 0.1
 			custom_effect_tooltip = USA_political_recovery_tooltip
 			USA_political_recovery = yes
-			country_event = ustates.3146
+			country_event = USA.556
 			hidden_effect = {
 				country_event = {
 					id = wcc.2714
@@ -4280,13 +4271,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus WCC_Fixing_Congress"
 			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = infrastructure
-						size > 1
-						include_locked = yes
-					}
-				}
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = infrastructure
@@ -5561,6 +5545,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus WCC_watchman"
 			add_ideas = WCC_watchmen
+			custom_effect_tooltip = USA_political_recovery_tooltip
+			USA_political_recovery = yes
 		}
 	}
 	focus = {#上门收税
@@ -5684,6 +5670,31 @@ focus_tree = {
 				remove_idea = WCC_first_stage_idea
 				add_idea = WCC_first_stage_idea2
 			}	
+			custom_effect_tooltip = USA_political_recovery_tooltip
+			USA_political_recovery = yes
+		}
+	}
+	focus = {#老兵不死
+		id = WCC_Preferential_treatment_for_veterans
+		icon = GFX_WCC_Preferential_treatment_for_veterans
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		relative_position_id = WCC_tax_collection
+		prerequisite = {
+			focus = WCC_tax_collection
+		}
+		prerequisite = {
+			focus = WCC_Military_education_for_children
+		}
+		x = -1
+		y = 1
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WCC_Preferential_treatment_for_veterans"
+			custom_effect_tooltip = USA_political_recovery_tooltip
+			USA_political_recovery = yes
+			add_ideas = WCC_veteran_pensions_idea
 		}
 	}
 	focus = {#煽动民族主义
@@ -5739,29 +5750,6 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {#老兵不死
-		id = WCC_Preferential_treatment_for_veterans
-		icon = GFX_WCC_Preferential_treatment_for_veterans
-		cost = 5
-		ai_will_do = {
-			factor = 10
-		}
-		relative_position_id = WCC_tax_collection
-		prerequisite = {
-			focus = WCC_tax_collection
-		}
-		prerequisite = {
-			focus = WCC_Military_education_for_children
-		}
-		x = -1
-		y = 1
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus WCC_Preferential_treatment_for_veterans"
-			custom_effect_tooltip = USA_political_recovery_tooltip
-			USA_political_recovery = yes
-			add_ideas = WCC_veteran_pensions_idea
-		}
-	}
 	focus = {#取缔政党
 		id = WCC_Ban_political_parties
 		icon = GFX_WCC_Ban_political_parties
@@ -5805,6 +5793,12 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus WCC_American_emperor"
+			hidden_effect = {
+				country_event = {
+					id = wcc.13
+					days = 3
+				}
+			}
 			swap_ideas = {
 				remove_idea = WCC_first_stage_idea2
 				add_idea = WCC_first_stage_idea3
@@ -5972,7 +5966,7 @@ focus_tree = {
 			add_political_power = 80
 			hidden_effect = {
 				country_event = {
-					id = ustates.129
+					id = USA.1517
 					days = 30
 				}
 				country_event = {
@@ -6060,7 +6054,7 @@ focus_tree = {
 				}
 				country_event = { id = ustates.651 days = 35 }#AUS Trials
 				country_event = { id = wcc.6 days = 55 }#CAR Trials
-				country_event = { id = ustates.627 days = 70 }#Pentagon Construction
+				country_event = { id = USA.2025 days = 70 }#Pentagon Construction
 			}
 			custom_effect_tooltip = USA_trials_will_begin		
 		}
@@ -6083,6 +6077,8 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus WCC_Rural_revitalization_law"
+			custom_effect_tooltip = USA_economic_recovery_tooltip
+			COR_increase_recovery = yes
 			add_ideas = WCC_Country_time_in_America
 		}
 	}
@@ -6104,6 +6100,8 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus WCC_Bring_back_the_Good_road_campaign"
+			custom_effect_tooltip = USA_economic_recovery_tooltip
+			COR_increase_recovery = yes
 			add_ideas = WCC_better_roads
 			random_owned_state = {
 				limit = {
@@ -6164,6 +6162,8 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus WCC_Coffee_chocolate_icecream"
+			custom_effect_tooltip = USA_economic_recovery_tooltip
+			COR_increase_recovery = yes
 			add_stability = 0.07
 			add_ideas = WCC_coffee_chocolate_icecream
 		}
@@ -6186,6 +6186,8 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus WCC_Demobilize_army_and_build_motherland"
+			custom_effect_tooltip = USA_economic_recovery_tooltip
+			COR_increase_recovery = yes
 			add_ideas = WCC_From_soldier_to_builder
 			add_stability = 0.1
 			add_war_support = -0.05
@@ -6307,7 +6309,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6335,7 +6337,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6366,7 +6368,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6442,7 +6444,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6494,7 +6496,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6530,7 +6532,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6588,7 +6590,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6620,7 +6622,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6655,7 +6657,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6691,7 +6693,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6719,7 +6721,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		select_effect = {
 		country_event = {
@@ -6754,7 +6756,7 @@ focus_tree = {
 		}
 		available = {
 			has_government = authoritarian_democrat
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6790,7 +6792,7 @@ focus_tree = {
 			has_government = authoritarian_democrat
 			has_government = paternal_autocrat
 			}
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6820,7 +6822,7 @@ focus_tree = {
 			has_government = authoritarian_democrat
 			has_government = paternal_autocrat
 			}
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6865,7 +6867,7 @@ focus_tree = {
 			has_government = authoritarian_democrat
 			has_government = paternal_autocrat
 			}
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6903,7 +6905,7 @@ focus_tree = {
 			has_government = authoritarian_democrat
 			has_government = paternal_autocrat
 			}
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst" }
 		}
 		ai_will_do = {
 			factor = 5
@@ -6949,7 +6951,7 @@ focus_tree = {
 			has_government = authoritarian_democrat
 			has_government = paternal_autocrat
 			}
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 			owns_state = 629
 		}
 		ai_will_do = {
@@ -6982,7 +6984,7 @@ focus_tree = {
 			has_government = authoritarian_democrat
 			has_government = paternal_autocrat
 			}
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -7016,7 +7018,7 @@ focus_tree = {
 			has_government = authoritarian_democrat
 			has_government = paternal_autocrat
 			}
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -7054,7 +7056,7 @@ focus_tree = {
 			has_government = authoritarian_democrat
 			has_government = paternal_autocrat
 			}
-			has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特"}
+			has_country_leader = { ruling_only = yes name = "William Randolph Hearst"}
 		}
 		ai_will_do = {
 			factor = 5
@@ -8456,6 +8458,31 @@ focus_tree = {
 			add_manpower = 2000
 		}
 	}
+	### Social Conservatives ###
+	focus = {# Democrats Elected
+		id = WCC_social_conservatives_in_power
+		icon = GFX_CAL_democratic_victory
+		cost = 5.00
+		prerequisite = {
+			focus = WCC_last_bastion
+		}
+		available = {
+			has_government = social_conservative
+		}
+		bypass = { has_government = social_conservative }
+		ai_will_do = {
+			factor = 5
+		}
+		available_if_capitulated = yes
+		cancel_if_invalid = yes
+		relative_position_id = WCC_last_bastion
+		x = 27
+		y = 1
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WCC_social_conservatives_in_power"
+			add_popularity = { ideology = social_conservative popularity = 0.03 }
+		}
+	}
 	focus = {# Social Gospel
 		id = WCC_social_gospel
 		icon = GFX_goal_COR_captains_of_industry
@@ -8603,31 +8630,7 @@ focus_tree = {
 			add_stability = 0.08
 		}
 	}
-	### Social Conservatives ###
-	focus = {# Democrats Elected
-		id = WCC_social_conservatives_in_power
-		icon = GFX_CAL_democratic_victory
-		cost = 5.00
-		prerequisite = {
-			focus = WCC_last_bastion
-		}
-		available = {
-			has_government = social_conservative
-		}
-		bypass = { has_government = social_conservative }
-		ai_will_do = {
-			factor = 5
-		}
-		available_if_capitulated = yes
-		cancel_if_invalid = yes
-		relative_position_id = WCC_last_bastion
-		x = 27
-		y = 1
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus WCC_social_conservatives_in_power"
-			add_popularity = { ideology = social_conservative popularity = 0.03 }
-		}
-	}
+
 
 	focus = {# Red Scare
 		id = WCC_red_scare
@@ -8766,7 +8769,7 @@ focus_tree = {
 			add_popularity = { ideology = totalist popularity = -0.05 }
 			hidden_effect = {
 				if = {
-				limit = { has_country_leader = { ruling_only = yes name = "威廉·伦道夫·赫斯特" } }
+				limit = { has_country_leader = { ruling_only = yes name = "William Randolph Hearst" } }
 				country_event = {
 				id = pacificstates.234
 				days = 5
@@ -9222,7 +9225,7 @@ focus_tree = {
 					}
 					CAN = {
 						country_event = {
-							id = ustates.270
+							id = USA.1505
 							days = 2
 						}
 					}
@@ -9736,45 +9739,6 @@ focus_tree = {
 			add_stability = 0.04
 		}
 	}
-
-	focus = {# National Railroads
-		id = WCC_new_public_works
-		icon = GFX_CAL_national_railroads
-		cost = 5.00
-		prerequisite = {
-			focus = WCC_new_anti_trust_laws
-		}
-		prerequisite = {
-			focus = WCC_farm_credit_act
-		}
-		available = {
-			has_government = social_democrat
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		available_if_capitulated = yes
-		relative_position_id = WCC_social_democrats_in_power
-		x = -2
-		y = 4
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus WCC_new_public_works"
-			swap_ideas = {
-			remove_idea = CAL_new_nationalism_idea3
-			add_idea = CAL_new_nationalism_idea4
-			}
-			add_tech_bonus = {
-				name = industrial_bonus
-				bonus = 1
-				uses = 1
-				category = industry
-			}
-			country_event = {
-			id = pacificstates.74
-			days = 2
-			}
-		}
-	}
 	
 	focus = {# Credit Union Recognition
 		id = WCC_credit_unions
@@ -9856,15 +9820,9 @@ focus_tree = {
 			hidden_trigger = {
 				PAR = {
 					NOT = {
-						OR = {
-							has_country_leader = {
-								name = "Señor Largo"
-								ruling_only = yes
-							}
-							has_country_leader = {
-								name = "朗先生"
-								ruling_only = yes
-							}
+						has_country_leader = {
+							name = "Señor Largo"
+							ruling_only = yes
 						}
 					}
 				}
@@ -9892,7 +9850,7 @@ focus_tree = {
 	}
 	
 	focus = {# New Nationalism
-		id = CAL_new_nationalism
+		id = WCC_new_nationalism
 		icon = GFX_CAL_new_nationalism
 		cost = 5.00
 		prerequisite = {
@@ -9914,7 +9872,7 @@ focus_tree = {
 		x = 0
 		y = 5
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CAL_new_nationalism"
+			log = "[GetDateText]: [Root.GetName]: Focus WCC_new_nationalism"
 			swap_ideas = {
 			remove_idea = CAL_new_nationalism_idea4
 			add_idea = CAL_new_nationalism_idea5
@@ -11193,81 +11151,7 @@ focus_tree = {
 			}
 		}
 	}
-
-		focus = {# Public Works
-		id = WCC_new_public_works
-		icon = GFX_CAL_pwa
-		cost = 5.00
-		prerequisite = {
-			focus = WCC_wealth_taxation
-		}
-		available = {
-			has_government = social_democrat
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		available_if_capitulated = yes
-		relative_position_id = WCC_social_democrats_in_power
-		x = -1
-		y = 2
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus WCC_public_works"
-			swap_ideas = {
-			remove_idea = CAL_progressive_taxation_idea
-			add_idea = CAL_progressive_taxation_2
-			}
-			random_owned_state = {
-				limit = {
-					is_core_of = WCC
-					is_controlled_by = WCC
-					industrial_complex > 0
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					is_core_of = WCC
-					is_controlled_by = WCC
-					industrial_complex > 0
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					is_core_of = WCC
-					is_controlled_by = WCC
-					industrial_complex > 0
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-		focus = {# National Railroads
+	focus = {# National Railroads
 		id = WCC_national_railroads
 		icon = GFX_CAL_national_railroads
 		cost = 5.00

@@ -38,7 +38,7 @@ country_event = {
 		FROM = { country_event = plxf.4 }
 		hidden_effect = {
 			FROM = { 
-				complete_national_focus = POL_ally_russia
+				complete_national_focus = PLX_ally_russia
 			}
 		}
 	}
@@ -75,7 +75,7 @@ country_event = {
 		FROM = { country_event = plxf.4 }
 		hidden_effect = {
 			FROM = { 
-				complete_national_focus = POL_ally_internationale
+				complete_national_focus = PLX_ally_internationale
 			}
 		}		
 	}
@@ -153,7 +153,7 @@ country_event = {
 				}
 			}	
 			FROM = { 
-				complete_national_focus = POL_go_with_austria
+				complete_national_focus = PLX_go_with_austria
 			}				
 		}
 		POL = { 
@@ -258,7 +258,7 @@ country_event = {
 				transfer_state = 1319
 				transfer_state = 1314
 			}
-			complete_national_focus = POL_go_with_austria			
+			complete_national_focus = PLX_go_with_austria			
 		}
 		clr_country_flag = plx_asking_for_faction
 	}
@@ -290,7 +290,7 @@ country_event = {
 				transfer_state = 1124
 				add_political_power = -25
 			}
-			complete_national_focus = POL_go_with_austria
+			complete_national_focus = PLX_go_with_austria
 		}
 		clr_country_flag = plx_asking_for_faction
 	}
@@ -318,7 +318,7 @@ country_event = {
 		AUS = { add_to_faction = POL }
 		add_political_power = -20
 		hidden_effect = {
-			complete_national_focus = POL_go_with_austria
+			complete_national_focus = PLX_go_with_austria
 		}		
 		clr_country_flag = plx_asking_for_faction
 	}
@@ -388,7 +388,7 @@ country_event = {
 		FROM = { country_event = plxf.4 }
 		hidden_effect = {
 			FROM = { 
-				complete_national_focus = POL_go_with_austria
+				complete_national_focus = PLX_go_with_austria
 			}
 		}		
 	}
@@ -913,25 +913,6 @@ country_event = {
 country_event = {
 	id = plxf.21 #Subject refuses submission
 	immediate = { log = "[GetDateText]: [Root.GetName]: event plxf.21" }
-	title = plxf.21.t
-	desc = plxf.21.d
-	#picture = GFX_report_event_soldiers_marching
-
-	fire_only_once = yes
-
-	is_triggered_only = yes
-
-	option = {
-		name = plxf.21.a
-		declare_war_on = {
-			target = FROM
-			type = annex_everything
-		}
-	}
-}
-country_event = {
-	id = plxf.22 #Subject submits
-	immediate = { log = "[GetDateText]: [Root.GetName]: event plxf.22" }
 	title = plxf.22.t
 	desc = plxf.22.d
 	#picture = GFX_report_event_soldiers_marching
@@ -942,9 +923,264 @@ country_event = {
 
 	option = {
 		name = plxf.22.a
+		declare_war_on = {
+			target = FROM
+			type = annex_everything
+		}
+	}
+}
+country_event = {
+	id = plxf.22 #Subject submits
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plxf.22" }
+	title = plxf.21.t
+	desc = plxf.21.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxf.21.a
 		annex_country = {
 			target = FROM
 			transfer_troops = no
 		}
+	}
+}
+country_event = {
+	id = plxf.23 #
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plxf.22" }
+	title = plxf.23.t
+	desc = plxf.23.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxf.23.a
+		ai_chance = {
+			factor = 100
+		}
+		POL = {
+			annex_country = {
+				target = ROOT
+				transfer_troops = no
+			}
+		}
+		
+	}
+	option = {
+		name = plxf.23.b
+		POL = {
+			create_wargoal = {
+				target = ROOT
+				type = annex_everything
+			}
+		}
+		
+	}
+}
+country_event = {
+	id = plxf.24 #
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plxf.22" }
+	title = plxf.24.t
+	desc = plxf.24.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxf.24.a
+			create_wargoal = {
+				target = SER
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SER
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = CRO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = CRO
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = SLO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SLO
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = BOS
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = BOS
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = MNT
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = MNT
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = BUL
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = BUL
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			add_state_core = 736
+			add_state_core = 1100
+			add_state_core = 1144
+	}
+	option = {
+		name = plxf.24.b
+		create_wargoal = {
+				target = SER
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SER
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = CRO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = CRO
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = SLO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = SLO
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = BOS
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = BOS
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = MNT
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = MNT
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = BUL
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = BUL
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = HUN
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = HUN
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = ROM
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = ROM
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
+			create_wargoal = {
+				target = TRS
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_core_of = TRS
+				}
+				POL = {
+					add_state_core = PREV
+				}
+			}
 	}
 }

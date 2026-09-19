@@ -1,0 +1,1136 @@
+TEX_AFP_politics_decisions = {#选举事务
+    TEX_AFP_election = { #美利坚至上党竞选活动
+		icon = afp
+		cost = 20
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			hidden_trigger = {
+				NOT = {
+					OR = {
+						has_country_flag = TEX_cp_electing
+						has_country_flag = TEX_dp_electing
+						has_country_flag = TEX_npp_electing
+					}
+				}
+			}
+		}
+		visible = {
+			check_variable = { TEX_AFP > 50 }		
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_AFP_election"
+			set_country_flag = TEX_afp_electing
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_AFP_election"
+			custom_effect_tooltip = TEX_first_party_tt
+			gui_dirty_change = yes
+			add_to_variable = { TEX_AFP = 5 }			
+			clr_country_flag = TEX_afp_electing
+		}
+    }
+    TEX_CP_election = { #基督教党竞选活动
+		icon = cp
+		cost = 20
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			hidden_trigger = {
+				NOT = {
+					OR = {
+						has_country_flag = TEX_afp_electing
+						has_country_flag = TEX_dp_electing
+						has_country_flag = TEX_npp_electing
+					}
+				}
+			}
+		}
+		visible = {
+			check_variable = { TEX_CP > 40 }		
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_CP_election"
+			set_country_flag = TEX_cp_electing
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_CP_election"
+			custom_effect_tooltip = TEX_christ_party_tt
+			add_to_variable = { TEX_CP = 5 }			
+			clr_country_flag = TEX_cp_electing
+			gui_dirty_change = yes
+		}
+    }
+    TEX_DP_election = { #民主党竞选活动
+		icon = dp
+		cost = 20
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			hidden_trigger = {
+				NOT = {
+					OR = {
+						has_country_flag = TEX_afp_electing
+						has_country_flag = TEX_cp_electing
+						has_country_flag = TEX_npp_electing
+					}
+				}
+			}
+		}
+		visible = {
+			check_variable = { TEX_DP > 40 }		
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_DP_election"
+			set_country_flag = TEX_dp_electing
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_DP_election"
+			custom_effect_tooltip = TEX_dem_party_tt
+			add_to_variable = { TEX_DP = 5 }			
+			clr_country_flag = TEX_dp_electing
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_election = { #国家进步党竞选活动
+		icon = npp
+		cost = 20
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			hidden_trigger = {
+				NOT = {
+					OR = {
+						has_country_flag = TEX_afp_electing
+						has_country_flag = TEX_cp_electing
+						has_country_flag = TEX_dp_electing
+					}
+				}
+			}
+		}
+		visible = {
+			check_variable = { TEX_NPP > 40 }		
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_NPP_election"
+			set_country_flag = TEX_npp_electing
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_election"
+			custom_effect_tooltip = TEX_progressive_party_tt
+			add_to_variable = { TEX_NPP = 5 }			
+			clr_country_flag = TEX_npp_electing
+			gui_dirty_change = yes
+		}
+    }
+}
+TEX_NPP_politics_decisions = {#国家进步党
+    TEX_NPP_decision_NEA_finish = { #宣布国家工程计划完成
+		icon = Blueprints
+		priority = 100
+		available = {
+			check_variable = { NPP_RIGHT1 > 90   }
+		}
+		fire_only_once = yes
+
+		visible = {
+			has_completed_focus = TEX_National_Engineering_Act
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_NPP_decision_invest_NEA_less"
+			add_ideas = TEX_NEA
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_decision_progressive_propaganda = { #进步主义宣传
+		icon = propaganda1
+		cost = 50
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_Sound_clarion_call_of_progress
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_progressive_propaganda"
+			increase_ruling_party_popularity_by_3 = yes
+			add_to_variable = { NPP_LEFT1 = 5  }
+			add_to_variable = { NPP_LEFT2 = 5  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_LEFT1_increase_tt
+			custom_effect_tooltip = TEX_NPP_decision_NPP_LEFT2_increase_tt
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_decision_Rectify_government_departments = { #整顿政府部门
+		icon = government1
+		cost = 50
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_Serve_public
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_Rectify_government_departments"
+			add_stability = 0.03
+			add_war_support = 0.03
+			add_to_variable = { NPP_Middle2 = 5  }
+			add_to_variable = { NPP_RIGHT2 = 5  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_MIDDLE2_increase_tt
+			custom_effect_tooltip = TEX_NPP_decision_NPP_RIGHT2_increase_tt
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_decision_strength_congress = { #加强国会权威
+		icon = government1
+		cost = 30
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_Strengthen_authority_of_Congress
+			NOT = {
+				check_variable = { TEX_NPP_CONGRESS > 50 }
+			}					
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_strength_congress"
+			add_to_variable = { TEX_NPP_PRESIDENT = -10  }
+			add_to_variable = { TEX_NPP_CONGRESS = 10  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_congress_tt
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_decision_strength_president = { #加强总统权威
+		icon = government1
+		cost = 30
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_Strengthen_authority_of_Congress
+			NOT = {
+				check_variable = { TEX_NPP_PRESIDENT > 50 }
+			}					
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_strength_president"
+			add_to_variable = { TEX_NPP_PRESIDENT = 10  }
+			add_to_variable = { TEX_NPP_CONGRESS = -10  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_president_tt
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_decision_form_farmer_labor_alliance = { #组建农民劳工联盟
+		icon = political1
+		cost = 50
+		days_remove = 30
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_All_those_who_work_should_not_be_hungry
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_form_farmer_labor_alliance"
+			add_ideas = TEX_farmer_labor_alliance_idea
+			add_to_variable = { NPP_LEFT1 = 5  }
+			add_to_variable = { NPP_RIGHT2 = 10  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_LEFT1_increase_tt
+			custom_effect_tooltip = TEX_NPP_decision_NPP_RIGHT2_increase_tt
+			gui_dirty_change = yes
+			set_country_flag = TEX_farmer_labor_alliance_flag
+		}
+    }
+    TEX_NPP_decision_cash_reform = { #绿币改革
+		icon = cash
+		cost = 20
+		days_remove = 30
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_new_cash
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_cash_reform"
+			add_ideas = TEX_greenback_currency_idea
+			add_to_variable = { NPP_LEFT1 = 5  }
+			add_to_variable = { NPP_RIGHT2 = 5  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_LEFT1_increase_tt
+			custom_effect_tooltip = TEX_NPP_decision_NPP_RIGHT2_increase_tt
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_decision_sunshine_reform = { #阳光下政府法案
+		icon = political1
+		cost = 30
+		days_remove = 30
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_Strengthen_authority_of_Congress
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_sunshine_reform"
+			add_ideas = TEX_greenback_currency_idea
+			add_to_variable = { NPP_MIDDLE2 = 15  }
+			add_to_variable = { NPP_RIGHT2 = 5  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_MIDDLE2_increase_tt
+			custom_effect_tooltip = TEX_NPP_decision_NPP_RIGHT2_increase_tt
+			gui_dirty_change = yes
+			set_country_flag = TEX_Government_in_the_Sunshine_Act_flag
+		}
+    }
+    TEX_NPP_decision_public_own_land = { #土地公有化改革
+		icon = political1
+		cost = 50
+		days_remove = 60
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_Public_land_stateowned_farm
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_public_own_land"
+			add_stability = 0.05
+			increase_ruling_party_popularity_by_5 = yes
+			random_owned_state = {
+				limit = {
+					is_core_of = TEX
+					is_controlled_by = TEX
+					infrastructure > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = TEX
+					is_controlled_by = TEX
+					infrastructure > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = TEX
+					is_controlled_by = TEX
+					infrastructure > 0
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_to_variable = { NPP_LEFT1 = 5  }
+			add_to_variable = { NPP_RIGHT2 = 5  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_LEFT1_increase_tt
+			custom_effect_tooltip = TEX_NPP_decision_NPP_RIGHT2_increase_tt
+			set_country_flag = NPP_public_land
+			gui_dirty_change = yes
+			set_country_flag = TEX_Public_Land_Ownership_flag
+		}
+    }
+    TEX_NPP_decision_farm_reform = { #国家农场现代化
+		icon = farmer
+		cost = 50
+		days_remove = 20
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_country_flag = NPP_public_land
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_farm_reform"
+			add_ideas = TEX_farmer_labor_alliance_idea2
+			add_to_variable = { NPP_LEFT1 = 5  }
+			add_to_variable = { NPP_RIGHT2 = 5  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_LEFT1_increase_tt
+			custom_effect_tooltip = TEX_NPP_decision_NPP_RIGHT2_increase_tt
+			clr_country_flag = NPP_public_land
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_decision_invest_NEA_lot = { #为国家工程计划大量拨款
+		icon = Blueprints
+		cost = 50
+		days_remove = 14
+		days_re_enable = 21
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_National_Engineering_Act
+			NOT = {
+				check_variable = { NPP_RIGHT1 > 95 }
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_NPP_decision_invest_NEA_lot"
+			add_to_variable = { NPP_RIGHT1 = 20  }
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_decision_invest_NEA = { #为国家工程计划拨款
+		icon = Blueprints
+		cost = 30
+		days_remove = 14
+		days_re_enable = 21
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_National_Engineering_Act
+			NOT = {
+				check_variable = { NPP_RIGHT1 > 95 }
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_NPP_decision_invest_NCE"
+			add_to_variable = { NPP_RIGHT1 = 10  }
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_decision_invest_NEA_less = { #为国家工程计划少量拨款
+		icon = Blueprints
+		cost = 20
+		days_remove = 14
+		days_re_enable = 21
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_National_Engineering_Act
+			NOT = {
+				check_variable = { NPP_RIGHT1 > 95 }
+			}			
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_NPP_decision_invest_NEA_less"
+			add_to_variable = { NPP_RIGHT1 = 5  }
+			gui_dirty_change = yes
+		}
+    }
+    TEX_NPP_decision_pro_repre = { #通过比例代表制
+		icon = government1
+		cost = 50
+		days_remove = 14
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_Superior_proportional_representation_system
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_pro_repre"
+			add_ideas = TEX_proportional_representation
+			add_to_variable = { NPP_LEFT1 = 5  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_LEFT1_increase_tt
+			custom_effect_tooltip = TEX_NPP_decision_NPP_LEFT2_increase_tt
+			add_to_variable = { NPP_LEFT2 = 15  }
+			gui_dirty_change = yes
+			set_country_flag = TEX_proportional_representation_flag
+		}
+    }
+    TEX_NPP_decision_speech_freedom = { #通过言论自由保护法
+		icon = government1
+		cost = 30
+		days_remove = 14
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			has_completed_focus = TEX_Superior_proportional_representation_system
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_NPP_decision_speech_freedom"
+			add_ideas = TEX_proportional_representation
+			add_to_variable = { NPP_LEFT1 = 5  }
+			custom_effect_tooltip = TEX_NPP_decision_NPP_LEFT1_increase_tt
+			custom_effect_tooltip = TEX_NPP_decision_NPP_LEFT2_increase_tt
+			add_to_variable = { NPP_LEFT2 = 5  }
+			gui_dirty_change = yes
+			set_country_flag = TEX_Speech_protection_system_flag
+		}
+    }
+}
+TEX_Pelley_category= {#
+	TEX_smith_rule = {
+		icon = smith
+		priority = 100
+		days_remove = 7
+		fire_only_once = yes
+
+		available = {
+			has_country_flag = TEX_has_smith_leader
+			hidden_trigger = {
+				has_country_flag = TEX_smith_win_win_win
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_smith_rule"
+			set_country_flag = TEX_smith_rule_the_country
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_smith_rule"
+			remove_power_balance = { id = TEX_Pelley_bop }
+		}
+	}
+	TEX_pelley_rule = {
+		icon = pelley
+		priority = 100
+		days_remove = 7
+		fire_only_once = yes
+
+		available = {
+			has_country_flag = TEX_has_kemp_leader
+			hidden_trigger = {
+				has_country_flag = TEX_pelley_win_win_win
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_pelley_rule"
+			set_country_flag = TEX_pelley_rule_the_country
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_pelley_rule"
+			remove_power_balance = { id = TEX_Pelley_bop }
+		}
+	}
+	TEX_smith_power_grow = {
+		icon = smith
+		priority = 20
+		activation = { #manually activated
+			has_country_flag = TEX_has_kemp_leader
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_trigger = {
+			has_completed_focus = TEX_it_do_happens_here
+		}
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 30
+		fire_only_once = no
+		timeout_effect = {
+			random_list = {
+				20 = { increase_smith_influence_15 = yes }
+				40 = { increase_smith_influence_10 = yes }
+				40 = { increase_smith_influence_5 = yes }
+			}	
+			hidden_effect = {
+				activate_mission = TEX_smith_power_grow
+			}
+		}
+	}
+	TEX_pelley_power_grow = {
+		icon = pelley
+		priority = 20
+		activation = { #manually activated
+			has_country_flag = TEX_has_smith_leader
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_trigger = {
+			has_completed_focus = TEX_it_do_happens_here
+		}
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 30
+		fire_only_once = no
+		timeout_effect = {
+			random_list = {
+				20 = { increase_pelley_influence_15 = yes }
+				40 = { increase_pelley_influence_10 = yes }
+				40 = { increase_pelley_influence_5 = yes }
+			}	
+			hidden_effect = {
+				activate_mission = TEX_pelley_power_grow
+			}
+		}
+	}
+    TEX_increase_pelley_power = { #增强总统对党的掌控
+		icon = GFX_decision_government_up
+		priority = 10
+		cost = 20
+		days_remove = 14
+		days_re_enable = 21
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			has_country_flag = TEX_has_kemp_leader
+		}
+		visible = {
+			NOT = {
+				check_variable = { TEX_Pelley_bop < -0.9 }
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_increase_pelley_power"
+			add_power_balance_value = {
+				id = TEX_Pelley_bop
+				value = -0.05
+			}
+		}
+    }
+    TEX_increase_smith_power = { #联络银衫军支持者
+		icon = GFX_decision_government_down
+		priority = 10
+		cost = 20
+		days_remove = 14
+		days_re_enable = 21
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			has_country_flag = TEX_has_smith_leader
+		}
+		visible = {
+			NOT = {
+				check_variable = { TEX_Pelley_bop > 0.9 }
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_increase_smith_power"
+			add_power_balance_value = {
+				id = TEX_Pelley_bop
+				value = 0.05
+			}
+		}
+    }
+    TEX_Investigate_silver_legion = { #调查银衫军内部
+		icon = investigation
+		cost = 20
+		days_remove = 7
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			has_country_flag = TEX_has_kemp_leader
+		}
+		visible = {
+			NOT = {
+				check_variable = { TEX_Pelley_bop < -0.9 }
+			}
+			has_completed_focus = TEX_all_pervasive_investigation_bureau
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_Investigate_silver_legion"
+			add_power_balance_value = {
+				id = TEX_Pelley_bop
+				value = -0.05
+			}
+		}
+    }
+    TEX_Promote_new_political_man = { #提拔政治新人
+		icon = generic_agreement
+		cost = 50
+		days_remove = 7
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			has_country_flag = TEX_has_kemp_leader
+		}
+		visible = {
+			NOT = {
+				check_variable = { TEX_Pelley_bop < -0.9 }
+			}
+			has_completed_focus = TEX_Political_re_education
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_Promote_new_political_man"
+			add_power_balance_value = {
+				id = TEX_Pelley_bop
+				value = -0.1
+			}
+		}
+    }
+    TEX_Hold_symposium_on_esotericism = { #举行神秘学研讨会
+		icon = hand_out
+		cost = 30
+		days_remove = 7
+		days_re_enable = 45
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			has_country_flag = TEX_has_kemp_leader
+		}
+		visible = {
+			NOT = {
+				check_variable = { TEX_Pelley_bop < -0.9 }
+			}
+			has_completed_focus = TEX_unique_theosophy_of_spiritual_realm
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_Hold_symposium_on_esotericism"
+			add_power_balance_value = {
+				id = TEX_Pelley_bop
+				value = -0.1
+			}
+		}
+    }
+    TEX_Hold_rally_of_the_Silver_legion = { #举行银衫军集会
+		icon = bandit
+		cost = 30
+		days_remove = 7
+		days_re_enable = 45
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			has_country_flag = TEX_has_smith_leader
+		}
+		visible = {
+			NOT = {
+				check_variable = { TEX_Pelley_bop > 0.9 }
+			}
+			has_completed_focus = TEX_Stand_under_the_same_flag
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_Hold_rally_of_the_Silver_legion"
+			add_power_balance_value = {
+				id = TEX_Pelley_bop
+				value = 0.1
+			}
+		}
+    }
+    TEX_build_house_for_the_Silver_legion = { #兴建更多银衫军屋舍
+		icon = Bulldozer
+		cost = 30
+		days_remove = 7
+		days_re_enable = 45
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			has_country_flag = TEX_has_smith_leader
+		}
+		visible = {
+			NOT = {
+				check_variable = { TEX_Pelley_bop > 0.9 }
+			}
+			has_completed_focus = TEX_Silver_houses_all_over_country
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_build_house_for_the_Silver_legion"
+			add_power_balance_value = {
+				id = TEX_Pelley_bop
+				value = 0.05
+			}
+		}
+    }
+    TEX_Infiltrate_the_president_security_system = { #渗透总统警卫系统
+		icon = brokencuffs
+		cost = 100
+		days_remove = 30
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		available = {
+			has_country_flag = TEX_has_smith_leader
+		}
+		visible = {
+			NOT = {
+				check_variable = { TEX_Pelley_bop > 0.9 }
+			}
+			has_completed_focus = TEX_Swallow_up_One_minute_people
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_Infiltrate_the_president_security_system"
+			add_power_balance_value = {
+				id = TEX_Pelley_bop
+				value = 0.2
+			}
+			add_war_support = 0.05
+			increase_ruling_party_popularity_by_3 = yes
+			custom_effect_tooltip = TEX_Infiltrate_the_president_security_system_tt
+		}
+    }
+    TEX_Implement_employment_registration_statistics = { #落实就业注册统计
+		icon = political1
+		cost = 30
+		days_remove = 30
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.01
+		}
+		visible = {
+			NOT = {
+				OR = {
+					check_variable = { TEX_Pelley_bop > 0.9 }
+					check_variable = { TEX_Pelley_bop < -0.9 }
+				}
+			}
+			has_completed_focus = TEX_Implement_employment_registration
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_Implement_employment_registration_statistics"
+			if = {
+				limit = {
+					has_country_flag = TEX_has_smith_leader
+				}
+				add_power_balance_value = {
+					id = TEX_Pelley_bop
+					value = 0.1
+				}
+				add_stability = 0.05
+				random_owned_state = {
+					limit = {
+						is_core_of = TEX
+						is_controlled_by = TEX
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			else = {
+				add_power_balance_value = {
+					id = TEX_Pelley_bop
+					value = -0.1
+				}	
+				add_stability = 0.05	
+				random_owned_state = {
+					limit = {
+						is_core_of = TEX
+						is_controlled_by = TEX
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}		
+			}
+		}
+    }
+}
+TEX_successors_decision = {
+	TEX_support_smith = {
+		icon = propaganda1
+		cost = 20
+		priority = 10
+		days_remove = 2
+		days_re_enable = 5
+
+		available = {
+			has_completed_focus = TEX_huey_died
+			NOT = {
+				has_country_flag = TEX_anything_goes
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = TEX_isnot_supporting_smith
+				}				
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_support_smith"
+			add_to_variable = { TEX_smith_power = 10 }
+			set_country_flag = TEX_is_supporting_smith
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_support_smith"
+			clr_country_flag = TEX_is_supporting_smith
+		}
+	}
+	TEX_fuck_smith = {
+		icon = propaganda1
+		cost = 20
+		priority = 10
+		days_remove = 2
+		days_re_enable = 5
+
+		available = {
+			has_completed_focus = TEX_huey_died
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = TEX_is_supporting_smith
+				}				
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_fuck_smith"
+			add_to_variable = { TEX_smith_power = -10 }
+			set_country_flag = TEX_isnot_supporting_smith
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_fuck_smith"
+			clr_country_flag = TEX_isnot_supporting_smith
+		}
+	}
+	TEX_support_coughlin = {
+		icon = propaganda1
+		cost = 20
+		priority = 10
+		days_remove = 2
+		days_re_enable = 5
+
+		available = {
+			has_completed_focus = TEX_huey_died
+			NOT = {
+				has_country_flag = TEX_anything_goes
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = TEX_isnot_supporting_coughlin
+				}				
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_support_coughlin"
+			add_to_variable = { TEX_coughlin_power = 10 }
+			gui_dirty_change = yes
+			set_country_flag = TEX_is_supporting_coughlin
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_support_coughlin"
+			clr_country_flag = TEX_is_supporting_coughlin
+		}
+	}
+	TEX_fuck_coughlin = {
+		icon = propaganda1
+		cost = 20
+		priority = 10
+		days_remove = 2
+		days_re_enable = 5
+
+		available = {
+			has_completed_focus = TEX_huey_died
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = TEX_is_supporting_coughlin
+				}				
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_fuck_coughlin"
+			add_to_variable = { TEX_coughlin_power = -10 }
+			gui_dirty_change = yes
+			set_country_flag = TEX_isnot_supporting_coughlin
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_fuck_coughlin"
+			clr_country_flag = TEX_isnot_supporting_coughlin
+		}
+	}
+	TEX_support_long = {
+		icon = propaganda1
+		cost = 20
+		priority = 10
+		days_remove = 2
+		days_re_enable = 5
+
+		available = {
+			has_completed_focus = TEX_huey_died
+			NOT = {
+				has_country_flag = TEX_anything_goes
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = TEX_isnot_supporting_long
+				}				
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_support_long"
+			add_to_variable = { TEX_long_power = 10 }
+			gui_dirty_change = yes
+			set_country_flag = TEX_is_supporting_long
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_support_long"
+			clr_country_flag = TEX_is_supporting_long
+		}
+	}
+	TEX_fuck_long = {
+		icon = propaganda1
+		cost = 20
+		priority = 10
+		days_remove = 2
+		days_re_enable = 5
+
+		available = {
+			has_completed_focus = TEX_huey_died
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = TEX_is_supporting_long
+				}				
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_fuck_long"
+			add_to_variable = { TEX_long_power = -10 }
+			gui_dirty_change = yes
+			set_country_flag = TEX_isnot_supporting_long
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_fuck_long"
+			clr_country_flag = TEX_isnot_supporting_long
+		}
+	}
+	TEX_support_bingham = {
+		icon = propaganda1
+		cost = 20
+		priority = 10
+		days_remove = 2
+		days_re_enable = 5
+
+		available = {
+			has_completed_focus = TEX_huey_died
+			NOT = {
+				has_country_flag = TEX_anything_goes
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = TEX_isnot_supporting_bingham
+				}				
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_support_bingham"
+			add_to_variable = { TEX_bingham_power = 10 }
+			gui_dirty_change = yes
+			set_country_flag = TEX_is_supporting_bingham
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_support_bingham"
+			clr_country_flag = TEX_is_supporting_bingham
+		}
+	}
+	TEX_fuck_bingham = {
+		icon = propaganda1
+		cost = 20
+		priority = 10
+		days_remove = 2
+		days_re_enable = 5
+
+		available = {
+			has_completed_focus = TEX_huey_died
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = TEX_is_supporting_bingham
+				}				
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_fuck_bingham"
+			add_to_variable = { TEX_bingham_power = -10 }
+			gui_dirty_change = yes
+			set_country_flag = TEX_isnot_supporting_bingham
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_fuck_bingham"
+			clr_country_flag = TEX_isnot_supporting_bingham
+		}
+	}
+	TEX_unite_the_party = {
+		icon = propaganda1
+		cost = 40
+		priority = 100
+		days_remove = 7
+		days_re_enable = 3	
+
+		available = {
+			has_completed_focus = TEX_huey_died
+			has_country_flag = TEX_centrist_survey
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TEX_fuck_bingham"
+			add_to_variable = { TEX_smith_power = -10 }
+			add_to_variable = { TEX_coughlin_power = -10 }
+			add_to_variable = { TEX_long_power = -10 }
+			add_to_variable = { TEX_bingham_power = -10 }
+			custom_effect_tooltip = TEX_all_down
+			gui_dirty_change = yes
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_fuck_bingham"
+		}
+	}
+}
