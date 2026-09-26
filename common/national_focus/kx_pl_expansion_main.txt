@@ -3409,7 +3409,7 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
-			add_ideas = PLX_leg_semi_nationalization_1
+			add_ideas = PLX_leg_liberal_1
 		}
 	}
 	focus = {
@@ -3431,7 +3431,10 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
-			add_ideas = PLX_leg_semi_nationalization_1
+			swap_ideas = {
+				remove_idea = PLX_leg_liberal_1
+				add_idea = PLX_leg_liberal_2
+			}
 		}
 	}
 	focus = {
@@ -3455,7 +3458,10 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
-			add_ideas = PLX_leg_semi_nationalization_1
+			swap_ideas = {
+				remove_idea = PLX_leg_liberal_2
+				add_idea = PLX_leg_liberal_3
+			}
 		}
 	}
 	focus = {
@@ -3478,7 +3484,7 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
-			add_ideas = PLX_leg_semi_nationalization_1
+			add_ideas = SOC_POL_ZL_capital_first
 		}
 	}
 	focus = {
@@ -3648,9 +3654,17 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = PLX_leg_semi_nationalization_1
-				add_idea = PLX_leg_semi_nationalization_2
+			if = {
+				limit = {
+					has_idea = PLX_leg_semi_nationalization_1
+				}
+				swap_ideas = {
+					remove_idea = PLX_leg_semi_nationalization_1
+					add_idea = PLX_leg_semi_nationalization_2
+				}
+			}
+			else = {
+				add_ideas = PLX_leg_limit_strike
 			}
 		}
 	}
@@ -6416,7 +6430,7 @@ focus_tree = {
 		id = KX_PL_PZPR_SOCIALISED_MARKET_ECONOMY
 		icon = GFX_RUS_State_Regulation_Act
 		available = {
-			#has_country_flag = plx_start
+			has_completed_focus = KX_PL_PZPR_WE_ALWAYS_WERE_REPUBLICANS
 		}
 		prerequisite = {
 			focus = KX_PL_PZPR_MID_FARMING
@@ -33302,7 +33316,18 @@ focus = {
 	available = { always = yes }
 	ai_will_do = { factor = 100 }
 	completion_reward = {
-		
+		if = {
+			limit = {
+				has_country_flag = POL_solidarity_left
+			}
+			country_event = plxv2.153
+		}
+		if = {
+			limit = {
+				has_country_flag = POL_solidarity_right
+			}
+			country_event = plxv2.154
+		}
 	}
 }
 focus = {
@@ -33323,11 +33348,10 @@ focus = {
        		ideology = social_conservative
       		popularity = -0.1
       	}
+		set_cosmetic_tag = POL_solidarity_cosmetic
 		increase_ruling_party_popularity_by_10 = yes
 		add_stability = 0.15
-		hidden_effect = {
-
-		}
+		
 	}
 }
 focus = {
@@ -33906,9 +33930,7 @@ focus = {
 	available = { always = yes }
 	ai_will_do = { factor = 100 }
 	completion_reward = {
-		#add_tot_to_ban = yes
-		#add_synd_to_ban = yes
-		#add_natpop_to_ban = yes
+		country_event = plxv2.155
 
 	}
 }
@@ -34021,7 +34043,7 @@ focus = {
 	available = { always = yes }
 	ai_will_do = { factor = 100 }
 	completion_reward = {
-		
+		country_event = plxv2.156
 	}
 }
 
@@ -34921,7 +34943,21 @@ focus = {
 		x = -40
 		y = 60
 		cost = 4
-		
+		select_effect = {
+			if = {
+				limit = {
+					check_variable = { POL.unity < 30 } #other left
+				}
+
+			}
+			else_if = {
+				limit = {
+					check_variable = { POL.unity > 30 }
+					check_variable = { POL.radicalism > 60 } #dlugo
+				}
+				
+			}
+		}
 		ai_will_do = { factor = 1 }
 		completion_reward = {
 			add_political_power = 100
@@ -34940,12 +34976,44 @@ focus = {
 		mutually_exclusive = {
 			focus = POL_reward_the_majors_clique
 		}
+		available = {
+			check_variable = { POL.radicalism > 30 }
+			check_variable = { POL.radicalism < 60 }
+			custom_trigger_tooltip = POL_radicalism_is_medium
+		}
 		relative_position_id = POL_return_of_the_holy_son
 		prerequisite = {
 			focus = POL_return_of_the_holy_son
 		}
 		completion_reward = {
-			add_political_power = 100
+			create_country_leader = {
+				name = "亚当·斯克瓦尔钦斯基"
+				picture = "gfx/leaders/POL/Portrait_PLX_Adam_Skwarczynski.png"
+				expire = "1.1.1"
+				ideology = tot_paternal_socialism_subtype
+			}
+		set_party_name = {
+			ideology = totalist
+			long_name = POL_totalist_bbwr_party_long
+			name = POL_totalist_bbwr_party
+		}
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = POL_Walery_Slawek_VISIBLE
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.15
+			}
+			set_politics = {
+				ruling_party = totalist
+				elections_allowed = no
+			}
+			remove_all_ministers = yes
+			add_ideas = {
+				POL_Welery_Slawek_hog_pau
+				POL_Boleslaw_Wieniawa_Dlugoszewski_for_pau
+				POL_Stanislaw_Szeptycki_eco_pau
+				POL_Marian_Kukiel_sec_pau
+			}
 		}
 		# 实现毕苏斯基的愿景
 	}
@@ -34961,12 +35029,47 @@ focus = {
 		mutually_exclusive = {
 			focus = POL_reward_the_majors_clique
 		}
+		available = {
+			check_variable = { POL.radicalism < 30 }
+			custom_trigger_tooltip = POL_radicalism_is_low
+		}
 		relative_position_id = POL_realize_pilsudskis_vision
 		x = 3
 		y = 0
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			create_country_leader = {
+				name = "亚历山大·普里斯托尔"
+				picture = "gfx/leaders/POL/Portrait_POL_Aleksander_Prystor.png"
+				expire = "1.1.1"
+				ideology = radsoc_popular_patriotism_subtype
+			}
+			create_country_leader = {
+				name = "亚历山大·普里斯托尔"
+				picture = "gfx/leaders/POL/Portrait_POL_Aleksander_Prystor.png"
+				expire = "1.1.1"
+				ideology = popular_patriotism_subtype
+			}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = POL_social_democrat_legacy_party_long
+			name = POL_social_democrat_legacy_party
+		}
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = POL_social_democrat_legacy_party_long
+			name = POL_social_democrat_legacy_party
+		}
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = POL_Walery_Slawek_VISIBLE
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.15
+			}
 		}
 		# 回归社会主义根源
 	}
@@ -34987,7 +35090,18 @@ focus = {
 		y = 0
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			create_country_leader = {
+				name = "卡齐米日·斯威塔尔斯基"
+				picture = "gfx/leaders/POL/Portrait_POL_Kazimierz_Switalski.png"
+				expire = "1.1.1"
+				ideology = red_tinted_autocracy_subtype
+			}
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = POL_Walery_Slawek_VISIBLE
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
 		}
 		# 奖赏少校集团
 	}
@@ -35002,7 +35116,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_unlimited_presidential_power
 		}
 		# 总统权力无限
 	}
@@ -35018,6 +35132,20 @@ focus = {
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = totalist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = syndicalist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.15
+			}
 		}
 		# 净化工团污秽
 	}
@@ -35035,7 +35163,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_socialism_in_jackboots
 		}
 		# 军靴中的社会主义
 	}
@@ -35050,7 +35178,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_build_a_patronage_network
 		}
 		# 建立恩庇关系网
 	}
@@ -35065,7 +35193,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_rule_of_brutal_oppression
 		}
 		# 暴力高压统治
 	}
@@ -35080,7 +35208,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_hyperindustrialization_under_authority
 		}
 		# 威权指导下的超工业化
 	}
@@ -35098,7 +35226,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_the_nation_sings_in_unison
 		}
 		# 全国同声歌唱
 	}
@@ -35117,7 +35245,14 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
+			set_politics = {
+				ruling_party = social_democrat
+				elections_allowed = no
+			}
 			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_radsoc_to_coalition = yes
 		}
 		# 忠诚的打手们
 	}
@@ -35136,7 +35271,14 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			set_politics = {
+				ruling_party = radical_socialist
+				elections_allowed = no
+			}
+			add_socdem_to_coalition = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
 		}
 		# 老同志们的橄榄枝
 	}
@@ -35153,7 +35295,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_overcome_party_politics
 		}
 		# 战胜党派政治
 	}
@@ -35168,7 +35310,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_know_everything_intervene_everywhere
 		}
 		# 了解一切，干预一切
 	}
@@ -35186,7 +35328,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_redder_than_britain_and_france
 		}
 		# 比英法更红
 	}
@@ -35201,7 +35343,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_blue_socialist_reconstruction
 		}
 		# 蓝色社会主义式重构
 	}
@@ -35219,7 +35361,7 @@ focus = {
 		y = 3
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_unite_the_socialist_parties
 		}
 		# 统合社会主义政党
 	}
@@ -35238,7 +35380,7 @@ focus = {
 		y = 3
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_peoples_capitalism
 		}
 		# 人民资本主义
 	}
@@ -35256,7 +35398,7 @@ focus = {
 		y = 3
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_welfarist_safety_net
 		}
 		# 福利主义托底
 	}
@@ -35274,7 +35416,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_republic_shining_new
 		}
 		# 共和国，崭新闪亮
 	}
@@ -35289,7 +35431,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_purification_of_sanacja
 		}
 		# 萨纳齐亚的净化
 	}
@@ -35305,6 +35447,28 @@ focus = {
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = -0.15
+			}
+			random_unit_leader = {
+				limit = { has_id = 19861 }
+				remove_unit_leader = yes
+			}
+			random_unit_leader = {
+				limit = { has_id = 19861 }
+				remove_unit_leader = yes
+			}
 		}
 		# 清理国贼
 	}
@@ -35322,7 +35486,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_purification_of_sanacja
+				add_idea = POL_a_national_moral_revolution
+			}
 		}
 		# 一场国民道德革命
 	}
@@ -35337,7 +35504,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_vanguardist_elite_stratum
 		}
 		# 先锋队精英阶层
 	}
@@ -35352,7 +35519,10 @@ focus = {
 		y = 4
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_vision_of_the_total_state
+			set_popularity = {
+				totalist = 100
+			}
 		}
 		# 总体国度之愿景
 	}
@@ -35367,7 +35537,16 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_achieve_state_socialization
+			add_synd_to_ban = yes
+			add_radsoc_to_ban = yes
+			add_socdem_to_ban = yes
+			add_soclib_to_ban = yes
+			add_marlib_to_ban = yes
+			add_soccon_to_ban = yes
+			add_authdem_to_ban = yes
+			add_pataut_to_ban = yes
+			add_natpop_to_ban = yes
 		}
 		# 实现国家社会化
 	}
@@ -35385,7 +35564,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_the_marshal_was_the_marshal_is_the_marshal_shall_be
 		}
 		# 元帅活在过去！元帅活在现在！元帅将会永存！
 	}

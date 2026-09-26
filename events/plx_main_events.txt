@@ -1013,25 +1013,25 @@ country_event = {
 			set_party_name = {
 				ideology = social_conservative
 				long_name = POL_fjr_party_long
-				name = "FJR"
+				name = POL_fjr_party
 			}
 			set_country_flag = plx_fjr_soclib
 			set_party_name = {
 				ideology = social_liberal
 				long_name = POL_fjr_party_long
-				name = "FJR"
+				name = POL_fjr_party
 			}
 			set_country_flag = plx_fjr_radsoc
 			set_party_name = {
 				ideology = radical_socialist
 				long_name = POL_fjr_party_long
-				name = "FJR"
+				name = POL_fjr_party
 			}
 			set_country_flag = plx_fjr_socdem
 			set_party_name = {
 				ideology = social_democrat
 				long_name = POL_fjr_party_long
-				name = "FJR"
+				name = POL_fjr_party
 			}
 
 			create_country_leader = {
@@ -1050,7 +1050,7 @@ country_event = {
 				name = "卡罗尔·奥布拉希特二世"
 				picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
 				expire = "1965.1.1"
-				ideology = radsoc_liberal_socialism_subtype
+				ideology = radsoc_paternal_socialism_subtype
 			}
 			create_country_leader = {
 				name = "卡罗尔·奥布拉希特二世"
@@ -1339,7 +1339,7 @@ country_event = {
 			set_party_name = {
 				ideology = national_populist
 				long_name = POL_fjr_party_long
-				name = "FJR"
+				name = POL_fjr_party
 			}			
 			complete_national_focus = KX_PL_PZPR_REACH_TO_YOUNG_NATDEM
 			create_country_leader = {
@@ -1348,7 +1348,7 @@ country_event = {
 				expire = "1965.1.1"
 				desc = "POLITICS_KAROL_OLBRACHT_HABSBURG_DESC"
 				traits = { charitable_emperor }
-				ideology = natpop_popular_patriotism_subtype
+				ideology = natpop_paternal_socialism_subtype
 			}	
 			add_ideas = {
 				POL_Antoni_Ciszak_hog_tot
@@ -1422,12 +1422,12 @@ country_event = {
 			set_party_name = {
 				ideology = social_democrat
 				long_name = POL_social_democrat_party_long
-				name = "PPS"
+				name = POL_social_democrat_party
 			}
 			set_party_name = {
 				ideology = radical_socialist
 				long_name = POL_radical_socialist_party_long
-				name = "PPS"
+				name = POL_radical_socialist_party
 			}			
 			
 			add_soclib_to_coalition = yes
@@ -1482,7 +1482,7 @@ country_event = {
 			set_party_name = {
 				ideology = radical_socialist
 				long_name = POL_radical_socialist_party_long
-				name = "PPS"
+				name = POL_radical_socialist_party
 			}			
 			
 			end_coalition = yes
@@ -1649,6 +1649,11 @@ country_event = {
 		hidden_effect = {
 			set_country_flag = plx_pzpr_monarchy
 		}
+		country_event = {
+			id = plxv2.152
+			days = 1
+		}
+		
 		ai_chance = {
 			factor = 60
 		}		
@@ -4119,27 +4124,16 @@ country_event = {
 			}
 
 			create_country_leader = {
-				name = "卡罗尔·奥布拉希特二世"
-				picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
-				expire = "1965.1.1"
-				ideology = christian_democracy_subtype
-			}
-
-			if = {
-				limit = { has_country_flag = plx_pzpr_republic }
-				create_country_leader = {
 					name = "约瑟夫·查辛斯基"
 					#desc = "POLITICS_JOZEF_CHACINSKI_DESC"
 					picture = "gfx/leaders/POL/Portrait_POL_Jozef_Chacinski.png"
 					expire = "1965.1.1"
 					ideology = christian_democracy_subtype
 				}
-			}			
-
 			set_party_name = {
 				ideology = social_conservative
-				long_name = POL_chadecja2_party_long
-				name = "ChSD"
+				long_name = POL_social_conservative_party_long
+				name = POL_social_conservative_party
 			}
 			
 			remove_all_ministers = yes
@@ -9368,6 +9362,7 @@ country_event = {
 		mark_focus_tree_layout_dirty = yes
 	}		
 }
+
 country_event = {
 	id = plxv2.151
 	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.142" }
@@ -9410,6 +9405,178 @@ country_event = {
 		
 }
 country_event = {
+	id = plxv2.152
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.142" }
+	title = plxv2.152.t
+	desc = plxv2.152.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = {
+		name = plxv2.152.a
+		clr_country_flag = plx_anti_endecja
+		uncomplete_national_focus = {
+			focus = KX_PL_PZPR_UNITED_FRONT
+			uncomplete_children = yes
+		}
+		if = {
+			limit = {
+				has_country_flag = plx_pzpr_left
+			}
+			set_country_flag = PLX_solidarity
+			set_country_flag = POL_solidarity_right
+			set_politics = {
+				ruling_party = paternal_autocrat
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "扬·奇亚"
+				picture = "gfx/leaders/POL/Portrait_POL_Jan_Zieja.png"
+				expire = "1.1.1"
+				ideology = pataut_agrarianism_subtype
+			}
+			create_country_leader = {
+				name = "沃伊切赫·奇恩宾斯基"
+				picture = "gfx/leaders/POL/Portrait_POL_Wojciech_Ziembinski.png"
+				expire = "1.1.1"
+				ideology = authdem_right_syndicalism_subtype
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.15
+			}
+			add_authdem_to_coalition = yes
+		}
+	}
+	if = {
+			limit = {
+				has_country_flag = plx_pzpr_right
+			}
+			set_country_flag = PLX_solidarity
+			set_country_flag = POL_solidarity_left
+			set_politics = {
+				ruling_party = radical_socialist
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "爱德华·利平斯基"
+				picture = "gfx/leaders/POL/Portrait_POL_Edward_Lipinski.png"
+				expire = "1.1.1"
+				ideology = utopian_technocracy_subtype
+			}
+			create_country_leader = {
+				name = "亚当·斯查普伊斯基"
+				picture = "gfx/leaders/POL/Portrait_POL_Adam_Szczypiorski.png"
+				expire = "1.1.1"
+				ideology = socdem_liberalized_syndicalism_subtype
+			}
+			set_country_flag = soc_dems_are_socialists
+			add_socdem_to_coalition = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.15
+			}
+		}
+}
+country_event = {
+	id = plxv2.153
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = plxv2.153.t
+	desc = plxv2.153.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxv2.153.a
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+		}
+		add_radsoc_to_coalition = yes
+	}
+	option = {
+		name = plxv2.153.b
+		
+	}
+}
+country_event = {
+	id = plxv2.154
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = plxv2.154.t
+	desc = plxv2.154.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxv2.154.a
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		add_pataut_to_coalition = yes
+	}
+	option = {
+		name = plxv2.154.b
+		
+	}
+}
+country_event = {
+	id = plxv2.155
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = plxv2.155.t
+	desc = plxv2.155.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxv2.155.a
+		add_tot_to_ban = yes
+		add_natpop_to_ban = yes
+	}
+}
+country_event = {
+	id = plxv2.156
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = plxv2.156.t
+	desc = plxv2.156.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxv2.156.a
+		GER = {
+			add_to_faction = POL
+		}
+	}
+	option = {
+		name = plxv2.156.b
+		
+	}
+}
+country_event = {
 	id = sanation.1
 	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
 	title = sanation.1.t
@@ -9427,7 +9594,7 @@ country_event = {
 
 }
 country_event = {
-	id = sanation.2
+	id = sanation.2 #slawek continues
 	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
 	title = sanation.2.t
 	desc = sanation.2.d
@@ -9439,32 +9606,10 @@ country_event = {
 
 	option = {
 		name = sanation.2.a
-		set_politics = {
-			ruling_party = national_populist
-			elections_allowed = no
-		}
-		add_tot_to_ban = yes
-		add_synd_to_ban = yes
-		add_radsoc_to_ban = yes
-		add_socdem_to_ban = yes
-		add_soclib_to_ban = yes 
-		add_marlib_to_ban = yes 
-		add_soccon_to_ban = yes
-		add_authdem_to_ban = yes 
-		add_pataut_to_ban = yes
-		add_natpop_to_ban = yes
+		set_country_flag = POL_struggle_is_over
+		set_country_flag = POL_sanation_slawek_win
+		mark_focus_tree_layout_dirty = yes
+		remove_power_balance = POL_sanation_bop
 	}
-	option = {
-		name = sanation.2.b
-		remove_tot_from_ban = yes
-		remove_synd_from_ban = yes
-		remove_radsoc_from_ban = yes
-		remove_socdem_from_ban = yes
-		remove_soclib_from_ban = yes 
-		remove_marlib_from_ban = yes 
-		remove_soccon_from_ban = yes
-		remove_authdem_from_ban = yes 
-		remove_pataut_from_ban = yes
-		remove_natpop_from_ban = yes
-	}
+	
 }
