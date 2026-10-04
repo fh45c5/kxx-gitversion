@@ -335,8 +335,24 @@ POL_sanation_second = {
 
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision timeout SOV_26_congress_mission"
-			#country_event = sovietpol.1050
-			
+			if = {
+				limit = {
+					check_variable = { smigly_factor > moci_factor }
+                    check_variable = { smigly_factor > beck_factor }
+				}
+				#
+			}
+			else_if = {
+				limit = {
+					check_variable = { moci_factor > smigly_factor }
+                    check_variable = { moci_factor > beck_factor }
+				}
+				country_event = sanation.12 #moci
+			}
+			else = {
+				country_event = sanation.10 #beck
+				
+			}
 		}
 	}
 
@@ -350,7 +366,7 @@ POL_sanation_second = {
 		icon = ger_mefo_bills
 
 		available = {
-			has_country_flag = POL_sanation_second
+			hidden_trigger = { always = no }
 		}
 
 		selectable_mission = yes
@@ -366,7 +382,7 @@ POL_sanation_second = {
 
 		cancel_trigger = {
 			NOT = {
-				has_country_flag = POL_sanation_second
+				has_country_flag = POL_sanation_struggle_second
 			}
 		}
 
@@ -374,13 +390,14 @@ POL_sanation_second = {
 			log = "[GetDateText]: [Root.GetName]: Decision SOV_Shliapnikov_Supporters_mission"
 			add_to_variable = { var = smigly_factor value = -1 }
 			custom_effect_tooltip = "希米格维的影响力将降低"
-			
+			activate_mission = POL_Smigly_Supporters_mission
 		}
 
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision timeout SOV_Shliapnikov_Supporters_mission"
 			add_to_variable = { var = smigly_factor value = 3 }
 			custom_effect_tooltip = "希米格维的影响力将增加"
+			activate_mission = POL_Smigly_Supporters_mission
 		}
 	}
 	POL_Moci_Supporters_mission = {
@@ -392,7 +409,7 @@ POL_sanation_second = {
 		icon = ger_mefo_bills
 
 		available = {
-			has_country_flag = POL_sanation_second
+			hidden_trigger = { always = no }
 		}
 
 		selectable_mission = yes
@@ -408,7 +425,7 @@ POL_sanation_second = {
 
 		cancel_trigger = {
 			NOT = {
-				has_country_flag = POL_sanation_second
+				has_country_flag = POL_sanation_struggle_second
 			}
 		}
 
@@ -416,13 +433,14 @@ POL_sanation_second = {
 			log = "[GetDateText]: [Root.GetName]: Decision SOV_Shliapnikov_Supporters_mission"
 			add_to_variable = { var = moci_factor value = -1 }
 			custom_effect_tooltip = "莫希奇茨基的影响力将降低"
-			
+			activate_mission = POL_Moci_Supporters_mission
 		}
 
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision timeout SOV_Shliapnikov_Supporters_mission"
 			add_to_variable = { var = moci_factor value = 3 }
 			custom_effect_tooltip = "莫希奇茨基的影响力将增加"
+			activate_mission = POL_Moci_Supporters_mission
 		}
 	}
 	POL_Beck_Supporters_mission = {
@@ -434,7 +452,7 @@ POL_sanation_second = {
 		icon = ger_mefo_bills
 
 		available = {
-			has_country_flag = POL_sanation_second
+			hidden_trigger = { always = no }
 		}
 
 		selectable_mission = yes
@@ -450,7 +468,7 @@ POL_sanation_second = {
 
 		cancel_trigger = {
 			NOT = {
-				has_country_flag = POL_sanation_second
+				has_country_flag = POL_sanation_struggle_second
 			}
 		}
 
@@ -458,13 +476,14 @@ POL_sanation_second = {
 			log = "[GetDateText]: [Root.GetName]: Decision SOV_Shliapnikov_Supporters_mission"
 			add_to_variable = { var = beck_factor value = -1 }
 			custom_effect_tooltip = "贝克的影响力将降低"
-			
+			activate_mission = POL_Beck_Supporters_mission
 		}
 
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision timeout SOV_Shliapnikov_Supporters_mission"
 			add_to_variable = { var = beck_factor value = 3 }
 			custom_effect_tooltip = "贝克的影响力将增加"
+			activate_mission = POL_Beck_Supporters_mission
 		}
 	}
 
