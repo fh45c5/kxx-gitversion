@@ -2441,13 +2441,52 @@ shared_focus = {
 		}
 
 		available = {
-			has_country_flag = has_united_china 
+			is_subject = no
+			china_no_rival_governments_left = yes
+			592 = { is_owned_by_ROOT_or_ally = yes } #Guangzhou
+			608 = { is_owned_by_ROOT_or_ally = yes } #Beijing
+			613 = { is_owned_by_ROOT_or_ally = yes } #Nanjing
+			1048 = { is_owned_by_ROOT_or_ally = yes } #Wuhan
+			716 = { is_owned_by_ROOT_or_ally = yes } #Shenyang
+			surrender_progress < 0.05
+			NOT = {
+				any_home_area_neighbor_country = {
+					OR = {
+						AND = {
+							has_war_with = ROOT
+							has_capitulated = no
+						}
+						AND = {
+							has_wargoal_against = ROOT
+							can_declare_war_on = ROOT
+						}
+					}
+				}
+			}
 		}
 
 		
 
 		ai_will_do = { base = 100 }
 		completion_reward = {
+			hidden_effect = {
+				#set_potential_national_government = yes
+				set_country_flag = has_united_china
+				set_global_flag = china_united
+				set_cosmetic_tag = UPC
+				if = {
+					limit = { NOT = { has_country_flag = china_capital_set_flag } }
+					set_capital = { state = 608 }
+				}
+				add_timed_idea = {
+					idea = unite_china_justification_idea
+					days = 150
+				}
+				news_event = {
+					id = worldnews.413
+					days = 1
+				}
+			}
 			set_party_name = {
 				ideology = social_liberal
 				name = UPC_CMS_party
@@ -2468,34 +2507,34 @@ shared_focus = {
 				name = UPC_PGP_party
 				long_name = UPC_PGP_party_long
 			}
-		create_country_leader = {
-			name = "罗隆基"
-			desc = "YUN_luo_longji_bio"
-			picture = "gfx/leaders/YUN/YUN_luo_longji.png"
-			expire = "1.1.1"
-			ideology = soclib_liberal_socialism_subtype
-		}
-		create_country_leader = {
-			name = "寸树生"
-			desc = "YUN_cun_shusheng_bio"
-			picture = "gfx/leaders/YUN/YUN_cun_shusheng.png"
-			expire = "1.1.1"
-			ideology = socdem_democratic_socialism_subtype
-		}
-		create_country_leader = {
-			name = "唐继尧"
-			desc = "POLITICS_YUNNAN_TANG_JIYAO_DESC"
-			picture = "gfx/leaders/YUN/Portrait_Yunnan_Tang_Jiyao.png"
-			expire = "1.1.1"
-			ideology = soccon_chinese_federalism_subtype
-		}
-		create_country_leader = {
-			name = "唐继虞"
-			desc = "YUN_tang_jiyu_sic_desc"
-			picture = "gfx/leaders/YUN/YUN_tang_jiyu.png"
-			expire = "1.1.1"
-			ideology = marlib_lianshengism_subtype
-		}
+			create_country_leader = {
+				name = "罗隆基"
+				desc = "YUN_luo_longji_bio"
+				picture = "gfx/leaders/YUN/YUN_luo_longji.png"
+				expire = "1.1.1"
+				ideology = soclib_liberal_socialism_subtype
+			}
+			create_country_leader = {
+				name = "寸树生"
+				desc = "YUN_cun_shusheng_bio"
+				picture = "gfx/leaders/YUN/YUN_cun_shusheng.png"
+				expire = "1.1.1"
+				ideology = socdem_democratic_socialism_subtype
+			}
+			create_country_leader = {
+				name = "唐继尧"
+				desc = "POLITICS_YUNNAN_TANG_JIYAO_DESC"
+				picture = "gfx/leaders/YUN/Portrait_Yunnan_Tang_Jiyao.png"
+				expire = "1.1.1"
+				ideology = soccon_chinese_federalism_subtype
+			}
+			create_country_leader = {
+				name = "唐继虞"
+				desc = "YUN_tang_jiyu_sic_desc"
+				picture = "gfx/leaders/YUN/YUN_tang_jiyu.png"
+				expire = "1.1.1"
+				ideology = marlib_lianshengism_subtype
+			}
 			set_cosmetic_tag = UPC
 			#election event here
 			country_event = yun.1000
