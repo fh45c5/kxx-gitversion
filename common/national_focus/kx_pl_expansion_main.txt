@@ -36557,7 +36557,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_decentralized_direct_democracy
 		}
 		# 去中心化直接民主
 	}
@@ -36572,7 +36572,14 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_cooperate_with_panslavists
+			add_tot_to_coalition = yes
+			set_party_name = {
+				ideology = totalist
+				long_name = POL_sanation_authoritarian_democrat_party_long
+				name = POL_sanation_authoritarian_democrat_party
+			}
+			
 		}
 		# 同泛斯拉夫主义者合作
 	}
@@ -36587,7 +36594,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_national_self_sufficiency
 		}
 		# 民族的自给自足
 	}
@@ -36608,7 +36615,13 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			LIT = {
+				country_event = sanation.9
+			}
+			swap_ideas = {
+				remove_idea = POL_cooperate_with_panslavists
+				add_idea = POL_cooperate_with_panslavists2
+			}
 		}
 		# 维尔纽斯之夜
 	}
@@ -36623,7 +36636,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_the_german_threat_from_the_west
 		}
 		# 西方的日耳曼威胁
 	}
@@ -36638,7 +36651,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_yellow_peril_panic_from_the_east
 		}
 		# 东方的黄祸恐慌
 	}
@@ -36656,7 +36669,10 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_cooperate_with_panslavists2
+				add_idea = POL_cooperate_with_panslavists3
+			}
 		}
 		# 完成立陶宛整合
 	}
@@ -36671,7 +36687,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_fight_for_slavic_unity
 		}
 		# 为斯拉夫统一而战
 	}
@@ -37361,6 +37377,12 @@ focus = {
 					check_variable = { POL.unity < 45 }
 				}
 				#zegota
+				hidden_effect = {
+					country_event = {
+						id = sanation.13
+						days = 5
+					}
+				}
 			}
 		}
 		completion_reward = {
@@ -38185,6 +38207,31 @@ focus = {
 		x = 15
 		y = 60
 		cost = 4
+		select_effect = {
+			if = {
+				limit = {
+					check_variable = { POL.unity < 30 } #other right
+				}
+				hidden_effect = {
+					country_event = {
+						id = sanation.3
+						days = 5
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { POL.unity > 30 }
+					check_variable = { POL.radicalism > 60 } #zeli
+				}
+				hidden_effect = {
+					country_event = {
+						id = sanation.7
+						days = 5
+					}
+				}
+			}
+		}
 		
 		completion_reward = {
 			add_political_power = 100
@@ -38197,6 +38244,10 @@ focus = {
 		prerequisite = {
 			focus = POL_a_new_augustus
 		}
+		available = {
+			check_variable = { POL.radicalism < 30 }
+			custom_trigger_tooltip = POL_radicalism_is_low
+		}
 		mutually_exclusive = {
 			focus = POL_first_marshal_second_figure
 		}
@@ -38208,7 +38259,39 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			create_country_leader = {
+				name = "亚当·科茨"
+				picture = "gfx/leaders/POL/Portrait_POL_Adam_Koc.png"
+				expire = "1.1.1"
+				ideology = authdem_national_front_subtype
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = POL_ozn_party_long
+				name = POL_ozn_party
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = POL_ozn_party_long
+				name = POL_ozn_party
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = POL_ozn_party_long
+				name = POL_ozn_party
+			}
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = POL_Edward_Rydz_Smigly_VISIBLE
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.15
+			}
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				elections_allowed = no
+			}
+			add_pataut_to_coalition = yes
+			add_natpop_to_coalition = yes
 		}
 		# 建立民族统一营
 	}
@@ -38217,6 +38300,11 @@ focus = {
 		icon = GFX_focus_POL_sanation_right
 		prerequisite = {
 			focus = POL_a_new_augustus
+		}
+		available = {
+			check_variable = { POL.radicalism > 30 }
+			check_variable = { POL.radicalism < 60 }
+			custom_trigger_tooltip = POL_radicalism_is_medium
 		}
 		mutually_exclusive = {
 			focus = POL_establish_the_camp_of_national_unity
@@ -38229,7 +38317,19 @@ focus = {
 		y = 0
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			create_country_leader = {
+				name = "博古斯瓦夫·米耶津斯基"
+				picture = "gfx/leaders/POL/Portrait_POL_Boguslaw_Miedzinski.png"
+				expire = "1.1.1"
+				ideology = junta_subtype
+			}
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = POL_Edward_Rydz_Smigly_VISIBLE
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
+			
 		}
 		# 第一元帅，第二人物
 	}
@@ -38250,7 +38350,28 @@ focus = {
 		y = 0
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			create_country_leader = {
+				name = "斯坦尼斯瓦夫·维特凯维奇"
+				picture = "gfx/leaders/POL/Portrait_POL_Stanislaw_Witkiewicz.png"
+				expire = "1.1.1"
+				ideology = natpop_futurism_subtype
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = POL_sanation_paternal_autocrat_party_long
+				name = POL_sanation_paternal_autocrat_party
+			}
+			set_country_flag = KXX_LEADER_GUI_VISIBLE
+			set_country_flag = POL_Edward_Rydz_Smigly_VISIBLE
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.15
+			}
+			set_politics = {
+				ruling_party = national_populist
+				elections_allowed = no
+			}
+			add_pataut_to_coalition = yes
 		}
 		# 授权总统密党
 	}
@@ -38265,7 +38386,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_the_social_pyramid_stands
 		}
 		# 社会金字塔不可撼动
 	}
@@ -38281,7 +38402,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_artist_spiritual_aristocracy
 		}
 		# 艺术家精神贵族
 	}
@@ -38299,7 +38420,9 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_manpower = 10000
+			add_command_power = 50
+			army_experience = 50
 		}
 		# 超级种族—波兰超人
 	}
@@ -38308,14 +38431,13 @@ focus = {
 		icon = GFX_goal_COL_Promote_Radical_Individualism
 		prerequisite = {
 			focus = POL_patriotic_dictator
-			
 		}
 		relative_position_id = POL_authorize_the_presidents_cabal
 		x = -2
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_individualist_monad_society
 		}
 		# 个人主义单子社会
 	}
@@ -38331,7 +38453,7 @@ focus = {
 		y = -1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_patriotic_dictator
 		}
 		# 爱国独裁者
 	}
@@ -38346,7 +38468,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_centralization_of_power
 		}
 		# 权力集中化
 	}
@@ -38364,7 +38486,7 @@ focus = {
 		y = 3
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_war_against_the_masses
 		}
 		# 对群众的战争
 	}
@@ -38382,7 +38504,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_bongo_above_all
 		}
 		# 邦戈高于一切！
 	}
@@ -38400,6 +38522,8 @@ focus = {
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
+			add_command_power = 50
+			add_war_support = 0.1
 		}
 		# 建立元帅崇拜
 	}
@@ -38415,7 +38539,7 @@ focus = {
 		y = 3
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_savior_of_the_nation
 		}
 		# 国家的救世主
 	}
@@ -38430,7 +38554,8 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_polish_shogunate
+			set_country_leader_ideology = spectral_state_subtype
 		}
 		# 波兰幕府
 	}
@@ -38446,6 +38571,32 @@ focus = {
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_socdem_to_coalition = yes
+			add_soclib_to_coalition = yes 
+			add_marlib_to_coalition = yes
+			add_soccon_to_coalition = yes
+			set_party_name = {
+				ideology = social_democrat
+				long_name = POL_ozn_party_long
+				name = POL_ozn_party
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = POL_ozn_party_long
+				name = POL_ozn_party
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = POL_ozn_party_long
+				name = POL_ozn_party
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = POL_ozn_party_long
+				name = POL_ozn_party
+			}
 		}
 		# 实现全社会团结
 	}
@@ -38463,7 +38614,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_liberal_interventionism
 		}
 		# 自由干预主义
 	}
@@ -38481,7 +38632,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_cooperate_with_the_catholic_church
 		}
 		# 与天主教会合作
 	}
@@ -38497,7 +38648,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_ministry_of_state_defense
 		}
 		# 国家保卫部
 	}
@@ -38512,7 +38663,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_forced_polonization
 		}
 		# 强制波兰化
 	}
@@ -38527,7 +38678,16 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_forced_polonization
+				add_idea = POL_forced_polonization2
+			}
+			if = {
+				limit = {
+					has_government = paternal_autocrat
+				}
+				add_natpop_to_coalition = yes
+			}
 		}
 		# 骑劫民族民主运动
 	}
@@ -38545,7 +38705,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_national_vertical_integration
 		}
 		# 国家垂直整合
 	}
@@ -38563,7 +38723,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_achieve_total_political_dominance
 		}
 		# 实现彻底政治支配
 	}
