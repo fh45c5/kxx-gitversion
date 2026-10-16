@@ -2975,7 +2975,7 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
-			country_event = plxv2.060
+			country_event = sanation.1
 		}
 	}
 	focus = {
@@ -2996,11 +2996,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			country_event = plxv2.063
-			hidden_effect = {
-				country_event = {
-					id = plxv2.72 days = 14
-				}
-			}
+			
 		}
 	}	
 	focus = {
@@ -3023,7 +3019,7 @@ focus_tree = {
 			country_event = plxv2.061
 		}
 	}	
-	focus = {
+	focus = { 
 		id = KX_PL_ZL_QUESTION_OF_THE_ELITES
 		icon = GFX_goal_collaborate_local_elites
 		available = {
@@ -3128,74 +3124,8 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
-			#if = {
-			#	limit = {
-			#		has_country_flag = {
-			#			flag = plx_legionist_sway
-			#			value = 5
-			#		}
-			#	}
-			#	country_event = plxv2.066
-			#}
-			#if = {
-			#	limit = {
-			#		has_country_flag = {
-			#			flag = plx_legionist_sway
-			#			value = 4
-			#		}
-			#	}
-			#	country_event = plxv2.067
-			#}
-			if = {
-				limit = {
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 4
-					}
-					has_country_flag = plx_kwiatkowski_available
-					has_country_flag = plx_legionist_planning
-				}
-				country_event = plxv2.067
-			}
-			else_if = {
-				limit = {
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 4
-					}
-					has_country_flag = plx_legionist_unions
-					has_country_flag = plx_legionist_corporatism
-				}
-				country_event = plxv2.101
-			}
-			else_if = {
-				limit = {
-					#has_country_flag = plx_legionist_young
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 5
-					}					
-				}
-				country_event = plxv2.133
-			}
-			else_if = {
-				limit = {
-					OR = {
-						has_country_flag = {
-							flag = plx_legionist_sway
-							value = 4
-						}
-						has_country_flag = {
-							flag = plx_legionist_sway
-							value = 5
-						}
-					}
-				}
-				country_event = plxv2.066
-			}
-			else = {
-				custom_effect_tooltip = PLX_legionists_uncertain_outcome_tooltitp
-			}			
+			POL_sanation_military_lose_power = yes
+			add_command_power = -25
 		}
 	}
 	focus = {
@@ -3224,34 +3154,15 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
-			if = {
-				limit = {
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 0
-					}
-				}
-				country_event = plxv2.071
-			}
-			else_if = {
-				limit = {
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 1
-					}
-				}
-				country_event = plxv2.070
-			}
-			else = {
-				custom_effect_tooltip = PLX_legionists_uncertain_outcome_tooltitp
-			}			
+			POL_sanation_agrarian_lose_power = yes
+			add_political_power = -50
 		}
 	}	
 	focus = {
 		id = KX_PL_ZL_LONGEST_DAY
 		icon = GFX_goal_GER_Yet_Another_Provisional_Government
 		available = {
-			
+			has_country_flag = POL_struggle_is_over
 		}
 		prerequisite = {
 			focus = KX_PL_ZL_LEFT
@@ -3272,25 +3183,29 @@ focus_tree = {
 		completion_reward = {
 			if = {
 				limit = {
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 0
-					}
+					check_variable = { POL.militarypower > 70 }
 				}
-				country_event = plxv2.071
+				hidden_effect = {
+					country_event = sanation.20
+				}
 			}
-			else_if = {
+			if = {
 				limit = {
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 1
-					}
+					check_variable = { POL.agrarianpower > 70 }
 				}
-				country_event = plxv2.070
+				hidden_effect = {
+					country_event = sanation.21
+				}
 			}
-			else = {
-				custom_effect_tooltip = PLX_legionists_uncertain_outcome_tooltitp
-			}			
+			if = {
+				limit = {
+					check_variable = { POL.natdempower > 70 }
+				}
+				hidden_effect = {
+					country_event = sanation.23
+				}
+			}
+			#insert anti sanation here	
 		}
 	}	
 	focus = {
@@ -3319,27 +3234,8 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
-			if = {
-				limit = {
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 3
-					}
-				}			
-				country_event = plxv2.069
-			}
-			else_if = {
-				limit = {
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 2
-					}
-				}			
-				country_event = plxv2.068
-			}
-			else = {
-				custom_effect_tooltip = PLX_legionists_uncertain_outcome_tooltitp
-			}
+			POL_sanation_natdem_lose_power = yes
+			add_war_support = -0.1
 		}
 	}
 	focus = {
@@ -3509,14 +3405,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_political_power = 100
-			hidden_effect = {
-				country_event = {
-					id = plxv2.119 days = 60
-				}	
-				country_event = {
-					id = plxv2.120 days = 40
-				}			
-			}
+			
 		}
 	}
 	focus = {
@@ -34890,7 +34779,7 @@ focus = {
 				hidden_effect = {
 					country_event = {
 						id = sanation.3
-						days = 5
+						days = 14
 					}
 				}
 			}
@@ -34902,7 +34791,7 @@ focus = {
 				hidden_effect = {
 					country_event = {
 						id = sanation.7
-						days = 5
+						days = 14
 					}
 				}
 			}
@@ -35540,7 +35429,15 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			set_politics = {
+				ruling_party = totalist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+			add_pataut_to_coalition = yes
 		}
 		# 锤子与镰刀
 	}
@@ -35555,7 +35452,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_left_junta_pol
 		}
 		# 强迫合并共产党
 	}
@@ -35570,7 +35467,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_left_junta_pol
+				add_idea = POL_left_junta_pol2
+			}
 		}
 		# 向国际示好
 	}
@@ -35585,7 +35485,10 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_left_junta_pol2
+				add_idea = POL_left_junta_pol3
+			}
 		}
 		# 枪指挥党
 	}
@@ -35603,7 +35506,11 @@ focus = {
 		y = 0
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.1
+			}
+			add_tot_to_ban = yes
 		}
 		# 清洗左派
 	}
@@ -35619,7 +35526,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas =  POL_declare_martial_law
 		}
 		# 颁布戒严令
 	}
@@ -35634,7 +35541,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_the_new_marshal_cult
 		}
 		# 新元帅崇拜
 	}
@@ -35649,7 +35556,15 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_try_the_traitors
+			random_unit_leader = {
+				limit = { has_id = 19861 }
+				remove_unit_leader = yes
+			}
+			random_unit_leader = {
+				limit = { has_id = 2137 }
+				remove_unit_leader = yes
+			}
 		}
 		# 审判国贼
 	}
@@ -35667,7 +35582,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_military_patronage
 		}
 		# 军政庇护主义
 	}
@@ -35682,7 +35597,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_right_junta_pol
 		}
 		# 乾纲独断
 	}
@@ -35697,7 +35612,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_right_junta_pol
+				add_idea = POL_right_junta_pol2
+			}
 		}
 		# 傀儡化民主派与工会
 	}
@@ -35712,7 +35630,10 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_right_junta_pol2
+				add_idea = POL_right_junta_pol3
+			}
 		}
 		# 警察与特工的政权
 	}
@@ -35731,7 +35652,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_the_military_salvation_council_above_all
 		}
 		# 军事救国委员会高于一切
 	}
@@ -35898,6 +35819,7 @@ focus = {
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
+			country_event = sanation.22
 		}
 		# 农民大罢工！
 	}
@@ -35906,6 +35828,9 @@ focus = {
 		icon = GFX_goal_POL_the_red_general
 		prerequisite = {
 			focus = POL_the_peasant_strike
+		}
+		available = {
+			has_government = totalist
 		}
 		mutually_exclusive = {
 			focus = POL_green_poland
@@ -35918,7 +35843,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_red_agar_pol
 		}
 		# 红色将军
 	}
@@ -35933,7 +35858,11 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_red_agar_pol
+				add_idea = POL_red_agar_pol2
+			}
+			
 		}
 		# 农民自助组织
 	}
@@ -35948,7 +35877,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_red_agar_pol2
+				add_idea = POL_red_agar_pol3
+			}
 		}
 		# 揭露布尔什维克的反共主义
 	}
@@ -35963,7 +35895,10 @@ focus = {
 		y = 3
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_red_agar_pol3
+				add_idea = POL_red_agar_pol4
+			}
 		}
 		# 土地归于农民
 	}
@@ -35978,7 +35913,10 @@ focus = {
 		y = 3
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_red_agar_pol4
+				add_idea = POL_red_agar_pol5
+			}
 		}
 		# 布尔什维工农革命
 	}
@@ -35993,7 +35931,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_liquidate_the_sanacja_nobility
 		}
 		# 清算萨纳齐亚贵族
 	}
@@ -36009,7 +35947,19 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_unify_the_peoples_movement
+			set_party_name = {
+				ideology = market_liberal
+				long_name = POL_social_liberal_party_long
+				name = POL_social_liberal_party
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = POL_social_liberal_party_long
+				name = POL_social_liberal_party
+			}
+			add_marlib_to_coalition = yes
+			add_radsoc_to_coalition = yes
 		}
 		# 统一人民运动
 	}
@@ -36017,6 +35967,9 @@ focus = {
 	focus = {
 		id = POL_green_poland
 		icon = GFX_goal_POL_green_poland
+		available = {
+			has_government = social_liberal
+		}
 		prerequisite = {
 			focus = POL_the_peasant_strike
 		}
@@ -36046,7 +35999,14 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_grand_coalition_of_free_parties
+			add_socdem_to_coalition = yes
+			add_soccon_to_coalition = yes
+			set_party_name = {
+				ideology = social_conservative
+				long_name = POL_social_conservative_party_long
+				name = POL_social_conservative_party	
+			}
 		}
 		# 自由政党大联合
 	}
@@ -36061,13 +36021,16 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_restore_democratic_institutions
 		}
 		# 恢复民主制度
 	}
 	focus = {
 		id = POL_blue_flame
 		icon = GFX_goal_POL_blue_flame
+		available = {
+			has_government = paternal_autocrat
+		}
 		prerequisite = {
 			focus = POL_the_peasant_strike
 		}
@@ -36082,7 +36045,7 @@ focus = {
 		y = 0
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_aut_agar_pol
 		}
 		# 蓝色火焰
 	}
@@ -36112,7 +36075,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_aut_agar_pol
+				add_idea = POL_aut_agar_pol2
+			}
 		}
 		# 为传统挺身而出
 	}
@@ -36127,7 +36093,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_aut_agar_pol2
+				add_idea = POL_aut_agar_pol3
+			}
 		}
 		# 农民的独裁者
 	}
@@ -36143,7 +36112,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_strengthen_peasant_guards
 		}
 		# 强化农民卫队
 	}
@@ -36161,7 +36130,7 @@ focus = {
 		y = 3
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_revenge_landlords
 		}
 		# 为自由民主而战
 	}
@@ -36176,7 +36145,7 @@ focus = {
 		y = 4
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_fight_for_liberal_democracy
 		}
 		# 为自由民主而战
 	}
@@ -36192,7 +36161,10 @@ focus = {
 		y = 3
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_aut_agar_pol3
+				add_idea = POL_aut_agar_pol4
+			}
 		}
 		# 波兰的土地，波兰人耕种
 	}
@@ -36207,7 +36179,10 @@ focus = {
 		y = 3
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_aut_agar_pol4
+				add_idea = POL_aut_agar_pol5
+			}
 		}
 		# 全体农民皆爱国
 	}
@@ -36224,7 +36199,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_revenge_against_the_cities
 		}
 		# 向城市复仇
 	}
@@ -36688,6 +36663,12 @@ focus = {
 		cost = 4
 		completion_reward = {
 			add_ideas = POL_fight_for_slavic_unity
+			hidden_effect = {
+				country_event = {
+					id = sanation.19
+					days = 30
+				}
+			}
 		}
 		# 为斯拉夫统一而战
 	}
@@ -36715,7 +36696,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_implement_separation_of_church_and_state
 		}
 		# 实施政教分离
 	}
@@ -36730,7 +36711,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_total_laissez_faire_economy
 		}
 		# 全面自由放任经济
 	}
@@ -36745,7 +36726,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_end_of_centralization
 		}
 		# 终结中央集权
 	}
@@ -36760,7 +36741,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_awaken_civic_building_interest
 		}
 		# 唤醒公民建设兴趣
 	}
@@ -36778,7 +36759,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_imperialism_not_nationalism
 		}
 		# 帝国主义，而非民族主义
 	}
@@ -36793,7 +36774,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_assimilate_minorities
 		}
 		# 同化少数民族
 	}
@@ -36814,7 +36795,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_supplement_objectivism_with_tradition
 		}
 		# 以传统补充客观主义
 	}
@@ -36829,7 +36810,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_freer_market_greater_nation
 		}
 		# 市场越自由，国家越伟大
 	}
@@ -36851,6 +36832,12 @@ focus = {
 		prerequisite = {
 			focus = POL_polish_savinkovism
 		}
+		available = {
+			has_country_leader = {
+				name = "卡罗尔·温季亚戈尔斯基"
+				ruling_only = yes
+			}
+		}
 		mutually_exclusive = {
 			focus = POL_musketeers_take_power
 		}
@@ -36859,7 +36846,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_orth_savin_pol
 		}
 		# 密友的统治
 	}
@@ -36869,6 +36856,12 @@ focus = {
 		prerequisite = {
 			focus = POL_polish_savinkovism
 		}
+		available = {
+			has_country_leader = {
+				name = "斯特凡·维特科夫斯基"
+				ruling_only = yes
+			}
+		}
 		mutually_exclusive = {
 			focus = POL_rule_of_confidants
 		}
@@ -36877,7 +36870,7 @@ focus = {
 		y = 0
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_mil_savin_pol
 		}
 		# 火枪手掌权
 	}
@@ -36892,7 +36885,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_mil_savin_pol
+				add_idea = POL_mil_savin_pol2
+			}
 		}
 		# 清洗军队
 	}
@@ -36907,7 +36903,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_form_combat_squads
 		}
 		# 组建战斗队
 	}
@@ -36925,7 +36921,10 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_mil_savin_pol3
+				add_idea = POL_mil_savin_pol4
+			}
 		}
 		# 鼓励科技创新
 	}
@@ -36943,7 +36942,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_mil_savin_pol4
+				add_idea = POL_mil_savin_pol5
+			}
 		}
 		# 情报机构的统治
 	}
@@ -36958,7 +36960,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_orth_savin_pol
+				add_idea = POL_orth_savin_pol2
+			}
 		}
 		# 实践民粹主义
 	}
@@ -36988,7 +36993,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_orth_savin_pol2
+				add_idea = POL_orth_savin_pol3
+			}
 		}
 		# 对抗民主的十字军东征
 	}
@@ -37006,7 +37014,10 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_orth_savin_pol3
+				add_idea = POL_orth_savin_pol4
+			}
 		}
 		# 为了斯拉夫人民的自由
 	}
@@ -37024,7 +37035,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_orth_savin_pol4
+				add_idea = POL_orth_savin_pol5
+			}
 		}
 		# 波兰的元首
 	}
@@ -37040,7 +37054,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_agrarian_revolution
 		}
 		# 农业革命
 	}
@@ -37055,7 +37069,10 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			swap_ideas = {
+				remove_idea = POL_mil_savin_pol2
+				add_idea = POL_mil_savin_pol3
+			}
 		}
 		# 拉拢贵族
 	}
@@ -37070,7 +37087,8 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_corporate_corporatism
+			add_pataut_to_coalition = yes
 		}
 		# 企业法团主义
 	}
@@ -37097,7 +37115,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_protect_the_notables
 		}
 		# 保障权贵
 	}
@@ -37112,7 +37130,8 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_loyalty_to_the_catholic_church
+			add_pataut_to_coalition = yes
 		}
 		# 忠于天主教会
 	}
@@ -37130,7 +37149,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_grind_down_social_resistance
 		}
 		# 磨平社会反抗
 	}
@@ -37145,7 +37164,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_allies_of_industry
 		}
 		# 实业家盟友
 	}
@@ -37160,7 +37179,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_economic_pragmatism
 		}
 		# 经济实用主义
 	}
@@ -37178,7 +37197,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_progress_and_order
 		}
 		# 进步与秩序
 	}
@@ -37196,7 +37215,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_rebuild_cross_party_bloc
 		}
 		# 重建跨党政治集团
 	}
@@ -37214,7 +37233,7 @@ focus = {
 		y = 2
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_szlachta_shall_never_fall
 		}
 		# 什拉赫塔永世不倒
 	}
@@ -37241,7 +37260,13 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_united_national_radical_camp
+			add_natpop_to_coalition = yes
+			set_party_name = {
+				ideology = national_populist
+				long_name = POL_abc_party_long
+				name = POL_abc_party
+			}
 		}
 		# 统一民族激进阵营
 	}
@@ -37256,7 +37281,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_embrace_charter_totalitarian_ideas
 		}
 		# 接纳宪章极权主义思想
 	}
@@ -37271,7 +37296,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_merciless_struggle
 		}
 		# 无情斗争
 	}
@@ -37286,7 +37311,8 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_strengthen_statist_policies
+			add_pataut_to_coalition = yes
 		}
 		# 强化国家主义方针
 	}
@@ -37304,7 +37330,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_railway_union_workers_example
 		}
 		# 铁路工会，工人榜样
 	}
@@ -37322,7 +37348,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_authoritarian_police_state
 		}
 		# 威权警察国家
 	}
@@ -37340,7 +37366,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_national_pacification_plan
 		}
 		# 国家平定计划
 	}
@@ -37361,7 +37387,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_hail_the_leader
 		}
 		# 向领袖致敬！
 	}
@@ -38016,7 +38042,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_modernized_nationalism
 		}
 		# 现代化民族主义
 	}
@@ -38031,7 +38057,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_appease_the_sanacja_followers
 		}
 		# 安抚萨纳齐亚分子
 	}
@@ -38046,7 +38072,13 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_unite_the_national_democratic_movement
+			add_authdem_to_coalition = yes
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = POL_authoritarian_democrat_party_long
+				name = POL_authoritarian_democrat_party	
+			}
 		}
 		# 团结民族民主运动
 	}
@@ -38067,7 +38099,8 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_dmowski_pilsudski_synthesis
+			country_event = sanation.24
 		}
 		# 德莫夫斯基—毕苏斯基思想
 	}
@@ -38080,12 +38113,18 @@ focus = {
 		mutually_exclusive = {
 			focus = POL_anti_liberal_revolution
 		}
+		available = {
+			has_country_leader = {
+				name = "扬·兹季托维茨基"
+				ruling_only = yes
+			}
+		}
 		relative_position_id = POL_dmowski_pilsudski_synthesis
 		x = -1
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_market_freedom_against_liberalism
 		}
 		# 市场自由反对自由主义
 	}
@@ -38098,13 +38137,18 @@ focus = {
 		mutually_exclusive = {
 			focus = POL_market_freedom_against_liberalism
 		}
-
+		available = {
+			has_country_leader = {
+				name = "扬·斯基夫斯基"
+				ruling_only = yes
+			}
+		}
 		relative_position_id = POL_market_freedom_against_liberalism
 		x = 2
 		y = 0
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_anti_liberal_revolution
 		}
 		# 反自由革命
 	}
@@ -38119,7 +38163,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_autonomy_democracy_science_leadership
 		}
 		# 自治，民主，科学领导
 	}
@@ -38134,7 +38178,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_slay_the_capitalist_hydra
 		}
 		# 杀死资本主义九头蛇
 	}
@@ -38149,7 +38193,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_nationalism_the_inevitable_result_of_progress
 		}
 		# 民族主义—社会进步的必然结果
 	}
@@ -38164,7 +38208,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_total_catholicism_against_pluralism
 		}
 		# 反多元化总体天主教
 	}
@@ -38179,7 +38223,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_fiscal_system_reform
 		}
 		# 财政体系改革
 	}
@@ -38194,7 +38238,7 @@ focus = {
 		y = 1
 		cost = 4
 		completion_reward = {
-			add_political_power = 100
+			add_ideas = POL_polish_national_community
 		}
 		# 波兰民族共同体
 	}
