@@ -722,6 +722,7 @@ country_event = {
 		add_stability = 0.01
 		custom_effect_tooltip = PLX_legionists_alone_tooltip
 		hidden_effect = { 
+				set_cosmetic_tag = POL_commonwealth
 				set_country_flag = plx_zlp_rules
 				set_country_flag = POL_ready_to_go_foreign
 				complete_national_focus = KX_PL_ZL_TAKES_POWER 
@@ -733,74 +734,7 @@ country_event = {
 			factor = 85
 		}		
 	}
-	option = {
-		name = plx.10.b
-		add_political_power = 50
-		add_popularity = {
-			ideology = social_democrat
-			popularity = 0.15
-		}
-		custom_effect_tooltip = PLX_legionists_ally_pps_tooltip
-		if = {
-			limit = {
-				has_country_flag = plx_zlp_Slawek
-			}
-			hidden_effect = {
-				create_country_leader = {
-					name = "诺伯特·巴利奇"
-					picture = "gfx/leaders/POL/Portrait_POL_Norbert_Barlicki.png"
-					expire = "1965.1.1"
-					ideology = popular_patriotism_subtype
-				}		
-			} 
-			drop_cosmetic_tag = yes 
-		}
-		else = {
-			hidden_effect = {
-				create_country_leader = {
-					name = "卡罗尔·奥布拉希特二世"
-					picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
-					expire = "1965.1.1"
-					desc = "POLITICS_KAROL_OLBRACHT_HABSBURG_DESC"
-					traits = { charitable_emperor }
-					ideology = popular_patriotism_subtype
-				}
-			} 
-			clr_country_flag = POL_Walery_Slawek_VISIBLE
-			set_country_flag = POL_Norbert_Barlicki_VISIBLE
-		}
-		hidden_effect = { 
-			set_country_flag = plx_pps_rules
-			set_country_flag = POL_ready_to_go_foreign
-			set_politics = {
-				ruling_party = social_democrat
-				elections_allowed = no
-			}	
-			remove_all_ministers = yes
-			add_ideas = {
-				POL_Welery_Slawek_hog_pau
-				POL_Adam_Prochnik_for_sde
-				POL_Aleksander_Prystor_eco_sde
-				POL_Jedrzej_Moraczewski_sec_sde
-			}
-
-			end_coalition = yes
-			
-			add_pataut_to_coalition = yes	
-			
-			add_tot_to_coalition = yes
-
-			complete_national_focus = KX_PL_PPS_FR_WINS_ELECTIONS
-
-			country_event = {
-				id = plx.32 days = 2
-			}			
-		}
-		
-		ai_chance = {
-			factor = 15
-		}		
-	}	
+	
 }
 
 country_event = {
@@ -2397,9 +2331,27 @@ country_event = {
 			}
 			else_if = {
 				limit = {
-					set_country_flag = plx_communism_slav_flag
+					has_country_flag = plx_communism_slav_flag
 				}
 				set_cosmetic_tag = POL_soviet
+			} 
+			else_if = {
+				limit = {
+					has_country_flag = POL_sanation_zeli_win
+				}
+				set_cosmetic_tag = POL_slav_zeli
+			} 
+			else_if = {
+				limit = {
+					has_country_flag = POL_sanation_savin_win
+				}
+				set_cosmetic_tag = POL_slav_savin
+			} 
+			else_if = {
+				limit = {
+					has_completed_focus = POL_awaken_the_national_spirit
+				}
+				set_cosmetic_tag = POL_slav_beck
 			} 
 			#set_country_flag = POL_ready_to_go_foreign
 			set_country_flag = plx_synd_slav_decision
@@ -7418,6 +7370,7 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = { #Replace
+		name = plxv2.062.a
 		add_stability = 0.02
 		add_political_power = -20
 		add_power_balance_value = {
@@ -7552,7 +7505,7 @@ country_event = {
 		add_war_support = 0.03
 		add_power_balance_value = {
 			id = POL_sanation_bop
-			value = -0.1
+			value = 0.1
 		}
 		POL_sanation_decrease_unity = yes
 		ai_chance = {
@@ -9612,6 +9565,7 @@ country_event = {
 	option = {
 		name = plxv2.152.a
 		clr_country_flag = plx_anti_endecja
+		set_cosmetic_tag = POL_solidarity_cosmetic
 		uncomplete_national_focus = {
 			focus = KX_PL_PZPR_UNITED_FRONT
 			uncomplete_children = yes
@@ -9800,10 +9754,13 @@ country_event = {
 
 	option = {
 		name = sanation.2.a
+		
 		set_country_flag = POL_struggle_is_over
 		set_country_flag = POL_sanation_slawek_win
 		mark_focus_tree_layout_dirty = yes
-		remove_power_balance = POL_sanation_bop
+		remove_power_balance = {
+			id = POL_sanation_bop
+		}
 	}
 	
 }
@@ -10207,6 +10164,7 @@ country_event = {
 				POL_Felicjan_Slawoj_Skladkowski_sec_ade
 			}
 		clr_country_flag = POL_sanation_struggle_second
+		
 	}
 }
 country_event = {
@@ -10235,12 +10193,12 @@ country_event = {
 			remove_unit_leader = yes
 		}
 		set_country_flag = POL_struggle_is_over
-		remove_power_balance = POL_sanation_bop
+		remove_power_balance = {
+			id = POL_sanation_bop
+		}
 		set_country_flag = POL_sanation_struggle_second
 		activate_mission = POL_congress_mission
-		activate_mission = POL_Moci_Supporters_mission
-		activate_mission = POL_Beck_Supporters_mission
-		activate_mission = POL_Smigly_Supporters_mission
+		
 	}
 }
 country_event = {
@@ -10305,6 +10263,7 @@ country_event = {
 			name = POL_conservative_party
 			long_name = POL_conservative_party_long
 		}
+		set_cosmetic_tag = POL_REPUBLIC
 		set_country_flag = POL_sanation_demo_win
 		mark_focus_tree_layout_dirty = yes
 		remove_all_ministers = yes
@@ -10467,6 +10426,7 @@ country_event = {
 		name = sanation.16.a	
 		set_country_flag = POL_sanation_zeli_win
 		mark_focus_tree_layout_dirty = yes
+		set_cosmetic_tag = POL_zeli_cosmetic
 	}
 	option = {
 		name = sanation.16.b
@@ -10558,6 +10518,7 @@ country_event = {
 			expire = "1.1.1"
 			ideology = savinkovism_subtype
 		}
+		set_cosmetic_tag = POL_savinkov
 		set_party_name = {
 			ideology = national_populist
 			long_name = POL_savinkov_party_long
@@ -10787,6 +10748,7 @@ country_event = {
 		clr_country_flag = POL_sanation_struggle_second
 		set_country_flag = POL_sanation_agar_win
 		mark_focus_tree_layout_dirty = yes
+		set_cosmetic_tag = POL_bch_cosmetic
 	}
 }
 country_event = {
@@ -10865,12 +10827,114 @@ country_event = {
 		
 	}
 	option = {
-		name = sanation.24.a
+		name = sanation.24.b
 		create_country_leader = {
 			name = "扬·斯基夫斯基"
 			picture = "gfx/leaders/POL/Portrait_POL_Jan_Skiwski.png"
 			expire = "1.1.1"
 			ideology = solidarism_subtype
+		}
+	}
+}
+country_event = {
+	id = sanation.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.25.t
+	desc = sanation.25.d
+	#picture = GFX_report_event_soldiers_marching
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.25.a
+		activate_mission = POL_military_action
+	}
+	
+}
+country_event = {
+	id = sanation.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.26.t
+	desc = sanation.26.d
+	#picture = GFX_report_event_soldiers_marching
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.26.a
+		activate_mission = POL_agrarian_action
+	}
+	
+}
+country_event = {
+	id = sanation.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.27.t
+	desc = sanation.27.d
+	#picture = GFX_report_event_soldiers_marching
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.27.a
+		activate_mission = POL_natdem_action
+	}
+	
+}
+country_event = {
+	id = sanation.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.28.t
+	desc = sanation.28.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.28.a
+		
+	}
+	option = {
+		name = sanation.28.b 
+		trigger = {
+			RUS = {
+				RUS_savinkov_in_power = yes
+			}
+		}
+		POL = {
+			annex_country = {
+				target = RUS
+				transfer_troops = yes
+			}
+		}
+		create_country_leader = {
+			name = "鲍里斯·萨文科夫"
+			desc = "POLITICS_BORIS_SAVINKOV_DESC"
+			picture = "gfx/leaders/RUS/Portrait_RUS_Boris_Savinkov.png"
+			expire = "1.1.1"
+			ideology = savinkovism_subtype
+			raits = {}
+		}
+	}
+	option = {
+		name = sanation.28.c
+		trigger = {
+			RUS = {
+				RUS_savinkov_in_power = no
+			}
+		}
+		create_country_leader = {
+			name = "鲍里斯·萨文科夫"
+			desc = "POLITICS_BORIS_SAVINKOV_DESC"
+			picture = "gfx/leaders/RUS/Portrait_RUS_Boris_Savinkov.png"
+			expire = "1.1.1"
+			ideology = savinkovism_subtype
+				raits = {}
 		}
 	}
 }

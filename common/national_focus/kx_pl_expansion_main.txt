@@ -2888,14 +2888,15 @@ focus_tree = {
 		id = KX_PL_ZL_MATTER_OF_ECONOMY
 		icon = GFX_goal_NFA_centralised_economy
 		available = {
-			#has_country_flag = plx_start
+			has_country_flag = POL_struggle_is_over
 			has_completed_focus = KX_PLX_CRISIS_RECOVERY_PROSPECT
 		}
+		
 		prerequisite = {
 			focus = KX_PL_ZL_REPLACE_ADMIN_APARATUS
 		}	
 		relative_position_id = KX_PL_ZL_REPLACE_ADMIN_APARATUS
-		x = 5
+		x = -8
 		y = 1
 		cost = 4 #?
 		ai_will_do = {
@@ -2968,7 +2969,7 @@ focus_tree = {
 			focus = KX_PL_ZL_REPLACE_ADMIN_APARATUS
 		}	
 		relative_position_id = KX_PL_ZL_REPLACE_ADMIN_APARATUS
-		x = -8
+		x = 5
 		y = 1
 		cost = 2
 		ai_will_do = {
@@ -3089,20 +3090,7 @@ focus_tree = {
 		id = KX_PL_ZL_LEFT
 		icon = GFX_goal_NFA_cdg_army_purge
 		available = {
-			#has_country_flag = plx_start
-			custom_trigger_tooltip = {
-				tooltip = KX_PL_ZL_LEFT_tooltitp
-				OR = {				
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 5
-					}
-					has_country_flag = {
-						flag = plx_legionist_sway
-						value = 4
-					}
-				}
-			}
+			
 		}
 		prerequisite = {
 			focus = KX_PL_ZL_STATE_COUNCIL
@@ -3181,6 +3169,9 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
 			if = {
 				limit = {
 					check_variable = { POL.militarypower > 70 }
@@ -3189,7 +3180,7 @@ focus_tree = {
 					country_event = sanation.20
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					check_variable = { POL.agrarianpower > 70 }
 				}
@@ -3197,7 +3188,7 @@ focus_tree = {
 					country_event = sanation.21
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					check_variable = { POL.natdempower > 70 }
 				}
@@ -3242,7 +3233,18 @@ focus_tree = {
 		id = KX_PL_ZL_CORPORATISM
 		icon = GFX_BRY_Support_Capitalists
 		available = {
-			
+			OR = {
+				has_completed_focus = POL_PROLETARIAT_UPRISING
+				has_completed_focus = POL_beks_victory
+				has_completed_focus = POL_maintain_the_triumvirate_alliance
+				has_completed_focus = POL_establish_economic_control
+				has_completed_focus = POL_rise_of_the_labor_clubs
+				has_completed_focus = POL_first_free_elections
+				has_completed_focus = POL_a_new_augustus
+				has_completed_focus = POL_dream_of_a_superpower
+				has_completed_focus = POL_polish_savinkovism
+				has_completed_focus = POL_second_spring_of_the_strongmen
+			}
 		}
 		prerequisite = {
 			focus = KX_PL_ZL_MATTER_OF_ECONOMY
@@ -3265,7 +3267,14 @@ focus_tree = {
 		id = KX_PL_ZL_APPROACH_CAPITALISTS
 		icon = GFX_goal_CAT_Corporatism_over_socialism
 		available = {
-			#
+			OR = {
+				has_completed_focus = POL_beks_victory
+				has_completed_focus = POL_maintain_the_triumvirate_alliance
+				has_completed_focus = POL_establish_economic_control
+				has_completed_focus = POL_a_new_augustus
+				has_completed_focus = POL_polish_savinkovism
+				has_completed_focus = POL_second_spring_of_the_strongmen
+			}
 		}
 		mutually_exclusive = {
 			focus = KX_PL_ZL_MARKET_LIBERAL
@@ -3288,7 +3297,12 @@ focus_tree = {
 		id = KX_PL_ZL_MARKET_LIBERAL
 		icon = GFX_RUS_New_Liberal_Era
 		available = {
-			#
+			OR = {
+				has_completed_focus = POL_PROLETARIAT_UPRISING
+				has_completed_focus = POL_rise_of_the_labor_clubs
+				has_completed_focus = POL_first_free_elections
+				has_completed_focus = POL_dream_of_a_superpower
+			}
 		}
 		
 		prerequisite = {
@@ -3387,8 +3401,18 @@ focus_tree = {
 		id = KX_PL_ZL_LEFT_ECONOMY
 		icon = GFX_goal_NYC_Syndicalism_Without_Radicalism
 		available = {
-		
-				
+			OR = {
+				has_completed_focus = POL_sweetheart_general_regime
+				has_completed_focus = POL_socialist_party_second_chance
+				has_completed_focus = POL_syndicalism_in_service_of_the_nation
+				has_completed_focus = POL_rise_of_the_national_labor_party
+				has_completed_focus = POL_return_of_the_holy_son
+				has_completed_focus = POL_lessons_of_the_syndicalist_model
+				has_completed_focus = POL_zeligowski_coup
+				has_completed_focus = POL_a_national_revolution
+				has_completed_focus = POL_hammer_and_sickle
+				has_completed_focus = POL_the_red_general
+			}
 		}
 		prerequisite = {
 			focus = KX_PL_ZL_MATTER_OF_ECONOMY
@@ -3412,7 +3436,17 @@ focus_tree = {
 		id = KX_PL_ZL_STATE_ECONOMY
 		icon = GFX_BBR_party_with_a_state
 		available = {
-			has_country_flag = plx_legionist_planning
+			OR = {
+				has_completed_focus = POL_sweetheart_general_regime
+				has_completed_focus = POL_socialist_party_second_chance
+				has_completed_focus = POL_rise_of_the_national_labor_party
+				has_completed_focus = POL_return_of_the_holy_son
+				has_completed_focus = POL_lessons_of_the_syndicalist_model
+				has_completed_focus = POL_zeligowski_coup
+				has_completed_focus = POL_a_national_revolution
+				has_completed_focus = POL_hammer_and_sickle
+				has_completed_focus = POL_the_red_general
+			}
 		}
 		prerequisite = {
 			focus = KX_PL_ZL_LEFT_ECONOMY
@@ -3484,8 +3518,7 @@ focus_tree = {
 		id = KX_PL_ZL_NATIONAL_SYNDICALISM
 		icon = GFX_goal_FRA_sorelians
 		available = {
-			has_country_flag = plx_legionist_unions
-			NOT = { has_country_flag = plx_kwiatkowski_in_power }
+			has_completed_focus = POL_syndicalism_in_service_of_the_nation
 		}
 		prerequisite = {
 			focus = KX_PL_ZL_LEFT_ECONOMY
@@ -7184,6 +7217,7 @@ focus_tree = {
 				has_country_flag = PLX_natsoc
 				has_country_flag = plx_zsp_rules_true
 				has_country_flag = plx_communism_slav_flag
+				has_country_flag = POL_sanation_zeli_win
 			}
 			
 		}
@@ -7236,6 +7270,8 @@ focus_tree = {
 			OR = {
 				has_country_flag = POL_zadruga_in_power
 				has_country_flag = PLX_libzadruga
+				has_country_flag = POL_sanation_savin_win
+				has_completed_focus = POL_awaken_the_national_spirit
 			}
 			
 		}
@@ -20186,112 +20222,6 @@ focus = {
 	}
 	
 	
-	
-	
-	focus = {
-		id = PLX_PLC_enemy_in_the_west
-		icon = GFX_goal_PLC_enemy_in_the_west
-		cost = 4
-		x = 7
-		y = 38
-		available = {
-			NOT = {
-				is_in_faction_with = GER
-			}
-			has_socialist_government = no
-		}
-		
-		prerequisite = {
-			focus = PLX_PLC_night_in_vilnius
-		}
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			add_ideas = PLC_enemy_in_the_west
-			add_equipment_to_stockpile = {
-				type = infantry_equipment
-				amount = 5000
-				producer = GER
-			}
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_one_sided_alliance
-		icon = GFX_goal_PLC_oneside
-		cost = 4
-		x = 9
-		y = 38
-		available = {
-			is_in_faction_with = GER
-			has_socialist_government = no
-		}
-		prerequisite = {
-			focus = PLX_PLC_night_in_vilnius
-		}
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			add_equipment_to_stockpile = {
-				type = infantry_equipment
-				amount = 15000
-				producer = POL
-			}
-			swap_ideas = {
-				add_idea = PLC_miedzymorze_idea_2
-				remove_idea = PLC_miedzymorze_idea
-			}
-			add_tech_bonus = {
-				bonus = 1
-				category = mountaineers_tech
-				uses = 1
-			}
-			add_tech_bonus = {
-				bonus = 1
-				category = para_tech
-				uses = 1
-			}
-			add_stability = 0.1
-			add_political_power = -25
-		}
-	}
-	
-	focus = {
-		id = PLX_PLC_enemy_in_the_east
-		icon = GFX_goal_PLC_euthanize_bear
-		cost = 4
-		x = 8
-		y = 39
-		prerequisite = {
-			focus = PLX_PLC_enemy_in_the_west
-			focus = PLX_PLC_one_sided_alliance
-		}
-		available = {
-			has_socialist_government = no
-		}
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			add_ideas = PLC_enemy_in_the_east
-			
-			hidden_effect = {
-				country_event = {
-					id = kxplc.17
-					days = 18
-				}
-			}
-		}
-	}
-	
 	focus = {
 		id = PLX_PLC_entente
 		icon = GFX_goal_PLC_with_canada
@@ -20355,57 +20285,7 @@ focus = {
 		}
 	}
 	
-	focus = {
-		id = PLX_PLC_night_in_vilnius
-		icon = GFX_goal_PLC_night_in_vilnius
-		cost = 4
-		x = 6
-		y = 37
-		
-		available = {
-			has_socialist_government = no
-		}
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PLC_rocket_experiments"
-			
-			add_war_support = 0.05
-			add_political_power = 100
-			add_popularity = {
-				ideology = authoritarian_democrat
-				popularity = 0.1
-			}
-			
-			96 = {
-				add_extra_state_shared_building_slots = 4
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-			
-			hidden_effect = {
-				country_event = {
-					id = kxplc.11
-					hours = 3
-				}
-				
-				country_event = {
-					id = kxplc.19
-					days = 64
-				}
-			}
-		}
-	}
+	
 	
 	focus = {
 		id = PLX_PLC_guide_her_carefully
@@ -30979,6 +30859,9 @@ focus = {
 					has_country_flag = POL_zadruga_in_power
 					has_country_flag = PLX_libzadruga
 					has_country_flag = PLX_natsoc
+					has_country_flag = POL_sanation_zeli_win
+					has_country_flag = POL_sanation_savin_win
+					has_completed_focus = POL_awaken_the_national_spirit
 				}
 		}
 		ai_will_do = {
@@ -33060,7 +32943,9 @@ focus = {
 	y = 10
 	
 	prerequisite = { }
-	available = { always = yes }
+	available = { 
+		has_country_flag = PLX_solidarity
+	 }
 	ai_will_do = { factor = 100 }
 	completion_reward = {
 		add_political_power = 100
@@ -33111,7 +32996,7 @@ focus = {
        		ideology = social_conservative
       		popularity = -0.1
       	}
-		set_cosmetic_tag = POL_solidarity_cosmetic
+		
 		increase_ruling_party_popularity_by_10 = yes
 		add_stability = 0.15
 		
@@ -33148,7 +33033,9 @@ focus = {
 
 	prerequisite = { focus = POL_keep_union_leadership }
 	mutually_exclusive = { focus = POL_socialist_party_remnants }
-	available = { always = yes }
+	available = { 
+		has_government = radical_socialist
+	}
 	ai_will_do = { factor = 100 }
 	completion_reward = {
 		add_ideas = POL_solidarity_radsoc
@@ -33169,7 +33056,9 @@ focus = {
 
 	prerequisite = { focus = POL_keep_union_leadership }
 	mutually_exclusive = { focus = POL_economists_politics }
-	available = { always = yes }
+	available = { 
+		has_government = social_democrat
+	}
 	ai_will_do = { factor = 100 }
 	completion_reward = {
 		add_ideas = POL_solidarity_socdem
@@ -33402,7 +33291,9 @@ focus = {
 	mutually_exclusive = {
 		focus = POL_national_unity_congress
 	}
-	available = { always = yes }
+	available = { 
+		has_government = paternal_autocrat
+	}
 	ai_will_do = { factor = 100 }
 	completion_reward = {
 		add_ideas = POL_solidarity_pataut
@@ -33423,7 +33314,9 @@ focus = {
 	mutually_exclusive = {
 		focus = POL_agrarianism_first
 	}
-	available = { always = yes }
+	available = { 
+		has_government = authoritarian_democrat
+	}
 	ai_will_do = { factor = 100 }
 	completion_reward = {
 		add_ideas = POL_solidarity_authdem
@@ -33823,8 +33716,15 @@ focus = {
   focus = {
         id = POL_PROLETARIAT_UPRISING
         icon = GFX_goal_BAS_Communism_Without_Orthodox_Puritanism
-        x = -78
-        y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_commie_win
+		}
         cost = 4
         ai_will_do = { factor = 1 }
 		
@@ -34102,8 +34002,15 @@ focus = {
 	focus = {
 		id = POL_sweetheart_general_regime
 		icon = GFX_goal_POL_sweetheart_general_regime
-		x = -70
-		y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_dlugo_win
+		}
 		cost = 4
 		
 		ai_will_do = { factor = 1 }
@@ -34249,8 +34156,15 @@ focus = {
 	focus = {
 		id = POL_socialist_party_second_chance
 		icon = GFX_goal_POL_socialist_party_second_chance
-		x = -63
-		y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_pps_win
+		}
 		cost = 4
 		
 		ai_will_do = { factor = 1 }
@@ -34403,8 +34317,15 @@ focus = {
 	focus = {
 		id = POL_syndicalism_in_service_of_the_nation
 		icon = GFX_goal_syndicalism
-		x = -56
-		y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_synd_win
+		}
 		cost = 4
 		
 		ai_will_do = { factor = 1 }
@@ -34614,8 +34535,15 @@ focus = {
 	focus = {
 		id = POL_rise_of_the_national_labor_party
 		icon = GFX_goal_POL_birth_npr
-		x = -50
-		y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_npr_win
+		}
 		cost = 4
 		
 		ai_will_do = { factor = 1 }
@@ -34768,13 +34696,20 @@ focus = {
 	focus = {
 		id = POL_return_of_the_holy_son
 		icon = GFX_goal_POL_return_of_the_holy_son
-		x = -40
-		y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_slawek_win
+		}
 		cost = 4
 		select_effect = {
 			if = {
 				limit = {
-					check_variable = { POL.unity < 30 } #other left
+					check_variable = { POL.unity < 45 } #other left
 				}
 				hidden_effect = {
 					country_event = {
@@ -34785,7 +34720,7 @@ focus = {
 			}
 			else_if = {
 				limit = {
-					check_variable = { POL.unity > 30 }
+					check_variable = { POL.unity > 45 }
 					check_variable = { POL.radicalism > 60 } #dlugo
 				}
 				hidden_effect = {
@@ -35405,9 +35340,15 @@ focus = {
 		id = POL_the_military_coup
 		icon = GFX_goal_SWE_Military_Coup
 		
-		relative_position_id = POL_the_marshal_was_the_marshal_is_the_marshal_shall_be
-		x = 0
-		y = 2
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_mil_win
+		}
 		cost = 4
 		
 		completion_reward = {
@@ -35660,8 +35601,15 @@ focus = {
 	focus = {
 		id = POL_beks_victory
 		icon = GFX_goal_POL_beks_victory
-		x = -24
-		y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_beck_win
+		}
 		cost = 4
 		
 		completion_reward = {
@@ -35806,6 +35754,7 @@ focus = {
 		cost = 4
 		completion_reward = {
 			add_ideas = POL_toward_polish_national_ascension
+			country_event = plx.28
 		}
 		# 迈向波兰国家飞升
 	}
@@ -35813,9 +35762,15 @@ focus = {
 		id = POL_the_peasant_strike
 		icon = GFX_goal_generic_peasant_strike
 		
-		relative_position_id = POL_purge_syndicalist_filth
-		x = 1
-		y = 5
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_agar_win
+		}
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
@@ -36212,8 +36167,15 @@ focus = {
 	focus = {
 		id = POL_first_free_elections
 		icon = GFX_goal_POL_Hold_Free_Elections
-		x = 5
-		y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_demo_win
+		}
 		cost = 4
 		
 		completion_reward = {
@@ -36512,8 +36474,15 @@ focus = {
 	focus = {
 		id = POL_zeligowski_coup
 		icon = GFX_goal_POL_zeligowski_coup
-		x = 25
-		y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_zeli_win
+		}
 		cost = 4
 		
 		completion_reward = {
@@ -36663,6 +36632,7 @@ focus = {
 		cost = 4
 		completion_reward = {
 			add_ideas = POL_fight_for_slavic_unity
+			country_event = plx.28
 			hidden_effect = {
 				country_event = {
 					id = sanation.19
@@ -36676,9 +36646,15 @@ focus = {
 	focus = {
 		id = POL_dream_of_a_superpower
 		icon = GFX_goal_POL_dream_of_a_superpower
-		x = 32
-		y = 60
-		
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_super_win
+		}
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
@@ -36817,8 +36793,15 @@ focus = {
 	focus = {
 		id = POL_polish_savinkovism
 		icon = GFX_RUS_Focus_On_Savinkovites
-		x = 40
-		y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_savin_win
+		}
 		cost = 4
 		
 		completion_reward = {
@@ -36946,6 +36929,7 @@ focus = {
 				remove_idea = POL_mil_savin_pol4
 				add_idea = POL_mil_savin_pol5
 			}
+			country_event = plx.28
 		}
 		# 情报机构的统治
 	}
@@ -37039,6 +37023,7 @@ focus = {
 				remove_idea = POL_orth_savin_pol4
 				add_idea = POL_orth_savin_pol5
 			}
+			country_event = plx.28
 		}
 		# 波兰的元首
 	}
@@ -37089,15 +37074,22 @@ focus = {
 		completion_reward = {
 			add_ideas = POL_corporate_corporatism
 			add_pataut_to_coalition = yes
+			country_event = sanation.28
 		}
 		# 企业法团主义
 	}
 	focus = {
 		id = POL_second_spring_of_the_strongmen
 		icon = GFX_goal_GER_Love_Thy_Neighbor
-		x = 48
-		y = 60
-		
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_szla_win
+		}
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
@@ -37240,9 +37232,15 @@ focus = {
 	focus = {
 		id = POL_a_national_revolution
 		icon = GFX_goal_POL_a_national_revolution
-		x = 55
-		y = 60
-		
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_onr_win
+		}
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
@@ -37394,8 +37392,15 @@ focus = {
 	focus = {
 		id = POL_new_king_in_the_castle
 		icon = GFX_goal_POL_new_king_in_the_castle
-		x = -10
-		y = 60
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_moci_win
+		}
 		cost = 4
 		select_effect = {
 			if = {
@@ -38022,9 +38027,15 @@ focus = {
 		id = POL_return_of_the_specter
 		icon = GFX_goal_POL_National_Rebirth
 		
-		relative_position_id = POL_empower_the_police
-		x = 0
-		y = 2
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_natdem_win
+		}
 		cost = 4
 		completion_reward = {
 			add_political_power = 100
@@ -38251,10 +38262,19 @@ focus = {
 		x = 15
 		y = 60
 		cost = 4
+		prerequisite = {
+			focus = KX_PL_ZL_LONGEST_DAY
+		}
+		relative_position_id = KX_PL_ZL_LONGEST_DAY
+        x = 0
+        y = 1
+		allow_branch = {
+			has_country_flag = POL_sanation_smigly_win
+		}
 		select_effect = {
 			if = {
 				limit = {
-					check_variable = { POL.unity < 30 } #other right
+					check_variable = { POL.unity < 45 } #other right
 				}
 				hidden_effect = {
 					country_event = {
@@ -38265,7 +38285,7 @@ focus = {
 			}
 			else_if = {
 				limit = {
-					check_variable = { POL.unity > 30 }
+					check_variable = { POL.unity > 45 }
 					check_variable = { POL.radicalism > 60 } #zeli
 				}
 				hidden_effect = {
