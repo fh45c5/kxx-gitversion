@@ -4,7 +4,7 @@
 
 add_namespace = plx
 add_namespace = plxv2
-
+add_namespace = sanation
 ### Introduction
 country_event = {
 	id = plx.1
@@ -722,6 +722,7 @@ country_event = {
 		add_stability = 0.01
 		custom_effect_tooltip = PLX_legionists_alone_tooltip
 		hidden_effect = { 
+				set_cosmetic_tag = POL_commonwealth
 				set_country_flag = plx_zlp_rules
 				set_country_flag = POL_ready_to_go_foreign
 				complete_national_focus = KX_PL_ZL_TAKES_POWER 
@@ -733,74 +734,7 @@ country_event = {
 			factor = 85
 		}		
 	}
-	option = {
-		name = plx.10.b
-		add_political_power = 50
-		add_popularity = {
-			ideology = social_democrat
-			popularity = 0.15
-		}
-		custom_effect_tooltip = PLX_legionists_ally_pps_tooltip
-		if = {
-			limit = {
-				has_country_flag = plx_zlp_Slawek
-			}
-			hidden_effect = {
-				create_country_leader = {
-					name = "诺伯特·巴利奇"
-					picture = "gfx/leaders/POL/Portrait_POL_Norbert_Barlicki.png"
-					expire = "1965.1.1"
-					ideology = popular_patriotism_subtype
-				}		
-			} 
-			drop_cosmetic_tag = yes 
-		}
-		else = {
-			hidden_effect = {
-				create_country_leader = {
-					name = "卡罗尔·奥布拉希特二世"
-					picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
-					expire = "1965.1.1"
-					desc = "POLITICS_KAROL_OLBRACHT_HABSBURG_DESC"
-					traits = { charitable_emperor }
-					ideology = popular_patriotism_subtype
-				}
-			} 
-			clr_country_flag = POL_Walery_Slawek_VISIBLE
-			set_country_flag = POL_Norbert_Barlicki_VISIBLE
-		}
-		hidden_effect = { 
-			set_country_flag = plx_pps_rules
-			set_country_flag = POL_ready_to_go_foreign
-			set_politics = {
-				ruling_party = social_democrat
-				elections_allowed = no
-			}	
-			remove_all_ministers = yes
-			add_ideas = {
-				POL_Welery_Slawek_hog_pau
-				POL_Adam_Prochnik_for_sde
-				POL_Aleksander_Prystor_eco_sde
-				POL_Jedrzej_Moraczewski_sec_sde
-			}
-
-			end_coalition = yes
-			
-			add_pataut_to_coalition = yes	
-			
-			add_tot_to_coalition = yes
-
-			complete_national_focus = KX_PL_PPS_FR_WINS_ELECTIONS
-
-			country_event = {
-				id = plx.32 days = 2
-			}			
-		}
-		
-		ai_chance = {
-			factor = 15
-		}		
-	}	
+	
 }
 
 country_event = {
@@ -990,21 +924,25 @@ country_event = {
 	option = {
 		name = plx.15.a	
 		add_popularity = {
-				ideology = social_liberal
-				popularity = 0.05
+			ideology = social_liberal
+			popularity = 0.05
 		}	
 		add_popularity = {
-				ideology = radical_socialist
-				popularity = 0.05
+			ideology = radical_socialist
+			popularity = 0.05
 		}
 		add_popularity = {
-				ideology = social_democrat
-				popularity = 0.05
+			ideology = social_democrat
+			popularity = 0.05
 		}		
 		add_popularity = {
-				ideology = social_conservative
-				popularity = 0.05
-		}			
+			ideology = social_conservative
+			popularity = 0.05
+		}	
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.05
+		}		
 		custom_effect_tooltip = PLX_fjr_formation_tooltip
 		hidden_effect = {
 			set_country_flag = plx_fjr_formed
@@ -1013,27 +951,32 @@ country_event = {
 			set_party_name = {
 				ideology = social_conservative
 				long_name = POL_fjr_party_long
-				name = "FJR"
+				name = POL_fjr_party
 			}
 			set_country_flag = plx_fjr_soclib
 			set_party_name = {
 				ideology = social_liberal
 				long_name = POL_fjr_party_long
-				name = "FJR"
+				name = POL_fjr_party
 			}
 			set_country_flag = plx_fjr_radsoc
 			set_party_name = {
 				ideology = radical_socialist
 				long_name = POL_fjr_party_long
-				name = "FJR"
+				name = POL_fjr_party
 			}
 			set_country_flag = plx_fjr_socdem
 			set_party_name = {
 				ideology = social_democrat
 				long_name = POL_fjr_party_long
-				name = "FJR"
+				name = POL_fjr_party
 			}
-
+			set_country_flag = plx_fjr_marlib
+			set_party_name = {
+				ideology = market_liberal
+				long_name = POL_fjr_party_long
+				name = POL_fjr_party
+			}
 			create_country_leader = {
 				name = "卡罗尔·奥布拉希特二世 "
 				picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
@@ -1050,7 +993,13 @@ country_event = {
 				name = "卡罗尔·奥布拉希特二世"
 				picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
 				expire = "1965.1.1"
-				ideology = radsoc_liberal_socialism_subtype
+				ideology = progressive_democracy_subtype
+			}
+			create_country_leader = {
+				name = "卡罗尔·奥布拉希特二世"
+				picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
+				expire = "1965.1.1"
+				ideology = radsoc_paternal_socialism_subtype
 			}
 			create_country_leader = {
 				name = "卡罗尔·奥布拉希特二世"
@@ -1243,25 +1192,29 @@ country_event = {
 	option = {
 		name = plx.17.a
 		add_popularity = {
-				ideology = social_liberal
-				popularity = 0.10
+			ideology = market_liberal
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.10
 		}	
 		add_popularity = {
-				ideology = radical_socialist
-				popularity = 0.10
+			ideology = radical_socialist
+			popularity = 0.10
 		}	
 		add_popularity = {
-				ideology = social_democrat
-				popularity = 0.10
+			ideology = social_democrat
+			popularity = 0.10
 		}		
 		add_popularity = {
-				ideology = social_conservative
-				popularity = 0.10
+			ideology = social_conservative
+			popularity = 0.10
 		}
 		custom_effect_tooltip = PLX_to_left_tooltip		
 		hidden_effect = {
 			set_politics = {
-				ruling_party = radical_socialist
+				ruling_party = social_conservative
 				last_election = "[CURRENT_DATE]"
 				election_frequency = 48
 				elections_allowed = yes
@@ -1275,17 +1228,15 @@ country_event = {
 				expire = "1965.1.1"
 				desc = "POLITICS_KAROL_OLBRACHT_HABSBURG_DESC"
 				traits = { charitable_emperor }
-				ideology = radsoc_paternal_socialism_subtype
+				ideology = paternal_socialism_subtype
 			}	
 		
 			set_country_flag = plx_pzpr_left
 			complete_national_focus = KX_PL_PZPR_STICK_TO_LEFT
 			add_soclib_to_coalition = yes
-			
+			add_marlib_to_coalition = yes
 			add_radsoc_to_coalition = yes	
-
 			add_socdem_to_coalition = yes
-
 			add_ideas = {
 				POL_Antoni_Ciszak_hog_tot
 				POL_Gabriel_Narutowicz_for_sli
@@ -1303,7 +1254,7 @@ country_event = {
 			set_country_flag = plx_PZPR_to_left
 			modify_country_flag = {
 				flag = plx_PZPR_to_left
-				value = -1
+				value = 0
 			}			
 		}
 		
@@ -1339,7 +1290,7 @@ country_event = {
 			set_party_name = {
 				ideology = national_populist
 				long_name = POL_fjr_party_long
-				name = "FJR"
+				name = POL_fjr_party
 			}			
 			complete_national_focus = KX_PL_PZPR_REACH_TO_YOUNG_NATDEM
 			create_country_leader = {
@@ -1348,7 +1299,7 @@ country_event = {
 				expire = "1965.1.1"
 				desc = "POLITICS_KAROL_OLBRACHT_HABSBURG_DESC"
 				traits = { charitable_emperor }
-				ideology = natpop_popular_patriotism_subtype
+				ideology = natpop_paternal_socialism_subtype
 			}	
 			add_ideas = {
 				POL_Antoni_Ciszak_hog_tot
@@ -1422,12 +1373,12 @@ country_event = {
 			set_party_name = {
 				ideology = social_democrat
 				long_name = POL_social_democrat_party_long
-				name = "PPS"
+				name = POL_social_democrat_party
 			}
 			set_party_name = {
 				ideology = radical_socialist
 				long_name = POL_radical_socialist_party_long
-				name = "PPS"
+				name = POL_radical_socialist_party
 			}			
 			
 			add_soclib_to_coalition = yes
@@ -1482,7 +1433,7 @@ country_event = {
 			set_party_name = {
 				ideology = radical_socialist
 				long_name = POL_radical_socialist_party_long
-				name = "PPS"
+				name = POL_radical_socialist_party
 			}			
 			
 			end_coalition = yes
@@ -1649,6 +1600,11 @@ country_event = {
 		hidden_effect = {
 			set_country_flag = plx_pzpr_monarchy
 		}
+		country_event = {
+			id = plxv2.152
+			days = 1
+		}
+		
 		ai_chance = {
 			factor = 60
 		}		
@@ -1664,29 +1620,34 @@ country_event = {
 			drop_cosmetic_tag = yes
 			set_country_flag = plx_pzpr_republic
 			create_country_leader = {
-				name = "斯坦尼斯瓦夫·杜波依斯"
-				picture = "gfx/leaders/POL/Portrait_PLX_Stanislaw_Dubois.png"
+				name = "安东尼·西扎克"
+				picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
 				expire = "1965.1.1"
-				ideology = moderate_socialist_subtype
+				ideology = radsoc_paternal_socialism_subtype
+			}	
+			create_country_leader = {
+				name = "安东尼·西扎克"
+				picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
+				expire = "1965.1.1"
+				ideology = socdem_paternal_socialism_subtype
+			}	
+			create_country_leader = {
+				name = "安东尼·西扎克"
+				picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
+				expire = "1965.1.1"
+				ideology = soclib_progressive_democracy_subtype
 			}
 			create_country_leader = {
-				name = "诺伯特·巴利奇"
-				picture = "gfx/leaders/POL/Portrait_POL_Norbert_Barlicki.png"
+				name = "安东尼·西扎克"
+				picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
 				expire = "1965.1.1"
-				ideology = socdem_democratic_socialism_subtype
-			}		
+				ideology = progressive_democracy_subtype
+			}	
 			create_country_leader = {
-				name = "斯坦尼斯瓦夫·米科瓦伊奇克奇"
-				picture = "gfx/leaders/POL/Portrait_PLX_Stanislaw_Mikolajczyk.png"
+				name = "安东尼·西扎克"
+				picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
 				expire = "1965.1.1"
-				ideology = soclib_agrarianism_subtype
-			}
-			create_country_leader = {
-				name = "约瑟夫·查辛斯基"
-				#desc = "POLITICS_JOZEF_CHACINSKI_DESC"
-				picture = "gfx/leaders/POL/Portrait_POL_Jozef_Chacinski.png"
-				expire = "1965.1.1"
-				ideology = christian_democracy_subtype
+				ideology = paternal_socialism_subtype
 			}	
 			create_country_leader = {
 				name = "罗曼·雷巴斯基"
@@ -1695,63 +1656,15 @@ country_event = {
 				ideology = national_democracy_subtype
 			}
 			create_country_leader = {
-				name = "塔德乌斯·别莱茨基"
-				picture = "gfx/leaders/POL/Portrait_POL_Tadeusz_Bielecki_kx.png"
+				name = "安东尼·西扎克"
+				picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
 				expire = "1965.1.1"
-				ideology = national_radicalism_subtype
-			}			
-		
-			if = {
-				limit = { has_country_flag = plx_fjr_radsoc }
-				create_country_leader = {
-					name = "安东尼·西扎克"
-					picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
-					expire = "1965.1.1"
-					ideology = radsoc_liberal_socialism_subtype
-				}		
-			}	
-			if = {
-				limit = { has_country_flag = plx_fjr_socdem }
-				create_country_leader = {
-					name = "安东尼·西扎克"
-					picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
-					expire = "1965.1.1"
-					ideology = socdem_paternal_socialism_subtype
-				}
-			}
-			if = {
-				limit = { has_country_flag = plx_fjr_soclib }
-				create_country_leader = {
-					name = "安东尼·西扎克"
-					picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
-					expire = "1965.1.1"
-					ideology = soclib_progressive_democracy_subtype
-				}				
-			}
-			if = {
-				limit = { has_country_flag = plx_fjr_soccon }
-				create_country_leader = {
-					name = "安东尼·西扎克"
-					picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
-					expire = "1965.1.1"
-					ideology = paternal_socialism_subtype
-				}				
-			}
-			if = {
-				limit = { has_country_flag = plx_fjr_natpop }
-				create_country_leader = {
-					name = "安东尼·西扎克"
-					picture = "gfx/leaders/POL/Portrait_PLX_Antoni_Ciszak.png"
-					expire = "1965.1.1"
-					ideology = natpop_popular_patriotism_subtype
-				}				
-			}
+				ideology = natpop_popular_patriotism_subtype
+			}				
+			set_cosmetic_tag = POL_pzpr
 			clr_country_flag = KXX_LEADER_GUI_VISIBLE
 			clr_country_flag = POL_Antoni_Ciszak_VISIBLE
-			if = {
-				limit = { NOT = { has_cosmetic_tag = POL_intermarian } }
-				set_cosmetic_tag = POL_pzpr
-			}
+			
 		}
 		ai_chance = {
 			factor = 40
@@ -1859,8 +1772,8 @@ country_event = {
 	#				ideology = natpop_popular_patriotism_subtype
 	#			}				
 	#		}
-			clr_country_flag = KXX_LEADER_GUI_VISIBLE
-			clr_country_flag = POL_Antoni_Ciszak_VISIBLE
+	#		clr_country_flag = KXX_LEADER_GUI_VISIBLE
+	#		clr_country_flag = POL_Antoni_Ciszak_VISIBLE
 	#		country_event = {
 	#			id = plx.26
 	#			days = 2
@@ -2392,9 +2305,27 @@ country_event = {
 			}
 			else_if = {
 				limit = {
-					set_country_flag = plx_communism_slav_flag
+					has_country_flag = plx_communism_slav_flag
 				}
 				set_cosmetic_tag = POL_soviet
+			} 
+			else_if = {
+				limit = {
+					has_country_flag = POL_sanation_zeli_win
+				}
+				set_cosmetic_tag = POL_slav_zeli
+			} 
+			else_if = {
+				limit = {
+					has_country_flag = POL_sanation_savin_win
+				}
+				set_cosmetic_tag = POL_slav_savin
+			} 
+			else_if = {
+				limit = {
+					has_completed_focus = POL_awaken_the_national_spirit
+				}
+				set_cosmetic_tag = POL_slav_beck
 			} 
 			#set_country_flag = POL_ready_to_go_foreign
 			set_country_flag = plx_synd_slav_decision
@@ -3220,8 +3151,8 @@ country_event = {
 	option = {
 		name = plx.40.b #Brzechwa
 		trigger = {
-			NOT = { has_government = national_populist }
-		}		
+			 has_government = social_democrat
+		}
 		increase_ruling_party_popularity_by_3 = yes
 		add_political_power = 30
 		add_stability = 0.03
@@ -3232,7 +3163,7 @@ country_event = {
 					name = "扬·布日赫瓦"
 					picture = "gfx/leaders/POL/Portrait_PLX_Jan_Brzechwa.png"
 					expire = "1965.1.1"
-					ideology = radsoc_liberal_socialism_subtype
+					ideology = radsoc_paternal_socialism_subtype
 				}		
 			}	
 			if = {
@@ -3254,6 +3185,15 @@ country_event = {
 				}				
 			}
 			if = {
+				limit = { has_country_flag = plx_fjr_marlib }
+				create_country_leader = {
+					name = "扬·布日赫瓦"
+					picture = "gfx/leaders/POL/Portrait_PLX_Jan_Brzechwa.png"
+					expire = "1965.1.1"
+					ideology = progressive_democracy_subtype
+				}				
+			}
+			if = {
 				limit = { has_country_flag = plx_fjr_soccon }
 				create_country_leader = {
 					name = "扬·布日赫瓦"
@@ -3268,7 +3208,7 @@ country_event = {
 					name = "扬·布日赫瓦"
 					picture = "gfx/leaders/POL/Portrait_PLX_Jan_Brzechwa.png"
 					expire = "1965.1.1"
-					ideology = natpop_popular_patriotism_subtype
+					ideology = natpop_paternal_socialism_subtype
 				}				
 			}							
 		}
@@ -3277,9 +3217,9 @@ country_event = {
 		}		
 	}	
 	option = {
-		name = plx.40.c #Fogg
+		name = plx.40.c #wirski
 		trigger = {
-			NOT = { has_government = national_populist }
+			 has_government = radical_socialist
 		}		
 		increase_ruling_party_popularity_by_5 = yes
 		add_political_power = 50
@@ -3287,17 +3227,17 @@ country_event = {
 			if = {
 				limit = { has_country_flag = plx_fjr_radsoc }
 				create_country_leader = {
-					name = "米齐兹瓦夫·福格"
-					picture = "gfx/leaders/POL/Portrait_PLX_Mieczyslaw_Fogg.png"
-					expire = "1965.1.1"
-					ideology = radsoc_liberal_socialism_subtype
-				}		
+					name = "费利克斯·维迪-维尔斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Feliks_Widy_Wirski.png"
+					expire = "1.1.1"
+					ideology = radsoc_paternal_socialism_subtype
+				} 	
 			}	
 			if = {
 				limit = { has_country_flag = plx_fjr_socdem }
 				create_country_leader = {
-					name = "米齐兹瓦夫·福格"
-					picture = "gfx/leaders/POL/Portrait_PLX_Mieczyslaw_Fogg.png"
+					name = "费利克斯·维迪-维尔斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Feliks_Widy_Wirski.png"
 					expire = "1965.1.1"
 					ideology = socdem_paternal_socialism_subtype
 				}
@@ -3305,17 +3245,26 @@ country_event = {
 			if = {
 				limit = { has_country_flag = plx_fjr_soclib }
 				create_country_leader = {
-					name = "米齐兹瓦夫·福格"
-					picture = "gfx/leaders/POL/Portrait_PLX_Mieczyslaw_Fogg.png"
+					name = "费利克斯·维迪-维尔斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Feliks_Widy_Wirski.png"
 					expire = "1965.1.1"
 					ideology = soclib_progressive_democracy_subtype
 				}				
 			}
 			if = {
+				limit = { has_country_flag = plx_fjr_marlib }
+				create_country_leader = {
+					name = "费利克斯·维迪-维尔斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Feliks_Widy_Wirski.png"
+					expire = "1965.1.1"
+					ideology = progressive_democracy_subtype
+				}				
+			}
+			if = {
 				limit = { has_country_flag = plx_fjr_soccon }
 				create_country_leader = {
-					name = "米齐兹瓦夫·福格"
-					picture = "gfx/leaders/POL/Portrait_PLX_Mieczyslaw_Fogg.png"
+					name = "费利克斯·维迪-维尔斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Feliks_Widy_Wirski.png"
 					expire = "1965.1.1"
 					ideology = paternal_socialism_subtype
 				}				
@@ -3323,10 +3272,10 @@ country_event = {
 			if = {
 				limit = { has_country_flag = plx_fjr_natpop }
 				create_country_leader = {
-					name = "米齐兹瓦夫·福格"
-					picture = "gfx/leaders/POL/Portrait_PLX_Mieczyslaw_Fogg.png"
+					name = "费利克斯·维迪-维尔斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Feliks_Widy_Wirski.png"
 					expire = "1965.1.1"
-					ideology = natpop_popular_patriotism_subtype
+					ideology = natpop_paternal_socialism_subtype
 				}				
 			}
 		}
@@ -3335,7 +3284,7 @@ country_event = {
 		}		
 	}	
 	option = {
-		name = plx.40.e #Piasecki
+		name = plx.40.e #Jan_Ostoja_Matlachowski
 		trigger = {
 			has_government = national_populist
 		}
@@ -3346,17 +3295,17 @@ country_event = {
 			if = {
 				limit = { has_country_flag = plx_fjr_radsoc }
 				create_country_leader = {
-					name = "博莱斯瓦夫·皮亚塞基"
-					picture = "gfx/leaders/POL/Portrait_PLX_Boleslaw_Piasecki.png"
+					name = "扬·奥斯托亚·马特拉霍夫斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Jan_Ostoja_Matlachowski.png"
 					expire = "1965.1.1"
-					ideology = radsoc_liberal_socialism_subtype
+					ideology = radsoc_paternal_socialism_subtype
 				}
 			}	
 			if = {
 				limit = { has_country_flag = plx_fjr_socdem }
 				create_country_leader = {
-					name = "博莱斯瓦夫·皮亚塞基"
-					picture = "gfx/leaders/POL/Portrait_PLX_Boleslaw_Piasecki.png"
+					name = "扬·奥斯托亚·马特拉霍夫斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Jan_Ostoja_Matlachowski.png"
 					expire = "1965.1.1"
 					ideology = socdem_paternal_socialism_subtype
 				}
@@ -3364,17 +3313,26 @@ country_event = {
 			if = {
 				limit = { has_country_flag = plx_fjr_soclib }
 				create_country_leader = {
-					name = "博莱斯瓦夫·皮亚塞基"
-					picture = "gfx/leaders/POL/Portrait_PLX_Boleslaw_Piasecki.png"
+					name = "扬·奥斯托亚·马特拉霍夫斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Jan_Ostoja_Matlachowski.png"
 					expire = "1965.1.1"
 					ideology = soclib_progressive_democracy_subtype
 				}
 			}
 			if = {
+				limit = { has_country_flag = plx_fjr_marlib }
+				create_country_leader = {
+					name = "扬·奥斯托亚·马特拉霍夫斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Jan_Ostoja_Matlachowski.png"
+					expire = "1965.1.1"
+					ideology = progressive_democracy_subtype
+				}
+			}
+			if = {
 				limit = { has_country_flag = plx_fjr_soccon }
 				create_country_leader = {
-					name = "博莱斯瓦夫·皮亚塞基"
-					picture = "gfx/leaders/POL/Portrait_PLX_Boleslaw_Piasecki.png"
+					name = "扬·奥斯托亚·马特拉霍夫斯基"
+					picture = "gfx/leaders/POL/Portrait_PLX_Jan_Ostoja_Matlachowski.png"	
 					expire = "1965.1.1"
 					ideology = paternal_socialism_subtype
 				}
@@ -3382,15 +3340,213 @@ country_event = {
 			if = {
 				limit = { has_country_flag = plx_fjr_natpop }
 				create_country_leader = {
-					name = "博莱斯瓦夫·皮亚塞基"
-					picture = "gfx/leaders/POL/Portrait_PLX_Boleslaw_Piasecki.png"
+					name = "扬·奥斯托亚·马特拉霍夫斯基"
+					picture = "gfx/leaders/POL/Portrait_PLX_Jan_Ostoja_Matlachowski.png"	
 					expire = "1965.1.1"
-					ideology = natpop_popular_patriotism_subtype
+					ideology = natpop_paternal_socialism_subtype
 				}
 			}
 		}
 		ai_chance = {
 			factor = 50
+		}		
+	}	
+	option = {
+		name = plx.40.f #felzak
+		trigger = {
+			 has_government = social_conservative
+		}		
+		add_political_power = 100
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = plx_fjr_radsoc }
+				create_country_leader = {
+					name = "齐格蒙特·菲尔查克"
+					picture = "gfx/leaders/POL/Portrait_POL_Zygmunt_Felczak.png"
+					expire = "1.1.1"
+					ideology = radsoc_paternal_socialism_subtype
+				} 	
+			}	
+			if = {
+				limit = { has_country_flag = plx_fjr_socdem }
+				create_country_leader = {
+					name = "齐格蒙特·菲尔查克"
+					picture = "gfx/leaders/POL/Portrait_POL_Zygmunt_Felczak.png"
+					expire = "1965.1.1"
+					ideology = socdem_paternal_socialism_subtype
+				}
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_soclib }
+				create_country_leader = {
+					name = "齐格蒙特·菲尔查克"
+					picture = "gfx/leaders/POL/Portrait_POL_Zygmunt_Felczak.png"
+					expire = "1965.1.1"
+					ideology = soclib_progressive_democracy_subtype
+				}				
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_marlib }
+				create_country_leader = {
+					name = "齐格蒙特·菲尔查克"
+					picture = "gfx/leaders/POL/Portrait_POL_Zygmunt_Felczak.png"
+					expire = "1965.1.1"
+					ideology = progressive_democracy_subtype
+				}				
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_soccon }
+				create_country_leader = {
+					name = "齐格蒙特·菲尔查克"
+					picture = "gfx/leaders/POL/Portrait_POL_Zygmunt_Felczak.png"
+					expire = "1965.1.1"
+					ideology = paternal_socialism_subtype
+				}				
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_natpop }
+				create_country_leader = {
+					name = "齐格蒙特·菲尔查克"
+					picture = "gfx/leaders/POL/Portrait_POL_Zygmunt_Felczak.png"
+					expire = "1965.1.1"
+					ideology = natpop_paternal_socialism_subtype
+				}				
+			}
+		}
+		ai_chance = {
+			factor = 20
+		}		
+	}	
+	option = {
+		name = plx.40.g #lubienski
+		trigger = {
+			 has_government = social_liberal
+		}		
+		add_political_power = 100
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = plx_fjr_radsoc }
+				create_country_leader = {
+					name = "康斯坦蒂·卢比恩斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Konstanty_Lubienski.png"
+					expire = "1.1.1"
+					ideology = radsoc_paternal_socialism_subtype
+				} 	
+			}	
+			if = {
+				limit = { has_country_flag = plx_fjr_socdem }
+				create_country_leader = {
+					name = "康斯坦蒂·卢比恩斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Konstanty_Lubienski.png"
+					expire = "1965.1.1"
+					ideology = socdem_paternal_socialism_subtype
+				}
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_soclib }
+				create_country_leader = {
+					name = "康斯坦蒂·卢比恩斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Konstanty_Lubienski.png"
+					expire = "1965.1.1"
+					ideology = soclib_progressive_democracy_subtype
+				}				
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_marlib }
+				create_country_leader = {
+					name = "康斯坦蒂·卢比恩斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Konstanty_Lubienski.png"
+					expire = "1965.1.1"
+					ideology = progressive_democracy_subtype
+				}				
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_soccon }
+				create_country_leader = {
+					name = "康斯坦蒂·卢比恩斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Konstanty_Lubienski.png"
+					expire = "1965.1.1"
+					ideology = paternal_socialism_subtype
+				}				
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_natpop }
+				create_country_leader = {
+					name = "康斯坦蒂·卢比恩斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Konstanty_Lubienski.png"
+					expire = "1965.1.1"
+					ideology = natpop_paternal_socialism_subtype
+				}				
+			}
+		}
+		ai_chance = {
+			factor = 20
+		}		
+	}	
+	option = {
+		name = plx.40.g #rowmund
+		trigger = {
+			 has_government = market_liberal
+		}		
+		add_political_power = 100
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = plx_fjr_radsoc }
+				create_country_leader = {
+					name = "罗蒙德·毕苏斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Rowmund_Pilsudski.png"
+					expire = "1.1.1"
+					ideology = radsoc_paternal_socialism_subtype
+				} 	
+			}	
+			if = {
+				limit = { has_country_flag = plx_fjr_socdem }
+				create_country_leader = {
+					name = "罗蒙德·毕苏斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Rowmund_Pilsudski.png"
+					expire = "1965.1.1"
+					ideology = socdem_paternal_socialism_subtype
+				}
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_soclib }
+				create_country_leader = {
+					name = "罗蒙德·毕苏斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Rowmund_Pilsudski.png"
+					expire = "1965.1.1"
+					ideology = soclib_progressive_democracy_subtype
+				}				
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_marlib }
+				create_country_leader = {
+					name = "罗蒙德·毕苏斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Rowmund_Pilsudski.png"
+					expire = "1965.1.1"
+					ideology = progressive_democracy_subtype
+				}				
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_soccon }
+				create_country_leader = {
+					name = "罗蒙德·毕苏斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Rowmund_Pilsudski.png"
+					expire = "1965.1.1"
+					ideology = paternal_socialism_subtype
+				}				
+			}
+			if = {
+				limit = { has_country_flag = plx_fjr_natpop }
+				create_country_leader = {
+					name = "罗蒙德·毕苏斯基"
+					picture = "gfx/leaders/POL/Portrait_POL_Rowmund_Pilsudski.png"
+					expire = "1965.1.1"
+					ideology = natpop_paternal_socialism_subtype
+				}				
+			}
+		}
+		ai_chance = {
+			factor = 20
 		}		
 	}	
 }
@@ -4008,12 +4164,7 @@ country_event = {
 		add_political_power = 50
 		add_stability = -0.06
 		add_ideas = KX_PL_AS_religious_tax
-		hidden_effect = {
-			modify_country_flag = {
-				flag = plx_PZPR_to_left
-				value = 1
-			}
-		}
+		
 		ai_chance = {
 			factor = 50
 		}
@@ -4045,6 +4196,7 @@ country_event = {
 				flag = plx_PZPR_to_left
 				value = 2
 			}
+			country_event = plx.54
 		}		
 		ai_chance = {
 			factor = 30
@@ -4119,27 +4271,16 @@ country_event = {
 			}
 
 			create_country_leader = {
-				name = "卡罗尔·奥布拉希特二世"
-				picture = "gfx/leaders/POL/Portrait_POL_Karol_Olbracht.png"
-				expire = "1965.1.1"
-				ideology = christian_democracy_subtype
-			}
-
-			if = {
-				limit = { has_country_flag = plx_pzpr_republic }
-				create_country_leader = {
 					name = "约瑟夫·查辛斯基"
 					#desc = "POLITICS_JOZEF_CHACINSKI_DESC"
 					picture = "gfx/leaders/POL/Portrait_POL_Jozef_Chacinski.png"
 					expire = "1965.1.1"
 					ideology = christian_democracy_subtype
 				}
-			}			
-
 			set_party_name = {
 				ideology = social_conservative
-				long_name = POL_chadecja2_party_long
-				name = "ChSD"
+				long_name = POL_social_conservative_party_long
+				name = POL_social_conservative_party
 			}
 			
 			remove_all_ministers = yes
@@ -4153,70 +4294,72 @@ country_event = {
 	}
 }
 
-#country_event = {
-#	id = plx.54 #anti-semitic hysteria
-#	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.54" }
-#	title = plx.54.t
-#	desc = plx.54.d
-#	#picture = GFX_report_event_soldiers_marching
-#
-#	fire_only_once = yes
-#
-#	is_triggered_only = yes
-#	option = {
-#		name = plx.54.a
-#		add_stability = -0.03
-#		add_popularity = {
-#			ideology = national_populist
-#			popularity = 0.02
-#		}		
-#		hidden_effect = {
-#			if = {
-#				limit = { has_country_flag = plx_fjr_formed }
-#				country_event = {
-#					id = plx.55
-#					days = 3
-#				}				
-#			}		
-#		}
-#		ai_chance = {
-#			factor = 100
-#		}
-#	}
-#}
-#
-#country_event = {
-#	id = plx.55 #FJR combats anti-semitism within
-#	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.55" }
-#	title = plx.55.t
-#	desc = plx.55.d
-#	#picture = GFX_report_event_soldiers_marching
-#
-#	fire_only_once = yes
-#
-#	is_triggered_only = yes
-#	option = {
-#		name = plx.55.a
-#		add_popularity = {
-#			ideology = social_conservative
-#			popularity = -0.01
-#		}
-#		add_popularity = {
-#			ideology = radical_socialist
-#			popularity = 0.01
-#		}	
-#		ai_chance = {
-#			factor = 60
-#		}
-#	}
-#	
-#	option = {
-#		name = plx.55.b
-#		ai_chance = {
-#			factor = 40
-#		}
-#	}
-#}
+country_event = {
+	id = plx.54 #PZPR shifts marlib
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.54" }
+	title = plx.54.t
+	desc = plx.54.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = {
+		name = plx.54.a	
+		add_political_power = -50
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.10
+		}		
+			
+		hidden_effect = {		
+
+			set_politics = {
+				ruling_party = market_liberal
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			add_socdem_to_coalition = yes
+			add_soclib_to_coalition = yes
+			add_soccon_to_coalition = yes		
+
+		}
+	}
+}
+country_event = {
+	id = plx.55 #PZPR shifts soclib
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.55" }
+	title = plx.55.t
+	desc = plx.55.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = {
+		name = plx.55.a	
+		add_political_power = -50
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.10
+		}		
+			
+		hidden_effect = {		
+
+			set_politics = {
+				ruling_party = social_liberal
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			add_socdem_to_coalition = yes
+			add_marlib_to_coalition = yes
+			add_soccon_to_coalition = yes		
+
+		}
+	}
+}
 
 country_event = {
 	id = plx.56 #Wyszynski Support Socialists
@@ -4353,7 +4496,7 @@ country_event = {
 }
 
 country_event = {
-	id = plx.58 #Stachniuk wants to join
+	id = plx.58 #PZPR shifts socdem
 	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.58" }
 	title = plx.58.t
 	desc = plx.58.d
@@ -4364,38 +4507,25 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = {
-		name = plx.58.a
-		add_stability = -0.05
-		add_political_power = 25
-		hidden_effect = {
-			set_country_flag = plx_ally_zadruga
-			set_party_name = {
-				ideology = national_populist
-				long_name = POL_zadruga_party_long
-				name = "Zadruga"
-			}
-			create_country_leader = {
-				name = "扬'斯托伊涅夫'斯塔奇纽克 "
-				picture = "gfx/leaders/POL/Portrait_PLX_Jan_Stachniuk.png"
-				expire = "1965.1.1"
-				ideology = right_syndicalism_subtype
-			}
-		}
-		increase_ruling_party_popularity_by_5 = yes
+		name = plx.58.a	
+		add_political_power = -50
 		add_popularity = {
-			ideology = national_populist
+			ideology = social_democrat
 			popularity = 0.10
-		}
-		add_natpop_to_coalition = yes
-		ai_chance = {
-			factor = 100
-		}
-	}
-	option = {
-		name = plx.58.b
-		ai_chance = {
-			factor = 100
 		}		
+			
+		hidden_effect = {		
+
+			set_politics = {
+				ruling_party = social_democrat
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			add_marlib_to_coalition = yes
+			add_soclib_to_coalition = yes
+			add_soccon_to_coalition = yes		
+
+		}
 	}
 }
 
@@ -7372,6 +7502,201 @@ country_event = {
 		clr_country_flag = POL_zadruga_in_power
 	}
 }
+##On Trade Unions
+country_event = {
+	id = plxv2.061
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.061" }
+	title = plxv2.061.t
+	desc = plxv2.061.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = { #Centralise
+		name = plxv2.061.a
+		add_stability = 0.02
+		add_political_power = -20
+		add_power_balance_value = {
+			id = POL_sanation_bop
+			value = -0.1
+		}
+		POL_sanation_increase_unity = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = { #Ban
+		name = plxv2.061.b	
+		add_stability = -0.02
+		add_political_power = 20		
+		add_power_balance_value = {
+			id = POL_sanation_bop
+			value = 0.1
+		}
+		POL_sanation_decrease_unity = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+##On Elites
+country_event = {
+	id = plxv2.062
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.062" }
+	title = plxv2.062.t
+	desc = plxv2.062.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = { #Replace
+		name = plxv2.062.a
+		add_stability = 0.02
+		add_political_power = -20
+		add_power_balance_value = {
+			id = POL_sanation_bop
+			value = -0.1
+		}
+		POL_sanation_increase_radicalism = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = { #Cooperate
+		name = plxv2.062.b
+		add_stability = 0.02
+		add_political_power = -20
+		add_power_balance_value = {
+			id = POL_sanation_bop
+			value = 0.1
+		}
+		POL_sanation_decrease_radicalism = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+##Military Constitution
+country_event = {
+	id = plxv2.063
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.063" }
+	title = plxv2.063.t
+	desc = plxv2.063.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = { #Favour Old
+		name = plxv2.063.a
+		add_stability = 0.05
+		add_power_balance_value = {
+			id = POL_sanation_bop
+			value = 0.1
+		}
+		POL_sanation_decrease_unity = yes
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = { #Introduce Young
+		name = plxv2.063.b
+		add_political_power = 30
+		add_war_support = 0.03
+		add_power_balance_value = {
+			id = POL_sanation_bop
+			value = -0.1
+		}
+		POL_sanation_increase_unity = yes
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+##Future of Economy
+country_event = {
+	id = plxv2.064
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.064" }
+	title = plxv2.064.t
+	desc = plxv2.064.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = { #Central Planning
+		name = plxv2.064.a
+		add_stability = 0.05
+		add_power_balance_value = {
+			id = POL_sanation_bop
+			value = -0.1
+		}
+		POL_sanation_increase_radicalism = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = { #Corporatism
+		name = plxv2.064.b
+		add_political_power = 50
+		add_power_balance_value = {
+			id = POL_sanation_bop
+			value = 0.1
+		}
+		POL_sanation_increase_unity = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+##State Council
+country_event = {
+	id = plxv2.065
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.065" }
+	title = plxv2.065.t
+	desc = plxv2.065.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = { #Introduce Civilians
+		name = plxv2.065.a
+		add_stability = 0.05
+		add_power_balance_value = {
+			id = POL_sanation_bop
+			value = -0.1
+		}
+		POL_sanation_decrease_radicalism = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = { #Maintain Military Primacy
+		name = plxv2.065.b
+		add_political_power = 30
+		add_war_support = 0.03
+		add_power_balance_value = {
+			id = POL_sanation_bop
+			value = 0.1
+		}
+		POL_sanation_decrease_unity = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
 ###Syndicalist Rework
 ##Abolition of Constitution
 country_event = {
@@ -9368,6 +9693,7 @@ country_event = {
 		mark_focus_tree_layout_dirty = yes
 	}		
 }
+
 country_event = {
 	id = plxv2.151
 	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.142" }
@@ -9408,4 +9734,1427 @@ country_event = {
 		
 	}	
 		
+}
+country_event = {
+	id = plxv2.152
+	#immediate = { log = "[GetDateText]: [Root.GetName]: event plxv2.142" }
+	title = plxv2.152.t
+	desc = plxv2.152.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = {
+		name = plxv2.152.a
+		clr_country_flag = plx_anti_endecja
+		set_cosmetic_tag = POL_solidarity_cosmetic
+		uncomplete_national_focus = {
+			focus = KX_PL_PZPR_UNITED_FRONT
+			uncomplete_children = yes
+		}
+		if = {
+			limit = {
+				has_country_flag = plx_pzpr_left
+			}
+			set_country_flag = PLX_solidarity
+			set_country_flag = POL_solidarity_right
+			set_politics = {
+				ruling_party = paternal_autocrat
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "扬·奇亚"
+				picture = "gfx/leaders/POL/Portrait_POL_Jan_Zieja.png"
+				expire = "1.1.1"
+				ideology = pataut_agrarianism_subtype
+			}
+			create_country_leader = {
+				name = "沃伊切赫·奇恩宾斯基"
+				picture = "gfx/leaders/POL/Portrait_POL_Wojciech_Ziembinski.png"
+				expire = "1.1.1"
+				ideology = authdem_right_syndicalism_subtype
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.15
+			}
+			add_authdem_to_coalition = yes
+		}
+	}
+	if = {
+			limit = {
+				has_country_flag = plx_pzpr_right
+			}
+			set_country_flag = PLX_solidarity
+			set_country_flag = POL_solidarity_left
+			set_politics = {
+				ruling_party = radical_socialist
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "爱德华·利平斯基"
+				picture = "gfx/leaders/POL/Portrait_POL_Edward_Lipinski.png"
+				expire = "1.1.1"
+				ideology = utopian_technocracy_subtype
+			}
+			create_country_leader = {
+				name = "亚当·斯查普伊斯基"
+				picture = "gfx/leaders/POL/Portrait_POL_Adam_Szczypiorski.png"
+				expire = "1.1.1"
+				ideology = socdem_liberalized_syndicalism_subtype
+			}
+			set_country_flag = soc_dems_are_socialists
+			add_socdem_to_coalition = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.15
+			}
+		}
+}
+country_event = {
+	id = plxv2.153
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = plxv2.153.t
+	desc = plxv2.153.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxv2.153.a
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+		}
+		add_radsoc_to_coalition = yes
+	}
+	option = {
+		name = plxv2.153.b
+		
+	}
+}
+country_event = {
+	id = plxv2.154
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = plxv2.154.t
+	desc = plxv2.154.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxv2.154.a
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		add_pataut_to_coalition = yes
+	}
+	option = {
+		name = plxv2.154.b
+		
+	}
+}
+country_event = {
+	id = plxv2.155
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = plxv2.155.t
+	desc = plxv2.155.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxv2.155.a
+		add_tot_to_ban = yes
+		add_natpop_to_ban = yes
+	}
+}
+country_event = {
+	id = plxv2.156
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = plxv2.156.t
+	desc = plxv2.156.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = plxv2.156.a
+		GER = {
+			add_to_faction = POL
+		}
+	}
+	option = {
+		name = plxv2.156.b
+		
+	}
+}
+country_event = {
+	id = sanation.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.1.t
+	desc = sanation.1.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.1.a
+		POL_set_up_sanation = yes
+	}
+
+}
+country_event = {
+	id = sanation.2 #slawek continues
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.2.t
+	desc = sanation.2.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.2.a
+		
+		set_country_flag = POL_struggle_is_over
+		set_country_flag = POL_sanation_slawek_win
+		mark_focus_tree_layout_dirty = yes
+		remove_power_balance = {
+			id = POL_sanation_bop
+		}
+	}
+	
+}
+country_event = {
+	id = sanation.3 #slawek overthrow by other left
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+		hidden_effect = {
+			uncomplete_national_focus = POL_return_of_the_holy_son
+		}
+	}
+	title = sanation.3.t
+	desc = sanation.3.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.3.a
+		trigger = {
+			check_variable = { POL.radicalism > 60 }
+		}
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "玛利亚·科苏茨卡"
+			picture = "gfx/leaders/POL/Portrait_POL_Maria_Koszutska.png"
+			expire = "1.1.1"
+			ideology = bukharinist_subtype
+		}
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = POL_sanation_totalist_party_long
+			name = POL_sanation_totalist_party
+		}
+		add_radsoc_to_coalition = yes
+		clr_country_flag = POL_sanation_slawek_win
+		set_country_flag = POL_sanation_commie_win
+		mark_focus_tree_layout_dirty = yes
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
+		remove_all_ministers = yes 
+		add_ideas = {
+			POL_Wladyslaw_Gomulka_hog_rso
+			POL_Henryk_Walecki_for_tot
+			POL_Tomasz_Pilarski_eco_rso
+			POL_Adolf_Warski_sec_syn
+		}
+		country_event = sanation.4 
+	}
+	option = {
+		name = sanation.3.b
+		trigger = {
+			check_variable = { POL.radicalism > 30 }
+			check_variable = { POL.radicalism < 60 }
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = no
+		}
+		
+		clr_country_flag = POL_sanation_slawek_win
+		set_country_flag = POL_sanation_pps_win
+		mark_focus_tree_layout_dirty = yes
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		remove_all_ministers = yes 
+		add_ideas = {
+			POL_Rajmund_Jaworowski_hog_sde
+			POL_Konstancja_Jaworowska_for_sde
+			POL_Jozef_Lokietek_eco_sde
+			POL_Lukasz_Siemiatkowski_sec_sde
+		}
+	}
+	option = {
+		name = sanation.3.c
+		trigger = {
+			check_variable = { POL.radicalism < 30 }
+		}
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = no
+		}
+		clr_country_flag = POL_sanation_slawek_win
+		set_country_flag = POL_sanation_npr_win
+		mark_focus_tree_layout_dirty = yes
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.1
+		}
+		remove_all_ministers = yes 
+		add_ideas = {
+			POL_Ludwik_Waszkiewicz_hog_tot
+			POL_Feliks_Wirdy_Wirski_for_rso
+			POL_Aleksander_Prystor_eco_sde
+			POL_Jozef_Alojzy_Gawrych_sec_sco
+		}
+	}
+}
+country_event = {
+	id = sanation.4 
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.4.t
+	desc = sanation.4.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.4.a
+		
+	}
+	option = {
+		name = sanation.4.b
+		set_politics = {
+			ruling_party = radical_socialist
+			elections_allowed = no
+		}
+		add_tot_to_coalition = yes
+	}
+}
+country_event = {
+	id = sanation.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.5.t
+	desc = sanation.5.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.5.a
+		
+	}
+	option = {
+		name = sanation.5.b
+		set_politics = {
+			ruling_party = syndicalist
+			elections_allowed = no
+		}
+		add_tot_to_coalition = yes
+	}
+}
+country_event = {
+	id = sanation.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.6.t
+	desc = sanation.6.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.6.a
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "延德热伊·莫拉切夫斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Jedrzej_Moraczewski.png"
+			expire = "1.1.1"
+			ideology = sorelianism_subtype
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = POL_sanation_syndicalist_party_long
+			name = POL_sanation_syndicalist_party
+		}
+		add_synd_to_coalition = yes
+		clr_country_flag = POL_sanation_slawek_win
+		set_country_flag = POL_sanation_synd_win
+		mark_focus_tree_layout_dirty = yes
+		add_popularity = {
+			ideology = syndicalist
+			popularity = 0.1
+		}
+		remove_all_ministers = yes 
+		add_ideas = {
+			POL_Kazimierz_Zakrzewski_hog_syn
+			POL_Stefan_Kapuscinski_for_syn
+			POL_Jarzy_Szurig_eco_syn
+			POL_Jedrzej_Moraczewski_sec_sde
+		}
+		country_event = sanation.5
+	}
+	option = {
+		name = sanation.6.b
+		set_country_leader_ideology = sorelian_bolshevism_subtype
+		set_country_flag = POL_sanation_dlugo_win
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+country_event = {
+	id = sanation.7 #dlugo coup
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+		hidden_effect = {
+			uncomplete_national_focus = POL_return_of_the_holy_son
+		}
+	}
+	title = sanation.7.t
+	desc = sanation.7.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.7.a
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "博莱斯瓦夫·德乌戈绍夫斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Boleslaw_Wieniawa_Dlugoszewski_kr.png"
+			expire = "1.1.1"
+			ideology = red_junta_subtype
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = POL_sanation_dlugo_party_long
+			name = POL_sanation_dlugo_party
+		}
+		clr_country_flag = POL_sanation_slawek_win
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
+		hidden_effect = {
+			country_event = {
+				id = sanation.6
+				days = 1
+			}
+		}
+	}
+}
+country_event = {
+	id = sanation.8 #join jap
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+	}
+	title = sanation.8.t
+	desc = sanation.8.d
+	#picture = GFX_report_event_soldiers_marching
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.8.a
+	}
+	option = {
+		name = sanation.8.b
+		JAP = {
+			add_to_faction = POL
+		}
+		
+	}
+}
+country_event = {
+	id = sanation.9 #annex lit
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+	}
+	title = sanation.9.t
+	desc = sanation.9.d
+	#picture = GFX_report_event_soldiers_marching
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		ai_chance = {
+			factor = 100
+		}
+		name = sanation.9.a
+		POL = {
+			annex_country = {
+				target = LIT
+				transfer_troops = yes
+			}
+		}
+		every_state = {
+			limit = {
+				is_core_of = LIT
+			}
+			POL = {
+				add_state_core = PREV
+			}
+		}
+	}
+	option = {
+		name = sanation.9.b
+		POL = {
+			create_wargoal = {
+				target = LIT
+				type = annex_everything
+			}
+		}
+	}
+}
+country_event = {
+	id = sanation.10 #beck win
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+	}
+	title = sanation.10.t
+	desc = sanation.10.d
+	#picture = GFX_report_event_soldiers_marching
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.10.a
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "古斯塔夫·奥尔利茨-德雷泽"
+			picture = "gfx/leaders/POL/Portrait_POL_Gustaw_Orlicz_Dreszer.png"
+			expire = "1.1.1"
+			ideology = authdem_junta_subtype
+		}
+		set_country_flag = KXX_LEADER_GUI_VISIBLE
+		set_country_flag = POL_Jozef_Beck_VISIBLE
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = POL_sanation_paternal_autocrat_party
+			name = POL_sanation_paternal_autocrat_party
+		}
+		set_country_flag = POL_sanation_beck_win
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.1
+		}
+		add_pataut_to_coalition = yes
+		mark_focus_tree_layout_dirty = yes
+		remove_all_ministers = yes
+			add_ideas = {
+				POL_Jozef_Beck_hog_ade
+				POL_Ignacy_Moscicki_for_ade
+				POL_Ignacy_Matuszewski_eco_ade
+				POL_Felicjan_Slawoj_Skladkowski_sec_ade
+			}
+		clr_country_flag = POL_sanation_struggle_second
+	}
+	option = {
+		name = sanation.10.b	
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "米耶齐斯瓦夫·基纽什"
+			picture = "gfx/leaders/POL/Portrait_POL_Mieczyslaw_Geniusz.png"
+			expire = "1.1.1"
+			ideology = theosophy_subtype
+		}
+		set_country_flag = KXX_LEADER_GUI_VISIBLE
+		set_country_flag = POL_Jozef_Beck_VISIBLE
+		set_party_name = {
+			ideology = national_populist
+			long_name = POL_sanation_beck_based_party_long
+			name = POL_sanation_beck_based_party
+		}
+		set_country_flag = POL_sanation_beck_win
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.1
+		}
+		add_pataut_to_coalition = yes
+		mark_focus_tree_layout_dirty = yes 
+		remove_all_ministers = yes
+			add_ideas = {
+				POL_Jozef_Beck_hog_ade
+				POL_Ignacy_Moscicki_for_ade
+				POL_Ignacy_Matuszewski_eco_ade
+				POL_Felicjan_Slawoj_Skladkowski_sec_ade
+			}
+		clr_country_flag = POL_sanation_struggle_second
+		
+	}
+}
+country_event = {
+	id = sanation.11 #slawek lose
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+	}
+	title = sanation.11.t
+	desc = sanation.11.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.11.a
+		create_country_leader = {
+			name = "伊格纳西·莫希奇茨基"
+			picture = "gfx/leaders/POL/Portrait_PLX_Ignacy_Moscicki.png"
+			expire = "1.1.1"
+			ideology = provisional_government_subtype
+		}
+		random_unit_leader = {
+			limit = { has_id = 2137 }
+			remove_unit_leader = yes
+		}
+		set_country_flag = POL_struggle_is_over
+		remove_power_balance = {
+			id = POL_sanation_bop
+		}
+		set_country_flag = POL_sanation_struggle_second
+		activate_mission = POL_congress_mission
+		
+	}
+}
+country_event = {
+	id = sanation.12 #moci
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+	}
+	title = sanation.12.t
+	desc = sanation.12.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.12.a	
+		set_country_flag = POL_sanation_moci_win
+		clr_country_flag = POL_sanation_struggle_second
+		mark_focus_tree_layout_dirty = yes
+		remove_all_ministers = yes
+			add_ideas = {
+				POL_Eugeniusz_Kwiatkowski_hog_tot
+				POL_Ignacy_Moscicki_for_ade
+				POL_Ignacy_Matuszewski_eco_ade
+				POL_Felicjan_Slawoj_Skladkowski_sec_ade
+			}
+	}
+}
+country_event = {
+	id = sanation.13 #zegota coups
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+		hidden_effect = {
+			uncomplete_national_focus = POL_new_king_in_the_castle
+		}
+	}
+	title = sanation.13.t
+	desc = sanation.13.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.13.a	
+		clr_country_flag = POL_sanation_moci_win
+		create_country_leader = {
+			name = "马里安·亚努沙伊蒂斯-泽戈塔"
+			picture = "gfx/leaders/POL/Portrait_POL_Marian_Januszajtis_Zegota.png"
+			expire = "1965.1.1"
+			ideology = junta_subtype
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			name = POL_paternal_autocrat_military_party
+			long_name = POL_paternal_autocrat_military_party_long
+		}
+		set_party_name = {
+			ideology = social_conservative
+			name = POL_conservative_party
+			long_name = POL_conservative_party_long
+		}
+		set_cosmetic_tag = POL_REPUBLIC
+		set_country_flag = POL_sanation_demo_win
+		mark_focus_tree_layout_dirty = yes
+		remove_all_ministers = yes
+		add_ideas = {
+			POL_Marian_Januszajtis_Zegota_hog_pau
+			POL_Eustachy_Sapiecha_for_pau
+			POL_Jerzy_Zdziechowski_eco_pau
+			POL_Marian_Januszajtis_Zegota_sec_pau
+		}
+	}
+}
+
+country_event = {
+	id = sanation.14 #smigly
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+	}
+	title = sanation.14.t
+	desc = sanation.14.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.14.a	
+		set_country_flag = POL_sanation_smigly_win
+		clr_country_flag = POL_sanation_struggle_second
+		create_country_leader = {
+			name = "爱德华·雷兹-希米格维"
+			picture = "gfx/leaders/POL/Portrait_POL_Edward_Rydz_Smigly_kr.png"
+			expire = "1965.1.1"
+			ideology = junta_subtype
+		}
+		mark_focus_tree_layout_dirty = yes
+		remove_all_ministers = yes
+			add_ideas = {
+				POL_Wladyslaw_Grabski_hog_ade
+				POL_Alfred_Wysocki_for_ade
+				POL_Ignacy_Matuszewski_eco_ade
+				POL_Felicjan_Slawoj_Skladkowski_sec_ade
+			}
+	}
+}
+country_event = {
+	id = sanation.15 #zeli coups
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+		hidden_effect = {
+			uncomplete_national_focus = POL_a_new_augustus
+		}
+	}
+	title = sanation.15.t
+	desc = sanation.15.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.15.a	
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		clr_country_flag = POL_sanation_smigly_win
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.1
+		}
+		hidden_effect = {
+			country_event = {
+				id = sanation.16
+				days = 1
+			}
+		}
+		mark_focus_tree_layout_dirty = yes
+		remove_all_ministers = yes
+			add_ideas = {
+				POL_Wladyslaw_Grabski_hog_ade
+				POL_Alfred_Wysocki_for_ade
+				POL_Ignacy_Matuszewski_eco_ade
+				POL_Felicjan_Slawoj_Skladkowski_sec_ade
+			}
+	}
+}
+country_event = {
+	id = sanation.16 
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+		hidden_effect = {
+			uncomplete_national_focus = POL_a_new_augustus
+		}
+	}
+	title = sanation.16.t
+	desc = sanation.16.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.16.a	
+		set_country_flag = POL_sanation_zeli_win
+		mark_focus_tree_layout_dirty = yes
+		set_cosmetic_tag = POL_zeli_cosmetic
+	}
+	option = {
+		name = sanation.16.b
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = no
+		}
+		set_country_flag = POL_sanation_super_win
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.1
+		}
+		mark_focus_tree_layout_dirty = yes
+		remove_all_ministers = yes
+			add_ideas = {
+				POL_Mikolaj_Kwasniewski_hog_mli
+				POL_Aleksander_Lednicki_for_mli
+				POL_Adam_Krzyzanowski_eco_mli
+				POL_Leon_Supinski_sec_mli
+			}
+	}
+}
+country_event = {
+	id = sanation.17 #smigly overthrow by other right
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+		hidden_effect = {
+			uncomplete_national_focus = POL_a_new_augustus
+		}
+	}
+	title = sanation.17.t
+	desc = sanation.17.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.17.a		
+		trigger = {
+			check_variable = { POL.radicalism > 60 }
+		}
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "布罗尼斯瓦夫·皮耶拉茨基"
+			picture = "gfx/leaders/POL/Portrait_POL_Bronisiaw_Pieracki.png"
+			expire = "1.1.1"
+			ideology = red_national_radicalism_subtype
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = POL_nrpp_party_long
+			name = POL_nrpp_party
+		}
+		add_radsoc_to_coalition = yes
+		clr_country_flag = POL_sanation_smigly_win
+		set_country_flag = POL_sanation_onr_win
+		mark_focus_tree_layout_dirty = yes
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
+		remove_all_ministers = yes 
+		add_ideas = {
+			POL_Boleslaw_Piasecki_hog_tot
+			POL_Jan_Dobraczynski_for_tot
+			POL_marian_reutt_eco_tot
+			POL_miroslaw_dietrich_sec_tot
+		}
+		
+	}
+	option = {
+		name = sanation.17.b		
+		trigger = {
+			check_variable = { POL.radicalism > 30 }
+			check_variable = { POL.radicalism < 60 }
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "卡罗尔·温季亚戈尔斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Karol_Wedziagolski.png"
+			expire = "1.1.1"
+			ideology = savinkovism_subtype
+		}
+		set_cosmetic_tag = POL_savinkov
+		set_party_name = {
+			ideology = national_populist
+			long_name = POL_savinkov_party_long
+			name = POL_savinkov_party
+		}
+		clr_country_flag = POL_sanation_smigly_win
+		set_country_flag = POL_sanation_savin_win
+		mark_focus_tree_layout_dirty = yes
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.1
+		}
+		remove_all_ministers = yes 
+		add_ideas = {
+			POL_Tadeusz_Bielecki_hog_npo
+			POL_Jozef_Targowski_for_ade
+			POL_Jerzy_Rutkowski_eco_npo
+			POL_Helena_Jamontt_sec_npo
+		}
+		country_event = sanation.18
+	}
+	option = {
+		name = sanation.17.c		
+		trigger = {
+			check_variable = { POL.radicalism < 30 }
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}
+		clr_country_flag = POL_sanation_smigly_win
+		set_country_flag = POL_sanation_szla_win
+		mark_focus_tree_layout_dirty = yes
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.1
+		}
+		remove_all_ministers = yes 
+		add_ideas = {
+			POL_Janusz_Franciszek_Radziwill_hog_ade
+			POL_Jozef_Targowski_for_ade
+			POL_Artur_Dobiecki_eco_ade
+			POL_Franciszek_Salezy_Potocki_sec_ade
+		}
+	}
+}
+country_event = {
+	id = sanation.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.18.t
+	desc = sanation.18.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.18.a
+		
+	}
+	option = {
+		name = sanation.18.b
+		create_country_leader = {
+			name = "斯特凡·维特科夫斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Stefan_Witkowski.png"
+			expire = "1.1.1"
+			ideology = national_security_state_subtype
+		}
+	}
+}
+country_event = {
+	id = sanation.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.19.t
+	desc = sanation.19.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.19.a
+		
+	}
+	option = {
+		name = sanation.19.b
+		create_country_leader = {
+			name = "卢恰恩·热利戈夫斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Lucjan_Zeligowski_kx.png"
+			expire = "1.1.1"
+			ideology = tot_national_mysticism_subtype
+		}
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
+	}
+}
+country_event = {
+	id = sanation.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.20.t
+	desc = sanation.20.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	option = {
+		name = sanation.20.a
+		create_country_leader = {
+			name = "米哈乌·罗拉-日梅尔斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Michal_Rola_Zymierski.png"
+			expire = "1.1.1"
+			ideology = junta_subtype
+		}
+		create_country_leader = {
+			name = "米哈乌·罗拉-日梅尔斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Michal_Rola_Zymierski.png"
+			expire = "1.1.1"
+			ideology = red_junta_subtype
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = POL_wron_party_long
+			name = POL_wron_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = POL_wron_party_long
+			name = POL_wron_party
+		}
+		clr_country_flag = POL_sanation_slawek_win
+		clr_country_flag = POL_sanation_struggle_second
+		set_country_flag = POL_sanation_mil_win
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+country_event = {
+	id = sanation.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.21.t
+	desc = sanation.21.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	option = {
+		name = sanation.21.a
+		create_country_leader = {
+			name = "弗朗西谢克·卡明斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Franciszek_Kaminski.png"
+			expire = "1.1.1"
+			ideology = soclib_agrarianism_subtype
+		}
+		create_country_leader = {
+			name = "约瑟夫·库拉什"
+			picture = "gfx/leaders/POL/Portrait_POL_Jozef_Kuras.png"
+			expire = "1.1.1"
+			ideology = pataut_agrarianism_subtype
+		}
+		create_country_leader = {
+			name = "博莱斯瓦夫·罗亚"
+			picture = "gfx/leaders/POL/Portrait_POL_Boleslaw_Roja.png"
+			expire = "1.1.1"
+			ideology = tot_agrarian_socialism_subtype
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = totalist
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.1
+		}
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = social_liberal
+			long_name = POL_bch_party_long
+			name = POL_bch_party
+		}
+		set_party_name = {
+			ideology = totalist
+			long_name = POL_bch_party_long
+			name = POL_bch_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = POL_bch_party_long
+			name = POL_bch_party
+		}
+		random_unit_leader = {
+			limit = { has_id = 19861 }
+			remove_unit_leader = yes
+		}
+		random_unit_leader = {
+			limit = { has_id = 2137 }
+			remove_unit_leader = yes
+		}
+		clr_country_flag = POL_sanation_slawek_win
+		clr_country_flag = POL_sanation_struggle_second
+		set_country_flag = POL_sanation_agar_win
+		mark_focus_tree_layout_dirty = yes
+		set_cosmetic_tag = POL_bch_cosmetic
+	}
+}
+country_event = {
+	id = sanation.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.22.t
+	desc = sanation.22.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.22.a
+		
+	}
+	option = {
+		name = sanation.22.b
+		set_politics = {
+			ruling_party = totalist
+			elections_allowed = no
+		}
+		
+	}
+	option = {
+		name = sanation.22.c
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		
+	}
+}
+country_event = {
+	id = sanation.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.23.t
+	desc = sanation.23.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.23.a
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.1
+		}
+		clr_country_flag = POL_sanation_slawek_win
+		clr_country_flag = POL_sanation_struggle_second
+		set_country_flag = POL_sanation_natdem_win
+		mark_focus_tree_layout_dirty = yes
+	}
+	
+}
+country_event = {
+	id = sanation.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.24.t
+	desc = sanation.24.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.24.a
+		
+	}
+	option = {
+		name = sanation.24.b
+		create_country_leader = {
+			name = "扬·斯基夫斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Jan_Skiwski.png"
+			expire = "1.1.1"
+			ideology = solidarism_subtype
+		}
+	}
+}
+country_event = {
+	id = sanation.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.25.t
+	desc = sanation.25.d
+	#picture = GFX_report_event_soldiers_marching
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.25.a
+		activate_mission = POL_military_action
+	}
+	
+}
+country_event = {
+	id = sanation.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.26.t
+	desc = sanation.26.d
+	#picture = GFX_report_event_soldiers_marching
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.26.a
+		activate_mission = POL_agrarian_action
+	}
+	
+}
+country_event = {
+	id = sanation.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.27.t
+	desc = sanation.27.d
+	#picture = GFX_report_event_soldiers_marching
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.27.a
+		activate_mission = POL_natdem_action
+	}
+	
+}
+country_event = {
+	id = sanation.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event plx.1" }
+	title = sanation.28.t
+	desc = sanation.28.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.28.a
+		
+	}
+	option = {
+		name = sanation.28.b 
+		trigger = {
+			RUS = {
+				RUS_savinkov_in_power = yes
+			}
+		}
+		POL = {
+			annex_country = {
+				target = RUS
+				transfer_troops = yes
+			}
+		}
+		create_country_leader = {
+			name = "鲍里斯·萨文科夫"
+			desc = "POLITICS_BORIS_SAVINKOV_DESC"
+			picture = "gfx/leaders/RUS/Portrait_RUS_Boris_Savinkov.png"
+			expire = "1.1.1"
+			ideology = savinkovism_subtype
+			raits = {}
+		}
+	}
+	option = {
+		name = sanation.28.c
+		trigger = {
+			RUS = {
+				RUS_savinkov_in_power = no
+			}
+		}
+		create_country_leader = {
+			name = "鲍里斯·萨文科夫"
+			desc = "POLITICS_BORIS_SAVINKOV_DESC"
+			picture = "gfx/leaders/RUS/Portrait_RUS_Boris_Savinkov.png"
+			expire = "1.1.1"
+			ideology = savinkovism_subtype
+				raits = {}
+		}
+	}
+}
+country_event = {
+	id = sanation.29 #election
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+	}
+	title = sanation.29.t
+	desc = sanation.29.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.29.a	
+		create_country_leader = {
+			name = "尤斯塔西·萨皮哈"
+			picture = "gfx/leaders/POL/Portrait_POL_Eustachy_Sapieha.png"
+			expire = "1965.1.1"
+			ideology = national_conservative_subtype
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.15
+		}
+	}
+	option = {
+		name = sanation.29.b
+		create_country_leader = {
+			name = "耶日·布劳恩"
+			picture = "gfx/leaders/POL/Portrait_POL_Jerzy_Braun.png"
+			expire = "1965.1.1"
+			ideology = soccon_theocracy_subtype
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.15
+		}
+	}
+	option = {
+		name = sanation.29.c
+		
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.15
+		}
+	}
+}
+country_event = {
+	id = sanation.30 #election
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event plx.1" 
+	}
+	title = sanation.30.t
+	desc = sanation.30.d
+	#picture = GFX_report_event_soldiers_marching
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = sanation.30.a
+	}
+	option = {
+		name = sanation.30.b
+		create_country_leader = {
+			name = "亚历山大·博申斯基"
+			picture = "gfx/leaders/POL/Portrait_POL_Aleksander_Bochenski.png"
+			expire = "1965.1.1"
+			ideology = marlib_authoritarian_liberalism_subtype
+		}
+		set_country_flag = KXX_LEADER_GUI_VISIBLE
+		set_country_flag = POL_Stanislaw_Mackiewicz_VISIBLE
+		set_cosmetic_tag = POL_kingdom
+	}
+	
 }
