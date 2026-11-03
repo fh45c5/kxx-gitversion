@@ -506,6 +506,7 @@ JAP_party_cabinet = {
 			OR = {
 				has_completed_focus = JAP_70th_imperial_diet
 				has_completed_focus = JAP_eliminate_corruption_in_justice_ministry
+				has_completed_focus = JAP_develop_kinkei_academy
 			}
 		}
 
@@ -809,5 +810,163 @@ JAP_party_cabinet = {
 		complete_effect = {
 			add_timed_idea = { idea = JAP_gt_tm_martial_drill days = 365 }
 		}
+	JAP_gt_arrest_go_seinosuke = {
+		icon = GFX_decision_generic_arrest
+
+		allowed = { always = yes }
+
+		available = {
+			has_completed_focus = JAP_create_financial_scandals
+			NOT = { has_country_flag = SCBJAP_scandal_go }
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				has_political_power < 70
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			add_political_power = 50
+			add_stability = -0.01
+			add_popularity = { ideology = social_conservative popularity = -0.02 }
+			add_timed_idea = { idea = JAP_scb_tm_scandal_go days = 180 }
+			set_country_flag = SCBJAP_scandal_go
+		}
+	}
+
+
+	JAP_gt_arrest_mitsuchi_chuzo = {
+		icon = GFX_decision_generic_arrest
+
+		allowed = { always = yes }
+
+		available = {
+			has_country_flag = SCBJAP_scandal_go
+			NOT = { has_country_flag = SCBJAP_scandal_mitsuchi }
+		}
+
+		cost = 75
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				has_political_power < 70
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			add_political_power = 75
+			add_stability = -0.015
+			add_popularity = { ideology = market_liberal popularity = -0.02 }
+			remove_ideas = JAP_scb_tm_scandal_go
+			add_timed_idea = { idea = JAP_scb_tm_scandal_mitsuchi days = 180 }
+			set_country_flag = SCBJAP_scandal_mitsuchi
+		}
+	}
+
+
+	JAP_gt_arrest_kuroda_hideo = {
+		icon = GFX_decision_generic_arrest
+
+		allowed = { always = yes }
+
+		available = {
+			has_country_flag = SCBJAP_scandal_mitsuchi
+			NOT = { has_country_flag = SCBJAP_scandal_kuroda }
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				has_political_power < 70
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			add_political_power = 100
+			add_stability = -0.02
+			add_popularity = { ideology = market_liberal popularity = -0.02 }
+			remove_ideas = JAP_scb_tm_scandal_mitsuchi
+			add_timed_idea = { idea = JAP_scb_tm_scandal_kuroda days = 180 }
+			set_country_flag = SCBJAP_scandal_kuroda
+		}
+	}
+
+
+	JAP_gt_sweep_takahashi_faction = {
+		icon = GFX_decision_generic_confiscation
+
+		allowed = { always = yes }
+
+		available = {
+			has_country_flag = SCBJAP_scandal_kuroda
+			NOT = { has_country_flag = SCBJAP_scandal_takafaction }
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				has_political_power < 70
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			add_political_power = 100
+			add_stability = -0.02
+			add_popularity = { ideology = social_conservative popularity = -0.03 }
+			remove_ideas = JAP_scb_tm_scandal_kuroda
+			add_timed_idea = { idea = JAP_scb_tm_scandal_takafaction days = 180 }
+			set_country_flag = SCBJAP_scandal_takafaction
+		}
+	}
+
+
+	JAP_gt_arrest_takahashi_heir = {
+		icon = GFX_decision_generic_arrest
+
+		allowed = { always = yes }
+
+		available = {
+			has_country_flag = SCBJAP_scandal_takafaction
+			NOT = { has_country_flag = SCBJAP_scandal_takaheir }
+		}
+
+		cost = 125
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				has_political_power < 70
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			add_political_power = 125
+			add_stability = -0.025
+			add_popularity = { ideology = social_conservative popularity = -0.03 }
+			add_popularity = { ideology = market_liberal popularity = -0.02 }
+			remove_ideas = JAP_scb_tm_scandal_takafaction
+			add_timed_idea = { idea = JAP_scb_tm_scandal_takaheir days = 180 }
+			set_country_flag = SCBJAP_scandal_takaheir
+		}
+	}
 	}
 }
