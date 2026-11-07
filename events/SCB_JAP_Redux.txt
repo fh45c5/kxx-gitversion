@@ -2986,3 +2986,260 @@ country_event = { #国同-昭会第二次选举
 	}
 
 }
+
+# ==================== 军部内阁对外战争 ====================
+# 由决议文件 SCB_JAP_cabinet_decisions.txt 中的 JAP_military_cabinet 决议触发。
+# 核心设计：由被通牒国先宣战，日本处于防御方，不承担侵略者身份。
+
+# ---- 满洲最后通牒：御前会议 ----
+country_event = {
+	id = SCBJAP.200
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.200" }
+	title = SCBJAP.200.t
+	desc = SCBJAP.200.d
+	picture = GFX_report_event_JAP_hirohito_addressing
+
+	is_triggered_only = yes
+
+	option = {
+		name = SCBJAP.200.a
+	}
+}
+
+# ---- 关东军的最后通牒：奉天 ----
+country_event = {
+	id = SCBJAP.201
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.201" }
+	title = SCBJAP.201.t
+	desc = SCBJAP.201.d
+	picture = GFX_report_event_JAP_kwantung
+
+	is_triggered_only = yes
+
+	trigger = {
+		exists = yes
+	}
+
+	option = { # 正面应对
+		name = SCBJAP.201.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 1.5
+				is_in_faction = yes
+			}
+			modifier = {
+				factor = 1.5
+				JAP = { has_war = yes }
+			}
+			modifier = {
+				factor = 2
+				strength_ratio = { tag = JAP ratio > 0.5 }
+			}
+			modifier = {
+				factor = 2
+				AND = {
+					country_exists = CHN
+					CHN = { has_war_with = JAP }
+				}
+			}
+		}
+		leave_faction = yes
+		diplomatic_relation = {
+			country = JAP
+			relation = non_aggression_pact
+			active = no
+		}
+		diplomatic_relation = {
+			country = JAP
+			relation = military_access
+			active = no
+		}
+		JAP = {
+			diplomatic_relation = {
+				country = ROOT
+				relation = guarantee
+				active = no
+			}
+			diplomatic_relation = {
+				country = ROOT
+				relation = military_access
+				active = no
+			}
+		}
+		declare_war_on = {
+			target = JAP
+			type = annex_everything
+		}
+		JAP = {
+			country_event = { id = SCBJAP.202 days = 1 }
+		}
+	}
+
+	option = { # 我们无能为力
+		name = SCBJAP.201.b
+		ai_chance = {
+			base = 75
+			modifier = {
+				factor = 0.5
+				is_in_faction = yes
+			}
+			modifier = {
+				factor = 0.5
+				JAP = { has_war = yes }
+			}
+		}
+		JAP = {
+			country_event = { id = SCBJAP.203 days = 1 }
+		}
+	}
+}
+
+# ---- 奉天选择了抵抗 ----
+country_event = {
+	id = SCBJAP.202
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.202" }
+	title = SCBJAP.202.t
+	desc = SCBJAP.202.d
+	picture = GFX_report_event_JAP_battle_flag
+
+	is_triggered_only = yes
+
+	option = {
+		name = SCBJAP.202.a
+		add_war_support = 0.08
+		add_political_power = 50
+		army_experience = 25
+	}
+}
+
+# ---- 奉天屈服 ----
+country_event = {
+	id = SCBJAP.203
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.203" }
+	title = SCBJAP.203.t
+	desc = SCBJAP.203.d
+	picture = GFX_report_event_JAP_manchu_exploit
+
+	is_triggered_only = yes
+
+	trigger = {
+		country_exists = FNG
+		NOT = { has_war_with = FNG }
+	}
+
+	option = {
+		name = SCBJAP.203.a
+		annex_country = {
+			target = FNG
+			transfer_troops = yes
+		}
+		if = {
+			limit = { FNG = { is_ai = no } }
+			change_tag_from = FNG
+		}
+		country_event = { id = SCBJAP.204 days = 3 }
+	}
+}
+
+# ---- 满洲全境并入 ----
+country_event = {
+	id = SCBJAP.204
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.204" }
+	title = SCBJAP.204.t
+	desc = SCBJAP.204.d
+	picture = GFX_report_event_JAP_economy_building
+
+	is_triggered_only = yes
+
+	option = {
+		name = SCBJAP.204.a
+		add_political_power = 100
+		add_offsite_building = { type = industrial_complex level = 5 }
+		add_offsite_building = { type = arms_factory level = 3 }
+		army_experience = 50
+	}
+}
+
+# ---- 北进最后通牒：诏书 ----
+country_event = {
+	id = SCBJAP.210
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.210" }
+	title = SCBJAP.210.t
+	desc = SCBJAP.210.d
+	picture = GFX_report_event_JAP_announcement
+
+	is_triggered_only = yes
+
+	option = {
+		name = SCBJAP.210.a
+	}
+}
+
+# ---- 对俄最后通牒：俄国 ----
+country_event = {
+	id = SCBJAP.211
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.211" }
+	title = SCBJAP.211.t
+	desc = SCBJAP.211.d
+	picture = GFX_report_event_RUS_army_1
+
+	is_triggered_only = yes
+
+	trigger = {
+		exists = yes
+		NOT = { has_war_with = JAP }
+	}
+
+	option = { # 绝不屈服
+		name = SCBJAP.211.a
+		leave_faction = yes
+		diplomatic_relation = {
+			country = JAP
+			relation = non_aggression_pact
+			active = no
+		}
+		diplomatic_relation = {
+			country = JAP
+			relation = military_access
+			active = no
+		}
+		JAP = {
+			diplomatic_relation = {
+				country = ROOT
+				relation = non_aggression_pact
+				active = no
+			}
+			diplomatic_relation = {
+				country = ROOT
+				relation = guarantee
+				active = no
+			}
+		}
+		declare_war_on = {
+			target = JAP
+			type = annex_everything
+		}
+		JAP = {
+			country_event = { id = SCBJAP.212 days = 1 }
+		}
+	}
+}
+
+# ---- 俄国拒绝通牒 ----
+country_event = {
+	id = SCBJAP.212
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.212" }
+	title = SCBJAP.212.t
+	desc = SCBJAP.212.d
+	picture = GFX_report_event_JAP_conscription
+
+	is_triggered_only = yes
+
+	option = {
+		name = SCBJAP.212.a
+		add_war_support = 0.1
+		add_political_power = 50
+		army_experience = 50
+	}
+}

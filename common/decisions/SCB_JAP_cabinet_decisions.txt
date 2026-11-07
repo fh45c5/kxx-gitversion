@@ -1,3 +1,4 @@
+# ==================== 政党内阁 ====================
 JAP_party_cabinet = {
 	icon = GFX_decision_category_generic_political_actions
 
@@ -470,6 +471,7 @@ JAP_party_cabinet = {
 
 }
 
+# ==================== 官僚内阁 ====================
 JAP_bureaucracy_cabinet = {
 	icon = GFX_category_JAP_congress_icon
 
@@ -973,6 +975,96 @@ JAP_bureaucracy_cabinet = {
 			remove_ideas = JAP_scb_tm_scandal_takafaction
 			add_timed_idea = { idea = JAP_scb_tm_scandal_takaheir days = 180 }
 			set_country_flag = SCBJAP_scandal_takaheir
+		}
+	}
+}
+
+# ==================== 军部内阁 ====================
+# 对外军事行动的统一决议框：任何内阁只要点出对应国策即可挂载，新增行动一律往本块里加。
+JAP_military_cabinet = {
+	icon = GFX_decision_category_military_operation
+
+	# ---- 满洲最后通牒 ----
+	JAP_ultimatum_to_FNG = {
+		icon = GFX_decision_generic_military
+
+		allowed = { always = yes }
+
+		visible = {
+			has_completed_focus = JAP_special_military_operation_manchuria
+			country_exists = FNG
+			FNG = { is_subject = no }
+			NOT = { has_war_with = FNG }
+			NOT = { has_war_with = CHN }
+			NOT = { has_global_flag = JAP_FNG_ultimatum_sent }
+		}
+
+		available = {
+			has_political_power > 49
+		}
+
+		cost = 50
+		days_remove = 2
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 0
+				NOT = { strength_ratio = { tag = FNG ratio > 2 } }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision JAP_ultimatum_to_FNG"
+			country_event = { id = SCBJAP.200 }
+		}
+
+		remove_effect = {
+			set_global_flag = JAP_FNG_ultimatum_sent
+			FNG = { country_event = { id = SCBJAP.201 } }
+		}
+	}
+
+	# ---- 北进最后通牒 ----
+	JAP_ultimatum_to_RUS = {
+		icon = GFX_decision_border_war
+
+		allowed = { always = yes }
+
+		visible = {
+			has_completed_focus = JAP_plan_lethal_blow_russia
+			country_exists = RUS
+			RUS = { is_subject = no }
+			NOT = { has_war_with = RUS }
+			NOT = { has_war_with = CHN }
+			NOT = { has_global_flag = JAP_RUS_ultimatum_sent }
+		}
+
+		available = {
+			has_political_power > 74
+		}
+
+		cost = 75
+		days_remove = 2
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				factor = 0
+				NOT = { strength_ratio = { tag = RUS ratio > 1.2 } }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision JAP_ultimatum_to_RUS"
+			country_event = { id = SCBJAP.210 }
+		}
+
+		remove_effect = {
+			set_global_flag = JAP_RUS_ultimatum_sent
+			RUS = { country_event = { id = SCBJAP.211 } }
 		}
 	}
 }
