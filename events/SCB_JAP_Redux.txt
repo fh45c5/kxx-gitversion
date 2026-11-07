@@ -3026,10 +3026,6 @@ country_event = {
 			base = 25
 			modifier = {
 				factor = 1.5
-				is_in_faction = yes
-			}
-			modifier = {
-				factor = 1.5
 				JAP = { has_war = yes }
 			}
 			modifier = {
@@ -3078,12 +3074,11 @@ country_event = {
 
 	option = { # 我们无能为力
 		name = SCBJAP.201.b
+		trigger = { # 身处军事同盟时无从屈服，只能硬顶
+			NOT = { is_in_faction = yes }
+		}
 		ai_chance = {
 			base = 75
-			modifier = {
-				factor = 0.5
-				is_in_faction = yes
-			}
 			modifier = {
 				factor = 0.5
 				JAP = { has_war = yes }
@@ -3130,6 +3125,15 @@ country_event = {
 
 	option = {
 		name = SCBJAP.203.a
+		# 合并前先按其核心/宣称清单落core，否则annex后原tag不存在便无从遍历
+		every_state = {
+			limit = { is_core_of = FNG }
+			add_core_of = JAP
+		}
+		every_state = {
+			limit = { is_claimed_by = FNG }
+			add_claim_by = JAP
+		}
 		annex_country = {
 			target = FNG
 			transfer_troops = yes
@@ -3241,5 +3245,124 @@ country_event = {
 		add_war_support = 0.1
 		add_political_power = 50
 		army_experience = 50
+	}
+}
+
+
+# ---- 帝国的最后通牒：亚洲盟邦 ----
+country_event = {
+	id = SCBJAP.220
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.220" }
+	title = SCBJAP.220.t
+	desc = SCBJAP.220.d
+	picture = GFX_report_event_JAP_announcement
+
+	is_triggered_only = yes
+
+	option = { # 接受并入帝国
+		name = SCBJAP.220.a
+		ai_chance = {
+			base = 10
+			modifier = { # 日本由玩家主导时，无人敢于拒绝
+				add = 200
+				FROM = { is_ai = no }
+			}
+			modifier = { # 傀儡无权拒绝
+				add = 200
+				is_puppet_of = FROM
+			}
+		}
+		# 合并前先按其核心/宣称清单落core，否则annex后原tag不存在便无从遍历
+		every_state = {
+			limit = { is_core_of = ROOT }
+			add_core_of = JAP
+		}
+		every_state = {
+			limit = { is_claimed_by = ROOT }
+			add_claim_by = JAP
+		}
+		FROM = { annex_country = { target = ROOT transfer_troops = yes } }
+		if = {
+			limit = { is_ai = no }
+			FROM = { change_tag_from = ROOT }
+		}
+	}
+
+	option = { # 拒绝
+		name = SCBJAP.220.b
+		ai_chance = {
+			base = 90
+			modifier = {
+				factor = 0
+				FROM = { is_ai = no }
+			}
+			modifier = {
+				factor = 0
+				is_puppet_of = FROM
+			}
+		}
+		leave_faction = yes
+		FROM = { create_wargoal = { type = annex_everything target = ROOT } }
+	}
+}
+
+country_event = { #亚洲联之邦的邀请
+	id = SCBJAP.230
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.230" }
+	title = SCBJAP.230.t
+	desc = SCBJAP.230.d
+	picture = GFX_report_event_JAP_announcement
+
+	is_triggered_only = yes
+
+	option = { # 接受合并
+		name = SCBJAP.230.a
+		ai_chance = {
+			base = 30
+			modifier = { # 傀儡照办
+				add = 300
+				is_puppet_of = FROM
+			}
+			modifier = { # 关系尚可
+				add = 25
+				has_opinion = { target = FROM value > 50 }
+			}
+			modifier = { # 已在共荣圈内，合并只是换个名分
+				add = 20
+				is_in_faction_with = FROM
+			}
+			modifier = { # 日本的体量本身就是理由
+				add = 15
+				FROM = { num_of_factories > 60 }
+			}
+		}
+		# 合并前先按其核心/宣称清单落core，否则annex后原tag不存在便无从遍历
+		every_state = {
+			limit = { is_core_of = ROOT }
+			add_core_of = JAP
+		}
+		every_state = {
+			limit = { is_claimed_by = ROOT }
+			add_claim_by = JAP
+		}
+		leave_faction = yes
+		FROM = { annex_country = { target = ROOT transfer_troops = yes } }
+		if = {
+			limit = { is_ai = no }
+			FROM = { change_tag_from = ROOT }
+		}
+	}
+
+	option = { # 婉拒
+		name = SCBJAP.230.b
+		ai_chance = {
+			base = 70
+			modifier = {
+				factor = 0
+				is_puppet_of = FROM
+			}
+		}
+		# 拒了就是拒了，不再重复递约章
+		set_country_flag = SCB_JAP_federation_refused
 	}
 }
