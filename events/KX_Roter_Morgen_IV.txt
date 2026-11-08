@@ -73,74 +73,31 @@ country_event = { #
 	desc = rotermorgenIV.3.d
 	is_triggered_only = yes
 	
-	option = { # 
+	option = { 
 		name = rotermorgenIV.3.a
-		set_country_flag = chosen_prussia
-		hidden_effect = {
-		country_event = {
-				id = rotermorgenIV.4
-				}
+		ai_chance = {
+			factor = 100
 		}
-	}
-	option = { # 
-		name = rotermorgenIV.3.b
-		set_country_flag = chosen_bavaria
 		hidden_effect = {
-		country_event = {
+            country_event = {
 				id = rotermorgenIV.4
-				}
-		}
-	}
-	option = { # 
-		name = rotermorgenIV.3.c
-		set_country_flag = chosen_rhein
-		hidden_effect = {
-		country_event = {
-				id = rotermorgenIV.4
-				}
-		}
-	}
-	option = { # 
-		name = rotermorgenIV.3.e
-		set_country_flag = chosen_hannover
-		hidden_effect = {
-		country_event = {
-				id = rotermorgenIV.4
-				}
-		}
+			}
+		}	
 	}
 	option = { # 
 		name = rotermorgenIV.3.f
-		set_country_flag = chosen_holland
-		HOL = {
-			load_focus_tree = germany_pap_back_home
-			set_cosmetic_tag = HOL_GERBACK
-			set_politics = {
-			ruling_party = authoritarian_democrat
-			elections_allowed = no
-			name = GERBACK_authoritarian_democrat_party
-			long_name = GERBACK_authoritarian_democrat_party
-			}
-			add_popularity = { ideology = authoritarian_democrat popularity = 0.45 }
-			create_country_leader = {
-			name = "弗朗茨·冯·帕彭"
-			desc = "GER_BACK_HOME_PAPEN_DESC"
-			picture = "gfx/leaders/GER/Portrait_Germany_Franz_von_Papen.png"
-			expire = "1965.1.1"
-			ideology = prussian_constitutionalism_subtype
-			traits = {
-				}
-			}
-		}	
+		ai_chance = {
+			factor = 10
+		}
 		hidden_effect = {
-		country_event = {
-				id = rotermorgenIV.4
+            country_event = {
+				id = rotermorgenIV.5
 			}
 		}
 	}
 }
 
-country_event = { # 
+country_event = { 
 	id = rotermorgenIV.4
 	immediate = { log = "[GetDateText]: [Root.GetName]: event rotermorgenIV.4" }
 	title = rotermorgenIV.4.t
@@ -149,134 +106,48 @@ country_event = { #
 	hidden = yes
 	immediate = {
 		hidden_effect = {
-		create_prussian_cores = yes
-		create_rhenish_cores = yes
-		create_bavarian_cores = yes
-		create_hanoverian_cores = yes
-		create_prussia = yes
-		create_bavaria = yes
-		create_rhenish_state = yes
-		create_north_german_state = yes
-			GER = {
-				transfer_units_fraction= {
-					target = WGR
-					size = 1.0
-					stockpile_ratio = 0.15
-					army_ratio = 0.15
-					navy_ratio = 0.0
-					air_ratio = 0.1
-					keep_unit_leaders_trigger = {
-						NOT = { has_unit_leader_flag = my_test_flag }
-					}
-				}
-				transfer_units_fraction= {
-					target = NGF
-					size = 1.0
-					stockpile_ratio = 0.10
-					army_ratio = 0.10
-					navy_ratio = 0.50
-					air_ratio = 0.1
-					keep_unit_leaders_trigger = {
-						NOT = { has_unit_leader_flag = my_test_flag }
-					}
-				}
-				transfer_units_fraction= {
-					target = BAY
-					size = 1.0
-					stockpile_ratio = 0.20
-					army_ratio = 0.20
-					navy_ratio = 0.0
-					air_ratio = 0.1
-					keep_unit_leaders_trigger = {
-						NOT = { has_unit_leader_flag = my_test_flag }
-					}
-				}
-				transfer_units_fraction= {
-					target = DDR
-					size = 1.0
-					stockpile_ratio = 1.00
-					army_ratio = 1.00
-					navy_ratio = 1.00
-					air_ratio = 1.00
-					keep_unit_leaders_trigger = {
-						NOT = { has_unit_leader_flag = my_test_flag }
-					}
-				}
-				if={
-					limit = { has_country_flag = chosen_prussia  }	
-					DDR = {
-						change_tag_from = GER
-					}
-				}
-				if={
-					limit = { has_country_flag = chosen_rhein  }	
-					WGR = {
-						change_tag_from = GER
-					}
-				}
-				if={
-					limit = { has_country_flag = chosen_hannover  }	
-					NGF = {
-						change_tag_from = GER
-					}
-				}
-				if={
-					limit = { has_country_flag = chosen_bavaria }
-					BAY = {
-						create_country_leader = {
-      						name = "鲁普雷希特"
-        					picture = "gfx/leaders/GER/Portrait_Germany_Rupprecht_Jacobite.png"
-       						expire = "1.1.1"
-        					ideology = integralism_subtype
-      					}
-					}	
-					BAY = {
-						change_tag_from = GER
-					}
-				}
-				if={
-					limit = { has_country_flag = chosen_holland }	
-					HOL = {
-						change_tag_from = GER
-					}
-				}
-			}
-			
-			
-			PRF = {
-				transfer_state = 422
-				transfer_state = 281
-				transfer_state = 710
-			}
-			
-			PAL = {
-				transfer_state = 753
-			}
-			
-			DDR = {
-				transfer_state = 1357
-				add_state_core = 188
-				add_state_core = 5
-				add_state_core = 777
-				add_state_core = 776
-				add_state_core = 86
-				add_state_core = 67
-			}
-			NGF = {
-				add_state_core = 61
-			}
-			WGR = {
-				add_state_core = 57
-				add_state_core = 55
-			}
+			germany_disintegration = yes
+            DDR = {
+				annex_country = { target = GER }
+	    		change_tag_from = GER
+	    	}
+		}	
+	}
+}
 
-			if = {
-				limit = { has_game_rule = { rule = KXX_annex_SBPOL option = KXX_annex_SBPOL_YES } }
-				SIC = {
-					transfer_state = 116
-					add_state_core = 116
-				}
-			}
-		}
+country_event = { 
+	id = rotermorgenIV.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event rotermorgenIV.5" }
+	title = rotermorgenIV.5.t
+	desc = rotermorgenIV.5.d
+	is_triggered_only = yes
+	hidden = yes
+	immediate = {
+		hidden_effect = {
+            AUS = {
+				set_cosmetic_tag = AUS_GER
+				annex_country = { target = GER }
+				annex_country = { target = BAY }
+				annex_country = { target = NGF }
+				annex_country = { target = WGR }
+				annex_country = { target = DDR }
+				annex_country = { target = CZE transfer_troops = yes }
+	    		change_tag_from = GER
+	        	set_country_flag = GER_CONQ
+	    	}
+			every_state = {
+		    	limit = {
+					or = {
+						is_core_of = GER
+			    		is_core_of = CZE
+						state = 779
+						state = 8
+						state = 741
+						state = 978
+					}
+		    	}
+		    	add_core_of = AUS
+		    }
+		}	
 	}
 }
