@@ -1986,7 +1986,7 @@ JAP_economy_cat = {
 		allowed = { always = no }
 
 		highlight_states = {
-			highlight_state_targets = { state = 1104 }
+			highlight_state_targets = { state = 1354 } # Hyogo
 		}
 
 		available = { num_of_civilian_factories_available_for_projects > 2 }
@@ -2237,7 +2237,7 @@ JAP_economy_cat = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_fund_nec_plant"
-			1101 = { prioritize_state = yes } # North Kanto
+			1351 = { prioritize_state = yes } # North Kanto
 			add_one_random_civilian_factory = yes
 			add_tech_bonus = {
 				name = JAP_fund_nec_plant
@@ -2269,7 +2269,7 @@ JAP_economy_cat = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_invest_in_mitsui"
-			1104 = { prioritize_state = yes } # Hyogo
+			1354 = { prioritize_state = yes } # Hyogo
 			add_one_random_civilian_factory = yes
 			add_tech_bonus = {
 				name = JAP_invest_in_mitsui
@@ -2331,7 +2331,7 @@ JAP_economy_cat = {
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_aid_for_chugoku_arms_industries"
 			529 = { prioritize_state = yes } # San'yo
-			1103 = { prioritize_state = yes } # San'in
+			1353 = { prioritize_state = yes } # San'in
 			add_one_random_military_factory = yes
 			add_one_random_military_factory = yes
 		}
@@ -2365,7 +2365,7 @@ JAP_economy_cat = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_support_nippon_soda target: [From.GetName]"
-			532 = { prioritize_state = yes } # Tokai
+			1356 = { prioritize_state = yes } # Tokai
 			add_one_random_synthetic_refinery = yes
 			add_one_random_synthetic_refinery = yes
 		}
@@ -2529,11 +2529,11 @@ JAP_economy_cat = {
 		}
 
 		visible = {
-			controls_state = 531
+			controls_state = 1354
 		}
 
 		highlight_states = {
-			highlight_state_targets = { state = 531 } # Kansai
+			highlight_state_targets = { state = 1354 } # Kansai/Hyogo
 		}
 
 		cost = 30
@@ -2553,7 +2553,7 @@ JAP_economy_cat = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_expand_maizuru_naval_arsenal"
-			531 = { prioritize_state = yes }
+			1354 = { prioritize_state = yes }
 			add_one_random_dockyard = yes
 		}
 	}
@@ -2616,6 +2616,191 @@ JAP_economy_cat = {
 }
 
 JAP_co_prosperity_decisions = {
+
+	JAP_Three_Gorges_Dam = {
+		icon = generic_flags
+		allowed = { tag = JAP }
+		available = {
+			has_capitulated = no
+			620 = { is_controlled_by_ROOT_or_ally = yes }
+		}
+		visible = {
+			620 = { is_controlled_by_ROOT_or_ally = yes }
+			has_completed_focus = JAP_Monuments_of_Heaven_and_Earth
+		}
+		
+		cost = 140
+		fire_only_once = yes
+		
+		ai_will_do = { factor = 10 }
+		
+		days_remove = 450
+		
+		remove_effect = {
+			620 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dam
+					level = 1
+					instant_build = yes
+					province = {
+						id = 10474
+					}
+				}
+			}
+			1048 = {
+				add_extra_state_shared_building_slots = 4
+			}
+			1045 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			1044 = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+	
+	JAP_Syonan_Light_South = {
+		icon = generic_flags
+		allowed = { tag = JAP }
+		available = {
+			has_capitulated = no
+			owns_state = 336
+		}
+		visible = {
+			owns_state = 336
+			has_completed_focus = JAP_Monuments_of_Heaven_and_Earth
+		}
+		
+		cost = 75
+		fire_only_once = yes
+		
+		ai_will_do = { factor = 10 }
+		
+		days_remove = 180
+		
+		remove_effect = {
+			336 = {
+				increase_state_category_by_one_level = yes
+			}
+			custom_effect_tooltip = JAP_model_colony_tooltip_syonan
+			hidden_effect = {
+				336 = {
+					if = {
+						limit = { has_dynamic_modifier = { modifier = JAP_model_colony } }
+						remove_dynamic_modifier = { modifier = JAP_model_colony }
+					}
+					add_dynamic_modifier = { modifier = JAP_model_colony_2 }
+				}
+			}
+		}
+	}
+	
+	JAP_Old_Summer_Palace_Rebuild = {
+		icon = generic_flags
+		allowed = { tag = JAP }
+		available = {
+			has_capitulated = no
+			608 = { is_controlled_by_ROOT_or_ally = yes }
+		}
+		visible = {
+			608 = { is_controlled_by_ROOT_or_ally = yes }
+			has_completed_focus = JAP_Monuments_of_Heaven_and_Earth
+		}
+		
+		cost = 35
+		fire_only_once = yes
+		
+		ai_will_do = { factor = 10 }
+		
+		days_remove = 120
+		
+		remove_effect = {
+			add_political_power = 100
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.05
+			}
+			608 = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+	
+	JAP_Beijing_Garden_City = {
+		icon = generic_flags
+		allowed = { tag = JAP }
+		available = {
+			has_capitulated = no
+			608 = { is_controlled_by_ROOT_or_ally = yes }
+		}
+		visible = {
+			608 = { is_controlled_by_ROOT_or_ally = yes }
+			has_completed_focus = JAP_Monuments_of_Heaven_and_Earth
+		}
+		
+		cost = 40
+		fire_only_once = yes
+		
+		ai_will_do = { factor = 10 }
+		
+		days_remove = 100
+		
+		remove_effect = {
+			add_tech_bonus = {
+				ahead_reduction = 1
+				uses = 1
+				category = construction_tech
+			}
+			608 = {
+				increase_state_category_by_one_level = yes
+			}
+		}
+	}
+	
+	JAP_Shanghai_Restructure = {
+		icon = generic_flags
+		allowed = { tag = JAP }
+		available = {
+			has_capitulated = no
+			743 = { is_controlled_by_ROOT_or_ally = yes }
+		}
+		visible = {
+			743 = { is_controlled_by_ROOT_or_ally = yes }
+			has_completed_focus = JAP_Monuments_of_Heaven_and_Earth
+		}
+		
+		cost = 60
+		fire_only_once = yes
+		
+		ai_will_do = { factor = 10 }
+		
+		days_remove = 130
+		
+		remove_effect = {
+			add_stability = 0.04
+			743 = {
+				add_compliance = 25
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
 	JAP_invite_into_faction = {
 		icon = generic_flags
 		allowed = { tag = JAP }
@@ -4658,7 +4843,7 @@ JAP_foreign_policy_decisions = {
 			can_declare_war_on = FROM
 		}
 
-		targets = { CSA NEE PSA TEX USA }
+		targets = { CSA NEE CAL TEX USA }
 		target_trigger = {
 			FROM = {
 				is_american_tag = yes
@@ -4692,8 +4877,13 @@ JAP_foreign_policy_decisions = {
 			}
 			modifier = {
 				factor = 0
-				FROM = { tag = PSA }
-				has_country_flag = ACW_supported_PSA
+				FROM = { tag = CAL }
+				OR = {
+					has_country_flag = ACW_supported_PSA
+					has_game_rule = { rule = CAL_political option = CAL_POLITICAL_PATH_JAPAN }
+					has_game_rule = { rule = CAL_political option = CAL_POLITICAL_PATH_AISO }
+					has_game_rule = { rule = CAL_political option = CAL_POLITICAL_PATH_AISO_YAMAGUCHI }
+				}
 			}
 			modifier = {
 				factor = 5
@@ -5027,5 +5217,238 @@ prospect_for_resources = {
 			}
 		}
 		ai_will_do = { factor = 50 }
+	}
+}
+
+JAP_desperate_struggle_cat = {
+	JAP_operation_sho_go = {
+		available = {
+			has_completed_focus = JAP_impending_sunset
+		}
+
+		visible = {
+			is_ai = no 
+		}
+
+		fire_only_once = yes
+
+		cost = 100
+		days_remove = 150
+
+		modifier = {
+			planning_speed = -0.40 
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_operation_sho_go"
+			set_country_flag = JAP_sunset_operations
+			custom_effect_tooltip = JAP_warplan_available
+		}
+		ai_will_do = { factor = 50 }
+	}
+	JAP_operation_ha_go = {
+		available = {
+			has_country_flag = JAP_sunset_operations
+			NOT = {
+				has_country_flag = JAP_operation_underway
+			}
+		}
+
+		visible = {
+			is_ai = no 
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+		days_remove = 30
+
+		modifier = {
+			army_attack_factor = 0.15
+			breakthrough_factor = 0.20
+			initiative_factor = 0.15
+			planning_speed = -0.20 
+			war_support_weekly = -0.03
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete JAP_operation_ha_go"
+			set_country_flag = JAP_operation_underway
+			clr_country_flag = JAP_sunset_operations
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_operation_ha_go"
+			add_war_support = -0.05
+			set_country_flag = JAP_sunset_operations
+			clr_country_flag = JAP_operation_underway
+			custom_effect_tooltip = JAP_warplan_available
+		}
+		ai_will_do = { factor = 50 }	
+	}
+	JAP_operation_u_go = {
+		available = {
+			has_country_flag = JAP_sunset_operations
+			NOT = {
+				has_country_flag = JAP_operation_underway
+			}
+		}
+
+		visible = {
+			is_ai = no 
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+		days_remove = 30
+
+		modifier = {
+			army_attack_factor = 0.15
+			breakthrough_factor = 0.20
+			initiative_factor = 0.15
+			planning_speed = -0.20 
+			war_support_weekly = -0.03
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete JAP_operation_u_go"
+			set_country_flag = JAP_operation_underway
+			clr_country_flag = JAP_sunset_operations
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_operation_u_go"
+			add_war_support = -0.05
+			set_country_flag = JAP_sunset_operations
+			clr_country_flag = JAP_operation_underway
+			custom_effect_tooltip = JAP_warplan_available
+		}
+		ai_will_do = { factor = 50 }	
+	}
+	JAP_operation_ten_go = {
+		available = {
+			has_country_flag = JAP_sunset_operations
+			NOT = {
+				has_country_flag = JAP_operation_underway
+			}
+		}
+
+		visible = {
+			is_ai = no 
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+		days_remove = 45
+
+		modifier = {
+			navy_capital_ship_attack_factor = 0.25
+			navy_screen_attack_factor = 0.25
+			naval_heavy_gun_hit_chance_factor = 0.15
+			navy_casualty_on_sink = 0.45
+			war_support_weekly = -0.03
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete JAP_operation_ten_go"
+			set_country_flag = JAP_operation_underway
+			clr_country_flag = JAP_sunset_operations
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_operation_ten_go"
+			add_war_support = -0.05
+			set_country_flag = JAP_sunset_operations
+			clr_country_flag = JAP_operation_underway
+			custom_effect_tooltip = JAP_warplan_available
+		}
+		ai_will_do = { factor = 50 }	
+	}
+	JAP_operation_a_go = {
+		available = {
+			has_country_flag = JAP_sunset_operations
+			NOT = {
+				has_country_flag = JAP_operation_underway
+			}
+		}
+
+		visible = {
+			is_ai = no 
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+		days_remove = 45
+
+		modifier = {
+			navy_carrier_air_attack_factor = 0.20 
+			navy_carrier_air_targetting_factor = 0.20
+			spotting_chance = 0.15
+			navy_visibility = 0.30
+			war_support_weekly = -0.03
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete JAP_operation_a_go"
+			set_country_flag = JAP_operation_underway
+			clr_country_flag = JAP_sunset_operations
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_operation_a_go"
+			add_war_support = -0.05
+			set_country_flag = JAP_sunset_operations
+			clr_country_flag = JAP_operation_underway
+			custom_effect_tooltip = JAP_warplan_available
+		}
+		ai_will_do = { factor = 50 }	
+	}
+	JAP_operation_ketsu_go = {
+		available = {
+			has_country_flag = JAP_sunset_operations
+			has_completed_focus = JAP_dying_sun
+			NOT = {
+				has_country_flag = JAP_operation_underway
+			}
+			JAP = {
+				any_core_state = {
+					NOT = { is_controlled_by = JAP }
+				}
+			}
+		}
+
+		visible = {
+			is_ai = no 
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+		days_remove = 180
+
+		modifier = {
+			mobilization_speed = 0.50
+			army_core_defence_factor = 0.45
+			minimum_training_level = -0.75
+			war_support_weekly = -0.07
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete JAP_operation_ketsu_go"
+			set_country_flag = JAP_operation_underway
+			clr_country_flag = JAP_sunset_operations
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_operation_ketsu_go"
+			add_war_support = -0.15
+			set_country_flag = JAP_sunset_operations
+			clr_country_flag = JAP_operation_underway
+			custom_effect_tooltip = JAP_warplan_available
+		}
+		ai_will_do = { factor = 50 }	
 	}
 }
