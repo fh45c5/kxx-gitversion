@@ -3252,6 +3252,8 @@ country_event = {
 
 	option = { # 接受并入帝国
 		name = SCBJAP.220.a
+		# 先给东京回执，此时对方尚在，[From.GetName] 才取得到名字
+		FROM = { country_event = { id = SCBJAP.240 } }
 		ai_chance = {
 			base = 10
 			modifier = { # 日本由玩家主导时，无人敢于拒绝
@@ -3281,6 +3283,8 @@ country_event = {
 
 	option = { # 拒绝
 		name = SCBJAP.220.b
+		# 先给东京回执，此时对方尚在，[From.GetName] 才取得到名字
+		FROM = { country_event = { id = SCBJAP.241 } }
 		ai_chance = {
 			base = 90
 			modifier = {
@@ -3308,6 +3312,8 @@ country_event = { #亚洲联之邦的邀请
 
 	option = { # 接受合并
 		name = SCBJAP.230.a
+		# 先给东京回执，此时对方尚在，[From.GetName] 才取得到名字
+		FROM = { country_event = { id = SCBJAP.242 } }
 		ai_chance = {
 			base = 30
 			modifier = { # 傀儡照办
@@ -3346,6 +3352,8 @@ country_event = { #亚洲联之邦的邀请
 
 	option = { # 婉拒
 		name = SCBJAP.230.b
+		# 先给东京回执，此时对方尚在，[From.GetName] 才取得到名字
+		FROM = { country_event = { id = SCBJAP.243 } }
 		ai_chance = {
 			base = 70
 			modifier = {
@@ -3356,4 +3364,52 @@ country_event = { #亚洲联之邦的邀请
 		# 拒了就是拒了，不再重复递约章
 		set_country_flag = SCB_JAP_federation_refused
 	}
+}
+
+country_event = { # 回执：对方接受并入帝国（ROOT = 日本，FROM = 对方）
+	id = SCBJAP.240
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.240 accepted from [From.GetName]" }
+	title = SCBJAP.240.t
+	desc = SCBJAP.240.d
+	picture = GFX_report_event_JAP_announcement
+
+	is_triggered_only = yes
+
+	option = { name = SCBJAP.240.a }
+}
+
+country_event = { # 回执：对方拒绝最后通牒
+	id = SCBJAP.241
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.241 refused by [From.GetName]" }
+	title = SCBJAP.241.t
+	desc = SCBJAP.241.d
+	picture = GFX_report_event_JAP_announcement
+
+	is_triggered_only = yes
+
+	option = { name = SCBJAP.241.a }
+}
+
+country_event = { # 回执：对方签署联邦约章
+	id = SCBJAP.242
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.242 joined by [From.GetName]" }
+	title = SCBJAP.242.t
+	desc = SCBJAP.242.d
+	picture = GFX_report_event_JAP_announcement
+
+	is_triggered_only = yes
+
+	option = { name = SCBJAP.242.a }
+}
+
+country_event = { # 回执：对方拒签联邦约章
+	id = SCBJAP.243
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCBJAP.243 declined by [From.GetName]" }
+	title = SCBJAP.243.t
+	desc = SCBJAP.243.d
+	picture = GFX_report_event_JAP_announcement
+
+	is_triggered_only = yes
+
+	option = { name = SCBJAP.243.a }
 }

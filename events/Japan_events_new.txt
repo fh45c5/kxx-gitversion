@@ -6631,11 +6631,18 @@ country_event = { #The Japanese Reach Out
 		}
 		JAP = { add_to_faction = BHC }
 		add_ideas = JAP_india_support
-		add_to_array = { global.asian_economic_sphere = ROOT }
+		set_country_flag = JAP_economic_sphere_member
+		if = {
+			limit = { NOT = { is_in_array = { global.asian_economic_sphere = ROOT } } }
+			add_to_array = { global.asian_economic_sphere = ROOT }
+		}
 		JAP_recalculate_economic_integration = yes
 		custom_effect_tooltip = JAP_member_of_co_prosperity_sphere
 		hidden_effect = {
-			add_dynamic_modifier = { modifier = JAP_asian_economic_sphere_member }
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = JAP_asian_economic_sphere_member } } }
+				add_dynamic_modifier = { modifier = JAP_asian_economic_sphere_member }
+			}
 		}
 		if = {
 			limit = {
