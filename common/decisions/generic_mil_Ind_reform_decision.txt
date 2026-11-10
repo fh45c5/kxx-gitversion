@@ -1,0 +1,195 @@
+# 产出决议（以第 1 档为例）
+MRP_decisions = {
+	MRP_train_officers = {
+		custom_cost_text = CP_10
+		custom_cost_trigger = {
+			NOT = { command_power < 10 }
+		}
+		icon = GFX_decision_generic_army_support
+		days_remove = 15
+		days_re_enable = 5
+		fire_only_once = no
+		visible = {
+			OR = {
+				tag = POL
+				tag = FRA
+				tag = BUL
+			}
+		}
+		complete_effect = {
+			custom_effect_tooltip = MRP_add_1
+			hidden_effect = {
+				add_command_power = -10
+				add_to_variable = { mrp = 1 }
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	MRP_army_practice = {
+		custom_cost_trigger = {
+			NOT = { has_equipment = { infantry_equipment < 500 } }
+		}
+		custom_cost_text = 500_guns
+		icon = GFX_decision_generic_military
+		days_remove = 15
+		days_re_enable = 5
+		fire_only_once = no
+		visible = {
+			OR = {
+				tag = POL
+				tag = FRA
+				tag = BUL
+			}
+		}
+		complete_effect = {
+			custom_effect_tooltip = MRP_add_2
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -500
+				}
+				add_to_variable = { mrp = 2 }
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	MRP_war_speech = {
+		custom_cost_trigger = {
+			has_war_support > 0.1
+		}
+		custom_cost_text = war_support10
+		icon = GFX_decision_generic_nationalism
+		days_remove = 15
+		days_re_enable = 5
+		fire_only_once = no
+		visible = {
+			OR = {
+				tag = POL
+				tag = FRA
+				tag = BUL
+			}
+		}
+		complete_effect = {
+			custom_effect_tooltip = MRP_add_4
+			hidden_effect = {
+				add_war_support = -0.1
+				add_to_variable = { mrp = 4 }
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	MRP_massive_investment = {
+		cost = 100
+		days_remove = 30
+		days_re_enable = 5
+		fire_only_once = no
+		icon = GFX_decision_generic_industry
+		visible = {
+			OR = {
+				tag = POL
+				tag = FRA
+				tag = BUL
+			}
+		}
+		complete_effect = {
+			custom_effect_tooltip = MRP_add_7
+			hidden_effect = {
+				add_political_power = -100
+				add_to_variable = { mrp = 7 }
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+}
+IRP_decisions = {
+	IRP_private_investment = {
+		icon = GFX_decision_generic_fundraising
+		days_remove = 15
+		days_re_enable = 5
+		fire_only_once = no
+		visible = {
+			OR = {
+				tag = POL
+				tag = FRA
+				tag = BUL
+			}
+		}
+		modifier = { consumer_goods_expected_value = 0.05 }
+		complete_effect = {
+			custom_effect_tooltip = IRP_add_1
+			hidden_effect = {
+				add_to_variable = { irp = 1 }		
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	IRP_regional_reshuffle = {
+		custom_cost_trigger = {
+			has_stability > 0.05
+		}
+		custom_cost_text = stability5
+		icon = GFX_decision_generic_merge_plant_materiel
+		days_remove = 15
+		days_re_enable = 5
+		fire_only_once = no
+		visible = {
+			OR = {
+				tag = POL
+				tag = FRA
+				tag = BUL
+			}
+		}
+		complete_effect = {
+			custom_effect_tooltip = IRP_add_2
+			hidden_effect = {
+				add_stability = -0.05
+				add_to_variable = { irp = 2 }
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	IRP_industrial_lands = {
+		icon = GFX_decision_generic_factory
+		days_remove = 15
+		days_re_enable = 5
+		fire_only_once = no
+		visible = {
+			OR = {
+				tag = POL
+				tag = FRA
+				tag = BUL
+			}
+		}
+		modifier = { consumer_goods_factor = 0.1 }
+
+		complete_effect = {
+			custom_effect_tooltip = IRP_add_4
+			hidden_effect = {
+				add_to_variable = { irp = 4 }
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	IRP_massive_investment = {
+		cost = 100
+		days_remove = 30
+		days_re_enable = 5
+		fire_only_once = no
+		icon = GFX_decision_generic_merge_plant_tank
+		visible = {
+			OR = {
+				tag = POL
+				tag = FRA
+				tag = BUL
+			}
+		}
+		complete_effect = {
+			custom_effect_tooltip = IRP_add_7
+			hidden_effect = {
+				add_political_power = -100
+				add_to_variable = { irp = 7 }
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+}
