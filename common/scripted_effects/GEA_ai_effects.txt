@@ -1,0 +1,570 @@
+# Only controls new division recruitment; existing queues and reinforcement are not cancelled.
+GEA_ai_update_training_reserves = {
+	if = {
+		limit = { NOT = { has_country_flag = GEA_ai_pause_infantry_training } GEA_ai_infantry_training_critical = yes }
+		set_country_flag = GEA_ai_pause_infantry_training
+	}
+	else_if = {
+		limit = { has_country_flag = { flag = GEA_ai_pause_infantry_training days > 6 } GEA_ai_infantry_training_healthy = yes }
+		clr_country_flag = GEA_ai_pause_infantry_training
+	}
+	if = {
+		limit = { NOT = { has_country_flag = GEA_ai_pause_armor_training } GEA_ai_armor_training_critical = yes }
+		set_country_flag = GEA_ai_pause_armor_training
+	}
+	else_if = {
+		limit = { has_country_flag = { flag = GEA_ai_pause_armor_training days > 6 } GEA_ai_armor_training_healthy = yes }
+		clr_country_flag = GEA_ai_pause_armor_training
+	}
+	if = {
+		limit = { NOT = { has_country_flag = GEA_ai_pause_heavy_td_training } GEA_ai_heavy_td_training_critical = yes }
+		set_country_flag = GEA_ai_pause_heavy_td_training
+	}
+	else_if = {
+		limit = { has_country_flag = { flag = GEA_ai_pause_heavy_td_training days > 6 } GEA_ai_heavy_td_training_healthy = yes }
+		clr_country_flag = GEA_ai_pause_heavy_td_training
+	}
+}
+
+# Triggered only when the GUI or a candidate is unlocked by a focus; no periodic polling.
+# Fill vacant contacts using the same unlocks and initial friendship as the GUI.
+GEA_ai_manage_josias_contacts_effect = {
+	if = {
+		limit = {
+			tag = GEA
+			is_ai = yes
+			has_country_flag = GEA_Governor_Josias_flag
+			has_completed_focus = GEA_Josias_Group
+		}
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_country_flag = GEA_Josias_frame_1_Nikolaus
+						has_country_flag = GEA_Josias_frame_1_Carl_Edward
+						has_country_flag = GEA_Josias_frame_1_Elard_von_Oldenburg
+						has_country_flag = GEA_Josias_frame_1_Schleicher
+						has_country_flag = GEA_Josias_frame_1_Hugenberg
+						has_country_flag = GEA_Josias_frame_1_Werner_von_Alvensleben
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = GEA_The_friendship_with_the_publicity_magnate
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Hugenberg
+							has_country_flag = GEA_Josias_frame_2_Hugenberg
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_1_Hugenberg
+				GEA_Josias_add_15_Hugenberg_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_The_close_bond_of_dual_in-laws
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Nikolaus
+							has_country_flag = GEA_Josias_frame_2_Nikolaus
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_1_Nikolaus
+				GEA_Josias_add_15_Nikolaus_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_The_Secret_Party_of_the_General
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Schleicher
+							has_country_flag = GEA_Josias_frame_2_Schleicher
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_1_Schleicher
+				GEA_Josias_add_15_Schleicher_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_Brotherly_affection
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Carl_Edward
+							has_country_flag = GEA_Josias_frame_2_Carl_Edward
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_1_Carl_Edward
+				GEA_Josias_add_15_Carl_Edward_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_The_wise_men_of_the_sovereignty_faction
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Elard_von_Oldenburg
+							has_country_flag = GEA_Josias_frame_2_Elard_von_Oldenburg
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_1_Elard_von_Oldenburg
+				GEA_Josias_add_15_Elard_von_Oldenburg_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_The_wise_men_of_the_sovereignty_faction
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Werner_von_Alvensleben
+							has_country_flag = GEA_Josias_frame_2_Werner_von_Alvensleben
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_1_Werner_von_Alvensleben
+				GEA_Josias_add_15_Werner_von_Alvensleben_effect = yes
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_country_flag = GEA_Josias_frame_2_Nikolaus
+						has_country_flag = GEA_Josias_frame_2_Carl_Edward
+						has_country_flag = GEA_Josias_frame_2_Elard_von_Oldenburg
+						has_country_flag = GEA_Josias_frame_2_Schleicher
+						has_country_flag = GEA_Josias_frame_2_Hugenberg
+						has_country_flag = GEA_Josias_frame_2_Werner_von_Alvensleben
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = GEA_The_close_bond_of_dual_in-laws
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Nikolaus
+							has_country_flag = GEA_Josias_frame_2_Nikolaus
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_2_Nikolaus
+				GEA_Josias_add_15_Nikolaus_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_Brotherly_affection
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Carl_Edward
+							has_country_flag = GEA_Josias_frame_2_Carl_Edward
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_2_Carl_Edward
+				GEA_Josias_add_15_Carl_Edward_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_The_Secret_Party_of_the_General
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Schleicher
+							has_country_flag = GEA_Josias_frame_2_Schleicher
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_2_Schleicher
+				GEA_Josias_add_15_Schleicher_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_The_friendship_with_the_publicity_magnate
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Hugenberg
+							has_country_flag = GEA_Josias_frame_2_Hugenberg
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_2_Hugenberg
+				GEA_Josias_add_15_Hugenberg_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_The_wise_men_of_the_sovereignty_faction
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Elard_von_Oldenburg
+							has_country_flag = GEA_Josias_frame_2_Elard_von_Oldenburg
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_2_Elard_von_Oldenburg
+				GEA_Josias_add_15_Elard_von_Oldenburg_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_The_wise_men_of_the_sovereignty_faction
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_1_Werner_von_Alvensleben
+							has_country_flag = GEA_Josias_frame_2_Werner_von_Alvensleben
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_2_Werner_von_Alvensleben
+				GEA_Josias_add_15_Werner_von_Alvensleben_effect = yes
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_country_flag = GEA_Josias_frame_3_Josef_Abs
+						has_country_flag = GEA_Josias_frame_3_Fritz_Meer
+						has_country_flag = GEA_Josias_frame_3_Hermann_Bucher
+						has_country_flag = GEA_Josias_frame_3_Hermann_Siemens
+						has_country_flag = GEA_Josias_frame_3_Otto_Jeidels
+						has_country_flag = GEA_Josias_frame_3_Alfred_Krupp
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Hermann_Siemens
+							has_country_flag = GEA_Josias_frame_4_Hermann_Siemens
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_3_Hermann_Siemens
+				GEA_Josias_add_15_Hermann_Siemens_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Josef_Abs
+							has_country_flag = GEA_Josias_frame_4_Josef_Abs
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_3_Josef_Abs
+				GEA_Josias_add_15_Josef_Abs_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Hermann_Bucher
+							has_country_flag = GEA_Josias_frame_4_Hermann_Bucher
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_3_Hermann_Bucher
+				GEA_Josias_add_15_Hermann_Bucher_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Fritz_Meer
+							has_country_flag = GEA_Josias_frame_4_Fritz_Meer
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_3_Fritz_Meer
+				GEA_Josias_add_15_Fritz_Meer_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Otto_Jeidels
+							has_country_flag = GEA_Josias_frame_4_Otto_Jeidels
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_3_Otto_Jeidels
+				GEA_Josias_add_15_Otto_Jeidels_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_The_friendship_with_the_publicity_magnate
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Alfred_Krupp
+							has_country_flag = GEA_Josias_frame_4_Alfred_Krupp
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_3_Alfred_Krupp
+				GEA_Josias_add_15_Alfred_Krupp_effect = yes
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_country_flag = GEA_Josias_frame_4_Josef_Abs
+						has_country_flag = GEA_Josias_frame_4_Fritz_Meer
+						has_country_flag = GEA_Josias_frame_4_Hermann_Bucher
+						has_country_flag = GEA_Josias_frame_4_Hermann_Siemens
+						has_country_flag = GEA_Josias_frame_4_Otto_Jeidels
+						has_country_flag = GEA_Josias_frame_4_Alfred_Krupp
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Josef_Abs
+							has_country_flag = GEA_Josias_frame_4_Josef_Abs
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_4_Josef_Abs
+				GEA_Josias_add_15_Josef_Abs_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Hermann_Bucher
+							has_country_flag = GEA_Josias_frame_4_Hermann_Bucher
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_4_Hermann_Bucher
+				GEA_Josias_add_15_Hermann_Bucher_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Hermann_Siemens
+							has_country_flag = GEA_Josias_frame_4_Hermann_Siemens
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_4_Hermann_Siemens
+				GEA_Josias_add_15_Hermann_Siemens_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Fritz_Meer
+							has_country_flag = GEA_Josias_frame_4_Fritz_Meer
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_4_Fritz_Meer
+				GEA_Josias_add_15_Fritz_Meer_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Otto_Jeidels
+							has_country_flag = GEA_Josias_frame_4_Otto_Jeidels
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_4_Otto_Jeidels
+				GEA_Josias_add_15_Otto_Jeidels_effect = yes
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = GEA_The_friendship_with_the_publicity_magnate
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_3_Alfred_Krupp
+							has_country_flag = GEA_Josias_frame_4_Alfred_Krupp
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_4_Alfred_Krupp
+				GEA_Josias_add_15_Alfred_Krupp_effect = yes
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_country_flag = GEA_Josias_frame_5_Carl_Schmitt
+						has_country_flag = GEA_Josias_frame_5_Dorpmuller
+						has_country_flag = GEA_Josias_frame_5_Emil_Helfferich
+						has_country_flag = GEA_Josias_frame_5_Fritz_Thyssen
+						has_country_flag = GEA_Josias_frame_5_Hermann_Goring
+						has_country_flag = GEA_Josias_frame_5_Siegmund_Bodenheimer
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Dorpmuller
+							has_country_flag = GEA_Josias_frame_6_Dorpmuller
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_5_Dorpmuller
+				GEA_Josias_add_15_Dorpmuller_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Fritz_Thyssen
+							has_country_flag = GEA_Josias_frame_6_Fritz_Thyssen
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_5_Fritz_Thyssen
+				GEA_Josias_add_15_Fritz_Thyssen_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Siegmund_Bodenheimer
+							has_country_flag = GEA_Josias_frame_6_Siegmund_Bodenheimer
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_5_Siegmund_Bodenheimer
+				GEA_Josias_add_15_Siegmund_Bodenheimer_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Emil_Helfferich
+							has_country_flag = GEA_Josias_frame_6_Emil_Helfferich
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_5_Emil_Helfferich
+				GEA_Josias_add_15_Emil_Helfferich_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Carl_Schmitt
+							has_country_flag = GEA_Josias_frame_6_Carl_Schmitt
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_5_Carl_Schmitt
+				GEA_Josias_add_15_Carl_Schmitt_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Hermann_Goring
+							has_country_flag = GEA_Josias_frame_6_Hermann_Goring
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_5_Hermann_Goring
+				GEA_Josias_add_15_Hermann_Goring_effect = yes
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_country_flag = GEA_Josias_frame_6_Carl_Schmitt
+						has_country_flag = GEA_Josias_frame_6_Dorpmuller
+						has_country_flag = GEA_Josias_frame_6_Emil_Helfferich
+						has_country_flag = GEA_Josias_frame_6_Fritz_Thyssen
+						has_country_flag = GEA_Josias_frame_6_Hermann_Goring
+						has_country_flag = GEA_Josias_frame_6_Siegmund_Bodenheimer
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Fritz_Thyssen
+							has_country_flag = GEA_Josias_frame_6_Fritz_Thyssen
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_6_Fritz_Thyssen
+				GEA_Josias_add_15_Fritz_Thyssen_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Siegmund_Bodenheimer
+							has_country_flag = GEA_Josias_frame_6_Siegmund_Bodenheimer
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_6_Siegmund_Bodenheimer
+				GEA_Josias_add_15_Siegmund_Bodenheimer_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Dorpmuller
+							has_country_flag = GEA_Josias_frame_6_Dorpmuller
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_6_Dorpmuller
+				GEA_Josias_add_15_Dorpmuller_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Emil_Helfferich
+							has_country_flag = GEA_Josias_frame_6_Emil_Helfferich
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_6_Emil_Helfferich
+				GEA_Josias_add_15_Emil_Helfferich_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Carl_Schmitt
+							has_country_flag = GEA_Josias_frame_6_Carl_Schmitt
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_6_Carl_Schmitt
+				GEA_Josias_add_15_Carl_Schmitt_effect = yes
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = GEA_Josias_frame_5_Hermann_Goring
+							has_country_flag = GEA_Josias_frame_6_Hermann_Goring
+						}
+					}
+				}
+				set_country_flag = GEA_Josias_frame_6_Hermann_Goring
+				GEA_Josias_add_15_Hermann_Goring_effect = yes
+			}
+		}
+	}
+}

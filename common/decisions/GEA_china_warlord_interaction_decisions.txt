@@ -1,0 +1,1203 @@
+GEA_china_warlord_interaction = {
+	GEA_warlord_extend_german_loan = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+		priority = 9003
+		cost = 0
+		visible = { has_country_flag = GEA_german_loan_active }
+		available = {
+			hidden_trigger = {
+				OR = {
+					NOT = { has_variable = GEA_german_loan_extension_count }
+					check_variable = { var = GEA_german_loan_extension_count value = 2 compare = less_than }
+				}
+			}
+			country_exists = GEA
+			OR = {
+				has_active_mission = GEA_warlord_repay_german_loan_short
+				has_active_mission = GEA_warlord_repay_german_loan_medium
+				has_active_mission = GEA_warlord_repay_german_loan_long
+			}
+		}
+		ai_will_do = {
+			factor = 30
+			modifier = { add = 30 GEA_china_warlord_positive_cooperation_trigger = yes }
+		}
+		complete_effect = {
+			hidden_effect = {
+				GEA_ensure_german_loan_repayment_effect = yes
+				GEA_extend_german_loan_effect = yes
+				add_to_variable = { GEA_german_loan_extension_count = 1 }
+				GEA_warlord_add_3_german_capital_influence_effect = yes
+			}
+			custom_effect_tooltip = GEA_loan_extend_60_days_tt
+			add_stability = -0.05
+			custom_effect_tooltip = GEA_china_capital_influence_add_3_tt
+			add_popularity = { ideology = market_liberal popularity = 0.015 }
+			GEA_refresh_tsingtau_collaboration_effect = yes
+			GEA = { add_political_power = 20 }
+		}
+	}
+
+	GEA_warlord_settle_loan_with_equity = {
+		icon = GFX_decision_generic_industry
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+		priority = 9002
+		cost = 0
+		visible = {
+			has_country_flag = GEA_german_loan_active
+			NOT = { has_country_flag = GEA_german_loan_equity_settlement_used }
+		}
+		available = {
+			country_exists = GEA
+
+			OR = {
+				has_active_mission = GEA_warlord_repay_german_loan_short
+				has_active_mission = GEA_warlord_repay_german_loan_medium
+				has_active_mission = GEA_warlord_repay_german_loan_long
+			}
+		}
+		ai_will_do = {
+			factor = 30
+			modifier = { add = 30 GEA_china_warlord_positive_cooperation_trigger = yes }
+		}
+		complete_effect = {
+			hidden_effect = {
+				GEA_ensure_german_loan_repayment_effect = yes
+				multiply_variable = { GEA_german_loan_repayment = 0.5 }
+				set_country_flag = GEA_german_loan_equity_settlement_used
+				GEA_warlord_add_3_german_capital_influence_effect = yes
+			}
+			custom_effect_tooltip = GEA_loan_equity_half_repayment_tt
+			custom_effect_tooltip = GEA_china_capital_influence_add_3_tt
+			add_popularity = { ideology = market_liberal popularity = 0.02 }
+			GEA_refresh_tsingtau_collaboration_effect = yes
+			GEA = { add_offsite_building = { type = industrial_complex level = 1 } }
+		}
+	}
+
+	GEA_warlord_repay_german_loan_early = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+		priority = 9001
+		cost = 0
+		visible = { has_country_flag = GEA_german_loan_active }
+		available = {
+			country_exists = GEA
+			OR = {
+				has_active_mission = GEA_warlord_repay_german_loan_short
+				has_active_mission = GEA_warlord_repay_german_loan_medium
+				has_active_mission = GEA_warlord_repay_german_loan_long
+			}
+			OR = {
+				AND = {
+					has_variable = GEA_german_loan_repayment
+					has_political_power > var:GEA_german_loan_repayment
+				}
+				AND = {
+					NOT = { has_variable = GEA_german_loan_repayment }
+					has_active_mission = GEA_warlord_repay_german_loan_short
+					has_political_power > 50
+				}
+				AND = {
+					NOT = { has_variable = GEA_german_loan_repayment }
+					has_active_mission = GEA_warlord_repay_german_loan_medium
+					has_political_power > 100
+				}
+				AND = {
+					NOT = { has_variable = GEA_german_loan_repayment }
+					has_active_mission = GEA_warlord_repay_german_loan_long
+					has_political_power > 200
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 30
+			modifier = { add = 30 GEA_china_warlord_positive_cooperation_trigger = yes }
+		}
+		complete_effect = {
+			custom_effect_tooltip = GEA_loan_early_repayment_tt
+			add_popularity = { ideology = market_liberal popularity = -0.05 }
+			custom_effect_tooltip = GEA_loan_capital_influence_reduce_5_tt
+			hidden_effect = { GEA_warlord_reduce_5_german_capital_influence_effect = yes }
+			GEA_repay_german_loan_early_effect = yes
+		}
+	}
+
+	GEA_warlord_default_on_german_loan = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+		priority = 9000
+		visible = { has_country_flag = GEA_german_loan_active }
+
+		cost = 0
+		custom_cost_text = CP_10
+		custom_cost_trigger = { command_power > 9.99 }
+		ai_will_do = {
+			factor = 10
+			modifier = { add = 10 has_political_power < 0 }
+			modifier = { add = 20 has_political_power < -100 }
+			modifier = { add = 50 has_opinion = { target = GEA value < 33 } }
+		}
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }
+			GEA_default_german_loan_effect = yes
+		}
+	}
+	GEA_warlord_repay_german_loan_short = {
+		priority = 10000
+		icon = GFX_GEA_Invest_in_East_China_decision
+		allowed = { always = no }
+		activation = { always = no }
+		available = { always = no }
+		visible = { has_country_flag = GEA_german_loan_active }
+		days_mission_timeout = 90
+		is_good = no
+		cancel_trigger = { NOT = { country_exists = GEA } }
+		cancel_effect = { GEA_clear_german_loan_effect = yes }
+		timeout_effect = { GEA_repay_short_german_loan_effect = yes }
+	}
+	GEA_warlord_repay_german_loan_medium = {
+		priority = 10000
+		icon = GFX_GEA_Invest_in_East_China_decision
+		allowed = { always = no }
+		activation = { always = no }
+		available = { always = no }
+		visible = { has_country_flag = GEA_german_loan_active }
+		days_mission_timeout = 180
+		is_good = no
+		cancel_trigger = { NOT = { country_exists = GEA } }
+		cancel_effect = { GEA_clear_german_loan_effect = yes }
+		timeout_effect = { GEA_repay_medium_german_loan_effect = yes }
+	}
+	GEA_warlord_repay_german_loan_long = {
+		priority = 10000
+		icon = GFX_GEA_Invest_in_East_China_decision
+		allowed = { always = no }
+		activation = { always = no }
+		available = { always = no }
+		visible = { has_country_flag = GEA_german_loan_active }
+		days_mission_timeout = 365
+		is_good = no
+		cancel_trigger = { NOT = { country_exists = GEA } }
+		cancel_effect = { GEA_clear_german_loan_effect = yes }
+		timeout_effect = { GEA_repay_long_german_loan_effect = yes }
+	}
+
+	GEA_warlord_seek_german_investment = {
+		icon = GFX_decision_generic_industry
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+		visible = {
+			country_exists = GEA
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+		available = { NOT = { has_war_with = GEA } }
+		cost = 20
+		days_remove = 30
+		days_re_enable = 60
+		ai_will_do = {
+			factor = 30
+			modifier = {
+				add = 30
+				GEA_china_warlord_positive_cooperation_trigger = yes
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GEA_warlord_seek_german_investment"
+			add_political_power = 30
+			add_stability = 0.02
+			add_popularity = { ideology = market_liberal popularity = 0.02 }
+			GEA_refresh_tsingtau_collaboration_effect = yes
+			custom_effect_tooltip = GEA_china_attitude_add_2_tt
+			custom_effect_tooltip = GEA_china_capital_influence_add_2_tt
+			hidden_effect = { GEA_warlord_add_2_german_influence_effect = yes }
+		}
+	}
+
+	GEA_warlord_import_german_enterprises = {
+		icon = GFX_decision_generic_industry
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+		visible = {
+			country_exists = GEA
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+		available = {
+			NOT = { has_war_with = GEA }
+			any_owned_state = { is_controlled_by = ROOT }
+		}
+		cost = 40
+		days_remove = 60
+		days_re_enable = 100
+		ai_will_do = {
+			factor = 30
+			modifier = {
+				add = 30
+				GEA_china_warlord_positive_cooperation_trigger = yes
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GEA_warlord_import_german_enterprises"
+			random_owned_state = {
+				limit = { is_controlled_by = ROOT }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_stability = 0.02
+			add_popularity = { ideology = market_liberal popularity = 0.03 }
+			GEA_refresh_tsingtau_collaboration_effect = yes
+			custom_effect_tooltip = GEA_china_attitude_add_3_tt
+			custom_effect_tooltip = GEA_china_capital_influence_add_3_tt
+			hidden_effect = { GEA_warlord_add_3_german_influence_effect = yes }
+		}
+	}
+
+	GEA_warlord_buy_german_arms = {
+		icon = GFX_decision_generic_industry
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+		visible = {
+			country_exists = GEA
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+		available = { NOT = { has_war_with = GEA } }
+		cost = 0
+		custom_cost_text = CP_50
+		custom_cost_trigger = { command_power > 49.99 }
+		days_remove = 60
+		days_re_enable = 120
+		ai_will_do = {
+			factor = 30
+			modifier = {
+				add = 30
+				GEA_china_warlord_positive_cooperation_trigger = yes
+			}
+			modifier = {
+				add = 30
+				GEA = { has_completed_focus = GEA_Goods_out_money_in }
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GEA_warlord_buy_german_arms"
+			hidden_effect = { add_command_power = -50 }
+		}
+		remove_effect = {
+			random_list = {
+				50 = { add_equipment_to_stockpile = { type = infantry_equipment amount = 3000 producer = GER } }
+				30 = { add_equipment_to_stockpile = { type = artillery_equipment amount = 100 producer = GER } }
+				20 = { add_equipment_to_stockpile = { type = support_equipment amount = 500 producer = GER } }
+			}
+			add_popularity = { ideology = market_liberal popularity = 0.02 }
+			GEA_refresh_tsingtau_collaboration_effect = yes
+			custom_effect_tooltip = GEA_china_capital_influence_add_5_tt
+			hidden_effect = { GEA_warlord_add_5_german_capital_influence_effect = yes }
+		}
+	}
+
+	GEA_warlord_buy_huning_railway = {
+		icon = railroad
+		allowed = { OR = { original_tag = LEP original_tag = SQI } }
+		cost = 0
+		custom_cost_text = CP_50
+		custom_cost_trigger = { command_power > 49.99 }
+		days_remove = 90
+		fire_only_once = yes
+		visible = {
+			country_exists = GEA
+			GEA_china_warlord_can_interact_trigger = yes
+			GEA = {
+				has_country_flag = GEA_railway_huning_completed
+				NOT = { has_country_flag = GEA_railway_huning_bought_out }
+			}
+		}
+		available = {
+			NOT = { has_war_with = GEA }
+			owns_state = 613
+			controls_state = 613
+		}
+		cancel_trigger = {
+			OR = {
+				NOT = { country_exists = GEA }
+				has_war_with = GEA
+				GEA_china_warlord_cannot_interact_trigger = yes
+				NOT = { owns_state = 613 }
+				NOT = { controls_state = 613 }
+				GEA = { has_country_flag = GEA_railway_huning_bought_out }
+			}
+		}
+		ai_will_do = {
+			factor = 30
+			modifier = {
+				add = 30
+				GEA_china_warlord_positive_cooperation_trigger = yes
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GEA_warlord_buy_huning_railway"
+			hidden_effect = { add_command_power = -50 }
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GEA_warlord_buy_huning_railway"
+			GEA = {
+				set_country_flag = GEA_railway_huning_bought_out
+				add_political_power = 100
+				GEA_remove_east_china_railway_revenue_effect = yes
+			}
+			GEA_add_east_china_railway_revenue_effect = yes
+		}
+	}
+
+	GEA_warlord_buy_hangjiang_railway = {
+		icon = railroad
+		allowed = { OR = { original_tag = LEP original_tag = SQI } }
+		cost = 0
+		custom_cost_text = CP_50
+		custom_cost_trigger = { command_power > 49.99 }
+		days_remove = 90
+		fire_only_once = yes
+		visible = {
+			country_exists = GEA
+			GEA_china_warlord_can_interact_trigger = yes
+			GEA = {
+				has_country_flag = GEA_railway_hangjiang_completed
+				NOT = { has_country_flag = GEA_railway_hangjiang_bought_out }
+			}
+		}
+		available = {
+			NOT = { has_war_with = GEA }
+			owns_state = 613
+			owns_state = 596
+			controls_state = 596
+			owns_state = 1067
+			controls_state = 1067
+		}
+		cancel_trigger = {
+			OR = {
+				NOT = { country_exists = GEA }
+				has_war_with = GEA
+				GEA_china_warlord_cannot_interact_trigger = yes
+				NOT = { owns_state = 596 }
+				NOT = { controls_state = 596 }
+				NOT = { owns_state = 613 }
+				NOT = { owns_state = 1067 }
+				NOT = { controls_state = 1067 }
+				GEA = { has_country_flag = GEA_railway_hangjiang_bought_out }
+			}
+		}
+		ai_will_do = {
+			factor = 30
+			modifier = {
+				add = 30
+				GEA_china_warlord_positive_cooperation_trigger = yes
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GEA_warlord_buy_hangjiang_railway"
+			hidden_effect = { add_command_power = -50 }
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GEA_warlord_buy_hangjiang_railway"
+			GEA = {
+				set_country_flag = GEA_railway_hangjiang_bought_out
+				add_political_power = 100
+				GEA_remove_east_china_railway_revenue_effect = yes
+			}
+			GEA_add_east_china_railway_revenue_effect = yes
+		}
+	}
+
+	GEA_warlord_buy_zhegan_railway = {
+		icon = railroad
+		allowed = { OR = { original_tag = LEP original_tag = SQI } }
+		cost = 0
+		custom_cost_text = CP_50
+		custom_cost_trigger = { command_power > 49.99 }
+		days_remove = 90
+		fire_only_once = yes
+		visible = {
+			country_exists = GEA
+			GEA_china_warlord_can_interact_trigger = yes
+			GEA = {
+				has_country_flag = GEA_railway_zhegan_completed
+				NOT = { has_country_flag = GEA_railway_zhegan_bought_out }
+			}
+		}
+		available = {
+			NOT = { has_war_with = GEA }
+			owns_state = 613
+			owns_state = 1067
+			controls_state = 1067
+			owns_state = 1044
+			controls_state = 1044
+		}
+		cancel_trigger = {
+			OR = {
+				NOT = { country_exists = GEA }
+				has_war_with = GEA
+				GEA_china_warlord_cannot_interact_trigger = yes
+				NOT = { owns_state = 613 }
+				NOT = { owns_state = 1044 }
+				NOT = { controls_state = 1044 }
+				NOT = { owns_state = 1067 }
+				NOT = { controls_state = 1067 }
+				GEA = { has_country_flag = GEA_railway_zhegan_bought_out }
+			}
+		}
+		ai_will_do = {
+			factor = 30
+			modifier = {
+				add = 30
+				GEA_china_warlord_positive_cooperation_trigger = yes
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GEA_warlord_buy_zhegan_railway"
+			hidden_effect = { add_command_power = -50 }
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GEA_warlord_buy_zhegan_railway"
+			GEA = {
+				set_country_flag = GEA_railway_zhegan_bought_out
+				add_political_power = 100
+				GEA_remove_east_china_railway_revenue_effect = yes
+			}
+			GEA_add_east_china_railway_revenue_effect = yes
+		}
+	}
+
+
+	GEA_warlord_expel_german_investment = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+
+		visible = {
+			country_exists = GEA
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+		available = {
+			NOT = { has_war_with = GEA }
+			if = {
+				limit = { is_ai = yes }
+				custom_trigger_tooltip = {
+					tooltip = GEA_warlord_expel_low_attitude_tt
+					OR = {
+						AND = {
+							original_tag = LEP
+							GEA = { check_variable = { GEA_china_lep_attitude < 20 } }
+						}
+						AND = {
+							original_tag = SQI
+							GEA = { check_variable = { GEA_china_sqi_attitude < 20 } }
+						}
+						AND = {
+							original_tag = GXC
+							GEA = { check_variable = { GEA_china_gxc_attitude < 20 } }
+						}
+						AND = {
+							original_tag = YUN
+							GEA = { check_variable = { GEA_china_yun_attitude < 20 } }
+						}
+						AND = {
+							original_tag = SZC
+							GEA = { check_variable = { GEA_china_szc_attitude < 20 } }
+						}
+					}
+				}
+			}
+		}
+
+		cost = 0
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				add = 20
+				OR = {
+					AND = {
+						original_tag = LEP
+						GEA = { check_variable = { GEA_china_lep_attitude < 20 } }
+					}
+					AND = {
+						original_tag = SQI
+						GEA = { check_variable = { GEA_china_sqi_attitude < 20 } }
+					}
+					AND = {
+						original_tag = GXC
+						GEA = { check_variable = { GEA_china_gxc_attitude < 20 } }
+					}
+					AND = {
+						original_tag = YUN
+						GEA = { check_variable = { GEA_china_yun_attitude < 20 } }
+					}
+					AND = {
+						original_tag = SZC
+						GEA = { check_variable = { GEA_china_szc_attitude < 20 } }
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GEA_warlord_expel_german_investment"
+			set_country_flag = GEA_china_warlord_interaction_blocked
+			GEA_clear_chinese_warlord_exploitation_effect = yes
+			GEA = { GEA_clear_invalid_chinese_railway_revenue_effect = yes }
+		}
+	}
+	GEA_warlord_restrict_german_investment = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+
+		visible = {
+			country_exists = GEA
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+		available = {
+			NOT = { has_war_with = GEA }
+			OR = {
+				AND = {
+					original_tag = LEP
+					GEA = { check_variable = { GEA_china_lep_capital_influence > 0 } }
+				}
+				AND = {
+					original_tag = SQI
+					GEA = { check_variable = { GEA_china_sqi_capital_influence > 0 } }
+				}
+				AND = {
+					original_tag = GXC
+					GEA = { check_variable = { GEA_china_gxc_capital_influence > 0 } }
+				}
+				AND = {
+					original_tag = YUN
+					GEA = { check_variable = { GEA_china_yun_capital_influence > 0 } }
+				}
+				AND = {
+					original_tag = SZC
+					GEA = { check_variable = { GEA_china_szc_capital_influence > 0 } }
+				}
+			}
+		}
+
+		cost = 30
+		days_remove = 45
+		days_re_enable = 90
+
+		cancel_trigger = {
+			OR = {
+				NOT = { country_exists = GEA }
+				has_war_with = GEA
+				GEA_china_warlord_cannot_interact_trigger = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				add = 5
+				OR = {
+					AND = {
+						original_tag = LEP
+						GEA = { check_variable = { GEA_china_lep_attitude < 60 } }
+					}
+					AND = {
+						original_tag = SQI
+						GEA = { check_variable = { GEA_china_sqi_attitude < 60 } }
+					}
+					AND = {
+						original_tag = GXC
+						GEA = { check_variable = { GEA_china_gxc_attitude < 60 } }
+					}
+					AND = {
+						original_tag = YUN
+						GEA = { check_variable = { GEA_china_yun_attitude < 60 } }
+					}
+					AND = {
+						original_tag = SZC
+						GEA = { check_variable = { GEA_china_szc_attitude < 60 } }
+					}
+				}
+			}
+			modifier = {
+				add = 10
+				OR = {
+					AND = {
+						original_tag = LEP
+						GEA = { check_variable = { GEA_china_lep_attitude < 40 } }
+					}
+					AND = {
+						original_tag = SQI
+						GEA = { check_variable = { GEA_china_sqi_attitude < 40 } }
+					}
+					AND = {
+						original_tag = GXC
+						GEA = { check_variable = { GEA_china_gxc_attitude < 40 } }
+					}
+					AND = {
+						original_tag = YUN
+						GEA = { check_variable = { GEA_china_yun_attitude < 40 } }
+					}
+					AND = {
+						original_tag = SZC
+						GEA = { check_variable = { GEA_china_szc_attitude < 40 } }
+					}
+				}
+			}
+			modifier = {
+				add = 20
+				OR = {
+					AND = {
+						original_tag = LEP
+						GEA = { check_variable = { GEA_china_lep_attitude < 20 } }
+					}
+					AND = {
+						original_tag = SQI
+						GEA = { check_variable = { GEA_china_sqi_attitude < 20 } }
+					}
+					AND = {
+						original_tag = GXC
+						GEA = { check_variable = { GEA_china_gxc_attitude < 20 } }
+					}
+					AND = {
+						original_tag = YUN
+						GEA = { check_variable = { GEA_china_yun_attitude < 20 } }
+					}
+					AND = {
+						original_tag = SZC
+						GEA = { check_variable = { GEA_china_szc_attitude < 20 } }
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GEA_warlord_restrict_german_investment"
+		}
+		remove_effect = {
+			if = {
+				limit = { original_tag = LEP }
+				GEA = {
+					add_to_variable = {
+						GEA_china_lep_capital_influence = -8
+						tooltip = GEA_china_capital_influence_change_tt
+					}
+					add_to_variable = {
+						GEA_china_lep_attitude = -3
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_lep_capital_influence min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_lep_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = SQI }
+				GEA = {
+					add_to_variable = {
+						GEA_china_sqi_capital_influence = -8
+						tooltip = GEA_china_capital_influence_change_tt
+					}
+					add_to_variable = {
+						GEA_china_sqi_attitude = -3
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_sqi_capital_influence min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_sqi_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = GXC }
+				GEA = {
+					add_to_variable = {
+						GEA_china_gxc_capital_influence = -8
+						tooltip = GEA_china_capital_influence_change_tt
+					}
+					add_to_variable = {
+						GEA_china_gxc_attitude = -3
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_gxc_capital_influence min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_gxc_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = YUN }
+				GEA = {
+					add_to_variable = {
+						GEA_china_yun_capital_influence = -8
+						tooltip = GEA_china_capital_influence_change_tt
+					}
+					add_to_variable = {
+						GEA_china_yun_attitude = -3
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_yun_capital_influence min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_yun_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = SZC }
+				GEA = {
+					add_to_variable = {
+						GEA_china_szc_capital_influence = -8
+						tooltip = GEA_china_capital_influence_change_tt
+					}
+					add_to_variable = {
+						GEA_china_szc_attitude = -3
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_szc_capital_influence min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_szc_attitude min = 0 max = 100 }
+					}
+				}
+			}
+		}
+	}
+
+	GEA_warlord_investigate_german_enterprises = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+
+		visible = {
+			country_exists = GEA
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+		available = {
+			NOT = { has_war_with = GEA }
+			OR = {
+				AND = {
+					original_tag = LEP
+					GEA = { check_variable = { GEA_china_lep_capital_influence > 0 } }
+				}
+				AND = {
+					original_tag = SQI
+					GEA = { check_variable = { GEA_china_sqi_capital_influence > 0 } }
+				}
+				AND = {
+					original_tag = GXC
+					GEA = { check_variable = { GEA_china_gxc_capital_influence > 0 } }
+				}
+				AND = {
+					original_tag = YUN
+					GEA = { check_variable = { GEA_china_yun_capital_influence > 0 } }
+				}
+				AND = {
+					original_tag = SZC
+					GEA = { check_variable = { GEA_china_szc_capital_influence > 0 } }
+				}
+			}
+		}
+
+		cost = 45
+		days_remove = 60
+		days_re_enable = 120
+
+		cancel_trigger = {
+			OR = {
+				NOT = { country_exists = GEA }
+				has_war_with = GEA
+				GEA_china_warlord_cannot_interact_trigger = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				add = 5
+				OR = {
+					AND = {
+						original_tag = LEP
+						GEA = { check_variable = { GEA_china_lep_attitude < 60 } }
+					}
+					AND = {
+						original_tag = SQI
+						GEA = { check_variable = { GEA_china_sqi_attitude < 60 } }
+					}
+					AND = {
+						original_tag = GXC
+						GEA = { check_variable = { GEA_china_gxc_attitude < 60 } }
+					}
+					AND = {
+						original_tag = YUN
+						GEA = { check_variable = { GEA_china_yun_attitude < 60 } }
+					}
+					AND = {
+						original_tag = SZC
+						GEA = { check_variable = { GEA_china_szc_attitude < 60 } }
+					}
+				}
+			}
+			modifier = {
+				add = 10
+				OR = {
+					AND = {
+						original_tag = LEP
+						GEA = { check_variable = { GEA_china_lep_attitude < 40 } }
+					}
+					AND = {
+						original_tag = SQI
+						GEA = { check_variable = { GEA_china_sqi_attitude < 40 } }
+					}
+					AND = {
+						original_tag = GXC
+						GEA = { check_variable = { GEA_china_gxc_attitude < 40 } }
+					}
+					AND = {
+						original_tag = YUN
+						GEA = { check_variable = { GEA_china_yun_attitude < 40 } }
+					}
+					AND = {
+						original_tag = SZC
+						GEA = { check_variable = { GEA_china_szc_attitude < 40 } }
+					}
+				}
+			}
+			modifier = {
+				add = 20
+				OR = {
+					AND = {
+						original_tag = LEP
+						GEA = { check_variable = { GEA_china_lep_attitude < 20 } }
+					}
+					AND = {
+						original_tag = SQI
+						GEA = { check_variable = { GEA_china_sqi_attitude < 20 } }
+					}
+					AND = {
+						original_tag = GXC
+						GEA = { check_variable = { GEA_china_gxc_attitude < 20 } }
+					}
+					AND = {
+						original_tag = YUN
+						GEA = { check_variable = { GEA_china_yun_attitude < 20 } }
+					}
+					AND = {
+						original_tag = SZC
+						GEA = { check_variable = { GEA_china_szc_attitude < 20 } }
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GEA_warlord_investigate_german_enterprises"
+		}
+		remove_effect = {
+			if = {
+				limit = { original_tag = LEP }
+				GEA = {
+					add_to_variable = {
+						GEA_china_lep_capital_influence = -12
+						tooltip = GEA_china_capital_influence_change_tt
+					}
+					add_to_variable = {
+						GEA_china_lep_attitude = -5
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_lep_capital_influence min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_lep_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = SQI }
+				GEA = {
+					add_to_variable = {
+						GEA_china_sqi_capital_influence = -12
+						tooltip = GEA_china_capital_influence_change_tt
+					}
+					add_to_variable = {
+						GEA_china_sqi_attitude = -5
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_sqi_capital_influence min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_sqi_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = GXC }
+				GEA = {
+					add_to_variable = {
+						GEA_china_gxc_capital_influence = -12
+						tooltip = GEA_china_capital_influence_change_tt
+					}
+					add_to_variable = {
+						GEA_china_gxc_attitude = -5
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_gxc_capital_influence min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_gxc_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = YUN }
+				GEA = {
+					add_to_variable = {
+						GEA_china_yun_capital_influence = -12
+						tooltip = GEA_china_capital_influence_change_tt
+					}
+					add_to_variable = {
+						GEA_china_yun_attitude = -5
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_yun_capital_influence min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_yun_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = SZC }
+				GEA = {
+					add_to_variable = {
+						GEA_china_szc_capital_influence = -12
+						tooltip = GEA_china_capital_influence_change_tt
+					}
+					add_to_variable = {
+						GEA_china_szc_attitude = -5
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_szc_capital_influence min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_szc_attitude min = 0 max = 100 }
+					}
+				}
+			}
+		}
+	}
+
+	GEA_warlord_dismiss_german_advisers = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { GEA_china_warlord_eligible_trigger = yes }
+
+		visible = {
+			country_exists = GEA
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+		available = {
+			NOT = { has_war_with = GEA }
+			OR = {
+				AND = {
+					original_tag = LEP
+					GEA = { check_variable = { GEA_china_lep_military_projection > 0 } }
+				}
+				AND = {
+					original_tag = SQI
+					GEA = { check_variable = { GEA_china_sqi_military_projection > 0 } }
+				}
+				AND = {
+					original_tag = GXC
+					GEA = { check_variable = { GEA_china_gxc_military_projection > 0 } }
+				}
+				AND = {
+					original_tag = YUN
+					GEA = { check_variable = { GEA_china_yun_military_projection > 0 } }
+				}
+				AND = {
+					original_tag = SZC
+					GEA = { check_variable = { GEA_china_szc_military_projection > 0 } }
+				}
+			}
+		}
+
+		cost = 0
+		custom_cost_text = CP_25
+		custom_cost_trigger = { command_power > 24.99 }
+		days_remove = 45
+		days_re_enable = 120
+
+		cancel_trigger = {
+			OR = {
+				NOT = { country_exists = GEA }
+				has_war_with = GEA
+				GEA_china_warlord_cannot_interact_trigger = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				add = 5
+				OR = {
+					AND = {
+						original_tag = LEP
+						GEA = { check_variable = { GEA_china_lep_attitude < 60 } }
+					}
+					AND = {
+						original_tag = SQI
+						GEA = { check_variable = { GEA_china_sqi_attitude < 60 } }
+					}
+					AND = {
+						original_tag = GXC
+						GEA = { check_variable = { GEA_china_gxc_attitude < 60 } }
+					}
+					AND = {
+						original_tag = YUN
+						GEA = { check_variable = { GEA_china_yun_attitude < 60 } }
+					}
+					AND = {
+						original_tag = SZC
+						GEA = { check_variable = { GEA_china_szc_attitude < 60 } }
+					}
+				}
+			}
+			modifier = {
+				add = 10
+				OR = {
+					AND = {
+						original_tag = LEP
+						GEA = { check_variable = { GEA_china_lep_attitude < 40 } }
+					}
+					AND = {
+						original_tag = SQI
+						GEA = { check_variable = { GEA_china_sqi_attitude < 40 } }
+					}
+					AND = {
+						original_tag = GXC
+						GEA = { check_variable = { GEA_china_gxc_attitude < 40 } }
+					}
+					AND = {
+						original_tag = YUN
+						GEA = { check_variable = { GEA_china_yun_attitude < 40 } }
+					}
+					AND = {
+						original_tag = SZC
+						GEA = { check_variable = { GEA_china_szc_attitude < 40 } }
+					}
+				}
+			}
+			modifier = {
+				add = 20
+				OR = {
+					AND = {
+						original_tag = LEP
+						GEA = { check_variable = { GEA_china_lep_attitude < 20 } }
+					}
+					AND = {
+						original_tag = SQI
+						GEA = { check_variable = { GEA_china_sqi_attitude < 20 } }
+					}
+					AND = {
+						original_tag = GXC
+						GEA = { check_variable = { GEA_china_gxc_attitude < 20 } }
+					}
+					AND = {
+						original_tag = YUN
+						GEA = { check_variable = { GEA_china_yun_attitude < 20 } }
+					}
+					AND = {
+						original_tag = SZC
+						GEA = { check_variable = { GEA_china_szc_attitude < 20 } }
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GEA_warlord_dismiss_german_advisers"
+			hidden_effect = { add_command_power = -25 }
+		}
+		remove_effect = {
+			if = {
+				limit = { original_tag = LEP }
+				GEA = {
+					add_to_variable = {
+						GEA_china_lep_military_projection = -10
+						tooltip = GEA_china_military_projection_change_tt
+					}
+					add_to_variable = {
+						GEA_china_lep_attitude = -5
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_lep_military_projection min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_lep_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = SQI }
+				GEA = {
+					add_to_variable = {
+						GEA_china_sqi_military_projection = -10
+						tooltip = GEA_china_military_projection_change_tt
+					}
+					add_to_variable = {
+						GEA_china_sqi_attitude = -5
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_sqi_military_projection min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_sqi_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = GXC }
+				GEA = {
+					add_to_variable = {
+						GEA_china_gxc_military_projection = -10
+						tooltip = GEA_china_military_projection_change_tt
+					}
+					add_to_variable = {
+						GEA_china_gxc_attitude = -5
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_gxc_military_projection min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_gxc_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = YUN }
+				GEA = {
+					add_to_variable = {
+						GEA_china_yun_military_projection = -10
+						tooltip = GEA_china_military_projection_change_tt
+					}
+					add_to_variable = {
+						GEA_china_yun_attitude = -5
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_yun_military_projection min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_yun_attitude min = 0 max = 100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { original_tag = SZC }
+				GEA = {
+					add_to_variable = {
+						GEA_china_szc_military_projection = -10
+						tooltip = GEA_china_military_projection_change_tt
+					}
+					add_to_variable = {
+						GEA_china_szc_attitude = -5
+						tooltip = GEA_china_attitude_change_tt
+					}
+					hidden_effect = {
+						clamp_variable = { var = GEA_china_szc_military_projection min = 0 max = 100 }
+						clamp_variable = { var = GEA_china_szc_attitude min = 0 max = 100 }
+					}
+				}
+			}
+		}
+	}
+}

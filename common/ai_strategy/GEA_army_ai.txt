@@ -1,0 +1,383 @@
+# GEA infantry/armor recruitment targets; weights among these two roles, not guaranteed fielded division counts.
+# Existing special-forces/front-control/unit-cap strategies remain active.
+# First cancel KX production.txt infantry/armor contributions for GEA, then apply exactly one stage.
+# Recheck offset plans if upstream KX production.txt changes.
+
+GEA_offset_default_unit_production = {
+	allowed = { tag = GEA }
+	enable = { always = yes }
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -100
+	}
+}
+
+GEA_offset_make_more_militia = {
+	allowed = { tag = GEA }
+	enable = {
+		num_of_military_factories < 5
+	}
+	abort = {
+		num_of_military_factories > 4
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 10
+	}
+	
+}
+
+GEA_offset_make_less_cavalry_and_militia = {
+	allowed = { tag = GEA }
+	enable = {
+		num_of_military_factories > 10
+	}
+	abort = {
+		num_of_military_factories < 11
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -14
+	}
+
+}
+
+GEA_offset_default_mobile_production = {
+	allowed = {
+		tag = GEA
+		NOT = {
+			original_tag = MON
+			original_tag = ALO
+			original_tag = TRK
+			original_tag = UZB
+			original_tag = KYR
+			original_tag = DKB
+			original_tag = KUB
+			original_tag = SAU
+			original_tag = JBS
+			original_tag = LBA
+			original_tag = TRP
+			original_tag = IRQ
+		}
+	}
+	enable = {
+		has_tech = motorised_infantry
+		num_of_military_factories > 10
+	}
+
+	abort_when_not_enabled = yes
+
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 2
+	}
+
+
+	
+}
+
+GEA_offset_limit_mobile_production = {
+	allowed = { tag = GEA }
+	enable = {
+		has_tech = motorised_infantry
+		num_of_military_factories > 10
+		OR = {
+			num_of_military_factories < 30
+			oil < 20
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -6
+	}
+}
+
+GEA_offset_more_mobile_production = {
+	allowed = { tag = GEA }
+	enable = {
+		has_tech = motorised_infantry
+		num_of_military_factories > 30
+		oil > 30
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 6
+	}
+}
+
+GEA_offset_default_tank_production = {
+	allowed = { tag = GEA }
+	enable = {
+		is_eligible_for_armor_production = yes
+		num_divisions > 39 #build enough infantry first
+	}
+	abort_when_not_enabled = yes
+
+	
+	
+	ai_strategy = {
+		type = role_ratio
+		id = armor_role
+		value = -2
+	}
+}
+
+GEA_offset_increased_tank_production_1 = {
+	allowed = { tag = GEA }
+	enable = {
+		num_of_military_factories > 49
+		num_divisions > 19 #build enough infantry first
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor_role
+		value = -8
+	}
+}
+
+GEA_offset_increased_tank_production_2 = {
+	allowed = { tag = GEA }
+	enable = {
+		num_of_military_factories > 99
+	}
+	abort_when_not_enabled = yes
+
+	
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor_role
+		value = -8
+	}
+}
+
+GEA_offset_increased_tank_production_3 = {
+	allowed = { tag = GEA }
+	enable = {
+		num_of_military_factories > 119
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor_role
+		value = -8
+	}
+}
+
+GEA_offset_increased_tank_production_4 = {
+	allowed = { tag = GEA }
+	enable = {
+		num_of_military_factories > 149
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor_role
+		value = -8
+	}
+}
+
+GEA_offset_increased_tank_production_5 = {
+	allowed = { tag = GEA }
+	enable = {
+		num_of_military_factories > 179
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor_role
+		value = -10
+	}
+}
+
+GEA_offset_increased_tank_production_6 = {
+	allowed = { tag = GEA }
+	enable = {
+		num_of_military_factories > 199
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor_role
+		value = -10
+	}
+}
+
+GEA_offset_more_armor_focused_nation = {
+	allowed = { tag = GEA }
+	enable = {
+		OR = {
+			num_of_military_factories > 49
+			AND = {
+				num_of_military_factories > 19
+				country_has_armor_focus = yes
+			}
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 12
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = armor_role
+		value = -12
+	}
+}
+
+GEA_offset_civil_war_militia_production = {
+	allowed = { tag = GEA }
+	enable = {
+		needs_cheap_infantry = yes
+	}
+	
+	abort_when_not_enabled = yes
+
+
+
+	
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -60
+	}
+}
+
+# KX-style long-term targets: time/industry/research select the stage, not temporary reserves.
+GEA_army_ratio_early = {
+	allowed = { tag = GEA }
+	enable = {
+		always = yes
+		NOT = { OR = { AND = { date > 1937.12.31 num_of_military_factories > 14 has_tech = motorised_infantry has_tech = tech_recon } AND = { date > 1939.12.31 num_of_military_factories > 24 has_tech = motorised_infantry has_tech = tech_recon OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } AND = { date > 1941.12.31 num_of_military_factories > 39 has_tech = motorised_infantry has_tech = tech_recon OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } AND = { date > 1943.12.31 num_of_military_factories > 49 has_tech = motorised_infantry has_tech = tech_recon OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } } }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = { type = role_ratio id = infantry value = 95 }
+	ai_strategy = { type = role_ratio id = armor_role value = 5 }
+}
+
+GEA_army_ratio_developing = {
+	allowed = { tag = GEA }
+	enable = {
+		date > 1937.12.31
+		num_of_military_factories > 14
+		has_tech = motorised_infantry
+		has_tech = tech_recon
+		NOT = { OR = { AND = { date > 1939.12.31 num_of_military_factories > 24 has_tech = motorised_infantry has_tech = tech_recon OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } AND = { date > 1941.12.31 num_of_military_factories > 39 has_tech = motorised_infantry has_tech = tech_recon OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } AND = { date > 1943.12.31 num_of_military_factories > 49 has_tech = motorised_infantry has_tech = tech_recon OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } } }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = { type = role_ratio id = infantry value = 90 }
+	ai_strategy = { type = role_ratio id = armor_role value = 10 }
+}
+
+GEA_army_ratio_medium = {
+	allowed = { tag = GEA }
+	enable = {
+		date > 1939.12.31
+		num_of_military_factories > 24
+		has_tech = motorised_infantry
+		has_tech = tech_recon
+		OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis }
+		NOT = { OR = { AND = { date > 1941.12.31 num_of_military_factories > 39 has_tech = motorised_infantry has_tech = tech_recon OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } AND = { date > 1943.12.31 num_of_military_factories > 49 has_tech = motorised_infantry has_tech = tech_recon OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } } }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = { type = role_ratio id = infantry value = 80 }
+	ai_strategy = { type = role_ratio id = armor_role value = 20 }
+}
+
+GEA_army_ratio_late = {
+	allowed = { tag = GEA }
+	enable = {
+		date > 1941.12.31
+		num_of_military_factories > 39
+		has_tech = motorised_infantry
+		has_tech = tech_recon
+		OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis }
+		NOT = { OR = { AND = { date > 1943.12.31 num_of_military_factories > 49 has_tech = motorised_infantry has_tech = tech_recon OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } } }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = { type = role_ratio id = infantry value = 70 }
+	ai_strategy = { type = role_ratio id = armor_role value = 30 }
+}
+
+GEA_army_ratio_mature = {
+	allowed = { tag = GEA }
+	enable = {
+		date > 1943.12.31
+		num_of_military_factories > 49
+		has_tech = motorised_infantry
+		has_tech = tech_recon
+		OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = { type = role_ratio id = infantry value = 65 }
+	ai_strategy = { type = role_ratio id = armor_role value = 35 }
+}
+
+# Heavy TD infantry takes seven points from the existing infantry share; combined infantry/armor stays unchanged.
+GEA_heavy_td_infantry_share = {
+	allowed = { tag = GEA }
+	enable = { num_of_military_factories > 49 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons has_tech = interwar_antitank OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } date > 1941.12.31 }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = role_ratio id = infantry value = -7 }
+	ai_strategy = { type = role_ratio id = GEA_heavy_td_infantry value = 7 }
+}
+
+# The custom role must also obey KX division-limit behavior.
+GEA_heavy_td_division_limit = {
+	allowed = { tag = GEA NOT = { has_game_rule = { rule = unit_limit_options option = NONE } } }
+	enable = { has_reached_maximum_divisions = yes NOT = { surrender_progress > 0.05 } }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = build_army id = GEA_heavy_td_infantry value = -1000 }
+}
+
+# Supply pause leaves the long-term role ratio unchanged.
+GEA_pause_infantry_recruitment = {
+	allowed = { tag = GEA }
+	enable = { has_country_flag = GEA_ai_pause_infantry_training }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = build_army id = infantry value = -1000 }
+}
+
+# Supply pause leaves the long-term role ratio unchanged.
+GEA_pause_armor_recruitment = {
+	allowed = { tag = GEA }
+	enable = { has_country_flag = GEA_ai_pause_armor_training }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = build_army id = armor_role value = -1000 }
+}
+
+# Supply pause leaves the long-term role ratio unchanged.
+GEA_pause_heavy_td_recruitment = {
+	allowed = { tag = GEA }
+	enable = { has_country_flag = GEA_ai_pause_heavy_td_training }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = build_army id = GEA_heavy_td_infantry value = -1000 }
+}
