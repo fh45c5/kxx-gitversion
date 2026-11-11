@@ -1,0 +1,280 @@
+on_actions = {
+	on_daily_GEA = {
+		effect = {
+			if = {
+				limit = { tag = GEA is_ai = yes }
+				GEA_ai_update_training_reserves = yes
+			}
+		}
+	}
+	#每日校正一次华东铁路变量
+	on_daily_GEA = {
+		effect = {
+			if = {
+				limit = { tag = GEA }
+				GEA_clear_invalid_chinese_railway_revenue_effect = yes
+			}
+		}
+	}
+	on_government_change = {
+		effect = {
+			if = {
+				limit = {
+					GEA_china_warlord_cannot_interact_trigger = yes
+					OR = {
+						has_idea = GEA_german_controlled_economic_market
+						has_idea = GEA_mark_trade_settlement
+						has_idea = GEA_gxc_german_capital_1
+						has_idea = GEA_gxc_german_capital_2
+						has_idea = GEA_gxc_german_capital_3
+						has_idea = GEA_german_controlled_economic_market_Yun_1
+						has_idea = GEA_german_controlled_economic_market_Yun_2
+						has_idea = GEA_german_controlled_economic_market_Yun_3
+						has_idea = GEA_german_controlled_economic_market_Yun_4
+						has_idea = GEA_german_controlled_economic_market_Yun_5
+						has_idea = GEA_Repaying_German_Loan
+					}
+				}
+				GEA_clear_chinese_warlord_exploitation_effect = yes
+			}
+			GEA = { GEA_clear_invalid_chinese_railway_revenue_effect = yes }
+		}
+	}
+	# 舍尔纳路线的独立抵抗度：每日仅校正范围，不自动增减
+	on_monthly_GEA = {
+		effect = {
+			#失去印支的实际控制后清理旧地图选择，也修复旧存档残留标记
+			if = {
+				limit = { 
+					has_country_flag = Indochina_OPEN 
+					NOT = { 
+						GEA_indochina_can_interact_trigger = yes 
+					} 
+				}
+				clr_country_flag = Indochina_OPEN
+			}
+			if = {
+				limit = { has_variable = GEA_indochina_resistance }
+				clamp_variable = { var = GEA_indochina_resistance min = 0 max = 100 }
+			}
+		}
+	}
+	# 卢克纳尔的国际形象：风险高于40%时每月回落1个百分点
+	on_monthly = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = GEA
+					has_country_flag = GEA_monthly_pirate_risk_decay_unlocked
+					NOT = { has_country_flag = GEA_pirate_exposure_disabled }
+					check_variable = { GEA_pirate_discovery_chance > 40 }
+				}
+				add_to_variable = { GEA_pirate_discovery_chance = -1 }
+				clamp_variable = { var = GEA_pirate_discovery_chance min = 0 max = 100 }
+			}
+		}
+	}
+
+	on_startup = {
+		effect = {
+			if = {
+				limit = { GEA = { exists = yes is_subject_of = GER } }
+				GER = {
+					set_autonomy = {
+						target = GEA
+						autonomy_state = autonomy_free
+					}
+				}
+			}
+			if = {
+				limit = { GEA = { exists = yes } }
+				GEA = {
+					744 = { add_core_of = GEA }
+					996 = { add_core_of = GEA }
+					if = {
+						limit = { has_completed_focus = GEA_Expand_issuance_of_banknotes }
+						set_variable = { GEA_china_economic_cost_30 = 10 }
+					}
+					GEA_refresh_lep_low_yield_costs_effect = yes
+					clr_country_flag = Dei_OPEN
+					clr_country_flag = Dei_WAR_OPEN
+					if = {
+						limit = {
+							OR = {
+								has_country_flag = GEA_war_rules_unrestricted
+								has_idea = GEA_colonial_question_unrestricted
+								has_idea = GEA_colonial_question_heye_unrestricted
+								has_idea = GEA_colonial_question_heye_2_unrestricted
+								has_idea = GEA_colonial_question_heye_3_unrestricted
+							}
+						}
+						set_rule = { can_not_declare_war = no can_decline_call_to_war = yes }
+					}
+					else = {
+						set_rule = { can_not_declare_war = yes can_decline_call_to_war = no }
+					}
+				}
+				if = {
+					limit = {
+						GER = { exists = yes is_faction_leader = yes }
+						GEA = { NOT = { is_in_faction_with = GER } }
+					}
+					GER = { add_to_faction = GEA }
+				}
+			}
+		}
+	}
+	# ROOT is the attacker; FROM is the defender.
+	on_war_relation_added = {
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						AND = { tag = JAP FROM = { tag = GEA } }
+						AND = { tag = GEA FROM = { tag = JAP } }
+					}
+				}
+				JAP = { country_event = { id = GEA.10001 } }
+			}
+		}
+	}
+	#ROOT is new controller #FROM is old controller #FROM.FROM is state ID
+	on_state_control_changed = {
+		effect = {
+			# Recalculate GEA AOG bonus 经济
+			if = {
+				limit = {
+					FROM.FROM = {
+						OR = {
+							state = 728 #广州湾
+							state = 326 #香港
+							state = 729 #澳门
+							state = 801 #汕头
+							state = 802 #厦门
+							state = 747 #福州
+							state = 803 #温州
+							state = 746 #宁波
+							state = 1075 #南通
+							state = 609 #天津
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = GEA
+						FROM = {
+							NOT = {
+								tag = GEA
+							}
+						}
+					}
+					GEA = {
+						subtract_from_variable = { GEA_AOG_CITIES_FACTORIES = 3 }
+						subtract_from_variable = { GEA_AOG_consumer_goods_factor = 0.03 }
+						add_to_variable = { GEA_AOG_CITIES_NUMBER = 1 }
+					}
+				}
+				else_if = {
+					limit = {
+						FROM = {
+							tag = GEA
+						}
+						NOT = {
+							tag = GEA
+						}
+					}
+					GEA = {
+						add_to_variable = { GEA_AOG_CITIES_FACTORIES = 3 }
+						add_to_variable = { GEA_AOG_consumer_goods_factor = 0.03 }
+						subtract_from_variable = { GEA_AOG_CITIES_NUMBER = 1 }
+					}
+				}
+			}
+			if = {
+				limit = {
+					FROM.FROM = {
+						OR = {
+							state = 743
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = GEA
+						FROM = {
+							NOT = {
+								tag = GEA
+							}
+						}
+					}
+					GEA = {
+						subtract_from_variable = { GEA_AOG_CITIES_FACTORIES = 10 }
+						subtract_from_variable = { GEA_AOG_consumer_goods_factor = 0.1 }
+						add_to_variable = { GEA_AOG_CITIES_NUMBER = 1 }
+					}
+				}
+				else_if = {
+					limit = {
+						FROM = {
+							tag = GEA
+						}
+						NOT = {
+							tag = GEA
+						}
+					}
+					GEA = {
+						add_to_variable = { GEA_AOG_CITIES_FACTORIES = 10 }
+						add_to_variable = { GEA_AOG_consumer_goods_factor = 0.1 }
+						subtract_from_variable = { GEA_AOG_CITIES_NUMBER = 1 }
+					}
+				}
+			}
+			if = {
+				limit = {
+					FROM.FROM = {
+						OR = {
+							state = 744 #青岛
+							state = 592 #广州
+							state = 996 #威海卫
+							state = 745 #大连
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = GEA
+						FROM = {
+							NOT = {
+								tag = GEA
+							}
+						}
+					}
+					GEA = {
+						add_to_variable = { GEA_AOG_SHIPYARD_loacl = 5 }
+						add_to_variable = { GEA_AOG_SHIPYARD = 0.05 }
+						add_to_variable = { GEA_TRADE_FACTOR_local = 5 }
+						add_to_variable = { GEA_TRADE_FACTOR = 0.05 }
+						add_to_variable = { GEA_AOG_CITIES_NUMBER = 1 }
+					}
+				}
+				else_if = {
+					limit = {
+						FROM = {
+							tag = GEA
+						}
+						NOT = {
+							tag = GEA
+						}
+					}
+					GEA = {
+						subtract_from_variable = { GEA_AOG_SHIPYARD_loacl = 5 }
+						subtract_from_variable = { GEA_AOG_SHIPYARD = 0.05 }
+						subtract_from_variable = { GEA_TRADE_FACTOR_local = 5 }
+						subtract_from_variable = { GEA_TRADE_FACTOR = 0.05 }
+						subtract_from_variable = { GEA_AOG_CITIES_NUMBER = 1 }						
+					}
+				}
+			}
+		}
+	}
+}
