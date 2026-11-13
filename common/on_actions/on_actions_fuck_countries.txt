@@ -418,9 +418,14 @@ on_actions = {
 				#}
 			}
 
-			#接管伊比利亚殖民地
+			#接管非洲其他殖民地
 			if = {
-				limit = { has_game_rule = { rule = KXX_annex_SPR_POR option = KXX_annex_SPR_POR_YES } }
+				limit = { 
+					or = {
+						has_game_rule = { rule = KXX_annex_SPR_POR option = KXX_annex_SPR_POR_YES }
+						has_game_rule = { rule = KXX_annex_SPR_POR option = KXX_annex_SPR_POR_MOR_LIB_YES }
+					}
+				}
 				every_state = {
 					limit = {
 						or = {
@@ -478,6 +483,24 @@ on_actions = {
 					}
 					transfer_state_to = DEI
 					add_core_of = DEI
+				}
+				if = {
+					limit = {
+						has_game_rule = { rule = KXX_annex_SPR_POR option = KXX_annex_SPR_POR_MOR_LIB_YES }
+					}
+					every_state = {
+			    		limit = {
+			    			or = {
+				    			is_core_of = MOR
+								is_core_of = LIB
+				    		}
+				    	}
+				    	add_claim_by = NFA
+				    }
+					NFA = {
+						annex_country = { target = MOR }
+						annex_country = { target = LIB }
+					}
 				}
 			}
 
@@ -1046,7 +1069,7 @@ on_actions = {
 					set_cosmetic_tag = POL_kingdom
 					every_state = {
 						limit = {
-							annex_country = { target = GER }
+							is_core_of = POL
 						}
 						add_core_of = GAL
 					}
