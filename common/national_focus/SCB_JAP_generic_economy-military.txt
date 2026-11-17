@@ -3236,4 +3236,147 @@
 		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS FOCUS_FILTER_RESEARCH }
 	}
 
+	shared_focus = {
+		id = JAP_impending_sunset
+		icon = GFX_goal_JAP_Impending_Sunset
+		cost = 3
 
+		relative_position_id = JAP_start_the_third_circle_plan
+		x = -9
+		y = 1
+
+		prerequisite = {
+			focus = JAP_start_the_third_circle_plan
+		}
+		prerequisite = {
+			focus = JAP_short_war_doctrine
+			focus = JAP_long_war_doctrine
+		}
+
+		available = {
+			OR = {
+				casualties_k > 500 
+				enemies_strength_ratio > 0.25
+				enemies_naval_strength_ratio > 0.25
+			}
+			OR = {
+				TRM = {
+					exists = no
+					has_capitulated = yes
+				}
+				FNG = { 
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+
+		ai_will_do = { factor = 100 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_impending_sunset"
+			add_ideas = JAP_desperate_struggle1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_ANNEXATION }
+	}
+
+	shared_focus = {
+		id = JAP_every_mile_paid_in_blood
+		icon = GFX_goal_JAP_To_Steel_Our_Resolve
+		cost = 3
+
+		relative_position_id = JAP_start_the_third_circle_plan
+		x = -10
+		y = 2
+
+		prerequisite = {
+			focus = JAP_impending_sunset
+		}
+	
+		available = {
+			OR = {
+				casualties_k > 750 
+				enemies_strength_ratio > 0.50
+				enemies_naval_strength_ratio > 0.50
+			}
+			OR = {
+				TRM = {
+					exists = no
+					has_capitulated = yes
+				}
+				FNG = { 
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+
+		ai_will_do = { factor = 100 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_every_mile_paid_in_blood"
+			swap_ideas = {
+				remove_idea = JAP_desperate_struggle1
+				add_idea = JAP_desperate_struggle2
+			}
+			hidden_effect = {
+				set_rule = {
+					can_use_kamikaze_pilots = yes
+				}
+			}
+			custom_effect_tooltip = kamikaze_focus_tooltip
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_ANNEXATION }
+	}
+
+
+	shared_focus = {
+		id = JAP_dying_sun
+		icon = GFX_goal_JAP_For_Sun_Set_Die
+		cost = 3
+
+		relative_position_id = JAP_start_the_third_circle_plan
+		x = -9
+		y = 3
+
+		prerequisite = {
+			focus = JAP_every_mile_paid_in_blood
+		}
+		prerequisite = {
+			focus = JAP_pacific_defence_zone
+		}
+
+		available = {
+			OR = {
+				casualties_k > 1000 
+				enemies_strength_ratio > 1
+				enemies_naval_strength_ratio > 1
+			}
+			OR = {
+				TRM = {
+					exists = no
+					has_capitulated = yes
+				}
+				FNG = { 
+					exists = no
+					has_capitulated = yes
+				}
+			}
+			JAP = {
+				any_core_state = {
+					NOT = { is_controlled_by = JAP }
+				}
+			}
+		}
+
+		ai_will_do = { factor = 100 }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus JAP_impending_sunset"
+			swap_ideas = {
+				remove_idea = JAP_desperate_struggle3
+				add_idea = JAP_desperate_struggle4
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_ANNEXATION }
+	}

@@ -1,0 +1,225 @@
+### Ruling Party Popularity Effects
+### Written by ~mw~
+### Retooled by Alpinia
+#
+# How to use:
+#
+#	increase_ruling_party_popularity_by_5 = yes
+#
+#	set_temp_variable = { ideology_change_var = X } - increases ruling party popularity by X amount
+#	change_ruling_party_popularity = yes
+#
+#	default_party_popularity_PP_gain = yes -- sets the PP gain to the default behaviour (i.e., tied to the ruling party)
+#
+#	set_variable = { political_power_ideology = token:ideology } -- maps PP gain to the ideology in the variable
+#	map_party_popularity_PP_gain_to_ideology = yes
+#
+#	set_variable = { coalition_partner_var = token:ideology } -- adds/removes a coalition partner
+#	add_to_coalition = yes
+#	remove_from_coalition = yes
+#
+#	end_coalition = yes  -- disables any active coalitions
+#
+#	disable_party_popularity_PP_gain = yes -- disables popularity PP gain altogether
+#
+
+
+add_to_ban = {
+	if = {
+		limit = {
+			NOT = {
+				is_in_array = { ban_partners = ban_partner_var }
+			}
+		}
+		custom_effect_tooltip = add_to_ban
+	}
+	if = {
+		limit = {
+			NOT = {
+				is_in_array = { ban_partners = ban_partner_var }
+				has_government = var:ban_partner_var
+			}
+		}
+		add_to_array = { ban_partners = ban_partner_var }
+		
+	}
+}
+
+remove_from_ban = {
+	if = {
+		limit = {
+			is_in_array = { ban_partners = ban_partner_var }
+		}
+		remove_from_array = { ban_partners = ban_partner_var }
+	}
+	else = {
+		custom_effect_tooltip = remove_from_ban
+	}
+}
+
+end_ban = {
+	clear_array = ban_partners
+}
+
+
+
+add_natpop_to_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:national_populist }
+		add_to_ban = yes
+	}
+	custom_effect_tooltip = natpop_will_ban_tt
+}
+
+add_pataut_to_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:paternal_autocrat }
+		add_to_ban = yes
+	}
+	custom_effect_tooltip = pataut_will_ban_tt
+}
+
+add_authdem_to_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:authoritarian_democrat }
+		add_to_ban = yes
+	}
+	custom_effect_tooltip = authdem_will_ban_tt
+}
+
+add_soccon_to_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:social_conservative }
+		add_to_ban = yes
+	}
+	custom_effect_tooltip = soccon_will_ban_tt
+}
+
+add_marlib_to_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:market_liberal }
+		add_to_ban = yes
+	}
+	custom_effect_tooltip = marlib_will_ban_tt
+}
+
+add_soclib_to_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:social_liberal }
+		add_to_ban = yes
+	}
+	custom_effect_tooltip = soclib_will_ban_tt
+}
+
+add_socdem_to_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:social_democrat }
+		add_to_ban = yes
+	}
+	custom_effect_tooltip = socdem_will_ban_tt
+}
+
+add_radsoc_to_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:radical_socialist }
+		add_to_ban = yes
+	}
+	custom_effect_tooltip = radsoc_will_ban_tt
+}
+
+add_synd_to_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:syndicalist }
+		add_to_ban = yes
+	}
+	custom_effect_tooltip = syn_will_ban_tt
+}
+
+add_tot_to_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:totalist }
+		add_to_ban = yes
+	}
+	custom_effect_tooltip = tot_will_ban_tt
+}
+
+remove_natpop_from_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:national_populist }
+		remove_from_ban = yes
+	}
+	custom_effect_tooltip = natpop_will_leave_ban_tt
+}
+
+remove_pataut_from_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:paternal_autocrat }
+		remove_from_ban = yes
+	}
+	custom_effect_tooltip = pataut_will_leave_ban_tt
+}
+
+remove_authdem_from_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:authoritarian_democrat }
+		remove_from_ban = yes
+	}
+	custom_effect_tooltip = authdem_will_leave_ban_tt
+}
+
+remove_soccon_from_ban = {		
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:social_conservative }
+		remove_from_ban = yes
+	}
+	custom_effect_tooltip = soccon_will_leave_ban_tt
+}
+
+remove_marlib_from_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:market_liberal }
+		remove_from_ban = yes
+	}
+	custom_effect_tooltip = marlib_will_leave_ban_tt
+}
+
+remove_soclib_from_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:social_liberal }
+		remove_from_ban = yes
+	}
+	custom_effect_tooltip = soclib_will_leave_ban_tt
+}
+
+remove_socdem_from_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:social_democrat }
+		remove_from_ban = yes
+	}
+	custom_effect_tooltip = socdem_will_leave_ban_tt
+}
+
+remove_radsoc_from_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:radical_socialist }
+		remove_from_ban = yes
+	}
+	custom_effect_tooltip = radsoc_will_leave_ban_tt
+}
+
+remove_synd_from_ban = {
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:syndicalist }
+		remove_from_ban = yes
+	}
+	custom_effect_tooltip = syn_will_leave_ban_tt
+}
+
+remove_tot_from_ban = {		
+	hidden_effect = {
+		set_temp_variable = { ban_partner_var = token:totalist }
+		remove_from_ban = yes
+	}
+	custom_effect_tooltip = tot_will_leave_ban_tt
+}
+

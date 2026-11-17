@@ -1,0 +1,7362 @@
+focus_tree = {
+	id = CAR_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = CAR
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 0 y = 2700 }
+
+	focus={
+		id=CAR_The_Shame_of_Carlist_Wars
+		icon=GFX_goal_CAR_The_Shame_of_Carlist_Wars
+		x=2
+		y=0
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		available = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = CAR_couped_gov
+					has_country_flag = CAR_coup_after_scw_avoided
+				}
+				custom_trigger_tooltip = {
+					tooltip = CAR_released_after_annexation
+					has_country_flag = released_after_annexation
+				}
+				AND = {
+					custom_trigger_tooltip = {
+						tooltip = SPR_civil_war_happened
+						has_global_flag = spanish_civil_war
+					}
+					NOT = { country_exists = SPR }
+					NOT = { country_exists = CNT }
+				}
+			}
+		}
+		select_effect = {
+			end_coalition = yes
+			hidden_effect = {
+				country_event = {
+					id = sprc.221
+					days = 14
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_INDUSTRY }
+		completion_reward={
+			add_stability = 0.05
+			set_country_flag = CAR_carlist_restoration
+			if = {
+				limit = { has_global_flag = spanish_civil_war }
+				country_event = sprc.320
+				else = { set_cosmetic_tag = CAR_kingdom }
+			}
+			hidden_effect = {
+				SRR_civil_war_end_effect = yes
+			}
+			every_state = {
+				limit = { is_core_of = SPR }
+				add_core_of = CAR
+			}
+			every_state = {
+				limit = { is_core_of = CNT }
+				add_core_of = CAR
+			}
+		}
+	}
+	focus={
+		id=CAR_Pelayos_returns_to_society
+		icon=GFX_goal_CAR_Pelayos_returns_to_society
+		x=-2
+		y=1
+		prerequisite={focus=CAR_The_Shame_of_Carlist_Wars}
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_stability = 0.05
+			add_ideas = CAR_young_requete_idea
+		}
+	}
+	focus={
+		id=CAR_Contemporary_Spanish_Orthodoxy
+		icon=GFX_goal_CAR_Contemporary_Spanish_Orthodoxy
+		x=0
+		y=1
+		prerequisite={focus=CAR_The_Shame_of_Carlist_Wars}
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_stability = 0.05
+			add_country_leader_trait = SPR_rey_leader_trait
+			
+			country_event = ncar.4
+			RIF = {
+				country_event = {
+					id = ncar.85
+					days = 3
+				}
+			}
+			EQG = {
+				country_event = {
+					id = ncar.85
+					days = 3
+				}
+			}
+		}
+	}
+	focus={
+		id=CAR_Tear_the_Pragmatic_Sanction_of_1830
+		icon=GFX_goal_CAR_Tear_the_Pragmatic_Sanction_of_1830
+		x=2
+		y=1
+		prerequisite={focus=CAR_The_Shame_of_Carlist_Wars}
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			
+			country_event = ncar.15
+		}
+	}
+	focus={
+		id=CAR_Pacto_de_Ramon_Orbe
+		icon=GFX_goal_CAR_Pacto_de_Ramon_Orbe
+		x=-1
+		y=2
+		prerequisite={focus=CAR_Contemporary_Spanish_Orthodoxy}
+		mutually_exclusive={focus=CAR_Carlos_VIII_go_to_hell }
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			swap_ideas = {
+				remove_idea = CAR_divisive_traditionalists_idea
+				add_idea = CAR_carlist_unity_idea
+			}
+			
+			country_event = ncar.17
+		}
+	}
+	focus={
+		id=CAR_Carlos_VIII_go_to_hell
+		icon=GFX_goal_CAR_Carlos_VIII_go_to_hell
+		x=1
+		y=2
+		prerequisite={focus=CAR_Contemporary_Spanish_Orthodoxy}
+		mutually_exclusive={focus=CAR_Pacto_de_Ramon_Orbe }
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			swap_ideas = {
+				remove_idea = CAR_divisive_traditionalists_idea
+				add_idea = CAR_the_one_and_only_king_idea
+			}
+			
+			country_event = ncar.19
+		}
+	}
+	focus={
+		id=CAR_Sociedades_de_Socorro_Mutuo
+		icon=GFX_goal_CAR_Sociedades_de_Socorro_Mutuo
+		x=-2
+		y=3
+		prerequisite={focus=CAR_Pelayos_returns_to_society}
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_carlist_mutual_aid_society_idea
+			
+			country_event = ncar.20
+		}
+	}
+	focus={
+		id=CAR_Que_viva_Zumalacarregui
+		icon=GFX_goal_CAR_Que_viva_Zumalacarregui
+		x=0
+		y=3
+		prerequisite={focus=CAR_Carlos_VIII_go_to_hell focus=CAR_Pacto_de_Ramon_Orbe }
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_organization_and_discipline_idea
+		}
+	}
+	focus={
+		id=CAR_El_Abanderado_de_la_Tradicion
+		icon=GFX_goal_CAR_El_Abanderado_de_la_Tradicion
+		x=2
+		y=3
+		prerequisite={focus=CAR_Tear_the_Pragmatic_Sanction_of_1830}
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_standard_bearer_of_traditionalism_idea
+			
+			country_event = ncar.18
+		}
+	}
+	focus={
+		id=CAR_Democracia_Organica
+		icon=GFX_goal_CAR_Democracia_Organica
+		x=-1
+		y=4
+		prerequisite={focus=CAR_Sociedades_de_Socorro_Mutuo}
+		prerequisite={focus=CAR_Que_viva_Zumalacarregui}
+		prerequisite={focus=CAR_El_Abanderado_de_la_Tradicion}
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_democracia_organica_idea
+			
+			country_event = ncar.21
+		}
+	}
+	focus={
+		id=CAR_Via_Crucis_de_Montejurra
+		icon=GFX_goal_CAR_Via_Crucis_de_Montejurra
+		x=1
+		y=4
+		prerequisite={focus=CAR_Sociedades_de_Socorro_Mutuo}
+		prerequisite={focus=CAR_Que_viva_Zumalacarregui}
+		prerequisite={focus=CAR_El_Abanderado_de_la_Tradicion}
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			
+			country_event = ncar.22
+		}
+	}
+	focus={
+		id=CAR_Dios_Patria_Rey
+		icon=GFX_goal_CAR_Dios_Patria_Rey
+		x=0
+		y=5
+		prerequisite={focus=CAR_Democracia_Organica}
+		prerequisite={focus=CAR_Via_Crucis_de_Montejurra}
+		cost=5
+		ai_will_do={
+			factor=200
+		}
+		relative_position_id = CAR_The_Shame_of_Carlist_Wars
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			country_event = ncar.23
+			
+			country_event = {
+				days = 7
+				id = ncar.6
+			}
+			complete_national_focus = CAR_the_spanish_industrial_potential
+			complete_national_focus = CAR_The_True_King_Rises
+			CAR = { SPR_remove_separatist_effect = yes }
+			if = {    
+				limit = {
+					has_idea = SPR_black_monday_scw
+				}
+				remove_ideas = SPR_black_monday_scw
+			}
+			if = {
+				limit = {
+					has_idea = SPR_black_monday
+				}
+				remove_ideas = SPR_black_monday
+			}
+		}
+	}
+	
+	focus = {
+		id = CAR_rebuild_command
+		icon = GFX_goal_SPR_rebuild_command
+		cost = 5
+		available_if_capitulated = yes
+		x = 22
+		y = 0
+
+		ai_will_do = {
+			base = 150
+		}
+		
+		available = {
+			has_completed_focus = CAR_Que_viva_Zumalacarregui
+			hidden_trigger = {
+				NOT = { has_country_flag = SPR_released_after_annexation_block_focuses_flag }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_rebuild_command"
+			add_dynamic_modifier = { modifier = CAR_spanish_army }
+			hidden_effect = {
+				country_event = { id = ncar.3 days = 75 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+
+	focus = {
+		id = CAR_standing_army
+		icon = GFX_focus_rus_expand_combat_squads
+		cost = 7
+		prerequisite = {
+			focus = CAR_rebuild_command
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_rebuild_command
+		x = -4
+		y = 1
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_standing_army"
+			if = {
+				limit = { has_idea = SPR_army_production_2 }
+				swap_ideas = {
+					remove_idea = SPR_army_production_2
+					add_idea = SPR_army_production_3
+				}
+			}
+			else = { add_ideas = SPR_army_production }
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_guard_border
+		icon = GFX_goal_NVN_Fortify_Fort_Defiance
+		cost = 4
+
+		available_if_capitulated = yes
+		relative_position_id = CAR_standing_army
+		x = -4
+		y = 0
+
+		prerequisite = {
+			focus = CAR_rebuild_command
+		}
+
+		ai_will_do = { base = 100 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_guard_border"
+			every_owned_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					any_neighbor_state = {
+						is_owned_by = FRA
+					}
+				}
+				add_building_construction = {
+					type = bunker
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = CAR_mobile_army
+		icon = GFX_goal_SPR_mobile_army
+		cost = 7
+		prerequisite = {
+			focus = CAR_rebuild_command
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_standing_army
+		x = -8
+		y = 0
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_mobile_army"
+			if = {
+				limit = { has_idea = SPR_army_production }
+				swap_ideas = {
+					remove_idea = SPR_army_production
+					add_idea = SPR_army_production_3
+				}
+			}
+			else = { add_ideas = SPR_army_production_2 }
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = CAR_new_equipment
+		icon = GFX_goal_FRA_Thundering_Artillery_Corps
+		cost = 5
+		prerequisite = {
+			focus = CAR_standing_army
+		}
+		mutually_exclusive = {
+			focus = CAR_artillery_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_standing_army
+		x = 2
+		y = 1
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_new_equipment"
+			custom_effect_tooltip = SPR_new_equipment_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_army_artillery_defence_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_dig_in_speed_factor = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+
+	focus = {
+		id = CAR_fortress_busters
+		icon = GFX_goal_SKM_Modern_Artillery
+		cost = 5
+		prerequisite = {
+			focus = CAR_new_equipment
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_new_equipment
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_fortress_busters"
+			custom_effect_tooltip = SPR_fortress_busters_and_SPR_composite_divisions_tt
+			if = {
+				limit = {
+					has_completed_focus = CAR_composite_divisions
+				}
+				hidden_effect = {
+					add_to_variable = { CAR.CAR_EdT_combat_width_factor = -0.05 }
+				}
+			}
+			else = {
+				hidden_effect = {
+					add_to_variable = { CAR.CAR_EdT_breakthrough_factor = 0.05 }
+					add_to_variable = { CAR.CAR_EdT_fortification_damage = 0.05 }
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_composite_divisions
+		icon = GFX_goal_AUS_great_soldier
+		cost = 5
+		prerequisite = {
+			focus = CAR_new_equipment
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_new_equipment
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_composite_divisions"
+			country_event = { id = sprd.612 days = 30 }
+			army_experience = 25
+			custom_effect_tooltip = SPR_fortress_busters_and_SPR_composite_divisions_tt
+			if = {
+				limit = {
+					has_completed_focus = CAR_composite_divisions
+				}
+				hidden_effect = {
+					add_to_variable = { CAR.CAR_EdT_combat_width_factor = -0.05 }
+				}
+			}
+			else = {
+				hidden_effect = {
+					add_to_variable = { CAR.CAR_EdT_breakthrough_factor = 0.05 }
+					add_to_variable = { CAR.CAR_EdT_fortification_damage = 0.05 }
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_the_queen_on_our_board
+		icon = GFX_goal_reform_socialist_army
+		cost = 5
+		prerequisite = {
+			focus = CAR_fortress_busters
+		}
+		prerequisite = {
+			focus = CAR_composite_divisions
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_new_equipment
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_the_queen_on_our_board"
+			country_event = { id = sprd.607 days = 14 }
+			custom_effect_tooltip = SPR_the_queen_on_our_board_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_dig_in_speed_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_recon_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_army_speed_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_offence = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_fire_superiority
+		icon = GFX_goal_KSV_rail_gun
+		cost = 5
+		prerequisite = {
+			focus = CAR_the_queen_on_our_board
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_the_queen_on_our_board
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_fire_superiority"
+			country_event = { id = sprd.292 days = 24 }
+			random_owned_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = arms_factory level = 2 instant_build = yes }
+			}
+			custom_effect_tooltip = SPR_fire_superiority_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_army_artillery_attack_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_army_artillery_defence_factor = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_the_traditional_arm
+		icon = GFX_goal_BEL_Mandatory_Military_Service
+		cost = 5
+		prerequisite = {
+			focus = CAR_fire_superiority
+			focus = CAR_military_autarky 
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_standing_army
+		x = 0
+		y = 5
+
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_the_traditional_arm"
+			country_event = { id = sprd.611 days = 25 }
+			custom_effect_tooltip = SPR_the_traditional_arm_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_acclimatization_hot_climate_gain_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_terrain_penalty_reduction = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_special_forces_attack_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_special_forces_defence_factor = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_cavalry_focus
+		icon = GFX_goal_TEX_cavalry_recon
+		cost = 5.0
+		prerequisite = {
+			focus = CAR_mobile_army
+		}
+		mutually_exclusive = {
+			focus = CAR_tank_focus
+		}
+		
+		available_if_capitulated = yes
+		relative_position_id = CAR_mobile_army
+		x = -2
+		y = 1
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_cavalry_focus"
+			custom_effect_tooltip = SPR_cavalry_focus_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_org_loss_when_moving = -0.05 }
+				add_to_variable = { CAR.CAR_EdT_cavalry_attack_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_cavalry_defence_factor = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+
+	focus = {
+		id = CAR_cyclists_and_sappers
+		icon = GFX_goal_bicycle_infantry
+		cost = 5
+		prerequisite = {
+			focus = CAR_cavalry_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_cavalry_focus
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_cyclists_and_sappers"
+			army_experience = 25
+			set_technology = { bicycle_infantry = 1 }
+			add_tech_bonus = {
+			name = SPR_sapper_shite
+			ahead_reduction = 2
+			uses = 1
+			category = engineers_tech
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH }
+	}
+	focus = {
+		id = CAR_heavy_cavalry
+		icon = GFX_goal_BRG_Trojan_Horse
+		cost = 5
+		prerequisite = {
+			focus = CAR_cavalry_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_cavalry_focus
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_heavy_cavalry"
+			country_event = { id = sprd.609 days = 12 }			
+			custom_effect_tooltip = SPR_heavy_cavalry_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_cavalry_attack_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_cavalry_defence_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_breakthrough_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_fortification_damage = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_motorization
+		icon = GFX_goal_VIN_motorization
+		cost = 5
+		prerequisite = {
+			focus = CAR_heavy_cavalry
+		}
+		prerequisite = {
+			focus = CAR_cyclists_and_sappers
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_cavalry_focus
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_motor_focus"
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = 250
+			}
+			random_owned_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = arms_factory level = 2 instant_build = yes }
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_flesh_over_machine
+		icon = GFX_goal_AUS_Humble_Three_Noble_Knights
+		cost = 5.0
+		prerequisite = {
+			focus = CAR_motorization
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_motorization
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_flesh_over_machine"
+			country_event = { id = sprd.610 days = 17 }		
+			custom_effect_tooltip = SPR_flesh_over_machine_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_cavalry_attack_factor = 0.03 }
+				add_to_variable = { CAR.CAR_EdT_cavalry_defence_factor = 0.03 }
+				add_to_variable = { CAR.CAR_EdT_breakthrough_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_army_speed_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_motorized_defence_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_terrain_penalty_reduction = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_recon_factor = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_maneuvre_warfare
+		icon = GFX_goal_FRA_Speed_Cult
+		cost = 5
+		prerequisite = {
+			focus = CAR_flesh_over_machine
+			focus = CAR_weapons_of_opportunity
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_mobile_army
+		x = 0
+		y = 5
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_maneuvre_warfare"
+			custom_effect_tooltip = SPR_maneuvre_warfare_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_army_armor_speed_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_army_speed_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_river_crossing_factor = -0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_artillery_focus
+		icon = GFX_goal_ALB_Liberation_Army
+		cost = 5
+		prerequisite = {
+			focus = CAR_standing_army
+		}
+		mutually_exclusive = {
+			focus = CAR_new_equipment
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_standing_army
+		x = -2
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_artillery_focus"
+			custom_effect_tooltip = SPR_artillery_focus_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_max_planning = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_experience_gain_army = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_conscription_factor = 0.07 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+
+	focus = {
+		id = CAR_morale_above_all
+		icon = GFX_goal_mass_concentration_of_army
+		cost = 5
+		prerequisite = {
+			focus = CAR_artillery_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_artillery_focus
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_morale_above_all"
+			country_event = { id = sprd.291 days = 17 }			
+			army_experience = 25
+			custom_effect_tooltip = SPR_morale_above_all_and_SPR_local_terrain_local_means_tt
+			if = {
+				limit = {
+					has_completed_focus = CAR_local_terrain_local_means
+				}
+				hidden_effect = {
+					add_to_variable = { CAR.CAR_EdT_army_org_factor = 0.05 }
+					add_to_variable = { CAR.CAR_EdT_army_morale_factor = 0.05 }
+					add_to_variable = { CAR.CAR_EdT_attrition = -0.05 }
+				}
+			}
+			else = {
+				hidden_effect = {
+					add_to_variable = { CAR.CAR_EdT_planning_speed = 0.05 }
+					add_to_variable = { CAR.CAR_EdT_army_core_attack_factor = 0.02 }
+					add_to_variable = { CAR.CAR_EdT_army_core_defence_factor = 0.02 }
+					add_to_variable = { CAR.CAR_EdT_land_reinforce_rate = 0.05 }
+					add_to_variable = { CAR.CAR_EdT_terrain_penalty_reduction = 0.05 }
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_local_terrain_local_means
+		icon = GFX_goal_COR_Renewed_Militarist_Spirit
+		cost = 5
+		prerequisite = {
+			focus = CAR_artillery_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_artillery_focus
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_local_terrain_local_means"
+			country_event = { id = sprd.290 days = 25 }
+			custom_effect_tooltip = SPR_morale_above_all_and_SPR_local_terrain_local_means_tt
+			if = {
+				limit = {
+					has_completed_focus = CAR_local_terrain_local_means
+				}
+				hidden_effect = {
+					add_to_variable = { CAR.CAR_EdT_army_org_factor = 0.05 }
+					add_to_variable = { CAR.CAR_EdT_army_morale_factor = 0.05 }
+					add_to_variable = { CAR.CAR_EdT_attrition = -0.05 }
+				}
+			}
+			else = {
+				hidden_effect = {
+					add_to_variable = { CAR.CAR_EdT_planning_speed = 0.05 }
+					add_to_variable = { CAR.CAR_EdT_army_core_attack_factor = 0.02 }
+					add_to_variable = { CAR.CAR_EdT_army_core_defence_factor = 0.02 }
+					add_to_variable = { CAR.CAR_EdT_land_reinforce_rate = 0.05 }
+					add_to_variable = { CAR.CAR_EdT_terrain_penalty_reduction = 0.05 }
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_the_desire_for_victory
+		icon = GFX_goal_NFA_Soldiers_Glory_Rewards
+		cost = 5
+		prerequisite = {
+			focus = CAR_morale_above_all
+		}
+		prerequisite = {
+			focus = CAR_local_terrain_local_means
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_artillery_focus
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_the_desire_for_victory"
+			country_event = { id = sprd.293 days = 13 }
+			custom_effect_tooltip = SPR_the_desire_for_victory_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_army_speed_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_army_infantry_attack_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_army_org_regain = 0.02 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_military_autarky 
+		icon = GFX_goal_BUL_citizen_rifles
+		cost = 5
+		prerequisite = {
+			focus = CAR_the_desire_for_victory
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_the_desire_for_victory
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_motor_focus"
+			random_owned_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = arms_factory level = 2 instant_build = yes }
+			}
+			custom_effect_tooltip = SPR_military_autarky_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_army_core_attack_factor = 0.03 }
+				add_to_variable = { CAR.CAR_EdT_army_core_defence_factor = 0.03 }
+				add_to_variable = { CAR.CAR_EdT_land_reinforce_rate = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_terrain_penalty_reduction = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_tank_focus
+		icon = GFX_goal_NEE_armored_spearhead
+		cost = 5
+		prerequisite = {
+			focus = CAR_mobile_army
+		}
+		mutually_exclusive = {
+			focus = CAR_cavalry_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_mobile_army
+		x = 2
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_tank_focus"
+			custom_effect_tooltip = SPR_tank_focus_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_army_speed_factor = 0.03 }
+				add_to_variable = { CAR.CAR_EdT_army_armor_attack_factor = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_montojas_heavy_cavalry
+		icon = GFX_goal_ATH_modern_cataphracts
+		cost = 3
+		prerequisite = {
+			focus = CAR_tank_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_tank_focus
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_montojas_heavy_cavalry"
+			army_experience = 25
+			custom_effect_tooltip = SPR_montojas_heavy_cavalry_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_army_speed_factor = 0.03 }
+				add_to_variable = { CAR.CAR_EdT_mechanized_attack_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_motorized_attack_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_army_armor_attack_factor = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_lluchs_motorized_infantry
+		icon = GFX_goal_ATH_mech_peltasts
+		cost = 3
+		prerequisite = {
+			focus = CAR_tank_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_tank_focus
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_lluchs_motorized_infantry"
+			country_event = { id = sprd.600 days = 15 }
+			add_equipment_to_stockpile = {
+				type = armored_car_equipment
+				amount = 250
+			}
+			random_owned_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = arms_factory level = 2 instant_build = yes }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+	}
+	focus = {
+		id = CAR_upgrade_the_trubias
+		icon = GFX_goal_SPR_upgrade_the_trubias
+		cost = 3
+		prerequisite = {
+			focus = CAR_lluchs_motorized_infantry
+		}
+		prerequisite = {
+			focus = CAR_montojas_heavy_cavalry
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_tank_focus
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_upgrade_the_trubias"
+			country_event = { id = sprd.606 days = 31 }
+			custom_effect_tooltip = SPR_upgrade_the_trubias_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_supply_consumption_factor = 0.03 }
+				add_to_variable = { CAR.CAR_EdT_army_armor_speed_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_recon_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_org_loss_when_moving = -0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_weapons_of_opportunity
+		icon = GFX_goal_COR_Reinforce_Meat_Grinder
+		cost = 3
+		prerequisite = {
+			focus = CAR_upgrade_the_trubias
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_upgrade_the_trubias
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_weapons_of_opportunity"
+			custom_effect_tooltip = SPR_weapons_of_opportunity_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_army_armor_speed_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_land_night_attack = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_terrain_penalty_reduction = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+	focus = {
+		id = CAR_army_innovation
+		icon = GFX_goal_SPR_army_innovation
+		cost = 5
+		prerequisite = {
+			focus = CAR_the_traditional_arm
+		}
+		prerequisite = {
+			focus = CAR_maneuvre_warfare
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_the_traditional_arm
+		x = -4
+		y = 1
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_army_innovation"
+			army_experience = 50
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			custom_effect_tooltip = SPR_army_innovation_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_planning_speed = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_supply_consumption_factor = -0.08 }
+				add_to_variable = { CAR.CAR_EdT_attrition = -0.05 }
+				add_to_variable = { CAR.CAR_EdT_army_org_regain = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_army_core_attack_factor = 0.05 }
+				add_to_variable = { CAR.CAR_EdT_army_core_defence_factor = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_ARMY_BONUS }
+	}
+
+	### AIR FORCE FOCUS
+	focus = {
+		id = CAR_air_academy
+		icon = GFX_goal_SPR_air_academy
+		cost = 5.0
+		prerequisite = {
+			focus = CAR_rebuild_command
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_rebuild_command
+		x = 4
+		y = 1
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_air_academy"
+			air_experience = 25
+			add_dynamic_modifier = { modifier = CAR_spanish_air }
+			if = {
+				limit = {
+					capital_scope = {
+						NOT = {
+							free_building_slots = {
+								building = air_base
+								size > 1
+							}
+						}
+					}
+				}
+				random_owned_state = {
+					limit = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					capital_scope = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+				}
+				capital_scope = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+
+	focus = {
+		id = CAR_air_factory
+		icon = GFX_goal_CZE_air_industry
+		cost = 5
+		prerequisite = {
+			focus = CAR_air_academy
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_air_academy
+		x = -2
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_air_factory"
+			country_event = sprd.604
+			add_ideas = SPR_vitorio_factory
+			random_owned_controlled_state = {
+				prioritize = { 172 }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = arms_factory level = 2 instant_build = yes }
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_utilize_local_talents
+		icon = GFX_VNC_mercenary_pilots
+		cost = 5
+		prerequisite = {
+			focus = CAR_air_academy
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_air_academy
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_utilize_local_talents"
+			country_event = { id = sprd.211 days = 13 }
+			air_experience = 150
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 1
+				uses = 1
+				category = air_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_cierva_autogyros
+		icon = GFX_goal_VIN_helicopters
+		cost = 5
+		prerequisite = {
+			focus = CAR_air_academy
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_air_academy
+		x = 2
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_cierva_autogyros"
+			random_owned_controlled_state = {
+				prioritize = { 172 }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+			}
+			custom_effect_tooltip = SPR_cierva_autogyros_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_ANE_experience_gain_air = 0.15 }
+				add_to_variable = { CAR.CAR_ANE_air_defence_factor = 0.1 }
+				add_to_variable = { CAR.CAR_ANE_air_cas_efficiency = 0.1 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+
+	focus = {
+		id = CAR_expanded_cooperation
+		icon = GFX_goal_generic_air_CAS_german
+		cost = 4
+		prerequisite = {
+			focus = CAR_cierva_autogyros
+		}
+		prerequisite = {
+			focus = CAR_utilize_local_talents
+		}
+		prerequisite = { focus = CAR_air_factory }
+		available_if_capitulated = yes
+		relative_position_id = CAR_air_academy
+		x = 0
+		y = 2
+		ai_will_do = { base = 50 }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_expanded_cooperation"
+			country_event = { id = sprd.210 days = 24 }
+			custom_effect_tooltip = SPR_expanded_cooperation_tt
+			hidden_effect = {
+				SPR = { country_event = { id = sprd.390 days = 75 } }
+				add_to_variable = { CAR.CAR_ANE_cas_damage_reduction = 0.15 }
+				add_to_variable = { CAR.CAR_ANE_army_bonus_air_superiority_factor = 0.1 }
+				add_to_variable = { CAR.CAR_ANE_enemy_army_bonus_air_superiority_factor = -0.1 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_fokker_cooperation
+		icon = GFX_goal_HOL_fokker
+		cost = 4
+		prerequisite = { focus = CAR_expanded_cooperation }
+		mutually_exclusive = { focus = CAR_hispano_suiza_cooperation }
+		mutually_exclusive = { focus = CAR_german_cooperation }
+		available_if_capitulated = yes
+		relative_position_id = CAR_expanded_cooperation
+		x = -2
+		y = 1
+		ai_will_do = { base = 50 }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_fokker_cooperation"
+			add_ideas = SPR_fokker_lisences
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_german_cooperation
+		icon = GFX_goal_AUS_luftfahrtruppen
+		cost = 4
+		prerequisite = { focus = CAR_expanded_cooperation }
+		mutually_exclusive = { focus = CAR_hispano_suiza_cooperation }
+		mutually_exclusive = { focus = CAR_fokker_cooperation }
+		available_if_capitulated = yes
+		relative_position_id = CAR_fokker_cooperation
+		x = 2
+		y = 0
+		ai_will_do = { base = 50 }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_german_cooperation"
+			custom_effect_tooltip = SPR_german_cooperation_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_ANE_air_accidents_factor = -0.15 }
+				add_to_variable = { CAR.CAR_ANE_air_attack_factor = 0.07 }
+				add_to_variable = { CAR.CAR_ANE_air_defence_factor = 0.07 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_hispano_suiza_cooperation
+		icon = GFX_goal_CAN_Fighter_Programme
+		cost = 4
+		prerequisite = { focus = CAR_expanded_cooperation }
+		mutually_exclusive = { focus = CAR_german_cooperation }
+		mutually_exclusive = { focus = CAR_fokker_cooperation }
+		available_if_capitulated = yes
+		relative_position_id = CAR_german_cooperation
+		x = 2
+		y = 0
+		ai_will_do = { base = 50 }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_hispano_suiza_cooperation"
+			custom_effect_tooltip = SPR_hispano_suiza_cooperation_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_ANE_air_fuel_consumption_factor = -0.15 }
+				add_to_variable = { CAR.CAR_ANE_air_agility_factor = 0.07 }
+				add_to_variable = { CAR.CAR_ANE_air_mission_efficiency = 0.1 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_Hispano_Aviacion
+		icon = GFX_MON_light_fighter
+		cost = 4
+		prerequisite = { focus = CAR_hispano_suiza_cooperation }
+		available_if_capitulated = yes
+		relative_position_id = CAR_hispano_suiza_cooperation
+		x = 0
+		y = 1
+		ai_will_do = { base = 50 }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_Hispano_Aviacion"
+			country_event = { id = sprd.608 days = 27 }
+			add_ideas = SPR_hispano_aviacion
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_CASA_lisences
+		icon = GFX_goal_generic_air_tactical_bomber_german
+		cost = 4
+		prerequisite = { focus = CAR_german_cooperation }
+		available_if_capitulated = yes
+		relative_position_id = CAR_german_cooperation
+		x = 0
+		y = 1
+		ai_will_do = { factor = 1 }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_CASA_lisences"
+			add_ideas = SPR_casa_lisences
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	focus = {
+		id = CAR_air_cruisers_over_spain
+		icon = GFX_goal_HOL_jachtkruiser
+		cost = 4
+		prerequisite = { focus = CAR_fokker_cooperation }
+		available_if_capitulated = yes
+		relative_position_id = CAR_fokker_cooperation
+		x = 0
+		y = 1
+		ai_will_do = { base = 50 }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_air_cruisers_over_spain"
+			custom_effect_tooltip = SPR_air_cruisers_over_spain_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_ANE_air_maximum_speed_factor = 0.15 }
+				add_to_variable = { CAR.CAR_ANE_air_range_factor = 0.15 }
+				add_to_variable = { CAR.CAR_ANE_air_intercept_efficiency = 0.15 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_multirole_bombers
+		icon = GFX_goal_HOL_luchtkruiser
+		cost = 4
+		prerequisite = { focus = CAR_air_cruisers_over_spain }
+		available_if_capitulated = yes
+		relative_position_id = CAR_air_cruisers_over_spain
+		x = 0
+		y = 1
+		ai_will_do = { base = 50 }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_multirole_bombers"
+			custom_effect_tooltip = SPR_multirole_bombers_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_ANE_air_cas_efficiency = 0.11 }
+				add_to_variable = { CAR.CAR_ANE_ground_attack_factor = 0.11 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_learning_from_the_best
+		icon = GFX_goal_SWE_air_force_cooperation
+		cost = 4
+		prerequisite = { focus = CAR_CASA_lisences }
+		available_if_capitulated = yes
+		relative_position_id = CAR_CASA_lisences
+		x = 0
+		y = 1
+		ai_will_do = { base = 50 }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_learning_from_the_best"
+			custom_effect_tooltip = SPR_learning_from_the_best_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_ANE_air_ace_generation_chance_factor = 0.15 }
+				add_to_variable = { CAR.CAR_ANE_air_doctrine_cost_factor = -0.2 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_lerets_patent
+		icon = GFX_goal_generic_air_jet_2
+		cost = 4
+		prerequisite = { focus = CAR_Hispano_Aviacion }
+		available_if_capitulated = yes
+		relative_position_id = CAR_Hispano_Aviacion
+		x = 0
+		y = 1
+		ai_will_do = { base = 50 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_lerets_patent"
+			country_event = { id = sprd.215 days = 15 }
+			custom_effect_tooltip = SPR_lerets_patent_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_ANE_cas_damage_reduction = 0.15 }
+				add_to_variable = { CAR.CAR_ANE_army_bonus_air_superiority_factor = 0.1 }
+				add_to_variable = { CAR.CAR_ANE_enemy_army_bonus_air_superiority_factor = -0.1 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+	focus = {
+		id = CAR_air_focus
+		icon = GFX_goal_KSV_rule_from_the_air
+		cost = 4
+		prerequisite = {
+			focus = CAR_lerets_patent 
+			focus = CAR_learning_from_the_best 
+			focus = CAR_multirole_bombers 
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_learning_from_the_best
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_air_focus"
+			country_event = sprd.214
+			custom_effect_tooltip = SPR_air_focus_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_ANE_air_ace_generation_chance_factor = 0.05 }
+				add_to_variable = { CAR.CAR_ANE_air_doctrine_cost_factor = -0.1 }
+				add_to_variable = { CAR.CAR_ANE_production_speed_air_base_factor = 0.1 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+
+	### NAVAL FOCUSES
+	focus = {
+		id = CAR_naval_academy
+		icon = GFX_goal_SPR_Navy
+		cost = 5.0
+		prerequisite = {
+			focus = CAR_rebuild_command
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_air_academy
+		x = 7
+		y = 0
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_naval_academy"
+			navy_experience = 25
+			add_dynamic_modifier = { modifier = CAR_spanish_navy }
+			add_doctrine_cost_reduction = {
+				name = naval_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = naval_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = CAR_shipyards
+		icon = GFX_goal_VIN_expand_ba_son_shipyard
+		cost = 4
+		prerequisite = {
+			focus = CAR_naval_academy
+		}
+		available = {
+			any_owned_state = {
+				is_fully_controlled_by = ROOT
+				is_coastal = yes
+			}
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_naval_academy
+		x = -2
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_shipyards"
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+				}
+				prioritize = { 168 }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = CAR_balearics_plan
+		icon = GFX_goal_POL_Establish_Border_Forts
+		cost = 4
+		prerequisite = {
+			focus = CAR_naval_academy
+		}
+		available = {
+			any_owned_state = {
+				is_fully_controlled_by = ROOT
+				is_coastal = yes
+			}
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_naval_academy
+		x = 2
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_balearics_plan"
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+				}
+				prioritize = { 177 }
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			country_event = { id = sprd.288 days = 23 }
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = CAR_reinosa_guns
+		icon = GFX_goal_NFL_fishing_boats_with_six_inch_guns
+		cost = 4
+		prerequisite = {
+			focus = CAR_naval_academy
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_naval_academy
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_reinosa_guns"
+			custom_effect_tooltip = SPR_reinosa_guns_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_AE_naval_hit_chance = 0.05 }
+				add_to_variable = { CAR.CAR_AE_naval_critical_score_chance_factor = 0.05 }
+				add_to_variable = { CAR.CAR_AE_navy_screen_attack_factor = 0.05 }
+				add_to_variable = { CAR.CAR_AE_navy_capital_ship_attack_factor = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = CAR_expand_navy
+		icon = GFX_goal_CSA_Great_Red_Fleet
+		cost = 4
+		prerequisite = {
+			focus = CAR_shipyards
+		}
+		prerequisite = {
+			focus = CAR_reinosa_guns
+		}
+		prerequisite = {
+			focus = CAR_balearics_plan
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_naval_academy
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_expand_navy"
+			country_event = { id = sprd.289 days = 13 }
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = 100
+				producer = SPR
+			}
+			add_tech_bonus = {
+				name = SPR_expand_navy
+				bonus = 1
+				uses = 2
+				category = naval_equipment
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = CAR_navy_focus
+		icon = GFX_goal_TEX_naval_prominence
+		cost = 4
+		prerequisite = {
+			focus = CAR_expand_navy
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_expand_navy
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_navy_focus"
+			custom_effect_tooltip = SPR_navy_focus_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_AE_refit_speed = 0.05 }
+				add_to_variable = { CAR.CAR_AE_refit_ic_cost = -0.10 }
+				add_to_variable = { CAR.CAR_AE_naval_morale_factor = 0.05 }
+				add_to_variable = { CAR.CAR_AE_navy_capital_ship_attack_factor = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = CAR_ferrol_scheme
+		icon = GFX_goal_FIU_proper_armada
+		cost = 4
+		prerequisite = {
+			focus = CAR_expand_navy
+		}
+		available = {
+			any_owned_state = {
+				is_fully_controlled_by = ROOT
+				is_coastal = yes
+			}
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_expand_navy
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_ferrol_scheme"
+			country_event = { id = sprd.287 days = 9 }
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+				}
+				prioritize = { 171 }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = CAR_dedalo_experience
+		icon = GFX_goal_CAN_Canadian_Carriers
+		cost = 4
+		prerequisite = {
+			focus = CAR_ferrol_scheme
+		}
+		prerequisite = {
+			focus = CAR_navy_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_navy_focus
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_dedalo_experience"
+			country_event = { id = sprd.285 days = 17 }
+			custom_effect_tooltip = SPR_dedalo_experience_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_AE_naval_coordination = 0.05 }
+				add_to_variable = { CAR.CAR_AE_navy_carrier_air_targetting_factor = 0.10 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = CAR_memories_of_alhucemas
+		icon = GFX_goal_NFE_elite_marines
+		cost = 4
+		prerequisite = {
+			focus = CAR_ferrol_scheme
+		}
+		prerequisite = {
+			focus = CAR_navy_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_navy_focus
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_memories_of_alhucemas"
+			country_event = { id = sprd.286 days = 11 }
+			custom_effect_tooltip = SPR_memories_of_alhucemas_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_AE_convoy_escort_efficiency = 0.10 }
+				add_to_variable = { CAR.CAR_AE_naval_invasion_capacity = 3 }
+				add_to_variable = { CAR.CAR_AE_naval_invasion_prep_speed = 0.10 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = CAR_resume_alava_class
+		icon = GFX_goal_CAN_Modernize_Naval_Force
+		cost = 4
+		prerequisite = {
+			focus = CAR_ferrol_scheme
+		}
+		prerequisite = {
+			focus = CAR_navy_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_ferrol_scheme
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 25
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_navy_focus"
+			add_ideas = SPR_resume_alava_class
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_NAVY_BONUS }
+	}
+	focus = {
+		id = CAR_new_armada
+		icon = GFX_goal_SPR_new_armada
+		cost = 4
+		prerequisite = {
+			focus = CAR_memories_of_alhucemas
+		}
+		prerequisite = {
+			focus = CAR_dedalo_experience
+		}
+		prerequisite = {
+			focus = CAR_resume_alava_class
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_expand_navy
+		x = 0
+		y = 3
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_new_armada"
+			custom_effect_tooltip = SPR_new_armada_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_AE_production_speed_naval_base_factor = 0.10 }
+				add_to_variable = { CAR.CAR_AE_production_speed_dockyard_factor = 0.10 }
+			}
+			add_ideas = SPR_navy_focus_idea
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_BONUS }
+	}
+	
+	### INDUSTRY FOCUSES
+	
+	focus = {
+		id = CAR_the_spanish_industrial_potential
+		icon = GFX_goal_SPR_the_spanish_industrial_potential
+		available = { always = no }
+		available_if_capitulated = yes
+		relative_position_id = CAR_rebuild_command
+		x = 27
+		y = 0
+		cost = 0
+		ai_will_do = {
+			base = 100
+		}
+		completion_reward = {
+			custom_effect_tooltip = unlock_focuses
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_restart_the_industrial_engine
+		icon = GFX_goal_SPR_restart_the_industrial_engine
+		cost = 4
+		prerequisite = {
+			focus = CAR_the_spanish_industrial_potential
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_the_spanish_industrial_potential
+		x = -8
+		y = 1
+
+		ai_will_do = {
+			base = 200
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_restart_the_industrial_engine"
+			SPR_economy_focus_idea_upgrade = yes
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = CAR_railroads_1
+		icon = GFX_thenorthernraillink
+		cost = 4
+		prerequisite = {
+			focus = CAR_restart_the_industrial_engine
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_restart_the_industrial_engine
+		x = -3
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_railroads_1"
+			country_event = sprd.205
+			build_railway = {
+				level = 3
+				build_only_on_allied = no
+				fallback = no
+				path = { 3938 9785 3816 6966 9764 }
+				start_province = 3938
+				target_province = 9764
+			}
+			build_railway = {
+				level = 3
+				build_only_on_allied = no
+				fallback = no
+				path = { 3938 9846 3920 11843 758 }
+				start_province = 3938
+				target_province = 758
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_a_gun_for_every_soldier
+		icon = GFX_UKR_Equip_Sich_Riflemen
+		cost = 4
+		prerequisite = {
+			focus = CAR_restart_the_industrial_engine
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_restart_the_industrial_engine
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 200
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_a_gun_for_every_soldier"
+			country_event = sprd.622
+			random_owned_controlled_state = {
+				prioritize = { 41 170 175 951 }
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = arms_factory level = 2 instant_build = yes }
+			}
+			random_owned_controlled_state = {
+				prioritize = { 41 170 175 951 }
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = arms_factory level = 2 instant_build = yes }
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_focus_on_the_home_front
+		icon = GFX_goal_COR_Free_Market_Appeals
+		cost = 4
+		prerequisite = {
+			focus = CAR_a_gun_for_every_soldier
+		}
+		mutually_exclusive = { focus = CAR_focus_on_the_solider }
+		available_if_capitulated = yes
+		relative_position_id = CAR_a_gun_for_every_soldier
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 150
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_focus_on_the_home_front"
+			add_offsite_building = {
+				type = industrial_complex
+				level = 2
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_industrial_foundations_built_with_logic
+		icon = GFX_goal_USA_New_Industrial_Act
+		cost = 4
+		prerequisite = {
+			focus = CAR_focus_on_the_home_front
+			focus = CAR_focus_on_the_solider
+		}
+		prerequisite = {
+			focus = CAR_expand_industry_1
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_a_gun_for_every_soldier
+		x = -1
+		y = 2
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_focus_on_the_home_front"
+			add_tech_bonus = {
+				bonus = 2.5
+				uses = 2
+				category = industry
+			}
+			add_tech_bonus = {
+				bonus = 2.5
+				uses = 2
+				category = cat_synth_oil
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_quality_and_quantity
+		icon = GFX_goal_NEE_Gunboat_Diplomacy
+		cost = 4
+		prerequisite = {
+			focus = CAR_focus_on_the_home_front
+			focus = CAR_focus_on_the_solider
+		}
+		prerequisite = {
+			focus = CAR_expand_mines_1
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_a_gun_for_every_soldier
+		x = 1
+		y = 2
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_quality_and_quantity"
+			country_event = { id = sprd.208 days = 9 }
+			add_tech_bonus = {
+				bonus = 2.5
+				uses = 2
+				category = artillery
+			}
+			add_tech_bonus = {
+				bonus = 2.5
+				uses = 2
+				category = naval_equipment
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_advancements_or_death
+		icon = GFX_goal_AUS_Demand_Gibraltar
+		cost = 4
+		prerequisite = {
+			focus = CAR_industrial_foundations_built_with_logic
+		}
+		prerequisite = {
+			focus = CAR_quality_and_quantity
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_a_gun_for_every_soldier
+		x = 0
+		y = 3
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_advancements_or_death"
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.75
+				uses = 2
+				category = land_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_focus_on_the_solider
+		icon = GFX_goal_CAN_New_Munitions_Plants
+		cost = 4
+		prerequisite = {
+			focus = CAR_a_gun_for_every_soldier
+		}
+		mutually_exclusive = { focus = CAR_focus_on_the_home_front }
+		available_if_capitulated = yes
+		relative_position_id = CAR_a_gun_for_every_soldier
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 150
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_focus_on_the_solider"
+			add_offsite_building = {
+				type = arms_factory
+				level = 2
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = CAR_new_industry
+		icon = GFX_goal_SPR_new_industry
+		cost = 4
+		prerequisite = {
+			focus = CAR_restart_the_industrial_engine
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_restart_the_industrial_engine
+		x = 3
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_new_industry"
+			add_resource = {
+				type = tungsten
+				amount = 14
+				state = 171
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = CAR_expand_industry_1
+		icon = GFX_BBR_build_industries
+		cost = 4
+		prerequisite = {
+			focus = CAR_railroads_1
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_railroads_1
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_expand_industry_1"
+			SPR_economy_focus_idea_upgrade = yes
+			country_event = sprd.207
+			41 = {
+				if = {
+					limit = { has_state_category = seven }
+					set_state_category = eight
+				}
+				else = {
+					set_state_category = seven
+				}
+			}
+			176 = {
+				if = {
+					limit = { has_state_category = seven }
+					set_state_category = eight
+				}
+				else = {
+					set_state_category = seven
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = CAR_expand_mines_1
+		icon = GFX_goal_SPR_expand_mines_1
+		cost = 4
+		prerequisite = {
+			focus = CAR_new_industry
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_new_industry
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_expand_mines_1"
+			country_event = sprd.206
+			random_owned_controlled_state = {
+				prioritize = { 169 }
+				add_resource = { type = chromium amount = 8 }
+			}
+			random_owned_controlled_state = {
+				prioritize = { 170 }
+				add_resource = { type = tungsten amount = 16 }
+			}
+			random_owned_controlled_state = {
+				prioritize = { 41 }
+				add_resource = { type = aluminium amount = 8 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_banking_focus
+		icon = GFX_goal_ROM_Break_Banks
+		cost = 4
+		prerequisite = {
+			focus = CAR_the_assembly_line_of_the_future
+		}
+		prerequisite = {
+			focus = CAR_advancements_or_death
+		}
+		prerequisite = {
+			focus = CAR_trading_armada
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_advancements_or_death
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 200
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_banking_focus"
+			add_ideas = CAR_banking
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = CAR_expand_industry_2
+		icon = GFX_goal_MNT_domestic_business
+		cost = 4
+		prerequisite = {
+			focus = CAR_expand_industry_1
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_expand_industry_1
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 200
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_expand_industry_2"
+			SPR_economy_focus_idea_upgrade = yes
+			random_owned_controlled_state = {
+				prioritize = { 165 } #Catalonia
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			random_owned_controlled_state = {
+				prioritize = { 169 } #Andalusia
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			random_owned_controlled_state = {
+				prioritize = { 166 } #Aragon
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_the_assembly_line_of_the_future
+		icon = GFX_goal_GAL_sell_oil
+		cost = 4
+		prerequisite = {
+			focus = CAR_expand_industry_2
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_expand_industry_2
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_the_assembly_line_of_the_future"
+			random_owned_controlled_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = synthetic_refinery level = 2 instant_build = yes }
+			}
+			random_owned_controlled_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = synthetic_refinery level = 2 instant_build = yes }
+			}
+			random_owned_controlled_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = fuel_silo level = 2 instant_build = yes }
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_trade_focus
+		icon = GFX_goal_SPR_trade_focus
+		cost = 4
+		prerequisite = {
+			focus = CAR_expand_mines_1
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_expand_mines_1
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_trade_focus"
+			add_political_power = 50
+			unlock_decision_tooltip = {
+				decision = SPR_buy_west_timor
+				show_effect_tooltip = no
+				show_modifiers = no
+			}
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = 100
+				producer = SPR
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ANNEXATION }
+	}
+	
+	focus = {
+		id = CAR_trading_armada
+		icon = GFX_goal_UMN_cobalt_mines
+		cost = 4
+		prerequisite = {
+			focus = CAR_trade_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_trade_focus
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_trading_armada"
+			add_resource = {
+				type = steel
+				amount = 16
+				state = 793
+			}
+			add_resource = {
+				type = steel
+				amount = 21
+				state = 172
+			}
+		}
+	}
+	
+	### Agrarian Reform ###
+	
+	focus = {
+		id = CAR_agrarian_reform
+		icon = GFX_goal_SPR_agrarian_reform
+		prerequisite = {
+			focus = CAR_the_spanish_industrial_potential
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_the_spanish_industrial_potential
+		x = 0
+		y = 1
+		cost = 4
+		ai_will_do = {
+			base = 200
+		}
+		completion_reward = {
+			country_event = sprd.620
+			swap_ideas = {
+				remove_idea = SPR_no_food_mierda
+				add_idea = SPR_agr_reform_1
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = CAR_new_initiatives
+		icon = GFX_goal_SPR_new_initiatives
+		prerequisite = {
+			focus = CAR_agrarian_reform
+		}	
+		available_if_capitulated = yes
+		relative_position_id = CAR_agrarian_reform
+		x = -2
+		y = 1
+		cost = 3
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = SPR_new_initiatives
+				days = 100
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+	}
+	focus = {
+		id = CAR_peasant_coop_focus
+		icon = GFX_goal_SPR_peasant_coop_focus
+		prerequisite = {
+			focus = CAR_agrarian_reform
+		}	
+		available_if_capitulated = yes
+		relative_position_id = CAR_agrarian_reform
+		x = 0
+		y = 1
+		cost = 3
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = SPR_peasant_coop_focus
+				days = 100
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+	}
+	focus = {
+		id = CAR_caciquismo_beaten
+		icon = GFX_goal_SPR_caciquismo_beaten
+		prerequisite = {
+			focus = CAR_agrarian_reform
+		}	
+		available_if_capitulated = yes
+		relative_position_id = CAR_agrarian_reform
+		x = 2
+		y = 1
+		cost = 3
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			country_event = sprd.224
+			add_timed_idea = {
+				idea = SPR_caciquismo_beaten
+				days = 50
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+	}
+	focus = {
+		id = CAR_careful_first_phase_complete
+		icon = GFX_goal_CAN_agrarian_heritage
+		prerequisite = {
+			focus = CAR_peasant_coop_focus
+		}
+		prerequisite = {
+			focus = CAR_new_initiatives
+		}
+		prerequisite = {
+			focus = CAR_caciquismo_beaten
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_peasant_coop_focus
+		x = 0
+		y = 1
+		cost = 3
+		ai_will_do = {
+			base = 200
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SPR_agr_reform_1
+				add_idea = SPR_agr_reform_2
+			}
+		}
+	}
+	focus = {
+		id = CAR_factories_and_farmers
+		icon = GFX_goal_SPR_factories_and_farmers
+		prerequisite = {
+			focus = CAR_new_industry
+		}
+		prerequisite = {
+			focus = CAR_caciquismo_beaten
+		}
+		available = {
+			has_completed_focus = CAR_careful_first_phase_complete
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_careful_first_phase_complete
+		x = -3
+		y = 0
+		cost = 4
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				prioritize = { 176 }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = industrial_complex level = 2 instant_build = yes }
+			}
+			random_owned_controlled_state = {
+				prioritize = { 167 }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = industrial_complex level = 2 instant_build = yes }
+			}
+			random_owned_controlled_state = {
+				prioritize = { 165 }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = industrial_complex level = 2 instant_build = yes }
+			}
+			random_owned_controlled_state = {
+				prioritize = { 168 }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = industrial_complex level = 2 instant_build = yes }
+			}
+		}
+	}
+	focus = {
+		id = CAR_mass_production_of_farming_equipment
+		icon = GFX_goal_SPR_mass_production_of_farming_equipment
+		prerequisite = {
+			focus = CAR_factories_and_farmers
+		}
+		available = {
+			has_completed_focus = CAR_Second_Phase_of_Reform
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_careful_first_phase_complete
+		x = -2
+		y = 1
+		cost = 4
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			SPR_economy_focus_idea_upgrade = yes
+			795 = {
+				if = {
+					limit = { has_state_category = five }
+					set_state_category = six
+				}
+				else = {
+					set_state_category = five
+				}
+			}
+			793 = {
+				if = {
+					limit = { has_state_category = five }
+					set_state_category = six
+				}
+				else = {
+					set_state_category = five
+				}
+			}
+			175 = {
+				if = {
+					limit = { has_state_category = five }
+					set_state_category = six
+				}
+				else = {
+					set_state_category = five
+				}
+			}
+		}
+	}
+	focus = {
+		id = CAR_Second_Phase_of_Reform
+		icon = GFX_goal_AUS_agrarian_means
+		prerequisite = {
+			focus = CAR_factories_and_farmers
+		}
+		prerequisite = {
+			focus = CAR_careful_first_phase_complete
+		}
+		prerequisite = {
+			focus = CAR_the_chemist_calls_out_towards_the_farmer
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_careful_first_phase_complete
+		x = 0
+		y = 1
+		cost = 3
+		ai_will_do = {
+			base = 200
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SPR_agr_reform_2
+				add_idea = SPR_agr_reform_3
+			}
+		}
+	}
+	focus = {
+		id = CAR_the_chemist_calls_out_towards_the_farmer
+		icon = GFX_goal_SPR_the_chemist_calls_out_towards_the_farmer
+		prerequisite = {
+			focus = CAR_electronics_focus
+		}
+		prerequisite = {
+			focus = CAR_new_initiatives
+		}
+		available = {
+			has_completed_focus = CAR_careful_first_phase_complete
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_careful_first_phase_complete
+		x = 3
+		y = 0
+		cost = 4
+		ai_will_do = {
+			base = 100
+		}
+		completion_reward = {
+			SPR_economy_focus_idea_upgrade = yes
+			every_owned_state = {
+				add_extra_state_shared_building_slots = 2
+			}		
+		}
+	}
+	focus = {
+		id = CAR_the_richest_soil_in_europe
+		icon = GFX_goal_SPR_the_richest_soil_in_europe
+		prerequisite = {
+			focus = CAR_the_chemist_calls_out_towards_the_farmer
+		}
+		available = {
+			has_completed_focus = CAR_Second_Phase_of_Reform
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_careful_first_phase_complete
+		x = 2
+		y = 1
+		cost = 4
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SPR_agr_reform_3
+				add_idea = SPR_agr_reform_4
+			}
+		}
+	}
+	focus = {
+		id = CAR_Work_for_Jornaleros
+		icon = GFX_goal_SRD_tackle_agrarian_issues
+		prerequisite = {
+			focus = CAR_Second_Phase_of_Reform
+		}
+		prerequisite = {
+			focus = CAR_the_richest_soil_in_europe
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_Second_Phase_of_Reform
+		x = 4
+		y = 1
+		cost = 3
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			country_event = sprd.225
+			swap_ideas = {
+				remove_idea = SPR_agr_reform_4
+				add_idea = SPR_agr_reform_5
+			}
+		}
+	}
+	focus = {
+		id = CAR_Local_Conditions_Above_All
+		icon = GFX_UKR_Wheat_Trade_Agreements
+		available = { has_completed_focus = CAR_Work_for_Jornaleros }
+		prerequisite = {
+			focus = CAR_Second_Phase_of_Reform
+		}
+		prerequisite = {
+			focus = CAR_mass_production_of_farming_equipment
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_Second_Phase_of_Reform
+		x = -4
+		y = 1
+		cost = 3
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SPR_agr_reform_5
+				add_idea = SPR_agr_reform_6
+			}
+		}
+	}
+	focus = {
+		id = CAR_Agrarianism_Powered_by_Foreign_Engines
+		icon = GFX_goal_AUS_steyr_tractor
+		available = { has_completed_focus = CAR_Local_Conditions_Above_All }
+		mutually_exclusive = { focus = CAR_Domestic_Designs_Till_Our_Fields }
+		prerequisite = {
+			focus = CAR_Second_Phase_of_Reform
+		}	
+		available_if_capitulated = yes
+		relative_position_id = CAR_Second_Phase_of_Reform
+		x = 2
+		y = 1
+		cost = 3
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			country_event = sprd.619
+			swap_ideas = {
+				remove_idea = SPR_agr_reform_6
+				add_idea = SPR_agr_reform_7
+			}
+		}
+	}
+	focus = {
+		id = CAR_Domestic_Designs_Till_Our_Fields
+		icon = GFX_goal_VIN_agricultural_modernization
+		available =	{ has_completed_focus = CAR_Local_Conditions_Above_All }
+		mutually_exclusive = { focus = CAR_Agrarianism_Powered_by_Foreign_Engines }
+		prerequisite = {
+			focus = CAR_Second_Phase_of_Reform
+		}	
+		available_if_capitulated = yes
+		relative_position_id = CAR_Second_Phase_of_Reform
+		x = -2
+		y = 1
+		cost = 3
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			country_event = sprd.618
+			swap_ideas = {
+				remove_idea = SPR_agr_reform_6
+				add_idea = SPR_agr_reform_7
+			}
+		}
+	}
+	focus = {
+		id = CAR_recover_black_monday
+		icon = GFX_goal_SPR_recover_black_monday
+		cost = 8
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SPR_recover_black_monday_tt
+				has_idea = SPR_economy_focus_5
+			}
+		}
+		prerequisite = {
+			focus = CAR_Domestic_Designs_Till_Our_Fields
+			focus = CAR_Agrarianism_Powered_by_Foreign_Engines
+		}
+		prerequisite = {
+			focus = CAR_Local_Conditions_Above_All
+		}
+		prerequisite = {
+			focus = CAR_Work_for_Jornaleros
+		}
+		prerequisite = {
+			focus = CAR_advancements_or_death
+			focus = CAR_trading_armada
+			focus = CAR_the_assembly_line_of_the_future
+		}
+		prerequisite = {
+			focus = CAR_ad_astra_per_aspera
+			focus = CAR_to_split_an_atom
+			focus = CAR_spanish_computation_machines
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_Second_Phase_of_Reform
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			base = 200
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_recover_black_monday"
+			swap_ideas = {
+				remove_idea = SPR_economy_focus_5
+				add_idea = SPR_economy_focus_final
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+	}
+
+	### TECH FOCUSES
+	focus = {
+		id = CAR_university
+		icon = GFX_goal_SPR_university
+		cost = 4
+		prerequisite = {
+			focus = CAR_the_spanish_industrial_potential
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_the_spanish_industrial_potential
+		x = 8
+		y = 1
+
+		ai_will_do = {
+			base = 200
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_university"
+			add_research_slot_until_six = yes
+			add_breakthrough_progress = {
+				specialization = specialization_naval
+				value = 0.1
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.1
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_nuclear
+				value = 0.1
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_land
+				value = 0.1
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_electronics_focus
+		icon = GFX_UKR_Science_Development_Grant
+		cost = 6
+		prerequisite = {
+			focus = CAR_university
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_university
+		x = -3
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_electronics_focus"
+			add_tech_bonus = {
+				name = SPR_electronics_focus
+				bonus = 1
+				uses = 1
+				category = computing_tech
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_experimental_education
+		icon = GFX_goal_SPR_experimental_education
+		cost = 5
+		available = {
+			has_completed_focus = CAR_united_minds
+		}
+		prerequisite = {
+			focus = CAR_electronics_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_electronics_focus
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_experimental_education"
+			country_event = sprd.209
+			custom_effect_tooltip = SPR_experimental_education_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_nerd_council_research_speed_factor = 0.025 }
+				add_to_variable = { CAR.CAR_nerd_council_production_speed_buildings_factor = 0.05 }
+				add_to_variable = { CAR.CAR_nerd_council_research_speed_factor_set = 0.025 }
+				add_to_variable = { CAR.CAR_nerd_council_production_speed_buildings_factor_set = 0.05 }
+				
+				country_event = { id = sprd.379 days = 100 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_education_from_the_rural_areas_to_the_capital
+		icon = GFX_goal_SPR_education_from_the_rural_areas_to_the_capital
+		cost = 5
+		prerequisite = {
+			focus = CAR_experimental_education
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_experimental_education
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_education_from_the_rural_areas_to_the_capital"
+			custom_effect_tooltip = SPR_education_from_the_rural_areas_to_the_capital_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_nerd_council_production_speed_buildings_factor = 0.03 }
+				add_to_variable = { CAR.CAR_nerd_council_production_speed_buildings_factor_set = 0.03 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_ad_astra_per_aspera
+		icon = GFX_goal_generic_cinema
+		cost = 5
+		prerequisite = {
+			focus = CAR_education_from_the_rural_areas_to_the_capital
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_education_from_the_rural_areas_to_the_capital
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_ad_astra_per_aspera"
+			add_ideas = SPR_ad_astra_per_aspera			
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_the_four_horsemen
+		icon = GFX_goal_SPR_the_four_horsemen
+		cost = 5
+		prerequisite = {
+			focus = CAR_university
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_university
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 75
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_united_minds"
+			add_breakthrough_progress = {
+				specialization = specialization_naval
+				value = 0.25
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.25
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_nuclear
+				value = 0.25
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_land
+				value = 0.25
+			}
+		}
+	}
+
+	focus = {
+		id = CAR_united_minds
+		icon = GFX_goal_SPR_united_minds
+		cost = 8
+		prerequisite = {
+			focus = CAR_the_four_horsemen
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_the_four_horsemen
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_united_minds"
+			add_dynamic_modifier = { modifier = CAR_nerd_council }
+			country_event = {
+				id = ncar.1
+				days = 7
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_science_of_the_high_seas
+		icon = GFX_goal_SPR_science_of_the_high_seas
+		cost = 6
+		available = {
+			has_completed_focus = CAR_united_minds
+		}
+		prerequisite = {
+			focus = CAR_the_four_horsemen
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_the_four_horsemen
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_science_of_the_high_seas"
+			random_owned_controlled_state = {
+				prioritize = { 178 }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = dockyard level = 2 instant_build = yes }
+			}
+			custom_effect_tooltip = SPR_science_of_the_high_seas_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_nerd_council_research_speed_factor = 0.025 }
+				add_to_variable = { CAR.CAR_nerd_council_research_speed_factor_set = 0.025 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_BONUS }
+	}
+	
+	focus = {
+		id = CAR_the_center_of_military_progress
+		icon = GFX_goal_SPR_the_center_of_military_progress
+		cost = 6
+		prerequisite = {
+			focus = CAR_united_minds
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_united_minds
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_the_center_of_military_progress"
+			random_owned_controlled_state = {
+				prioritize = { 41 }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = land_facility level = 1 instant_build = yes province = 3938 }
+				add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_to_conquer_the_heavens
+		icon = GFX_goal_SPR_to_conquer_the_heavens
+		cost = 6
+		prerequisite = {
+			focus = CAR_science_of_the_high_seas
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_science_of_the_high_seas
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_science_of_the_high_seas"
+			random_owned_controlled_state = {
+				prioritize = { 169 }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = air_facility level = 1 instant_build = yes province = 13637 }
+				add_building_construction = { type = anti_air_building level = 1 instant_build = yes }
+			}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_to_split_an_atom
+		icon = GFX_goal_SPR_to_split_an_atom
+		cost = 6
+		prerequisite = {
+			focus = CAR_the_center_of_military_progress
+		}
+		prerequisite = {
+			focus = CAR_to_conquer_the_heavens
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_the_four_horsemen
+		x = 0
+		y = 3
+
+		ai_will_do = {
+			base = 100
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_to_split_an_atom"
+			random_owned_controlled_state = {
+				prioritize = { 176 }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = nuclear_facility level = 1 instant_build = yes province = 11825 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_radio_focus
+		icon = GFX_goal_AUS_Radio_Rekonstruktion
+		cost = 7
+		prerequisite = {
+			focus = CAR_university
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_university
+		x = 3
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_radio_focus"
+			add_tech_bonus = {
+				name = SPR_radio_focus
+				bonus = 1
+				uses = 1
+				category = electronics
+			}
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_EdT_land_reinforce_rate = 0.02 }
+				add_to_variable = { CAR.CAR_EdT_army_morale_factor = 0.1 }
+				add_to_variable = { CAR.CAR_EdT_war_support_factor = 0.1 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_the_bleeding_edge
+		icon = GFX_goal_COR_University_System_of_America
+		cost = 3
+		prerequisite = {
+			focus = CAR_radio_focus
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_radio_focus
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_the_bleeding_edge"
+			country_event = ncar.2
+			random_owned_controlled_state = {
+				prioritize = { 41 }
+				if = {
+					limit = {
+						infrastructure < 5
+					}
+					increase_state_category_by_one_level = yes
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+				else = {
+					increase_state_category_by_two_levels = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY }
+	}
+	
+	focus = {
+		id = CAR_mechanical_calculations
+		icon = GFX_goal_NYC_Establish_Broadcast
+		cost = 5
+		prerequisite = {
+			focus = CAR_the_bleeding_edge
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_the_bleeding_edge
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_mechanical_calculations"
+			add_ideas = SPR_mechanical_calculations
+			add_tech_bonus = {
+				name = SPR_telekino
+				bonus = 1
+				uses = 1
+				category = rocketry
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+		}
+	}
+	
+	focus = {
+		id = CAR_spanish_computation_machines
+		icon = GFX_goal_GER_Zuse_Computer
+		cost = 5
+		prerequisite = {
+			focus = CAR_mechanical_calculations
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_mechanical_calculations
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			base = 50
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_spanish_computation_machines"
+			add_ideas = SPR_spanish_computation_machines				
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	
+	focus = {
+		id = CAR_unleash_the_new_minds_of_spain
+		icon = GFX_goal_AUS_big_brain
+		cost = 8
+		prerequisite = {
+			focus = CAR_ad_astra_per_aspera
+		}
+		prerequisite = {
+			focus = CAR_to_split_an_atom
+		}
+		prerequisite = {
+			focus = CAR_spanish_computation_machines
+		}
+		available_if_capitulated = yes
+		relative_position_id = CAR_to_split_an_atom
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			base = 200
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SPR_unleash_the_new_minds_of_spain"
+			add_research_slot_until_six = yes
+			custom_effect_tooltip = SPR_unleash_the_new_minds_of_spain_tt
+			hidden_effect = {
+				add_to_variable = { CAR.CAR_nerd_council_research_speed_factor = 0.05 }
+				add_to_variable = { CAR.CAR_nerd_council_research_speed_factor_set = 0.05 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	focus={
+		id=CAR_The_True_King_Rises
+		icon=GFX_goal_CAR_The_True_King_Rises
+		x=74
+		y=0
+		cost=0
+		ai_will_do={
+			factor=1
+		}
+		available = { always = no }
+		available_if_capitulated=yes
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus={
+		id=CAR_Fight_for_the_anti_socialist_cause
+		icon=GFX_goal_CAR_Fight_for_the_anti_socialist_cause
+		x=-9
+		y=1
+		prerequisite={focus=CAR_The_True_King_Rises}
+		mutually_exclusive={focus=CAR_Spain_is_supreme focus=CAR_Ally_with_the_Austrian_Empire }
+		cost=4
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			date > 1938.5.9
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			ENT = {
+				add_to_faction = CAR
+			}
+		}
+	}
+	focus={
+		id=CAR_Unified_Iberia
+		icon=GFX_goal_CAR_Unified_Iberia
+		x=-11
+		y=2
+		prerequisite={focus=CAR_Fight_for_the_anti_socialist_cause}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			country_exists = POR
+			POR = {
+				is_subject = no
+			}
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			POR = {
+				country_event = ncar.73
+			}
+		}
+	}
+	focus={
+		id=CAR_The_Spanish_Counter_Revolutionary_Front
+		icon=GFX_goal_CAR_The_Spanish_Counter_Revolutionary_Front
+		x=-9
+		y=2
+		prerequisite={focus=CAR_Fight_for_the_anti_socialist_cause}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			add_ideas = CAR_end_the_reds_idea
+		}
+	}
+	focus={
+		id=CAR_Open_up_the_North_African_route
+		icon=GFX_goal_CAR_Open_up_the_North_African_route
+		x=-7
+		y=2
+		prerequisite={focus=CAR_Fight_for_the_anti_socialist_cause}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			GER = {
+				country_event = ncar.75
+			}
+		}
+	}
+	focus={
+		id=CAR_Accept_aid_from_the_Allied_Powers
+		icon=GFX_goal_CAR_Accept_aid_from_the_Allied_Powers
+		x=-11
+		y=3
+		prerequisite={focus=CAR_The_Spanish_Counter_Revolutionary_Front}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			add_ideas = CAR_canadian_advisors_idea
+		}
+	}
+	focus={
+		id=CAR_Hang_the_Jacobin_thugs
+		icon=GFX_goal_CAR_Hang_the_Jacobin_thugs
+		x=-9
+		y=3
+		prerequisite={focus=CAR_The_Spanish_Counter_Revolutionary_Front}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			create_wargoal = {
+				type = annex_everything
+				target = FRA
+			}
+		}
+	}
+	focus={
+		id=CAR_Negotiating_for_Bourbon_relatives
+		icon=GFX_goal_CAR_Negotiating_for_Bourbon_relatives
+		x=-7
+		y=3
+		prerequisite={focus=CAR_The_Spanish_Counter_Revolutionary_Front}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			SIC = {
+				OR = {
+					has_country_leader = {
+						name = "Ferdinando III"
+						ruling_only = yes
+					}
+					has_country_leader = {
+						name = "费迪南多三世"
+						ruling_only = yes
+					}
+				}
+			}
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			SRD = {
+				leave_faction = yes
+			}
+			CAN = {
+				add_to_faction = SIC
+			}
+		}
+	}
+	focus={
+		id=CAR_Spain_is_supreme
+		icon=GFX_goal_CAR_Spain_is_supreme
+		x=0
+		y=1
+		prerequisite={focus=CAR_The_True_King_Rises}
+		mutually_exclusive={focus=CAR_Fight_for_the_anti_socialist_cause focus=CAR_Ally_with_the_Austrian_Empire }
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			date > 1938.5.9
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			create_faction_from_template = { 
+				template = faction_template_generic_dominance              
+				name = faction_latin_union
+				icon = GFX_faction_latin_union
+			}	
+		}
+	}
+	focus={
+		id=CAR_Unite_Latin_compatriots
+		icon=GFX_goal_CAR_Unite_Latin_compatriots
+		x=-2
+		y=2
+		prerequisite={focus=CAR_Spain_is_supreme}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			country_event = carfor.452
+			country_event = carfor.420
+		}
+	}
+	focus={
+		id=CAR_Unite_the_rebellious_brothers
+		icon=GFX_goal_CAR_Unite_the_rebellious_brothers
+		x=0
+		y=2
+		prerequisite={focus=CAR_Spain_is_supreme}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			create_wargoal = {
+				type = annex_everything
+				target = POR
+			}
+			every_state = {
+				limit = { is_core_of = POR }
+				add_core_of = CAR
+			}
+		}
+	}
+	focus={
+		id=CAR_Stabbing_into_the_sacrilegious_heart
+		icon=GFX_goal_CAR_Stabbing_into_the_sacrilegious_heart
+		x=2
+		y=2
+		prerequisite={focus=CAR_Spain_is_supreme}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			create_wargoal = {
+				type = annex_everything
+				target = FRA
+			}
+			every_state = {
+				limit = { is_core_of = FRA }
+				add_core_of = CAR
+			}
+		}
+	}
+	focus={
+		id=CAR_Catholic_brotherhood
+		icon=GFX_goal_CAR_Catholic_brotherhood
+		x=-4
+		y=3
+		prerequisite={focus=CAR_Unite_Latin_compatriots}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			country_event = { id = carfor.424 }
+		}
+	}
+	focus={
+		id=CAR_Algiers_Old_King
+		icon=GFX_goal_CAR_Algiers_Old_King
+		x=-2
+		y=3
+		prerequisite={focus=CAR_Unite_Latin_compatriots}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			country_event = { id = carfor.440 }
+		}
+	}
+	focus={
+		id=CAR_Heretic_Beheaded
+		icon=GFX_goal_CAR_Heretic_Beheaded
+		x=2
+		y=3
+		prerequisite={focus=CAR_Stabbing_into_the_sacrilegious_heart}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			add_ideas = CAR_end_the_reds_idea
+		}
+	}
+	focus={
+		id=CAR_Fight_against_the_Eastern_heretics
+		icon=GFX_goal_CAR_Fight_against_the_Eastern_heretics
+		x=4
+		y=3
+		prerequisite={focus=CAR_Stabbing_into_the_sacrilegious_heart}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			create_wargoal = {
+				type = annex_everything
+				target = RUS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SER
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = UKR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BUL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = GRE
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = WHR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ROM
+			}
+		}
+	}
+	focus={
+		id=CAR_The_Godfather_of_Sicily
+		icon=GFX_goal_CAR_The_Godfather_of_Sicily
+		x=-2
+		y=4
+		prerequisite={focus=CAR_Catholic_brotherhood}
+		prerequisite={focus=CAR_Algiers_Old_King}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			country_event = carfor.410
+		}
+	}
+	focus={
+		id=CAR_The_Contemporary_Spear_of_God
+		icon=GFX_goal_CAR_The_Contemporary_Spear_of_God
+		x=0
+		y=4
+		prerequisite={focus=CAR_Unite_the_rebellious_brothers}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			if = {
+				limit = {has_idea = CAR_holy_idea}
+				swap_ideas = {
+					remove_idea = CAR_holy_idea
+					add_idea = CAR_holy_idea2
+				}
+			}
+			else = {
+				add_ideas = CAR_holy_idea
+			}
+			
+		}
+	}
+	focus={
+		id=CAR_The_faithful_servant_of_God_triumphs
+		icon=GFX_goal_CAR_The_faithful_servant_of_God_triumphs
+		x=2
+		y=4
+		prerequisite={focus=CAR_Heretic_Beheaded}
+		prerequisite={focus=CAR_Fight_against_the_Eastern_heretics}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			if = {
+				limit = {has_idea = CAR_holy_idea}
+				swap_ideas = {
+					remove_idea = CAR_holy_idea
+					add_idea = CAR_holy_idea2
+				}
+			}
+			else = {
+				add_ideas = CAR_holy_idea
+			}
+		}
+	}
+	focus={
+		id=CAR_Rebuilding_Holy_Spain
+		icon=GFX_goal_CAR_Rebuilding_Holy_Spain
+		x=0
+		y=5
+		prerequisite={focus=CAR_The_Godfather_of_Sicily}
+		prerequisite={focus=CAR_The_Contemporary_Spear_of_God}
+		prerequisite={focus=CAR_The_faithful_servant_of_God_triumphs}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			swap_ideas = {
+					remove_idea = CAR_holy_idea2
+					add_idea = CAR_holy_idea3
+				}
+		}
+	}
+	focus={
+		id=CAR_Ally_with_the_Austrian_Empire
+		icon=GFX_goal_CAR_Ally_with_the_Austrian_Empire
+		x=9
+		y=1
+		prerequisite={focus=CAR_The_True_King_Rises}
+		mutually_exclusive={focus=CAR_Fight_for_the_anti_socialist_cause focus=CAR_Spain_is_supreme }
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			date > 1938.5.9
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			AUS = {
+				add_to_faction = CAR
+			}
+		}
+	}
+	focus={
+		id=CAR_The_Pyrenean_wind_is_bone_chilling
+		icon=GFX_goal_CAR_The_Pyrenean_wind_is_bone_chilling
+		x=7
+		y=2
+		prerequisite={focus=CAR_Ally_with_the_Austrian_Empire}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			add_ideas = CAR_bunker
+		}
+	}
+	focus={
+		id=CAR_Memories_of_the_Golden_Age
+		icon=GFX_goal_CAR_Memories_of_the_Golden_Age
+		x=9
+		y=2
+		prerequisite={focus=CAR_Ally_with_the_Austrian_Empire}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			add_ideas = CAR_royal_idea
+		}
+	}
+	focus={
+		id=CAR_The_Holy_City_Vienna
+		icon=GFX_goal_CAR_The_Holy_City_Vienna
+		x=11
+		y=2
+		prerequisite={focus=CAR_Ally_with_the_Austrian_Empire}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_idea = CAR_royal_idea
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			swap_ideas = {
+					remove_idea = CAR_royal_idea
+					add_idea = CAR_royal_idea2
+				}
+		}
+	}
+	focus={
+		id=CAR_Austrian_military_experience
+		icon=GFX_goal_CAR_Austrian_military_experience
+		x=7
+		y=3
+		prerequisite={focus=CAR_The_Pyrenean_wind_is_bone_chilling}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			army_experience = 100
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2000
+				producer = AUS
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 200
+				producer = AUS
+			}
+		}
+	}
+	focus={
+		id=CAR_The_two_big_shots_of_Catholicism
+		icon=GFX_goal_CAR_The_two_big_shots_of_Catholicism
+		x=9
+		y=3
+		prerequisite={focus=CAR_Memories_of_the_Golden_Age}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_idea = CAR_royal_idea2
+			has_completed_focus = CAR_The_Holy_City_Vienna
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			swap_ideas = {
+					remove_idea = CAR_royal_idea2
+					add_idea = CAR_royal_idea3
+				}
+			
+		}
+	}
+	focus={
+		id=CAR_Studying_the_Vienna_School
+		icon=GFX_goal_CAR_Studying_the_Vienna_School
+		x=11
+		y=3
+		prerequisite={focus=CAR_The_Holy_City_Vienna}
+		cost=3
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_The_True_King_Rises
+		search_filters={FOCUS_FILTER_POLITICAL}
+		completion_reward={
+			add_ideas = SPR_Vienna_Circle
+			add_to_tech_sharing_group = austrian_research
+		}
+	}
+	focus = {# Plus Ultra
+		id = CAR_plus_ultra
+		icon = GFX_CAR_plus_ultra
+		cost = 1
+		available = {
+			has_completed_focus = CAR_Dios_Patria_Rey
+		}
+		x = 90
+		y = 0
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_plus_ultra"
+			add_political_power = 100
+			add_war_support = 0.05
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# The Cuban Gambit
+		id = CAR_cuban_gambit
+		icon = GFX_CAR_cuban_gambit
+		cost = 2
+		prerequisite = {
+			focus = CAR_plus_ultra
+		}
+		relative_position_id = CAR_plus_ultra
+		x = 0
+		y = 1
+		
+		bypass = {
+			owns_state = 820
+			owns_state = 315
+		}
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_cuban_gambit"
+			add_political_power = 25
+			820 = { add_claim_by = CAR }
+			818 = { add_claim_by = CAR }
+			315 = { add_claim_by = CAR }
+			country_event = sprc.330
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# Hombre Sincero
+		id = CAR_guantanamo_bay
+		icon = GFX_CAR_guantanamo_bay
+		cost = 1
+		prerequisite = {
+			focus = CAR_cuban_gambit
+		}
+		relative_position_id = CAR_cuban_gambit
+		x = 0
+		y = 1
+		
+		bypass = {
+			owns_state = 820
+			owns_state = 315
+		}
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_guantanamo_bay"
+			create_wargoal = {
+			type = annex_everything
+			target = CUB
+				}
+			}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# Rosa Blanca
+		id = CAR_cuba_secured
+		icon = GFX_CAR_cuba_secured
+		cost = 2
+		prerequisite = {
+			focus = CAR_guantanamo_bay
+		}
+		relative_position_id = CAR_cuban_gambit
+		x = 0
+		y = 2
+		
+		available = {
+			owns_state = 820
+			owns_state = 315
+		}
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_cuba_secured"
+			add_political_power = 100
+			820 = { add_core_of = CAR }
+			315 = { add_core_of = CAR }
+			IF = {
+				limit = {
+					owns_state = 818
+				}
+				818 = { add_core_of = CAR }
+			}
+			country_event = sprc.335
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# The French Connection
+		id = CAR_conquer_haiti
+		icon = GFX_CAR_conquer_haiti
+		cost = 2
+		prerequisite = {
+			focus = CAR_cuba_secured
+		}
+		relative_position_id = CAR_cuba_secured
+		x = -2
+		y = 1
+		
+		bypass = {
+			owns_state = 318
+		}
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_haiti"
+			create_wargoal = {
+				type = annex_everything
+				target = HAI
+			}
+			318 = { add_claim_by = CAR }
+			add_war_support = 0.025
+			add_stability = 0.025
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# Puerto Rico's Folly
+		id = CAR_conquer_puertorico
+		icon = GFX_CAR_conquer_puertorico
+		cost = 2
+		prerequisite = {
+			focus = CAR_cuba_secured
+		}
+		relative_position_id = CAR_cuba_secured
+		x = 0
+		y = 1
+		
+		bypass = {
+			owns_state = 686
+		}
+		
+		available = {
+			686 = { #Puerto Rico
+				owner = {
+					NOT = {
+						tag = CAR
+						is_in_faction_with = CAR
+						is_subject_of = CAR
+					}
+				}
+			}
+		}
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_california"
+				owner = {
+					create_wargoal = {
+						type = annex_everything
+						target = 686.owner
+					}
+				}
+			686 = { add_claim_by = CAR }
+			1312 = { add_claim_by = CAR }
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# Santana's Legacy
+		id = CAR_conquer_dominicanrepublic
+		icon = GFX_CAR_conquer_dominicanrepublic
+		cost = 2
+		prerequisite = {
+			focus = CAR_cuba_secured
+		}
+		relative_position_id = CAR_cuba_secured
+		x = 2
+		y = 1
+		
+		bypass = {
+			owns_state = 319
+		}
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_dominicanrepublic"
+			create_wargoal = {
+				type = annex_everything
+				target = DOM
+			}
+			319 = { add_claim_by = CAR }
+			add_war_support = 0.025
+			add_stability = 0.025
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# New World Reconquista
+		id = CAR_new_reconquista
+		icon = GFX_CAR_new_reconquista
+		cost = 4
+		available = {
+			CAR = {
+				owns_state = 315
+				owns_state = 319
+			}
+		}
+		prerequisite = {
+			focus = CAR_conquer_dominicanrepublic
+		}
+		prerequisite = {
+			focus = CAR_conquer_haiti
+		}
+		relative_position_id = CAR_conquer_puertorico
+		x = 0
+		y = 1
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_new_reconquista"
+			319 = { add_core_of = CAR }
+			686 = { add_core_of = CAR }
+			1312 = { add_core_of = CAR }
+			318 = { add_core_of = CAR }
+			add_political_power = 200
+			custom_effect_tooltip = CAR_viceroy_tt
+			hidden_effect = {
+			news_event = { id = worldnews.500 days = 7 }
+			country_event = { id = carfor.471 days = 14 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# Heirs to Cortez
+		id = CAR_conquer_mexico
+		icon = GFX_CAR_conquer_mexico
+		cost = 3
+		prerequisite = {
+			focus = CAR_new_reconquista
+		}
+		relative_position_id = CAR_new_reconquista
+		x = 1
+		y = 1
+		
+		bypass = {
+			MEX = {
+			is_in_faction_with = CAR
+			}
+		}
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_mexico"
+			create_wargoal = {
+				type = annex_everything
+				target = MEX
+			}
+			every_state = {
+				limit = { is_core_of = MEX }
+				add_claim_by = CAR
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# Pacify Centro
+		id = CAR_conquer_centro
+		icon = GFX_CAR_conquer_centro
+		cost = 3
+		prerequisite = {
+			focus = CAR_new_reconquista
+		}
+		relative_position_id = CAR_new_reconquista
+		x = 3
+		y = 1
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_centro"
+			create_wargoal = {
+				type = annex_everything
+				target = PAN
+		}
+		create_wargoal = {
+				type = annex_everything
+				target = CEN
+		}
+		create_wargoal = {
+				type = annex_everything
+				target = COS
+		}
+		create_wargoal = {
+				type = annex_everything
+				target = NIC
+		}
+		create_wargoal = {
+				type = annex_everything
+				target = HON
+		}
+		create_wargoal = {
+				type = annex_everything
+				target = ELS
+		}
+		create_wargoal = {
+				type = annex_everything
+				target = GUA
+		}
+			set_country_flag = CAR_centro_wars_unlocked
+			every_state = {
+				limit = { is_core_of = GUA }
+				add_claim_by = CAR
+			}
+			every_state = {
+				limit = { is_core_of = HON }
+				add_claim_by = CAR
+			}
+			every_state = {
+				limit = { is_core_of = ELS }
+				add_claim_by = CAR
+			}
+			every_state = {
+				limit = { is_core_of = NIC }
+				add_claim_by = CAR
+			}
+			every_state = {
+				limit = { is_core_of = COS }
+				add_claim_by = CAR
+			}
+			every_state = {
+				limit = { is_core_of = PAN }
+				add_claim_by = CAR
+			}
+			hidden_effect = {
+			311 = { add_claim_by = CAR }
+			1071 = { add_claim_by = CAR }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# Smash Colombia
+		id = CAR_conquer_colombia
+		icon = GFX_CAR_conquer_colombia
+		cost = 3
+		prerequisite = {
+			focus = CAR_new_reconquista
+		}
+		relative_position_id = CAR_new_reconquista
+		x = -3
+		y = 1
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_colombia"
+			create_wargoal = {
+				type = annex_everything
+				target = COL
+			}
+			every_state = {
+				limit = { is_core_of = COL }
+				add_claim_by = CAR
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# Bolivarian Black Gold
+		id = CAR_conquer_venezuela
+		icon = GFX_CAR_conquer_venezuela
+		cost = 3
+		prerequisite = {
+			focus = CAR_new_reconquista
+		}
+		relative_position_id = CAR_new_reconquista
+		x = -1
+		y = 1
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_venezuela"
+			create_wargoal = {
+				type = annex_everything
+				target = VEN
+			}
+			every_state = {
+				limit = { 
+					OR = {
+					is_core_of = VEN 
+					is_claimed_by = VEN
+					}
+				}	
+				add_claim_by = CAR
+			}
+			hidden_effect = {
+			695 = { add_claim_by = CAR }
+			691 = { add_claim_by = CAR }
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# Conquer Ecuador
+		id = CAR_conquer_ecuador
+		icon = GFX_CAR_conquer_ecuador
+		cost = 3
+		prerequisite = {
+			focus = CAR_conquer_colombia
+		}
+		relative_position_id = CAR_conquer_colombia
+		x = 0
+		y = 1
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_ecuador"
+			create_wargoal = {
+				type = annex_everything
+				target = ECU
+			}
+			every_state = {
+				limit = { is_core_of = ECU }
+				add_claim_by = CAR
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# Ode to Pizarro
+		id = CAR_conquer_peru
+		icon = GFX_CAR_conquer_peru
+		cost = 3
+		prerequisite = {
+			focus = CAR_conquer_colombia
+		}
+		relative_position_id = CAR_conquer_venezuela
+		x = 0
+		y = 1
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_ecuador"
+			create_wargoal = {
+				type = annex_everything
+				target = PRU
+			}
+			every_state = {
+				limit = { is_core_of = PRU }
+				add_claim_by = CAR
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# The Bounty of Cerro Potosi
+		id = CAR_conquer_bolivia
+		icon = GFX_CAR_conquer_bolivia
+		cost = 3
+		prerequisite = {
+			focus = CAR_conquer_peru
+		}
+		relative_position_id = CAR_conquer_peru
+		x = 1
+		y = 1
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_bolivia"
+			create_wargoal = {
+				type = annex_everything
+				target = BOL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = PAR
+			}
+			every_state = {
+				limit = { 
+					OR = {
+					is_core_of = BOL 
+					is_claimed_by = BOL
+					}
+				}
+				add_claim_by = CAR
+			}
+			855 = { add_claim_by = CAR }
+			1040 = { add_claim_by = CAR }
+			every_state = {
+				limit = { is_core_of = PAR }
+				add_claim_by = CAR
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = {# alonch land
+		id = CAR_conquer_chile
+		icon = GFX_CAR_conquer_chile
+		cost = 3
+		prerequisite = {
+			focus = CAR_conquer_peru
+		}
+		relative_position_id = CAR_conquer_peru
+		x = -1
+		y = 1
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_chile"
+			create_wargoal = {
+				type = annex_everything
+				target = CHL
+			}
+			every_state = {
+				limit = { is_core_of = CHL }
+				add_claim_by = CAR
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+		focus = {# la plata
+		id = CAR_conquer_la_plata
+		icon = GFX_CAR_conquer_la_plata
+		cost = 3
+		prerequisite = {
+			focus = CAR_conquer_chile
+			focus = CAR_conquer_bolivia
+		}
+		relative_position_id = CAR_conquer_peru
+		x = 0
+		y = 2
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_la_plata"
+			create_wargoal = {
+				type = annex_everything
+				target = ARG
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = URG
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = FOP
+			}
+			every_state = {
+				limit = { is_core_of = ARG }
+				add_claim_by = CAR
+			}
+			every_state = {
+				limit = { is_core_of = FOP }
+				add_claim_by = CAR
+			}
+			every_state = {
+				limit = { is_core_of = URG }
+				add_claim_by = CAR
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+		focus = {# yucatan
+		id = CAR_conquer_yucatan
+		icon = GFX_CAR_conquer_yucatan
+		cost = 3
+		bypass = {
+			MEX = {
+			is_in_faction_with = CAR
+			}
+		}
+		prerequisite = {
+			focus = CAR_conquer_centro
+		}
+		relative_position_id = CAR_conquer_centro
+		x = 0
+		y = 1
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_yucatan"
+				owner = {
+					create_wargoal = {
+						type = annex_everything
+						target = 474.owner
+					}
+				}
+			474 = { add_claim_by = CAR }
+			1254 = { add_claim_by = CAR }
+			1255 = { add_claim_by = CAR }
+	}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+		focus = {# florida
+		id = CAR_conquer_florida
+		icon = GFX_CAR_conquer_florida
+		cost = 3
+		prerequisite = {
+			focus = CAR_conquer_mexico
+		}
+		relative_position_id = CAR_conquer_mexico
+		x = 0
+		y = 1
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_florida"
+				owner = {
+					create_wargoal = {
+						type = annex_everything
+						target = 366.owner
+					}
+				}	
+			custom_effect_tooltip = CAR_florida_tt
+			hidden_effect = {
+			366 = { add_claim_by = CAR }
+			1171 = { add_claim_by = CAR }
+			1172 = { add_claim_by = CAR }
+		if = {
+		limit = {
+		MEX = {
+		is_subject_of = CAR
+			}
+		}
+			366 = { add_core_of = MEX }
+			1171 = { add_core_of = MEX }
+			1172 = { add_core_of = MEX }
+					}
+		if = {
+		limit = {
+		MEX = {
+		is_in_faction_with = CAR
+		NOT = {
+		is_subject_of = CAR
+				}
+			}
+		}
+		366 = { add_claim_by = MEX }
+		1171 = { add_claim_by = MEX }
+		1172 = { add_claim_by = MEX }
+		}
+	    }
+	    }    
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = { # california
+		id = CAR_conquer_california
+		icon = GFX_CAR_conquer_california
+		cost = 3
+		prerequisite = {
+			focus = CAR_conquer_florida
+			focus = CAR_conquer_yucatan
+		}
+		relative_position_id = CAR_conquer_florida
+		x = 1
+		y = 1
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_california"
+				owner = {
+					create_wargoal = {
+						type = annex_everything
+						target = 797.owner
+					}
+				}
+			custom_effect_tooltip = CAR_california_tt
+			hidden_effect = {
+			798 = { add_claim_by = CAR }
+			829 = { add_claim_by = CAR }
+			378 = { add_claim_by = CAR }
+			797 = { add_claim_by = CAR }
+			385 = { add_claim_by = CAR }
+			386 = { add_claim_by = CAR }
+			473 = { add_claim_by = CAR }
+			1332 = { add_claim_by = CAR }
+			471 = { add_claim_by = CAR }
+			740 = { add_claim_by = CAR }
+			1165 = { add_claim_by = CAR }
+			387 = { add_claim_by = CAR }
+			379 = { add_claim_by = CAR }
+			380 = { add_claim_by = CAR }
+			377 = { add_claim_by = CAR }
+			376 = { add_claim_by = CAR }
+			1157 = { add_claim_by = CAR }
+			1164 = { add_claim_by = CAR }
+			1166 = { add_claim_by = CAR }
+			833 = { add_claim_by = CAR }
+			375 = { add_claim_by = CAR }
+			1174 = { add_claim_by = CAR }
+			1096 = { add_claim_by = CAR }
+			1161 = { add_claim_by = CAR }
+			371 = { add_claim_by = CAR }
+			372 = { add_claim_by = CAR }
+			1156 = { add_claim_by = CAR }
+			373 = { add_claim_by = CAR }
+			1163 = { add_claim_by = CAR }
+			392 = { add_claim_by = CAR }
+			391 = { add_claim_by = CAR }
+			390 = { add_claim_by = CAR }
+			389 = { add_claim_by = CAR }
+			388 = { add_claim_by = CAR }
+			381 = { add_claim_by = CAR }
+			382 = { add_claim_by = CAR }
+			1150 = { add_claim_by = CAR }
+			1175 = { add_claim_by = CAR }
+			374 = { add_claim_by = CAR }
+			383 = { add_claim_by = CAR }
+			384 = { add_claim_by = CAR }
+			463 = { add_claim_by = CAR }
+			1348 = { add_claim_by = CAR }
+			1349 = { add_claim_by = CAR }
+			1350 = { add_claim_by = CAR }
+			1273 = { add_claim_by = CAR }
+			370 = { add_claim_by = CAR }
+			1173 = { add_claim_by = CAR }
+		if = {
+		limit = {
+		MEX = {
+		is_subject_of = CAR
+			}
+		}
+			798 = { add_core_of = MEX }
+			829 = { add_core_of = MEX }
+			378 = { add_core_of = MEX }
+			797 = { add_core_of = MEX }
+			385 = { add_core_of = MEX }
+			386 = { add_core_of = MEX }
+			473 = { add_core_of = MEX }
+			1332 = { add_core_of = MEX }
+			471 = { add_core_of = MEX }
+			740 = { add_core_of = MEX }
+			1165 = { add_core_of = MEX }
+			387 = { add_core_of = MEX }
+			379 = { add_core_of = MEX }
+			380 = { add_core_of = MEX }
+			377 = { add_core_of = MEX }
+			376 = { add_core_of = MEX }
+			1157 = { add_core_of = MEX }
+			1164 = { add_core_of = MEX }
+			1166 = { add_core_of = MEX }
+			833 = { add_core_of = MEX }
+			375 = { add_core_of = MEX }
+			1174 = { add_core_of = MEX }
+			1096 = { add_core_of = MEX }
+			1161 = { add_core_of = MEX }
+			371 = { add_core_of = MEX }
+			372 = { add_core_of = MEX }
+			1156 = { add_core_of = MEX }
+			373 = { add_core_of = MEX }
+			1163 = { add_core_of = MEX }
+			392 = { add_core_of = MEX }
+			391 = { add_core_of = MEX }
+			390 = { add_core_of = MEX }
+			389 = { add_core_of = MEX }
+			388 = { add_core_of = MEX }
+			381 = { add_core_of = MEX }
+			382 = { add_core_of = MEX }
+			1150 = { add_core_of = MEX }
+			1175 = { add_core_of = MEX }
+			374 = { add_core_of = MEX }
+			383 = { add_core_of = MEX }
+			384 = { add_core_of = MEX }
+			463 = { add_core_of = MEX }
+			1348 = { add_claim_by = MEX }
+			1349 = { add_claim_by = MEX }
+			1350 = { add_claim_by = MEX }
+			1273 = { add_claim_by = MEX }
+			370 = { add_core_of = MEX }
+			1173 = { add_core_of = MEX }
+		}
+		if = {
+		limit = {
+		MEX = {
+		is_in_faction_with = CAR
+		NOT = {
+		is_subject_of = CAR
+				}
+			}
+		}
+			798 = { add_claim_by = MEX }
+			829 = { add_claim_by = MEX }
+			378 = { add_claim_by = MEX }
+			797 = { add_claim_by = MEX }
+			385 = { add_claim_by = MEX }
+			386 = { add_claim_by = MEX }
+			473 = { add_claim_by = MEX }
+			1332 = { add_claim_by = MEX }
+			471 = { add_claim_by = MEX }
+			740 = { add_claim_by = MEX }
+			1165 = { add_claim_by = MEX }
+			387 = { add_claim_by = MEX }
+			379 = { add_claim_by = MEX }
+			380 = { add_claim_by = MEX }
+			377 = { add_claim_by = MEX }
+			376 = { add_claim_by = MEX }
+			1157 = { add_claim_by = MEX }
+			1164 = { add_claim_by = MEX }
+			1166 = { add_claim_by = MEX }
+			833 = { add_claim_by = MEX }
+			375 = { add_claim_by = MEX }
+			1174 = { add_claim_by = MEX }
+			1096 = { add_claim_by = MEX }
+			1161 = { add_claim_by = MEX }
+			371 = { add_claim_by = MEX }
+			372 = { add_claim_by = MEX }
+			1156 = { add_claim_by = MEX }
+			373 = { add_claim_by = MEX }
+			1163 = { add_claim_by = MEX }
+			392 = { add_claim_by = MEX }
+			391 = { add_claim_by = MEX }
+			390 = { add_claim_by = MEX }
+			389 = { add_claim_by = MEX }
+			388 = { add_claim_by = MEX }
+			381 = { add_claim_by = MEX }
+			382 = { add_claim_by = MEX }
+			1150 = { add_claim_by = MEX }
+			1175 = { add_claim_by = MEX }
+			374 = { add_claim_by = MEX }
+			383 = { add_claim_by = MEX }
+			384 = { add_claim_by = MEX }
+			463 = { add_claim_by = MEX }
+			1348 = { add_claim_by = MEX }
+			1349 = { add_claim_by = MEX }
+			1350 = { add_claim_by = MEX }
+			1273 = { add_claim_by = MEX }
+			370 = { add_claim_by = MEX }
+			1173 = { add_claim_by = MEX }
+		}
+		}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus = { # philippines
+		id = CAR_conquer_the_philippines
+		icon = GFX_CAR_conquer_philippines
+		cost = 3
+		prerequisite = {
+			focus = CAR_conquer_california
+		}
+		relative_position_id = CAR_conquer_california
+		x = 0
+		y = 1
+		
+		ai_will_do = { factor = 0 }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CAR_conquer_philippines"
+			create_wargoal = {
+				type = annex_everything
+				target = PHI
+			}
+			every_state = {
+				limit = { is_core_of = PHI }
+				add_claim_by = CAR
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+	}
+	focus={
+		id=CAR_Holy_Spain_under_Christ
+		icon=GFX_goal_CAR_Holy_Spain_under_Christ
+		x=5
+		y=9
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = { always = no }
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus={
+		id=CAR_Respect_God
+		icon=GFX_goal_CAR_Respect_God
+		x=-1
+		y=1
+		prerequisite={focus=CAR_Holy_Spain_under_Christ}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			country_event = ncar.24
+		}
+	}
+	focus={
+		id=CAR_Local_self_government_national_unity
+		icon=GFX_goal_CAR_Local_self_government_national_unity
+		x=1
+		y=1
+		prerequisite={focus=CAR_Holy_Spain_under_Christ}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_one_random_military_factory = yes
+			add_one_random_civilian_factory = yes
+			add_stability = 0.1
+			country_event = ncar.25
+			unlock_decision_category_tooltip = CAR_local_self_governmentdec
+			add_dynamic_modifier = { modifier = CAR_spain_of_all_nations }
+		}
+	}
+	focus={
+		id=CAR_The_orthodox_hold_their_ground
+		icon=GFX_goal_CAR_The_orthodox_hold_their_ground
+		x=0
+		y=2
+		prerequisite={focus=CAR_Respect_God}
+		prerequisite={focus=CAR_Local_self_government_national_unity}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_flag = CAR_Javier_I_tt
+			has_government = paternal_autocrat
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Community_organism
+		icon=GFX_goal_CAR_Community_organism
+		x=-1
+		y=3
+		prerequisite={focus=CAR_The_orthodox_hold_their_ground}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Community_organism
+			country_event = ncar.26
+		}
+	}
+	focus={
+		id=CAR_Catholic_social_teaching
+		icon=GFX_goal_CAR_Catholic_social_teaching
+		x=1
+		y=3
+		prerequisite={focus=CAR_The_orthodox_hold_their_ground}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Catholic_social_teaching
+			country_event = ncar.27
+		}
+	}
+	focus={
+		id=CAR_The_Social_Responsibility_of_Requete
+		icon=GFX_goal_CAR_The_Social_Responsibility_of_Requete
+		x=-2
+		y=4
+		prerequisite={focus=CAR_Community_organism focus=CAR_Appeasement_integrator }
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Social_Responsibility_of_Requete
+			country_event = ncar.30
+		}
+	}
+	focus={
+		id=CAR_Under_society_the_king_comes_second
+		icon=GFX_goal_CAR_Under_society_the_king_comes_second
+		x=0
+		y=4
+		prerequisite={focus=CAR_Community_organism}
+		prerequisite={focus=CAR_Catholic_social_teaching}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Under_society_the_king_comes_second
+			country_event = ncar.28
+		}
+	}
+	focus={
+		id=CAR_Guiding_conservative_people
+		icon=GFX_goal_CAR_Guiding_conservative_people
+		x=2
+		y=4
+		prerequisite={focus=CAR_Catholic_social_teaching focus=CAR_Traditional_order_saves_Spain }
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Guiding_conservative_people
+		}
+	}
+	focus={
+		id=CAR_The_Beauty_of_Agrarianism
+		icon=GFX_goal_CAR_The_Beauty_of_Agrarianism
+		x=0
+		y=6
+		prerequisite={focus=CAR_Under_society_the_king_comes_second focus=CAR_The_End_of_Liberal_Democracy focus=CAR_Respect_local_rights focus=CAR_Catholic_moral_rule focus=CAR_The_Grace_of_Holy_Christ }
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Beauty_of_Agrarianism
+			country_event = ncar.29
+		}
+	}
+	focus={
+		id=CAR_The_Habsburg_Coronation
+		icon=GFX_goal_CAR_The_Habsburg_Coronation
+		x=-4
+		y=2
+		prerequisite={focus=CAR_Respect_God}
+		prerequisite={focus=CAR_Local_self_government_national_unity}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_flag = CAR_Carlos_VIII_tt
+			has_government = national_populist
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Rebuilding_royal_authority
+		icon=GFX_goal_CAR_Rebuilding_royal_authority
+		x=-5
+		y=3
+		prerequisite={focus=CAR_The_Habsburg_Coronation}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Rebuilding_royal_authority
+			country_event = ncar.31
+		}
+	}
+	focus={
+		id=CAR_Appeasement_integrator
+		icon=GFX_goal_CAR_Appeasement_integrator
+		x=-3
+		y=3
+		prerequisite={focus=CAR_The_Habsburg_Coronation}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Appeasement_integrator
+			country_event = ncar.32
+		}
+	}
+	focus={
+		id=CAR_Relationship_with_the_Viennese_court
+		icon=GFX_goal_CAR_Relationship_with_the_Viennese_court
+		x=-4
+		y=4
+		prerequisite={focus=CAR_Rebuilding_royal_authority}
+		prerequisite={focus=CAR_Appeasement_integrator}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Relationship_with_the_Viennese_court
+		}
+	}
+	focus={
+		id=CAR_Catholic_moral_rule
+		icon=GFX_goal_CAR_Catholic_moral_rule
+		x=-3
+		y=5
+		prerequisite={focus=CAR_Relationship_with_the_Viennese_court}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Catholic_moral_rule
+			country_event = ncar.33
+		}
+	}
+	focus={
+		id=CAR_The_End_of_Liberal_Democracy
+		icon=GFX_goal_CAR_The_End_of_Liberal_Democracy
+		x=-1
+		y=5
+		prerequisite={focus=CAR_Relationship_with_the_Viennese_court}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_End_of_Liberal_Democracy
+		}
+	}
+	focus={
+		id=CAR_Traditionalist_Peoples_Front
+		icon=GFX_goal_CAR_Traditionalist_Peoples_Front
+		x=-2
+		y=6
+		prerequisite={focus=CAR_The_Social_Responsibility_of_Requete}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_one_random_military_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_civilian_factory = yes
+			add_soccon_to_coalition = yes
+			add_authdem_to_coalition = yes
+			add_pataut_to_coalition = yes
+			add_natpop_to_coalition = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Peoples_Action_Youth
+		icon=GFX_goal_CAR_Peoples_Action_Youth
+		x=4
+		y=2
+		prerequisite={focus=CAR_Respect_God}
+		prerequisite={focus=CAR_Local_self_government_national_unity}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_flag = CAR_JAP_tt
+			has_government = authoritarian_democrat
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Traditional_order_saves_Spain
+		icon=GFX_goal_CAR_Traditional_order_saves_Spain
+		x=3
+		y=3
+		prerequisite={focus=CAR_Peoples_Action_Youth}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Traditional_order_saves_Spain
+		}
+	}
+	focus={
+		id=CAR_Put_leash_on_randomness
+		icon=GFX_goal_CAR_Put_leash_on_randomness
+		x=5
+		y=3
+		prerequisite={focus=CAR_Peoples_Action_Youth}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Put_leash_on_randomness
+			country_event = ncar.34
+		}
+	}
+	focus={
+		id=CAR_Incite_social_violence
+		icon=GFX_goal_CAR_Incite_social_violence
+		x=4
+		y=4
+		prerequisite={focus=CAR_Traditional_order_saves_Spain}
+		prerequisite={focus=CAR_Put_leash_on_randomness}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Incite_social_violence
+			country_event = ncar.35
+		}
+	}
+	focus={
+		id=CAR_Respect_local_rights
+		icon=GFX_goal_CAR_Respect_local_rights
+		x=1
+		y=5
+		prerequisite={focus=CAR_Incite_social_violence}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Respect_local_rights
+		}
+	}
+	focus={
+		id=CAR_The_Grace_of_Holy_Christ
+		icon=GFX_goal_CAR_The_Grace_of_Holy_Christ
+		x=3
+		y=5
+		prerequisite={focus=CAR_Incite_social_violence}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Grace_of_Holy_Christ
+			country_event = ncar.36
+		}
+	}
+	focus={
+		id=CAR_Making_use_of_tyrants_inheritance
+		icon=GFX_goal_CAR_Making_use_of_tyrants_inheritance
+		x=2
+		y=6
+		prerequisite={focus=CAR_Guiding_conservative_people}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			SPR = {
+				every_unit_leader = {
+					set_nationality = CAR
+				}
+			}
+			country_event = ncar.37
+		}
+	}
+	focus={
+		id=CAR_The_order_of_God_still_exists_in_the_world
+		icon=GFX_goal_CAR_The_order_of_God_still_exists_in_the_world
+		x=0
+		y=7
+		prerequisite={focus=CAR_Traditionalist_Peoples_Front focus=CAR_The_Beauty_of_Agrarianism focus=CAR_Making_use_of_tyrants_inheritance }
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Holy_Spain_under_Christ
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_order_of_God_still_exists_in_the_world
+		}
+	}
+	focus={
+		id=CAR_Unbelievable_turn
+		icon=GFX_goal_SRI_Revival_of_the_syndical_empire
+		x=18
+		y=9
+		cost=0
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			always = no
+		}
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus={
+		id=CAR_Integrationalism_at_dead_end
+		icon=GFX_goal_CAR_Integrationalism_at_dead_end
+		x=-1
+		y=1
+		prerequisite={focus=CAR_Unbelievable_turn}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_one_random_military_factory = yes
+			add_one_random_civilian_factory = yes
+			add_war_support = 0.1
+			unlock_decision_category_tooltip = CAR_local_self_governmentdec
+			add_dynamic_modifier = { modifier = CAR_spain_of_all_nations }
+		}
+	}
+	focus={
+		id=CAR_Win_over_the_cntfai
+		icon=GFX_goal_CAR_Win_over_the_cntfai
+		x=1
+		y=1
+		prerequisite={focus=CAR_Unbelievable_turn}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			country_event = ncar.38
+		}
+	}
+	focus={
+		id=CAR_The_fellowship_turns_left
+		icon=GFX_goal_CAR_The_fellowship_turns_left
+		x=0
+		y=2
+		prerequisite={focus=CAR_Integrationalism_at_dead_end}
+		prerequisite={focus=CAR_Win_over_the_cntfai}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_flag = CAR_ignacio_romero_tt
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Reinterpreting_Carlos_War
+		icon=GFX_goal_CAR_Reinterpreting_Carlos_War
+		x=-1
+		y=3
+		prerequisite={focus=CAR_The_fellowship_turns_left}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Reinterpreting_Carlos_War
+			country_event = ncar.42
+		}
+	}
+	focus={
+		id=CAR_Workers_managing_themselves
+		icon=GFX_goal_SRI_Expand_the_Trust_Syndicate
+		x=1
+		y=3
+		prerequisite={focus=CAR_The_fellowship_turns_left}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Workers_managing_themselves
+			country_event = ncar.43
+		}
+	}
+	focus={
+		id=CAR_Harnessing_the_labor_movement
+		icon=GFX_goal_SRI_Promote_cooperative_labor_movement
+		x=-2
+		y=4
+		prerequisite={focus=CAR_Reinterpreting_Carlos_War focus=CAR_National_regulatory_labor_union }
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Harnessing_the_labor_movement
+		}
+	}
+	focus={
+		id=CAR_Federalization_under_the_king
+		icon=GFX_goal_CAR_Federalization_under_the_king
+		x=0
+		y=4
+		prerequisite={focus=CAR_Reinterpreting_Carlos_War}
+		prerequisite={focus=CAR_Workers_managing_themselves}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Federalization_under_the_king
+		}
+	}
+	focus={
+		id=CAR_Left_wing_elements_in_the_Bible
+		icon=GFX_goal_SRI_Topdown_local_autonomy
+		x=2
+		y=4
+		prerequisite={focus=CAR_Workers_managing_themselves focus=CAR_Eliminate_the_scabs }
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Left_wing_elements_in_the_Bible
+		}
+	}
+	focus={
+		id=CAR_Peoples_monarchy
+		icon=GFX_goal_CAR_Peoples_monarchy
+		x=0
+		y=6
+		prerequisite={focus=CAR_Federalization_under_the_king focus=CAR_The_Patriotic_Cause_of_Sindicatos_Libres focus=CAR_Workers_sense_of_autonomy focus=CAR_Yellow_roses_never_wither focus=CAR_Maybe_Guild_Socialism }
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Peoples_monarchy
+			country_event = ncar.44
+		}
+	}
+	focus={
+		id=CAR_End_the_red_tyranny
+		icon=GFX_goal_CAR_End_the_red_tyranny
+		x=-4
+		y=2
+		prerequisite={focus=CAR_Integrationalism_at_dead_end}
+		prerequisite={focus=CAR_Win_over_the_cntfai}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_flag = CAR_syndicalist_tt
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_The_Inevitable_End_of_Violence
+		icon=GFX_goal_SRI_Voluntariness_autonomy_and_action
+		x=-5
+		y=3
+		prerequisite={focus=CAR_End_the_red_tyranny}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Inevitable_End_of_Violence
+			country_event = ncar.39
+		}
+	}
+	focus={
+		id=CAR_National_regulatory_labor_union
+		icon=GFX_goal_SRI_Marginalize_radical_heretics
+		x=-3
+		y=3
+		prerequisite={focus=CAR_End_the_red_tyranny}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_National_regulatory_labor_union
+			country_event = ncar.40
+		}
+	}
+	focus={
+		id=CAR_Insights_from_Integrative_Syndicalism
+		icon=GFX_goal_CAR_Insights_from_Integrative_Syndicalism
+		x=-4
+		y=4
+		prerequisite={focus=CAR_The_Inevitable_End_of_Violence}
+		prerequisite={focus=CAR_National_regulatory_labor_union}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Insights_from_Integrative_Syndicalism
+			country_event = ncar.41
+		}
+	}
+	focus={
+		id=CAR_Yellow_roses_never_wither
+		icon=GFX_goal_CAR_Yellow_roses_never_wither
+		x=-3
+		y=5
+		prerequisite={focus=CAR_Insights_from_Integrative_Syndicalism}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Yellow_roses_never_wither
+		}
+	}
+	focus={
+		id=CAR_The_Patriotic_Cause_of_Sindicatos_Libres
+		icon=GFX_goal_CAR_The_Patriotic_Cause_of_Sindicatos_Libres
+		x=-1
+		y=5
+		prerequisite={focus=CAR_Insights_from_Integrative_Syndicalism}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Patriotic_Cause_of_Sindicatos_Libres
+		}
+	}
+	focus={
+		id=CAR_The_Rise_of_Carlos_the_Worker
+		icon=GFX_goal_CAR_The_Rise_of_Carlos_the_Worker
+		x=-2
+		y=6
+		prerequisite={focus=CAR_Harnessing_the_labor_movement}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Rise_of_Carlos_the_Worker
+		}
+	}
+	focus={
+		id=CAR_Independent_Syndical
+		icon=GFX_goal_CAR_Independent_Syndical
+		x=4
+		y=2
+		prerequisite={focus=CAR_Integrationalism_at_dead_end}
+		prerequisite={focus=CAR_Win_over_the_cntfai}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_flag = CAR_radical_socialist_tt
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Eliminate_the_scabs
+		icon=GFX_goal_SRI_Peoples_Attidi_movement
+		x=3
+		y=3
+		prerequisite={focus=CAR_Independent_Syndical}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Eliminate_the_scabs
+			country_event = ncar.45
+		}
+	}
+	focus={
+		id=CAR_Truly_independent_workers_union
+		icon=GFX_goal_SRI_Syndical_Directly_Governed_Social_Security_Network
+		x=5
+		y=3
+		prerequisite={focus=CAR_Independent_Syndical}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Truly_independent_workers_union
+			country_event = ncar.46
+		}
+	}
+	focus={
+		id=CAR_End_capitalist_greed
+		icon=GFX_goal_SRI_Legalize_nonsocialist_trade_unions
+		x=4
+		y=4
+		prerequisite={focus=CAR_Eliminate_the_scabs}
+		prerequisite={focus=CAR_Truly_independent_workers_union}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_End_capitalist_greed
+			country_event = ncar.47
+		}
+	}
+	focus={
+		id=CAR_Workers_sense_of_autonomy
+		icon=GFX_goal_SRI_Shape_the_New_Producer
+		x=1
+		y=5
+		prerequisite={focus=CAR_End_capitalist_greed}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Workers_sense_of_autonomy
+		}
+	}
+	focus={
+		id=CAR_Maybe_Guild_Socialism
+		icon=GFX_goal_CAR_Maybe_Guild_Socialism
+		x=3
+		y=5
+		prerequisite={focus=CAR_End_capitalist_greed}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Maybe_Guild_Socialism
+			country_event = ncar.48
+		}
+	}
+	focus={
+		id=CAR_Worship_Worker_Jesus
+		icon=GFX_goal_CAR_Worship_Worker_Jesus
+		x=2
+		y=6
+		prerequisite={focus=CAR_Left_wing_elements_in_the_Bible}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Worship_Worker_Jesus
+		}
+	}
+	focus={
+		id=CAR_All_are_children_of_Christ
+		icon=GFX_goal_CAR_All_are_children_of_Christ
+		x=0
+		y=7
+		prerequisite={focus=CAR_The_Rise_of_Carlos_the_Worker focus=CAR_Peoples_monarchy focus=CAR_Worship_Worker_Jesus }
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Unbelievable_turn
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_All_are_children_of_Christ
+		}
+	}
+	focus={
+		id=CAR_Falange_New_Rise
+		icon=GFX_goal_CAR_Falange_New_Rise
+		x=35
+		y=9
+		cost=0
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			always = no
+		}
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus={
+		id=CAR_Destroy_the_monarchy
+		icon=GFX_goal_CAR_Destroy_the_monarchy
+		x=-2
+		y=1
+		prerequisite={focus=CAR_Falange_New_Rise}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	focus={
+		id=CAR_Tidying_up_party_affairs
+		icon=GFX_goal_CAR_Tidying_up_party_affairs
+		x=0
+		y=1
+		prerequisite={focus=CAR_Falange_New_Rise}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power =100
+			add_stability = 0.1
+			add_war_support = 0.1  
+		}
+	}
+	focus={
+		id=CAR_Youthful_national_vitality
+		icon=GFX_goal_CAR_Youthful_national_vitality
+		x=2
+		y=1
+		prerequisite={focus=CAR_Falange_New_Rise}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_manpower = 10000
+			army_experience = 50
+			add_command_power = 50
+		}
+	}
+	focus={
+		id=CAR_Things_that_are_out_of_reach
+		icon=GFX_goal_CAR_Things_that_are_out_of_reach
+		x=0
+		y=2
+		prerequisite={focus=CAR_Destroy_the_monarchy}
+		prerequisite={focus=CAR_Tidying_up_party_affairs}
+		prerequisite={focus=CAR_Youthful_national_vitality}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+		}
+	}
+	focus={
+		id=CAR_Deploy_paramilitary_forces
+		icon=GFX_goal_CAR_Deploy_paramilitary_forces
+		x=-1
+		y=3
+		prerequisite={focus=CAR_Things_that_are_out_of_reach}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Deploy_paramilitary_forces
+		}
+	}
+	focus={
+		id=CAR_Behead_the_rebellious_son
+		icon=GFX_goal_CAR_Behead_the_rebellious_son
+		x=1
+		y=3
+		prerequisite={focus=CAR_Things_that_are_out_of_reach}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Behead_the_rebellious_son
+		}
+	}
+	focus={
+		id=CAR_National_Law_Corporation_Experiment
+		icon=GFX_goal_CAR_National_Law_Corporation_Experiment
+		x=0
+		y=4
+		prerequisite={focus=CAR_Deploy_paramilitary_forces}
+		prerequisite={focus=CAR_Behead_the_rebellious_son}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_National_Law_Corporation_Experiment
+			country_event = ncar.49
+		}
+	}
+	focus={
+		id=CAR_Jose_Antonio
+		icon=GFX_goal_CAR_Jose_Antonio
+		x=-3
+		y=2
+		prerequisite={focus=CAR_Destroy_the_monarchy}
+		prerequisite={focus=CAR_Tidying_up_party_affairs}
+		prerequisite={focus=CAR_Youthful_national_vitality}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "何塞·安东尼奥·普里莫·德·里维拉"
+			}
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power =100
+			add_stability = 0.1
+			add_war_support = 0.1  
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Dont_lean_too_far_left_or_right
+		icon=GFX_goal_CAR_Dont_lean_too_far_left_or_right
+		x=-5
+		y=3
+		prerequisite={focus=CAR_Jose_Antonio}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Dont_lean_too_far_left_or_right
+		}
+	}
+	focus={
+		id=CAR_community_with_shared_future
+		icon=GFX_goal_CAR_community_with_shared_future
+		x=-3
+		y=3
+		prerequisite={focus=CAR_Jose_Antonio}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_community_with_shared_future
+			country_event = ncar.50
+		}
+	}
+	focus={
+		id=CAR_Violence_and_Roses
+		icon=GFX_goal_CAR_Violence_and_Roses
+		x=-4
+		y=4
+		prerequisite={focus=CAR_Dont_lean_too_far_left_or_right}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Violence_and_Roses
+		}
+	}
+	focus={
+		id=CAR_The_organic_unity_of_individuals_and_the_collective
+		icon=GFX_goal_CAR_The_organic_unity_of_individuals_and_the_collective
+		x=-2
+		y=4
+		prerequisite={focus=CAR_community_with_shared_future}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_organic_unity_of_individuals_and_the_collective
+			country_event = ncar.51
+		}
+	}
+	focus={
+		id=CAR_The_Leaders_Responsibility
+		icon=GFX_goal_CAR_The_Leaders_Responsibility
+		x=-3
+		y=5
+		prerequisite={focus=CAR_Violence_and_Roses}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Leaders_Responsibility
+			country_event = ncar.52
+		}
+	}
+	focus={
+		id=CAR_The_Monastic_Life_of_the_Legion
+		icon=GFX_goal_CAR_The_Monastic_Life_of_the_Legion
+		x=-1
+		y=5
+		prerequisite={focus=CAR_The_organic_unity_of_individuals_and_the_collective}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Monastic_Life_of_the_Legion
+		}
+	}
+	focus={
+		id=CAR_Dionisio_Ridruejo
+		icon=GFX_goal_CAR_Dionisio_Ridruejo
+		x=3
+		y=2
+		prerequisite={focus=CAR_Destroy_the_monarchy}
+		prerequisite={focus=CAR_Tidying_up_party_affairs}
+		prerequisite={focus=CAR_Youthful_national_vitality}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "迪奧尼西奧·里德鲁埃霍"
+			}
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power =100
+			add_stability = 0.1
+			add_war_support = 0.1  
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Reflecting_authoritarian_systems
+		icon=GFX_goal_CAR_Reflecting_authoritarian_systems
+		x=3
+		y=3
+		prerequisite={focus=CAR_Dionisio_Ridruejo}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Reflecting_authoritarian_systems
+			country_event = ncar.56
+		}
+	}
+	focus={
+		id=CAR_Awakening_Spanish_Youth
+		icon=GFX_goal_CAR_Awakening_Spanish_Youth
+		x=5
+		y=3
+		prerequisite={focus=CAR_Dionisio_Ridruejo}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Awakening_Spanish_Youth
+		}
+	}
+	focus={
+		id=CAR_United_Old_Republicans
+		icon=GFX_goal_CAR_United_Old_Republicans
+		x=2
+		y=4
+		prerequisite={focus=CAR_Reflecting_authoritarian_systems}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas  = CAR_United_Old_Republicans
+		}
+	}
+	focus={
+		id=CAR_Social_revolution_for_the_people
+		icon=GFX_goal_CAR_Social_revolution_for_the_people
+		x=4
+		y=4
+		prerequisite={focus=CAR_Awakening_Spanish_Youth}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Social_revolution_for_the_people
+			country_event = ncar.57
+		}
+	}
+	focus={
+		id=CAR_Individual_freedom_is_above_the_state
+		icon=GFX_goal_CAR_Individual_freedom_is_above_the_state
+		x=1
+		y=5
+		prerequisite={focus=CAR_United_Old_Republicans}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Individual_freedom_is_above_the_state
+		}
+	}
+	focus={
+		id=CAR_Fight_for_social_justice
+		icon=GFX_goal_CAR_Fight_for_social_justice
+		x=3
+		y=5
+		prerequisite={focus=CAR_Social_revolution_for_the_people}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Fight_for_social_justice
+			country_event = ncar.58
+		}
+	}
+	focus={
+		id=CAR_Sanchez_Mazas
+		icon=GFX_goal_CAR_Sanchez_Mazas
+		x=-7
+		y=2
+		prerequisite={focus=CAR_Destroy_the_monarchy}
+		prerequisite={focus=CAR_Tidying_up_party_affairs}
+		prerequisite={focus=CAR_Youthful_national_vitality}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "拉斐尔·桑切斯·马扎斯"
+			}
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power =100
+			add_stability = 0.1
+			add_war_support = 0.1  
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.1
+			}
+			
+		}
+	}
+	focus={
+		id=CAR_Stripping_away_mass_market_mediocrity
+		icon=GFX_goal_CAR_Stripping_away_mass_market_mediocrity
+		x=-9
+		y=3
+		prerequisite={focus=CAR_Sanchez_Mazas}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Stripping_away_mass_market_mediocrity
+			country_event = ncar.54
+		}
+	}
+	focus={
+		id=CAR_Loving_God_greater_than_loving_country
+		icon=GFX_goal_CAR_Loving_God_greater_than_loving_country
+		x=-7
+		y=3
+		prerequisite={focus=CAR_Sanchez_Mazas}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Loving_God_greater_than_loving_country
+			country_event = ncar.53
+		}
+	}
+	focus={
+		id=CAR_Reviving_Latin_aesthetics
+		icon=GFX_goal_CAR_Reviving_Latin_aesthetics
+		x=-8
+		y=4
+		prerequisite={focus=CAR_Stripping_away_mass_market_mediocrity}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Reviving_Latin_aesthetics
+		}
+	}
+	focus={
+		id=CAR_The_Holy_War_of_Divine_Right
+		icon=GFX_goal_CAR_The_Holy_War_of_Divine_Right
+		x=-6
+		y=4
+		prerequisite={focus=CAR_Loving_God_greater_than_loving_country}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Holy_War_of_Divine_Right
+		}
+	}
+	focus={
+		id=CAR_Salute_to_the_death_saint
+		icon=GFX_goal_CAR_Salute_to_the_death_saint
+		x=-7
+		y=5
+		prerequisite={focus=CAR_Reviving_Latin_aesthetics}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Salute_to_the_death_saint
+			country_event = ncar.55
+		}
+	}
+	focus={
+		id=CAR_The_great_imperial_power_returns_the_world
+		icon=GFX_goal_CAR_The_great_imperial_power_returns_the_world
+		x=-5
+		y=5
+		prerequisite={focus=CAR_The_Holy_War_of_Divine_Right}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_great_imperial_power_returns_the_world
+		}
+	}
+	focus={
+		id=CAR_Castroviejo
+		icon=GFX_goal_CAR_Castroviejo
+		x=7
+		y=2
+		prerequisite={focus=CAR_Youthful_national_vitality}
+		prerequisite={focus=CAR_Tidying_up_party_affairs}
+		prerequisite={focus=CAR_Destroy_the_monarchy}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "何塞·玛丽亚·卡斯特罗维霍"
+			}
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power =100
+			add_stability = 0.1
+			add_war_support = 0.1  
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Personal_independence_and_freedom_of_action
+		icon=GFX_goal_CAR_Personal_independence_and_freedom_of_action
+		x=7
+		y=3
+		prerequisite={focus=CAR_Castroviejo}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Personal_independence_and_freedom_of_action
+		}
+	}
+	focus={
+		id=CAR_Continuing_local_self_government
+		icon=GFX_goal_CAR_Continuing_local_self_government
+		x=9
+		y=3
+		prerequisite={focus=CAR_Castroviejo}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Continuing_local_self_government
+			country_event = ncar.59
+		}
+	}
+	focus={
+		id=CAR_Kingless_Traditionalism
+		icon=GFX_goal_CAR_Kingless_Traditionalism
+		x=6
+		y=4
+		prerequisite={focus=CAR_Personal_independence_and_freedom_of_action}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Kingless_Traditionalism
+		}
+	}
+	focus={
+		id=CAR_Nature_spirituality_worship
+		icon=GFX_goal_CAR_Nature_spirituality_worship
+		x=8
+		y=4
+		prerequisite={focus=CAR_Continuing_local_self_government}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Nature_spirituality_worship
+			country_event = ncar.60
+		}
+	}
+	focus={
+		id=CAR_Modern_Don_Quixote
+		icon=GFX_goal_CAR_Modern_Don_Quixote
+		x=5
+		y=5
+		prerequisite={focus=CAR_Kingless_Traditionalism}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Modern_Don_Quixote
+		}
+	}
+	focus={
+		id=CAR_Life_Mysticism
+		icon=GFX_goal_CAR_Life_Mysticism
+		x=7
+		y=5
+		prerequisite={focus=CAR_Nature_spirituality_worship}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Life_Mysticism
+			country_event = ncar.61
+		}
+	}
+	focus={
+		id=CAR_The_Solar_Empire_Rises_Again
+		icon=GFX_goal_CAR_The_Solar_Empire_Rises_Again
+		x=0
+		y=6
+		prerequisite={focus=CAR_National_Law_Corporation_Experiment}
+		prerequisite={focus=CAR_Salute_to_the_death_saint focus=CAR_The_great_imperial_power_returns_the_world focus=CAR_The_Leaders_Responsibility focus=CAR_The_Monastic_Life_of_the_Legion focus=CAR_Individual_freedom_is_above_the_state focus=CAR_Fight_for_social_justice focus=CAR_Modern_Don_Quixote focus=CAR_Life_Mysticism }
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Falange_New_Rise
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Solar_Empire_Rises_Again
+		}
+	}
+	focus={
+		id=CAR_Towards_Nationwide_Revolution
+		icon=GFX_goal_CAR_Towards_Nationwide_Revolution
+		x=56
+		y=9
+		cost=0
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			always = no
+		}
+		available_if_capitulated=yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power = 100
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus={
+		id=CAR_Get_rid_of_local_privileges
+		icon=GFX_goal_CAR_Get_rid_of_local_privileges
+		x=-2
+		y=1
+		prerequisite={focus=CAR_Towards_Nationwide_Revolution}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+			add_one_random_civilian_factory = yes
+		}
+	}
+	focus={
+		id=CAR_Taking_apart_Leviathan_machine
+		icon=GFX_goal_CAR_Taking_apart_Leviathan_machine
+		x=0
+		y=1
+		prerequisite={focus=CAR_Towards_Nationwide_Revolution}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_manpower = 10000
+			army_experience = 50
+			add_command_power = 50
+			
+		}
+	}
+	focus={
+		id=CAR_Declare_war_on_theists
+		icon=GFX_goal_CAR_Declare_war_on_theists
+		x=2
+		y=1
+		prerequisite={focus=CAR_Towards_Nationwide_Revolution}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power =100
+			add_stability = 0.1
+			add_war_support = 0.1  
+		}
+	}
+	focus={
+		id=CAR_Viva_la_Revolucion
+		icon=GFX_goal_CAR_Viva_la_Revolucion
+		x=0
+		y=2
+		prerequisite={focus=CAR_Get_rid_of_local_privileges}
+		prerequisite={focus=CAR_Taking_apart_Leviathan_machine}
+		prerequisite={focus=CAR_Declare_war_on_theists}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+			add_one_random_military_factory = yes
+		}
+	}
+	focus={
+		id=CAR_End_the_tyranny_of_capital
+		icon=GFX_goal_CAR_End_the_tyranny_of_capital
+		x=-1
+		y=3
+		prerequisite={focus=CAR_Viva_la_Revolucion}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_End_the_tyranny_of_capital
+			country_event = ncar.62
+		}
+	}
+	focus={
+		id=CAR_Restructuring_vertical_unions
+		icon=GFX_goal_CAR_Restructuring_vertical_unions
+		x=1
+		y=3
+		prerequisite={focus=CAR_Viva_la_Revolucion}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Restructuring_vertical_unions
+		}
+	}
+	focus={
+		id=CAR_Bullets_and_gunpowder
+		icon=GFX_goal_CAR_Bullets_and_gunpowder
+		x=0
+		y=4
+		prerequisite={focus=CAR_End_the_tyranny_of_capital}
+		prerequisite={focus=CAR_Restructuring_vertical_unions}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Bullets_and_gunpowder
+		}
+	}
+	focus={
+		id=CAR_Federico_Manuel_Hedilla
+		icon=GFX_goal_CAR_Federico_Manuel_Hedilla
+		x=-3
+		y=2
+		prerequisite={focus=CAR_Get_rid_of_local_privileges}
+		prerequisite={focus=CAR_Taking_apart_Leviathan_machine}
+		prerequisite={focus=CAR_Declare_war_on_theists}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "曼努埃尔·埃迪利亚"
+			}
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power =100
+			add_stability = 0.1
+			add_war_support = 0.1  
+			add_popularity = {
+				ideology = syndicalist
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Everything_belongs_to_the_producers
+		icon=GFX_goal_CAR_Everything_belongs_to_the_producers
+		x=-5
+		y=3
+		prerequisite={focus=CAR_Federico_Manuel_Hedilla}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Everything_belongs_to_the_producers
+			country_event = ncar.65
+		}
+	}
+	focus={
+		id=CAR_Stirring_populism_among_civilians
+		icon=GFX_goal_CAR_Stirring_populism_among_civilians
+		x=-3
+		y=3
+		prerequisite={focus=CAR_Federico_Manuel_Hedilla}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Stirring_populism_among_civilians
+		}
+	}
+	focus={
+		id=CAR_Justice_and_dignity
+		icon=GFX_goal_CAR_Justice_and_dignity
+		x=-4
+		y=4
+		prerequisite={focus=CAR_Everything_belongs_to_the_producers}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Justice_and_dignity
+			country_event = ncar.63
+		}
+	}
+	focus={
+		id=CAR_Encouraging_public_violence
+		icon=GFX_goal_CAR_Encouraging_public_violence
+		x=-2
+		y=4
+		prerequisite={focus=CAR_Stirring_populism_among_civilians}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Encouraging_public_violence
+			country_event = ncar.64
+		}
+	}
+	focus={
+		id=CAR_Bottom_up_syndicalism
+		icon=GFX_goal_CAR_Bottom_up_syndicalism
+		x=-3
+		y=5
+		prerequisite={focus=CAR_Justice_and_dignity}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Bottom_up_syndicalism
+		}
+	}
+	focus={
+		id=CAR_The_old_order_went_up_in_flames
+		icon=GFX_goal_CAR_The_old_order_went_up_in_flames
+		x=-1
+		y=5
+		prerequisite={focus=CAR_Encouraging_public_violence}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_old_order_went_up_in_flames
+		}
+	}
+	focus={
+		id=CAR_Marciano_Pedro_Durruti
+		icon=GFX_goal_CAR_Marciano_Pedro_Durruti
+		x=3
+		y=2
+		prerequisite={focus=CAR_Get_rid_of_local_privileges}
+		prerequisite={focus=CAR_Taking_apart_Leviathan_machine}
+		prerequisite={focus=CAR_Declare_war_on_theists}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "佩德罗·杜鲁蒂"
+			}
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power =100
+			add_stability = 0.1
+			add_war_support = 0.1  
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Victory_achieved_through_strategy
+		icon=GFX_goal_CAR_Victory_achieved_through_strategy
+		x=3
+		y=3
+		prerequisite={focus=CAR_Marciano_Pedro_Durruti}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Victory_achieved_through_strategy
+		}
+	}
+	focus={
+		id=CAR_Free_our_fellow_compatriots
+		icon=GFX_goal_CAR_Free_our_fellow_compatriots
+		x=5
+		y=3
+		prerequisite={focus=CAR_Marciano_Pedro_Durruti}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Free_our_fellow_compatriots
+		}
+	}
+	focus={
+		id=CAR_Expel_right_wing_members
+		icon=GFX_goal_CAR_Expel_right_wing_members
+		x=2
+		y=4
+		prerequisite={focus=CAR_Victory_achieved_through_strategy}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Expel_right_wing_members
+		}
+	}
+	focus={
+		id=CAR_No_place_for_speculators
+		icon=GFX_goal_CAR_No_place_for_speculators
+		x=4
+		y=4
+		prerequisite={focus=CAR_Free_our_fellow_compatriots}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_No_place_for_speculators
+		}
+	}
+	focus={
+		id=CAR_Syndicalist_Reconciliation
+		icon=GFX_goal_CAR_Syndicalist_Reconciliation
+		x=1
+		y=5
+		prerequisite={focus=CAR_Expel_right_wing_members}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Syndicalist_Reconciliation
+			add_synd_to_coalition = yes
+		}
+	}
+	focus={
+		id=CAR_The_Rise_of_Black_Revolution
+		icon=GFX_goal_CAR_The_Rise_of_Black_Revolution
+		x=3
+		y=5
+		prerequisite={focus=CAR_No_place_for_speculators}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Rise_of_Black_Revolution
+		}
+	}
+	focus={
+		id=CAR_Julio_Ruiz_de_Alda
+		icon=GFX_goal_CAR_Julio_Ruiz_de_Alda
+		x=-7
+		y=2
+		prerequisite={focus=CAR_Get_rid_of_local_privileges}
+		prerequisite={focus=CAR_Taking_apart_Leviathan_machine}
+		prerequisite={focus=CAR_Declare_war_on_theists}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "胡利奥·鲁伊斯·德·阿尔达"
+			}
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power =100
+			add_stability = 0.1
+			add_war_support = 0.1  
+			add_popularity = {
+				ideology = totalist
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Conquer_the_sky_overcome_the_past
+		icon=GFX_goal_CAR_Conquer_the_sky_overcome_the_past
+		x=-9
+		y=3
+		prerequisite={focus=CAR_Julio_Ruiz_de_Alda}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Conquer_the_sky_overcome_the_past
+			country_event = ncar.66
+		}
+	}
+	focus={
+		id=CAR_technocratic_system
+		icon=GFX_goal_CAR_technocratic_system
+		x=-7
+		y=3
+		prerequisite={focus=CAR_Julio_Ruiz_de_Alda}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_technocratic_system
+			country_event = ncar.67
+		}
+	}
+	focus={
+		id=CAR_Talk_less_do_more
+		icon=GFX_goal_CAR_Talk_less_do_more
+		x=-8
+		y=4
+		prerequisite={focus=CAR_Conquer_the_sky_overcome_the_past}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Talk_less_do_more
+		}
+	}
+	focus={
+		id=CAR_Spreading_the_spirit_of_the_legion
+		icon=GFX_goal_CAR_Spreading_the_spirit_of_the_legion
+		x=-6
+		y=4
+		prerequisite={focus=CAR_technocratic_system}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Spreading_the_spirit_of_the_legion
+			country_event = ncar.68
+		}
+	}
+	focus={
+		id=CAR_Integrate_JONS
+		icon=GFX_goal_CAR_Integrate_JONS
+		x=-7
+		y=5
+		prerequisite={focus=CAR_Talk_less_do_more}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Integrate_JONS
+		}
+	}
+	focus={
+		id=CAR_Youth_Commando
+		icon=GFX_goal_CAR_Youth_Commando
+		x=-5
+		y=5
+		prerequisite={focus=CAR_Spreading_the_spirit_of_the_legion}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Youth_Commando
+		}
+	}
+	focus={
+		id=CAR_Gerardo_Salvador_Merino
+		icon=GFX_goal_CAR_Gerardo_Salvador_Merino
+		x=7
+		y=2
+		prerequisite={focus=CAR_Declare_war_on_theists}
+		prerequisite={focus=CAR_Taking_apart_Leviathan_machine}
+		prerequisite={focus=CAR_Get_rid_of_local_privileges}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available = {
+			has_country_leader = {
+				ruling_only = yes
+				name = "赫拉多·萨尔瓦多·梅里诺"
+			}
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_political_power =100
+			add_stability = 0.1
+			add_war_support = 0.1  
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.1
+			}
+		}
+	}
+	focus={
+		id=CAR_Break_away_from_republican_absurdity
+		icon=GFX_goal_CAR_Break_away_from_republican_absurdity
+		x=7
+		y=3
+		prerequisite={focus=CAR_Gerardo_Salvador_Merino}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Break_away_from_republican_absurdity
+		}
+	}
+	focus={
+		id=CAR_Down_with_the_bourgeoisie
+		icon=GFX_goal_CAR_Down_with_the_bourgeoisie
+		x=9
+		y=3
+		prerequisite={focus=CAR_Gerardo_Salvador_Merino}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Down_with_the_bourgeoisie
+			country_event = ncar.69
+		}
+	}
+	focus={
+		id=CAR_The_Land_of_Thousands_of_Trade_Unions
+		icon=GFX_goal_CAR_The_Land_of_Thousands_of_Trade_Unions
+		x=6
+		y=4
+		prerequisite={focus=CAR_Break_away_from_republican_absurdity}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_The_Land_of_Thousands_of_Trade_Unions
+			country_event = ncar.70
+		}
+	}
+	focus={
+		id=CAR_forced_integration
+		icon=GFX_goal_CAR_forced_integration
+		x=8
+		y=4
+		prerequisite={focus=CAR_Down_with_the_bourgeoisie}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_forced_integration
+		}
+	}
+	focus={
+		id=CAR_Strength_comes_from_joy
+		icon=GFX_goal_CAR_Strength_comes_from_joy
+		x=5
+		y=5
+		prerequisite={focus=CAR_The_Land_of_Thousands_of_Trade_Unions}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Strength_comes_from_joy
+		}
+	}
+	focus={
+		id=CAR_Opposing_the_idea_of_class_harmony
+		icon=GFX_goal_CAR_Opposing_the_idea_of_class_harmony
+		x=7
+		y=5
+		prerequisite={focus=CAR_forced_integration}
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Opposing_the_idea_of_class_harmony
+			country_event = ncar.71
+		}
+	}
+	focus={
+		id=CAR_Militant_nationalist
+		icon=GFX_goal_CAR_Militant_nationalist
+		x=0
+		y=6
+		prerequisite={focus=CAR_Bullets_and_gunpowder}
+		prerequisite={focus=CAR_Integrate_JONS focus=CAR_Youth_Commando focus=CAR_Bottom_up_syndicalism focus=CAR_The_old_order_went_up_in_flames focus=CAR_Syndicalist_Reconciliation focus=CAR_The_Rise_of_Black_Revolution focus=CAR_Strength_comes_from_joy focus=CAR_Opposing_the_idea_of_class_harmony }
+		cost=5
+		ai_will_do={
+			factor=1
+		}
+		available_if_capitulated=yes
+		relative_position_id = CAR_Towards_Nationwide_Revolution
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward={
+			add_ideas = CAR_Militant_nationalist
+		}
+	}
+}

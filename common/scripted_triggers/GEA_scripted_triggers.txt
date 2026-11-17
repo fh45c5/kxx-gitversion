@@ -1,0 +1,523 @@
+
+#固定采用当前KX外阿穆尔开局的12个地区，不随其后续领土变化。
+GEA_transamur_initial_states_trigger = {
+	OR = {
+		state = 408
+		state = 409
+		state = 560
+		state = 561
+		state = 562
+		state = 563
+		state = 564
+		state = 565
+		state = 574
+		state = 637
+		state = 657
+		state = 1246
+	}
+}
+
+#舍尔纳最终宣称与核心奖励的地区范围。
+GEA_schorner_far_east_claim_area_trigger = {
+	NOT = { state = 858 } #达旺属于南亚，不纳入远东整合
+	OR = {
+		is_china_claim_area = yes
+		is_mongolia = yes
+		region = 154
+		is_core_of = JAP
+		region = 191
+		is_southeast_asia = yes
+		GEA_transamur_initial_states_trigger = yes
+	}
+}
+
+#地区必须由德属东亚或其直属傀儡拥有，军事占领与普通盟友不计入。
+GEA_or_subject_owns_state_trigger = {
+	owner = {
+		OR = {
+			tag = GEA
+			is_subject_of = GEA
+		}
+	}
+}
+
+#在华北国家作用域判断当前反租界立场；退让解决旧立场，保留新反德政策与政权变动判断。
+GEA_zhili_anti_concession_trigger = {
+	NOT = { is_subject_of = GEA }
+	OR = {
+		AND = {
+			has_country_flag = wu_intervenes_proANQ
+			NOT = { has_country_flag = GEA_jade_marshal_concessions_accepted }
+		}
+		has_country_flag = QIE_manchu_restoration
+		has_country_flag = QIE_yiguandao_couped
+		has_focus_tree = QIE_manchu
+		AND = {
+			has_completed_focus = QIE_nationalize_germans
+			NOT = { has_country_flag = GEA_jade_concession_settled_QIE_nationalize_germans }
+		}
+		AND = {
+			has_completed_focus = QIE_endconcessions
+			NOT = { has_country_flag = GEA_jade_concession_settled_QIE_endconcessions }
+		}
+		AND = {
+			has_completed_focus = QIE_destroy_concessions
+			NOT = { has_country_flag = GEA_jade_concession_settled_QIE_destroy_concessions }
+		}
+		AND = {
+			has_completed_focus = QIE_destroy_germany
+			NOT = { has_country_flag = GEA_jade_concession_settled_QIE_destroy_germany }
+		}
+		AND = {
+			has_completed_focus = QIE_YGD_destroy_concessions
+			NOT = { has_country_flag = GEA_jade_concession_settled_QIE_YGD_destroy_concessions }
+		}
+	}
+}
+
+# Indochina presets: an explicit Heye route takes precedence over the no-revolt preset.
+GEA_indochina_revolt_preset = {
+	OR = {
+		has_game_rule = { rule = GEA_future option = GEA_FUTURE_REVOLT_YES }
+		has_game_rule = { rule = GEA_governor option = GEA_GOVERNOR_HEYE }
+	}
+}
+
+GEA_indochina_no_revolt_preset = {
+	has_game_rule = { rule = GEA_future option = GEA_FUTURE_REVOLT_NO }
+	NOT = { has_game_rule = { rule = GEA_governor option = GEA_GOVERNOR_HEYE } }
+}
+
+GEA_indochina_random_preset = {
+	has_game_rule = { rule = GEA_future option = DEFAULT }
+	NOT = { has_game_rule = { rule = GEA_governor option = GEA_GOVERNOR_HEYE } }
+}
+
+#印度支那地图互动
+GEA_indochina_can_interact_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_indochina_still_be_controlled_tt
+		GEA = {
+			any_owned_state = {
+				OR = { 
+					state = 857 
+					state = 671 
+					state = 827 
+					state = 670 
+					state = 826 
+					state = 286 
+					state = 856 
+				}
+				is_controlled_by = GEA
+			}
+		}
+	}
+}
+
+# 东方快车同时覆盖印度支那和马来亚，两个地区均失去控制后取消。
+GEA_indochina_or_malaya_can_interact_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_indochina_or_malaya_still_be_controlled_tt
+		OR = {
+			GEA_indochina_can_interact_trigger = yes
+			GEA = {
+				any_owned_state = {
+					is_controlled_by = GEA
+					OR = { state = 846 state = 336 }
+				}
+			}
+		}
+	}
+}
+
+#与整合印度支那决议一致的七个地区均已拥有并核心化
+GEA_indochina_fully_pacified_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_indochina_fully_pacified_tt
+		857 = { is_owned_by = GEA is_core_of = GEA }
+		671 = { is_owned_by = GEA is_core_of = GEA }
+		827 = { is_owned_by = GEA is_core_of = GEA }
+		670 = { is_owned_by = GEA is_core_of = GEA }
+		826 = { is_owned_by = GEA is_core_of = GEA }
+		286 = { is_owned_by = GEA is_core_of = GEA }
+		856 = { is_owned_by = GEA is_core_of = GEA }
+	}
+}
+
+#检查南京实际控制者
+GEA_nanjing_non_anti_concession_controller_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_nanjing_non_anti_concession_controller_tt
+		613 = {
+			controller = { 
+				GEA_china_warlord_can_interact_trigger = yes 
+			}
+		}
+	}
+}
+#判断山东
+GEA_shandong_non_anti_concession_controller_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_shandong_non_anti_concession_controller_tt
+		SQI = {
+			exists = yes
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+	}
+}
+#判断云南
+GEA_yunnan_non_anti_concession_controller_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_yunnan_non_anti_concession_controller_tt
+		YUN = {
+			exists = yes
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+	}
+}
+GEA_qie_non_anti_concession_controller_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_qie_non_anti_concession_controller_tt
+		QIE = {
+			exists = yes
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+	}
+}
+GEA_china_warlord_eligible_trigger = { #能互动的军阀
+	custom_trigger_tooltip = {
+		tooltip = GEA_china_warlord_eligible_tt
+		OR = {
+			original_tag = SQI
+			original_tag = LEP
+			original_tag = GXC
+			original_tag = YUN
+			original_tag = SZC
+		}
+	}
+}
+
+#
+
+GEA_china_warlord_cannot_interact_trigger = { #能互动的
+	custom_trigger_tooltip = {
+		NOT = { is_subject_of = GEA }
+		tooltip = GEA_china_warlord_cannot_interact_tt
+		OR = {
+			original_tag = ANQ #新皖系军阀
+			has_country_flag = GEA_china_warlord_interaction_blocked #没法互动标记
+			has_country_flag = GEA_german_coup_defeated # 政变失败禁用的
+			has_socialist_government = yes #国左的傻逼
+			has_government = radical_socialist
+			has_government = social_democrat
+			is_ruled_by_left_kmt = yes #也是国左的傻逼
+			has_country_leader = { name = "Zhang Tianran" ruling_only = yes } #神棍
+			has_country_leader = { name = "Chen Mingshu" ruling_only = yes } #还是国左的傻逼
+			has_country_leader = { name = "Zhu De" ruling_only = yes } #...
+		}
+	}
+}
+GEA_china_warlord_can_interact_trigger = {#即时判断
+	custom_trigger_tooltip = {
+		tooltip = GEA_china_warlord_can_interact_tt
+		NOT = { GEA_china_warlord_cannot_interact_trigger = yes }
+	}
+}
+GEA_china_warlord_positive_cooperation_trigger = {#积极合作的军阀判定
+	custom_trigger_tooltip = {
+		tooltip = GEA_china_warlord_positive_cooperation_tt
+		OR = {
+			is_subject_of = GEA
+			AND = {
+				NOT = { GEA_china_warlord_right_kmt_government_trigger = yes }
+				NOT = {
+					OR = {
+						has_country_flag = GEA_china_warlord_interaction_blocked #禁止互动
+						has_country_flag = GEA_german_coup_defeated #德国政变失败
+					}
+				}
+				OR = {
+					original_tag = LEP #德国人的狗
+					AND = {
+						original_tag = GXC
+						has_country_leader = { name = "Chen Lianbo" ruling_only = yes } #老霸道了
+					}
+					AND = {
+						original_tag = YUN
+						has_country_leader = { name = "Tang Jiyao" ruling_only = yes } #弱智大唐
+					}
+					AND = {
+						original_tag = QIE
+						has_country_flag = wu_intervenes_proLEP #正式支持南京
+					}
+					AND = {
+						original_tag = SZC
+						NOT = { has_country_leader = { name = "Chen Jiongming" ruling_only = yes } } #联省逼
+						NOT = { has_country_leader = { name = "Lü Chao" ruling_only = yes } } #吕超
+						NOT = { has_completed_focus = SZC_Eradicate_The_Concessions }
+						OR = {
+							has_country_leader = { name = "Yang Sen" ruling_only = yes } #杨森
+							has_country_leader = { name = "Liu Cunhou" ruling_only = yes } #留存后
+							has_completed_focus = SZC_Contact_An_Old_Ally
+						}
+					}
+				}
+			}
+		}
+	}
+}
+GEA_east_china_coup_threshold_trigger = {#可政变条件：读取实际目标国的违约门槛
+	if = {
+		limit = { FROM = { has_variable = GEA_coup_capital_requirement } }
+		custom_trigger_tooltip = {
+			tooltip = GEA_lep_coup_capital_dynamic_tt
+			check_variable = { var = GEA_china_lep_capital_influence value = FROM.GEA_coup_capital_requirement compare = greater_than_or_equals }
+		}
+		custom_trigger_tooltip = {
+			tooltip = GEA_lep_coup_military_dynamic_tt
+			check_variable = { var = GEA_china_lep_military_projection value = FROM.GEA_coup_military_requirement compare = greater_than_or_equals }
+		}
+	}
+	else = {
+		custom_trigger_tooltip = {
+			tooltip = GEA_lep_coup_capital_default_tt
+			check_variable = { var = GEA_china_lep_capital_influence value = 90 compare = greater_than_or_equals }
+		}
+		custom_trigger_tooltip = {
+			tooltip = GEA_lep_coup_military_default_tt
+			check_variable = { var = GEA_china_lep_military_projection value = 80 compare = greater_than_or_equals }
+		}
+	}
+}
+GEA_yunnan_vietnam_railway_access_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_yun_vietnam_railway_access_tt
+		GEA_yunnan_non_anti_concession_controller_trigger = yes
+		NOT = {
+			has_war_with = YUN
+		}
+		325 = {
+			is_owned_and_controlled_by = YUN
+		}
+		671 = {
+			owner = {
+				tag = GEA
+			}
+			controller = {
+				tag = GEA
+			}
+		}
+		857 = {
+			owner = {
+				tag = GEA
+			}
+			controller = {
+				tag = GEA
+			}
+		}
+	}
+}
+
+#四川军阀互动
+GEA_sichuan_non_anti_concession_controller_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_sichuan_non_anti_concession_controller_tt
+		SZC = {
+			exists = yes
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+	}
+}
+
+#四川大饥荒：恢复期民族精神不计入
+GEA_sichuan_famine_active_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_sichuan_famine_active_tt
+		SZC = {
+			exists = yes
+			has_idea = SZC_famine_idea
+		}
+	}
+}
+
+#川滇国内的国民党执政身份；不使用全局阵营对齐判定
+GEA_szc_yun_kmt_government_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_szc_yun_kmt_government_tt
+		OR = {
+			has_country_leader_ideology = tot_tridemism_subtype
+			has_country_leader_ideology = syn_tridemism_subtype
+			has_country_leader_ideology = radsoc_tridemism_subtype
+			has_country_leader_ideology = socdem_tridemism_subtype
+			has_country_leader_ideology = soclib_tridemism_subtype
+			has_country_leader_ideology = marlib_tridemism_subtype
+			has_country_leader_ideology = soccon_tridemism_subtype
+			has_country_leader_ideology = authdem_tridemism_subtype
+			has_country_leader_ideology = pataut_tridemism_subtype
+			has_country_leader_ideology = natpop_tridemism_subtype
+		}
+	}
+}
+
+#AI完成所选政治路线与经济收尾后，再提高对华经营优先级
+GEA_ai_domestic_main_focuses_completed_trigger = {
+	has_completed_focus = GEA_On_the_colonial_crown_the_pearl_is_shining
+	OR = {
+		AND = {
+			has_country_flag = GEA_Governor_Hahl_flag
+			has_completed_focus = GEA_Even_closer_to_a_model_colony
+		}
+		AND = {
+			has_country_flag = GEA_Governor_Josias_flag
+			has_completed_focus = GEA_Prinz_Kaiser_Deutschland
+		}
+		AND = {
+			has_country_flag = GEA_Governor_Heye_flag
+			has_completed_focus = GEA_Die_Wacht_im_Fernen_Osten
+		}
+		AND = {
+			has_country_flag = GEA_Governor_Tilo_flag
+			has_completed_focus = GEA_The_factorys_thick_smoke_wealth_and_German_East_Asia
+		}
+		AND = {
+			has_country_flag = GEA_Governor_Meer_flag
+			has_completed_focus = GEA_The_factorys_thick_smoke_wealth_and_German_East_Asia
+		}
+		AND = {
+			has_country_flag = GEA_Governor_Luckner_flag
+			has_completed_focus = GEA_The_ocean_demon_conquers_the_seven_seas
+		}
+		AND = {
+			has_country_flag = GEA_Governor_Schorner_flag
+			has_completed_focus = GEA_Let_loose_the_blood-stained_black_eagle
+		}
+	}
+}
+
+#两广互动
+GEA_liangguang_peacetime_interaction_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_liangguang_peacetime_interaction_tt
+		GXC = {
+			exists = yes
+			GEA_china_warlord_can_interact_trigger = yes
+			has_civil_war = no
+			NOT = { has_war_with = GEA }
+		}
+		NOT = {
+			AND = {
+				has_global_flag = GXC_had_civil_war
+				NOT = { has_global_flag = GXC_civil_war_over }
+				any_country = {
+					GXC_has_guangdong_government = yes
+					any_enemy_country = { GXC_has_guangxi_government = yes }
+				}
+			}
+		}
+	}
+}
+
+#判断两广
+GEA_liangguang_non_anti_concession_controller_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_liangguang_non_anti_concession_controller_tt
+		GXC = {
+			exists = yes
+			GEA_china_warlord_can_interact_trigger = yes
+		}
+	}
+}
+
+#两广内战结算包括和平整合；开局尚未发生内战不算结算
+GEA_liangguang_civil_war_resolved_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_liangguang_civil_war_resolved_tt
+		has_global_flag = GXC_civil_war_over
+		GXC = { has_civil_war = no }
+		NOT = {
+			any_country = {
+				GXC_has_guangdong_government = yes
+				any_enemy_country = { GXC_has_guangxi_government = yes }
+			}
+		}
+	}
+}
+
+#两广：左派执政，或右派执政且已经驱逐德资；不按阵营判定执政身份
+GEA_liangguang_expedition_target_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_liangguang_expedition_target_tt
+		GXC = {
+			exists = yes
+			OR = {
+				OR = {
+					has_country_leader = { name = "Chen Mingshu" ruling_only = yes }
+					has_country_leader_ideology = tot_tridemism_subtype
+					has_country_leader_ideology = syn_tridemism_subtype
+					has_country_leader_ideology = radsoc_tridemism_subtype
+					has_country_leader_ideology = socdem_tridemism_subtype
+				}
+				AND = {
+					has_country_flag = GEA_china_warlord_interaction_blocked
+					OR = {
+						has_country_leader = { name = "Li Zongren" ruling_only = yes }
+						has_country_leader_ideology = soclib_tridemism_subtype
+						has_country_leader_ideology = marlib_tridemism_subtype
+						has_country_leader_ideology = soccon_tridemism_subtype
+						has_country_leader_ideology = authdem_tridemism_subtype
+						has_country_leader_ideology = pataut_tridemism_subtype
+						has_country_leader_ideology = natpop_tridemism_subtype
+					}
+				}
+			}
+		}
+	}
+}
+
+#国民党右派实际执政身份，不因加入其阵营而改变国内合作态度
+GEA_china_warlord_right_kmt_government_trigger = {
+	NOT = { is_subject_of = GEA }
+	OR = {
+		has_country_leader = { name = "Li Zongren" ruling_only = yes }
+		has_country_leader = { name = "Zhu Peide" ruling_only = yes }
+		has_country_leader_ideology = soclib_tridemism_subtype
+		has_country_leader_ideology = marlib_tridemism_subtype
+		has_country_leader_ideology = soccon_tridemism_subtype
+		has_country_leader_ideology = authdem_tridemism_subtype
+		has_country_leader_ideology = pataut_tridemism_subtype
+		has_country_leader_ideology = natpop_tridemism_subtype
+	}
+}
+
+GEA_china_warlord_limited_cooperation_trigger = {
+	GEA_china_warlord_right_kmt_government_trigger = yes
+	NOT = {
+		OR = {
+			has_country_flag = GEA_china_warlord_interaction_blocked
+			has_country_flag = GEA_german_coup_defeated
+		}
+	}
+}
+
+#广东、广西和海南本土地块；不包括香港、澳门、广州湾等外国租界
+GEA_liangguang_under_german_control_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = GEA_liangguang_under_german_control_tt
+		OR = {
+			GXC = { exists = yes is_subject_of = GEA }
+			AND = {
+				591 = { is_controlled_by = GEA }
+				592 = { is_controlled_by = GEA }
+				593 = { is_controlled_by = GEA }
+				594 = { is_controlled_by = GEA }
+				599 = { is_controlled_by = GEA }
+				800 = { is_controlled_by = GEA }
+				1012 = { is_controlled_by = GEA }
+				1053 = { is_controlled_by = GEA }
+				1054 = { is_controlled_by = GEA }
+				1055 = { is_controlled_by = GEA }
+				1056 = { is_controlled_by = GEA }
+			}
+		}
+	}
+}

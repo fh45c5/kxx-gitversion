@@ -1,0 +1,143 @@
+# Light flame support: original bootstrap retained.
+GEA_flame_tank_bootstrap = {
+	allowed = { original_tag = GEA }
+	enable = {
+		num_of_military_factories > 24
+		has_tech = basic_light_tank_chassis
+		is_special_project_completed = sp:sp_land_flamethrower_tank
+		has_equipment = { light_tank_flame_chassis < 40 }
+		has_equipment = { infantry_equipment > 500 }
+		has_equipment = { support_equipment > 20 }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = light_tank_flame_chassis
+		value = 1
+	}
+}
+
+# Independent TD reserves: no flame project, flame stockpile, hospital or engineer dependency at the support stage.
+GEA_td_support_bootstrap = {
+	allowed = { original_tag = GEA }
+	enable = {
+		num_of_military_factories > 24
+		NOT = { AND = { num_of_military_factories > 49 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons has_tech = interwar_antitank OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } date > 1941.12.31 } }
+		has_tech = interwar_antitank
+		OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis }
+		has_equipment = { medium_tank_destroyer_chassis < 180 }
+		has_equipment = { infantry_equipment > 500 }
+		has_equipment = { support_equipment > 50 }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = medium_tank_destroyer_chassis
+		value = 1
+	}
+}
+
+# Mature heavy TD infantry reserves; flame support remains optional.
+GEA_td_infantry_bootstrap = {
+	allowed = { original_tag = GEA }
+	enable = {
+		num_of_military_factories > 49
+		has_tech = tech_engineers
+		has_tech = tech_recon
+		has_tech = tech_field_hospital
+		has_tech = tech_logistics_company
+		has_tech = support_weapons
+		has_tech = interwar_antitank
+		OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis }
+		date > 1941.12.31
+		has_equipment = { medium_tank_destroyer_chassis < 600 }
+		has_equipment = { infantry_equipment > 500 }
+		has_equipment = { support_equipment > 50 }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = medium_tank_destroyer_chassis
+		value = 2
+	}
+}
+
+# Recovery reserves prevent supply pauses from starving the production that can release them.
+# Exactly one shared recovery component is selected; existing flame/TD reserve plans remain separate.
+GEA_recover_infantry_equipment_basic = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_infantry_equipment = yes }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = infantry_equipment value = 1 }
+}
+
+GEA_recover_artillery_equipment_basic = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_artillery_equipment = yes NOT = { OR = { GEA_ai_recover_infantry_equipment = yes } } }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = artillery_equipment value = 1 }
+}
+
+GEA_recover_support_equipment_basic = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_support_equipment = yes NOT = { OR = { GEA_ai_recover_infantry_equipment = yes GEA_ai_recover_artillery_equipment = yes } } }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = support_equipment value = 1 }
+}
+
+GEA_recover_motorized_equipment_basic = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_motorized_equipment = yes NOT = { OR = { GEA_ai_recover_infantry_equipment = yes GEA_ai_recover_artillery_equipment = yes GEA_ai_recover_support_equipment = yes } } }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = motorized_equipment value = 1 }
+}
+
+GEA_recover_anti_tank_equipment_basic = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_anti_tank_equipment = yes NOT = { OR = { GEA_ai_recover_infantry_equipment = yes GEA_ai_recover_artillery_equipment = yes GEA_ai_recover_support_equipment = yes GEA_ai_recover_motorized_equipment = yes } } }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = anti_tank_equipment value = 1 }
+}
+
+GEA_recover_light_tank_chassis_small = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_light_tank_chassis = yes NOT = { OR = { GEA_ai_recover_infantry_equipment = yes GEA_ai_recover_artillery_equipment = yes GEA_ai_recover_support_equipment = yes GEA_ai_recover_motorized_equipment = yes GEA_ai_recover_anti_tank_equipment = yes } } num_of_military_factories < 25 }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = light_tank_chassis value = 1 }
+}
+
+GEA_recover_light_tank_chassis_medium = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_light_tank_chassis = yes NOT = { OR = { GEA_ai_recover_infantry_equipment = yes GEA_ai_recover_artillery_equipment = yes GEA_ai_recover_support_equipment = yes GEA_ai_recover_motorized_equipment = yes GEA_ai_recover_anti_tank_equipment = yes } } num_of_military_factories > 24 num_of_military_factories < 40 }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = light_tank_chassis value = 2 }
+}
+
+GEA_recover_light_tank_chassis_large = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_light_tank_chassis = yes NOT = { OR = { GEA_ai_recover_infantry_equipment = yes GEA_ai_recover_artillery_equipment = yes GEA_ai_recover_support_equipment = yes GEA_ai_recover_motorized_equipment = yes GEA_ai_recover_anti_tank_equipment = yes } } num_of_military_factories > 39 }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = light_tank_chassis value = 3 }
+}
+
+GEA_recover_medium_tank_chassis_small = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_medium_tank_chassis = yes NOT = { OR = { GEA_ai_recover_infantry_equipment = yes GEA_ai_recover_artillery_equipment = yes GEA_ai_recover_support_equipment = yes GEA_ai_recover_motorized_equipment = yes GEA_ai_recover_anti_tank_equipment = yes GEA_ai_recover_light_tank_chassis = yes } } num_of_military_factories < 25 }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = medium_tank_chassis value = 1 }
+}
+
+GEA_recover_medium_tank_chassis_medium = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_medium_tank_chassis = yes NOT = { OR = { GEA_ai_recover_infantry_equipment = yes GEA_ai_recover_artillery_equipment = yes GEA_ai_recover_support_equipment = yes GEA_ai_recover_motorized_equipment = yes GEA_ai_recover_anti_tank_equipment = yes GEA_ai_recover_light_tank_chassis = yes } } num_of_military_factories > 24 num_of_military_factories < 40 }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = medium_tank_chassis value = 2 }
+}
+
+GEA_recover_medium_tank_chassis_large = {
+	allowed = { tag = GEA }
+	enable = { GEA_ai_recover_medium_tank_chassis = yes NOT = { OR = { GEA_ai_recover_infantry_equipment = yes GEA_ai_recover_artillery_equipment = yes GEA_ai_recover_support_equipment = yes GEA_ai_recover_motorized_equipment = yes GEA_ai_recover_anti_tank_equipment = yes GEA_ai_recover_light_tank_chassis = yes } } num_of_military_factories > 39 }
+	abort_when_not_enabled = yes
+	ai_strategy = { type = equipment_production_min_factories_archetype id = medium_tank_chassis value = 3 }
+}
+

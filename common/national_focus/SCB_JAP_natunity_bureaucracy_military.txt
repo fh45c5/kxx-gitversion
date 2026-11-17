@@ -14,7 +14,7 @@ focus_tree = {
 	shared_focus = JAP_land_reform_focus
 	shared_focus = JAP_revise_imperial_defence_policy
 # ==================== 开局国策 ====================
-	# 平沼内阁 (开局已完成)
+	# 平沼内阁（开局已完成）
 	focus = {
 		id = JAP_hiranuma_cabinet
 		icon = GFX_goal_JAP_hiranuma_cabinet
@@ -22,11 +22,12 @@ focus_tree = {
 		x = 14
 		y = 0
 		completion_reward = {
+			add_ideas = JAP_gt_hiranuma_base
 			custom_effect_tooltip = JAP_hiranuma_cabinet_eff
-		}
+}
 	}
 
-	# 枢密院改革案 (开局已完成)
+	# 枢密院改革案（开局已完成）
 	focus = {
 		id = JAP_privy_council_reform
 		icon = GFX_goal_JAP_privy_council_reform
@@ -38,11 +39,12 @@ focus_tree = {
 		y = 1
 		cost = 0
 		completion_reward = {
+			add_ideas = JAP_gt_privy_council
 			custom_effect_tooltip = JAP_privy_council_reform_eff
-		}
+}
 	}
 
-	# 陆海军预算协调 (开局已完成)
+	# 陆海军预算协调（开局已完成）
 	focus = {
 		id = JAP_army_navy_budget_coordination
 		icon = GFX_goal_JAP_army_navy_budget_coordination
@@ -54,11 +56,13 @@ focus_tree = {
 		y = 1
 		cost = 0
 		completion_reward = {
+			add_political_power = 75
+			army_experience = 25
 			custom_effect_tooltip = JAP_army_navy_budget_coordination_eff
-		}
+}
 	}
 
-	# 持续的选举肃正 (开局已完成)
+	# 持续的选举肃正（开局已完成）
 	focus = {
 		id = JAP_continued_election_purification
 		icon = GFX_goal_JAP_continued_election_purification
@@ -70,11 +74,12 @@ focus_tree = {
 		y = 1
 		cost = 0
 		completion_reward = {
+			add_political_power = 50
 			custom_effect_tooltip = JAP_continued_election_purification_eff
-		}
+}
 	}
 
-	# 压制右翼的躁动 (开局已完成)
+	# 压制右翼的躁动（开局已完成）
 	focus = {
 		id = JAP_suppress_right_wing_agitation
 		icon = GFX_goal_JAP_suppress_right_wing_agitation
@@ -92,11 +97,12 @@ focus_tree = {
 		y = 1
 		cost = 0
 		completion_reward = {
+			add_ideas = JAP_gt_suppress_right
 			custom_effect_tooltip = JAP_suppress_right_wing_agitation_eff
-		}
+}
 	}
 
-	# 与政友会的联盟 (开局已完成)
+	# 与政友会的联盟（开局已完成）
 	focus = {
 		id = JAP_alliance_with_seiyukai
 		icon = GFX_goal_JAP_alliance_with_seiyukai
@@ -114,8 +120,9 @@ focus_tree = {
 		y = 1
 		cost = 0
 		completion_reward = {
+			add_political_power = 50
 			custom_effect_tooltip = JAP_alliance_with_seiyukai_eff
-		}
+}
 	}
 
 	# 第七十届帝国议会
@@ -136,11 +143,13 @@ focus_tree = {
 		y = 2
 		cost = 0
 		completion_reward = {
+			add_political_power = 75
+		
 			country_event = {
 				id = SCBJAP.6
 				days = 30
 			}
-		}
+}
 	}	
 	
 	# ==================== 官僚内阁 ====================
@@ -154,122 +163,185 @@ focus_tree = {
 		x = 14
 		y = 5
 		completion_reward = {
+			add_ideas = JAP_gt_bureau_cabinet
+		
+			add_political_power = 100
+			country_event = {
+				id = SCBJAP.50
+				days = 3
+			}
+
+			add_offsite_building = { type = industrial_complex level = 10 }
 		}
 	}
 	
-	# ==================== 平沼阀VS伊泽阀 ====================
+	# ---- 平沼阀VS伊泽阀 ----
 	focus = {
 		id = JAP_iron_fist_of_thought_prosecutors
 		icon = GFX_goal_JAP_iron_fist_of_thought_prosecutors
-		cost = 7
+		cost = 4
+		available = {
+			always = no
+		}
 		prerequisite = { focus = JAP_continuation_of_bureaucratic_cabinet }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -3
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = gt_police_L1
+				add_idea = gt_police_L2
+			}
+		
+			add_political_power = 50
+
+			add_offsite_building = { type = arms_factory level = 10 }
 		}
 	}
 	
 	focus = {
 		id = JAP_return_of_the_new_bureaucrats
 		icon = GFX_goal_JAP_return_of_the_new_bureaucrats
-		cost = 7
+		cost = 4
+		available = {
+			always = no
+		}		
 		prerequisite = { focus = JAP_continuation_of_bureaucratic_cabinet }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = 3
 		y = 1
 		completion_reward = {
+			add_ideas = gt_bureau_L1
+		
+			add_tech_bonus = {
+				name = JAP_new_bureaucrats_industry
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+
+			add_offsite_building = { type = industrial_complex level = 10 }
 		}
 	}
 	
 	focus = {
 		id = JAP_promote_provincial_personnel_reform
 		icon = GFX_goal_JAP_promote_provincial_personnel_reform
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_iron_fist_of_thought_prosecutors }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -4
 		y = 2
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = gt_bureau_L1
+				add_idea = gt_bureau_L2
+			}
+		
+			add_political_power = 50
+
+			add_offsite_building = { type = industrial_complex level = 10 }
 		}
 	}
 	
 	focus = {
 		id = JAP_enforce_national_security_act
 		icon = GFX_goal_JAP_enforce_national_security_act
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_iron_fist_of_thought_prosecutors }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -2
 		y = 2
 		completion_reward = {
+			add_political_power = 50
+		
+
+			add_offsite_building = { type = arms_factory level = 10 }
+			add_manpower = 10000
 		}
 	}
 	
 	focus = {
 		id = JAP_resist_military_radicalism
 		icon = GFX_goal_JAP_resist_military_radicalism
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_return_of_the_new_bureaucrats }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = 2
 		y = 2
 		completion_reward = {
+			add_ideas = JAP_gt_resist_radical
+		
+			add_political_power = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_eliminate_corruption_in_justice_ministry
 		icon = GFX_goal_JAP_eliminate_corruption_in_justice_ministry
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_return_of_the_new_bureaucrats }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = 4
 		y = 2
 		completion_reward = {
+			add_political_power = 125
 		}
 	}
 	
 	focus = {
 		id = JAP_support_imperial_way_diplomacy_renewal
 		icon = GFX_goal_JAP_support_imperial_way_diplomacy_renewal
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_promote_provincial_personnel_reform }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -6
 		y = 3
 		completion_reward = {
+			add_political_power = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_reject_normalization_of_criminal_police
 		icon = GFX_goal_JAP_reject_normalization_of_criminal_police
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_promote_provincial_personnel_reform }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -4
 		y = 3
 		completion_reward = {
+			add_ideas = JAP_gt_reject_police_norm
+		
+
+			add_political_power = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_establish_jurisprudence_research_society
 		icon = GFX_goal_JAP_establish_jurisprudence_research_society
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_enforce_national_security_act }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -2
 		y = 3
 		completion_reward = {
+			add_political_power = 50
+		
+			add_tech_bonus = {
+				name = JAP_jurisprudence_research
+				bonus = 1
+				uses = 1
+				category = electronics
+			}
 		}
 	}
 	
 	focus = {
 		id = JAP_purge_action_right_wing
 		icon = GFX_goal_AUS_rebuke_antisemitism
-		cost = 7
+		cost = 4
 		prerequisite = {
 			focus = JAP_enforce_national_security_act
 			focus = JAP_resist_military_radicalism
@@ -278,88 +350,128 @@ focus_tree = {
 		x = 0
 		y = 3
 		completion_reward = {
+			add_political_power = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_develop_kinkei_academy
 		icon = GFX_goal_JAP_develop_kinkei_academy
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_resist_military_radicalism }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = 2
 		y = 3
-		completion_reward = {
+							completion_reward = {
+			add_political_power = 125
+				army_experience = 25
+				add_ideas = JAP_scb_kinkei_academy
+				country_event = { id = SCBJAP.62 days = 5 }
+				unlock_decision_tooltip = JAP_gt_bureau_posting
+			
+			add_offsite_building = { type = industrial_complex level = 10 }
 		}
 	}
 	
 	focus = {
 		id = JAP_senior_bureaucrats_protection_act
 		icon = GFX_goal_JAP_senior_bureaucrats_protection_act
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_eliminate_corruption_in_justice_ministry }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = 4
 		y = 3
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = gt_bureau_L2
+				add_idea = gt_bureau_L3
+			}
+		
+			add_political_power = 75
+
+			add_offsite_building = { type = industrial_complex level = 10 }
 		}
 	}
 	
 	focus = {
 		id = JAP_promote_agricultural_association_movement
 		icon = GFX_goal_JAP_promote_agricultural_association_movement
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_eliminate_corruption_in_justice_ministry }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = 6
 		y = 3
 		completion_reward = {
+			add_manpower = 7000
+			add_political_power = 50
+			
+		
+			
+
+			add_offsite_building = { type = industrial_complex level = 10 }
 		}
 	}
 	
 	focus = {
 		id = JAP_expand_suzuki_kwantung_army
 		icon = GFX_goal_JAP_expand_suzuki_kwantung_army
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_support_imperial_way_diplomacy_renewal }
 		prerequisite = { focus = JAP_reject_normalization_of_criminal_police }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -5
 		y = 4
 		completion_reward = {
+			add_political_power = 50
+			army_experience = 25
+		
+			add_offsite_building = { type = arms_factory level = 10 }
+			add_manpower = 10000
 		}
 	}
 	
 	focus = {
 		id = JAP_useful_discretion_of_nationalism
 		icon = GFX_goal_JAP_useful_discretion_of_nationalism
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_reject_normalization_of_criminal_police }
 		prerequisite = { focus = JAP_establish_jurisprudence_research_society }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -3
 		y = 4
 		completion_reward = {
+			add_ideas = JAP_gt_nationalism_discretion
+		
+			add_political_power = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_increase_execution_preventive_detention
 		icon = GFX_goal_JAP_increase_execution_preventive_detention
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_establish_jurisprudence_research_society }
 		prerequisite = { focus = JAP_purge_action_right_wing }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -1
 		y = 4
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = gt_police_L2
+				add_idea = gt_police_L3
+			}
+		
+
+		
+			add_political_power = 50
+			add_manpower = 10000
 		}
 	}
 	
 	focus = {
 		id = JAP_appeasement_policy
 		icon = GFX_goal_JAP_appeasement_policy
-		cost = 7
+		cost = 4
 		prerequisite = {
 			focus = JAP_purge_action_right_wing
 		}
@@ -369,14 +481,17 @@ focus_tree = {
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = 1
 		y = 4
-		completion_reward = {
+				completion_reward = {
+			add_political_power = 175
+			add_ideas = JAP_scb_appeasement
+			unlock_decision_tooltip = JAP_gt_asia_cooperation
 		}
 	}
 	
 	focus = {
 		id = JAP_inspiration_of_mahatma_gandhi
 		icon = GFX_goal_JAP_inspiration_of_mahatma_gandhi
-		cost = 7
+		cost = 4
 		prerequisite = {
 			focus = JAP_develop_kinkei_academy
 		}
@@ -386,14 +501,17 @@ focus_tree = {
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = 3
 		y = 4
-		completion_reward = {
+				completion_reward = {
+			add_political_power = 50
+			add_ideas = JAP_scb_gandhi_inspiration
+			custom_effect_tooltip = SCB_JAP_gandhi_inspiration_tt
 		}
 	}
 	
 	focus = {
 		id = JAP_unified_organization_of_youth_corps
 		icon = GFX_goal_JAP_unified_organization_of_youth_corps
-		cost = 7
+		cost = 4
 		prerequisite = {
 			focus = JAP_senior_bureaucrats_protection_act
 		}
@@ -404,39 +522,55 @@ focus_tree = {
 		x = 5
 		y = 4
 		completion_reward = {
+			add_manpower = 17000
+			add_political_power = 50
+			
+		
 		}
 	}
 	
 	focus = {
 		id = JAP_create_financial_scandals
 		icon = GFX_goal_JAP_create_financial_scandals
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_expand_suzuki_kwantung_army }
 		prerequisite = { focus = JAP_useful_discretion_of_nationalism }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -4
 		y = 5
-		completion_reward = {
+							completion_reward = {
+			add_political_power = 250
+				add_ideas = JAP_scb_financial_scandal
+				unlock_decision_tooltip = JAP_gt_scandal_purge
+				unlock_decision_tooltip = JAP_gt_arrest_go_seinosuke
 		}
 	}
 	
 	focus = {
 		id = JAP_kempeitai_politics_tokko_state
 		icon = GFX_goal_JAP_kempeitai_politics_tokko_state
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_useful_discretion_of_nationalism }
 		prerequisite = { focus = JAP_increase_execution_preventive_detention }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -2
 		y = 5
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = gt_police_L3
+				add_idea = gt_police_L4
+			}
+		
+
+			add_offsite_building = { type = arms_factory level = 10 }
+			add_manpower = 10000
 		}
 	}
 	
 	focus = {
 		id = JAP_national_labor_education
 		icon = GFX_goal_JAP_national_labor_education
-		cost = 7
+		cost = 4
 		prerequisite = {
 			focus = JAP_appeasement_policy 
 		}
@@ -447,13 +581,23 @@ focus_tree = {
 		x = 2
 		y = 5
 		completion_reward = {
+			add_ideas = gt_spirit_L1
+		
+			add_tech_bonus = {
+				name = JAP_labor_education_industry
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+
+			add_offsite_building = { type = industrial_complex level = 10 }
 		}
 	}
 	
 	focus = {
 		id = JAP_relief_for_colonies
 		icon = GFX_goal_JAP_relief_for_colonies
-		cost = 7
+		cost = 4
 		prerequisite = {
 			focus = JAP_inspiration_of_mahatma_gandhi
 		}
@@ -463,27 +607,34 @@ focus_tree = {
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = 4
 		y = 5
-		completion_reward = {
+				completion_reward = {
+			add_political_power = 50
+			add_manpower = 10000
+			add_ideas = JAP_scb_colony_relief
+			unlock_decision_tooltip = JAP_gt_colony_relief
 		}
 	}
 	
 	focus = {
 		id = JAP_imperial_way_is_jurisprudence
 		icon = GFX_goal_JAP_imperial_way_is_jurisprudence
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_create_financial_scandals }
 		prerequisite = { focus = JAP_kempeitai_politics_tokko_state }
 		relative_position_id = JAP_continuation_of_bureaucratic_cabinet
 		x = -3
 		y = 6
 		completion_reward = {
+			add_ideas = JAP_gt_imperial_jurisprudence
+		
+			add_political_power = 75
 		}
 	}
 	
 	focus = {
 		id = JAP_rebuild_the_moral_nation
 		icon = GFX_goal_JAP_rebuild_the_moral_nation
-		cost = 7
+		cost = 4
 		prerequisite = {
 			focus = JAP_national_labor_education
 		}
@@ -494,9 +645,14 @@ focus_tree = {
 		x = 3
 		y = 6
 		completion_reward = {
+			add_ideas = JAP_gt_moral_nation
+			country_event = SCBJAP.61
+			add_research_slot = 1
+
+			add_offsite_building = { type = industrial_complex level = 10 }
 		}
 	}
-#松井石根南次郎军政府
+	# ==================== 军部内阁 ====================
 	focus = {
 		id = JAP_total_martial_law
 		icon = GFX_goal_JAP_total_martial_law
@@ -505,9 +661,17 @@ focus_tree = {
 		}
 		x = 8
 		y = 13
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			add_ideas = JAP_gt_martial_law_base
+		
+			add_political_power = 100
+			country_event = {
+				id = SCBJAP.51
+				days = 3
+			}
+
+			army_experience = 50
 		}
 	}
 	
@@ -520,9 +684,11 @@ focus_tree = {
 		relative_position_id = JAP_total_martial_law
 		x = -1
 		y = 1
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			add_ideas = JAP_gt_active_service_minister
+		
+			army_experience = 25
 		}
 	}
 	
@@ -535,9 +701,13 @@ focus_tree = {
 		relative_position_id = JAP_total_martial_law
 		x = 1
 		y = 1
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			add_ideas = gt_police_L1
+		
+
+		
+			add_political_power = 50
 		}
 	}
 	
@@ -555,7 +725,15 @@ focus_tree = {
 		y = 2
 		cost = 10
 		completion_reward = {
-			
+			add_ideas = JAP_gt_dai_nippon_seijikai
+		
+			add_political_power = 100
+			country_event = {
+				id = SCBJAP.52
+				days = 3
+			}
+
+			army_experience = 25
 		}
 	}
 	
@@ -568,9 +746,20 @@ focus_tree = {
 		relative_position_id = JAP_birth_of_dai_nippon_political_association
 		x = -1
 		y = 1
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			add_ideas = gt_control_L1
+		
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 4
+					instant_build = yes
+				}
+			}
+
+			add_offsite_building = { type = industrial_complex level = 3 }
 		}
 	}
 	
@@ -583,9 +772,11 @@ focus_tree = {
 		relative_position_id = JAP_birth_of_dai_nippon_political_association
 		x = 1
 		y = 1
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			add_ideas = JAP_gt_expel_parties
+		
+			add_political_power = 75
 		}
 	}
 	
@@ -598,9 +789,21 @@ focus_tree = {
 		relative_position_id = JAP_industrial_control_expansion
 		x = -1
 		y = 1
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			add_political_power = 75
+		
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 4
+					instant_build = yes
+				}
+			}
+
+			add_ideas = JAP_gt_zaibatsu_manchuria
+			add_offsite_building = { type = arms_factory level = 2 }
 		}
 	}
 	
@@ -616,9 +819,12 @@ focus_tree = {
 		relative_position_id = JAP_birth_of_dai_nippon_political_association
 		x = 0
 		y = 2
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			add_political_power = 50
+		
+
+			add_ideas = JAP_gt_patriotic_combination
 		}
 	}
 	
@@ -631,9 +837,20 @@ focus_tree = {
 		relative_position_id = JAP_expelling_political_parties
 		x = 1
 		y = 1
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			add_ideas = gt_rearm_L1
+		
+			army_experience = 25
+			add_tech_bonus = {
+				name = JAP_three_year_rearmament_armor
+				bonus = 1
+				uses = 1
+				category = armor
+			}
+
+			add_ideas = JAP_gt_army_modernization
+			add_offsite_building = { type = arms_factory level = 2 }
 		}
 	}
 	
@@ -651,7 +868,17 @@ focus_tree = {
 		y = 1
 		cost = 10
 		completion_reward = {
-			
+			add_political_power = 75
+		
+			add_tech_bonus = {
+				name = JAP_zaibatsu_merger_industry
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+
+			add_ideas = JAP_gt_military_zaibatsu
+			add_offsite_building = { type = arms_factory level = 2 }
 		}
 	}
 	
@@ -669,7 +896,11 @@ focus_tree = {
 		y = 1
 		cost = 10
 		completion_reward = {
-			
+			add_ideas = JAP_gt_kowa_in
+		
+			add_political_power = 75
+
+			add_offsite_building = { type = arms_factory level = 1 }
 		}
 	}
 	
@@ -682,9 +913,14 @@ focus_tree = {
 		relative_position_id = JAP_military_zaibatsu_merger
 		x = -1
 		y = 1
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = gt_control_L1
+				add_idea = gt_control_L3
+			}
+		
+			add_war_support = 0.05
 		}
 	}
 	
@@ -697,9 +933,23 @@ focus_tree = {
 		relative_position_id = JAP_military_zaibatsu_merger
 		x = 1
 		y = 1
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = gt_rearm_L1
+				add_idea = gt_rearm_L2
+			}
+		
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 4
+					instant_build = yes
+				}
+			}
+
+			add_offsite_building = { type = arms_factory level = 3 }
 		}
 	}
 	
@@ -712,9 +962,12 @@ focus_tree = {
 		relative_position_id = JAP_establish_kowa_in
 		x = -1
 		y = 1
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			add_political_power = 125
+		
+
+			add_ideas = JAP_gt_china_work
 		}
 	}
 	
@@ -727,9 +980,11 @@ focus_tree = {
 		relative_position_id = JAP_establish_kowa_in
 		x = 1
 		y = 1
-		cost = 7
+		cost = 4
 		completion_reward = {
-			
+			add_political_power = 125
+		
+			add_ideas = JAP_gt_manchuria_network
 		}
 	}
 	
@@ -747,7 +1002,18 @@ focus_tree = {
 		y = 2
 		cost = 10
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = gt_rearm_L2
+				add_idea = gt_rearm_L3
+			}
+		
+			country_event = {
+				id = SCBJAP.53
+				days = 3
+			}
+
+			add_offsite_building = { type = arms_factory level = 1 }
+			army_experience = 50
 		}
 	}
 	
@@ -765,7 +1031,11 @@ focus_tree = {
 		y = 2
 		cost = 10
 		completion_reward = {
-			
+			add_ideas = JAP_gt_asia_liberation
+		
+			add_war_support = 0.05
+
+			add_manpower = 20000
 		}
 	}
 	
@@ -784,7 +1054,19 @@ focus_tree = {
 		y = 4
 		cost = 10
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = gt_control_L3
+				add_idea = gt_control_L4
+			}
+		
+			add_research_slot = 1
+			army_experience = 50
+			country_event = {
+				id = SCBJAP.54
+				days = 3
+			}
+
+			add_offsite_building = { type = arms_factory level = 1 }
 		}
 	}
 	
@@ -795,54 +1077,68 @@ focus_tree = {
 		available = {
 			always = no
 		}		
-		cost = 7
+		cost = 4
 		x = 21
 		y = 13
 		completion_reward = {
-			add_ideas = { JAP_imperial_way_needs_order }
+			add_ideas = JAP_gt_imperial_order_base
+		
+			add_political_power = 100
+			country_event = {
+				id = SCBJAP.55
+				days = 3
+			}
+
+			add_offsite_building = { type = arms_factory level = 1 }
+			army_experience = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_pardon_involved_parties
 		icon = GFX_goal_AUS_illegal_opposition
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_imperial_way_needs_order }
 		relative_position_id = JAP_imperial_way_needs_order
 		x = -3
 		y = 1
 		completion_reward = {
+			add_political_power = 125
 		}
 	}
 	
 	focus = {
 		id = JAP_purge_kita_nishida
 		icon = GFX_JAPARAKI_attack_the_socialist_resistance-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_imperial_way_needs_order }
 		relative_position_id = JAP_imperial_way_needs_order
 		x = 0
 		y = 1
 		completion_reward = {
+			add_political_power = 125
 		}
 	}
 	
 	focus = {
 		id = JAP_exorcise_ugaki_faction
 		icon = GFX_JAPARAKI_crush_ugaki_thought-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_imperial_way_needs_order }
 		relative_position_id = JAP_imperial_way_needs_order
 		x = 3
 		y = 1
 		completion_reward = {
+			add_political_power = 50
+		
+			army_experience = 25
 		}
 	}
 	
 	focus = {
 		id = JAP_mazaki_araki_shogunate
 		icon = GFX_JAPARAKI_araki_at_the_helm-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_pardon_involved_parties }
 		prerequisite = { focus = JAP_purge_kita_nishida }
 		prerequisite = { focus = JAP_exorcise_ugaki_faction }
@@ -850,209 +1146,304 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
-			add_ideas = { JAP_mazaki_araki_shogunate }
+			add_ideas = JAP_gt_mazaki_araki
+		
+			add_political_power = 100
+			country_event = {
+				id = SCBJAP.56
+				days = 3
+			}
+
+			add_offsite_building = { type = arms_factory level = 1 }
+			army_experience = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_rural_relief_funds
 		icon = GFX_JAPARAKI_a_promise_to_the_peasant_soldiers-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_mazaki_araki_shogunate }
 		relative_position_id = JAP_mazaki_araki_shogunate
 		x = -4
 		y = 1
 		completion_reward = {
+			add_manpower = 7000
+			add_political_power = 75
+			
+		
 		}
 	}
 	
 	focus = {
 		id = JAP_suspend_diet_proceedings
 		icon = GFX_JAPARAKI_rally_the_tonarigumi-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_mazaki_araki_shogunate }
 		relative_position_id = JAP_mazaki_araki_shogunate
 		x = -2
 		y = 1
 		completion_reward = {
+			add_ideas = JAP_gt_suspend_diet
+		
+			add_political_power = 75
 		}
 	}
 	
 	focus = {
 		id = JAP_clarify_the_kokutai
 		icon = GFX_JAPARAKI_kokutai_no_hongi-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_mazaki_araki_shogunate }
 		relative_position_id = JAP_mazaki_araki_shogunate
 		x = 0
 		y = 1
 		completion_reward = {
-			add_ideas = { JAP_imperial_way_jurisprudence }
+			add_ideas = JAP_gt_kokutai_clarified
+		
+			add_tech_bonus = {
+				name = JAP_kokutai_clarified_research
+				bonus = 1
+				uses = 1
+				category = electronics
+			}
 		}
 	}
 	
 	focus = {
 		id = JAP_shadow_of_kempeitai
 		icon = GFX_JAPARAKI_reinforce_security_of_the_state-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_mazaki_araki_shogunate }
 		relative_position_id = JAP_mazaki_araki_shogunate
 		x = 2
 		y = 1
 		completion_reward = {
-			add_ideas = { JAP_kempeitai_politics }
+			add_ideas = JAP_gt_kempeitai_shadow
+		
+
+		
+			add_political_power = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_unify_basic_industry_control
 		icon = GFX_JAPARAKI_the_autarky_economic_solution-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_mazaki_araki_shogunate }
 		relative_position_id = JAP_mazaki_araki_shogunate
 		x = 4
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = gt_control_L1
+				add_idea = gt_control_L2
+			}
+		
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 4
+					instant_build = yes
+				}
+			}
+
+			add_offsite_building = { type = industrial_complex level = 2 }
 		}
 	}
 	
 	focus = {
 		id = JAP_special_military_operation_manchuria
 		icon = GFX_JAPKOKUMIN_japanesemanchurian_union-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_rural_relief_funds }
 		prerequisite = { focus = JAP_suspend_diet_proceedings }
 		relative_position_id = JAP_rural_relief_funds
 		x = 1
 		y = 1
 		completion_reward = {
+			add_ideas = JAP_gt_manchuria_op
+		
+			army_experience = 25
+
+			add_offsite_building = { type = arms_factory level = 1 }
 		}
 	}
 	
 	focus = {
 		id = JAP_bushido_martyrdom_education
-		icon = GFX_goal_JAP_Children_Sun
-		cost = 7
+		icon = GFX_goal_JAP_supremacy_of_mind
+		cost = 4
 		prerequisite = { focus = JAP_suspend_diet_proceedings }
 		prerequisite = { focus = JAP_clarify_the_kokutai }
 		relative_position_id = JAP_suspend_diet_proceedings
 		x = 1
 		y = 1
 		completion_reward = {
-			add_ideas = { JAP_bushido_martyrdom }
+			add_ideas = { JAP_bushido_martyrdom_education }
+		
+			army_experience = 25
 		}
 	}
 	
 	focus = {
 		id = JAP_promote_military_ninjo
 		icon = GFX_JAP_BLACKDRAG_the_path_of_war-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_clarify_the_kokutai }
 		prerequisite = { focus = JAP_shadow_of_kempeitai }
 		relative_position_id = JAP_clarify_the_kokutai
 		x = 1
 		y = 1
 		completion_reward = {
-			add_ideas = { JAP_military_ninjo }
+			add_ideas = { JAP_promote_military_ninjo }
+		
+			add_war_support = 0.05
 		}
 	}
 	
 	focus = {
 		id = JAP_war_on_zaibatsu_mammonism
 		icon = GFX_JAPARAKI_continued_the_zaibatsu_nationalisation-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_shadow_of_kempeitai }
 		prerequisite = { focus = JAP_unify_basic_industry_control }
 		relative_position_id = JAP_shadow_of_kempeitai
 		x = 1
 		y = 1
 		completion_reward = {
+			add_ideas = JAP_gt_anti_zaibatsu
+		
+			add_political_power = 75
+
+			add_offsite_building = { type = industrial_complex level = 1 }
 		}
 	}
 	
 	focus = {
 		id = JAP_new_local_improvement_movement
 		icon = GFX_JAPARAKI_organize_rural_cooperatives-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_special_military_operation_manchuria }
 		relative_position_id = JAP_special_military_operation_manchuria
 		x = -1
 		y = 1
 		completion_reward = {
+			add_political_power = 50
+		
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+
+			add_offsite_building = { type = industrial_complex level = 1 }
 		}
 	}
 	
 	focus = {
 		id = JAP_plan_lethal_blow_russia
 		icon = GFX_JAPARAKI_the_military_leap-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_special_military_operation_manchuria }
 		prerequisite = { focus = JAP_bushido_martyrdom_education }
 		relative_position_id = JAP_special_military_operation_manchuria
 		x = 1
 		y = 1
 		completion_reward = {
+			add_ideas = JAP_gt_lethal_blow_russia
+		
+			add_tech_bonus = {
+				name = JAP_lethal_blow_doctrine
+				bonus = 1
+				uses = 1
+				category = land_doctrine
+			}
+
+			add_offsite_building = { type = arms_factory level = 2 }
+			army_experience = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_national_spiritual_mobilization
 		icon = GFX_JAPARAKI_extending_the_fist_of_military_might-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_bushido_martyrdom_education }
 		prerequisite = { focus = JAP_promote_military_ninjo }
 		relative_position_id = JAP_bushido_martyrdom_education
 		x = 1
 		y = 1
 		completion_reward = {
-			add_ideas = { JAP_national_spiritual_mobilization }
+			swap_ideas = {
+				remove_idea = gt_spirit_L1
+				add_idea = gt_spirit_L2
+			}
+		
+			add_war_support = 0.05
 		}
 	}
 	
 	focus = {
 		id = JAP_ban_enemy_language
 		icon = GFX_goal_COL_Burn_All_History_Books
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_promote_military_ninjo }
 		prerequisite = { focus = JAP_war_on_zaibatsu_mammonism }
 		relative_position_id = JAP_promote_military_ninjo
 		x = 1
 		y = 1
 		completion_reward = {
+			add_political_power = 125
 		}
 	}
 	
 	focus = {
 		id = JAP_martial_culture_national_service
 		icon = GFX_JAPARAKI_preparing_for_total_war-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_war_on_zaibatsu_mammonism }
 		relative_position_id = JAP_war_on_zaibatsu_mammonism
 		x = 1
 		y = 1
 		completion_reward = {
-			add_ideas = { JAP_spiritual_training }
+			add_political_power = 50
+			army_experience = 75
 		}
 	}
 	
 	focus = {
 		id = JAP_obata_mobility_theory
 		icon = GFX_JAPARAKI_national_spiritual_mobilisation-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_new_local_improvement_movement }
 		prerequisite = { focus = JAP_plan_lethal_blow_russia }
 		relative_position_id = JAP_new_local_improvement_movement
 		x = 1
 		y = 1
 		completion_reward = {
-			add_ideas = { JAP_obata_mobility }
+			add_ideas = JAP_gt_obata_mobility
+		
+			add_tech_bonus = {
+				name = JAP_obata_mobility_doctrine
+				bonus = 1
+				uses = 1
+				category = land_doctrine
+			}
+
+			army_experience = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_bamboo_spear_doctrine
 		icon = GFX_JAPARAKI_the_bamboo_spear_slay_our_enemies-248360
-		cost = 7
+		cost = 4
 		prerequisite = { 
 			focus = JAP_plan_lethal_blow_russia
 		}
@@ -1063,60 +1454,98 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
-			add_ideas = { JAP_bamboo_spear_doctrine }
+			add_ideas = JAP_gt_bamboo_spear
+		
+			country_event = {
+				id = SCBJAP.57
+				days = 3
+			}
+
+			add_manpower = 20000
 		}
 	}
 	
 	focus = {
 		id = JAP_marching_in_snow_spirit
 		icon = GFX_goal_JAP_Expand_Land_Gods
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_national_spiritual_mobilization }
 		prerequisite = { focus = JAP_ban_enemy_language }
 		relative_position_id = JAP_national_spiritual_mobilization
 		x = 1
 		y = 1
 		completion_reward = {
+			add_ideas = JAP_gt_snow_march
+		
+			army_experience = 25
 		}
 	}
 	
 	focus = {
 		id = JAP_strengthen_state_shinto
 		icon = GFX_goal_JAP_Kokutai_Hongi
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_ban_enemy_language }
 		prerequisite = { focus = JAP_martial_culture_national_service }
 		relative_position_id = JAP_ban_enemy_language
 		x = 1
 		y = 1
 		completion_reward = {
-			add_ideas = { JAP_shinto_strengthened }
+			swap_ideas = {
+				remove_idea = gt_spirit_L2
+				add_idea = gt_spirit_L3
+			}
+		
+
+		
+			add_political_power = 75
 		}
 	}
 	
 	focus = {
 		id = JAP_why_fear_hundreds_of_millions
 		icon = GFX_JAPARAKI_the_spiritual_leap-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_obata_mobility_theory }
 		prerequisite = { focus = JAP_bamboo_spear_doctrine }
 		relative_position_id = JAP_obata_mobility_theory
 		x = 1
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = gt_spirit_L3
+				add_idea = gt_spirit_L4
+			}
+		
+			country_event = {
+				id = SCBJAP.58
+				days = 3
+			}
+
+			add_ideas = JAP_gt_fear_not_millions
+			army_experience = 50
 		}
 	}
 	
 	focus = {
 		id = JAP_as_an_arrow_pierced_stone
 		icon = GFX_JAPARAKI_spiritual_training-248360
-		cost = 7
+		cost = 4
 		prerequisite = { focus = JAP_marching_in_snow_spirit }
 		prerequisite = { focus = JAP_strengthen_state_shinto }
 		relative_position_id = JAP_marching_in_snow_spirit
 		x = 1
 		y = 1
 		completion_reward = {
+			add_ideas = JAP_gt_arrow_stone
+		
+			army_experience = 50
+			country_event = {
+				id = SCBJAP.59
+				days = 3
+			}
+
+			add_offsite_building = { type = arms_factory level = 1 }
 		}
 	}	
 }

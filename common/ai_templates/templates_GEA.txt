@@ -1,0 +1,528 @@
+# GEA AI templates. Root-first replacement chains; delta-only field equipment guards.
+# Optional support paths have basic anchors with identical 6-motorized/4-light-tank composition.
+# Training reserves are handled separately. Heavy paths retain the intermediate communication prerequisite.
+
+armored_GEA = {
+	available_for = { GEA }
+	role = armor_role
+	upgrade_prio = {
+		base = 10
+		modifier = {
+			factor = 0
+			NOT = { has_tech = motorised_infantry }
+		}
+		modifier = {
+			factor = 0
+			NOT = { has_tech = tech_recon }
+		}
+		modifier = { factor = 2 date > 1939.12.31 }
+		modifier = { factor = 2 date > 1941.12.31 }
+		modifier = { factor = 2 num_of_military_factories > 24 }
+		modifier = { factor = 2 num_of_military_factories > 39 }
+	}
+
+	armor_basic_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { NOT = { is_special_project_completed = sp:sp_land_flamethrower_tank } NOT = { AND = { num_of_military_factories > 39 has_tech = interwar_antitank OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } } }
+		upgrade_prio = { base = 1000 }
+		target_template = {
+			regiments = {
+				motorized = 6
+				light_armor = 4
+			}
+			support = {
+				artillery = 1
+				light_tank_recon = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { num_of_military_factories > 24 has_tech = motorised_infantry has_tech = tech_recon has_tech = tech_logistics_company has_tech = tech_signal_company OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } has_equipment = { infantry_equipment > 299 } has_equipment = { motorized_equipment > 134 } has_equipment = { medium_tank_chassis > 449 } has_equipment = { support_equipment > 59 } }
+		replace_at_match = 0.9
+		replace_with = armor_medium_GEA
+		target_min_match = 0.4
+	}
+
+	armor_basic_flame_path_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { is_special_project_completed = sp:sp_land_flamethrower_tank NOT = { AND = { num_of_military_factories > 39 has_tech = interwar_antitank OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } } }
+		upgrade_prio = { base = 1000 }
+		target_template = {
+			regiments = {
+				motorized = 6
+				light_armor = 4
+			}
+			support = {
+				artillery = 1
+				light_tank_recon = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { num_of_military_factories > 24 has_tech = motorised_infantry has_tech = tech_recon has_tech = tech_logistics_company has_tech = tech_signal_company OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } is_special_project_completed = sp:sp_land_flamethrower_tank has_equipment = { infantry_equipment > 299 } has_equipment = { motorized_equipment > 134 } has_equipment = { medium_tank_chassis > 449 } has_equipment = { light_tank_flame_chassis > 22 } has_equipment = { support_equipment > 59 } }
+		replace_at_match = 0.9
+		replace_with = armor_medium_flame_GEA
+		target_min_match = 0.37
+	}
+
+	armor_basic_td_path_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { NOT = { is_special_project_completed = sp:sp_land_flamethrower_tank } AND = { num_of_military_factories > 39 has_tech = interwar_antitank OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } }
+		upgrade_prio = { base = 1000 }
+		target_template = {
+			regiments = {
+				motorized = 6
+				light_armor = 4
+			}
+			support = {
+				artillery = 1
+				light_tank_recon = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { num_of_military_factories > 24 has_tech = motorised_infantry has_tech = tech_recon has_tech = tech_logistics_company has_tech = tech_signal_company OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } has_tech = interwar_antitank num_of_military_factories > 39 has_equipment = { medium_tank_destroyer_chassis > 22 } has_equipment = { infantry_equipment > 299 } has_equipment = { motorized_equipment > 134 } has_equipment = { medium_tank_chassis > 449 } has_equipment = { support_equipment > 59 } }
+		replace_at_match = 0.9
+		replace_with = armor_medium_td_support_GEA
+		target_min_match = 0.37
+	}
+
+	armor_basic_flame_td_path_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { is_special_project_completed = sp:sp_land_flamethrower_tank AND = { num_of_military_factories > 39 has_tech = interwar_antitank OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } } }
+		upgrade_prio = { base = 1000 }
+		target_template = {
+			regiments = {
+				motorized = 6
+				light_armor = 4
+			}
+			support = {
+				artillery = 1
+				light_tank_recon = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { num_of_military_factories > 24 has_tech = motorised_infantry has_tech = tech_recon has_tech = tech_logistics_company has_tech = tech_signal_company OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } is_special_project_completed = sp:sp_land_flamethrower_tank has_tech = interwar_antitank num_of_military_factories > 39 has_equipment = { medium_tank_destroyer_chassis > 22 } has_equipment = { infantry_equipment > 299 } has_equipment = { motorized_equipment > 134 } has_equipment = { medium_tank_chassis > 449 } has_equipment = { light_tank_flame_chassis > 22 } has_equipment = { support_equipment > 59 } }
+		replace_at_match = 0.9
+		replace_with = armor_medium_flame_td_support_GEA
+		target_min_match = 0.35
+	}
+
+	armor_medium_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { num_of_military_factories > 24 has_tech = motorised_infantry has_tech = tech_recon has_tech = tech_logistics_company has_tech = tech_signal_company OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } }
+		upgrade_prio = { base = 160 }
+		target_template = {
+			regiments = {
+				motorized = 8
+				medium_armor = 6
+				light_armor = 2
+			}
+			support = {
+				artillery = 1
+				light_tank_recon = 1
+				logistics_company = 1
+				signal_company = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } has_equipment = { infantry_equipment > 359 } has_equipment = { medium_tank_chassis > 224 } has_equipment = { support_equipment > 67 } }
+		replace_at_match = 0.9
+		replace_with = armor_heavy_GEA
+		target_min_match = 0.25
+	}
+
+	armor_medium_flame_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { num_of_military_factories > 24 has_tech = motorised_infantry has_tech = tech_recon has_tech = tech_logistics_company has_tech = tech_signal_company OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } is_special_project_completed = sp:sp_land_flamethrower_tank }
+		upgrade_prio = { base = 150 }
+		target_template = {
+			regiments = {
+				motorized = 8
+				medium_armor = 6
+				light_armor = 2
+			}
+			support = {
+				artillery = 1
+				light_tank_recon = 1
+				light_flame_tank = 1
+				logistics_company = 1
+				signal_company = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } is_special_project_completed = sp:sp_land_flamethrower_tank has_equipment = { infantry_equipment > 359 } has_equipment = { medium_tank_chassis > 224 } has_equipment = { support_equipment > 67 } }
+		replace_at_match = 0.9
+		replace_with = armor_heavy_flame_GEA
+		target_min_match = 0.26
+	}
+
+	armor_medium_td_support_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { num_of_military_factories > 24 has_tech = motorised_infantry has_tech = tech_recon has_tech = tech_logistics_company has_tech = tech_signal_company OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } has_tech = interwar_antitank num_of_military_factories > 39 }
+		upgrade_prio = { base = 140 }
+		target_template = {
+			regimental_support = { medium_tank_destroyer_support = 1 }
+			regiments = {
+				motorized = 8
+				medium_armor = 6
+				light_armor = 2
+			}
+			support = {
+				artillery = 1
+				light_tank_recon = 1
+				logistics_company = 1
+				signal_company = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } has_tech = interwar_antitank num_of_military_factories > 39 has_equipment = { infantry_equipment > 359 } has_equipment = { medium_tank_chassis > 224 } has_equipment = { support_equipment > 67 } }
+		replace_at_match = 0.9
+		replace_with = armor_heavy_td_support_GEA
+		target_min_match = 0.26
+	}
+
+	armor_medium_flame_td_support_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { num_of_military_factories > 24 has_tech = motorised_infantry has_tech = tech_recon has_tech = tech_logistics_company has_tech = tech_signal_company OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } is_special_project_completed = sp:sp_land_flamethrower_tank has_tech = interwar_antitank num_of_military_factories > 39 }
+		upgrade_prio = { base = 130 }
+		target_template = {
+			regimental_support = { medium_tank_destroyer_support = 1 }
+			regiments = {
+				motorized = 8
+				medium_armor = 6
+				light_armor = 2
+			}
+			support = {
+				artillery = 1
+				light_tank_recon = 1
+				light_flame_tank = 1
+				logistics_company = 1
+				signal_company = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } is_special_project_completed = sp:sp_land_flamethrower_tank has_tech = interwar_antitank num_of_military_factories > 39 has_equipment = { infantry_equipment > 359 } has_equipment = { medium_tank_chassis > 224 } has_equipment = { support_equipment > 67 } }
+		replace_at_match = 0.9
+		replace_with = armor_heavy_flame_td_support_GEA
+		target_min_match = 0.28
+	}
+
+	armor_heavy_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } }
+		upgrade_prio = { base = 120 }
+		target_template = {
+			regiments = {
+				infantry = 10
+				medium_armor = 9
+			}
+			support = {
+				engineer = 1
+				field_hospital = 1
+				light_tank_recon = 1
+				logistics_company = 1
+			}
+			regimental_support = {
+				fire_support = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } has_tech = interwar_antitank num_of_military_factories > 39 has_equipment = { medium_tank_destroyer_chassis > 29 } }
+		replace_at_match = 0.9
+		replace_with = armor_heavy_td_support_GEA
+		target_min_match = 0.8
+	}
+
+	armor_heavy_flame_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } is_special_project_completed = sp:sp_land_flamethrower_tank }
+		upgrade_prio = { base = 110 }
+		target_template = {
+			regiments = {
+				infantry = 10
+				medium_armor = 9
+			}
+			support = {
+				engineer = 1
+				field_hospital = 1
+				light_tank_recon = 1
+				logistics_company = 1
+				light_flame_tank = 1
+			}
+			regimental_support = {
+				fire_support = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } is_special_project_completed = sp:sp_land_flamethrower_tank has_tech = interwar_antitank num_of_military_factories > 39 has_equipment = { medium_tank_destroyer_chassis > 29 } }
+		replace_at_match = 0.9
+		replace_with = armor_heavy_flame_td_support_GEA
+		target_min_match = 0.8
+	}
+
+	armor_heavy_td_support_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } has_tech = interwar_antitank num_of_military_factories > 39 }
+		upgrade_prio = { base = 100 }
+		target_template = {
+			regiments = {
+				infantry = 10
+				medium_armor = 9
+			}
+			support = {
+				engineer = 1
+				field_hospital = 1
+				light_tank_recon = 1
+				logistics_company = 1
+			}
+			regimental_support = {
+				fire_support = 1
+				medium_tank_destroyer_support = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } is_special_project_completed = sp:sp_land_flamethrower_tank has_tech = interwar_antitank num_of_military_factories > 39 has_equipment = { light_tank_flame_chassis > 29 } }
+		replace_at_match = 0.9
+		replace_with = armor_heavy_flame_td_support_GEA
+		target_min_match = 0.8
+	}
+
+	armor_heavy_flame_td_support_GEA = {
+		division_names_group = GEA_ARM_01
+		reinforce_prio = 2
+		enable = { has_tech = tech_signal_company  num_of_military_factories > 39 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } is_special_project_completed = sp:sp_land_flamethrower_tank has_tech = interwar_antitank num_of_military_factories > 39 }
+		upgrade_prio = { base = 90 }
+		target_template = {
+			regiments = {
+				infantry = 10
+				medium_armor = 9
+			}
+			support = {
+				engineer = 1
+				field_hospital = 1
+				light_tank_recon = 1
+				logistics_company = 1
+				light_flame_tank = 1
+			}
+			regimental_support = {
+				fire_support = 1
+				medium_tank_destroyer_support = 1
+			}
+		}
+	}
+
+}
+
+infantry_GEA = {
+	available_for = { GEA }
+	role = infantry
+	upgrade_prio = {
+		base = 40
+	}
+
+	infantry_default_GEA = {
+		enable = { NOT = { AND = { num_of_military_factories > 19 has_tech = interwar_antitank } } }
+		upgrade_prio = { base = 1000 }
+		target_template = {
+			support = {
+				artillery = 1
+				engineer = 1
+			}
+			regiments = {
+				infantry = 9
+				artillery_brigade = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { num_of_military_factories > 19 has_equipment = { artillery_equipment > 71 } }
+		replace_at_match = 0.9
+		replace_with = infantry_artillery_GEA
+		target_min_match = 0.7
+	}
+
+	infantry_default_anti_tank_GEA = {
+		enable = { has_tech = interwar_antitank num_of_military_factories > 19 }
+		upgrade_prio = { base = 1000 }
+		target_template = {
+			regimental_support = {
+				anti_tank_battery = 1
+			}
+			support = {
+				artillery = 1
+				engineer = 1
+			}
+			regiments = {
+				infantry = 9
+				artillery_brigade = 1
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { has_tech = interwar_antitank num_of_military_factories > 19 has_equipment = { artillery_equipment > 71 } }
+		replace_at_match = 0.9
+		replace_with = infantry_artillery_anti_tank_GEA
+		target_min_match = 0.7
+	}
+
+	infantry_artillery_GEA = {
+		enable = { num_of_military_factories > 19 }
+		upgrade_prio = { base = 180 }
+		target_template = {
+			support = {
+				artillery = 1
+				engineer = 1
+			}
+			regiments = {
+				infantry = 9
+				artillery_brigade = 3
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { num_of_military_factories > 49 has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_equipment = { infantry_equipment > 79 } has_equipment = { support_equipment > 119 } has_equipment = { motorized_equipment > 59 } }
+		replace_at_match = 0.9
+		replace_with = infantry_full_support_GEA
+		target_min_match = 0.8
+	}
+
+	infantry_artillery_anti_tank_GEA = {
+		enable = { has_tech = interwar_antitank num_of_military_factories > 19 }
+		upgrade_prio = { base = 170 }
+		target_template = {
+			regimental_support = {
+				anti_tank_battery = 1
+			}
+			support = {
+				artillery = 1
+				engineer = 1
+			}
+			regiments = {
+				infantry = 9
+				artillery_brigade = 3
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { has_tech = interwar_antitank num_of_military_factories > 49 has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_equipment = { infantry_equipment > 79 } has_equipment = { support_equipment > 119 } has_equipment = { motorized_equipment > 59 } }
+		replace_at_match = 0.9
+		replace_with = infantry_full_support_anti_tank_GEA
+		target_min_match = 0.8
+	}
+
+	infantry_full_support_GEA = {
+		enable = { num_of_military_factories > 49 has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company }
+		upgrade_prio = { base = 160 }
+		target_template = {
+			support = {
+				artillery = 1
+				engineer = 1
+				recon = 1
+				field_hospital = 1
+				logistics_company = 1
+			}
+			regiments = {
+				infantry = 9
+				artillery_brigade = 3
+			}
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { has_tech = interwar_antitank num_of_military_factories > 49 has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_equipment = { anti_tank_equipment > 31 } }
+		replace_at_match = 0.9
+		replace_with = infantry_full_support_anti_tank_GEA
+		target_min_match = 0.8
+	}
+
+	infantry_full_support_anti_tank_GEA = {
+		enable = { has_tech = interwar_antitank num_of_military_factories > 49 has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company }
+		upgrade_prio = { base = 150 }
+		target_template = {
+			regimental_support = {
+				anti_tank_battery = 1
+			}
+			support = {
+				artillery = 1
+				engineer = 1
+				recon = 1
+				field_hospital = 1
+				logistics_company = 1
+			}
+			regiments = {
+				infantry = 9
+				artillery_brigade = 3
+			}
+		}
+	}
+
+}
+
+GEA_heavy_td_infantry = {
+	available_for = { GEA }
+	role = GEA_heavy_td_infantry
+	upgrade_prio = { factor = 30 modifier = { factor = 0 NOT = { AND = { num_of_military_factories > 49 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons has_tech = interwar_antitank OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } date > 1941.12.31 } } } }
+
+	heavy_td_infantry_GEA = {
+		division_names_group = GEA_INF_01
+		enable = { num_of_military_factories > 49 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons has_tech = interwar_antitank OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } date > 1941.12.31 }
+		upgrade_prio = { base = 1000 }
+		target_template = {
+			regiments = {
+				infantry = 10
+				medium_tank_destroyer_brigade = 9
+			}
+			support = {
+				engineer = 1
+				field_hospital = 1
+				light_tank_recon = 1
+				logistics_company = 1
+			}
+			regimental_support = { fire_support = 1 }
+		}
+		# Only the additional equipment is reserved; unchanged equipment is not checked.
+		can_upgrade_in_field = { is_special_project_completed = sp:sp_land_flamethrower_tank num_of_military_factories > 49 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons has_tech = interwar_antitank OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } date > 1941.12.31 has_equipment = { light_tank_flame_chassis > 29 } }
+		replace_at_match = 0.9
+		replace_with = heavy_td_infantry_flame_GEA
+		target_min_match = 0.8
+	}
+
+	heavy_td_infantry_flame_GEA = {
+		division_names_group = GEA_INF_01
+		enable = { is_special_project_completed = sp:sp_land_flamethrower_tank num_of_military_factories > 49 has_tech = tech_engineers has_tech = tech_recon has_tech = tech_field_hospital has_tech = tech_logistics_company has_tech = support_weapons has_tech = interwar_antitank OR = { has_tech = basic_medium_tank has_tech = basic_medium_tank_chassis } date > 1941.12.31 }
+		upgrade_prio = { base = 190 }
+		target_template = {
+			regiments = {
+				infantry = 10
+				medium_tank_destroyer_brigade = 9
+			}
+			support = {
+				engineer = 1
+				field_hospital = 1
+				light_tank_recon = 1
+				logistics_company = 1
+				light_flame_tank = 1
+			}
+			regimental_support = { fire_support = 1 }
+		}
+	}
+
+}
+
+suppression_GEA = {
+	available_for = { GEA }
+	role = suppression
+	upgrade_prio = { factor = 100 }
+	suppression_10_cavalry_GEA = {
+		reinforce_prio = 0
+		custom_icon = 13
+		division_names_group = GEA_CAV_01
+		upgrade_prio = { base = 100 }
+		target_template = {
+			regiments = { cavalry = 10 }
+		}
+	}
+}

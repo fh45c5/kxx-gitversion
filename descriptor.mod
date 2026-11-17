@@ -11,7 +11,8 @@ dependencies={
 	"Kaiserredux汉化（已适配简中）"
 	"KX汉化补充"
 	"test2"
+	"kx旧版本"
 }
 picture="thumbnail.png"
-supported_version="1.19.2.0"
+supported_version="1.19.3.0"
 remote_file_id="3244364529"
