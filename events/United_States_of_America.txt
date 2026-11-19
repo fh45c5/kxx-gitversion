@@ -1348,6 +1348,8 @@ add_namespace = usanew
 		trigger = {
 			tag = USA
 			has_global_flag = USA_civil_war_over_flag
+			has_variable = USA_Syndicalist_Resistance
+			NOT = { has_dynamic_modifier = USA_syndicalist_modifier }
 			check_variable = {
 				var = USA_Syndicalist_Resistance
 				value = 0
@@ -1358,9 +1360,6 @@ add_namespace = usanew
 		option = {
 			name = ACW.10.a
 			add_political_power = 20
-			remove_dynamic_modifier = {
-				modifier = USA_syndicalist_modifier
-			}
 		}
 	}
 	country_event = { #一分钟人抵抗被粉碎
@@ -1373,6 +1372,8 @@ add_namespace = usanew
 		trigger = {
 			tag = USA
 			has_global_flag = USA_civil_war_over_flag
+			has_variable = USA_Minutemen_Resistance
+			NOT = { has_dynamic_modifier = USA_minutemen_modifier }
 			check_variable = {
 				var = USA_Minutemen_Resistance
 				value = 0
@@ -1383,9 +1384,6 @@ add_namespace = usanew
 		option = {
 			name = ACW.11.a
 			add_political_power = 20
-			remove_dynamic_modifier = {
-				modifier = USA_minutemen_modifier
-			}
 		}
 	}
 	country_event = { #3k党销声匿迹
@@ -1398,6 +1396,8 @@ add_namespace = usanew
 		trigger = {
 			tag = USA
 			has_global_flag = USA_civil_war_over_flag
+			has_variable = USA_Klan_Resistance
+			NOT = { has_dynamic_modifier = USA_kkk_modifier }
 			check_variable = {
 				var = USA_Klan_Resistance
 				value = 0
@@ -1408,9 +1408,6 @@ add_namespace = usanew
 		option = {
 			name = ACW.12.a
 			add_political_power = 20
-			remove_dynamic_modifier = {
-				modifier = USA_kkk_modifier
-			}
 		}
 	}
 	country_event = { #黑色军团销声匿迹
@@ -1423,6 +1420,8 @@ add_namespace = usanew
 		trigger = {
 			tag = USA
 			has_global_flag = USA_civil_war_over_flag
+			has_variable = USA_Black_legion_Resistance
+			NOT = { has_dynamic_modifier = USA_black_legion_modifier }
 			check_variable = {
 				var = USA_Black_legion_Resistance
 				value = 0
@@ -1433,9 +1432,6 @@ add_namespace = usanew
 		option = {
 			name = ACW.13.a
 			add_political_power = 20
-			remove_dynamic_modifier = {
-				modifier = USA_black_legion_modifier
-			}
 		}
 	}
 #开局到总统选举前
@@ -1656,8 +1652,8 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					has_game_rule = {
-						rule = USA_1936_election
-						option = USA_1936_ELECTION_RP_HOOVER
+						rule = USA_rep_nomination
+						option = USA_REP_NOM_HOOVER
 					}
 				}
 			}
@@ -1887,12 +1883,9 @@ add_namespace = usanew
 				factor = 70
 				modifier = {
 					factor = 0
-					OR = {
-						#1936年总统选举预设：兰登
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_LANDON
-						}
+					has_game_rule = {
+						rule = USA_rep_nomination
+						option = USA_REP_NOM_LANDON
 					}
 				}
 			}
@@ -1921,14 +1914,13 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：柯蒂斯/胡佛
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_CURTIS
+							rule = USA_rep_nomination
+							option = USA_REP_NOM_CURTIS
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_HOOVER
+							rule = USA_rep_nomination
+							option = USA_REP_NOM_HOOVER
 						}
 					}
 				}
@@ -1965,14 +1957,13 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：柯蒂斯/胡佛
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_CURTIS
+							rule = USA_rep_nomination
+							option = USA_REP_NOM_CURTIS
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_HOOVER
+							rule = USA_rep_nomination
+							option = USA_REP_NOM_HOOVER
 						}
 					}
 				}
@@ -1990,21 +1981,9 @@ add_namespace = usanew
 				factor = 50
 				modifier = {
 					factor = 0
-					OR = {
-						#1936年总统选举预设：兰登
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_LANDON
-						}
-					}
-				}
-				modifier = {
-					factor = 0
-					has_country_flag = USA_gwbill_passes
-					#1936年总统选举预设：胡佛（胡佛可以再被提名时让位）
 					has_game_rule = {
-						rule = USA_1936_election
-						option = USA_1936_ELECTION_RP_HOOVER
+						rule = USA_rep_nomination
+						option = USA_REP_NOM_HOOVER
 					}
 				}
 			}
@@ -2024,16 +2003,9 @@ add_namespace = usanew
 				factor = 25
 				modifier = {
 					factor = 0
-					OR = {
-						#1936年总统选举预设：柯蒂斯/兰登
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_CURTIS
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_LANDON
-						}
+					has_game_rule = {
+						rule = USA_rep_nomination
+						option = USA_REP_NOM_CURTIS
 					}
 				}
 			}
@@ -4699,46 +4671,41 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：由其他候选人或僵局胜出
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_DP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1936
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_PP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CACTUS_SMACK
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_SPA
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_NORRIS
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_AFP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HUEY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_ODP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_MURRAY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HAYWOOD
 						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
-						}
-						has_game_rule = {
-							rule = TXS_independence
-							option = TXS_INDEPENDENCE_GUARENTEE
+						AND = {
+							has_game_rule = {
+								rule = TXS_independence
+								option = TXS_INDEPENDENCE_GUARENTEE
+							}
+							NOT = {
+								has_game_rule = {
+									rule = USA_civil_war
+									option = USA_CIVIL_WAR_AVOIDED_HOOVER_HARDLINE
+								}
+							}
 						}
 					}
 				}
@@ -4846,42 +4813,29 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：由其他候选人或僵局胜出
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_DP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1936
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_PP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HUEY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_SPA
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_MURRAY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_AFP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HAYWOOD
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_ODP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CACTUS_SMACK
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_NORRIS
 						}
 					}
 				}
@@ -4981,42 +4935,29 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：由其他候选人或僵局胜出
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_DP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1936
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_PP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HUEY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_SPA
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_MURRAY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_AFP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HAYWOOD
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_ODP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CACTUS_SMACK
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_NORRIS
 						}
 					}
 				}
@@ -5128,50 +5069,37 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：由其他候选人或僵局胜出
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_HOOVER
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1936
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_CURTIS
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_ESTABLISHMENT
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_LANDON
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HUEY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_DP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_MURRAY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_PP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CURDON
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_AFP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CACTUS_SMACK
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_ODP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_NORRIS
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_HOOVER_HARDLINE
 						}
 					}
 				}
@@ -5302,50 +5230,37 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：由其他候选人或僵局胜出
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_HOOVER
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1936
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_CURTIS
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_ESTABLISHMENT
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_LANDON
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_MURRAY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_DP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HAYWOOD
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_PP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CURDON
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_SPA
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CACTUS_SMACK
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_ODP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_NORRIS
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_HOOVER_HARDLINE
 						}
 					}
 				}
@@ -5486,50 +5401,37 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：由其他候选人或僵局胜出
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_HOOVER
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1936
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_CURTIS
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_ESTABLISHMENT
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_LANDON
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HUEY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_DP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HAYWOOD
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_PP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CURDON
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_SPA
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CACTUS_SMACK
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_AFP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_NORRIS
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_HOOVER_HARDLINE
 						}
 					}
 				}
@@ -5654,50 +5556,37 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：由其他候选人或僵局胜出
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_HOOVER
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1936
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_CURTIS
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_LANDON
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HUEY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_DP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_MURRAY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_SPA
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HAYWOOD
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_AFP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CURDON
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_ODP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CACTUS_SMACK
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_HOOVER_HARDLINE
 						}
 					}
 				}
@@ -5826,50 +5715,37 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：由其他候选人或僵局胜出
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_HOOVER
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1936
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_CURTIS
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CURDON
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_LANDON
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_PP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HUEY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_SPA
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_MURRAY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_AFP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HAYWOOD
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_ODP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_NORRIS
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_HOOVER_HARDLINE
 						}
 					}
 				}
@@ -5997,38 +5873,41 @@ add_namespace = usanew
 				modifier = {
 					factor = 0
 					OR = {
-						#1936年总统选举预设：由其他候选人胜出
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_HOOVER
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_NORRIS
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_CURTIS
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_RP_LANDON
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_ESTABLISHMENT
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_DP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HUEY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_PP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_MURRAY
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_SPA
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_1937_HAYWOOD
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_AFP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CURDON
 						}
 						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_ODP
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_CACTUS_SMACK
+						}
+						has_game_rule = {
+							rule = USA_civil_war
+							option = USA_CIVIL_WAR_AVOIDED_HOOVER_HARDLINE
 						}
 						has_game_rule = {
 							rule = TXS_independence
@@ -6056,24 +5935,6 @@ add_namespace = usanew
 			name = USA.64.a
 			ai_chance = {
 				factor = 70
-				modifier = {
-					factor = 0
-					#1936年总统选举预设：僵局由民主党/进步党/内战收场
-					OR = {
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
-						}
-					}
-				}
 			}
 			custom_effect_tooltip = USA_mac_deadlock_tooltip
 			set_global_flag = USA_mac_deadlock
@@ -6159,24 +6020,6 @@ add_namespace = usanew
 			name = USA.64.b
 			ai_chance = {
 				factor = 70
-				modifier = {
-					factor = 0
-					#1936年总统选举预设：僵局由麦克阿瑟/民主党/进步党收场
-					OR = {
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-					}
-				}
 			}
 			custom_effect_tooltip = USA_mac_deadlock_tooltip
 			set_global_flag = USA_mac_deadlock
@@ -6255,20 +6098,9 @@ add_namespace = usanew
 				factor = 20
 				modifier = {
 					factor = 0
-					#1936年总统选举预设：僵局由麦克阿瑟/进步党/内战收场
-					OR = {
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_PP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
-						}
+					has_game_rule = {
+						rule = USA_civil_war
+						option = USA_CIVIL_WAR_1936
 					}
 				}
 			}
@@ -6357,20 +6189,9 @@ add_namespace = usanew
 				factor = 10
 				modifier = {
 					factor = 0
-					#1936年总统选举预设：僵局由麦克阿瑟/民主党/内战收场
-					OR = {
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_MACARTHUR
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_DP
-						}
-						has_game_rule = {
-							rule = USA_1936_election
-							option = USA_1936_ELECTION_NO_MAJORITY_RUN
-						}
+					has_game_rule = {
+						rule = USA_civil_war
+						option = USA_CIVIL_WAR_1936
 					}
 				}
 			}
@@ -6680,6 +6501,17 @@ add_namespace = usanew
 		picture = GFX_report_event_HOL_february_strike2
 
 		is_triggered_only = yes
+
+		trigger = {
+			NOT = {
+				OR = {
+					has_completed_focus = USA_Strike_the_heart_of_anarchism
+					has_completed_focus = USA_End_chaos_in_Great_Lakes_Region
+					has_country_flag = USA_avoid_civil_war_dp
+					has_country_flag = USA_second_round_talks_agreed
+				}
+			}
+		}
 
 		option = {
 			name = USA.71.a
@@ -7507,6 +7339,7 @@ add_namespace = usanew
 
 		trigger = {
 			tag = USA
+			has_country_flag = USA_President_Long_1936
 			NOT = { has_country_flag = USA_macarthur_coup }
 		}
 
@@ -9168,9 +9001,19 @@ add_namespace = usanew
 		picture = GFX_report_event_HOL_february_strike2
 
 		fire_only_once = yes
+		is_triggered_only = yes
 
 		trigger = {
 			tag = USA
+			has_idea = USA_new_year_strike_idea
+			NOT = {
+				OR = {
+					has_completed_focus = USA_Strike_the_heart_of_anarchism
+					has_completed_focus = USA_End_chaos_in_Great_Lakes_Region
+					has_country_flag = USA_avoid_civil_war_dp
+					has_country_flag = USA_second_round_talks_agreed
+				}
+			}
 			NOT = { has_country_flag = USA_macarthur_coup }
 			NOT = { has_global_flag = USA_civil_war_begun_flag }
 			NOT = { has_country_flag = USA_SPA_was_defeated }
@@ -9207,18 +9050,6 @@ add_namespace = usanew
 			sp_power_5_down_effect = yes
 			afp_power_5_down_effect = yes
 			add_ideas = USA_Relief_Bill
-			if = {
-				limit = {
-					has_idea = USA_new_year_strike_idea_2
-				}
-				swap_ideas = {
-					remove_idea = USA_new_year_strike_idea_2
-					add_idea = USA_new_year_strike_idea
-				}
-			}
-			else = {
-				remove_ideas = USA_new_year_strike_idea
-			}
 		}
 	}
 
@@ -9234,6 +9065,10 @@ add_namespace = usanew
 
 		option = {
 			name = USA.312.a
+			set_country_flag = USA_second_round_talks_agreed
+			remove_ideas = USA_new_year_strike_idea
+			remove_ideas = USA_new_year_strike_idea_2
+			remove_ideas = USA_new_year_strike_idea_3
 			add_stability = 0.03
 			add_authdem_to_coalition = yes
 			increase_ruling_party_popularity_by_3 = yes
@@ -9709,6 +9544,7 @@ add_namespace = usanew
 			add_political_power = 100
 			add_stability = 0.15
 			set_global_flag = USA_civil_war_avoided_flag
+			mark_focus_tree_layout_dirty = yes
 			set_country_flag = USA_avoid_civil_war
 			if = {
 				limit = { has_idea = USA_black_monday }
@@ -9728,16 +9564,9 @@ add_namespace = usanew
 					long_name = USA_authoritarian_democrat_democracy_party_long
 					name = USA_authoritarian_democrat_democracy_party
 				}
-				add_country_leader_role = {
+				promote_character = {
 					character = USA_Richard_B_Russell
-					promote_leader = yes
-					country_leader = {
-						desc = POLITICS_RICHARD_RUSSELL_DESC
-						ideology = authdem_dixiecrat_subtype
-						traits = {
-							USA_jim_crows_champion
-						}
-					}
+					ideology = authdem_dixiecrat_subtype
 				}
 				if = {
 					limit = { has_dlc = "La Resistance" }
@@ -11515,6 +11344,7 @@ add_namespace = usanew
 			add_political_power = 100
 			add_stability = 0.15
 			set_global_flag = USA_civil_war_avoided_flag
+			mark_focus_tree_layout_dirty = yes
 			set_country_flag = USA_avoid_civil_war_gop
 			if = {
 				limit = { has_idea = USA_black_monday }
@@ -11534,16 +11364,9 @@ add_namespace = usanew
 					long_name = USA_authoritarian_democrat_democracy_party_long
 					name = USA_authoritarian_democrat_democracy_party
 				}
-				add_country_leader_role = {
+				promote_character = {
 					character = USA_Richard_B_Russell
-					promote_leader = yes
-					country_leader = {
-						desc = POLITICS_RICHARD_RUSSELL_DESC
-						ideology = authdem_dixiecrat_subtype
-					traits = {
-							USA_jim_crows_champion
-						}
-					}
+					ideology = authdem_dixiecrat_subtype
 				}
 				if = {
 					limit = { has_dlc = "La Resistance" }
@@ -12455,6 +12278,8 @@ add_namespace = usanew
 					has_country_flag = USA_dp_with_huey
 				}
 				afp_power_5_up_effect = yes
+				custom_effect_tooltip = USA_afp_monthly_power_decreases_5_tt
+				add_to_variable = { USA_afp_monthly_increase = -0.05 }
 				est_power_10_up_effect = yes
 				increase_ruling_party_popularity_by_3 = yes
 				set_country_flag = USA_fiscal_austerity_bill_was_passed
@@ -12573,7 +12398,13 @@ add_namespace = usanew
 			add_political_power = 100
 			add_stability = 0.15
 			set_global_flag = USA_civil_war_avoided_flag
+			mark_focus_tree_layout_dirty = yes
 			set_country_flag = USA_avoid_civil_war_dp
+			remove_ideas = USA_new_year_strike_idea
+			remove_ideas = USA_new_year_strike_idea_2
+			remove_ideas = USA_new_year_strike_idea_3
+			remove_ideas = USA_syndicalist_strike_idea
+			remove_ideas = USA_syndicalist_strike_idea2
 			if = {
 				limit = { has_idea = USA_black_monday }
 				remove_ideas = USA_black_monday
@@ -12592,16 +12423,9 @@ add_namespace = usanew
 					long_name = USA_authoritarian_democrat_democracy_party_long
 					name = USA_authoritarian_democrat_democracy_party
 				}
-				add_country_leader_role = {
+				promote_character = {
 					character = USA_Richard_B_Russell
-					promote_leader = yes
-					country_leader = {
-						desc = POLITICS_RICHARD_RUSSELL_DESC
-						ideology = authdem_dixiecrat_subtype
-					traits = {
-							USA_jim_crows_champion
-						}
-					}
+					ideology = authdem_dixiecrat_subtype
 				}
 				if = {
 					limit = { has_dlc = "La Resistance" }
@@ -12625,18 +12449,18 @@ add_namespace = usanew
 				country_event = { id = USA.88 days = 700 random_days = 10  } #波多黎各成为美国一州？
 				country_event = { id = USA.89 days = 205 random_days = 10  } #顽石坝竣工
 			}
-			add_country_leader_role = {
+			promote_character = {
 				character = USA_John_Nance_Garner_2
-				country_leader = {
-					desc = POLITICS_JOHN_NANCE_GARNER_DESC
-					ideology = american_conservatism_subtype
-					traits = {
-						strict_austerity_adherent
-						cactus_jack
-						savior_of_america
+				ideology = american_conservatism_subtype
+			}
+			USA_John_Nance_Garner_2 = {
+				if = {
+					limit = { NOT = { has_trait = savior_of_america } }
+					add_country_leader_trait = {
+						ideology = american_conservatism_subtype
+						trait = savior_of_america
 					}
 				}
-				promote_leader = yes
 			}
 			hidden_effect = {
 				if = {
@@ -14574,6 +14398,7 @@ add_namespace = usanew
 			}
 			hidden_effect = {
 				set_global_flag = USA_civil_war_avoided_flag
+				mark_focus_tree_layout_dirty = yes
 				set_country_flag = USA_avoid_civil_war_hoover
 				remove_ideas = {
 					USA_syndicalist_strike_idea
@@ -14915,7 +14740,7 @@ add_namespace = usanew
 					OR = {
 						has_game_rule = {
 							rule = USA_POST_CIVIL_WAR_MACARTHUR
-							option = RULE_OPTION_USA_POST_CIVIL_WAR_MACARTHUR_RESTORE_DEMOCRACY
+							option = USA_POST_CIVIL_WAR_MACARTHUR_RESTORE_DEMOCRACY
 						}
 						has_game_rule = {
 							rule = WCC_american_standoff
@@ -14944,7 +14769,7 @@ add_namespace = usanew
 					OR = {
 						has_game_rule = {
 							rule = USA_POST_CIVIL_WAR_MACARTHUR
-							option = RULE_OPTION_USA_POST_CIVIL_WAR_MACARTHUR_RESTORE_DEMOCRACY
+							option = USA_POST_CIVIL_WAR_MACARTHUR_RESTORE_DEMOCRACY
 						}
 					}
 				}
@@ -15092,14 +14917,16 @@ add_namespace = usanew
 			add_political_power = -50
 			if = {
 				limit = { WCC = { exists = yes } }
-				annex_country = {
-					target = WCC
-					transfer_troops = yes
-				}
 				WCC = {
 					every_unit_leader = {
 						set_nationality = USA
 					}
+					every_scientist = { set_nationality = USA }
+				}
+				USA = { change_tag_from = WCC }
+				annex_country = {
+					target = WCC
+					transfer_troops = yes
 				}
 			}
 			set_party_name = {
@@ -18512,6 +18339,7 @@ add_namespace = usanew
 
 			set_country_flag = USA_had_1940_election
 			set_country_flag = USA_1940_election_PP_victory
+			mark_focus_tree_layout_dirty = yes
 			complete_national_focus = USA_The_true_era_of_commoners
 
 			if = {
@@ -18672,6 +18500,10 @@ add_namespace = usanew
 					add_ideas = USA_Gus_Hall_eco_tot #格斯·霍尔
 					add_ideas = USA_Eugene_Dennis_sec_syn #尤金·丹尼斯
 					set_country_flag = USA_President_Browder_1940_flag
+					country_event = {
+						id = USA.833
+						days = 30
+					}
 				}
 				# next primarie
 				country_event = { # 年共和党初选
@@ -18698,6 +18530,7 @@ add_namespace = usanew
 			}
 			set_country_flag = USA_had_1940_election
 			set_country_flag = USA_1940_election_NPP_victory
+			mark_focus_tree_layout_dirty = yes
 			complete_national_focus = USA_The_return_of_the_true_American_spirit
 			if = {
 				limit = {
@@ -18944,7 +18777,7 @@ add_namespace = usanew
 		immediate = {log = "[GetDateText]: [Root.GetName]: event USA.605"}
 		title = USA.605.t
 		desc = USA.605.d
-		picture = GFX_CAL_legislature
+		picture = GFX_report_event_CAL_legislature
 
 		fire_only_once = yes
 		is_triggered_only = yes
@@ -20688,6 +20521,7 @@ add_namespace = usanew
 			OR = {
 				has_country_flag = USA_had_1940_election
 				has_global_flag = USA_civil_war_over_flag
+				has_global_flag = USA_civil_war_avoided_flag
 			}
 			NOT = { has_country_flag = USA_had_1944_election }
 			NOT = {
@@ -20911,13 +20745,15 @@ add_namespace = usanew
 					has_government = social_liberal
 				}
 				has_country_flag = USA_DEM_win_1940_election
+				NOT = { has_country_flag = USA_President_Garner_1940_flag }
 			}
 		}
 		desc = { #[GetYear]年民主党初选即将举行，有许多候选人希望成为总统候选人。代表们将挑选谁呢？
 			text = USA.705.d.not_president
 			trigger = {
-				NOT = {
-					has_country_flag = USA_DEM_win_1940_election
+				OR = {
+					NOT = { has_country_flag = USA_DEM_win_1940_election }
+					has_country_flag = USA_President_Garner_1940_flag
 				}
 			}
 		}
@@ -20932,6 +20768,7 @@ add_namespace = usanew
 			OR = {
 				has_country_flag = USA_had_1940_election
 				has_global_flag = USA_civil_war_over_flag
+				has_global_flag = USA_civil_war_avoided_flag
 			}
 			NOT = {
 				has_country_flag = USA_had_1944_election
@@ -20967,6 +20804,10 @@ add_namespace = usanew
 						has_country_flag = USA_DEM_win_1940_election
 						has_country_flag = USA_President_Smith_1940_flag
 					}
+					AND = {
+						has_country_flag = USA_DEM_win_1940_election
+						has_country_flag = USA_President_Garner_1940_flag
+					}
 				}
 			}
 			set_country_flag = USA_1944_democratic_primary_barkley
@@ -20988,6 +20829,10 @@ add_namespace = usanew
 						has_government = social_liberal
 						has_country_flag = USA_DEM_win_1940_election
 						has_country_flag = USA_President_Smith_1940_flag
+					}
+					AND = {
+						has_country_flag = USA_DEM_win_1940_election
+						has_country_flag = USA_President_Garner_1940_flag
 					}
 				}
 			}
@@ -21011,6 +20856,10 @@ add_namespace = usanew
 						has_country_flag = USA_DEM_win_1940_election
 						has_country_flag = USA_President_Smith_1940_flag
 					}
+					AND = {
+						has_country_flag = USA_DEM_win_1940_election
+						has_country_flag = USA_President_Garner_1940_flag
+					}
 				}
 			}
 			set_country_flag = USA_1944_democratic_primary_chandler
@@ -21032,6 +20881,10 @@ add_namespace = usanew
 						has_government = social_liberal
 						has_country_flag = USA_DEM_win_1940_election
 						has_country_flag = USA_President_Smith_1940_flag
+					}
+					AND = {
+						has_country_flag = USA_DEM_win_1940_election
+						has_country_flag = USA_President_Garner_1940_flag
 					}
 				}
 			}
@@ -21055,6 +20908,10 @@ add_namespace = usanew
 						has_country_flag = USA_DEM_win_1940_election
 						has_country_flag = USA_President_Smith_1940_flag
 					}
+					AND = {
+						has_country_flag = USA_DEM_win_1940_election
+						has_country_flag = USA_President_Garner_1940_flag
+					}
 				}
 			}
 			set_country_flag = USA_1944_democratic_primary_lucas
@@ -21077,6 +20934,10 @@ add_namespace = usanew
 						has_country_flag = USA_DEM_win_1940_election
 						has_country_flag = USA_President_Smith_1940_flag
 					}
+					AND = {
+						has_country_flag = USA_DEM_win_1940_election
+						has_country_flag = USA_President_Garner_1940_flag
+					}
 				}
 			}
 			set_country_flag = USA_1944_democratic_primary_thurmond
@@ -21090,6 +20951,7 @@ add_namespace = usanew
 					OR = {
 						has_country_flag = USA_President_Willkie_1940_flag
 						has_country_flag = USA_President_Smith_1940_flag
+						has_country_flag = USA_President_Garner_1940_flag
 					}
 				}
 			}
@@ -22121,6 +21983,7 @@ add_namespace = usanew
 			}
 			set_country_flag = USA_had_1944_election
 			set_country_flag = USA_1944_election_PP_victory
+			mark_focus_tree_layout_dirty = yes
 			if = {
 				limit = {
 					OR = {
@@ -22294,6 +22157,7 @@ add_namespace = usanew
 			}
 			set_country_flag = USA_had_1944_election
 			set_country_flag = USA_1944_election_NPP_victory
+			mark_focus_tree_layout_dirty = yes
 			if = {
 				limit = {
 					has_country_flag = USA_1944_NPP_primary_pelley
@@ -23425,6 +23289,43 @@ add_namespace = usanew
 				has_country_flag = USA_avoidcw_coup
 				has_country_flag = USA_Bradley_coup_Browder
 			}
+			# Require an eligible party with this cycle's nomination before opening the election.
+			OR = {
+				AND = {
+					has_country_flag = USA_progressives_exist
+					NOT  = {
+						has_country_flag = USA_deadlock_garner
+					}
+					has_country_flag = USA_has_nominated_PRO_1948
+				}
+				AND = {
+					has_country_flag = USA_republicans_exist
+					NOT  = {
+						has_country_flag = USA_deadlock_norris
+					}
+					NOT  = {
+						has_country_flag = USA_deadlock_garner
+					}
+					has_country_flag = USA_has_nominated_GOP_1948
+				}
+				AND = {
+					has_country_flag = USA_democrats_exist
+					NOT  = {
+						has_country_flag = USA_deadlock_norris
+					}
+					has_country_flag = USA_has_nominated_DEM_1948
+				}
+				AND = {
+					has_country_flag = USA_deadlock_garner
+					has_global_flag = USA_civil_war_avoided_flag
+					has_country_flag = USA_has_nominated_PP_1948
+				}
+				AND = {
+					has_country_flag = USA_deadlock_norris
+					has_global_flag = USA_civil_war_avoided_flag
+					has_country_flag = USA_has_nominated_NPP_1948
+				}
+			}
 		}
 
 		immediate = {
@@ -23884,6 +23785,7 @@ add_namespace = usanew
 			}
 			set_country_flag = USA_had_1948_election
 			set_country_flag = USA_1948_election_PP_victory
+			mark_focus_tree_layout_dirty = yes
 			if = {
 				limit = {
 					OR = {
@@ -24058,6 +23960,7 @@ add_namespace = usanew
 			}
 			set_country_flag = USA_had_1948_election
 			set_country_flag = USA_1948_election_NPP_victory
+			mark_focus_tree_layout_dirty = yes
 			if = {
 				limit = {
 					has_country_flag = USA_1948_NPP_primary_russell
@@ -25201,6 +25104,43 @@ add_namespace = usanew
 				has_country_flag = USA_had_1952_election
 			}
 			NOT = { has_country_flag = USA_avoidcw_coup }
+			# Require an eligible party with this cycle's nomination before opening the election.
+			OR = {
+				AND = {
+					has_country_flag = USA_progressives_exist
+					NOT  = {
+						has_country_flag = USA_deadlock_garner
+					}
+					has_country_flag = USA_has_nominated_PRO_1952
+				}
+				AND = {
+					has_country_flag = USA_republicans_exist
+					NOT  = {
+						has_country_flag = USA_deadlock_norris
+					}
+					NOT  = {
+						has_country_flag = USA_deadlock_garner
+					}
+					has_country_flag = USA_has_nominated_GOP_1952
+				}
+				AND = {
+					has_country_flag = USA_democrats_exist
+					NOT  = {
+						has_country_flag = USA_deadlock_norris
+					}
+					has_country_flag = USA_has_nominated_DEM_1952
+				}
+				AND = {
+					has_country_flag = USA_deadlock_garner
+					has_global_flag = USA_civil_war_avoided_flag
+					has_country_flag = USA_has_nominated_PP_1952
+				}
+				AND = {
+					has_country_flag = USA_deadlock_norris
+					has_global_flag = USA_civil_war_avoided_flag
+					has_country_flag = USA_has_nominated_NPP_1952
+				}
+			}
 		}
 
 		immediate = {
@@ -25572,6 +25512,7 @@ add_namespace = usanew
 			}
 			set_country_flag = USA_had_1952_election
 			set_country_flag = USA_1952_election_PP_victory
+			mark_focus_tree_layout_dirty = yes
 			if = {
 				limit = {
 					OR = {
@@ -25725,6 +25666,7 @@ add_namespace = usanew
 			}
 			set_country_flag = USA_had_1952_election
 			set_country_flag = USA_1952_election_NPP_victory
+			mark_focus_tree_layout_dirty = yes
 			if = {
 				limit = {
 					has_country_flag = USA_1952_NPP_primary_russell
@@ -26972,6 +26914,7 @@ add_namespace = usanew
 			name = USA.811.a
 			set_country_flag = USA_has_nominated_PP
 			set_country_flag = USA_Thomas_has_been_nominated
+			mark_focus_tree_layout_dirty = yes
 			add_popularity = { ideology = radical_socialist popularity = 0.03 }
 			USA_refresh_gui_variable_effect = yes
 		}
@@ -26979,6 +26922,7 @@ add_namespace = usanew
 			name = USA.811.b
 			set_country_flag = USA_has_nominated_PP
 			set_country_flag = USA_Cutting_has_been_nominated
+			mark_focus_tree_layout_dirty = yes
 			add_popularity = { ideology = social_democrat popularity = 0.03 }
 			USA_refresh_gui_variable_effect = yes
 		}
@@ -26986,6 +26930,7 @@ add_namespace = usanew
 			name = USA.811.c
 			set_country_flag = USA_has_nominated_PP
 			set_country_flag = USA_Aiken_has_been_nominated
+			mark_focus_tree_layout_dirty = yes
 			add_popularity = { ideology = social_democrat popularity = 0.03 }
 			USA_refresh_gui_variable_effect = yes
 		}
@@ -26993,6 +26938,7 @@ add_namespace = usanew
 			name = USA.811.e
 			set_country_flag = USA_has_nominated_PP
 			set_country_flag = USA_Sinclair_has_been_nominated
+			mark_focus_tree_layout_dirty = yes
 			add_popularity = { ideology = radical_socialist popularity = 0.03 }
 			USA_refresh_gui_variable_effect = yes
 		}
@@ -27012,6 +26958,7 @@ add_namespace = usanew
 			name = USA.812.a
 			set_country_flag = USA_has_nominated_NPP
 			set_country_flag = USA_Murray_has_been_nominated
+			mark_focus_tree_layout_dirty = yes
 			add_popularity = { ideology = paternal_autocrat popularity = 0.03 }
 			USA_refresh_gui_variable_effect = yes
 		}
@@ -27019,6 +26966,7 @@ add_namespace = usanew
 			name = USA.812.b
 			set_country_flag = USA_has_nominated_NPP
 			set_country_flag = USA_Lindbergh_has_been_nominated
+			mark_focus_tree_layout_dirty = yes
 			add_popularity = { ideology = paternal_autocrat popularity = 0.03 }
 			USA_refresh_gui_variable_effect = yes
 		}
@@ -31384,6 +31332,7 @@ add_namespace = usanew
 			}
 			complete_national_focus = USA_anchoring_our_rule
 			complete_national_focus = USA_admiral_of_navy
+			mark_focus_tree_layout_dirty = yes
 		}
 		option = { #Halsey assumes command
 			name = USA.940.b
@@ -31396,6 +31345,7 @@ add_namespace = usanew
 				traits = { admiral_halsey_trait }
 			}
 			complete_national_focus = USA_admiral_of_navy
+			mark_focus_tree_layout_dirty = yes
 			complete_national_focus = USA_anchoring_our_rule
 		}
 		option = { #Spruance assumes control
@@ -31409,6 +31359,7 @@ add_namespace = usanew
 				traits = { admiral_spruance_trait }
 			}
 			complete_national_focus = USA_admiral_of_navy
+			mark_focus_tree_layout_dirty = yes
 			complete_national_focus = USA_anchoring_our_rule
 		}
 		option = { #Triumvirate
@@ -31443,6 +31394,7 @@ add_namespace = usanew
 			}
 			complete_national_focus = USA_anchoring_our_rule
 			complete_national_focus = USA_admiral_of_navy
+			mark_focus_tree_layout_dirty = yes
 		}
 	}
 
@@ -33230,16 +33182,36 @@ add_namespace = usanew
 			name = USA.1004.a
 			add_political_power = 30
 			increase_ruling_party_popularity_by_3 = yes
-			custom_effect_tooltip = USA_Let_every_worker_drive_a_Ford_tt
-			add_to_variable = { USA_NRA_consumer_goods= 0.05 }
-			add_to_variable = { USA_NRA_stability = 0.05 }
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = {
+				localization_key = tooltip_modify_dynmod
+				DYNMOD = USA_NRA_modifier
+			}
+			add_to_variable = {
+				USA_NRA_consumer_goods = 0.05
+				tooltip = consumer_goods_factor_tt
+			}
+			add_to_variable = {
+				USA_NRA_stability = 0.05
+				tooltip = stability_factor_tt
+			}
 		}
 
 		option = { #正值困难时期，难道他们就不能无私奉献一些？
 			name = USA.1004.b
-			custom_effect_tooltip = USA_Support_Hnery_Ford_tt_3
-			add_to_variable = { USA_NRA_political_power = -0.05 }
-			add_to_variable = { USA_NRA_factory_output = 0.05 }
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = {
+				localization_key = tooltip_modify_dynmod
+				DYNMOD = USA_NRA_modifier
+			}
+			add_to_variable = {
+				USA_NRA_political_power = -0.05
+				tooltip = political_power_factor_tt
+			}
+			add_to_variable = {
+				USA_NRA_factory_output = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
 		}
 	}
 
@@ -33586,14 +33558,28 @@ add_namespace = usanew
 
 		option = { #肯尼迪家族扎根政界多年，堪为助力
 			name = USA.1020.a
-			custom_effect_tooltip = USA_NEE_event_1_tt
-			add_to_variable = { USA_NRA_political_power = 0.05 }
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = {
+				localization_key = tooltip_modify_dynmod
+				DYNMOD = USA_NRA_modifier
+			}
+			add_to_variable = {
+				USA_NRA_political_power = 0.05
+				tooltip = political_power_factor_tt
+			}
 		}
 
 		option = { #阿斯特家族跟商界关系密切，与他们合作
 			name = USA.1020.b
-			custom_effect_tooltip = USA_NEE_event_2_tt
-			add_to_variable = { USA_NRA_consumer_goods = -0.05 }
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = {
+				localization_key = tooltip_modify_dynmod
+				DYNMOD = USA_NRA_modifier
+			}
+			add_to_variable = {
+				USA_NRA_consumer_goods = -0.05
+				tooltip = consumer_goods_factor_tt
+			}
 		}
 
 		option = { #范德比尔特家族的社会影响力巨大，有助于我们
@@ -33614,14 +33600,28 @@ add_namespace = usanew
 		option = { #更青睐常青藤联盟的大学
 			name = USA.1021.a
 			add_political_power = 35
-			custom_effect_tooltip = USA_NEE_event_4_tt
-			add_to_variable = { USA_NRA_research_speed = -0.025 }
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = {
+				localization_key = tooltip_modify_dynmod
+				DYNMOD = USA_NRA_modifier
+			}
+			add_to_variable = {
+				USA_NRA_research_speed = -0.025
+				tooltip = research_speed_factor_tt
+			}
 		}
 
 		option = { #还是帮帮那些更年轻的大学吧
 			name = USA.1021.b
-			custom_effect_tooltip = USA_NEE_event_3_tt
-			add_to_variable = { USA_NRA_research_speed = -0.05 }
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = {
+				localization_key = tooltip_modify_dynmod
+				DYNMOD = USA_NRA_modifier
+			}
+			add_to_variable = {
+				USA_NRA_research_speed = -0.05
+				tooltip = research_speed_factor_tt
+			}
 		}
 	}
 
@@ -34047,6 +34047,10 @@ add_namespace = usanew
 
 		option = { #
 			name = USA.1104.a
+			set_variable = { USA_Syndicalist_Resistance = 0 }
+			set_variable = { USA_Minutemen_Resistance = 0 }
+			set_variable = { USA_Klan_Resistance = 0 }
+			set_variable = { USA_Black_legion_Resistance = 0 }
 			if = {
 				limit = {
 					has_idea = USA_civil_war_war_aftermath_idea5
@@ -35435,7 +35439,7 @@ add_namespace = usanew
 		}
 
 		option = {
-			name = USA.1327.a
+			name = USA.1327.c
 			set_global_flag = USA_ask_mine_in_africa_and_saf
 			ENT = {
 				country_event = { # 美国盟友的要求
@@ -38779,7 +38783,19 @@ add_namespace = usanew
 
 		option = { #美利坚将战胜一切！
 			name = USA.2033.a
-			add_ideas = USA_NDRC
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_idea = USA_NDRC
+							has_idea = USA_NDRC_2
+							has_idea = USA_NDRC_3
+							has_idea = USA_NDRC_4
+						}
+					}
+				}
+				add_ideas = USA_NDRC
+			}
 		}
 	}
 	country_event = { # 暗中刺探
@@ -42086,32 +42102,41 @@ country_event = { # 美利坚的灭亡
 					}
 				}
 			}
-			promote_character = {
-				character = USA_CSA_Central_Committee
-				ideology = moderate_socialist_subtype
-			}
 			hidden_effect = {
-				add_country_leader_role = {
-					character = USA_CSA_Central_Committee
-					country_leader = {
-						desc = POLITICS_CSA_CENTRAL_COMITTEE_DESC
-						ideology = syndicalist_subtype
-						traits = {
-							our_right_to_survive
+				USA_CSA_Central_Committee = {
+					if = {
+						limit = { NOT = { has_ideology = moderate_socialist_subtype } }
+						add_country_leader_role = {
+							country_leader = {
+								desc = POLITICS_CSA_CENTRAL_COMITTEE_DESC
+								ideology = moderate_socialist_subtype
+								traits = { our_right_to_survive }
+							}
 						}
 					}
-					promote_leader = yes
-				}
-				add_country_leader_role = {
-					character = USA_CSA_Central_Committee
-					country_leader = {
-						desc = POLITICS_CSA_CENTRAL_COMITTEE_DESC
-						ideology = totalist_subtype
-						traits = {
-							our_right_to_survive
+					promote_character = { ideology = moderate_socialist_subtype }
+					if = {
+						limit = { NOT = { has_ideology = syndicalist_subtype } }
+						add_country_leader_role = {
+							country_leader = {
+								desc = POLITICS_CSA_CENTRAL_COMITTEE_DESC
+								ideology = syndicalist_subtype
+								traits = { our_right_to_survive }
+							}
 						}
 					}
-					promote_leader = yes
+					promote_character = { ideology = syndicalist_subtype }
+					if = {
+						limit = { NOT = { has_ideology = totalist_subtype } }
+						add_country_leader_role = {
+							country_leader = {
+								desc = POLITICS_CSA_CENTRAL_COMITTEE_DESC
+								ideology = totalist_subtype
+								traits = { our_right_to_survive }
+							}
+						}
+					}
+					promote_character = { ideology = totalist_subtype }
 				}
 			}
 			hidden_effect = {
@@ -43119,3 +43144,121 @@ country_event = { # 美利坚的灭亡
 			add_war_support = 0.01
 		}
 	}
+
+country_event = {
+	id = USA.2300
+	title = portrait_picker.19.t
+	desc = portrait_picker.19.d
+	picture = GFX_report_event_TXS_garner_picker
+	is_triggered_only = yes
+	trigger = {
+		tag = USA
+		OR = {
+			has_country_leader = { character = USA_John_Nance_Garner ruling_only = yes }
+			has_country_leader = { character = USA_John_Nance_Garner_2 ruling_only = yes }
+		}
+	}
+
+	option = {
+		name = portrait_picker.19.a
+		ai_chance = { factor = 0 }
+		# Recheck the ruler in case leadership changed while the event was open.
+		if = {
+			limit = {
+				OR = {
+					has_country_leader = { character = USA_John_Nance_Garner ruling_only = yes }
+					has_country_leader = { character = USA_John_Nance_Garner_2 ruling_only = yes }
+				}
+			}
+			set_country_leader_portrait = {
+				portrait = "gfx/leaders/USA/Portrait_USA_John_Nance_Garner.png"
+			}
+		}
+	}
+
+	option = {
+		name = portrait_picker.19.b
+		ai_chance = { factor = 0 }
+		trigger = { has_global_flag = USA_civil_war_avoided_flag }
+		# Recheck the ruler in case leadership changed while the event was open.
+		if = {
+			limit = {
+				OR = {
+					has_country_leader = { character = USA_John_Nance_Garner ruling_only = yes }
+					has_country_leader = { character = USA_John_Nance_Garner_2 ruling_only = yes }
+				}
+			}
+			set_country_leader_portrait = {
+				portrait = "gfx/leaders/USA/Portrait_USA_John_Nance_Garner_Hawk.png"
+			}
+		}
+	}
+
+	option = {
+		name = portrait_picker.19.c
+		ai_chance = { factor = 0 }
+		# Recheck the ruler in case leadership changed while the event was open.
+		if = {
+			limit = {
+				OR = {
+					has_country_leader = { character = USA_John_Nance_Garner ruling_only = yes }
+					has_country_leader = { character = USA_John_Nance_Garner_2 ruling_only = yes }
+				}
+			}
+			set_country_leader_portrait = {
+				portrait = "gfx/leaders/TXS/Portrait_Texas_John_Nance_Garner_Authoritarian.png"
+			}
+		}
+	}
+
+	option = {
+		name = portrait_picker.19.e
+		ai_chance = { factor = 0 }
+		# Recheck the ruler in case leadership changed while the event was open.
+		if = {
+			limit = {
+				OR = {
+					has_country_leader = { character = USA_John_Nance_Garner ruling_only = yes }
+					has_country_leader = { character = USA_John_Nance_Garner_2 ruling_only = yes }
+				}
+			}
+			set_country_leader_portrait = {
+				portrait = "gfx/leaders/TXS/Portrait_Texas_John_Nance_Garner.png"
+			}
+		}
+	}
+
+	option = {
+		name = portrait_picker.19.f
+		ai_chance = { factor = 0 }
+		# Recheck the ruler in case leadership changed while the event was open.
+		if = {
+			limit = {
+				OR = {
+					has_country_leader = { character = USA_John_Nance_Garner ruling_only = yes }
+					has_country_leader = { character = USA_John_Nance_Garner_2 ruling_only = yes }
+				}
+			}
+			set_country_leader_portrait = {
+				portrait = "gfx/leaders/CAL/Portrait_CAL_John_Nance_Garner.png"
+			}
+		}
+	}
+
+	option = {
+		name = portrait_picker.19.g
+		ai_chance = { factor = 0 }
+		# Recheck the ruler in case leadership changed while the event was open.
+		if = {
+			limit = {
+				OR = {
+					has_country_leader = { character = USA_John_Nance_Garner ruling_only = yes }
+					has_country_leader = { character = USA_John_Nance_Garner_2 ruling_only = yes }
+				}
+			}
+			set_country_leader_portrait = {
+				portrait = "gfx/leaders/USA/Portrait_USA_John_Nance_Garner_Alt.png"
+			}
+		}
+	}
+}
