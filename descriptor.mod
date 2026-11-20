@@ -14,5 +14,5 @@ dependencies={
 	"kx旧版本"
 }
 picture="thumbnail.png"
-supported_version="1.19.*"
+supported_version="1.20.0.0"
 remote_file_id="3244364529"
